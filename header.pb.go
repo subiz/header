@@ -7062,7 +7062,7 @@ type Data struct {
 	Form                 *Form                    `protobuf:"bytes,139,opt,name=form,proto3" json:"form,omitempty"`
 	EventDestination     *EventDestination        `protobuf:"bytes,140,opt,name=event_destination,json=eventDestination,proto3" json:"event_destination,omitempty"`
 	EventDestinations    []*EventDestination      `protobuf:"bytes,141,rep,name=event_destinations,json=eventDestinations,proto3" json:"event_destinations,omitempty"`
-	ExternalSegmentSync  *ExternalSegmentSync     `protobuf:"bytes,144,opt,name=external_segment_sync,json=externalSegmentSync,proto3" json:"external_segment_sync,omitempty"`
+	SegmentSync          *SegmentSync             `protobuf:"bytes,144,opt,name=segment_sync,json=segmentSync,proto3" json:"segment_sync,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -7769,9 +7769,9 @@ func (x *Data) GetEventDestinations() []*EventDestination {
 	return nil
 }
 
-func (x *Data) GetExternalSegmentSync() *ExternalSegmentSync {
+func (x *Data) GetSegmentSync() *SegmentSync {
 	if x != nil {
-		return x.ExternalSegmentSync
+		return x.SegmentSync
 	}
 	return nil
 }
@@ -42376,7 +42376,7 @@ func (x *MetaSyncBatchSession) GetEstimatedNumTotal() int64 {
 	return 0
 }
 
-type ExternalSegmentSyncUserStatus struct {
+type SegmentSyncUserStatus struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -42390,20 +42390,20 @@ type ExternalSegmentSyncUserStatus struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ExternalSegmentSyncUserStatus) Reset() {
-	*x = ExternalSegmentSyncUserStatus{}
+func (x *SegmentSyncUserStatus) Reset() {
+	*x = SegmentSyncUserStatus{}
 	mi := &file_header_proto_msgTypes[340]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ExternalSegmentSyncUserStatus) String() string {
+func (x *SegmentSyncUserStatus) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ExternalSegmentSyncUserStatus) ProtoMessage() {}
+func (*SegmentSyncUserStatus) ProtoMessage() {}
 
-func (x *ExternalSegmentSyncUserStatus) ProtoReflect() protoreflect.Message {
+func (x *SegmentSyncUserStatus) ProtoReflect() protoreflect.Message {
 	mi := &file_header_proto_msgTypes[340]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -42415,113 +42415,116 @@ func (x *ExternalSegmentSyncUserStatus) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExternalSegmentSyncUserStatus.ProtoReflect.Descriptor instead.
-func (*ExternalSegmentSyncUserStatus) Descriptor() ([]byte, []int) {
+// Deprecated: Use SegmentSyncUserStatus.ProtoReflect.Descriptor instead.
+func (*SegmentSyncUserStatus) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{340}
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetCtx() *common.Context {
+func (x *SegmentSyncUserStatus) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetAccountId() string {
+func (x *SegmentSyncUserStatus) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetId() string {
+func (x *SegmentSyncUserStatus) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetSegmentId() string {
+func (x *SegmentSyncUserStatus) GetSegmentId() string {
 	if x != nil {
 		return x.SegmentId
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetUserId() string {
+func (x *SegmentSyncUserStatus) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetLastSync() int64 {
+func (x *SegmentSyncUserStatus) GetLastSync() int64 {
 	if x != nil {
 		return x.LastSync
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetStatus() string {
+func (x *SegmentSyncUserStatus) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSyncUserStatus) GetError() string {
+func (x *SegmentSyncUserStatus) GetError() string {
 	if x != nil {
 		return x.Error
 	}
 	return ""
 }
 
-type ExternalSegmentSync struct {
+type SegmentSync struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	Ctx                   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId             string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id                    string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	SegmentId             string                 `protobuf:"bytes,4,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
-	Direction             string                 `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`                                   // import, export
-	Provider              string                 `protobuf:"bytes,6,opt,name=provider,proto3" json:"provider,omitempty"`                                     // meta
-	MetaAudienceId        string                 `protobuf:"bytes,7,opt,name=meta_audience_id,json=metaAudienceId,proto3" json:"meta_audience_id,omitempty"` // allow to update
-	MetaBusinessId        string                 `protobuf:"bytes,8,opt,name=meta_business_id,json=metaBusinessId,proto3" json:"meta_business_id,omitempty"`
-	MetaAdAccount         string                 `protobuf:"bytes,9,opt,name=meta_ad_account,json=metaAdAccount,proto3" json:"meta_ad_account,omitempty"` // act_315986166689190
+	Direction             string                 `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"` // import, export
+	Provider              string                 `protobuf:"bytes,6,opt,name=provider,proto3" json:"provider,omitempty"`   // meta
+	Name                  string                 `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	Description           string                 `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
 	LastSyncStarted       int64                  `protobuf:"varint,10,opt,name=last_sync_started,json=lastSyncStarted,proto3" json:"last_sync_started,omitempty"`
 	LastSyncEnded         int64                  `protobuf:"varint,11,opt,name=last_sync_ended,json=lastSyncEnded,proto3" json:"last_sync_ended,omitempty"`
-	LastSyncStatus        int64                  `protobuf:"varint,12,opt,name=last_sync_status,json=lastSyncStatus,proto3" json:"last_sync_status,omitempty"` // completed, error, require_accept_meta_term
+	LastSyncStatus        string                 `protobuf:"bytes,12,opt,name=last_sync_status,json=lastSyncStatus,proto3" json:"last_sync_status,omitempty"` // completed, error, require_accept_meta_term
 	NumSyncSuccess        int64                  `protobuf:"varint,14,opt,name=num_sync_success,json=numSyncSuccess,proto3" json:"num_sync_success,omitempty"`
 	NumSyncFailed         int64                  `protobuf:"varint,15,opt,name=num_sync_failed,json=numSyncFailed,proto3" json:"num_sync_failed,omitempty"`
-	FailedMessage         string                 `protobuf:"bytes,16,opt,name=failed_message,json=failedMessage,proto3" json:"failed_message,omitempty"`   // reset after each sync
-	LastSyncError         string                 `protobuf:"bytes,17,opt,name=last_sync_error,json=lastSyncError,proto3" json:"last_sync_error,omitempty"` // require_accept_meta_term, invalid_access_token
-	BatchIndex            string                 `protobuf:"bytes,18,opt,name=batch_index,json=batchIndex,proto3" json:"batch_index,omitempty"`            // should run from 0 -> 1000
-	MetaBatchSession      *MetaSyncBatchSession  `protobuf:"bytes,20,opt,name=meta_batch_session,json=metaBatchSession,proto3" json:"meta_batch_session,omitempty"`
-	MetaAudience          *MetaCustomAudience    `protobuf:"bytes,21,opt,name=meta_audience,json=metaAudience,proto3" json:"meta_audience,omitempty"`
-	LastFbRequestResponse string                 `protobuf:"bytes,22,opt,name=last_fb_request_response,json=lastFbRequestResponse,proto3" json:"last_fb_request_response,omitempty"`
-	LastFbRequestStatus   int64                  `protobuf:"varint,23,opt,name=last_fb_request_status,json=lastFbRequestStatus,proto3" json:"last_fb_request_status,omitempty"`
-	LastFbRequestAt       int64                  `protobuf:"varint,24,opt,name=last_fb_request_at,json=lastFbRequestAt,proto3" json:"last_fb_request_at,omitempty"`
-	Disabled              int64                  `protobuf:"varint,25,opt,name=disabled,proto3" json:"disabled,omitempty"` // active, paused
-	Updated               int64                  `protobuf:"varint,26,opt,name=updated,proto3" json:"updated,omitempty"`
-	Created               int64                  `protobuf:"varint,27,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy             int64                  `protobuf:"varint,28,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	FailedMessage         string                 `protobuf:"bytes,16,opt,name=failed_message,json=failedMessage,proto3" json:"failed_message,omitempty"`           // reset after each sync
+	LastSyncError         string                 `protobuf:"bytes,17,opt,name=last_sync_error,json=lastSyncError,proto3" json:"last_sync_error,omitempty"`         // require_accept_meta_term, invalid_access_token
+	BatchIndex            int64                  `protobuf:"varint,18,opt,name=batch_index,json=batchIndex,proto3" json:"batch_index,omitempty"`                   // should run from 0 -> 1000
+	MetaAudienceId        string                 `protobuf:"bytes,19,opt,name=meta_audience_id,json=metaAudienceId,proto3" json:"meta_audience_id,omitempty"`      // allow to update
+	MetaAdAccountId       string                 `protobuf:"bytes,20,opt,name=meta_ad_account_id,json=metaAdAccountId,proto3" json:"meta_ad_account_id,omitempty"` // act_315986166689190
+	MetaBatchSession      *MetaSyncBatchSession  `protobuf:"bytes,21,opt,name=meta_batch_session,json=metaBatchSession,proto3" json:"meta_batch_session,omitempty"`
+	MetaAudience          *MetaCustomAudience    `protobuf:"bytes,22,opt,name=meta_audience,json=metaAudience,proto3" json:"meta_audience,omitempty"`
+	LastFbRequestResponse string                 `protobuf:"bytes,23,opt,name=last_fb_request_response,json=lastFbRequestResponse,proto3" json:"last_fb_request_response,omitempty"`
+	LastFbRequestStatus   int64                  `protobuf:"varint,24,opt,name=last_fb_request_status,json=lastFbRequestStatus,proto3" json:"last_fb_request_status,omitempty"`
+	LastFbRequestAt       int64                  `protobuf:"varint,25,opt,name=last_fb_request_at,json=lastFbRequestAt,proto3" json:"last_fb_request_at,omitempty"`
+	Disabled              int64                  `protobuf:"varint,30,opt,name=disabled,proto3" json:"disabled,omitempty"` // active, paused
+	Updated               int64                  `protobuf:"varint,31,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy             string                 `protobuf:"bytes,32,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Created               int64                  `protobuf:"varint,33,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy             string                 `protobuf:"bytes,34,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Modified              int64                  `protobuf:"varint,35,opt,name=modified,proto3" json:"modified,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *ExternalSegmentSync) Reset() {
-	*x = ExternalSegmentSync{}
+func (x *SegmentSync) Reset() {
+	*x = SegmentSync{}
 	mi := &file_header_proto_msgTypes[341]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ExternalSegmentSync) String() string {
+func (x *SegmentSync) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ExternalSegmentSync) ProtoMessage() {}
+func (*SegmentSync) ProtoMessage() {}
 
-func (x *ExternalSegmentSync) ProtoReflect() protoreflect.Message {
+func (x *SegmentSync) ProtoReflect() protoreflect.Message {
 	mi := &file_header_proto_msgTypes[341]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -42533,189 +42536,210 @@ func (x *ExternalSegmentSync) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExternalSegmentSync.ProtoReflect.Descriptor instead.
-func (*ExternalSegmentSync) Descriptor() ([]byte, []int) {
+// Deprecated: Use SegmentSync.ProtoReflect.Descriptor instead.
+func (*SegmentSync) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{341}
 }
 
-func (x *ExternalSegmentSync) GetCtx() *common.Context {
+func (x *SegmentSync) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *ExternalSegmentSync) GetAccountId() string {
+func (x *SegmentSync) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetId() string {
+func (x *SegmentSync) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetSegmentId() string {
+func (x *SegmentSync) GetSegmentId() string {
 	if x != nil {
 		return x.SegmentId
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetDirection() string {
+func (x *SegmentSync) GetDirection() string {
 	if x != nil {
 		return x.Direction
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetProvider() string {
+func (x *SegmentSync) GetProvider() string {
 	if x != nil {
 		return x.Provider
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetMetaAudienceId() string {
+func (x *SegmentSync) GetName() string {
 	if x != nil {
-		return x.MetaAudienceId
+		return x.Name
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetMetaBusinessId() string {
+func (x *SegmentSync) GetDescription() string {
 	if x != nil {
-		return x.MetaBusinessId
+		return x.Description
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetMetaAdAccount() string {
-	if x != nil {
-		return x.MetaAdAccount
-	}
-	return ""
-}
-
-func (x *ExternalSegmentSync) GetLastSyncStarted() int64 {
+func (x *SegmentSync) GetLastSyncStarted() int64 {
 	if x != nil {
 		return x.LastSyncStarted
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetLastSyncEnded() int64 {
+func (x *SegmentSync) GetLastSyncEnded() int64 {
 	if x != nil {
 		return x.LastSyncEnded
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetLastSyncStatus() int64 {
+func (x *SegmentSync) GetLastSyncStatus() string {
 	if x != nil {
 		return x.LastSyncStatus
 	}
-	return 0
+	return ""
 }
 
-func (x *ExternalSegmentSync) GetNumSyncSuccess() int64 {
+func (x *SegmentSync) GetNumSyncSuccess() int64 {
 	if x != nil {
 		return x.NumSyncSuccess
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetNumSyncFailed() int64 {
+func (x *SegmentSync) GetNumSyncFailed() int64 {
 	if x != nil {
 		return x.NumSyncFailed
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetFailedMessage() string {
+func (x *SegmentSync) GetFailedMessage() string {
 	if x != nil {
 		return x.FailedMessage
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetLastSyncError() string {
+func (x *SegmentSync) GetLastSyncError() string {
 	if x != nil {
 		return x.LastSyncError
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetBatchIndex() string {
+func (x *SegmentSync) GetBatchIndex() int64 {
 	if x != nil {
 		return x.BatchIndex
+	}
+	return 0
+}
+
+func (x *SegmentSync) GetMetaAudienceId() string {
+	if x != nil {
+		return x.MetaAudienceId
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetMetaBatchSession() *MetaSyncBatchSession {
+func (x *SegmentSync) GetMetaAdAccountId() string {
+	if x != nil {
+		return x.MetaAdAccountId
+	}
+	return ""
+}
+
+func (x *SegmentSync) GetMetaBatchSession() *MetaSyncBatchSession {
 	if x != nil {
 		return x.MetaBatchSession
 	}
 	return nil
 }
 
-func (x *ExternalSegmentSync) GetMetaAudience() *MetaCustomAudience {
+func (x *SegmentSync) GetMetaAudience() *MetaCustomAudience {
 	if x != nil {
 		return x.MetaAudience
 	}
 	return nil
 }
 
-func (x *ExternalSegmentSync) GetLastFbRequestResponse() string {
+func (x *SegmentSync) GetLastFbRequestResponse() string {
 	if x != nil {
 		return x.LastFbRequestResponse
 	}
 	return ""
 }
 
-func (x *ExternalSegmentSync) GetLastFbRequestStatus() int64 {
+func (x *SegmentSync) GetLastFbRequestStatus() int64 {
 	if x != nil {
 		return x.LastFbRequestStatus
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetLastFbRequestAt() int64 {
+func (x *SegmentSync) GetLastFbRequestAt() int64 {
 	if x != nil {
 		return x.LastFbRequestAt
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetDisabled() int64 {
+func (x *SegmentSync) GetDisabled() int64 {
 	if x != nil {
 		return x.Disabled
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetUpdated() int64 {
+func (x *SegmentSync) GetUpdated() int64 {
 	if x != nil {
 		return x.Updated
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetCreated() int64 {
+func (x *SegmentSync) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *SegmentSync) GetCreated() int64 {
 	if x != nil {
 		return x.Created
 	}
 	return 0
 }
 
-func (x *ExternalSegmentSync) GetCreatedBy() int64 {
+func (x *SegmentSync) GetCreatedBy() string {
 	if x != nil {
 		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *SegmentSync) GetModified() int64 {
+	if x != nil {
+		return x.Modified
 	}
 	return 0
 }
@@ -42723,10 +42747,9 @@ func (x *ExternalSegmentSync) GetCreatedBy() int64 {
 type MetaCustomAudience struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
 	Ctx                        *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	SubizAccountId             string                 `protobuf:"bytes,2,opt,name=subiz_account_id,json=subizAccountId,proto3" json:"subiz_account_id,omitempty"`
-	PageId                     string                 `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"` // subiz
+	SubizAccountId             string                 `protobuf:"bytes,2,opt,name=subiz_account_id,json=subizAccountId,proto3" json:"subiz_account_id,omitempty"` // string page_id = 3; // subiz
 	Id                         string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	AccountId                  string                 `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // meta ad account ID
+	AccountId                  string                 `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // meta ad account ID act_...
 	ApproximateCountLowerBound int64                  `protobuf:"varint,6,opt,name=approximate_count_lower_bound,json=approximateCountLowerBound,proto3" json:"approximate_count_lower_bound,omitempty"`
 	ApproximateCountUpperBound int64                  `protobuf:"varint,7,opt,name=approximate_count_upper_bound,json=approximateCountUpperBound,proto3" json:"approximate_count_upper_bound,omitempty"`
 	CustomerFileSource         string                 `protobuf:"bytes,8,opt,name=customer_file_source,json=customerFileSource,proto3" json:"customer_file_source,omitempty"`
@@ -42785,13 +42808,6 @@ func (x *MetaCustomAudience) GetCtx() *common.Context {
 func (x *MetaCustomAudience) GetSubizAccountId() string {
 	if x != nil {
 		return x.SubizAccountId
-	}
-	return ""
-}
-
-func (x *MetaCustomAudience) GetPageId() string {
-	if x != nil {
-		return x.PageId
 	}
 	return ""
 }
@@ -48252,143 +48268,143 @@ func (x *BlockedEmail) GetLastBlocked() int64 {
 }
 
 type Response struct {
-	state                         protoimpl.MessageState         `protogen:"open.v1"`
-	Ctx                           *common.Context                `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId                     string                         `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Error                         *Error                         `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
-	LastModified                  int64                          `protobuf:"varint,4,opt,name=last_modified,json=lastModified,proto3" json:"last_modified,omitempty"`
-	Total                         int64                          `protobuf:"varint,5,opt,name=total,proto3" json:"total,omitempty"`
-	NextAnchor                    string                         `protobuf:"bytes,6,opt,name=next_anchor,json=nextAnchor,proto3" json:"next_anchor,omitempty"`
-	PrevAnchor                    string                         `protobuf:"bytes,7,opt,name=prev_anchor,json=prevAnchor,proto3" json:"prev_anchor,omitempty"`
-	ETag                          string                         `protobuf:"bytes,8,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
-	TotalHits                     int64                          `protobuf:"varint,9,opt,name=total_hits,json=totalHits,proto3" json:"total_hits,omitempty"`
-	BlockedEmail                  *BlockedEmail                  `protobuf:"bytes,10,opt,name=blocked_email,json=blockedEmail,proto3" json:"blocked_email,omitempty"`
-	BlockedEmails                 []*BlockedEmail                `protobuf:"bytes,11,rep,name=blocked_emails,json=blockedEmails,proto3" json:"blocked_emails,omitempty"`
-	BouncedEmail                  *BouncedEmail                  `protobuf:"bytes,12,opt,name=bounced_email,json=bouncedEmail,proto3" json:"bounced_email,omitempty"`
-	BouncedEmails                 []*BouncedEmail                `protobuf:"bytes,13,rep,name=bounced_emails,json=bouncedEmails,proto3" json:"bounced_emails,omitempty"`
-	ZaloCallConsent               *ZaloCallConsent               `protobuf:"bytes,14,opt,name=zalo_call_consent,json=zaloCallConsent,proto3" json:"zalo_call_consent,omitempty"`
-	Credit                        *Credit                        `protobuf:"bytes,15,opt,name=credit,proto3" json:"credit,omitempty"`
-	Credits                       []*Credit                      `protobuf:"bytes,16,rep,name=credits,proto3" json:"credits,omitempty"`
-	Account                       *account.Account               `protobuf:"bytes,17,opt,name=account,proto3" json:"account,omitempty"`
-	Accounts                      []*account.Account             `protobuf:"bytes,18,rep,name=accounts,proto3" json:"accounts,omitempty"`
-	Workflow                      *Workflow                      `protobuf:"bytes,19,opt,name=workflow,proto3" json:"workflow,omitempty"`
-	Workflows                     []*Workflow                    `protobuf:"bytes,20,rep,name=workflows,proto3" json:"workflows,omitempty"`
-	Agent                         *account.Agent                 `protobuf:"bytes,21,opt,name=agent,proto3" json:"agent,omitempty"`
-	Agents                        []*account.Agent               `protobuf:"bytes,22,rep,name=agents,proto3" json:"agents,omitempty"`
-	WorkflowLogs                  []*WorkflowLog                 `protobuf:"bytes,23,rep,name=workflow_logs,json=workflowLogs,proto3" json:"workflow_logs,omitempty"`
-	WorkflowSessions              []*WorkflowSession             `protobuf:"bytes,24,rep,name=workflow_sessions,json=workflowSessions,proto3" json:"workflow_sessions,omitempty"`
-	WorkflowSession               *WorkflowSession               `protobuf:"bytes,26,opt,name=workflow_session,json=workflowSession,proto3" json:"workflow_session,omitempty"`
-	Tickets                       []*Ticket                      `protobuf:"bytes,25,rep,name=tickets,proto3" json:"tickets,omitempty"`
-	TicketTypes                   []*TicketType                  `protobuf:"bytes,27,rep,name=ticket_types,json=ticketTypes,proto3" json:"ticket_types,omitempty"`
-	TicketViews                   []*TicketView                  `protobuf:"bytes,29,rep,name=ticket_views,json=ticketViews,proto3" json:"ticket_views,omitempty"`
-	BotTemplates                  []*BotTemplate                 `protobuf:"bytes,30,rep,name=bot_templates,json=botTemplates,proto3" json:"bot_templates,omitempty"`
-	TicketTemplates               []*TicketTemplate              `protobuf:"bytes,31,rep,name=ticket_templates,json=ticketTemplates,proto3" json:"ticket_templates,omitempty"`
-	Taxes                         []*Tax                         `protobuf:"bytes,32,rep,name=taxes,proto3" json:"taxes,omitempty"`
-	SlaPolicies                   []*SLAPolicy                   `protobuf:"bytes,33,rep,name=sla_policies,json=slaPolicies,proto3" json:"sla_policies,omitempty"`
-	SlaPolicy                     *SLAPolicy                     `protobuf:"bytes,34,opt,name=sla_policy,json=slaPolicy,proto3" json:"sla_policy,omitempty"`
-	SlaViolations                 []*SLAViolation                `protobuf:"bytes,35,rep,name=sla_violations,json=slaViolations,proto3" json:"sla_violations,omitempty"`
-	KnowledgeBase                 *KnowledgeBase                 `protobuf:"bytes,36,opt,name=knowledge_base,json=knowledgeBase,proto3" json:"knowledge_base,omitempty"`
-	Articles                      []*Article                     `protobuf:"bytes,37,rep,name=articles,proto3" json:"articles,omitempty"`
-	ArticleCategories             []*ArticleCategory             `protobuf:"bytes,38,rep,name=article_categories,json=articleCategories,proto3" json:"article_categories,omitempty"`
-	KnowledgeBases                []*KnowledgeBase               `protobuf:"bytes,39,rep,name=knowledge_bases,json=knowledgeBases,proto3" json:"knowledge_bases,omitempty"`
-	Article                       *Article                       `protobuf:"bytes,40,opt,name=article,proto3" json:"article,omitempty"`
-	ArticleCategory               *ArticleCategory               `protobuf:"bytes,41,opt,name=article_category,json=articleCategory,proto3" json:"article_category,omitempty"`
-	Conversation                  *Conversation                  `protobuf:"bytes,42,opt,name=conversation,proto3" json:"conversation,omitempty"`
-	Conversations                 []*Conversation                `protobuf:"bytes,123,rep,name=conversations,proto3" json:"conversations,omitempty"`
-	ConversationMetas             []*ConversationMeta            `protobuf:"bytes,124,rep,name=conversation_metas,json=conversationMetas,proto3" json:"conversation_metas,omitempty"`
-	GreetingAudios                []*GreetingAudio               `protobuf:"bytes,125,rep,name=greeting_audios,json=greetingAudios,proto3" json:"greeting_audios,omitempty"`
-	GreetingAudio                 *GreetingAudio                 `protobuf:"bytes,126,opt,name=greeting_audio,json=greetingAudio,proto3" json:"greeting_audio,omitempty"`
-	Topic                         string                         `protobuf:"bytes,127,opt,name=topic,proto3" json:"topic,omitempty"`
-	Users                         []*User                        `protobuf:"bytes,128,rep,name=users,proto3" json:"users,omitempty"`
-	User                          *User                          `protobuf:"bytes,129,opt,name=user,proto3" json:"user,omitempty"`
-	Event                         *Event                         `protobuf:"bytes,130,opt,name=event,proto3" json:"event,omitempty"`
-	Events                        []*Event                       `protobuf:"bytes,120,rep,name=events,proto3" json:"events,omitempty"`
-	Rating                        *Rating                        `protobuf:"bytes,131,opt,name=rating,proto3" json:"rating,omitempty"`
-	Rule                          *Rule                          `protobuf:"bytes,132,opt,name=rule,proto3" json:"rule,omitempty"`
-	Rules                         []*Rule                        `protobuf:"bytes,133,rep,name=rules,proto3" json:"rules,omitempty"`
-	TicketRule                    *Rule                          `protobuf:"bytes,134,opt,name=ticket_rule,json=ticketRule,proto3" json:"ticket_rule,omitempty"`
-	TicketRules                   []*Rule                        `protobuf:"bytes,135,rep,name=ticket_rules,json=ticketRules,proto3" json:"ticket_rules,omitempty"`
-	AgentProfile                  *AgentProfile                  `protobuf:"bytes,136,opt,name=agent_profile,json=agentProfile,proto3" json:"agent_profile,omitempty"`
-	LoginSession                  *LoginSession                  `protobuf:"bytes,137,opt,name=login_session,json=loginSession,proto3" json:"login_session,omitempty"`
-	PromotionCode                 *PromotionCode                 `protobuf:"bytes,138,opt,name=promotion_code,json=promotionCode,proto3" json:"promotion_code,omitempty"`
-	PromotionCodes                []*PromotionCode               `protobuf:"bytes,139,rep,name=promotion_codes,json=promotionCodes,proto3" json:"promotion_codes,omitempty"`
-	PromotionCheckResult          *PromotionCheckResult          `protobuf:"bytes,140,opt,name=promotion_check_result,json=promotionCheckResult,proto3" json:"promotion_check_result,omitempty"`
-	Ratings                       []*Rating                      `protobuf:"bytes,141,rep,name=ratings,proto3" json:"ratings,omitempty"`
-	SubizPromotionPrograms        []*SubizPromotionProgram       `protobuf:"bytes,142,rep,name=subiz_promotion_programs,json=subizPromotionPrograms,proto3" json:"subiz_promotion_programs,omitempty"`
-	SubizPaymentMethod            *SubizPaymentMethod            `protobuf:"bytes,143,opt,name=subiz_payment_method,json=subizPaymentMethod,proto3" json:"subiz_payment_method,omitempty"`
-	SubizPaymentMethods           []*SubizPaymentMethod          `protobuf:"bytes,144,rep,name=subiz_payment_methods,json=subizPaymentMethods,proto3" json:"subiz_payment_methods,omitempty"`
-	ProfileEmailUsage             *ProfileEmailUsage             `protobuf:"bytes,145,opt,name=profile_email_usage,json=profileEmailUsage,proto3" json:"profile_email_usage,omitempty"`
-	BankAccount                   *BankAccount                   `protobuf:"bytes,146,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccounts                  []*BankAccount                 `protobuf:"bytes,147,rep,name=bank_accounts,json=bankAccounts,proto3" json:"bank_accounts,omitempty"`
-	BankTransferRequest           *BankTransferRequest           `protobuf:"bytes,148,opt,name=bank_transfer_request,json=bankTransferRequest,proto3" json:"bank_transfer_request,omitempty"`
-	WorkflowCounts                []*WorkflowCount               `protobuf:"bytes,149,rep,name=workflow_counts,json=workflowCounts,proto3" json:"workflow_counts,omitempty"`
-	Integrations                  []*Integration                 `protobuf:"bytes,150,rep,name=integrations,proto3" json:"integrations,omitempty"`
-	Integration                   *Integration                   `protobuf:"bytes,154,opt,name=integration,proto3" json:"integration,omitempty"`
-	PhoneDevices                  []*PhoneDevice                 `protobuf:"bytes,151,rep,name=phone_devices,json=phoneDevices,proto3" json:"phone_devices,omitempty"`
-	EventTypes                    []*EventType                   `protobuf:"bytes,152,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
-	ReportCounts                  []*ReportCount                 `protobuf:"bytes,153,rep,name=report_counts,json=reportCounts,proto3" json:"report_counts,omitempty"`
-	Site                          *Site                          `protobuf:"bytes,156,opt,name=site,proto3" json:"site,omitempty"`
-	Sites                         []*Site                        `protobuf:"bytes,157,rep,name=sites,proto3" json:"sites,omitempty"`
-	AttributeDefinition           *AttributeDefinition           `protobuf:"bytes,160,opt,name=attribute_definition,json=attributeDefinition,proto3" json:"attribute_definition,omitempty"`
-	AttributeDefinitions          []*AttributeDefinition         `protobuf:"bytes,161,rep,name=attribute_definitions,json=attributeDefinitions,proto3" json:"attribute_definitions,omitempty"`
-	ArticleNode                   *ArticleNode                   `protobuf:"bytes,162,opt,name=article_node,json=articleNode,proto3" json:"article_node,omitempty"`
-	Tag                           *Tag                           `protobuf:"bytes,163,opt,name=tag,proto3" json:"tag,omitempty"`
-	Tags                          []*Tag                         `protobuf:"bytes,164,rep,name=tags,proto3" json:"tags,omitempty"`
-	Ids                           []string                       `protobuf:"bytes,165,rep,name=ids,proto3" json:"ids,omitempty"`
-	AiDataEntries                 []*AIDataEntry                 `protobuf:"bytes,166,rep,name=ai_data_entries,json=aiDataEntries,proto3" json:"ai_data_entries,omitempty"`
-	AiDataEntry                   *AIDataEntry                   `protobuf:"bytes,167,opt,name=ai_data_entry,json=aiDataEntry,proto3" json:"ai_data_entry,omitempty"`
-	AiDataGroups                  []*AIDataGroup                 `protobuf:"bytes,168,rep,name=ai_data_groups,json=aiDataGroups,proto3" json:"ai_data_groups,omitempty"`
-	AiDataGroup                   *AIDataGroup                   `protobuf:"bytes,169,opt,name=ai_data_group,json=aiDataGroup,proto3" json:"ai_data_group,omitempty"`
-	AiAgents                      []*AIAgent                     `protobuf:"bytes,170,rep,name=ai_agents,json=aiAgents,proto3" json:"ai_agents,omitempty"`
-	AiAgent                       *AIAgent                       `protobuf:"bytes,171,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
-	AiQnaSuggestion               *AiQnASuggestion               `protobuf:"bytes,172,opt,name=ai_qna_suggestion,json=aiQnaSuggestion,proto3" json:"ai_qna_suggestion,omitempty"`
-	AiQnaSuggestions              []*AiQnASuggestion             `protobuf:"bytes,173,rep,name=ai_qna_suggestions,json=aiQnaSuggestions,proto3" json:"ai_qna_suggestions,omitempty"`
-	AiResponseSources             []*AiResponseSource            `protobuf:"bytes,174,rep,name=ai_response_sources,json=aiResponseSources,proto3" json:"ai_response_sources,omitempty"`
-	AiResponseSource              *AiResponseSource              `protobuf:"bytes,158,opt,name=ai_response_source,json=aiResponseSource,proto3" json:"ai_response_source,omitempty"`
-	AiDataChunks                  []*AIDataChunk                 `protobuf:"bytes,175,rep,name=ai_data_chunks,json=aiDataChunks,proto3" json:"ai_data_chunks,omitempty"`
-	File                          *File                          `protobuf:"bytes,176,opt,name=file,proto3" json:"file,omitempty"`
-	Files                         []*File                        `protobuf:"bytes,177,rep,name=files,proto3" json:"files,omitempty"`
-	FacebookPosts                 []*FacebookPost                `protobuf:"bytes,178,rep,name=facebook_posts,json=facebookPosts,proto3" json:"facebook_posts,omitempty"`
-	FacebookPost                  *FacebookPost                  `protobuf:"bytes,179,opt,name=facebook_post,json=facebookPost,proto3" json:"facebook_post,omitempty"`
-	Templates                     []*Template                    `protobuf:"bytes,180,rep,name=templates,proto3" json:"templates,omitempty"`
-	Webhooks                      []*Webhook                     `protobuf:"bytes,181,rep,name=webhooks,proto3" json:"webhooks,omitempty"`
-	Notifications                 []*Noti                        `protobuf:"bytes,182,rep,name=notifications,proto3" json:"notifications,omitempty"`
-	NumUnseenNotifications        int64                          `protobuf:"varint,183,opt,name=num_unseen_notifications,json=numUnseenNotifications,proto3" json:"num_unseen_notifications,omitempty"`
-	NotificationSetting           *NotiSetting                   `protobuf:"bytes,184,opt,name=notification_setting,json=notificationSetting,proto3" json:"notification_setting,omitempty"`
-	AgentGroups                   []*AgentGroup                  `protobuf:"bytes,185,rep,name=agent_groups,json=agentGroups,proto3" json:"agent_groups,omitempty"`
-	ZnsTemplates                  []*ZNSTemplate                 `protobuf:"bytes,186,rep,name=zns_templates,json=znsTemplates,proto3" json:"zns_templates,omitempty"`
-	ZnsTemplate                   *ZNSTemplate                   `protobuf:"bytes,187,opt,name=zns_template,json=znsTemplate,proto3" json:"zns_template,omitempty"`
-	ZnsMedias                     []*ZNSMedia                    `protobuf:"bytes,188,rep,name=zns_medias,json=znsMedias,proto3" json:"zns_medias,omitempty"`
-	ZnsMedia                      *ZNSMedia                      `protobuf:"bytes,189,opt,name=zns_media,json=znsMedia,proto3" json:"zns_media,omitempty"`
-	EmailSignatures               []*EmailSignature              `protobuf:"bytes,190,rep,name=email_signatures,json=emailSignatures,proto3" json:"email_signatures,omitempty"`
-	EmailSignature                *EmailSignature                `protobuf:"bytes,191,opt,name=email_signature,json=emailSignature,proto3" json:"email_signature,omitempty"`
-	Campaigns                     []*Campaign                    `protobuf:"bytes,192,rep,name=campaigns,proto3" json:"campaigns,omitempty"`
-	Campaign                      *Campaign                      `protobuf:"bytes,193,opt,name=campaign,proto3" json:"campaign,omitempty"`
-	CreditUsage                   *CreditUsage                   `protobuf:"bytes,194,opt,name=credit_usage,json=creditUsage,proto3" json:"credit_usage,omitempty"`
-	AiAgentSpans                  []*AIAgentSpan                 `protobuf:"bytes,195,rep,name=ai_agent_spans,json=aiAgentSpans,proto3" json:"ai_agent_spans,omitempty"`
-	AiAgentTraces                 []*AIAgentTrace                `protobuf:"bytes,196,rep,name=ai_agent_traces,json=aiAgentTraces,proto3" json:"ai_agent_traces,omitempty"`
-	FormSubmissions               []*FormSubmission              `protobuf:"bytes,197,rep,name=form_submissions,json=formSubmissions,proto3" json:"form_submissions,omitempty"`
-	Forms                         []*Form                        `protobuf:"bytes,198,rep,name=forms,proto3" json:"forms,omitempty"`
-	Form                          *Form                          `protobuf:"bytes,199,opt,name=form,proto3" json:"form,omitempty"`
-	FormSubmission                *FormSubmission                `protobuf:"bytes,200,opt,name=form_submission,json=formSubmission,proto3" json:"form_submission,omitempty"`
-	Products                      []*Product                     `protobuf:"bytes,202,rep,name=products,proto3" json:"products,omitempty"`
-	Product                       *Product                       `protobuf:"bytes,201,opt,name=product,proto3" json:"product,omitempty"`
-	PromotionPrograms             []*PromotionProgram            `protobuf:"bytes,203,rep,name=promotion_programs,json=promotionPrograms,proto3" json:"promotion_programs,omitempty"`
-	Bills                         []*Bill                        `protobuf:"bytes,204,rep,name=bills,proto3" json:"bills,omitempty"`
-	Orders                        []*Order                       `protobuf:"bytes,205,rep,name=orders,proto3" json:"orders,omitempty"`
-	Bill                          *Bill                          `protobuf:"bytes,206,opt,name=bill,proto3" json:"bill,omitempty"`
-	Order                         *Order                         `protobuf:"bytes,207,opt,name=order,proto3" json:"order,omitempty"`
-	SegmentJoineds                []int64                        `protobuf:"varint,208,rep,packed,name=segment_joineds,json=segmentJoineds,proto3" json:"segment_joineds,omitempty"`
-	ProductOffer                  *ProductOffer                  `protobuf:"bytes,210,opt,name=product_offer,json=productOffer,proto3" json:"product_offer,omitempty"`
-	ProductOffers                 []*ProductOffer                `protobuf:"bytes,211,rep,name=product_offers,json=productOffers,proto3" json:"product_offers,omitempty"`
-	Addresses                     []*Address                     `protobuf:"bytes,222,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	ExternalSegmentSync           *ExternalSegmentSync           `protobuf:"bytes,223,opt,name=external_segment_sync,json=externalSegmentSync,proto3" json:"external_segment_sync,omitempty"`
-	ExternalSegmentSyncs          []*ExternalSegmentSync         `protobuf:"bytes,224,rep,name=external_segment_syncs,json=externalSegmentSyncs,proto3" json:"external_segment_syncs,omitempty"`
-	ExternalSegmentSyncUserStatus *ExternalSegmentSyncUserStatus `protobuf:"bytes,225,opt,name=external_segment_sync_user_status,json=externalSegmentSyncUserStatus,proto3" json:"external_segment_sync_user_status,omitempty"`
-	MetaAdAccount                 *MetaAdAccount                 `protobuf:"bytes,226,opt,name=meta_ad_account,json=metaAdAccount,proto3" json:"meta_ad_account,omitempty"`
-	MetaAdAccounts                []*MetaAdAccount               `protobuf:"bytes,227,rep,name=meta_ad_accounts,json=metaAdAccounts,proto3" json:"meta_ad_accounts,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state                  protoimpl.MessageState   `protogen:"open.v1"`
+	Ctx                    *common.Context          `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId              string                   `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Error                  *Error                   `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
+	LastModified           int64                    `protobuf:"varint,4,opt,name=last_modified,json=lastModified,proto3" json:"last_modified,omitempty"`
+	Total                  int64                    `protobuf:"varint,5,opt,name=total,proto3" json:"total,omitempty"`
+	NextAnchor             string                   `protobuf:"bytes,6,opt,name=next_anchor,json=nextAnchor,proto3" json:"next_anchor,omitempty"`
+	PrevAnchor             string                   `protobuf:"bytes,7,opt,name=prev_anchor,json=prevAnchor,proto3" json:"prev_anchor,omitempty"`
+	ETag                   string                   `protobuf:"bytes,8,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
+	TotalHits              int64                    `protobuf:"varint,9,opt,name=total_hits,json=totalHits,proto3" json:"total_hits,omitempty"`
+	BlockedEmail           *BlockedEmail            `protobuf:"bytes,10,opt,name=blocked_email,json=blockedEmail,proto3" json:"blocked_email,omitempty"`
+	BlockedEmails          []*BlockedEmail          `protobuf:"bytes,11,rep,name=blocked_emails,json=blockedEmails,proto3" json:"blocked_emails,omitempty"`
+	BouncedEmail           *BouncedEmail            `protobuf:"bytes,12,opt,name=bounced_email,json=bouncedEmail,proto3" json:"bounced_email,omitempty"`
+	BouncedEmails          []*BouncedEmail          `protobuf:"bytes,13,rep,name=bounced_emails,json=bouncedEmails,proto3" json:"bounced_emails,omitempty"`
+	ZaloCallConsent        *ZaloCallConsent         `protobuf:"bytes,14,opt,name=zalo_call_consent,json=zaloCallConsent,proto3" json:"zalo_call_consent,omitempty"`
+	Credit                 *Credit                  `protobuf:"bytes,15,opt,name=credit,proto3" json:"credit,omitempty"`
+	Credits                []*Credit                `protobuf:"bytes,16,rep,name=credits,proto3" json:"credits,omitempty"`
+	Account                *account.Account         `protobuf:"bytes,17,opt,name=account,proto3" json:"account,omitempty"`
+	Accounts               []*account.Account       `protobuf:"bytes,18,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Workflow               *Workflow                `protobuf:"bytes,19,opt,name=workflow,proto3" json:"workflow,omitempty"`
+	Workflows              []*Workflow              `protobuf:"bytes,20,rep,name=workflows,proto3" json:"workflows,omitempty"`
+	Agent                  *account.Agent           `protobuf:"bytes,21,opt,name=agent,proto3" json:"agent,omitempty"`
+	Agents                 []*account.Agent         `protobuf:"bytes,22,rep,name=agents,proto3" json:"agents,omitempty"`
+	WorkflowLogs           []*WorkflowLog           `protobuf:"bytes,23,rep,name=workflow_logs,json=workflowLogs,proto3" json:"workflow_logs,omitempty"`
+	WorkflowSessions       []*WorkflowSession       `protobuf:"bytes,24,rep,name=workflow_sessions,json=workflowSessions,proto3" json:"workflow_sessions,omitempty"`
+	WorkflowSession        *WorkflowSession         `protobuf:"bytes,26,opt,name=workflow_session,json=workflowSession,proto3" json:"workflow_session,omitempty"`
+	Tickets                []*Ticket                `protobuf:"bytes,25,rep,name=tickets,proto3" json:"tickets,omitempty"`
+	TicketTypes            []*TicketType            `protobuf:"bytes,27,rep,name=ticket_types,json=ticketTypes,proto3" json:"ticket_types,omitempty"`
+	TicketViews            []*TicketView            `protobuf:"bytes,29,rep,name=ticket_views,json=ticketViews,proto3" json:"ticket_views,omitempty"`
+	BotTemplates           []*BotTemplate           `protobuf:"bytes,30,rep,name=bot_templates,json=botTemplates,proto3" json:"bot_templates,omitempty"`
+	TicketTemplates        []*TicketTemplate        `protobuf:"bytes,31,rep,name=ticket_templates,json=ticketTemplates,proto3" json:"ticket_templates,omitempty"`
+	Taxes                  []*Tax                   `protobuf:"bytes,32,rep,name=taxes,proto3" json:"taxes,omitempty"`
+	SlaPolicies            []*SLAPolicy             `protobuf:"bytes,33,rep,name=sla_policies,json=slaPolicies,proto3" json:"sla_policies,omitempty"`
+	SlaPolicy              *SLAPolicy               `protobuf:"bytes,34,opt,name=sla_policy,json=slaPolicy,proto3" json:"sla_policy,omitempty"`
+	SlaViolations          []*SLAViolation          `protobuf:"bytes,35,rep,name=sla_violations,json=slaViolations,proto3" json:"sla_violations,omitempty"`
+	KnowledgeBase          *KnowledgeBase           `protobuf:"bytes,36,opt,name=knowledge_base,json=knowledgeBase,proto3" json:"knowledge_base,omitempty"`
+	Articles               []*Article               `protobuf:"bytes,37,rep,name=articles,proto3" json:"articles,omitempty"`
+	ArticleCategories      []*ArticleCategory       `protobuf:"bytes,38,rep,name=article_categories,json=articleCategories,proto3" json:"article_categories,omitempty"`
+	KnowledgeBases         []*KnowledgeBase         `protobuf:"bytes,39,rep,name=knowledge_bases,json=knowledgeBases,proto3" json:"knowledge_bases,omitempty"`
+	Article                *Article                 `protobuf:"bytes,40,opt,name=article,proto3" json:"article,omitempty"`
+	ArticleCategory        *ArticleCategory         `protobuf:"bytes,41,opt,name=article_category,json=articleCategory,proto3" json:"article_category,omitempty"`
+	Conversation           *Conversation            `protobuf:"bytes,42,opt,name=conversation,proto3" json:"conversation,omitempty"`
+	Conversations          []*Conversation          `protobuf:"bytes,123,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	ConversationMetas      []*ConversationMeta      `protobuf:"bytes,124,rep,name=conversation_metas,json=conversationMetas,proto3" json:"conversation_metas,omitempty"`
+	GreetingAudios         []*GreetingAudio         `protobuf:"bytes,125,rep,name=greeting_audios,json=greetingAudios,proto3" json:"greeting_audios,omitempty"`
+	GreetingAudio          *GreetingAudio           `protobuf:"bytes,126,opt,name=greeting_audio,json=greetingAudio,proto3" json:"greeting_audio,omitempty"`
+	Topic                  string                   `protobuf:"bytes,127,opt,name=topic,proto3" json:"topic,omitempty"`
+	Users                  []*User                  `protobuf:"bytes,128,rep,name=users,proto3" json:"users,omitempty"`
+	User                   *User                    `protobuf:"bytes,129,opt,name=user,proto3" json:"user,omitempty"`
+	Event                  *Event                   `protobuf:"bytes,130,opt,name=event,proto3" json:"event,omitempty"`
+	Events                 []*Event                 `protobuf:"bytes,120,rep,name=events,proto3" json:"events,omitempty"`
+	Rating                 *Rating                  `protobuf:"bytes,131,opt,name=rating,proto3" json:"rating,omitempty"`
+	Rule                   *Rule                    `protobuf:"bytes,132,opt,name=rule,proto3" json:"rule,omitempty"`
+	Rules                  []*Rule                  `protobuf:"bytes,133,rep,name=rules,proto3" json:"rules,omitempty"`
+	TicketRule             *Rule                    `protobuf:"bytes,134,opt,name=ticket_rule,json=ticketRule,proto3" json:"ticket_rule,omitempty"`
+	TicketRules            []*Rule                  `protobuf:"bytes,135,rep,name=ticket_rules,json=ticketRules,proto3" json:"ticket_rules,omitempty"`
+	AgentProfile           *AgentProfile            `protobuf:"bytes,136,opt,name=agent_profile,json=agentProfile,proto3" json:"agent_profile,omitempty"`
+	LoginSession           *LoginSession            `protobuf:"bytes,137,opt,name=login_session,json=loginSession,proto3" json:"login_session,omitempty"`
+	PromotionCode          *PromotionCode           `protobuf:"bytes,138,opt,name=promotion_code,json=promotionCode,proto3" json:"promotion_code,omitempty"`
+	PromotionCodes         []*PromotionCode         `protobuf:"bytes,139,rep,name=promotion_codes,json=promotionCodes,proto3" json:"promotion_codes,omitempty"`
+	PromotionCheckResult   *PromotionCheckResult    `protobuf:"bytes,140,opt,name=promotion_check_result,json=promotionCheckResult,proto3" json:"promotion_check_result,omitempty"`
+	Ratings                []*Rating                `protobuf:"bytes,141,rep,name=ratings,proto3" json:"ratings,omitempty"`
+	SubizPromotionPrograms []*SubizPromotionProgram `protobuf:"bytes,142,rep,name=subiz_promotion_programs,json=subizPromotionPrograms,proto3" json:"subiz_promotion_programs,omitempty"`
+	SubizPaymentMethod     *SubizPaymentMethod      `protobuf:"bytes,143,opt,name=subiz_payment_method,json=subizPaymentMethod,proto3" json:"subiz_payment_method,omitempty"`
+	SubizPaymentMethods    []*SubizPaymentMethod    `protobuf:"bytes,144,rep,name=subiz_payment_methods,json=subizPaymentMethods,proto3" json:"subiz_payment_methods,omitempty"`
+	ProfileEmailUsage      *ProfileEmailUsage       `protobuf:"bytes,145,opt,name=profile_email_usage,json=profileEmailUsage,proto3" json:"profile_email_usage,omitempty"`
+	BankAccount            *BankAccount             `protobuf:"bytes,146,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	BankAccounts           []*BankAccount           `protobuf:"bytes,147,rep,name=bank_accounts,json=bankAccounts,proto3" json:"bank_accounts,omitempty"`
+	BankTransferRequest    *BankTransferRequest     `protobuf:"bytes,148,opt,name=bank_transfer_request,json=bankTransferRequest,proto3" json:"bank_transfer_request,omitempty"`
+	WorkflowCounts         []*WorkflowCount         `protobuf:"bytes,149,rep,name=workflow_counts,json=workflowCounts,proto3" json:"workflow_counts,omitempty"`
+	Integrations           []*Integration           `protobuf:"bytes,150,rep,name=integrations,proto3" json:"integrations,omitempty"`
+	Integration            *Integration             `protobuf:"bytes,154,opt,name=integration,proto3" json:"integration,omitempty"`
+	PhoneDevices           []*PhoneDevice           `protobuf:"bytes,151,rep,name=phone_devices,json=phoneDevices,proto3" json:"phone_devices,omitempty"`
+	EventTypes             []*EventType             `protobuf:"bytes,152,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
+	ReportCounts           []*ReportCount           `protobuf:"bytes,153,rep,name=report_counts,json=reportCounts,proto3" json:"report_counts,omitempty"`
+	Site                   *Site                    `protobuf:"bytes,156,opt,name=site,proto3" json:"site,omitempty"`
+	Sites                  []*Site                  `protobuf:"bytes,157,rep,name=sites,proto3" json:"sites,omitempty"`
+	AttributeDefinition    *AttributeDefinition     `protobuf:"bytes,160,opt,name=attribute_definition,json=attributeDefinition,proto3" json:"attribute_definition,omitempty"`
+	AttributeDefinitions   []*AttributeDefinition   `protobuf:"bytes,161,rep,name=attribute_definitions,json=attributeDefinitions,proto3" json:"attribute_definitions,omitempty"`
+	ArticleNode            *ArticleNode             `protobuf:"bytes,162,opt,name=article_node,json=articleNode,proto3" json:"article_node,omitempty"`
+	Tag                    *Tag                     `protobuf:"bytes,163,opt,name=tag,proto3" json:"tag,omitempty"`
+	Tags                   []*Tag                   `protobuf:"bytes,164,rep,name=tags,proto3" json:"tags,omitempty"`
+	Ids                    []string                 `protobuf:"bytes,165,rep,name=ids,proto3" json:"ids,omitempty"`
+	AiDataEntries          []*AIDataEntry           `protobuf:"bytes,166,rep,name=ai_data_entries,json=aiDataEntries,proto3" json:"ai_data_entries,omitempty"`
+	AiDataEntry            *AIDataEntry             `protobuf:"bytes,167,opt,name=ai_data_entry,json=aiDataEntry,proto3" json:"ai_data_entry,omitempty"`
+	AiDataGroups           []*AIDataGroup           `protobuf:"bytes,168,rep,name=ai_data_groups,json=aiDataGroups,proto3" json:"ai_data_groups,omitempty"`
+	AiDataGroup            *AIDataGroup             `protobuf:"bytes,169,opt,name=ai_data_group,json=aiDataGroup,proto3" json:"ai_data_group,omitempty"`
+	AiAgents               []*AIAgent               `protobuf:"bytes,170,rep,name=ai_agents,json=aiAgents,proto3" json:"ai_agents,omitempty"`
+	AiAgent                *AIAgent                 `protobuf:"bytes,171,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
+	AiQnaSuggestion        *AiQnASuggestion         `protobuf:"bytes,172,opt,name=ai_qna_suggestion,json=aiQnaSuggestion,proto3" json:"ai_qna_suggestion,omitempty"`
+	AiQnaSuggestions       []*AiQnASuggestion       `protobuf:"bytes,173,rep,name=ai_qna_suggestions,json=aiQnaSuggestions,proto3" json:"ai_qna_suggestions,omitempty"`
+	AiResponseSources      []*AiResponseSource      `protobuf:"bytes,174,rep,name=ai_response_sources,json=aiResponseSources,proto3" json:"ai_response_sources,omitempty"`
+	AiResponseSource       *AiResponseSource        `protobuf:"bytes,158,opt,name=ai_response_source,json=aiResponseSource,proto3" json:"ai_response_source,omitempty"`
+	AiDataChunks           []*AIDataChunk           `protobuf:"bytes,175,rep,name=ai_data_chunks,json=aiDataChunks,proto3" json:"ai_data_chunks,omitempty"`
+	File                   *File                    `protobuf:"bytes,176,opt,name=file,proto3" json:"file,omitempty"`
+	Files                  []*File                  `protobuf:"bytes,177,rep,name=files,proto3" json:"files,omitempty"`
+	FacebookPosts          []*FacebookPost          `protobuf:"bytes,178,rep,name=facebook_posts,json=facebookPosts,proto3" json:"facebook_posts,omitempty"`
+	FacebookPost           *FacebookPost            `protobuf:"bytes,179,opt,name=facebook_post,json=facebookPost,proto3" json:"facebook_post,omitempty"`
+	Templates              []*Template              `protobuf:"bytes,180,rep,name=templates,proto3" json:"templates,omitempty"`
+	Webhooks               []*Webhook               `protobuf:"bytes,181,rep,name=webhooks,proto3" json:"webhooks,omitempty"`
+	Notifications          []*Noti                  `protobuf:"bytes,182,rep,name=notifications,proto3" json:"notifications,omitempty"`
+	NumUnseenNotifications int64                    `protobuf:"varint,183,opt,name=num_unseen_notifications,json=numUnseenNotifications,proto3" json:"num_unseen_notifications,omitempty"`
+	NotificationSetting    *NotiSetting             `protobuf:"bytes,184,opt,name=notification_setting,json=notificationSetting,proto3" json:"notification_setting,omitempty"`
+	AgentGroups            []*AgentGroup            `protobuf:"bytes,185,rep,name=agent_groups,json=agentGroups,proto3" json:"agent_groups,omitempty"`
+	ZnsTemplates           []*ZNSTemplate           `protobuf:"bytes,186,rep,name=zns_templates,json=znsTemplates,proto3" json:"zns_templates,omitempty"`
+	ZnsTemplate            *ZNSTemplate             `protobuf:"bytes,187,opt,name=zns_template,json=znsTemplate,proto3" json:"zns_template,omitempty"`
+	ZnsMedias              []*ZNSMedia              `protobuf:"bytes,188,rep,name=zns_medias,json=znsMedias,proto3" json:"zns_medias,omitempty"`
+	ZnsMedia               *ZNSMedia                `protobuf:"bytes,189,opt,name=zns_media,json=znsMedia,proto3" json:"zns_media,omitempty"`
+	EmailSignatures        []*EmailSignature        `protobuf:"bytes,190,rep,name=email_signatures,json=emailSignatures,proto3" json:"email_signatures,omitempty"`
+	EmailSignature         *EmailSignature          `protobuf:"bytes,191,opt,name=email_signature,json=emailSignature,proto3" json:"email_signature,omitempty"`
+	Campaigns              []*Campaign              `protobuf:"bytes,192,rep,name=campaigns,proto3" json:"campaigns,omitempty"`
+	Campaign               *Campaign                `protobuf:"bytes,193,opt,name=campaign,proto3" json:"campaign,omitempty"`
+	CreditUsage            *CreditUsage             `protobuf:"bytes,194,opt,name=credit_usage,json=creditUsage,proto3" json:"credit_usage,omitempty"`
+	AiAgentSpans           []*AIAgentSpan           `protobuf:"bytes,195,rep,name=ai_agent_spans,json=aiAgentSpans,proto3" json:"ai_agent_spans,omitempty"`
+	AiAgentTraces          []*AIAgentTrace          `protobuf:"bytes,196,rep,name=ai_agent_traces,json=aiAgentTraces,proto3" json:"ai_agent_traces,omitempty"`
+	FormSubmissions        []*FormSubmission        `protobuf:"bytes,197,rep,name=form_submissions,json=formSubmissions,proto3" json:"form_submissions,omitempty"`
+	Forms                  []*Form                  `protobuf:"bytes,198,rep,name=forms,proto3" json:"forms,omitempty"`
+	Form                   *Form                    `protobuf:"bytes,199,opt,name=form,proto3" json:"form,omitempty"`
+	FormSubmission         *FormSubmission          `protobuf:"bytes,200,opt,name=form_submission,json=formSubmission,proto3" json:"form_submission,omitempty"`
+	Products               []*Product               `protobuf:"bytes,202,rep,name=products,proto3" json:"products,omitempty"`
+	Product                *Product                 `protobuf:"bytes,201,opt,name=product,proto3" json:"product,omitempty"`
+	PromotionPrograms      []*PromotionProgram      `protobuf:"bytes,203,rep,name=promotion_programs,json=promotionPrograms,proto3" json:"promotion_programs,omitempty"`
+	Bills                  []*Bill                  `protobuf:"bytes,204,rep,name=bills,proto3" json:"bills,omitempty"`
+	Orders                 []*Order                 `protobuf:"bytes,205,rep,name=orders,proto3" json:"orders,omitempty"`
+	Bill                   *Bill                    `protobuf:"bytes,206,opt,name=bill,proto3" json:"bill,omitempty"`
+	Order                  *Order                   `protobuf:"bytes,207,opt,name=order,proto3" json:"order,omitempty"`
+	SegmentJoineds         []int64                  `protobuf:"varint,208,rep,packed,name=segment_joineds,json=segmentJoineds,proto3" json:"segment_joineds,omitempty"`
+	ProductOffer           *ProductOffer            `protobuf:"bytes,210,opt,name=product_offer,json=productOffer,proto3" json:"product_offer,omitempty"`
+	ProductOffers          []*ProductOffer          `protobuf:"bytes,211,rep,name=product_offers,json=productOffers,proto3" json:"product_offers,omitempty"`
+	Addresses              []*Address               `protobuf:"bytes,222,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	SegmentSync            *SegmentSync             `protobuf:"bytes,223,opt,name=segment_sync,json=segmentSync,proto3" json:"segment_sync,omitempty"`
+	SegmentSyncs           []*SegmentSync           `protobuf:"bytes,224,rep,name=segment_syncs,json=segmentSyncs,proto3" json:"segment_syncs,omitempty"`
+	SegmentSyncUserStatus  *SegmentSyncUserStatus   `protobuf:"bytes,225,opt,name=segment_sync_user_status,json=segmentSyncUserStatus,proto3" json:"segment_sync_user_status,omitempty"`
+	MetaAdAccount          *MetaAdAccount           `protobuf:"bytes,226,opt,name=meta_ad_account,json=metaAdAccount,proto3" json:"meta_ad_account,omitempty"`
+	MetaAdAccounts         []*MetaAdAccount         `protobuf:"bytes,227,rep,name=meta_ad_accounts,json=metaAdAccounts,proto3" json:"meta_ad_accounts,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Response) Reset() {
@@ -49324,23 +49340,23 @@ func (x *Response) GetAddresses() []*Address {
 	return nil
 }
 
-func (x *Response) GetExternalSegmentSync() *ExternalSegmentSync {
+func (x *Response) GetSegmentSync() *SegmentSync {
 	if x != nil {
-		return x.ExternalSegmentSync
+		return x.SegmentSync
 	}
 	return nil
 }
 
-func (x *Response) GetExternalSegmentSyncs() []*ExternalSegmentSync {
+func (x *Response) GetSegmentSyncs() []*SegmentSync {
 	if x != nil {
-		return x.ExternalSegmentSyncs
+		return x.SegmentSyncs
 	}
 	return nil
 }
 
-func (x *Response) GetExternalSegmentSyncUserStatus() *ExternalSegmentSyncUserStatus {
+func (x *Response) GetSegmentSyncUserStatus() *SegmentSyncUserStatus {
 	if x != nil {
-		return x.ExternalSegmentSyncUserStatus
+		return x.SegmentSyncUserStatus
 	}
 	return nil
 }
@@ -70175,7 +70191,7 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\ttimestamp\x12\x16\n" +
 	"\x06object\x18\v \x01(\tR\x06object\x12\x14\n" +
 	"\x05value\x18\f \x01(\tR\x05value\x12(\n" +
-	"\x05array\x18\x14 \x03(\v2\x12.header.EventFieldR\x05array\"\xbf)\n" +
+	"\x05array\x18\x14 \x03(\v2\x12.header.EventFieldR\x05array\"\xa6)\n" +
 	"\x04Data\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12$\n" +
 	"\x05agent\x18\x02 \x01(\v2\x0e.account.AgentR\x05agent\x12)\n" +
@@ -70284,8 +70300,8 @@ const file_header_proto_rawDesc = "" +
 	"\rllm_tool_call\x18\x8a\x01 \x01(\v2\x13.header.LLMToolCallR\vllmToolCall\x12!\n" +
 	"\x04form\x18\x8b\x01 \x01(\v2\f.header.FormR\x04form\x12F\n" +
 	"\x11event_destination\x18\x8c\x01 \x01(\v2\x18.header.EventDestinationR\x10eventDestination\x12H\n" +
-	"\x12event_destinations\x18\x8d\x01 \x03(\v2\x18.header.EventDestinationR\x11eventDestinations\x12P\n" +
-	"\x15external_segment_sync\x18\x90\x01 \x01(\v2\x1b.header.ExternalSegmentSyncR\x13externalSegmentSync\"\xee\x03\n" +
+	"\x12event_destinations\x18\x8d\x01 \x03(\v2\x18.header.EventDestinationR\x11eventDestinations\x127\n" +
+	"\fsegment_sync\x18\x90\x01 \x01(\v2\x13.header.SegmentSyncR\vsegmentSync\"\xee\x03\n" +
 	"\x10ConversationMeta\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x18\n" +
 	"\aactived\x18\x04 \x01(\x03R\aactived\x12\x1d\n" +
@@ -74523,8 +74539,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\tsessionId\x12\x1b\n" +
 	"\tbatch_seq\x18\v \x01(\tR\bbatchSeq\x12&\n" +
 	"\x0flast_batch_flag\x18\f \x01(\bR\rlastBatchFlag\x12.\n" +
-	"\x13estimated_num_total\x18\r \x01(\x03R\x11estimatedNumTotal\"\xf4\x01\n" +
-	"\x1dExternalSegmentSyncUserStatus\x12!\n" +
+	"\x13estimated_num_total\x18\r \x01(\x03R\x11estimatedNumTotal\"\xec\x01\n" +
+	"\x15SegmentSyncUserStatus\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
@@ -74534,8 +74550,8 @@ const file_header_proto_rawDesc = "" +
 	"\auser_id\x18\x05 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tlast_sync\x18\x06 \x01(\x03R\blastSync\x12\x16\n" +
 	"\x06status\x18\a \x01(\tR\x06status\x12\x14\n" +
-	"\x05error\x18\b \x01(\tR\x05error\"\x93\b\n" +
-	"\x13ExternalSegmentSync\x12!\n" +
+	"\x05error\x18\b \x01(\tR\x05error\"\xd7\b\n" +
+	"\vSegmentSync\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
@@ -74543,34 +74559,37 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"segment_id\x18\x04 \x01(\tR\tsegmentId\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x1a\n" +
-	"\bprovider\x18\x06 \x01(\tR\bprovider\x12(\n" +
-	"\x10meta_audience_id\x18\a \x01(\tR\x0emetaAudienceId\x12(\n" +
-	"\x10meta_business_id\x18\b \x01(\tR\x0emetaBusinessId\x12&\n" +
-	"\x0fmeta_ad_account\x18\t \x01(\tR\rmetaAdAccount\x12*\n" +
+	"\bprovider\x18\x06 \x01(\tR\bprovider\x12\x12\n" +
+	"\x04name\x18\b \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\t \x01(\tR\vdescription\x12*\n" +
 	"\x11last_sync_started\x18\n" +
 	" \x01(\x03R\x0flastSyncStarted\x12&\n" +
 	"\x0flast_sync_ended\x18\v \x01(\x03R\rlastSyncEnded\x12(\n" +
-	"\x10last_sync_status\x18\f \x01(\x03R\x0elastSyncStatus\x12(\n" +
+	"\x10last_sync_status\x18\f \x01(\tR\x0elastSyncStatus\x12(\n" +
 	"\x10num_sync_success\x18\x0e \x01(\x03R\x0enumSyncSuccess\x12&\n" +
 	"\x0fnum_sync_failed\x18\x0f \x01(\x03R\rnumSyncFailed\x12%\n" +
 	"\x0efailed_message\x18\x10 \x01(\tR\rfailedMessage\x12&\n" +
 	"\x0flast_sync_error\x18\x11 \x01(\tR\rlastSyncError\x12\x1f\n" +
-	"\vbatch_index\x18\x12 \x01(\tR\n" +
-	"batchIndex\x12J\n" +
-	"\x12meta_batch_session\x18\x14 \x01(\v2\x1c.header.MetaSyncBatchSessionR\x10metaBatchSession\x12?\n" +
-	"\rmeta_audience\x18\x15 \x01(\v2\x1a.header.MetaCustomAudienceR\fmetaAudience\x127\n" +
-	"\x18last_fb_request_response\x18\x16 \x01(\tR\x15lastFbRequestResponse\x123\n" +
-	"\x16last_fb_request_status\x18\x17 \x01(\x03R\x13lastFbRequestStatus\x12+\n" +
-	"\x12last_fb_request_at\x18\x18 \x01(\x03R\x0flastFbRequestAt\x12\x1a\n" +
-	"\bdisabled\x18\x19 \x01(\x03R\bdisabled\x12\x18\n" +
-	"\aupdated\x18\x1a \x01(\x03R\aupdated\x12\x18\n" +
-	"\acreated\x18\x1b \x01(\x03R\acreated\x12\x1d\n" +
+	"\vbatch_index\x18\x12 \x01(\x03R\n" +
+	"batchIndex\x12(\n" +
+	"\x10meta_audience_id\x18\x13 \x01(\tR\x0emetaAudienceId\x12+\n" +
+	"\x12meta_ad_account_id\x18\x14 \x01(\tR\x0fmetaAdAccountId\x12J\n" +
+	"\x12meta_batch_session\x18\x15 \x01(\v2\x1c.header.MetaSyncBatchSessionR\x10metaBatchSession\x12?\n" +
+	"\rmeta_audience\x18\x16 \x01(\v2\x1a.header.MetaCustomAudienceR\fmetaAudience\x127\n" +
+	"\x18last_fb_request_response\x18\x17 \x01(\tR\x15lastFbRequestResponse\x123\n" +
+	"\x16last_fb_request_status\x18\x18 \x01(\x03R\x13lastFbRequestStatus\x12+\n" +
+	"\x12last_fb_request_at\x18\x19 \x01(\x03R\x0flastFbRequestAt\x12\x1a\n" +
+	"\bdisabled\x18\x1e \x01(\x03R\bdisabled\x12\x18\n" +
+	"\aupdated\x18\x1f \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\x1c \x01(\x03R\tcreatedBy\"\xe8\x05\n" +
+	"updated_by\x18  \x01(\tR\tupdatedBy\x12\x18\n" +
+	"\acreated\x18! \x01(\x03R\acreated\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\" \x01(\tR\tcreatedBy\x12\x1a\n" +
+	"\bmodified\x18# \x01(\x03R\bmodified\"\xcf\x05\n" +
 	"\x12MetaCustomAudience\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12(\n" +
-	"\x10subiz_account_id\x18\x02 \x01(\tR\x0esubizAccountId\x12\x17\n" +
-	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x0e\n" +
+	"\x10subiz_account_id\x18\x02 \x01(\tR\x0esubizAccountId\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x05 \x01(\tR\taccountId\x12A\n" +
@@ -75214,7 +75233,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xe98\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\x9e8\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75353,10 +75372,10 @@ const file_header_proto_rawDesc = "" +
 	"\x0fsegment_joineds\x18\xd0\x01 \x03(\x03R\x0esegmentJoineds\x12:\n" +
 	"\rproduct_offer\x18\xd2\x01 \x01(\v2\x14.header.ProductOfferR\fproductOffer\x12<\n" +
 	"\x0eproduct_offers\x18\xd3\x01 \x03(\v2\x14.header.ProductOfferR\rproductOffers\x12.\n" +
-	"\taddresses\x18\xde\x01 \x03(\v2\x0f.header.AddressR\taddresses\x12P\n" +
-	"\x15external_segment_sync\x18\xdf\x01 \x01(\v2\x1b.header.ExternalSegmentSyncR\x13externalSegmentSync\x12R\n" +
-	"\x16external_segment_syncs\x18\xe0\x01 \x03(\v2\x1b.header.ExternalSegmentSyncR\x14externalSegmentSyncs\x12p\n" +
-	"!external_segment_sync_user_status\x18\xe1\x01 \x01(\v2%.header.ExternalSegmentSyncUserStatusR\x1dexternalSegmentSyncUserStatus\x12>\n" +
+	"\taddresses\x18\xde\x01 \x03(\v2\x0f.header.AddressR\taddresses\x127\n" +
+	"\fsegment_sync\x18\xdf\x01 \x01(\v2\x13.header.SegmentSyncR\vsegmentSync\x129\n" +
+	"\rsegment_syncs\x18\xe0\x01 \x03(\v2\x13.header.SegmentSyncR\fsegmentSyncs\x12W\n" +
+	"\x18segment_sync_user_status\x18\xe1\x01 \x01(\v2\x1d.header.SegmentSyncUserStatusR\x15segmentSyncUserStatus\x12>\n" +
 	"\x0fmeta_ad_account\x18\xe2\x01 \x01(\v2\x15.header.MetaAdAccountR\rmetaAdAccount\x12@\n" +
 	"\x10meta_ad_accounts\x18\xe3\x01 \x03(\v2\x15.header.MetaAdAccountR\x0emetaAdAccounts\"Y\n" +
 	"\vReportCount\x12\x12\n" +
@@ -78210,8 +78229,8 @@ var file_header_proto_goTypes = []any{
 	(*EventType)(nil),                               // 370: header.EventType
 	(*Segment)(nil),                                 // 371: header.Segment
 	(*MetaSyncBatchSession)(nil),                    // 372: header.MetaSyncBatchSession
-	(*ExternalSegmentSyncUserStatus)(nil),           // 373: header.ExternalSegmentSyncUserStatus
-	(*ExternalSegmentSync)(nil),                     // 374: header.ExternalSegmentSync
+	(*SegmentSyncUserStatus)(nil),                   // 373: header.SegmentSyncUserStatus
+	(*SegmentSync)(nil),                             // 374: header.SegmentSync
 	(*MetaCustomAudience)(nil),                      // 375: header.MetaCustomAudience
 	(*CustomAudienceBatchResponse)(nil),             // 376: header.CustomAudienceBatchResponse
 	(*CustomAudienceBatchRequest)(nil),              // 377: header.CustomAudienceBatchRequest
@@ -78681,7 +78700,7 @@ var file_header_proto_depIdxs = []int32{
 	182,  // 160: header.Data.form:type_name -> header.Form
 	212,  // 161: header.Data.event_destination:type_name -> header.EventDestination
 	212,  // 162: header.Data.event_destinations:type_name -> header.EventDestination
-	374,  // 163: header.Data.external_segment_sync:type_name -> header.ExternalSegmentSync
+	374,  // 163: header.Data.segment_sync:type_name -> header.SegmentSync
 	48,   // 164: header.ConversationMeta.touchpoint:type_name -> header.Touchpoint
 	74,   // 165: header.ConversationMeta.event:type_name -> header.Event
 	662,  // 166: header.StartWorkflowSessionRequest.ctx:type_name -> common.Context
@@ -79278,10 +79297,10 @@ var file_header_proto_depIdxs = []int32{
 	257,  // 757: header.Segment.condition:type_name -> header.UserViewCondition
 	321,  // 758: header.Segment.fetch_error:type_name -> header.Error
 	492,  // 759: header.Segment.permissions:type_name -> header.ResourceGroupMember
-	662,  // 760: header.ExternalSegmentSyncUserStatus.ctx:type_name -> common.Context
-	662,  // 761: header.ExternalSegmentSync.ctx:type_name -> common.Context
-	372,  // 762: header.ExternalSegmentSync.meta_batch_session:type_name -> header.MetaSyncBatchSession
-	375,  // 763: header.ExternalSegmentSync.meta_audience:type_name -> header.MetaCustomAudience
+	662,  // 760: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
+	662,  // 761: header.SegmentSync.ctx:type_name -> common.Context
+	372,  // 762: header.SegmentSync.meta_batch_session:type_name -> header.MetaSyncBatchSession
+	375,  // 763: header.SegmentSync.meta_audience:type_name -> header.MetaCustomAudience
 	662,  // 764: header.MetaCustomAudience.ctx:type_name -> common.Context
 	662,  // 765: header.CustomAudienceBatchResponse.ctx:type_name -> common.Context
 	662,  // 766: header.CustomAudienceBatchRequest.ctx:type_name -> common.Context
@@ -79498,9 +79517,9 @@ var file_header_proto_depIdxs = []int32{
 	305,  // 977: header.Response.product_offer:type_name -> header.ProductOffer
 	305,  // 978: header.Response.product_offers:type_name -> header.ProductOffer
 	269,  // 979: header.Response.addresses:type_name -> header.Address
-	374,  // 980: header.Response.external_segment_sync:type_name -> header.ExternalSegmentSync
-	374,  // 981: header.Response.external_segment_syncs:type_name -> header.ExternalSegmentSync
-	373,  // 982: header.Response.external_segment_sync_user_status:type_name -> header.ExternalSegmentSyncUserStatus
+	374,  // 980: header.Response.segment_sync:type_name -> header.SegmentSync
+	374,  // 981: header.Response.segment_syncs:type_name -> header.SegmentSync
+	373,  // 982: header.Response.segment_sync_user_status:type_name -> header.SegmentSyncUserStatus
 	598,  // 983: header.Response.meta_ad_account:type_name -> header.MetaAdAccount
 	598,  // 984: header.Response.meta_ad_accounts:type_name -> header.MetaAdAccount
 	663,  // 985: header.ZaloCallConsent.message:type_name -> header.I18nString

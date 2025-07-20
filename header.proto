@@ -792,7 +792,7 @@ message Data {
 	EventDestination event_destination = 140;
 	repeated EventDestination event_destinations = 141;
 
-	ExternalSegmentSync external_segment_sync = 144;
+	SegmentSync segment_sync = 144;
 }
 
 message ConversationMeta {
@@ -5958,7 +5958,7 @@ message MetaSyncBatchSession {
 	int64 estimated_num_total = 13;
 }
 
-message ExternalSegmentSyncUserStatus {
+message SegmentSyncUserStatus {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -5972,7 +5972,7 @@ message ExternalSegmentSyncUserStatus {
 	string error = 8;
 }
 
-message ExternalSegmentSync {
+message SegmentSync {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -5982,39 +5982,42 @@ message ExternalSegmentSync {
 
 	string provider = 6; // meta
 
-	string meta_audience_id = 7; // allow to update
-	string meta_business_id = 8;
-	string meta_ad_account = 9;  // act_315986166689190
+	string name = 8;
+	string description = 9;
 	int64 last_sync_started = 10;
 	int64 last_sync_ended = 11;
-	int64 last_sync_status = 12; // completed, error, require_accept_meta_term
+	string last_sync_status = 12; // completed, error, require_accept_meta_term
 	int64 num_sync_success = 14;
 	int64 num_sync_failed = 15;
 	string failed_message = 16; // reset after each sync
 
 	string last_sync_error = 17;// require_accept_meta_term, invalid_access_token
 
-	string batch_index = 18; // should run from 0 -> 1000
+	int64 batch_index = 18; // should run from 0 -> 1000
 
-	MetaSyncBatchSession meta_batch_session = 20;
-	MetaCustomAudience meta_audience = 21;
-	string last_fb_request_response = 22;
-	int64 last_fb_request_status = 23;
-	int64 last_fb_request_at = 24;
+	string meta_audience_id = 19; // allow to update
+	string meta_ad_account_id = 20;  // act_315986166689190
+	MetaSyncBatchSession meta_batch_session = 21;
+	MetaCustomAudience meta_audience = 22;
+	string last_fb_request_response = 23;
+	int64 last_fb_request_status = 24;
+	int64 last_fb_request_at = 25;
 
-	int64 disabled = 25; // active, paused
-	int64 updated = 26;
-	int64 created = 27;
-	int64 created_by = 28;
+	int64 disabled = 30; // active, paused
+	int64 updated = 31;
+	string updated_by = 32;
+	int64 created = 33;
+	string created_by = 34;
+	int64 modified = 35;
 }
 
 message MetaCustomAudience {
 	common.Context ctx = 1;
 	string subiz_account_id = 2;
-	string page_id = 3; // subiz
+	// string page_id = 3; // subiz
 
 	string id = 4;
-	string account_id = 5; // meta ad account ID
+	string account_id = 5; // meta ad account ID act_...
 	int64 approximate_count_lower_bound = 6;
 	int64 approximate_count_upper_bound = 7;
 	string customer_file_source = 8;
@@ -7014,9 +7017,9 @@ message Response {
 
 	repeated Address addresses = 222;
 
-	ExternalSegmentSync external_segment_sync = 223;
-	repeated ExternalSegmentSync external_segment_syncs = 224;
-	ExternalSegmentSyncUserStatus external_segment_sync_user_status = 225;
+	SegmentSync segment_sync = 223;
+	repeated SegmentSync segment_syncs = 224;
+	SegmentSyncUserStatus segment_sync_user_status = 225;
 
 	MetaAdAccount meta_ad_account = 226;
 	repeated MetaAdAccount meta_ad_accounts = 227;

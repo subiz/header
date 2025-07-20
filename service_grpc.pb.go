@@ -6649,8 +6649,9 @@ const (
 	UserMgr_RemoveFromSegment_FullMethodName                = "/header.UserMgr/RemoveFromSegment"
 	UserMgr_ListSegmentSyncs_FullMethodName                 = "/header.UserMgr/ListSegmentSyncs"
 	UserMgr_UpdateSegmentSync_FullMethodName                = "/header.UserMgr/UpdateSegmentSync"
+	UserMgr_GetSegmentSync_FullMethodName                   = "/header.UserMgr/GetSegmentSync"
 	UserMgr_CreateSegmentSync_FullMethodName                = "/header.UserMgr/CreateSegmentSync"
-	UserMgr_DeleteSegmentSyncs_FullMethodName               = "/header.UserMgr/DeleteSegmentSyncs"
+	UserMgr_DeleteSegmentSync_FullMethodName                = "/header.UserMgr/DeleteSegmentSync"
 	UserMgr_MatchSegmentSyncs_FullMethodName                = "/header.UserMgr/MatchSegmentSyncs"
 	UserMgr_CheckUserSegmentSyncStatus_FullMethodName       = "/header.UserMgr/CheckUserSegmentSyncStatus"
 	UserMgr_UpsertLabel_FullMethodName                      = "/header.UserMgr/UpsertLabel"
@@ -6721,9 +6722,10 @@ type UserMgrClient interface {
 	AddToSegment(ctx context.Context, in *SegmentUsers, opts ...grpc.CallOption) (*Empty, error)
 	RemoveFromSegment(ctx context.Context, in *SegmentUsers, opts ...grpc.CallOption) (*Empty, error)
 	ListSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	UpdateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error)
-	CreateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error)
-	DeleteSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	UpdateSegmentSync(ctx context.Context, in *SegmentSync, opts ...grpc.CallOption) (*Response, error)
+	GetSegmentSync(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateSegmentSync(ctx context.Context, in *SegmentSync, opts ...grpc.CallOption) (*Response, error)
+	DeleteSegmentSync(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchSegmentSyncs(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	CheckUserSegmentSyncStatus(ctx context.Context, in *UserSegmentSyncStatusCheck, opts ...grpc.CallOption) (*Response, error)
 	UpsertLabel(ctx context.Context, in *Label, opts ...grpc.CallOption) (*Label, error)
@@ -7030,7 +7032,7 @@ func (c *userMgrClient) ListSegmentSyncs(ctx context.Context, in *Id, opts ...gr
 	return out, nil
 }
 
-func (c *userMgrClient) UpdateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error) {
+func (c *userMgrClient) UpdateSegmentSync(ctx context.Context, in *SegmentSync, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, UserMgr_UpdateSegmentSync_FullMethodName, in, out, cOpts...)
@@ -7040,7 +7042,17 @@ func (c *userMgrClient) UpdateSegmentSync(ctx context.Context, in *ExternalSegme
 	return out, nil
 }
 
-func (c *userMgrClient) CreateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error) {
+func (c *userMgrClient) GetSegmentSync(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_GetSegmentSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CreateSegmentSync(ctx context.Context, in *SegmentSync, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, UserMgr_CreateSegmentSync_FullMethodName, in, out, cOpts...)
@@ -7050,10 +7062,10 @@ func (c *userMgrClient) CreateSegmentSync(ctx context.Context, in *ExternalSegme
 	return out, nil
 }
 
-func (c *userMgrClient) DeleteSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *userMgrClient) DeleteSegmentSync(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, UserMgr_DeleteSegmentSyncs_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserMgr_DeleteSegmentSync_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7452,9 +7464,10 @@ type UserMgrServer interface {
 	AddToSegment(context.Context, *SegmentUsers) (*Empty, error)
 	RemoveFromSegment(context.Context, *SegmentUsers) (*Empty, error)
 	ListSegmentSyncs(context.Context, *Id) (*Response, error)
-	UpdateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error)
-	CreateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error)
-	DeleteSegmentSyncs(context.Context, *Id) (*Response, error)
+	UpdateSegmentSync(context.Context, *SegmentSync) (*Response, error)
+	GetSegmentSync(context.Context, *Id) (*Response, error)
+	CreateSegmentSync(context.Context, *SegmentSync) (*Response, error)
+	DeleteSegmentSync(context.Context, *Id) (*Response, error)
 	MatchSegmentSyncs(context.Context, *Ids) (*Response, error)
 	CheckUserSegmentSyncStatus(context.Context, *UserSegmentSyncStatusCheck) (*Response, error)
 	UpsertLabel(context.Context, *Label) (*Label, error)
@@ -7579,14 +7592,17 @@ func (UnimplementedUserMgrServer) RemoveFromSegment(context.Context, *SegmentUse
 func (UnimplementedUserMgrServer) ListSegmentSyncs(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSegmentSyncs not implemented")
 }
-func (UnimplementedUserMgrServer) UpdateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error) {
+func (UnimplementedUserMgrServer) UpdateSegmentSync(context.Context, *SegmentSync) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSegmentSync not implemented")
 }
-func (UnimplementedUserMgrServer) CreateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error) {
+func (UnimplementedUserMgrServer) GetSegmentSync(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSegmentSync not implemented")
+}
+func (UnimplementedUserMgrServer) CreateSegmentSync(context.Context, *SegmentSync) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSegmentSync not implemented")
 }
-func (UnimplementedUserMgrServer) DeleteSegmentSyncs(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteSegmentSyncs not implemented")
+func (UnimplementedUserMgrServer) DeleteSegmentSync(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSegmentSync not implemented")
 }
 func (UnimplementedUserMgrServer) MatchSegmentSyncs(context.Context, *Ids) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchSegmentSyncs not implemented")
@@ -8186,7 +8202,7 @@ func _UserMgr_ListSegmentSyncs_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _UserMgr_UpdateSegmentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExternalSegmentSync)
+	in := new(SegmentSync)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -8198,13 +8214,31 @@ func _UserMgr_UpdateSegmentSync_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: UserMgr_UpdateSegmentSync_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).UpdateSegmentSync(ctx, req.(*ExternalSegmentSync))
+		return srv.(UserMgrServer).UpdateSegmentSync(ctx, req.(*SegmentSync))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_GetSegmentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).GetSegmentSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_GetSegmentSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).GetSegmentSync(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserMgr_CreateSegmentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExternalSegmentSync)
+	in := new(SegmentSync)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -8216,25 +8250,25 @@ func _UserMgr_CreateSegmentSync_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: UserMgr_CreateSegmentSync_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).CreateSegmentSync(ctx, req.(*ExternalSegmentSync))
+		return srv.(UserMgrServer).CreateSegmentSync(ctx, req.(*SegmentSync))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserMgr_DeleteSegmentSyncs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserMgr_DeleteSegmentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserMgrServer).DeleteSegmentSyncs(ctx, in)
+		return srv.(UserMgrServer).DeleteSegmentSync(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserMgr_DeleteSegmentSyncs_FullMethodName,
+		FullMethod: UserMgr_DeleteSegmentSync_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).DeleteSegmentSyncs(ctx, req.(*Id))
+		return srv.(UserMgrServer).DeleteSegmentSync(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -9003,12 +9037,16 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserMgr_UpdateSegmentSync_Handler,
 		},
 		{
+			MethodName: "GetSegmentSync",
+			Handler:    _UserMgr_GetSegmentSync_Handler,
+		},
+		{
 			MethodName: "CreateSegmentSync",
 			Handler:    _UserMgr_CreateSegmentSync_Handler,
 		},
 		{
-			MethodName: "DeleteSegmentSyncs",
-			Handler:    _UserMgr_DeleteSegmentSyncs_Handler,
+			MethodName: "DeleteSegmentSync",
+			Handler:    _UserMgr_DeleteSegmentSync_Handler,
 		},
 		{
 			MethodName: "MatchSegmentSyncs",

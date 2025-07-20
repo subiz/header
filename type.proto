@@ -344,6 +344,9 @@ enum RealtimeType {
 	facebook_event_lead_sent = 343;
 	facebook_event_purchase_sent = 344;
 	facebook_event_add_to_cart_sent = 345;
+
+	segment_sync_updated = 350;
+	segment_sync_deleted = 351;
 }
 
 message TextTransform {

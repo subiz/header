@@ -264,6 +264,8 @@ const (
 	RealtimeType_facebook_event_lead_sent        RealtimeType = 343
 	RealtimeType_facebook_event_purchase_sent    RealtimeType = 344
 	RealtimeType_facebook_event_add_to_cart_sent RealtimeType = 345
+	RealtimeType_segment_sync_updated            RealtimeType = 350
+	RealtimeType_segment_sync_deleted            RealtimeType = 351
 )
 
 // Enum value maps for RealtimeType.
@@ -507,6 +509,8 @@ var (
 		343: "facebook_event_lead_sent",
 		344: "facebook_event_purchase_sent",
 		345: "facebook_event_add_to_cart_sent",
+		350: "segment_sync_updated",
+		351: "segment_sync_deleted",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -747,6 +751,8 @@ var (
 		"facebook_event_lead_sent":           343,
 		"facebook_event_purchase_sent":       344,
 		"facebook_event_add_to_cart_sent":    345,
+		"segment_sync_updated":               350,
+		"segment_sync_deleted":               351,
 	}
 )
 
@@ -1776,7 +1782,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xcd-\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\x83.\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -2017,7 +2023,9 @@ const file_type_proto_rawDesc = "" +
 	"\fform_deleted\x10\xd6\x02\x12\x1d\n" +
 	"\x18facebook_event_lead_sent\x10\xd7\x02\x12!\n" +
 	"\x1cfacebook_event_purchase_sent\x10\xd8\x02\x12$\n" +
-	"\x1ffacebook_event_add_to_cart_sent\x10\xd9\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\x1ffacebook_event_add_to_cart_sent\x10\xd9\x02\x12\x19\n" +
+	"\x14segment_sync_updated\x10\xde\x02\x12\x19\n" +
+	"\x14segment_sync_deleted\x10\xdf\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once
