@@ -21,6 +21,7 @@ message FacebookPage {
 	optional int64 created = 3;
 	optional string picture_url = 4;
 	optional string name = 5;
+	optional string original_access_token = 8;
 	optional string access_token = 6;
 	optional int64 updated = 7;
 	optional int64 last_facebook_hook = 9;

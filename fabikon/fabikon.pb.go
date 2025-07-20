@@ -140,6 +140,7 @@ type FacebookPage struct {
 	Created                  *int64                 `protobuf:"varint,3,opt,name=created" json:"created,omitempty"`
 	PictureUrl               *string                `protobuf:"bytes,4,opt,name=picture_url,json=pictureUrl" json:"picture_url,omitempty"`
 	Name                     *string                `protobuf:"bytes,5,opt,name=name" json:"name,omitempty"`
+	OriginalAccessToken      *string                `protobuf:"bytes,8,opt,name=original_access_token,json=originalAccessToken" json:"original_access_token,omitempty"`
 	AccessToken              *string                `protobuf:"bytes,6,opt,name=access_token,json=accessToken" json:"access_token,omitempty"`
 	Updated                  *int64                 `protobuf:"varint,7,opt,name=updated" json:"updated,omitempty"`
 	LastFacebookHook         *int64                 `protobuf:"varint,9,opt,name=last_facebook_hook,json=lastFacebookHook" json:"last_facebook_hook,omitempty"`
@@ -230,6 +231,13 @@ func (x *FacebookPage) GetPictureUrl() string {
 func (x *FacebookPage) GetName() string {
 	if x != nil && x.Name != nil {
 		return *x.Name
+	}
+	return ""
+}
+
+func (x *FacebookPage) GetOriginalAccessToken() string {
+	if x != nil && x.OriginalAccessToken != nil {
+		return *x.OriginalAccessToken
 	}
 	return ""
 }
@@ -5504,7 +5512,8 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x02id\x18\x04 \x01(\tR\x02id\"2\n" +
 	"\fMetaBusiness\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\xdd\t\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\x91\n" +
+	"\n" +
 	"\fFacebookPage\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x0e\n" +
@@ -5512,7 +5521,8 @@ const file_fabikon_proto_rawDesc = "" +
 	"\acreated\x18\x03 \x01(\x03R\acreated\x12\x1f\n" +
 	"\vpicture_url\x18\x04 \x01(\tR\n" +
 	"pictureUrl\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\x12!\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x122\n" +
+	"\x15original_access_token\x18\b \x01(\tR\x13originalAccessToken\x12!\n" +
 	"\faccess_token\x18\x06 \x01(\tR\vaccessToken\x12\x18\n" +
 	"\aupdated\x18\a \x01(\x03R\aupdated\x12,\n" +
 	"\x12last_facebook_hook\x18\t \x01(\x03R\x10lastFacebookHook\x12$\n" +
