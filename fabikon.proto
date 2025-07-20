@@ -4,11 +4,15 @@ package fabikon;
 
 option go_package = "github.com/subiz/header/fabikon";
 
-
 message FacebookDataset {
 	optional string account_id = 1;
 	optional string page_id = 3;
 	optional string id = 4;
+}
+
+message MetaBusiness {
+	optional string id = 3;
+	optional string name = 4;
 }
 
 message FacebookPage {
@@ -54,6 +58,8 @@ message FacebookPage {
 	optional string state = 34; // replicated of integration.state
 	optional int64 comment_disabled = 35; // replicated of integration.comment_disabled
 	optional int64 last_sync_from_convo = 36;
+
+	optional MetaBusiness business = 37;
 }
 
 message FbWebhookEvent {

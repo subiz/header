@@ -994,3 +994,11 @@ message SegmentUsersRequest {
 	repeated string user_ids = 5;
 	int64 created = 6;
 }
+
+message UserSegmentSyncStatusCheck {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string segment_id = 4;
+	string external_segment_sync_id = 5;
+	string user_id = 6;
+}

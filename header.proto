@@ -791,6 +791,8 @@ message Data {
 
 	EventDestination event_destination = 140;
 	repeated EventDestination event_destinations = 141;
+
+	ExternalSegmentSync external_segment_sync = 144;
 }
 
 message ConversationMeta {
@@ -1467,7 +1469,7 @@ message Message {
 
 	string source_event_id = 57; // for pong
 
-	int64 total_credit_fpv = 58;
+	int64 total_credit_fpv = 58; // vnd
 	int64 sentiment_score = 60;
 }
 
@@ -5944,6 +5946,108 @@ message Segment {
 	string order_by = 34; // attr.username asc
 
 	repeated ResourceGroupMember permissions = 35;
+
+}
+
+message MetaSyncBatchSession {
+	int64 created = 8; // ms
+
+	string session_id = 10;
+	string batch_seq = 11;
+	bool last_batch_flag = 12;
+	int64 estimated_num_total = 13;
+}
+
+message ExternalSegmentSyncUserStatus {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string segment_id = 4;
+
+	string user_id = 5;
+
+	int64 last_sync = 6; // ms
+	string status = 7;
+	string error = 8;
+}
+
+message ExternalSegmentSync {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string segment_id = 4;
+	string direction = 5; // import, export
+
+	string provider = 6; // meta
+
+	string meta_audience_id = 7; // allow to update
+	string meta_business_id = 8;
+	string meta_ad_account = 9;  // act_315986166689190
+	int64 last_sync_started = 10;
+	int64 last_sync_ended = 11;
+	int64 last_sync_status = 12; // completed, error, require_accept_meta_term
+	int64 num_sync_success = 14;
+	int64 num_sync_failed = 15;
+	string failed_message = 16; // reset after each sync
+
+	string last_sync_error = 17;// require_accept_meta_term, invalid_access_token
+
+	string batch_index = 18; // should run from 0 -> 1000
+
+	MetaSyncBatchSession meta_batch_session = 20;
+	MetaCustomAudience meta_audience = 21;
+	string last_fb_request_response = 22;
+	int64 last_fb_request_status = 23;
+	int64 last_fb_request_at = 24;
+
+	int64 disabled = 25; // active, paused
+	int64 updated = 26;
+	int64 created = 27;
+	int64 created_by = 28;
+}
+
+message MetaCustomAudience {
+	common.Context ctx = 1;
+	string subiz_account_id = 2;
+	string page_id = 3; // subiz
+
+	string id = 4;
+	string account_id = 5; // meta ad account ID
+	int64 approximate_count_lower_bound = 6;
+	int64 approximate_count_upper_bound = 7;
+	string customer_file_source = 8;
+	string description = 9;
+	bool is_value_based = 10;
+	repeated string lookalike_audience_ids = 11;
+	string name = 12;
+	string opt_out_link = 13;
+	int32 retention_days = 14;
+	string subtype = 15;
+	int64 time_content_updated = 16;
+	int64 time_created = 17;
+	int64 time_updated = 18;
+	int64 updated = 19; // subiz
+}
+
+message CustomAudienceBatchResponse {
+	common.Context ctx = 1;
+	string audience_id = 4;
+	string session_id = 5;
+	int64 num_received = 6;
+	int64 num_invalid_entries = 7;
+	string response = 8;
+	int64 status_code = 9;
+}
+
+message CustomAudienceBatchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ad_account_id = 4;
+	string audience_id = 5;
+	MetaSyncBatchSession session = 6;
+	repeated User users = 7;
 }
 
 message Segments {
@@ -6908,6 +7012,13 @@ message Response {
 	repeated ProductOffer product_offers = 211;
 
 	repeated Address addresses = 222;
+
+	ExternalSegmentSync external_segment_sync = 223;
+	repeated ExternalSegmentSync external_segment_syncs = 224;
+	ExternalSegmentSyncUserStatus external_segment_sync_user_status = 225;
+
+	MetaAdAccount meta_ad_account = 226;
+	repeated MetaAdAccount meta_ad_accounts = 227;
 }
 
 message ReportCount {
@@ -9545,4 +9656,29 @@ message Markers {
 }
 
 message UserDataSource {
+}
+
+message MetaBusiness {
+	string id = 3;
+	string name = 4;
+}
+
+message MetaAdAccount {
+	string name = 4;
+	string account_id = 5;
+	string id = 6;
+	int64 account_status = 7;
+	float age = 8;
+	string amount_spent = 9;
+	string balance = 10;
+
+	string business_country_code = 11;
+	string currency = 14;
+	int32 disable_reason = 15;
+
+	string owner = 16;
+	string spend_cap = 17;
+	string tax_id = 18;
+
+	MetaBusiness business = 19;
 }

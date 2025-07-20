@@ -266,6 +266,13 @@ service UserMgr {
 	rpc AddToSegment(header.SegmentUsers) returns (Empty);
 	rpc RemoveFromSegment(header.SegmentUsers) returns (Empty);
 
+	rpc ListSegmentSyncs(Id) returns (Response);
+	rpc UpdateSegmentSync(header.ExternalSegmentSync) returns (Response);
+	rpc CreateSegmentSync(header.ExternalSegmentSync) returns (Response);
+	rpc DeleteSegmentSyncs(Id) returns (Response);
+	rpc MatchSegmentSyncs(Ids) returns (Response);
+	rpc CheckUserSegmentSyncStatus(UserSegmentSyncStatusCheck) returns (Response);
+
 	rpc UpsertLabel(header.Label) returns (header.Label);
 	rpc DeleteLabel(Id) returns (Empty);
 	rpc ListLabels(Id) returns (header.Labels);
@@ -309,6 +316,7 @@ service UserMgr {
 
 	rpc UpdateSegmentMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveSegmentMember(ResourceGroupMember) returns (header.Empty);
+
 }
 
 service NoteMgr {
@@ -651,6 +659,14 @@ service FabikonService {
 	rpc GenerateRefLink(header.Id) returns (header.Id);
 
 	rpc SyncAdsFlow(header.FacebookAdsFlow) returns (header.Id);
+
+	rpc GetAdsAudience(header.MetaCustomAudience) returns (header.MetaCustomAudience);
+	rpc CreateAdsAudience(header.MetaCustomAudience) returns (header.MetaCustomAudience);
+	// rpc DeleteAdsAudience(header.MetaCustomAudience) returns (header.MetaCustomAudience);
+	rpc UploadAdsAudienceUsers(header.CustomAudienceBatchRequest) returns (header.CustomAudienceBatchResponse);
+	rpc DeleteAdsAudienceUsers(header.CustomAudienceBatchRequest) returns (header.CustomAudienceBatchResponse);
+
+	rpc ListAdAccounts(header.Id) returns (header.Response);
 }
 
 service ChannelConnector {

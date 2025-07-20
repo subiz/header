@@ -6647,6 +6647,12 @@ const (
 	UserMgr_ListSegments_FullMethodName                     = "/header.UserMgr/ListSegments"
 	UserMgr_AddToSegment_FullMethodName                     = "/header.UserMgr/AddToSegment"
 	UserMgr_RemoveFromSegment_FullMethodName                = "/header.UserMgr/RemoveFromSegment"
+	UserMgr_ListSegmentSyncs_FullMethodName                 = "/header.UserMgr/ListSegmentSyncs"
+	UserMgr_UpdateSegmentSync_FullMethodName                = "/header.UserMgr/UpdateSegmentSync"
+	UserMgr_CreateSegmentSync_FullMethodName                = "/header.UserMgr/CreateSegmentSync"
+	UserMgr_DeleteSegmentSyncs_FullMethodName               = "/header.UserMgr/DeleteSegmentSyncs"
+	UserMgr_MatchSegmentSyncs_FullMethodName                = "/header.UserMgr/MatchSegmentSyncs"
+	UserMgr_CheckUserSegmentSyncStatus_FullMethodName       = "/header.UserMgr/CheckUserSegmentSyncStatus"
 	UserMgr_UpsertLabel_FullMethodName                      = "/header.UserMgr/UpsertLabel"
 	UserMgr_DeleteLabel_FullMethodName                      = "/header.UserMgr/DeleteLabel"
 	UserMgr_ListLabels_FullMethodName                       = "/header.UserMgr/ListLabels"
@@ -6714,6 +6720,12 @@ type UserMgrClient interface {
 	ListSegments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segments, error)
 	AddToSegment(ctx context.Context, in *SegmentUsers, opts ...grpc.CallOption) (*Empty, error)
 	RemoveFromSegment(ctx context.Context, in *SegmentUsers, opts ...grpc.CallOption) (*Empty, error)
+	ListSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	UpdateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error)
+	CreateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error)
+	DeleteSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	MatchSegmentSyncs(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	CheckUserSegmentSyncStatus(ctx context.Context, in *UserSegmentSyncStatusCheck, opts ...grpc.CallOption) (*Response, error)
 	UpsertLabel(ctx context.Context, in *Label, opts ...grpc.CallOption) (*Label, error)
 	DeleteLabel(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListLabels(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Labels, error)
@@ -7002,6 +7014,66 @@ func (c *userMgrClient) RemoveFromSegment(ctx context.Context, in *SegmentUsers,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, UserMgr_RemoveFromSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) ListSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_ListSegmentSyncs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) UpdateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_UpdateSegmentSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CreateSegmentSync(ctx context.Context, in *ExternalSegmentSync, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_CreateSegmentSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) DeleteSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_DeleteSegmentSyncs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) MatchSegmentSyncs(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_MatchSegmentSyncs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CheckUserSegmentSyncStatus(ctx context.Context, in *UserSegmentSyncStatusCheck, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_CheckUserSegmentSyncStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7379,6 +7451,12 @@ type UserMgrServer interface {
 	ListSegments(context.Context, *Id) (*Segments, error)
 	AddToSegment(context.Context, *SegmentUsers) (*Empty, error)
 	RemoveFromSegment(context.Context, *SegmentUsers) (*Empty, error)
+	ListSegmentSyncs(context.Context, *Id) (*Response, error)
+	UpdateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error)
+	CreateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error)
+	DeleteSegmentSyncs(context.Context, *Id) (*Response, error)
+	MatchSegmentSyncs(context.Context, *Ids) (*Response, error)
+	CheckUserSegmentSyncStatus(context.Context, *UserSegmentSyncStatusCheck) (*Response, error)
 	UpsertLabel(context.Context, *Label) (*Label, error)
 	DeleteLabel(context.Context, *Id) (*Empty, error)
 	ListLabels(context.Context, *Id) (*Labels, error)
@@ -7497,6 +7575,24 @@ func (UnimplementedUserMgrServer) AddToSegment(context.Context, *SegmentUsers) (
 }
 func (UnimplementedUserMgrServer) RemoveFromSegment(context.Context, *SegmentUsers) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFromSegment not implemented")
+}
+func (UnimplementedUserMgrServer) ListSegmentSyncs(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSegmentSyncs not implemented")
+}
+func (UnimplementedUserMgrServer) UpdateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSegmentSync not implemented")
+}
+func (UnimplementedUserMgrServer) CreateSegmentSync(context.Context, *ExternalSegmentSync) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSegmentSync not implemented")
+}
+func (UnimplementedUserMgrServer) DeleteSegmentSyncs(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSegmentSyncs not implemented")
+}
+func (UnimplementedUserMgrServer) MatchSegmentSyncs(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchSegmentSyncs not implemented")
+}
+func (UnimplementedUserMgrServer) CheckUserSegmentSyncStatus(context.Context, *UserSegmentSyncStatusCheck) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckUserSegmentSyncStatus not implemented")
 }
 func (UnimplementedUserMgrServer) UpsertLabel(context.Context, *Label) (*Label, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertLabel not implemented")
@@ -8067,6 +8163,114 @@ func _UserMgr_RemoveFromSegment_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).RemoveFromSegment(ctx, req.(*SegmentUsers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_ListSegmentSyncs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).ListSegmentSyncs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_ListSegmentSyncs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).ListSegmentSyncs(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_UpdateSegmentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExternalSegmentSync)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).UpdateSegmentSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_UpdateSegmentSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).UpdateSegmentSync(ctx, req.(*ExternalSegmentSync))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CreateSegmentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExternalSegmentSync)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CreateSegmentSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_CreateSegmentSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CreateSegmentSync(ctx, req.(*ExternalSegmentSync))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_DeleteSegmentSyncs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).DeleteSegmentSyncs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_DeleteSegmentSyncs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).DeleteSegmentSyncs(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_MatchSegmentSyncs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MatchSegmentSyncs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_MatchSegmentSyncs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MatchSegmentSyncs(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CheckUserSegmentSyncStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSegmentSyncStatusCheck)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CheckUserSegmentSyncStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_CheckUserSegmentSyncStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CheckUserSegmentSyncStatus(ctx, req.(*UserSegmentSyncStatusCheck))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8789,6 +8993,30 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveFromSegment",
 			Handler:    _UserMgr_RemoveFromSegment_Handler,
+		},
+		{
+			MethodName: "ListSegmentSyncs",
+			Handler:    _UserMgr_ListSegmentSyncs_Handler,
+		},
+		{
+			MethodName: "UpdateSegmentSync",
+			Handler:    _UserMgr_UpdateSegmentSync_Handler,
+		},
+		{
+			MethodName: "CreateSegmentSync",
+			Handler:    _UserMgr_CreateSegmentSync_Handler,
+		},
+		{
+			MethodName: "DeleteSegmentSyncs",
+			Handler:    _UserMgr_DeleteSegmentSyncs_Handler,
+		},
+		{
+			MethodName: "MatchSegmentSyncs",
+			Handler:    _UserMgr_MatchSegmentSyncs_Handler,
+		},
+		{
+			MethodName: "CheckUserSegmentSyncStatus",
+			Handler:    _UserMgr_CheckUserSegmentSyncStatus_Handler,
 		},
 		{
 			MethodName: "UpsertLabel",
@@ -18266,6 +18494,11 @@ const (
 	FabikonService_AddFbUserLabel_FullMethodName         = "/header.FabikonService/AddFbUserLabel"
 	FabikonService_GenerateRefLink_FullMethodName        = "/header.FabikonService/GenerateRefLink"
 	FabikonService_SyncAdsFlow_FullMethodName            = "/header.FabikonService/SyncAdsFlow"
+	FabikonService_GetAdsAudience_FullMethodName         = "/header.FabikonService/GetAdsAudience"
+	FabikonService_CreateAdsAudience_FullMethodName      = "/header.FabikonService/CreateAdsAudience"
+	FabikonService_UploadAdsAudienceUsers_FullMethodName = "/header.FabikonService/UploadAdsAudienceUsers"
+	FabikonService_DeleteAdsAudienceUsers_FullMethodName = "/header.FabikonService/DeleteAdsAudienceUsers"
+	FabikonService_ListAdAccounts_FullMethodName         = "/header.FabikonService/ListAdAccounts"
 )
 
 // FabikonServiceClient is the client API for FabikonService service.
@@ -18282,6 +18515,12 @@ type FabikonServiceClient interface {
 	AddFbUserLabel(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 	GenerateRefLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	SyncAdsFlow(ctx context.Context, in *FacebookAdsFlow, opts ...grpc.CallOption) (*Id, error)
+	GetAdsAudience(ctx context.Context, in *MetaCustomAudience, opts ...grpc.CallOption) (*MetaCustomAudience, error)
+	CreateAdsAudience(ctx context.Context, in *MetaCustomAudience, opts ...grpc.CallOption) (*MetaCustomAudience, error)
+	// rpc DeleteAdsAudience(header.MetaCustomAudience) returns (header.MetaCustomAudience);
+	UploadAdsAudienceUsers(ctx context.Context, in *CustomAudienceBatchRequest, opts ...grpc.CallOption) (*CustomAudienceBatchResponse, error)
+	DeleteAdsAudienceUsers(ctx context.Context, in *CustomAudienceBatchRequest, opts ...grpc.CallOption) (*CustomAudienceBatchResponse, error)
+	ListAdAccounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type fabikonServiceClient struct {
@@ -18392,6 +18631,56 @@ func (c *fabikonServiceClient) SyncAdsFlow(ctx context.Context, in *FacebookAdsF
 	return out, nil
 }
 
+func (c *fabikonServiceClient) GetAdsAudience(ctx context.Context, in *MetaCustomAudience, opts ...grpc.CallOption) (*MetaCustomAudience, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MetaCustomAudience)
+	err := c.cc.Invoke(ctx, FabikonService_GetAdsAudience_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) CreateAdsAudience(ctx context.Context, in *MetaCustomAudience, opts ...grpc.CallOption) (*MetaCustomAudience, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MetaCustomAudience)
+	err := c.cc.Invoke(ctx, FabikonService_CreateAdsAudience_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) UploadAdsAudienceUsers(ctx context.Context, in *CustomAudienceBatchRequest, opts ...grpc.CallOption) (*CustomAudienceBatchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomAudienceBatchResponse)
+	err := c.cc.Invoke(ctx, FabikonService_UploadAdsAudienceUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) DeleteAdsAudienceUsers(ctx context.Context, in *CustomAudienceBatchRequest, opts ...grpc.CallOption) (*CustomAudienceBatchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomAudienceBatchResponse)
+	err := c.cc.Invoke(ctx, FabikonService_DeleteAdsAudienceUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) ListAdAccounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_ListAdAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FabikonServiceServer is the server API for FabikonService service.
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
@@ -18406,6 +18695,12 @@ type FabikonServiceServer interface {
 	AddFbUserLabel(context.Context, *User) (*Empty, error)
 	GenerateRefLink(context.Context, *Id) (*Id, error)
 	SyncAdsFlow(context.Context, *FacebookAdsFlow) (*Id, error)
+	GetAdsAudience(context.Context, *MetaCustomAudience) (*MetaCustomAudience, error)
+	CreateAdsAudience(context.Context, *MetaCustomAudience) (*MetaCustomAudience, error)
+	// rpc DeleteAdsAudience(header.MetaCustomAudience) returns (header.MetaCustomAudience);
+	UploadAdsAudienceUsers(context.Context, *CustomAudienceBatchRequest) (*CustomAudienceBatchResponse, error)
+	DeleteAdsAudienceUsers(context.Context, *CustomAudienceBatchRequest) (*CustomAudienceBatchResponse, error)
+	ListAdAccounts(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedFabikonServiceServer()
 }
 
@@ -18445,6 +18740,21 @@ func (UnimplementedFabikonServiceServer) GenerateRefLink(context.Context, *Id) (
 }
 func (UnimplementedFabikonServiceServer) SyncAdsFlow(context.Context, *FacebookAdsFlow) (*Id, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SyncAdsFlow not implemented")
+}
+func (UnimplementedFabikonServiceServer) GetAdsAudience(context.Context, *MetaCustomAudience) (*MetaCustomAudience, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAdsAudience not implemented")
+}
+func (UnimplementedFabikonServiceServer) CreateAdsAudience(context.Context, *MetaCustomAudience) (*MetaCustomAudience, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAdsAudience not implemented")
+}
+func (UnimplementedFabikonServiceServer) UploadAdsAudienceUsers(context.Context, *CustomAudienceBatchRequest) (*CustomAudienceBatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadAdsAudienceUsers not implemented")
+}
+func (UnimplementedFabikonServiceServer) DeleteAdsAudienceUsers(context.Context, *CustomAudienceBatchRequest) (*CustomAudienceBatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdsAudienceUsers not implemented")
+}
+func (UnimplementedFabikonServiceServer) ListAdAccounts(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAdAccounts not implemented")
 }
 func (UnimplementedFabikonServiceServer) mustEmbedUnimplementedFabikonServiceServer() {}
 func (UnimplementedFabikonServiceServer) testEmbeddedByValue()                        {}
@@ -18647,6 +18957,96 @@ func _FabikonService_SyncAdsFlow_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FabikonService_GetAdsAudience_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MetaCustomAudience)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).GetAdsAudience(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_GetAdsAudience_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).GetAdsAudience(ctx, req.(*MetaCustomAudience))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_CreateAdsAudience_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MetaCustomAudience)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).CreateAdsAudience(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_CreateAdsAudience_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).CreateAdsAudience(ctx, req.(*MetaCustomAudience))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_UploadAdsAudienceUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomAudienceBatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).UploadAdsAudienceUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_UploadAdsAudienceUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).UploadAdsAudienceUsers(ctx, req.(*CustomAudienceBatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_DeleteAdsAudienceUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomAudienceBatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).DeleteAdsAudienceUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_DeleteAdsAudienceUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).DeleteAdsAudienceUsers(ctx, req.(*CustomAudienceBatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_ListAdAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).ListAdAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_ListAdAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).ListAdAccounts(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FabikonService_ServiceDesc is the grpc.ServiceDesc for FabikonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -18693,6 +19093,26 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SyncAdsFlow",
 			Handler:    _FabikonService_SyncAdsFlow_Handler,
+		},
+		{
+			MethodName: "GetAdsAudience",
+			Handler:    _FabikonService_GetAdsAudience_Handler,
+		},
+		{
+			MethodName: "CreateAdsAudience",
+			Handler:    _FabikonService_CreateAdsAudience_Handler,
+		},
+		{
+			MethodName: "UploadAdsAudienceUsers",
+			Handler:    _FabikonService_UploadAdsAudienceUsers_Handler,
+		},
+		{
+			MethodName: "DeleteAdsAudienceUsers",
+			Handler:    _FabikonService_DeleteAdsAudienceUsers_Handler,
+		},
+		{
+			MethodName: "ListAdAccounts",
+			Handler:    _FabikonService_ListAdAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

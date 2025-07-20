@@ -1275,6 +1275,15 @@ func GetUserDisplayName(u *User) string {
 	return countryName + " #" + last4Chars(u.GetId())
 }
 
+func GetUserTextAttr(u *User, key string) string {
+	for _, attr := range u.GetAttributes() {
+		if attr.GetKey() == "trace_country_name" {
+			return attr.GetText()
+		}
+	}
+	return ""
+}
+
 func last4Chars(s string) string {
 	if len(s) < 4 {
 		return s
