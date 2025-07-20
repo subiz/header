@@ -268,8 +268,9 @@ service UserMgr {
 
 	rpc ListSegmentSyncs(Id) returns (Response);
 	rpc UpdateSegmentSync(header.ExternalSegmentSync) returns (Response);
+	rpc GetSegmentSync(Id) returns (header.Response);
 	rpc CreateSegmentSync(header.ExternalSegmentSync) returns (Response);
-	rpc DeleteSegmentSyncs(Id) returns (Response);
+	rpc DeleteSegmentSync(Id) returns (Response);
 	rpc MatchSegmentSyncs(Ids) returns (Response);
 	rpc CheckUserSegmentSyncStatus(UserSegmentSyncStatusCheck) returns (Response);
 
