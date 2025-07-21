@@ -5952,8 +5952,8 @@ message Segment {
 message MetaSyncBatchSession {
 	int64 created = 8; // ms
 
-	string session_id = 10;
-	string batch_seq = 11;
+	int64 session_id = 10;
+	int64 batch_seq = 11;
 	bool last_batch_flag = 12;
 	int64 estimated_num_total = 13;
 }
@@ -5986,22 +5986,20 @@ message SegmentSync {
 	string description = 9;
 	int64 last_sync_started = 10;
 	int64 last_sync_ended = 11;
-	string last_sync_status = 12; // completed, error, require_accept_meta_term
 	int64 num_sync_success = 14;
 	int64 num_sync_failed = 15;
 	string failed_message = 16; // reset after each sync
 
-	string last_sync_error = 17;// require_accept_meta_term, invalid_access_token
-
-	int64 batch_index = 18; // should run from 0 -> 1000
+	int64 progress = 18; // should run from 0 -> 100
 
 	string meta_audience_id = 19; // allow to update
 	string meta_ad_account_id = 20;  // act_315986166689190
-	MetaSyncBatchSession meta_batch_session = 21;
-	MetaCustomAudience meta_audience = 22;
-	string last_fb_request_response = 23;
-	int64 last_fb_request_status = 24;
-	int64 last_fb_request_at = 25;
+	MetaSyncBatchSession meta_batch_add_session = 21;
+	MetaSyncBatchSession meta_batch_remove_session = 22;
+	MetaCustomAudience meta_audience = 23;
+	string last_fb_request_response = 24;
+	int64 last_fb_request_status = 25;
+	int64 last_fb_request_at = 26;
 
 	int64 disabled = 30; // active, paused
 	int64 updated = 31;
@@ -6036,8 +6034,8 @@ message MetaCustomAudience {
 
 message CustomAudienceBatchResponse {
 	common.Context ctx = 1;
-	string audience_id = 4;
-	string session_id = 5;
+	// string audience_id = 4;
+	// string session_id = 5;
 	int64 num_received = 6;
 	int64 num_invalid_entries = 7;
 	string response = 8;
