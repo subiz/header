@@ -5994,8 +5994,6 @@ message SegmentSync {
 
 	string meta_audience_id = 19; // allow to update
 	string meta_ad_account_id = 20;  // act_315986166689190
-	MetaSyncBatchSession meta_batch_add_session = 21;
-	MetaSyncBatchSession meta_batch_remove_session = 22;
 	MetaCustomAudience meta_audience = 23;
 	string last_fb_request_response = 24;
 	int64 last_fb_request_status = 25;

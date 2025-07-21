@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"reflect"
+	"runtime/debug"
 	"strconv"
 	"strings"
 	"sync"
@@ -453,6 +454,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 				if e, ok := r.(error); ok {
 					err = log.ERetry(e, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
 				} else {
+					debug.PrintStack() // prints stack trace to know where panic happened
 					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod, "__skip_stack": 1})
 				}
 			}

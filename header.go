@@ -2443,5 +2443,17 @@ func TruncateUser(user *User) {
 		attr.By = ""
 		newuserattributes = append(newuserattributes, attr)
 	}
+
 	user.Attributes = newuserattributes
+}
+
+func Unmarshal(data []byte, msg proto.Message) error {
+	if len(data) == 0 {
+		return nil
+	}
+	return proto.Unmarshal(data, msg)
+}
+
+func Marshal(msg proto.Message) ([]byte, error) {
+	return proto.Marshal(msg)
 }

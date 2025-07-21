@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package fabikon;
 
@@ -324,7 +324,7 @@ message FbPayload {
 	optional string currency = 15;
 	optional string payment_method = 16;
 	optional string order_url = 17;
-	optional string timestamp = 18;
+  // google.protobuf.Any timestamp = 18; // sometime its a string, sometime its a number https://developers.facebook.com/docs/messenger-platform/reference/templates/receipt
 	optional FbProducts product = 19;
 
 	optional string title = 20;
