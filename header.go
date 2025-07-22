@@ -1368,6 +1368,11 @@ func GetUserType(u *User) string {
 	if u == nil {
 		return ""
 	}
+
+	if u.Type == "lead" {
+		return "lead"
+	}
+
 	if u.Type == "contact" {
 		return "contact"
 	}
@@ -2421,7 +2426,6 @@ func TruncateUser(user *User) {
 	user.FirstContentView = nil
 	user.LatestContentView = nil
 	user.StartContentView = nil
-	user.LifecycleStages = nil
 	user.Labels = nil
 	user.Merged = 0
 	user.MergedReason = ""

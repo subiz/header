@@ -278,7 +278,7 @@ message User {
 	int64 created = 59;
 	int64 updated = 60;
 
-	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
+	// repeated UserLifecycleStage lifecycle_stages = 61; // read-only
 	// repeated UserSegment segments = 66; // read-only // deprecated
 	repeated User secondaries = 67; // read-only // deprecated
 	// map<string, UserConversationTag> conversation_tags = 68; // read-only
@@ -314,6 +314,7 @@ message UserAds {
 	string content = 6; // logolink, textlink
 }
 
+/*
 message UserLifecycleStage {
 	string stage = 5; // id
 	int64 duration = 6; // ms
@@ -321,6 +322,7 @@ message UserLifecycleStage {
 	string by_type = 8; // agent, bot
 	int64 start_at = 9;
 }
+*/
 
 // lookup contact point to user_id
 // contact point => chain => conversation
