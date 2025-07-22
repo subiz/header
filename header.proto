@@ -9666,6 +9666,9 @@ message MetaBusiness {
 }
 
 message MetaAdAccount {
+	common.Context ctx = 1;
+	string subiz_account_id = 2;
+
 	string name = 4;
 	string account_id = 5;
 	string id = 6;
@@ -9683,4 +9686,7 @@ message MetaAdAccount {
 	string tax_id = 18;
 
 	MetaBusiness business = 19;
+
+	int64 last_sync_at = 20;
+	string access_token = 23;
 }
