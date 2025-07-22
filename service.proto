@@ -317,7 +317,6 @@ service UserMgr {
 
 	rpc UpdateSegmentMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveSegmentMember(ResourceGroupMember) returns (header.Empty);
-
 }
 
 service NoteMgr {

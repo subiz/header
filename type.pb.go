@@ -173,7 +173,6 @@ const (
 	RealtimeType_call_ringing                    RealtimeType = 215
 	RealtimeType_call_transferred                RealtimeType = 216
 	RealtimeType_agent_on_call_status_changed    RealtimeType = 220
-	RealtimeType_user_lifecycle_stage_changed    RealtimeType = 221
 	RealtimeType_event_type_updated              RealtimeType = 225
 	RealtimeType_segment_updated                 RealtimeType = 226
 	RealtimeType_segment_deleted                 RealtimeType = 227
@@ -418,7 +417,6 @@ var (
 		215: "call_ringing",
 		216: "call_transferred",
 		220: "agent_on_call_status_changed",
-		221: "user_lifecycle_stage_changed",
 		225: "event_type_updated",
 		226: "segment_updated",
 		227: "segment_deleted",
@@ -660,7 +658,6 @@ var (
 		"call_ringing":                       215,
 		"call_transferred":                   216,
 		"agent_on_call_status_changed":       220,
-		"user_lifecycle_stage_changed":       221,
 		"event_type_updated":                 225,
 		"segment_updated":                    226,
 		"segment_deleted":                    227,
@@ -1782,7 +1779,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\x83.\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xe0-\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1932,8 +1929,7 @@ const file_type_proto_rawDesc = "" +
 	"\tcall_left\x10\xd6\x01\x12\x11\n" +
 	"\fcall_ringing\x10\xd7\x01\x12\x15\n" +
 	"\x10call_transferred\x10\xd8\x01\x12!\n" +
-	"\x1cagent_on_call_status_changed\x10\xdc\x01\x12!\n" +
-	"\x1cuser_lifecycle_stage_changed\x10\xdd\x01\x12\x17\n" +
+	"\x1cagent_on_call_status_changed\x10\xdc\x01\x12\x17\n" +
 	"\x12event_type_updated\x10\xe1\x01\x12\x14\n" +
 	"\x0fsegment_updated\x10\xe2\x01\x12\x14\n" +
 	"\x0fsegment_deleted\x10\xe3\x01\x12\x15\n" +

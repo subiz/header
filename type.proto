@@ -222,8 +222,6 @@ enum RealtimeType {
 
 	agent_on_call_status_changed = 220;
 
-	user_lifecycle_stage_changed = 221;
-
 	event_type_updated = 225;
 
 	segment_updated = 226;
