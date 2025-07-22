@@ -68581,6 +68581,8 @@ func (x *MetaBusiness) GetName() string {
 
 type MetaAdAccount struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                 *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	SubizAccountId      string                 `protobuf:"bytes,2,opt,name=subiz_account_id,json=subizAccountId,proto3" json:"subiz_account_id,omitempty"`
 	Name                string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	AccountId           string                 `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id                  string                 `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
@@ -68595,6 +68597,9 @@ type MetaAdAccount struct {
 	SpendCap            string                 `protobuf:"bytes,17,opt,name=spend_cap,json=spendCap,proto3" json:"spend_cap,omitempty"`
 	TaxId               string                 `protobuf:"bytes,18,opt,name=tax_id,json=taxId,proto3" json:"tax_id,omitempty"`
 	Business            *MetaBusiness          `protobuf:"bytes,19,opt,name=business,proto3" json:"business,omitempty"`
+	LastSyncAt          int64                  `protobuf:"varint,20,opt,name=last_sync_at,json=lastSyncAt,proto3" json:"last_sync_at,omitempty"`
+	LastSyncStatus      string                 `protobuf:"bytes,21,opt,name=last_sync_status,json=lastSyncStatus,proto3" json:"last_sync_status,omitempty"` // success, failed
+	LastSyncStatusCode  int64                  `protobuf:"varint,22,opt,name=last_sync_status_code,json=lastSyncStatusCode,proto3" json:"last_sync_status_code,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -68627,6 +68632,20 @@ func (x *MetaAdAccount) ProtoReflect() protoreflect.Message {
 // Deprecated: Use MetaAdAccount.ProtoReflect.Descriptor instead.
 func (*MetaAdAccount) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{564}
+}
+
+func (x *MetaAdAccount) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *MetaAdAccount) GetSubizAccountId() string {
+	if x != nil {
+		return x.SubizAccountId
+	}
+	return ""
 }
 
 func (x *MetaAdAccount) GetName() string {
@@ -68725,6 +68744,27 @@ func (x *MetaAdAccount) GetBusiness() *MetaBusiness {
 		return x.Business
 	}
 	return nil
+}
+
+func (x *MetaAdAccount) GetLastSyncAt() int64 {
+	if x != nil {
+		return x.LastSyncAt
+	}
+	return 0
+}
+
+func (x *MetaAdAccount) GetLastSyncStatus() string {
+	if x != nil {
+		return x.LastSyncStatus
+	}
+	return ""
+}
+
+func (x *MetaAdAccount) GetLastSyncStatusCode() int64 {
+	if x != nil {
+		return x.LastSyncStatusCode
+	}
+	return 0
 }
 
 type ReportBotResponse_Metric struct {
@@ -77542,8 +77582,10 @@ const file_header_proto_rawDesc = "" +
 	"\x0eUserDataSource\"2\n" +
 	"\fMetaBusiness\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\xbb\x03\n" +
-	"\rMetaAdAccount\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\x87\x05\n" +
+	"\rMetaAdAccount\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12(\n" +
+	"\x10subiz_account_id\x18\x02 \x01(\tR\x0esubizAccountId\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x05 \x01(\tR\taccountId\x12\x0e\n" +
@@ -77559,7 +77601,11 @@ const file_header_proto_rawDesc = "" +
 	"\x05owner\x18\x10 \x01(\tR\x05owner\x12\x1b\n" +
 	"\tspend_cap\x18\x11 \x01(\tR\bspendCap\x12\x15\n" +
 	"\x06tax_id\x18\x12 \x01(\tR\x05taxId\x120\n" +
-	"\bbusiness\x18\x13 \x01(\v2\x14.header.MetaBusinessR\bbusiness*t\n" +
+	"\bbusiness\x18\x13 \x01(\v2\x14.header.MetaBusinessR\bbusiness\x12 \n" +
+	"\flast_sync_at\x18\x14 \x01(\x03R\n" +
+	"lastSyncAt\x12(\n" +
+	"\x10last_sync_status\x18\x15 \x01(\tR\x0elastSyncStatus\x121\n" +
+	"\x15last_sync_status_code\x18\x16 \x01(\x03R\x12lastSyncStatusCode*t\n" +
 	"\n" +
 	"ConvoState\x12\x0e\n" +
 	"\n" +
@@ -79716,36 +79762,37 @@ var file_header_proto_depIdxs = []int32{
 	386,  // 1313: header.TestMessageRequest.message:type_name -> header.MarketingMessage
 	661,  // 1314: header.CreditUsage.ctx:type_name -> common.Context
 	570,  // 1315: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
-	596,  // 1316: header.MetaAdAccount.business:type_name -> header.MetaBusiness
-	74,   // 1317: header.Event.CustomDataEntry.value:type_name -> header.EventField
-	504,  // 1318: header.Message.I18nBlockEntry.value:type_name -> header.Block
-	605,  // 1319: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
-	504,  // 1320: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
-	504,  // 1321: header.I18nBlock.I18nEntry.value:type_name -> header.Block
-	504,  // 1322: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
-	174,  // 1323: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
-	173,  // 1324: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
-	175,  // 1325: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
-	176,  // 1326: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
-	177,  // 1327: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
-	662,  // 1328: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
-	504,  // 1329: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
-	548,  // 1330: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
-	319,  // 1331: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
-	319,  // 1332: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
-	432,  // 1333: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
-	403,  // 1334: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
-	403,  // 1335: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
-	90,   // 1336: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
-	488,  // 1337: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
-	504,  // 1338: header.Article.I18nContentEntry.value:type_name -> header.Block
-	548,  // 1339: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
-	403,  // 1340: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
-	1341, // [1341:1341] is the sub-list for method output_type
-	1341, // [1341:1341] is the sub-list for method input_type
-	1341, // [1341:1341] is the sub-list for extension type_name
-	1341, // [1341:1341] is the sub-list for extension extendee
-	0,    // [0:1341] is the sub-list for field type_name
+	661,  // 1316: header.MetaAdAccount.ctx:type_name -> common.Context
+	596,  // 1317: header.MetaAdAccount.business:type_name -> header.MetaBusiness
+	74,   // 1318: header.Event.CustomDataEntry.value:type_name -> header.EventField
+	504,  // 1319: header.Message.I18nBlockEntry.value:type_name -> header.Block
+	605,  // 1320: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
+	504,  // 1321: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
+	504,  // 1322: header.I18nBlock.I18nEntry.value:type_name -> header.Block
+	504,  // 1323: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
+	174,  // 1324: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
+	173,  // 1325: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
+	175,  // 1326: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
+	176,  // 1327: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
+	177,  // 1328: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
+	662,  // 1329: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
+	504,  // 1330: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
+	548,  // 1331: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
+	319,  // 1332: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
+	319,  // 1333: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
+	432,  // 1334: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
+	403,  // 1335: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
+	403,  // 1336: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
+	90,   // 1337: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
+	488,  // 1338: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
+	504,  // 1339: header.Article.I18nContentEntry.value:type_name -> header.Block
+	548,  // 1340: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
+	403,  // 1341: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
+	1342, // [1342:1342] is the sub-list for method output_type
+	1342, // [1342:1342] is the sub-list for method input_type
+	1342, // [1342:1342] is the sub-list for extension type_name
+	1342, // [1342:1342] is the sub-list for extension extendee
+	0,    // [0:1342] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }
