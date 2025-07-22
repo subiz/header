@@ -658,41 +658,41 @@ func (x *FbFrom) GetUsername() string {
 }
 
 type FbChangeValue struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	EditedTime       *int64                 `protobuf:"varint,3,opt,name=edited_time,json=editedTime,proto3,oneof" json:"edited_time,omitempty"`
-	From             *FbFrom                `protobuf:"bytes,4,opt,name=from,proto3,oneof" json:"from,omitempty"`
-	Post             *FbPagePost            `protobuf:"bytes,5,opt,name=post,proto3,oneof" json:"post,omitempty"`
-	IsHidden         *bool                  `protobuf:"varint,6,opt,name=is_hidden,json=isHidden,proto3,oneof" json:"is_hidden,omitempty"`
-	Link             *string                `protobuf:"bytes,7,opt,name=link,proto3,oneof" json:"link,omitempty"`
-	Message          *string                `protobuf:"bytes,8,opt,name=message,proto3,oneof" json:"message,omitempty"`
-	Photo            *string                `protobuf:"bytes,9,opt,name=photo,proto3,oneof" json:"photo,omitempty"`
-	Photos           []string               `protobuf:"bytes,10,rep,name=photos,proto3" json:"photos,omitempty"`
-	PostId           *string                `protobuf:"bytes,11,opt,name=post_id,json=postId,proto3,oneof" json:"post_id,omitempty"`
-	Story            *string                `protobuf:"bytes,12,opt,name=story,proto3,oneof" json:"story,omitempty"`
-	Title            *string                `protobuf:"bytes,13,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Video            *string                `protobuf:"bytes,14,opt,name=video,proto3,oneof" json:"video,omitempty"`
-	VideoFlagReason  *string                `protobuf:"bytes,15,opt,name=video_flag_reason,json=videoFlagReason,proto3,oneof" json:"video_flag_reason,omitempty"`
-	Action           *string                `protobuf:"bytes,16,opt,name=action,proto3,oneof" json:"action,omitempty"`
-	AlbumId          *string                `protobuf:"bytes,17,opt,name=album_id,json=albumId,proto3,oneof" json:"album_id,omitempty"`
-	CommentId        *string                `protobuf:"bytes,18,opt,name=comment_id,json=commentId,proto3,oneof" json:"comment_id,omitempty"`
-	CreatedTime      *int64                 `protobuf:"varint,19,opt,name=created_time,json=createdTime,proto3,oneof" json:"created_time,omitempty"`
-	EventId          *string                `protobuf:"bytes,20,opt,name=event_id,json=eventId,proto3,oneof" json:"event_id,omitempty"`
-	Item             *string                `protobuf:"bytes,21,opt,name=item,proto3,oneof" json:"item,omitempty"`
-	OpenGraphStoryId *string                `protobuf:"bytes,22,opt,name=open_graph_story_id,json=openGraphStoryId,proto3,oneof" json:"open_graph_story_id,omitempty"`
-	ParentId         *string                `protobuf:"bytes,23,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
-	PhotoId          *string                `protobuf:"bytes,24,opt,name=photo_id,json=photoId,proto3,oneof" json:"photo_id,omitempty"`
-	ReactionType     *string                `protobuf:"bytes,25,opt,name=reaction_type,json=reactionType,proto3,oneof" json:"reaction_type,omitempty"`
-	Published        *int32                 `protobuf:"varint,26,opt,name=published,proto3,oneof" json:"published,omitempty"`
-	RecipientId      *string                `protobuf:"bytes,27,opt,name=recipient_id,json=recipientId,proto3,oneof" json:"recipient_id,omitempty"`
-	ShareId          *string                `protobuf:"bytes,28,opt,name=share_id,json=shareId,proto3,oneof" json:"share_id,omitempty"`
-	Verb             *string                `protobuf:"bytes,29,opt,name=verb,proto3,oneof" json:"verb,omitempty"` // remove
-	VideoId          *string                `protobuf:"bytes,30,opt,name=video_id,json=videoId,proto3,oneof" json:"video_id,omitempty"`
-	Media            *IgMedia               `protobuf:"bytes,31,opt,name=media,proto3,oneof" json:"media,omitempty"`
-	Id               *string                `protobuf:"bytes,32,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Text             *string                `protobuf:"bytes,33,opt,name=text,proto3,oneof" json:"text,omitempty"`
-	MediaId          *string                `protobuf:"bytes,34,opt,name=media_id,json=mediaId,proto3,oneof" json:"media_id,omitempty"`
-	User             *FbChangeUser          `protobuf:"bytes,35,opt,name=user,proto3,oneof" json:"user,omitempty"` // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
-	Label            *FbCustomLabel         `protobuf:"bytes,36,opt,name=label,proto3,oneof" json:"label,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	EditedTime *int64                 `protobuf:"varint,3,opt,name=edited_time,json=editedTime,proto3,oneof" json:"edited_time,omitempty"`
+	From       *FbFrom                `protobuf:"bytes,4,opt,name=from,proto3,oneof" json:"from,omitempty"`
+	Post       *FbPagePost            `protobuf:"bytes,5,opt,name=post,proto3,oneof" json:"post,omitempty"`
+	IsHidden   *bool                  `protobuf:"varint,6,opt,name=is_hidden,json=isHidden,proto3,oneof" json:"is_hidden,omitempty"`
+	Link       *string                `protobuf:"bytes,7,opt,name=link,proto3,oneof" json:"link,omitempty"`
+	Message    *string                `protobuf:"bytes,8,opt,name=message,proto3,oneof" json:"message,omitempty"`
+	Photo      *string                `protobuf:"bytes,9,opt,name=photo,proto3,oneof" json:"photo,omitempty"`
+	Photos     []string               `protobuf:"bytes,10,rep,name=photos,proto3" json:"photos,omitempty"`
+	PostId     *string                `protobuf:"bytes,11,opt,name=post_id,json=postId,proto3,oneof" json:"post_id,omitempty"`
+	Story      *string                `protobuf:"bytes,12,opt,name=story,proto3,oneof" json:"story,omitempty"`
+	Title      *string                `protobuf:"bytes,13,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	Video      *string                `protobuf:"bytes,14,opt,name=video,proto3,oneof" json:"video,omitempty"`
+	// optional string video_flag_reason = 15;
+	Action           *string        `protobuf:"bytes,16,opt,name=action,proto3,oneof" json:"action,omitempty"`
+	AlbumId          *string        `protobuf:"bytes,17,opt,name=album_id,json=albumId,proto3,oneof" json:"album_id,omitempty"`
+	CommentId        *string        `protobuf:"bytes,18,opt,name=comment_id,json=commentId,proto3,oneof" json:"comment_id,omitempty"`
+	CreatedTime      *int64         `protobuf:"varint,19,opt,name=created_time,json=createdTime,proto3,oneof" json:"created_time,omitempty"`
+	EventId          *string        `protobuf:"bytes,20,opt,name=event_id,json=eventId,proto3,oneof" json:"event_id,omitempty"`
+	Item             *string        `protobuf:"bytes,21,opt,name=item,proto3,oneof" json:"item,omitempty"`
+	OpenGraphStoryId *string        `protobuf:"bytes,22,opt,name=open_graph_story_id,json=openGraphStoryId,proto3,oneof" json:"open_graph_story_id,omitempty"`
+	ParentId         *string        `protobuf:"bytes,23,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	PhotoId          *string        `protobuf:"bytes,24,opt,name=photo_id,json=photoId,proto3,oneof" json:"photo_id,omitempty"`
+	ReactionType     *string        `protobuf:"bytes,25,opt,name=reaction_type,json=reactionType,proto3,oneof" json:"reaction_type,omitempty"`
+	Published        *int32         `protobuf:"varint,26,opt,name=published,proto3,oneof" json:"published,omitempty"`
+	RecipientId      *string        `protobuf:"bytes,27,opt,name=recipient_id,json=recipientId,proto3,oneof" json:"recipient_id,omitempty"`
+	ShareId          *string        `protobuf:"bytes,28,opt,name=share_id,json=shareId,proto3,oneof" json:"share_id,omitempty"`
+	Verb             *string        `protobuf:"bytes,29,opt,name=verb,proto3,oneof" json:"verb,omitempty"` // remove
+	VideoId          *string        `protobuf:"bytes,30,opt,name=video_id,json=videoId,proto3,oneof" json:"video_id,omitempty"`
+	Media            *IgMedia       `protobuf:"bytes,31,opt,name=media,proto3,oneof" json:"media,omitempty"`
+	Id               *string        `protobuf:"bytes,32,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Text             *string        `protobuf:"bytes,33,opt,name=text,proto3,oneof" json:"text,omitempty"`
+	MediaId          *string        `protobuf:"bytes,34,opt,name=media_id,json=mediaId,proto3,oneof" json:"media_id,omitempty"`
+	User             *FbChangeUser  `protobuf:"bytes,35,opt,name=user,proto3,oneof" json:"user,omitempty"` // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
+	Label            *FbCustomLabel `protobuf:"bytes,36,opt,name=label,proto3,oneof" json:"label,omitempty"`
 	// leadgen
 	LeadgenId     *string `protobuf:"bytes,40,opt,name=leadgen_id,json=leadgenId,proto3,oneof" json:"leadgen_id,omitempty"`
 	PageId        *string `protobuf:"bytes,41,opt,name=page_id,json=pageId,proto3,oneof" json:"page_id,omitempty"`
@@ -813,13 +813,6 @@ func (x *FbChangeValue) GetTitle() string {
 func (x *FbChangeValue) GetVideo() string {
 	if x != nil && x.Video != nil {
 		return *x.Video
-	}
-	return ""
-}
-
-func (x *FbChangeValue) GetVideoFlagReason() string {
-	if x != nil && x.VideoFlagReason != nil {
-		return *x.VideoFlagReason
 	}
 	return ""
 }
@@ -5606,7 +5599,7 @@ const file_fabikon_proto_rawDesc = "" +
 	"\busername\x18\x03 \x01(\tH\x02R\busername\x88\x01\x01B\x05\n" +
 	"\x03_idB\a\n" +
 	"\x05_fromB\v\n" +
-	"\t_username\"\x9a\x0e\n" +
+	"\t_username\"\xd3\r\n" +
 	"\rFbChangeValue\x12$\n" +
 	"\vedited_time\x18\x03 \x01(\x03H\x00R\n" +
 	"editedTime\x88\x01\x01\x12(\n" +
@@ -5622,37 +5615,36 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x05story\x18\f \x01(\tH\bR\x05story\x88\x01\x01\x12\x19\n" +
 	"\x05title\x18\r \x01(\tH\tR\x05title\x88\x01\x01\x12\x19\n" +
 	"\x05video\x18\x0e \x01(\tH\n" +
-	"R\x05video\x88\x01\x01\x12/\n" +
-	"\x11video_flag_reason\x18\x0f \x01(\tH\vR\x0fvideoFlagReason\x88\x01\x01\x12\x1b\n" +
-	"\x06action\x18\x10 \x01(\tH\fR\x06action\x88\x01\x01\x12\x1e\n" +
-	"\balbum_id\x18\x11 \x01(\tH\rR\aalbumId\x88\x01\x01\x12\"\n" +
+	"R\x05video\x88\x01\x01\x12\x1b\n" +
+	"\x06action\x18\x10 \x01(\tH\vR\x06action\x88\x01\x01\x12\x1e\n" +
+	"\balbum_id\x18\x11 \x01(\tH\fR\aalbumId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"comment_id\x18\x12 \x01(\tH\x0eR\tcommentId\x88\x01\x01\x12&\n" +
-	"\fcreated_time\x18\x13 \x01(\x03H\x0fR\vcreatedTime\x88\x01\x01\x12\x1e\n" +
-	"\bevent_id\x18\x14 \x01(\tH\x10R\aeventId\x88\x01\x01\x12\x17\n" +
-	"\x04item\x18\x15 \x01(\tH\x11R\x04item\x88\x01\x01\x122\n" +
-	"\x13open_graph_story_id\x18\x16 \x01(\tH\x12R\x10openGraphStoryId\x88\x01\x01\x12 \n" +
-	"\tparent_id\x18\x17 \x01(\tH\x13R\bparentId\x88\x01\x01\x12\x1e\n" +
-	"\bphoto_id\x18\x18 \x01(\tH\x14R\aphotoId\x88\x01\x01\x12(\n" +
-	"\rreaction_type\x18\x19 \x01(\tH\x15R\freactionType\x88\x01\x01\x12!\n" +
-	"\tpublished\x18\x1a \x01(\x05H\x16R\tpublished\x88\x01\x01\x12&\n" +
-	"\frecipient_id\x18\x1b \x01(\tH\x17R\vrecipientId\x88\x01\x01\x12\x1e\n" +
-	"\bshare_id\x18\x1c \x01(\tH\x18R\ashareId\x88\x01\x01\x12\x17\n" +
-	"\x04verb\x18\x1d \x01(\tH\x19R\x04verb\x88\x01\x01\x12\x1e\n" +
-	"\bvideo_id\x18\x1e \x01(\tH\x1aR\avideoId\x88\x01\x01\x12+\n" +
-	"\x05media\x18\x1f \x01(\v2\x10.fabikon.IgMediaH\x1bR\x05media\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18  \x01(\tH\x1cR\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04text\x18! \x01(\tH\x1dR\x04text\x88\x01\x01\x12\x1e\n" +
-	"\bmedia_id\x18\" \x01(\tH\x1eR\amediaId\x88\x01\x01\x12.\n" +
-	"\x04user\x18# \x01(\v2\x15.fabikon.FbChangeUserH\x1fR\x04user\x88\x01\x01\x121\n" +
-	"\x05label\x18$ \x01(\v2\x16.fabikon.FbCustomLabelH R\x05label\x88\x01\x01\x12\"\n" +
+	"comment_id\x18\x12 \x01(\tH\rR\tcommentId\x88\x01\x01\x12&\n" +
+	"\fcreated_time\x18\x13 \x01(\x03H\x0eR\vcreatedTime\x88\x01\x01\x12\x1e\n" +
+	"\bevent_id\x18\x14 \x01(\tH\x0fR\aeventId\x88\x01\x01\x12\x17\n" +
+	"\x04item\x18\x15 \x01(\tH\x10R\x04item\x88\x01\x01\x122\n" +
+	"\x13open_graph_story_id\x18\x16 \x01(\tH\x11R\x10openGraphStoryId\x88\x01\x01\x12 \n" +
+	"\tparent_id\x18\x17 \x01(\tH\x12R\bparentId\x88\x01\x01\x12\x1e\n" +
+	"\bphoto_id\x18\x18 \x01(\tH\x13R\aphotoId\x88\x01\x01\x12(\n" +
+	"\rreaction_type\x18\x19 \x01(\tH\x14R\freactionType\x88\x01\x01\x12!\n" +
+	"\tpublished\x18\x1a \x01(\x05H\x15R\tpublished\x88\x01\x01\x12&\n" +
+	"\frecipient_id\x18\x1b \x01(\tH\x16R\vrecipientId\x88\x01\x01\x12\x1e\n" +
+	"\bshare_id\x18\x1c \x01(\tH\x17R\ashareId\x88\x01\x01\x12\x17\n" +
+	"\x04verb\x18\x1d \x01(\tH\x18R\x04verb\x88\x01\x01\x12\x1e\n" +
+	"\bvideo_id\x18\x1e \x01(\tH\x19R\avideoId\x88\x01\x01\x12+\n" +
+	"\x05media\x18\x1f \x01(\v2\x10.fabikon.IgMediaH\x1aR\x05media\x88\x01\x01\x12\x13\n" +
+	"\x02id\x18  \x01(\tH\x1bR\x02id\x88\x01\x01\x12\x17\n" +
+	"\x04text\x18! \x01(\tH\x1cR\x04text\x88\x01\x01\x12\x1e\n" +
+	"\bmedia_id\x18\" \x01(\tH\x1dR\amediaId\x88\x01\x01\x12.\n" +
+	"\x04user\x18# \x01(\v2\x15.fabikon.FbChangeUserH\x1eR\x04user\x88\x01\x01\x121\n" +
+	"\x05label\x18$ \x01(\v2\x16.fabikon.FbCustomLabelH\x1fR\x05label\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"leadgen_id\x18( \x01(\tH!R\tleadgenId\x88\x01\x01\x12\x1c\n" +
-	"\apage_id\x18) \x01(\tH\"R\x06pageId\x88\x01\x01\x12\x1c\n" +
-	"\aform_id\x18* \x01(\tH#R\x06formId\x88\x01\x01\x12\"\n" +
+	"leadgen_id\x18( \x01(\tH R\tleadgenId\x88\x01\x01\x12\x1c\n" +
+	"\apage_id\x18) \x01(\tH!R\x06pageId\x88\x01\x01\x12\x1c\n" +
+	"\aform_id\x18* \x01(\tH\"R\x06formId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"adgroup_id\x18+ \x01(\tH$R\tadgroupId\x88\x01\x01\x12\x18\n" +
-	"\x05ad_id\x18, \x01(\tH%R\x04adId\x88\x01\x01B\x0e\n" +
+	"adgroup_id\x18+ \x01(\tH#R\tadgroupId\x88\x01\x01\x12\x18\n" +
+	"\x05ad_id\x18, \x01(\tH$R\x04adId\x88\x01\x01B\x0e\n" +
 	"\f_edited_timeB\a\n" +
 	"\x05_fromB\a\n" +
 	"\x05_postB\f\n" +
@@ -5666,8 +5658,7 @@ const file_fabikon_proto_rawDesc = "" +
 	"\b_post_idB\b\n" +
 	"\x06_storyB\b\n" +
 	"\x06_titleB\b\n" +
-	"\x06_videoB\x14\n" +
-	"\x12_video_flag_reasonB\t\n" +
+	"\x06_videoB\t\n" +
 	"\a_actionB\v\n" +
 	"\t_album_idB\r\n" +
 	"\v_comment_idB\x0f\n" +

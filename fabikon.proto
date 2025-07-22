@@ -100,7 +100,7 @@ message FbChangeValue {
 	optional string story = 12;
 	optional string title = 13;
 	optional string video = 14;
-	optional string video_flag_reason = 15;
+	// optional string video_flag_reason = 15;
 	optional string action = 16;
 	optional string album_id = 17;
 	optional string comment_id = 18;
