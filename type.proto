@@ -345,6 +345,8 @@ enum RealtimeType {
 
 	segment_sync_updated = 350;
 	segment_sync_deleted = 351;
+
+	facebook_offline_conversion_sent = 352;
 }
 
 message TextTransform {
