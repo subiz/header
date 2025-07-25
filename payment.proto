@@ -37,7 +37,6 @@ message DiffSubRequest {
 message Plan {
 	optional string name = 2;
 	optional common.Limit limit = 3;
-	// optional float price = 4; // deprecated
 	optional int64 fpv_price = 8; // usd // permonth
 	optional bool is_unlimited_agent = 5;
 	optional bool renewable = 6;
@@ -47,13 +46,15 @@ message Plan {
 	// cho phep renew
 	enum Type {
 		trial = 0;
-		standard = 2;
-		advanced = 3;
+		standard = 2; // per agent
+		advanced = 3; // per agent
 		standard_unlimited_agent = 4;
-		custom = 5;
+		advanced_unlimited_agent = 6;
 	}
 	optional int64 fpv_price_usd = 11; // usd // permonth
 	optional int64 fpv_price_vnd = 12; // usd // permonth
+
+	optional int64 is_unlimited_ai_spending = 13;
 }
 
 message PurchaseRequest {

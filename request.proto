@@ -786,6 +786,9 @@ message ListAIDataEntryRequest {
 	string type = 7;
 	string referer_id = 8;
 	string status = 10;
+	string exclude_ids = 11;
+
+	bool is_only = 12;
 }
 
 message CampaignSendLogRequest {

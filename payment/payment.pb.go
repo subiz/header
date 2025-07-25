@@ -27,10 +27,10 @@ type Plan_Type int32
 
 const (
 	Plan_trial                    Plan_Type = 0
-	Plan_standard                 Plan_Type = 2
-	Plan_advanced                 Plan_Type = 3
+	Plan_standard                 Plan_Type = 2 // per agent
+	Plan_advanced                 Plan_Type = 3 // per agent
 	Plan_standard_unlimited_agent Plan_Type = 4
-	Plan_custom                   Plan_Type = 5
+	Plan_advanced_unlimited_agent Plan_Type = 6
 )
 
 // Enum value maps for Plan_Type.
@@ -40,14 +40,14 @@ var (
 		2: "standard",
 		3: "advanced",
 		4: "standard_unlimited_agent",
-		5: "custom",
+		6: "advanced_unlimited_agent",
 	}
 	Plan_Type_value = map[string]int32{
 		"trial":                    0,
 		"standard":                 2,
 		"advanced":                 3,
 		"standard_unlimited_agent": 4,
-		"custom":                   5,
+		"advanced_unlimited_agent": 6,
 	}
 )
 
@@ -533,18 +533,18 @@ func (x *DiffSubRequest) GetNewSubscription() *Subscription {
 }
 
 type Plan struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Name  *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Limit *common.Limit          `protobuf:"bytes,3,opt,name=limit" json:"limit,omitempty"`
-	// optional float price = 4; // deprecated
-	FpvPrice                 *int64 `protobuf:"varint,8,opt,name=fpv_price,json=fpvPrice" json:"fpv_price,omitempty"` // usd // permonth
-	IsUnlimitedAgent         *bool  `protobuf:"varint,5,opt,name=is_unlimited_agent,json=isUnlimitedAgent" json:"is_unlimited_agent,omitempty"`
-	Renewable                *bool  `protobuf:"varint,6,opt,name=renewable" json:"renewable,omitempty"`
-	InactiveDaysAfterChurned *int64 `protobuf:"varint,7,opt,name=inactive_days_after_churned,json=inactiveDaysAfterChurned" json:"inactive_days_after_churned,omitempty"`
-	LongBillingCycleDiscount *bool  `protobuf:"varint,9,opt,name=long_billing_cycle_discount,json=longBillingCycleDiscount" json:"long_billing_cycle_discount,omitempty"`
-	MininumBillingCycleMonth *int64 `protobuf:"varint,10,opt,name=mininum_billing_cycle_month,json=mininumBillingCycleMonth" json:"mininum_billing_cycle_month,omitempty"`
-	FpvPriceUsd              *int64 `protobuf:"varint,11,opt,name=fpv_price_usd,json=fpvPriceUsd" json:"fpv_price_usd,omitempty"` // usd // permonth
-	FpvPriceVnd              *int64 `protobuf:"varint,12,opt,name=fpv_price_vnd,json=fpvPriceVnd" json:"fpv_price_vnd,omitempty"` // usd // permonth
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Name                     *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Limit                    *common.Limit          `protobuf:"bytes,3,opt,name=limit" json:"limit,omitempty"`
+	FpvPrice                 *int64                 `protobuf:"varint,8,opt,name=fpv_price,json=fpvPrice" json:"fpv_price,omitempty"` // usd // permonth
+	IsUnlimitedAgent         *bool                  `protobuf:"varint,5,opt,name=is_unlimited_agent,json=isUnlimitedAgent" json:"is_unlimited_agent,omitempty"`
+	Renewable                *bool                  `protobuf:"varint,6,opt,name=renewable" json:"renewable,omitempty"`
+	InactiveDaysAfterChurned *int64                 `protobuf:"varint,7,opt,name=inactive_days_after_churned,json=inactiveDaysAfterChurned" json:"inactive_days_after_churned,omitempty"`
+	LongBillingCycleDiscount *bool                  `protobuf:"varint,9,opt,name=long_billing_cycle_discount,json=longBillingCycleDiscount" json:"long_billing_cycle_discount,omitempty"`
+	MininumBillingCycleMonth *int64                 `protobuf:"varint,10,opt,name=mininum_billing_cycle_month,json=mininumBillingCycleMonth" json:"mininum_billing_cycle_month,omitempty"`
+	FpvPriceUsd              *int64                 `protobuf:"varint,11,opt,name=fpv_price_usd,json=fpvPriceUsd" json:"fpv_price_usd,omitempty"` // usd // permonth
+	FpvPriceVnd              *int64                 `protobuf:"varint,12,opt,name=fpv_price_vnd,json=fpvPriceVnd" json:"fpv_price_vnd,omitempty"` // usd // permonth
+	IsUnlimitedAiSpending    *int64                 `protobuf:"varint,13,opt,name=is_unlimited_ai_spending,json=isUnlimitedAiSpending" json:"is_unlimited_ai_spending,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -645,6 +645,13 @@ func (x *Plan) GetFpvPriceUsd() int64 {
 func (x *Plan) GetFpvPriceVnd() int64 {
 	if x != nil && x.FpvPriceVnd != nil {
 		return *x.FpvPriceVnd
+	}
+	return 0
+}
+
+func (x *Plan) GetIsUnlimitedAiSpending() int64 {
+	if x != nil && x.IsUnlimitedAiSpending != nil {
+		return *x.IsUnlimitedAiSpending
 	}
 	return 0
 }
@@ -3385,7 +3392,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05plans\x18\x02 \x03(\v2\r.payment.PlanR\x05plans\"\x94\x01\n" +
 	"\x0eDiffSubRequest\x12@\n" +
 	"\x10old_subscription\x18\x04 \x01(\v2\x15.payment.SubscriptionR\x0foldSubscription\x12@\n" +
-	"\x10new_subscription\x18\x05 \x01(\v2\x15.payment.SubscriptionR\x0fnewSubscription\"\x86\x04\n" +
+	"\x10new_subscription\x18\x05 \x01(\v2\x15.payment.SubscriptionR\x0fnewSubscription\"\xd1\x04\n" +
 	"\x04Plan\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12#\n" +
 	"\x05limit\x18\x03 \x01(\v2\r.common.LimitR\x05limit\x12\x1b\n" +
@@ -3397,14 +3404,14 @@ const file_payment_proto_rawDesc = "" +
 	"\x1bmininum_billing_cycle_month\x18\n" +
 	" \x01(\x03R\x18mininumBillingCycleMonth\x12\"\n" +
 	"\rfpv_price_usd\x18\v \x01(\x03R\vfpvPriceUsd\x12\"\n" +
-	"\rfpv_price_vnd\x18\f \x01(\x03R\vfpvPriceVnd\"W\n" +
+	"\rfpv_price_vnd\x18\f \x01(\x03R\vfpvPriceVnd\x127\n" +
+	"\x18is_unlimited_ai_spending\x18\r \x01(\x03R\x15isUnlimitedAiSpending\"i\n" +
 	"\x04Type\x12\t\n" +
 	"\x05trial\x10\x00\x12\f\n" +
 	"\bstandard\x10\x02\x12\f\n" +
 	"\badvanced\x10\x03\x12\x1c\n" +
-	"\x18standard_unlimited_agent\x10\x04\x12\n" +
-	"\n" +
-	"\x06custom\x10\x05\"\xa7\x04\n" +
+	"\x18standard_unlimited_agent\x10\x04\x12\x1c\n" +
+	"\x18advanced_unlimited_agent\x10\x06\"\xa7\x04\n" +
 	"\x0fPurchaseRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
