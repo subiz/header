@@ -5927,7 +5927,7 @@ message Segment {
 	UserViewCondition condition = 6;
 
 	string type = 7; // manual vs auto
-	int64 fetching_progress = 8; // 0 -> 100%
+	int64 fetching_progress = 8; // 0 -> 100
 
 	int64 last_fetched = 9;
 	string fetch_session_id = 10;
@@ -5948,6 +5948,8 @@ message Segment {
 	string order_by = 34; // attr.username asc
 
 	repeated ResourceGroupMember permissions = 35;
+
+	int64 last_success_fetched = 36;
 
 }
 

@@ -42006,31 +42006,32 @@ func (x *EventType) GetAssignee() string {
 }
 
 type Segment struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Ctx              *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId        string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id               string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Name             string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Condition        *UserViewCondition     `protobuf:"bytes,6,opt,name=condition,proto3" json:"condition,omitempty"`
-	Type             string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`                                                  // manual vs auto
-	FetchingProgress int64                  `protobuf:"varint,8,opt,name=fetching_progress,json=fetchingProgress,proto3" json:"fetching_progress,omitempty"` // 0 -> 100%
-	LastFetched      int64                  `protobuf:"varint,9,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
-	FetchSessionId   string                 `protobuf:"bytes,10,opt,name=fetch_session_id,json=fetchSessionId,proto3" json:"fetch_session_id,omitempty"`
-	FetchError       *Error                 `protobuf:"bytes,11,opt,name=fetch_error,json=fetchError,proto3" json:"fetch_error,omitempty"`
-	Total            int64                  `protobuf:"varint,19,opt,name=total,proto3" json:"total,omitempty"`
-	Created          int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy        string                 `protobuf:"bytes,21,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated          int64                  `protobuf:"varint,22,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy        string                 `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"` // int64 disabled = 24;
-	IsSystem         bool                   `protobuf:"varint,27,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
-	SourceType       string                 `protobuf:"bytes,31,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"` // campaign, popup, bot
-	SourceId         string                 `protobuf:"bytes,32,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
-	DisplayFields    []string               `protobuf:"bytes,33,rep,name=display_fields,json=displayFields,proto3" json:"display_fields,omitempty"`
-	OrderBy          string                 `protobuf:"bytes,34,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"` // attr.username asc
-	Permissions      []*ResourceGroupMember `protobuf:"bytes,35,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId          string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id                 string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Name               string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Description        string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Condition          *UserViewCondition     `protobuf:"bytes,6,opt,name=condition,proto3" json:"condition,omitempty"`
+	Type               string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`                                                  // manual vs auto
+	FetchingProgress   int64                  `protobuf:"varint,8,opt,name=fetching_progress,json=fetchingProgress,proto3" json:"fetching_progress,omitempty"` // 0 -> 100
+	LastFetched        int64                  `protobuf:"varint,9,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
+	FetchSessionId     string                 `protobuf:"bytes,10,opt,name=fetch_session_id,json=fetchSessionId,proto3" json:"fetch_session_id,omitempty"`
+	FetchError         *Error                 `protobuf:"bytes,11,opt,name=fetch_error,json=fetchError,proto3" json:"fetch_error,omitempty"`
+	Total              int64                  `protobuf:"varint,19,opt,name=total,proto3" json:"total,omitempty"`
+	Created            int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy          string                 `protobuf:"bytes,21,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated            int64                  `protobuf:"varint,22,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy          string                 `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"` // int64 disabled = 24;
+	IsSystem           bool                   `protobuf:"varint,27,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
+	SourceType         string                 `protobuf:"bytes,31,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"` // campaign, popup, bot
+	SourceId           string                 `protobuf:"bytes,32,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	DisplayFields      []string               `protobuf:"bytes,33,rep,name=display_fields,json=displayFields,proto3" json:"display_fields,omitempty"`
+	OrderBy            string                 `protobuf:"bytes,34,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"` // attr.username asc
+	Permissions        []*ResourceGroupMember `protobuf:"bytes,35,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	LastSuccessFetched int64                  `protobuf:"varint,36,opt,name=last_success_fetched,json=lastSuccessFetched,proto3" json:"last_success_fetched,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Segment) Reset() {
@@ -42215,6 +42216,13 @@ func (x *Segment) GetPermissions() []*ResourceGroupMember {
 		return x.Permissions
 	}
 	return nil
+}
+
+func (x *Segment) GetLastSuccessFetched() int64 {
+	if x != nil {
+		return x.LastSuccessFetched
+	}
+	return 0
 }
 
 type MetaSyncBatchSession struct {
@@ -74406,7 +74414,7 @@ const file_header_proto_rawDesc = "" +
 	"\barchived\x18  \x01(\x03R\barchived\x12\x1a\n" +
 	"\bpriority\x18! \x01(\x03R\bpriority\x12\x1a\n" +
 	"\breporter\x18\" \x01(\tR\breporter\x12\x1a\n" +
-	"\bassignee\x18# \x01(\tR\bassignee\"\xec\x05\n" +
+	"\bassignee\x18# \x01(\tR\bassignee\"\x9e\x06\n" +
 	"\aSegment\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74435,7 +74443,8 @@ const file_header_proto_rawDesc = "" +
 	"\tsource_id\x18  \x01(\tR\bsourceId\x12%\n" +
 	"\x0edisplay_fields\x18! \x03(\tR\rdisplayFields\x12\x19\n" +
 	"\border_by\x18\" \x01(\tR\aorderBy\x12=\n" +
-	"\vpermissions\x18# \x03(\v2\x1b.header.ResourceGroupMemberR\vpermissions\"\xc4\x01\n" +
+	"\vpermissions\x18# \x03(\v2\x1b.header.ResourceGroupMemberR\vpermissions\x120\n" +
+	"\x14last_success_fetched\x18$ \x01(\x03R\x12lastSuccessFetched\"\xc4\x01\n" +
 	"\x14MetaSyncBatchSession\x12\x18\n" +
 	"\acreated\x18\b \x01(\x03R\acreated\x12\x1d\n" +
 	"\n" +
