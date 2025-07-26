@@ -5951,6 +5951,9 @@ message Segment {
 
 	int64 last_success_fetched = 36;
 
+	// subiz only
+	int64 last_member_changed = 40;
+	int64 last_member_counted = 41;
 }
 
 message MetaSyncBatchSession {
