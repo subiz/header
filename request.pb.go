@@ -6312,6 +6312,7 @@ type ListAIDataEntryRequest struct {
 	RefererId     string                 `protobuf:"bytes,8,opt,name=referer_id,json=refererId,proto3" json:"referer_id,omitempty"`
 	Status        string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
 	IgnoreIds     []string               `protobuf:"bytes,11,rep,name=ignore_ids,json=ignoreIds,proto3" json:"ignore_ids,omitempty"`
+	OnlyIds       []string               `protobuf:"bytes,13,rep,name=only_ids,json=onlyIds,proto3" json:"only_ids,omitempty"` // only
 	IdOnly        bool                   `protobuf:"varint,12,opt,name=id_only,json=idOnly,proto3" json:"id_only,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6413,6 +6414,13 @@ func (x *ListAIDataEntryRequest) GetStatus() string {
 func (x *ListAIDataEntryRequest) GetIgnoreIds() []string {
 	if x != nil {
 		return x.IgnoreIds
+	}
+	return nil
+}
+
+func (x *ListAIDataEntryRequest) GetOnlyIds() []string {
+	if x != nil {
+		return x.OnlyIds
 	}
 	return nil
 }
@@ -8936,7 +8944,7 @@ const file_request_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
 	"\blast_md5\x18\x03 \x01(\tR\alastMd5\x12\x1b\n" +
-	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\"\xc0\x02\n" +
+	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\"\xdb\x02\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -8951,7 +8959,8 @@ const file_request_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"ignore_ids\x18\v \x03(\tR\tignoreIds\x12\x17\n" +
+	"ignore_ids\x18\v \x03(\tR\tignoreIds\x12\x19\n" +
+	"\bonly_ids\x18\r \x03(\tR\aonlyIds\x12\x17\n" +
 	"\aid_only\x18\f \x01(\bR\x06idOnly\"\x82\x04\n" +
 	"\x16CampaignSendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +

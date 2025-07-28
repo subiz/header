@@ -787,6 +787,7 @@ message ListAIDataEntryRequest {
 	string referer_id = 8;
 	string status = 10;
 	repeated string ignore_ids = 11;
+	repeated string only_ids = 13; // only
 
 	bool id_only = 12;
 }
