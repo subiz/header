@@ -7028,6 +7028,8 @@ message Response {
 
 	MetaAdAccount meta_ad_account = 226;
 	repeated MetaAdAccount meta_ad_accounts = 227;
+
+	repeated FbFanpageSetting fanpage_settings = 228;
 }
 
 message ReportCount {

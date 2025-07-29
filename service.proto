@@ -667,6 +667,7 @@ service FabikonService {
 	rpc DeleteAdsAudienceUsers(header.CustomAudienceBatchRequest) returns (header.CustomAudienceBatchResponse);
 
 	rpc ListAdAccounts(header.Id) returns (header.Response);
+	rpc ListFbFanpageSettings2(ListPageSettingRequest) returns (header.Response);
 }
 
 service ChannelConnector {
