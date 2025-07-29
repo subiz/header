@@ -25967,17 +25967,19 @@ func (x *FbComment) GetBlock() *Block {
 }
 
 type FbFanpageSetting struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                        *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId                  string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	FanpageId                  string                 `protobuf:"bytes,3,opt,name=fanpage_id,json=fanpageId,proto3" json:"fanpage_id,omitempty"`
-	GeneralCommentSetting      *FbCommentSetting      `protobuf:"bytes,5,opt,name=general_comment_setting,json=generalCommentSetting,proto3" json:"general_comment_setting,omitempty"`
-	SpecificPostCommentSetting *FbCommentSetting      `protobuf:"bytes,6,opt,name=specific_post_comment_setting,json=specificPostCommentSetting,proto3" json:"specific_post_comment_setting,omitempty"`
-	PostCommentSettings        []*FbCommentSetting    `protobuf:"bytes,7,rep,name=post_comment_settings,json=postCommentSettings,proto3" json:"post_comment_settings,omitempty"`
-	Updated                    int64                  `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
-	Platform                   string                 `protobuf:"bytes,10,opt,name=platform,proto3" json:"platform,omitempty"` // default facebook. Could be instagram
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                      string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	FanpageId                      string                 `protobuf:"bytes,3,opt,name=fanpage_id,json=fanpageId,proto3" json:"fanpage_id,omitempty"`
+	GeneralCommentSetting          *FbCommentSetting      `protobuf:"bytes,5,opt,name=general_comment_setting,json=generalCommentSetting,proto3" json:"general_comment_setting,omitempty"`
+	SpecificPostCommentSetting     *FbCommentSetting      `protobuf:"bytes,6,opt,name=specific_post_comment_setting,json=specificPostCommentSetting,proto3" json:"specific_post_comment_setting,omitempty"`
+	PostCommentSettings            []*FbCommentSetting    `protobuf:"bytes,7,rep,name=post_comment_settings,json=postCommentSettings,proto3" json:"post_comment_settings,omitempty"`
+	Updated                        int64                  `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
+	Platform                       string                 `protobuf:"bytes,10,opt,name=platform,proto3" json:"platform,omitempty"` // default facebook. Could be instagram
+	SendLeadEventOnLifecycleStages []string               `protobuf:"bytes,20,rep,name=send_lead_event_on_lifecycle_stages,json=sendLeadEventOnLifecycleStages,proto3" json:"send_lead_event_on_lifecycle_stages,omitempty"`
+	SyncConversionDisabled         int64                  `protobuf:"varint,21,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3" json:"sync_conversion_disabled,omitempty"` // source of truth
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *FbFanpageSetting) Reset() {
@@ -26066,6 +26068,20 @@ func (x *FbFanpageSetting) GetPlatform() string {
 	return ""
 }
 
+func (x *FbFanpageSetting) GetSendLeadEventOnLifecycleStages() []string {
+	if x != nil {
+		return x.SendLeadEventOnLifecycleStages
+	}
+	return nil
+}
+
+func (x *FbFanpageSetting) GetSyncConversionDisabled() int64 {
+	if x != nil {
+		return x.SyncConversionDisabled
+	}
+	return 0
+}
+
 type FbFanpageSettings struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -26135,7 +26151,6 @@ type FbCommentSetting struct {
 	PostIds                                          []string               `protobuf:"bytes,11,rep,name=post_ids,json=postIds,proto3" json:"post_ids,omitempty"` // post
 	Hashtags                                         []string               `protobuf:"bytes,12,rep,name=hashtags,proto3" json:"hashtags,omitempty"`              // post (contain #)
 	Posts                                            []*FacebookPost        `protobuf:"bytes,13,rep,name=posts,proto3" json:"posts,omitempty"`                    // read only
-	SendLeadEventOnLifecycleStages                   []string               `protobuf:"bytes,20,rep,name=send_lead_event_on_lifecycle_stages,json=sendLeadEventOnLifecycleStages,proto3" json:"send_lead_event_on_lifecycle_stages,omitempty"`
 	unknownFields                                    protoimpl.UnknownFields
 	sizeCache                                        protoimpl.SizeCache
 }
@@ -26271,13 +26286,6 @@ func (x *FbCommentSetting) GetHashtags() []string {
 func (x *FbCommentSetting) GetPosts() []*FacebookPost {
 	if x != nil {
 		return x.Posts
-	}
-	return nil
-}
-
-func (x *FbCommentSetting) GetSendLeadEventOnLifecycleStages() []string {
-	if x != nil {
-		return x.SendLeadEventOnLifecycleStages
 	}
 	return nil
 }
@@ -72565,7 +72573,7 @@ const file_header_proto_rawDesc = "" +
 	"\btemplate\x18\x05 \x01(\tR\btemplate\x12\x1f\n" +
 	"\vis_template\x18\x06 \x01(\bR\n" +
 	"isTemplate\x12#\n" +
-	"\x05block\x18\a \x01(\v2\r.header.BlockR\x05block\"\xa6\x03\n" +
+	"\x05block\x18\a \x01(\v2\r.header.BlockR\x05block\"\xad\x04\n" +
 	"\x10FbFanpageSetting\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72577,10 +72585,12 @@ const file_header_proto_rawDesc = "" +
 	"\x15post_comment_settings\x18\a \x03(\v2\x18.header.FbCommentSettingR\x13postCommentSettings\x12\x18\n" +
 	"\aupdated\x18\t \x01(\x03R\aupdated\x12\x1a\n" +
 	"\bplatform\x18\n" +
-	" \x01(\tR\bplatform\"l\n" +
+	" \x01(\tR\bplatform\x12K\n" +
+	"#send_lead_event_on_lifecycle_stages\x18\x14 \x03(\tR\x1esendLeadEventOnLifecycleStages\x128\n" +
+	"\x18sync_conversion_disabled\x18\x15 \x01(\x03R\x16syncConversionDisabled\"l\n" +
 	"\x11FbFanpageSettings\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x124\n" +
-	"\bsettings\x18\x02 \x03(\v2\x18.header.FbFanpageSettingR\bsettings\"\xd1\a\n" +
+	"\bsettings\x18\x02 \x03(\v2\x18.header.FbFanpageSettingR\bsettings\"\x84\a\n" +
 	"\x10FbCommentSetting\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1b\n" +
 	"\tauto_like\x18\x02 \x01(\bR\bautoLike\x12\x1b\n" +
@@ -72599,8 +72609,7 @@ const file_header_proto_rawDesc = "" +
 	" \x03(\tR\bkeywords\x12\x19\n" +
 	"\bpost_ids\x18\v \x03(\tR\apostIds\x12\x1a\n" +
 	"\bhashtags\x18\f \x03(\tR\bhashtags\x12*\n" +
-	"\x05posts\x18\r \x03(\v2\x14.header.FacebookPostR\x05posts\x12K\n" +
-	"#send_lead_event_on_lifecycle_stages\x18\x14 \x03(\tR\x1esendLeadEventOnLifecycleStages\"[\n" +
+	"\x05posts\x18\r \x03(\v2\x14.header.FacebookPostR\x05posts\"[\n" +
 	"\vHideComment\x12\r\n" +
 	"\tdont_hide\x10\x00\x12\x10\n" +
 	"\fall_comments\x10\x01\x12+\n" +

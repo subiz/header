@@ -3665,6 +3665,9 @@ message FbFanpageSetting {
 
 	int64 updated = 9;
 	string platform = 10; // default facebook. Could be instagram
+
+	repeated string send_lead_event_on_lifecycle_stages = 20;
+	int64 sync_conversion_disabled = 21; // source of truth
 }
 
 message FbFanpageSettings {
@@ -3700,8 +3703,6 @@ message FbCommentSetting {
 	repeated string hashtags = 12; // post (contain #)
 
 	repeated FacebookPost posts = 13; // read only
-
-	repeated string send_lead_event_on_lifecycle_stages = 20;
 }
 
 message FacebookPosts {
