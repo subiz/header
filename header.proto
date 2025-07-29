@@ -3700,6 +3700,8 @@ message FbCommentSetting {
 	repeated string hashtags = 12; // post (contain #)
 
 	repeated FacebookPost posts = 13; // read only
+
+	repeated string send_lead_event_on_lifecycle_stages = 20;
 }
 
 message FacebookPosts {

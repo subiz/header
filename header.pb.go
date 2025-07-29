@@ -26135,6 +26135,7 @@ type FbCommentSetting struct {
 	PostIds                                          []string               `protobuf:"bytes,11,rep,name=post_ids,json=postIds,proto3" json:"post_ids,omitempty"` // post
 	Hashtags                                         []string               `protobuf:"bytes,12,rep,name=hashtags,proto3" json:"hashtags,omitempty"`              // post (contain #)
 	Posts                                            []*FacebookPost        `protobuf:"bytes,13,rep,name=posts,proto3" json:"posts,omitempty"`                    // read only
+	SendLeadEventOnLifecycleStages                   []string               `protobuf:"bytes,20,rep,name=send_lead_event_on_lifecycle_stages,json=sendLeadEventOnLifecycleStages,proto3" json:"send_lead_event_on_lifecycle_stages,omitempty"`
 	unknownFields                                    protoimpl.UnknownFields
 	sizeCache                                        protoimpl.SizeCache
 }
@@ -26270,6 +26271,13 @@ func (x *FbCommentSetting) GetHashtags() []string {
 func (x *FbCommentSetting) GetPosts() []*FacebookPost {
 	if x != nil {
 		return x.Posts
+	}
+	return nil
+}
+
+func (x *FbCommentSetting) GetSendLeadEventOnLifecycleStages() []string {
+	if x != nil {
+		return x.SendLeadEventOnLifecycleStages
 	}
 	return nil
 }
@@ -72564,7 +72572,7 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\bplatform\"l\n" +
 	"\x11FbFanpageSettings\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x124\n" +
-	"\bsettings\x18\x02 \x03(\v2\x18.header.FbFanpageSettingR\bsettings\"\x84\a\n" +
+	"\bsettings\x18\x02 \x03(\v2\x18.header.FbFanpageSettingR\bsettings\"\xd1\a\n" +
 	"\x10FbCommentSetting\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1b\n" +
 	"\tauto_like\x18\x02 \x01(\bR\bautoLike\x12\x1b\n" +
@@ -72583,7 +72591,8 @@ const file_header_proto_rawDesc = "" +
 	" \x03(\tR\bkeywords\x12\x19\n" +
 	"\bpost_ids\x18\v \x03(\tR\apostIds\x12\x1a\n" +
 	"\bhashtags\x18\f \x03(\tR\bhashtags\x12*\n" +
-	"\x05posts\x18\r \x03(\v2\x14.header.FacebookPostR\x05posts\"[\n" +
+	"\x05posts\x18\r \x03(\v2\x14.header.FacebookPostR\x05posts\x12K\n" +
+	"#send_lead_event_on_lifecycle_stages\x18\x14 \x03(\tR\x1esendLeadEventOnLifecycleStages\"[\n" +
 	"\vHideComment\x12\r\n" +
 	"\tdont_hide\x10\x00\x12\x10\n" +
 	"\fall_comments\x10\x01\x12+\n" +
