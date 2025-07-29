@@ -11,6 +11,7 @@ import (
 
 	apb "github.com/subiz/header/account"
 	"github.com/thanhpk/ascii"
+	"github.com/tidwall/gjson"
 )
 
 const Tolerance = 0.000001
@@ -664,12 +665,29 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 		return EvaluateText(true, id, cond.GetText())
 	}
 
+	if cond.GetKey() == "deleted" {
+		return EvaluateBoolean(true, u.Deleted > 0, cond.GetBoolean())
+	}
+
 	if cond.GetKey() == "channel" {
 		return EvaluateText(true, u.Channel, cond.GetText())
 	}
 
 	if cond.GetKey() == "channel_source" {
-		return EvaluateText(true, u.ChannelSource, cond.GetText())
+		text := cond.GetText()
+		if cond.GetText().GetOp() == "contain" {
+			newContains := []string{}
+			for _, c := range cond.GetText().GetContain() {
+				containsplit := strings.Split(c, ".")
+				if len(containsplit) > 2 {
+					newContains = append(newContains, containsplit[1])
+				} else {
+					newContains = append(newContains, c)
+				}
+			}
+			text = &TextCondition{Op: "contain", Contain: newContains}
+		}
+		return EvaluateText(true, u.ChannelSource, text)
 	}
 
 	if cond.GetKey() == "keyword" && len(cond.GetText().GetContain()) > 0 { // email phone or name
@@ -826,6 +844,43 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 		}
 
 		return EvaluateTexts(labels, cond.Text)
+	}
+
+	if strings.HasPrefix(cond.GetKey(), "start_content_view.") ||
+		strings.HasPrefix(cond.GetKey(), "first_content_view.") ||
+		strings.HasPrefix(cond.GetKey(), "latest_content_view.") {
+		prefix := strings.Split(cond.GetKey(), "_")[0]
+		path := strings.Split(cond.GetKey(), ".")[1]
+		ub, _ := json.Marshal(u)
+		haspageview := u.FirstContentView != nil || u.StartContentView != nil || u.LatestContentView != nil
+		if path == "url" {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.referrer").String(), cond.Text)
+		} else if path == "source" {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.source").String(), cond.Text)
+		} else if path == "domain" {
+			// _content_view.by.device.referrer.host ->
+			// parsedUrl, _ := url.Parse(contentView.GetBy().GetDevice().GetReferrer())
+			// domain := parsedUrl.Host
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.referrer.host").String(), cond.Text)
+		} else if path == "referrer_url" {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.source_referrer").String(), cond.Text)
+		} else if path == "referrer_domain" {
+			// _content_view.by.device.source_referrer.host ->
+			// parsedUrl, _ := url.Parse(contentView.GetBy().GetDevice().GetSourceReferrer())
+			// domain := parsedUrl.Host
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.source_referrer.host").String(), cond.Text)
+		} else if strings.HasSuffix(cond.GetKey(), "_content_view.utm.name") {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.utm.name").String(), cond.Text)
+		} else if strings.HasSuffix(cond.GetKey(), "_content_view.utm.source") {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.utm.source").String(), cond.Text)
+		} else if strings.HasSuffix(cond.GetKey(), "_content_view.utm.medium") {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.utm.medium").String(), cond.Text)
+		} else if strings.HasSuffix(cond.GetKey(), "_content_view.utm.term") {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.utm.term").String(), cond.Text)
+		} else if strings.HasSuffix(cond.GetKey(), "_content_view.utm.id") {
+			return EvaluateText(haspageview, gjson.GetBytes(ub, prefix+"_content_view.by.device.utm.id").String(), cond.Text)
+		}
+		return false
 	}
 
 	if strings.HasPrefix(cond.GetKey(), "attr:") || strings.HasPrefix(cond.GetKey(), "attr.") {
