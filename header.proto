@@ -254,6 +254,16 @@ message UserLeadOwner {
 	repeated LeadOwner lead_owners = 6;
 }
 
+message UserContentView {
+	common.Context ctx = 1;
+	string id = 3; // user-id
+	string account_id = 4;
+
+	Event latest_content_view = 55; // readonly
+	Event start_content_view = 56; // readonly latest content view that change the source
+	Event first_content_view = 57; // readonly first content view
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -269,9 +279,9 @@ message User {
 	string channel_source = 53; // pvcombank require verification
 	string channel = 54; // account => require verification, acc logo
 
-	Event latest_content_view = 55; // readonly
-	Event start_content_view = 56; // readonly latest content view that change the source
-	Event first_content_view = 57; // readonly first content view
+	Event latest_content_view = 55; // readonly @deprecated
+	Event start_content_view = 56; // readonly latest content view that change the source @deprecated
+	Event first_content_view = 57; // readonly first content view @deprecated
 
 	repeated string lead_conversion_bys = 58; // for quick search
 
@@ -7031,6 +7041,8 @@ message Response {
 	repeated MetaAdAccount meta_ad_accounts = 227;
 
 	repeated FbFanpageSetting fanpage_settings = 228;
+
+	repeated UserContentView user_content_views = 230;
 }
 
 message ReportCount {

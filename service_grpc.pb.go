@@ -6632,6 +6632,7 @@ const (
 	UserMgr_ReadUser_FullMethodName                         = "/header.UserMgr/ReadUser"
 	UserMgr_ReadOrCreateUserByContactProfile_FullMethodName = "/header.UserMgr/ReadOrCreateUserByContactProfile"
 	UserMgr_MatchUsers_FullMethodName                       = "/header.UserMgr/MatchUsers"
+	UserMgr_MatchContentViews_FullMethodName                = "/header.UserMgr/MatchContentViews"
 	UserMgr_BanUser_FullMethodName                          = "/header.UserMgr/BanUser"
 	UserMgr_UnbanUser_FullMethodName                        = "/header.UserMgr/UnbanUser"
 	UserMgr_LookupByPhone_FullMethodName                    = "/header.UserMgr/LookupByPhone"
@@ -6706,6 +6707,7 @@ type UserMgrClient interface {
 	ReadUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	ReadOrCreateUserByContactProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	MatchUsers(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Users, error)
+	MatchContentViews(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	BanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	UnbanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	LookupByPhone(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Users, error)
@@ -6866,6 +6868,16 @@ func (c *userMgrClient) MatchUsers(ctx context.Context, in *Ids, opts ...grpc.Ca
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Users)
 	err := c.cc.Invoke(ctx, UserMgr_MatchUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) MatchContentViews(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_MatchContentViews_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7448,6 +7460,7 @@ type UserMgrServer interface {
 	ReadUser(context.Context, *Id) (*User, error)
 	ReadOrCreateUserByContactProfile(context.Context, *Id) (*User, error)
 	MatchUsers(context.Context, *Ids) (*Users, error)
+	MatchContentViews(context.Context, *Ids) (*Response, error)
 	BanUser(context.Context, *Id) (*User, error)
 	UnbanUser(context.Context, *Id) (*User, error)
 	LookupByPhone(context.Context, *Id) (*Users, error)
@@ -7543,6 +7556,9 @@ func (UnimplementedUserMgrServer) ReadOrCreateUserByContactProfile(context.Conte
 }
 func (UnimplementedUserMgrServer) MatchUsers(context.Context, *Ids) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchUsers not implemented")
+}
+func (UnimplementedUserMgrServer) MatchContentViews(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchContentViews not implemented")
 }
 func (UnimplementedUserMgrServer) BanUser(context.Context, *Id) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BanUser not implemented")
@@ -7909,6 +7925,24 @@ func _UserMgr_MatchUsers_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).MatchUsers(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_MatchContentViews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MatchContentViews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_MatchContentViews_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MatchContentViews(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8967,6 +9001,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchUsers",
 			Handler:    _UserMgr_MatchUsers_Handler,
+		},
+		{
+			MethodName: "MatchContentViews",
+			Handler:    _UserMgr_MatchContentViews_Handler,
 		},
 		{
 			MethodName: "BanUser",
