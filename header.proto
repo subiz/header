@@ -254,16 +254,6 @@ message UserLeadOwner {
 	repeated LeadOwner lead_owners = 6;
 }
 
-message UserContentView {
-	common.Context ctx = 1;
-	string id = 3; // user-id
-	string account_id = 4;
-
-	Event latest_content_view = 55; // readonly
-	Event start_content_view = 56; // readonly latest content view that change the source
-	Event first_content_view = 57; // readonly first content view
-}
-
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -2420,7 +2410,7 @@ message RealtimeToken {
 	string connection_id = 4;
 	int64 last_offset = 5;
 
-	int64 last_polled = 8;
+	// int64 last_polled = 8;
 	int64 package_size = 9;
 }
 
@@ -7041,8 +7031,6 @@ message Response {
 	repeated MetaAdAccount meta_ad_accounts = 227;
 
 	repeated FbFanpageSetting fanpage_settings = 228;
-
-	repeated UserContentView user_content_views = 230;
 }
 
 message ReportCount {
@@ -9052,6 +9040,8 @@ message AIAgent {
 	string follow_up_instruction = 73;
 	string generated_follow_up_instruction = 74;
 	int64 disabled_follow_up = 75;
+
+	int64 num_unread_suggestions = 76;
 }
 
 message InitFlow {
@@ -9305,6 +9295,15 @@ message AIDataEntry {
 	string instruction = 51; // type=instruction
 	AIIntent intent = 52; // instruction trigger
 	WorkflowCondition condition = 53; // instruction condition
+
+	// suggestion
+	string conversation_id = 60;
+	string ai_agent_id = 61;
+	string message_id = 62;
+
+	int64 flagged = 64;
+	int64 read_at = 65;
+	string read_by = 66;
 }
 
 message AiResponseSource {
