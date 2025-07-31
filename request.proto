@@ -788,9 +788,12 @@ message ListAIDataEntryRequest {
 	string status = 10;
 	repeated string ignore_ids = 11;
 	repeated string only_ids = 13; // only
-
 	bool id_only = 12;
-	bool is_draft = 14;
+	bool is_suggestion = 15;
+
+	string ai_agent_id = 16;
+	string exclude_ai_agent_id = 17;
+	int64 ai_agent_version = 18;
 }
 
 message CampaignSendLogRequest {

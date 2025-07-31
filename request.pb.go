@@ -6301,22 +6301,25 @@ func (x *CrawlUrlRequest) GetLinkOnly() bool {
 }
 
 type ListAIDataEntryRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	GroupId       string                 `protobuf:"bytes,3,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	Keyword       string                 `protobuf:"bytes,4,opt,name=keyword,proto3" json:"keyword,omitempty"`
-	Anchor        string                 `protobuf:"bytes,9,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	Limit         int64                  `protobuf:"varint,6,opt,name=limit,proto3" json:"limit,omitempty"`
-	Type          string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	RefererId     string                 `protobuf:"bytes,8,opt,name=referer_id,json=refererId,proto3" json:"referer_id,omitempty"`
-	Status        string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
-	IgnoreIds     []string               `protobuf:"bytes,11,rep,name=ignore_ids,json=ignoreIds,proto3" json:"ignore_ids,omitempty"`
-	OnlyIds       []string               `protobuf:"bytes,13,rep,name=only_ids,json=onlyIds,proto3" json:"only_ids,omitempty"` // only
-	IdOnly        bool                   `protobuf:"varint,12,opt,name=id_only,json=idOnly,proto3" json:"id_only,omitempty"`
-	IsDraft       bool                   `protobuf:"varint,14,opt,name=is_draft,json=isDraft,proto3" json:"is_draft,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Ctx              *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId        string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	GroupId          string                 `protobuf:"bytes,3,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Keyword          string                 `protobuf:"bytes,4,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	Anchor           string                 `protobuf:"bytes,9,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	Limit            int64                  `protobuf:"varint,6,opt,name=limit,proto3" json:"limit,omitempty"`
+	Type             string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	RefererId        string                 `protobuf:"bytes,8,opt,name=referer_id,json=refererId,proto3" json:"referer_id,omitempty"`
+	Status           string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	IgnoreIds        []string               `protobuf:"bytes,11,rep,name=ignore_ids,json=ignoreIds,proto3" json:"ignore_ids,omitempty"`
+	OnlyIds          []string               `protobuf:"bytes,13,rep,name=only_ids,json=onlyIds,proto3" json:"only_ids,omitempty"` // only
+	IdOnly           bool                   `protobuf:"varint,12,opt,name=id_only,json=idOnly,proto3" json:"id_only,omitempty"`
+	IsSuggestion     bool                   `protobuf:"varint,15,opt,name=is_suggestion,json=isSuggestion,proto3" json:"is_suggestion,omitempty"`
+	AiAgentId        string                 `protobuf:"bytes,16,opt,name=ai_agent_id,json=aiAgentId,proto3" json:"ai_agent_id,omitempty"`
+	ExcludeAiAgentId string                 `protobuf:"bytes,17,opt,name=exclude_ai_agent_id,json=excludeAiAgentId,proto3" json:"exclude_ai_agent_id,omitempty"`
+	AiAgentVersion   int64                  `protobuf:"varint,18,opt,name=ai_agent_version,json=aiAgentVersion,proto3" json:"ai_agent_version,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListAIDataEntryRequest) Reset() {
@@ -6433,11 +6436,32 @@ func (x *ListAIDataEntryRequest) GetIdOnly() bool {
 	return false
 }
 
-func (x *ListAIDataEntryRequest) GetIsDraft() bool {
+func (x *ListAIDataEntryRequest) GetIsSuggestion() bool {
 	if x != nil {
-		return x.IsDraft
+		return x.IsSuggestion
 	}
 	return false
+}
+
+func (x *ListAIDataEntryRequest) GetAiAgentId() string {
+	if x != nil {
+		return x.AiAgentId
+	}
+	return ""
+}
+
+func (x *ListAIDataEntryRequest) GetExcludeAiAgentId() string {
+	if x != nil {
+		return x.ExcludeAiAgentId
+	}
+	return ""
+}
+
+func (x *ListAIDataEntryRequest) GetAiAgentVersion() int64 {
+	if x != nil {
+		return x.AiAgentVersion
+	}
+	return 0
 }
 
 type CampaignSendLogRequest struct {
@@ -9012,7 +9036,7 @@ const file_request_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
 	"\blast_md5\x18\x03 \x01(\tR\alastMd5\x12\x1b\n" +
-	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\"\xf6\x02\n" +
+	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9029,8 +9053,11 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"ignore_ids\x18\v \x03(\tR\tignoreIds\x12\x19\n" +
 	"\bonly_ids\x18\r \x03(\tR\aonlyIds\x12\x17\n" +
-	"\aid_only\x18\f \x01(\bR\x06idOnly\x12\x19\n" +
-	"\bis_draft\x18\x0e \x01(\bR\aisDraft\"\x82\x04\n" +
+	"\aid_only\x18\f \x01(\bR\x06idOnly\x12#\n" +
+	"\ris_suggestion\x18\x0f \x01(\bR\fisSuggestion\x12\x1e\n" +
+	"\vai_agent_id\x18\x10 \x01(\tR\taiAgentId\x12-\n" +
+	"\x13exclude_ai_agent_id\x18\x11 \x01(\tR\x10excludeAiAgentId\x12(\n" +
+	"\x10ai_agent_version\x18\x12 \x01(\x03R\x0eaiAgentVersion\"\x82\x04\n" +
 	"\x16CampaignSendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
