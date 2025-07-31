@@ -790,6 +790,7 @@ message ListAIDataEntryRequest {
 	repeated string only_ids = 13; // only
 
 	bool id_only = 12;
+	bool is_draft = 14;
 }
 
 message CampaignSendLogRequest {

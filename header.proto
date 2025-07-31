@@ -6964,8 +6964,8 @@ message Response {
 	repeated AIAgent ai_agents = 170;
 	AIAgent ai_agent = 171;
 
-	AiQnASuggestion ai_qna_suggestion = 172;
-	repeated AiQnASuggestion ai_qna_suggestions = 173;
+	// AiQnASuggestion ai_qna_suggestion = 172;
+	// repeated AiQnASuggestion ai_qna_suggestions = 173;
 
 	repeated AiResponseSource ai_response_sources = 174;
 	AiResponseSource ai_response_source = 158;
@@ -9319,6 +9319,7 @@ message AiResponseSource {
 	string embed_chunk = 11;
 }
 
+/*
 message AiQnASuggestion {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -9341,6 +9342,7 @@ message AiQnASuggestion {
 	int64 ai_data_entry_score = 20;
 	string ai_data_entry_id = 21; // optional
 }
+*/
 
 message FacebookAdsFlow {
 	common.Context ctx = 1;
@@ -9679,6 +9681,7 @@ message Markers {
 }
 
 message UserDataSource {
+
 }
 
 message MetaBusiness {
