@@ -362,6 +362,9 @@ service WorkflowMgr {
 	rpc StartAiAgent(RunAiAgentRequest) returns (Empty);
 	rpc StopAIAgent(RunAiAgentRequest) returns (Empty);
 
+	rpc DeleteAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
+	rpc AddAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
+
 	rpc ListAIDataGroup(Id) returns (Response);
 	rpc SuggestAIDataEntry(SuggestAIDataEntryRequest) returns (Response);
 	rpc CreateAIDataGroup(AIDataGroup) returns (Response);

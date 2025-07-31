@@ -1018,3 +1018,13 @@ message ListPageSettingRequest {
 
 	bool only_lead_conversion = 4; // true
 }
+
+message AIAgentDataEntryRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string agent_id = 3;
+	int64 agent_version = 4;
+
+	repeated string entry_ids = 5 ;
+}

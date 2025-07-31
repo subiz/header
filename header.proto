@@ -9300,8 +9300,9 @@ message AIDataEntry {
 	string conversation_id = 60;
 	string ai_agent_id = 61;
 	string message_id = 62;
+	int64 ai_agent_version = 64;
 
-	int64 flagged = 64;
+	// int64 flagged = 64;
 	int64 read_at = 65;
 	string read_by = 66;
 }

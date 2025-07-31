@@ -65129,11 +65129,12 @@ type AIDataEntry struct {
 	ConversationId string `protobuf:"bytes,60,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
 	AiAgentId      string `protobuf:"bytes,61,opt,name=ai_agent_id,json=aiAgentId,proto3" json:"ai_agent_id,omitempty"`
 	MessageId      string `protobuf:"bytes,62,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
-	Flagged        int64  `protobuf:"varint,64,opt,name=flagged,proto3" json:"flagged,omitempty"`
-	ReadAt         int64  `protobuf:"varint,65,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
-	ReadBy         string `protobuf:"bytes,66,opt,name=read_by,json=readBy,proto3" json:"read_by,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	AiAgentVersion int64  `protobuf:"varint,64,opt,name=ai_agent_version,json=aiAgentVersion,proto3" json:"ai_agent_version,omitempty"`
+	// int64 flagged = 64;
+	ReadAt        int64  `protobuf:"varint,65,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
+	ReadBy        string `protobuf:"bytes,66,opt,name=read_by,json=readBy,proto3" json:"read_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AIDataEntry) Reset() {
@@ -65502,9 +65503,9 @@ func (x *AIDataEntry) GetMessageId() string {
 	return ""
 }
 
-func (x *AIDataEntry) GetFlagged() int64 {
+func (x *AIDataEntry) GetAiAgentVersion() int64 {
 	if x != nil {
-		return x.Flagged
+		return x.AiAgentVersion
 	}
 	return 0
 }
@@ -77115,7 +77116,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\"\xea\x0e\n" +
+	" \x01(\tR\x05model\"\xfa\x0e\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77174,8 +77175,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fconversation_id\x18< \x01(\tR\x0econversationId\x12\x1e\n" +
 	"\vai_agent_id\x18= \x01(\tR\taiAgentId\x12\x1d\n" +
 	"\n" +
-	"message_id\x18> \x01(\tR\tmessageId\x12\x18\n" +
-	"\aflagged\x18@ \x01(\x03R\aflagged\x12\x17\n" +
+	"message_id\x18> \x01(\tR\tmessageId\x12(\n" +
+	"\x10ai_agent_version\x18@ \x01(\x03R\x0eaiAgentVersion\x12\x17\n" +
 	"\aread_at\x18A \x01(\x03R\x06readAt\x12\x17\n" +
 	"\aread_by\x18B \x01(\tR\x06readBy\"\x8d\x02\n" +
 	"\x10AiResponseSource\x12!\n" +
