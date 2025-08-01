@@ -9040,8 +9040,6 @@ message AIAgent {
 	string follow_up_instruction = 73;
 	string generated_follow_up_instruction = 74;
 	int64 disabled_follow_up = 75;
-
-	int64 num_unread_suggestions = 76;
 }
 
 message InitFlow {
@@ -9064,8 +9062,8 @@ message InitFlow {
 }
 
 message AIDataStore {
-	// string agent_id = 3;
-	repeated string data_entries = 5; // group id and entry id, could have product id (product id must start with pd.)
+	string agent_id = 3;
+	// repeated string data_entries = 5; // group id and entry id, could have product id (product id must start with pd.)
 
 	// string trained_md5 = 6; // subiz generated
 	string md5 = 7; // subiz generated
@@ -9074,6 +9072,8 @@ message AIDataStore {
 	int64 total_characters = 10;
 	string status = 12; // training || ready
 	int64 pending_entries = 20;
+
+	int64 num_unread_suggestions = 21;
 }
 
 message HumanHandoverSetting {

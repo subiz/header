@@ -1024,7 +1024,7 @@ message AIAgentDataEntryRequest {
 	string account_id = 2;
 
 	string agent_id = 3;
-	int64 agent_version = 4;
+	string mode = 4; // draft, active
 
 	repeated string entry_ids = 5 ;
 }

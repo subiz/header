@@ -63301,7 +63301,6 @@ type AIAgent struct {
 	FollowUpInstruction          string                 `protobuf:"bytes,73,opt,name=follow_up_instruction,json=followUpInstruction,proto3" json:"follow_up_instruction,omitempty"`
 	GeneratedFollowUpInstruction string                 `protobuf:"bytes,74,opt,name=generated_follow_up_instruction,json=generatedFollowUpInstruction,proto3" json:"generated_follow_up_instruction,omitempty"`
 	DisabledFollowUp             int64                  `protobuf:"varint,75,opt,name=disabled_follow_up,json=disabledFollowUp,proto3" json:"disabled_follow_up,omitempty"`
-	NumUnreadSuggestions         int64                  `protobuf:"varint,76,opt,name=num_unread_suggestions,json=numUnreadSuggestions,proto3" json:"num_unread_suggestions,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -63721,13 +63720,6 @@ func (x *AIAgent) GetDisabledFollowUp() int64 {
 	return 0
 }
 
-func (x *AIAgent) GetNumUnreadSuggestions() int64 {
-	if x != nil {
-		return x.NumUnreadSuggestions
-	}
-	return 0
-}
-
 type InitFlow struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// common.Context ctx = 1;
@@ -63847,18 +63839,18 @@ func (x *InitFlow) GetStopWhenFlowEnded() int64 {
 }
 
 type AIDataStore struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// string agent_id = 3;
-	DataEntries []string `protobuf:"bytes,5,rep,name=data_entries,json=dataEntries,proto3" json:"data_entries,omitempty"` // group id and entry id, could have product id (product id must start with pd.)
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	AgentId string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"` // repeated string data_entries = 5; // group id and entry id, could have product id (product id must start with pd.)
 	// string trained_md5 = 6; // subiz generated
 	Md5 string `protobuf:"bytes,7,opt,name=md5,proto3" json:"md5,omitempty"` // subiz generated
 	// int64 training_started = 8;
-	TrainingEnded   int64  `protobuf:"varint,9,opt,name=training_ended,json=trainingEnded,proto3" json:"training_ended,omitempty"`
-	TotalCharacters int64  `protobuf:"varint,10,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
-	Status          string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training || ready
-	PendingEntries  int64  `protobuf:"varint,20,opt,name=pending_entries,json=pendingEntries,proto3" json:"pending_entries,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	TrainingEnded        int64  `protobuf:"varint,9,opt,name=training_ended,json=trainingEnded,proto3" json:"training_ended,omitempty"`
+	TotalCharacters      int64  `protobuf:"varint,10,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
+	Status               string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training || ready
+	PendingEntries       int64  `protobuf:"varint,20,opt,name=pending_entries,json=pendingEntries,proto3" json:"pending_entries,omitempty"`
+	NumUnreadSuggestions int64  `protobuf:"varint,21,opt,name=num_unread_suggestions,json=numUnreadSuggestions,proto3" json:"num_unread_suggestions,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AIDataStore) Reset() {
@@ -63891,11 +63883,11 @@ func (*AIDataStore) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{513}
 }
 
-func (x *AIDataStore) GetDataEntries() []string {
+func (x *AIDataStore) GetAgentId() string {
 	if x != nil {
-		return x.DataEntries
+		return x.AgentId
 	}
-	return nil
+	return ""
 }
 
 func (x *AIDataStore) GetMd5() string {
@@ -63929,6 +63921,13 @@ func (x *AIDataStore) GetStatus() string {
 func (x *AIDataStore) GetPendingEntries() int64 {
 	if x != nil {
 		return x.PendingEntries
+	}
+	return 0
+}
+
+func (x *AIDataStore) GetNumUnreadSuggestions() int64 {
+	if x != nil {
+		return x.NumUnreadSuggestions
 	}
 	return 0
 }
@@ -76906,7 +76905,7 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x12\"\n" +
 	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x12\"\n" +
 	"\x05rules\x18\f \x03(\v2\f.header.RuleR\x05rules\x12)\n" +
-	"\tassign_to\x18\v \x01(\v2\f.header.RuleR\bassignTo\"\xde\x12\n" +
+	"\tassign_to\x18\v \x01(\v2\f.header.RuleR\bassignTo\"\xa8\x12\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76972,8 +76971,7 @@ const file_header_proto_rawDesc = "" +
 	"\x13llm_spend_limit_fpv\x18H \x01(\x03R\x10llmSpendLimitFpv\x122\n" +
 	"\x15follow_up_instruction\x18I \x01(\tR\x13followUpInstruction\x12E\n" +
 	"\x1fgenerated_follow_up_instruction\x18J \x01(\tR\x1cgeneratedFollowUpInstruction\x12,\n" +
-	"\x12disabled_follow_up\x18K \x01(\x03R\x10disabledFollowUp\x124\n" +
-	"\x16num_unread_suggestions\x18L \x01(\x03R\x14numUnreadSuggestions\"\x96\x03\n" +
+	"\x12disabled_follow_up\x18K \x01(\x03R\x10disabledFollowUp\"\x96\x03\n" +
 	"\bInitFlow\x12\x1a\n" +
 	"\bdisabled\x18\x04 \x01(\x03R\bdisabled\x12)\n" +
 	"\x06action\x18\t \x01(\v2\x11.header.BotActionR\x06action\x12+\n" +
@@ -76986,15 +76984,16 @@ const file_header_proto_rawDesc = "" +
 	"\x06locale\x18\x1c \x01(\tR\x06locale\x12\x18\n" +
 	"\alocales\x18\x1d \x03(\tR\alocales\x12 \n" +
 	"\x04rule\x18\x1e \x01(\v2\f.header.RuleR\x04rule\x12/\n" +
-	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\xd5\x01\n" +
-	"\vAIDataStore\x12!\n" +
-	"\fdata_entries\x18\x05 \x03(\tR\vdataEntries\x12\x10\n" +
+	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\x83\x02\n" +
+	"\vAIDataStore\x12\x19\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x10\n" +
 	"\x03md5\x18\a \x01(\tR\x03md5\x12%\n" +
 	"\x0etraining_ended\x18\t \x01(\x03R\rtrainingEnded\x12)\n" +
 	"\x10total_characters\x18\n" +
 	" \x01(\x03R\x0ftotalCharacters\x12\x16\n" +
 	"\x06status\x18\f \x01(\tR\x06status\x12'\n" +
-	"\x0fpending_entries\x18\x14 \x01(\x03R\x0ependingEntries\"\xac\x01\n" +
+	"\x0fpending_entries\x18\x14 \x01(\x03R\x0ependingEntries\x124\n" +
+	"\x16num_unread_suggestions\x18\x15 \x01(\x03R\x14numUnreadSuggestions\"\xac\x01\n" +
 	"\x14HumanHandoverSetting\x12\x1a\n" +
 	"\bdisabled\x18\n" +
 	" \x01(\x03R\bdisabled\x12)\n" +

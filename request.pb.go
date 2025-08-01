@@ -8345,7 +8345,7 @@ type AIAgentDataEntryRequest struct {
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AgentId       string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	AgentVersion  int64                  `protobuf:"varint,4,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
+	Mode          string                 `protobuf:"bytes,4,opt,name=mode,proto3" json:"mode,omitempty"` // draft, active
 	EntryIds      []string               `protobuf:"bytes,5,rep,name=entry_ids,json=entryIds,proto3" json:"entry_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -8402,11 +8402,11 @@ func (x *AIAgentDataEntryRequest) GetAgentId() string {
 	return ""
 }
 
-func (x *AIAgentDataEntryRequest) GetAgentVersion() int64 {
+func (x *AIAgentDataEntryRequest) GetMode() string {
 	if x != nil {
-		return x.AgentVersion
+		return x.Mode
 	}
-	return 0
+	return ""
 }
 
 func (x *AIAgentDataEntryRequest) GetEntryIds() []string {
@@ -9333,13 +9333,13 @@ const file_request_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x120\n" +
-	"\x14only_lead_conversion\x18\x04 \x01(\bR\x12onlyLeadConversion\"\xb8\x01\n" +
+	"\x14only_lead_conversion\x18\x04 \x01(\bR\x12onlyLeadConversion\"\xa7\x01\n" +
 	"\x17AIAgentDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12#\n" +
-	"\ragent_version\x18\x04 \x01(\x03R\fagentVersion\x12\x1b\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x12\n" +
+	"\x04mode\x18\x04 \x01(\tR\x04mode\x12\x1b\n" +
 	"\tentry_ids\x18\x05 \x03(\tR\bentryIdsB\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
