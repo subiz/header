@@ -3512,7 +3512,7 @@ message File {
 	int64 thumbnail_width = 20;
 	int64 thumbnail_height = 21;
 
-	int64 ttl = 22; // created + 3 months
+	int64 ttl = 22; // (sec) created + 3 months
 	int64 deleted = 23;
 
 	string category = 27; // call_recorded, product_image, ... for reporting
@@ -3531,6 +3531,7 @@ message File {
 
 	string visibility = 38; // public(default), private
 	int64 r2_uploaded = 39; // ms
+	string r2_path = 40;
 }
 
 message BotTerminated {
@@ -9074,6 +9075,7 @@ message AIDataStore {
 	int64 pending_entries = 20;
 
 	int64 num_unread_suggestions = 21;
+	int64 total_entries = 22;
 }
 
 message HumanHandoverSetting {

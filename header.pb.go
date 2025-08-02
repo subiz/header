@@ -24786,7 +24786,7 @@ type File struct {
 	ThumbnailUrl    string `protobuf:"bytes,19,opt,name=thumbnail_url,json=thumbnailUrl,proto3" json:"thumbnail_url,omitempty"`
 	ThumbnailWidth  int64  `protobuf:"varint,20,opt,name=thumbnail_width,json=thumbnailWidth,proto3" json:"thumbnail_width,omitempty"`
 	ThumbnailHeight int64  `protobuf:"varint,21,opt,name=thumbnail_height,json=thumbnailHeight,proto3" json:"thumbnail_height,omitempty"`
-	Ttl             int64  `protobuf:"varint,22,opt,name=ttl,proto3" json:"ttl,omitempty"` // created + 3 months
+	Ttl             int64  `protobuf:"varint,22,opt,name=ttl,proto3" json:"ttl,omitempty"` // (sec) created + 3 months
 	Deleted         int64  `protobuf:"varint,23,opt,name=deleted,proto3" json:"deleted,omitempty"`
 	Category        string `protobuf:"bytes,27,opt,name=category,proto3" json:"category,omitempty"`           // call_recorded, product_image, ... for reporting
 	GcsUrl          string `protobuf:"bytes,29,opt,name=gcs_url,json=gcsUrl,proto3" json:"gcs_url,omitempty"` // example: acrtvsvgrvecksycsble/802b2cd6014f0546c36e3fa198ef27dadbc8b174573a267eca6d352dd8982067
@@ -24799,6 +24799,7 @@ type File struct {
 	NumCharacters   int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Visibility      string `protobuf:"bytes,38,opt,name=visibility,proto3" json:"visibility,omitempty"`                    // public(default), private
 	R2Uploaded      int64  `protobuf:"varint,39,opt,name=r2_uploaded,json=r2Uploaded,proto3" json:"r2_uploaded,omitempty"` // ms
+	R2Path          string `protobuf:"bytes,40,opt,name=r2_path,json=r2Path,proto3" json:"r2_path,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -25062,6 +25063,13 @@ func (x *File) GetR2Uploaded() int64 {
 		return x.R2Uploaded
 	}
 	return 0
+}
+
+func (x *File) GetR2Path() string {
+	if x != nil {
+		return x.R2Path
+	}
+	return ""
 }
 
 type BotTerminated struct {
@@ -63849,6 +63857,7 @@ type AIDataStore struct {
 	Status               string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training || ready
 	PendingEntries       int64  `protobuf:"varint,20,opt,name=pending_entries,json=pendingEntries,proto3" json:"pending_entries,omitempty"`
 	NumUnreadSuggestions int64  `protobuf:"varint,21,opt,name=num_unread_suggestions,json=numUnreadSuggestions,proto3" json:"num_unread_suggestions,omitempty"`
+	TotalEntries         int64  `protobuf:"varint,22,opt,name=total_entries,json=totalEntries,proto3" json:"total_entries,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -63928,6 +63937,13 @@ func (x *AIDataStore) GetPendingEntries() int64 {
 func (x *AIDataStore) GetNumUnreadSuggestions() int64 {
 	if x != nil {
 		return x.NumUnreadSuggestions
+	}
+	return 0
+}
+
+func (x *AIDataStore) GetTotalEntries() int64 {
+	if x != nil {
+		return x.TotalEntries
 	}
 	return 0
 }
@@ -72301,7 +72317,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x0e\n" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xc3\a\n" +
+	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xdc\a\n" +
 	"\x04File\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72342,7 +72358,8 @@ const file_header_proto_rawDesc = "" +
 	"visibility\x18& \x01(\tR\n" +
 	"visibility\x12\x1f\n" +
 	"\vr2_uploaded\x18' \x01(\x03R\n" +
-	"r2Uploaded\"\xdf\x02\n" +
+	"r2Uploaded\x12\x17\n" +
+	"\ar2_path\x18( \x01(\tR\x06r2Path\"\xdf\x02\n" +
 	"\rBotTerminated\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76984,7 +77001,7 @@ const file_header_proto_rawDesc = "" +
 	"\x06locale\x18\x1c \x01(\tR\x06locale\x12\x18\n" +
 	"\alocales\x18\x1d \x03(\tR\alocales\x12 \n" +
 	"\x04rule\x18\x1e \x01(\v2\f.header.RuleR\x04rule\x12/\n" +
-	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\x83\x02\n" +
+	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\xa8\x02\n" +
 	"\vAIDataStore\x12\x19\n" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x10\n" +
 	"\x03md5\x18\a \x01(\tR\x03md5\x12%\n" +
@@ -76993,7 +77010,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\x03R\x0ftotalCharacters\x12\x16\n" +
 	"\x06status\x18\f \x01(\tR\x06status\x12'\n" +
 	"\x0fpending_entries\x18\x14 \x01(\x03R\x0ependingEntries\x124\n" +
-	"\x16num_unread_suggestions\x18\x15 \x01(\x03R\x14numUnreadSuggestions\"\xac\x01\n" +
+	"\x16num_unread_suggestions\x18\x15 \x01(\x03R\x14numUnreadSuggestions\x12#\n" +
+	"\rtotal_entries\x18\x16 \x01(\x03R\ftotalEntries\"\xac\x01\n" +
 	"\x14HumanHandoverSetting\x12\x1a\n" +
 	"\bdisabled\x18\n" +
 	" \x01(\x03R\bdisabled\x12)\n" +
