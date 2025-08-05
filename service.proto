@@ -1055,3 +1055,10 @@ service Marker {
 	rpc Commit(CommitRequest) returns (Empty);
 	rpc ListMarkers(MarkRequest) returns (Markers);
 }
+
+service VectorDB {
+	rpc Upsert(VectorDoc) returns (Empty);
+	rpc Delete(VectorDoc) returns (Empty);
+	rpc Search(VectorSearchReq) returns (VectorSearchResponse);
+	rpc ListVectorIds(ListVectorRequest) returns (Response); // ids
+}

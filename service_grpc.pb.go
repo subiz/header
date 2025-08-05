@@ -30381,3 +30381,219 @@ var Marker_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
 }
+
+const (
+	VectorDB_Upsert_FullMethodName        = "/header.VectorDB/Upsert"
+	VectorDB_Delete_FullMethodName        = "/header.VectorDB/Delete"
+	VectorDB_Search_FullMethodName        = "/header.VectorDB/Search"
+	VectorDB_ListVectorIds_FullMethodName = "/header.VectorDB/ListVectorIds"
+)
+
+// VectorDBClient is the client API for VectorDB service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type VectorDBClient interface {
+	Upsert(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error)
+	Delete(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error)
+	Search(ctx context.Context, in *VectorSearchReq, opts ...grpc.CallOption) (*VectorSearchResponse, error)
+	ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error)
+}
+
+type vectorDBClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewVectorDBClient(cc grpc.ClientConnInterface) VectorDBClient {
+	return &vectorDBClient{cc}
+}
+
+func (c *vectorDBClient) Upsert(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_Upsert_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) Delete(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) Search(ctx context.Context, in *VectorSearchReq, opts ...grpc.CallOption) (*VectorSearchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VectorSearchResponse)
+	err := c.cc.Invoke(ctx, VectorDB_Search_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, VectorDB_ListVectorIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// VectorDBServer is the server API for VectorDB service.
+// All implementations must embed UnimplementedVectorDBServer
+// for forward compatibility.
+type VectorDBServer interface {
+	Upsert(context.Context, *VectorDoc) (*Empty, error)
+	Delete(context.Context, *VectorDoc) (*Empty, error)
+	Search(context.Context, *VectorSearchReq) (*VectorSearchResponse, error)
+	ListVectorIds(context.Context, *ListVectorRequest) (*Response, error)
+	mustEmbedUnimplementedVectorDBServer()
+}
+
+// UnimplementedVectorDBServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedVectorDBServer struct{}
+
+func (UnimplementedVectorDBServer) Upsert(context.Context, *VectorDoc) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
+}
+func (UnimplementedVectorDBServer) Delete(context.Context, *VectorDoc) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedVectorDBServer) Search(context.Context, *VectorSearchReq) (*VectorSearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (UnimplementedVectorDBServer) ListVectorIds(context.Context, *ListVectorRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListVectorIds not implemented")
+}
+func (UnimplementedVectorDBServer) mustEmbedUnimplementedVectorDBServer() {}
+func (UnimplementedVectorDBServer) testEmbeddedByValue()                  {}
+
+// UnsafeVectorDBServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to VectorDBServer will
+// result in compilation errors.
+type UnsafeVectorDBServer interface {
+	mustEmbedUnimplementedVectorDBServer()
+}
+
+func RegisterVectorDBServer(s grpc.ServiceRegistrar, srv VectorDBServer) {
+	// If the following call pancis, it indicates UnimplementedVectorDBServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&VectorDB_ServiceDesc, srv)
+}
+
+func _VectorDB_Upsert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VectorDoc)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).Upsert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_Upsert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).Upsert(ctx, req.(*VectorDoc))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VectorDoc)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).Delete(ctx, req.(*VectorDoc))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VectorSearchReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).Search(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_Search_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).Search(ctx, req.(*VectorSearchReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_ListVectorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListVectorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).ListVectorIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_ListVectorIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).ListVectorIds(ctx, req.(*ListVectorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// VectorDB_ServiceDesc is the grpc.ServiceDesc for VectorDB service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var VectorDB_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.VectorDB",
+	HandlerType: (*VectorDBServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Upsert",
+			Handler:    _VectorDB_Upsert_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _VectorDB_Delete_Handler,
+		},
+		{
+			MethodName: "Search",
+			Handler:    _VectorDB_Search_Handler,
+		},
+		{
+			MethodName: "ListVectorIds",
+			Handler:    _VectorDB_ListVectorIds_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}

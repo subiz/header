@@ -9717,3 +9717,48 @@ message MetaAdAccount {
 	int64 last_sync_at = 20;
 	string access_token = 23;
 }
+
+message VectorSearchReq {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string collection = 3;
+	repeated string terms = 4; // higher score matching
+	repeated float vector = 5;
+	int64 limit = 6;
+}
+
+message VectorDoc {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string collection = 3;
+	string id = 4;
+	repeated string terms = 5; // higher score matching
+	repeated float vector = 6;
+}
+
+message VectorSearchResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+}
+
+message ListVectorRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string collection = 3;
+	repeated string terms = 4; // higher score matching
+	int64 shard = 5; // 0 -> 127
+}
+
+message VectorMatch {
+	string id = 3;
+	float score = 4;
+}
+
+message VectorMatchs {
+	common.Context ctx = 1;
+	string account_id = 2;
+	VectorMatch matches = 3;
+}
