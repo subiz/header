@@ -1057,8 +1057,9 @@ service Marker {
 }
 
 service VectorDB {
-	rpc Upsert(VectorDoc) returns (Empty);
-	rpc Delete(VectorDoc) returns (Empty);
-	rpc Search(VectorSearchReq) returns (VectorSearchResponse);
+	rpc UpsertVector(VectorDoc) returns (Empty);
+	rpc DeleteVector(VectorDoc) returns (Empty);
+	rpc SearchVectors(VectorSearchReq) returns (VectorMatches);
+	rpc GetVector(VectorDoc) returns (VectorDoc);
 	rpc ListVectorIds(ListVectorRequest) returns (Response); // ids
 }
