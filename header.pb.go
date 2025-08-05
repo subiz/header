@@ -68993,7 +68993,8 @@ type VectorMatches struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Matches       *VectorMatch           `protobuf:"bytes,3,opt,name=matches,proto3" json:"matches,omitempty"`
+	Collection    string                 `protobuf:"bytes,3,opt,name=collection,proto3" json:"collection,omitempty"`
+	Matches       []*VectorMatch         `protobuf:"bytes,4,rep,name=matches,proto3" json:"matches,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -69042,7 +69043,14 @@ func (x *VectorMatches) GetAccountId() string {
 	return ""
 }
 
-func (x *VectorMatches) GetMatches() *VectorMatch {
+func (x *VectorMatches) GetCollection() string {
+	if x != nil {
+		return x.Collection
+	}
+	return ""
+}
+
+func (x *VectorMatches) GetMatches() []*VectorMatch {
 	if x != nil {
 		return x.Matches
 	}
@@ -77910,12 +77918,15 @@ const file_header_proto_rawDesc = "" +
 	"\x05shard\x18\x05 \x01(\x03R\x05shard\"3\n" +
 	"\vVectorMatch\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x14\n" +
-	"\x05score\x18\x04 \x01(\x02R\x05score\"\x80\x01\n" +
+	"\x05score\x18\x04 \x01(\x02R\x05score\"\xa0\x01\n" +
 	"\rVectorMatches\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tR\taccountId\x12-\n" +
-	"\amatches\x18\x03 \x01(\v2\x13.header.VectorMatchR\amatches*t\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1e\n" +
+	"\n" +
+	"collection\x18\x03 \x01(\tR\n" +
+	"collection\x12-\n" +
+	"\amatches\x18\x04 \x03(\v2\x13.header.VectorMatchR\amatches*t\n" +
 	"\n" +
 	"ConvoState\x12\x0e\n" +
 	"\n" +
