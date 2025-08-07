@@ -6739,7 +6739,7 @@ message ActionLLM {
 
 	bool stop_after_function_call = 23; // only call function without completion
 
-	bool use_rag = 25;
+	// bool use_rag = 25;
 
 	string append_instruction_variable = 26;
 }
@@ -8379,6 +8379,19 @@ message Block {
 	int64 colwidth = 116;
 
 	map<string,string> attrs = 200;
+
+	// for llm
+	LLMInputRetryPolicy llm_input_retry_policy = 201;
+}
+
+message LLMInputRetryPolicy {
+	// string type = 4; type: 'respectful_reprompting' | 'persistent' | 'none';
+
+	int64 max_attempts = 5; // 3 maximum number of retry
+	bool respect_decline = 6; // stop on rejection (user says no)
+
+	// If the user ignores your question (e.g., doesn’t answer the phone number prompt) for 2 chatbot-user exchanges, then the bot should consider retrying or taking an alternate action (like giving up or escalating).
+	int64 silence_timeout_turns = 7;
 }
 
 message TicketUpdatedNotiEmail {
@@ -9041,6 +9054,10 @@ message AIAgent {
 	string follow_up_instruction = 73;
 	string generated_follow_up_instruction = 74;
 	int64 disabled_follow_up = 75;
+
+	string collect_user_information_on = 76; // none | chat_started | interest_detected
+	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
+  Form collect_user_information = 78;
 }
 
 message InitFlow {
