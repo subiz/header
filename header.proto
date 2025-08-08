@@ -8352,7 +8352,7 @@ message Block {
 	}
 	repeated InputOption input_options = 31;
 
-	string validation = 32; // none, email, phone, date, link, number, regex
+	string validation = 32; // none, email, phone, vnphone, date, link, number, regex
 	string validation_regex = 33;
 	bool is_hidden = 34;
 	string value = 35;
@@ -8391,7 +8391,7 @@ message LLMInputRetryPolicy {
 	bool respect_decline = 6; // stop on rejection (user says no)
 
 	// If the user ignores your question (e.g., doesn’t answer the phone number prompt) for 2 chatbot-user exchanges, then the bot should consider retrying or taking an alternate action (like giving up or escalating).
-	int64 silence_timeout_turns = 7;
+	// int64 silence_timeout_turns = 7;
 }
 
 message TicketUpdatedNotiEmail {

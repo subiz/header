@@ -58926,10 +58926,8 @@ type LLMInputRetryPolicy struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	MaxAttempts    int64                  `protobuf:"varint,5,opt,name=max_attempts,json=maxAttempts,proto3" json:"max_attempts,omitempty"`          // 3 maximum number of retry
 	RespectDecline bool                   `protobuf:"varint,6,opt,name=respect_decline,json=respectDecline,proto3" json:"respect_decline,omitempty"` // stop on rejection (user says no)
-	// If the user ignores your question (e.g., doesn’t answer the phone number prompt) for 2 chatbot-user exchanges, then the bot should consider retrying or taking an alternate action (like giving up or escalating).
-	SilenceTimeoutTurns int64 `protobuf:"varint,7,opt,name=silence_timeout_turns,json=silenceTimeoutTurns,proto3" json:"silence_timeout_turns,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *LLMInputRetryPolicy) Reset() {
@@ -58974,13 +58972,6 @@ func (x *LLMInputRetryPolicy) GetRespectDecline() bool {
 		return x.RespectDecline
 	}
 	return false
-}
-
-func (x *LLMInputRetryPolicy) GetSilenceTimeoutTurns() int64 {
-	if x != nil {
-		return x.SilenceTimeoutTurns
-	}
-	return 0
 }
 
 type TicketUpdatedNotiEmail struct {
@@ -76852,11 +76843,10 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"AttrsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x95\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"a\n" +
 	"\x13LLMInputRetryPolicy\x12!\n" +
 	"\fmax_attempts\x18\x05 \x01(\x03R\vmaxAttempts\x12'\n" +
-	"\x0frespect_decline\x18\x06 \x01(\bR\x0erespectDecline\x122\n" +
-	"\x15silence_timeout_turns\x18\a \x01(\x03R\x13silenceTimeoutTurns\"\x86\x05\n" +
+	"\x0frespect_decline\x18\x06 \x01(\bR\x0erespectDecline\"\x86\x05\n" +
 	"\x16TicketUpdatedNotiEmail\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02to\x18\x02 \x01(\tR\x02to\x12\x1d\n" +

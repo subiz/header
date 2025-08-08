@@ -13,6 +13,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 
 	cpb "github.com/subiz/header/common"
 	"github.com/subiz/log"
@@ -1185,6 +1186,7 @@ func EmailAddress(email string) string {
 	return Substring(email, 0, 320)
 }
 
+// return 84.. phone number
 func PhoneNumber(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
 		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
@@ -1559,6 +1561,15 @@ func GetVietnamPhoneISP(number string) string {
 	if first3 == "052" || first3 == "056" || first3 == "058" || first3 == "092" || first4 == "0182" || first4 == "0186" || first4 == "0188" {
 		return "Vietnammobile"
 	}
+
+	if first4 == "0775" {
+		return "FPT" // FPT SIM uses a specific sub-prefix of Mobifone's 077
+	}
+
+	if first4 == "0777" {
+		return "VNSKY"
+	}
+
 	if first3 == "070" || first3 == "079" || first3 == "077" || first3 == "076" || first3 == "078" || first3 == "090" || first3 == "093" || first3 == "089" ||
 		first4 == "0120" || first4 == "0121" || first4 == "0122" || first4 == "0126" || first4 == "0128" {
 		return "Mobifone"
@@ -1573,10 +1584,10 @@ func GetVietnamPhoneISP(number string) string {
 		return "Vinaphone"
 	}
 
-	if first3 == "032" || first3 == "033" || first3 == "034" || first3 == "035" || first3 == "036" || first3 == "037" || first3 == "038" || first3 == "039" || first3 == "096" || first3 == "097" || first3 == "098" || first3 == "086" ||
-		first4 == "0169" || first4 == "0168" || first4 == "0167" || first4 == "0166" || first4 == "0165" || first4 == "0164" || first4 == "0163" || first4 == "0162" {
-		return "Viettel"
+	if first3 == "055" {
+		return "Wintel"
 	}
+
 	return "other"
 }
 
@@ -2460,4 +2471,49 @@ func Unmarshal(data []byte, msg proto.Message) error {
 
 func Marshal(msg proto.Message) ([]byte, error) {
 	return proto.Marshal(msg)
+}
+
+// Define a regular expression for a basic email address pattern.
+const emailRegexPattern = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+
+// IsValidEmail validates an email address using regular expressions.
+func IsValidEmail(email string) bool {
+
+	// Compile the regular expression.
+	re := regexp.MustCompile(emailRegexPattern)
+
+	// Validate the email by matching against the regular expression.
+	return re.MatchString(email)
+}
+
+func IsValidPhoneNumber(phoneNumber string) bool {
+	phoneNumber = PhoneNumber(phoneNumber)
+	// Check if the length is exactly 11
+	if len(phoneNumber) != 11 {
+		return false
+	}
+
+	// Check if all characters are digits
+	for _, char := range phoneNumber {
+		if !unicode.IsDigit(char) {
+			return false
+		}
+	}
+
+	return true
+}
+
+// phonenumber must start with 84
+func IsValidVNPhoneNumber(phoneNumber string) bool {
+	phoneNumber = PhoneNumber(phoneNumber)
+
+	if !IsValidPhoneNumber(phoneNumber) {
+		return false
+	}
+
+	if GetVietnamPhoneISP(phoneNumber) == "other" {
+		return false
+	}
+
+	return true
 }
