@@ -2130,6 +2130,8 @@ message Bot {
 	string pipeline_stage = 31; // for pipeline_stage
 
 	string template_id = 32; // type=operation
+
+	Message welcome_message = 34;
 }
 
 message Bots {
@@ -9058,6 +9060,8 @@ message AIAgent {
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
 	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
   Form collect_user_information = 78;
+
+	Message welcome_message = 79;
 }
 
 message InitFlow {
