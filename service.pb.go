@@ -404,7 +404,7 @@ const file_service_proto_rawDesc = "" +
 	"\x19ListAttributeDefinitions2\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12U\n" +
 	"\x19CreateAttributeDefinition\x12\x1b.header.AttributeDefinition\x1a\x1b.header.AttributeDefinition\x12U\n" +
-	"\x19UpdateAttributeDefinition\x12\x1b.header.AttributeDefinition\x1a\x1b.header.AttributeDefinition2\xcc\x16\n" +
+	"\x19UpdateAttributeDefinition\x12\x1b.header.AttributeDefinition\x1a\x1b.header.AttributeDefinition2\xcb\x16\n" +
 	"\vWorkflowMgr\x12-\n" +
 	"\rListWorkflows\x12\n" +
 	".header.Id\x1a\x10.header.Response\x124\n" +
@@ -463,8 +463,8 @@ const file_service_proto_rawDesc = "" +
 	"\rReportAIAgent\x12\x1c.header.ReportAIAgentRequest\x1a\x1d.header.AIAgentReportResponse\x12G\n" +
 	"\x11TryWorkflowAction\x12#.header.StartWorkflowSessionRequest\x1a\r.header.Empty\x12J\n" +
 	"\x13ListAIAgentMessages\x12!.header.ListAIAgentMessageRequest\x1a\x10.header.Response\x12D\n" +
-	"\x12ListConvertedLeads\x12\x1c.header.ReportAIAgentRequest\x1a\x10.header.Response\x12D\n" +
-	"\x13GetAIResponseTraces\x12\x1b.header.AIAgentTraceRequest\x1a\x10.header.Response2\xe4 \n" +
+	"\x12ListConvertedLeads\x12\x1c.header.ReportAIAgentRequest\x1a\x10.header.Response\x12C\n" +
+	"\x12GetAIResponseTrace\x12\x1b.header.AIAgentTraceRequest\x1a\x10.header.Response2\xe4 \n" +
 	"\x0fConversationMgr\x128\n" +
 	"\n" +
 	"AssignRule\x12\x15.header.AssignRequest\x1a\x13.header.RouteResult\x127\n" +
@@ -1766,7 +1766,7 @@ var file_service_proto_depIdxs = []int32{
 	79,  // 277: header.WorkflowMgr.TryWorkflowAction:input_type -> header.StartWorkflowSessionRequest
 	98,  // 278: header.WorkflowMgr.ListAIAgentMessages:input_type -> header.ListAIAgentMessageRequest
 	97,  // 279: header.WorkflowMgr.ListConvertedLeads:input_type -> header.ReportAIAgentRequest
-	99,  // 280: header.WorkflowMgr.GetAIResponseTraces:input_type -> header.AIAgentTraceRequest
+	99,  // 280: header.WorkflowMgr.GetAIResponseTrace:input_type -> header.AIAgentTraceRequest
 	100, // 281: header.ConversationMgr.AssignRule:input_type -> header.AssignRequest
 	1,   // 282: header.ConversationMgr.ReassignConversation:input_type -> header.Id
 	64,  // 283: header.ConversationMgr.PongMessage:input_type -> header.Event
@@ -2502,7 +2502,7 @@ var file_service_proto_depIdxs = []int32{
 	9,   // 1013: header.WorkflowMgr.TryWorkflowAction:output_type -> header.Empty
 	256, // 1014: header.WorkflowMgr.ListAIAgentMessages:output_type -> header.Response
 	256, // 1015: header.WorkflowMgr.ListConvertedLeads:output_type -> header.Response
-	256, // 1016: header.WorkflowMgr.GetAIResponseTraces:output_type -> header.Response
+	256, // 1016: header.WorkflowMgr.GetAIResponseTrace:output_type -> header.Response
 	284, // 1017: header.ConversationMgr.AssignRule:output_type -> header.RouteResult
 	284, // 1018: header.ConversationMgr.ReassignConversation:output_type -> header.RouteResult
 	64,  // 1019: header.ConversationMgr.PongMessage:output_type -> header.Event

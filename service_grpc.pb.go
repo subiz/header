@@ -9676,7 +9676,7 @@ const (
 	WorkflowMgr_TryWorkflowAction_FullMethodName      = "/header.WorkflowMgr/TryWorkflowAction"
 	WorkflowMgr_ListAIAgentMessages_FullMethodName    = "/header.WorkflowMgr/ListAIAgentMessages"
 	WorkflowMgr_ListConvertedLeads_FullMethodName     = "/header.WorkflowMgr/ListConvertedLeads"
-	WorkflowMgr_GetAIResponseTraces_FullMethodName    = "/header.WorkflowMgr/GetAIResponseTraces"
+	WorkflowMgr_GetAIResponseTrace_FullMethodName     = "/header.WorkflowMgr/GetAIResponseTrace"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9729,7 +9729,7 @@ type WorkflowMgrClient interface {
 	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
 	ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error)
-	GetAIResponseTraces(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error)
+	GetAIResponseTrace(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type workflowMgrClient struct {
@@ -10200,10 +10200,10 @@ func (c *workflowMgrClient) ListConvertedLeads(ctx context.Context, in *ReportAI
 	return out, nil
 }
 
-func (c *workflowMgrClient) GetAIResponseTraces(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *workflowMgrClient) GetAIResponseTrace(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIResponseTraces_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIResponseTrace_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -10260,7 +10260,7 @@ type WorkflowMgrServer interface {
 	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
 	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
 	ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error)
-	GetAIResponseTraces(context.Context, *AIAgentTraceRequest) (*Response, error)
+	GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -10409,8 +10409,8 @@ func (UnimplementedWorkflowMgrServer) ListAIAgentMessages(context.Context, *List
 func (UnimplementedWorkflowMgrServer) ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListConvertedLeads not implemented")
 }
-func (UnimplementedWorkflowMgrServer) GetAIResponseTraces(context.Context, *AIAgentTraceRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAIResponseTraces not implemented")
+func (UnimplementedWorkflowMgrServer) GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAIResponseTrace not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -11261,20 +11261,20 @@ func _WorkflowMgr_ListConvertedLeads_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkflowMgr_GetAIResponseTraces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _WorkflowMgr_GetAIResponseTrace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AIAgentTraceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkflowMgrServer).GetAIResponseTraces(ctx, in)
+		return srv.(WorkflowMgrServer).GetAIResponseTrace(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkflowMgr_GetAIResponseTraces_FullMethodName,
+		FullMethod: WorkflowMgr_GetAIResponseTrace_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).GetAIResponseTraces(ctx, req.(*AIAgentTraceRequest))
+		return srv.(WorkflowMgrServer).GetAIResponseTrace(ctx, req.(*AIAgentTraceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11471,8 +11471,8 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _WorkflowMgr_ListConvertedLeads_Handler,
 		},
 		{
-			MethodName: "GetAIResponseTraces",
-			Handler:    _WorkflowMgr_GetAIResponseTraces_Handler,
+			MethodName: "GetAIResponseTrace",
+			Handler:    _WorkflowMgr_GetAIResponseTrace_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

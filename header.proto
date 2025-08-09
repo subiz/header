@@ -1474,7 +1474,6 @@ message Message {
 
 	string source_event_id = 57; // for pong
 
-	int64 total_credit_fpv = 58; // vnd
 	int64 sentiment_score = 60;
 }
 
@@ -7006,6 +7005,7 @@ message Response {
 	CreditUsage credit_usage = 194;
 
 	// repeated AIAgentSpan ai_agent_spans = 195;
+	AIAgentTrace ai_agent_trace = 195;
 	repeated AIAgentTrace ai_agent_traces = 196;
 	repeated FormSubmission form_submissions = 197;
 	repeated Form forms = 198;
@@ -7664,6 +7664,8 @@ message AIAgentTrace {
 	repeated LLMToolCall tool_calls = 20;
 	repeated string override_rules = 21;
 	string error = 22; //
+
+	int64 total_credit_fpv = 30; // vnd
 }
 
 message AIAgentSpan {
