@@ -7640,6 +7640,7 @@ message AIDataEntryUsed {
 message AIAgentTrace {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string message_id = 3;
 
 	string trace_id = 5;
 	int64 started = 6;
@@ -9080,7 +9081,7 @@ message InitFlow {
 	// common.Context ctx = 1;
 	// string account_id = 2;
 	int64 disabled = 4;
-	// BotAction action = 9; // point to root action
+	BotAction action = 9; // point to root action
 
 	repeated Trigger triggers = 14;
 	Frequently initiative_frequency = 15;
