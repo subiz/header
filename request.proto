@@ -920,6 +920,13 @@ message LLMSpansRequest {
 	string span_id = 6; // could be empty for filtering
 }
 
+message AIAgentTraceRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3; // agent_id
+	string message_id = 5; // filter
+}
+
 message LLMTracesRequest {
 	common.Context ctx = 1;
 	string account_id = 2;

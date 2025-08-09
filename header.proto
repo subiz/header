@@ -888,6 +888,8 @@ message RunAiAgentRequest {
 	int64 ai_agent_index = 16;
 
 	Event last_message_sent = 17;
+
+	bool is_testing = 18;
 }
 
 // @deprecated
@@ -1303,6 +1305,7 @@ message Conversation {
 
 	int64 input_llm_tokens = 84;
 	int64 output_llm_tokens = 85;
+	bool is_testing = 86; // bot testing, do not report or end
 }
 
 message GoogleReview {
@@ -7002,7 +7005,7 @@ message Response {
 
 	CreditUsage credit_usage = 194;
 
-	repeated AIAgentSpan ai_agent_spans = 195;
+	// repeated AIAgentSpan ai_agent_spans = 195;
 	repeated AIAgentTrace ai_agent_traces = 196;
 	repeated FormSubmission form_submissions = 197;
 	repeated Form forms = 198;
@@ -7603,7 +7606,7 @@ message LLMToolCall {
 
 	int64 called = 13;
 	int64 ended = 14;
-	repeated RAGDocument context_chunks = 15;
+	// repeated RAGDocument context_chunks = 15;
 
 	int64 http_code = 16;
 	repeated string assigned_tos = 17; // system_human_handoff
@@ -7626,30 +7629,40 @@ message LLMChatHistoryEntry {
 	repeated string more_expected_contents = 10;
 }
 
-message RAGDocument {
-	string data_entry_id = 5;
+message AIDataEntryUsed {
+	string chunk_id = 4;
+	// string data_entry_id = 5;
 	string chunk = 6; // original
 	int64 score = 7;
 	string embed_chunk = 11;
 }
 
 message AIAgentTrace {
-	string trace_id = 3;
-	int64 started = 4;
-	int64 total_spans = 5;
-	string input_message_id = 6;
-	string conversation_id = 7;
-	string output_message_id = 8;
+	common.Context ctx = 1;
+	string account_id = 2;
 
-	string input = 9;
-	string output = 10;
+	string trace_id = 5;
+	int64 started = 6;
+	string user_message_id = 7;
+	string conversation_id = 8;
+	string session_id = 9;
 
-	int64 feedback_at = 11;
-	int64 feedback = 12; // 1 positive, -1 negative
-	int64 workflow_version = 13;
-	int64 total_tokens = 14;
-	int64 duration = 15; // ms
-	// int64 created = 16;
+	string agent_id = 10;
+	int64 agent_version = 11;
+
+	bool human_transfered = 12;
+	repeated string transfer_to_agents = 13;
+	string model = 14;
+
+	bool context_guard = 15;
+
+	int64 duration = 16; // ms
+	repeated string rewriten_queries = 17;
+	repeated AIDataEntryUsed context_documents = 18;
+	repeated string context_instructions = 19;
+	repeated LLMToolCall tool_calls = 20;
+	repeated string override_rules = 21;
+	string error = 22; //
 }
 
 message AIAgentSpan {
@@ -8983,7 +8996,6 @@ message AIAgent {
 	string tone = 12; // casual, friendly, professional
 
 	repeated AIAgentGuardrail guardrails = 8;
-	HumanHandoverSetting human_handover = 16;
 
 	int64 created = 17;
 	string created_by = 18;
@@ -9068,7 +9080,7 @@ message InitFlow {
 	// common.Context ctx = 1;
 	// string account_id = 2;
 	int64 disabled = 4;
-	BotAction action = 9; // point to root action
+	// BotAction action = 9; // point to root action
 
 	repeated Trigger triggers = 14;
 	Frequently initiative_frequency = 15;
@@ -9097,13 +9109,6 @@ message AIDataStore {
 
 	int64 num_unread_suggestions = 21;
 	int64 total_entries = 22;
-}
-
-message HumanHandoverSetting {
-	int64 disabled = 10;
-	Message message = 11; // message to be sent to user when human agent request detected
-	repeated Rule rules = 12;
-	Rule assign_to = 13;
 }
 
 message JSONSchema {

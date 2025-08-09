@@ -391,6 +391,8 @@ service WorkflowMgr {
 
 	rpc ListAIAgentMessages(ListAIAgentMessageRequest) returns (Response);
 	rpc ListConvertedLeads(ReportAIAgentRequest) returns (Response);
+
+	rpc GetAIResponseTraces(AIAgentTraceRequest) returns (Response);
 }
 
 service ConversationMgr {
