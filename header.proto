@@ -7634,6 +7634,7 @@ message LLMToolCall {
 }
 
 message LLMChatHistoryEntry {
+	int64 created = 2; // ms
 	string role = 3; // user | agent
 	string content = 4;
 	LLMToolCall tool = 5;

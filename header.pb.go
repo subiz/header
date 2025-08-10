@@ -53837,7 +53837,8 @@ func (x *LLMToolCall) GetConversationId() string {
 
 type LLMChatHistoryEntry struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
-	Role    string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"` // user | agent
+	Created int64                  `protobuf:"varint,2,opt,name=created,proto3" json:"created,omitempty"` // ms
+	Role    string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`        // user | agent
 	Content string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 	Tool    *LLMToolCall           `protobuf:"bytes,5,opt,name=tool,proto3" json:"tool,omitempty"`
 	// extra field in the message
@@ -53878,6 +53879,13 @@ func (x *LLMChatHistoryEntry) ProtoReflect() protoreflect.Message {
 // Deprecated: Use LLMChatHistoryEntry.ProtoReflect.Descriptor instead.
 func (*LLMChatHistoryEntry) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{441}
+}
+
+func (x *LLMChatHistoryEntry) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
 }
 
 func (x *LLMChatHistoryEntry) GetRole() string {
@@ -76336,8 +76344,9 @@ const file_header_proto_rawDesc = "" +
 	"\x05ended\x18\x0e \x01(\x03R\x05ended\x12\x1b\n" +
 	"\thttp_code\x18\x10 \x01(\x03R\bhttpCode\x12!\n" +
 	"\fassigned_tos\x18\x11 \x03(\tR\vassignedTos\x12'\n" +
-	"\x0fconversation_id\x18\x12 \x01(\tR\x0econversationId\"\xee\x02\n" +
-	"\x13LLMChatHistoryEntry\x12\x12\n" +
+	"\x0fconversation_id\x18\x12 \x01(\tR\x0econversationId\"\x88\x03\n" +
+	"\x13LLMChatHistoryEntry\x12\x18\n" +
+	"\acreated\x18\x02 \x01(\x03R\acreated\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12'\n" +
 	"\x04tool\x18\x05 \x01(\v2\x13.header.LLMToolCallR\x04tool\x12?\n" +
