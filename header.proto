@@ -1306,6 +1306,24 @@ message Conversation {
 	int64 input_llm_tokens = 84;
 	int64 output_llm_tokens = 85;
 	bool is_testing = 86; // bot testing, do not report or end
+	int64 human_only_requested = 87;
+}
+
+message AIAgentAutoSendThankSetting {
+	int64 enabled = 3;
+	string instruction = 4;
+	int64 agent_timeout = 5; // ms agent must reply or bot take over
+}
+
+message AIAgentAutoTakeoverSetting {
+	int64 enabled = 3;
+	int64 agent_timeout = 4; // ms agent must reply or bot take over
+}
+
+message AIAgentAutoFollowUpSetting {
+	int64 enabled = 4;
+	int64 max_attempts = 5;
+	repeated string instructions = 6;
 }
 
 message GoogleReview {
@@ -9068,15 +9086,16 @@ message AIAgent {
 	Message llm_limit_message = 68;
 	int64 llm_spend_limit_fpv = 72;
 
-	string follow_up_instruction = 73;
-	string generated_follow_up_instruction = 74;
-	int64 disabled_follow_up = 75;
-
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
 	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
   Form collect_user_information = 78;
 
 	Message welcome_message = 79;
+
+	// async behaviour
+	AIAgentAutoSendThankSetting background_send_thank = 81;
+	AIAgentAutoTakeoverSetting auto_takeover = 82;
+	AIAgentAutoFollowUpSetting background_follow_up = 83;
 }
 
 message InitFlow {
