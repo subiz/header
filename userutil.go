@@ -423,7 +423,7 @@ func EvaluateFloat(found bool, fl float64, cond *FloatCondition) bool {
 	case "lt":
 		return fl <= cond.GetLt()
 	case "gte":
-		return fl >= cond.GetLte() || math.Abs(fl-cond.GetGte()) < Tolerance
+		return fl >= cond.GetGte() || math.Abs(fl-cond.GetGte()) < Tolerance
 	case "lte":
 		return fl <= cond.GetLte() || math.Abs(fl-cond.GetLte()) < Tolerance
 	case "in_range":
@@ -472,16 +472,15 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 		inbusinesshours, _ := DuringBusinessHour(acc.GetBusinessHours(), t, acc.GetTimezone())
 		return !inbusinesshours
 	case "today":
-		utc := time.Now().UTC()
-		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location())
-		endoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 23, 59, 59, 0, utc.Location())
-
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
-		tzsec := int64(h*3600 + m*60)
-		if startoftheday.Unix()-tzsec <= t.Unix() && t.Unix() <= endoftheday.Unix()-tzsec {
-			return true
-		}
-		return false
+		location := time.FixedZone("account_tz", h*3600+m*60)
+
+		nowInLoc := time.Now().In(location)
+		year, month, day := nowInLoc.Date()
+		startoftoday := time.Date(year, month, day, 0, 0, 0, 0, location)
+		endoftoday := time.Date(year, month, day, 23, 59, 59, 0, location)
+
+		return startoftoday.Unix() <= t.Unix() && t.Unix() <= endoftoday.Unix()
 	case "date_last_30mins":
 		now := time.Now().Unix()
 		last30mins := now - 1800
@@ -503,72 +502,87 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 		last30days := now - 30*86400
 		return last30days <= t.Unix() && t.Unix() <= now
 	case "yesterday":
-		utc := time.Now().UTC()
-		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location()).Unix()
-		startofyesterday := startoftheday - 86400
-
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
-		tzsec := int64(h*3600 + m*60)
-		return startofyesterday-tzsec <= t.Unix() && t.Unix() <= startoftheday-tzsec
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		nowInLoc := time.Now().In(location)
+
+		// Yesterday is the day before today
+		yesterday := nowInLoc.AddDate(0, 0, -1)
+		year, month, day := yesterday.Date()
+		startofyesterday := time.Date(year, month, day, 0, 0, 0, 0, location)
+		endofyesterday := time.Date(year, month, day, 23, 59, 59, 0, location)
+
+		return startofyesterday.Unix() <= t.Unix() && t.Unix() <= endofyesterday.Unix()
 	case "last_week":
-		utc := time.Now().UTC()
-		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location())
-		weekday := int64(startoftheday.Weekday())
-		weekday--
-		if weekday == -1 {
-			weekday = 7
-		}
-		startoftheweek := time.Unix(startoftheday.Unix()-weekday*86400, 0)
-		endoftheweek := time.Unix(startoftheday.Unix()*(7-weekday)*86400+86400, 0)
-		// endoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 23, 59, 59, 0, utc.Location())
-
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
-		tzsec := int64(h*3600 + m*60)
-		if startoftheweek.Unix()-604800-tzsec <= t.Unix() && t.Unix() <= endoftheweek.Unix()-604800-tzsec { // 604800 is to move back 7 day
-			return true
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		nowInLoc := time.Now().In(location)
+
+		// Monday of the current week
+		weekday := nowInLoc.Weekday()
+		daysToSubtract := int(weekday - time.Monday)
+		if daysToSubtract < 0 {
+			daysToSubtract += 7
 		}
-		return false
+		startofweek_date := nowInLoc.AddDate(0, 0, -daysToSubtract)
+		year, month, day := startofweek_date.Date()
+		startofthisweek := time.Date(year, month, day, 0, 0, 0, 0, location)
+
+		// Last week is the 7 days before the start of this week
+		startoflastweek := startofthisweek.AddDate(0, 0, -7)
+		endoflastweek_date := startofthisweek.AddDate(0, 0, -1)
+		year, month, day = endoflastweek_date.Date()
+		endoflastweek := time.Date(year, month, day, 23, 59, 59, 0, location)
+
+		return startoflastweek.Unix() <= t.Unix() && t.Unix() <= endoflastweek.Unix()
 	case "this_week":
-		utc := time.Now().UTC()
-		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location())
-		weekday := int64(startoftheday.Weekday())
-		weekday--
-		if weekday == -1 {
-			weekday = 7
-		}
-		startoftheweek := time.Unix(startoftheday.Unix()-weekday*86400, 0)
-		endoftheweek := time.Unix(startoftheday.Unix()*(7-weekday)*86400+86400, 0)
-		// endoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 23, 59, 59, 0, utc.Location())
-
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
-		tzsec := int64(h*3600 + m*60)
-		if startoftheweek.Unix()-tzsec <= t.Unix() && t.Unix() <= endoftheweek.Unix()-tzsec { // 604800 is to move back 7 day
-			return true
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		nowInLoc := time.Now().In(location)
+
+		// Monday of the current week
+		weekday := nowInLoc.Weekday()
+		daysToSubtract := int(weekday - time.Monday)
+		if daysToSubtract < 0 {
+			daysToSubtract += 7
 		}
-		return false
+		startofweek_date := nowInLoc.AddDate(0, 0, -daysToSubtract)
+		year, month, day := startofweek_date.Date()
+		startofweek := time.Date(year, month, day, 0, 0, 0, 0, location)
+
+		// Sunday of the current week
+		endofweek_date := startofweek.AddDate(0, 0, 6)
+		year, month, day = endofweek_date.Date()
+		endofweek := time.Date(year, month, day, 23, 59, 59, 0, location)
+
+		return startofweek.Unix() <= t.Unix() && t.Unix() <= endofweek.Unix()
 	case "last_month":
-		utc := time.Now().UTC()
-		endOfMonth := time.Date(utc.Year(), utc.Month(), 1, 0, 0, 0, 0, utc.Location())
-		endOfMonth = endOfMonth.AddDate(0, 0, -1)
-
-		startOfMonth := time.Date(endOfMonth.Year(), endOfMonth.Month(), 1, 0, 0, 0, 0, utc.Location())
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
-		tzsec := int64(h*3600 + m*60)
-		if startOfMonth.Unix()-tzsec <= t.Unix() && t.Unix() <= endOfMonth.Unix()-tzsec {
-			return true
-		}
-		return false
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		nowInLoc := time.Now().In(location)
+
+		year, month, _ := nowInLoc.Date()
+		startofthismonth := time.Date(year, month, 1, 0, 0, 0, 0, location)
+		startoflastmonth := startofthismonth.AddDate(0, -1, 0)
+
+		endoflastmonth_date := startofthismonth.AddDate(0, 0, -1)
+		year, month, day := endoflastmonth_date.Date()
+		endoflastmonth := time.Date(year, month, day, 23, 59, 59, 0, location)
+
+		return startoflastmonth.Unix() <= t.Unix() && t.Unix() <= endoflastmonth.Unix()
 	case "this_month":
-		utc := time.Now().UTC()
-		firstOfMonth := time.Date(utc.Year(), utc.Month(), 1, 0, 0, 0, 0, utc.Location())
-		lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
-
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
-		tzsec := int64(h*3600 + m*60)
-		if firstOfMonth.Unix()-tzsec <= t.Unix() && t.Unix() <= lastOfMonth.Unix()-tzsec {
-			return true
-		}
-		return false
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		nowInLoc := time.Now().In(location)
+
+		year, month, _ := nowInLoc.Date()
+		startofmonth := time.Date(year, month, 1, 0, 0, 0, 0, location)
+
+		endofmonth_date := startofmonth.AddDate(0, 1, -1)
+		year, month, day := endofmonth_date.Date()
+		endofmonth := time.Date(year, month, day, 23, 59, 59, 0, location)
+
+		return startofmonth.Unix() <= t.Unix() && t.Unix() <= endofmonth.Unix()
 	case "last":
 		a := time.Now().Unix() - cond.GetLast()
 		b := time.Now().Unix()
