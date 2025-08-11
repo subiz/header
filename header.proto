@@ -7121,7 +7121,7 @@ message WorkflowThread {
 	int64 ended = 8;
 	int64 last_waited = 9;
 	string exit_code = 10;
-	string action_id = 11;
+	string action_id = 11; // commited action
 	string workflow_id = 15; // wf for actionid, could be difference with session.workflow since we allow function call
 	int64 last_error_at = 12;
 	int64 last_action_at = 13;
@@ -7129,6 +7129,7 @@ message WorkflowThread {
 	string start_scope_id = 16;
 	// string catch_action_id = 17; // set on start-scope
 	int64 is_on_exception = 18; // clear on start-scope
+	string start_action_id = 19; // used when action id is empty
 }
 
 message WorkflowStack {

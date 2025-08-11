@@ -49940,14 +49940,15 @@ type WorkflowThread struct {
 	Ended        int64                  `protobuf:"varint,8,opt,name=ended,proto3" json:"ended,omitempty"`
 	LastWaited   int64                  `protobuf:"varint,9,opt,name=last_waited,json=lastWaited,proto3" json:"last_waited,omitempty"`
 	ExitCode     string                 `protobuf:"bytes,10,opt,name=exit_code,json=exitCode,proto3" json:"exit_code,omitempty"`
-	ActionId     string                 `protobuf:"bytes,11,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
+	ActionId     string                 `protobuf:"bytes,11,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`       // commited action
 	WorkflowId   string                 `protobuf:"bytes,15,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"` // wf for actionid, could be difference with session.workflow since we allow function call
 	LastErrorAt  int64                  `protobuf:"varint,12,opt,name=last_error_at,json=lastErrorAt,proto3" json:"last_error_at,omitempty"`
 	LastActionAt int64                  `protobuf:"varint,13,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
 	LastTraceId  string                 `protobuf:"bytes,14,opt,name=last_trace_id,json=lastTraceId,proto3" json:"last_trace_id,omitempty"`
 	StartScopeId string                 `protobuf:"bytes,16,opt,name=start_scope_id,json=startScopeId,proto3" json:"start_scope_id,omitempty"`
 	// string catch_action_id = 17; // set on start-scope
-	IsOnException int64 `protobuf:"varint,18,opt,name=is_on_exception,json=isOnException,proto3" json:"is_on_exception,omitempty"` // clear on start-scope
+	IsOnException int64  `protobuf:"varint,18,opt,name=is_on_exception,json=isOnException,proto3" json:"is_on_exception,omitempty"` // clear on start-scope
+	StartActionId string `protobuf:"bytes,19,opt,name=start_action_id,json=startActionId,proto3" json:"start_action_id,omitempty"`  // used when action id is empty
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -50078,6 +50079,13 @@ func (x *WorkflowThread) GetIsOnException() int64 {
 		return x.IsOnException
 	}
 	return 0
+}
+
+func (x *WorkflowThread) GetStartActionId() string {
+	if x != nil {
+		return x.StartActionId
+	}
+	return ""
 }
 
 type WorkflowStack struct {
@@ -75906,7 +75914,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0fEmailAttachment\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1a\n" +
-	"\bmimetype\x18\x04 \x01(\tR\bmimetype\"\xb4\x03\n" +
+	"\bmimetype\x18\x04 \x01(\tR\bmimetype\"\xdc\x03\n" +
 	"\x0eWorkflowThread\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x16\n" +
@@ -75924,7 +75932,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0elast_action_at\x18\r \x01(\x03R\flastActionAt\x12\"\n" +
 	"\rlast_trace_id\x18\x0e \x01(\tR\vlastTraceId\x12$\n" +
 	"\x0estart_scope_id\x18\x10 \x01(\tR\fstartScopeId\x12&\n" +
-	"\x0fis_on_exception\x18\x12 \x01(\x03R\risOnException\"@\n" +
+	"\x0fis_on_exception\x18\x12 \x01(\x03R\risOnException\x12&\n" +
+	"\x0fstart_action_id\x18\x13 \x01(\tR\rstartActionId\"@\n" +
 	"\rWorkflowStack\x12/\n" +
 	"\x05calls\x18\x04 \x03(\v2\x19.header.WorkflowStackItemR\x05calls\"a\n" +
 	"\x11WorkflowStackItem\x12\x1f\n" +
