@@ -7639,6 +7639,7 @@ message LLMChatHistoryEntry {
 	string role = 3; // user | agent
 	string content = 4;
 	LLMToolCall tool = 5;
+	string id = 6;
 
 	// extra field in the message
 	map<string, string> fields = 7; // key -> jsonified value. eg "by_agent_id": "\"ag1\""

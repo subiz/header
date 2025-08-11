@@ -53842,6 +53842,7 @@ type LLMChatHistoryEntry struct {
 	Role    string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`        // user | agent
 	Content string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 	Tool    *LLMToolCall           `protobuf:"bytes,5,opt,name=tool,proto3" json:"tool,omitempty"`
+	Id      string                 `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
 	// extra field in the message
 	Fields map[string]string `protobuf:"bytes,7,rep,name=fields,proto3" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // key -> jsonified value. eg "by_agent_id": "\"ag1\""
 	// for testing
@@ -53908,6 +53909,13 @@ func (x *LLMChatHistoryEntry) GetTool() *LLMToolCall {
 		return x.Tool
 	}
 	return nil
+}
+
+func (x *LLMChatHistoryEntry) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *LLMChatHistoryEntry) GetFields() map[string]string {
@@ -76338,12 +76346,13 @@ const file_header_proto_rawDesc = "" +
 	"\x05ended\x18\x0e \x01(\x03R\x05ended\x12\x1b\n" +
 	"\thttp_code\x18\x10 \x01(\x03R\bhttpCode\x12!\n" +
 	"\fassigned_tos\x18\x11 \x03(\tR\vassignedTos\x12'\n" +
-	"\x0fconversation_id\x18\x12 \x01(\tR\x0econversationId\"\x88\x03\n" +
+	"\x0fconversation_id\x18\x12 \x01(\tR\x0econversationId\"\x98\x03\n" +
 	"\x13LLMChatHistoryEntry\x12\x18\n" +
 	"\acreated\x18\x02 \x01(\x03R\acreated\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12'\n" +
-	"\x04tool\x18\x05 \x01(\v2\x13.header.LLMToolCallR\x04tool\x12?\n" +
+	"\x04tool\x18\x05 \x01(\v2\x13.header.LLMToolCallR\x04tool\x12\x0e\n" +
+	"\x02id\x18\x06 \x01(\tR\x02id\x12?\n" +
 	"\x06fields\x18\a \x03(\v2'.header.LLMChatHistoryEntry.FieldsEntryR\x06fields\x12\x18\n" +
 	"\atimeout\x18\b \x01(\x03R\atimeout\x124\n" +
 	"\vattachments\x18\t \x03(\v2\x12.header.AttachmentR\vattachments\x124\n" +
