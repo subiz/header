@@ -89,6 +89,7 @@ func TestVNPhone(t *testing.T) {
 		out string
 	}{
 		{"", ""},
+		{"0976781229 ạ", "84976781229"},
 		{"Sdt cua minh la (84)36 4821324", "84364821324"},
 		{"Sdt cua minh la (0)36 48213244. Goi nhe", ""},
 		{"Sdt cua minh la (0)36 4821324\n4. Goi nhe", "84364821324"},

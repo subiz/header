@@ -1584,6 +1584,10 @@ func GetVietnamPhoneISP(number string) string {
 		return "Vinaphone"
 	}
 
+	if first3 == "032" || first3 == "033" || first3 == "034" || first3 == "035" || first3 == "036" || first3 == "037" || first3 == "038" || first3 == "039" || first3 == "096" || first3 == "097" || first3 == "098" || first3 == "086" ||
+		first4 == "0169" || first4 == "0168" || first4 == "0167" || first4 == "0166" || first4 == "0165" || first4 == "0164" || first4 == "0163" || first4 == "0162" {
+		return "Viettel"
+	}
 	if first3 == "055" {
 		return "Wintel"
 	}
