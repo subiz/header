@@ -1321,8 +1321,8 @@ message AIAgentAutoTakeoverSetting {
 }
 
 message AIAgentAutoFollowUpSetting {
-	int64 enabled = 4;
-	int64 max_attempts = 5;
+	int64 enabled = 4; // maximum twice
+	// int64 max_attempts = 5;
 	repeated string instructions = 6;
 }
 
@@ -8980,7 +8980,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -8997,9 +8997,9 @@ message AIAgentOverrideRule {
 	Frequently frequently = 17; // once or always
 	repeated string for_agent_ids = 18; // empty -> all-agent
 
-	// human handoff
-	repeated Rule rules = 12;
-	Rule assign_to = 11;
+	// human handoff or invite_human
+	// repeated Rule rules = 12;
+	AssignRequest assign_to = 19;
 }
 
 message AIAgent {
