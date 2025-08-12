@@ -1207,6 +1207,8 @@ message StartRequest {
 
 	FormSubmission form_submission = 46;
 	GoogleReview google_review = 47;
+
+	bool is_testing = 50;
 }
 
 enum ConvoState {

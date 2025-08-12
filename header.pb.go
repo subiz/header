@@ -9952,6 +9952,7 @@ type StartRequest struct {
 	OutboundCallEntryId string          `protobuf:"bytes,45,opt,name=outbound_call_entry_id,json=outboundCallEntryId,proto3" json:"outbound_call_entry_id,omitempty"`
 	FormSubmission      *FormSubmission `protobuf:"bytes,46,opt,name=form_submission,json=formSubmission,proto3" json:"form_submission,omitempty"`
 	GoogleReview        *GoogleReview   `protobuf:"bytes,47,opt,name=google_review,json=googleReview,proto3" json:"google_review,omitempty"`
+	IsTesting           bool            `protobuf:"varint,50,opt,name=is_testing,json=isTesting,proto3" json:"is_testing,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -10166,6 +10167,13 @@ func (x *StartRequest) GetGoogleReview() *GoogleReview {
 		return x.GoogleReview
 	}
 	return nil
+}
+
+func (x *StartRequest) GetIsTesting() bool {
+	if x != nil {
+		return x.IsTesting
+	}
+	return false
 }
 
 type Conversation struct {
@@ -71097,7 +71105,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04left\x10\x01\x12\f\n" +
 	"\bobserver\x10\x02\x12\x0e\n" +
 	"\n" +
-	"terminated\x10\x03\"\xad\a\n" +
+	"terminated\x10\x03\"\xcc\a\n" +
 	"\fStartRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71130,7 +71138,9 @@ const file_header_proto_rawDesc = "" +
 	"campaignId\x123\n" +
 	"\x16outbound_call_entry_id\x18- \x01(\tR\x13outboundCallEntryId\x12?\n" +
 	"\x0fform_submission\x18. \x01(\v2\x16.header.FormSubmissionR\x0eformSubmission\x129\n" +
-	"\rgoogle_review\x18/ \x01(\v2\x14.header.GoogleReviewR\fgoogleReview\"\xb3\x12\n" +
+	"\rgoogle_review\x18/ \x01(\v2\x14.header.GoogleReviewR\fgoogleReview\x12\x1d\n" +
+	"\n" +
+	"is_testing\x182 \x01(\bR\tisTesting\"\xb3\x12\n" +
 	"\fConversation\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
