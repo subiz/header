@@ -10798,6 +10798,7 @@ type AIAgentAutoFollowUpSetting struct {
 	Enabled int64                  `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"` // maximum twice
 	// int64 max_attempts = 5;
 	Instructions  []string `protobuf:"bytes,6,rep,name=instructions,proto3" json:"instructions,omitempty"`
+	Examples      []string `protobuf:"bytes,7,rep,name=examples,proto3" json:"examples,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -10842,6 +10843,13 @@ func (x *AIAgentAutoFollowUpSetting) GetEnabled() int64 {
 func (x *AIAgentAutoFollowUpSetting) GetInstructions() []string {
 	if x != nil {
 		return x.Instructions
+	}
+	return nil
+}
+
+func (x *AIAgentAutoFollowUpSetting) GetExamples() []string {
+	if x != nil {
+		return x.Examples
 	}
 	return nil
 }
@@ -71201,10 +71209,11 @@ const file_header_proto_rawDesc = "" +
 	"\ragent_timeout\x18\x05 \x01(\x03R\fagentTimeout\"[\n" +
 	"\x1aAIAgentAutoTakeoverSetting\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\x03R\aenabled\x12#\n" +
-	"\ragent_timeout\x18\x04 \x01(\x03R\fagentTimeout\"Z\n" +
+	"\ragent_timeout\x18\x04 \x01(\x03R\fagentTimeout\"v\n" +
 	"\x1aAIAgentAutoFollowUpSetting\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\x03R\aenabled\x12\"\n" +
-	"\finstructions\x18\x06 \x03(\tR\finstructions\"\xb9\x02\n" +
+	"\finstructions\x18\x06 \x03(\tR\finstructions\x12\x1a\n" +
+	"\bexamples\x18\a \x03(\tR\bexamples\"\xb9\x02\n" +
 	"\fGoogleReview\x12\x1b\n" +
 	"\treview_id\x18\x01 \x01(\tR\breviewId\x12#\n" +
 	"\rrating_string\x18\x02 \x01(\tR\fratingString\x12\x16\n" +

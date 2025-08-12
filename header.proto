@@ -1324,6 +1324,7 @@ message AIAgentAutoFollowUpSetting {
 	int64 enabled = 4; // maximum twice
 	// int64 max_attempts = 5;
 	repeated string instructions = 6;
+	repeated string examples = 7;
 }
 
 message GoogleReview {
