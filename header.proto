@@ -890,6 +890,8 @@ message RunAiAgentRequest {
 	Event last_message_sent = 17;
 
 	bool is_testing = 18;
+
+	Conversation conversation = 19;
 }
 
 // @deprecated
@@ -1163,6 +1165,7 @@ message ConversationMember {
 	string is_subscribed = 38; // "", off, on
 
 	string workflow_session_id = 40;
+	int64 bot_version = 41;
 }
 
 message StartRequest {
