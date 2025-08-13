@@ -890,8 +890,7 @@ message RunAiAgentRequest {
 	Event last_message_sent = 17;
 
 	bool is_testing = 18;
-
-	Conversation conversation = 19;
+	string user_id = 20;
 }
 
 // @deprecated
@@ -9035,7 +9034,7 @@ message AIAgent {
 
 	string state = 22; // active, inactive
 
-	string model = 23; // gpt-4o-mini-2024-07-18
+	string model = 23; // gpt-4o-mini
 
 	repeated AIAgent sub_agents = 25;
 	repeated string form_ids = 27; // readonly
