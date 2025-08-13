@@ -63670,6 +63670,7 @@ type AIAgent struct {
 	BackgroundSendThank *AIAgentAutoSendThankSetting `protobuf:"bytes,81,opt,name=background_send_thank,json=backgroundSendThank,proto3" json:"background_send_thank,omitempty"`
 	AutoTakeover        *AIAgentAutoTakeoverSetting  `protobuf:"bytes,82,opt,name=auto_takeover,json=autoTakeover,proto3" json:"auto_takeover,omitempty"`
 	BackgroundFollowUp  *AIAgentAutoFollowUpSetting  `protobuf:"bytes,83,opt,name=background_follow_up,json=backgroundFollowUp,proto3" json:"background_follow_up,omitempty"`
+	OperationMode       string                       `protobuf:"bytes,84,opt,name=operation_mode,json=operationMode,proto3" json:"operation_mode,omitempty"` // foreground, background
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -64108,6 +64109,13 @@ func (x *AIAgent) GetBackgroundFollowUp() *AIAgentAutoFollowUpSetting {
 		return x.BackgroundFollowUp
 	}
 	return nil
+}
+
+func (x *AIAgent) GetOperationMode() string {
+	if x != nil {
+		return x.OperationMode
+	}
+	return ""
 }
 
 type InitFlow struct {
@@ -77636,7 +77644,7 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x18\x11 \x01(\v2\x12.header.FrequentlyR\n" +
 	"frequently\x12\"\n" +
 	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x122\n" +
-	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\"\xa0\x14\n" +
+	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\"\xc7\x14\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77705,7 +77713,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fwelcome_message\x18O \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x12W\n" +
 	"\x15background_send_thank\x18Q \x01(\v2#.header.AIAgentAutoSendThankSettingR\x13backgroundSendThank\x12G\n" +
 	"\rauto_takeover\x18R \x01(\v2\".header.AIAgentAutoTakeoverSettingR\fautoTakeover\x12T\n" +
-	"\x14background_follow_up\x18S \x01(\v2\".header.AIAgentAutoFollowUpSettingR\x12backgroundFollowUp\"\x96\x03\n" +
+	"\x14background_follow_up\x18S \x01(\v2\".header.AIAgentAutoFollowUpSettingR\x12backgroundFollowUp\x12%\n" +
+	"\x0eoperation_mode\x18T \x01(\tR\roperationMode\"\x96\x03\n" +
 	"\bInitFlow\x12\x1a\n" +
 	"\bdisabled\x18\x04 \x01(\x03R\bdisabled\x12)\n" +
 	"\x06action\x18\t \x01(\v2\x11.header.BotActionR\x06action\x12+\n" +

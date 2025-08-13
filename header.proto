@@ -9105,6 +9105,8 @@ message AIAgent {
 	AIAgentAutoSendThankSetting background_send_thank = 81;
 	AIAgentAutoTakeoverSetting auto_takeover = 82;
 	AIAgentAutoFollowUpSetting background_follow_up = 83;
+
+	string operation_mode = 84; // foreground, background
 }
 
 message InitFlow {
