@@ -6650,7 +6650,6 @@ message WorkflowAction {
 	string output_error_variable = 106;
 
 	ActionTerminateBot terminate_bot = 110;
-	ActionCheckOverrideRules check_override_rules = 111;
 	ActionSendFacebookConversion send_facebook_conversion = 112;
 }
 
@@ -6658,12 +6657,6 @@ message ActionSendFacebookConversion {
 	string type = 3; // lead, purchase
 
 	Bill bill = 4;
-}
-
-message ActionCheckOverrideRules {
-	string on_assign = 4;
-	string output_assigned_agent_variable = 5;
-	string output_remind_variable = 6;
 }
 
 message ActionTerminateBot {
@@ -8987,7 +8980,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -9091,8 +9084,8 @@ message AIAgent {
 
 	repeated AIAgentOverrideRule override_rules = 66; // only root
 
-	Message llm_limit_message = 68;
-	int64 llm_spend_limit_fpv = 72;
+	//
+	// int64 llm_spend_limit_fpv = 72;
 
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
 	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
@@ -9106,6 +9099,17 @@ message AIAgent {
 	AIAgentAutoFollowUpSetting background_follow_up = 83;
 
 	string operation_mode = 84; // foreground, background
+	AIAgentRateLimit ratelimit = 85;
+}
+
+message AIAgentRateLimit {
+	int64 messages_per_hour_per_user = 5;
+	int64 messages_per_day_per_user = 6;
+
+	int64 messages_per_hour_per_agent = 8;
+	int64 messages_per_day_per_agent = 9;
+
+	Message message = 10;
 }
 
 message InitFlow {
@@ -9379,31 +9383,6 @@ message AiResponseSource {
 	AIDataEntry data_entry = 9; // optional
 	string embed_chunk = 11;
 }
-
-/*
-message AiQnASuggestion {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string conversation_id = 3;
-	string ai_agent_id = 4;
-	string message_id = 5;
-	string id = 6;
-	string group_id = 7;
-
-	string query = 10;
-
-	Message answer = 11;
-	int64 flagged = 12;
-	string status = 13; // pending, accept
-	int64 created = 14;
-	int64 read_at = 15;
-	string read_by = 16;
-
-	// when search for suggestion
-	int64 ai_data_entry_score = 20;
-	string ai_data_entry_id = 21; // optional
-}
-*/
 
 message FacebookAdsFlow {
 	common.Context ctx = 1;
