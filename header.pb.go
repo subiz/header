@@ -63388,20 +63388,20 @@ func (x *AIAgentGuardrail) GetAction() string {
 }
 
 type AIAgentOverrideRule struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Id             string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Name           string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Action         string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`                  // '' == assign, remind, function, human_handoff, invite_human, end
-	Functions      []*AIFunction          `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`            // use when action = function
-	Instruction    string                 `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"`        // use when action = remind
-	Hook           string                 `protobuf:"bytes,8,opt,name=hook,proto3" json:"hook,omitempty"`                      // '' = before_reply, after_reply
-	AgentId        string                 `protobuf:"bytes,6,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"` // use when action = assign
-	Intent         *AIIntent              `protobuf:"bytes,13,opt,name=intent,proto3" json:"intent,omitempty"`
-	Condition      *WorkflowCondition     `protobuf:"bytes,14,opt,name=condition,proto3" json:"condition,omitempty"`
-	Disabled       int64                  `protobuf:"varint,15,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	IsAgentDefault bool                   `protobuf:"varint,16,opt,name=is_agent_default,json=isAgentDefault,proto3" json:"is_agent_default,omitempty"` // default for agent id
-	Frequently     *Frequently            `protobuf:"bytes,17,opt,name=frequently,proto3" json:"frequently,omitempty"`                                  // once or always
-	ForAgentIds    []string               `protobuf:"bytes,18,rep,name=for_agent_ids,json=forAgentIds,proto3" json:"for_agent_ids,omitempty"`           // empty -> all-agent
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end
+	Functions   []*AIFunction          `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`     // use when action = function
+	Instruction string                 `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"` // use when action = remind
+	// string hook = 8; // ” = before_reply, after_reply
+	AgentId        string             `protobuf:"bytes,6,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"` // use when action = assign
+	Intent         *AIIntent          `protobuf:"bytes,13,opt,name=intent,proto3" json:"intent,omitempty"`
+	Condition      *WorkflowCondition `protobuf:"bytes,14,opt,name=condition,proto3" json:"condition,omitempty"`
+	Disabled       int64              `protobuf:"varint,15,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	IsAgentDefault bool               `protobuf:"varint,16,opt,name=is_agent_default,json=isAgentDefault,proto3" json:"is_agent_default,omitempty"` // default for agent id
+	Frequently     *Frequently        `protobuf:"bytes,17,opt,name=frequently,proto3" json:"frequently,omitempty"`                                  // once or always
+	ForAgentIds    []string           `protobuf:"bytes,18,rep,name=for_agent_ids,json=forAgentIds,proto3" json:"for_agent_ids,omitempty"`           // empty -> all-agent
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
 	AssignTo      *AssignRequest `protobuf:"bytes,19,opt,name=assign_to,json=assignTo,proto3" json:"assign_to,omitempty"`
@@ -63470,13 +63470,6 @@ func (x *AIAgentOverrideRule) GetFunctions() []*AIFunction {
 func (x *AIAgentOverrideRule) GetInstruction() string {
 	if x != nil {
 		return x.Instruction
-	}
-	return ""
-}
-
-func (x *AIAgentOverrideRule) GetHook() string {
-	if x != nil {
-		return x.Hook
 	}
 	return ""
 }
@@ -63601,7 +63594,7 @@ type AIAgent struct {
 	AutoTakeover        *AIAgentAutoTakeoverSetting  `protobuf:"bytes,82,opt,name=auto_takeover,json=autoTakeover,proto3" json:"auto_takeover,omitempty"`
 	BackgroundFollowUp  *AIAgentAutoFollowUpSetting  `protobuf:"bytes,83,opt,name=background_follow_up,json=backgroundFollowUp,proto3" json:"background_follow_up,omitempty"`
 	OperationMode       string                       `protobuf:"bytes,84,opt,name=operation_mode,json=operationMode,proto3" json:"operation_mode,omitempty"` // foreground, background
-	Ratelimit           *AIAgentRateLimit            `protobuf:"bytes,85,opt,name=ratelimit,proto3" json:"ratelimit,omitempty"`
+	UsageLimit          *AIAgentUsageLimit           `protobuf:"bytes,85,opt,name=usage_limit,json=usageLimit,proto3" json:"usage_limit,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -64035,38 +64028,42 @@ func (x *AIAgent) GetOperationMode() string {
 	return ""
 }
 
-func (x *AIAgent) GetRatelimit() *AIAgentRateLimit {
+func (x *AIAgent) GetUsageLimit() *AIAgentUsageLimit {
 	if x != nil {
-		return x.Ratelimit
+		return x.UsageLimit
 	}
 	return nil
 }
 
-type AIAgentRateLimit struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	MessagesPerHourPerUser  int64                  `protobuf:"varint,5,opt,name=messages_per_hour_per_user,json=messagesPerHourPerUser,proto3" json:"messages_per_hour_per_user,omitempty"`
-	MessagesPerDayPerUser   int64                  `protobuf:"varint,6,opt,name=messages_per_day_per_user,json=messagesPerDayPerUser,proto3" json:"messages_per_day_per_user,omitempty"`
-	MessagesPerHourPerAgent int64                  `protobuf:"varint,8,opt,name=messages_per_hour_per_agent,json=messagesPerHourPerAgent,proto3" json:"messages_per_hour_per_agent,omitempty"`
-	MessagesPerDayPerAgent  int64                  `protobuf:"varint,9,opt,name=messages_per_day_per_agent,json=messagesPerDayPerAgent,proto3" json:"messages_per_day_per_agent,omitempty"`
-	Message                 *Message               `protobuf:"bytes,10,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+type AIAgentUsageLimit struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Enabled int64                  `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// per user id
+	MessagesPerHourPerUser int64 `protobuf:"varint,5,opt,name=messages_per_hour_per_user,json=messagesPerHourPerUser,proto3" json:"messages_per_hour_per_user,omitempty"`
+	MessagesPerDayPerUser  int64 `protobuf:"varint,6,opt,name=messages_per_day_per_user,json=messagesPerDayPerUser,proto3" json:"messages_per_day_per_user,omitempty"`
+	// per agent id (1 agent can answer to many users)
+	MessagesPerHourPerAgent  int64    `protobuf:"varint,8,opt,name=messages_per_hour_per_agent,json=messagesPerHourPerAgent,proto3" json:"messages_per_hour_per_agent,omitempty"`
+	MessagesPerDayPerAgent   int64    `protobuf:"varint,9,opt,name=messages_per_day_per_agent,json=messagesPerDayPerAgent,proto3" json:"messages_per_day_per_agent,omitempty"`
+	MessagesPerMonthPerAgent int64    `protobuf:"varint,10,opt,name=messages_per_month_per_agent,json=messagesPerMonthPerAgent,proto3" json:"messages_per_month_per_agent,omitempty"`
+	WarningMessage           *Message `protobuf:"bytes,11,opt,name=warning_message,json=warningMessage,proto3" json:"warning_message,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
-func (x *AIAgentRateLimit) Reset() {
-	*x = AIAgentRateLimit{}
+func (x *AIAgentUsageLimit) Reset() {
+	*x = AIAgentUsageLimit{}
 	mi := &file_header_proto_msgTypes[515]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AIAgentRateLimit) String() string {
+func (x *AIAgentUsageLimit) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AIAgentRateLimit) ProtoMessage() {}
+func (*AIAgentUsageLimit) ProtoMessage() {}
 
-func (x *AIAgentRateLimit) ProtoReflect() protoreflect.Message {
+func (x *AIAgentUsageLimit) ProtoReflect() protoreflect.Message {
 	mi := &file_header_proto_msgTypes[515]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64078,42 +64075,56 @@ func (x *AIAgentRateLimit) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AIAgentRateLimit.ProtoReflect.Descriptor instead.
-func (*AIAgentRateLimit) Descriptor() ([]byte, []int) {
+// Deprecated: Use AIAgentUsageLimit.ProtoReflect.Descriptor instead.
+func (*AIAgentUsageLimit) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{515}
 }
 
-func (x *AIAgentRateLimit) GetMessagesPerHourPerUser() int64 {
+func (x *AIAgentUsageLimit) GetEnabled() int64 {
+	if x != nil {
+		return x.Enabled
+	}
+	return 0
+}
+
+func (x *AIAgentUsageLimit) GetMessagesPerHourPerUser() int64 {
 	if x != nil {
 		return x.MessagesPerHourPerUser
 	}
 	return 0
 }
 
-func (x *AIAgentRateLimit) GetMessagesPerDayPerUser() int64 {
+func (x *AIAgentUsageLimit) GetMessagesPerDayPerUser() int64 {
 	if x != nil {
 		return x.MessagesPerDayPerUser
 	}
 	return 0
 }
 
-func (x *AIAgentRateLimit) GetMessagesPerHourPerAgent() int64 {
+func (x *AIAgentUsageLimit) GetMessagesPerHourPerAgent() int64 {
 	if x != nil {
 		return x.MessagesPerHourPerAgent
 	}
 	return 0
 }
 
-func (x *AIAgentRateLimit) GetMessagesPerDayPerAgent() int64 {
+func (x *AIAgentUsageLimit) GetMessagesPerDayPerAgent() int64 {
 	if x != nil {
 		return x.MessagesPerDayPerAgent
 	}
 	return 0
 }
 
-func (x *AIAgentRateLimit) GetMessage() *Message {
+func (x *AIAgentUsageLimit) GetMessagesPerMonthPerAgent() int64 {
 	if x != nil {
-		return x.Message
+		return x.MessagesPerMonthPerAgent
+	}
+	return 0
+}
+
+func (x *AIAgentUsageLimit) GetWarningMessage() *Message {
+	if x != nil {
+		return x.WarningMessage
 	}
 	return nil
 }
@@ -77622,14 +77633,13 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12 \n" +
 	"\vinstruction\x18\x06 \x01(\tR\vinstruction\x12\x1c\n" +
 	"\treasoning\x18\a \x01(\bR\treasoning\x12\x16\n" +
-	"\x06action\x18\b \x01(\tR\x06action\"\x89\x04\n" +
+	"\x06action\x18\b \x01(\tR\x06action\"\xf5\x03\n" +
 	"\x13AIAgentOverrideRule\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
 	"\x06action\x18\x05 \x01(\tR\x06action\x120\n" +
 	"\tfunctions\x18\t \x03(\v2\x12.header.AIFunctionR\tfunctions\x12 \n" +
-	"\vinstruction\x18\a \x01(\tR\vinstruction\x12\x12\n" +
-	"\x04hook\x18\b \x01(\tR\x04hook\x12\x19\n" +
+	"\vinstruction\x18\a \x01(\tR\vinstruction\x12\x19\n" +
 	"\bagent_id\x18\x06 \x01(\tR\aagentId\x12(\n" +
 	"\x06intent\x18\r \x01(\v2\x10.header.AIIntentR\x06intent\x127\n" +
 	"\tcondition\x18\x0e \x01(\v2\x19.header.WorkflowConditionR\tcondition\x12\x1a\n" +
@@ -77639,7 +77649,7 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x18\x11 \x01(\v2\x12.header.FrequentlyR\n" +
 	"frequently\x12\"\n" +
 	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x122\n" +
-	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\"\x93\x14\n" +
+	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\"\x97\x14\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77707,15 +77717,18 @@ const file_header_proto_rawDesc = "" +
 	"\x15background_send_thank\x18Q \x01(\v2#.header.AIAgentAutoSendThankSettingR\x13backgroundSendThank\x12G\n" +
 	"\rauto_takeover\x18R \x01(\v2\".header.AIAgentAutoTakeoverSettingR\fautoTakeover\x12T\n" +
 	"\x14background_follow_up\x18S \x01(\v2\".header.AIAgentAutoFollowUpSettingR\x12backgroundFollowUp\x12%\n" +
-	"\x0eoperation_mode\x18T \x01(\tR\roperationMode\x126\n" +
-	"\tratelimit\x18U \x01(\v2\x18.header.AIAgentRateLimitR\tratelimit\"\xad\x02\n" +
-	"\x10AIAgentRateLimit\x12:\n" +
+	"\x0eoperation_mode\x18T \x01(\tR\roperationMode\x12:\n" +
+	"\vusage_limit\x18U \x01(\v2\x19.header.AIAgentUsageLimitR\n" +
+	"usageLimit\"\x97\x03\n" +
+	"\x11AIAgentUsageLimit\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\x03R\aenabled\x12:\n" +
 	"\x1amessages_per_hour_per_user\x18\x05 \x01(\x03R\x16messagesPerHourPerUser\x128\n" +
 	"\x19messages_per_day_per_user\x18\x06 \x01(\x03R\x15messagesPerDayPerUser\x12<\n" +
 	"\x1bmessages_per_hour_per_agent\x18\b \x01(\x03R\x17messagesPerHourPerAgent\x12:\n" +
-	"\x1amessages_per_day_per_agent\x18\t \x01(\x03R\x16messagesPerDayPerAgent\x12)\n" +
-	"\amessage\x18\n" +
-	" \x01(\v2\x0f.header.MessageR\amessage\"\x96\x03\n" +
+	"\x1amessages_per_day_per_agent\x18\t \x01(\x03R\x16messagesPerDayPerAgent\x12>\n" +
+	"\x1cmessages_per_month_per_agent\x18\n" +
+	" \x01(\x03R\x18messagesPerMonthPerAgent\x128\n" +
+	"\x0fwarning_message\x18\v \x01(\v2\x0f.header.MessageR\x0ewarningMessage\"\x96\x03\n" +
 	"\bInitFlow\x12\x1a\n" +
 	"\bdisabled\x18\x04 \x01(\x03R\bdisabled\x12)\n" +
 	"\x06action\x18\t \x01(\v2\x11.header.BotActionR\x06action\x12+\n" +
@@ -78992,7 +79005,7 @@ var file_header_proto_goTypes = []any{
 	(*AIAgentGuardrail)(nil),                        // 545: header.AIAgentGuardrail
 	(*AIAgentOverrideRule)(nil),                     // 546: header.AIAgentOverrideRule
 	(*AIAgent)(nil),                                 // 547: header.AIAgent
-	(*AIAgentRateLimit)(nil),                        // 548: header.AIAgentRateLimit
+	(*AIAgentUsageLimit)(nil),                       // 548: header.AIAgentUsageLimit
 	(*InitFlow)(nil),                                // 549: header.InitFlow
 	(*AIDataStore)(nil),                             // 550: header.AIDataStore
 	(*JSONSchema)(nil),                              // 551: header.JSONSchema
@@ -80367,8 +80380,8 @@ var file_header_proto_depIdxs = []int32{
 	93,   // 1233: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
 	94,   // 1234: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
 	95,   // 1235: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
-	548,  // 1236: header.AIAgent.ratelimit:type_name -> header.AIAgentRateLimit
-	102,  // 1237: header.AIAgentRateLimit.message:type_name -> header.Message
+	548,  // 1236: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
+	102,  // 1237: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
 	131,  // 1238: header.InitFlow.action:type_name -> header.BotAction
 	122,  // 1239: header.InitFlow.triggers:type_name -> header.Trigger
 	150,  // 1240: header.InitFlow.initiative_frequency:type_name -> header.Frequently

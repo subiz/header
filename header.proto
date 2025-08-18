@@ -8986,7 +8986,7 @@ message AIAgentOverrideRule {
 
 	string instruction = 7; // use when action = remind
 
-	string hook = 8; // '' = before_reply, after_reply
+	// string hook = 8; // '' = before_reply, after_reply
 	string agent_id = 6; // use when action = assign
 
 	AIIntent intent = 13;
@@ -9084,9 +9084,6 @@ message AIAgent {
 
 	repeated AIAgentOverrideRule override_rules = 66; // only root
 
-	//
-	// int64 llm_spend_limit_fpv = 72;
-
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
 	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
   Form collect_user_information = 78;
@@ -9099,17 +9096,21 @@ message AIAgent {
 	AIAgentAutoFollowUpSetting background_follow_up = 83;
 
 	string operation_mode = 84; // foreground, background
-	AIAgentRateLimit ratelimit = 85;
+	AIAgentUsageLimit usage_limit = 85;
 }
 
-message AIAgentRateLimit {
+message AIAgentUsageLimit {
+	int64 enabled = 3;
+	// per user id
 	int64 messages_per_hour_per_user = 5;
 	int64 messages_per_day_per_user = 6;
 
+	// per agent id (1 agent can answer to many users)
 	int64 messages_per_hour_per_agent = 8;
 	int64 messages_per_day_per_agent = 9;
+	int64 messages_per_month_per_agent = 10;
 
-	Message message = 10;
+	Message warning_message = 11;
 }
 
 message InitFlow {
