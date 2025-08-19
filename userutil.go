@@ -1152,5 +1152,4 @@ func NormalizeTextCond(cond *TextCondition) {
 			cond.NotEndWith[i] = strings.TrimSpace(cs)
 		}
 	}
-	return
 }
