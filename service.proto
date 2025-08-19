@@ -504,7 +504,7 @@ service ConversationMgr {
 
 	// for ai agent to notify human
 	rpc NotifyHuman(header.Event) returns (header.Event);
-
+	rpc MarkAsHumanHandled(header.Id) returns (Response);
 	rpc ReportMessages(ReportConvoMessageRequest) returns (Response);
 }
 
@@ -731,6 +731,7 @@ service WidgetService {
 	rpc ReadUserSetting(Id) returns (header.WidgetUserSetting);
 
 	rpc ReadAccountSetting(Id) returns (header.AccountWeb);
+	rpc ReadAccountSetting2(WidgetSettingRequest) returns (header.AccountWeb);
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
 	rpc SubmitConversion(header.Conversion) returns (header.Conversion);

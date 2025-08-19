@@ -1139,6 +1139,7 @@ message ConversationMember {
 		left = 1;
 		observer = 2; // assigned
 		terminated = 3; // bot only
+		background = 5;
 	};
 	By invited_by = 16;
 
@@ -1165,6 +1166,9 @@ message ConversationMember {
 
 	string workflow_session_id = 40;
 	int64 bot_version = 41;
+
+	int64 bot_takeover_enabled = 43;
+	int64 bot_takeover_timeout = 44; // ms agent must reply or bot take over
 }
 
 message StartRequest {
@@ -1254,8 +1258,6 @@ message Conversation {
 	repeated Rating ratings = 35;
 
 	string source = 36; // indicate where does the conversation happended (url)
-
-	int64 human_notified = 72;
 	// my field
 	string agent_id = 40;
 	bool mute = 41; // true, false
@@ -1307,10 +1309,16 @@ message Conversation {
 	string access = 82; // default=public, private
 	MessageReferral referrer = 83;
 
-	int64 input_llm_tokens = 84;
-	int64 output_llm_tokens = 85;
+	// int64 input_llm_tokens = 84;
+	// int64 output_llm_tokens = 85;
 	bool is_testing = 86; // bot testing, do not report or end
-	int64 human_only_requested = 87;
+	// int64 human_only = 87; // > 0 no bot should take over or follow up this
+
+	int64 human_notified = 72; // ms timestamp when bot → human handoff happened
+	// int64 human_handoff_at = 88;
+	int64 human_handled = 88; // mark that the conversation have been handled
+	string human_handled_by = 89; // mark that the conversation have been handled
+	string human_handoff_reason_code = 90; // e.g. "bot_confidence_low", "user_request", "policy"
 }
 
 message AIAgentAutoSendThankSetting {

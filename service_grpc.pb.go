@@ -11553,6 +11553,7 @@ const (
 	ConversationMgr_OnBotDeleted_FullMethodName             = "/header.ConversationMgr/OnBotDeleted"
 	ConversationMgr_OnAIAgentUpdated_FullMethodName         = "/header.ConversationMgr/OnAIAgentUpdated"
 	ConversationMgr_NotifyHuman_FullMethodName              = "/header.ConversationMgr/NotifyHuman"
+	ConversationMgr_MarkAsHumanHandled_FullMethodName       = "/header.ConversationMgr/MarkAsHumanHandled"
 	ConversationMgr_ReportMessages_FullMethodName           = "/header.ConversationMgr/ReportMessages"
 )
 
@@ -11638,6 +11639,7 @@ type ConversationMgrClient interface {
 	OnAIAgentUpdated(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
 	// for ai agent to notify human
 	NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
+	MarkAsHumanHandled(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
@@ -12379,6 +12381,16 @@ func (c *conversationMgrClient) NotifyHuman(ctx context.Context, in *Event, opts
 	return out, nil
 }
 
+func (c *conversationMgrClient) MarkAsHumanHandled(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_MarkAsHumanHandled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *conversationMgrClient) ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -12471,6 +12483,7 @@ type ConversationMgrServer interface {
 	OnAIAgentUpdated(context.Context, *AIAgent) (*Response, error)
 	// for ai agent to notify human
 	NotifyHuman(context.Context, *Event) (*Event, error)
+	MarkAsHumanHandled(context.Context, *Id) (*Response, error)
 	ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
@@ -12700,6 +12713,9 @@ func (UnimplementedConversationMgrServer) OnAIAgentUpdated(context.Context, *AIA
 }
 func (UnimplementedConversationMgrServer) NotifyHuman(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyHuman not implemented")
+}
+func (UnimplementedConversationMgrServer) MarkAsHumanHandled(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarkAsHumanHandled not implemented")
 }
 func (UnimplementedConversationMgrServer) ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportMessages not implemented")
@@ -14039,6 +14055,24 @@ func _ConversationMgr_NotifyHuman_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_MarkAsHumanHandled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).MarkAsHumanHandled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_MarkAsHumanHandled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).MarkAsHumanHandled(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ConversationMgr_ReportMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReportConvoMessageRequest)
 	if err := dec(in); err != nil {
@@ -14355,6 +14389,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NotifyHuman",
 			Handler:    _ConversationMgr_NotifyHuman_Handler,
+		},
+		{
+			MethodName: "MarkAsHumanHandled",
+			Handler:    _ConversationMgr_MarkAsHumanHandled_Handler,
 		},
 		{
 			MethodName: "ReportMessages",
@@ -20608,6 +20646,7 @@ const (
 	WidgetService_Update_FullMethodName                   = "/header.WidgetService/Update"
 	WidgetService_ReadUserSetting_FullMethodName          = "/header.WidgetService/ReadUserSetting"
 	WidgetService_ReadAccountSetting_FullMethodName       = "/header.WidgetService/ReadAccountSetting"
+	WidgetService_ReadAccountSetting2_FullMethodName      = "/header.WidgetService/ReadAccountSetting2"
 	WidgetService_SubmitImpression_FullMethodName         = "/header.WidgetService/SubmitImpression"
 	WidgetService_SubmitConversion_FullMethodName         = "/header.WidgetService/SubmitConversion"
 	WidgetService_SubmitUserCampaignStatus_FullMethodName = "/header.WidgetService/SubmitUserCampaignStatus"
@@ -20645,6 +20684,7 @@ type WidgetServiceClient interface {
 	Update(ctx context.Context, in *WidgetSetting, opts ...grpc.CallOption) (*WidgetSetting, error)
 	ReadUserSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetUserSetting, error)
 	ReadAccountSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccountWeb, error)
+	ReadAccountSetting2(ctx context.Context, in *WidgetSettingRequest, opts ...grpc.CallOption) (*AccountWeb, error)
 	SubmitImpression(ctx context.Context, in *Impression, opts ...grpc.CallOption) (*Impression, error)
 	SubmitConversion(ctx context.Context, in *Conversion, opts ...grpc.CallOption) (*Conversion, error)
 	SubmitUserCampaignStatus(ctx context.Context, in *UserCampaignStatus, opts ...grpc.CallOption) (*UserCampaignStatus, error)
@@ -20714,6 +20754,16 @@ func (c *widgetServiceClient) ReadAccountSetting(ctx context.Context, in *Id, op
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AccountWeb)
 	err := c.cc.Invoke(ctx, WidgetService_ReadAccountSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ReadAccountSetting2(ctx context.Context, in *WidgetSettingRequest, opts ...grpc.CallOption) (*AccountWeb, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AccountWeb)
+	err := c.cc.Invoke(ctx, WidgetService_ReadAccountSetting2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -20980,6 +21030,7 @@ type WidgetServiceServer interface {
 	Update(context.Context, *WidgetSetting) (*WidgetSetting, error)
 	ReadUserSetting(context.Context, *Id) (*WidgetUserSetting, error)
 	ReadAccountSetting(context.Context, *Id) (*AccountWeb, error)
+	ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error)
 	SubmitImpression(context.Context, *Impression) (*Impression, error)
 	SubmitConversion(context.Context, *Conversion) (*Conversion, error)
 	SubmitUserCampaignStatus(context.Context, *UserCampaignStatus) (*UserCampaignStatus, error)
@@ -21026,6 +21077,9 @@ func (UnimplementedWidgetServiceServer) ReadUserSetting(context.Context, *Id) (*
 }
 func (UnimplementedWidgetServiceServer) ReadAccountSetting(context.Context, *Id) (*AccountWeb, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadAccountSetting not implemented")
+}
+func (UnimplementedWidgetServiceServer) ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadAccountSetting2 not implemented")
 }
 func (UnimplementedWidgetServiceServer) SubmitImpression(context.Context, *Impression) (*Impression, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitImpression not implemented")
@@ -21191,6 +21245,24 @@ func _WidgetService_ReadAccountSetting_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WidgetServiceServer).ReadAccountSetting(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ReadAccountSetting2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WidgetSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ReadAccountSetting2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WidgetService_ReadAccountSetting2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ReadAccountSetting2(ctx, req.(*WidgetSettingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -21667,6 +21739,10 @@ var WidgetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadAccountSetting",
 			Handler:    _WidgetService_ReadAccountSetting_Handler,
+		},
+		{
+			MethodName: "ReadAccountSetting2",
+			Handler:    _WidgetService_ReadAccountSetting2_Handler,
 		},
 		{
 			MethodName: "SubmitImpression",

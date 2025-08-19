@@ -1035,3 +1035,11 @@ message AIAgentDataEntryRequest {
 
 	repeated string entry_ids = 5 ;
 }
+
+message WidgetSettingRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string url = 3;
+	repeated string include_bot_ids = 4;
+	string user_id = 5;
+}
