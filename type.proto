@@ -41,7 +41,8 @@ enum RealtimeType {
 
 	conversation_joined = 44; // event.data.conversation.memebers.0
 	conversation_invited = 45;
-	conversation_left = 46 ;
+	conversation_left = 46;
+	conversation_membership_updated = 53;
 
 	conversation_tagged = 47;
 	conversation_untagged = 48;
@@ -347,6 +348,8 @@ enum RealtimeType {
 	segment_sync_deleted = 351;
 
 	facebook_offline_conversion_sent = 352;
+	human_notified = 353; // conversation
+	human_handled = 354; // conversation
 }
 
 message TextTransform {

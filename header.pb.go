@@ -895,7 +895,6 @@ const (
 	ConversationMember_left       ConversationMember_State = 1
 	ConversationMember_observer   ConversationMember_State = 2 // assigned
 	ConversationMember_terminated ConversationMember_State = 3 // bot only
-	ConversationMember_background ConversationMember_State = 5
 )
 
 // Enum value maps for ConversationMember_State.
@@ -905,14 +904,12 @@ var (
 		1: "left",
 		2: "observer",
 		3: "terminated",
-		5: "background",
 	}
 	ConversationMember_State_value = map[string]int32{
 		"active":     0,
 		"left":       1,
 		"observer":   2,
 		"terminated": 3,
-		"background": 5,
 	}
 )
 
@@ -9687,38 +9684,39 @@ func (x *RouteResult) GetAssignedTo() string {
 }
 
 type ConversationMember struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId          string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Type               string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // type
-	Id                 string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	TicketId           string                 `protobuf:"bytes,6,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	ConversationId     string                 `protobuf:"bytes,13,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
-	Membership         string                 `protobuf:"bytes,12,opt,name=membership,proto3" json:"membership,omitempty"`
-	InvitedBy          *By                    `protobuf:"bytes,16,opt,name=invited_by,json=invitedBy,proto3" json:"invited_by,omitempty"`
-	LeftAt             int64                  `protobuf:"varint,17,opt,name=left_at,json=leftAt,proto3" json:"left_at,omitempty"`
-	JoinedAt           int64                  `protobuf:"varint,18,opt,name=joined_at,json=joinedAt,proto3" json:"joined_at,omitempty"`                     // ms
-	FirstMessageAt     int64                  `protobuf:"varint,19,opt,name=first_message_at,json=firstMessageAt,proto3" json:"first_message_at,omitempty"` // ms
-	SeenAt             int64                  `protobuf:"varint,20,opt,name=seen_at,json=seenAt,proto3" json:"seen_at,omitempty"`
-	ReceivedAt         int64                  `protobuf:"varint,21,opt,name=received_at,json=receivedAt,proto3" json:"received_at,omitempty"`
-	LastSent           int64                  `protobuf:"varint,23,opt,name=last_sent,json=lastSent,proto3" json:"last_sent,omitempty"`                                // timestamp
-	LastSentEventTime  int64                  `protobuf:"varint,39,opt,name=last_sent_event_time,json=lastSentEventTime,proto3" json:"last_sent_event_time,omitempty"` // true time sent timestamp
-	CallAnswered       int64                  `protobuf:"varint,24,opt,name=call_answered,json=callAnswered,proto3" json:"call_answered,omitempty"`
-	CallRang           int64                  `protobuf:"varint,25,opt,name=call_rang,json=callRang,proto3" json:"call_rang,omitempty"`
-	IsMuted            bool                   `protobuf:"varint,27,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
-	OffNotification    bool                   `protobuf:"varint,28,opt,name=off_notification,json=offNotification,proto3" json:"off_notification,omitempty"`
-	Hidden             int64                  `protobuf:"varint,29,opt,name=hidden,proto3" json:"hidden,omitempty"`                                    // ms
-	LastMentioned      int64                  `protobuf:"varint,30,opt,name=last_mentioned,json=lastMentioned,proto3" json:"last_mentioned,omitempty"` // ms
-	InviteReason       string                 `protobuf:"bytes,34,opt,name=invite_reason,json=inviteReason,proto3" json:"invite_reason,omitempty"`
-	TotalMessages      int64                  `protobuf:"varint,35,opt,name=total_messages,json=totalMessages,proto3" json:"total_messages,omitempty"`
-	LastActionAt       int64                  `protobuf:"varint,37,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
-	IsSubscribed       string                 `protobuf:"bytes,38,opt,name=is_subscribed,json=isSubscribed,proto3" json:"is_subscribed,omitempty"` // "", off, on
-	WorkflowSessionId  string                 `protobuf:"bytes,40,opt,name=workflow_session_id,json=workflowSessionId,proto3" json:"workflow_session_id,omitempty"`
-	BotVersion         int64                  `protobuf:"varint,41,opt,name=bot_version,json=botVersion,proto3" json:"bot_version,omitempty"`
-	BotTakeoverEnabled int64                  `protobuf:"varint,43,opt,name=bot_takeover_enabled,json=botTakeoverEnabled,proto3" json:"bot_takeover_enabled,omitempty"`
-	BotTakeoverTimeout int64                  `protobuf:"varint,44,opt,name=bot_takeover_timeout,json=botTakeoverTimeout,proto3" json:"bot_takeover_timeout,omitempty"` // ms agent must reply or bot take over
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                 *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId           string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Type                string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // type
+	Id                  string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	TicketId            string                 `protobuf:"bytes,6,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	ConversationId      string                 `protobuf:"bytes,13,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	Membership          string                 `protobuf:"bytes,12,opt,name=membership,proto3" json:"membership,omitempty"`
+	InvitedBy           *By                    `protobuf:"bytes,16,opt,name=invited_by,json=invitedBy,proto3" json:"invited_by,omitempty"`
+	LeftAt              int64                  `protobuf:"varint,17,opt,name=left_at,json=leftAt,proto3" json:"left_at,omitempty"`
+	JoinedAt            int64                  `protobuf:"varint,18,opt,name=joined_at,json=joinedAt,proto3" json:"joined_at,omitempty"`                     // ms
+	FirstMessageAt      int64                  `protobuf:"varint,19,opt,name=first_message_at,json=firstMessageAt,proto3" json:"first_message_at,omitempty"` // ms
+	SeenAt              int64                  `protobuf:"varint,20,opt,name=seen_at,json=seenAt,proto3" json:"seen_at,omitempty"`
+	ReceivedAt          int64                  `protobuf:"varint,21,opt,name=received_at,json=receivedAt,proto3" json:"received_at,omitempty"`
+	LastSent            int64                  `protobuf:"varint,23,opt,name=last_sent,json=lastSent,proto3" json:"last_sent,omitempty"`                                // timestamp
+	LastSentEventTime   int64                  `protobuf:"varint,39,opt,name=last_sent_event_time,json=lastSentEventTime,proto3" json:"last_sent_event_time,omitempty"` // true time sent timestamp
+	CallAnswered        int64                  `protobuf:"varint,24,opt,name=call_answered,json=callAnswered,proto3" json:"call_answered,omitempty"`
+	CallRang            int64                  `protobuf:"varint,25,opt,name=call_rang,json=callRang,proto3" json:"call_rang,omitempty"`
+	IsMuted             bool                   `protobuf:"varint,27,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
+	OffNotification     bool                   `protobuf:"varint,28,opt,name=off_notification,json=offNotification,proto3" json:"off_notification,omitempty"`
+	Hidden              int64                  `protobuf:"varint,29,opt,name=hidden,proto3" json:"hidden,omitempty"`                                    // ms
+	LastMentioned       int64                  `protobuf:"varint,30,opt,name=last_mentioned,json=lastMentioned,proto3" json:"last_mentioned,omitempty"` // ms
+	InviteReason        string                 `protobuf:"bytes,34,opt,name=invite_reason,json=inviteReason,proto3" json:"invite_reason,omitempty"`
+	TotalMessages       int64                  `protobuf:"varint,35,opt,name=total_messages,json=totalMessages,proto3" json:"total_messages,omitempty"`
+	LastActionAt        int64                  `protobuf:"varint,37,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
+	IsSubscribed        string                 `protobuf:"bytes,38,opt,name=is_subscribed,json=isSubscribed,proto3" json:"is_subscribed,omitempty"` // "", off, on
+	WorkflowSessionId   string                 `protobuf:"bytes,40,opt,name=workflow_session_id,json=workflowSessionId,proto3" json:"workflow_session_id,omitempty"`
+	BotVersion          int64                  `protobuf:"varint,41,opt,name=bot_version,json=botVersion,proto3" json:"bot_version,omitempty"`
+	BotTakeoverDisabled int64                  `protobuf:"varint,43,opt,name=bot_takeover_disabled,json=botTakeoverDisabled,proto3" json:"bot_takeover_disabled,omitempty"`
+	BotTakeoverTimeout  int64                  `protobuf:"varint,44,opt,name=bot_takeover_timeout,json=botTakeoverTimeout,proto3" json:"bot_takeover_timeout,omitempty"` // ms agent must reply or bot take over
+	BotFollowUpDisabled int64                  `protobuf:"varint,45,opt,name=bot_follow_up_disabled,json=botFollowUpDisabled,proto3" json:"bot_follow_up_disabled,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ConversationMember) Reset() {
@@ -9940,9 +9938,9 @@ func (x *ConversationMember) GetBotVersion() int64 {
 	return 0
 }
 
-func (x *ConversationMember) GetBotTakeoverEnabled() int64 {
+func (x *ConversationMember) GetBotTakeoverDisabled() int64 {
 	if x != nil {
-		return x.BotTakeoverEnabled
+		return x.BotTakeoverDisabled
 	}
 	return 0
 }
@@ -9950,6 +9948,13 @@ func (x *ConversationMember) GetBotTakeoverEnabled() int64 {
 func (x *ConversationMember) GetBotTakeoverTimeout() int64 {
 	if x != nil {
 		return x.BotTakeoverTimeout
+	}
+	return 0
+}
+
+func (x *ConversationMember) GetBotFollowUpDisabled() int64 {
+	if x != nil {
+		return x.BotFollowUpDisabled
 	}
 	return 0
 }
@@ -10277,11 +10282,11 @@ type Conversation struct {
 	IsTesting     bool  `protobuf:"varint,86,opt,name=is_testing,json=isTesting,proto3" json:"is_testing,omitempty"`             // bot testing, do not report or end
 	HumanNotified int64 `protobuf:"varint,72,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"` // ms timestamp when bot → human handoff happened
 	// int64 human_handoff_at = 88;
-	HumanHandled           int64  `protobuf:"varint,88,opt,name=human_handled,json=humanHandled,proto3" json:"human_handled,omitempty"`                                  // mark that the conversation have been handled
-	HumanHandledBy         string `protobuf:"bytes,89,opt,name=human_handled_by,json=humanHandledBy,proto3" json:"human_handled_by,omitempty"`                           // mark that the conversation have been handled
-	HumanHandoffReasonCode string `protobuf:"bytes,90,opt,name=human_handoff_reason_code,json=humanHandoffReasonCode,proto3" json:"human_handoff_reason_code,omitempty"` // e.g. "bot_confidence_low", "user_request", "policy"
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	HumanHandled          int64  `protobuf:"varint,88,opt,name=human_handled,json=humanHandled,proto3" json:"human_handled,omitempty"`                               // mark that the conversation have been handled
+	HumanHandledBy        string `protobuf:"bytes,89,opt,name=human_handled_by,json=humanHandledBy,proto3" json:"human_handled_by,omitempty"`                        // mark that the conversation have been handled
+	HumanNotifyReasonCode string `protobuf:"bytes,73,opt,name=human_notify_reason_code,json=humanNotifyReasonCode,proto3" json:"human_notify_reason_code,omitempty"` // e.g. "bot_confidence_low", "user_request", "policy"
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Conversation) Reset() {
@@ -10720,9 +10725,9 @@ func (x *Conversation) GetHumanHandledBy() string {
 	return ""
 }
 
-func (x *Conversation) GetHumanHandoffReasonCode() string {
+func (x *Conversation) GetHumanNotifyReasonCode() string {
 	if x != nil {
-		return x.HumanHandoffReasonCode
+		return x.HumanNotifyReasonCode
 	}
 	return ""
 }
@@ -71123,7 +71128,7 @@ const file_header_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1f\n" +
 	"\vassigned_to\x18\v \x01(\tR\n" +
-	"assignedTo\"\xd3\b\n" +
+	"assignedTo\"\xfa\b\n" +
 	"\x12ConversationMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71158,18 +71163,17 @@ const file_header_proto_rawDesc = "" +
 	"\ris_subscribed\x18& \x01(\tR\fisSubscribed\x12.\n" +
 	"\x13workflow_session_id\x18( \x01(\tR\x11workflowSessionId\x12\x1f\n" +
 	"\vbot_version\x18) \x01(\x03R\n" +
-	"botVersion\x120\n" +
-	"\x14bot_takeover_enabled\x18+ \x01(\x03R\x12botTakeoverEnabled\x120\n" +
-	"\x14bot_takeover_timeout\x18, \x01(\x03R\x12botTakeoverTimeout\"K\n" +
+	"botVersion\x122\n" +
+	"\x15bot_takeover_disabled\x18+ \x01(\x03R\x13botTakeoverDisabled\x120\n" +
+	"\x14bot_takeover_timeout\x18, \x01(\x03R\x12botTakeoverTimeout\x123\n" +
+	"\x16bot_follow_up_disabled\x18- \x01(\x03R\x13botFollowUpDisabled\";\n" +
 	"\x05State\x12\n" +
 	"\n" +
 	"\x06active\x10\x00\x12\b\n" +
 	"\x04left\x10\x01\x12\f\n" +
 	"\bobserver\x10\x02\x12\x0e\n" +
 	"\n" +
-	"terminated\x10\x03\x12\x0e\n" +
-	"\n" +
-	"background\x10\x05\"\xcc\a\n" +
+	"terminated\x10\x03\"\xcc\a\n" +
 	"\fStartRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71204,7 +71208,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_submission\x18. \x01(\v2\x16.header.FormSubmissionR\x0eformSubmission\x129\n" +
 	"\rgoogle_review\x18/ \x01(\v2\x14.header.GoogleReviewR\fgoogleReview\x12\x1d\n" +
 	"\n" +
-	"is_testing\x182 \x01(\bR\tisTesting\"\xb5\x12\n" +
+	"is_testing\x182 \x01(\bR\tisTesting\"\xb3\x12\n" +
 	"\fConversation\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -71275,8 +71279,8 @@ const file_header_proto_rawDesc = "" +
 	"is_testing\x18V \x01(\bR\tisTesting\x12%\n" +
 	"\x0ehuman_notified\x18H \x01(\x03R\rhumanNotified\x12#\n" +
 	"\rhuman_handled\x18X \x01(\x03R\fhumanHandled\x12(\n" +
-	"\x10human_handled_by\x18Y \x01(\tR\x0ehumanHandledBy\x129\n" +
-	"\x19human_handoff_reason_code\x18Z \x01(\tR\x16humanHandoffReasonCode\"~\n" +
+	"\x10human_handled_by\x18Y \x01(\tR\x0ehumanHandledBy\x127\n" +
+	"\x18human_notify_reason_code\x18I \x01(\tR\x15humanNotifyReasonCode\"~\n" +
 	"\x1bAIAgentAutoSendThankSetting\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\x03R\aenabled\x12 \n" +
 	"\vinstruction\x18\x04 \x01(\tR\vinstruction\x12#\n" +

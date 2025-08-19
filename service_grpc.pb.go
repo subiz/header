@@ -11578,7 +11578,7 @@ type ConversationMgrClient interface {
 	MarkReadTopic(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	UpdateConversationInfo(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Conversation, error)
 	UpdateMuteConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
-	UpdateConversationMember(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
+	UpdateConversationMember(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Response, error)
 	UnwatchConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
 	UnhiddenConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
 	UnsentMessage(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
@@ -11638,7 +11638,7 @@ type ConversationMgrClient interface {
 	OnBotDeleted(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	OnAIAgentUpdated(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
 	// for ai agent to notify human
-	NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
+	NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
 	MarkAsHumanHandled(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error)
 }
@@ -11821,9 +11821,9 @@ func (c *conversationMgrClient) UpdateMuteConversation(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *conversationMgrClient) UpdateConversationMember(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error) {
+func (c *conversationMgrClient) UpdateConversationMember(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_UpdateConversationMember_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -12371,9 +12371,9 @@ func (c *conversationMgrClient) OnAIAgentUpdated(ctx context.Context, in *AIAgen
 	return out, nil
 }
 
-func (c *conversationMgrClient) NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+func (c *conversationMgrClient) NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Event)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_NotifyHuman_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -12422,7 +12422,7 @@ type ConversationMgrServer interface {
 	MarkReadTopic(context.Context, *Id) (*Empty, error)
 	UpdateConversationInfo(context.Context, *Conversation) (*Conversation, error)
 	UpdateMuteConversation(context.Context, *Conversation) (*Empty, error)
-	UpdateConversationMember(context.Context, *ConversationMember) (*Empty, error)
+	UpdateConversationMember(context.Context, *ConversationMember) (*Response, error)
 	UnwatchConversation(context.Context, *Conversation) (*Empty, error)
 	UnhiddenConversation(context.Context, *Conversation) (*Empty, error)
 	UnsentMessage(context.Context, *Event) (*Event, error)
@@ -12482,7 +12482,7 @@ type ConversationMgrServer interface {
 	OnBotDeleted(context.Context, *Id) (*Response, error)
 	OnAIAgentUpdated(context.Context, *AIAgent) (*Response, error)
 	// for ai agent to notify human
-	NotifyHuman(context.Context, *Event) (*Event, error)
+	NotifyHuman(context.Context, *Event) (*Response, error)
 	MarkAsHumanHandled(context.Context, *Id) (*Response, error)
 	ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
@@ -12546,7 +12546,7 @@ func (UnimplementedConversationMgrServer) UpdateConversationInfo(context.Context
 func (UnimplementedConversationMgrServer) UpdateMuteConversation(context.Context, *Conversation) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMuteConversation not implemented")
 }
-func (UnimplementedConversationMgrServer) UpdateConversationMember(context.Context, *ConversationMember) (*Empty, error) {
+func (UnimplementedConversationMgrServer) UpdateConversationMember(context.Context, *ConversationMember) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConversationMember not implemented")
 }
 func (UnimplementedConversationMgrServer) UnwatchConversation(context.Context, *Conversation) (*Empty, error) {
@@ -12711,7 +12711,7 @@ func (UnimplementedConversationMgrServer) OnBotDeleted(context.Context, *Id) (*R
 func (UnimplementedConversationMgrServer) OnAIAgentUpdated(context.Context, *AIAgent) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnAIAgentUpdated not implemented")
 }
-func (UnimplementedConversationMgrServer) NotifyHuman(context.Context, *Event) (*Event, error) {
+func (UnimplementedConversationMgrServer) NotifyHuman(context.Context, *Event) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyHuman not implemented")
 }
 func (UnimplementedConversationMgrServer) MarkAsHumanHandled(context.Context, *Id) (*Response, error) {

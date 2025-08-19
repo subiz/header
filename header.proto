@@ -1139,7 +1139,6 @@ message ConversationMember {
 		left = 1;
 		observer = 2; // assigned
 		terminated = 3; // bot only
-		background = 5;
 	};
 	By invited_by = 16;
 
@@ -1167,8 +1166,9 @@ message ConversationMember {
 	string workflow_session_id = 40;
 	int64 bot_version = 41;
 
-	int64 bot_takeover_enabled = 43;
+	int64 bot_takeover_disabled = 43;
 	int64 bot_takeover_timeout = 44; // ms agent must reply or bot take over
+	int64 bot_follow_up_disabled = 45;
 }
 
 message StartRequest {
@@ -1318,7 +1318,7 @@ message Conversation {
 	// int64 human_handoff_at = 88;
 	int64 human_handled = 88; // mark that the conversation have been handled
 	string human_handled_by = 89; // mark that the conversation have been handled
-	string human_handoff_reason_code = 90; // e.g. "bot_confidence_low", "user_request", "policy"
+	string human_notify_reason_code = 73; // e.g. "bot_confidence_low", "user_request", "policy"
 }
 
 message AIAgentAutoSendThankSetting {

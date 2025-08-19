@@ -51,6 +51,7 @@ const (
 	RealtimeType_conversation_joined                RealtimeType = 44 // event.data.conversation.memebers.0
 	RealtimeType_conversation_invited               RealtimeType = 45
 	RealtimeType_conversation_left                  RealtimeType = 46
+	RealtimeType_conversation_membership_updated    RealtimeType = 53
 	RealtimeType_conversation_tagged                RealtimeType = 47
 	RealtimeType_conversation_untagged              RealtimeType = 48
 	RealtimeType_integration_updated                RealtimeType = 49
@@ -266,6 +267,8 @@ const (
 	RealtimeType_segment_sync_updated             RealtimeType = 350
 	RealtimeType_segment_sync_deleted             RealtimeType = 351
 	RealtimeType_facebook_offline_conversion_sent RealtimeType = 352
+	RealtimeType_human_notified                   RealtimeType = 353 // conversation
+	RealtimeType_human_handled                    RealtimeType = 354 // conversation
 )
 
 // Enum value maps for RealtimeType.
@@ -297,6 +300,7 @@ var (
 		44:  "conversation_joined",
 		45:  "conversation_invited",
 		46:  "conversation_left",
+		53:  "conversation_membership_updated",
 		47:  "conversation_tagged",
 		48:  "conversation_untagged",
 		49:  "integration_updated",
@@ -511,6 +515,8 @@ var (
 		350: "segment_sync_updated",
 		351: "segment_sync_deleted",
 		352: "facebook_offline_conversion_sent",
+		353: "human_notified",
+		354: "human_handled",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -539,6 +545,7 @@ var (
 		"conversation_joined":                44,
 		"conversation_invited":               45,
 		"conversation_left":                  46,
+		"conversation_membership_updated":    53,
 		"conversation_tagged":                47,
 		"conversation_untagged":              48,
 		"integration_updated":                49,
@@ -753,6 +760,8 @@ var (
 		"segment_sync_updated":               350,
 		"segment_sync_deleted":               351,
 		"facebook_offline_conversion_sent":   352,
+		"human_notified":                     353,
+		"human_handled":                      354,
 	}
 )
 
@@ -1782,7 +1791,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\x87.\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xd5.\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1810,7 +1819,8 @@ const file_type_proto_rawDesc = "" +
 	"\fmessage_pong\x10+\x12\x17\n" +
 	"\x13conversation_joined\x10,\x12\x18\n" +
 	"\x14conversation_invited\x10-\x12\x15\n" +
-	"\x11conversation_left\x10.\x12\x17\n" +
+	"\x11conversation_left\x10.\x12#\n" +
+	"\x1fconversation_membership_updated\x105\x12\x17\n" +
 	"\x13conversation_tagged\x10/\x12\x19\n" +
 	"\x15conversation_untagged\x100\x12\x17\n" +
 	"\x13integration_updated\x101\x12\x17\n" +
@@ -2025,7 +2035,9 @@ const file_type_proto_rawDesc = "" +
 	"\x1ffacebook_event_add_to_cart_sent\x10\xd9\x02\x12\x19\n" +
 	"\x14segment_sync_updated\x10\xde\x02\x12\x19\n" +
 	"\x14segment_sync_deleted\x10\xdf\x02\x12%\n" +
-	" facebook_offline_conversion_sent\x10\xe0\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	" facebook_offline_conversion_sent\x10\xe0\x02\x12\x13\n" +
+	"\x0ehuman_notified\x10\xe1\x02\x12\x12\n" +
+	"\rhuman_handled\x10\xe2\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once

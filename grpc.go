@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/crc32"
-	"io"
-	"net/http"
 	"os"
 	"reflect"
 	"runtime/debug"
@@ -592,69 +590,6 @@ func init() {
 	if dat, _ := os.ReadFile(".server_config"); len(dat) > 0 {
 		json.Unmarshal(dat, conf)
 	}
-
-	makeSureServerConfiguation(conf)
-	_serverConfiguration = *conf
-	go func() {
-		for {
-			conf, err := fetchServerConfig()
-			if err == nil && conf != nil {
-				makeSureServerConfiguation(conf)
-				_serverConfiguration = *conf
-			}
-
-			time.Sleep(30 * time.Second)
-		}
-	}()
-}
-
-func fetchServerConfig() (*ServerConfig, error) {
-	resp, err := http.Get("https://config.subiz.net/subiz")
-	if err != nil {
-		return nil, log.ERetry(err, log.M{"MSG": "CANNOT FETCH CONFIG"})
-	}
-
-	bodyBytes, _ := io.ReadAll(resp.Body)
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, log.ERetry(err, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG"})
-	}
-
-	conf := &ServerConfig{}
-	err = json.Unmarshal(bodyBytes, conf)
-	if err == nil {
-		return conf, nil
-	}
-	return nil, log.ERetry(err, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG INVALIDJSON"})
-}
-
-func makeSureServerConfiguation(conf *ServerConfig) {
-	if conf == nil {
-		return
-	}
-	// make sure service config is good
-	if conf.Services == nil {
-		conf.Services = map[string]ServiceConfiguration{}
-	}
-	for _, s := range conf.Services {
-		s.PortStr = strconv.Itoa(int(s.Port))
-	}
-
-	if conf.StaggingAccounts == nil {
-		conf.StaggingAccounts = map[string]bool{}
-	}
-
-	if conf.ProductionAccounts == nil {
-		conf.ProductionAccounts = map[string]bool{}
-	}
-
-	if conf.DevelopmentAccounts == nil {
-		conf.DevelopmentAccounts = map[string]bool{}
-	}
-
-	if conf.XAccounts == nil {
-		conf.XAccounts = map[string]bool{}
-	}
 }
 
 func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
@@ -715,12 +650,6 @@ func NewServer() *grpc.Server {
 		grpc.StatsHandler(otelgrpc.NewServerHandler()),
 	)
 }
-
-var (
-	dialLock             = &sync.Mutex{}
-	ticketClients        map[string]TicketMgrClient
-	_serverConfiguration ServerConfig
-)
 
 type ServiceConfiguration struct {
 	PortStr   string // must fill using port
@@ -795,6 +724,7 @@ func staggingTarget(target string) string {
 
 func isNormalService(target string) bool {
 	return strings.Contains(target, "account") ||
+		strings.Contains(target, "automation") ||
 		strings.Contains(target, "bizbot") ||
 		strings.Contains(target, "counter") ||
 		strings.Contains(target, "email") ||

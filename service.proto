@@ -419,7 +419,7 @@ service ConversationMgr {
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
-	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
+	rpc UpdateConversationMember(header.ConversationMember) returns (Response);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc UnhiddenConversation(header.Conversation) returns (Empty);
 
@@ -503,7 +503,7 @@ service ConversationMgr {
 	rpc OnAIAgentUpdated(header.AIAgent) returns (Response); // update rule
 
 	// for ai agent to notify human
-	rpc NotifyHuman(header.Event) returns (header.Event);
+	rpc NotifyHuman(header.Event) returns (header.Response);
 	rpc MarkAsHumanHandled(header.Id) returns (Response);
 	rpc ReportMessages(ReportConvoMessageRequest) returns (Response);
 }

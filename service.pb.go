@@ -464,7 +464,7 @@ const file_service_proto_rawDesc = "" +
 	"\x11TryWorkflowAction\x12#.header.StartWorkflowSessionRequest\x1a\r.header.Empty\x12J\n" +
 	"\x13ListAIAgentMessages\x12!.header.ListAIAgentMessageRequest\x1a\x10.header.Response\x12D\n" +
 	"\x12ListConvertedLeads\x12\x1c.header.ReportAIAgentRequest\x1a\x10.header.Response\x12C\n" +
-	"\x12GetAIResponseTrace\x12\x1b.header.AIAgentTraceRequest\x1a\x10.header.Response2\x98!\n" +
+	"\x12GetAIResponseTrace\x12\x1b.header.AIAgentTraceRequest\x1a\x10.header.Response2\x9e!\n" +
 	"\x0fConversationMgr\x128\n" +
 	"\n" +
 	"AssignRule\x12\x15.header.AssignRequest\x1a\x13.header.RouteResult\x127\n" +
@@ -488,8 +488,8 @@ const file_service_proto_rawDesc = "" +
 	"\rMarkReadTopic\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12D\n" +
 	"\x16UpdateConversationInfo\x12\x14.header.Conversation\x1a\x14.header.Conversation\x12=\n" +
-	"\x16UpdateMuteConversation\x12\x14.header.Conversation\x1a\r.header.Empty\x12E\n" +
-	"\x18UpdateConversationMember\x12\x1a.header.ConversationMember\x1a\r.header.Empty\x12:\n" +
+	"\x16UpdateMuteConversation\x12\x14.header.Conversation\x1a\r.header.Empty\x12H\n" +
+	"\x18UpdateConversationMember\x12\x1a.header.ConversationMember\x1a\x10.header.Response\x12:\n" +
 	"\x13UnwatchConversation\x12\x14.header.Conversation\x1a\r.header.Empty\x12;\n" +
 	"\x14UnhiddenConversation\x12\x14.header.Conversation\x1a\r.header.Empty\x12-\n" +
 	"\rUnsentMessage\x12\r.header.Event\x1a\r.header.Event\x12:\n" +
@@ -568,8 +568,8 @@ const file_service_proto_rawDesc = "" +
 	"\fOnBotUpdated\x12\v.header.Bot\x1a\x10.header.Response\x12,\n" +
 	"\fOnBotDeleted\x12\n" +
 	".header.Id\x1a\x10.header.Response\x125\n" +
-	"\x10OnAIAgentUpdated\x12\x0f.header.AIAgent\x1a\x10.header.Response\x12+\n" +
-	"\vNotifyHuman\x12\r.header.Event\x1a\r.header.Event\x122\n" +
+	"\x10OnAIAgentUpdated\x12\x0f.header.AIAgent\x1a\x10.header.Response\x12.\n" +
+	"\vNotifyHuman\x12\r.header.Event\x1a\x10.header.Response\x122\n" +
 	"\x12MarkAsHumanHandled\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12E\n" +
 	"\x0eReportMessages\x12!.header.ReportConvoMessageRequest\x1a\x10.header.Response2\xd8\x17\n" +
@@ -2526,7 +2526,7 @@ var file_service_proto_depIdxs = []int32{
 	9,   // 1033: header.ConversationMgr.MarkReadTopic:output_type -> header.Empty
 	105, // 1034: header.ConversationMgr.UpdateConversationInfo:output_type -> header.Conversation
 	9,   // 1035: header.ConversationMgr.UpdateMuteConversation:output_type -> header.Empty
-	9,   // 1036: header.ConversationMgr.UpdateConversationMember:output_type -> header.Empty
+	257, // 1036: header.ConversationMgr.UpdateConversationMember:output_type -> header.Response
 	9,   // 1037: header.ConversationMgr.UnwatchConversation:output_type -> header.Empty
 	9,   // 1038: header.ConversationMgr.UnhiddenConversation:output_type -> header.Empty
 	64,  // 1039: header.ConversationMgr.UnsentMessage:output_type -> header.Event
@@ -2581,7 +2581,7 @@ var file_service_proto_depIdxs = []int32{
 	257, // 1088: header.ConversationMgr.OnBotUpdated:output_type -> header.Response
 	257, // 1089: header.ConversationMgr.OnBotDeleted:output_type -> header.Response
 	257, // 1090: header.ConversationMgr.OnAIAgentUpdated:output_type -> header.Response
-	64,  // 1091: header.ConversationMgr.NotifyHuman:output_type -> header.Event
+	257, // 1091: header.ConversationMgr.NotifyHuman:output_type -> header.Response
 	257, // 1092: header.ConversationMgr.MarkAsHumanHandled:output_type -> header.Response
 	257, // 1093: header.ConversationMgr.ReportMessages:output_type -> header.Response
 	121, // 1094: header.TicketMgr.CreateTicketType:output_type -> header.TicketType
