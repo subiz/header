@@ -1167,8 +1167,10 @@ message ConversationMember {
 	int64 bot_version = 41;
 
 	int64 bot_takeover_disabled = 43;
-	int64 bot_takeover_timeout = 44; // ms agent must reply or bot take over
+	int64 bot_takeover_at = 44; // ms agent must reply or bot take over
 	int64 bot_follow_up_disabled = 45;
+
+	Message bot_takeover_message = 46;
 }
 
 message StartRequest {

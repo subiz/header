@@ -503,7 +503,7 @@ service ConversationMgr {
 	rpc OnAIAgentUpdated(header.AIAgent) returns (Response); // update rule
 
 	// for ai agent to notify human
-	rpc NotifyHuman(header.Event) returns (header.Response);
+	rpc NotifyHuman(header.Event) returns (header.Response); // internal
 	rpc MarkAsHumanHandled(header.Id) returns (Response);
 	rpc ReportMessages(ReportConvoMessageRequest) returns (Response);
 }
