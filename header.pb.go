@@ -10293,6 +10293,7 @@ type Conversation struct {
 	HumanHandled          int64  `protobuf:"varint,88,opt,name=human_handled,json=humanHandled,proto3" json:"human_handled,omitempty"`                               // mark that the conversation have been handled
 	HumanHandledBy        string `protobuf:"bytes,89,opt,name=human_handled_by,json=humanHandledBy,proto3" json:"human_handled_by,omitempty"`                        // mark that the conversation have been handled
 	HumanNotifyReasonCode string `protobuf:"bytes,73,opt,name=human_notify_reason_code,json=humanNotifyReasonCode,proto3" json:"human_notify_reason_code,omitempty"` // e.g. "bot_confidence_low", "user_request", "policy"
+	HumanNotifyMessage    string `protobuf:"bytes,74,opt,name=human_notify_message,json=humanNotifyMessage,proto3" json:"human_notify_message,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -10736,6 +10737,13 @@ func (x *Conversation) GetHumanHandledBy() string {
 func (x *Conversation) GetHumanNotifyReasonCode() string {
 	if x != nil {
 		return x.HumanNotifyReasonCode
+	}
+	return ""
+}
+
+func (x *Conversation) GetHumanNotifyMessage() string {
+	if x != nil {
+		return x.HumanNotifyMessage
 	}
 	return ""
 }
@@ -71217,7 +71225,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_submission\x18. \x01(\v2\x16.header.FormSubmissionR\x0eformSubmission\x129\n" +
 	"\rgoogle_review\x18/ \x01(\v2\x14.header.GoogleReviewR\fgoogleReview\x12\x1d\n" +
 	"\n" +
-	"is_testing\x182 \x01(\bR\tisTesting\"\xb3\x12\n" +
+	"is_testing\x182 \x01(\bR\tisTesting\"\xe5\x12\n" +
 	"\fConversation\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -71289,7 +71297,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0ehuman_notified\x18H \x01(\x03R\rhumanNotified\x12#\n" +
 	"\rhuman_handled\x18X \x01(\x03R\fhumanHandled\x12(\n" +
 	"\x10human_handled_by\x18Y \x01(\tR\x0ehumanHandledBy\x127\n" +
-	"\x18human_notify_reason_code\x18I \x01(\tR\x15humanNotifyReasonCode\"~\n" +
+	"\x18human_notify_reason_code\x18I \x01(\tR\x15humanNotifyReasonCode\x120\n" +
+	"\x14human_notify_message\x18J \x01(\tR\x12humanNotifyMessage\"~\n" +
 	"\x1bAIAgentAutoSendThankSetting\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\x03R\aenabled\x12 \n" +
 	"\vinstruction\x18\x04 \x01(\tR\vinstruction\x12#\n" +

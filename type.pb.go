@@ -269,6 +269,7 @@ const (
 	RealtimeType_facebook_offline_conversion_sent RealtimeType = 352
 	RealtimeType_human_notified                   RealtimeType = 353 // conversation
 	RealtimeType_human_handled                    RealtimeType = 354 // conversation
+	RealtimeType_workflow_thread_heartbeat        RealtimeType = 355 // manually trigger workflow waiting thread
 )
 
 // Enum value maps for RealtimeType.
@@ -517,6 +518,7 @@ var (
 		352: "facebook_offline_conversion_sent",
 		353: "human_notified",
 		354: "human_handled",
+		355: "workflow_thread_heartbeat",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -762,6 +764,7 @@ var (
 		"facebook_offline_conversion_sent":   352,
 		"human_notified":                     353,
 		"human_handled":                      354,
+		"workflow_thread_heartbeat":          355,
 	}
 )
 
@@ -1791,7 +1794,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xd5.\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xf5.\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -2037,7 +2040,8 @@ const file_type_proto_rawDesc = "" +
 	"\x14segment_sync_deleted\x10\xdf\x02\x12%\n" +
 	" facebook_offline_conversion_sent\x10\xe0\x02\x12\x13\n" +
 	"\x0ehuman_notified\x10\xe1\x02\x12\x12\n" +
-	"\rhuman_handled\x10\xe2\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\rhuman_handled\x10\xe2\x02\x12\x1e\n" +
+	"\x19workflow_thread_heartbeat\x10\xe3\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once
