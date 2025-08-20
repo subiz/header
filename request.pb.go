@@ -6233,13 +6233,15 @@ func (x *NewPassword) GetEmail() string {
 }
 
 type CrawlUrlRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	LastMd5       string                 `protobuf:"bytes,3,opt,name=last_md5,json=lastMd5,proto3" json:"last_md5,omitempty"`
-	LinkOnly      bool                   `protobuf:"varint,4,opt,name=link_only,json=linkOnly,proto3" json:"link_only,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Url               string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	LastMd5           string                 `protobuf:"bytes,3,opt,name=last_md5,json=lastMd5,proto3" json:"last_md5,omitempty"`
+	LinkOnly          bool                   `protobuf:"varint,4,opt,name=link_only,json=linkOnly,proto3" json:"link_only,omitempty"`
+	JavascriptEnabled bool                   `protobuf:"varint,5,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
+	Timeout           int64                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"` // ms 30_000 default
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CrawlUrlRequest) Reset() {
@@ -6298,6 +6300,20 @@ func (x *CrawlUrlRequest) GetLinkOnly() bool {
 		return x.LinkOnly
 	}
 	return false
+}
+
+func (x *CrawlUrlRequest) GetJavascriptEnabled() bool {
+	if x != nil {
+		return x.JavascriptEnabled
+	}
+	return false
+}
+
+func (x *CrawlUrlRequest) GetTimeout() int64 {
+	if x != nil {
+		return x.Timeout
+	}
+	return 0
 }
 
 type ListAIDataEntryRequest struct {
@@ -9251,12 +9267,14 @@ const file_request_proto_rawDesc = "" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12!\n" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\"~\n" +
+	"\x05email\x18\b \x01(\tR\x05email\"\xc7\x01\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
 	"\blast_md5\x18\x03 \x01(\tR\alastMd5\x12\x1b\n" +
-	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\"\xf9\x03\n" +
+	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\x12-\n" +
+	"\x12javascript_enabled\x18\x05 \x01(\bR\x11javascriptEnabled\x12\x18\n" +
+	"\atimeout\x18\x06 \x01(\x03R\atimeout\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

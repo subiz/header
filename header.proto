@@ -9297,6 +9297,7 @@ message CrawlResponse {
 	int64 num_characters = 11;
 
 	Product product = 12;
+	repeated Product products = 13;
 }
 
 message AIDataChunk {

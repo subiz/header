@@ -773,6 +773,8 @@ message CrawlUrlRequest {
 	string url = 2;
 	string last_md5 = 3;
 	bool link_only = 4;
+	bool javascript_enabled = 5;
+	int64 timeout = 6; // ms 30_000 default
 }
 
 message ListAIDataEntryRequest {
