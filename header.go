@@ -2422,7 +2422,8 @@ func TruncateConversation(convo *Conversation) {
 	convo.HumanNotified = 0
 	newmems := []*ConversationMember{}
 	for _, mem := range convo.GetMembers() {
-		if mem.Membership != "active" && mem.GetType() != "user" {
+		if mem.Membership != "active" && mem.GetType() != "user" &&
+			mem.GetId() != convo.GetInitialBy() /* incase of user start conversation with bot but bot have not reply */ {
 			continue
 		}
 		m := &ConversationMember{Id: mem.Id, Type: mem.Type, Membership: mem.Membership, LastSent: mem.LastSent}
