@@ -4933,7 +4933,7 @@ message Product {
 	string id = 3; // generated
 	repeated Product other_variants = 4; // [2] [3]
 	string product_group_id = 5; // iphone-6-plus // parent id
-	string title = 6; // deprecated // should be use for name
+	// string title = 6; // deprecated // should be use for name
 
 	string url = 7; // (shared)
 
@@ -4944,7 +4944,7 @@ message Product {
 	string description = 11; // (shared)
 	// I18nString i18n_description = 12; // (shared) server generated
 
-	I18nString i18n_long_description_quill_delta = 13; // (shared)
+	// I18nString i18n_long_description_quill_delta = 13; // (shared)
 	string long_description = 15; // (shared)
 
 	repeated KV props = 14;
@@ -5044,7 +5044,8 @@ message Product {
 
 	bool auto_enrich = 93;
 	repeated ProductEnrichSource enrich_sources = 94;
-	int64 fpv_enriched_cost = 95; // vnd
+	int64 fpv_total_enriched_cost = 95; // vnd
+	int64 fpv_last_enriched_cost = 96; // vnd
 
 	int64 modified = 99;
 	Error error = 100;
@@ -5056,6 +5057,8 @@ message ProductEnrichSource {
 	string url = 4;
 	int64 crawl_interval_ms = 5;
 
+	bool javascript_enabled = 12;
+
 	int64 last_crawled = 6;
 	int64 crawl_duration = 41; // ms
 	int64 crawl_status_code = 7;
@@ -5063,9 +5066,6 @@ message ProductEnrichSource {
 	string crawl_error = 9;
 	int64 body_length = 10;
 	string md5 = 11;
-
-	int64 fpv_last_chunking_cost = 24;
-	int64 fpv_cost = 25;
 }
 
 message ProductStock {
@@ -5101,11 +5101,6 @@ message GoogleSheetProductFeed {
 	string url = 2;
 }
 
-message WebsiteProductFeed {
-	string format = 2; // jsonld, rdfa, microdata
-	string website_url = 3;
-}
-
 message ShopeeProductFeed {
 	string access_token = 4;
 }
@@ -5124,7 +5119,7 @@ message ProductFeed {
 
 	// google sheet
 	ShopeeProductFeed shopee = 5;
-	WebsiteProductFeed website = 6;
+	// WebsiteProductFeed website = 6;
 	GoogleSheetProductFeed google_sheet = 7;
 
 	int64 created = 20;
@@ -5189,21 +5184,10 @@ message KV {
 	repeated Block value_blocks = 8;
 	string value_type = 9; //static, block, blocks
 
-	bool ai_enriched = 10; // this field is enriched by the AI
+	// bool ai_enriched = 10; // this field is enriched by the AI
 	int64 modified = 11;
 	bool ai_enrich_locked = 12;
-}
-
-message ProductAttribute {
-	string key = 2; // attribute id from category.json
-	string value = 3; // jsonified
-
-	// string attribute_id = 5; // definition id
-
-	repeated string values = 4;
-	string range = 6; // "5000-10000", - delimiter
-
-	string unit = 7;
+	string modified_by = 13;
 }
 
 message ProductCategoryBuildQueryExample {
@@ -9348,14 +9332,10 @@ message AIDataEntry {
 	Message answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
-	bool expand_link_disabled = 9;
+	bool javascript_enabled = 9;
+
 	File file = 10;
 	Product product = 18;
-
-	// llm generated
-	string product_category_id = 44;
-	repeated ProductAttribute product_attrs = 42;
-	repeated KV product_extra_props = 32;
 
 	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
