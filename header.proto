@@ -4944,7 +4944,7 @@ message Product {
 	string description = 11; // (shared)
 	// I18nString i18n_description = 12; // (shared) server generated
 
-	I18nString i18n_long_description_quill_delta = 13; // (shared)
+	// I18nString i18n_long_description_quill_delta = 13; // (shared)
 	string long_description = 15; // (shared)
 
 	repeated KV props = 14;
@@ -5044,7 +5044,8 @@ message Product {
 
 	bool auto_enrich = 93;
 	repeated ProductEnrichSource enrich_sources = 94;
-	int64 fpv_enriched_cost = 95; // vnd
+	int64 fpv_total_enriched_cost = 95; // vnd
+	int64 fpv_last_enriched_cost = 96; // vnd
 
 	int64 modified = 99;
 	Error error = 100;
@@ -5063,9 +5064,6 @@ message ProductEnrichSource {
 	string crawl_error = 9;
 	int64 body_length = 10;
 	string md5 = 11;
-
-	int64 fpv_last_chunking_cost = 24;
-	int64 fpv_cost = 25;
 }
 
 message ProductStock {
@@ -9353,9 +9351,9 @@ message AIDataEntry {
 	Product product = 18;
 
 	// llm generated
-	string product_category_id = 44;
-	repeated ProductAttribute product_attrs = 42;
-	repeated KV product_extra_props = 32;
+	// string product_category_id = 44;
+	// repeated ProductAttribute product_attrs = 42;
+	// repeated KV product_extra_props = 32;
 
 	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
