@@ -35496,9 +35496,11 @@ type ProductEnrichSource struct {
 	CrawlIntervalMs     int64                  `protobuf:"varint,5,opt,name=crawl_interval_ms,json=crawlIntervalMs,proto3" json:"crawl_interval_ms,omitempty"`
 	LastCrawled         int64                  `protobuf:"varint,6,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
 	CrawlDuration       int64                  `protobuf:"varint,41,opt,name=crawl_duration,json=crawlDuration,proto3" json:"crawl_duration,omitempty"` // ms
-	CrawlStatus         int64                  `protobuf:"varint,7,opt,name=crawl_status,json=crawlStatus,proto3" json:"crawl_status,omitempty"`
-	BodyLength          int64                  `protobuf:"varint,9,opt,name=body_length,json=bodyLength,proto3" json:"body_length,omitempty"`
-	Md5                 string                 `protobuf:"bytes,23,opt,name=md5,proto3" json:"md5,omitempty"`
+	CrawlStatusCode     int64                  `protobuf:"varint,7,opt,name=crawl_status_code,json=crawlStatusCode,proto3" json:"crawl_status_code,omitempty"`
+	CrawlStatus         string                 `protobuf:"bytes,8,opt,name=crawl_status,json=crawlStatus,proto3" json:"crawl_status,omitempty"` // success | failed
+	CrawlError          string                 `protobuf:"bytes,9,opt,name=crawl_error,json=crawlError,proto3" json:"crawl_error,omitempty"`
+	BodyLength          int64                  `protobuf:"varint,10,opt,name=body_length,json=bodyLength,proto3" json:"body_length,omitempty"`
+	Md5                 string                 `protobuf:"bytes,11,opt,name=md5,proto3" json:"md5,omitempty"`
 	FpvLastChunkingCost int64                  `protobuf:"varint,24,opt,name=fpv_last_chunking_cost,json=fpvLastChunkingCost,proto3" json:"fpv_last_chunking_cost,omitempty"`
 	FpvCost             int64                  `protobuf:"varint,25,opt,name=fpv_cost,json=fpvCost,proto3" json:"fpv_cost,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -35577,11 +35579,25 @@ func (x *ProductEnrichSource) GetCrawlDuration() int64 {
 	return 0
 }
 
-func (x *ProductEnrichSource) GetCrawlStatus() int64 {
+func (x *ProductEnrichSource) GetCrawlStatusCode() int64 {
+	if x != nil {
+		return x.CrawlStatusCode
+	}
+	return 0
+}
+
+func (x *ProductEnrichSource) GetCrawlStatus() string {
 	if x != nil {
 		return x.CrawlStatus
 	}
-	return 0
+	return ""
+}
+
+func (x *ProductEnrichSource) GetCrawlError() string {
+	if x != nil {
+		return x.CrawlError
+	}
+	return ""
 }
 
 func (x *ProductEnrichSource) GetBodyLength() int64 {
@@ -36460,19 +36476,20 @@ func (x *ProductsRequest) GetETag() string {
 }
 
 type KV struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
-	Value         string                 `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
-	KeyId         int64                  `protobuf:"varint,4,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
-	ValueId       int64                  `protobuf:"varint,5,opt,name=value_id,json=valueId,proto3" json:"value_id,omitempty"`
-	Kvs           []*KV                  `protobuf:"bytes,6,rep,name=kvs,proto3" json:"kvs,omitempty"`
-	ValueBlock    *Block                 `protobuf:"bytes,7,opt,name=value_block,json=valueBlock,proto3" json:"value_block,omitempty"`
-	ValueBlocks   []*Block               `protobuf:"bytes,8,rep,name=value_blocks,json=valueBlocks,proto3" json:"value_blocks,omitempty"`
-	ValueType     string                 `protobuf:"bytes,9,opt,name=value_type,json=valueType,proto3" json:"value_type,omitempty"`      //static, block, blocks
-	AiEnriched    bool                   `protobuf:"varint,10,opt,name=ai_enriched,json=aiEnriched,proto3" json:"ai_enriched,omitempty"` // this field is enriched by the AI
-	Modified      int64                  `protobuf:"varint,11,opt,name=modified,proto3" json:"modified,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Key            string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	Value          string                 `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	KeyId          int64                  `protobuf:"varint,4,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	ValueId        int64                  `protobuf:"varint,5,opt,name=value_id,json=valueId,proto3" json:"value_id,omitempty"`
+	Kvs            []*KV                  `protobuf:"bytes,6,rep,name=kvs,proto3" json:"kvs,omitempty"`
+	ValueBlock     *Block                 `protobuf:"bytes,7,opt,name=value_block,json=valueBlock,proto3" json:"value_block,omitempty"`
+	ValueBlocks    []*Block               `protobuf:"bytes,8,rep,name=value_blocks,json=valueBlocks,proto3" json:"value_blocks,omitempty"`
+	ValueType      string                 `protobuf:"bytes,9,opt,name=value_type,json=valueType,proto3" json:"value_type,omitempty"`      //static, block, blocks
+	AiEnriched     bool                   `protobuf:"varint,10,opt,name=ai_enriched,json=aiEnriched,proto3" json:"ai_enriched,omitempty"` // this field is enriched by the AI
+	Modified       int64                  `protobuf:"varint,11,opt,name=modified,proto3" json:"modified,omitempty"`
+	AiEnrichLocked bool                   `protobuf:"varint,12,opt,name=ai_enrich_locked,json=aiEnrichLocked,proto3" json:"ai_enrich_locked,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *KV) Reset() {
@@ -36573,6 +36590,13 @@ func (x *KV) GetModified() int64 {
 		return x.Modified
 	}
 	return 0
+}
+
+func (x *KV) GetAiEnrichLocked() bool {
+	if x != nil {
+		return x.AiEnrichLocked
+	}
+	return false
 }
 
 type ProductAttribute struct {
@@ -74477,18 +74501,22 @@ const file_header_proto_rawDesc = "" +
 	"\x05error\x18d \x01(\v2\r.header.ErrorR\x05error\x1aV\n" +
 	"\x19I18nDescriptionBlockEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12#\n" +
-	"\x05value\x18\x02 \x01(\v2\r.header.BlockR\x05value:\x028\x01\"\xf3\x02\n" +
+	"\x05value\x18\x02 \x01(\v2\r.header.BlockR\x05value:\x028\x01\"\xc0\x03\n" +
 	"\x13ProductEnrichSource\x12\x1a\n" +
 	"\bdisabled\x18\x02 \x01(\x03R\bdisabled\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12*\n" +
 	"\x11crawl_interval_ms\x18\x05 \x01(\x03R\x0fcrawlIntervalMs\x12!\n" +
 	"\flast_crawled\x18\x06 \x01(\x03R\vlastCrawled\x12%\n" +
-	"\x0ecrawl_duration\x18) \x01(\x03R\rcrawlDuration\x12!\n" +
-	"\fcrawl_status\x18\a \x01(\x03R\vcrawlStatus\x12\x1f\n" +
-	"\vbody_length\x18\t \x01(\x03R\n" +
+	"\x0ecrawl_duration\x18) \x01(\x03R\rcrawlDuration\x12*\n" +
+	"\x11crawl_status_code\x18\a \x01(\x03R\x0fcrawlStatusCode\x12!\n" +
+	"\fcrawl_status\x18\b \x01(\tR\vcrawlStatus\x12\x1f\n" +
+	"\vcrawl_error\x18\t \x01(\tR\n" +
+	"crawlError\x12\x1f\n" +
+	"\vbody_length\x18\n" +
+	" \x01(\x03R\n" +
 	"bodyLength\x12\x10\n" +
-	"\x03md5\x18\x17 \x01(\tR\x03md5\x123\n" +
+	"\x03md5\x18\v \x01(\tR\x03md5\x123\n" +
 	"\x16fpv_last_chunking_cost\x18\x18 \x01(\x03R\x13fpvLastChunkingCost\x12\x19\n" +
 	"\bfpv_cost\x18\x19 \x01(\x03R\afpvCost\";\n" +
 	"\fProductStock\x12\x15\n" +
@@ -74577,7 +74605,7 @@ const file_header_proto_rawDesc = "" +
 	"\tsource_id\x18\x15 \x01(\tR\bsourceId\x12\x1d\n" +
 	"\n" +
 	"variant_of\x18\x16 \x01(\tR\tvariantOf\x12\x13\n" +
-	"\x05e_tag\x18\x17 \x01(\tR\x04eTag\"\xba\x02\n" +
+	"\x05e_tag\x18\x17 \x01(\tR\x04eTag\"\xe4\x02\n" +
 	"\x02KV\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\tR\x05value\x12\x15\n" +
@@ -74593,7 +74621,8 @@ const file_header_proto_rawDesc = "" +
 	"\vai_enriched\x18\n" +
 	" \x01(\bR\n" +
 	"aiEnriched\x12\x1a\n" +
-	"\bmodified\x18\v \x01(\x03R\bmodified\"|\n" +
+	"\bmodified\x18\v \x01(\x03R\bmodified\x12(\n" +
+	"\x10ai_enrich_locked\x18\f \x01(\bR\x0eaiEnrichLocked\"|\n" +
 	"\x10ProductAttribute\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\tR\x05value\x12\x16\n" +

@@ -5058,9 +5058,11 @@ message ProductEnrichSource {
 
 	int64 last_crawled = 6;
 	int64 crawl_duration = 41; // ms
-	int64 crawl_status = 7;
-	int64 body_length = 9;
-	string md5 = 23;
+	int64 crawl_status_code = 7;
+	string crawl_status = 8; // success | failed
+	string crawl_error = 9;
+	int64 body_length = 10;
+	string md5 = 11;
 
 	int64 fpv_last_chunking_cost = 24;
 	int64 fpv_cost = 25;
@@ -5189,6 +5191,7 @@ message KV {
 
 	bool ai_enriched = 10; // this field is enriched by the AI
 	int64 modified = 11;
+	bool ai_enrich_locked = 12;
 }
 
 message ProductAttribute {
