@@ -4939,10 +4939,10 @@ message Product {
 
 	string handle = 8; // (shared) iphone-6-plus-128G
 	string name = 9;
-	I18nString i18n_name = 10; // (shared) apple Iphone 6 plus
+	// I18nString i18n_name = 10; // (shared) apple Iphone 6 plus
 
 	string description = 11; // (shared)
-	I18nString i18n_description = 12; // (shared) server generated
+	// I18nString i18n_description = 12; // (shared) server generated
 
 	I18nString i18n_long_description_quill_delta = 13; // (shared)
 	string long_description = 15; // (shared)
@@ -4954,7 +4954,6 @@ message Product {
 
 	// app_link = 11; // mobile deep link
 
-	// repeated KV metadata = 13;
 	// accessory.watch
 	string category = 16; // (shared)
 	// repeated Product related_products = 21; // releated content ids
@@ -5043,7 +5042,28 @@ message Product {
 
 	repeated ProductOffer offers = 92;
 
+	bool auto_enrich = 93;
+	repeated ProductEnrichSource enrich_sources = 94;
+	int64 fpv_enriched_cost = 95; // vnd
+
+	int64 modified = 99;
 	Error error = 100;
+}
+
+message ProductEnrichSource {
+	int64 disabled = 2;
+	string type = 3; // url
+	string url = 4;
+	int64 crawl_interval_ms = 5;
+
+	int64 last_crawled = 6;
+	int64 crawl_duration = 41; // ms
+	int64 crawl_status = 7;
+	int64 body_length = 9;
+	string md5 = 23;
+
+	int64 fpv_last_chunking_cost = 24;
+	int64 fpv_cost = 25;
 }
 
 message ProductStock {
@@ -5166,6 +5186,9 @@ message KV {
 	Block value_block = 7;
 	repeated Block value_blocks = 8;
 	string value_type = 9; //static, block, blocks
+
+	bool ai_enriched = 10; // this field is enriched by the AI
+	int64 modified = 11;
 }
 
 message ProductAttribute {
