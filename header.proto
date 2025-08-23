@@ -1305,7 +1305,7 @@ message Conversation {
 	repeated string associated_conversations = 77;
 	Ticket ticket = 78; // main ticket, sync state and tag
 
-	string primary_bot = 79;
+	// string primary_bot = 79;
 	Error error = 80;
 
 	string access = 82; // default=public, private
@@ -7671,7 +7671,7 @@ message LLMChatHistoryEntry {
 
 message AIDataEntryUsed {
 	string chunk_id = 4;
-	// string data_entry_id = 5;
+	string data_entry_id = 5;
 	string chunk = 6; // original
 	int64 score = 7;
 	string embed_chunk = 11;
@@ -7702,7 +7702,7 @@ message AIAgentTrace {
 	repeated AIDataEntryUsed context_documents = 18;
 	repeated string context_instructions = 19;
 	repeated LLMToolCall tool_calls = 20;
-	repeated string override_rules = 21;
+	repeated AIAgentOverrideRule override_rules = 23;
 	string error = 22; //
 
 	int64 total_credit_fpv = 30; // vnd

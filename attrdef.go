@@ -70,14 +70,6 @@ func ListDefaultDefs() []*AttributeDefinition {
 			IsSystem:  true,
 		},
 		&AttributeDefinition{
-			Name:      "Rank",
-			Label:     "Rank",
-			I18NLabel: &I18NString{Vi_VN: "Xếp hạng", En_US: "Rank"},
-			Key:       "rank",
-			Type:      "number",
-			IsSystem:  true,
-		},
-		&AttributeDefinition{
 			Name:      "Job title",
 			Label:     "Job title",
 			Key:       "job_title",
@@ -342,7 +334,6 @@ func ListDefaultDefs() []*AttributeDefinition {
 			IsSystem:   true,
 			IsReadonly: true,
 		},
-
 		&AttributeDefinition{
 			Label:       "Tổng tiền đã thanh toán",
 			Description: "Tổng tiền đã thanh toán",
