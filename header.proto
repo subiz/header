@@ -9792,6 +9792,7 @@ message VectorDoc {
 	string id = 4;
 	repeated string terms = 5; // higher score matching
 	repeated float vector = 6;
+	repeated VectorDocProp props = 7;
 }
 
 message ListVectorRequest {
@@ -9803,9 +9804,16 @@ message ListVectorRequest {
 	int64 shard = 5; // 0 -> 127
 }
 
+message VectorDocProp {
+	string collection = 3;
+	string key = 4;
+	string value = 5;
+}
+
 message VectorMatch {
 	string id = 3;
 	float score = 4;
+	repeated VectorDocProp props = 5;
 }
 
 message VectorMatches {
