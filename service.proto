@@ -393,6 +393,12 @@ service WorkflowMgr {
 	rpc ListConvertedLeads(ReportAIAgentRequest) returns (Response);
 
 	rpc GetAIResponseTrace(AIAgentTraceRequest) returns (Response);
+
+	rpc ListNamedEntities(Id) returns (Response);
+	rpc CreateNamedEntity(NamedEntity) returns (Response);
+	rpc UpdateNamedEntity(NamedEntity) returns (Response);
+	rpc GetNamedEntity(Id) returns (Response);
+	rpc MatchNamedEntities(Ids) returns (Response);
 }
 
 service ConversationMgr {

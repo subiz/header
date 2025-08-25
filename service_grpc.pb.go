@@ -9677,6 +9677,11 @@ const (
 	WorkflowMgr_ListAIAgentMessages_FullMethodName    = "/header.WorkflowMgr/ListAIAgentMessages"
 	WorkflowMgr_ListConvertedLeads_FullMethodName     = "/header.WorkflowMgr/ListConvertedLeads"
 	WorkflowMgr_GetAIResponseTrace_FullMethodName     = "/header.WorkflowMgr/GetAIResponseTrace"
+	WorkflowMgr_ListNamedEntities_FullMethodName      = "/header.WorkflowMgr/ListNamedEntities"
+	WorkflowMgr_CreateNamedEntity_FullMethodName      = "/header.WorkflowMgr/CreateNamedEntity"
+	WorkflowMgr_UpdateNamedEntity_FullMethodName      = "/header.WorkflowMgr/UpdateNamedEntity"
+	WorkflowMgr_GetNamedEntity_FullMethodName         = "/header.WorkflowMgr/GetNamedEntity"
+	WorkflowMgr_MatchNamedEntities_FullMethodName     = "/header.WorkflowMgr/MatchNamedEntities"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9730,6 +9735,11 @@ type WorkflowMgrClient interface {
 	ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
 	ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error)
 	GetAIResponseTrace(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error)
+	ListNamedEntities(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateNamedEntity(ctx context.Context, in *NamedEntity, opts ...grpc.CallOption) (*Response, error)
+	UpdateNamedEntity(ctx context.Context, in *NamedEntity, opts ...grpc.CallOption) (*Response, error)
+	GetNamedEntity(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	MatchNamedEntities(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 }
 
 type workflowMgrClient struct {
@@ -10210,6 +10220,56 @@ func (c *workflowMgrClient) GetAIResponseTrace(ctx context.Context, in *AIAgentT
 	return out, nil
 }
 
+func (c *workflowMgrClient) ListNamedEntities(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_ListNamedEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) CreateNamedEntity(ctx context.Context, in *NamedEntity, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_CreateNamedEntity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) UpdateNamedEntity(ctx context.Context, in *NamedEntity, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_UpdateNamedEntity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) GetNamedEntity(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_GetNamedEntity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) MatchNamedEntities(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_MatchNamedEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowMgrServer is the server API for WorkflowMgr service.
 // All implementations must embed UnimplementedWorkflowMgrServer
 // for forward compatibility.
@@ -10261,6 +10321,11 @@ type WorkflowMgrServer interface {
 	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
 	ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error)
 	GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error)
+	ListNamedEntities(context.Context, *Id) (*Response, error)
+	CreateNamedEntity(context.Context, *NamedEntity) (*Response, error)
+	UpdateNamedEntity(context.Context, *NamedEntity) (*Response, error)
+	GetNamedEntity(context.Context, *Id) (*Response, error)
+	MatchNamedEntities(context.Context, *Ids) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -10411,6 +10476,21 @@ func (UnimplementedWorkflowMgrServer) ListConvertedLeads(context.Context, *Repor
 }
 func (UnimplementedWorkflowMgrServer) GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAIResponseTrace not implemented")
+}
+func (UnimplementedWorkflowMgrServer) ListNamedEntities(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListNamedEntities not implemented")
+}
+func (UnimplementedWorkflowMgrServer) CreateNamedEntity(context.Context, *NamedEntity) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateNamedEntity not implemented")
+}
+func (UnimplementedWorkflowMgrServer) UpdateNamedEntity(context.Context, *NamedEntity) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNamedEntity not implemented")
+}
+func (UnimplementedWorkflowMgrServer) GetNamedEntity(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNamedEntity not implemented")
+}
+func (UnimplementedWorkflowMgrServer) MatchNamedEntities(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchNamedEntities not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -11279,6 +11359,96 @@ func _WorkflowMgr_GetAIResponseTrace_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_ListNamedEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).ListNamedEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_ListNamedEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).ListNamedEntities(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_CreateNamedEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamedEntity)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).CreateNamedEntity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_CreateNamedEntity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).CreateNamedEntity(ctx, req.(*NamedEntity))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_UpdateNamedEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamedEntity)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).UpdateNamedEntity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_UpdateNamedEntity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).UpdateNamedEntity(ctx, req.(*NamedEntity))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_GetNamedEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).GetNamedEntity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_GetNamedEntity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).GetNamedEntity(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_MatchNamedEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).MatchNamedEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_MatchNamedEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).MatchNamedEntities(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowMgr_ServiceDesc is the grpc.ServiceDesc for WorkflowMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -11473,6 +11643,26 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAIResponseTrace",
 			Handler:    _WorkflowMgr_GetAIResponseTrace_Handler,
+		},
+		{
+			MethodName: "ListNamedEntities",
+			Handler:    _WorkflowMgr_ListNamedEntities_Handler,
+		},
+		{
+			MethodName: "CreateNamedEntity",
+			Handler:    _WorkflowMgr_CreateNamedEntity_Handler,
+		},
+		{
+			MethodName: "UpdateNamedEntity",
+			Handler:    _WorkflowMgr_UpdateNamedEntity_Handler,
+		},
+		{
+			MethodName: "GetNamedEntity",
+			Handler:    _WorkflowMgr_GetNamedEntity_Handler,
+		},
+		{
+			MethodName: "MatchNamedEntities",
+			Handler:    _WorkflowMgr_MatchNamedEntities_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

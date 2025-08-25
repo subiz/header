@@ -7074,6 +7074,9 @@ message Response {
 	repeated MetaAdAccount meta_ad_accounts = 227;
 
 	repeated FbFanpageSetting fanpage_settings = 228;
+
+	repeated NamedEntity named_entities = 229;
+	NamedEntity named_entity = 230;
 }
 
 message ReportCount {
@@ -7704,6 +7707,8 @@ message AIAgentTrace {
 	repeated LLMToolCall tool_calls = 20;
 	repeated AIAgentOverrideRule override_rules = 23;
 	string error = 22; //
+	repeated int32 query_topics = 25;
+	repeated string query_terms = 26;
 
 	int64 total_credit_fpv = 30; // vnd
 }
@@ -9320,6 +9325,8 @@ message AIDataChunk {
 	string embedded_chunk = 8;
 	int64 num_characters = 9;
 	string model = 10;
+
+	repeated uint32 named_entities = 12;
 }
 
 message AIDataEntry {
@@ -9340,14 +9347,14 @@ message AIDataEntry {
 	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
 	// url only
-	int64 num_sub_links = 11;
+	// int64 num_sub_links = 11;
 	int64 last_crawled = 12;
 	string crawling_status = 13; // crawling, done
 	string crawling_error = 25; // crawling, done
 	int64 crawl_status_code = 14;
-	int64 crawl_depth = 15; // 2 default
-	string referer_entry_id = 16;
-	int64 referer_entry_id_last_crawled = 33;
+	// int64 crawl_depth = 15; // 2 default
+	// string referer_entry_id = 16;
+	// int64 referer_entry_id_last_crawled = 33;
 
 	string status = 17; // pending, crawling, training, ready, unlinked, token-limit
 	int64 created = 19;
@@ -9378,6 +9385,8 @@ message AIDataEntry {
 	string instruction = 51; // type=instruction
 	AIIntent intent = 52; // instruction trigger
 	WorkflowCondition condition = 53; // instruction condition
+
+	repeated uint32 named_entities = 54; // for debugging
 
 	// suggestion
 	string conversation_id = 60;
@@ -9790,7 +9799,7 @@ message VectorDoc {
 
 	string collection = 3;
 	string id = 4;
-	repeated string terms = 5; // higher score matching
+	repeated uint32 named_entities = 5; // higher score matching
 	repeated float vector = 6;
 	repeated VectorDocProp props = 7;
 }
@@ -9800,7 +9809,7 @@ message ListVectorRequest {
 	string account_id = 2;
 
 	string collection = 3;
-	repeated string terms = 4; // higher score matching
+	repeated uint32 named_entities = 4; // higher score matching
 	int64 shard = 5; // 0 -> 127
 }
 
@@ -9821,4 +9830,20 @@ message VectorMatches {
 	string account_id = 2;
 	string collection = 3;
 	repeated VectorMatch matches = 4;
+}
+
+message NamedEntity {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // int32
+	string name = 4; // Paris
+	repeated string synonyms = 5;
+	string description = 8;
+
+	string merged_to = 9; // use the merged_to id, not this one
+
+	int64 updated = 10;
+	string updated_by = 11;
+	int64 created = 12;
+	string created_by = 13;
 }
