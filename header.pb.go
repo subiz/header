@@ -34563,17 +34563,17 @@ type Discount struct {
 	EndAt           int64                  `protobuf:"varint,17,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`       // ms
 	// 500k mỗi sản phẩm -> type = product, discount_type=amount, fpv_value=500_000
 	// 50% hoặc 300k tổng giá trị đơn hàng -> type = order, discount_type =amount, fpv_value=50, max_fpv_amount = 300_000
-	DiscountType  string  `protobuf:"bytes,18,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"` // percentage, amount
-	Value         float32 `protobuf:"fixed32,19,opt,name=value,proto3" json:"value,omitempty"`
-	MaxAmount     float32 `protobuf:"fixed32,20,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	Created       int64   `protobuf:"varint,21,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy     string  `protobuf:"bytes,22,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated       int64   `protobuf:"varint,23,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy     string  `protobuf:"bytes,24,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Note          string  `protobuf:"bytes,25,opt,name=note,proto3" json:"note,omitempty"`
-	StartAtCel    string  `protobuf:"bytes,26,opt,name=start_at_cel,json=startAtCel,proto3" json:"start_at_cel,omitempty"`        // now < product.props
-	EndAtCel      string  `protobuf:"bytes,27,opt,name=end_at_cel,json=endAtCel,proto3" json:"end_at_cel,omitempty"`              // now < product.props
-	ValidationCel string  `protobuf:"bytes,28,opt,name=validation_cel,json=validationCel,proto3" json:"validation_cel,omitempty"` // now < product.props
+	DiscountType string  `protobuf:"bytes,18,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"` // percentage, amount
+	Value        float32 `protobuf:"fixed32,19,opt,name=value,proto3" json:"value,omitempty"`
+	MaxAmount    float32 `protobuf:"fixed32,20,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	Created      int64   `protobuf:"varint,21,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy    string  `protobuf:"bytes,22,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated      int64   `protobuf:"varint,23,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy    string  `protobuf:"bytes,24,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Note         string  `protobuf:"bytes,25,opt,name=note,proto3" json:"note,omitempty"`
+	// string start_at_cel = 26; // now < product.props
+	// string end_at_cel = 27; // now < product.props
+	EligibleCel   string `protobuf:"bytes,28,opt,name=eligible_cel,json=eligibleCel,proto3" json:"eligible_cel,omitempty"` // now < product.props
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -34769,23 +34769,9 @@ func (x *Discount) GetNote() string {
 	return ""
 }
 
-func (x *Discount) GetStartAtCel() string {
+func (x *Discount) GetEligibleCel() string {
 	if x != nil {
-		return x.StartAtCel
-	}
-	return ""
-}
-
-func (x *Discount) GetEndAtCel() string {
-	if x != nil {
-		return x.EndAtCel
-	}
-	return ""
-}
-
-func (x *Discount) GetValidationCel() string {
-	if x != nil {
-		return x.ValidationCel
+		return x.EligibleCel
 	}
 	return ""
 }
@@ -36099,6 +36085,7 @@ type ProductsRequest struct {
 	ETag           string   `protobuf:"bytes,23,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
 	HasDiscount    bool     `protobuf:"varint,24,opt,name=has_discount,json=hasDiscount,proto3" json:"has_discount,omitempty"`
 	DiscountId     string   `protobuf:"bytes,25,opt,name=discount_id,json=discountId,proto3" json:"discount_id,omitempty"` // by discount
+	UserId         string   `protobuf:"bytes,26,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -36290,6 +36277,13 @@ func (x *ProductsRequest) GetHasDiscount() bool {
 func (x *ProductsRequest) GetDiscountId() string {
 	if x != nil {
 		return x.DiscountId
+	}
+	return ""
+}
+
+func (x *ProductsRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
 	}
 	return ""
 }
@@ -69586,7 +69580,7 @@ type ListAvaiableDiscountsRequest struct {
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	UserId        string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Order         *Order                 `protobuf:"bytes,4,opt,name=order,proto3" json:"order,omitempty"`
-	Products      []*Product             `protobuf:"bytes,5,rep,name=products,proto3" json:"products,omitempty"` // for cart contains those product
+	ProductIds    []string               `protobuf:"bytes,5,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"` // for cart contains those products
 	CategoryId    string                 `protobuf:"bytes,6,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
 	Visibility    string                 `protobuf:"bytes,7,opt,name=visibility,proto3" json:"visibility,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -69651,9 +69645,9 @@ func (x *ListAvaiableDiscountsRequest) GetOrder() *Order {
 	return nil
 }
 
-func (x *ListAvaiableDiscountsRequest) GetProducts() []*Product {
+func (x *ListAvaiableDiscountsRequest) GetProductIds() []string {
 	if x != nil {
-		return x.Products
+		return x.ProductIds
 	}
 	return nil
 }
@@ -74429,7 +74423,7 @@ const file_header_proto_rawDesc = "" +
 	"\rlast_modified\x18\x05 \x01(\x03R\flastModified\"G\n" +
 	"\x0fProductValidity\x12\x1b\n" +
 	"\tfrom_date\x18\x04 \x01(\tR\bfromDate\x12\x17\n" +
-	"\ato_date\x18\x05 \x01(\tR\x06toDate\"\xf7\x05\n" +
+	"\ato_date\x18\x05 \x01(\tR\x06toDate\"\xb3\x05\n" +
 	"\bDiscount\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74461,12 +74455,8 @@ const file_header_proto_rawDesc = "" +
 	"\aupdated\x18\x17 \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
 	"updated_by\x18\x18 \x01(\tR\tupdatedBy\x12\x12\n" +
-	"\x04note\x18\x19 \x01(\tR\x04note\x12 \n" +
-	"\fstart_at_cel\x18\x1a \x01(\tR\n" +
-	"startAtCel\x12\x1c\n" +
-	"\n" +
-	"end_at_cel\x18\x1b \x01(\tR\bendAtCel\x12%\n" +
-	"\x0evalidation_cel\x18\x1c \x01(\tR\rvalidationCel\"\xa0\x14\n" +
+	"\x04note\x18\x19 \x01(\tR\x04note\x12!\n" +
+	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xa0\x14\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74616,7 +74606,7 @@ const file_header_proto_rawDesc = "" +
 	"\x10last_fetch_error\x18\x1a \x01(\tR\x0elastFetchError\x12*\n" +
 	"\x11last_fetch_status\x18\x1b \x01(\tR\x0flastFetchStatus\x12.\n" +
 	"\x13last_sucess_fetched\x18\x1e \x01(\x03R\x11lastSucessFetched\x12\x1a\n" +
-	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\"\xa0\x05\n" +
+	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\"\xb9\x05\n" +
 	"\x0fProductsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74647,7 +74637,8 @@ const file_header_proto_rawDesc = "" +
 	"\x05e_tag\x18\x17 \x01(\tR\x04eTag\x12!\n" +
 	"\fhas_discount\x18\x18 \x01(\bR\vhasDiscount\x12\x1f\n" +
 	"\vdiscount_id\x18\x19 \x01(\tR\n" +
-	"discountId\"\xe4\x02\n" +
+	"discountId\x12\x17\n" +
+	"\auser_id\x18\x1a \x01(\tR\x06userId\"\xe4\x02\n" +
 	"\x02KV\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\tR\x05value\x12\x15\n" +
@@ -78616,14 +78607,15 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\v \x01(\tR\tupdatedBy\x12\x18\n" +
 	"\acreated\x18\f \x01(\x03R\acreated\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\r \x01(\tR\tcreatedBy\"\x8c\x02\n" +
+	"created_by\x18\r \x01(\tR\tcreatedBy\"\x80\x02\n" +
 	"\x1cListAvaiableDiscountsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x12#\n" +
-	"\x05order\x18\x04 \x01(\v2\r.header.OrderR\x05order\x12+\n" +
-	"\bproducts\x18\x05 \x03(\v2\x0f.header.ProductR\bproducts\x12\x1f\n" +
+	"\x05order\x18\x04 \x01(\v2\r.header.OrderR\x05order\x12\x1f\n" +
+	"\vproduct_ids\x18\x05 \x03(\tR\n" +
+	"productIds\x12\x1f\n" +
 	"\vcategory_id\x18\x06 \x01(\tR\n" +
 	"categoryId\x12\x1e\n" +
 	"\n" +
@@ -80804,36 +80796,35 @@ var file_header_proto_depIdxs = []int32{
 	668,  // 1325: header.NamedEntity.ctx:type_name -> common.Context
 	668,  // 1326: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
 	290,  // 1327: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
-	303,  // 1328: header.ListAvaiableDiscountsRequest.products:type_name -> header.Product
-	74,   // 1329: header.Event.CustomDataEntry.value:type_name -> header.EventField
-	503,  // 1330: header.Message.I18nBlockEntry.value:type_name -> header.Block
-	612,  // 1331: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
-	503,  // 1332: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
-	503,  // 1333: header.I18nBlock.I18nEntry.value:type_name -> header.Block
-	503,  // 1334: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
-	177,  // 1335: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
-	176,  // 1336: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
-	178,  // 1337: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
-	179,  // 1338: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
-	180,  // 1339: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
-	669,  // 1340: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
-	503,  // 1341: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
-	548,  // 1342: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
-	319,  // 1343: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
-	319,  // 1344: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
-	431,  // 1345: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
-	403,  // 1346: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
-	403,  // 1347: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
-	90,   // 1348: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
-	487,  // 1349: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
-	503,  // 1350: header.Article.I18nContentEntry.value:type_name -> header.Block
-	548,  // 1351: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
-	403,  // 1352: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
-	1353, // [1353:1353] is the sub-list for method output_type
-	1353, // [1353:1353] is the sub-list for method input_type
-	1353, // [1353:1353] is the sub-list for extension type_name
-	1353, // [1353:1353] is the sub-list for extension extendee
-	0,    // [0:1353] is the sub-list for field type_name
+	74,   // 1328: header.Event.CustomDataEntry.value:type_name -> header.EventField
+	503,  // 1329: header.Message.I18nBlockEntry.value:type_name -> header.Block
+	612,  // 1330: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
+	503,  // 1331: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
+	503,  // 1332: header.I18nBlock.I18nEntry.value:type_name -> header.Block
+	503,  // 1333: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
+	177,  // 1334: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
+	176,  // 1335: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
+	178,  // 1336: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
+	179,  // 1337: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
+	180,  // 1338: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
+	669,  // 1339: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
+	503,  // 1340: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
+	548,  // 1341: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
+	319,  // 1342: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
+	319,  // 1343: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
+	431,  // 1344: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
+	403,  // 1345: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
+	403,  // 1346: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
+	90,   // 1347: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
+	487,  // 1348: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
+	503,  // 1349: header.Article.I18nContentEntry.value:type_name -> header.Block
+	548,  // 1350: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
+	403,  // 1351: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
+	1352, // [1352:1352] is the sub-list for method output_type
+	1352, // [1352:1352] is the sub-list for method input_type
+	1352, // [1352:1352] is the sub-list for extension type_name
+	1352, // [1352:1352] is the sub-list for extension extendee
+	0,    // [0:1352] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }

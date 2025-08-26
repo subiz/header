@@ -4914,9 +4914,9 @@ message Discount {
 	string updated_by = 24;
 
 	string note = 25;
-	string start_at_cel = 26; // now < product.props
-	string end_at_cel = 27; // now < product.props
-	string validation_cel = 28; // now < product.props
+	// string start_at_cel = 26; // now < product.props
+	// string end_at_cel = 27; // now < product.props
+	string eligible_cel = 28; // now < product.props
 	/// product.props.exists(p, p.key == "ngay khoi hanh") && date.parse(product.props.filter(p, p.key == "ngay khoi hanh")[0].value, "%d-%m-%Y") - duration("4d")
 }
 
@@ -5169,6 +5169,7 @@ message ProductsRequest {
 
 	bool has_discount = 24;
 	string discount_id = 25; // by discount
+	string user_id = 26;
 }
 
 message KV {
@@ -9854,7 +9855,7 @@ message ListAvaiableDiscountsRequest {
 
 	string user_id = 3;
 	Order order = 4;
-	repeated Product products = 5; // for cart contains those product
+	repeated string product_ids = 5; // for cart contains those products
 	string category_id = 6;
 	string visibility = 7;
 }
