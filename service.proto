@@ -861,11 +861,6 @@ service Proder {
 	rpc MatchDiscounts(Ids) returns (header.Response);
 	rpc ListAvaiableDiscounts(ListAvaiableDiscountsRequest) returns (Response);
 
-	rpc ListProductCollections(Ids) returns (header.ProductCollections);
-	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);
-	rpc UpdateProductCollection(ProductCollection) returns (ProductCollection);
-	rpc DeleteProductCollection(Id) returns (Empty);
-
 	rpc ListProductFeeds(Id) returns (header.ProductFeeds);
 	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc UpdateProductFeed(header.ProductFeed) returns (header.ProductFeed);

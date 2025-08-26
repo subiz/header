@@ -110,8 +110,8 @@ const (
 	RealtimeType_product_deleted                    RealtimeType = 131
 	RealtimeType_product_feed_updated               RealtimeType = 132
 	RealtimeType_product_feed_deleted               RealtimeType = 133
-	RealtimeType_product_collection_updated         RealtimeType = 134
-	RealtimeType_product_collection_deleted         RealtimeType = 135
+	RealtimeType_discount_updated                   RealtimeType = 134
+	RealtimeType_discount_deleted                   RealtimeType = 135
 	RealtimeType_order_created                      RealtimeType = 136
 	RealtimeType_order_updated                      RealtimeType = 137
 	RealtimeType_order_deleted                      RealtimeType = 138
@@ -360,8 +360,8 @@ var (
 		131: "product_deleted",
 		132: "product_feed_updated",
 		133: "product_feed_deleted",
-		134: "product_collection_updated",
-		135: "product_collection_deleted",
+		134: "discount_updated",
+		135: "discount_deleted",
 		136: "order_created",
 		137: "order_updated",
 		138: "order_deleted",
@@ -606,8 +606,8 @@ var (
 		"product_deleted":                    131,
 		"product_feed_updated":               132,
 		"product_feed_deleted":               133,
-		"product_collection_updated":         134,
-		"product_collection_deleted":         135,
+		"discount_updated":                   134,
+		"discount_deleted":                   135,
 		"order_created":                      136,
 		"order_updated":                      137,
 		"order_deleted":                      138,
@@ -1794,7 +1794,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xf5.\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xe1.\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1881,9 +1881,9 @@ const file_type_proto_rawDesc = "" +
 	"\x0fproduct_updated\x10\x82\x01\x12\x14\n" +
 	"\x0fproduct_deleted\x10\x83\x01\x12\x19\n" +
 	"\x14product_feed_updated\x10\x84\x01\x12\x19\n" +
-	"\x14product_feed_deleted\x10\x85\x01\x12\x1f\n" +
-	"\x1aproduct_collection_updated\x10\x86\x01\x12\x1f\n" +
-	"\x1aproduct_collection_deleted\x10\x87\x01\x12\x12\n" +
+	"\x14product_feed_deleted\x10\x85\x01\x12\x15\n" +
+	"\x10discount_updated\x10\x86\x01\x12\x15\n" +
+	"\x10discount_deleted\x10\x87\x01\x12\x12\n" +
 	"\rorder_created\x10\x88\x01\x12\x12\n" +
 	"\rorder_updated\x10\x89\x01\x12\x12\n" +
 	"\rorder_deleted\x10\x8a\x01\x12\x15\n" +

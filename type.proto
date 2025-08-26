@@ -128,8 +128,8 @@ enum RealtimeType {
 	product_feed_updated = 132;
 	product_feed_deleted = 133;
 
-	product_collection_updated = 134;
-	product_collection_deleted = 135;
+	discount_updated = 134;
+	discount_deleted = 135;
 
 	order_created = 136;
 	order_updated = 137;

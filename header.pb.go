@@ -1866,7 +1866,7 @@ func (x PaymentMethod_State) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PaymentMethod_State.Descriptor instead.
 func (PaymentMethod_State) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{253, 0}
+	return file_header_proto_rawDescGZIP(), []int{251, 0}
 }
 
 type PipelineRule_AssignType int32
@@ -1915,7 +1915,7 @@ func (x PipelineRule_AssignType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PipelineRule_AssignType.Descriptor instead.
 func (PipelineRule_AssignType) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{296, 0}
+	return file_header_proto_rawDescGZIP(), []int{294, 0}
 }
 
 type OutboundCallCampaign_AssignStrategy int32
@@ -1970,7 +1970,7 @@ func (x OutboundCallCampaign_AssignStrategy) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OutboundCallCampaign_AssignStrategy.Descriptor instead.
 func (OutboundCallCampaign_AssignStrategy) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{350, 0}
+	return file_header_proto_rawDescGZIP(), []int{348, 0}
 }
 
 type AgentProfile_ProfileState int32
@@ -2019,7 +2019,7 @@ func (x AgentProfile_ProfileState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AgentProfile_ProfileState.Descriptor instead.
 func (AgentProfile_ProfileState) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{479, 0}
+	return file_header_proto_rawDescGZIP(), []int{477, 0}
 }
 
 type SetupFeatureStatus_Status int32
@@ -2068,7 +2068,7 @@ func (x SetupFeatureStatus_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SetupFeatureStatus_Status.Descriptor instead.
 func (SetupFeatureStatus_Status) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{507, 0}
+	return file_header_proto_rawDescGZIP(), []int{505, 0}
 }
 
 type PushToken_Platform int32
@@ -2117,7 +2117,7 @@ func (x PushToken_Platform) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PushToken_Platform.Descriptor instead.
 func (PushToken_Platform) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{537, 0}
+	return file_header_proto_rawDescGZIP(), []int{535, 0}
 }
 
 type Empty struct {
@@ -6906,12 +6906,12 @@ type Data struct {
 	Conversion *Conversion `protobuf:"bytes,47,opt,name=conversion,proto3" json:"conversion,omitempty"`
 	Site       *Site       `protobuf:"bytes,52,opt,name=site,proto3" json:"site,omitempty"`
 	// WebpageCheck webpage_check = 53;
-	LanguageMessage       *LangMessage           `protobuf:"bytes,54,opt,name=language_message,json=languageMessage,proto3" json:"language_message,omitempty"`
-	Label                 *Label                 `protobuf:"bytes,55,opt,name=label,proto3" json:"label,omitempty"`
-	UserView              *UserView              `protobuf:"bytes,56,opt,name=user_view,json=userView,proto3" json:"user_view,omitempty"`
-	LoginSession          *LoginSession          `protobuf:"bytes,57,opt,name=login_session,json=loginSession,proto3" json:"login_session,omitempty"`
-	ProductFeed           *ProductFeed           `protobuf:"bytes,58,opt,name=product_feed,json=productFeed,proto3" json:"product_feed,omitempty"`
-	ProductCollection     *ProductCollection     `protobuf:"bytes,59,opt,name=product_collection,json=productCollection,proto3" json:"product_collection,omitempty"`
+	LanguageMessage *LangMessage  `protobuf:"bytes,54,opt,name=language_message,json=languageMessage,proto3" json:"language_message,omitempty"`
+	Label           *Label        `protobuf:"bytes,55,opt,name=label,proto3" json:"label,omitempty"`
+	UserView        *UserView     `protobuf:"bytes,56,opt,name=user_view,json=userView,proto3" json:"user_view,omitempty"`
+	LoginSession    *LoginSession `protobuf:"bytes,57,opt,name=login_session,json=loginSession,proto3" json:"login_session,omitempty"`
+	ProductFeed     *ProductFeed  `protobuf:"bytes,58,opt,name=product_feed,json=productFeed,proto3" json:"product_feed,omitempty"`
+	// ProductCollection product_collection = 59;
 	Order                 *Order                 `protobuf:"bytes,60,opt,name=order,proto3" json:"order,omitempty"`
 	Currency              *Currency              `protobuf:"bytes,61,opt,name=currency,proto3" json:"currency,omitempty"`
 	ShopSetting           *ShopSetting           `protobuf:"bytes,62,opt,name=shop_setting,json=shopSetting,proto3" json:"shop_setting,omitempty"`
@@ -7220,13 +7220,6 @@ func (x *Data) GetLoginSession() *LoginSession {
 func (x *Data) GetProductFeed() *ProductFeed {
 	if x != nil {
 		return x.ProductFeed
-	}
-	return nil
-}
-
-func (x *Data) GetProductCollection() *ProductCollection {
-	if x != nil {
-		return x.ProductCollection
 	}
 	return nil
 }
@@ -28992,198 +28985,6 @@ func (x *CurrencyLogEntry) GetUpdatedBy() string {
 	return ""
 }
 
-type ProductCollections struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	ProductCollections []*ProductCollection   `protobuf:"bytes,2,rep,name=product_collections,json=productCollections,proto3" json:"product_collections,omitempty"`
-	Anchor             string                 `protobuf:"bytes,3,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	Total              int64                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *ProductCollections) Reset() {
-	*x = ProductCollections{}
-	mi := &file_header_proto_msgTypes[233]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProductCollections) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProductCollections) ProtoMessage() {}
-
-func (x *ProductCollections) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[233]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProductCollections.ProtoReflect.Descriptor instead.
-func (*ProductCollections) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{233}
-}
-
-func (x *ProductCollections) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *ProductCollections) GetProductCollections() []*ProductCollection {
-	if x != nil {
-		return x.ProductCollections
-	}
-	return nil
-}
-
-func (x *ProductCollections) GetAnchor() string {
-	if x != nil {
-		return x.Anchor
-	}
-	return ""
-}
-
-func (x *ProductCollections) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-type ProductCollection struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"` // use
-	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Visiblity     string                 `protobuf:"bytes,5,opt,name=visiblity,proto3" json:"visiblity,omitempty"` // public || unpublished
-	Code          string                 `protobuf:"bytes,6,opt,name=code,proto3" json:"code,omitempty"`
-	ItemIds       []string               `protobuf:"bytes,7,rep,name=item_ids,json=itemIds,proto3" json:"item_ids,omitempty"` // product ids
-	Created       int64                  `protobuf:"varint,11,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated       int64                  `protobuf:"varint,13,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy     string                 `protobuf:"bytes,14,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ProductCollection) Reset() {
-	*x = ProductCollection{}
-	mi := &file_header_proto_msgTypes[234]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProductCollection) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProductCollection) ProtoMessage() {}
-
-func (x *ProductCollection) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[234]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProductCollection.ProtoReflect.Descriptor instead.
-func (*ProductCollection) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{234}
-}
-
-func (x *ProductCollection) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *ProductCollection) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *ProductCollection) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *ProductCollection) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *ProductCollection) GetVisiblity() string {
-	if x != nil {
-		return x.Visiblity
-	}
-	return ""
-}
-
-func (x *ProductCollection) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *ProductCollection) GetItemIds() []string {
-	if x != nil {
-		return x.ItemIds
-	}
-	return nil
-}
-
-func (x *ProductCollection) GetCreated() int64 {
-	if x != nil {
-		return x.Created
-	}
-	return 0
-}
-
-func (x *ProductCollection) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
-}
-
-func (x *ProductCollection) GetUpdated() int64 {
-	if x != nil {
-		return x.Updated
-	}
-	return 0
-}
-
-func (x *ProductCollection) GetUpdatedBy() string {
-	if x != nil {
-		return x.UpdatedBy
-	}
-	return ""
-}
-
 type PriceRule struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FeedId        string                 `protobuf:"bytes,4,opt,name=feed_id,json=feedId,proto3" json:"feed_id,omitempty"`
@@ -29198,7 +28999,7 @@ type PriceRule struct {
 
 func (x *PriceRule) Reset() {
 	*x = PriceRule{}
-	mi := &file_header_proto_msgTypes[235]
+	mi := &file_header_proto_msgTypes[233]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -29210,7 +29011,7 @@ func (x *PriceRule) String() string {
 func (*PriceRule) ProtoMessage() {}
 
 func (x *PriceRule) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[235]
+	mi := &file_header_proto_msgTypes[233]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -29223,7 +29024,7 @@ func (x *PriceRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PriceRule.ProtoReflect.Descriptor instead.
 func (*PriceRule) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{235}
+	return file_header_proto_rawDescGZIP(), []int{233}
 }
 
 func (x *PriceRule) GetFeedId() string {
@@ -29293,7 +29094,7 @@ type OrderItem struct {
 
 func (x *OrderItem) Reset() {
 	*x = OrderItem{}
-	mi := &file_header_proto_msgTypes[236]
+	mi := &file_header_proto_msgTypes[234]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -29305,7 +29106,7 @@ func (x *OrderItem) String() string {
 func (*OrderItem) ProtoMessage() {}
 
 func (x *OrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[236]
+	mi := &file_header_proto_msgTypes[234]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -29318,7 +29119,7 @@ func (x *OrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderItem.ProtoReflect.Descriptor instead.
 func (*OrderItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{236}
+	return file_header_proto_rawDescGZIP(), []int{234}
 }
 
 func (x *OrderItem) GetOrderId() string {
@@ -29441,7 +29242,7 @@ type GHNAddress struct {
 
 func (x *GHNAddress) Reset() {
 	*x = GHNAddress{}
-	mi := &file_header_proto_msgTypes[237]
+	mi := &file_header_proto_msgTypes[235]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -29453,7 +29254,7 @@ func (x *GHNAddress) String() string {
 func (*GHNAddress) ProtoMessage() {}
 
 func (x *GHNAddress) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[237]
+	mi := &file_header_proto_msgTypes[235]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -29466,7 +29267,7 @@ func (x *GHNAddress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNAddress.ProtoReflect.Descriptor instead.
 func (*GHNAddress) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{237}
+	return file_header_proto_rawDescGZIP(), []int{235}
 }
 
 func (x *GHNAddress) GetProvinceID() int64 {
@@ -29572,7 +29373,7 @@ type Address struct {
 
 func (x *Address) Reset() {
 	*x = Address{}
-	mi := &file_header_proto_msgTypes[238]
+	mi := &file_header_proto_msgTypes[236]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -29584,7 +29385,7 @@ func (x *Address) String() string {
 func (*Address) ProtoMessage() {}
 
 func (x *Address) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[238]
+	mi := &file_header_proto_msgTypes[236]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -29597,7 +29398,7 @@ func (x *Address) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Address.ProtoReflect.Descriptor instead.
 func (*Address) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{238}
+	return file_header_proto_rawDescGZIP(), []int{236}
 }
 
 func (x *Address) GetCtx() *common.Context {
@@ -29921,7 +29722,7 @@ type GHNShippingData struct {
 
 func (x *GHNShippingData) Reset() {
 	*x = GHNShippingData{}
-	mi := &file_header_proto_msgTypes[239]
+	mi := &file_header_proto_msgTypes[237]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -29933,7 +29734,7 @@ func (x *GHNShippingData) String() string {
 func (*GHNShippingData) ProtoMessage() {}
 
 func (x *GHNShippingData) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[239]
+	mi := &file_header_proto_msgTypes[237]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -29946,7 +29747,7 @@ func (x *GHNShippingData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNShippingData.ProtoReflect.Descriptor instead.
 func (*GHNShippingData) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{239}
+	return file_header_proto_rawDescGZIP(), []int{237}
 }
 
 func (x *GHNShippingData) GetServiceTypeId() int32 {
@@ -30030,7 +29831,7 @@ type GHNOrder struct {
 
 func (x *GHNOrder) Reset() {
 	*x = GHNOrder{}
-	mi := &file_header_proto_msgTypes[240]
+	mi := &file_header_proto_msgTypes[238]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30042,7 +29843,7 @@ func (x *GHNOrder) String() string {
 func (*GHNOrder) ProtoMessage() {}
 
 func (x *GHNOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[240]
+	mi := &file_header_proto_msgTypes[238]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30055,7 +29856,7 @@ func (x *GHNOrder) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNOrder.ProtoReflect.Descriptor instead.
 func (*GHNOrder) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{240}
+	return file_header_proto_rawDescGZIP(), []int{238}
 }
 
 func (x *GHNOrder) GetClientOrderCode() string {
@@ -30334,7 +30135,7 @@ type GHNOrderFee struct {
 
 func (x *GHNOrderFee) Reset() {
 	*x = GHNOrderFee{}
-	mi := &file_header_proto_msgTypes[241]
+	mi := &file_header_proto_msgTypes[239]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30346,7 +30147,7 @@ func (x *GHNOrderFee) String() string {
 func (*GHNOrderFee) ProtoMessage() {}
 
 func (x *GHNOrderFee) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[241]
+	mi := &file_header_proto_msgTypes[239]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30359,7 +30160,7 @@ func (x *GHNOrderFee) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNOrderFee.ProtoReflect.Descriptor instead.
 func (*GHNOrderFee) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{241}
+	return file_header_proto_rawDescGZIP(), []int{239}
 }
 
 func (x *GHNOrderFee) GetInsurance() int64 {
@@ -30395,7 +30196,7 @@ type GHNOrder2 struct {
 
 func (x *GHNOrder2) Reset() {
 	*x = GHNOrder2{}
-	mi := &file_header_proto_msgTypes[242]
+	mi := &file_header_proto_msgTypes[240]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30407,7 +30208,7 @@ func (x *GHNOrder2) String() string {
 func (*GHNOrder2) ProtoMessage() {}
 
 func (x *GHNOrder2) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[242]
+	mi := &file_header_proto_msgTypes[240]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30420,7 +30221,7 @@ func (x *GHNOrder2) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNOrder2.ProtoReflect.Descriptor instead.
 func (*GHNOrder2) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{242}
+	return file_header_proto_rawDescGZIP(), []int{240}
 }
 
 func (x *GHNOrder2) GetAccountId() string {
@@ -30503,7 +30304,7 @@ type GHNOrder2Fee struct {
 
 func (x *GHNOrder2Fee) Reset() {
 	*x = GHNOrder2Fee{}
-	mi := &file_header_proto_msgTypes[243]
+	mi := &file_header_proto_msgTypes[241]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30515,7 +30316,7 @@ func (x *GHNOrder2Fee) String() string {
 func (*GHNOrder2Fee) ProtoMessage() {}
 
 func (x *GHNOrder2Fee) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[243]
+	mi := &file_header_proto_msgTypes[241]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30528,7 +30329,7 @@ func (x *GHNOrder2Fee) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNOrder2Fee.ProtoReflect.Descriptor instead.
 func (*GHNOrder2Fee) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{243}
+	return file_header_proto_rawDescGZIP(), []int{241}
 }
 
 func (x *GHNOrder2Fee) GetInsurance() int64 {
@@ -30561,7 +30362,7 @@ type GHNOrderItem struct {
 
 func (x *GHNOrderItem) Reset() {
 	*x = GHNOrderItem{}
-	mi := &file_header_proto_msgTypes[244]
+	mi := &file_header_proto_msgTypes[242]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30573,7 +30374,7 @@ func (x *GHNOrderItem) String() string {
 func (*GHNOrderItem) ProtoMessage() {}
 
 func (x *GHNOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[244]
+	mi := &file_header_proto_msgTypes[242]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30586,7 +30387,7 @@ func (x *GHNOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHNOrderItem.ProtoReflect.Descriptor instead.
 func (*GHNOrderItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{244}
+	return file_header_proto_rawDescGZIP(), []int{242}
 }
 
 func (x *GHNOrderItem) GetWeight() int64 {
@@ -30662,7 +30463,7 @@ type GHTKShippingData struct {
 
 func (x *GHTKShippingData) Reset() {
 	*x = GHTKShippingData{}
-	mi := &file_header_proto_msgTypes[245]
+	mi := &file_header_proto_msgTypes[243]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30674,7 +30475,7 @@ func (x *GHTKShippingData) String() string {
 func (*GHTKShippingData) ProtoMessage() {}
 
 func (x *GHTKShippingData) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[245]
+	mi := &file_header_proto_msgTypes[243]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30687,7 +30488,7 @@ func (x *GHTKShippingData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHTKShippingData.ProtoReflect.Descriptor instead.
 func (*GHTKShippingData) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{245}
+	return file_header_proto_rawDescGZIP(), []int{243}
 }
 
 func (x *GHTKShippingData) GetDeliverWorkShift() int64 {
@@ -30821,7 +30622,7 @@ type GHTKOrder struct {
 
 func (x *GHTKOrder) Reset() {
 	*x = GHTKOrder{}
-	mi := &file_header_proto_msgTypes[246]
+	mi := &file_header_proto_msgTypes[244]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30833,7 +30634,7 @@ func (x *GHTKOrder) String() string {
 func (*GHTKOrder) ProtoMessage() {}
 
 func (x *GHTKOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[246]
+	mi := &file_header_proto_msgTypes[244]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30846,7 +30647,7 @@ func (x *GHTKOrder) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GHTKOrder.ProtoReflect.Descriptor instead.
 func (*GHTKOrder) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{246}
+	return file_header_proto_rawDescGZIP(), []int{244}
 }
 
 func (x *GHTKOrder) GetAccountId() string {
@@ -31320,7 +31121,7 @@ type ShippingInfo struct {
 
 func (x *ShippingInfo) Reset() {
 	*x = ShippingInfo{}
-	mi := &file_header_proto_msgTypes[247]
+	mi := &file_header_proto_msgTypes[245]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31332,7 +31133,7 @@ func (x *ShippingInfo) String() string {
 func (*ShippingInfo) ProtoMessage() {}
 
 func (x *ShippingInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[247]
+	mi := &file_header_proto_msgTypes[245]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31345,7 +31146,7 @@ func (x *ShippingInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShippingInfo.ProtoReflect.Descriptor instead.
 func (*ShippingInfo) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{247}
+	return file_header_proto_rawDescGZIP(), []int{245}
 }
 
 func (x *ShippingInfo) GetAddress() *Address {
@@ -31616,7 +31417,7 @@ type ShippingData struct {
 
 func (x *ShippingData) Reset() {
 	*x = ShippingData{}
-	mi := &file_header_proto_msgTypes[248]
+	mi := &file_header_proto_msgTypes[246]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31628,7 +31429,7 @@ func (x *ShippingData) String() string {
 func (*ShippingData) ProtoMessage() {}
 
 func (x *ShippingData) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[248]
+	mi := &file_header_proto_msgTypes[246]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31641,7 +31442,7 @@ func (x *ShippingData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShippingData.ProtoReflect.Descriptor instead.
 func (*ShippingData) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{248}
+	return file_header_proto_rawDescGZIP(), []int{246}
 }
 
 func (x *ShippingData) GetGhtk() *GHTKShippingData {
@@ -31711,7 +31512,7 @@ type ShippingPolicies struct {
 
 func (x *ShippingPolicies) Reset() {
 	*x = ShippingPolicies{}
-	mi := &file_header_proto_msgTypes[249]
+	mi := &file_header_proto_msgTypes[247]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31723,7 +31524,7 @@ func (x *ShippingPolicies) String() string {
 func (*ShippingPolicies) ProtoMessage() {}
 
 func (x *ShippingPolicies) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[249]
+	mi := &file_header_proto_msgTypes[247]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31736,7 +31537,7 @@ func (x *ShippingPolicies) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShippingPolicies.ProtoReflect.Descriptor instead.
 func (*ShippingPolicies) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{249}
+	return file_header_proto_rawDescGZIP(), []int{247}
 }
 
 func (x *ShippingPolicies) GetCtx() *common.Context {
@@ -31761,39 +31562,39 @@ func (x *ShippingPolicies) GetShippingPolicies() []*ShippingPolicy {
 }
 
 type ShippingPolicy struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId          string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id                 string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Name               string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	ProductIds         []string               `protobuf:"bytes,5,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
-	ProductCollections []string               `protobuf:"bytes,6,rep,name=product_collections,json=productCollections,proto3" json:"product_collections,omitempty"`
-	ExcludeProductIds  []string               `protobuf:"bytes,7,rep,name=exclude_product_ids,json=excludeProductIds,proto3" json:"exclude_product_ids,omitempty"`
-	CountryCode        string                 `protobuf:"bytes,8,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"` // alway vn
-	Province           string                 `protobuf:"bytes,9,opt,name=province,proto3" json:"province,omitempty"`
-	Districts          []string               `protobuf:"bytes,13,rep,name=districts,proto3" json:"districts,omitempty"`
-	UseWeight          bool                   `protobuf:"varint,10,opt,name=use_weight,json=useWeight,proto3" json:"use_weight,omitempty"`
-	WeightGt           int64                  `protobuf:"varint,11,opt,name=weight_gt,json=weightGt,proto3" json:"weight_gt,omitempty"` // gram
-	WeightLt           int64                  `protobuf:"varint,12,opt,name=weight_lt,json=weightLt,proto3" json:"weight_lt,omitempty"` // gram
-	UseOrderTotal      bool                   `protobuf:"varint,16,opt,name=use_order_total,json=useOrderTotal,proto3" json:"use_order_total,omitempty"`
-	OrderTotalLt       float32                `protobuf:"fixed32,17,opt,name=order_total_lt,json=orderTotalLt,proto3" json:"order_total_lt,omitempty"`
-	FpvOrderTotalLt    int64                  `protobuf:"varint,18,opt,name=fpv_order_total_lt,json=fpvOrderTotalLt,proto3" json:"fpv_order_total_lt,omitempty"` // (readonly from client)
-	OrderTotalGt       float32                `protobuf:"fixed32,19,opt,name=order_total_gt,json=orderTotalGt,proto3" json:"order_total_gt,omitempty"`
-	FpvOrderTotalGt    int64                  `protobuf:"varint,20,opt,name=fpv_order_total_gt,json=fpvOrderTotalGt,proto3" json:"fpv_order_total_gt,omitempty"` // (readonly from client)
-	Price              float32                `protobuf:"fixed32,21,opt,name=price,proto3" json:"price,omitempty"`                                               // 0 => freeship
-	FpvPrice           int64                  `protobuf:"varint,22,opt,name=fpv_price,json=fpvPrice,proto3" json:"fpv_price,omitempty"`                          // (readonly from client)
-	Disabled           bool                   `protobuf:"varint,23,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	Created            int64                  `protobuf:"varint,24,opt,name=created,proto3" json:"created,omitempty"`
-	Updated            int64                  `protobuf:"varint,26,opt,name=updated,proto3" json:"updated,omitempty"`
-	CreatedBy          string                 `protobuf:"bytes,27,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	UpdatedBy          string                 `protobuf:"bytes,28,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Ctx        *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId  string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id         string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	ProductIds []string               `protobuf:"bytes,5,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
+	// repeated string product_collections = 6;
+	ExcludeProductIds []string `protobuf:"bytes,7,rep,name=exclude_product_ids,json=excludeProductIds,proto3" json:"exclude_product_ids,omitempty"`
+	CountryCode       string   `protobuf:"bytes,8,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"` // alway vn
+	Province          string   `protobuf:"bytes,9,opt,name=province,proto3" json:"province,omitempty"`
+	Districts         []string `protobuf:"bytes,13,rep,name=districts,proto3" json:"districts,omitempty"`
+	UseWeight         bool     `protobuf:"varint,10,opt,name=use_weight,json=useWeight,proto3" json:"use_weight,omitempty"`
+	WeightGt          int64    `protobuf:"varint,11,opt,name=weight_gt,json=weightGt,proto3" json:"weight_gt,omitempty"` // gram
+	WeightLt          int64    `protobuf:"varint,12,opt,name=weight_lt,json=weightLt,proto3" json:"weight_lt,omitempty"` // gram
+	UseOrderTotal     bool     `protobuf:"varint,16,opt,name=use_order_total,json=useOrderTotal,proto3" json:"use_order_total,omitempty"`
+	OrderTotalLt      float32  `protobuf:"fixed32,17,opt,name=order_total_lt,json=orderTotalLt,proto3" json:"order_total_lt,omitempty"`
+	FpvOrderTotalLt   int64    `protobuf:"varint,18,opt,name=fpv_order_total_lt,json=fpvOrderTotalLt,proto3" json:"fpv_order_total_lt,omitempty"` // (readonly from client)
+	OrderTotalGt      float32  `protobuf:"fixed32,19,opt,name=order_total_gt,json=orderTotalGt,proto3" json:"order_total_gt,omitempty"`
+	FpvOrderTotalGt   int64    `protobuf:"varint,20,opt,name=fpv_order_total_gt,json=fpvOrderTotalGt,proto3" json:"fpv_order_total_gt,omitempty"` // (readonly from client)
+	Price             float32  `protobuf:"fixed32,21,opt,name=price,proto3" json:"price,omitempty"`                                               // 0 => freeship
+	FpvPrice          int64    `protobuf:"varint,22,opt,name=fpv_price,json=fpvPrice,proto3" json:"fpv_price,omitempty"`                          // (readonly from client)
+	Disabled          bool     `protobuf:"varint,23,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Created           int64    `protobuf:"varint,24,opt,name=created,proto3" json:"created,omitempty"`
+	Updated           int64    `protobuf:"varint,26,opt,name=updated,proto3" json:"updated,omitempty"`
+	CreatedBy         string   `protobuf:"bytes,27,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy         string   `protobuf:"bytes,28,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ShippingPolicy) Reset() {
 	*x = ShippingPolicy{}
-	mi := &file_header_proto_msgTypes[250]
+	mi := &file_header_proto_msgTypes[248]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31805,7 +31606,7 @@ func (x *ShippingPolicy) String() string {
 func (*ShippingPolicy) ProtoMessage() {}
 
 func (x *ShippingPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[250]
+	mi := &file_header_proto_msgTypes[248]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31818,7 +31619,7 @@ func (x *ShippingPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShippingPolicy.ProtoReflect.Descriptor instead.
 func (*ShippingPolicy) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{250}
+	return file_header_proto_rawDescGZIP(), []int{248}
 }
 
 func (x *ShippingPolicy) GetCtx() *common.Context {
@@ -31852,13 +31653,6 @@ func (x *ShippingPolicy) GetName() string {
 func (x *ShippingPolicy) GetProductIds() []string {
 	if x != nil {
 		return x.ProductIds
-	}
-	return nil
-}
-
-func (x *ShippingPolicy) GetProductCollections() []string {
-	if x != nil {
-		return x.ProductCollections
 	}
 	return nil
 }
@@ -32026,7 +31820,7 @@ type IntegratedShipping struct {
 
 func (x *IntegratedShipping) Reset() {
 	*x = IntegratedShipping{}
-	mi := &file_header_proto_msgTypes[251]
+	mi := &file_header_proto_msgTypes[249]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32038,7 +31832,7 @@ func (x *IntegratedShipping) String() string {
 func (*IntegratedShipping) ProtoMessage() {}
 
 func (x *IntegratedShipping) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[251]
+	mi := &file_header_proto_msgTypes[249]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32051,7 +31845,7 @@ func (x *IntegratedShipping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntegratedShipping.ProtoReflect.Descriptor instead.
 func (*IntegratedShipping) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{251}
+	return file_header_proto_rawDescGZIP(), []int{249}
 }
 
 func (x *IntegratedShipping) GetCtx() *common.Context {
@@ -32220,7 +32014,7 @@ type IntegratedShippings struct {
 
 func (x *IntegratedShippings) Reset() {
 	*x = IntegratedShippings{}
-	mi := &file_header_proto_msgTypes[252]
+	mi := &file_header_proto_msgTypes[250]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32232,7 +32026,7 @@ func (x *IntegratedShippings) String() string {
 func (*IntegratedShippings) ProtoMessage() {}
 
 func (x *IntegratedShippings) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[252]
+	mi := &file_header_proto_msgTypes[250]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32245,7 +32039,7 @@ func (x *IntegratedShippings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntegratedShippings.ProtoReflect.Descriptor instead.
 func (*IntegratedShippings) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{252}
+	return file_header_proto_rawDescGZIP(), []int{250}
 }
 
 func (x *IntegratedShippings) GetCtx() *common.Context {
@@ -32302,7 +32096,7 @@ type PaymentMethod struct {
 
 func (x *PaymentMethod) Reset() {
 	*x = PaymentMethod{}
-	mi := &file_header_proto_msgTypes[253]
+	mi := &file_header_proto_msgTypes[251]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32314,7 +32108,7 @@ func (x *PaymentMethod) String() string {
 func (*PaymentMethod) ProtoMessage() {}
 
 func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[253]
+	mi := &file_header_proto_msgTypes[251]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32327,7 +32121,7 @@ func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentMethod.ProtoReflect.Descriptor instead.
 func (*PaymentMethod) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{253}
+	return file_header_proto_rawDescGZIP(), []int{251}
 }
 
 func (x *PaymentMethod) GetCtx() *common.Context {
@@ -32467,7 +32261,7 @@ type PaymentMethods struct {
 
 func (x *PaymentMethods) Reset() {
 	*x = PaymentMethods{}
-	mi := &file_header_proto_msgTypes[254]
+	mi := &file_header_proto_msgTypes[252]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32479,7 +32273,7 @@ func (x *PaymentMethods) String() string {
 func (*PaymentMethods) ProtoMessage() {}
 
 func (x *PaymentMethods) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[254]
+	mi := &file_header_proto_msgTypes[252]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32492,7 +32286,7 @@ func (x *PaymentMethods) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentMethods.ProtoReflect.Descriptor instead.
 func (*PaymentMethods) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{254}
+	return file_header_proto_rawDescGZIP(), []int{252}
 }
 
 func (x *PaymentMethods) GetCtx() *common.Context {
@@ -32558,7 +32352,7 @@ type OrderMetric struct {
 
 func (x *OrderMetric) Reset() {
 	*x = OrderMetric{}
-	mi := &file_header_proto_msgTypes[255]
+	mi := &file_header_proto_msgTypes[253]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32570,7 +32364,7 @@ func (x *OrderMetric) String() string {
 func (*OrderMetric) ProtoMessage() {}
 
 func (x *OrderMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[255]
+	mi := &file_header_proto_msgTypes[253]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32583,7 +32377,7 @@ func (x *OrderMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderMetric.ProtoReflect.Descriptor instead.
 func (*OrderMetric) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{255}
+	return file_header_proto_rawDescGZIP(), []int{253}
 }
 
 func (x *OrderMetric) GetAccountId() string {
@@ -32840,7 +32634,7 @@ type Orders struct {
 
 func (x *Orders) Reset() {
 	*x = Orders{}
-	mi := &file_header_proto_msgTypes[256]
+	mi := &file_header_proto_msgTypes[254]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32852,7 +32646,7 @@ func (x *Orders) String() string {
 func (*Orders) ProtoMessage() {}
 
 func (x *Orders) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[256]
+	mi := &file_header_proto_msgTypes[254]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32865,7 +32659,7 @@ func (x *Orders) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Orders.ProtoReflect.Descriptor instead.
 func (*Orders) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{256}
+	return file_header_proto_rawDescGZIP(), []int{254}
 }
 
 func (x *Orders) GetCtx() *common.Context {
@@ -32935,7 +32729,7 @@ type CountOrdersResponse struct {
 
 func (x *CountOrdersResponse) Reset() {
 	*x = CountOrdersResponse{}
-	mi := &file_header_proto_msgTypes[257]
+	mi := &file_header_proto_msgTypes[255]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32947,7 +32741,7 @@ func (x *CountOrdersResponse) String() string {
 func (*CountOrdersResponse) ProtoMessage() {}
 
 func (x *CountOrdersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[257]
+	mi := &file_header_proto_msgTypes[255]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32960,7 +32754,7 @@ func (x *CountOrdersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountOrdersResponse.ProtoReflect.Descriptor instead.
 func (*CountOrdersResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{257}
+	return file_header_proto_rawDescGZIP(), []int{255}
 }
 
 func (x *CountOrdersResponse) GetCtx() *common.Context {
@@ -32998,7 +32792,7 @@ type DownloadOrderRequest struct {
 
 func (x *DownloadOrderRequest) Reset() {
 	*x = DownloadOrderRequest{}
-	mi := &file_header_proto_msgTypes[258]
+	mi := &file_header_proto_msgTypes[256]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -33010,7 +32804,7 @@ func (x *DownloadOrderRequest) String() string {
 func (*DownloadOrderRequest) ProtoMessage() {}
 
 func (x *DownloadOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[258]
+	mi := &file_header_proto_msgTypes[256]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -33023,7 +32817,7 @@ func (x *DownloadOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadOrderRequest.ProtoReflect.Descriptor instead.
 func (*DownloadOrderRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{258}
+	return file_header_proto_rawDescGZIP(), []int{256}
 }
 
 func (x *DownloadOrderRequest) GetCtx() *common.Context {
@@ -33148,7 +32942,7 @@ type Order struct {
 
 func (x *Order) Reset() {
 	*x = Order{}
-	mi := &file_header_proto_msgTypes[259]
+	mi := &file_header_proto_msgTypes[257]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -33160,7 +32954,7 @@ func (x *Order) String() string {
 func (*Order) ProtoMessage() {}
 
 func (x *Order) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[259]
+	mi := &file_header_proto_msgTypes[257]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -33173,7 +32967,7 @@ func (x *Order) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Order.ProtoReflect.Descriptor instead.
 func (*Order) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{259}
+	return file_header_proto_rawDescGZIP(), []int{257}
 }
 
 func (x *Order) GetCtx() *common.Context {
@@ -33650,7 +33444,7 @@ type OrderPipelineStage struct {
 
 func (x *OrderPipelineStage) Reset() {
 	*x = OrderPipelineStage{}
-	mi := &file_header_proto_msgTypes[260]
+	mi := &file_header_proto_msgTypes[258]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -33662,7 +33456,7 @@ func (x *OrderPipelineStage) String() string {
 func (*OrderPipelineStage) ProtoMessage() {}
 
 func (x *OrderPipelineStage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[260]
+	mi := &file_header_proto_msgTypes[258]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -33675,7 +33469,7 @@ func (x *OrderPipelineStage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderPipelineStage.ProtoReflect.Descriptor instead.
 func (*OrderPipelineStage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{260}
+	return file_header_proto_rawDescGZIP(), []int{258}
 }
 
 func (x *OrderPipelineStage) GetCtx() *common.Context {
@@ -33771,7 +33565,7 @@ type OrderAgent struct {
 
 func (x *OrderAgent) Reset() {
 	*x = OrderAgent{}
-	mi := &file_header_proto_msgTypes[261]
+	mi := &file_header_proto_msgTypes[259]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -33783,7 +33577,7 @@ func (x *OrderAgent) String() string {
 func (*OrderAgent) ProtoMessage() {}
 
 func (x *OrderAgent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[261]
+	mi := &file_header_proto_msgTypes[259]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -33796,7 +33590,7 @@ func (x *OrderAgent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderAgent.ProtoReflect.Descriptor instead.
 func (*OrderAgent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{261}
+	return file_header_proto_rawDescGZIP(), []int{259}
 }
 
 func (x *OrderAgent) GetCtx() *common.Context {
@@ -33870,7 +33664,7 @@ type Bills struct {
 
 func (x *Bills) Reset() {
 	*x = Bills{}
-	mi := &file_header_proto_msgTypes[262]
+	mi := &file_header_proto_msgTypes[260]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -33882,7 +33676,7 @@ func (x *Bills) String() string {
 func (*Bills) ProtoMessage() {}
 
 func (x *Bills) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[262]
+	mi := &file_header_proto_msgTypes[260]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -33895,7 +33689,7 @@ func (x *Bills) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bills.ProtoReflect.Descriptor instead.
 func (*Bills) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{262}
+	return file_header_proto_rawDescGZIP(), []int{260}
 }
 
 func (x *Bills) GetCtx() *common.Context {
@@ -33982,7 +33776,7 @@ type Bill struct {
 
 func (x *Bill) Reset() {
 	*x = Bill{}
-	mi := &file_header_proto_msgTypes[263]
+	mi := &file_header_proto_msgTypes[261]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -33994,7 +33788,7 @@ func (x *Bill) String() string {
 func (*Bill) ProtoMessage() {}
 
 func (x *Bill) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[263]
+	mi := &file_header_proto_msgTypes[261]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34007,7 +33801,7 @@ func (x *Bill) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bill.ProtoReflect.Descriptor instead.
 func (*Bill) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{263}
+	return file_header_proto_rawDescGZIP(), []int{261}
 }
 
 func (x *Bill) GetCtx() *common.Context {
@@ -34210,7 +34004,7 @@ type CancellationCodes struct {
 
 func (x *CancellationCodes) Reset() {
 	*x = CancellationCodes{}
-	mi := &file_header_proto_msgTypes[264]
+	mi := &file_header_proto_msgTypes[262]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34222,7 +34016,7 @@ func (x *CancellationCodes) String() string {
 func (*CancellationCodes) ProtoMessage() {}
 
 func (x *CancellationCodes) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[264]
+	mi := &file_header_proto_msgTypes[262]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34235,7 +34029,7 @@ func (x *CancellationCodes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancellationCodes.ProtoReflect.Descriptor instead.
 func (*CancellationCodes) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{264}
+	return file_header_proto_rawDescGZIP(), []int{262}
 }
 
 func (x *CancellationCodes) GetCtx() *common.Context {
@@ -34287,7 +34081,7 @@ type CancellationCode struct {
 
 func (x *CancellationCode) Reset() {
 	*x = CancellationCode{}
-	mi := &file_header_proto_msgTypes[265]
+	mi := &file_header_proto_msgTypes[263]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34299,7 +34093,7 @@ func (x *CancellationCode) String() string {
 func (*CancellationCode) ProtoMessage() {}
 
 func (x *CancellationCode) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[265]
+	mi := &file_header_proto_msgTypes[263]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34312,7 +34106,7 @@ func (x *CancellationCode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancellationCode.ProtoReflect.Descriptor instead.
 func (*CancellationCode) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{265}
+	return file_header_proto_rawDescGZIP(), []int{263}
 }
 
 func (x *CancellationCode) GetCtx() *common.Context {
@@ -34400,7 +34194,7 @@ type OrderPipelineUpdated struct {
 
 func (x *OrderPipelineUpdated) Reset() {
 	*x = OrderPipelineUpdated{}
-	mi := &file_header_proto_msgTypes[266]
+	mi := &file_header_proto_msgTypes[264]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34412,7 +34206,7 @@ func (x *OrderPipelineUpdated) String() string {
 func (*OrderPipelineUpdated) ProtoMessage() {}
 
 func (x *OrderPipelineUpdated) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[266]
+	mi := &file_header_proto_msgTypes[264]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34425,7 +34219,7 @@ func (x *OrderPipelineUpdated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderPipelineUpdated.ProtoReflect.Descriptor instead.
 func (*OrderPipelineUpdated) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{266}
+	return file_header_proto_rawDescGZIP(), []int{264}
 }
 
 func (x *OrderPipelineUpdated) GetCtx() *common.Context {
@@ -34490,7 +34284,7 @@ type OrderStatusUpdated struct {
 
 func (x *OrderStatusUpdated) Reset() {
 	*x = OrderStatusUpdated{}
-	mi := &file_header_proto_msgTypes[267]
+	mi := &file_header_proto_msgTypes[265]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34502,7 +34296,7 @@ func (x *OrderStatusUpdated) String() string {
 func (*OrderStatusUpdated) ProtoMessage() {}
 
 func (x *OrderStatusUpdated) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[267]
+	mi := &file_header_proto_msgTypes[265]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34515,7 +34309,7 @@ func (x *OrderStatusUpdated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderStatusUpdated.ProtoReflect.Descriptor instead.
 func (*OrderStatusUpdated) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{267}
+	return file_header_proto_rawDescGZIP(), []int{265}
 }
 
 func (x *OrderStatusUpdated) GetCtx() *common.Context {
@@ -34564,7 +34358,7 @@ type OrderHistoryEntry struct {
 
 func (x *OrderHistoryEntry) Reset() {
 	*x = OrderHistoryEntry{}
-	mi := &file_header_proto_msgTypes[268]
+	mi := &file_header_proto_msgTypes[266]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34576,7 +34370,7 @@ func (x *OrderHistoryEntry) String() string {
 func (*OrderHistoryEntry) ProtoMessage() {}
 
 func (x *OrderHistoryEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[268]
+	mi := &file_header_proto_msgTypes[266]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34589,7 +34383,7 @@ func (x *OrderHistoryEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderHistoryEntry.ProtoReflect.Descriptor instead.
 func (*OrderHistoryEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{268}
+	return file_header_proto_rawDescGZIP(), []int{266}
 }
 
 func (x *OrderHistoryEntry) GetEvent() *Event {
@@ -34626,7 +34420,7 @@ type OrderHistoryEntries struct {
 
 func (x *OrderHistoryEntries) Reset() {
 	*x = OrderHistoryEntries{}
-	mi := &file_header_proto_msgTypes[269]
+	mi := &file_header_proto_msgTypes[267]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34638,7 +34432,7 @@ func (x *OrderHistoryEntries) String() string {
 func (*OrderHistoryEntries) ProtoMessage() {}
 
 func (x *OrderHistoryEntries) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[269]
+	mi := &file_header_proto_msgTypes[267]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34651,7 +34445,7 @@ func (x *OrderHistoryEntries) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderHistoryEntries.ProtoReflect.Descriptor instead.
 func (*OrderHistoryEntries) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{269}
+	return file_header_proto_rawDescGZIP(), []int{267}
 }
 
 func (x *OrderHistoryEntries) GetCtx() *common.Context {
@@ -34700,7 +34494,7 @@ type ProductValidity struct {
 
 func (x *ProductValidity) Reset() {
 	*x = ProductValidity{}
-	mi := &file_header_proto_msgTypes[270]
+	mi := &file_header_proto_msgTypes[268]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34712,7 +34506,7 @@ func (x *ProductValidity) String() string {
 func (*ProductValidity) ProtoMessage() {}
 
 func (x *ProductValidity) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[270]
+	mi := &file_header_proto_msgTypes[268]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34725,7 +34519,7 @@ func (x *ProductValidity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductValidity.ProtoReflect.Descriptor instead.
 func (*ProductValidity) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{270}
+	return file_header_proto_rawDescGZIP(), []int{268}
 }
 
 func (x *ProductValidity) GetFromDate() string {
@@ -34777,7 +34571,7 @@ type Discount struct {
 
 func (x *Discount) Reset() {
 	*x = Discount{}
-	mi := &file_header_proto_msgTypes[271]
+	mi := &file_header_proto_msgTypes[269]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -34789,7 +34583,7 @@ func (x *Discount) String() string {
 func (*Discount) ProtoMessage() {}
 
 func (x *Discount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[271]
+	mi := &file_header_proto_msgTypes[269]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -34802,7 +34596,7 @@ func (x *Discount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Discount.ProtoReflect.Descriptor instead.
 func (*Discount) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{271}
+	return file_header_proto_rawDescGZIP(), []int{269}
 }
 
 func (x *Discount) GetCtx() *common.Context {
@@ -35059,7 +34853,7 @@ type Product struct {
 
 func (x *Product) Reset() {
 	*x = Product{}
-	mi := &file_header_proto_msgTypes[272]
+	mi := &file_header_proto_msgTypes[270]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -35071,7 +34865,7 @@ func (x *Product) String() string {
 func (*Product) ProtoMessage() {}
 
 func (x *Product) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[272]
+	mi := &file_header_proto_msgTypes[270]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -35084,7 +34878,7 @@ func (x *Product) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Product.ProtoReflect.Descriptor instead.
 func (*Product) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{272}
+	return file_header_proto_rawDescGZIP(), []int{270}
 }
 
 func (x *Product) GetCtx() *common.Context {
@@ -35576,7 +35370,7 @@ type ProductEnrichSource struct {
 
 func (x *ProductEnrichSource) Reset() {
 	*x = ProductEnrichSource{}
-	mi := &file_header_proto_msgTypes[273]
+	mi := &file_header_proto_msgTypes[271]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -35588,7 +35382,7 @@ func (x *ProductEnrichSource) String() string {
 func (*ProductEnrichSource) ProtoMessage() {}
 
 func (x *ProductEnrichSource) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[273]
+	mi := &file_header_proto_msgTypes[271]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -35601,7 +35395,7 @@ func (x *ProductEnrichSource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductEnrichSource.ProtoReflect.Descriptor instead.
 func (*ProductEnrichSource) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{273}
+	return file_header_proto_rawDescGZIP(), []int{271}
 }
 
 func (x *ProductEnrichSource) GetDisabled() int64 {
@@ -35698,7 +35492,7 @@ type ProductStock struct {
 
 func (x *ProductStock) Reset() {
 	*x = ProductStock{}
-	mi := &file_header_proto_msgTypes[274]
+	mi := &file_header_proto_msgTypes[272]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -35710,7 +35504,7 @@ func (x *ProductStock) String() string {
 func (*ProductStock) ProtoMessage() {}
 
 func (x *ProductStock) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[274]
+	mi := &file_header_proto_msgTypes[272]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -35723,7 +35517,7 @@ func (x *ProductStock) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductStock.ProtoReflect.Descriptor instead.
 func (*ProductStock) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{274}
+	return file_header_proto_rawDescGZIP(), []int{272}
 }
 
 func (x *ProductStock) GetPosId() string {
@@ -35761,7 +35555,7 @@ type ProductOffer struct {
 
 func (x *ProductOffer) Reset() {
 	*x = ProductOffer{}
-	mi := &file_header_proto_msgTypes[275]
+	mi := &file_header_proto_msgTypes[273]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -35773,7 +35567,7 @@ func (x *ProductOffer) String() string {
 func (*ProductOffer) ProtoMessage() {}
 
 func (x *ProductOffer) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[275]
+	mi := &file_header_proto_msgTypes[273]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -35786,7 +35580,7 @@ func (x *ProductOffer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductOffer.ProtoReflect.Descriptor instead.
 func (*ProductOffer) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{275}
+	return file_header_proto_rawDescGZIP(), []int{273}
 }
 
 func (x *ProductOffer) GetCtx() *common.Context {
@@ -35892,7 +35686,7 @@ type ProductOption struct {
 
 func (x *ProductOption) Reset() {
 	*x = ProductOption{}
-	mi := &file_header_proto_msgTypes[276]
+	mi := &file_header_proto_msgTypes[274]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -35904,7 +35698,7 @@ func (x *ProductOption) String() string {
 func (*ProductOption) ProtoMessage() {}
 
 func (x *ProductOption) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[276]
+	mi := &file_header_proto_msgTypes[274]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -35917,7 +35711,7 @@ func (x *ProductOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductOption.ProtoReflect.Descriptor instead.
 func (*ProductOption) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{276}
+	return file_header_proto_rawDescGZIP(), []int{274}
 }
 
 func (x *ProductOption) GetKey() string {
@@ -35957,7 +35751,7 @@ type GoogleSheetProductFeed struct {
 
 func (x *GoogleSheetProductFeed) Reset() {
 	*x = GoogleSheetProductFeed{}
-	mi := &file_header_proto_msgTypes[277]
+	mi := &file_header_proto_msgTypes[275]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -35969,7 +35763,7 @@ func (x *GoogleSheetProductFeed) String() string {
 func (*GoogleSheetProductFeed) ProtoMessage() {}
 
 func (x *GoogleSheetProductFeed) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[277]
+	mi := &file_header_proto_msgTypes[275]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -35982,7 +35776,7 @@ func (x *GoogleSheetProductFeed) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoogleSheetProductFeed.ProtoReflect.Descriptor instead.
 func (*GoogleSheetProductFeed) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{277}
+	return file_header_proto_rawDescGZIP(), []int{275}
 }
 
 func (x *GoogleSheetProductFeed) GetUrl() string {
@@ -36001,7 +35795,7 @@ type ShopeeProductFeed struct {
 
 func (x *ShopeeProductFeed) Reset() {
 	*x = ShopeeProductFeed{}
-	mi := &file_header_proto_msgTypes[278]
+	mi := &file_header_proto_msgTypes[276]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36013,7 +35807,7 @@ func (x *ShopeeProductFeed) String() string {
 func (*ShopeeProductFeed) ProtoMessage() {}
 
 func (x *ShopeeProductFeed) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[278]
+	mi := &file_header_proto_msgTypes[276]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36026,7 +35820,7 @@ func (x *ShopeeProductFeed) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShopeeProductFeed.ProtoReflect.Descriptor instead.
 func (*ShopeeProductFeed) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{278}
+	return file_header_proto_rawDescGZIP(), []int{276}
 }
 
 func (x *ShopeeProductFeed) GetAccessToken() string {
@@ -36047,7 +35841,7 @@ type ProductFeeds struct {
 
 func (x *ProductFeeds) Reset() {
 	*x = ProductFeeds{}
-	mi := &file_header_proto_msgTypes[279]
+	mi := &file_header_proto_msgTypes[277]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36059,7 +35853,7 @@ func (x *ProductFeeds) String() string {
 func (*ProductFeeds) ProtoMessage() {}
 
 func (x *ProductFeeds) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[279]
+	mi := &file_header_proto_msgTypes[277]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36072,7 +35866,7 @@ func (x *ProductFeeds) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductFeeds.ProtoReflect.Descriptor instead.
 func (*ProductFeeds) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{279}
+	return file_header_proto_rawDescGZIP(), []int{277}
 }
 
 func (x *ProductFeeds) GetCtx() *common.Context {
@@ -36122,7 +35916,7 @@ type ProductFeed struct {
 
 func (x *ProductFeed) Reset() {
 	*x = ProductFeed{}
-	mi := &file_header_proto_msgTypes[280]
+	mi := &file_header_proto_msgTypes[278]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36134,7 +35928,7 @@ func (x *ProductFeed) String() string {
 func (*ProductFeed) ProtoMessage() {}
 
 func (x *ProductFeed) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[280]
+	mi := &file_header_proto_msgTypes[278]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36147,7 +35941,7 @@ func (x *ProductFeed) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductFeed.ProtoReflect.Descriptor instead.
 func (*ProductFeed) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{280}
+	return file_header_proto_rawDescGZIP(), []int{278}
 }
 
 func (x *ProductFeed) GetCtx() *common.Context {
@@ -36274,27 +36068,26 @@ type ProductsRequest struct {
 	PriceLte  int64                  `protobuf:"varint,7,opt,name=price_lte,json=priceLte,proto3" json:"price_lte,omitempty"`
 	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
-	Props                []*KV    `protobuf:"bytes,8,rep,name=props,proto3" json:"props,omitempty"`
-	Availability         string   `protobuf:"bytes,9,opt,name=availability,proto3" json:"availability,omitempty"` // instock, out_of_stock
-	Category             string   `protobuf:"bytes,10,opt,name=category,proto3" json:"category,omitempty"`
-	Visibility           string   `protobuf:"bytes,11,opt,name=visibility,proto3" json:"visibility,omitempty"` // published or hidden
-	Ids                  []string `protobuf:"bytes,12,rep,name=ids,proto3" json:"ids,omitempty"`
-	LastModifieds        []int64  `protobuf:"varint,14,rep,packed,name=last_modifieds,json=lastModifieds,proto3" json:"last_modifieds,omitempty"` // ms
-	ProductCollectionIds []string `protobuf:"bytes,15,rep,name=product_collection_ids,json=productCollectionIds,proto3" json:"product_collection_ids,omitempty"`
-	IncludeDeleted       bool     `protobuf:"varint,17,opt,name=include_deleted,json=includeDeleted,proto3" json:"include_deleted,omitempty"`
-	Sku                  string   `protobuf:"bytes,18,opt,name=sku,proto3" json:"sku,omitempty"`
-	Url                  string   `protobuf:"bytes,19,opt,name=url,proto3" json:"url,omitempty"`
-	Grouped              bool     `protobuf:"varint,20,opt,name=grouped,proto3" json:"grouped,omitempty"` // group sampe product_group_id into one
-	SourceId             string   `protobuf:"bytes,21,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
-	VariantOf            string   `protobuf:"bytes,22,opt,name=variant_of,json=variantOf,proto3" json:"variant_of,omitempty"`
-	ETag                 string   `protobuf:"bytes,23,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	Props          []*KV    `protobuf:"bytes,8,rep,name=props,proto3" json:"props,omitempty"`
+	Availability   string   `protobuf:"bytes,9,opt,name=availability,proto3" json:"availability,omitempty"` // instock, out_of_stock
+	Category       string   `protobuf:"bytes,10,opt,name=category,proto3" json:"category,omitempty"`
+	Visibility     string   `protobuf:"bytes,11,opt,name=visibility,proto3" json:"visibility,omitempty"` // published or hidden
+	Ids            []string `protobuf:"bytes,12,rep,name=ids,proto3" json:"ids,omitempty"`
+	LastModifieds  []int64  `protobuf:"varint,14,rep,packed,name=last_modifieds,json=lastModifieds,proto3" json:"last_modifieds,omitempty"` // ms
+	IncludeDeleted bool     `protobuf:"varint,17,opt,name=include_deleted,json=includeDeleted,proto3" json:"include_deleted,omitempty"`
+	Sku            string   `protobuf:"bytes,18,opt,name=sku,proto3" json:"sku,omitempty"`
+	Url            string   `protobuf:"bytes,19,opt,name=url,proto3" json:"url,omitempty"`
+	Grouped        bool     `protobuf:"varint,20,opt,name=grouped,proto3" json:"grouped,omitempty"` // group sampe product_group_id into one
+	SourceId       string   `protobuf:"bytes,21,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	VariantOf      string   `protobuf:"bytes,22,opt,name=variant_of,json=variantOf,proto3" json:"variant_of,omitempty"`
+	ETag           string   `protobuf:"bytes,23,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ProductsRequest) Reset() {
 	*x = ProductsRequest{}
-	mi := &file_header_proto_msgTypes[281]
+	mi := &file_header_proto_msgTypes[279]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36306,7 +36099,7 @@ func (x *ProductsRequest) String() string {
 func (*ProductsRequest) ProtoMessage() {}
 
 func (x *ProductsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[281]
+	mi := &file_header_proto_msgTypes[279]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36319,7 +36112,7 @@ func (x *ProductsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductsRequest.ProtoReflect.Descriptor instead.
 func (*ProductsRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{281}
+	return file_header_proto_rawDescGZIP(), []int{279}
 }
 
 func (x *ProductsRequest) GetCtx() *common.Context {
@@ -36420,13 +36213,6 @@ func (x *ProductsRequest) GetLastModifieds() []int64 {
 	return nil
 }
 
-func (x *ProductsRequest) GetProductCollectionIds() []string {
-	if x != nil {
-		return x.ProductCollectionIds
-	}
-	return nil
-}
-
 func (x *ProductsRequest) GetIncludeDeleted() bool {
 	if x != nil {
 		return x.IncludeDeleted
@@ -36496,7 +36282,7 @@ type KV struct {
 
 func (x *KV) Reset() {
 	*x = KV{}
-	mi := &file_header_proto_msgTypes[282]
+	mi := &file_header_proto_msgTypes[280]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36508,7 +36294,7 @@ func (x *KV) String() string {
 func (*KV) ProtoMessage() {}
 
 func (x *KV) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[282]
+	mi := &file_header_proto_msgTypes[280]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36521,7 +36307,7 @@ func (x *KV) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KV.ProtoReflect.Descriptor instead.
 func (*KV) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{282}
+	return file_header_proto_rawDescGZIP(), []int{280}
 }
 
 func (x *KV) GetKey() string {
@@ -36611,7 +36397,7 @@ type ProductCategoryBuildQueryExample struct {
 
 func (x *ProductCategoryBuildQueryExample) Reset() {
 	*x = ProductCategoryBuildQueryExample{}
-	mi := &file_header_proto_msgTypes[283]
+	mi := &file_header_proto_msgTypes[281]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36623,7 +36409,7 @@ func (x *ProductCategoryBuildQueryExample) String() string {
 func (*ProductCategoryBuildQueryExample) ProtoMessage() {}
 
 func (x *ProductCategoryBuildQueryExample) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[283]
+	mi := &file_header_proto_msgTypes[281]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36636,7 +36422,7 @@ func (x *ProductCategoryBuildQueryExample) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductCategoryBuildQueryExample.ProtoReflect.Descriptor instead.
 func (*ProductCategoryBuildQueryExample) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{283}
+	return file_header_proto_rawDescGZIP(), []int{281}
 }
 
 func (x *ProductCategoryBuildQueryExample) GetHistory() []*LLMChatHistoryEntry {
@@ -36672,7 +36458,7 @@ type ProductCategory struct {
 
 func (x *ProductCategory) Reset() {
 	*x = ProductCategory{}
-	mi := &file_header_proto_msgTypes[284]
+	mi := &file_header_proto_msgTypes[282]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36684,7 +36470,7 @@ func (x *ProductCategory) String() string {
 func (*ProductCategory) ProtoMessage() {}
 
 func (x *ProductCategory) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[284]
+	mi := &file_header_proto_msgTypes[282]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36697,7 +36483,7 @@ func (x *ProductCategory) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductCategory.ProtoReflect.Descriptor instead.
 func (*ProductCategory) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{284}
+	return file_header_proto_rawDescGZIP(), []int{282}
 }
 
 func (x *ProductCategory) GetId() string {
@@ -36789,7 +36575,7 @@ type ProductCategoryExtractExample struct {
 
 func (x *ProductCategoryExtractExample) Reset() {
 	*x = ProductCategoryExtractExample{}
-	mi := &file_header_proto_msgTypes[285]
+	mi := &file_header_proto_msgTypes[283]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36801,7 +36587,7 @@ func (x *ProductCategoryExtractExample) String() string {
 func (*ProductCategoryExtractExample) ProtoMessage() {}
 
 func (x *ProductCategoryExtractExample) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[285]
+	mi := &file_header_proto_msgTypes[283]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36814,7 +36600,7 @@ func (x *ProductCategoryExtractExample) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductCategoryExtractExample.ProtoReflect.Descriptor instead.
 func (*ProductCategoryExtractExample) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{285}
+	return file_header_proto_rawDescGZIP(), []int{283}
 }
 
 func (x *ProductCategoryExtractExample) GetHistory() string {
@@ -36859,7 +36645,7 @@ type ProductCategories struct {
 
 func (x *ProductCategories) Reset() {
 	*x = ProductCategories{}
-	mi := &file_header_proto_msgTypes[286]
+	mi := &file_header_proto_msgTypes[284]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36871,7 +36657,7 @@ func (x *ProductCategories) String() string {
 func (*ProductCategories) ProtoMessage() {}
 
 func (x *ProductCategories) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[286]
+	mi := &file_header_proto_msgTypes[284]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36884,7 +36670,7 @@ func (x *ProductCategories) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductCategories.ProtoReflect.Descriptor instead.
 func (*ProductCategories) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{286}
+	return file_header_proto_rawDescGZIP(), []int{284}
 }
 
 func (x *ProductCategories) GetCtx() *common.Context {
@@ -36951,7 +36737,7 @@ type Tax struct {
 
 func (x *Tax) Reset() {
 	*x = Tax{}
-	mi := &file_header_proto_msgTypes[287]
+	mi := &file_header_proto_msgTypes[285]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -36963,7 +36749,7 @@ func (x *Tax) String() string {
 func (*Tax) ProtoMessage() {}
 
 func (x *Tax) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[287]
+	mi := &file_header_proto_msgTypes[285]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -36976,7 +36762,7 @@ func (x *Tax) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tax.ProtoReflect.Descriptor instead.
 func (*Tax) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{287}
+	return file_header_proto_rawDescGZIP(), []int{285}
 }
 
 func (x *Tax) GetCtx() *common.Context {
@@ -37081,7 +36867,7 @@ type ErrorAttribute struct {
 
 func (x *ErrorAttribute) Reset() {
 	*x = ErrorAttribute{}
-	mi := &file_header_proto_msgTypes[288]
+	mi := &file_header_proto_msgTypes[286]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37093,7 +36879,7 @@ func (x *ErrorAttribute) String() string {
 func (*ErrorAttribute) ProtoMessage() {}
 
 func (x *ErrorAttribute) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[288]
+	mi := &file_header_proto_msgTypes[286]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37106,7 +36892,7 @@ func (x *ErrorAttribute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorAttribute.ProtoReflect.Descriptor instead.
 func (*ErrorAttribute) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{288}
+	return file_header_proto_rawDescGZIP(), []int{286}
 }
 
 func (x *ErrorAttribute) GetKey() string {
@@ -37150,7 +36936,7 @@ type Error struct {
 
 func (x *Error) Reset() {
 	*x = Error{}
-	mi := &file_header_proto_msgTypes[289]
+	mi := &file_header_proto_msgTypes[287]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37162,7 +36948,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[289]
+	mi := &file_header_proto_msgTypes[287]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37175,7 +36961,7 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{289}
+	return file_header_proto_rawDescGZIP(), []int{287}
 }
 
 func (x *Error) GetId() int64 {
@@ -37271,7 +37057,7 @@ type ShopeeShop struct {
 
 func (x *ShopeeShop) Reset() {
 	*x = ShopeeShop{}
-	mi := &file_header_proto_msgTypes[290]
+	mi := &file_header_proto_msgTypes[288]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37283,7 +37069,7 @@ func (x *ShopeeShop) String() string {
 func (*ShopeeShop) ProtoMessage() {}
 
 func (x *ShopeeShop) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[290]
+	mi := &file_header_proto_msgTypes[288]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37296,7 +37082,7 @@ func (x *ShopeeShop) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShopeeShop.ProtoReflect.Descriptor instead.
 func (*ShopeeShop) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{290}
+	return file_header_proto_rawDescGZIP(), []int{288}
 }
 
 func (x *ShopeeShop) GetCtx() *common.Context {
@@ -37420,7 +37206,7 @@ type ShopeeSyncProductResponse struct {
 
 func (x *ShopeeSyncProductResponse) Reset() {
 	*x = ShopeeSyncProductResponse{}
-	mi := &file_header_proto_msgTypes[291]
+	mi := &file_header_proto_msgTypes[289]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37432,7 +37218,7 @@ func (x *ShopeeSyncProductResponse) String() string {
 func (*ShopeeSyncProductResponse) ProtoMessage() {}
 
 func (x *ShopeeSyncProductResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[291]
+	mi := &file_header_proto_msgTypes[289]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37445,7 +37231,7 @@ func (x *ShopeeSyncProductResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShopeeSyncProductResponse.ProtoReflect.Descriptor instead.
 func (*ShopeeSyncProductResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{291}
+	return file_header_proto_rawDescGZIP(), []int{289}
 }
 
 func (x *ShopeeSyncProductResponse) GetCtx() *common.Context {
@@ -37515,7 +37301,7 @@ type AddressAutocompleteResponses struct {
 
 func (x *AddressAutocompleteResponses) Reset() {
 	*x = AddressAutocompleteResponses{}
-	mi := &file_header_proto_msgTypes[292]
+	mi := &file_header_proto_msgTypes[290]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37527,7 +37313,7 @@ func (x *AddressAutocompleteResponses) String() string {
 func (*AddressAutocompleteResponses) ProtoMessage() {}
 
 func (x *AddressAutocompleteResponses) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[292]
+	mi := &file_header_proto_msgTypes[290]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37540,7 +37326,7 @@ func (x *AddressAutocompleteResponses) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressAutocompleteResponses.ProtoReflect.Descriptor instead.
 func (*AddressAutocompleteResponses) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{292}
+	return file_header_proto_rawDescGZIP(), []int{290}
 }
 
 func (x *AddressAutocompleteResponses) GetCtx() *common.Context {
@@ -37578,7 +37364,7 @@ type AddressAutocompleteResponse struct {
 
 func (x *AddressAutocompleteResponse) Reset() {
 	*x = AddressAutocompleteResponse{}
-	mi := &file_header_proto_msgTypes[293]
+	mi := &file_header_proto_msgTypes[291]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37590,7 +37376,7 @@ func (x *AddressAutocompleteResponse) String() string {
 func (*AddressAutocompleteResponse) ProtoMessage() {}
 
 func (x *AddressAutocompleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[293]
+	mi := &file_header_proto_msgTypes[291]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37603,7 +37389,7 @@ func (x *AddressAutocompleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressAutocompleteResponse.ProtoReflect.Descriptor instead.
 func (*AddressAutocompleteResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{293}
+	return file_header_proto_rawDescGZIP(), []int{291}
 }
 
 func (x *AddressAutocompleteResponse) GetCtx() *common.Context {
@@ -37658,7 +37444,7 @@ type SubstringIndex struct {
 
 func (x *SubstringIndex) Reset() {
 	*x = SubstringIndex{}
-	mi := &file_header_proto_msgTypes[294]
+	mi := &file_header_proto_msgTypes[292]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37670,7 +37456,7 @@ func (x *SubstringIndex) String() string {
 func (*SubstringIndex) ProtoMessage() {}
 
 func (x *SubstringIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[294]
+	mi := &file_header_proto_msgTypes[292]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37683,7 +37469,7 @@ func (x *SubstringIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubstringIndex.ProtoReflect.Descriptor instead.
 func (*SubstringIndex) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{294}
+	return file_header_proto_rawDescGZIP(), []int{292}
 }
 
 func (x *SubstringIndex) GetOffset() int32 {
@@ -37724,7 +37510,7 @@ type PipelineStage struct {
 
 func (x *PipelineStage) Reset() {
 	*x = PipelineStage{}
-	mi := &file_header_proto_msgTypes[295]
+	mi := &file_header_proto_msgTypes[293]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37736,7 +37522,7 @@ func (x *PipelineStage) String() string {
 func (*PipelineStage) ProtoMessage() {}
 
 func (x *PipelineStage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[295]
+	mi := &file_header_proto_msgTypes[293]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37749,7 +37535,7 @@ func (x *PipelineStage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PipelineStage.ProtoReflect.Descriptor instead.
 func (*PipelineStage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{295}
+	return file_header_proto_rawDescGZIP(), []int{293}
 }
 
 func (x *PipelineStage) GetPipeline() string {
@@ -37876,7 +37662,7 @@ type PipelineRule struct {
 
 func (x *PipelineRule) Reset() {
 	*x = PipelineRule{}
-	mi := &file_header_proto_msgTypes[296]
+	mi := &file_header_proto_msgTypes[294]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37888,7 +37674,7 @@ func (x *PipelineRule) String() string {
 func (*PipelineRule) ProtoMessage() {}
 
 func (x *PipelineRule) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[296]
+	mi := &file_header_proto_msgTypes[294]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -37901,7 +37687,7 @@ func (x *PipelineRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PipelineRule.ProtoReflect.Descriptor instead.
 func (*PipelineRule) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{296}
+	return file_header_proto_rawDescGZIP(), []int{294}
 }
 
 func (x *PipelineRule) GetCtx() *common.Context {
@@ -37987,7 +37773,7 @@ type Pipelines struct {
 
 func (x *Pipelines) Reset() {
 	*x = Pipelines{}
-	mi := &file_header_proto_msgTypes[297]
+	mi := &file_header_proto_msgTypes[295]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -37999,7 +37785,7 @@ func (x *Pipelines) String() string {
 func (*Pipelines) ProtoMessage() {}
 
 func (x *Pipelines) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[297]
+	mi := &file_header_proto_msgTypes[295]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38012,7 +37798,7 @@ func (x *Pipelines) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Pipelines.ProtoReflect.Descriptor instead.
 func (*Pipelines) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{297}
+	return file_header_proto_rawDescGZIP(), []int{295}
 }
 
 func (x *Pipelines) GetCtx() *common.Context {
@@ -38068,7 +37854,7 @@ type Pipeline struct {
 
 func (x *Pipeline) Reset() {
 	*x = Pipeline{}
-	mi := &file_header_proto_msgTypes[298]
+	mi := &file_header_proto_msgTypes[296]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38080,7 +37866,7 @@ func (x *Pipeline) String() string {
 func (*Pipeline) ProtoMessage() {}
 
 func (x *Pipeline) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[298]
+	mi := &file_header_proto_msgTypes[296]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38093,7 +37879,7 @@ func (x *Pipeline) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Pipeline.ProtoReflect.Descriptor instead.
 func (*Pipeline) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{298}
+	return file_header_proto_rawDescGZIP(), []int{296}
 }
 
 func (x *Pipeline) GetCtx() *common.Context {
@@ -38179,7 +37965,7 @@ type Tasks struct {
 
 func (x *Tasks) Reset() {
 	*x = Tasks{}
-	mi := &file_header_proto_msgTypes[299]
+	mi := &file_header_proto_msgTypes[297]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38191,7 +37977,7 @@ func (x *Tasks) String() string {
 func (*Tasks) ProtoMessage() {}
 
 func (x *Tasks) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[299]
+	mi := &file_header_proto_msgTypes[297]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38204,7 +37990,7 @@ func (x *Tasks) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tasks.ProtoReflect.Descriptor instead.
 func (*Tasks) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{299}
+	return file_header_proto_rawDescGZIP(), []int{297}
 }
 
 func (x *Tasks) GetCtx() *common.Context {
@@ -38256,7 +38042,7 @@ type ImportLeadRequest struct {
 
 func (x *ImportLeadRequest) Reset() {
 	*x = ImportLeadRequest{}
-	mi := &file_header_proto_msgTypes[300]
+	mi := &file_header_proto_msgTypes[298]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38268,7 +38054,7 @@ func (x *ImportLeadRequest) String() string {
 func (*ImportLeadRequest) ProtoMessage() {}
 
 func (x *ImportLeadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[300]
+	mi := &file_header_proto_msgTypes[298]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38281,7 +38067,7 @@ func (x *ImportLeadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportLeadRequest.ProtoReflect.Descriptor instead.
 func (*ImportLeadRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{300}
+	return file_header_proto_rawDescGZIP(), []int{298}
 }
 
 func (x *ImportLeadRequest) GetCtx() *common.Context {
@@ -38339,7 +38125,7 @@ type ImportLeadResponse struct {
 
 func (x *ImportLeadResponse) Reset() {
 	*x = ImportLeadResponse{}
-	mi := &file_header_proto_msgTypes[301]
+	mi := &file_header_proto_msgTypes[299]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38351,7 +38137,7 @@ func (x *ImportLeadResponse) String() string {
 func (*ImportLeadResponse) ProtoMessage() {}
 
 func (x *ImportLeadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[301]
+	mi := &file_header_proto_msgTypes[299]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38364,7 +38150,7 @@ func (x *ImportLeadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportLeadResponse.ProtoReflect.Descriptor instead.
 func (*ImportLeadResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{301}
+	return file_header_proto_rawDescGZIP(), []int{299}
 }
 
 func (x *ImportLeadResponse) GetCtx() *common.Context {
@@ -38413,7 +38199,7 @@ type ImportProductRequest struct {
 
 func (x *ImportProductRequest) Reset() {
 	*x = ImportProductRequest{}
-	mi := &file_header_proto_msgTypes[302]
+	mi := &file_header_proto_msgTypes[300]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38425,7 +38211,7 @@ func (x *ImportProductRequest) String() string {
 func (*ImportProductRequest) ProtoMessage() {}
 
 func (x *ImportProductRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[302]
+	mi := &file_header_proto_msgTypes[300]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38438,7 +38224,7 @@ func (x *ImportProductRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportProductRequest.ProtoReflect.Descriptor instead.
 func (*ImportProductRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{302}
+	return file_header_proto_rawDescGZIP(), []int{300}
 }
 
 func (x *ImportProductRequest) GetCtx() *common.Context {
@@ -38478,7 +38264,7 @@ type ImportProductResponse struct {
 
 func (x *ImportProductResponse) Reset() {
 	*x = ImportProductResponse{}
-	mi := &file_header_proto_msgTypes[303]
+	mi := &file_header_proto_msgTypes[301]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38490,7 +38276,7 @@ func (x *ImportProductResponse) String() string {
 func (*ImportProductResponse) ProtoMessage() {}
 
 func (x *ImportProductResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[303]
+	mi := &file_header_proto_msgTypes[301]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38503,7 +38289,7 @@ func (x *ImportProductResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportProductResponse.ProtoReflect.Descriptor instead.
 func (*ImportProductResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{303}
+	return file_header_proto_rawDescGZIP(), []int{301}
 }
 
 func (x *ImportProductResponse) GetCtx() *common.Context {
@@ -38622,7 +38408,7 @@ type Task struct {
 
 func (x *Task) Reset() {
 	*x = Task{}
-	mi := &file_header_proto_msgTypes[304]
+	mi := &file_header_proto_msgTypes[302]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38634,7 +38420,7 @@ func (x *Task) String() string {
 func (*Task) ProtoMessage() {}
 
 func (x *Task) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[304]
+	mi := &file_header_proto_msgTypes[302]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38647,7 +38433,7 @@ func (x *Task) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Task.ProtoReflect.Descriptor instead.
 func (*Task) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{304}
+	return file_header_proto_rawDescGZIP(), []int{302}
 }
 
 func (x *Task) GetCtx() *common.Context {
@@ -38965,7 +38751,7 @@ type TaskMember struct {
 
 func (x *TaskMember) Reset() {
 	*x = TaskMember{}
-	mi := &file_header_proto_msgTypes[305]
+	mi := &file_header_proto_msgTypes[303]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -38977,7 +38763,7 @@ func (x *TaskMember) String() string {
 func (*TaskMember) ProtoMessage() {}
 
 func (x *TaskMember) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[305]
+	mi := &file_header_proto_msgTypes[303]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -38990,7 +38776,7 @@ func (x *TaskMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskMember.ProtoReflect.Descriptor instead.
 func (*TaskMember) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{305}
+	return file_header_proto_rawDescGZIP(), []int{303}
 }
 
 func (x *TaskMember) GetAgentId() string {
@@ -39046,7 +38832,7 @@ type TaskHistoryEntry struct {
 
 func (x *TaskHistoryEntry) Reset() {
 	*x = TaskHistoryEntry{}
-	mi := &file_header_proto_msgTypes[306]
+	mi := &file_header_proto_msgTypes[304]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39058,7 +38844,7 @@ func (x *TaskHistoryEntry) String() string {
 func (*TaskHistoryEntry) ProtoMessage() {}
 
 func (x *TaskHistoryEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[306]
+	mi := &file_header_proto_msgTypes[304]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39071,7 +38857,7 @@ func (x *TaskHistoryEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskHistoryEntry.ProtoReflect.Descriptor instead.
 func (*TaskHistoryEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{306}
+	return file_header_proto_rawDescGZIP(), []int{304}
 }
 
 func (x *TaskHistoryEntry) GetEvent() *Event {
@@ -39108,7 +38894,7 @@ type TaskHistoryEntries struct {
 
 func (x *TaskHistoryEntries) Reset() {
 	*x = TaskHistoryEntries{}
-	mi := &file_header_proto_msgTypes[307]
+	mi := &file_header_proto_msgTypes[305]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39120,7 +38906,7 @@ func (x *TaskHistoryEntries) String() string {
 func (*TaskHistoryEntries) ProtoMessage() {}
 
 func (x *TaskHistoryEntries) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[307]
+	mi := &file_header_proto_msgTypes[305]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39133,7 +38919,7 @@ func (x *TaskHistoryEntries) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskHistoryEntries.ProtoReflect.Descriptor instead.
 func (*TaskHistoryEntries) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{307}
+	return file_header_proto_rawDescGZIP(), []int{305}
 }
 
 func (x *TaskHistoryEntries) GetCtx() *common.Context {
@@ -39181,7 +38967,7 @@ type AgentGroups struct {
 
 func (x *AgentGroups) Reset() {
 	*x = AgentGroups{}
-	mi := &file_header_proto_msgTypes[308]
+	mi := &file_header_proto_msgTypes[306]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39193,7 +38979,7 @@ func (x *AgentGroups) String() string {
 func (*AgentGroups) ProtoMessage() {}
 
 func (x *AgentGroups) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[308]
+	mi := &file_header_proto_msgTypes[306]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39206,7 +38992,7 @@ func (x *AgentGroups) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentGroups.ProtoReflect.Descriptor instead.
 func (*AgentGroups) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{308}
+	return file_header_proto_rawDescGZIP(), []int{306}
 }
 
 func (x *AgentGroups) GetCtx() *common.Context {
@@ -39247,7 +39033,7 @@ type AgentGroup struct {
 
 func (x *AgentGroup) Reset() {
 	*x = AgentGroup{}
-	mi := &file_header_proto_msgTypes[309]
+	mi := &file_header_proto_msgTypes[307]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39259,7 +39045,7 @@ func (x *AgentGroup) String() string {
 func (*AgentGroup) ProtoMessage() {}
 
 func (x *AgentGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[309]
+	mi := &file_header_proto_msgTypes[307]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39272,7 +39058,7 @@ func (x *AgentGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentGroup.ProtoReflect.Descriptor instead.
 func (*AgentGroup) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{309}
+	return file_header_proto_rawDescGZIP(), []int{307}
 }
 
 func (x *AgentGroup) GetCtx() *common.Context {
@@ -39413,7 +39199,7 @@ type DocHit struct {
 
 func (x *DocHit) Reset() {
 	*x = DocHit{}
-	mi := &file_header_proto_msgTypes[310]
+	mi := &file_header_proto_msgTypes[308]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39425,7 +39211,7 @@ func (x *DocHit) String() string {
 func (*DocHit) ProtoMessage() {}
 
 func (x *DocHit) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[310]
+	mi := &file_header_proto_msgTypes[308]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39438,7 +39224,7 @@ func (x *DocHit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DocHit.ProtoReflect.Descriptor instead.
 func (*DocHit) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{310}
+	return file_header_proto_rawDescGZIP(), []int{308}
 }
 
 func (x *DocHit) GetDocumentId() string {
@@ -39579,7 +39365,7 @@ type DocSearchResponse struct {
 
 func (x *DocSearchResponse) Reset() {
 	*x = DocSearchResponse{}
-	mi := &file_header_proto_msgTypes[311]
+	mi := &file_header_proto_msgTypes[309]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39591,7 +39377,7 @@ func (x *DocSearchResponse) String() string {
 func (*DocSearchResponse) ProtoMessage() {}
 
 func (x *DocSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[311]
+	mi := &file_header_proto_msgTypes[309]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39604,7 +39390,7 @@ func (x *DocSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DocSearchResponse.ProtoReflect.Descriptor instead.
 func (*DocSearchResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{311}
+	return file_header_proto_rawDescGZIP(), []int{309}
 }
 
 func (x *DocSearchResponse) GetCtx() *common.Context {
@@ -39650,7 +39436,7 @@ type ArticleHit struct {
 
 func (x *ArticleHit) Reset() {
 	*x = ArticleHit{}
-	mi := &file_header_proto_msgTypes[312]
+	mi := &file_header_proto_msgTypes[310]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39662,7 +39448,7 @@ func (x *ArticleHit) String() string {
 func (*ArticleHit) ProtoMessage() {}
 
 func (x *ArticleHit) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[312]
+	mi := &file_header_proto_msgTypes[310]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39675,7 +39461,7 @@ func (x *ArticleHit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleHit.ProtoReflect.Descriptor instead.
 func (*ArticleHit) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{312}
+	return file_header_proto_rawDescGZIP(), []int{310}
 }
 
 func (x *ArticleHit) GetId() string {
@@ -39739,7 +39525,7 @@ type ArticleSearchResponse struct {
 
 func (x *ArticleSearchResponse) Reset() {
 	*x = ArticleSearchResponse{}
-	mi := &file_header_proto_msgTypes[313]
+	mi := &file_header_proto_msgTypes[311]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39751,7 +39537,7 @@ func (x *ArticleSearchResponse) String() string {
 func (*ArticleSearchResponse) ProtoMessage() {}
 
 func (x *ArticleSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[313]
+	mi := &file_header_proto_msgTypes[311]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39764,7 +39550,7 @@ func (x *ArticleSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleSearchResponse.ProtoReflect.Descriptor instead.
 func (*ArticleSearchResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{313}
+	return file_header_proto_rawDescGZIP(), []int{311}
 }
 
 func (x *ArticleSearchResponse) GetCtx() *common.Context {
@@ -39807,7 +39593,7 @@ type AccessToken struct {
 
 func (x *AccessToken) Reset() {
 	*x = AccessToken{}
-	mi := &file_header_proto_msgTypes[314]
+	mi := &file_header_proto_msgTypes[312]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39819,7 +39605,7 @@ func (x *AccessToken) String() string {
 func (*AccessToken) ProtoMessage() {}
 
 func (x *AccessToken) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[314]
+	mi := &file_header_proto_msgTypes[312]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39832,7 +39618,7 @@ func (x *AccessToken) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessToken.ProtoReflect.Descriptor instead.
 func (*AccessToken) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{314}
+	return file_header_proto_rawDescGZIP(), []int{312}
 }
 
 func (x *AccessToken) GetAccessToken() string {
@@ -39874,7 +39660,7 @@ type ZaloCodeChallenge struct {
 
 func (x *ZaloCodeChallenge) Reset() {
 	*x = ZaloCodeChallenge{}
-	mi := &file_header_proto_msgTypes[315]
+	mi := &file_header_proto_msgTypes[313]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39886,7 +39672,7 @@ func (x *ZaloCodeChallenge) String() string {
 func (*ZaloCodeChallenge) ProtoMessage() {}
 
 func (x *ZaloCodeChallenge) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[315]
+	mi := &file_header_proto_msgTypes[313]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39899,7 +39685,7 @@ func (x *ZaloCodeChallenge) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloCodeChallenge.ProtoReflect.Descriptor instead.
 func (*ZaloCodeChallenge) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{315}
+	return file_header_proto_rawDescGZIP(), []int{313}
 }
 
 func (x *ZaloCodeChallenge) GetCtx() *common.Context {
@@ -39948,7 +39734,7 @@ type ConversationModal struct {
 
 func (x *ConversationModal) Reset() {
 	*x = ConversationModal{}
-	mi := &file_header_proto_msgTypes[316]
+	mi := &file_header_proto_msgTypes[314]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -39960,7 +39746,7 @@ func (x *ConversationModal) String() string {
 func (*ConversationModal) ProtoMessage() {}
 
 func (x *ConversationModal) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[316]
+	mi := &file_header_proto_msgTypes[314]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -39973,7 +39759,7 @@ func (x *ConversationModal) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationModal.ProtoReflect.Descriptor instead.
 func (*ConversationModal) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{316}
+	return file_header_proto_rawDescGZIP(), []int{314}
 }
 
 func (x *ConversationModal) GetCtx() *common.Context {
@@ -40106,7 +39892,7 @@ type ConversationModals struct {
 
 func (x *ConversationModals) Reset() {
 	*x = ConversationModals{}
-	mi := &file_header_proto_msgTypes[317]
+	mi := &file_header_proto_msgTypes[315]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40118,7 +39904,7 @@ func (x *ConversationModals) String() string {
 func (*ConversationModals) ProtoMessage() {}
 
 func (x *ConversationModals) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[317]
+	mi := &file_header_proto_msgTypes[315]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40131,7 +39917,7 @@ func (x *ConversationModals) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationModals.ProtoReflect.Descriptor instead.
 func (*ConversationModals) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{317}
+	return file_header_proto_rawDescGZIP(), []int{315}
 }
 
 func (x *ConversationModals) GetCtx() *common.Context {
@@ -40171,7 +39957,7 @@ type ConversationModalPickRequest struct {
 
 func (x *ConversationModalPickRequest) Reset() {
 	*x = ConversationModalPickRequest{}
-	mi := &file_header_proto_msgTypes[318]
+	mi := &file_header_proto_msgTypes[316]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40183,7 +39969,7 @@ func (x *ConversationModalPickRequest) String() string {
 func (*ConversationModalPickRequest) ProtoMessage() {}
 
 func (x *ConversationModalPickRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[318]
+	mi := &file_header_proto_msgTypes[316]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40196,7 +39982,7 @@ func (x *ConversationModalPickRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationModalPickRequest.ProtoReflect.Descriptor instead.
 func (*ConversationModalPickRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{318}
+	return file_header_proto_rawDescGZIP(), []int{316}
 }
 
 func (x *ConversationModalPickRequest) GetCtx() *common.Context {
@@ -40269,7 +40055,7 @@ type ConversationModalPicked struct {
 
 func (x *ConversationModalPicked) Reset() {
 	*x = ConversationModalPicked{}
-	mi := &file_header_proto_msgTypes[319]
+	mi := &file_header_proto_msgTypes[317]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40281,7 +40067,7 @@ func (x *ConversationModalPicked) String() string {
 func (*ConversationModalPicked) ProtoMessage() {}
 
 func (x *ConversationModalPicked) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[319]
+	mi := &file_header_proto_msgTypes[317]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40294,7 +40080,7 @@ func (x *ConversationModalPicked) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationModalPicked.ProtoReflect.Descriptor instead.
 func (*ConversationModalPicked) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{319}
+	return file_header_proto_rawDescGZIP(), []int{317}
 }
 
 func (x *ConversationModalPicked) GetCtx() *common.Context {
@@ -40353,7 +40139,7 @@ type FacebookPageRegister struct {
 
 func (x *FacebookPageRegister) Reset() {
 	*x = FacebookPageRegister{}
-	mi := &file_header_proto_msgTypes[320]
+	mi := &file_header_proto_msgTypes[318]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40365,7 +40151,7 @@ func (x *FacebookPageRegister) String() string {
 func (*FacebookPageRegister) ProtoMessage() {}
 
 func (x *FacebookPageRegister) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[320]
+	mi := &file_header_proto_msgTypes[318]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40378,7 +40164,7 @@ func (x *FacebookPageRegister) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookPageRegister.ProtoReflect.Descriptor instead.
 func (*FacebookPageRegister) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{320}
+	return file_header_proto_rawDescGZIP(), []int{318}
 }
 
 func (x *FacebookPageRegister) GetCtx() *common.Context {
@@ -40450,7 +40236,7 @@ type FacebookPage struct {
 
 func (x *FacebookPage) Reset() {
 	*x = FacebookPage{}
-	mi := &file_header_proto_msgTypes[321]
+	mi := &file_header_proto_msgTypes[319]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40462,7 +40248,7 @@ func (x *FacebookPage) String() string {
 func (*FacebookPage) ProtoMessage() {}
 
 func (x *FacebookPage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[321]
+	mi := &file_header_proto_msgTypes[319]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40475,7 +40261,7 @@ func (x *FacebookPage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookPage.ProtoReflect.Descriptor instead.
 func (*FacebookPage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{321}
+	return file_header_proto_rawDescGZIP(), []int{319}
 }
 
 func (x *FacebookPage) GetCtx() *common.Context {
@@ -40623,7 +40409,7 @@ type FacebookPageRequest struct {
 
 func (x *FacebookPageRequest) Reset() {
 	*x = FacebookPageRequest{}
-	mi := &file_header_proto_msgTypes[322]
+	mi := &file_header_proto_msgTypes[320]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40635,7 +40421,7 @@ func (x *FacebookPageRequest) String() string {
 func (*FacebookPageRequest) ProtoMessage() {}
 
 func (x *FacebookPageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[322]
+	mi := &file_header_proto_msgTypes[320]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40648,7 +40434,7 @@ func (x *FacebookPageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookPageRequest.ProtoReflect.Descriptor instead.
 func (*FacebookPageRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{322}
+	return file_header_proto_rawDescGZIP(), []int{320}
 }
 
 func (x *FacebookPageRequest) GetCtx() *common.Context {
@@ -40690,7 +40476,7 @@ type FacebookPages struct {
 
 func (x *FacebookPages) Reset() {
 	*x = FacebookPages{}
-	mi := &file_header_proto_msgTypes[323]
+	mi := &file_header_proto_msgTypes[321]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40702,7 +40488,7 @@ func (x *FacebookPages) String() string {
 func (*FacebookPages) ProtoMessage() {}
 
 func (x *FacebookPages) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[323]
+	mi := &file_header_proto_msgTypes[321]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40715,7 +40501,7 @@ func (x *FacebookPages) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookPages.ProtoReflect.Descriptor instead.
 func (*FacebookPages) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{323}
+	return file_header_proto_rawDescGZIP(), []int{321}
 }
 
 func (x *FacebookPages) GetCtx() *common.Context {
@@ -40761,7 +40547,7 @@ type InstagramUser struct {
 
 func (x *InstagramUser) Reset() {
 	*x = InstagramUser{}
-	mi := &file_header_proto_msgTypes[324]
+	mi := &file_header_proto_msgTypes[322]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40773,7 +40559,7 @@ func (x *InstagramUser) String() string {
 func (*InstagramUser) ProtoMessage() {}
 
 func (x *InstagramUser) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[324]
+	mi := &file_header_proto_msgTypes[322]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40786,7 +40572,7 @@ func (x *InstagramUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InstagramUser.ProtoReflect.Descriptor instead.
 func (*InstagramUser) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{324}
+	return file_header_proto_rawDescGZIP(), []int{322}
 }
 
 func (x *InstagramUser) GetCtx() *common.Context {
@@ -40925,7 +40711,7 @@ type CallDriverRequest struct {
 
 func (x *CallDriverRequest) Reset() {
 	*x = CallDriverRequest{}
-	mi := &file_header_proto_msgTypes[325]
+	mi := &file_header_proto_msgTypes[323]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -40937,7 +40723,7 @@ func (x *CallDriverRequest) String() string {
 func (*CallDriverRequest) ProtoMessage() {}
 
 func (x *CallDriverRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[325]
+	mi := &file_header_proto_msgTypes[323]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -40950,7 +40736,7 @@ func (x *CallDriverRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallDriverRequest.ProtoReflect.Descriptor instead.
 func (*CallDriverRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{325}
+	return file_header_proto_rawDescGZIP(), []int{323}
 }
 
 func (x *CallDriverRequest) GetCtx() *common.Context {
@@ -41153,7 +40939,7 @@ type CallDriverResponse struct {
 
 func (x *CallDriverResponse) Reset() {
 	*x = CallDriverResponse{}
-	mi := &file_header_proto_msgTypes[326]
+	mi := &file_header_proto_msgTypes[324]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41165,7 +40951,7 @@ func (x *CallDriverResponse) String() string {
 func (*CallDriverResponse) ProtoMessage() {}
 
 func (x *CallDriverResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[326]
+	mi := &file_header_proto_msgTypes[324]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41178,7 +40964,7 @@ func (x *CallDriverResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallDriverResponse.ProtoReflect.Descriptor instead.
 func (*CallDriverResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{326}
+	return file_header_proto_rawDescGZIP(), []int{324}
 }
 
 func (x *CallDriverResponse) GetRequestId() string {
@@ -41213,7 +40999,7 @@ type BlockedNumbers struct {
 
 func (x *BlockedNumbers) Reset() {
 	*x = BlockedNumbers{}
-	mi := &file_header_proto_msgTypes[327]
+	mi := &file_header_proto_msgTypes[325]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41225,7 +41011,7 @@ func (x *BlockedNumbers) String() string {
 func (*BlockedNumbers) ProtoMessage() {}
 
 func (x *BlockedNumbers) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[327]
+	mi := &file_header_proto_msgTypes[325]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41238,7 +41024,7 @@ func (x *BlockedNumbers) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockedNumbers.ProtoReflect.Descriptor instead.
 func (*BlockedNumbers) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{327}
+	return file_header_proto_rawDescGZIP(), []int{325}
 }
 
 func (x *BlockedNumbers) GetCtx() *common.Context {
@@ -41279,7 +41065,7 @@ type BlockedNumber struct {
 
 func (x *BlockedNumber) Reset() {
 	*x = BlockedNumber{}
-	mi := &file_header_proto_msgTypes[328]
+	mi := &file_header_proto_msgTypes[326]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41291,7 +41077,7 @@ func (x *BlockedNumber) String() string {
 func (*BlockedNumber) ProtoMessage() {}
 
 func (x *BlockedNumber) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[328]
+	mi := &file_header_proto_msgTypes[326]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41304,7 +41090,7 @@ func (x *BlockedNumber) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockedNumber.ProtoReflect.Descriptor instead.
 func (*BlockedNumber) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{328}
+	return file_header_proto_rawDescGZIP(), []int{326}
 }
 
 func (x *BlockedNumber) GetCtx() *common.Context {
@@ -41360,7 +41146,7 @@ type TextToSpeech struct {
 
 func (x *TextToSpeech) Reset() {
 	*x = TextToSpeech{}
-	mi := &file_header_proto_msgTypes[329]
+	mi := &file_header_proto_msgTypes[327]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41372,7 +41158,7 @@ func (x *TextToSpeech) String() string {
 func (*TextToSpeech) ProtoMessage() {}
 
 func (x *TextToSpeech) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[329]
+	mi := &file_header_proto_msgTypes[327]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41385,7 +41171,7 @@ func (x *TextToSpeech) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextToSpeech.ProtoReflect.Descriptor instead.
 func (*TextToSpeech) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{329}
+	return file_header_proto_rawDescGZIP(), []int{327}
 }
 
 func (x *TextToSpeech) GetAccountId() string {
@@ -41424,7 +41210,7 @@ type TTSVoiceSelection struct {
 
 func (x *TTSVoiceSelection) Reset() {
 	*x = TTSVoiceSelection{}
-	mi := &file_header_proto_msgTypes[330]
+	mi := &file_header_proto_msgTypes[328]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41436,7 +41222,7 @@ func (x *TTSVoiceSelection) String() string {
 func (*TTSVoiceSelection) ProtoMessage() {}
 
 func (x *TTSVoiceSelection) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[330]
+	mi := &file_header_proto_msgTypes[328]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41449,7 +41235,7 @@ func (x *TTSVoiceSelection) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TTSVoiceSelection.ProtoReflect.Descriptor instead.
 func (*TTSVoiceSelection) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{330}
+	return file_header_proto_rawDescGZIP(), []int{328}
 }
 
 func (x *TTSVoiceSelection) GetText() string {
@@ -41514,7 +41300,7 @@ type BusinessHour struct {
 
 func (x *BusinessHour) Reset() {
 	*x = BusinessHour{}
-	mi := &file_header_proto_msgTypes[331]
+	mi := &file_header_proto_msgTypes[329]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41526,7 +41312,7 @@ func (x *BusinessHour) String() string {
 func (*BusinessHour) ProtoMessage() {}
 
 func (x *BusinessHour) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[331]
+	mi := &file_header_proto_msgTypes[329]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41539,7 +41325,7 @@ func (x *BusinessHour) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessHour.ProtoReflect.Descriptor instead.
 func (*BusinessHour) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{331}
+	return file_header_proto_rawDescGZIP(), []int{329}
 }
 
 func (x *BusinessHour) GetWeekday() string {
@@ -41585,7 +41371,7 @@ type BusinessHours struct {
 
 func (x *BusinessHours) Reset() {
 	*x = BusinessHours{}
-	mi := &file_header_proto_msgTypes[332]
+	mi := &file_header_proto_msgTypes[330]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41597,7 +41383,7 @@ func (x *BusinessHours) String() string {
 func (*BusinessHours) ProtoMessage() {}
 
 func (x *BusinessHours) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[332]
+	mi := &file_header_proto_msgTypes[330]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41610,7 +41396,7 @@ func (x *BusinessHours) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessHours.ProtoReflect.Descriptor instead.
 func (*BusinessHours) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{332}
+	return file_header_proto_rawDescGZIP(), []int{330}
 }
 
 func (x *BusinessHours) GetCtx() *common.Context {
@@ -41674,7 +41460,7 @@ type RecentCallRecords struct {
 
 func (x *RecentCallRecords) Reset() {
 	*x = RecentCallRecords{}
-	mi := &file_header_proto_msgTypes[333]
+	mi := &file_header_proto_msgTypes[331]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41686,7 +41472,7 @@ func (x *RecentCallRecords) String() string {
 func (*RecentCallRecords) ProtoMessage() {}
 
 func (x *RecentCallRecords) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[333]
+	mi := &file_header_proto_msgTypes[331]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41699,7 +41485,7 @@ func (x *RecentCallRecords) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecentCallRecords.ProtoReflect.Descriptor instead.
 func (*RecentCallRecords) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{333}
+	return file_header_proto_rawDescGZIP(), []int{331}
 }
 
 func (x *RecentCallRecords) GetCtx() *common.Context {
@@ -41749,7 +41535,7 @@ type RecentCallRecord struct {
 
 func (x *RecentCallRecord) Reset() {
 	*x = RecentCallRecord{}
-	mi := &file_header_proto_msgTypes[334]
+	mi := &file_header_proto_msgTypes[332]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41761,7 +41547,7 @@ func (x *RecentCallRecord) String() string {
 func (*RecentCallRecord) ProtoMessage() {}
 
 func (x *RecentCallRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[334]
+	mi := &file_header_proto_msgTypes[332]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41774,7 +41560,7 @@ func (x *RecentCallRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecentCallRecord.ProtoReflect.Descriptor instead.
 func (*RecentCallRecord) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{334}
+	return file_header_proto_rawDescGZIP(), []int{332}
 }
 
 func (x *RecentCallRecord) GetAvatarUrl() string {
@@ -41868,7 +41654,7 @@ type ZaloUserRequest struct {
 
 func (x *ZaloUserRequest) Reset() {
 	*x = ZaloUserRequest{}
-	mi := &file_header_proto_msgTypes[335]
+	mi := &file_header_proto_msgTypes[333]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41880,7 +41666,7 @@ func (x *ZaloUserRequest) String() string {
 func (*ZaloUserRequest) ProtoMessage() {}
 
 func (x *ZaloUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[335]
+	mi := &file_header_proto_msgTypes[333]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41893,7 +41679,7 @@ func (x *ZaloUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloUserRequest.ProtoReflect.Descriptor instead.
 func (*ZaloUserRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{335}
+	return file_header_proto_rawDescGZIP(), []int{333}
 }
 
 func (x *ZaloUserRequest) GetCtx() *common.Context {
@@ -41954,7 +41740,7 @@ type ZnsRequest struct {
 
 func (x *ZnsRequest) Reset() {
 	*x = ZnsRequest{}
-	mi := &file_header_proto_msgTypes[336]
+	mi := &file_header_proto_msgTypes[334]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41966,7 +41752,7 @@ func (x *ZnsRequest) String() string {
 func (*ZnsRequest) ProtoMessage() {}
 
 func (x *ZnsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[336]
+	mi := &file_header_proto_msgTypes[334]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -41979,7 +41765,7 @@ func (x *ZnsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZnsRequest.ProtoReflect.Descriptor instead.
 func (*ZnsRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{336}
+	return file_header_proto_rawDescGZIP(), []int{334}
 }
 
 func (x *ZnsRequest) GetCtx() *common.Context {
@@ -42054,7 +41840,7 @@ type SendOmniChannelMessageRequest struct {
 
 func (x *SendOmniChannelMessageRequest) Reset() {
 	*x = SendOmniChannelMessageRequest{}
-	mi := &file_header_proto_msgTypes[337]
+	mi := &file_header_proto_msgTypes[335]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42066,7 +41852,7 @@ func (x *SendOmniChannelMessageRequest) String() string {
 func (*SendOmniChannelMessageRequest) ProtoMessage() {}
 
 func (x *SendOmniChannelMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[337]
+	mi := &file_header_proto_msgTypes[335]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -42079,7 +41865,7 @@ func (x *SendOmniChannelMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendOmniChannelMessageRequest.ProtoReflect.Descriptor instead.
 func (*SendOmniChannelMessageRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{337}
+	return file_header_proto_rawDescGZIP(), []int{335}
 }
 
 func (x *SendOmniChannelMessageRequest) GetCtx() *common.Context {
@@ -42167,7 +41953,7 @@ type EventType struct {
 
 func (x *EventType) Reset() {
 	*x = EventType{}
-	mi := &file_header_proto_msgTypes[338]
+	mi := &file_header_proto_msgTypes[336]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42179,7 +41965,7 @@ func (x *EventType) String() string {
 func (*EventType) ProtoMessage() {}
 
 func (x *EventType) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[338]
+	mi := &file_header_proto_msgTypes[336]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -42192,7 +41978,7 @@ func (x *EventType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventType.ProtoReflect.Descriptor instead.
 func (*EventType) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{338}
+	return file_header_proto_rawDescGZIP(), []int{336}
 }
 
 func (x *EventType) GetCtx() *common.Context {
@@ -42425,7 +42211,7 @@ type Segment struct {
 
 func (x *Segment) Reset() {
 	*x = Segment{}
-	mi := &file_header_proto_msgTypes[339]
+	mi := &file_header_proto_msgTypes[337]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42437,7 +42223,7 @@ func (x *Segment) String() string {
 func (*Segment) ProtoMessage() {}
 
 func (x *Segment) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[339]
+	mi := &file_header_proto_msgTypes[337]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -42450,7 +42236,7 @@ func (x *Segment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Segment.ProtoReflect.Descriptor instead.
 func (*Segment) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{339}
+	return file_header_proto_rawDescGZIP(), []int{337}
 }
 
 func (x *Segment) GetCtx() *common.Context {
@@ -42641,7 +42427,7 @@ type MetaSyncBatchSession struct {
 
 func (x *MetaSyncBatchSession) Reset() {
 	*x = MetaSyncBatchSession{}
-	mi := &file_header_proto_msgTypes[340]
+	mi := &file_header_proto_msgTypes[338]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42653,7 +42439,7 @@ func (x *MetaSyncBatchSession) String() string {
 func (*MetaSyncBatchSession) ProtoMessage() {}
 
 func (x *MetaSyncBatchSession) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[340]
+	mi := &file_header_proto_msgTypes[338]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -42666,7 +42452,7 @@ func (x *MetaSyncBatchSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaSyncBatchSession.ProtoReflect.Descriptor instead.
 func (*MetaSyncBatchSession) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{340}
+	return file_header_proto_rawDescGZIP(), []int{338}
 }
 
 func (x *MetaSyncBatchSession) GetCreated() int64 {
@@ -42720,7 +42506,7 @@ type SegmentSyncUserStatus struct {
 
 func (x *SegmentSyncUserStatus) Reset() {
 	*x = SegmentSyncUserStatus{}
-	mi := &file_header_proto_msgTypes[341]
+	mi := &file_header_proto_msgTypes[339]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42732,7 +42518,7 @@ func (x *SegmentSyncUserStatus) String() string {
 func (*SegmentSyncUserStatus) ProtoMessage() {}
 
 func (x *SegmentSyncUserStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[341]
+	mi := &file_header_proto_msgTypes[339]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -42745,7 +42531,7 @@ func (x *SegmentSyncUserStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SegmentSyncUserStatus.ProtoReflect.Descriptor instead.
 func (*SegmentSyncUserStatus) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{341}
+	return file_header_proto_rawDescGZIP(), []int{339}
 }
 
 func (x *SegmentSyncUserStatus) GetCtx() *common.Context {
@@ -42838,7 +42624,7 @@ type SegmentSync struct {
 
 func (x *SegmentSync) Reset() {
 	*x = SegmentSync{}
-	mi := &file_header_proto_msgTypes[342]
+	mi := &file_header_proto_msgTypes[340]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42850,7 +42636,7 @@ func (x *SegmentSync) String() string {
 func (*SegmentSync) ProtoMessage() {}
 
 func (x *SegmentSync) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[342]
+	mi := &file_header_proto_msgTypes[340]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -42863,7 +42649,7 @@ func (x *SegmentSync) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SegmentSync.ProtoReflect.Descriptor instead.
 func (*SegmentSync) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{342}
+	return file_header_proto_rawDescGZIP(), []int{340}
 }
 
 func (x *SegmentSync) GetCtx() *common.Context {
@@ -43074,7 +42860,7 @@ type MetaCustomAudience struct {
 
 func (x *MetaCustomAudience) Reset() {
 	*x = MetaCustomAudience{}
-	mi := &file_header_proto_msgTypes[343]
+	mi := &file_header_proto_msgTypes[341]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43086,7 +42872,7 @@ func (x *MetaCustomAudience) String() string {
 func (*MetaCustomAudience) ProtoMessage() {}
 
 func (x *MetaCustomAudience) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[343]
+	mi := &file_header_proto_msgTypes[341]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43099,7 +42885,7 @@ func (x *MetaCustomAudience) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaCustomAudience.ProtoReflect.Descriptor instead.
 func (*MetaCustomAudience) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{343}
+	return file_header_proto_rawDescGZIP(), []int{341}
 }
 
 func (x *MetaCustomAudience) GetCtx() *common.Context {
@@ -43243,7 +43029,7 @@ type CustomAudienceBatchResponse struct {
 
 func (x *CustomAudienceBatchResponse) Reset() {
 	*x = CustomAudienceBatchResponse{}
-	mi := &file_header_proto_msgTypes[344]
+	mi := &file_header_proto_msgTypes[342]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43255,7 +43041,7 @@ func (x *CustomAudienceBatchResponse) String() string {
 func (*CustomAudienceBatchResponse) ProtoMessage() {}
 
 func (x *CustomAudienceBatchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[344]
+	mi := &file_header_proto_msgTypes[342]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43268,7 +43054,7 @@ func (x *CustomAudienceBatchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomAudienceBatchResponse.ProtoReflect.Descriptor instead.
 func (*CustomAudienceBatchResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{344}
+	return file_header_proto_rawDescGZIP(), []int{342}
 }
 
 func (x *CustomAudienceBatchResponse) GetCtx() *common.Context {
@@ -43321,7 +43107,7 @@ type CustomAudienceBatchRequest struct {
 
 func (x *CustomAudienceBatchRequest) Reset() {
 	*x = CustomAudienceBatchRequest{}
-	mi := &file_header_proto_msgTypes[345]
+	mi := &file_header_proto_msgTypes[343]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43333,7 +43119,7 @@ func (x *CustomAudienceBatchRequest) String() string {
 func (*CustomAudienceBatchRequest) ProtoMessage() {}
 
 func (x *CustomAudienceBatchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[345]
+	mi := &file_header_proto_msgTypes[343]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43346,7 +43132,7 @@ func (x *CustomAudienceBatchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomAudienceBatchRequest.ProtoReflect.Descriptor instead.
 func (*CustomAudienceBatchRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{345}
+	return file_header_proto_rawDescGZIP(), []int{343}
 }
 
 func (x *CustomAudienceBatchRequest) GetCtx() *common.Context {
@@ -43409,7 +43195,7 @@ type Segments struct {
 
 func (x *Segments) Reset() {
 	*x = Segments{}
-	mi := &file_header_proto_msgTypes[346]
+	mi := &file_header_proto_msgTypes[344]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43421,7 +43207,7 @@ func (x *Segments) String() string {
 func (*Segments) ProtoMessage() {}
 
 func (x *Segments) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[346]
+	mi := &file_header_proto_msgTypes[344]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43434,7 +43220,7 @@ func (x *Segments) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Segments.ProtoReflect.Descriptor instead.
 func (*Segments) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{346}
+	return file_header_proto_rawDescGZIP(), []int{344}
 }
 
 func (x *Segments) GetCtx() *common.Context {
@@ -43470,7 +43256,7 @@ type SegmentUsers struct {
 
 func (x *SegmentUsers) Reset() {
 	*x = SegmentUsers{}
-	mi := &file_header_proto_msgTypes[347]
+	mi := &file_header_proto_msgTypes[345]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43482,7 +43268,7 @@ func (x *SegmentUsers) String() string {
 func (*SegmentUsers) ProtoMessage() {}
 
 func (x *SegmentUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[347]
+	mi := &file_header_proto_msgTypes[345]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43495,7 +43281,7 @@ func (x *SegmentUsers) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SegmentUsers.ProtoReflect.Descriptor instead.
 func (*SegmentUsers) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{347}
+	return file_header_proto_rawDescGZIP(), []int{345}
 }
 
 func (x *SegmentUsers) GetCtx() *common.Context {
@@ -43540,7 +43326,7 @@ type UserSegment struct {
 
 func (x *UserSegment) Reset() {
 	*x = UserSegment{}
-	mi := &file_header_proto_msgTypes[348]
+	mi := &file_header_proto_msgTypes[346]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43552,7 +43338,7 @@ func (x *UserSegment) String() string {
 func (*UserSegment) ProtoMessage() {}
 
 func (x *UserSegment) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[348]
+	mi := &file_header_proto_msgTypes[346]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43565,7 +43351,7 @@ func (x *UserSegment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserSegment.ProtoReflect.Descriptor instead.
 func (*UserSegment) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{348}
+	return file_header_proto_rawDescGZIP(), []int{346}
 }
 
 func (x *UserSegment) GetCtx() *common.Context {
@@ -43662,7 +43448,7 @@ type Campaign struct {
 
 func (x *Campaign) Reset() {
 	*x = Campaign{}
-	mi := &file_header_proto_msgTypes[349]
+	mi := &file_header_proto_msgTypes[347]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43674,7 +43460,7 @@ func (x *Campaign) String() string {
 func (*Campaign) ProtoMessage() {}
 
 func (x *Campaign) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[349]
+	mi := &file_header_proto_msgTypes[347]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -43687,7 +43473,7 @@ func (x *Campaign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Campaign.ProtoReflect.Descriptor instead.
 func (*Campaign) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{349}
+	return file_header_proto_rawDescGZIP(), []int{347}
 }
 
 func (x *Campaign) GetCtx() *common.Context {
@@ -44018,7 +43804,7 @@ type OutboundCallCampaign struct {
 
 func (x *OutboundCallCampaign) Reset() {
 	*x = OutboundCallCampaign{}
-	mi := &file_header_proto_msgTypes[350]
+	mi := &file_header_proto_msgTypes[348]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44030,7 +43816,7 @@ func (x *OutboundCallCampaign) String() string {
 func (*OutboundCallCampaign) ProtoMessage() {}
 
 func (x *OutboundCallCampaign) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[350]
+	mi := &file_header_proto_msgTypes[348]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44043,7 +43829,7 @@ func (x *OutboundCallCampaign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallCampaign.ProtoReflect.Descriptor instead.
 func (*OutboundCallCampaign) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{350}
+	return file_header_proto_rawDescGZIP(), []int{348}
 }
 
 func (x *OutboundCallCampaign) GetManagers() []string {
@@ -44149,7 +43935,7 @@ type ListOutboundCallRequest struct {
 
 func (x *ListOutboundCallRequest) Reset() {
 	*x = ListOutboundCallRequest{}
-	mi := &file_header_proto_msgTypes[351]
+	mi := &file_header_proto_msgTypes[349]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44161,7 +43947,7 @@ func (x *ListOutboundCallRequest) String() string {
 func (*ListOutboundCallRequest) ProtoMessage() {}
 
 func (x *ListOutboundCallRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[351]
+	mi := &file_header_proto_msgTypes[349]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44174,7 +43960,7 @@ func (x *ListOutboundCallRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOutboundCallRequest.ProtoReflect.Descriptor instead.
 func (*ListOutboundCallRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{351}
+	return file_header_proto_rawDescGZIP(), []int{349}
 }
 
 func (x *ListOutboundCallRequest) GetCtx() *common.Context {
@@ -44316,7 +44102,7 @@ type OutboundCallEntries struct {
 
 func (x *OutboundCallEntries) Reset() {
 	*x = OutboundCallEntries{}
-	mi := &file_header_proto_msgTypes[352]
+	mi := &file_header_proto_msgTypes[350]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44328,7 +44114,7 @@ func (x *OutboundCallEntries) String() string {
 func (*OutboundCallEntries) ProtoMessage() {}
 
 func (x *OutboundCallEntries) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[352]
+	mi := &file_header_proto_msgTypes[350]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44341,7 +44127,7 @@ func (x *OutboundCallEntries) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallEntries.ProtoReflect.Descriptor instead.
 func (*OutboundCallEntries) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{352}
+	return file_header_proto_rawDescGZIP(), []int{350}
 }
 
 func (x *OutboundCallEntries) GetCtx() *common.Context {
@@ -44436,7 +44222,7 @@ type ImportOutboundCallEntryRequest struct {
 
 func (x *ImportOutboundCallEntryRequest) Reset() {
 	*x = ImportOutboundCallEntryRequest{}
-	mi := &file_header_proto_msgTypes[353]
+	mi := &file_header_proto_msgTypes[351]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44448,7 +44234,7 @@ func (x *ImportOutboundCallEntryRequest) String() string {
 func (*ImportOutboundCallEntryRequest) ProtoMessage() {}
 
 func (x *ImportOutboundCallEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[353]
+	mi := &file_header_proto_msgTypes[351]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44461,7 +44247,7 @@ func (x *ImportOutboundCallEntryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportOutboundCallEntryRequest.ProtoReflect.Descriptor instead.
 func (*ImportOutboundCallEntryRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{353}
+	return file_header_proto_rawDescGZIP(), []int{351}
 }
 
 func (x *ImportOutboundCallEntryRequest) GetCtx() *common.Context {
@@ -44548,7 +44334,7 @@ type OutboundCallEntry struct {
 
 func (x *OutboundCallEntry) Reset() {
 	*x = OutboundCallEntry{}
-	mi := &file_header_proto_msgTypes[354]
+	mi := &file_header_proto_msgTypes[352]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44560,7 +44346,7 @@ func (x *OutboundCallEntry) String() string {
 func (*OutboundCallEntry) ProtoMessage() {}
 
 func (x *OutboundCallEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[354]
+	mi := &file_header_proto_msgTypes[352]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44573,7 +44359,7 @@ func (x *OutboundCallEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallEntry.ProtoReflect.Descriptor instead.
 func (*OutboundCallEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{354}
+	return file_header_proto_rawDescGZIP(), []int{352}
 }
 
 func (x *OutboundCallEntry) GetCtx() *common.Context {
@@ -44768,7 +44554,7 @@ type MarketingMessage struct {
 
 func (x *MarketingMessage) Reset() {
 	*x = MarketingMessage{}
-	mi := &file_header_proto_msgTypes[355]
+	mi := &file_header_proto_msgTypes[353]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44780,7 +44566,7 @@ func (x *MarketingMessage) String() string {
 func (*MarketingMessage) ProtoMessage() {}
 
 func (x *MarketingMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[355]
+	mi := &file_header_proto_msgTypes[353]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44793,7 +44579,7 @@ func (x *MarketingMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarketingMessage.ProtoReflect.Descriptor instead.
 func (*MarketingMessage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{355}
+	return file_header_proto_rawDescGZIP(), []int{353}
 }
 
 func (x *MarketingMessage) GetId() string {
@@ -44893,7 +44679,7 @@ type CampaignSendLogEntry struct {
 
 func (x *CampaignSendLogEntry) Reset() {
 	*x = CampaignSendLogEntry{}
-	mi := &file_header_proto_msgTypes[356]
+	mi := &file_header_proto_msgTypes[354]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44905,7 +44691,7 @@ func (x *CampaignSendLogEntry) String() string {
 func (*CampaignSendLogEntry) ProtoMessage() {}
 
 func (x *CampaignSendLogEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[356]
+	mi := &file_header_proto_msgTypes[354]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -44918,7 +44704,7 @@ func (x *CampaignSendLogEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CampaignSendLogEntry.ProtoReflect.Descriptor instead.
 func (*CampaignSendLogEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{356}
+	return file_header_proto_rawDescGZIP(), []int{354}
 }
 
 func (x *CampaignSendLogEntry) GetCtx() *common.Context {
@@ -45089,7 +44875,7 @@ type CampaignSendLog struct {
 
 func (x *CampaignSendLog) Reset() {
 	*x = CampaignSendLog{}
-	mi := &file_header_proto_msgTypes[357]
+	mi := &file_header_proto_msgTypes[355]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45101,7 +44887,7 @@ func (x *CampaignSendLog) String() string {
 func (*CampaignSendLog) ProtoMessage() {}
 
 func (x *CampaignSendLog) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[357]
+	mi := &file_header_proto_msgTypes[355]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45114,7 +44900,7 @@ func (x *CampaignSendLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CampaignSendLog.ProtoReflect.Descriptor instead.
 func (*CampaignSendLog) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{357}
+	return file_header_proto_rawDescGZIP(), []int{355}
 }
 
 func (x *CampaignSendLog) GetCtx() *common.Context {
@@ -45172,7 +44958,7 @@ type BroadcastCampaignMetrics struct {
 
 func (x *BroadcastCampaignMetrics) Reset() {
 	*x = BroadcastCampaignMetrics{}
-	mi := &file_header_proto_msgTypes[358]
+	mi := &file_header_proto_msgTypes[356]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45184,7 +44970,7 @@ func (x *BroadcastCampaignMetrics) String() string {
 func (*BroadcastCampaignMetrics) ProtoMessage() {}
 
 func (x *BroadcastCampaignMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[358]
+	mi := &file_header_proto_msgTypes[356]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45197,7 +44983,7 @@ func (x *BroadcastCampaignMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BroadcastCampaignMetrics.ProtoReflect.Descriptor instead.
 func (*BroadcastCampaignMetrics) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{358}
+	return file_header_proto_rawDescGZIP(), []int{356}
 }
 
 func (x *BroadcastCampaignMetrics) GetCtx() *common.Context {
@@ -45252,7 +45038,7 @@ type EmailSenderVerificationResult struct {
 
 func (x *EmailSenderVerificationResult) Reset() {
 	*x = EmailSenderVerificationResult{}
-	mi := &file_header_proto_msgTypes[359]
+	mi := &file_header_proto_msgTypes[357]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45264,7 +45050,7 @@ func (x *EmailSenderVerificationResult) String() string {
 func (*EmailSenderVerificationResult) ProtoMessage() {}
 
 func (x *EmailSenderVerificationResult) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[359]
+	mi := &file_header_proto_msgTypes[357]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45277,7 +45063,7 @@ func (x *EmailSenderVerificationResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailSenderVerificationResult.ProtoReflect.Descriptor instead.
 func (*EmailSenderVerificationResult) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{359}
+	return file_header_proto_rawDescGZIP(), []int{357}
 }
 
 func (x *EmailSenderVerificationResult) GetMxRecord() bool {
@@ -45369,7 +45155,7 @@ type BusinessEmailAddress struct {
 
 func (x *BusinessEmailAddress) Reset() {
 	*x = BusinessEmailAddress{}
-	mi := &file_header_proto_msgTypes[360]
+	mi := &file_header_proto_msgTypes[358]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45381,7 +45167,7 @@ func (x *BusinessEmailAddress) String() string {
 func (*BusinessEmailAddress) ProtoMessage() {}
 
 func (x *BusinessEmailAddress) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[360]
+	mi := &file_header_proto_msgTypes[358]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45394,7 +45180,7 @@ func (x *BusinessEmailAddress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessEmailAddress.ProtoReflect.Descriptor instead.
 func (*BusinessEmailAddress) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{360}
+	return file_header_proto_rawDescGZIP(), []int{358}
 }
 
 func (x *BusinessEmailAddress) GetCtx() *common.Context {
@@ -45534,7 +45320,7 @@ type BusinessEmailAddresses struct {
 
 func (x *BusinessEmailAddresses) Reset() {
 	*x = BusinessEmailAddresses{}
-	mi := &file_header_proto_msgTypes[361]
+	mi := &file_header_proto_msgTypes[359]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45546,7 +45332,7 @@ func (x *BusinessEmailAddresses) String() string {
 func (*BusinessEmailAddresses) ProtoMessage() {}
 
 func (x *BusinessEmailAddresses) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[361]
+	mi := &file_header_proto_msgTypes[359]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45559,7 +45345,7 @@ func (x *BusinessEmailAddresses) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessEmailAddresses.ProtoReflect.Descriptor instead.
 func (*BusinessEmailAddresses) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{361}
+	return file_header_proto_rawDescGZIP(), []int{359}
 }
 
 func (x *BusinessEmailAddresses) GetCtx() *common.Context {
@@ -45591,7 +45377,7 @@ type FormReportRequest struct {
 
 func (x *FormReportRequest) Reset() {
 	*x = FormReportRequest{}
-	mi := &file_header_proto_msgTypes[362]
+	mi := &file_header_proto_msgTypes[360]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45603,7 +45389,7 @@ func (x *FormReportRequest) String() string {
 func (*FormReportRequest) ProtoMessage() {}
 
 func (x *FormReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[362]
+	mi := &file_header_proto_msgTypes[360]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45616,7 +45402,7 @@ func (x *FormReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FormReportRequest.ProtoReflect.Descriptor instead.
 func (*FormReportRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{362}
+	return file_header_proto_rawDescGZIP(), []int{360}
 }
 
 type FormReportResponse struct {
@@ -45627,7 +45413,7 @@ type FormReportResponse struct {
 
 func (x *FormReportResponse) Reset() {
 	*x = FormReportResponse{}
-	mi := &file_header_proto_msgTypes[363]
+	mi := &file_header_proto_msgTypes[361]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45639,7 +45425,7 @@ func (x *FormReportResponse) String() string {
 func (*FormReportResponse) ProtoMessage() {}
 
 func (x *FormReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[363]
+	mi := &file_header_proto_msgTypes[361]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45652,7 +45438,7 @@ func (x *FormReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FormReportResponse.ProtoReflect.Descriptor instead.
 func (*FormReportResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{363}
+	return file_header_proto_rawDescGZIP(), []int{361}
 }
 
 type ListFormSubmissionRequest struct {
@@ -45670,7 +45456,7 @@ type ListFormSubmissionRequest struct {
 
 func (x *ListFormSubmissionRequest) Reset() {
 	*x = ListFormSubmissionRequest{}
-	mi := &file_header_proto_msgTypes[364]
+	mi := &file_header_proto_msgTypes[362]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45682,7 +45468,7 @@ func (x *ListFormSubmissionRequest) String() string {
 func (*ListFormSubmissionRequest) ProtoMessage() {}
 
 func (x *ListFormSubmissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[364]
+	mi := &file_header_proto_msgTypes[362]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45695,7 +45481,7 @@ func (x *ListFormSubmissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListFormSubmissionRequest.ProtoReflect.Descriptor instead.
 func (*ListFormSubmissionRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{364}
+	return file_header_proto_rawDescGZIP(), []int{362}
 }
 
 func (x *ListFormSubmissionRequest) GetCtx() *common.Context {
@@ -45757,7 +45543,7 @@ type OutboundCallReportRequest struct {
 
 func (x *OutboundCallReportRequest) Reset() {
 	*x = OutboundCallReportRequest{}
-	mi := &file_header_proto_msgTypes[365]
+	mi := &file_header_proto_msgTypes[363]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45769,7 +45555,7 @@ func (x *OutboundCallReportRequest) String() string {
 func (*OutboundCallReportRequest) ProtoMessage() {}
 
 func (x *OutboundCallReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[365]
+	mi := &file_header_proto_msgTypes[363]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45782,7 +45568,7 @@ func (x *OutboundCallReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallReportRequest.ProtoReflect.Descriptor instead.
 func (*OutboundCallReportRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{365}
+	return file_header_proto_rawDescGZIP(), []int{363}
 }
 
 func (x *OutboundCallReportRequest) GetCtx() *common.Context {
@@ -45862,7 +45648,7 @@ type ImportOutboundCallEntryResponse struct {
 
 func (x *ImportOutboundCallEntryResponse) Reset() {
 	*x = ImportOutboundCallEntryResponse{}
-	mi := &file_header_proto_msgTypes[366]
+	mi := &file_header_proto_msgTypes[364]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45874,7 +45660,7 @@ func (x *ImportOutboundCallEntryResponse) String() string {
 func (*ImportOutboundCallEntryResponse) ProtoMessage() {}
 
 func (x *ImportOutboundCallEntryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[366]
+	mi := &file_header_proto_msgTypes[364]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45887,7 +45673,7 @@ func (x *ImportOutboundCallEntryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportOutboundCallEntryResponse.ProtoReflect.Descriptor instead.
 func (*ImportOutboundCallEntryResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{366}
+	return file_header_proto_rawDescGZIP(), []int{364}
 }
 
 func (x *ImportOutboundCallEntryResponse) GetCtx() *common.Context {
@@ -45958,7 +45744,7 @@ type OutboundCallReportResponse struct {
 
 func (x *OutboundCallReportResponse) Reset() {
 	*x = OutboundCallReportResponse{}
-	mi := &file_header_proto_msgTypes[367]
+	mi := &file_header_proto_msgTypes[365]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45970,7 +45756,7 @@ func (x *OutboundCallReportResponse) String() string {
 func (*OutboundCallReportResponse) ProtoMessage() {}
 
 func (x *OutboundCallReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[367]
+	mi := &file_header_proto_msgTypes[365]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -45983,7 +45769,7 @@ func (x *OutboundCallReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallReportResponse.ProtoReflect.Descriptor instead.
 func (*OutboundCallReportResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{367}
+	return file_header_proto_rawDescGZIP(), []int{365}
 }
 
 func (x *OutboundCallReportResponse) GetCtx() *common.Context {
@@ -46123,7 +45909,7 @@ type OutboundCallSurveyReport struct {
 
 func (x *OutboundCallSurveyReport) Reset() {
 	*x = OutboundCallSurveyReport{}
-	mi := &file_header_proto_msgTypes[368]
+	mi := &file_header_proto_msgTypes[366]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46135,7 +45921,7 @@ func (x *OutboundCallSurveyReport) String() string {
 func (*OutboundCallSurveyReport) ProtoMessage() {}
 
 func (x *OutboundCallSurveyReport) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[368]
+	mi := &file_header_proto_msgTypes[366]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46148,7 +45934,7 @@ func (x *OutboundCallSurveyReport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallSurveyReport.ProtoReflect.Descriptor instead.
 func (*OutboundCallSurveyReport) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{368}
+	return file_header_proto_rawDescGZIP(), []int{366}
 }
 
 func (x *OutboundCallSurveyReport) GetQuestionKey() string {
@@ -46192,7 +45978,7 @@ type OutboundCallAgentReport struct {
 
 func (x *OutboundCallAgentReport) Reset() {
 	*x = OutboundCallAgentReport{}
-	mi := &file_header_proto_msgTypes[369]
+	mi := &file_header_proto_msgTypes[367]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46204,7 +45990,7 @@ func (x *OutboundCallAgentReport) String() string {
 func (*OutboundCallAgentReport) ProtoMessage() {}
 
 func (x *OutboundCallAgentReport) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[369]
+	mi := &file_header_proto_msgTypes[367]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46217,7 +46003,7 @@ func (x *OutboundCallAgentReport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallAgentReport.ProtoReflect.Descriptor instead.
 func (*OutboundCallAgentReport) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{369}
+	return file_header_proto_rawDescGZIP(), []int{367}
 }
 
 func (x *OutboundCallAgentReport) GetAgentId() string {
@@ -46313,7 +46099,7 @@ type HourEventMeta struct {
 
 func (x *HourEventMeta) Reset() {
 	*x = HourEventMeta{}
-	mi := &file_header_proto_msgTypes[370]
+	mi := &file_header_proto_msgTypes[368]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46325,7 +46111,7 @@ func (x *HourEventMeta) String() string {
 func (*HourEventMeta) ProtoMessage() {}
 
 func (x *HourEventMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[370]
+	mi := &file_header_proto_msgTypes[368]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46338,7 +46124,7 @@ func (x *HourEventMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HourEventMeta.ProtoReflect.Descriptor instead.
 func (*HourEventMeta) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{370}
+	return file_header_proto_rawDescGZIP(), []int{368}
 }
 
 func (x *HourEventMeta) GetCount() int64 {
@@ -46368,7 +46154,7 @@ type LinkData struct {
 
 func (x *LinkData) Reset() {
 	*x = LinkData{}
-	mi := &file_header_proto_msgTypes[371]
+	mi := &file_header_proto_msgTypes[369]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46380,7 +46166,7 @@ func (x *LinkData) String() string {
 func (*LinkData) ProtoMessage() {}
 
 func (x *LinkData) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[371]
+	mi := &file_header_proto_msgTypes[369]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46393,7 +46179,7 @@ func (x *LinkData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LinkData.ProtoReflect.Descriptor instead.
 func (*LinkData) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{371}
+	return file_header_proto_rawDescGZIP(), []int{369}
 }
 
 func (x *LinkData) GetCtx() *common.Context {
@@ -46529,7 +46315,7 @@ type WorkflowAction struct {
 
 func (x *WorkflowAction) Reset() {
 	*x = WorkflowAction{}
-	mi := &file_header_proto_msgTypes[372]
+	mi := &file_header_proto_msgTypes[370]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46541,7 +46327,7 @@ func (x *WorkflowAction) String() string {
 func (*WorkflowAction) ProtoMessage() {}
 
 func (x *WorkflowAction) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[372]
+	mi := &file_header_proto_msgTypes[370]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46554,7 +46340,7 @@ func (x *WorkflowAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowAction.ProtoReflect.Descriptor instead.
 func (*WorkflowAction) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{372}
+	return file_header_proto_rawDescGZIP(), []int{370}
 }
 
 func (x *WorkflowAction) GetId() string {
@@ -46840,7 +46626,7 @@ type ActionSendFacebookConversion struct {
 
 func (x *ActionSendFacebookConversion) Reset() {
 	*x = ActionSendFacebookConversion{}
-	mi := &file_header_proto_msgTypes[373]
+	mi := &file_header_proto_msgTypes[371]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46852,7 +46638,7 @@ func (x *ActionSendFacebookConversion) String() string {
 func (*ActionSendFacebookConversion) ProtoMessage() {}
 
 func (x *ActionSendFacebookConversion) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[373]
+	mi := &file_header_proto_msgTypes[371]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46865,7 +46651,7 @@ func (x *ActionSendFacebookConversion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSendFacebookConversion.ProtoReflect.Descriptor instead.
 func (*ActionSendFacebookConversion) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{373}
+	return file_header_proto_rawDescGZIP(), []int{371}
 }
 
 func (x *ActionSendFacebookConversion) GetType() string {
@@ -46894,7 +46680,7 @@ type ActionTerminateBot struct {
 
 func (x *ActionTerminateBot) Reset() {
 	*x = ActionTerminateBot{}
-	mi := &file_header_proto_msgTypes[374]
+	mi := &file_header_proto_msgTypes[372]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46906,7 +46692,7 @@ func (x *ActionTerminateBot) String() string {
 func (*ActionTerminateBot) ProtoMessage() {}
 
 func (x *ActionTerminateBot) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[374]
+	mi := &file_header_proto_msgTypes[372]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46919,7 +46705,7 @@ func (x *ActionTerminateBot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionTerminateBot.ProtoReflect.Descriptor instead.
 func (*ActionTerminateBot) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{374}
+	return file_header_proto_rawDescGZIP(), []int{372}
 }
 
 func (x *ActionTerminateBot) GetBotId() string {
@@ -46954,7 +46740,7 @@ type ActionStartScope struct {
 
 func (x *ActionStartScope) Reset() {
 	*x = ActionStartScope{}
-	mi := &file_header_proto_msgTypes[375]
+	mi := &file_header_proto_msgTypes[373]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46966,7 +46752,7 @@ func (x *ActionStartScope) String() string {
 func (*ActionStartScope) ProtoMessage() {}
 
 func (x *ActionStartScope) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[375]
+	mi := &file_header_proto_msgTypes[373]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46979,7 +46765,7 @@ func (x *ActionStartScope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionStartScope.ProtoReflect.Descriptor instead.
 func (*ActionStartScope) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{375}
+	return file_header_proto_rawDescGZIP(), []int{373}
 }
 
 func (x *ActionStartScope) GetIdVar() string {
@@ -47013,7 +46799,7 @@ type ActionAssignLead struct {
 
 func (x *ActionAssignLead) Reset() {
 	*x = ActionAssignLead{}
-	mi := &file_header_proto_msgTypes[376]
+	mi := &file_header_proto_msgTypes[374]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47025,7 +46811,7 @@ func (x *ActionAssignLead) String() string {
 func (*ActionAssignLead) ProtoMessage() {}
 
 func (x *ActionAssignLead) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[376]
+	mi := &file_header_proto_msgTypes[374]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47038,7 +46824,7 @@ func (x *ActionAssignLead) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionAssignLead.ProtoReflect.Descriptor instead.
 func (*ActionAssignLead) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{376}
+	return file_header_proto_rawDescGZIP(), []int{374}
 }
 
 func (x *ActionAssignLead) GetStrategy() string {
@@ -47066,7 +46852,7 @@ type ActionCallWorkflow struct {
 
 func (x *ActionCallWorkflow) Reset() {
 	*x = ActionCallWorkflow{}
-	mi := &file_header_proto_msgTypes[377]
+	mi := &file_header_proto_msgTypes[375]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47078,7 +46864,7 @@ func (x *ActionCallWorkflow) String() string {
 func (*ActionCallWorkflow) ProtoMessage() {}
 
 func (x *ActionCallWorkflow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[377]
+	mi := &file_header_proto_msgTypes[375]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47091,7 +46877,7 @@ func (x *ActionCallWorkflow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionCallWorkflow.ProtoReflect.Descriptor instead.
 func (*ActionCallWorkflow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{377}
+	return file_header_proto_rawDescGZIP(), []int{375}
 }
 
 func (x *ActionCallWorkflow) GetWorkflowId() string {
@@ -47126,7 +46912,7 @@ type ActionSetVariable struct {
 
 func (x *ActionSetVariable) Reset() {
 	*x = ActionSetVariable{}
-	mi := &file_header_proto_msgTypes[378]
+	mi := &file_header_proto_msgTypes[376]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47138,7 +46924,7 @@ func (x *ActionSetVariable) String() string {
 func (*ActionSetVariable) ProtoMessage() {}
 
 func (x *ActionSetVariable) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[378]
+	mi := &file_header_proto_msgTypes[376]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47151,7 +46937,7 @@ func (x *ActionSetVariable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSetVariable.ProtoReflect.Descriptor instead.
 func (*ActionSetVariable) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{378}
+	return file_header_proto_rawDescGZIP(), []int{376}
 }
 
 func (x *ActionSetVariable) GetName() string {
@@ -47220,7 +47006,7 @@ type ActionStartThread struct {
 
 func (x *ActionStartThread) Reset() {
 	*x = ActionStartThread{}
-	mi := &file_header_proto_msgTypes[379]
+	mi := &file_header_proto_msgTypes[377]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47232,7 +47018,7 @@ func (x *ActionStartThread) String() string {
 func (*ActionStartThread) ProtoMessage() {}
 
 func (x *ActionStartThread) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[379]
+	mi := &file_header_proto_msgTypes[377]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47245,7 +47031,7 @@ func (x *ActionStartThread) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionStartThread.ProtoReflect.Descriptor instead.
 func (*ActionStartThread) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{379}
+	return file_header_proto_rawDescGZIP(), []int{377}
 }
 
 func (x *ActionStartThread) GetThreadId() string {
@@ -47283,7 +47069,7 @@ type ActionAskInfo struct {
 
 func (x *ActionAskInfo) Reset() {
 	*x = ActionAskInfo{}
-	mi := &file_header_proto_msgTypes[380]
+	mi := &file_header_proto_msgTypes[378]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47295,7 +47081,7 @@ func (x *ActionAskInfo) String() string {
 func (*ActionAskInfo) ProtoMessage() {}
 
 func (x *ActionAskInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[380]
+	mi := &file_header_proto_msgTypes[378]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47308,7 +47094,7 @@ func (x *ActionAskInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionAskInfo.ProtoReflect.Descriptor instead.
 func (*ActionAskInfo) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{380}
+	return file_header_proto_rawDescGZIP(), []int{378}
 }
 
 func (x *ActionAskInfo) GetTypeInfo() string {
@@ -47382,7 +47168,7 @@ type ActionLLM struct {
 
 func (x *ActionLLM) Reset() {
 	*x = ActionLLM{}
-	mi := &file_header_proto_msgTypes[381]
+	mi := &file_header_proto_msgTypes[379]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47394,7 +47180,7 @@ func (x *ActionLLM) String() string {
 func (*ActionLLM) ProtoMessage() {}
 
 func (x *ActionLLM) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[381]
+	mi := &file_header_proto_msgTypes[379]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47407,7 +47193,7 @@ func (x *ActionLLM) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionLLM.ProtoReflect.Descriptor instead.
 func (*ActionLLM) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{381}
+	return file_header_proto_rawDescGZIP(), []int{379}
 }
 
 func (x *ActionLLM) GetSystemInstruction() string {
@@ -47568,7 +47354,7 @@ type LLMResponseJSONSchemaFormat struct {
 
 func (x *LLMResponseJSONSchemaFormat) Reset() {
 	*x = LLMResponseJSONSchemaFormat{}
-	mi := &file_header_proto_msgTypes[382]
+	mi := &file_header_proto_msgTypes[380]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47580,7 +47366,7 @@ func (x *LLMResponseJSONSchemaFormat) String() string {
 func (*LLMResponseJSONSchemaFormat) ProtoMessage() {}
 
 func (x *LLMResponseJSONSchemaFormat) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[382]
+	mi := &file_header_proto_msgTypes[380]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47593,7 +47379,7 @@ func (x *LLMResponseJSONSchemaFormat) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMResponseJSONSchemaFormat.ProtoReflect.Descriptor instead.
 func (*LLMResponseJSONSchemaFormat) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{382}
+	return file_header_proto_rawDescGZIP(), []int{380}
 }
 
 func (x *LLMResponseJSONSchemaFormat) GetName() string {
@@ -47636,7 +47422,7 @@ type ActionCreateOrder struct {
 
 func (x *ActionCreateOrder) Reset() {
 	*x = ActionCreateOrder{}
-	mi := &file_header_proto_msgTypes[383]
+	mi := &file_header_proto_msgTypes[381]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47648,7 +47434,7 @@ func (x *ActionCreateOrder) String() string {
 func (*ActionCreateOrder) ProtoMessage() {}
 
 func (x *ActionCreateOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[383]
+	mi := &file_header_proto_msgTypes[381]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47661,7 +47447,7 @@ func (x *ActionCreateOrder) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionCreateOrder.ProtoReflect.Descriptor instead.
 func (*ActionCreateOrder) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{383}
+	return file_header_proto_rawDescGZIP(), []int{381}
 }
 
 func (x *ActionCreateOrder) GetNote() string {
@@ -47752,7 +47538,7 @@ type ActionWaitMessage struct {
 
 func (x *ActionWaitMessage) Reset() {
 	*x = ActionWaitMessage{}
-	mi := &file_header_proto_msgTypes[384]
+	mi := &file_header_proto_msgTypes[382]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47764,7 +47550,7 @@ func (x *ActionWaitMessage) String() string {
 func (*ActionWaitMessage) ProtoMessage() {}
 
 func (x *ActionWaitMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[384]
+	mi := &file_header_proto_msgTypes[382]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47777,7 +47563,7 @@ func (x *ActionWaitMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionWaitMessage.ProtoReflect.Descriptor instead.
 func (*ActionWaitMessage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{384}
+	return file_header_proto_rawDescGZIP(), []int{382}
 }
 
 func (x *ActionWaitMessage) GetWaitSec() int64 {
@@ -47803,7 +47589,7 @@ type ActionSendTranscript struct {
 
 func (x *ActionSendTranscript) Reset() {
 	*x = ActionSendTranscript{}
-	mi := &file_header_proto_msgTypes[385]
+	mi := &file_header_proto_msgTypes[383]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47815,7 +47601,7 @@ func (x *ActionSendTranscript) String() string {
 func (*ActionSendTranscript) ProtoMessage() {}
 
 func (x *ActionSendTranscript) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[385]
+	mi := &file_header_proto_msgTypes[383]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47828,7 +47614,7 @@ func (x *ActionSendTranscript) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSendTranscript.ProtoReflect.Descriptor instead.
 func (*ActionSendTranscript) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{385}
+	return file_header_proto_rawDescGZIP(), []int{383}
 }
 
 func (x *ActionSendTranscript) GetTosEmail() []string {
@@ -47851,7 +47637,7 @@ type RunWorkflowActionRequest struct {
 
 func (x *RunWorkflowActionRequest) Reset() {
 	*x = RunWorkflowActionRequest{}
-	mi := &file_header_proto_msgTypes[386]
+	mi := &file_header_proto_msgTypes[384]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47863,7 +47649,7 @@ func (x *RunWorkflowActionRequest) String() string {
 func (*RunWorkflowActionRequest) ProtoMessage() {}
 
 func (x *RunWorkflowActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[386]
+	mi := &file_header_proto_msgTypes[384]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47876,7 +47662,7 @@ func (x *RunWorkflowActionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunWorkflowActionRequest.ProtoReflect.Descriptor instead.
 func (*RunWorkflowActionRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{386}
+	return file_header_proto_rawDescGZIP(), []int{384}
 }
 
 func (x *RunWorkflowActionRequest) GetAction() *WorkflowAction {
@@ -47925,7 +47711,7 @@ type ActionSendHttpReq struct {
 
 func (x *ActionSendHttpReq) Reset() {
 	*x = ActionSendHttpReq{}
-	mi := &file_header_proto_msgTypes[387]
+	mi := &file_header_proto_msgTypes[385]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47937,7 +47723,7 @@ func (x *ActionSendHttpReq) String() string {
 func (*ActionSendHttpReq) ProtoMessage() {}
 
 func (x *ActionSendHttpReq) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[387]
+	mi := &file_header_proto_msgTypes[385]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -47950,7 +47736,7 @@ func (x *ActionSendHttpReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSendHttpReq.ProtoReflect.Descriptor instead.
 func (*ActionSendHttpReq) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{387}
+	return file_header_proto_rawDescGZIP(), []int{385}
 }
 
 func (x *ActionSendHttpReq) GetWebhookId() string {
@@ -47984,7 +47770,7 @@ type ActionPercentageSplit struct {
 
 func (x *ActionPercentageSplit) Reset() {
 	*x = ActionPercentageSplit{}
-	mi := &file_header_proto_msgTypes[388]
+	mi := &file_header_proto_msgTypes[386]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47996,7 +47782,7 @@ func (x *ActionPercentageSplit) String() string {
 func (*ActionPercentageSplit) ProtoMessage() {}
 
 func (x *ActionPercentageSplit) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[388]
+	mi := &file_header_proto_msgTypes[386]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48009,7 +47795,7 @@ func (x *ActionPercentageSplit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionPercentageSplit.ProtoReflect.Descriptor instead.
 func (*ActionPercentageSplit) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{388}
+	return file_header_proto_rawDescGZIP(), []int{386}
 }
 
 func (x *ActionPercentageSplit) GetActionIds() []string {
@@ -48047,7 +47833,7 @@ type ActionWaitBranch struct {
 
 func (x *ActionWaitBranch) Reset() {
 	*x = ActionWaitBranch{}
-	mi := &file_header_proto_msgTypes[389]
+	mi := &file_header_proto_msgTypes[387]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48059,7 +47845,7 @@ func (x *ActionWaitBranch) String() string {
 func (*ActionWaitBranch) ProtoMessage() {}
 
 func (x *ActionWaitBranch) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[389]
+	mi := &file_header_proto_msgTypes[387]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48072,7 +47858,7 @@ func (x *ActionWaitBranch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionWaitBranch.ProtoReflect.Descriptor instead.
 func (*ActionWaitBranch) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{389}
+	return file_header_proto_rawDescGZIP(), []int{387}
 }
 
 func (x *ActionWaitBranch) GetWaitFor() string {
@@ -48167,7 +47953,7 @@ type ActionBranchingBranch struct {
 
 func (x *ActionBranchingBranch) Reset() {
 	*x = ActionBranchingBranch{}
-	mi := &file_header_proto_msgTypes[390]
+	mi := &file_header_proto_msgTypes[388]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48179,7 +47965,7 @@ func (x *ActionBranchingBranch) String() string {
 func (*ActionBranchingBranch) ProtoMessage() {}
 
 func (x *ActionBranchingBranch) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[390]
+	mi := &file_header_proto_msgTypes[388]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48192,7 +47978,7 @@ func (x *ActionBranchingBranch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionBranchingBranch.ProtoReflect.Descriptor instead.
 func (*ActionBranchingBranch) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{390}
+	return file_header_proto_rawDescGZIP(), []int{388}
 }
 
 func (x *ActionBranchingBranch) GetUiType() string {
@@ -48247,7 +48033,7 @@ type ActionBranching struct {
 
 func (x *ActionBranching) Reset() {
 	*x = ActionBranching{}
-	mi := &file_header_proto_msgTypes[391]
+	mi := &file_header_proto_msgTypes[389]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48259,7 +48045,7 @@ func (x *ActionBranching) String() string {
 func (*ActionBranching) ProtoMessage() {}
 
 func (x *ActionBranching) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[391]
+	mi := &file_header_proto_msgTypes[389]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48272,7 +48058,7 @@ func (x *ActionBranching) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionBranching.ProtoReflect.Descriptor instead.
 func (*ActionBranching) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{391}
+	return file_header_proto_rawDescGZIP(), []int{389}
 }
 
 func (x *ActionBranching) GetBranches() []*ActionBranchingBranch {
@@ -48304,7 +48090,7 @@ type BouncedEmail struct {
 
 func (x *BouncedEmail) Reset() {
 	*x = BouncedEmail{}
-	mi := &file_header_proto_msgTypes[392]
+	mi := &file_header_proto_msgTypes[390]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48316,7 +48102,7 @@ func (x *BouncedEmail) String() string {
 func (*BouncedEmail) ProtoMessage() {}
 
 func (x *BouncedEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[392]
+	mi := &file_header_proto_msgTypes[390]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48329,7 +48115,7 @@ func (x *BouncedEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BouncedEmail.ProtoReflect.Descriptor instead.
 func (*BouncedEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{392}
+	return file_header_proto_rawDescGZIP(), []int{390}
 }
 
 func (x *BouncedEmail) GetCtx() *common.Context {
@@ -48397,7 +48183,7 @@ type BlockedEmail struct {
 
 func (x *BlockedEmail) Reset() {
 	*x = BlockedEmail{}
-	mi := &file_header_proto_msgTypes[393]
+	mi := &file_header_proto_msgTypes[391]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48409,7 +48195,7 @@ func (x *BlockedEmail) String() string {
 func (*BlockedEmail) ProtoMessage() {}
 
 func (x *BlockedEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[393]
+	mi := &file_header_proto_msgTypes[391]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48422,7 +48208,7 @@ func (x *BlockedEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockedEmail.ProtoReflect.Descriptor instead.
 func (*BlockedEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{393}
+	return file_header_proto_rawDescGZIP(), []int{391}
 }
 
 func (x *BlockedEmail) GetCtx() *common.Context {
@@ -48603,6 +48389,7 @@ type Response struct {
 	Products              []*Product             `protobuf:"bytes,202,rep,name=products,proto3" json:"products,omitempty"`
 	Product               *Product               `protobuf:"bytes,201,opt,name=product,proto3" json:"product,omitempty"`
 	Discounts             []*Discount            `protobuf:"bytes,203,rep,name=discounts,proto3" json:"discounts,omitempty"`
+	Discount              *Discount              `protobuf:"bytes,209,opt,name=discount,proto3" json:"discount,omitempty"`
 	Bills                 []*Bill                `protobuf:"bytes,204,rep,name=bills,proto3" json:"bills,omitempty"`
 	Orders                []*Order               `protobuf:"bytes,205,rep,name=orders,proto3" json:"orders,omitempty"`
 	Bill                  *Bill                  `protobuf:"bytes,206,opt,name=bill,proto3" json:"bill,omitempty"`
@@ -48625,7 +48412,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_header_proto_msgTypes[394]
+	mi := &file_header_proto_msgTypes[392]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48637,7 +48424,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[394]
+	mi := &file_header_proto_msgTypes[392]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -48650,7 +48437,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{394}
+	return file_header_proto_rawDescGZIP(), []int{392}
 }
 
 func (x *Response) GetCtx() *common.Context {
@@ -49486,6 +49273,13 @@ func (x *Response) GetDiscounts() []*Discount {
 	return nil
 }
 
+func (x *Response) GetDiscount() *Discount {
+	if x != nil {
+		return x.Discount
+	}
+	return nil
+}
+
 func (x *Response) GetBills() []*Bill {
 	if x != nil {
 		return x.Bills
@@ -49609,7 +49403,7 @@ type ReportCount struct {
 
 func (x *ReportCount) Reset() {
 	*x = ReportCount{}
-	mi := &file_header_proto_msgTypes[395]
+	mi := &file_header_proto_msgTypes[393]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49621,7 +49415,7 @@ func (x *ReportCount) String() string {
 func (*ReportCount) ProtoMessage() {}
 
 func (x *ReportCount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[395]
+	mi := &file_header_proto_msgTypes[393]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -49634,7 +49428,7 @@ func (x *ReportCount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportCount.ProtoReflect.Descriptor instead.
 func (*ReportCount) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{395}
+	return file_header_proto_rawDescGZIP(), []int{393}
 }
 
 func (x *ReportCount) GetType() string {
@@ -49668,7 +49462,7 @@ type ZaloCallConsent struct {
 
 func (x *ZaloCallConsent) Reset() {
 	*x = ZaloCallConsent{}
-	mi := &file_header_proto_msgTypes[396]
+	mi := &file_header_proto_msgTypes[394]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49680,7 +49474,7 @@ func (x *ZaloCallConsent) String() string {
 func (*ZaloCallConsent) ProtoMessage() {}
 
 func (x *ZaloCallConsent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[396]
+	mi := &file_header_proto_msgTypes[394]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -49693,7 +49487,7 @@ func (x *ZaloCallConsent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloCallConsent.ProtoReflect.Descriptor instead.
 func (*ZaloCallConsent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{396}
+	return file_header_proto_rawDescGZIP(), []int{394}
 }
 
 func (x *ZaloCallConsent) GetCode() int64 {
@@ -49735,7 +49529,7 @@ type SendEmailRequest struct {
 
 func (x *SendEmailRequest) Reset() {
 	*x = SendEmailRequest{}
-	mi := &file_header_proto_msgTypes[397]
+	mi := &file_header_proto_msgTypes[395]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49747,7 +49541,7 @@ func (x *SendEmailRequest) String() string {
 func (*SendEmailRequest) ProtoMessage() {}
 
 func (x *SendEmailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[397]
+	mi := &file_header_proto_msgTypes[395]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -49760,7 +49554,7 @@ func (x *SendEmailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEmailRequest.ProtoReflect.Descriptor instead.
 func (*SendEmailRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{397}
+	return file_header_proto_rawDescGZIP(), []int{395}
 }
 
 func (x *SendEmailRequest) GetCtx() *common.Context {
@@ -49901,7 +49695,7 @@ type Email struct {
 
 func (x *Email) Reset() {
 	*x = Email{}
-	mi := &file_header_proto_msgTypes[398]
+	mi := &file_header_proto_msgTypes[396]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49913,7 +49707,7 @@ func (x *Email) String() string {
 func (*Email) ProtoMessage() {}
 
 func (x *Email) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[398]
+	mi := &file_header_proto_msgTypes[396]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -49926,7 +49720,7 @@ func (x *Email) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Email.ProtoReflect.Descriptor instead.
 func (*Email) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{398}
+	return file_header_proto_rawDescGZIP(), []int{396}
 }
 
 func (x *Email) GetCtx() *common.Context {
@@ -50010,7 +49804,7 @@ type EmailAttachment struct {
 
 func (x *EmailAttachment) Reset() {
 	*x = EmailAttachment{}
-	mi := &file_header_proto_msgTypes[399]
+	mi := &file_header_proto_msgTypes[397]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50022,7 +49816,7 @@ func (x *EmailAttachment) String() string {
 func (*EmailAttachment) ProtoMessage() {}
 
 func (x *EmailAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[399]
+	mi := &file_header_proto_msgTypes[397]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50035,7 +49829,7 @@ func (x *EmailAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailAttachment.ProtoReflect.Descriptor instead.
 func (*EmailAttachment) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{399}
+	return file_header_proto_rawDescGZIP(), []int{397}
 }
 
 func (x *EmailAttachment) GetUrl() string {
@@ -50083,7 +49877,7 @@ type WorkflowThread struct {
 
 func (x *WorkflowThread) Reset() {
 	*x = WorkflowThread{}
-	mi := &file_header_proto_msgTypes[400]
+	mi := &file_header_proto_msgTypes[398]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50095,7 +49889,7 @@ func (x *WorkflowThread) String() string {
 func (*WorkflowThread) ProtoMessage() {}
 
 func (x *WorkflowThread) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[400]
+	mi := &file_header_proto_msgTypes[398]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50108,7 +49902,7 @@ func (x *WorkflowThread) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowThread.ProtoReflect.Descriptor instead.
 func (*WorkflowThread) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{400}
+	return file_header_proto_rawDescGZIP(), []int{398}
 }
 
 func (x *WorkflowThread) GetId() string {
@@ -50225,7 +50019,7 @@ type WorkflowStack struct {
 
 func (x *WorkflowStack) Reset() {
 	*x = WorkflowStack{}
-	mi := &file_header_proto_msgTypes[401]
+	mi := &file_header_proto_msgTypes[399]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50237,7 +50031,7 @@ func (x *WorkflowStack) String() string {
 func (*WorkflowStack) ProtoMessage() {}
 
 func (x *WorkflowStack) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[401]
+	mi := &file_header_proto_msgTypes[399]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50250,7 +50044,7 @@ func (x *WorkflowStack) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowStack.ProtoReflect.Descriptor instead.
 func (*WorkflowStack) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{401}
+	return file_header_proto_rawDescGZIP(), []int{399}
 }
 
 func (x *WorkflowStack) GetCalls() []*WorkflowStackItem {
@@ -50271,7 +50065,7 @@ type WorkflowStackItem struct {
 
 func (x *WorkflowStackItem) Reset() {
 	*x = WorkflowStackItem{}
-	mi := &file_header_proto_msgTypes[402]
+	mi := &file_header_proto_msgTypes[400]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50283,7 +50077,7 @@ func (x *WorkflowStackItem) String() string {
 func (*WorkflowStackItem) ProtoMessage() {}
 
 func (x *WorkflowStackItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[402]
+	mi := &file_header_proto_msgTypes[400]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50296,7 +50090,7 @@ func (x *WorkflowStackItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowStackItem.ProtoReflect.Descriptor instead.
 func (*WorkflowStackItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{402}
+	return file_header_proto_rawDescGZIP(), []int{400}
 }
 
 func (x *WorkflowStackItem) GetWorkflowId() string {
@@ -50349,7 +50143,7 @@ type WorkflowSession struct {
 
 func (x *WorkflowSession) Reset() {
 	*x = WorkflowSession{}
-	mi := &file_header_proto_msgTypes[403]
+	mi := &file_header_proto_msgTypes[401]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50361,7 +50155,7 @@ func (x *WorkflowSession) String() string {
 func (*WorkflowSession) ProtoMessage() {}
 
 func (x *WorkflowSession) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[403]
+	mi := &file_header_proto_msgTypes[401]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50374,7 +50168,7 @@ func (x *WorkflowSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowSession.ProtoReflect.Descriptor instead.
 func (*WorkflowSession) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{403}
+	return file_header_proto_rawDescGZIP(), []int{401}
 }
 
 func (x *WorkflowSession) GetCtx() *common.Context {
@@ -50534,7 +50328,7 @@ type SchedulerTask struct {
 
 func (x *SchedulerTask) Reset() {
 	*x = SchedulerTask{}
-	mi := &file_header_proto_msgTypes[404]
+	mi := &file_header_proto_msgTypes[402]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50546,7 +50340,7 @@ func (x *SchedulerTask) String() string {
 func (*SchedulerTask) ProtoMessage() {}
 
 func (x *SchedulerTask) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[404]
+	mi := &file_header_proto_msgTypes[402]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50559,7 +50353,7 @@ func (x *SchedulerTask) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SchedulerTask.ProtoReflect.Descriptor instead.
 func (*SchedulerTask) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{404}
+	return file_header_proto_rawDescGZIP(), []int{402}
 }
 
 func (x *SchedulerTask) GetCtx() *common.Context {
@@ -50652,7 +50446,7 @@ type Credit struct {
 
 func (x *Credit) Reset() {
 	*x = Credit{}
-	mi := &file_header_proto_msgTypes[405]
+	mi := &file_header_proto_msgTypes[403]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50664,7 +50458,7 @@ func (x *Credit) String() string {
 func (*Credit) ProtoMessage() {}
 
 func (x *Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[405]
+	mi := &file_header_proto_msgTypes[403]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50677,7 +50471,7 @@ func (x *Credit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Credit.ProtoReflect.Descriptor instead.
 func (*Credit) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{405}
+	return file_header_proto_rawDescGZIP(), []int{403}
 }
 
 func (x *Credit) GetCtx() *common.Context {
@@ -50836,7 +50630,7 @@ type CreditSpendEntry struct {
 
 func (x *CreditSpendEntry) Reset() {
 	*x = CreditSpendEntry{}
-	mi := &file_header_proto_msgTypes[406]
+	mi := &file_header_proto_msgTypes[404]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50848,7 +50642,7 @@ func (x *CreditSpendEntry) String() string {
 func (*CreditSpendEntry) ProtoMessage() {}
 
 func (x *CreditSpendEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[406]
+	mi := &file_header_proto_msgTypes[404]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -50861,7 +50655,7 @@ func (x *CreditSpendEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditSpendEntry.ProtoReflect.Descriptor instead.
 func (*CreditSpendEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{406}
+	return file_header_proto_rawDescGZIP(), []int{404}
 }
 
 func (x *CreditSpendEntry) GetCtx() *common.Context {
@@ -50978,7 +50772,7 @@ type CreditEntryDataId struct {
 
 func (x *CreditEntryDataId) Reset() {
 	*x = CreditEntryDataId{}
-	mi := &file_header_proto_msgTypes[407]
+	mi := &file_header_proto_msgTypes[405]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50990,7 +50784,7 @@ func (x *CreditEntryDataId) String() string {
 func (*CreditEntryDataId) ProtoMessage() {}
 
 func (x *CreditEntryDataId) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[407]
+	mi := &file_header_proto_msgTypes[405]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51003,7 +50797,7 @@ func (x *CreditEntryDataId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataId.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataId) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{407}
+	return file_header_proto_rawDescGZIP(), []int{405}
 }
 
 func (x *CreditEntryDataId) GetId() string {
@@ -51023,7 +50817,7 @@ type CreditEntryDataAgent struct {
 
 func (x *CreditEntryDataAgent) Reset() {
 	*x = CreditEntryDataAgent{}
-	mi := &file_header_proto_msgTypes[408]
+	mi := &file_header_proto_msgTypes[406]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51035,7 +50829,7 @@ func (x *CreditEntryDataAgent) String() string {
 func (*CreditEntryDataAgent) ProtoMessage() {}
 
 func (x *CreditEntryDataAgent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[408]
+	mi := &file_header_proto_msgTypes[406]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51048,7 +50842,7 @@ func (x *CreditEntryDataAgent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataAgent.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataAgent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{408}
+	return file_header_proto_rawDescGZIP(), []int{406}
 }
 
 func (x *CreditEntryDataAgent) GetTotalAgents() int64 {
@@ -51077,7 +50871,7 @@ type CreditEntryDataEmail struct {
 
 func (x *CreditEntryDataEmail) Reset() {
 	*x = CreditEntryDataEmail{}
-	mi := &file_header_proto_msgTypes[409]
+	mi := &file_header_proto_msgTypes[407]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51089,7 +50883,7 @@ func (x *CreditEntryDataEmail) String() string {
 func (*CreditEntryDataEmail) ProtoMessage() {}
 
 func (x *CreditEntryDataEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[409]
+	mi := &file_header_proto_msgTypes[407]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51102,7 +50896,7 @@ func (x *CreditEntryDataEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataEmail.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{409}
+	return file_header_proto_rawDescGZIP(), []int{407}
 }
 
 func (x *CreditEntryDataEmail) GetFrom() string {
@@ -51145,7 +50939,7 @@ type CreditEntryDataZaloZNS struct {
 
 func (x *CreditEntryDataZaloZNS) Reset() {
 	*x = CreditEntryDataZaloZNS{}
-	mi := &file_header_proto_msgTypes[410]
+	mi := &file_header_proto_msgTypes[408]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51157,7 +50951,7 @@ func (x *CreditEntryDataZaloZNS) String() string {
 func (*CreditEntryDataZaloZNS) ProtoMessage() {}
 
 func (x *CreditEntryDataZaloZNS) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[410]
+	mi := &file_header_proto_msgTypes[408]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51170,7 +50964,7 @@ func (x *CreditEntryDataZaloZNS) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataZaloZNS.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataZaloZNS) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{410}
+	return file_header_proto_rawDescGZIP(), []int{408}
 }
 
 func (x *CreditEntryDataZaloZNS) GetOaId() string {
@@ -51214,7 +51008,7 @@ type CreditEntryDataZaloRequestCall struct {
 
 func (x *CreditEntryDataZaloRequestCall) Reset() {
 	*x = CreditEntryDataZaloRequestCall{}
-	mi := &file_header_proto_msgTypes[411]
+	mi := &file_header_proto_msgTypes[409]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51226,7 +51020,7 @@ func (x *CreditEntryDataZaloRequestCall) String() string {
 func (*CreditEntryDataZaloRequestCall) ProtoMessage() {}
 
 func (x *CreditEntryDataZaloRequestCall) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[411]
+	mi := &file_header_proto_msgTypes[409]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51239,7 +51033,7 @@ func (x *CreditEntryDataZaloRequestCall) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataZaloRequestCall.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataZaloRequestCall) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{411}
+	return file_header_proto_rawDescGZIP(), []int{409}
 }
 
 func (x *CreditEntryDataZaloRequestCall) GetOaId() string {
@@ -51276,7 +51070,7 @@ type CreditEntryDataZaloActiveMessage struct {
 
 func (x *CreditEntryDataZaloActiveMessage) Reset() {
 	*x = CreditEntryDataZaloActiveMessage{}
-	mi := &file_header_proto_msgTypes[412]
+	mi := &file_header_proto_msgTypes[410]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51288,7 +51082,7 @@ func (x *CreditEntryDataZaloActiveMessage) String() string {
 func (*CreditEntryDataZaloActiveMessage) ProtoMessage() {}
 
 func (x *CreditEntryDataZaloActiveMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[412]
+	mi := &file_header_proto_msgTypes[410]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51301,7 +51095,7 @@ func (x *CreditEntryDataZaloActiveMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataZaloActiveMessage.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataZaloActiveMessage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{412}
+	return file_header_proto_rawDescGZIP(), []int{410}
 }
 
 func (x *CreditEntryDataZaloActiveMessage) GetOaId() string {
@@ -51355,7 +51149,7 @@ type CreditEntryData struct {
 
 func (x *CreditEntryData) Reset() {
 	*x = CreditEntryData{}
-	mi := &file_header_proto_msgTypes[413]
+	mi := &file_header_proto_msgTypes[411]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51367,7 +51161,7 @@ func (x *CreditEntryData) String() string {
 func (*CreditEntryData) ProtoMessage() {}
 
 func (x *CreditEntryData) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[413]
+	mi := &file_header_proto_msgTypes[411]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51380,7 +51174,7 @@ func (x *CreditEntryData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryData.ProtoReflect.Descriptor instead.
 func (*CreditEntryData) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{413}
+	return file_header_proto_rawDescGZIP(), []int{411}
 }
 
 func (x *CreditEntryData) GetAgent() *CreditEntryDataAgent {
@@ -51459,7 +51253,7 @@ type CreditEntryDataLLMCompletion struct {
 
 func (x *CreditEntryDataLLMCompletion) Reset() {
 	*x = CreditEntryDataLLMCompletion{}
-	mi := &file_header_proto_msgTypes[414]
+	mi := &file_header_proto_msgTypes[412]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51471,7 +51265,7 @@ func (x *CreditEntryDataLLMCompletion) String() string {
 func (*CreditEntryDataLLMCompletion) ProtoMessage() {}
 
 func (x *CreditEntryDataLLMCompletion) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[414]
+	mi := &file_header_proto_msgTypes[412]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51484,7 +51278,7 @@ func (x *CreditEntryDataLLMCompletion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataLLMCompletion.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataLLMCompletion) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{414}
+	return file_header_proto_rawDescGZIP(), []int{412}
 }
 
 func (x *CreditEntryDataLLMCompletion) GetTraceId() string {
@@ -51586,7 +51380,7 @@ type CreditEntryDataTextEmbedding struct {
 
 func (x *CreditEntryDataTextEmbedding) Reset() {
 	*x = CreditEntryDataTextEmbedding{}
-	mi := &file_header_proto_msgTypes[415]
+	mi := &file_header_proto_msgTypes[413]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51598,7 +51392,7 @@ func (x *CreditEntryDataTextEmbedding) String() string {
 func (*CreditEntryDataTextEmbedding) ProtoMessage() {}
 
 func (x *CreditEntryDataTextEmbedding) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[415]
+	mi := &file_header_proto_msgTypes[413]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51611,7 +51405,7 @@ func (x *CreditEntryDataTextEmbedding) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditEntryDataTextEmbedding.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataTextEmbedding) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{415}
+	return file_header_proto_rawDescGZIP(), []int{413}
 }
 
 func (x *CreditEntryDataTextEmbedding) GetText() string {
@@ -51675,7 +51469,7 @@ type CreditSpendEntries struct {
 
 func (x *CreditSpendEntries) Reset() {
 	*x = CreditSpendEntries{}
-	mi := &file_header_proto_msgTypes[416]
+	mi := &file_header_proto_msgTypes[414]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51687,7 +51481,7 @@ func (x *CreditSpendEntries) String() string {
 func (*CreditSpendEntries) ProtoMessage() {}
 
 func (x *CreditSpendEntries) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[416]
+	mi := &file_header_proto_msgTypes[414]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51700,7 +51494,7 @@ func (x *CreditSpendEntries) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditSpendEntries.ProtoReflect.Descriptor instead.
 func (*CreditSpendEntries) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{416}
+	return file_header_proto_rawDescGZIP(), []int{414}
 }
 
 func (x *CreditSpendEntries) GetCtx() *common.Context {
@@ -51745,7 +51539,7 @@ type TrySpendCreditResponse struct {
 
 func (x *TrySpendCreditResponse) Reset() {
 	*x = TrySpendCreditResponse{}
-	mi := &file_header_proto_msgTypes[417]
+	mi := &file_header_proto_msgTypes[415]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51757,7 +51551,7 @@ func (x *TrySpendCreditResponse) String() string {
 func (*TrySpendCreditResponse) ProtoMessage() {}
 
 func (x *TrySpendCreditResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[417]
+	mi := &file_header_proto_msgTypes[415]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51770,7 +51564,7 @@ func (x *TrySpendCreditResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrySpendCreditResponse.ProtoReflect.Descriptor instead.
 func (*TrySpendCreditResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{417}
+	return file_header_proto_rawDescGZIP(), []int{415}
 }
 
 func (x *TrySpendCreditResponse) GetCtx() *common.Context {
@@ -51826,7 +51620,7 @@ type CreditSpendReportResponseData struct {
 
 func (x *CreditSpendReportResponseData) Reset() {
 	*x = CreditSpendReportResponseData{}
-	mi := &file_header_proto_msgTypes[418]
+	mi := &file_header_proto_msgTypes[416]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51838,7 +51632,7 @@ func (x *CreditSpendReportResponseData) String() string {
 func (*CreditSpendReportResponseData) ProtoMessage() {}
 
 func (x *CreditSpendReportResponseData) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[418]
+	mi := &file_header_proto_msgTypes[416]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51851,7 +51645,7 @@ func (x *CreditSpendReportResponseData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditSpendReportResponseData.ProtoReflect.Descriptor instead.
 func (*CreditSpendReportResponseData) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{418}
+	return file_header_proto_rawDescGZIP(), []int{416}
 }
 
 func (x *CreditSpendReportResponseData) GetItemId() string {
@@ -51888,7 +51682,7 @@ type CreditSpendReportResponse struct {
 
 func (x *CreditSpendReportResponse) Reset() {
 	*x = CreditSpendReportResponse{}
-	mi := &file_header_proto_msgTypes[419]
+	mi := &file_header_proto_msgTypes[417]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51900,7 +51694,7 @@ func (x *CreditSpendReportResponse) String() string {
 func (*CreditSpendReportResponse) ProtoMessage() {}
 
 func (x *CreditSpendReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[419]
+	mi := &file_header_proto_msgTypes[417]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51913,7 +51707,7 @@ func (x *CreditSpendReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditSpendReportResponse.ProtoReflect.Descriptor instead.
 func (*CreditSpendReportResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{419}
+	return file_header_proto_rawDescGZIP(), []int{417}
 }
 
 func (x *CreditSpendReportResponse) GetCtx() *common.Context {
@@ -51967,7 +51761,7 @@ type AccSub struct {
 
 func (x *AccSub) Reset() {
 	*x = AccSub{}
-	mi := &file_header_proto_msgTypes[420]
+	mi := &file_header_proto_msgTypes[418]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51979,7 +51773,7 @@ func (x *AccSub) String() string {
 func (*AccSub) ProtoMessage() {}
 
 func (x *AccSub) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[420]
+	mi := &file_header_proto_msgTypes[418]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -51992,7 +51786,7 @@ func (x *AccSub) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccSub.ProtoReflect.Descriptor instead.
 func (*AccSub) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{420}
+	return file_header_proto_rawDescGZIP(), []int{418}
 }
 
 func (x *AccSub) GetCtx() *common.Context {
@@ -52067,7 +51861,7 @@ type AccSubs struct {
 
 func (x *AccSubs) Reset() {
 	*x = AccSubs{}
-	mi := &file_header_proto_msgTypes[421]
+	mi := &file_header_proto_msgTypes[419]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52079,7 +51873,7 @@ func (x *AccSubs) String() string {
 func (*AccSubs) ProtoMessage() {}
 
 func (x *AccSubs) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[421]
+	mi := &file_header_proto_msgTypes[419]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52092,7 +51886,7 @@ func (x *AccSubs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccSubs.ProtoReflect.Descriptor instead.
 func (*AccSubs) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{421}
+	return file_header_proto_rawDescGZIP(), []int{419}
 }
 
 func (x *AccSubs) GetCtx() *common.Context {
@@ -52169,7 +51963,7 @@ type OutboundCallUpdateEvent struct {
 
 func (x *OutboundCallUpdateEvent) Reset() {
 	*x = OutboundCallUpdateEvent{}
-	mi := &file_header_proto_msgTypes[422]
+	mi := &file_header_proto_msgTypes[420]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52181,7 +51975,7 @@ func (x *OutboundCallUpdateEvent) String() string {
 func (*OutboundCallUpdateEvent) ProtoMessage() {}
 
 func (x *OutboundCallUpdateEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[422]
+	mi := &file_header_proto_msgTypes[420]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52194,7 +51988,7 @@ func (x *OutboundCallUpdateEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundCallUpdateEvent.ProtoReflect.Descriptor instead.
 func (*OutboundCallUpdateEvent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{422}
+	return file_header_proto_rawDescGZIP(), []int{420}
 }
 
 func (x *OutboundCallUpdateEvent) GetCtx() *common.Context {
@@ -52277,7 +52071,7 @@ type String struct {
 
 func (x *String) Reset() {
 	*x = String{}
-	mi := &file_header_proto_msgTypes[423]
+	mi := &file_header_proto_msgTypes[421]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52289,7 +52083,7 @@ func (x *String) String() string {
 func (*String) ProtoMessage() {}
 
 func (x *String) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[423]
+	mi := &file_header_proto_msgTypes[421]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52302,7 +52096,7 @@ func (x *String) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use String.ProtoReflect.Descriptor instead.
 func (*String) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{423}
+	return file_header_proto_rawDescGZIP(), []int{421}
 }
 
 func (x *String) GetStr() string {
@@ -52329,7 +52123,7 @@ type Number struct {
 
 func (x *Number) Reset() {
 	*x = Number{}
-	mi := &file_header_proto_msgTypes[424]
+	mi := &file_header_proto_msgTypes[422]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52341,7 +52135,7 @@ func (x *Number) String() string {
 func (*Number) ProtoMessage() {}
 
 func (x *Number) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[424]
+	mi := &file_header_proto_msgTypes[422]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52354,7 +52148,7 @@ func (x *Number) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Number.ProtoReflect.Descriptor instead.
 func (*Number) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{424}
+	return file_header_proto_rawDescGZIP(), []int{422}
 }
 
 func (x *Number) GetNumber() int64 {
@@ -52380,7 +52174,7 @@ type StrNumM struct {
 
 func (x *StrNumM) Reset() {
 	*x = StrNumM{}
-	mi := &file_header_proto_msgTypes[425]
+	mi := &file_header_proto_msgTypes[423]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52392,7 +52186,7 @@ func (x *StrNumM) String() string {
 func (*StrNumM) ProtoMessage() {}
 
 func (x *StrNumM) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[425]
+	mi := &file_header_proto_msgTypes[423]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52405,7 +52199,7 @@ func (x *StrNumM) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StrNumM.ProtoReflect.Descriptor instead.
 func (*StrNumM) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{425}
+	return file_header_proto_rawDescGZIP(), []int{423}
 }
 
 func (x *StrNumM) GetStrsM() map[string]int64 {
@@ -52424,7 +52218,7 @@ type NumStrM struct {
 
 func (x *NumStrM) Reset() {
 	*x = NumStrM{}
-	mi := &file_header_proto_msgTypes[426]
+	mi := &file_header_proto_msgTypes[424]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52436,7 +52230,7 @@ func (x *NumStrM) String() string {
 func (*NumStrM) ProtoMessage() {}
 
 func (x *NumStrM) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[426]
+	mi := &file_header_proto_msgTypes[424]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52449,7 +52243,7 @@ func (x *NumStrM) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NumStrM.ProtoReflect.Descriptor instead.
 func (*NumStrM) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{426}
+	return file_header_proto_rawDescGZIP(), []int{424}
 }
 
 func (x *NumStrM) GetNumsM() map[int64]string {
@@ -52479,7 +52273,7 @@ type ConvoReportRequest struct {
 
 func (x *ConvoReportRequest) Reset() {
 	*x = ConvoReportRequest{}
-	mi := &file_header_proto_msgTypes[427]
+	mi := &file_header_proto_msgTypes[425]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52491,7 +52285,7 @@ func (x *ConvoReportRequest) String() string {
 func (*ConvoReportRequest) ProtoMessage() {}
 
 func (x *ConvoReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[427]
+	mi := &file_header_proto_msgTypes[425]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52504,7 +52298,7 @@ func (x *ConvoReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConvoReportRequest.ProtoReflect.Descriptor instead.
 func (*ConvoReportRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{427}
+	return file_header_proto_rawDescGZIP(), []int{425}
 }
 
 func (x *ConvoReportRequest) GetCtx() *common.Context {
@@ -52601,7 +52395,7 @@ type ConvoReportResponse struct {
 
 func (x *ConvoReportResponse) Reset() {
 	*x = ConvoReportResponse{}
-	mi := &file_header_proto_msgTypes[428]
+	mi := &file_header_proto_msgTypes[426]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52613,7 +52407,7 @@ func (x *ConvoReportResponse) String() string {
 func (*ConvoReportResponse) ProtoMessage() {}
 
 func (x *ConvoReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[428]
+	mi := &file_header_proto_msgTypes[426]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52626,7 +52420,7 @@ func (x *ConvoReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConvoReportResponse.ProtoReflect.Descriptor instead.
 func (*ConvoReportResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{428}
+	return file_header_proto_rawDescGZIP(), []int{426}
 }
 
 func (x *ConvoReportResponse) GetCtx() *common.Context {
@@ -52654,7 +52448,7 @@ type ConvoReportEntry struct {
 
 func (x *ConvoReportEntry) Reset() {
 	*x = ConvoReportEntry{}
-	mi := &file_header_proto_msgTypes[429]
+	mi := &file_header_proto_msgTypes[427]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52666,7 +52460,7 @@ func (x *ConvoReportEntry) String() string {
 func (*ConvoReportEntry) ProtoMessage() {}
 
 func (x *ConvoReportEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[429]
+	mi := &file_header_proto_msgTypes[427]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52679,7 +52473,7 @@ func (x *ConvoReportEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConvoReportEntry.ProtoReflect.Descriptor instead.
 func (*ConvoReportEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{429}
+	return file_header_proto_rawDescGZIP(), []int{427}
 }
 
 func (x *ConvoReportEntry) GetDatapoints() []int64 {
@@ -52715,7 +52509,7 @@ type WorkflowGoal struct {
 
 func (x *WorkflowGoal) Reset() {
 	*x = WorkflowGoal{}
-	mi := &file_header_proto_msgTypes[430]
+	mi := &file_header_proto_msgTypes[428]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52727,7 +52521,7 @@ func (x *WorkflowGoal) String() string {
 func (*WorkflowGoal) ProtoMessage() {}
 
 func (x *WorkflowGoal) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[430]
+	mi := &file_header_proto_msgTypes[428]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52740,7 +52534,7 @@ func (x *WorkflowGoal) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowGoal.ProtoReflect.Descriptor instead.
 func (*WorkflowGoal) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{430}
+	return file_header_proto_rawDescGZIP(), []int{428}
 }
 
 func (x *WorkflowGoal) GetActionId() string {
@@ -52797,7 +52591,7 @@ type WorkflowTrigger struct {
 
 func (x *WorkflowTrigger) Reset() {
 	*x = WorkflowTrigger{}
-	mi := &file_header_proto_msgTypes[431]
+	mi := &file_header_proto_msgTypes[429]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52809,7 +52603,7 @@ func (x *WorkflowTrigger) String() string {
 func (*WorkflowTrigger) ProtoMessage() {}
 
 func (x *WorkflowTrigger) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[431]
+	mi := &file_header_proto_msgTypes[429]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52822,7 +52616,7 @@ func (x *WorkflowTrigger) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowTrigger.ProtoReflect.Descriptor instead.
 func (*WorkflowTrigger) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{431}
+	return file_header_proto_rawDescGZIP(), []int{429}
 }
 
 func (x *WorkflowTrigger) GetUiId() string {
@@ -52893,7 +52687,7 @@ type WorkflowTimming struct {
 
 func (x *WorkflowTimming) Reset() {
 	*x = WorkflowTimming{}
-	mi := &file_header_proto_msgTypes[432]
+	mi := &file_header_proto_msgTypes[430]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -52905,7 +52699,7 @@ func (x *WorkflowTimming) String() string {
 func (*WorkflowTimming) ProtoMessage() {}
 
 func (x *WorkflowTimming) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[432]
+	mi := &file_header_proto_msgTypes[430]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52918,7 +52712,7 @@ func (x *WorkflowTimming) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowTimming.ProtoReflect.Descriptor instead.
 func (*WorkflowTimming) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{432}
+	return file_header_proto_rawDescGZIP(), []int{430}
 }
 
 func (x *WorkflowTimming) GetOp() string {
@@ -53008,7 +52802,7 @@ type WorkflowCondition struct {
 
 func (x *WorkflowCondition) Reset() {
 	*x = WorkflowCondition{}
-	mi := &file_header_proto_msgTypes[433]
+	mi := &file_header_proto_msgTypes[431]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53020,7 +52814,7 @@ func (x *WorkflowCondition) String() string {
 func (*WorkflowCondition) ProtoMessage() {}
 
 func (x *WorkflowCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[433]
+	mi := &file_header_proto_msgTypes[431]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -53033,7 +52827,7 @@ func (x *WorkflowCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowCondition.ProtoReflect.Descriptor instead.
 func (*WorkflowCondition) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{433}
+	return file_header_proto_rawDescGZIP(), []int{431}
 }
 
 func (x *WorkflowCondition) GetId() string {
@@ -53160,7 +52954,7 @@ type LLMCondition struct {
 
 func (x *LLMCondition) Reset() {
 	*x = LLMCondition{}
-	mi := &file_header_proto_msgTypes[434]
+	mi := &file_header_proto_msgTypes[432]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53172,7 +52966,7 @@ func (x *LLMCondition) String() string {
 func (*LLMCondition) ProtoMessage() {}
 
 func (x *LLMCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[434]
+	mi := &file_header_proto_msgTypes[432]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -53185,7 +52979,7 @@ func (x *LLMCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMCondition.ProtoReflect.Descriptor instead.
 func (*LLMCondition) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{434}
+	return file_header_proto_rawDescGZIP(), []int{432}
 }
 
 func (x *LLMCondition) GetOp() string {
@@ -53330,7 +53124,7 @@ type WorkflowLogRequest struct {
 
 func (x *WorkflowLogRequest) Reset() {
 	*x = WorkflowLogRequest{}
-	mi := &file_header_proto_msgTypes[435]
+	mi := &file_header_proto_msgTypes[433]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53342,7 +53136,7 @@ func (x *WorkflowLogRequest) String() string {
 func (*WorkflowLogRequest) ProtoMessage() {}
 
 func (x *WorkflowLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[435]
+	mi := &file_header_proto_msgTypes[433]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -53355,7 +53149,7 @@ func (x *WorkflowLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowLogRequest.ProtoReflect.Descriptor instead.
 func (*WorkflowLogRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{435}
+	return file_header_proto_rawDescGZIP(), []int{433}
 }
 
 func (x *WorkflowLogRequest) GetCtx() *common.Context {
@@ -53459,7 +53253,7 @@ type Workflow struct {
 
 func (x *Workflow) Reset() {
 	*x = Workflow{}
-	mi := &file_header_proto_msgTypes[436]
+	mi := &file_header_proto_msgTypes[434]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53471,7 +53265,7 @@ func (x *Workflow) String() string {
 func (*Workflow) ProtoMessage() {}
 
 func (x *Workflow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[436]
+	mi := &file_header_proto_msgTypes[434]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -53484,7 +53278,7 @@ func (x *Workflow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Workflow.ProtoReflect.Descriptor instead.
 func (*Workflow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{436}
+	return file_header_proto_rawDescGZIP(), []int{434}
 }
 
 func (x *Workflow) GetCtx() *common.Context {
@@ -53753,7 +53547,7 @@ type KvSetting struct {
 
 func (x *KvSetting) Reset() {
 	*x = KvSetting{}
-	mi := &file_header_proto_msgTypes[437]
+	mi := &file_header_proto_msgTypes[435]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53765,7 +53559,7 @@ func (x *KvSetting) String() string {
 func (*KvSetting) ProtoMessage() {}
 
 func (x *KvSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[437]
+	mi := &file_header_proto_msgTypes[435]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -53778,7 +53572,7 @@ func (x *KvSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KvSetting.ProtoReflect.Descriptor instead.
 func (*KvSetting) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{437}
+	return file_header_proto_rawDescGZIP(), []int{435}
 }
 
 func (x *KvSetting) GetKey() string {
@@ -53845,7 +53639,7 @@ type LLMToolCall struct {
 
 func (x *LLMToolCall) Reset() {
 	*x = LLMToolCall{}
-	mi := &file_header_proto_msgTypes[438]
+	mi := &file_header_proto_msgTypes[436]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53857,7 +53651,7 @@ func (x *LLMToolCall) String() string {
 func (*LLMToolCall) ProtoMessage() {}
 
 func (x *LLMToolCall) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[438]
+	mi := &file_header_proto_msgTypes[436]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -53870,7 +53664,7 @@ func (x *LLMToolCall) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMToolCall.ProtoReflect.Descriptor instead.
 func (*LLMToolCall) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{438}
+	return file_header_proto_rawDescGZIP(), []int{436}
 }
 
 func (x *LLMToolCall) GetType() string {
@@ -53983,7 +53777,7 @@ type LLMChatHistoryEntry struct {
 
 func (x *LLMChatHistoryEntry) Reset() {
 	*x = LLMChatHistoryEntry{}
-	mi := &file_header_proto_msgTypes[439]
+	mi := &file_header_proto_msgTypes[437]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53995,7 +53789,7 @@ func (x *LLMChatHistoryEntry) String() string {
 func (*LLMChatHistoryEntry) ProtoMessage() {}
 
 func (x *LLMChatHistoryEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[439]
+	mi := &file_header_proto_msgTypes[437]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54008,7 +53802,7 @@ func (x *LLMChatHistoryEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMChatHistoryEntry.ProtoReflect.Descriptor instead.
 func (*LLMChatHistoryEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{439}
+	return file_header_proto_rawDescGZIP(), []int{437}
 }
 
 func (x *LLMChatHistoryEntry) GetCreated() int64 {
@@ -54089,7 +53883,7 @@ type AIDataEntryUsed struct {
 
 func (x *AIDataEntryUsed) Reset() {
 	*x = AIDataEntryUsed{}
-	mi := &file_header_proto_msgTypes[440]
+	mi := &file_header_proto_msgTypes[438]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -54101,7 +53895,7 @@ func (x *AIDataEntryUsed) String() string {
 func (*AIDataEntryUsed) ProtoMessage() {}
 
 func (x *AIDataEntryUsed) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[440]
+	mi := &file_header_proto_msgTypes[438]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54114,7 +53908,7 @@ func (x *AIDataEntryUsed) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataEntryUsed.ProtoReflect.Descriptor instead.
 func (*AIDataEntryUsed) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{440}
+	return file_header_proto_rawDescGZIP(), []int{438}
 }
 
 func (x *AIDataEntryUsed) GetChunkId() string {
@@ -54198,7 +53992,7 @@ type AIAgentTrace struct {
 
 func (x *AIAgentTrace) Reset() {
 	*x = AIAgentTrace{}
-	mi := &file_header_proto_msgTypes[441]
+	mi := &file_header_proto_msgTypes[439]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -54210,7 +54004,7 @@ func (x *AIAgentTrace) String() string {
 func (*AIAgentTrace) ProtoMessage() {}
 
 func (x *AIAgentTrace) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[441]
+	mi := &file_header_proto_msgTypes[439]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54223,7 +54017,7 @@ func (x *AIAgentTrace) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentTrace.ProtoReflect.Descriptor instead.
 func (*AIAgentTrace) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{441}
+	return file_header_proto_rawDescGZIP(), []int{439}
 }
 
 func (x *AIAgentTrace) GetCtx() *common.Context {
@@ -54433,7 +54227,7 @@ type AIAgentSpan struct {
 
 func (x *AIAgentSpan) Reset() {
 	*x = AIAgentSpan{}
-	mi := &file_header_proto_msgTypes[442]
+	mi := &file_header_proto_msgTypes[440]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -54445,7 +54239,7 @@ func (x *AIAgentSpan) String() string {
 func (*AIAgentSpan) ProtoMessage() {}
 
 func (x *AIAgentSpan) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[442]
+	mi := &file_header_proto_msgTypes[440]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54458,7 +54252,7 @@ func (x *AIAgentSpan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentSpan.ProtoReflect.Descriptor instead.
 func (*AIAgentSpan) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{442}
+	return file_header_proto_rawDescGZIP(), []int{440}
 }
 
 func (x *AIAgentSpan) GetTraceId() string {
@@ -54691,7 +54485,7 @@ type WorkflowLog struct {
 
 func (x *WorkflowLog) Reset() {
 	*x = WorkflowLog{}
-	mi := &file_header_proto_msgTypes[443]
+	mi := &file_header_proto_msgTypes[441]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -54703,7 +54497,7 @@ func (x *WorkflowLog) String() string {
 func (*WorkflowLog) ProtoMessage() {}
 
 func (x *WorkflowLog) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[443]
+	mi := &file_header_proto_msgTypes[441]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54716,7 +54510,7 @@ func (x *WorkflowLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowLog.ProtoReflect.Descriptor instead.
 func (*WorkflowLog) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{443}
+	return file_header_proto_rawDescGZIP(), []int{441}
 }
 
 func (x *WorkflowLog) GetCtx() *common.Context {
@@ -54923,7 +54717,7 @@ type TicketType struct {
 
 func (x *TicketType) Reset() {
 	*x = TicketType{}
-	mi := &file_header_proto_msgTypes[444]
+	mi := &file_header_proto_msgTypes[442]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -54935,7 +54729,7 @@ func (x *TicketType) String() string {
 func (*TicketType) ProtoMessage() {}
 
 func (x *TicketType) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[444]
+	mi := &file_header_proto_msgTypes[442]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54948,7 +54742,7 @@ func (x *TicketType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketType.ProtoReflect.Descriptor instead.
 func (*TicketType) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{444}
+	return file_header_proto_rawDescGZIP(), []int{442}
 }
 
 func (x *TicketType) GetCtx() *common.Context {
@@ -55115,7 +54909,7 @@ type TicketSatisfaction struct {
 
 func (x *TicketSatisfaction) Reset() {
 	*x = TicketSatisfaction{}
-	mi := &file_header_proto_msgTypes[445]
+	mi := &file_header_proto_msgTypes[443]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -55127,7 +54921,7 @@ func (x *TicketSatisfaction) String() string {
 func (*TicketSatisfaction) ProtoMessage() {}
 
 func (x *TicketSatisfaction) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[445]
+	mi := &file_header_proto_msgTypes[443]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55140,7 +54934,7 @@ func (x *TicketSatisfaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketSatisfaction.ProtoReflect.Descriptor instead.
 func (*TicketSatisfaction) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{445}
+	return file_header_proto_rawDescGZIP(), []int{443}
 }
 
 func (x *TicketSatisfaction) GetCtx() *common.Context {
@@ -55221,7 +55015,7 @@ type TicketAutoReply struct {
 
 func (x *TicketAutoReply) Reset() {
 	*x = TicketAutoReply{}
-	mi := &file_header_proto_msgTypes[446]
+	mi := &file_header_proto_msgTypes[444]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -55233,7 +55027,7 @@ func (x *TicketAutoReply) String() string {
 func (*TicketAutoReply) ProtoMessage() {}
 
 func (x *TicketAutoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[446]
+	mi := &file_header_proto_msgTypes[444]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55246,7 +55040,7 @@ func (x *TicketAutoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketAutoReply.ProtoReflect.Descriptor instead.
 func (*TicketAutoReply) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{446}
+	return file_header_proto_rawDescGZIP(), []int{444}
 }
 
 func (x *TicketAutoReply) GetCtx() *common.Context {
@@ -55322,7 +55116,7 @@ type TicketTemplate struct {
 
 func (x *TicketTemplate) Reset() {
 	*x = TicketTemplate{}
-	mi := &file_header_proto_msgTypes[447]
+	mi := &file_header_proto_msgTypes[445]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -55334,7 +55128,7 @@ func (x *TicketTemplate) String() string {
 func (*TicketTemplate) ProtoMessage() {}
 
 func (x *TicketTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[447]
+	mi := &file_header_proto_msgTypes[445]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55347,7 +55141,7 @@ func (x *TicketTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketTemplate.ProtoReflect.Descriptor instead.
 func (*TicketTemplate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{447}
+	return file_header_proto_rawDescGZIP(), []int{445}
 }
 
 func (x *TicketTemplate) GetCtx() *common.Context {
@@ -55537,7 +55331,7 @@ type Ticket struct {
 
 func (x *Ticket) Reset() {
 	*x = Ticket{}
-	mi := &file_header_proto_msgTypes[448]
+	mi := &file_header_proto_msgTypes[446]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -55549,7 +55343,7 @@ func (x *Ticket) String() string {
 func (*Ticket) ProtoMessage() {}
 
 func (x *Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[448]
+	mi := &file_header_proto_msgTypes[446]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55562,7 +55356,7 @@ func (x *Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ticket.ProtoReflect.Descriptor instead.
 func (*Ticket) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{448}
+	return file_header_proto_rawDescGZIP(), []int{446}
 }
 
 func (x *Ticket) GetCtx() *common.Context {
@@ -56070,7 +55864,7 @@ type ReceiptMember struct {
 
 func (x *ReceiptMember) Reset() {
 	*x = ReceiptMember{}
-	mi := &file_header_proto_msgTypes[449]
+	mi := &file_header_proto_msgTypes[447]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56082,7 +55876,7 @@ func (x *ReceiptMember) String() string {
 func (*ReceiptMember) ProtoMessage() {}
 
 func (x *ReceiptMember) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[449]
+	mi := &file_header_proto_msgTypes[447]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56095,7 +55889,7 @@ func (x *ReceiptMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceiptMember.ProtoReflect.Descriptor instead.
 func (*ReceiptMember) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{449}
+	return file_header_proto_rawDescGZIP(), []int{447}
 }
 
 func (x *ReceiptMember) GetCtx() *common.Context {
@@ -56159,7 +55953,7 @@ type SLAViolations struct {
 
 func (x *SLAViolations) Reset() {
 	*x = SLAViolations{}
-	mi := &file_header_proto_msgTypes[450]
+	mi := &file_header_proto_msgTypes[448]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56171,7 +55965,7 @@ func (x *SLAViolations) String() string {
 func (*SLAViolations) ProtoMessage() {}
 
 func (x *SLAViolations) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[450]
+	mi := &file_header_proto_msgTypes[448]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56184,7 +55978,7 @@ func (x *SLAViolations) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SLAViolations.ProtoReflect.Descriptor instead.
 func (*SLAViolations) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{450}
+	return file_header_proto_rawDescGZIP(), []int{448}
 }
 
 func (x *SLAViolations) GetCtx() *common.Context {
@@ -56234,7 +56028,7 @@ type SLAViolation struct {
 
 func (x *SLAViolation) Reset() {
 	*x = SLAViolation{}
-	mi := &file_header_proto_msgTypes[451]
+	mi := &file_header_proto_msgTypes[449]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56246,7 +56040,7 @@ func (x *SLAViolation) String() string {
 func (*SLAViolation) ProtoMessage() {}
 
 func (x *SLAViolation) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[451]
+	mi := &file_header_proto_msgTypes[449]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56259,7 +56053,7 @@ func (x *SLAViolation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SLAViolation.ProtoReflect.Descriptor instead.
 func (*SLAViolation) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{451}
+	return file_header_proto_rawDescGZIP(), []int{449}
 }
 
 func (x *SLAViolation) GetCtx() *common.Context {
@@ -56350,7 +56144,7 @@ type TicketHistoryEntry struct {
 
 func (x *TicketHistoryEntry) Reset() {
 	*x = TicketHistoryEntry{}
-	mi := &file_header_proto_msgTypes[452]
+	mi := &file_header_proto_msgTypes[450]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56362,7 +56156,7 @@ func (x *TicketHistoryEntry) String() string {
 func (*TicketHistoryEntry) ProtoMessage() {}
 
 func (x *TicketHistoryEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[452]
+	mi := &file_header_proto_msgTypes[450]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56375,7 +56169,7 @@ func (x *TicketHistoryEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketHistoryEntry.ProtoReflect.Descriptor instead.
 func (*TicketHistoryEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{452}
+	return file_header_proto_rawDescGZIP(), []int{450}
 }
 
 func (x *TicketHistoryEntry) GetEvent() *Event {
@@ -56423,7 +56217,7 @@ type ListTicketRequest struct {
 
 func (x *ListTicketRequest) Reset() {
 	*x = ListTicketRequest{}
-	mi := &file_header_proto_msgTypes[453]
+	mi := &file_header_proto_msgTypes[451]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56435,7 +56229,7 @@ func (x *ListTicketRequest) String() string {
 func (*ListTicketRequest) ProtoMessage() {}
 
 func (x *ListTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[453]
+	mi := &file_header_proto_msgTypes[451]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56448,7 +56242,7 @@ func (x *ListTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketRequest.ProtoReflect.Descriptor instead.
 func (*ListTicketRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{453}
+	return file_header_proto_rawDescGZIP(), []int{451}
 }
 
 func (x *ListTicketRequest) GetCtx() *common.Context {
@@ -56588,7 +56382,7 @@ type TicketView struct {
 
 func (x *TicketView) Reset() {
 	*x = TicketView{}
-	mi := &file_header_proto_msgTypes[454]
+	mi := &file_header_proto_msgTypes[452]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56600,7 +56394,7 @@ func (x *TicketView) String() string {
 func (*TicketView) ProtoMessage() {}
 
 func (x *TicketView) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[454]
+	mi := &file_header_proto_msgTypes[452]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56613,7 +56407,7 @@ func (x *TicketView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketView.ProtoReflect.Descriptor instead.
 func (*TicketView) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{454}
+	return file_header_proto_rawDescGZIP(), []int{452}
 }
 
 func (x *TicketView) GetCtx() *common.Context {
@@ -56746,7 +56540,7 @@ type TicketViewMember struct {
 
 func (x *TicketViewMember) Reset() {
 	*x = TicketViewMember{}
-	mi := &file_header_proto_msgTypes[455]
+	mi := &file_header_proto_msgTypes[453]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56758,7 +56552,7 @@ func (x *TicketViewMember) String() string {
 func (*TicketViewMember) ProtoMessage() {}
 
 func (x *TicketViewMember) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[455]
+	mi := &file_header_proto_msgTypes[453]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56771,7 +56565,7 @@ func (x *TicketViewMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketViewMember.ProtoReflect.Descriptor instead.
 func (*TicketViewMember) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{455}
+	return file_header_proto_rawDescGZIP(), []int{453}
 }
 
 func (x *TicketViewMember) GetCtx() *common.Context {
@@ -56850,7 +56644,7 @@ type LiveViewMetric struct {
 
 func (x *LiveViewMetric) Reset() {
 	*x = LiveViewMetric{}
-	mi := &file_header_proto_msgTypes[456]
+	mi := &file_header_proto_msgTypes[454]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56862,7 +56656,7 @@ func (x *LiveViewMetric) String() string {
 func (*LiveViewMetric) ProtoMessage() {}
 
 func (x *LiveViewMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[456]
+	mi := &file_header_proto_msgTypes[454]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56875,7 +56669,7 @@ func (x *LiveViewMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LiveViewMetric.ProtoReflect.Descriptor instead.
 func (*LiveViewMetric) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{456}
+	return file_header_proto_rawDescGZIP(), []int{454}
 }
 
 func (x *LiveViewMetric) GetCount() int64 {
@@ -56934,7 +56728,7 @@ type LiveUserView struct {
 
 func (x *LiveUserView) Reset() {
 	*x = LiveUserView{}
-	mi := &file_header_proto_msgTypes[457]
+	mi := &file_header_proto_msgTypes[455]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -56946,7 +56740,7 @@ func (x *LiveUserView) String() string {
 func (*LiveUserView) ProtoMessage() {}
 
 func (x *LiveUserView) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[457]
+	mi := &file_header_proto_msgTypes[455]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56959,7 +56753,7 @@ func (x *LiveUserView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LiveUserView.ProtoReflect.Descriptor instead.
 func (*LiveUserView) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{457}
+	return file_header_proto_rawDescGZIP(), []int{455}
 }
 
 func (x *LiveUserView) GetCtx() *common.Context {
@@ -57075,7 +56869,7 @@ type BotTemplate struct {
 
 func (x *BotTemplate) Reset() {
 	*x = BotTemplate{}
-	mi := &file_header_proto_msgTypes[458]
+	mi := &file_header_proto_msgTypes[456]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57087,7 +56881,7 @@ func (x *BotTemplate) String() string {
 func (*BotTemplate) ProtoMessage() {}
 
 func (x *BotTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[458]
+	mi := &file_header_proto_msgTypes[456]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57100,7 +56894,7 @@ func (x *BotTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BotTemplate.ProtoReflect.Descriptor instead.
 func (*BotTemplate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{458}
+	return file_header_proto_rawDescGZIP(), []int{456}
 }
 
 func (x *BotTemplate) GetCtx() *common.Context {
@@ -57220,7 +57014,7 @@ type ResourceGroupMember struct {
 
 func (x *ResourceGroupMember) Reset() {
 	*x = ResourceGroupMember{}
-	mi := &file_header_proto_msgTypes[459]
+	mi := &file_header_proto_msgTypes[457]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57232,7 +57026,7 @@ func (x *ResourceGroupMember) String() string {
 func (*ResourceGroupMember) ProtoMessage() {}
 
 func (x *ResourceGroupMember) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[459]
+	mi := &file_header_proto_msgTypes[457]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57245,7 +57039,7 @@ func (x *ResourceGroupMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceGroupMember.ProtoReflect.Descriptor instead.
 func (*ResourceGroupMember) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{459}
+	return file_header_proto_rawDescGZIP(), []int{457}
 }
 
 func (x *ResourceGroupMember) GetCtx() *common.Context {
@@ -57348,7 +57142,7 @@ type SLAPolicy struct {
 
 func (x *SLAPolicy) Reset() {
 	*x = SLAPolicy{}
-	mi := &file_header_proto_msgTypes[460]
+	mi := &file_header_proto_msgTypes[458]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57360,7 +57154,7 @@ func (x *SLAPolicy) String() string {
 func (*SLAPolicy) ProtoMessage() {}
 
 func (x *SLAPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[460]
+	mi := &file_header_proto_msgTypes[458]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57373,7 +57167,7 @@ func (x *SLAPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SLAPolicy.ProtoReflect.Descriptor instead.
 func (*SLAPolicy) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{460}
+	return file_header_proto_rawDescGZIP(), []int{458}
 }
 
 func (x *SLAPolicy) GetCtx() *common.Context {
@@ -57545,7 +57339,7 @@ type SLATarget struct {
 
 func (x *SLATarget) Reset() {
 	*x = SLATarget{}
-	mi := &file_header_proto_msgTypes[461]
+	mi := &file_header_proto_msgTypes[459]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57557,7 +57351,7 @@ func (x *SLATarget) String() string {
 func (*SLATarget) ProtoMessage() {}
 
 func (x *SLATarget) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[461]
+	mi := &file_header_proto_msgTypes[459]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57570,7 +57364,7 @@ func (x *SLATarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SLATarget.ProtoReflect.Descriptor instead.
 func (*SLATarget) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{461}
+	return file_header_proto_rawDescGZIP(), []int{459}
 }
 
 func (x *SLATarget) GetSlaPolicy() string {
@@ -57634,7 +57428,7 @@ type ArticleSEOSetting struct {
 
 func (x *ArticleSEOSetting) Reset() {
 	*x = ArticleSEOSetting{}
-	mi := &file_header_proto_msgTypes[462]
+	mi := &file_header_proto_msgTypes[460]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57646,7 +57440,7 @@ func (x *ArticleSEOSetting) String() string {
 func (*ArticleSEOSetting) ProtoMessage() {}
 
 func (x *ArticleSEOSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[462]
+	mi := &file_header_proto_msgTypes[460]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57659,7 +57453,7 @@ func (x *ArticleSEOSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleSEOSetting.ProtoReflect.Descriptor instead.
 func (*ArticleSEOSetting) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{462}
+	return file_header_proto_rawDescGZIP(), []int{460}
 }
 
 func (x *ArticleSEOSetting) GetPageTitle() map[string]string {
@@ -57751,7 +57545,7 @@ type Article struct {
 
 func (x *Article) Reset() {
 	*x = Article{}
-	mi := &file_header_proto_msgTypes[463]
+	mi := &file_header_proto_msgTypes[461]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57763,7 +57557,7 @@ func (x *Article) String() string {
 func (*Article) ProtoMessage() {}
 
 func (x *Article) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[463]
+	mi := &file_header_proto_msgTypes[461]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57776,7 +57570,7 @@ func (x *Article) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Article.ProtoReflect.Descriptor instead.
 func (*Article) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{463}
+	return file_header_proto_rawDescGZIP(), []int{461}
 }
 
 func (x *Article) GetCtx() *common.Context {
@@ -58017,7 +57811,7 @@ type ArticleCategory struct {
 
 func (x *ArticleCategory) Reset() {
 	*x = ArticleCategory{}
-	mi := &file_header_proto_msgTypes[464]
+	mi := &file_header_proto_msgTypes[462]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58029,7 +57823,7 @@ func (x *ArticleCategory) String() string {
 func (*ArticleCategory) ProtoMessage() {}
 
 func (x *ArticleCategory) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[464]
+	mi := &file_header_proto_msgTypes[462]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58042,7 +57836,7 @@ func (x *ArticleCategory) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleCategory.ProtoReflect.Descriptor instead.
 func (*ArticleCategory) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{464}
+	return file_header_proto_rawDescGZIP(), []int{462}
 }
 
 func (x *ArticleCategory) GetCtx() *common.Context {
@@ -58182,7 +57976,7 @@ type ArticleTopic struct {
 
 func (x *ArticleTopic) Reset() {
 	*x = ArticleTopic{}
-	mi := &file_header_proto_msgTypes[465]
+	mi := &file_header_proto_msgTypes[463]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58194,7 +57988,7 @@ func (x *ArticleTopic) String() string {
 func (*ArticleTopic) ProtoMessage() {}
 
 func (x *ArticleTopic) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[465]
+	mi := &file_header_proto_msgTypes[463]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58207,7 +58001,7 @@ func (x *ArticleTopic) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleTopic.ProtoReflect.Descriptor instead.
 func (*ArticleTopic) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{465}
+	return file_header_proto_rawDescGZIP(), []int{463}
 }
 
 func (x *ArticleTopic) GetCtx() *common.Context {
@@ -58290,7 +58084,7 @@ type ArticleTopics struct {
 
 func (x *ArticleTopics) Reset() {
 	*x = ArticleTopics{}
-	mi := &file_header_proto_msgTypes[466]
+	mi := &file_header_proto_msgTypes[464]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58302,7 +58096,7 @@ func (x *ArticleTopics) String() string {
 func (*ArticleTopics) ProtoMessage() {}
 
 func (x *ArticleTopics) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[466]
+	mi := &file_header_proto_msgTypes[464]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58315,7 +58109,7 @@ func (x *ArticleTopics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleTopics.ProtoReflect.Descriptor instead.
 func (*ArticleTopics) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{466}
+	return file_header_proto_rawDescGZIP(), []int{464}
 }
 
 func (x *ArticleTopics) GetCtx() *common.Context {
@@ -58344,7 +58138,7 @@ type ArticleTopicRequest struct {
 
 func (x *ArticleTopicRequest) Reset() {
 	*x = ArticleTopicRequest{}
-	mi := &file_header_proto_msgTypes[467]
+	mi := &file_header_proto_msgTypes[465]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58356,7 +58150,7 @@ func (x *ArticleTopicRequest) String() string {
 func (*ArticleTopicRequest) ProtoMessage() {}
 
 func (x *ArticleTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[467]
+	mi := &file_header_proto_msgTypes[465]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58369,7 +58163,7 @@ func (x *ArticleTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleTopicRequest.ProtoReflect.Descriptor instead.
 func (*ArticleTopicRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{467}
+	return file_header_proto_rawDescGZIP(), []int{465}
 }
 
 func (x *ArticleTopicRequest) GetCtx() *common.Context {
@@ -58447,7 +58241,7 @@ type KnowledgeBase struct {
 
 func (x *KnowledgeBase) Reset() {
 	*x = KnowledgeBase{}
-	mi := &file_header_proto_msgTypes[468]
+	mi := &file_header_proto_msgTypes[466]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58459,7 +58253,7 @@ func (x *KnowledgeBase) String() string {
 func (*KnowledgeBase) ProtoMessage() {}
 
 func (x *KnowledgeBase) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[468]
+	mi := &file_header_proto_msgTypes[466]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58472,7 +58266,7 @@ func (x *KnowledgeBase) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KnowledgeBase.ProtoReflect.Descriptor instead.
 func (*KnowledgeBase) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{468}
+	return file_header_proto_rawDescGZIP(), []int{466}
 }
 
 func (x *KnowledgeBase) GetCtx() *common.Context {
@@ -58760,7 +58554,7 @@ type KnowledgeBaseArticlePageSetting struct {
 
 func (x *KnowledgeBaseArticlePageSetting) Reset() {
 	*x = KnowledgeBaseArticlePageSetting{}
-	mi := &file_header_proto_msgTypes[469]
+	mi := &file_header_proto_msgTypes[467]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58772,7 +58566,7 @@ func (x *KnowledgeBaseArticlePageSetting) String() string {
 func (*KnowledgeBaseArticlePageSetting) ProtoMessage() {}
 
 func (x *KnowledgeBaseArticlePageSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[469]
+	mi := &file_header_proto_msgTypes[467]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58785,7 +58579,7 @@ func (x *KnowledgeBaseArticlePageSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KnowledgeBaseArticlePageSetting.ProtoReflect.Descriptor instead.
 func (*KnowledgeBaseArticlePageSetting) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{469}
+	return file_header_proto_rawDescGZIP(), []int{467}
 }
 
 func (x *KnowledgeBaseArticlePageSetting) GetStyle() *KnowledgeBasePageStyle {
@@ -58830,7 +58624,7 @@ type KnowledgeBasePageStyle struct {
 
 func (x *KnowledgeBasePageStyle) Reset() {
 	*x = KnowledgeBasePageStyle{}
-	mi := &file_header_proto_msgTypes[470]
+	mi := &file_header_proto_msgTypes[468]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58842,7 +58636,7 @@ func (x *KnowledgeBasePageStyle) String() string {
 func (*KnowledgeBasePageStyle) ProtoMessage() {}
 
 func (x *KnowledgeBasePageStyle) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[470]
+	mi := &file_header_proto_msgTypes[468]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58855,7 +58649,7 @@ func (x *KnowledgeBasePageStyle) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KnowledgeBasePageStyle.ProtoReflect.Descriptor instead.
 func (*KnowledgeBasePageStyle) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{470}
+	return file_header_proto_rawDescGZIP(), []int{468}
 }
 
 func (x *KnowledgeBasePageStyle) GetSiteFontFamily() string {
@@ -58922,7 +58716,7 @@ type Job struct {
 
 func (x *Job) Reset() {
 	*x = Job{}
-	mi := &file_header_proto_msgTypes[471]
+	mi := &file_header_proto_msgTypes[469]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58934,7 +58728,7 @@ func (x *Job) String() string {
 func (*Job) ProtoMessage() {}
 
 func (x *Job) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[471]
+	mi := &file_header_proto_msgTypes[469]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58947,7 +58741,7 @@ func (x *Job) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Job.ProtoReflect.Descriptor instead.
 func (*Job) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{471}
+	return file_header_proto_rawDescGZIP(), []int{469}
 }
 
 func (x *Job) GetCtx() *common.Context {
@@ -59102,7 +58896,7 @@ type Block struct {
 
 func (x *Block) Reset() {
 	*x = Block{}
-	mi := &file_header_proto_msgTypes[472]
+	mi := &file_header_proto_msgTypes[470]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59114,7 +58908,7 @@ func (x *Block) String() string {
 func (*Block) ProtoMessage() {}
 
 func (x *Block) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[472]
+	mi := &file_header_proto_msgTypes[470]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59127,7 +58921,7 @@ func (x *Block) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Block.ProtoReflect.Descriptor instead.
 func (*Block) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{472}
+	return file_header_proto_rawDescGZIP(), []int{470}
 }
 
 func (x *Block) GetId() string {
@@ -59378,7 +59172,7 @@ type LLMInputRetryPolicy struct {
 
 func (x *LLMInputRetryPolicy) Reset() {
 	*x = LLMInputRetryPolicy{}
-	mi := &file_header_proto_msgTypes[473]
+	mi := &file_header_proto_msgTypes[471]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59390,7 +59184,7 @@ func (x *LLMInputRetryPolicy) String() string {
 func (*LLMInputRetryPolicy) ProtoMessage() {}
 
 func (x *LLMInputRetryPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[473]
+	mi := &file_header_proto_msgTypes[471]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59403,7 +59197,7 @@ func (x *LLMInputRetryPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMInputRetryPolicy.ProtoReflect.Descriptor instead.
 func (*LLMInputRetryPolicy) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{473}
+	return file_header_proto_rawDescGZIP(), []int{471}
 }
 
 func (x *LLMInputRetryPolicy) GetMaxAttempts() int64 {
@@ -59441,7 +59235,7 @@ type TicketUpdatedNotiEmail struct {
 
 func (x *TicketUpdatedNotiEmail) Reset() {
 	*x = TicketUpdatedNotiEmail{}
-	mi := &file_header_proto_msgTypes[474]
+	mi := &file_header_proto_msgTypes[472]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59453,7 +59247,7 @@ func (x *TicketUpdatedNotiEmail) String() string {
 func (*TicketUpdatedNotiEmail) ProtoMessage() {}
 
 func (x *TicketUpdatedNotiEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[474]
+	mi := &file_header_proto_msgTypes[472]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59466,7 +59260,7 @@ func (x *TicketUpdatedNotiEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketUpdatedNotiEmail.ProtoReflect.Descriptor instead.
 func (*TicketUpdatedNotiEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{474}
+	return file_header_proto_rawDescGZIP(), []int{472}
 }
 
 func (x *TicketUpdatedNotiEmail) GetCtx() *common.Context {
@@ -59577,7 +59371,7 @@ type ResetPasswordEmail struct {
 
 func (x *ResetPasswordEmail) Reset() {
 	*x = ResetPasswordEmail{}
-	mi := &file_header_proto_msgTypes[475]
+	mi := &file_header_proto_msgTypes[473]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59589,7 +59383,7 @@ func (x *ResetPasswordEmail) String() string {
 func (*ResetPasswordEmail) ProtoMessage() {}
 
 func (x *ResetPasswordEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[475]
+	mi := &file_header_proto_msgTypes[473]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59602,7 +59396,7 @@ func (x *ResetPasswordEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetPasswordEmail.ProtoReflect.Descriptor instead.
 func (*ResetPasswordEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{475}
+	return file_header_proto_rawDescGZIP(), []int{473}
 }
 
 func (x *ResetPasswordEmail) GetCtx() *common.Context {
@@ -59677,7 +59471,7 @@ type OTPEmail struct {
 
 func (x *OTPEmail) Reset() {
 	*x = OTPEmail{}
-	mi := &file_header_proto_msgTypes[476]
+	mi := &file_header_proto_msgTypes[474]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59689,7 +59483,7 @@ func (x *OTPEmail) String() string {
 func (*OTPEmail) ProtoMessage() {}
 
 func (x *OTPEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[476]
+	mi := &file_header_proto_msgTypes[474]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59702,7 +59496,7 @@ func (x *OTPEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OTPEmail.ProtoReflect.Descriptor instead.
 func (*OTPEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{476}
+	return file_header_proto_rawDescGZIP(), []int{474}
 }
 
 func (x *OTPEmail) GetCtx() *common.Context {
@@ -59773,7 +59567,7 @@ type InviteEmail struct {
 
 func (x *InviteEmail) Reset() {
 	*x = InviteEmail{}
-	mi := &file_header_proto_msgTypes[477]
+	mi := &file_header_proto_msgTypes[475]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59785,7 +59579,7 @@ func (x *InviteEmail) String() string {
 func (*InviteEmail) ProtoMessage() {}
 
 func (x *InviteEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[477]
+	mi := &file_header_proto_msgTypes[475]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59798,7 +59592,7 @@ func (x *InviteEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InviteEmail.ProtoReflect.Descriptor instead.
 func (*InviteEmail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{477}
+	return file_header_proto_rawDescGZIP(), []int{475}
 }
 
 func (x *InviteEmail) GetCtx() *common.Context {
@@ -59888,7 +59682,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_header_proto_msgTypes[478]
+	mi := &file_header_proto_msgTypes[476]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59900,7 +59694,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[478]
+	mi := &file_header_proto_msgTypes[476]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59913,7 +59707,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{478}
+	return file_header_proto_rawDescGZIP(), []int{476}
 }
 
 func (x *LoginRequest) GetUsername() string {
@@ -59957,7 +59751,7 @@ type AgentProfile struct {
 
 func (x *AgentProfile) Reset() {
 	*x = AgentProfile{}
-	mi := &file_header_proto_msgTypes[479]
+	mi := &file_header_proto_msgTypes[477]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -59969,7 +59763,7 @@ func (x *AgentProfile) String() string {
 func (*AgentProfile) ProtoMessage() {}
 
 func (x *AgentProfile) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[479]
+	mi := &file_header_proto_msgTypes[477]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59982,7 +59776,7 @@ func (x *AgentProfile) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentProfile.ProtoReflect.Descriptor instead.
 func (*AgentProfile) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{479}
+	return file_header_proto_rawDescGZIP(), []int{477}
 }
 
 func (x *AgentProfile) GetCtx() *common.Context {
@@ -60128,7 +59922,7 @@ type InvitationLink struct {
 
 func (x *InvitationLink) Reset() {
 	*x = InvitationLink{}
-	mi := &file_header_proto_msgTypes[480]
+	mi := &file_header_proto_msgTypes[478]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -60140,7 +59934,7 @@ func (x *InvitationLink) String() string {
 func (*InvitationLink) ProtoMessage() {}
 
 func (x *InvitationLink) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[480]
+	mi := &file_header_proto_msgTypes[478]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60153,7 +59947,7 @@ func (x *InvitationLink) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvitationLink.ProtoReflect.Descriptor instead.
 func (*InvitationLink) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{480}
+	return file_header_proto_rawDescGZIP(), []int{478}
 }
 
 func (x *InvitationLink) GetCtx() *common.Context {
@@ -60231,7 +60025,7 @@ type ProfileEmailUsage struct {
 
 func (x *ProfileEmailUsage) Reset() {
 	*x = ProfileEmailUsage{}
-	mi := &file_header_proto_msgTypes[481]
+	mi := &file_header_proto_msgTypes[479]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -60243,7 +60037,7 @@ func (x *ProfileEmailUsage) String() string {
 func (*ProfileEmailUsage) ProtoMessage() {}
 
 func (x *ProfileEmailUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[481]
+	mi := &file_header_proto_msgTypes[479]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60256,7 +60050,7 @@ func (x *ProfileEmailUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProfileEmailUsage.ProtoReflect.Descriptor instead.
 func (*ProfileEmailUsage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{481}
+	return file_header_proto_rawDescGZIP(), []int{479}
 }
 
 func (x *ProfileEmailUsage) GetCtx() *common.Context {
@@ -60299,7 +60093,7 @@ type InviteRequest struct {
 
 func (x *InviteRequest) Reset() {
 	*x = InviteRequest{}
-	mi := &file_header_proto_msgTypes[482]
+	mi := &file_header_proto_msgTypes[480]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -60311,7 +60105,7 @@ func (x *InviteRequest) String() string {
 func (*InviteRequest) ProtoMessage() {}
 
 func (x *InviteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[482]
+	mi := &file_header_proto_msgTypes[480]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60324,7 +60118,7 @@ func (x *InviteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InviteRequest.ProtoReflect.Descriptor instead.
 func (*InviteRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{482}
+	return file_header_proto_rawDescGZIP(), []int{480}
 }
 
 func (x *InviteRequest) GetCtx() *common.Context {
@@ -60372,7 +60166,7 @@ type JoinAccountRequest struct {
 
 func (x *JoinAccountRequest) Reset() {
 	*x = JoinAccountRequest{}
-	mi := &file_header_proto_msgTypes[483]
+	mi := &file_header_proto_msgTypes[481]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -60384,7 +60178,7 @@ func (x *JoinAccountRequest) String() string {
 func (*JoinAccountRequest) ProtoMessage() {}
 
 func (x *JoinAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[483]
+	mi := &file_header_proto_msgTypes[481]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60397,7 +60191,7 @@ func (x *JoinAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinAccountRequest.ProtoReflect.Descriptor instead.
 func (*JoinAccountRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{483}
+	return file_header_proto_rawDescGZIP(), []int{481}
 }
 
 func (x *JoinAccountRequest) GetCtx() *common.Context {
@@ -60504,7 +60298,7 @@ type PromotionCode struct {
 
 func (x *PromotionCode) Reset() {
 	*x = PromotionCode{}
-	mi := &file_header_proto_msgTypes[484]
+	mi := &file_header_proto_msgTypes[482]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -60516,7 +60310,7 @@ func (x *PromotionCode) String() string {
 func (*PromotionCode) ProtoMessage() {}
 
 func (x *PromotionCode) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[484]
+	mi := &file_header_proto_msgTypes[482]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60529,7 +60323,7 @@ func (x *PromotionCode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PromotionCode.ProtoReflect.Descriptor instead.
 func (*PromotionCode) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{484}
+	return file_header_proto_rawDescGZIP(), []int{482}
 }
 
 func (x *PromotionCode) GetCtx() *common.Context {
@@ -60751,7 +60545,7 @@ type SubizPromotionProgram struct {
 
 func (x *SubizPromotionProgram) Reset() {
 	*x = SubizPromotionProgram{}
-	mi := &file_header_proto_msgTypes[485]
+	mi := &file_header_proto_msgTypes[483]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -60763,7 +60557,7 @@ func (x *SubizPromotionProgram) String() string {
 func (*SubizPromotionProgram) ProtoMessage() {}
 
 func (x *SubizPromotionProgram) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[485]
+	mi := &file_header_proto_msgTypes[483]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60776,7 +60570,7 @@ func (x *SubizPromotionProgram) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubizPromotionProgram.ProtoReflect.Descriptor instead.
 func (*SubizPromotionProgram) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{485}
+	return file_header_proto_rawDescGZIP(), []int{483}
 }
 
 func (x *SubizPromotionProgram) GetCtx() *common.Context {
@@ -61017,7 +60811,7 @@ type PromotionCheckResult struct {
 
 func (x *PromotionCheckResult) Reset() {
 	*x = PromotionCheckResult{}
-	mi := &file_header_proto_msgTypes[486]
+	mi := &file_header_proto_msgTypes[484]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61029,7 +60823,7 @@ func (x *PromotionCheckResult) String() string {
 func (*PromotionCheckResult) ProtoMessage() {}
 
 func (x *PromotionCheckResult) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[486]
+	mi := &file_header_proto_msgTypes[484]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61042,7 +60836,7 @@ func (x *PromotionCheckResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PromotionCheckResult.ProtoReflect.Descriptor instead.
 func (*PromotionCheckResult) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{486}
+	return file_header_proto_rawDescGZIP(), []int{484}
 }
 
 func (x *PromotionCheckResult) GetValid() bool {
@@ -61098,7 +60892,7 @@ type PromotionCodeUsage struct {
 
 func (x *PromotionCodeUsage) Reset() {
 	*x = PromotionCodeUsage{}
-	mi := &file_header_proto_msgTypes[487]
+	mi := &file_header_proto_msgTypes[485]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61110,7 +60904,7 @@ func (x *PromotionCodeUsage) String() string {
 func (*PromotionCodeUsage) ProtoMessage() {}
 
 func (x *PromotionCodeUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[487]
+	mi := &file_header_proto_msgTypes[485]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61123,7 +60917,7 @@ func (x *PromotionCodeUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PromotionCodeUsage.ProtoReflect.Descriptor instead.
 func (*PromotionCodeUsage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{487}
+	return file_header_proto_rawDescGZIP(), []int{485}
 }
 
 func (x *PromotionCodeUsage) GetCtx() *common.Context {
@@ -61181,7 +60975,7 @@ type SubizPaymentMethod struct {
 
 func (x *SubizPaymentMethod) Reset() {
 	*x = SubizPaymentMethod{}
-	mi := &file_header_proto_msgTypes[488]
+	mi := &file_header_proto_msgTypes[486]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61193,7 +60987,7 @@ func (x *SubizPaymentMethod) String() string {
 func (*SubizPaymentMethod) ProtoMessage() {}
 
 func (x *SubizPaymentMethod) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[488]
+	mi := &file_header_proto_msgTypes[486]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61206,7 +61000,7 @@ func (x *SubizPaymentMethod) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubizPaymentMethod.ProtoReflect.Descriptor instead.
 func (*SubizPaymentMethod) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{488}
+	return file_header_proto_rawDescGZIP(), []int{486}
 }
 
 func (x *SubizPaymentMethod) GetCtx() *common.Context {
@@ -61403,7 +61197,7 @@ type StripeWebhookEvent struct {
 
 func (x *StripeWebhookEvent) Reset() {
 	*x = StripeWebhookEvent{}
-	mi := &file_header_proto_msgTypes[489]
+	mi := &file_header_proto_msgTypes[487]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61415,7 +61209,7 @@ func (x *StripeWebhookEvent) String() string {
 func (*StripeWebhookEvent) ProtoMessage() {}
 
 func (x *StripeWebhookEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[489]
+	mi := &file_header_proto_msgTypes[487]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61428,7 +61222,7 @@ func (x *StripeWebhookEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StripeWebhookEvent.ProtoReflect.Descriptor instead.
 func (*StripeWebhookEvent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{489}
+	return file_header_proto_rawDescGZIP(), []int{487}
 }
 
 func (x *StripeWebhookEvent) GetCreated() int64 {
@@ -61476,7 +61270,7 @@ type WorkflowPulse struct {
 
 func (x *WorkflowPulse) Reset() {
 	*x = WorkflowPulse{}
-	mi := &file_header_proto_msgTypes[490]
+	mi := &file_header_proto_msgTypes[488]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61488,7 +61282,7 @@ func (x *WorkflowPulse) String() string {
 func (*WorkflowPulse) ProtoMessage() {}
 
 func (x *WorkflowPulse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[490]
+	mi := &file_header_proto_msgTypes[488]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61501,7 +61295,7 @@ func (x *WorkflowPulse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowPulse.ProtoReflect.Descriptor instead.
 func (*WorkflowPulse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{490}
+	return file_header_proto_rawDescGZIP(), []int{488}
 }
 
 func (x *WorkflowPulse) GetWorkflowId() string {
@@ -61584,7 +61378,7 @@ type WorkflowTimeup struct {
 
 func (x *WorkflowTimeup) Reset() {
 	*x = WorkflowTimeup{}
-	mi := &file_header_proto_msgTypes[491]
+	mi := &file_header_proto_msgTypes[489]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61596,7 +61390,7 @@ func (x *WorkflowTimeup) String() string {
 func (*WorkflowTimeup) ProtoMessage() {}
 
 func (x *WorkflowTimeup) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[491]
+	mi := &file_header_proto_msgTypes[489]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61609,7 +61403,7 @@ func (x *WorkflowTimeup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowTimeup.ProtoReflect.Descriptor instead.
 func (*WorkflowTimeup) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{491}
+	return file_header_proto_rawDescGZIP(), []int{489}
 }
 
 func (x *WorkflowTimeup) GetWorkflowId() string {
@@ -61692,7 +61486,7 @@ type AndroidNotificationRequest struct {
 
 func (x *AndroidNotificationRequest) Reset() {
 	*x = AndroidNotificationRequest{}
-	mi := &file_header_proto_msgTypes[492]
+	mi := &file_header_proto_msgTypes[490]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61704,7 +61498,7 @@ func (x *AndroidNotificationRequest) String() string {
 func (*AndroidNotificationRequest) ProtoMessage() {}
 
 func (x *AndroidNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[492]
+	mi := &file_header_proto_msgTypes[490]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61717,7 +61511,7 @@ func (x *AndroidNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AndroidNotificationRequest.ProtoReflect.Descriptor instead.
 func (*AndroidNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{492}
+	return file_header_proto_rawDescGZIP(), []int{490}
 }
 
 func (x *AndroidNotificationRequest) GetCtx() *common.Context {
@@ -61785,7 +61579,7 @@ type AndroidNotification struct {
 
 func (x *AndroidNotification) Reset() {
 	*x = AndroidNotification{}
-	mi := &file_header_proto_msgTypes[493]
+	mi := &file_header_proto_msgTypes[491]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61797,7 +61591,7 @@ func (x *AndroidNotification) String() string {
 func (*AndroidNotification) ProtoMessage() {}
 
 func (x *AndroidNotification) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[493]
+	mi := &file_header_proto_msgTypes[491]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61810,7 +61604,7 @@ func (x *AndroidNotification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AndroidNotification.ProtoReflect.Descriptor instead.
 func (*AndroidNotification) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{493}
+	return file_header_proto_rawDescGZIP(), []int{491}
 }
 
 func (x *AndroidNotification) GetDeviceId() string {
@@ -61892,7 +61686,7 @@ type AndroidDevice struct {
 
 func (x *AndroidDevice) Reset() {
 	*x = AndroidDevice{}
-	mi := &file_header_proto_msgTypes[494]
+	mi := &file_header_proto_msgTypes[492]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -61904,7 +61698,7 @@ func (x *AndroidDevice) String() string {
 func (*AndroidDevice) ProtoMessage() {}
 
 func (x *AndroidDevice) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[494]
+	mi := &file_header_proto_msgTypes[492]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61917,7 +61711,7 @@ func (x *AndroidDevice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AndroidDevice.ProtoReflect.Descriptor instead.
 func (*AndroidDevice) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{494}
+	return file_header_proto_rawDescGZIP(), []int{492}
 }
 
 func (x *AndroidDevice) GetId() string {
@@ -62050,7 +61844,7 @@ type BankAccount struct {
 
 func (x *BankAccount) Reset() {
 	*x = BankAccount{}
-	mi := &file_header_proto_msgTypes[495]
+	mi := &file_header_proto_msgTypes[493]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62062,7 +61856,7 @@ func (x *BankAccount) String() string {
 func (*BankAccount) ProtoMessage() {}
 
 func (x *BankAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[495]
+	mi := &file_header_proto_msgTypes[493]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62075,7 +61869,7 @@ func (x *BankAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BankAccount.ProtoReflect.Descriptor instead.
 func (*BankAccount) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{495}
+	return file_header_proto_rawDescGZIP(), []int{493}
 }
 
 func (x *BankAccount) GetCtx() *common.Context {
@@ -62209,7 +62003,7 @@ type WorkflowCount struct {
 
 func (x *WorkflowCount) Reset() {
 	*x = WorkflowCount{}
-	mi := &file_header_proto_msgTypes[496]
+	mi := &file_header_proto_msgTypes[494]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62221,7 +62015,7 @@ func (x *WorkflowCount) String() string {
 func (*WorkflowCount) ProtoMessage() {}
 
 func (x *WorkflowCount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[496]
+	mi := &file_header_proto_msgTypes[494]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62234,7 +62028,7 @@ func (x *WorkflowCount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowCount.ProtoReflect.Descriptor instead.
 func (*WorkflowCount) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{496}
+	return file_header_proto_rawDescGZIP(), []int{494}
 }
 
 func (x *WorkflowCount) GetRange() string {
@@ -62278,7 +62072,7 @@ type SuggestLeadFieldRequest struct {
 
 func (x *SuggestLeadFieldRequest) Reset() {
 	*x = SuggestLeadFieldRequest{}
-	mi := &file_header_proto_msgTypes[497]
+	mi := &file_header_proto_msgTypes[495]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62290,7 +62084,7 @@ func (x *SuggestLeadFieldRequest) String() string {
 func (*SuggestLeadFieldRequest) ProtoMessage() {}
 
 func (x *SuggestLeadFieldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[497]
+	mi := &file_header_proto_msgTypes[495]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62303,7 +62097,7 @@ func (x *SuggestLeadFieldRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestLeadFieldRequest.ProtoReflect.Descriptor instead.
 func (*SuggestLeadFieldRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{497}
+	return file_header_proto_rawDescGZIP(), []int{495}
 }
 
 func (x *SuggestLeadFieldRequest) GetCtx() *common.Context {
@@ -62354,7 +62148,7 @@ type UsersRequest struct {
 
 func (x *UsersRequest) Reset() {
 	*x = UsersRequest{}
-	mi := &file_header_proto_msgTypes[498]
+	mi := &file_header_proto_msgTypes[496]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62366,7 +62160,7 @@ func (x *UsersRequest) String() string {
 func (*UsersRequest) ProtoMessage() {}
 
 func (x *UsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[498]
+	mi := &file_header_proto_msgTypes[496]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62379,7 +62173,7 @@ func (x *UsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsersRequest.ProtoReflect.Descriptor instead.
 func (*UsersRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{498}
+	return file_header_proto_rawDescGZIP(), []int{496}
 }
 
 func (x *UsersRequest) GetCtx() *common.Context {
@@ -62445,7 +62239,7 @@ type BankTransferRequest struct {
 
 func (x *BankTransferRequest) Reset() {
 	*x = BankTransferRequest{}
-	mi := &file_header_proto_msgTypes[499]
+	mi := &file_header_proto_msgTypes[497]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62457,7 +62251,7 @@ func (x *BankTransferRequest) String() string {
 func (*BankTransferRequest) ProtoMessage() {}
 
 func (x *BankTransferRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[499]
+	mi := &file_header_proto_msgTypes[497]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62470,7 +62264,7 @@ func (x *BankTransferRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BankTransferRequest.ProtoReflect.Descriptor instead.
 func (*BankTransferRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{499}
+	return file_header_proto_rawDescGZIP(), []int{497}
 }
 
 func (x *BankTransferRequest) GetCtx() *common.Context {
@@ -62631,7 +62425,7 @@ type GenQrCodeRequest struct {
 
 func (x *GenQrCodeRequest) Reset() {
 	*x = GenQrCodeRequest{}
-	mi := &file_header_proto_msgTypes[500]
+	mi := &file_header_proto_msgTypes[498]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62643,7 +62437,7 @@ func (x *GenQrCodeRequest) String() string {
 func (*GenQrCodeRequest) ProtoMessage() {}
 
 func (x *GenQrCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[500]
+	mi := &file_header_proto_msgTypes[498]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62656,7 +62450,7 @@ func (x *GenQrCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenQrCodeRequest.ProtoReflect.Descriptor instead.
 func (*GenQrCodeRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{500}
+	return file_header_proto_rawDescGZIP(), []int{498}
 }
 
 func (x *GenQrCodeRequest) GetCtx() *common.Context {
@@ -62741,7 +62535,7 @@ type QrCode struct {
 
 func (x *QrCode) Reset() {
 	*x = QrCode{}
-	mi := &file_header_proto_msgTypes[501]
+	mi := &file_header_proto_msgTypes[499]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62753,7 +62547,7 @@ func (x *QrCode) String() string {
 func (*QrCode) ProtoMessage() {}
 
 func (x *QrCode) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[501]
+	mi := &file_header_proto_msgTypes[499]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62766,7 +62560,7 @@ func (x *QrCode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QrCode.ProtoReflect.Descriptor instead.
 func (*QrCode) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{501}
+	return file_header_proto_rawDescGZIP(), []int{499}
 }
 
 func (x *QrCode) GetCtx() *common.Context {
@@ -62808,7 +62602,7 @@ type ReportUserEventEntry struct {
 
 func (x *ReportUserEventEntry) Reset() {
 	*x = ReportUserEventEntry{}
-	mi := &file_header_proto_msgTypes[502]
+	mi := &file_header_proto_msgTypes[500]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62820,7 +62614,7 @@ func (x *ReportUserEventEntry) String() string {
 func (*ReportUserEventEntry) ProtoMessage() {}
 
 func (x *ReportUserEventEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[502]
+	mi := &file_header_proto_msgTypes[500]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62833,7 +62627,7 @@ func (x *ReportUserEventEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportUserEventEntry.ProtoReflect.Descriptor instead.
 func (*ReportUserEventEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{502}
+	return file_header_proto_rawDescGZIP(), []int{500}
 }
 
 func (x *ReportUserEventEntry) GetTimestamp() string {
@@ -62870,7 +62664,7 @@ type ReportUserEventRequest struct {
 
 func (x *ReportUserEventRequest) Reset() {
 	*x = ReportUserEventRequest{}
-	mi := &file_header_proto_msgTypes[503]
+	mi := &file_header_proto_msgTypes[501]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62882,7 +62676,7 @@ func (x *ReportUserEventRequest) String() string {
 func (*ReportUserEventRequest) ProtoMessage() {}
 
 func (x *ReportUserEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[503]
+	mi := &file_header_proto_msgTypes[501]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62895,7 +62689,7 @@ func (x *ReportUserEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportUserEventRequest.ProtoReflect.Descriptor instead.
 func (*ReportUserEventRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{503}
+	return file_header_proto_rawDescGZIP(), []int{501}
 }
 
 func (x *ReportUserEventRequest) GetCtx() *common.Context {
@@ -62945,7 +62739,7 @@ type ReportUserEventResponse struct {
 
 func (x *ReportUserEventResponse) Reset() {
 	*x = ReportUserEventResponse{}
-	mi := &file_header_proto_msgTypes[504]
+	mi := &file_header_proto_msgTypes[502]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -62957,7 +62751,7 @@ func (x *ReportUserEventResponse) String() string {
 func (*ReportUserEventResponse) ProtoMessage() {}
 
 func (x *ReportUserEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[504]
+	mi := &file_header_proto_msgTypes[502]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62970,7 +62764,7 @@ func (x *ReportUserEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportUserEventResponse.ProtoReflect.Descriptor instead.
 func (*ReportUserEventResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{504}
+	return file_header_proto_rawDescGZIP(), []int{502}
 }
 
 func (x *ReportUserEventResponse) GetCtx() *common.Context {
@@ -63012,7 +62806,7 @@ type CounterReportResponse struct {
 
 func (x *CounterReportResponse) Reset() {
 	*x = CounterReportResponse{}
-	mi := &file_header_proto_msgTypes[505]
+	mi := &file_header_proto_msgTypes[503]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63024,7 +62818,7 @@ func (x *CounterReportResponse) String() string {
 func (*CounterReportResponse) ProtoMessage() {}
 
 func (x *CounterReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[505]
+	mi := &file_header_proto_msgTypes[503]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63037,7 +62831,7 @@ func (x *CounterReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CounterReportResponse.ProtoReflect.Descriptor instead.
 func (*CounterReportResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{505}
+	return file_header_proto_rawDescGZIP(), []int{503}
 }
 
 func (x *CounterReportResponse) GetCtx() *common.Context {
@@ -63076,7 +62870,7 @@ type CounterDataPoint struct {
 
 func (x *CounterDataPoint) Reset() {
 	*x = CounterDataPoint{}
-	mi := &file_header_proto_msgTypes[506]
+	mi := &file_header_proto_msgTypes[504]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63088,7 +62882,7 @@ func (x *CounterDataPoint) String() string {
 func (*CounterDataPoint) ProtoMessage() {}
 
 func (x *CounterDataPoint) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[506]
+	mi := &file_header_proto_msgTypes[504]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63101,7 +62895,7 @@ func (x *CounterDataPoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CounterDataPoint.ProtoReflect.Descriptor instead.
 func (*CounterDataPoint) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{506}
+	return file_header_proto_rawDescGZIP(), []int{504}
 }
 
 func (x *CounterDataPoint) GetTimeSeries() []string {
@@ -63166,7 +62960,7 @@ type SetupFeatureStatus struct {
 
 func (x *SetupFeatureStatus) Reset() {
 	*x = SetupFeatureStatus{}
-	mi := &file_header_proto_msgTypes[507]
+	mi := &file_header_proto_msgTypes[505]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63178,7 +62972,7 @@ func (x *SetupFeatureStatus) String() string {
 func (*SetupFeatureStatus) ProtoMessage() {}
 
 func (x *SetupFeatureStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[507]
+	mi := &file_header_proto_msgTypes[505]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63191,7 +62985,7 @@ func (x *SetupFeatureStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetupFeatureStatus.ProtoReflect.Descriptor instead.
 func (*SetupFeatureStatus) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{507}
+	return file_header_proto_rawDescGZIP(), []int{505}
 }
 
 func (x *SetupFeatureStatus) GetCtx() *common.Context {
@@ -63289,7 +63083,7 @@ type RelationUpdates struct {
 
 func (x *RelationUpdates) Reset() {
 	*x = RelationUpdates{}
-	mi := &file_header_proto_msgTypes[508]
+	mi := &file_header_proto_msgTypes[506]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63301,7 +63095,7 @@ func (x *RelationUpdates) String() string {
 func (*RelationUpdates) ProtoMessage() {}
 
 func (x *RelationUpdates) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[508]
+	mi := &file_header_proto_msgTypes[506]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63314,7 +63108,7 @@ func (x *RelationUpdates) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RelationUpdates.ProtoReflect.Descriptor instead.
 func (*RelationUpdates) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{508}
+	return file_header_proto_rawDescGZIP(), []int{506}
 }
 
 func (x *RelationUpdates) GetCtx() *common.Context {
@@ -63351,7 +63145,7 @@ type RelationUpdate struct {
 
 func (x *RelationUpdate) Reset() {
 	*x = RelationUpdate{}
-	mi := &file_header_proto_msgTypes[509]
+	mi := &file_header_proto_msgTypes[507]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63363,7 +63157,7 @@ func (x *RelationUpdate) String() string {
 func (*RelationUpdate) ProtoMessage() {}
 
 func (x *RelationUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[509]
+	mi := &file_header_proto_msgTypes[507]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63376,7 +63170,7 @@ func (x *RelationUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RelationUpdate.ProtoReflect.Descriptor instead.
 func (*RelationUpdate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{509}
+	return file_header_proto_rawDescGZIP(), []int{507}
 }
 
 func (x *RelationUpdate) GetOperation() string {
@@ -63429,7 +63223,7 @@ type ArticleNode struct {
 
 func (x *ArticleNode) Reset() {
 	*x = ArticleNode{}
-	mi := &file_header_proto_msgTypes[510]
+	mi := &file_header_proto_msgTypes[508]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63441,7 +63235,7 @@ func (x *ArticleNode) String() string {
 func (*ArticleNode) ProtoMessage() {}
 
 func (x *ArticleNode) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[510]
+	mi := &file_header_proto_msgTypes[508]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63454,7 +63248,7 @@ func (x *ArticleNode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArticleNode.ProtoReflect.Descriptor instead.
 func (*ArticleNode) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{510}
+	return file_header_proto_rawDescGZIP(), []int{508}
 }
 
 func (x *ArticleNode) GetCtx() *common.Context {
@@ -63520,7 +63314,7 @@ type AIAgentGuardrail struct {
 
 func (x *AIAgentGuardrail) Reset() {
 	*x = AIAgentGuardrail{}
-	mi := &file_header_proto_msgTypes[511]
+	mi := &file_header_proto_msgTypes[509]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63532,7 +63326,7 @@ func (x *AIAgentGuardrail) String() string {
 func (*AIAgentGuardrail) ProtoMessage() {}
 
 func (x *AIAgentGuardrail) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[511]
+	mi := &file_header_proto_msgTypes[509]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63545,7 +63339,7 @@ func (x *AIAgentGuardrail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentGuardrail.ProtoReflect.Descriptor instead.
 func (*AIAgentGuardrail) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{511}
+	return file_header_proto_rawDescGZIP(), []int{509}
 }
 
 func (x *AIAgentGuardrail) GetId() string {
@@ -63614,7 +63408,7 @@ type AIAgentOverrideRule struct {
 
 func (x *AIAgentOverrideRule) Reset() {
 	*x = AIAgentOverrideRule{}
-	mi := &file_header_proto_msgTypes[512]
+	mi := &file_header_proto_msgTypes[510]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63626,7 +63420,7 @@ func (x *AIAgentOverrideRule) String() string {
 func (*AIAgentOverrideRule) ProtoMessage() {}
 
 func (x *AIAgentOverrideRule) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[512]
+	mi := &file_header_proto_msgTypes[510]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63639,7 +63433,7 @@ func (x *AIAgentOverrideRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentOverrideRule.ProtoReflect.Descriptor instead.
 func (*AIAgentOverrideRule) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{512}
+	return file_header_proto_rawDescGZIP(), []int{510}
 }
 
 func (x *AIAgentOverrideRule) GetId() string {
@@ -63804,7 +63598,7 @@ type AIAgent struct {
 
 func (x *AIAgent) Reset() {
 	*x = AIAgent{}
-	mi := &file_header_proto_msgTypes[513]
+	mi := &file_header_proto_msgTypes[511]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63816,7 +63610,7 @@ func (x *AIAgent) String() string {
 func (*AIAgent) ProtoMessage() {}
 
 func (x *AIAgent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[513]
+	mi := &file_header_proto_msgTypes[511]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63829,7 +63623,7 @@ func (x *AIAgent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgent.ProtoReflect.Descriptor instead.
 func (*AIAgent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{513}
+	return file_header_proto_rawDescGZIP(), []int{511}
 }
 
 func (x *AIAgent) GetCtx() *common.Context {
@@ -64255,7 +64049,7 @@ type AIAgentUsageLimit struct {
 
 func (x *AIAgentUsageLimit) Reset() {
 	*x = AIAgentUsageLimit{}
-	mi := &file_header_proto_msgTypes[514]
+	mi := &file_header_proto_msgTypes[512]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64267,7 +64061,7 @@ func (x *AIAgentUsageLimit) String() string {
 func (*AIAgentUsageLimit) ProtoMessage() {}
 
 func (x *AIAgentUsageLimit) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[514]
+	mi := &file_header_proto_msgTypes[512]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64280,7 +64074,7 @@ func (x *AIAgentUsageLimit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentUsageLimit.ProtoReflect.Descriptor instead.
 func (*AIAgentUsageLimit) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{514}
+	return file_header_proto_rawDescGZIP(), []int{512}
 }
 
 func (x *AIAgentUsageLimit) GetEnabled() int64 {
@@ -64352,7 +64146,7 @@ type InitFlow struct {
 
 func (x *InitFlow) Reset() {
 	*x = InitFlow{}
-	mi := &file_header_proto_msgTypes[515]
+	mi := &file_header_proto_msgTypes[513]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64364,7 +64158,7 @@ func (x *InitFlow) String() string {
 func (*InitFlow) ProtoMessage() {}
 
 func (x *InitFlow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[515]
+	mi := &file_header_proto_msgTypes[513]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64377,7 +64171,7 @@ func (x *InitFlow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitFlow.ProtoReflect.Descriptor instead.
 func (*InitFlow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{515}
+	return file_header_proto_rawDescGZIP(), []int{513}
 }
 
 func (x *InitFlow) GetDisabled() int64 {
@@ -64468,7 +64262,7 @@ type AIDataStore struct {
 
 func (x *AIDataStore) Reset() {
 	*x = AIDataStore{}
-	mi := &file_header_proto_msgTypes[516]
+	mi := &file_header_proto_msgTypes[514]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64480,7 +64274,7 @@ func (x *AIDataStore) String() string {
 func (*AIDataStore) ProtoMessage() {}
 
 func (x *AIDataStore) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[516]
+	mi := &file_header_proto_msgTypes[514]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64493,7 +64287,7 @@ func (x *AIDataStore) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataStore.ProtoReflect.Descriptor instead.
 func (*AIDataStore) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{516}
+	return file_header_proto_rawDescGZIP(), []int{514}
 }
 
 func (x *AIDataStore) GetAgentId() string {
@@ -64571,7 +64365,7 @@ type JSONSchema struct {
 
 func (x *JSONSchema) Reset() {
 	*x = JSONSchema{}
-	mi := &file_header_proto_msgTypes[517]
+	mi := &file_header_proto_msgTypes[515]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64583,7 +64377,7 @@ func (x *JSONSchema) String() string {
 func (*JSONSchema) ProtoMessage() {}
 
 func (x *JSONSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[517]
+	mi := &file_header_proto_msgTypes[515]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64596,7 +64390,7 @@ func (x *JSONSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JSONSchema.ProtoReflect.Descriptor instead.
 func (*JSONSchema) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{517}
+	return file_header_proto_rawDescGZIP(), []int{515}
 }
 
 func (x *JSONSchema) GetTitle() string {
@@ -64705,7 +64499,7 @@ type AIFunction struct {
 
 func (x *AIFunction) Reset() {
 	*x = AIFunction{}
-	mi := &file_header_proto_msgTypes[518]
+	mi := &file_header_proto_msgTypes[516]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64717,7 +64511,7 @@ func (x *AIFunction) String() string {
 func (*AIFunction) ProtoMessage() {}
 
 func (x *AIFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[518]
+	mi := &file_header_proto_msgTypes[516]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64730,7 +64524,7 @@ func (x *AIFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIFunction.ProtoReflect.Descriptor instead.
 func (*AIFunction) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{518}
+	return file_header_proto_rawDescGZIP(), []int{516}
 }
 
 func (x *AIFunction) GetName() string {
@@ -64883,7 +64677,7 @@ type RecordUserPreference struct {
 
 func (x *RecordUserPreference) Reset() {
 	*x = RecordUserPreference{}
-	mi := &file_header_proto_msgTypes[519]
+	mi := &file_header_proto_msgTypes[517]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64895,7 +64689,7 @@ func (x *RecordUserPreference) String() string {
 func (*RecordUserPreference) ProtoMessage() {}
 
 func (x *RecordUserPreference) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[519]
+	mi := &file_header_proto_msgTypes[517]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64908,7 +64702,7 @@ func (x *RecordUserPreference) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordUserPreference.ProtoReflect.Descriptor instead.
 func (*RecordUserPreference) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{519}
+	return file_header_proto_rawDescGZIP(), []int{517}
 }
 
 func (x *RecordUserPreference) GetName() string {
@@ -64935,7 +64729,7 @@ type CollectInfomationAttribute struct {
 
 func (x *CollectInfomationAttribute) Reset() {
 	*x = CollectInfomationAttribute{}
-	mi := &file_header_proto_msgTypes[520]
+	mi := &file_header_proto_msgTypes[518]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64947,7 +64741,7 @@ func (x *CollectInfomationAttribute) String() string {
 func (*CollectInfomationAttribute) ProtoMessage() {}
 
 func (x *CollectInfomationAttribute) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[520]
+	mi := &file_header_proto_msgTypes[518]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64960,7 +64754,7 @@ func (x *CollectInfomationAttribute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectInfomationAttribute.ProtoReflect.Descriptor instead.
 func (*CollectInfomationAttribute) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{520}
+	return file_header_proto_rawDescGZIP(), []int{518}
 }
 
 func (x *CollectInfomationAttribute) GetAttributeKey() string {
@@ -64986,7 +64780,7 @@ type CollectUserInformation struct {
 
 func (x *CollectUserInformation) Reset() {
 	*x = CollectUserInformation{}
-	mi := &file_header_proto_msgTypes[521]
+	mi := &file_header_proto_msgTypes[519]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -64998,7 +64792,7 @@ func (x *CollectUserInformation) String() string {
 func (*CollectUserInformation) ProtoMessage() {}
 
 func (x *CollectUserInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[521]
+	mi := &file_header_proto_msgTypes[519]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65011,7 +64805,7 @@ func (x *CollectUserInformation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectUserInformation.ProtoReflect.Descriptor instead.
 func (*CollectUserInformation) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{521}
+	return file_header_proto_rawDescGZIP(), []int{519}
 }
 
 func (x *CollectUserInformation) GetAttributes() []*CollectInfomationAttribute {
@@ -65031,7 +64825,7 @@ type UpdateUserInformation struct {
 
 func (x *UpdateUserInformation) Reset() {
 	*x = UpdateUserInformation{}
-	mi := &file_header_proto_msgTypes[522]
+	mi := &file_header_proto_msgTypes[520]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65043,7 +64837,7 @@ func (x *UpdateUserInformation) String() string {
 func (*UpdateUserInformation) ProtoMessage() {}
 
 func (x *UpdateUserInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[522]
+	mi := &file_header_proto_msgTypes[520]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65056,7 +64850,7 @@ func (x *UpdateUserInformation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserInformation.ProtoReflect.Descriptor instead.
 func (*UpdateUserInformation) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{522}
+	return file_header_proto_rawDescGZIP(), []int{520}
 }
 
 func (x *UpdateUserInformation) GetAttributeKey() string {
@@ -65084,7 +64878,7 @@ type AutomationFunction struct {
 
 func (x *AutomationFunction) Reset() {
 	*x = AutomationFunction{}
-	mi := &file_header_proto_msgTypes[523]
+	mi := &file_header_proto_msgTypes[521]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65096,7 +64890,7 @@ func (x *AutomationFunction) String() string {
 func (*AutomationFunction) ProtoMessage() {}
 
 func (x *AutomationFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[523]
+	mi := &file_header_proto_msgTypes[521]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65109,7 +64903,7 @@ func (x *AutomationFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AutomationFunction.ProtoReflect.Descriptor instead.
 func (*AutomationFunction) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{523}
+	return file_header_proto_rawDescGZIP(), []int{521}
 }
 
 func (x *AutomationFunction) GetCondition() *WorkflowCondition {
@@ -65145,7 +64939,7 @@ type CreateTicketFunction struct {
 
 func (x *CreateTicketFunction) Reset() {
 	*x = CreateTicketFunction{}
-	mi := &file_header_proto_msgTypes[524]
+	mi := &file_header_proto_msgTypes[522]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65157,7 +64951,7 @@ func (x *CreateTicketFunction) String() string {
 func (*CreateTicketFunction) ProtoMessage() {}
 
 func (x *CreateTicketFunction) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[524]
+	mi := &file_header_proto_msgTypes[522]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65170,7 +64964,7 @@ func (x *CreateTicketFunction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTicketFunction.ProtoReflect.Descriptor instead.
 func (*CreateTicketFunction) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{524}
+	return file_header_proto_rawDescGZIP(), []int{522}
 }
 
 func (x *CreateTicketFunction) GetTitle() string {
@@ -65214,7 +65008,7 @@ type AIIntent struct {
 
 func (x *AIIntent) Reset() {
 	*x = AIIntent{}
-	mi := &file_header_proto_msgTypes[525]
+	mi := &file_header_proto_msgTypes[523]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65226,7 +65020,7 @@ func (x *AIIntent) String() string {
 func (*AIIntent) ProtoMessage() {}
 
 func (x *AIIntent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[525]
+	mi := &file_header_proto_msgTypes[523]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65239,7 +65033,7 @@ func (x *AIIntent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIIntent.ProtoReflect.Descriptor instead.
 func (*AIIntent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{525}
+	return file_header_proto_rawDescGZIP(), []int{523}
 }
 
 func (x *AIIntent) GetName() string {
@@ -65298,7 +65092,7 @@ type AIDataGroup struct {
 
 func (x *AIDataGroup) Reset() {
 	*x = AIDataGroup{}
-	mi := &file_header_proto_msgTypes[526]
+	mi := &file_header_proto_msgTypes[524]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65310,7 +65104,7 @@ func (x *AIDataGroup) String() string {
 func (*AIDataGroup) ProtoMessage() {}
 
 func (x *AIDataGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[526]
+	mi := &file_header_proto_msgTypes[524]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65323,7 +65117,7 @@ func (x *AIDataGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataGroup.ProtoReflect.Descriptor instead.
 func (*AIDataGroup) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{526}
+	return file_header_proto_rawDescGZIP(), []int{524}
 }
 
 func (x *AIDataGroup) GetCtx() *common.Context {
@@ -65436,7 +65230,7 @@ type CrawlResponse struct {
 
 func (x *CrawlResponse) Reset() {
 	*x = CrawlResponse{}
-	mi := &file_header_proto_msgTypes[527]
+	mi := &file_header_proto_msgTypes[525]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65448,7 +65242,7 @@ func (x *CrawlResponse) String() string {
 func (*CrawlResponse) ProtoMessage() {}
 
 func (x *CrawlResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[527]
+	mi := &file_header_proto_msgTypes[525]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65461,7 +65255,7 @@ func (x *CrawlResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CrawlResponse.ProtoReflect.Descriptor instead.
 func (*CrawlResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{527}
+	return file_header_proto_rawDescGZIP(), []int{525}
 }
 
 func (x *CrawlResponse) GetUrl() string {
@@ -65558,7 +65352,7 @@ type AIDataChunk struct {
 
 func (x *AIDataChunk) Reset() {
 	*x = AIDataChunk{}
-	mi := &file_header_proto_msgTypes[528]
+	mi := &file_header_proto_msgTypes[526]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65570,7 +65364,7 @@ func (x *AIDataChunk) String() string {
 func (*AIDataChunk) ProtoMessage() {}
 
 func (x *AIDataChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[528]
+	mi := &file_header_proto_msgTypes[526]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65583,7 +65377,7 @@ func (x *AIDataChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataChunk.ProtoReflect.Descriptor instead.
 func (*AIDataChunk) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{528}
+	return file_header_proto_rawDescGZIP(), []int{526}
 }
 
 func (x *AIDataChunk) GetCtx() *common.Context {
@@ -65700,7 +65494,7 @@ type AIDataEntry struct {
 
 func (x *AIDataEntry) Reset() {
 	*x = AIDataEntry{}
-	mi := &file_header_proto_msgTypes[529]
+	mi := &file_header_proto_msgTypes[527]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65712,7 +65506,7 @@ func (x *AIDataEntry) String() string {
 func (*AIDataEntry) ProtoMessage() {}
 
 func (x *AIDataEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[529]
+	mi := &file_header_proto_msgTypes[527]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65725,7 +65519,7 @@ func (x *AIDataEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataEntry.ProtoReflect.Descriptor instead.
 func (*AIDataEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{529}
+	return file_header_proto_rawDescGZIP(), []int{527}
 }
 
 func (x *AIDataEntry) GetCtx() *common.Context {
@@ -66060,7 +65854,7 @@ type AiResponseSource struct {
 
 func (x *AiResponseSource) Reset() {
 	*x = AiResponseSource{}
-	mi := &file_header_proto_msgTypes[530]
+	mi := &file_header_proto_msgTypes[528]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66072,7 +65866,7 @@ func (x *AiResponseSource) String() string {
 func (*AiResponseSource) ProtoMessage() {}
 
 func (x *AiResponseSource) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[530]
+	mi := &file_header_proto_msgTypes[528]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66085,7 +65879,7 @@ func (x *AiResponseSource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AiResponseSource.ProtoReflect.Descriptor instead.
 func (*AiResponseSource) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{530}
+	return file_header_proto_rawDescGZIP(), []int{528}
 }
 
 func (x *AiResponseSource) GetCtx() *common.Context {
@@ -66161,7 +65955,7 @@ type FacebookAdsFlow struct {
 
 func (x *FacebookAdsFlow) Reset() {
 	*x = FacebookAdsFlow{}
-	mi := &file_header_proto_msgTypes[531]
+	mi := &file_header_proto_msgTypes[529]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66173,7 +65967,7 @@ func (x *FacebookAdsFlow) String() string {
 func (*FacebookAdsFlow) ProtoMessage() {}
 
 func (x *FacebookAdsFlow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[531]
+	mi := &file_header_proto_msgTypes[529]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66186,7 +65980,7 @@ func (x *FacebookAdsFlow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookAdsFlow.ProtoReflect.Descriptor instead.
 func (*FacebookAdsFlow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{531}
+	return file_header_proto_rawDescGZIP(), []int{529}
 }
 
 func (x *FacebookAdsFlow) GetCtx() *common.Context {
@@ -66264,7 +66058,7 @@ type RuleOrder struct {
 
 func (x *RuleOrder) Reset() {
 	*x = RuleOrder{}
-	mi := &file_header_proto_msgTypes[532]
+	mi := &file_header_proto_msgTypes[530]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66276,7 +66070,7 @@ func (x *RuleOrder) String() string {
 func (*RuleOrder) ProtoMessage() {}
 
 func (x *RuleOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[532]
+	mi := &file_header_proto_msgTypes[530]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66289,7 +66083,7 @@ func (x *RuleOrder) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RuleOrder.ProtoReflect.Descriptor instead.
 func (*RuleOrder) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{532}
+	return file_header_proto_rawDescGZIP(), []int{530}
 }
 
 func (x *RuleOrder) GetCtx() *common.Context {
@@ -66344,7 +66138,7 @@ type NotiSubscription struct {
 
 func (x *NotiSubscription) Reset() {
 	*x = NotiSubscription{}
-	mi := &file_header_proto_msgTypes[533]
+	mi := &file_header_proto_msgTypes[531]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66356,7 +66150,7 @@ func (x *NotiSubscription) String() string {
 func (*NotiSubscription) ProtoMessage() {}
 
 func (x *NotiSubscription) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[533]
+	mi := &file_header_proto_msgTypes[531]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66369,7 +66163,7 @@ func (x *NotiSubscription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotiSubscription.ProtoReflect.Descriptor instead.
 func (*NotiSubscription) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{533}
+	return file_header_proto_rawDescGZIP(), []int{531}
 }
 
 func (x *NotiSubscription) GetNewMessage() bool {
@@ -66494,7 +66288,7 @@ type TicketTypeSubscription struct {
 
 func (x *TicketTypeSubscription) Reset() {
 	*x = TicketTypeSubscription{}
-	mi := &file_header_proto_msgTypes[534]
+	mi := &file_header_proto_msgTypes[532]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66506,7 +66300,7 @@ func (x *TicketTypeSubscription) String() string {
 func (*TicketTypeSubscription) ProtoMessage() {}
 
 func (x *TicketTypeSubscription) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[534]
+	mi := &file_header_proto_msgTypes[532]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66519,7 +66313,7 @@ func (x *TicketTypeSubscription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketTypeSubscription.ProtoReflect.Descriptor instead.
 func (*TicketTypeSubscription) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{534}
+	return file_header_proto_rawDescGZIP(), []int{532}
 }
 
 func (x *TicketTypeSubscription) GetTicketType() string {
@@ -66555,7 +66349,7 @@ type NotiSetting struct {
 
 func (x *NotiSetting) Reset() {
 	*x = NotiSetting{}
-	mi := &file_header_proto_msgTypes[535]
+	mi := &file_header_proto_msgTypes[533]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66567,7 +66361,7 @@ func (x *NotiSetting) String() string {
 func (*NotiSetting) ProtoMessage() {}
 
 func (x *NotiSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[535]
+	mi := &file_header_proto_msgTypes[533]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66580,7 +66374,7 @@ func (x *NotiSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotiSetting.ProtoReflect.Descriptor instead.
 func (*NotiSetting) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{535}
+	return file_header_proto_rawDescGZIP(), []int{533}
 }
 
 func (x *NotiSetting) GetCtx() *common.Context {
@@ -66672,7 +66466,7 @@ type DoNotDisturb struct {
 
 func (x *DoNotDisturb) Reset() {
 	*x = DoNotDisturb{}
-	mi := &file_header_proto_msgTypes[536]
+	mi := &file_header_proto_msgTypes[534]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66684,7 +66478,7 @@ func (x *DoNotDisturb) String() string {
 func (*DoNotDisturb) ProtoMessage() {}
 
 func (x *DoNotDisturb) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[536]
+	mi := &file_header_proto_msgTypes[534]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66697,7 +66491,7 @@ func (x *DoNotDisturb) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DoNotDisturb.ProtoReflect.Descriptor instead.
 func (*DoNotDisturb) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{536}
+	return file_header_proto_rawDescGZIP(), []int{534}
 }
 
 func (x *DoNotDisturb) GetDailyFrom() int64 {
@@ -66746,7 +66540,7 @@ type PushToken struct {
 
 func (x *PushToken) Reset() {
 	*x = PushToken{}
-	mi := &file_header_proto_msgTypes[537]
+	mi := &file_header_proto_msgTypes[535]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66758,7 +66552,7 @@ func (x *PushToken) String() string {
 func (*PushToken) ProtoMessage() {}
 
 func (x *PushToken) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[537]
+	mi := &file_header_proto_msgTypes[535]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66771,7 +66565,7 @@ func (x *PushToken) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushToken.ProtoReflect.Descriptor instead.
 func (*PushToken) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{537}
+	return file_header_proto_rawDescGZIP(), []int{535}
 }
 
 func (x *PushToken) GetCtx() *common.Context {
@@ -66855,7 +66649,7 @@ type ZNSTemplateParam struct {
 
 func (x *ZNSTemplateParam) Reset() {
 	*x = ZNSTemplateParam{}
-	mi := &file_header_proto_msgTypes[538]
+	mi := &file_header_proto_msgTypes[536]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66867,7 +66661,7 @@ func (x *ZNSTemplateParam) String() string {
 func (*ZNSTemplateParam) ProtoMessage() {}
 
 func (x *ZNSTemplateParam) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[538]
+	mi := &file_header_proto_msgTypes[536]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66880,7 +66674,7 @@ func (x *ZNSTemplateParam) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateParam.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateParam) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{538}
+	return file_header_proto_rawDescGZIP(), []int{536}
 }
 
 func (x *ZNSTemplateParam) GetType() string {
@@ -66926,7 +66720,7 @@ type ZNSTemplateLayoutComponentItem struct {
 
 func (x *ZNSTemplateLayoutComponentItem) Reset() {
 	*x = ZNSTemplateLayoutComponentItem{}
-	mi := &file_header_proto_msgTypes[539]
+	mi := &file_header_proto_msgTypes[537]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66938,7 +66732,7 @@ func (x *ZNSTemplateLayoutComponentItem) String() string {
 func (*ZNSTemplateLayoutComponentItem) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[539]
+	mi := &file_header_proto_msgTypes[537]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66951,7 +66745,7 @@ func (x *ZNSTemplateLayoutComponentItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentItem.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{539}
+	return file_header_proto_rawDescGZIP(), []int{537}
 }
 
 func (x *ZNSTemplateLayoutComponentItem) GetBankCode() string {
@@ -67063,7 +66857,7 @@ type ZNSTemplateLayoutComponentButton struct {
 
 func (x *ZNSTemplateLayoutComponentButton) Reset() {
 	*x = ZNSTemplateLayoutComponentButton{}
-	mi := &file_header_proto_msgTypes[540]
+	mi := &file_header_proto_msgTypes[538]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67075,7 +66869,7 @@ func (x *ZNSTemplateLayoutComponentButton) String() string {
 func (*ZNSTemplateLayoutComponentButton) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentButton) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[540]
+	mi := &file_header_proto_msgTypes[538]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67088,7 +66882,7 @@ func (x *ZNSTemplateLayoutComponentButton) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentButton.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentButton) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{540}
+	return file_header_proto_rawDescGZIP(), []int{538}
 }
 
 func (x *ZNSTemplateLayoutComponentButton) GetContent() string {
@@ -67121,7 +66915,7 @@ type ZNSTemplateLayoutComponentButtons struct {
 
 func (x *ZNSTemplateLayoutComponentButtons) Reset() {
 	*x = ZNSTemplateLayoutComponentButtons{}
-	mi := &file_header_proto_msgTypes[541]
+	mi := &file_header_proto_msgTypes[539]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67133,7 +66927,7 @@ func (x *ZNSTemplateLayoutComponentButtons) String() string {
 func (*ZNSTemplateLayoutComponentButtons) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentButtons) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[541]
+	mi := &file_header_proto_msgTypes[539]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67146,7 +66940,7 @@ func (x *ZNSTemplateLayoutComponentButtons) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ZNSTemplateLayoutComponentButtons.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentButtons) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{541}
+	return file_header_proto_rawDescGZIP(), []int{539}
 }
 
 func (x *ZNSTemplateLayoutComponentButtons) GetItems() []*ZNSTemplateLayoutComponentButton {
@@ -67167,7 +66961,7 @@ type ZNSTemplateLayoutComponentTableRow struct {
 
 func (x *ZNSTemplateLayoutComponentTableRow) Reset() {
 	*x = ZNSTemplateLayoutComponentTableRow{}
-	mi := &file_header_proto_msgTypes[542]
+	mi := &file_header_proto_msgTypes[540]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67179,7 +66973,7 @@ func (x *ZNSTemplateLayoutComponentTableRow) String() string {
 func (*ZNSTemplateLayoutComponentTableRow) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentTableRow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[542]
+	mi := &file_header_proto_msgTypes[540]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67192,7 +66986,7 @@ func (x *ZNSTemplateLayoutComponentTableRow) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ZNSTemplateLayoutComponentTableRow.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentTableRow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{542}
+	return file_header_proto_rawDescGZIP(), []int{540}
 }
 
 func (x *ZNSTemplateLayoutComponentTableRow) GetTitle() string {
@@ -67225,7 +67019,7 @@ type ZNSTemplateLayoutComponentTable struct {
 
 func (x *ZNSTemplateLayoutComponentTable) Reset() {
 	*x = ZNSTemplateLayoutComponentTable{}
-	mi := &file_header_proto_msgTypes[543]
+	mi := &file_header_proto_msgTypes[541]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67237,7 +67031,7 @@ func (x *ZNSTemplateLayoutComponentTable) String() string {
 func (*ZNSTemplateLayoutComponentTable) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentTable) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[543]
+	mi := &file_header_proto_msgTypes[541]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67250,7 +67044,7 @@ func (x *ZNSTemplateLayoutComponentTable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentTable.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentTable) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{543}
+	return file_header_proto_rawDescGZIP(), []int{541}
 }
 
 func (x *ZNSTemplateLayoutComponentTable) GetRows() []*ZNSTemplateLayoutComponentTableRow {
@@ -67270,7 +67064,7 @@ type ZNSTemplateLayoutComponentImageItem struct {
 
 func (x *ZNSTemplateLayoutComponentImageItem) Reset() {
 	*x = ZNSTemplateLayoutComponentImageItem{}
-	mi := &file_header_proto_msgTypes[544]
+	mi := &file_header_proto_msgTypes[542]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67282,7 +67076,7 @@ func (x *ZNSTemplateLayoutComponentImageItem) String() string {
 func (*ZNSTemplateLayoutComponentImageItem) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentImageItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[544]
+	mi := &file_header_proto_msgTypes[542]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67295,7 +67089,7 @@ func (x *ZNSTemplateLayoutComponentImageItem) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ZNSTemplateLayoutComponentImageItem.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentImageItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{544}
+	return file_header_proto_rawDescGZIP(), []int{542}
 }
 
 func (x *ZNSTemplateLayoutComponentImageItem) GetType() string {
@@ -67321,7 +67115,7 @@ type ZNSTemplateLayoutComponentImages struct {
 
 func (x *ZNSTemplateLayoutComponentImages) Reset() {
 	*x = ZNSTemplateLayoutComponentImages{}
-	mi := &file_header_proto_msgTypes[545]
+	mi := &file_header_proto_msgTypes[543]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67333,7 +67127,7 @@ func (x *ZNSTemplateLayoutComponentImages) String() string {
 func (*ZNSTemplateLayoutComponentImages) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentImages) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[545]
+	mi := &file_header_proto_msgTypes[543]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67346,7 +67140,7 @@ func (x *ZNSTemplateLayoutComponentImages) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentImages.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentImages) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{545}
+	return file_header_proto_rawDescGZIP(), []int{543}
 }
 
 func (x *ZNSTemplateLayoutComponentImages) GetItems() []*ZNSTemplateLayoutComponentImageItem {
@@ -67366,7 +67160,7 @@ type ZNSTemplateLayoutComponentLogo struct {
 
 func (x *ZNSTemplateLayoutComponentLogo) Reset() {
 	*x = ZNSTemplateLayoutComponentLogo{}
-	mi := &file_header_proto_msgTypes[546]
+	mi := &file_header_proto_msgTypes[544]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67378,7 +67172,7 @@ func (x *ZNSTemplateLayoutComponentLogo) String() string {
 func (*ZNSTemplateLayoutComponentLogo) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentLogo) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[546]
+	mi := &file_header_proto_msgTypes[544]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67391,7 +67185,7 @@ func (x *ZNSTemplateLayoutComponentLogo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentLogo.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentLogo) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{546}
+	return file_header_proto_rawDescGZIP(), []int{544}
 }
 
 func (x *ZNSTemplateLayoutComponentLogo) GetLight() *ZNSTemplateLayoutComponentImageItem {
@@ -67425,7 +67219,7 @@ type ZNSTemplateLayoutComponent struct {
 
 func (x *ZNSTemplateLayoutComponent) Reset() {
 	*x = ZNSTemplateLayoutComponent{}
-	mi := &file_header_proto_msgTypes[547]
+	mi := &file_header_proto_msgTypes[545]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67437,7 +67231,7 @@ func (x *ZNSTemplateLayoutComponent) String() string {
 func (*ZNSTemplateLayoutComponent) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[547]
+	mi := &file_header_proto_msgTypes[545]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67450,7 +67244,7 @@ func (x *ZNSTemplateLayoutComponent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponent.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{547}
+	return file_header_proto_rawDescGZIP(), []int{545}
 }
 
 func (x *ZNSTemplateLayoutComponent) GetIMAGES() *ZNSTemplateLayoutComponentImages {
@@ -67525,7 +67319,7 @@ type ZNSTemplateComponents struct {
 
 func (x *ZNSTemplateComponents) Reset() {
 	*x = ZNSTemplateComponents{}
-	mi := &file_header_proto_msgTypes[548]
+	mi := &file_header_proto_msgTypes[546]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67537,7 +67331,7 @@ func (x *ZNSTemplateComponents) String() string {
 func (*ZNSTemplateComponents) ProtoMessage() {}
 
 func (x *ZNSTemplateComponents) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[548]
+	mi := &file_header_proto_msgTypes[546]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67550,7 +67344,7 @@ func (x *ZNSTemplateComponents) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateComponents.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateComponents) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{548}
+	return file_header_proto_rawDescGZIP(), []int{546}
 }
 
 func (x *ZNSTemplateComponents) GetComponents() []*ZNSTemplateLayoutComponent {
@@ -67571,7 +67365,7 @@ type ZNSTemplateLayout struct {
 
 func (x *ZNSTemplateLayout) Reset() {
 	*x = ZNSTemplateLayout{}
-	mi := &file_header_proto_msgTypes[549]
+	mi := &file_header_proto_msgTypes[547]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67583,7 +67377,7 @@ func (x *ZNSTemplateLayout) String() string {
 func (*ZNSTemplateLayout) ProtoMessage() {}
 
 func (x *ZNSTemplateLayout) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[549]
+	mi := &file_header_proto_msgTypes[547]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67596,7 +67390,7 @@ func (x *ZNSTemplateLayout) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayout.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayout) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{549}
+	return file_header_proto_rawDescGZIP(), []int{547}
 }
 
 func (x *ZNSTemplateLayout) GetHeader() *ZNSTemplateComponents {
@@ -67636,7 +67430,7 @@ type ZNSTemplateRequest struct {
 
 func (x *ZNSTemplateRequest) Reset() {
 	*x = ZNSTemplateRequest{}
-	mi := &file_header_proto_msgTypes[550]
+	mi := &file_header_proto_msgTypes[548]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67648,7 +67442,7 @@ func (x *ZNSTemplateRequest) String() string {
 func (*ZNSTemplateRequest) ProtoMessage() {}
 
 func (x *ZNSTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[550]
+	mi := &file_header_proto_msgTypes[548]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67661,7 +67455,7 @@ func (x *ZNSTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateRequest.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{550}
+	return file_header_proto_rawDescGZIP(), []int{548}
 }
 
 func (x *ZNSTemplateRequest) GetTemplateId() string {
@@ -67735,7 +67529,7 @@ type ZaloOAZNSQuota struct {
 
 func (x *ZaloOAZNSQuota) Reset() {
 	*x = ZaloOAZNSQuota{}
-	mi := &file_header_proto_msgTypes[551]
+	mi := &file_header_proto_msgTypes[549]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67747,7 +67541,7 @@ func (x *ZaloOAZNSQuota) String() string {
 func (*ZaloOAZNSQuota) ProtoMessage() {}
 
 func (x *ZaloOAZNSQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[551]
+	mi := &file_header_proto_msgTypes[549]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67760,7 +67554,7 @@ func (x *ZaloOAZNSQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloOAZNSQuota.ProtoReflect.Descriptor instead.
 func (*ZaloOAZNSQuota) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{551}
+	return file_header_proto_rawDescGZIP(), []int{549}
 }
 
 func (x *ZaloOAZNSQuota) GetDailyQuota() int64 {
@@ -67838,7 +67632,7 @@ type ZNSTemplate struct {
 
 func (x *ZNSTemplate) Reset() {
 	*x = ZNSTemplate{}
-	mi := &file_header_proto_msgTypes[552]
+	mi := &file_header_proto_msgTypes[550]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67850,7 +67644,7 @@ func (x *ZNSTemplate) String() string {
 func (*ZNSTemplate) ProtoMessage() {}
 
 func (x *ZNSTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[552]
+	mi := &file_header_proto_msgTypes[550]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67863,7 +67657,7 @@ func (x *ZNSTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplate.ProtoReflect.Descriptor instead.
 func (*ZNSTemplate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{552}
+	return file_header_proto_rawDescGZIP(), []int{550}
 }
 
 func (x *ZNSTemplate) GetCtx() *common.Context {
@@ -68016,7 +67810,7 @@ type ZnsTemplate struct {
 
 func (x *ZnsTemplate) Reset() {
 	*x = ZnsTemplate{}
-	mi := &file_header_proto_msgTypes[553]
+	mi := &file_header_proto_msgTypes[551]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68028,7 +67822,7 @@ func (x *ZnsTemplate) String() string {
 func (*ZnsTemplate) ProtoMessage() {}
 
 func (x *ZnsTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[553]
+	mi := &file_header_proto_msgTypes[551]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68041,7 +67835,7 @@ func (x *ZnsTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZnsTemplate.ProtoReflect.Descriptor instead.
 func (*ZnsTemplate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{553}
+	return file_header_proto_rawDescGZIP(), []int{551}
 }
 
 func (x *ZnsTemplate) GetTemplateId() int64 {
@@ -68167,7 +67961,7 @@ type ZNSButton struct {
 
 func (x *ZNSButton) Reset() {
 	*x = ZNSButton{}
-	mi := &file_header_proto_msgTypes[554]
+	mi := &file_header_proto_msgTypes[552]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68179,7 +67973,7 @@ func (x *ZNSButton) String() string {
 func (*ZNSButton) ProtoMessage() {}
 
 func (x *ZNSButton) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[554]
+	mi := &file_header_proto_msgTypes[552]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68192,7 +67986,7 @@ func (x *ZNSButton) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSButton.ProtoReflect.Descriptor instead.
 func (*ZNSButton) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{554}
+	return file_header_proto_rawDescGZIP(), []int{552}
 }
 
 func (x *ZNSButton) GetType() int64 {
@@ -68230,7 +68024,7 @@ type ZNSParamDefinition struct {
 
 func (x *ZNSParamDefinition) Reset() {
 	*x = ZNSParamDefinition{}
-	mi := &file_header_proto_msgTypes[555]
+	mi := &file_header_proto_msgTypes[553]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68242,7 +68036,7 @@ func (x *ZNSParamDefinition) String() string {
 func (*ZNSParamDefinition) ProtoMessage() {}
 
 func (x *ZNSParamDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[555]
+	mi := &file_header_proto_msgTypes[553]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68255,7 +68049,7 @@ func (x *ZNSParamDefinition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSParamDefinition.ProtoReflect.Descriptor instead.
 func (*ZNSParamDefinition) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{555}
+	return file_header_proto_rawDescGZIP(), []int{553}
 }
 
 func (x *ZNSParamDefinition) GetName() string {
@@ -68324,7 +68118,7 @@ type ZNSMedia struct {
 
 func (x *ZNSMedia) Reset() {
 	*x = ZNSMedia{}
-	mi := &file_header_proto_msgTypes[556]
+	mi := &file_header_proto_msgTypes[554]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68336,7 +68130,7 @@ func (x *ZNSMedia) String() string {
 func (*ZNSMedia) ProtoMessage() {}
 
 func (x *ZNSMedia) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[556]
+	mi := &file_header_proto_msgTypes[554]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68349,7 +68143,7 @@ func (x *ZNSMedia) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSMedia.ProtoReflect.Descriptor instead.
 func (*ZNSMedia) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{556}
+	return file_header_proto_rawDescGZIP(), []int{554}
 }
 
 func (x *ZNSMedia) GetCtx() *common.Context {
@@ -68429,7 +68223,7 @@ type EmailSignature struct {
 
 func (x *EmailSignature) Reset() {
 	*x = EmailSignature{}
-	mi := &file_header_proto_msgTypes[557]
+	mi := &file_header_proto_msgTypes[555]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68441,7 +68235,7 @@ func (x *EmailSignature) String() string {
 func (*EmailSignature) ProtoMessage() {}
 
 func (x *EmailSignature) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[557]
+	mi := &file_header_proto_msgTypes[555]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68454,7 +68248,7 @@ func (x *EmailSignature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailSignature.ProtoReflect.Descriptor instead.
 func (*EmailSignature) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{557}
+	return file_header_proto_rawDescGZIP(), []int{555}
 }
 
 func (x *EmailSignature) GetCtx() *common.Context {
@@ -68564,7 +68358,7 @@ type TestMessageRequest struct {
 
 func (x *TestMessageRequest) Reset() {
 	*x = TestMessageRequest{}
-	mi := &file_header_proto_msgTypes[558]
+	mi := &file_header_proto_msgTypes[556]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68576,7 +68370,7 @@ func (x *TestMessageRequest) String() string {
 func (*TestMessageRequest) ProtoMessage() {}
 
 func (x *TestMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[558]
+	mi := &file_header_proto_msgTypes[556]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68589,7 +68383,7 @@ func (x *TestMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestMessageRequest.ProtoReflect.Descriptor instead.
 func (*TestMessageRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{558}
+	return file_header_proto_rawDescGZIP(), []int{556}
 }
 
 func (x *TestMessageRequest) GetCtx() *common.Context {
@@ -68661,7 +68455,7 @@ type CreditUsage struct {
 
 func (x *CreditUsage) Reset() {
 	*x = CreditUsage{}
-	mi := &file_header_proto_msgTypes[559]
+	mi := &file_header_proto_msgTypes[557]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68673,7 +68467,7 @@ func (x *CreditUsage) String() string {
 func (*CreditUsage) ProtoMessage() {}
 
 func (x *CreditUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[559]
+	mi := &file_header_proto_msgTypes[557]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68686,7 +68480,7 @@ func (x *CreditUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditUsage.ProtoReflect.Descriptor instead.
 func (*CreditUsage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{559}
+	return file_header_proto_rawDescGZIP(), []int{557}
 }
 
 func (x *CreditUsage) GetCtx() *common.Context {
@@ -68736,7 +68530,7 @@ type SendSubizZNSTestRequest struct {
 
 func (x *SendSubizZNSTestRequest) Reset() {
 	*x = SendSubizZNSTestRequest{}
-	mi := &file_header_proto_msgTypes[560]
+	mi := &file_header_proto_msgTypes[558]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68748,7 +68542,7 @@ func (x *SendSubizZNSTestRequest) String() string {
 func (*SendSubizZNSTestRequest) ProtoMessage() {}
 
 func (x *SendSubizZNSTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[560]
+	mi := &file_header_proto_msgTypes[558]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68761,7 +68555,7 @@ func (x *SendSubizZNSTestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendSubizZNSTestRequest.ProtoReflect.Descriptor instead.
 func (*SendSubizZNSTestRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{560}
+	return file_header_proto_rawDescGZIP(), []int{558}
 }
 
 func (x *SendSubizZNSTestRequest) GetAccountId() string {
@@ -68808,7 +68602,7 @@ type ActionAIAgentTrack struct {
 
 func (x *ActionAIAgentTrack) Reset() {
 	*x = ActionAIAgentTrack{}
-	mi := &file_header_proto_msgTypes[561]
+	mi := &file_header_proto_msgTypes[559]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68820,7 +68614,7 @@ func (x *ActionAIAgentTrack) String() string {
 func (*ActionAIAgentTrack) ProtoMessage() {}
 
 func (x *ActionAIAgentTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[561]
+	mi := &file_header_proto_msgTypes[559]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68833,7 +68627,7 @@ func (x *ActionAIAgentTrack) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionAIAgentTrack.ProtoReflect.Descriptor instead.
 func (*ActionAIAgentTrack) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{561}
+	return file_header_proto_rawDescGZIP(), []int{559}
 }
 
 func (x *ActionAIAgentTrack) GetIsMissingSource() string {
@@ -68894,7 +68688,7 @@ type Markers struct {
 
 func (x *Markers) Reset() {
 	*x = Markers{}
-	mi := &file_header_proto_msgTypes[562]
+	mi := &file_header_proto_msgTypes[560]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68906,7 +68700,7 @@ func (x *Markers) String() string {
 func (*Markers) ProtoMessage() {}
 
 func (x *Markers) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[562]
+	mi := &file_header_proto_msgTypes[560]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68919,7 +68713,7 @@ func (x *Markers) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Markers.ProtoReflect.Descriptor instead.
 func (*Markers) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{562}
+	return file_header_proto_rawDescGZIP(), []int{560}
 }
 
 func (x *Markers) GetOffsets() []int64 {
@@ -68937,7 +68731,7 @@ type UserDataSource struct {
 
 func (x *UserDataSource) Reset() {
 	*x = UserDataSource{}
-	mi := &file_header_proto_msgTypes[563]
+	mi := &file_header_proto_msgTypes[561]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68949,7 +68743,7 @@ func (x *UserDataSource) String() string {
 func (*UserDataSource) ProtoMessage() {}
 
 func (x *UserDataSource) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[563]
+	mi := &file_header_proto_msgTypes[561]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68962,7 +68756,7 @@ func (x *UserDataSource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDataSource.ProtoReflect.Descriptor instead.
 func (*UserDataSource) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{563}
+	return file_header_proto_rawDescGZIP(), []int{561}
 }
 
 type MetaBusiness struct {
@@ -68975,7 +68769,7 @@ type MetaBusiness struct {
 
 func (x *MetaBusiness) Reset() {
 	*x = MetaBusiness{}
-	mi := &file_header_proto_msgTypes[564]
+	mi := &file_header_proto_msgTypes[562]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68987,7 +68781,7 @@ func (x *MetaBusiness) String() string {
 func (*MetaBusiness) ProtoMessage() {}
 
 func (x *MetaBusiness) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[564]
+	mi := &file_header_proto_msgTypes[562]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69000,7 +68794,7 @@ func (x *MetaBusiness) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaBusiness.ProtoReflect.Descriptor instead.
 func (*MetaBusiness) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{564}
+	return file_header_proto_rawDescGZIP(), []int{562}
 }
 
 func (x *MetaBusiness) GetId() string {
@@ -69043,7 +68837,7 @@ type MetaAdAccount struct {
 
 func (x *MetaAdAccount) Reset() {
 	*x = MetaAdAccount{}
-	mi := &file_header_proto_msgTypes[565]
+	mi := &file_header_proto_msgTypes[563]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69055,7 +68849,7 @@ func (x *MetaAdAccount) String() string {
 func (*MetaAdAccount) ProtoMessage() {}
 
 func (x *MetaAdAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[565]
+	mi := &file_header_proto_msgTypes[563]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69068,7 +68862,7 @@ func (x *MetaAdAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaAdAccount.ProtoReflect.Descriptor instead.
 func (*MetaAdAccount) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{565}
+	return file_header_proto_rawDescGZIP(), []int{563}
 }
 
 func (x *MetaAdAccount) GetCtx() *common.Context {
@@ -69211,7 +69005,7 @@ type VectorSearchReq struct {
 
 func (x *VectorSearchReq) Reset() {
 	*x = VectorSearchReq{}
-	mi := &file_header_proto_msgTypes[566]
+	mi := &file_header_proto_msgTypes[564]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69223,7 +69017,7 @@ func (x *VectorSearchReq) String() string {
 func (*VectorSearchReq) ProtoMessage() {}
 
 func (x *VectorSearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[566]
+	mi := &file_header_proto_msgTypes[564]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69236,7 +69030,7 @@ func (x *VectorSearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorSearchReq.ProtoReflect.Descriptor instead.
 func (*VectorSearchReq) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{566}
+	return file_header_proto_rawDescGZIP(), []int{564}
 }
 
 func (x *VectorSearchReq) GetCtx() *common.Context {
@@ -69296,7 +69090,7 @@ type VectorDoc struct {
 
 func (x *VectorDoc) Reset() {
 	*x = VectorDoc{}
-	mi := &file_header_proto_msgTypes[567]
+	mi := &file_header_proto_msgTypes[565]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69308,7 +69102,7 @@ func (x *VectorDoc) String() string {
 func (*VectorDoc) ProtoMessage() {}
 
 func (x *VectorDoc) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[567]
+	mi := &file_header_proto_msgTypes[565]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69321,7 +69115,7 @@ func (x *VectorDoc) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorDoc.ProtoReflect.Descriptor instead.
 func (*VectorDoc) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{567}
+	return file_header_proto_rawDescGZIP(), []int{565}
 }
 
 func (x *VectorDoc) GetCtx() *common.Context {
@@ -69386,7 +69180,7 @@ type ListVectorRequest struct {
 
 func (x *ListVectorRequest) Reset() {
 	*x = ListVectorRequest{}
-	mi := &file_header_proto_msgTypes[568]
+	mi := &file_header_proto_msgTypes[566]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69398,7 +69192,7 @@ func (x *ListVectorRequest) String() string {
 func (*ListVectorRequest) ProtoMessage() {}
 
 func (x *ListVectorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[568]
+	mi := &file_header_proto_msgTypes[566]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69411,7 +69205,7 @@ func (x *ListVectorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListVectorRequest.ProtoReflect.Descriptor instead.
 func (*ListVectorRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{568}
+	return file_header_proto_rawDescGZIP(), []int{566}
 }
 
 func (x *ListVectorRequest) GetCtx() *common.Context {
@@ -69460,7 +69254,7 @@ type VectorDocProp struct {
 
 func (x *VectorDocProp) Reset() {
 	*x = VectorDocProp{}
-	mi := &file_header_proto_msgTypes[569]
+	mi := &file_header_proto_msgTypes[567]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69472,7 +69266,7 @@ func (x *VectorDocProp) String() string {
 func (*VectorDocProp) ProtoMessage() {}
 
 func (x *VectorDocProp) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[569]
+	mi := &file_header_proto_msgTypes[567]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69485,7 +69279,7 @@ func (x *VectorDocProp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorDocProp.ProtoReflect.Descriptor instead.
 func (*VectorDocProp) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{569}
+	return file_header_proto_rawDescGZIP(), []int{567}
 }
 
 func (x *VectorDocProp) GetCollection() string {
@@ -69520,7 +69314,7 @@ type VectorMatch struct {
 
 func (x *VectorMatch) Reset() {
 	*x = VectorMatch{}
-	mi := &file_header_proto_msgTypes[570]
+	mi := &file_header_proto_msgTypes[568]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69532,7 +69326,7 @@ func (x *VectorMatch) String() string {
 func (*VectorMatch) ProtoMessage() {}
 
 func (x *VectorMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[570]
+	mi := &file_header_proto_msgTypes[568]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69545,7 +69339,7 @@ func (x *VectorMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorMatch.ProtoReflect.Descriptor instead.
 func (*VectorMatch) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{570}
+	return file_header_proto_rawDescGZIP(), []int{568}
 }
 
 func (x *VectorMatch) GetId() string {
@@ -69581,7 +69375,7 @@ type VectorMatches struct {
 
 func (x *VectorMatches) Reset() {
 	*x = VectorMatches{}
-	mi := &file_header_proto_msgTypes[571]
+	mi := &file_header_proto_msgTypes[569]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69593,7 +69387,7 @@ func (x *VectorMatches) String() string {
 func (*VectorMatches) ProtoMessage() {}
 
 func (x *VectorMatches) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[571]
+	mi := &file_header_proto_msgTypes[569]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69606,7 +69400,7 @@ func (x *VectorMatches) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorMatches.ProtoReflect.Descriptor instead.
 func (*VectorMatches) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{571}
+	return file_header_proto_rawDescGZIP(), []int{569}
 }
 
 func (x *VectorMatches) GetCtx() *common.Context {
@@ -69656,7 +69450,7 @@ type NamedEntity struct {
 
 func (x *NamedEntity) Reset() {
 	*x = NamedEntity{}
-	mi := &file_header_proto_msgTypes[572]
+	mi := &file_header_proto_msgTypes[570]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69668,7 +69462,7 @@ func (x *NamedEntity) String() string {
 func (*NamedEntity) ProtoMessage() {}
 
 func (x *NamedEntity) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[572]
+	mi := &file_header_proto_msgTypes[570]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69681,7 +69475,7 @@ func (x *NamedEntity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NamedEntity.ProtoReflect.Descriptor instead.
 func (*NamedEntity) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{572}
+	return file_header_proto_rawDescGZIP(), []int{570}
 }
 
 func (x *NamedEntity) GetCtx() *common.Context {
@@ -69776,7 +69570,7 @@ type ListAvaiableDiscountsRequest struct {
 
 func (x *ListAvaiableDiscountsRequest) Reset() {
 	*x = ListAvaiableDiscountsRequest{}
-	mi := &file_header_proto_msgTypes[573]
+	mi := &file_header_proto_msgTypes[571]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69788,7 +69582,7 @@ func (x *ListAvaiableDiscountsRequest) String() string {
 func (*ListAvaiableDiscountsRequest) ProtoMessage() {}
 
 func (x *ListAvaiableDiscountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[573]
+	mi := &file_header_proto_msgTypes[571]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69801,7 +69595,7 @@ func (x *ListAvaiableDiscountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAvaiableDiscountsRequest.ProtoReflect.Descriptor instead.
 func (*ListAvaiableDiscountsRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{573}
+	return file_header_proto_rawDescGZIP(), []int{571}
 }
 
 func (x *ListAvaiableDiscountsRequest) GetCtx() *common.Context {
@@ -69868,7 +69662,7 @@ type ReportBotResponse_Metric struct {
 
 func (x *ReportBotResponse_Metric) Reset() {
 	*x = ReportBotResponse_Metric{}
-	mi := &file_header_proto_msgTypes[581]
+	mi := &file_header_proto_msgTypes[579]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69880,7 +69674,7 @@ func (x *ReportBotResponse_Metric) String() string {
 func (*ReportBotResponse_Metric) ProtoMessage() {}
 
 func (x *ReportBotResponse_Metric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[581]
+	mi := &file_header_proto_msgTypes[579]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69959,7 +69753,7 @@ type ActionrunMetrics_ActionrunMetric struct {
 
 func (x *ActionrunMetrics_ActionrunMetric) Reset() {
 	*x = ActionrunMetrics_ActionrunMetric{}
-	mi := &file_header_proto_msgTypes[582]
+	mi := &file_header_proto_msgTypes[580]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69971,7 +69765,7 @@ func (x *ActionrunMetrics_ActionrunMetric) String() string {
 func (*ActionrunMetrics_ActionrunMetric) ProtoMessage() {}
 
 func (x *ActionrunMetrics_ActionrunMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[582]
+	mi := &file_header_proto_msgTypes[580]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70044,7 +69838,7 @@ type ContactComponent_ContactButton struct {
 
 func (x *ContactComponent_ContactButton) Reset() {
 	*x = ContactComponent_ContactButton{}
-	mi := &file_header_proto_msgTypes[587]
+	mi := &file_header_proto_msgTypes[585]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70056,7 +69850,7 @@ func (x *ContactComponent_ContactButton) String() string {
 func (*ContactComponent_ContactButton) ProtoMessage() {}
 
 func (x *ContactComponent_ContactButton) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[587]
+	mi := &file_header_proto_msgTypes[585]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70132,7 +69926,7 @@ type CallContactComponent_Hotline struct {
 
 func (x *CallContactComponent_Hotline) Reset() {
 	*x = CallContactComponent_Hotline{}
-	mi := &file_header_proto_msgTypes[588]
+	mi := &file_header_proto_msgTypes[586]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70144,7 +69938,7 @@ func (x *CallContactComponent_Hotline) String() string {
 func (*CallContactComponent_Hotline) ProtoMessage() {}
 
 func (x *CallContactComponent_Hotline) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[588]
+	mi := &file_header_proto_msgTypes[586]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70193,7 +69987,7 @@ type MapContactComponent_Location struct {
 
 func (x *MapContactComponent_Location) Reset() {
 	*x = MapContactComponent_Location{}
-	mi := &file_header_proto_msgTypes[589]
+	mi := &file_header_proto_msgTypes[587]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70205,7 +69999,7 @@ func (x *MapContactComponent_Location) String() string {
 func (*MapContactComponent_Location) ProtoMessage() {}
 
 func (x *MapContactComponent_Location) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[589]
+	mi := &file_header_proto_msgTypes[587]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70260,7 +70054,7 @@ type FormField_FormFieldOption struct {
 
 func (x *FormField_FormFieldOption) Reset() {
 	*x = FormField_FormFieldOption{}
-	mi := &file_header_proto_msgTypes[590]
+	mi := &file_header_proto_msgTypes[588]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70272,7 +70066,7 @@ func (x *FormField_FormFieldOption) String() string {
 func (*FormField_FormFieldOption) ProtoMessage() {}
 
 func (x *FormField_FormFieldOption) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[590]
+	mi := &file_header_proto_msgTypes[588]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70321,7 +70115,7 @@ type CountTouchpointResponse_TouchpointCount struct {
 
 func (x *CountTouchpointResponse_TouchpointCount) Reset() {
 	*x = CountTouchpointResponse_TouchpointCount{}
-	mi := &file_header_proto_msgTypes[592]
+	mi := &file_header_proto_msgTypes[590]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70333,7 +70127,7 @@ func (x *CountTouchpointResponse_TouchpointCount) String() string {
 func (*CountTouchpointResponse_TouchpointCount) ProtoMessage() {}
 
 func (x *CountTouchpointResponse_TouchpointCount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[592]
+	mi := &file_header_proto_msgTypes[590]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70398,7 +70192,7 @@ type BroadcastCampaignMetrics_BroadcastCampaignMetric struct {
 
 func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) Reset() {
 	*x = BroadcastCampaignMetrics_BroadcastCampaignMetric{}
-	mi := &file_header_proto_msgTypes[607]
+	mi := &file_header_proto_msgTypes[605]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70410,7 +70204,7 @@ func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) String() string {
 func (*BroadcastCampaignMetrics_BroadcastCampaignMetric) ProtoMessage() {}
 
 func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[607]
+	mi := &file_header_proto_msgTypes[605]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70423,7 +70217,7 @@ func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) ProtoReflect() protor
 
 // Deprecated: Use BroadcastCampaignMetrics_BroadcastCampaignMetric.ProtoReflect.Descriptor instead.
 func (*BroadcastCampaignMetrics_BroadcastCampaignMetric) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{358, 0}
+	return file_header_proto_rawDescGZIP(), []int{356, 0}
 }
 
 func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) GetMessageId() string {
@@ -70576,7 +70370,7 @@ type Block_InputOption struct {
 
 func (x *Block_InputOption) Reset() {
 	*x = Block_InputOption{}
-	mi := &file_header_proto_msgTypes[632]
+	mi := &file_header_proto_msgTypes[630]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70588,7 +70382,7 @@ func (x *Block_InputOption) String() string {
 func (*Block_InputOption) ProtoMessage() {}
 
 func (x *Block_InputOption) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[632]
+	mi := &file_header_proto_msgTypes[630]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70601,7 +70395,7 @@ func (x *Block_InputOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Block_InputOption.ProtoReflect.Descriptor instead.
 func (*Block_InputOption) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{472, 0}
+	return file_header_proto_rawDescGZIP(), []int{470, 0}
 }
 
 func (x *Block_InputOption) GetLabel() string {
@@ -71189,7 +70983,7 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\ttimestamp\x12\x16\n" +
 	"\x06object\x18\v \x01(\tR\x06object\x12\x14\n" +
 	"\x05value\x18\f \x01(\tR\x05value\x12(\n" +
-	"\x05array\x18\x14 \x03(\v2\x12.header.EventFieldR\x05array\"\xa6)\n" +
+	"\x05array\x18\x14 \x03(\v2\x12.header.EventFieldR\x05array\"\xdc(\n" +
 	"\x04Data\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12$\n" +
 	"\x05agent\x18\x02 \x01(\v2\x0e.account.AgentR\x05agent\x12)\n" +
@@ -71224,8 +71018,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05label\x187 \x01(\v2\r.header.LabelR\x05label\x12-\n" +
 	"\tuser_view\x188 \x01(\v2\x10.header.UserViewR\buserView\x129\n" +
 	"\rlogin_session\x189 \x01(\v2\x14.header.LoginSessionR\floginSession\x126\n" +
-	"\fproduct_feed\x18: \x01(\v2\x13.header.ProductFeedR\vproductFeed\x12H\n" +
-	"\x12product_collection\x18; \x01(\v2\x19.header.ProductCollectionR\x11productCollection\x12#\n" +
+	"\fproduct_feed\x18: \x01(\v2\x13.header.ProductFeedR\vproductFeed\x12#\n" +
 	"\x05order\x18< \x01(\v2\r.header.OrderR\x05order\x12,\n" +
 	"\bcurrency\x18= \x01(\v2\x10.header.CurrencyR\bcurrency\x126\n" +
 	"\fshop_setting\x18> \x01(\v2\x13.header.ShopSettingR\vshopSetting\x12:\n" +
@@ -73922,27 +73715,7 @@ const file_header_proto_rawDesc = "" +
 	"\aupdated\x18\x04 \x01(\x03R\aupdated\x12\x12\n" +
 	"\x04rate\x18\x05 \x01(\x02R\x04rate\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\xb1\x01\n" +
-	"\x12ProductCollections\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12J\n" +
-	"\x13product_collections\x18\x02 \x03(\v2\x19.header.ProductCollectionR\x12productCollections\x12\x16\n" +
-	"\x06anchor\x18\x03 \x01(\tR\x06anchor\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xb8\x02\n" +
-	"\x11ProductCollection\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1c\n" +
-	"\tvisiblity\x18\x05 \x01(\tR\tvisiblity\x12\x12\n" +
-	"\x04code\x18\x06 \x01(\tR\x04code\x12\x19\n" +
-	"\bitem_ids\x18\a \x03(\tR\aitemIds\x12\x18\n" +
-	"\acreated\x18\v \x01(\x03R\acreated\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\f \x01(\tR\tcreatedBy\x12\x18\n" +
-	"\aupdated\x18\r \x01(\x03R\aupdated\x12\x1d\n" +
-	"\n" +
-	"updated_by\x18\x0e \x01(\tR\tupdatedBy\"\xad\x01\n" +
+	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\xad\x01\n" +
 	"\tPriceRule\x12\x17\n" +
 	"\afeed_id\x18\x04 \x01(\tR\x06feedId\x12\x14\n" +
 	"\x05price\x18\x05 \x01(\x02R\x05price\x12\x1b\n" +
@@ -74261,7 +74034,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12C\n" +
-	"\x11shipping_policies\x18\x05 \x03(\v2\x16.header.ShippingPolicyR\x10shippingPolicies\"\xbd\x06\n" +
+	"\x11shipping_policies\x18\x05 \x03(\v2\x16.header.ShippingPolicyR\x10shippingPolicies\"\x8c\x06\n" +
 	"\x0eShippingPolicy\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74269,8 +74042,7 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1f\n" +
 	"\vproduct_ids\x18\x05 \x03(\tR\n" +
-	"productIds\x12/\n" +
-	"\x13product_collections\x18\x06 \x03(\tR\x12productCollections\x12.\n" +
+	"productIds\x12.\n" +
 	"\x13exclude_product_ids\x18\a \x03(\tR\x11excludeProductIds\x12!\n" +
 	"\fcountry_code\x18\b \x01(\tR\vcountryCode\x12\x1a\n" +
 	"\bprovince\x18\t \x01(\tR\bprovince\x12\x1c\n" +
@@ -74816,7 +74588,7 @@ const file_header_proto_rawDesc = "" +
 	"\x10last_fetch_error\x18\x1a \x01(\tR\x0elastFetchError\x12*\n" +
 	"\x11last_fetch_status\x18\x1b \x01(\tR\x0flastFetchStatus\x12.\n" +
 	"\x13last_sucess_fetched\x18\x1e \x01(\x03R\x11lastSucessFetched\x12\x1a\n" +
-	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\"\x92\x05\n" +
+	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\"\xdc\x04\n" +
 	"\x0fProductsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74836,8 +74608,7 @@ const file_header_proto_rawDesc = "" +
 	"visibility\x18\v \x01(\tR\n" +
 	"visibility\x12\x10\n" +
 	"\x03ids\x18\f \x03(\tR\x03ids\x12%\n" +
-	"\x0elast_modifieds\x18\x0e \x03(\x03R\rlastModifieds\x124\n" +
-	"\x16product_collection_ids\x18\x0f \x03(\tR\x14productCollectionIds\x12'\n" +
+	"\x0elast_modifieds\x18\x0e \x03(\x03R\rlastModifieds\x12'\n" +
 	"\x0finclude_deleted\x18\x11 \x01(\bR\x0eincludeDeleted\x12\x10\n" +
 	"\x03sku\x18\x12 \x01(\tR\x03sku\x12\x10\n" +
 	"\x03url\x18\x13 \x01(\tR\x03url\x12\x18\n" +
@@ -76271,7 +76042,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xb48\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xe38\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76400,7 +76171,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_submission\x18\xc8\x01 \x01(\v2\x16.header.FormSubmissionR\x0eformSubmission\x12,\n" +
 	"\bproducts\x18\xca\x01 \x03(\v2\x0f.header.ProductR\bproducts\x12*\n" +
 	"\aproduct\x18\xc9\x01 \x01(\v2\x0f.header.ProductR\aproduct\x12/\n" +
-	"\tdiscounts\x18\xcb\x01 \x03(\v2\x10.header.DiscountR\tdiscounts\x12#\n" +
+	"\tdiscounts\x18\xcb\x01 \x03(\v2\x10.header.DiscountR\tdiscounts\x12-\n" +
+	"\bdiscount\x18\xd1\x01 \x01(\v2\x10.header.DiscountR\bdiscount\x12#\n" +
 	"\x05bills\x18\xcc\x01 \x03(\v2\f.header.BillR\x05bills\x12&\n" +
 	"\x06orders\x18\xcd\x01 \x03(\v2\r.header.OrderR\x06orders\x12!\n" +
 	"\x04bill\x18\xce\x01 \x01(\v2\f.header.BillR\x04bill\x12$\n" +
@@ -78985,7 +78757,7 @@ func file_header_proto_rawDescGZIP() []byte {
 }
 
 var file_header_proto_enumTypes = make([]protoimpl.EnumInfo, 33)
-var file_header_proto_msgTypes = make([]protoimpl.MessageInfo, 637)
+var file_header_proto_msgTypes = make([]protoimpl.MessageInfo, 635)
 var file_header_proto_goTypes = []any{
 	(ConvoState)(0),                                 // 0: header.ConvoState
 	(AttachmentType)(0),                             // 1: header.AttachmentType
@@ -79253,510 +79025,508 @@ var file_header_proto_goTypes = []any{
 	(*Addresses)(nil),                               // 263: header.Addresses
 	(*Currency)(nil),                                // 264: header.Currency
 	(*CurrencyLogEntry)(nil),                        // 265: header.CurrencyLogEntry
-	(*ProductCollections)(nil),                      // 266: header.ProductCollections
-	(*ProductCollection)(nil),                       // 267: header.ProductCollection
-	(*PriceRule)(nil),                               // 268: header.PriceRule
-	(*OrderItem)(nil),                               // 269: header.OrderItem
-	(*GHNAddress)(nil),                              // 270: header.GHNAddress
-	(*Address)(nil),                                 // 271: header.Address
-	(*GHNShippingData)(nil),                         // 272: header.GHNShippingData
-	(*GHNOrder)(nil),                                // 273: header.GHNOrder
-	(*GHNOrderFee)(nil),                             // 274: header.GHNOrderFee
-	(*GHNOrder2)(nil),                               // 275: header.GHNOrder2
-	(*GHNOrder2Fee)(nil),                            // 276: header.GHNOrder2Fee
-	(*GHNOrderItem)(nil),                            // 277: header.GHNOrderItem
-	(*GHTKShippingData)(nil),                        // 278: header.GHTKShippingData
-	(*GHTKOrder)(nil),                               // 279: header.GHTKOrder
-	(*ShippingInfo)(nil),                            // 280: header.ShippingInfo
-	(*ShippingData)(nil),                            // 281: header.ShippingData
-	(*ShippingPolicies)(nil),                        // 282: header.ShippingPolicies
-	(*ShippingPolicy)(nil),                          // 283: header.ShippingPolicy
-	(*IntegratedShipping)(nil),                      // 284: header.IntegratedShipping
-	(*IntegratedShippings)(nil),                     // 285: header.IntegratedShippings
-	(*PaymentMethod)(nil),                           // 286: header.PaymentMethod
-	(*PaymentMethods)(nil),                          // 287: header.PaymentMethods
-	(*OrderMetric)(nil),                             // 288: header.OrderMetric
-	(*Orders)(nil),                                  // 289: header.Orders
-	(*CountOrdersResponse)(nil),                     // 290: header.CountOrdersResponse
-	(*DownloadOrderRequest)(nil),                    // 291: header.DownloadOrderRequest
-	(*Order)(nil),                                   // 292: header.Order
-	(*OrderPipelineStage)(nil),                      // 293: header.OrderPipelineStage
-	(*OrderAgent)(nil),                              // 294: header.OrderAgent
-	(*Bills)(nil),                                   // 295: header.Bills
-	(*Bill)(nil),                                    // 296: header.Bill
-	(*CancellationCodes)(nil),                       // 297: header.CancellationCodes
-	(*CancellationCode)(nil),                        // 298: header.CancellationCode
-	(*OrderPipelineUpdated)(nil),                    // 299: header.OrderPipelineUpdated
-	(*OrderStatusUpdated)(nil),                      // 300: header.OrderStatusUpdated
-	(*OrderHistoryEntry)(nil),                       // 301: header.OrderHistoryEntry
-	(*OrderHistoryEntries)(nil),                     // 302: header.OrderHistoryEntries
-	(*ProductValidity)(nil),                         // 303: header.ProductValidity
-	(*Discount)(nil),                                // 304: header.Discount
-	(*Product)(nil),                                 // 305: header.Product
-	(*ProductEnrichSource)(nil),                     // 306: header.ProductEnrichSource
-	(*ProductStock)(nil),                            // 307: header.ProductStock
-	(*ProductOffer)(nil),                            // 308: header.ProductOffer
-	(*ProductOption)(nil),                           // 309: header.ProductOption
-	(*GoogleSheetProductFeed)(nil),                  // 310: header.GoogleSheetProductFeed
-	(*ShopeeProductFeed)(nil),                       // 311: header.ShopeeProductFeed
-	(*ProductFeeds)(nil),                            // 312: header.ProductFeeds
-	(*ProductFeed)(nil),                             // 313: header.ProductFeed
-	(*ProductsRequest)(nil),                         // 314: header.ProductsRequest
-	(*KV)(nil),                                      // 315: header.KV
-	(*ProductCategoryBuildQueryExample)(nil),        // 316: header.ProductCategoryBuildQueryExample
-	(*ProductCategory)(nil),                         // 317: header.ProductCategory
-	(*ProductCategoryExtractExample)(nil),           // 318: header.ProductCategoryExtractExample
-	(*ProductCategories)(nil),                       // 319: header.ProductCategories
-	(*Tax)(nil),                                     // 320: header.Tax
-	(*ErrorAttribute)(nil),                          // 321: header.ErrorAttribute
-	(*Error)(nil),                                   // 322: header.Error
-	(*ShopeeShop)(nil),                              // 323: header.ShopeeShop
-	(*ShopeeSyncProductResponse)(nil),               // 324: header.ShopeeSyncProductResponse
-	(*AddressAutocompleteResponses)(nil),            // 325: header.AddressAutocompleteResponses
-	(*AddressAutocompleteResponse)(nil),             // 326: header.AddressAutocompleteResponse
-	(*SubstringIndex)(nil),                          // 327: header.SubstringIndex
-	(*PipelineStage)(nil),                           // 328: header.PipelineStage
-	(*PipelineRule)(nil),                            // 329: header.PipelineRule
-	(*Pipelines)(nil),                               // 330: header.Pipelines
-	(*Pipeline)(nil),                                // 331: header.Pipeline
-	(*Tasks)(nil),                                   // 332: header.Tasks
-	(*ImportLeadRequest)(nil),                       // 333: header.ImportLeadRequest
-	(*ImportLeadResponse)(nil),                      // 334: header.ImportLeadResponse
-	(*ImportProductRequest)(nil),                    // 335: header.ImportProductRequest
-	(*ImportProductResponse)(nil),                   // 336: header.ImportProductResponse
-	(*Task)(nil),                                    // 337: header.Task
-	(*TaskMember)(nil),                              // 338: header.TaskMember
-	(*TaskHistoryEntry)(nil),                        // 339: header.TaskHistoryEntry
-	(*TaskHistoryEntries)(nil),                      // 340: header.TaskHistoryEntries
-	(*AgentGroups)(nil),                             // 341: header.AgentGroups
-	(*AgentGroup)(nil),                              // 342: header.AgentGroup
-	(*DocHit)(nil),                                  // 343: header.DocHit
-	(*DocSearchResponse)(nil),                       // 344: header.DocSearchResponse
-	(*ArticleHit)(nil),                              // 345: header.ArticleHit
-	(*ArticleSearchResponse)(nil),                   // 346: header.ArticleSearchResponse
-	(*AccessToken)(nil),                             // 347: header.AccessToken
-	(*ZaloCodeChallenge)(nil),                       // 348: header.ZaloCodeChallenge
-	(*ConversationModal)(nil),                       // 349: header.ConversationModal
-	(*ConversationModals)(nil),                      // 350: header.ConversationModals
-	(*ConversationModalPickRequest)(nil),            // 351: header.ConversationModalPickRequest
-	(*ConversationModalPicked)(nil),                 // 352: header.ConversationModalPicked
-	(*FacebookPageRegister)(nil),                    // 353: header.FacebookPageRegister
-	(*FacebookPage)(nil),                            // 354: header.FacebookPage
-	(*FacebookPageRequest)(nil),                     // 355: header.FacebookPageRequest
-	(*FacebookPages)(nil),                           // 356: header.FacebookPages
-	(*InstagramUser)(nil),                           // 357: header.InstagramUser
-	(*CallDriverRequest)(nil),                       // 358: header.CallDriverRequest
-	(*CallDriverResponse)(nil),                      // 359: header.CallDriverResponse
-	(*BlockedNumbers)(nil),                          // 360: header.BlockedNumbers
-	(*BlockedNumber)(nil),                           // 361: header.BlockedNumber
-	(*TextToSpeech)(nil),                            // 362: header.TextToSpeech
-	(*TTSVoiceSelection)(nil),                       // 363: header.TTSVoiceSelection
-	(*BusinessHour)(nil),                            // 364: header.BusinessHour
-	(*BusinessHours)(nil),                           // 365: header.BusinessHours
-	(*RecentCallRecords)(nil),                       // 366: header.RecentCallRecords
-	(*RecentCallRecord)(nil),                        // 367: header.RecentCallRecord
-	(*ZaloUserRequest)(nil),                         // 368: header.ZaloUserRequest
-	(*ZnsRequest)(nil),                              // 369: header.ZnsRequest
-	(*SendOmniChannelMessageRequest)(nil),           // 370: header.SendOmniChannelMessageRequest
-	(*EventType)(nil),                               // 371: header.EventType
-	(*Segment)(nil),                                 // 372: header.Segment
-	(*MetaSyncBatchSession)(nil),                    // 373: header.MetaSyncBatchSession
-	(*SegmentSyncUserStatus)(nil),                   // 374: header.SegmentSyncUserStatus
-	(*SegmentSync)(nil),                             // 375: header.SegmentSync
-	(*MetaCustomAudience)(nil),                      // 376: header.MetaCustomAudience
-	(*CustomAudienceBatchResponse)(nil),             // 377: header.CustomAudienceBatchResponse
-	(*CustomAudienceBatchRequest)(nil),              // 378: header.CustomAudienceBatchRequest
-	(*Segments)(nil),                                // 379: header.Segments
-	(*SegmentUsers)(nil),                            // 380: header.SegmentUsers
-	(*UserSegment)(nil),                             // 381: header.UserSegment
-	(*Campaign)(nil),                                // 382: header.Campaign
-	(*OutboundCallCampaign)(nil),                    // 383: header.OutboundCallCampaign
-	(*ListOutboundCallRequest)(nil),                 // 384: header.ListOutboundCallRequest
-	(*OutboundCallEntries)(nil),                     // 385: header.OutboundCallEntries
-	(*ImportOutboundCallEntryRequest)(nil),          // 386: header.ImportOutboundCallEntryRequest
-	(*OutboundCallEntry)(nil),                       // 387: header.OutboundCallEntry
-	(*MarketingMessage)(nil),                        // 388: header.MarketingMessage
-	(*CampaignSendLogEntry)(nil),                    // 389: header.CampaignSendLogEntry
-	(*CampaignSendLog)(nil),                         // 390: header.CampaignSendLog
-	(*BroadcastCampaignMetrics)(nil),                // 391: header.BroadcastCampaignMetrics
-	(*EmailSenderVerificationResult)(nil),           // 392: header.EmailSenderVerificationResult
-	(*BusinessEmailAddress)(nil),                    // 393: header.BusinessEmailAddress
-	(*BusinessEmailAddresses)(nil),                  // 394: header.BusinessEmailAddresses
-	(*FormReportRequest)(nil),                       // 395: header.FormReportRequest
-	(*FormReportResponse)(nil),                      // 396: header.FormReportResponse
-	(*ListFormSubmissionRequest)(nil),               // 397: header.ListFormSubmissionRequest
-	(*OutboundCallReportRequest)(nil),               // 398: header.OutboundCallReportRequest
-	(*ImportOutboundCallEntryResponse)(nil),         // 399: header.ImportOutboundCallEntryResponse
-	(*OutboundCallReportResponse)(nil),              // 400: header.OutboundCallReportResponse
-	(*OutboundCallSurveyReport)(nil),                // 401: header.OutboundCallSurveyReport
-	(*OutboundCallAgentReport)(nil),                 // 402: header.OutboundCallAgentReport
-	(*HourEventMeta)(nil),                           // 403: header.HourEventMeta
-	(*LinkData)(nil),                                // 404: header.LinkData
-	(*WorkflowAction)(nil),                          // 405: header.WorkflowAction
-	(*ActionSendFacebookConversion)(nil),            // 406: header.ActionSendFacebookConversion
-	(*ActionTerminateBot)(nil),                      // 407: header.ActionTerminateBot
-	(*ActionStartScope)(nil),                        // 408: header.ActionStartScope
-	(*ActionAssignLead)(nil),                        // 409: header.ActionAssignLead
-	(*ActionCallWorkflow)(nil),                      // 410: header.ActionCallWorkflow
-	(*ActionSetVariable)(nil),                       // 411: header.ActionSetVariable
-	(*ActionStartThread)(nil),                       // 412: header.ActionStartThread
-	(*ActionAskInfo)(nil),                           // 413: header.ActionAskInfo
-	(*ActionLLM)(nil),                               // 414: header.ActionLLM
-	(*LLMResponseJSONSchemaFormat)(nil),             // 415: header.LLMResponseJSONSchemaFormat
-	(*ActionCreateOrder)(nil),                       // 416: header.ActionCreateOrder
-	(*ActionWaitMessage)(nil),                       // 417: header.ActionWaitMessage
-	(*ActionSendTranscript)(nil),                    // 418: header.ActionSendTranscript
-	(*RunWorkflowActionRequest)(nil),                // 419: header.RunWorkflowActionRequest
-	(*ActionSendHttpReq)(nil),                       // 420: header.ActionSendHttpReq
-	(*ActionPercentageSplit)(nil),                   // 421: header.ActionPercentageSplit
-	(*ActionWaitBranch)(nil),                        // 422: header.ActionWaitBranch
-	(*ActionBranchingBranch)(nil),                   // 423: header.ActionBranchingBranch
-	(*ActionBranching)(nil),                         // 424: header.ActionBranching
-	(*BouncedEmail)(nil),                            // 425: header.BouncedEmail
-	(*BlockedEmail)(nil),                            // 426: header.BlockedEmail
-	(*Response)(nil),                                // 427: header.Response
-	(*ReportCount)(nil),                             // 428: header.ReportCount
-	(*ZaloCallConsent)(nil),                         // 429: header.ZaloCallConsent
-	(*SendEmailRequest)(nil),                        // 430: header.SendEmailRequest
-	(*Email)(nil),                                   // 431: header.Email
-	(*EmailAttachment)(nil),                         // 432: header.EmailAttachment
-	(*WorkflowThread)(nil),                          // 433: header.WorkflowThread
-	(*WorkflowStack)(nil),                           // 434: header.WorkflowStack
-	(*WorkflowStackItem)(nil),                       // 435: header.WorkflowStackItem
-	(*WorkflowSession)(nil),                         // 436: header.WorkflowSession
-	(*SchedulerTask)(nil),                           // 437: header.SchedulerTask
-	(*Credit)(nil),                                  // 438: header.Credit
-	(*CreditSpendEntry)(nil),                        // 439: header.CreditSpendEntry
-	(*CreditEntryDataId)(nil),                       // 440: header.CreditEntryDataId
-	(*CreditEntryDataAgent)(nil),                    // 441: header.CreditEntryDataAgent
-	(*CreditEntryDataEmail)(nil),                    // 442: header.CreditEntryDataEmail
-	(*CreditEntryDataZaloZNS)(nil),                  // 443: header.CreditEntryDataZaloZNS
-	(*CreditEntryDataZaloRequestCall)(nil),          // 444: header.CreditEntryDataZaloRequestCall
-	(*CreditEntryDataZaloActiveMessage)(nil),        // 445: header.CreditEntryDataZaloActiveMessage
-	(*CreditEntryData)(nil),                         // 446: header.CreditEntryData
-	(*CreditEntryDataLLMCompletion)(nil),            // 447: header.CreditEntryDataLLMCompletion
-	(*CreditEntryDataTextEmbedding)(nil),            // 448: header.CreditEntryDataTextEmbedding
-	(*CreditSpendEntries)(nil),                      // 449: header.CreditSpendEntries
-	(*TrySpendCreditResponse)(nil),                  // 450: header.TrySpendCreditResponse
-	(*CreditSpendReportResponseData)(nil),           // 451: header.CreditSpendReportResponseData
-	(*CreditSpendReportResponse)(nil),               // 452: header.CreditSpendReportResponse
-	(*AccSub)(nil),                                  // 453: header.AccSub
-	(*AccSubs)(nil),                                 // 454: header.AccSubs
-	(*OutboundCallUpdateEvent)(nil),                 // 455: header.OutboundCallUpdateEvent
-	(*String)(nil),                                  // 456: header.String
-	(*Number)(nil),                                  // 457: header.Number
-	(*StrNumM)(nil),                                 // 458: header.StrNumM
-	(*NumStrM)(nil),                                 // 459: header.NumStrM
-	(*ConvoReportRequest)(nil),                      // 460: header.ConvoReportRequest
-	(*ConvoReportResponse)(nil),                     // 461: header.ConvoReportResponse
-	(*ConvoReportEntry)(nil),                        // 462: header.ConvoReportEntry
-	(*WorkflowGoal)(nil),                            // 463: header.WorkflowGoal
-	(*WorkflowTrigger)(nil),                         // 464: header.WorkflowTrigger
-	(*WorkflowTimming)(nil),                         // 465: header.WorkflowTimming
-	(*WorkflowCondition)(nil),                       // 466: header.WorkflowCondition
-	(*LLMCondition)(nil),                            // 467: header.LLMCondition
-	(*WorkflowLogRequest)(nil),                      // 468: header.WorkflowLogRequest
-	(*Workflow)(nil),                                // 469: header.Workflow
-	(*KvSetting)(nil),                               // 470: header.KvSetting
-	(*LLMToolCall)(nil),                             // 471: header.LLMToolCall
-	(*LLMChatHistoryEntry)(nil),                     // 472: header.LLMChatHistoryEntry
-	(*AIDataEntryUsed)(nil),                         // 473: header.AIDataEntryUsed
-	(*AIAgentTrace)(nil),                            // 474: header.AIAgentTrace
-	(*AIAgentSpan)(nil),                             // 475: header.AIAgentSpan
-	(*WorkflowLog)(nil),                             // 476: header.WorkflowLog
-	(*TicketType)(nil),                              // 477: header.TicketType
-	(*TicketSatisfaction)(nil),                      // 478: header.TicketSatisfaction
-	(*TicketAutoReply)(nil),                         // 479: header.TicketAutoReply
-	(*TicketTemplate)(nil),                          // 480: header.TicketTemplate
-	(*Ticket)(nil),                                  // 481: header.Ticket
-	(*ReceiptMember)(nil),                           // 482: header.ReceiptMember
-	(*SLAViolations)(nil),                           // 483: header.SLAViolations
-	(*SLAViolation)(nil),                            // 484: header.SLAViolation
-	(*TicketHistoryEntry)(nil),                      // 485: header.TicketHistoryEntry
-	(*ListTicketRequest)(nil),                       // 486: header.ListTicketRequest
-	(*TicketView)(nil),                              // 487: header.TicketView
-	(*TicketViewMember)(nil),                        // 488: header.TicketViewMember
-	(*LiveViewMetric)(nil),                          // 489: header.LiveViewMetric
-	(*LiveUserView)(nil),                            // 490: header.LiveUserView
-	(*BotTemplate)(nil),                             // 491: header.BotTemplate
-	(*ResourceGroupMember)(nil),                     // 492: header.ResourceGroupMember
-	(*SLAPolicy)(nil),                               // 493: header.SLAPolicy
-	(*SLATarget)(nil),                               // 494: header.SLATarget
-	(*ArticleSEOSetting)(nil),                       // 495: header.ArticleSEOSetting
-	(*Article)(nil),                                 // 496: header.Article
-	(*ArticleCategory)(nil),                         // 497: header.ArticleCategory
-	(*ArticleTopic)(nil),                            // 498: header.ArticleTopic
-	(*ArticleTopics)(nil),                           // 499: header.ArticleTopics
-	(*ArticleTopicRequest)(nil),                     // 500: header.ArticleTopicRequest
-	(*KnowledgeBase)(nil),                           // 501: header.KnowledgeBase
-	(*KnowledgeBaseArticlePageSetting)(nil),         // 502: header.KnowledgeBaseArticlePageSetting
-	(*KnowledgeBasePageStyle)(nil),                  // 503: header.KnowledgeBasePageStyle
-	(*Job)(nil),                                     // 504: header.Job
-	(*Block)(nil),                                   // 505: header.Block
-	(*LLMInputRetryPolicy)(nil),                     // 506: header.LLMInputRetryPolicy
-	(*TicketUpdatedNotiEmail)(nil),                  // 507: header.TicketUpdatedNotiEmail
-	(*ResetPasswordEmail)(nil),                      // 508: header.ResetPasswordEmail
-	(*OTPEmail)(nil),                                // 509: header.OTPEmail
-	(*InviteEmail)(nil),                             // 510: header.InviteEmail
-	(*LoginRequest)(nil),                            // 511: header.LoginRequest
-	(*AgentProfile)(nil),                            // 512: header.AgentProfile
-	(*InvitationLink)(nil),                          // 513: header.InvitationLink
-	(*ProfileEmailUsage)(nil),                       // 514: header.ProfileEmailUsage
-	(*InviteRequest)(nil),                           // 515: header.InviteRequest
-	(*JoinAccountRequest)(nil),                      // 516: header.JoinAccountRequest
-	(*PromotionCode)(nil),                           // 517: header.PromotionCode
-	(*SubizPromotionProgram)(nil),                   // 518: header.SubizPromotionProgram
-	(*PromotionCheckResult)(nil),                    // 519: header.PromotionCheckResult
-	(*PromotionCodeUsage)(nil),                      // 520: header.PromotionCodeUsage
-	(*SubizPaymentMethod)(nil),                      // 521: header.SubizPaymentMethod
-	(*StripeWebhookEvent)(nil),                      // 522: header.StripeWebhookEvent
-	(*WorkflowPulse)(nil),                           // 523: header.WorkflowPulse
-	(*WorkflowTimeup)(nil),                          // 524: header.WorkflowTimeup
-	(*AndroidNotificationRequest)(nil),              // 525: header.AndroidNotificationRequest
-	(*AndroidNotification)(nil),                     // 526: header.AndroidNotification
-	(*AndroidDevice)(nil),                           // 527: header.AndroidDevice
-	(*BankAccount)(nil),                             // 528: header.BankAccount
-	(*WorkflowCount)(nil),                           // 529: header.WorkflowCount
-	(*SuggestLeadFieldRequest)(nil),                 // 530: header.SuggestLeadFieldRequest
-	(*UsersRequest)(nil),                            // 531: header.UsersRequest
-	(*BankTransferRequest)(nil),                     // 532: header.BankTransferRequest
-	(*GenQrCodeRequest)(nil),                        // 533: header.GenQrCodeRequest
-	(*QrCode)(nil),                                  // 534: header.QrCode
-	(*ReportUserEventEntry)(nil),                    // 535: header.ReportUserEventEntry
-	(*ReportUserEventRequest)(nil),                  // 536: header.ReportUserEventRequest
-	(*ReportUserEventResponse)(nil),                 // 537: header.ReportUserEventResponse
-	(*CounterReportResponse)(nil),                   // 538: header.CounterReportResponse
-	(*CounterDataPoint)(nil),                        // 539: header.CounterDataPoint
-	(*SetupFeatureStatus)(nil),                      // 540: header.SetupFeatureStatus
-	(*RelationUpdates)(nil),                         // 541: header.RelationUpdates
-	(*RelationUpdate)(nil),                          // 542: header.RelationUpdate
-	(*ArticleNode)(nil),                             // 543: header.ArticleNode
-	(*AIAgentGuardrail)(nil),                        // 544: header.AIAgentGuardrail
-	(*AIAgentOverrideRule)(nil),                     // 545: header.AIAgentOverrideRule
-	(*AIAgent)(nil),                                 // 546: header.AIAgent
-	(*AIAgentUsageLimit)(nil),                       // 547: header.AIAgentUsageLimit
-	(*InitFlow)(nil),                                // 548: header.InitFlow
-	(*AIDataStore)(nil),                             // 549: header.AIDataStore
-	(*JSONSchema)(nil),                              // 550: header.JSONSchema
-	(*AIFunction)(nil),                              // 551: header.AIFunction
-	(*RecordUserPreference)(nil),                    // 552: header.RecordUserPreference
-	(*CollectInfomationAttribute)(nil),              // 553: header.CollectInfomationAttribute
-	(*CollectUserInformation)(nil),                  // 554: header.CollectUserInformation
-	(*UpdateUserInformation)(nil),                   // 555: header.UpdateUserInformation
-	(*AutomationFunction)(nil),                      // 556: header.AutomationFunction
-	(*CreateTicketFunction)(nil),                    // 557: header.CreateTicketFunction
-	(*AIIntent)(nil),                                // 558: header.AIIntent
-	(*AIDataGroup)(nil),                             // 559: header.AIDataGroup
-	(*CrawlResponse)(nil),                           // 560: header.CrawlResponse
-	(*AIDataChunk)(nil),                             // 561: header.AIDataChunk
-	(*AIDataEntry)(nil),                             // 562: header.AIDataEntry
-	(*AiResponseSource)(nil),                        // 563: header.AiResponseSource
-	(*FacebookAdsFlow)(nil),                         // 564: header.FacebookAdsFlow
-	(*RuleOrder)(nil),                               // 565: header.RuleOrder
-	(*NotiSubscription)(nil),                        // 566: header.NotiSubscription
-	(*TicketTypeSubscription)(nil),                  // 567: header.TicketTypeSubscription
-	(*NotiSetting)(nil),                             // 568: header.NotiSetting
-	(*DoNotDisturb)(nil),                            // 569: header.DoNotDisturb
-	(*PushToken)(nil),                               // 570: header.PushToken
-	(*ZNSTemplateParam)(nil),                        // 571: header.ZNSTemplateParam
-	(*ZNSTemplateLayoutComponentItem)(nil),          // 572: header.ZNSTemplateLayoutComponentItem
-	(*ZNSTemplateLayoutComponentButton)(nil),        // 573: header.ZNSTemplateLayoutComponentButton
-	(*ZNSTemplateLayoutComponentButtons)(nil),       // 574: header.ZNSTemplateLayoutComponentButtons
-	(*ZNSTemplateLayoutComponentTableRow)(nil),      // 575: header.ZNSTemplateLayoutComponentTableRow
-	(*ZNSTemplateLayoutComponentTable)(nil),         // 576: header.ZNSTemplateLayoutComponentTable
-	(*ZNSTemplateLayoutComponentImageItem)(nil),     // 577: header.ZNSTemplateLayoutComponentImageItem
-	(*ZNSTemplateLayoutComponentImages)(nil),        // 578: header.ZNSTemplateLayoutComponentImages
-	(*ZNSTemplateLayoutComponentLogo)(nil),          // 579: header.ZNSTemplateLayoutComponentLogo
-	(*ZNSTemplateLayoutComponent)(nil),              // 580: header.ZNSTemplateLayoutComponent
-	(*ZNSTemplateComponents)(nil),                   // 581: header.ZNSTemplateComponents
-	(*ZNSTemplateLayout)(nil),                       // 582: header.ZNSTemplateLayout
-	(*ZNSTemplateRequest)(nil),                      // 583: header.ZNSTemplateRequest
-	(*ZaloOAZNSQuota)(nil),                          // 584: header.ZaloOAZNSQuota
-	(*ZNSTemplate)(nil),                             // 585: header.ZNSTemplate
-	(*ZnsTemplate)(nil),                             // 586: header.ZnsTemplate
-	(*ZNSButton)(nil),                               // 587: header.ZNSButton
-	(*ZNSParamDefinition)(nil),                      // 588: header.ZNSParamDefinition
-	(*ZNSMedia)(nil),                                // 589: header.ZNSMedia
-	(*EmailSignature)(nil),                          // 590: header.EmailSignature
-	(*TestMessageRequest)(nil),                      // 591: header.TestMessageRequest
-	(*CreditUsage)(nil),                             // 592: header.CreditUsage
-	(*SendSubizZNSTestRequest)(nil),                 // 593: header.SendSubizZNSTestRequest
-	(*ActionAIAgentTrack)(nil),                      // 594: header.ActionAIAgentTrack
-	(*Markers)(nil),                                 // 595: header.Markers
-	(*UserDataSource)(nil),                          // 596: header.UserDataSource
-	(*MetaBusiness)(nil),                            // 597: header.MetaBusiness
-	(*MetaAdAccount)(nil),                           // 598: header.MetaAdAccount
-	(*VectorSearchReq)(nil),                         // 599: header.VectorSearchReq
-	(*VectorDoc)(nil),                               // 600: header.VectorDoc
-	(*ListVectorRequest)(nil),                       // 601: header.ListVectorRequest
-	(*VectorDocProp)(nil),                           // 602: header.VectorDocProp
-	(*VectorMatch)(nil),                             // 603: header.VectorMatch
-	(*VectorMatches)(nil),                           // 604: header.VectorMatches
-	(*NamedEntity)(nil),                             // 605: header.NamedEntity
-	(*ListAvaiableDiscountsRequest)(nil),            // 606: header.ListAvaiableDiscountsRequest
-	nil,                                             // 607: header.UserReportEntry.CategoryIdsEntry
-	nil,                                             // 608: header.Event.CustomDataEntry
-	nil,                                             // 609: header.Message.I18nBlockEntry
-	nil,                                             // 610: header.Message.ZnsTemplateDataEntry
-	nil,                                             // 611: header.Message.ZnsTemplateDefaultDataEntry
-	nil,                                             // 612: header.Message.ZnsTemplateDataFieldEntry
-	nil,                                             // 613: header.MessageButton.I18nTitleEntry
-	(*ReportBotResponse_Metric)(nil),                // 614: header.ReportBotResponse.Metric
-	(*ActionrunMetrics_ActionrunMetric)(nil),        // 615: header.ActionrunMetrics.ActionrunMetric
-	nil,                                             // 616: header.WidgetGroup.I18nNameEntry
-	nil,                                             // 617: header.TextComponent.I18nBlockEntry
-	nil,                                             // 618: header.I18nBlock.I18nEntry
-	nil,                                             // 619: header.Notif.I18nTitleBlockEntry
-	(*ContactComponent_ContactButton)(nil),          // 620: header.ContactComponent.ContactButton
-	(*CallContactComponent_Hotline)(nil),            // 621: header.CallContactComponent.Hotline
-	(*MapContactComponent_Location)(nil),            // 622: header.MapContactComponent.Location
-	(*FormField_FormFieldOption)(nil),               // 623: header.FormField.FormFieldOption
-	nil,                                             // 624: header.GoogleReviewSetting.RepliesMEntry
-	(*CountTouchpointResponse_TouchpointCount)(nil), // 625: header.CountTouchpointResponse.TouchpointCount
-	nil, // 626: header.Order.FieldsEntry
-	nil, // 627: header.Product.I18nDescriptionBlockEntry
-	nil, // 628: header.ProductCategory.I18nNameEntry
-	nil, // 629: header.ProductCategory.AttributesEntry
-	nil, // 630: header.Error.FieldsEntry
-	nil, // 631: header.Error.HiddenEntry
-	nil, // 632: header.Error.MessageEntry
-	nil, // 633: header.Error.AttrsEntry
-	nil, // 634: header.Error.HiddenAttrsEntry
-	nil, // 635: header.DocHit.QueryMatchMEntry
-	nil, // 636: header.ZnsRequest.TemplateDataEntry
-	nil, // 637: header.OutboundCallCampaign.AgentWeightEntry
-	nil, // 638: header.ListOutboundCallRequest.AgentWeightEntry
-	nil, // 639: header.ImportOutboundCallEntryRequest.AgentWeightEntry
-	(*BroadcastCampaignMetrics_BroadcastCampaignMetric)(nil), // 640: header.BroadcastCampaignMetrics.BroadcastCampaignMetric
-	nil,                            // 641: header.SendEmailRequest.HeaderEntry
-	nil,                            // 642: header.Email.HeaderEntry
-	nil,                            // 643: header.WorkflowSession.ThreadsEntry
-	nil,                            // 644: header.StrNumM.StrsMEntry
-	nil,                            // 645: header.NumStrM.NumsMEntry
-	nil,                            // 646: header.Workflow.ActionsEntry
-	nil,                            // 647: header.Workflow.ComputedActionsEntry
-	nil,                            // 648: header.LLMChatHistoryEntry.FieldsEntry
-	nil,                            // 649: header.WorkflowLog.DataEntry
-	nil,                            // 650: header.Ticket.MemberMEntry
-	nil,                            // 651: header.LiveUserView.MetricsEntry
-	nil,                            // 652: header.ArticleSEOSetting.PageTitleEntry
-	nil,                            // 653: header.ArticleSEOSetting.MetaDescriptionEntry
-	nil,                            // 654: header.ArticleSEOSetting.SocialTitleEntry
-	nil,                            // 655: header.ArticleSEOSetting.SocialDescriptionEntry
-	nil,                            // 656: header.Article.I18nTitleEntry
-	nil,                            // 657: header.Article.I18nContentEntry
-	nil,                            // 658: header.Article.I18nSlugEntry
-	nil,                            // 659: header.ArticleCategory.I18nTitleEntry
-	nil,                            // 660: header.ArticleCategory.I18nDescriptionEntry
-	nil,                            // 661: header.ArticleCategory.I18nSlugEntry
-	nil,                            // 662: header.ArticleTopic.TitleEntry
-	nil,                            // 663: header.KnowledgeBase.I18nTitleEntry
-	nil,                            // 664: header.KnowledgeBase.I18nDescriptionEntry
-	(*Block_InputOption)(nil),      // 665: header.Block.InputOption
-	nil,                            // 666: header.Block.AttrsEntry
-	nil,                            // 667: header.ArticleNode.I18nTitleEntry
-	nil,                            // 668: header.JSONSchema.PropertiesEntry
-	nil,                            // 669: header.AutomationFunction.ActionsEntry
-	(*common.Context)(nil),         // 670: common.Context
-	(*I18NString)(nil),             // 671: header.I18nString
-	(*common.Device)(nil),          // 672: common.Device
-	(*common.PackedDevice)(nil),    // 673: common.PackedDevice
-	(*account.Agent)(nil),          // 674: account.Agent
-	(*account.Presence)(nil),       // 675: account.Presence
-	(*account.Account)(nil),        // 676: account.Account
-	(*payment.Bill)(nil),           // 677: payment.Bill
-	(*common.SessionCampaign)(nil), // 678: common.SessionCampaign
-	(*EventConditionFilter)(nil),   // 679: header.EventConditionFilter
-	(*FloatCondition)(nil),         // 680: header.FloatCondition
-	(*TextCondition)(nil),          // 681: header.TextCondition
-	(*BooleanCondition)(nil),       // 682: header.BooleanCondition
-	(*DatetimeCondition)(nil),      // 683: header.DatetimeCondition
-	(*EventCondition)(nil),         // 684: header.EventCondition
-	(*payment.Subscription)(nil),   // 685: payment.Subscription
-	(*payment.Invoice)(nil),        // 686: payment.Invoice
+	(*PriceRule)(nil),                               // 266: header.PriceRule
+	(*OrderItem)(nil),                               // 267: header.OrderItem
+	(*GHNAddress)(nil),                              // 268: header.GHNAddress
+	(*Address)(nil),                                 // 269: header.Address
+	(*GHNShippingData)(nil),                         // 270: header.GHNShippingData
+	(*GHNOrder)(nil),                                // 271: header.GHNOrder
+	(*GHNOrderFee)(nil),                             // 272: header.GHNOrderFee
+	(*GHNOrder2)(nil),                               // 273: header.GHNOrder2
+	(*GHNOrder2Fee)(nil),                            // 274: header.GHNOrder2Fee
+	(*GHNOrderItem)(nil),                            // 275: header.GHNOrderItem
+	(*GHTKShippingData)(nil),                        // 276: header.GHTKShippingData
+	(*GHTKOrder)(nil),                               // 277: header.GHTKOrder
+	(*ShippingInfo)(nil),                            // 278: header.ShippingInfo
+	(*ShippingData)(nil),                            // 279: header.ShippingData
+	(*ShippingPolicies)(nil),                        // 280: header.ShippingPolicies
+	(*ShippingPolicy)(nil),                          // 281: header.ShippingPolicy
+	(*IntegratedShipping)(nil),                      // 282: header.IntegratedShipping
+	(*IntegratedShippings)(nil),                     // 283: header.IntegratedShippings
+	(*PaymentMethod)(nil),                           // 284: header.PaymentMethod
+	(*PaymentMethods)(nil),                          // 285: header.PaymentMethods
+	(*OrderMetric)(nil),                             // 286: header.OrderMetric
+	(*Orders)(nil),                                  // 287: header.Orders
+	(*CountOrdersResponse)(nil),                     // 288: header.CountOrdersResponse
+	(*DownloadOrderRequest)(nil),                    // 289: header.DownloadOrderRequest
+	(*Order)(nil),                                   // 290: header.Order
+	(*OrderPipelineStage)(nil),                      // 291: header.OrderPipelineStage
+	(*OrderAgent)(nil),                              // 292: header.OrderAgent
+	(*Bills)(nil),                                   // 293: header.Bills
+	(*Bill)(nil),                                    // 294: header.Bill
+	(*CancellationCodes)(nil),                       // 295: header.CancellationCodes
+	(*CancellationCode)(nil),                        // 296: header.CancellationCode
+	(*OrderPipelineUpdated)(nil),                    // 297: header.OrderPipelineUpdated
+	(*OrderStatusUpdated)(nil),                      // 298: header.OrderStatusUpdated
+	(*OrderHistoryEntry)(nil),                       // 299: header.OrderHistoryEntry
+	(*OrderHistoryEntries)(nil),                     // 300: header.OrderHistoryEntries
+	(*ProductValidity)(nil),                         // 301: header.ProductValidity
+	(*Discount)(nil),                                // 302: header.Discount
+	(*Product)(nil),                                 // 303: header.Product
+	(*ProductEnrichSource)(nil),                     // 304: header.ProductEnrichSource
+	(*ProductStock)(nil),                            // 305: header.ProductStock
+	(*ProductOffer)(nil),                            // 306: header.ProductOffer
+	(*ProductOption)(nil),                           // 307: header.ProductOption
+	(*GoogleSheetProductFeed)(nil),                  // 308: header.GoogleSheetProductFeed
+	(*ShopeeProductFeed)(nil),                       // 309: header.ShopeeProductFeed
+	(*ProductFeeds)(nil),                            // 310: header.ProductFeeds
+	(*ProductFeed)(nil),                             // 311: header.ProductFeed
+	(*ProductsRequest)(nil),                         // 312: header.ProductsRequest
+	(*KV)(nil),                                      // 313: header.KV
+	(*ProductCategoryBuildQueryExample)(nil),        // 314: header.ProductCategoryBuildQueryExample
+	(*ProductCategory)(nil),                         // 315: header.ProductCategory
+	(*ProductCategoryExtractExample)(nil),           // 316: header.ProductCategoryExtractExample
+	(*ProductCategories)(nil),                       // 317: header.ProductCategories
+	(*Tax)(nil),                                     // 318: header.Tax
+	(*ErrorAttribute)(nil),                          // 319: header.ErrorAttribute
+	(*Error)(nil),                                   // 320: header.Error
+	(*ShopeeShop)(nil),                              // 321: header.ShopeeShop
+	(*ShopeeSyncProductResponse)(nil),               // 322: header.ShopeeSyncProductResponse
+	(*AddressAutocompleteResponses)(nil),            // 323: header.AddressAutocompleteResponses
+	(*AddressAutocompleteResponse)(nil),             // 324: header.AddressAutocompleteResponse
+	(*SubstringIndex)(nil),                          // 325: header.SubstringIndex
+	(*PipelineStage)(nil),                           // 326: header.PipelineStage
+	(*PipelineRule)(nil),                            // 327: header.PipelineRule
+	(*Pipelines)(nil),                               // 328: header.Pipelines
+	(*Pipeline)(nil),                                // 329: header.Pipeline
+	(*Tasks)(nil),                                   // 330: header.Tasks
+	(*ImportLeadRequest)(nil),                       // 331: header.ImportLeadRequest
+	(*ImportLeadResponse)(nil),                      // 332: header.ImportLeadResponse
+	(*ImportProductRequest)(nil),                    // 333: header.ImportProductRequest
+	(*ImportProductResponse)(nil),                   // 334: header.ImportProductResponse
+	(*Task)(nil),                                    // 335: header.Task
+	(*TaskMember)(nil),                              // 336: header.TaskMember
+	(*TaskHistoryEntry)(nil),                        // 337: header.TaskHistoryEntry
+	(*TaskHistoryEntries)(nil),                      // 338: header.TaskHistoryEntries
+	(*AgentGroups)(nil),                             // 339: header.AgentGroups
+	(*AgentGroup)(nil),                              // 340: header.AgentGroup
+	(*DocHit)(nil),                                  // 341: header.DocHit
+	(*DocSearchResponse)(nil),                       // 342: header.DocSearchResponse
+	(*ArticleHit)(nil),                              // 343: header.ArticleHit
+	(*ArticleSearchResponse)(nil),                   // 344: header.ArticleSearchResponse
+	(*AccessToken)(nil),                             // 345: header.AccessToken
+	(*ZaloCodeChallenge)(nil),                       // 346: header.ZaloCodeChallenge
+	(*ConversationModal)(nil),                       // 347: header.ConversationModal
+	(*ConversationModals)(nil),                      // 348: header.ConversationModals
+	(*ConversationModalPickRequest)(nil),            // 349: header.ConversationModalPickRequest
+	(*ConversationModalPicked)(nil),                 // 350: header.ConversationModalPicked
+	(*FacebookPageRegister)(nil),                    // 351: header.FacebookPageRegister
+	(*FacebookPage)(nil),                            // 352: header.FacebookPage
+	(*FacebookPageRequest)(nil),                     // 353: header.FacebookPageRequest
+	(*FacebookPages)(nil),                           // 354: header.FacebookPages
+	(*InstagramUser)(nil),                           // 355: header.InstagramUser
+	(*CallDriverRequest)(nil),                       // 356: header.CallDriverRequest
+	(*CallDriverResponse)(nil),                      // 357: header.CallDriverResponse
+	(*BlockedNumbers)(nil),                          // 358: header.BlockedNumbers
+	(*BlockedNumber)(nil),                           // 359: header.BlockedNumber
+	(*TextToSpeech)(nil),                            // 360: header.TextToSpeech
+	(*TTSVoiceSelection)(nil),                       // 361: header.TTSVoiceSelection
+	(*BusinessHour)(nil),                            // 362: header.BusinessHour
+	(*BusinessHours)(nil),                           // 363: header.BusinessHours
+	(*RecentCallRecords)(nil),                       // 364: header.RecentCallRecords
+	(*RecentCallRecord)(nil),                        // 365: header.RecentCallRecord
+	(*ZaloUserRequest)(nil),                         // 366: header.ZaloUserRequest
+	(*ZnsRequest)(nil),                              // 367: header.ZnsRequest
+	(*SendOmniChannelMessageRequest)(nil),           // 368: header.SendOmniChannelMessageRequest
+	(*EventType)(nil),                               // 369: header.EventType
+	(*Segment)(nil),                                 // 370: header.Segment
+	(*MetaSyncBatchSession)(nil),                    // 371: header.MetaSyncBatchSession
+	(*SegmentSyncUserStatus)(nil),                   // 372: header.SegmentSyncUserStatus
+	(*SegmentSync)(nil),                             // 373: header.SegmentSync
+	(*MetaCustomAudience)(nil),                      // 374: header.MetaCustomAudience
+	(*CustomAudienceBatchResponse)(nil),             // 375: header.CustomAudienceBatchResponse
+	(*CustomAudienceBatchRequest)(nil),              // 376: header.CustomAudienceBatchRequest
+	(*Segments)(nil),                                // 377: header.Segments
+	(*SegmentUsers)(nil),                            // 378: header.SegmentUsers
+	(*UserSegment)(nil),                             // 379: header.UserSegment
+	(*Campaign)(nil),                                // 380: header.Campaign
+	(*OutboundCallCampaign)(nil),                    // 381: header.OutboundCallCampaign
+	(*ListOutboundCallRequest)(nil),                 // 382: header.ListOutboundCallRequest
+	(*OutboundCallEntries)(nil),                     // 383: header.OutboundCallEntries
+	(*ImportOutboundCallEntryRequest)(nil),          // 384: header.ImportOutboundCallEntryRequest
+	(*OutboundCallEntry)(nil),                       // 385: header.OutboundCallEntry
+	(*MarketingMessage)(nil),                        // 386: header.MarketingMessage
+	(*CampaignSendLogEntry)(nil),                    // 387: header.CampaignSendLogEntry
+	(*CampaignSendLog)(nil),                         // 388: header.CampaignSendLog
+	(*BroadcastCampaignMetrics)(nil),                // 389: header.BroadcastCampaignMetrics
+	(*EmailSenderVerificationResult)(nil),           // 390: header.EmailSenderVerificationResult
+	(*BusinessEmailAddress)(nil),                    // 391: header.BusinessEmailAddress
+	(*BusinessEmailAddresses)(nil),                  // 392: header.BusinessEmailAddresses
+	(*FormReportRequest)(nil),                       // 393: header.FormReportRequest
+	(*FormReportResponse)(nil),                      // 394: header.FormReportResponse
+	(*ListFormSubmissionRequest)(nil),               // 395: header.ListFormSubmissionRequest
+	(*OutboundCallReportRequest)(nil),               // 396: header.OutboundCallReportRequest
+	(*ImportOutboundCallEntryResponse)(nil),         // 397: header.ImportOutboundCallEntryResponse
+	(*OutboundCallReportResponse)(nil),              // 398: header.OutboundCallReportResponse
+	(*OutboundCallSurveyReport)(nil),                // 399: header.OutboundCallSurveyReport
+	(*OutboundCallAgentReport)(nil),                 // 400: header.OutboundCallAgentReport
+	(*HourEventMeta)(nil),                           // 401: header.HourEventMeta
+	(*LinkData)(nil),                                // 402: header.LinkData
+	(*WorkflowAction)(nil),                          // 403: header.WorkflowAction
+	(*ActionSendFacebookConversion)(nil),            // 404: header.ActionSendFacebookConversion
+	(*ActionTerminateBot)(nil),                      // 405: header.ActionTerminateBot
+	(*ActionStartScope)(nil),                        // 406: header.ActionStartScope
+	(*ActionAssignLead)(nil),                        // 407: header.ActionAssignLead
+	(*ActionCallWorkflow)(nil),                      // 408: header.ActionCallWorkflow
+	(*ActionSetVariable)(nil),                       // 409: header.ActionSetVariable
+	(*ActionStartThread)(nil),                       // 410: header.ActionStartThread
+	(*ActionAskInfo)(nil),                           // 411: header.ActionAskInfo
+	(*ActionLLM)(nil),                               // 412: header.ActionLLM
+	(*LLMResponseJSONSchemaFormat)(nil),             // 413: header.LLMResponseJSONSchemaFormat
+	(*ActionCreateOrder)(nil),                       // 414: header.ActionCreateOrder
+	(*ActionWaitMessage)(nil),                       // 415: header.ActionWaitMessage
+	(*ActionSendTranscript)(nil),                    // 416: header.ActionSendTranscript
+	(*RunWorkflowActionRequest)(nil),                // 417: header.RunWorkflowActionRequest
+	(*ActionSendHttpReq)(nil),                       // 418: header.ActionSendHttpReq
+	(*ActionPercentageSplit)(nil),                   // 419: header.ActionPercentageSplit
+	(*ActionWaitBranch)(nil),                        // 420: header.ActionWaitBranch
+	(*ActionBranchingBranch)(nil),                   // 421: header.ActionBranchingBranch
+	(*ActionBranching)(nil),                         // 422: header.ActionBranching
+	(*BouncedEmail)(nil),                            // 423: header.BouncedEmail
+	(*BlockedEmail)(nil),                            // 424: header.BlockedEmail
+	(*Response)(nil),                                // 425: header.Response
+	(*ReportCount)(nil),                             // 426: header.ReportCount
+	(*ZaloCallConsent)(nil),                         // 427: header.ZaloCallConsent
+	(*SendEmailRequest)(nil),                        // 428: header.SendEmailRequest
+	(*Email)(nil),                                   // 429: header.Email
+	(*EmailAttachment)(nil),                         // 430: header.EmailAttachment
+	(*WorkflowThread)(nil),                          // 431: header.WorkflowThread
+	(*WorkflowStack)(nil),                           // 432: header.WorkflowStack
+	(*WorkflowStackItem)(nil),                       // 433: header.WorkflowStackItem
+	(*WorkflowSession)(nil),                         // 434: header.WorkflowSession
+	(*SchedulerTask)(nil),                           // 435: header.SchedulerTask
+	(*Credit)(nil),                                  // 436: header.Credit
+	(*CreditSpendEntry)(nil),                        // 437: header.CreditSpendEntry
+	(*CreditEntryDataId)(nil),                       // 438: header.CreditEntryDataId
+	(*CreditEntryDataAgent)(nil),                    // 439: header.CreditEntryDataAgent
+	(*CreditEntryDataEmail)(nil),                    // 440: header.CreditEntryDataEmail
+	(*CreditEntryDataZaloZNS)(nil),                  // 441: header.CreditEntryDataZaloZNS
+	(*CreditEntryDataZaloRequestCall)(nil),          // 442: header.CreditEntryDataZaloRequestCall
+	(*CreditEntryDataZaloActiveMessage)(nil),        // 443: header.CreditEntryDataZaloActiveMessage
+	(*CreditEntryData)(nil),                         // 444: header.CreditEntryData
+	(*CreditEntryDataLLMCompletion)(nil),            // 445: header.CreditEntryDataLLMCompletion
+	(*CreditEntryDataTextEmbedding)(nil),            // 446: header.CreditEntryDataTextEmbedding
+	(*CreditSpendEntries)(nil),                      // 447: header.CreditSpendEntries
+	(*TrySpendCreditResponse)(nil),                  // 448: header.TrySpendCreditResponse
+	(*CreditSpendReportResponseData)(nil),           // 449: header.CreditSpendReportResponseData
+	(*CreditSpendReportResponse)(nil),               // 450: header.CreditSpendReportResponse
+	(*AccSub)(nil),                                  // 451: header.AccSub
+	(*AccSubs)(nil),                                 // 452: header.AccSubs
+	(*OutboundCallUpdateEvent)(nil),                 // 453: header.OutboundCallUpdateEvent
+	(*String)(nil),                                  // 454: header.String
+	(*Number)(nil),                                  // 455: header.Number
+	(*StrNumM)(nil),                                 // 456: header.StrNumM
+	(*NumStrM)(nil),                                 // 457: header.NumStrM
+	(*ConvoReportRequest)(nil),                      // 458: header.ConvoReportRequest
+	(*ConvoReportResponse)(nil),                     // 459: header.ConvoReportResponse
+	(*ConvoReportEntry)(nil),                        // 460: header.ConvoReportEntry
+	(*WorkflowGoal)(nil),                            // 461: header.WorkflowGoal
+	(*WorkflowTrigger)(nil),                         // 462: header.WorkflowTrigger
+	(*WorkflowTimming)(nil),                         // 463: header.WorkflowTimming
+	(*WorkflowCondition)(nil),                       // 464: header.WorkflowCondition
+	(*LLMCondition)(nil),                            // 465: header.LLMCondition
+	(*WorkflowLogRequest)(nil),                      // 466: header.WorkflowLogRequest
+	(*Workflow)(nil),                                // 467: header.Workflow
+	(*KvSetting)(nil),                               // 468: header.KvSetting
+	(*LLMToolCall)(nil),                             // 469: header.LLMToolCall
+	(*LLMChatHistoryEntry)(nil),                     // 470: header.LLMChatHistoryEntry
+	(*AIDataEntryUsed)(nil),                         // 471: header.AIDataEntryUsed
+	(*AIAgentTrace)(nil),                            // 472: header.AIAgentTrace
+	(*AIAgentSpan)(nil),                             // 473: header.AIAgentSpan
+	(*WorkflowLog)(nil),                             // 474: header.WorkflowLog
+	(*TicketType)(nil),                              // 475: header.TicketType
+	(*TicketSatisfaction)(nil),                      // 476: header.TicketSatisfaction
+	(*TicketAutoReply)(nil),                         // 477: header.TicketAutoReply
+	(*TicketTemplate)(nil),                          // 478: header.TicketTemplate
+	(*Ticket)(nil),                                  // 479: header.Ticket
+	(*ReceiptMember)(nil),                           // 480: header.ReceiptMember
+	(*SLAViolations)(nil),                           // 481: header.SLAViolations
+	(*SLAViolation)(nil),                            // 482: header.SLAViolation
+	(*TicketHistoryEntry)(nil),                      // 483: header.TicketHistoryEntry
+	(*ListTicketRequest)(nil),                       // 484: header.ListTicketRequest
+	(*TicketView)(nil),                              // 485: header.TicketView
+	(*TicketViewMember)(nil),                        // 486: header.TicketViewMember
+	(*LiveViewMetric)(nil),                          // 487: header.LiveViewMetric
+	(*LiveUserView)(nil),                            // 488: header.LiveUserView
+	(*BotTemplate)(nil),                             // 489: header.BotTemplate
+	(*ResourceGroupMember)(nil),                     // 490: header.ResourceGroupMember
+	(*SLAPolicy)(nil),                               // 491: header.SLAPolicy
+	(*SLATarget)(nil),                               // 492: header.SLATarget
+	(*ArticleSEOSetting)(nil),                       // 493: header.ArticleSEOSetting
+	(*Article)(nil),                                 // 494: header.Article
+	(*ArticleCategory)(nil),                         // 495: header.ArticleCategory
+	(*ArticleTopic)(nil),                            // 496: header.ArticleTopic
+	(*ArticleTopics)(nil),                           // 497: header.ArticleTopics
+	(*ArticleTopicRequest)(nil),                     // 498: header.ArticleTopicRequest
+	(*KnowledgeBase)(nil),                           // 499: header.KnowledgeBase
+	(*KnowledgeBaseArticlePageSetting)(nil),         // 500: header.KnowledgeBaseArticlePageSetting
+	(*KnowledgeBasePageStyle)(nil),                  // 501: header.KnowledgeBasePageStyle
+	(*Job)(nil),                                     // 502: header.Job
+	(*Block)(nil),                                   // 503: header.Block
+	(*LLMInputRetryPolicy)(nil),                     // 504: header.LLMInputRetryPolicy
+	(*TicketUpdatedNotiEmail)(nil),                  // 505: header.TicketUpdatedNotiEmail
+	(*ResetPasswordEmail)(nil),                      // 506: header.ResetPasswordEmail
+	(*OTPEmail)(nil),                                // 507: header.OTPEmail
+	(*InviteEmail)(nil),                             // 508: header.InviteEmail
+	(*LoginRequest)(nil),                            // 509: header.LoginRequest
+	(*AgentProfile)(nil),                            // 510: header.AgentProfile
+	(*InvitationLink)(nil),                          // 511: header.InvitationLink
+	(*ProfileEmailUsage)(nil),                       // 512: header.ProfileEmailUsage
+	(*InviteRequest)(nil),                           // 513: header.InviteRequest
+	(*JoinAccountRequest)(nil),                      // 514: header.JoinAccountRequest
+	(*PromotionCode)(nil),                           // 515: header.PromotionCode
+	(*SubizPromotionProgram)(nil),                   // 516: header.SubizPromotionProgram
+	(*PromotionCheckResult)(nil),                    // 517: header.PromotionCheckResult
+	(*PromotionCodeUsage)(nil),                      // 518: header.PromotionCodeUsage
+	(*SubizPaymentMethod)(nil),                      // 519: header.SubizPaymentMethod
+	(*StripeWebhookEvent)(nil),                      // 520: header.StripeWebhookEvent
+	(*WorkflowPulse)(nil),                           // 521: header.WorkflowPulse
+	(*WorkflowTimeup)(nil),                          // 522: header.WorkflowTimeup
+	(*AndroidNotificationRequest)(nil),              // 523: header.AndroidNotificationRequest
+	(*AndroidNotification)(nil),                     // 524: header.AndroidNotification
+	(*AndroidDevice)(nil),                           // 525: header.AndroidDevice
+	(*BankAccount)(nil),                             // 526: header.BankAccount
+	(*WorkflowCount)(nil),                           // 527: header.WorkflowCount
+	(*SuggestLeadFieldRequest)(nil),                 // 528: header.SuggestLeadFieldRequest
+	(*UsersRequest)(nil),                            // 529: header.UsersRequest
+	(*BankTransferRequest)(nil),                     // 530: header.BankTransferRequest
+	(*GenQrCodeRequest)(nil),                        // 531: header.GenQrCodeRequest
+	(*QrCode)(nil),                                  // 532: header.QrCode
+	(*ReportUserEventEntry)(nil),                    // 533: header.ReportUserEventEntry
+	(*ReportUserEventRequest)(nil),                  // 534: header.ReportUserEventRequest
+	(*ReportUserEventResponse)(nil),                 // 535: header.ReportUserEventResponse
+	(*CounterReportResponse)(nil),                   // 536: header.CounterReportResponse
+	(*CounterDataPoint)(nil),                        // 537: header.CounterDataPoint
+	(*SetupFeatureStatus)(nil),                      // 538: header.SetupFeatureStatus
+	(*RelationUpdates)(nil),                         // 539: header.RelationUpdates
+	(*RelationUpdate)(nil),                          // 540: header.RelationUpdate
+	(*ArticleNode)(nil),                             // 541: header.ArticleNode
+	(*AIAgentGuardrail)(nil),                        // 542: header.AIAgentGuardrail
+	(*AIAgentOverrideRule)(nil),                     // 543: header.AIAgentOverrideRule
+	(*AIAgent)(nil),                                 // 544: header.AIAgent
+	(*AIAgentUsageLimit)(nil),                       // 545: header.AIAgentUsageLimit
+	(*InitFlow)(nil),                                // 546: header.InitFlow
+	(*AIDataStore)(nil),                             // 547: header.AIDataStore
+	(*JSONSchema)(nil),                              // 548: header.JSONSchema
+	(*AIFunction)(nil),                              // 549: header.AIFunction
+	(*RecordUserPreference)(nil),                    // 550: header.RecordUserPreference
+	(*CollectInfomationAttribute)(nil),              // 551: header.CollectInfomationAttribute
+	(*CollectUserInformation)(nil),                  // 552: header.CollectUserInformation
+	(*UpdateUserInformation)(nil),                   // 553: header.UpdateUserInformation
+	(*AutomationFunction)(nil),                      // 554: header.AutomationFunction
+	(*CreateTicketFunction)(nil),                    // 555: header.CreateTicketFunction
+	(*AIIntent)(nil),                                // 556: header.AIIntent
+	(*AIDataGroup)(nil),                             // 557: header.AIDataGroup
+	(*CrawlResponse)(nil),                           // 558: header.CrawlResponse
+	(*AIDataChunk)(nil),                             // 559: header.AIDataChunk
+	(*AIDataEntry)(nil),                             // 560: header.AIDataEntry
+	(*AiResponseSource)(nil),                        // 561: header.AiResponseSource
+	(*FacebookAdsFlow)(nil),                         // 562: header.FacebookAdsFlow
+	(*RuleOrder)(nil),                               // 563: header.RuleOrder
+	(*NotiSubscription)(nil),                        // 564: header.NotiSubscription
+	(*TicketTypeSubscription)(nil),                  // 565: header.TicketTypeSubscription
+	(*NotiSetting)(nil),                             // 566: header.NotiSetting
+	(*DoNotDisturb)(nil),                            // 567: header.DoNotDisturb
+	(*PushToken)(nil),                               // 568: header.PushToken
+	(*ZNSTemplateParam)(nil),                        // 569: header.ZNSTemplateParam
+	(*ZNSTemplateLayoutComponentItem)(nil),          // 570: header.ZNSTemplateLayoutComponentItem
+	(*ZNSTemplateLayoutComponentButton)(nil),        // 571: header.ZNSTemplateLayoutComponentButton
+	(*ZNSTemplateLayoutComponentButtons)(nil),       // 572: header.ZNSTemplateLayoutComponentButtons
+	(*ZNSTemplateLayoutComponentTableRow)(nil),      // 573: header.ZNSTemplateLayoutComponentTableRow
+	(*ZNSTemplateLayoutComponentTable)(nil),         // 574: header.ZNSTemplateLayoutComponentTable
+	(*ZNSTemplateLayoutComponentImageItem)(nil),     // 575: header.ZNSTemplateLayoutComponentImageItem
+	(*ZNSTemplateLayoutComponentImages)(nil),        // 576: header.ZNSTemplateLayoutComponentImages
+	(*ZNSTemplateLayoutComponentLogo)(nil),          // 577: header.ZNSTemplateLayoutComponentLogo
+	(*ZNSTemplateLayoutComponent)(nil),              // 578: header.ZNSTemplateLayoutComponent
+	(*ZNSTemplateComponents)(nil),                   // 579: header.ZNSTemplateComponents
+	(*ZNSTemplateLayout)(nil),                       // 580: header.ZNSTemplateLayout
+	(*ZNSTemplateRequest)(nil),                      // 581: header.ZNSTemplateRequest
+	(*ZaloOAZNSQuota)(nil),                          // 582: header.ZaloOAZNSQuota
+	(*ZNSTemplate)(nil),                             // 583: header.ZNSTemplate
+	(*ZnsTemplate)(nil),                             // 584: header.ZnsTemplate
+	(*ZNSButton)(nil),                               // 585: header.ZNSButton
+	(*ZNSParamDefinition)(nil),                      // 586: header.ZNSParamDefinition
+	(*ZNSMedia)(nil),                                // 587: header.ZNSMedia
+	(*EmailSignature)(nil),                          // 588: header.EmailSignature
+	(*TestMessageRequest)(nil),                      // 589: header.TestMessageRequest
+	(*CreditUsage)(nil),                             // 590: header.CreditUsage
+	(*SendSubizZNSTestRequest)(nil),                 // 591: header.SendSubizZNSTestRequest
+	(*ActionAIAgentTrack)(nil),                      // 592: header.ActionAIAgentTrack
+	(*Markers)(nil),                                 // 593: header.Markers
+	(*UserDataSource)(nil),                          // 594: header.UserDataSource
+	(*MetaBusiness)(nil),                            // 595: header.MetaBusiness
+	(*MetaAdAccount)(nil),                           // 596: header.MetaAdAccount
+	(*VectorSearchReq)(nil),                         // 597: header.VectorSearchReq
+	(*VectorDoc)(nil),                               // 598: header.VectorDoc
+	(*ListVectorRequest)(nil),                       // 599: header.ListVectorRequest
+	(*VectorDocProp)(nil),                           // 600: header.VectorDocProp
+	(*VectorMatch)(nil),                             // 601: header.VectorMatch
+	(*VectorMatches)(nil),                           // 602: header.VectorMatches
+	(*NamedEntity)(nil),                             // 603: header.NamedEntity
+	(*ListAvaiableDiscountsRequest)(nil),            // 604: header.ListAvaiableDiscountsRequest
+	nil,                                             // 605: header.UserReportEntry.CategoryIdsEntry
+	nil,                                             // 606: header.Event.CustomDataEntry
+	nil,                                             // 607: header.Message.I18nBlockEntry
+	nil,                                             // 608: header.Message.ZnsTemplateDataEntry
+	nil,                                             // 609: header.Message.ZnsTemplateDefaultDataEntry
+	nil,                                             // 610: header.Message.ZnsTemplateDataFieldEntry
+	nil,                                             // 611: header.MessageButton.I18nTitleEntry
+	(*ReportBotResponse_Metric)(nil),                // 612: header.ReportBotResponse.Metric
+	(*ActionrunMetrics_ActionrunMetric)(nil),        // 613: header.ActionrunMetrics.ActionrunMetric
+	nil,                                             // 614: header.WidgetGroup.I18nNameEntry
+	nil,                                             // 615: header.TextComponent.I18nBlockEntry
+	nil,                                             // 616: header.I18nBlock.I18nEntry
+	nil,                                             // 617: header.Notif.I18nTitleBlockEntry
+	(*ContactComponent_ContactButton)(nil),          // 618: header.ContactComponent.ContactButton
+	(*CallContactComponent_Hotline)(nil),            // 619: header.CallContactComponent.Hotline
+	(*MapContactComponent_Location)(nil),            // 620: header.MapContactComponent.Location
+	(*FormField_FormFieldOption)(nil),               // 621: header.FormField.FormFieldOption
+	nil,                                             // 622: header.GoogleReviewSetting.RepliesMEntry
+	(*CountTouchpointResponse_TouchpointCount)(nil), // 623: header.CountTouchpointResponse.TouchpointCount
+	nil, // 624: header.Order.FieldsEntry
+	nil, // 625: header.Product.I18nDescriptionBlockEntry
+	nil, // 626: header.ProductCategory.I18nNameEntry
+	nil, // 627: header.ProductCategory.AttributesEntry
+	nil, // 628: header.Error.FieldsEntry
+	nil, // 629: header.Error.HiddenEntry
+	nil, // 630: header.Error.MessageEntry
+	nil, // 631: header.Error.AttrsEntry
+	nil, // 632: header.Error.HiddenAttrsEntry
+	nil, // 633: header.DocHit.QueryMatchMEntry
+	nil, // 634: header.ZnsRequest.TemplateDataEntry
+	nil, // 635: header.OutboundCallCampaign.AgentWeightEntry
+	nil, // 636: header.ListOutboundCallRequest.AgentWeightEntry
+	nil, // 637: header.ImportOutboundCallEntryRequest.AgentWeightEntry
+	(*BroadcastCampaignMetrics_BroadcastCampaignMetric)(nil), // 638: header.BroadcastCampaignMetrics.BroadcastCampaignMetric
+	nil,                            // 639: header.SendEmailRequest.HeaderEntry
+	nil,                            // 640: header.Email.HeaderEntry
+	nil,                            // 641: header.WorkflowSession.ThreadsEntry
+	nil,                            // 642: header.StrNumM.StrsMEntry
+	nil,                            // 643: header.NumStrM.NumsMEntry
+	nil,                            // 644: header.Workflow.ActionsEntry
+	nil,                            // 645: header.Workflow.ComputedActionsEntry
+	nil,                            // 646: header.LLMChatHistoryEntry.FieldsEntry
+	nil,                            // 647: header.WorkflowLog.DataEntry
+	nil,                            // 648: header.Ticket.MemberMEntry
+	nil,                            // 649: header.LiveUserView.MetricsEntry
+	nil,                            // 650: header.ArticleSEOSetting.PageTitleEntry
+	nil,                            // 651: header.ArticleSEOSetting.MetaDescriptionEntry
+	nil,                            // 652: header.ArticleSEOSetting.SocialTitleEntry
+	nil,                            // 653: header.ArticleSEOSetting.SocialDescriptionEntry
+	nil,                            // 654: header.Article.I18nTitleEntry
+	nil,                            // 655: header.Article.I18nContentEntry
+	nil,                            // 656: header.Article.I18nSlugEntry
+	nil,                            // 657: header.ArticleCategory.I18nTitleEntry
+	nil,                            // 658: header.ArticleCategory.I18nDescriptionEntry
+	nil,                            // 659: header.ArticleCategory.I18nSlugEntry
+	nil,                            // 660: header.ArticleTopic.TitleEntry
+	nil,                            // 661: header.KnowledgeBase.I18nTitleEntry
+	nil,                            // 662: header.KnowledgeBase.I18nDescriptionEntry
+	(*Block_InputOption)(nil),      // 663: header.Block.InputOption
+	nil,                            // 664: header.Block.AttrsEntry
+	nil,                            // 665: header.ArticleNode.I18nTitleEntry
+	nil,                            // 666: header.JSONSchema.PropertiesEntry
+	nil,                            // 667: header.AutomationFunction.ActionsEntry
+	(*common.Context)(nil),         // 668: common.Context
+	(*I18NString)(nil),             // 669: header.I18nString
+	(*common.Device)(nil),          // 670: common.Device
+	(*common.PackedDevice)(nil),    // 671: common.PackedDevice
+	(*account.Agent)(nil),          // 672: account.Agent
+	(*account.Presence)(nil),       // 673: account.Presence
+	(*account.Account)(nil),        // 674: account.Account
+	(*payment.Bill)(nil),           // 675: payment.Bill
+	(*common.SessionCampaign)(nil), // 676: common.SessionCampaign
+	(*EventConditionFilter)(nil),   // 677: header.EventConditionFilter
+	(*FloatCondition)(nil),         // 678: header.FloatCondition
+	(*TextCondition)(nil),          // 679: header.TextCondition
+	(*BooleanCondition)(nil),       // 680: header.BooleanCondition
+	(*DatetimeCondition)(nil),      // 681: header.DatetimeCondition
+	(*EventCondition)(nil),         // 682: header.EventCondition
+	(*payment.Subscription)(nil),   // 683: payment.Subscription
+	(*payment.Invoice)(nil),        // 684: payment.Invoice
 }
 var file_header_proto_depIdxs = []int32{
-	670,  // 0: header.Empty.ctx:type_name -> common.Context
-	670,  // 1: header.Id.ctx:type_name -> common.Context
-	670,  // 2: header.Ids.ctx:type_name -> common.Context
-	670,  // 3: header.Noti.ctx:type_name -> common.Context
+	668,  // 0: header.Empty.ctx:type_name -> common.Context
+	668,  // 1: header.Id.ctx:type_name -> common.Context
+	668,  // 2: header.Ids.ctx:type_name -> common.Context
+	668,  // 3: header.Noti.ctx:type_name -> common.Context
 	36,   // 4: header.Noti.meta:type_name -> header.NotiData
 	72,   // 5: header.Noti.tos:type_name -> header.By
 	39,   // 6: header.Attribute.related_values:type_name -> header.RelatedValue
-	670,  // 7: header.PhoneDevice.ctx:type_name -> common.Context
-	670,  // 8: header.CallSettings.ctx:type_name -> common.Context
+	668,  // 7: header.PhoneDevice.ctx:type_name -> common.Context
+	668,  // 8: header.CallSettings.ctx:type_name -> common.Context
 	42,   // 9: header.CallSettings.call_settings:type_name -> header.CallSetting
-	670,  // 10: header.CallSetting.ctx:type_name -> common.Context
+	668,  // 10: header.CallSetting.ctx:type_name -> common.Context
 	209,  // 11: header.CallSetting.greeting_message:type_name -> header.GreetingAudio
 	209,  // 12: header.CallSetting.missed_message:type_name -> header.GreetingAudio
-	670,  // 13: header.UserLeadOwner.ctx:type_name -> common.Context
+	668,  // 13: header.UserLeadOwner.ctx:type_name -> common.Context
 	43,   // 14: header.UserLeadOwner.lead_owners:type_name -> header.LeadOwner
-	670,  // 15: header.User.ctx:type_name -> common.Context
+	668,  // 15: header.User.ctx:type_name -> common.Context
 	38,   // 16: header.User.attributes:type_name -> header.Attribute
 	49,   // 17: header.User.labels:type_name -> header.UserLabel
 	73,   // 18: header.User.latest_content_view:type_name -> header.Event
 	73,   // 19: header.User.start_content_view:type_name -> header.Event
 	73,   // 20: header.User.first_content_view:type_name -> header.Event
 	45,   // 21: header.User.secondaries:type_name -> header.User
-	322,  // 22: header.User.error:type_name -> header.Error
+	320,  // 22: header.User.error:type_name -> header.Error
 	104,  // 23: header.UserAds.ads_context_data:type_name -> header.AdsContextData
-	670,  // 24: header.Touchpoint.ctx:type_name -> common.Context
-	315,  // 25: header.Touchpoint.fields:type_name -> header.KV
-	670,  // 26: header.ShippingAddresses.ctx:type_name -> common.Context
-	271,  // 27: header.ShippingAddresses.shipping_addresses:type_name -> header.Address
-	670,  // 28: header.Label.ctx:type_name -> common.Context
-	670,  // 29: header.Labels.ctx:type_name -> common.Context
+	668,  // 24: header.Touchpoint.ctx:type_name -> common.Context
+	313,  // 25: header.Touchpoint.fields:type_name -> header.KV
+	668,  // 26: header.ShippingAddresses.ctx:type_name -> common.Context
+	269,  // 27: header.ShippingAddresses.shipping_addresses:type_name -> header.Address
+	668,  // 28: header.Label.ctx:type_name -> common.Context
+	668,  // 29: header.Labels.ctx:type_name -> common.Context
 	50,   // 30: header.Labels.labels:type_name -> header.Label
-	670,  // 31: header.TryUpdateUserResult.ctx:type_name -> common.Context
+	668,  // 31: header.TryUpdateUserResult.ctx:type_name -> common.Context
 	45,   // 32: header.TryUpdateUserResult.users:type_name -> header.User
 	45,   // 33: header.Users.users:type_name -> header.User
-	322,  // 34: header.Users.errors:type_name -> header.Error
+	320,  // 34: header.Users.errors:type_name -> header.Error
 	45,   // 35: header.Users.secondaries:type_name -> header.User
-	671,  // 36: header.AttributeDefinitionListItem.i18n_label:type_name -> header.I18nString
-	670,  // 37: header.AttributeDefinition.ctx:type_name -> common.Context
-	671,  // 38: header.AttributeDefinition.i18n_label:type_name -> header.I18nString
+	669,  // 36: header.AttributeDefinitionListItem.i18n_label:type_name -> header.I18nString
+	668,  // 37: header.AttributeDefinition.ctx:type_name -> common.Context
+	669,  // 38: header.AttributeDefinition.i18n_label:type_name -> header.I18nString
 	54,   // 39: header.AttributeDefinition.items:type_name -> header.AttributeDefinitionListItem
-	670,  // 40: header.AttributeDefinitions.ctx:type_name -> common.Context
+	668,  // 40: header.AttributeDefinitions.ctx:type_name -> common.Context
 	55,   // 41: header.AttributeDefinitions.attributes:type_name -> header.AttributeDefinition
-	670,  // 42: header.Note.ctx:type_name -> common.Context
-	670,  // 43: header.Notes.ctx:type_name -> common.Context
+	668,  // 42: header.Note.ctx:type_name -> common.Context
+	668,  // 43: header.Notes.ctx:type_name -> common.Context
 	57,   // 44: header.Notes.notes:type_name -> header.Note
-	607,  // 45: header.UserReportEntry.category_ids:type_name -> header.UserReportEntry.CategoryIdsEntry
-	670,  // 46: header.UserReportResponse.ctx:type_name -> common.Context
+	605,  // 45: header.UserReportEntry.category_ids:type_name -> header.UserReportEntry.CategoryIdsEntry
+	668,  // 46: header.UserReportResponse.ctx:type_name -> common.Context
 	61,   // 47: header.UserReportResponse.users:type_name -> header.UserReportEntry
 	61,   // 48: header.UserReportResponse.leads:type_name -> header.UserReportEntry
-	670,  // 49: header.AIAgentReportResponse.ctx:type_name -> common.Context
+	668,  // 49: header.AIAgentReportResponse.ctx:type_name -> common.Context
 	63,   // 50: header.AIAgentReportResponse.metrics:type_name -> header.AIAgentReportMetric
 	65,   // 51: header.ConversationMetrics.metrics:type_name -> header.ConversationMetric
 	67,   // 52: header.AgentMetrics.metrics:type_name -> header.AgentMetric
 	69,   // 53: header.CallMetrics.metrics:type_name -> header.CallMetric
-	670,  // 54: header.Events.ctx:type_name -> common.Context
+	668,  // 54: header.Events.ctx:type_name -> common.Context
 	73,   // 55: header.Events.events:type_name -> header.Event
-	672,  // 56: header.By.device:type_name -> common.Device
-	673,  // 57: header.By.packed_device:type_name -> common.PackedDevice
-	670,  // 58: header.Event.ctx:type_name -> common.Context
+	670,  // 56: header.By.device:type_name -> common.Device
+	671,  // 57: header.By.packed_device:type_name -> common.PackedDevice
+	668,  // 58: header.Event.ctx:type_name -> common.Context
 	72,   // 59: header.Event.by:type_name -> header.By
 	47,   // 60: header.Event.touchpoint:type_name -> header.Touchpoint
 	75,   // 61: header.Event.data:type_name -> header.Data
 	75,   // 62: header.Event.old:type_name -> header.Data
 	75,   // 63: header.Event.ref:type_name -> header.Data
-	608,  // 64: header.Event.custom_data:type_name -> header.Event.CustomDataEntry
+	606,  // 64: header.Event.custom_data:type_name -> header.Event.CustomDataEntry
 	74,   // 65: header.EventField.array:type_name -> header.EventField
-	670,  // 66: header.Data.ctx:type_name -> common.Context
-	674,  // 67: header.Data.agent:type_name -> account.Agent
+	668,  // 66: header.Data.ctx:type_name -> common.Context
+	672,  // 67: header.Data.agent:type_name -> account.Agent
 	102,  // 68: header.Data.message:type_name -> header.Message
 	92,   // 69: header.Data.conversation:type_name -> header.Conversation
-	305,  // 70: header.Data.product:type_name -> header.Product
-	675,  // 71: header.Data.presence:type_name -> account.Presence
-	675,  // 72: header.Data.presences:type_name -> account.Presence
+	303,  // 70: header.Data.product:type_name -> header.Product
+	673,  // 71: header.Data.presence:type_name -> account.Presence
+	673,  // 72: header.Data.presences:type_name -> account.Presence
 	45,   // 73: header.Data.user:type_name -> header.User
 	37,   // 74: header.Data.notification:type_name -> header.Noti
 	37,   // 75: header.Data.noti:type_name -> header.Noti
-	342,  // 76: header.Data.agent_group:type_name -> header.AgentGroup
+	340,  // 76: header.Data.agent_group:type_name -> header.AgentGroup
 	57,   // 77: header.Data.note:type_name -> header.Note
-	469,  // 78: header.Data.workflow:type_name -> header.Workflow
+	467,  // 78: header.Data.workflow:type_name -> header.Workflow
 	73,   // 79: header.Data.event:type_name -> header.Event
-	568,  // 80: header.Data.notification_setting:type_name -> header.NotiSetting
+	566,  // 80: header.Data.notification_setting:type_name -> header.NotiSetting
 	83,   // 81: header.Data.rule:type_name -> header.Rule
 	55,   // 82: header.Data.user_attribute:type_name -> header.AttributeDefinition
 	111,  // 83: header.Data.tag:type_name -> header.Tag
@@ -79771,1271 +79541,1268 @@ var file_header_proto_depIdxs = []int32{
 	50,   // 92: header.Data.label:type_name -> header.Label
 	256,  // 93: header.Data.user_view:type_name -> header.UserView
 	228,  // 94: header.Data.login_session:type_name -> header.LoginSession
-	313,  // 95: header.Data.product_feed:type_name -> header.ProductFeed
-	267,  // 96: header.Data.product_collection:type_name -> header.ProductCollection
-	292,  // 97: header.Data.order:type_name -> header.Order
-	264,  // 98: header.Data.currency:type_name -> header.Currency
-	262,  // 99: header.Data.shop_setting:type_name -> header.ShopSetting
-	271,  // 100: header.Data.shipping_address:type_name -> header.Address
-	300,  // 101: header.Data.order_status:type_name -> header.OrderStatusUpdated
-	296,  // 102: header.Data.bill:type_name -> header.Bill
-	292,  // 103: header.Data.order_from:type_name -> header.Order
-	73,   // 104: header.Data.current:type_name -> header.Event
-	301,  // 105: header.Data.order_history_entry:type_name -> header.OrderHistoryEntry
-	249,  // 106: header.Data.user_order_confirmation:type_name -> header.UserOrderConfirmation
-	331,  // 107: header.Data.pipeline:type_name -> header.Pipeline
-	299,  // 108: header.Data.order_pipeline_updated:type_name -> header.OrderPipelineUpdated
-	337,  // 109: header.Data.task:type_name -> header.Task
-	339,  // 110: header.Data.task_history_entry:type_name -> header.TaskHistoryEntry
-	293,  // 111: header.Data.order_pipeline_stage:type_name -> header.OrderPipelineStage
-	349,  // 112: header.Data.conversation_modal:type_name -> header.ConversationModal
-	40,   // 113: header.Data.phone_device:type_name -> header.PhoneDevice
-	42,   // 114: header.Data.call_setting:type_name -> header.CallSetting
-	361,  // 115: header.Data.blocked_number:type_name -> header.BlockedNumber
-	99,   // 116: header.Data.call_info:type_name -> header.CallInfo
-	358,  // 117: header.Data.call_request:type_name -> header.CallDriverRequest
-	209,  // 118: header.Data.greeting_audio:type_name -> header.GreetingAudio
-	367,  // 119: header.Data.recent_call_record:type_name -> header.RecentCallRecord
-	77,   // 120: header.Data.webrtc_message:type_name -> header.WebRTCMessage
-	371,  // 121: header.Data.event_type:type_name -> header.EventType
-	322,  // 122: header.Data.error:type_name -> header.Error
-	676,  // 123: header.Data.account:type_name -> account.Account
-	372,  // 124: header.Data.segment:type_name -> header.Segment
-	382,  // 125: header.Data.campaign:type_name -> header.Campaign
-	394,  // 126: header.Data.business_email_address:type_name -> header.BusinessEmailAddresses
-	183,  // 127: header.Data.form_submission:type_name -> header.FormSubmission
-	387,  // 128: header.Data.outbound_call_entry:type_name -> header.OutboundCallEntry
-	455,  // 129: header.Data.outbound_call_update:type_name -> header.OutboundCallUpdateEvent
-	226,  // 130: header.Data.banned_user:type_name -> header.BannedUser
-	438,  // 131: header.Data.credit:type_name -> header.Credit
-	677,  // 132: header.Data.subiz_bill:type_name -> payment.Bill
-	37,   // 133: header.Data.desktop_notification:type_name -> header.Noti
-	481,  // 134: header.Data.ticket:type_name -> header.Ticket
-	477,  // 135: header.Data.ticket_type:type_name -> header.TicketType
-	485,  // 136: header.Data.ticket_history_entry:type_name -> header.TicketHistoryEntry
-	490,  // 137: header.Data.live_user_view:type_name -> header.LiveUserView
-	487,  // 138: header.Data.ticket_view:type_name -> header.TicketView
-	493,  // 139: header.Data.sla_policy:type_name -> header.SLAPolicy
-	501,  // 140: header.Data.knowledged_base:type_name -> header.KnowledgeBase
-	497,  // 141: header.Data.article_category:type_name -> header.ArticleCategory
-	496,  // 142: header.Data.article:type_name -> header.Article
-	76,   // 143: header.Data.conversation_meta:type_name -> header.ConversationMeta
-	100,  // 144: header.Data.rating:type_name -> header.Rating
-	83,   // 145: header.Data.ticket_rule:type_name -> header.Rule
-	484,  // 146: header.Data.violation:type_name -> header.SLAViolation
-	523,  // 147: header.Data.workflow_pulse:type_name -> header.WorkflowPulse
-	524,  // 148: header.Data.workflow_timeup:type_name -> header.WorkflowTimeup
-	528,  // 149: header.Data.bank_account:type_name -> header.BankAccount
-	498,  // 150: header.Data.article_topic:type_name -> header.ArticleTopic
-	543,  // 151: header.Data.article_node:type_name -> header.ArticleNode
-	562,  // 152: header.Data.ai_data_entry:type_name -> header.AIDataEntry
-	559,  // 153: header.Data.ai_data_group:type_name -> header.AIDataGroup
-	546,  // 154: header.Data.ai_agent:type_name -> header.AIAgent
-	585,  // 155: header.Data.zns_template:type_name -> header.ZNSTemplate
-	589,  // 156: header.Data.zns_media:type_name -> header.ZNSMedia
-	590,  // 157: header.Data.email_signature:type_name -> header.EmailSignature
-	471,  // 158: header.Data.llm_tool_call:type_name -> header.LLMToolCall
-	184,  // 159: header.Data.form:type_name -> header.Form
-	214,  // 160: header.Data.event_destination:type_name -> header.EventDestination
-	214,  // 161: header.Data.event_destinations:type_name -> header.EventDestination
-	375,  // 162: header.Data.segment_sync:type_name -> header.SegmentSync
-	47,   // 163: header.ConversationMeta.touchpoint:type_name -> header.Touchpoint
-	73,   // 164: header.ConversationMeta.event:type_name -> header.Event
-	670,  // 165: header.StartWorkflowSessionRequest.ctx:type_name -> common.Context
-	128,  // 166: header.StartWorkflowSessionRequest.bot:type_name -> header.Bot
-	131,  // 167: header.StartWorkflowSessionRequest.action:type_name -> header.BotAction
-	73,   // 168: header.StartWorkflowSessionRequest.event:type_name -> header.Event
-	670,  // 169: header.RunAiAgentRequest.ctx:type_name -> common.Context
-	128,  // 170: header.RunAiAgentRequest.bot:type_name -> header.Bot
-	131,  // 171: header.RunAiAgentRequest.action:type_name -> header.BotAction
-	73,   // 172: header.RunAiAgentRequest.event:type_name -> header.Event
-	73,   // 173: header.RunAiAgentRequest.last_message_sent:type_name -> header.Event
-	670,  // 174: header.BotRunRequest.ctx:type_name -> common.Context
-	315,  // 175: header.BotRunRequest.object_contexts:type_name -> header.KV
-	128,  // 176: header.BotRunRequest.bot:type_name -> header.Bot
-	131,  // 177: header.BotRunRequest.action:type_name -> header.BotAction
-	73,   // 178: header.BotRunRequest.event:type_name -> header.Event
-	670,  // 179: header.Rule.ctx:type_name -> common.Context
-	87,   // 180: header.Rule.channel_condition:type_name -> header.ChannelCondition
-	86,   // 181: header.Rule.timming_condition:type_name -> header.TimmingCondition
-	125,  // 182: header.Rule.form_conditions:type_name -> header.Condition
-	125,  // 183: header.Rule.user_conditions:type_name -> header.Condition
-	125,  // 184: header.Rule.user_start_content_view_conditions:type_name -> header.Condition
-	85,   // 185: header.Rule.call:type_name -> header.RingingSetting
-	209,  // 186: header.RingingSetting.greeting_message:type_name -> header.GreetingAudio
-	209,  // 187: header.RingingSetting.missed_message:type_name -> header.GreetingAudio
-	209,  // 188: header.RingingSetting.menu_message:type_name -> header.GreetingAudio
-	209,  // 189: header.RingingSetting.invalid_option_message:type_name -> header.GreetingAudio
-	83,   // 190: header.RingingSetting.menu_options:type_name -> header.Rule
-	83,   // 191: header.RingingSetting.menu_fallback:type_name -> header.Rule
-	88,   // 192: header.ChannelCondition.locations:type_name -> header.LocationCondition
-	88,   // 193: header.ChannelCondition.not_in_locations:type_name -> header.LocationCondition
-	84,   // 194: header.ChannelCondition.facebook:type_name -> header.FacebookCondition
-	670,  // 195: header.ConversationMember.ctx:type_name -> common.Context
-	72,   // 196: header.ConversationMember.invited_by:type_name -> header.By
-	102,  // 197: header.ConversationMember.bot_takeover_message:type_name -> header.Message
-	670,  // 198: header.StartRequest.ctx:type_name -> common.Context
-	45,   // 199: header.StartRequest.user:type_name -> header.User
-	90,   // 200: header.StartRequest.members:type_name -> header.ConversationMember
-	47,   // 201: header.StartRequest.touchpoint:type_name -> header.Touchpoint
-	183,  // 202: header.StartRequest.form_submission:type_name -> header.FormSubmission
-	96,   // 203: header.StartRequest.google_review:type_name -> header.GoogleReview
-	670,  // 204: header.Conversation.ctx:type_name -> common.Context
-	90,   // 205: header.Conversation.members:type_name -> header.ConversationMember
-	111,  // 206: header.Conversation.tags:type_name -> header.Tag
-	47,   // 207: header.Conversation.touchpoint:type_name -> header.Touchpoint
-	73,   // 208: header.Conversation.last_internal_message_sent:type_name -> header.Event
-	73,   // 209: header.Conversation.last_message_sent:type_name -> header.Event
-	89,   // 210: header.Conversation.assigned_to:type_name -> header.RouteResult
-	89,   // 211: header.Conversation.reassigned_to:type_name -> header.RouteResult
-	315,  // 212: header.Conversation.fields:type_name -> header.KV
-	100,  // 213: header.Conversation.ratings:type_name -> header.Rating
-	73,   // 214: header.Conversation.matched_event:type_name -> header.Event
-	99,   // 215: header.Conversation.call:type_name -> header.CallInfo
-	358,  // 216: header.Conversation.call_request:type_name -> header.CallDriverRequest
-	678,  // 217: header.Conversation.traffic_utm:type_name -> common.SessionCampaign
-	183,  // 218: header.Conversation.form_submission:type_name -> header.FormSubmission
-	96,   // 219: header.Conversation.google_review:type_name -> header.GoogleReview
-	481,  // 220: header.Conversation.ticket:type_name -> header.Ticket
-	322,  // 221: header.Conversation.error:type_name -> header.Error
-	103,  // 222: header.Conversation.referrer:type_name -> header.MessageReferral
-	98,   // 223: header.GoogleReview.review_rely:type_name -> header.ReviewReply
-	97,   // 224: header.GoogleReview.reviewer:type_name -> header.Reviewer
-	223,  // 225: header.CallInfo.recorded_audio:type_name -> header.File
-	670,  // 226: header.Rating.ctx:type_name -> common.Context
-	505,  // 227: header.Rating.question:type_name -> header.Block
-	670,  // 228: header.Conversations.ctx:type_name -> common.Context
-	92,   // 229: header.Conversations.conversations:type_name -> header.Conversation
-	322,  // 230: header.Conversations.errors:type_name -> header.Error
-	670,  // 231: header.Message.ctx:type_name -> common.Context
-	109,  // 232: header.Message.attachments:type_name -> header.Attachment
-	505,  // 233: header.Message.block:type_name -> header.Block
-	315,  // 234: header.Message.fields:type_name -> header.KV
-	106,  // 235: header.Message.pongs:type_name -> header.MessagePong
-	671,  // 236: header.Message.i18n_quill_delta:type_name -> header.I18nString
-	609,  // 237: header.Message.i18n_block:type_name -> header.Message.I18nBlockEntry
-	105,  // 238: header.Message.story:type_name -> header.InstagramStory
-	103,  // 239: header.Message.referral:type_name -> header.MessageReferral
-	610,  // 240: header.Message.zns_template_data:type_name -> header.Message.ZnsTemplateDataEntry
-	611,  // 241: header.Message.zns_template_default_data:type_name -> header.Message.ZnsTemplateDefaultDataEntry
-	612,  // 242: header.Message.zns_template_data_field:type_name -> header.Message.ZnsTemplateDataFieldEntry
-	671,  // 243: header.Message.i18n_text:type_name -> header.I18nString
-	104,  // 244: header.MessageReferral.ads_context_data:type_name -> header.AdsContextData
-	322,  // 245: header.MessagePong.error:type_name -> header.Error
-	671,  // 246: header.MessageButton.old_i18n_title:type_name -> header.I18nString
-	613,  // 247: header.MessageButton.i18n_title:type_name -> header.MessageButton.I18nTitleEntry
-	107,  // 248: header.GenericElementTemplate.default_action:type_name -> header.MessageButton
-	107,  // 249: header.GenericElementTemplate.buttons:type_name -> header.MessageButton
-	671,  // 250: header.GenericElementTemplate.i18n_title:type_name -> header.I18nString
-	671,  // 251: header.GenericElementTemplate.i18n_subtitle:type_name -> header.I18nString
-	108,  // 252: header.Attachment.elements:type_name -> header.GenericElementTemplate
-	107,  // 253: header.Attachment.buttons:type_name -> header.MessageButton
-	110,  // 254: header.Attachment.quick_replies:type_name -> header.QuickReply
-	115,  // 255: header.Attachment.postback:type_name -> header.Postback
-	73,   // 256: header.Attachment.quote:type_name -> header.Event
-	305,  // 257: header.Attachment.product:type_name -> header.Product
-	110,  // 258: header.Attachment.quick_reply:type_name -> header.QuickReply
-	292,  // 259: header.Attachment.order:type_name -> header.Order
-	223,  // 260: header.Attachment.file:type_name -> header.File
-	184,  // 261: header.Attachment.form:type_name -> header.Form
-	183,  // 262: header.Attachment.form_submission:type_name -> header.FormSubmission
-	671,  // 263: header.QuickReply.i18n_title:type_name -> header.I18nString
-	670,  // 264: header.Tag.ctx:type_name -> common.Context
-	670,  // 265: header.Template.ctx:type_name -> common.Context
-	102,  // 266: header.Template.message:type_name -> header.Message
-	112,  // 267: header.Template.data:type_name -> header.TemplateData
-	670,  // 268: header.SearchTemplate.ctx:type_name -> common.Context
-	671,  // 269: header.BotPostback.i18n_title:type_name -> header.I18nString
-	670,  // 270: header.Integration.ctx:type_name -> common.Context
-	584,  // 271: header.Integration.zalo_zns_quota:type_name -> header.ZaloOAZNSQuota
-	492,  // 272: header.Integration.permissions:type_name -> header.ResourceGroupMember
-	670,  // 273: header.WorkflowSessionId.ctx:type_name -> common.Context
-	670,  // 274: header.AssignRequest.ctx:type_name -> common.Context
-	73,   // 275: header.AssignRequest.start_event:type_name -> header.Event
-	670,  // 276: header.EndchatSetting.ctx:type_name -> common.Context
-	120,  // 277: header.EndchatSetting.connector_settings:type_name -> header.EndchatConnectorSetting
-	120,  // 278: header.EndchatSetting.global_setting:type_name -> header.EndchatConnectorSetting
-	679,  // 279: header.Trigger.event_attributes:type_name -> header.EventConditionFilter
-	88,   // 280: header.BotCondition.locations:type_name -> header.LocationCondition
-	88,   // 281: header.BotCondition.exclude_locations:type_name -> header.LocationCondition
-	125,  // 282: header.BotCondition.user:type_name -> header.Condition
-	124,  // 283: header.BotCondition.order:type_name -> header.OrderCondition
-	87,   // 284: header.BotCondition.channel_condition:type_name -> header.ChannelCondition
-	680,  // 285: header.OrderCondition.total:type_name -> header.FloatCondition
-	88,   // 286: header.OrderCondition.shipping:type_name -> header.LocationCondition
-	88,   // 287: header.OrderCondition.exclude_shipping:type_name -> header.LocationCondition
-	670,  // 288: header.VisitProductSiteRequest.ctx:type_name -> common.Context
-	670,  // 289: header.Site.ctx:type_name -> common.Context
-	670,  // 290: header.Bot.ctx:type_name -> common.Context
-	131,  // 291: header.Bot.action:type_name -> header.BotAction
-	122,  // 292: header.Bot.triggers:type_name -> header.Trigger
-	150,  // 293: header.Bot.initiative_frequency:type_name -> header.Frequently
-	123,  // 294: header.Bot.conditions:type_name -> header.BotCondition
-	83,   // 295: header.Bot.condition:type_name -> header.Rule
-	102,  // 296: header.Bot.welcome_message:type_name -> header.Message
-	670,  // 297: header.Bots.ctx:type_name -> common.Context
-	128,  // 298: header.Bots.bots:type_name -> header.Bot
-	131,  // 299: header.NextBotAction.action:type_name -> header.BotAction
-	130,  // 300: header.BotAction.nexts:type_name -> header.NextBotAction
-	137,  // 301: header.BotAction.jump:type_name -> header.ActionJump
-	138,  // 302: header.BotAction.send_http:type_name -> header.ActionSendHttp
-	141,  // 303: header.BotAction.ask_question:type_name -> header.ActionAskQuestion
-	119,  // 304: header.BotAction.assign:type_name -> header.AssignRequest
-	136,  // 305: header.BotAction.update_conversation:type_name -> header.ActionUpdateConversation
-	142,  // 306: header.BotAction.update_user:type_name -> header.ActionUpdateUser
-	143,  // 307: header.BotAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
-	134,  // 308: header.BotAction.confirm_order:type_name -> header.ActionConfirmOrder
-	133,  // 309: header.BotAction.create_task:type_name -> header.ActionCreateTask
-	135,  // 310: header.BotAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
-	505,  // 311: header.ActionCreateTask.title_block:type_name -> header.Block
-	505,  // 312: header.ActionCreateTask.note_block:type_name -> header.Block
-	102,  // 313: header.ActionConfirmOrder.messages:type_name -> header.Message
-	102,  // 314: header.ActionConfirmOrder.invalid_messages:type_name -> header.Message
-	315,  // 315: header.ActionUpdateConversation.fields:type_name -> header.KV
-	315,  // 316: header.ActionSendHttp.header:type_name -> header.KV
-	505,  // 317: header.ActionSendHttp.block:type_name -> header.Block
-	102,  // 318: header.ActionSendTyping.message:type_name -> header.Message
-	102,  // 319: header.ActionSendMessage.messages:type_name -> header.Message
-	315,  // 320: header.ActionSendMessage.extra_fields:type_name -> header.KV
-	414,  // 321: header.ActionSendMessage.llm:type_name -> header.ActionLLM
-	102,  // 322: header.ActionAskQuestion.messages:type_name -> header.Message
-	102,  // 323: header.ActionAskQuestion.resume_message:type_name -> header.Message
-	38,   // 324: header.ActionUpdateUser.attr:type_name -> header.Attribute
-	38,   // 325: header.ActionUpdateUser.attrs:type_name -> header.Attribute
-	614,  // 326: header.ReportBotResponse.metrics:type_name -> header.ReportBotResponse.Metric
-	146,  // 327: header.BotrunMetrics.metrics:type_name -> header.BotrunMetric
-	615,  // 328: header.ActionrunMetrics.metrics:type_name -> header.ActionrunMetrics.ActionrunMetric
-	670,  // 329: header.RealtimeSubscription.ctx:type_name -> common.Context
-	670,  // 330: header.PollResult.ctx:type_name -> common.Context
-	73,   // 331: header.PollResult.events:type_name -> header.Event
-	670,  // 332: header.PsMessage.ctx:type_name -> common.Context
-	73,   // 333: header.PsMessage.event:type_name -> header.Event
-	670,  // 334: header.WidgetUserSetting.ctx:type_name -> common.Context
-	676,  // 335: header.WidgetUserSetting.account:type_name -> account.Account
-	674,  // 336: header.WidgetUserSetting.agents:type_name -> account.Agent
-	128,  // 337: header.WidgetUserSetting.bots:type_name -> header.Bot
-	167,  // 338: header.WidgetUserSetting.plugins:type_name -> header.WebPlugin
-	59,   // 339: header.WidgetUserSetting.location:type_name -> header.Location
-	670,  // 340: header.AccountWeb.ctx:type_name -> common.Context
-	676,  // 341: header.AccountWeb.account:type_name -> account.Account
-	674,  // 342: header.AccountWeb.agents:type_name -> account.Agent
-	128,  // 343: header.AccountWeb.bots:type_name -> header.Bot
-	167,  // 344: header.AccountWeb.plugins:type_name -> header.WebPlugin
-	286,  // 345: header.AccountWeb.payment_methods:type_name -> header.PaymentMethod
-	59,   // 346: header.AccountWeb.location:type_name -> header.Location
-	157,  // 347: header.WidgetHeader.links:type_name -> header.SocialLink
-	670,  // 348: header.WidgetSetting.ctx:type_name -> common.Context
-	674,  // 349: header.WidgetSetting.agents:type_name -> account.Agent
-	158,  // 350: header.WidgetSetting.header:type_name -> header.WidgetHeader
-	162,  // 351: header.WidgetSetting.offline_form:type_name -> header.WidgetForm
-	162,  // 352: header.WidgetSetting.prechat_form:type_name -> header.WidgetForm
-	163,  // 353: header.WidgetSetting.desktop_button:type_name -> header.WidgetChatButton
-	163,  // 354: header.WidgetSetting.mobile_button:type_name -> header.WidgetChatButton
-	164,  // 355: header.WidgetSetting.greeting:type_name -> header.WidgetGreeting
-	671,  // 356: header.WidgetSetting.caption:type_name -> header.I18nString
-	671,  // 357: header.WidgetSetting.tagline:type_name -> header.I18nString
-	671,  // 358: header.WidgetField.i18n_label:type_name -> header.I18nString
-	671,  // 359: header.WidgetField.i18n_placeholder:type_name -> header.I18nString
-	55,   // 360: header.WidgetField.def:type_name -> header.AttributeDefinition
-	616,  // 361: header.WidgetGroup.i18n_name:type_name -> header.WidgetGroup.I18nNameEntry
-	160,  // 362: header.WidgetForm.fields:type_name -> header.WidgetField
-	161,  // 363: header.WidgetForm.groups:type_name -> header.WidgetGroup
-	671,  // 364: header.WidgetForm.i18n_group_label:type_name -> header.I18nString
-	671,  // 365: header.WidgetForm.i18n_title:type_name -> header.I18nString
-	671,  // 366: header.WidgetForm.i18n_question_label:type_name -> header.I18nString
-	671,  // 367: header.WidgetGreeting.greeting:type_name -> header.I18nString
-	102,  // 368: header.CampaignNotification.user_email:type_name -> header.Message
-	670,  // 369: header.WebPlugins.ctx:type_name -> common.Context
-	167,  // 370: header.WebPlugins.plugins:type_name -> header.WebPlugin
-	670,  // 371: header.WebPlugin.ctx:type_name -> common.Context
-	122,  // 372: header.WebPlugin.triggers:type_name -> header.Trigger
-	150,  // 373: header.WebPlugin.initiative_frequency:type_name -> header.Frequently
-	123,  // 374: header.WebPlugin.conditions:type_name -> header.BotCondition
-	159,  // 375: header.WebPlugin.chatbox:type_name -> header.WidgetSetting
-	191,  // 376: header.WebPlugin.popup:type_name -> header.Popup
-	175,  // 377: header.WebPlugin.contact:type_name -> header.ContactComponent
-	174,  // 378: header.WebPlugin.notification:type_name -> header.Notif
-	165,  // 379: header.WebPlugin.conversion_notification:type_name -> header.CampaignNotification
-	671,  // 380: header.TextComponent.i18n_html:type_name -> header.I18nString
-	671,  // 381: header.TextComponent.i18n_quill_delta:type_name -> header.I18nString
-	505,  // 382: header.TextComponent.block:type_name -> header.Block
-	617,  // 383: header.TextComponent.i18n_block:type_name -> header.TextComponent.I18nBlockEntry
-	670,  // 384: header.NotifProfiles.ctx:type_name -> common.Context
-	172,  // 385: header.NotifProfiles.profiles:type_name -> header.NotifProfile
-	670,  // 386: header.NotifProfile.ctx:type_name -> common.Context
-	618,  // 387: header.I18nBlock.i18n:type_name -> header.I18nBlock.I18nEntry
-	172,  // 388: header.Notif.profiles:type_name -> header.NotifProfile
-	505,  // 389: header.Notif.title_block:type_name -> header.Block
-	619,  // 390: header.Notif.i18n_title_block:type_name -> header.Notif.I18nTitleBlockEntry
-	193,  // 391: header.Notif.title_style:type_name -> header.Style
-	505,  // 392: header.Notif.message_blocks:type_name -> header.Block
-	173,  // 393: header.Notif.i18n_message_blocks:type_name -> header.I18nBlock
-	193,  // 394: header.Notif.message_style:type_name -> header.Style
-	193,  // 395: header.Notif.background_style:type_name -> header.Style
-	193,  // 396: header.Notif.subtext_style:type_name -> header.Style
-	193,  // 397: header.Notif.avatar_style:type_name -> header.Style
-	620,  // 398: header.ContactComponent.buttons:type_name -> header.ContactComponent.ContactButton
-	621,  // 399: header.CallContactComponent.hotlines:type_name -> header.CallContactComponent.Hotline
-	622,  // 400: header.MapContactComponent.locations:type_name -> header.MapContactComponent.Location
-	671,  // 401: header.FormField.i18n_label:type_name -> header.I18nString
-	623,  // 402: header.FormField.options:type_name -> header.FormField.FormFieldOption
-	671,  // 403: header.FormField.i18n_placeholder:type_name -> header.I18nString
-	670,  // 404: header.FormSubmission.ctx:type_name -> common.Context
-	182,  // 405: header.FormSubmission.values:type_name -> header.FormField
-	672,  // 406: header.FormSubmission.device:type_name -> common.Device
-	670,  // 407: header.Form.ctx:type_name -> common.Context
-	161,  // 408: header.Form.groups:type_name -> header.WidgetGroup
-	671,  // 409: header.Form.i18n_group_label:type_name -> header.I18nString
-	671,  // 410: header.Form.i18n_title:type_name -> header.I18nString
-	671,  // 411: header.Form.i18n_question_label:type_name -> header.I18nString
-	505,  // 412: header.Form.components:type_name -> header.Block
-	223,  // 413: header.Form.logo:type_name -> header.File
-	223,  // 414: header.Form.cover_image:type_name -> header.File
-	193,  // 415: header.Form.header_style:type_name -> header.Style
-	193,  // 416: header.Form.text_style:type_name -> header.Style
-	193,  // 417: header.Form.input_style:type_name -> header.Style
-	182,  // 418: header.OldForm.fields:type_name -> header.FormField
-	161,  // 419: header.OldForm.groups:type_name -> header.WidgetGroup
-	671,  // 420: header.OldForm.i18n_group_label:type_name -> header.I18nString
-	671,  // 421: header.OldForm.i18n_title:type_name -> header.I18nString
-	671,  // 422: header.OldForm.i18n_question_label:type_name -> header.I18nString
-	186,  // 423: header.OldForm.form_groups:type_name -> header.FormGroup
-	182,  // 424: header.FormGroup.fields:type_name -> header.FormField
-	671,  // 425: header.FormGroup.i18n_title:type_name -> header.I18nString
-	200,  // 426: header.ButtonsComponent.primary_actions:type_name -> header.PopupButtonAction
-	671,  // 427: header.ButtonsComponent.i18n_primary_text:type_name -> header.I18nString
-	200,  // 428: header.ButtonsComponent.secondary_actions:type_name -> header.PopupButtonAction
-	671,  // 429: header.ButtonsComponent.i18n_secondary_text:type_name -> header.I18nString
-	193,  // 430: header.WebPluginComponent.style:type_name -> header.Style
-	193,  // 431: header.WebPluginComponent.mobile_style:type_name -> header.Style
-	168,  // 432: header.WebPluginComponent.text:type_name -> header.TextComponent
-	187,  // 433: header.WebPluginComponent.buttons:type_name -> header.ButtonsComponent
-	181,  // 434: header.WebPluginComponent.countdown:type_name -> header.CountdownComponent
-	185,  // 435: header.WebPluginComponent.form:type_name -> header.OldForm
-	192,  // 436: header.WebPluginComponent.link:type_name -> header.LinkComponent
-	170,  // 437: header.WebPluginComponent.image:type_name -> header.ImageComponent
-	169,  // 438: header.WebPluginComponent.line:type_name -> header.LineComponent
-	190,  // 439: header.WebPluginComponent.social_buttons:type_name -> header.SocialButtonsComponent
-	189,  // 440: header.WebPluginComponent.follow_facebook:type_name -> header.FollowFacebookComponent
-	194,  // 441: header.Popup.pages:type_name -> header.PopupPage
-	193,  // 442: header.Style.hover:type_name -> header.Style
-	188,  // 443: header.PopupPage.components:type_name -> header.WebPluginComponent
-	193,  // 444: header.PopupPage.style:type_name -> header.Style
-	193,  // 445: header.PopupPage.mobile_style:type_name -> header.Style
-	201,  // 446: header.PopupPage.background_click:type_name -> header.ButtonComponent
-	670,  // 447: header.Impression.ctx:type_name -> common.Context
-	672,  // 448: header.Impression.device:type_name -> common.Device
-	670,  // 449: header.Conversions.ctx:type_name -> common.Context
-	197,  // 450: header.Conversions.conversions:type_name -> header.Conversion
-	670,  // 451: header.Conversion.ctx:type_name -> common.Context
-	672,  // 452: header.Conversion.device:type_name -> common.Device
-	199,  // 453: header.Conversion.submission:type_name -> header.CampaignSubmission
-	45,   // 454: header.Conversion.user:type_name -> header.User
-	670,  // 455: header.UserCampaignStatus.ctx:type_name -> common.Context
-	670,  // 456: header.CampaignSubmission.ctx:type_name -> common.Context
-	160,  // 457: header.CampaignSubmission.fields:type_name -> header.WidgetField
-	200,  // 458: header.ButtonComponent.actions:type_name -> header.PopupButtonAction
-	670,  // 459: header.ReportCampaignResponse.ctx:type_name -> common.Context
-	670,  // 460: header.ReportWebPluginResponse.ctx:type_name -> common.Context
-	205,  // 461: header.ReportWebPluginResponse.metrics:type_name -> header.WebPluginMetric
-	670,  // 462: header.GreetingAudios.ctx:type_name -> common.Context
-	209,  // 463: header.GreetingAudios.greeting_audios:type_name -> header.GreetingAudio
-	670,  // 464: header.GreetingAudio.ctx:type_name -> common.Context
-	223,  // 465: header.GreetingAudio.file:type_name -> header.File
-	670,  // 466: header.UploadedImage.ctx:type_name -> common.Context
-	670,  // 467: header.UploadedImages.ctx:type_name -> common.Context
-	210,  // 468: header.UploadedImages.images:type_name -> header.UploadedImage
-	466,  // 469: header.EventFilter.condition:type_name -> header.WorkflowCondition
-	670,  // 470: header.EventDestination.ctx:type_name -> common.Context
-	213,  // 471: header.EventDestination.filters:type_name -> header.EventFilter
-	217,  // 472: header.EventDestination.webhook:type_name -> header.Webhook
-	216,  // 473: header.EventDestination.facebook_conversion_api:type_name -> header.FacebookConversionAPI
-	215,  // 474: header.EventDestination.mappings:type_name -> header.DataMapping
-	670,  // 475: header.Webhook.ctx:type_name -> common.Context
-	212,  // 476: header.Webhook.old_secret:type_name -> header.WebhookSecret
-	670,  // 477: header.WebhookDeliveries.ctx:type_name -> common.Context
-	219,  // 478: header.WebhookDeliveries.deliveries:type_name -> header.WebhookDelivery
-	670,  // 479: header.WebhookDelivery.ctx:type_name -> common.Context
-	315,  // 480: header.WebhookDelivery.resquest_headers:type_name -> header.KV
-	315,  // 481: header.WebhookDelivery.response_headers:type_name -> header.KV
-	670,  // 482: header.WebhookTestResult.ctx:type_name -> common.Context
-	670,  // 483: header.BackOffSleepWebhookEmail.ctx:type_name -> common.Context
-	670,  // 484: header.PresignResult.ctx:type_name -> common.Context
-	670,  // 485: header.File.ctx:type_name -> common.Context
-	670,  // 486: header.BotTerminated.ctx:type_name -> common.Context
-	670,  // 487: header.BlacklistIP.ctx:type_name -> common.Context
-	670,  // 488: header.BannedUser.ctx:type_name -> common.Context
-	670,  // 489: header.LoginSessions.ctx:type_name -> common.Context
-	228,  // 490: header.LoginSessions.sessions:type_name -> header.LoginSession
-	670,  // 491: header.LoginSession.ctx:type_name -> common.Context
-	672,  // 492: header.LoginSession.device:type_name -> common.Device
-	59,   // 493: header.LoginSession.location:type_name -> header.Location
-	231,  // 494: header.GoogleLocationSettings.settings:type_name -> header.GoogleLocationSetting
-	232,  // 495: header.GoogleLocationSetting.google_review_setting:type_name -> header.GoogleReviewSetting
-	233,  // 496: header.GoogleLocationSetting.google_question_setting:type_name -> header.GoogleQuestionSetting
-	624,  // 497: header.GoogleReviewSetting.repliesM:type_name -> header.GoogleReviewSetting.RepliesMEntry
-	505,  // 498: header.FbComment.block:type_name -> header.Block
-	670,  // 499: header.FbFanpageSetting.ctx:type_name -> common.Context
-	237,  // 500: header.FbFanpageSetting.general_comment_setting:type_name -> header.FbCommentSetting
-	237,  // 501: header.FbFanpageSetting.specific_post_comment_setting:type_name -> header.FbCommentSetting
-	237,  // 502: header.FbFanpageSetting.post_comment_settings:type_name -> header.FbCommentSetting
-	670,  // 503: header.FbFanpageSettings.ctx:type_name -> common.Context
-	235,  // 504: header.FbFanpageSettings.settings:type_name -> header.FbFanpageSetting
-	234,  // 505: header.FbCommentSetting.comments:type_name -> header.FbComment
-	102,  // 506: header.FbCommentSetting.message:type_name -> header.Message
-	102,  // 507: header.FbCommentSetting.message_for_comments_contain_phone_email_or_address:type_name -> header.Message
-	102,  // 508: header.FbCommentSetting.message_for_comments_contain_keyword:type_name -> header.Message
-	248,  // 509: header.FbCommentSetting.posts:type_name -> header.FacebookPost
-	670,  // 510: header.FacebookPosts.ctx:type_name -> common.Context
-	248,  // 511: header.FacebookPosts.posts:type_name -> header.FacebookPost
-	239,  // 512: header.FacebookPostAttachmentMedia.image:type_name -> header.FacebookPostAttachmentMediaImage
-	240,  // 513: header.FacebookPostAttachment.media:type_name -> header.FacebookPostAttachmentMedia
-	242,  // 514: header.FacebookPostAttachment.subattachments:type_name -> header.FacebookPostAttachemnts
-	241,  // 515: header.FacebookPostAttachemnts.data:type_name -> header.FacebookPostAttachment
-	248,  // 516: header.FbFacebookPosts.data:type_name -> header.FacebookPost
-	246,  // 517: header.FbFacebookPosts.paging:type_name -> header.FacebookPaging
-	245,  // 518: header.FacebookPaging.cursors:type_name -> header.FacebookPagingCursor
-	670,  // 519: header.InstagramMedia.ctx:type_name -> common.Context
-	670,  // 520: header.FacebookPost.ctx:type_name -> common.Context
-	243,  // 521: header.FacebookPost.from:type_name -> header.FacebookPostFrom
-	242,  // 522: header.FacebookPost.attachments:type_name -> header.FacebookPostAttachemnts
-	670,  // 523: header.UserOrderConfirmation.ctx:type_name -> common.Context
-	292,  // 524: header.UserOrderConfirmation.order:type_name -> header.Order
-	670,  // 525: header.LangMessage.ctx:type_name -> common.Context
-	670,  // 526: header.Lang.ctx:type_name -> common.Context
-	251,  // 527: header.Lang.messages:type_name -> header.LangMessage
-	670,  // 528: header.Locale.ctx:type_name -> common.Context
-	676,  // 529: header.AccountImage.img:type_name -> account.Account
-	674,  // 530: header.AccountImage.owner:type_name -> account.Agent
-	670,  // 531: header.UserViews.ctx:type_name -> common.Context
-	256,  // 532: header.UserViews.views:type_name -> header.UserView
-	670,  // 533: header.UserView.ctx:type_name -> common.Context
-	259,  // 534: header.UserView.condition:type_name -> header.UserViewCondition
-	670,  // 535: header.CountTouchpointResponse.ctx:type_name -> common.Context
-	625,  // 536: header.CountTouchpointResponse.counts:type_name -> header.CountTouchpointResponse.TouchpointCount
-	670,  // 537: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
-	670,  // 538: header.UserViewCondition.ctx:type_name -> common.Context
-	681,  // 539: header.UserViewCondition.text:type_name -> header.TextCondition
-	682,  // 540: header.UserViewCondition.boolean:type_name -> header.BooleanCondition
-	680,  // 541: header.UserViewCondition.number:type_name -> header.FloatCondition
-	683,  // 542: header.UserViewCondition.datetime:type_name -> header.DatetimeCondition
-	684,  // 543: header.UserViewCondition.event:type_name -> header.EventCondition
-	259,  // 544: header.UserViewCondition.all:type_name -> header.UserViewCondition
-	259,  // 545: header.UserViewCondition.one:type_name -> header.UserViewCondition
-	670,  // 546: header.ReportResponse.ctx:type_name -> common.Context
-	671,  // 547: header.InvoiceTemplate.i18n_terms_and_conditions:type_name -> header.I18nString
-	671,  // 548: header.InvoiceTemplate.i18n_tagline:type_name -> header.I18nString
-	671,  // 549: header.InvoiceTemplate.i18n_signature:type_name -> header.I18nString
-	670,  // 550: header.ShopSetting.ctx:type_name -> common.Context
-	264,  // 551: header.ShopSetting.other_currencies:type_name -> header.Currency
-	271,  // 552: header.ShopSetting.addresses:type_name -> header.Address
-	320,  // 553: header.ShopSetting.taxes:type_name -> header.Tax
-	286,  // 554: header.ShopSetting.payment_methods:type_name -> header.PaymentMethod
-	261,  // 555: header.ShopSetting.invoice_template:type_name -> header.InvoiceTemplate
-	323,  // 556: header.ShopSetting.shopee_shops:type_name -> header.ShopeeShop
-	284,  // 557: header.ShopSetting.shippings:type_name -> header.IntegratedShipping
-	283,  // 558: header.ShopSetting.shipping_policies:type_name -> header.ShippingPolicy
-	298,  // 559: header.ShopSetting.cancellation_codes:type_name -> header.CancellationCode
-	670,  // 560: header.Addresses.ctx:type_name -> common.Context
-	271,  // 561: header.Addresses.addresses:type_name -> header.Address
-	670,  // 562: header.Currency.ctx:type_name -> common.Context
-	265,  // 563: header.Currency.logs:type_name -> header.CurrencyLogEntry
-	670,  // 564: header.ProductCollections.ctx:type_name -> common.Context
-	267,  // 565: header.ProductCollections.product_collections:type_name -> header.ProductCollection
-	670,  // 566: header.ProductCollection.ctx:type_name -> common.Context
-	305,  // 567: header.OrderItem.product:type_name -> header.Product
-	320,  // 568: header.OrderItem.tax:type_name -> header.Tax
-	670,  // 569: header.Address.ctx:type_name -> common.Context
-	270,  // 570: header.Address.ghn:type_name -> header.GHNAddress
-	271,  // 571: header.Address.ghtk:type_name -> header.Address
-	277,  // 572: header.GHNOrder.items:type_name -> header.GHNOrderItem
-	274,  // 573: header.GHNOrder.fee:type_name -> header.GHNOrderFee
-	276,  // 574: header.GHNOrder2.Fee:type_name -> header.GHNOrder2Fee
-	271,  // 575: header.ShippingInfo.address:type_name -> header.Address
-	271,  // 576: header.ShippingInfo.pickup_address:type_name -> header.Address
-	320,  // 577: header.ShippingInfo.tax:type_name -> header.Tax
-	281,  // 578: header.ShippingInfo.data:type_name -> header.ShippingData
-	278,  // 579: header.ShippingData.ghtk:type_name -> header.GHTKShippingData
-	279,  // 580: header.ShippingData.ghtk_order:type_name -> header.GHTKOrder
-	272,  // 581: header.ShippingData.ghn:type_name -> header.GHNShippingData
-	273,  // 582: header.ShippingData.ghn_order:type_name -> header.GHNOrder
-	670,  // 583: header.ShippingPolicies.ctx:type_name -> common.Context
-	283,  // 584: header.ShippingPolicies.shipping_policies:type_name -> header.ShippingPolicy
-	670,  // 585: header.ShippingPolicy.ctx:type_name -> common.Context
-	670,  // 586: header.IntegratedShipping.ctx:type_name -> common.Context
-	271,  // 587: header.IntegratedShipping.address:type_name -> header.Address
-	670,  // 588: header.IntegratedShippings.ctx:type_name -> common.Context
-	284,  // 589: header.IntegratedShippings.integrated_shippings:type_name -> header.IntegratedShipping
-	670,  // 590: header.PaymentMethod.ctx:type_name -> common.Context
-	670,  // 591: header.PaymentMethods.ctx:type_name -> common.Context
-	286,  // 592: header.PaymentMethods.payment_methods:type_name -> header.PaymentMethod
-	670,  // 593: header.Orders.ctx:type_name -> common.Context
-	288,  // 594: header.Orders.metrics:type_name -> header.OrderMetric
-	292,  // 595: header.Orders.orders:type_name -> header.Order
-	670,  // 596: header.CountOrdersResponse.ctx:type_name -> common.Context
-	670,  // 597: header.DownloadOrderRequest.ctx:type_name -> common.Context
-	292,  // 598: header.DownloadOrderRequest.order:type_name -> header.Order
-	261,  // 599: header.DownloadOrderRequest.template:type_name -> header.InvoiceTemplate
-	670,  // 600: header.Order.ctx:type_name -> common.Context
-	280,  // 601: header.Order.shipping:type_name -> header.ShippingInfo
-	286,  // 602: header.Order.payment_method:type_name -> header.PaymentMethod
-	269,  // 603: header.Order.items:type_name -> header.OrderItem
-	45,   // 604: header.Order.user:type_name -> header.User
-	626,  // 605: header.Order.fields:type_name -> header.Order.FieldsEntry
-	294,  // 606: header.Order.agents:type_name -> header.OrderAgent
-	293,  // 607: header.Order.stages:type_name -> header.OrderPipelineStage
-	111,  // 608: header.Order.tags:type_name -> header.Tag
-	322,  // 609: header.Order.error:type_name -> header.Error
-	670,  // 610: header.OrderPipelineStage.ctx:type_name -> common.Context
-	337,  // 611: header.OrderPipelineStage.tasks:type_name -> header.Task
-	670,  // 612: header.OrderAgent.ctx:type_name -> common.Context
-	670,  // 613: header.Bills.ctx:type_name -> common.Context
-	296,  // 614: header.Bills.bills:type_name -> header.Bill
-	670,  // 615: header.Bill.ctx:type_name -> common.Context
-	532,  // 616: header.Bill.bank_transfer_request:type_name -> header.BankTransferRequest
-	670,  // 617: header.CancellationCodes.ctx:type_name -> common.Context
-	298,  // 618: header.CancellationCodes.cancellation_codes:type_name -> header.CancellationCode
-	670,  // 619: header.CancellationCode.ctx:type_name -> common.Context
-	670,  // 620: header.OrderPipelineUpdated.ctx:type_name -> common.Context
-	670,  // 621: header.OrderStatusUpdated.ctx:type_name -> common.Context
-	73,   // 622: header.OrderHistoryEntry.event:type_name -> header.Event
-	73,   // 623: header.OrderHistoryEntry.ref_comment:type_name -> header.Event
-	670,  // 624: header.OrderHistoryEntries.ctx:type_name -> common.Context
-	301,  // 625: header.OrderHistoryEntries.entries:type_name -> header.OrderHistoryEntry
-	670,  // 626: header.Discount.ctx:type_name -> common.Context
-	223,  // 627: header.Discount.image:type_name -> header.File
-	670,  // 628: header.Product.ctx:type_name -> common.Context
-	305,  // 629: header.Product.other_variants:type_name -> header.Product
-	315,  // 630: header.Product.props:type_name -> header.KV
-	309,  // 631: header.Product.options:type_name -> header.ProductOption
-	268,  // 632: header.Product.price_rules:type_name -> header.PriceRule
-	307,  // 633: header.Product.stocks:type_name -> header.ProductStock
-	320,  // 634: header.Product.tax:type_name -> header.Tax
-	107,  // 635: header.Product.buttons:type_name -> header.MessageButton
-	627,  // 636: header.Product.i18n_description_block:type_name -> header.Product.I18nDescriptionBlockEntry
-	223,  // 637: header.Product.attachments:type_name -> header.File
-	303,  // 638: header.Product.validity:type_name -> header.ProductValidity
-	308,  // 639: header.Product.offers:type_name -> header.ProductOffer
-	306,  // 640: header.Product.enrich_sources:type_name -> header.ProductEnrichSource
-	322,  // 641: header.Product.error:type_name -> header.Error
-	670,  // 642: header.ProductOffer.ctx:type_name -> common.Context
-	670,  // 643: header.ProductFeeds.ctx:type_name -> common.Context
-	313,  // 644: header.ProductFeeds.product_feeds:type_name -> header.ProductFeed
-	670,  // 645: header.ProductFeed.ctx:type_name -> common.Context
-	311,  // 646: header.ProductFeed.shopee:type_name -> header.ShopeeProductFeed
-	310,  // 647: header.ProductFeed.google_sheet:type_name -> header.GoogleSheetProductFeed
-	670,  // 648: header.ProductsRequest.ctx:type_name -> common.Context
-	315,  // 649: header.ProductsRequest.props:type_name -> header.KV
-	315,  // 650: header.KV.kvs:type_name -> header.KV
-	505,  // 651: header.KV.value_block:type_name -> header.Block
-	505,  // 652: header.KV.value_blocks:type_name -> header.Block
-	472,  // 653: header.ProductCategoryBuildQueryExample.history:type_name -> header.LLMChatHistoryEntry
-	628,  // 654: header.ProductCategory.i18n_name:type_name -> header.ProductCategory.I18nNameEntry
-	629,  // 655: header.ProductCategory.attributes:type_name -> header.ProductCategory.AttributesEntry
-	316,  // 656: header.ProductCategory._build_query_examples:type_name -> header.ProductCategoryBuildQueryExample
-	318,  // 657: header.ProductCategory.keyword_extract_examples:type_name -> header.ProductCategoryExtractExample
-	670,  // 658: header.ProductCategories.ctx:type_name -> common.Context
-	670,  // 659: header.Tax.ctx:type_name -> common.Context
-	671,  // 660: header.Tax.i18n_name:type_name -> header.I18nString
-	630,  // 661: header.Error.fields:type_name -> header.Error.FieldsEntry
-	631,  // 662: header.Error._hidden:type_name -> header.Error.HiddenEntry
-	632,  // 663: header.Error.message:type_name -> header.Error.MessageEntry
-	633,  // 664: header.Error.attrs:type_name -> header.Error.AttrsEntry
-	634,  // 665: header.Error._hidden_attrs:type_name -> header.Error.HiddenAttrsEntry
-	670,  // 666: header.ShopeeShop.ctx:type_name -> common.Context
-	670,  // 667: header.ShopeeSyncProductResponse.ctx:type_name -> common.Context
-	670,  // 668: header.AddressAutocompleteResponses.ctx:type_name -> common.Context
-	326,  // 669: header.AddressAutocompleteResponses.responses:type_name -> header.AddressAutocompleteResponse
-	670,  // 670: header.AddressAutocompleteResponse.ctx:type_name -> common.Context
-	327,  // 671: header.AddressAutocompleteResponse.matched_substrings:type_name -> header.SubstringIndex
-	329,  // 672: header.PipelineStage.routes:type_name -> header.PipelineRule
-	337,  // 673: header.PipelineStage.tasks:type_name -> header.Task
-	670,  // 674: header.PipelineRule.ctx:type_name -> common.Context
-	123,  // 675: header.PipelineRule.conditions:type_name -> header.BotCondition
-	670,  // 676: header.Pipelines.ctx:type_name -> common.Context
-	331,  // 677: header.Pipelines.pipelines:type_name -> header.Pipeline
-	670,  // 678: header.Pipeline.ctx:type_name -> common.Context
-	328,  // 679: header.Pipeline.stages:type_name -> header.PipelineStage
-	670,  // 680: header.Tasks.ctx:type_name -> common.Context
-	337,  // 681: header.Tasks.tasks:type_name -> header.Task
-	670,  // 682: header.ImportLeadRequest.ctx:type_name -> common.Context
-	45,   // 683: header.ImportLeadRequest.users:type_name -> header.User
-	670,  // 684: header.ImportLeadResponse.ctx:type_name -> common.Context
-	670,  // 685: header.ImportProductRequest.ctx:type_name -> common.Context
-	305,  // 686: header.ImportProductRequest.products:type_name -> header.Product
-	670,  // 687: header.ImportProductResponse.ctx:type_name -> common.Context
-	305,  // 688: header.ImportProductResponse.products:type_name -> header.Product
-	670,  // 689: header.Task.ctx:type_name -> common.Context
-	73,   // 690: header.Task.data_email:type_name -> header.Event
-	223,  // 691: header.Task.files:type_name -> header.File
-	73,   // 692: header.Task.latest_comment:type_name -> header.Event
-	338,  // 693: header.Task.members:type_name -> header.TaskMember
-	505,  // 694: header.Task.note_block:type_name -> header.Block
-	505,  // 695: header.Task.title_block:type_name -> header.Block
-	73,   // 696: header.TaskHistoryEntry.event:type_name -> header.Event
-	73,   // 697: header.TaskHistoryEntry.ref_comment:type_name -> header.Event
-	670,  // 698: header.TaskHistoryEntries.ctx:type_name -> common.Context
-	339,  // 699: header.TaskHistoryEntries.entries:type_name -> header.TaskHistoryEntry
-	670,  // 700: header.AgentGroups.ctx:type_name -> common.Context
-	342,  // 701: header.AgentGroups.Groups:type_name -> header.AgentGroup
-	670,  // 702: header.AgentGroup.ctx:type_name -> common.Context
-	45,   // 703: header.DocHit.user:type_name -> header.User
-	343,  // 704: header.DocHit.secondary_doc:type_name -> header.DocHit
-	496,  // 705: header.DocHit.article:type_name -> header.Article
-	505,  // 706: header.DocHit.description_block:type_name -> header.Block
-	635,  // 707: header.DocHit.query_matchM:type_name -> header.DocHit.QueryMatchMEntry
-	670,  // 708: header.DocSearchResponse.ctx:type_name -> common.Context
-	343,  // 709: header.DocSearchResponse.hits:type_name -> header.DocHit
-	505,  // 710: header.ArticleHit.title_block:type_name -> header.Block
-	505,  // 711: header.ArticleHit.description_block:type_name -> header.Block
-	505,  // 712: header.ArticleHit.content_block:type_name -> header.Block
-	670,  // 713: header.ArticleSearchResponse.ctx:type_name -> common.Context
-	345,  // 714: header.ArticleSearchResponse.hits:type_name -> header.ArticleHit
-	670,  // 715: header.ZaloCodeChallenge.ctx:type_name -> common.Context
-	670,  // 716: header.ConversationModal.ctx:type_name -> common.Context
-	670,  // 717: header.ConversationModals.ctx:type_name -> common.Context
-	349,  // 718: header.ConversationModals.conversation_modals:type_name -> header.ConversationModal
-	670,  // 719: header.ConversationModalPickRequest.ctx:type_name -> common.Context
-	47,   // 720: header.ConversationModalPickRequest.touchpoint:type_name -> header.Touchpoint
-	670,  // 721: header.ConversationModalPicked.ctx:type_name -> common.Context
-	670,  // 722: header.FacebookPageRegister.ctx:type_name -> common.Context
-	670,  // 723: header.FacebookPage.ctx:type_name -> common.Context
-	357,  // 724: header.FacebookPage.instagram_account:type_name -> header.InstagramUser
-	670,  // 725: header.FacebookPageRequest.ctx:type_name -> common.Context
-	670,  // 726: header.FacebookPages.ctx:type_name -> common.Context
-	354,  // 727: header.FacebookPages.facebook_pages:type_name -> header.FacebookPage
-	670,  // 728: header.InstagramUser.ctx:type_name -> common.Context
-	670,  // 729: header.CallDriverRequest.ctx:type_name -> common.Context
-	40,   // 730: header.CallDriverRequest.phone_device:type_name -> header.PhoneDevice
-	117,  // 731: header.CallDriverRequest.integration:type_name -> header.Integration
-	40,   // 732: header.CallDriverResponse.phone_device:type_name -> header.PhoneDevice
-	99,   // 733: header.CallDriverResponse.call:type_name -> header.CallInfo
-	670,  // 734: header.BlockedNumbers.ctx:type_name -> common.Context
-	361,  // 735: header.BlockedNumbers.blocked_numbers:type_name -> header.BlockedNumber
-	670,  // 736: header.BlockedNumber.ctx:type_name -> common.Context
-	363,  // 737: header.TextToSpeech.speeches:type_name -> header.TTSVoiceSelection
-	223,  // 738: header.TTSVoiceSelection.file:type_name -> header.File
-	670,  // 739: header.BusinessHours.ctx:type_name -> common.Context
-	364,  // 740: header.BusinessHours.week_days:type_name -> header.BusinessHour
-	364,  // 741: header.BusinessHours.extra_hours:type_name -> header.BusinessHour
-	364,  // 742: header.BusinessHours.holidays:type_name -> header.BusinessHour
-	670,  // 743: header.RecentCallRecords.ctx:type_name -> common.Context
-	367,  // 744: header.RecentCallRecords.records:type_name -> header.RecentCallRecord
-	670,  // 745: header.ZaloUserRequest.ctx:type_name -> common.Context
-	670,  // 746: header.ZnsRequest.ctx:type_name -> common.Context
-	636,  // 747: header.ZnsRequest.template_data:type_name -> header.ZnsRequest.TemplateDataEntry
-	670,  // 748: header.SendOmniChannelMessageRequest.ctx:type_name -> common.Context
-	73,   // 749: header.SendOmniChannelMessageRequest.messages:type_name -> header.Event
-	670,  // 750: header.EventType.ctx:type_name -> common.Context
-	73,   // 751: header.EventType.first_event:type_name -> header.Event
-	73,   // 752: header.EventType.last_event:type_name -> header.Event
-	45,   // 753: header.EventType.first_user:type_name -> header.User
-	45,   // 754: header.EventType.last_user:type_name -> header.User
-	670,  // 755: header.Segment.ctx:type_name -> common.Context
-	259,  // 756: header.Segment.condition:type_name -> header.UserViewCondition
-	322,  // 757: header.Segment.fetch_error:type_name -> header.Error
-	492,  // 758: header.Segment.permissions:type_name -> header.ResourceGroupMember
-	670,  // 759: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
-	670,  // 760: header.SegmentSync.ctx:type_name -> common.Context
-	376,  // 761: header.SegmentSync.meta_audience:type_name -> header.MetaCustomAudience
-	670,  // 762: header.MetaCustomAudience.ctx:type_name -> common.Context
-	670,  // 763: header.CustomAudienceBatchResponse.ctx:type_name -> common.Context
-	670,  // 764: header.CustomAudienceBatchRequest.ctx:type_name -> common.Context
-	373,  // 765: header.CustomAudienceBatchRequest.session:type_name -> header.MetaSyncBatchSession
-	45,   // 766: header.CustomAudienceBatchRequest.users:type_name -> header.User
-	670,  // 767: header.Segments.ctx:type_name -> common.Context
-	372,  // 768: header.Segments.segments:type_name -> header.Segment
-	670,  // 769: header.SegmentUsers.ctx:type_name -> common.Context
-	670,  // 770: header.UserSegment.ctx:type_name -> common.Context
-	670,  // 771: header.Campaign.ctx:type_name -> common.Context
-	388,  // 772: header.Campaign.messages:type_name -> header.MarketingMessage
-	383,  // 773: header.Campaign.outbound_call:type_name -> header.OutboundCallCampaign
-	86,   // 774: header.Campaign.timming_condition:type_name -> header.TimmingCondition
-	259,  // 775: header.Campaign.trigger_condition:type_name -> header.UserViewCondition
-	531,  // 776: header.Campaign.audient_request:type_name -> header.UsersRequest
-	184,  // 777: header.OutboundCallCampaign.form:type_name -> header.Form
-	637,  // 778: header.OutboundCallCampaign.agent_weight:type_name -> header.OutboundCallCampaign.AgentWeightEntry
-	670,  // 779: header.ListOutboundCallRequest.ctx:type_name -> common.Context
-	259,  // 780: header.ListOutboundCallRequest.condition:type_name -> header.UserViewCondition
-	638,  // 781: header.ListOutboundCallRequest.agent_weight:type_name -> header.ListOutboundCallRequest.AgentWeightEntry
-	670,  // 782: header.OutboundCallEntries.ctx:type_name -> common.Context
-	387,  // 783: header.OutboundCallEntries.entries:type_name -> header.OutboundCallEntry
-	670,  // 784: header.ImportOutboundCallEntryRequest.ctx:type_name -> common.Context
-	387,  // 785: header.ImportOutboundCallEntryRequest.entries:type_name -> header.OutboundCallEntry
-	639,  // 786: header.ImportOutboundCallEntryRequest.agent_weight:type_name -> header.ImportOutboundCallEntryRequest.AgentWeightEntry
-	670,  // 787: header.OutboundCallEntry.ctx:type_name -> common.Context
-	183,  // 788: header.OutboundCallEntry.submission:type_name -> header.FormSubmission
-	86,   // 789: header.MarketingMessage.timming_condition:type_name -> header.TimmingCondition
-	87,   // 790: header.MarketingMessage.channel_condition:type_name -> header.ChannelCondition
-	102,  // 791: header.MarketingMessage.messages:type_name -> header.Message
-	670,  // 792: header.CampaignSendLogEntry.ctx:type_name -> common.Context
-	322,  // 793: header.CampaignSendLogEntry.error:type_name -> header.Error
-	670,  // 794: header.CampaignSendLog.ctx:type_name -> common.Context
-	389,  // 795: header.CampaignSendLog.entries:type_name -> header.CampaignSendLogEntry
-	670,  // 796: header.BroadcastCampaignMetrics.ctx:type_name -> common.Context
-	640,  // 797: header.BroadcastCampaignMetrics.metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
-	640,  // 798: header.BroadcastCampaignMetrics.per_message_metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
-	670,  // 799: header.BusinessEmailAddress.ctx:type_name -> common.Context
-	590,  // 800: header.BusinessEmailAddress.signature:type_name -> header.EmailSignature
-	670,  // 801: header.BusinessEmailAddresses.ctx:type_name -> common.Context
-	393,  // 802: header.BusinessEmailAddresses.business_email_addresses:type_name -> header.BusinessEmailAddress
-	670,  // 803: header.ListFormSubmissionRequest.ctx:type_name -> common.Context
-	670,  // 804: header.OutboundCallReportRequest.ctx:type_name -> common.Context
-	670,  // 805: header.ImportOutboundCallEntryResponse.ctx:type_name -> common.Context
-	670,  // 806: header.OutboundCallReportResponse.ctx:type_name -> common.Context
-	402,  // 807: header.OutboundCallReportResponse.agents:type_name -> header.OutboundCallAgentReport
-	401,  // 808: header.OutboundCallReportResponse.surveys:type_name -> header.OutboundCallSurveyReport
-	670,  // 809: header.LinkData.ctx:type_name -> common.Context
-	672,  // 810: header.LinkData.device:type_name -> common.Device
-	137,  // 811: header.WorkflowAction.jump:type_name -> header.ActionJump
-	138,  // 812: header.WorkflowAction.send_http:type_name -> header.ActionSendHttp
-	141,  // 813: header.WorkflowAction.ask_question:type_name -> header.ActionAskQuestion
-	119,  // 814: header.WorkflowAction.assign:type_name -> header.AssignRequest
-	136,  // 815: header.WorkflowAction.update_conversation:type_name -> header.ActionUpdateConversation
-	142,  // 816: header.WorkflowAction.update_user:type_name -> header.ActionUpdateUser
-	143,  // 817: header.WorkflowAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
-	134,  // 818: header.WorkflowAction.confirm_order:type_name -> header.ActionConfirmOrder
-	133,  // 819: header.WorkflowAction.create_task:type_name -> header.ActionCreateTask
-	135,  // 820: header.WorkflowAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
-	144,  // 821: header.WorkflowAction.update_user_segments:type_name -> header.ActionUpdateUserSegments
-	422,  // 822: header.WorkflowAction.wait_branches:type_name -> header.ActionWaitBranch
-	424,  // 823: header.WorkflowAction.branching:type_name -> header.ActionBranching
-	421,  // 824: header.WorkflowAction.percentage_split:type_name -> header.ActionPercentageSplit
-	140,  // 825: header.WorkflowAction.send_message:type_name -> header.ActionSendMessage
-	420,  // 826: header.WorkflowAction.send_http_req:type_name -> header.ActionSendHttpReq
-	418,  // 827: header.WorkflowAction.send_transcript:type_name -> header.ActionSendTranscript
-	417,  // 828: header.WorkflowAction.wait_message:type_name -> header.ActionWaitMessage
-	416,  // 829: header.WorkflowAction.create_order:type_name -> header.ActionCreateOrder
-	413,  // 830: header.WorkflowAction.ask_info:type_name -> header.ActionAskInfo
-	414,  // 831: header.WorkflowAction.llm:type_name -> header.ActionLLM
-	412,  // 832: header.WorkflowAction.start_thread:type_name -> header.ActionStartThread
-	411,  // 833: header.WorkflowAction.set_variable:type_name -> header.ActionSetVariable
-	410,  // 834: header.WorkflowAction.call_workflow:type_name -> header.ActionCallWorkflow
-	409,  // 835: header.WorkflowAction.assign_lead:type_name -> header.ActionAssignLead
-	139,  // 836: header.WorkflowAction.send_typing:type_name -> header.ActionSendTyping
-	408,  // 837: header.WorkflowAction.start_scope:type_name -> header.ActionStartScope
-	594,  // 838: header.WorkflowAction.ai_agent_track:type_name -> header.ActionAIAgentTrack
-	407,  // 839: header.WorkflowAction.terminate_bot:type_name -> header.ActionTerminateBot
-	406,  // 840: header.WorkflowAction.send_facebook_conversion:type_name -> header.ActionSendFacebookConversion
-	296,  // 841: header.ActionSendFacebookConversion.bill:type_name -> header.Bill
-	505,  // 842: header.ActionLLM.system_instruction_block:type_name -> header.Block
-	551,  // 843: header.ActionLLM.functions:type_name -> header.AIFunction
-	415,  // 844: header.ActionLLM.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
-	551,  // 845: header.ActionLLM.tool_choice_function:type_name -> header.AIFunction
-	550,  // 846: header.LLMResponseJSONSchemaFormat.schema:type_name -> header.JSONSchema
-	466,  // 847: header.ActionWaitMessage.condition:type_name -> header.WorkflowCondition
-	405,  // 848: header.RunWorkflowActionRequest.action:type_name -> header.WorkflowAction
-	45,   // 849: header.RunWorkflowActionRequest.user:type_name -> header.User
-	92,   // 850: header.RunWorkflowActionRequest.convo:type_name -> header.Conversation
-	292,  // 851: header.RunWorkflowActionRequest.order:type_name -> header.Order
-	481,  // 852: header.RunWorkflowActionRequest.ticket:type_name -> header.Ticket
-	466,  // 853: header.ActionWaitBranch.condition:type_name -> header.WorkflowCondition
-	466,  // 854: header.ActionBranchingBranch.condition:type_name -> header.WorkflowCondition
-	423,  // 855: header.ActionBranching.branches:type_name -> header.ActionBranchingBranch
-	670,  // 856: header.BouncedEmail.ctx:type_name -> common.Context
-	670,  // 857: header.BlockedEmail.ctx:type_name -> common.Context
-	322,  // 858: header.BlockedEmail.error:type_name -> header.Error
-	670,  // 859: header.Response.ctx:type_name -> common.Context
-	322,  // 860: header.Response.error:type_name -> header.Error
-	426,  // 861: header.Response.blocked_email:type_name -> header.BlockedEmail
-	426,  // 862: header.Response.blocked_emails:type_name -> header.BlockedEmail
-	425,  // 863: header.Response.bounced_email:type_name -> header.BouncedEmail
-	425,  // 864: header.Response.bounced_emails:type_name -> header.BouncedEmail
-	429,  // 865: header.Response.zalo_call_consent:type_name -> header.ZaloCallConsent
-	438,  // 866: header.Response.credit:type_name -> header.Credit
-	438,  // 867: header.Response.credits:type_name -> header.Credit
-	676,  // 868: header.Response.account:type_name -> account.Account
-	676,  // 869: header.Response.accounts:type_name -> account.Account
-	469,  // 870: header.Response.workflow:type_name -> header.Workflow
-	469,  // 871: header.Response.workflows:type_name -> header.Workflow
-	674,  // 872: header.Response.agent:type_name -> account.Agent
-	674,  // 873: header.Response.agents:type_name -> account.Agent
-	476,  // 874: header.Response.workflow_logs:type_name -> header.WorkflowLog
-	436,  // 875: header.Response.workflow_sessions:type_name -> header.WorkflowSession
-	436,  // 876: header.Response.workflow_session:type_name -> header.WorkflowSession
-	481,  // 877: header.Response.tickets:type_name -> header.Ticket
-	477,  // 878: header.Response.ticket_types:type_name -> header.TicketType
-	487,  // 879: header.Response.ticket_views:type_name -> header.TicketView
-	491,  // 880: header.Response.bot_templates:type_name -> header.BotTemplate
-	480,  // 881: header.Response.ticket_templates:type_name -> header.TicketTemplate
-	320,  // 882: header.Response.taxes:type_name -> header.Tax
-	493,  // 883: header.Response.sla_policies:type_name -> header.SLAPolicy
-	493,  // 884: header.Response.sla_policy:type_name -> header.SLAPolicy
-	484,  // 885: header.Response.sla_violations:type_name -> header.SLAViolation
-	501,  // 886: header.Response.knowledge_base:type_name -> header.KnowledgeBase
-	496,  // 887: header.Response.articles:type_name -> header.Article
-	497,  // 888: header.Response.article_categories:type_name -> header.ArticleCategory
-	501,  // 889: header.Response.knowledge_bases:type_name -> header.KnowledgeBase
-	496,  // 890: header.Response.article:type_name -> header.Article
-	497,  // 891: header.Response.article_category:type_name -> header.ArticleCategory
-	92,   // 892: header.Response.conversation:type_name -> header.Conversation
-	92,   // 893: header.Response.conversations:type_name -> header.Conversation
-	76,   // 894: header.Response.conversation_metas:type_name -> header.ConversationMeta
-	209,  // 895: header.Response.greeting_audios:type_name -> header.GreetingAudio
-	209,  // 896: header.Response.greeting_audio:type_name -> header.GreetingAudio
-	45,   // 897: header.Response.users:type_name -> header.User
-	45,   // 898: header.Response.user:type_name -> header.User
-	73,   // 899: header.Response.event:type_name -> header.Event
-	73,   // 900: header.Response.events:type_name -> header.Event
-	100,  // 901: header.Response.rating:type_name -> header.Rating
-	83,   // 902: header.Response.rule:type_name -> header.Rule
-	83,   // 903: header.Response.rules:type_name -> header.Rule
-	83,   // 904: header.Response.ticket_rule:type_name -> header.Rule
-	83,   // 905: header.Response.ticket_rules:type_name -> header.Rule
-	512,  // 906: header.Response.agent_profile:type_name -> header.AgentProfile
-	228,  // 907: header.Response.login_session:type_name -> header.LoginSession
-	517,  // 908: header.Response.promotion_code:type_name -> header.PromotionCode
-	517,  // 909: header.Response.promotion_codes:type_name -> header.PromotionCode
-	519,  // 910: header.Response.promotion_check_result:type_name -> header.PromotionCheckResult
-	100,  // 911: header.Response.ratings:type_name -> header.Rating
-	518,  // 912: header.Response.subiz_promotion_programs:type_name -> header.SubizPromotionProgram
-	521,  // 913: header.Response.subiz_payment_method:type_name -> header.SubizPaymentMethod
-	521,  // 914: header.Response.subiz_payment_methods:type_name -> header.SubizPaymentMethod
-	514,  // 915: header.Response.profile_email_usage:type_name -> header.ProfileEmailUsage
-	528,  // 916: header.Response.bank_account:type_name -> header.BankAccount
-	528,  // 917: header.Response.bank_accounts:type_name -> header.BankAccount
-	532,  // 918: header.Response.bank_transfer_request:type_name -> header.BankTransferRequest
-	529,  // 919: header.Response.workflow_counts:type_name -> header.WorkflowCount
-	117,  // 920: header.Response.integrations:type_name -> header.Integration
-	117,  // 921: header.Response.integration:type_name -> header.Integration
-	40,   // 922: header.Response.phone_devices:type_name -> header.PhoneDevice
-	371,  // 923: header.Response.event_types:type_name -> header.EventType
-	428,  // 924: header.Response.report_counts:type_name -> header.ReportCount
-	127,  // 925: header.Response.site:type_name -> header.Site
-	127,  // 926: header.Response.sites:type_name -> header.Site
-	55,   // 927: header.Response.attribute_definition:type_name -> header.AttributeDefinition
-	55,   // 928: header.Response.attribute_definitions:type_name -> header.AttributeDefinition
-	543,  // 929: header.Response.article_node:type_name -> header.ArticleNode
-	111,  // 930: header.Response.tag:type_name -> header.Tag
-	111,  // 931: header.Response.tags:type_name -> header.Tag
-	562,  // 932: header.Response.ai_data_entries:type_name -> header.AIDataEntry
-	562,  // 933: header.Response.ai_data_entry:type_name -> header.AIDataEntry
-	559,  // 934: header.Response.ai_data_groups:type_name -> header.AIDataGroup
-	559,  // 935: header.Response.ai_data_group:type_name -> header.AIDataGroup
-	546,  // 936: header.Response.ai_agents:type_name -> header.AIAgent
-	546,  // 937: header.Response.ai_agent:type_name -> header.AIAgent
-	563,  // 938: header.Response.ai_response_sources:type_name -> header.AiResponseSource
-	563,  // 939: header.Response.ai_response_source:type_name -> header.AiResponseSource
-	561,  // 940: header.Response.ai_data_chunks:type_name -> header.AIDataChunk
-	223,  // 941: header.Response.file:type_name -> header.File
-	223,  // 942: header.Response.files:type_name -> header.File
-	248,  // 943: header.Response.facebook_posts:type_name -> header.FacebookPost
-	248,  // 944: header.Response.facebook_post:type_name -> header.FacebookPost
-	113,  // 945: header.Response.templates:type_name -> header.Template
-	217,  // 946: header.Response.webhooks:type_name -> header.Webhook
-	37,   // 947: header.Response.notifications:type_name -> header.Noti
-	568,  // 948: header.Response.notification_setting:type_name -> header.NotiSetting
-	342,  // 949: header.Response.agent_groups:type_name -> header.AgentGroup
-	585,  // 950: header.Response.zns_templates:type_name -> header.ZNSTemplate
-	585,  // 951: header.Response.zns_template:type_name -> header.ZNSTemplate
-	589,  // 952: header.Response.zns_medias:type_name -> header.ZNSMedia
-	589,  // 953: header.Response.zns_media:type_name -> header.ZNSMedia
-	590,  // 954: header.Response.email_signatures:type_name -> header.EmailSignature
-	590,  // 955: header.Response.email_signature:type_name -> header.EmailSignature
-	382,  // 956: header.Response.campaigns:type_name -> header.Campaign
-	382,  // 957: header.Response.campaign:type_name -> header.Campaign
-	592,  // 958: header.Response.credit_usage:type_name -> header.CreditUsage
-	474,  // 959: header.Response.ai_agent_trace:type_name -> header.AIAgentTrace
-	474,  // 960: header.Response.ai_agent_traces:type_name -> header.AIAgentTrace
-	183,  // 961: header.Response.form_submissions:type_name -> header.FormSubmission
-	184,  // 962: header.Response.forms:type_name -> header.Form
-	184,  // 963: header.Response.form:type_name -> header.Form
-	183,  // 964: header.Response.form_submission:type_name -> header.FormSubmission
-	305,  // 965: header.Response.products:type_name -> header.Product
-	305,  // 966: header.Response.product:type_name -> header.Product
-	304,  // 967: header.Response.discounts:type_name -> header.Discount
-	296,  // 968: header.Response.bills:type_name -> header.Bill
-	292,  // 969: header.Response.orders:type_name -> header.Order
-	296,  // 970: header.Response.bill:type_name -> header.Bill
-	292,  // 971: header.Response.order:type_name -> header.Order
-	308,  // 972: header.Response.product_offer:type_name -> header.ProductOffer
-	308,  // 973: header.Response.product_offers:type_name -> header.ProductOffer
-	271,  // 974: header.Response.addresses:type_name -> header.Address
-	375,  // 975: header.Response.segment_sync:type_name -> header.SegmentSync
-	375,  // 976: header.Response.segment_syncs:type_name -> header.SegmentSync
-	374,  // 977: header.Response.segment_sync_user_status:type_name -> header.SegmentSyncUserStatus
-	598,  // 978: header.Response.meta_ad_account:type_name -> header.MetaAdAccount
-	598,  // 979: header.Response.meta_ad_accounts:type_name -> header.MetaAdAccount
-	235,  // 980: header.Response.fanpage_settings:type_name -> header.FbFanpageSetting
-	605,  // 981: header.Response.named_entities:type_name -> header.NamedEntity
-	605,  // 982: header.Response.named_entity:type_name -> header.NamedEntity
-	671,  // 983: header.ZaloCallConsent.message:type_name -> header.I18nString
-	670,  // 984: header.SendEmailRequest.ctx:type_name -> common.Context
-	641,  // 985: header.SendEmailRequest.header:type_name -> header.SendEmailRequest.HeaderEntry
-	432,  // 986: header.SendEmailRequest.attachments:type_name -> header.EmailAttachment
-	670,  // 987: header.Email.ctx:type_name -> common.Context
-	642,  // 988: header.Email.header:type_name -> header.Email.HeaderEntry
-	432,  // 989: header.Email.attachments:type_name -> header.EmailAttachment
-	435,  // 990: header.WorkflowStack.calls:type_name -> header.WorkflowStackItem
-	670,  // 991: header.WorkflowSession.ctx:type_name -> common.Context
-	405,  // 992: header.WorkflowSession.action:type_name -> header.WorkflowAction
-	643,  // 993: header.WorkflowSession.threads:type_name -> header.WorkflowSession.ThreadsEntry
-	73,   // 994: header.WorkflowSession.last_message_sent:type_name -> header.Event
-	670,  // 995: header.SchedulerTask.ctx:type_name -> common.Context
-	670,  // 996: header.Credit.ctx:type_name -> common.Context
-	670,  // 997: header.CreditSpendEntry.ctx:type_name -> common.Context
-	446,  // 998: header.CreditSpendEntry.data:type_name -> header.CreditEntryData
-	441,  // 999: header.CreditEntryData.agent:type_name -> header.CreditEntryDataAgent
-	443,  // 1000: header.CreditEntryData.zalo_zns:type_name -> header.CreditEntryDataZaloZNS
-	445,  // 1001: header.CreditEntryData.zalo_active_message:type_name -> header.CreditEntryDataZaloActiveMessage
-	442,  // 1002: header.CreditEntryData.email:type_name -> header.CreditEntryDataEmail
-	440,  // 1003: header.CreditEntryData.file:type_name -> header.CreditEntryDataId
-	444,  // 1004: header.CreditEntryData.zalo_request_call:type_name -> header.CreditEntryDataZaloRequestCall
-	447,  // 1005: header.CreditEntryData.llm_completion:type_name -> header.CreditEntryDataLLMCompletion
-	448,  // 1006: header.CreditEntryData.text_embedding:type_name -> header.CreditEntryDataTextEmbedding
-	670,  // 1007: header.CreditSpendEntries.ctx:type_name -> common.Context
-	439,  // 1008: header.CreditSpendEntries.entries:type_name -> header.CreditSpendEntry
-	670,  // 1009: header.TrySpendCreditResponse.ctx:type_name -> common.Context
-	670,  // 1010: header.CreditSpendReportResponse.ctx:type_name -> common.Context
-	451,  // 1011: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
-	670,  // 1012: header.AccSub.ctx:type_name -> common.Context
-	676,  // 1013: header.AccSub.account:type_name -> account.Account
-	685,  // 1014: header.AccSub.subscription:type_name -> payment.Subscription
-	674,  // 1015: header.AccSub.agents:type_name -> account.Agent
-	438,  // 1016: header.AccSub.credits:type_name -> header.Credit
-	670,  // 1017: header.AccSubs.ctx:type_name -> common.Context
-	453,  // 1018: header.AccSubs.accsub:type_name -> header.AccSub
-	670,  // 1019: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
-	402,  // 1020: header.OutboundCallUpdateEvent.agents:type_name -> header.OutboundCallAgentReport
-	644,  // 1021: header.StrNumM.strsM:type_name -> header.StrNumM.StrsMEntry
-	645,  // 1022: header.NumStrM.numsM:type_name -> header.NumStrM.NumsMEntry
-	670,  // 1023: header.ConvoReportRequest.ctx:type_name -> common.Context
-	259,  // 1024: header.ConvoReportRequest.conditions:type_name -> header.UserViewCondition
-	676,  // 1025: header.ConvoReportRequest.account:type_name -> account.Account
-	670,  // 1026: header.ConvoReportResponse.ctx:type_name -> common.Context
-	462,  // 1027: header.ConvoReportResponse.metrics:type_name -> header.ConvoReportEntry
-	466,  // 1028: header.WorkflowGoal.condition:type_name -> header.WorkflowCondition
-	466,  // 1029: header.WorkflowTrigger.condition:type_name -> header.WorkflowCondition
-	87,   // 1030: header.WorkflowCondition.channel:type_name -> header.ChannelCondition
-	682,  // 1031: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
-	680,  // 1032: header.WorkflowCondition.number:type_name -> header.FloatCondition
-	683,  // 1033: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
-	684,  // 1034: header.WorkflowCondition.event:type_name -> header.EventCondition
-	681,  // 1035: header.WorkflowCondition.text:type_name -> header.TextCondition
-	465,  // 1036: header.WorkflowCondition.timming:type_name -> header.WorkflowTimming
-	467,  // 1037: header.WorkflowCondition.llm:type_name -> header.LLMCondition
-	466,  // 1038: header.WorkflowCondition.all:type_name -> header.WorkflowCondition
-	466,  // 1039: header.WorkflowCondition.one:type_name -> header.WorkflowCondition
-	505,  // 1040: header.LLMCondition.instruction_block:type_name -> header.Block
-	551,  // 1041: header.LLMCondition.functions:type_name -> header.AIFunction
-	415,  // 1042: header.LLMCondition.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
-	551,  // 1043: header.LLMCondition.tool_choice_function:type_name -> header.AIFunction
-	670,  // 1044: header.WorkflowLogRequest.ctx:type_name -> common.Context
-	670,  // 1045: header.Workflow.ctx:type_name -> common.Context
-	464,  // 1046: header.Workflow.triggers:type_name -> header.WorkflowTrigger
-	464,  // 1047: header.Workflow.computed_triggers:type_name -> header.WorkflowTrigger
-	466,  // 1048: header.Workflow.condition:type_name -> header.WorkflowCondition
-	466,  // 1049: header.Workflow.computed_condition:type_name -> header.WorkflowCondition
-	646,  // 1050: header.Workflow.actions:type_name -> header.Workflow.ActionsEntry
-	647,  // 1051: header.Workflow.computed_actions:type_name -> header.Workflow.ComputedActionsEntry
-	463,  // 1052: header.Workflow.goal:type_name -> header.WorkflowGoal
-	466,  // 1053: header.Workflow.exit_when:type_name -> header.WorkflowCondition
-	223,  // 1054: header.Workflow.avatar:type_name -> header.File
-	470,  // 1055: header.Workflow.kv_settings:type_name -> header.KvSetting
-	471,  // 1056: header.LLMChatHistoryEntry.tool:type_name -> header.LLMToolCall
-	648,  // 1057: header.LLMChatHistoryEntry.fields:type_name -> header.LLMChatHistoryEntry.FieldsEntry
-	109,  // 1058: header.LLMChatHistoryEntry.attachments:type_name -> header.Attachment
-	670,  // 1059: header.AIAgentTrace.ctx:type_name -> common.Context
-	473,  // 1060: header.AIAgentTrace.context_documents:type_name -> header.AIDataEntryUsed
-	471,  // 1061: header.AIAgentTrace.tool_calls:type_name -> header.LLMToolCall
-	545,  // 1062: header.AIAgentTrace.override_rules:type_name -> header.AIAgentOverrideRule
-	551,  // 1063: header.AIAgentSpan.tools:type_name -> header.AIFunction
-	415,  // 1064: header.AIAgentSpan.response_format:type_name -> header.LLMResponseJSONSchemaFormat
-	472,  // 1065: header.AIAgentSpan.chat_history:type_name -> header.LLMChatHistoryEntry
-	471,  // 1066: header.AIAgentSpan.tool_calls:type_name -> header.LLMToolCall
-	670,  // 1067: header.WorkflowLog.ctx:type_name -> common.Context
-	649,  // 1068: header.WorkflowLog.data:type_name -> header.WorkflowLog.DataEntry
-	73,   // 1069: header.WorkflowLog.event:type_name -> header.Event
-	72,   // 1070: header.WorkflowLog.by:type_name -> header.By
-	670,  // 1071: header.TicketType.ctx:type_name -> common.Context
-	55,   // 1072: header.TicketType.defs:type_name -> header.AttributeDefinition
-	492,  // 1073: header.TicketType.permissions:type_name -> header.ResourceGroupMember
-	322,  // 1074: header.TicketType.error:type_name -> header.Error
-	479,  // 1075: header.TicketType.auto_reply:type_name -> header.TicketAutoReply
-	478,  // 1076: header.TicketType.satisfaction:type_name -> header.TicketSatisfaction
-	670,  // 1077: header.TicketSatisfaction.ctx:type_name -> common.Context
-	505,  // 1078: header.TicketSatisfaction.question:type_name -> header.Block
-	670,  // 1079: header.TicketAutoReply.ctx:type_name -> common.Context
-	505,  // 1080: header.TicketAutoReply.body:type_name -> header.Block
-	505,  // 1081: header.TicketAutoReply.title:type_name -> header.Block
-	670,  // 1082: header.TicketTemplate.ctx:type_name -> common.Context
-	102,  // 1083: header.TicketTemplate.message:type_name -> header.Message
-	111,  // 1084: header.TicketTemplate.tags:type_name -> header.Tag
-	38,   // 1085: header.TicketTemplate.attrs:type_name -> header.Attribute
-	322,  // 1086: header.TicketTemplate.error:type_name -> header.Error
-	670,  // 1087: header.Ticket.ctx:type_name -> common.Context
-	90,   // 1088: header.Ticket.members:type_name -> header.ConversationMember
-	38,   // 1089: header.Ticket.attrs:type_name -> header.Attribute
-	102,  // 1090: header.Ticket.description:type_name -> header.Message
-	111,  // 1091: header.Ticket.tags:type_name -> header.Tag
-	45,   // 1092: header.Ticket.users:type_name -> header.User
-	47,   // 1093: header.Ticket.touchpoint:type_name -> header.Touchpoint
-	73,   // 1094: header.Ticket.last_internal_message_sent:type_name -> header.Event
-	89,   // 1095: header.Ticket.assigned_to:type_name -> header.RouteResult
-	89,   // 1096: header.Ticket.reassigned_to:type_name -> header.RouteResult
-	315,  // 1097: header.Ticket.fields:type_name -> header.KV
-	100,  // 1098: header.Ticket.ratings:type_name -> header.Rating
-	73,   // 1099: header.Ticket.matched_event:type_name -> header.Event
-	73,   // 1100: header.Ticket.last_event:type_name -> header.Event
-	322,  // 1101: header.Ticket.error:type_name -> header.Error
-	650,  // 1102: header.Ticket.memberM:type_name -> header.Ticket.MemberMEntry
-	482,  // 1103: header.Ticket.read_receipts:type_name -> header.ReceiptMember
-	670,  // 1104: header.ReceiptMember.ctx:type_name -> common.Context
-	670,  // 1105: header.SLAViolations.ctx:type_name -> common.Context
-	484,  // 1106: header.SLAViolations.violations:type_name -> header.SLAViolation
-	670,  // 1107: header.SLAViolation.ctx:type_name -> common.Context
-	73,   // 1108: header.TicketHistoryEntry.event:type_name -> header.Event
-	73,   // 1109: header.TicketHistoryEntry.ref_comment:type_name -> header.Event
-	670,  // 1110: header.ListTicketRequest.ctx:type_name -> common.Context
-	259,  // 1111: header.ListTicketRequest.condition:type_name -> header.UserViewCondition
-	47,   // 1112: header.ListTicketRequest.touchpoint:type_name -> header.Touchpoint
-	670,  // 1113: header.TicketView.ctx:type_name -> common.Context
-	488,  // 1114: header.TicketView.members:type_name -> header.TicketViewMember
-	259,  // 1115: header.TicketView.condition:type_name -> header.UserViewCondition
-	670,  // 1116: header.TicketViewMember.ctx:type_name -> common.Context
-	73,   // 1117: header.TicketViewMember.last_event:type_name -> header.Event
-	670,  // 1118: header.LiveUserView.ctx:type_name -> common.Context
-	259,  // 1119: header.LiveUserView.condition:type_name -> header.UserViewCondition
-	651,  // 1120: header.LiveUserView.metrics:type_name -> header.LiveUserView.MetricsEntry
-	670,  // 1121: header.BotTemplate.ctx:type_name -> common.Context
-	670,  // 1122: header.ResourceGroupMember.ctx:type_name -> common.Context
-	670,  // 1123: header.SLAPolicy.ctx:type_name -> common.Context
-	494,  // 1124: header.SLAPolicy.normal_priority_target:type_name -> header.SLATarget
-	494,  // 1125: header.SLAPolicy.high_priority_target:type_name -> header.SLATarget
-	494,  // 1126: header.SLAPolicy.urgent_priority_target:type_name -> header.SLATarget
-	87,   // 1127: header.SLAPolicy.channel_condition:type_name -> header.ChannelCondition
-	86,   // 1128: header.SLAPolicy.timming_condition:type_name -> header.TimmingCondition
-	125,  // 1129: header.SLAPolicy.form_conditions:type_name -> header.Condition
-	125,  // 1130: header.SLAPolicy.user_conditions:type_name -> header.Condition
-	652,  // 1131: header.ArticleSEOSetting.page_title:type_name -> header.ArticleSEOSetting.PageTitleEntry
-	653,  // 1132: header.ArticleSEOSetting.meta_description:type_name -> header.ArticleSEOSetting.MetaDescriptionEntry
-	654,  // 1133: header.ArticleSEOSetting.social_title:type_name -> header.ArticleSEOSetting.SocialTitleEntry
-	655,  // 1134: header.ArticleSEOSetting.social_description:type_name -> header.ArticleSEOSetting.SocialDescriptionEntry
-	670,  // 1135: header.Article.ctx:type_name -> common.Context
-	498,  // 1136: header.Article.topics:type_name -> header.ArticleTopic
-	656,  // 1137: header.Article.i18n_title:type_name -> header.Article.I18nTitleEntry
-	495,  // 1138: header.Article.seo_setting:type_name -> header.ArticleSEOSetting
-	657,  // 1139: header.Article.i18n_content:type_name -> header.Article.I18nContentEntry
-	658,  // 1140: header.Article.i18n_slug:type_name -> header.Article.I18nSlugEntry
-	670,  // 1141: header.ArticleCategory.ctx:type_name -> common.Context
-	659,  // 1142: header.ArticleCategory.i18n_title:type_name -> header.ArticleCategory.I18nTitleEntry
-	660,  // 1143: header.ArticleCategory.i18n_description:type_name -> header.ArticleCategory.I18nDescriptionEntry
-	497,  // 1144: header.ArticleCategory.article_categories:type_name -> header.ArticleCategory
-	661,  // 1145: header.ArticleCategory.i18n_slug:type_name -> header.ArticleCategory.I18nSlugEntry
-	670,  // 1146: header.ArticleTopic.ctx:type_name -> common.Context
-	662,  // 1147: header.ArticleTopic.title:type_name -> header.ArticleTopic.TitleEntry
-	670,  // 1148: header.ArticleTopics.ctx:type_name -> common.Context
-	498,  // 1149: header.ArticleTopics.topics:type_name -> header.ArticleTopic
-	670,  // 1150: header.ArticleTopicRequest.ctx:type_name -> common.Context
-	670,  // 1151: header.KnowledgeBase.ctx:type_name -> common.Context
-	671,  // 1152: header.KnowledgeBase.name:type_name -> header.I18nString
-	671,  // 1153: header.KnowledgeBase.description:type_name -> header.I18nString
-	223,  // 1154: header.KnowledgeBase.logo:type_name -> header.File
-	223,  // 1155: header.KnowledgeBase.favikon:type_name -> header.File
-	477,  // 1156: header.KnowledgeBase.ticket_type:type_name -> header.TicketType
-	492,  // 1157: header.KnowledgeBase.permissions:type_name -> header.ResourceGroupMember
-	663,  // 1158: header.KnowledgeBase.i18n_title:type_name -> header.KnowledgeBase.I18nTitleEntry
-	664,  // 1159: header.KnowledgeBase.i18n_description:type_name -> header.KnowledgeBase.I18nDescriptionEntry
-	503,  // 1160: header.KnowledgeBase.home_page:type_name -> header.KnowledgeBasePageStyle
-	502,  // 1161: header.KnowledgeBase.article_page:type_name -> header.KnowledgeBaseArticlePageSetting
-	503,  // 1162: header.KnowledgeBase.category_page:type_name -> header.KnowledgeBasePageStyle
-	503,  // 1163: header.KnowledgeBaseArticlePageSetting.style:type_name -> header.KnowledgeBasePageStyle
-	670,  // 1164: header.Job.ctx:type_name -> common.Context
-	505,  // 1165: header.Block.content:type_name -> header.Block
-	665,  // 1166: header.Block.input_options:type_name -> header.Block.InputOption
-	193,  // 1167: header.Block.style:type_name -> header.Style
-	223,  // 1168: header.Block.image:type_name -> header.File
-	666,  // 1169: header.Block.attrs:type_name -> header.Block.AttrsEntry
-	506,  // 1170: header.Block.llm_input_retry_policy:type_name -> header.LLMInputRetryPolicy
-	670,  // 1171: header.TicketUpdatedNotiEmail.ctx:type_name -> common.Context
-	481,  // 1172: header.TicketUpdatedNotiEmail.assigned_tickets:type_name -> header.Ticket
-	73,   // 1173: header.TicketUpdatedNotiEmail.updated_events:type_name -> header.Event
-	481,  // 1174: header.TicketUpdatedNotiEmail.new_tickets:type_name -> header.Ticket
-	481,  // 1175: header.TicketUpdatedNotiEmail.high_risk_sla_tickets:type_name -> header.Ticket
-	481,  // 1176: header.TicketUpdatedNotiEmail.breached_sla_tickets:type_name -> header.Ticket
-	670,  // 1177: header.ResetPasswordEmail.ctx:type_name -> common.Context
-	670,  // 1178: header.OTPEmail.ctx:type_name -> common.Context
-	670,  // 1179: header.InviteEmail.ctx:type_name -> common.Context
-	670,  // 1180: header.AgentProfile.ctx:type_name -> common.Context
-	223,  // 1181: header.AgentProfile.avatar:type_name -> header.File
-	675,  // 1182: header.AgentProfile.last_seen:type_name -> account.Presence
-	670,  // 1183: header.InvitationLink.ctx:type_name -> common.Context
-	223,  // 1184: header.InvitationLink.account_logo:type_name -> header.File
-	670,  // 1185: header.ProfileEmailUsage.ctx:type_name -> common.Context
-	670,  // 1186: header.InviteRequest.ctx:type_name -> common.Context
-	670,  // 1187: header.JoinAccountRequest.ctx:type_name -> common.Context
-	670,  // 1188: header.PromotionCode.ctx:type_name -> common.Context
-	670,  // 1189: header.SubizPromotionProgram.ctx:type_name -> common.Context
-	670,  // 1190: header.PromotionCodeUsage.ctx:type_name -> common.Context
-	686,  // 1191: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
-	677,  // 1192: header.PromotionCodeUsage.bills:type_name -> payment.Bill
-	670,  // 1193: header.SubizPaymentMethod.ctx:type_name -> common.Context
-	670,  // 1194: header.AndroidNotificationRequest.ctx:type_name -> common.Context
-	526,  // 1195: header.AndroidNotificationRequest.android_notifications:type_name -> header.AndroidNotification
-	527,  // 1196: header.AndroidNotificationRequest.android_device:type_name -> header.AndroidDevice
-	670,  // 1197: header.BankAccount.ctx:type_name -> common.Context
-	670,  // 1198: header.SuggestLeadFieldRequest.ctx:type_name -> common.Context
-	259,  // 1199: header.SuggestLeadFieldRequest.condition:type_name -> header.UserViewCondition
-	670,  // 1200: header.UsersRequest.ctx:type_name -> common.Context
-	259,  // 1201: header.UsersRequest.condition:type_name -> header.UserViewCondition
-	670,  // 1202: header.BankTransferRequest.ctx:type_name -> common.Context
-	47,   // 1203: header.BankTransferRequest.touchpoint:type_name -> header.Touchpoint
-	670,  // 1204: header.GenQrCodeRequest.ctx:type_name -> common.Context
-	670,  // 1205: header.QrCode.ctx:type_name -> common.Context
-	670,  // 1206: header.ReportUserEventRequest.ctx:type_name -> common.Context
-	670,  // 1207: header.ReportUserEventResponse.ctx:type_name -> common.Context
-	535,  // 1208: header.ReportUserEventResponse.entries:type_name -> header.ReportUserEventEntry
-	670,  // 1209: header.CounterReportResponse.ctx:type_name -> common.Context
-	670,  // 1210: header.SetupFeatureStatus.ctx:type_name -> common.Context
-	670,  // 1211: header.RelationUpdates.ctx:type_name -> common.Context
-	542,  // 1212: header.RelationUpdates.updates:type_name -> header.RelationUpdate
-	670,  // 1213: header.ArticleNode.ctx:type_name -> common.Context
-	667,  // 1214: header.ArticleNode.i18n_title:type_name -> header.ArticleNode.I18nTitleEntry
-	543,  // 1215: header.ArticleNode.children:type_name -> header.ArticleNode
-	551,  // 1216: header.AIAgentOverrideRule.functions:type_name -> header.AIFunction
-	558,  // 1217: header.AIAgentOverrideRule.intent:type_name -> header.AIIntent
-	466,  // 1218: header.AIAgentOverrideRule.condition:type_name -> header.WorkflowCondition
-	150,  // 1219: header.AIAgentOverrideRule.frequently:type_name -> header.Frequently
-	119,  // 1220: header.AIAgentOverrideRule.assign_to:type_name -> header.AssignRequest
-	670,  // 1221: header.AIAgent.ctx:type_name -> common.Context
-	223,  // 1222: header.AIAgent.avatar:type_name -> header.File
-	544,  // 1223: header.AIAgent.guardrails:type_name -> header.AIAgentGuardrail
-	546,  // 1224: header.AIAgent.sub_agents:type_name -> header.AIAgent
-	102,  // 1225: header.AIAgent.context_guard_message:type_name -> header.Message
-	551,  // 1226: header.AIAgent.functions:type_name -> header.AIFunction
-	102,  // 1227: header.AIAgent.unabled_to_answer_message:type_name -> header.Message
-	102,  // 1228: header.AIAgent.error_message:type_name -> header.Message
-	558,  // 1229: header.AIAgent.generated_intent:type_name -> header.AIIntent
-	549,  // 1230: header.AIAgent.data_store:type_name -> header.AIDataStore
-	548,  // 1231: header.AIAgent.init_flow:type_name -> header.InitFlow
-	545,  // 1232: header.AIAgent.override_rules:type_name -> header.AIAgentOverrideRule
-	184,  // 1233: header.AIAgent.collect_user_information:type_name -> header.Form
-	102,  // 1234: header.AIAgent.welcome_message:type_name -> header.Message
-	93,   // 1235: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
-	94,   // 1236: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
-	95,   // 1237: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
-	547,  // 1238: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
-	102,  // 1239: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
-	131,  // 1240: header.InitFlow.action:type_name -> header.BotAction
-	122,  // 1241: header.InitFlow.triggers:type_name -> header.Trigger
-	150,  // 1242: header.InitFlow.initiative_frequency:type_name -> header.Frequently
-	123,  // 1243: header.InitFlow.conditions:type_name -> header.BotCondition
-	83,   // 1244: header.InitFlow.rule:type_name -> header.Rule
-	668,  // 1245: header.JSONSchema.properties:type_name -> header.JSONSchema.PropertiesEntry
-	550,  // 1246: header.JSONSchema.items:type_name -> header.JSONSchema
-	315,  // 1247: header.AIFunction.headers:type_name -> header.KV
-	550,  // 1248: header.AIFunction.parameters:type_name -> header.JSONSchema
-	557,  // 1249: header.AIFunction.system_create_ticket:type_name -> header.CreateTicketFunction
-	556,  // 1250: header.AIFunction.workflow:type_name -> header.AutomationFunction
-	555,  // 1251: header.AIFunction.update_information:type_name -> header.UpdateUserInformation
-	554,  // 1252: header.AIFunction.collect_user_information:type_name -> header.CollectUserInformation
-	119,  // 1253: header.AIFunction.assign_agent:type_name -> header.AssignRequest
-	184,  // 1254: header.AIFunction.system_schedule_appointment:type_name -> header.Form
-	552,  // 1255: header.AIFunction.record_user_preference:type_name -> header.RecordUserPreference
-	551,  // 1256: header.AIFunction.functions:type_name -> header.AIFunction
-	553,  // 1257: header.CollectUserInformation.attributes:type_name -> header.CollectInfomationAttribute
-	466,  // 1258: header.AutomationFunction.condition:type_name -> header.WorkflowCondition
-	669,  // 1259: header.AutomationFunction.actions:type_name -> header.AutomationFunction.ActionsEntry
-	670,  // 1260: header.AIDataGroup.ctx:type_name -> common.Context
-	305,  // 1261: header.CrawlResponse.product:type_name -> header.Product
-	305,  // 1262: header.CrawlResponse.products:type_name -> header.Product
-	670,  // 1263: header.AIDataChunk.ctx:type_name -> common.Context
-	670,  // 1264: header.AIDataEntry.ctx:type_name -> common.Context
-	102,  // 1265: header.AIDataEntry.answer:type_name -> header.Message
-	223,  // 1266: header.AIDataEntry.file:type_name -> header.File
-	305,  // 1267: header.AIDataEntry.product:type_name -> header.Product
-	549,  // 1268: header.AIDataEntry.data_store:type_name -> header.AIDataStore
-	551,  // 1269: header.AIDataEntry.functions:type_name -> header.AIFunction
-	558,  // 1270: header.AIDataEntry.intent:type_name -> header.AIIntent
-	466,  // 1271: header.AIDataEntry.condition:type_name -> header.WorkflowCondition
-	670,  // 1272: header.AiResponseSource.ctx:type_name -> common.Context
-	562,  // 1273: header.AiResponseSource.data_entry:type_name -> header.AIDataEntry
-	670,  // 1274: header.FacebookAdsFlow.ctx:type_name -> common.Context
-	102,  // 1275: header.FacebookAdsFlow.welcome_message:type_name -> header.Message
-	670,  // 1276: header.RuleOrder.ctx:type_name -> common.Context
-	670,  // 1277: header.NotiSetting.ctx:type_name -> common.Context
-	566,  // 1278: header.NotiSetting.web:type_name -> header.NotiSubscription
-	566,  // 1279: header.NotiSetting.mobile:type_name -> header.NotiSubscription
-	566,  // 1280: header.NotiSetting.email:type_name -> header.NotiSubscription
-	566,  // 1281: header.NotiSetting.instant:type_name -> header.NotiSubscription
-	567,  // 1282: header.NotiSetting.ticket_types:type_name -> header.TicketTypeSubscription
-	569,  // 1283: header.NotiSetting.do_not_disturb:type_name -> header.DoNotDisturb
-	670,  // 1284: header.PushToken.ctx:type_name -> common.Context
-	573,  // 1285: header.ZNSTemplateLayoutComponentButtons.items:type_name -> header.ZNSTemplateLayoutComponentButton
-	575,  // 1286: header.ZNSTemplateLayoutComponentTable.rows:type_name -> header.ZNSTemplateLayoutComponentTableRow
-	577,  // 1287: header.ZNSTemplateLayoutComponentImages.items:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	577,  // 1288: header.ZNSTemplateLayoutComponentLogo.light:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	577,  // 1289: header.ZNSTemplateLayoutComponentLogo.dark:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	578,  // 1290: header.ZNSTemplateLayoutComponent.IMAGES:type_name -> header.ZNSTemplateLayoutComponentImages
-	579,  // 1291: header.ZNSTemplateLayoutComponent.LOGO:type_name -> header.ZNSTemplateLayoutComponentLogo
-	572,  // 1292: header.ZNSTemplateLayoutComponent.TITLE:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1293: header.ZNSTemplateLayoutComponent.PARAGRAPH:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1294: header.ZNSTemplateLayoutComponent.OTP:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1295: header.ZNSTemplateLayoutComponent.VOUCHER:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1296: header.ZNSTemplateLayoutComponent.PAYMENT:type_name -> header.ZNSTemplateLayoutComponentItem
-	574,  // 1297: header.ZNSTemplateLayoutComponent.BUTTONS:type_name -> header.ZNSTemplateLayoutComponentButtons
-	576,  // 1298: header.ZNSTemplateLayoutComponent.TABLE:type_name -> header.ZNSTemplateLayoutComponentTable
-	580,  // 1299: header.ZNSTemplateComponents.components:type_name -> header.ZNSTemplateLayoutComponent
-	581,  // 1300: header.ZNSTemplateLayout.header:type_name -> header.ZNSTemplateComponents
-	581,  // 1301: header.ZNSTemplateLayout.body:type_name -> header.ZNSTemplateComponents
-	581,  // 1302: header.ZNSTemplateLayout.footer:type_name -> header.ZNSTemplateComponents
-	582,  // 1303: header.ZNSTemplateRequest.layout:type_name -> header.ZNSTemplateLayout
-	571,  // 1304: header.ZNSTemplateRequest.params:type_name -> header.ZNSTemplateParam
-	670,  // 1305: header.ZNSTemplate.ctx:type_name -> common.Context
-	583,  // 1306: header.ZNSTemplate.request:type_name -> header.ZNSTemplateRequest
-	586,  // 1307: header.ZNSTemplate.template:type_name -> header.ZnsTemplate
-	588,  // 1308: header.ZnsTemplate.listParams:type_name -> header.ZNSParamDefinition
-	587,  // 1309: header.ZnsTemplate.listButtons:type_name -> header.ZNSButton
-	670,  // 1310: header.ZNSMedia.ctx:type_name -> common.Context
-	223,  // 1311: header.ZNSMedia.file:type_name -> header.File
-	670,  // 1312: header.EmailSignature.ctx:type_name -> common.Context
-	505,  // 1313: header.EmailSignature.block:type_name -> header.Block
-	670,  // 1314: header.TestMessageRequest.ctx:type_name -> common.Context
-	388,  // 1315: header.TestMessageRequest.message:type_name -> header.MarketingMessage
-	670,  // 1316: header.CreditUsage.ctx:type_name -> common.Context
-	571,  // 1317: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
-	670,  // 1318: header.MetaAdAccount.ctx:type_name -> common.Context
-	597,  // 1319: header.MetaAdAccount.business:type_name -> header.MetaBusiness
-	670,  // 1320: header.VectorSearchReq.ctx:type_name -> common.Context
-	670,  // 1321: header.VectorDoc.ctx:type_name -> common.Context
-	602,  // 1322: header.VectorDoc.props:type_name -> header.VectorDocProp
-	670,  // 1323: header.ListVectorRequest.ctx:type_name -> common.Context
-	602,  // 1324: header.VectorMatch.props:type_name -> header.VectorDocProp
-	670,  // 1325: header.VectorMatches.ctx:type_name -> common.Context
-	603,  // 1326: header.VectorMatches.matches:type_name -> header.VectorMatch
-	670,  // 1327: header.NamedEntity.ctx:type_name -> common.Context
-	670,  // 1328: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
-	292,  // 1329: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
-	305,  // 1330: header.ListAvaiableDiscountsRequest.products:type_name -> header.Product
-	74,   // 1331: header.Event.CustomDataEntry.value:type_name -> header.EventField
-	505,  // 1332: header.Message.I18nBlockEntry.value:type_name -> header.Block
-	614,  // 1333: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
-	505,  // 1334: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
-	505,  // 1335: header.I18nBlock.I18nEntry.value:type_name -> header.Block
-	505,  // 1336: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
-	177,  // 1337: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
-	176,  // 1338: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
-	178,  // 1339: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
-	179,  // 1340: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
-	180,  // 1341: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
-	671,  // 1342: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
-	505,  // 1343: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
-	550,  // 1344: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
-	321,  // 1345: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
-	321,  // 1346: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
-	433,  // 1347: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
-	405,  // 1348: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
-	405,  // 1349: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
-	90,   // 1350: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
-	489,  // 1351: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
-	505,  // 1352: header.Article.I18nContentEntry.value:type_name -> header.Block
-	550,  // 1353: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
-	405,  // 1354: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
-	1355, // [1355:1355] is the sub-list for method output_type
-	1355, // [1355:1355] is the sub-list for method input_type
-	1355, // [1355:1355] is the sub-list for extension type_name
-	1355, // [1355:1355] is the sub-list for extension extendee
-	0,    // [0:1355] is the sub-list for field type_name
+	311,  // 95: header.Data.product_feed:type_name -> header.ProductFeed
+	290,  // 96: header.Data.order:type_name -> header.Order
+	264,  // 97: header.Data.currency:type_name -> header.Currency
+	262,  // 98: header.Data.shop_setting:type_name -> header.ShopSetting
+	269,  // 99: header.Data.shipping_address:type_name -> header.Address
+	298,  // 100: header.Data.order_status:type_name -> header.OrderStatusUpdated
+	294,  // 101: header.Data.bill:type_name -> header.Bill
+	290,  // 102: header.Data.order_from:type_name -> header.Order
+	73,   // 103: header.Data.current:type_name -> header.Event
+	299,  // 104: header.Data.order_history_entry:type_name -> header.OrderHistoryEntry
+	249,  // 105: header.Data.user_order_confirmation:type_name -> header.UserOrderConfirmation
+	329,  // 106: header.Data.pipeline:type_name -> header.Pipeline
+	297,  // 107: header.Data.order_pipeline_updated:type_name -> header.OrderPipelineUpdated
+	335,  // 108: header.Data.task:type_name -> header.Task
+	337,  // 109: header.Data.task_history_entry:type_name -> header.TaskHistoryEntry
+	291,  // 110: header.Data.order_pipeline_stage:type_name -> header.OrderPipelineStage
+	347,  // 111: header.Data.conversation_modal:type_name -> header.ConversationModal
+	40,   // 112: header.Data.phone_device:type_name -> header.PhoneDevice
+	42,   // 113: header.Data.call_setting:type_name -> header.CallSetting
+	359,  // 114: header.Data.blocked_number:type_name -> header.BlockedNumber
+	99,   // 115: header.Data.call_info:type_name -> header.CallInfo
+	356,  // 116: header.Data.call_request:type_name -> header.CallDriverRequest
+	209,  // 117: header.Data.greeting_audio:type_name -> header.GreetingAudio
+	365,  // 118: header.Data.recent_call_record:type_name -> header.RecentCallRecord
+	77,   // 119: header.Data.webrtc_message:type_name -> header.WebRTCMessage
+	369,  // 120: header.Data.event_type:type_name -> header.EventType
+	320,  // 121: header.Data.error:type_name -> header.Error
+	674,  // 122: header.Data.account:type_name -> account.Account
+	370,  // 123: header.Data.segment:type_name -> header.Segment
+	380,  // 124: header.Data.campaign:type_name -> header.Campaign
+	392,  // 125: header.Data.business_email_address:type_name -> header.BusinessEmailAddresses
+	183,  // 126: header.Data.form_submission:type_name -> header.FormSubmission
+	385,  // 127: header.Data.outbound_call_entry:type_name -> header.OutboundCallEntry
+	453,  // 128: header.Data.outbound_call_update:type_name -> header.OutboundCallUpdateEvent
+	226,  // 129: header.Data.banned_user:type_name -> header.BannedUser
+	436,  // 130: header.Data.credit:type_name -> header.Credit
+	675,  // 131: header.Data.subiz_bill:type_name -> payment.Bill
+	37,   // 132: header.Data.desktop_notification:type_name -> header.Noti
+	479,  // 133: header.Data.ticket:type_name -> header.Ticket
+	475,  // 134: header.Data.ticket_type:type_name -> header.TicketType
+	483,  // 135: header.Data.ticket_history_entry:type_name -> header.TicketHistoryEntry
+	488,  // 136: header.Data.live_user_view:type_name -> header.LiveUserView
+	485,  // 137: header.Data.ticket_view:type_name -> header.TicketView
+	491,  // 138: header.Data.sla_policy:type_name -> header.SLAPolicy
+	499,  // 139: header.Data.knowledged_base:type_name -> header.KnowledgeBase
+	495,  // 140: header.Data.article_category:type_name -> header.ArticleCategory
+	494,  // 141: header.Data.article:type_name -> header.Article
+	76,   // 142: header.Data.conversation_meta:type_name -> header.ConversationMeta
+	100,  // 143: header.Data.rating:type_name -> header.Rating
+	83,   // 144: header.Data.ticket_rule:type_name -> header.Rule
+	482,  // 145: header.Data.violation:type_name -> header.SLAViolation
+	521,  // 146: header.Data.workflow_pulse:type_name -> header.WorkflowPulse
+	522,  // 147: header.Data.workflow_timeup:type_name -> header.WorkflowTimeup
+	526,  // 148: header.Data.bank_account:type_name -> header.BankAccount
+	496,  // 149: header.Data.article_topic:type_name -> header.ArticleTopic
+	541,  // 150: header.Data.article_node:type_name -> header.ArticleNode
+	560,  // 151: header.Data.ai_data_entry:type_name -> header.AIDataEntry
+	557,  // 152: header.Data.ai_data_group:type_name -> header.AIDataGroup
+	544,  // 153: header.Data.ai_agent:type_name -> header.AIAgent
+	583,  // 154: header.Data.zns_template:type_name -> header.ZNSTemplate
+	587,  // 155: header.Data.zns_media:type_name -> header.ZNSMedia
+	588,  // 156: header.Data.email_signature:type_name -> header.EmailSignature
+	469,  // 157: header.Data.llm_tool_call:type_name -> header.LLMToolCall
+	184,  // 158: header.Data.form:type_name -> header.Form
+	214,  // 159: header.Data.event_destination:type_name -> header.EventDestination
+	214,  // 160: header.Data.event_destinations:type_name -> header.EventDestination
+	373,  // 161: header.Data.segment_sync:type_name -> header.SegmentSync
+	47,   // 162: header.ConversationMeta.touchpoint:type_name -> header.Touchpoint
+	73,   // 163: header.ConversationMeta.event:type_name -> header.Event
+	668,  // 164: header.StartWorkflowSessionRequest.ctx:type_name -> common.Context
+	128,  // 165: header.StartWorkflowSessionRequest.bot:type_name -> header.Bot
+	131,  // 166: header.StartWorkflowSessionRequest.action:type_name -> header.BotAction
+	73,   // 167: header.StartWorkflowSessionRequest.event:type_name -> header.Event
+	668,  // 168: header.RunAiAgentRequest.ctx:type_name -> common.Context
+	128,  // 169: header.RunAiAgentRequest.bot:type_name -> header.Bot
+	131,  // 170: header.RunAiAgentRequest.action:type_name -> header.BotAction
+	73,   // 171: header.RunAiAgentRequest.event:type_name -> header.Event
+	73,   // 172: header.RunAiAgentRequest.last_message_sent:type_name -> header.Event
+	668,  // 173: header.BotRunRequest.ctx:type_name -> common.Context
+	313,  // 174: header.BotRunRequest.object_contexts:type_name -> header.KV
+	128,  // 175: header.BotRunRequest.bot:type_name -> header.Bot
+	131,  // 176: header.BotRunRequest.action:type_name -> header.BotAction
+	73,   // 177: header.BotRunRequest.event:type_name -> header.Event
+	668,  // 178: header.Rule.ctx:type_name -> common.Context
+	87,   // 179: header.Rule.channel_condition:type_name -> header.ChannelCondition
+	86,   // 180: header.Rule.timming_condition:type_name -> header.TimmingCondition
+	125,  // 181: header.Rule.form_conditions:type_name -> header.Condition
+	125,  // 182: header.Rule.user_conditions:type_name -> header.Condition
+	125,  // 183: header.Rule.user_start_content_view_conditions:type_name -> header.Condition
+	85,   // 184: header.Rule.call:type_name -> header.RingingSetting
+	209,  // 185: header.RingingSetting.greeting_message:type_name -> header.GreetingAudio
+	209,  // 186: header.RingingSetting.missed_message:type_name -> header.GreetingAudio
+	209,  // 187: header.RingingSetting.menu_message:type_name -> header.GreetingAudio
+	209,  // 188: header.RingingSetting.invalid_option_message:type_name -> header.GreetingAudio
+	83,   // 189: header.RingingSetting.menu_options:type_name -> header.Rule
+	83,   // 190: header.RingingSetting.menu_fallback:type_name -> header.Rule
+	88,   // 191: header.ChannelCondition.locations:type_name -> header.LocationCondition
+	88,   // 192: header.ChannelCondition.not_in_locations:type_name -> header.LocationCondition
+	84,   // 193: header.ChannelCondition.facebook:type_name -> header.FacebookCondition
+	668,  // 194: header.ConversationMember.ctx:type_name -> common.Context
+	72,   // 195: header.ConversationMember.invited_by:type_name -> header.By
+	102,  // 196: header.ConversationMember.bot_takeover_message:type_name -> header.Message
+	668,  // 197: header.StartRequest.ctx:type_name -> common.Context
+	45,   // 198: header.StartRequest.user:type_name -> header.User
+	90,   // 199: header.StartRequest.members:type_name -> header.ConversationMember
+	47,   // 200: header.StartRequest.touchpoint:type_name -> header.Touchpoint
+	183,  // 201: header.StartRequest.form_submission:type_name -> header.FormSubmission
+	96,   // 202: header.StartRequest.google_review:type_name -> header.GoogleReview
+	668,  // 203: header.Conversation.ctx:type_name -> common.Context
+	90,   // 204: header.Conversation.members:type_name -> header.ConversationMember
+	111,  // 205: header.Conversation.tags:type_name -> header.Tag
+	47,   // 206: header.Conversation.touchpoint:type_name -> header.Touchpoint
+	73,   // 207: header.Conversation.last_internal_message_sent:type_name -> header.Event
+	73,   // 208: header.Conversation.last_message_sent:type_name -> header.Event
+	89,   // 209: header.Conversation.assigned_to:type_name -> header.RouteResult
+	89,   // 210: header.Conversation.reassigned_to:type_name -> header.RouteResult
+	313,  // 211: header.Conversation.fields:type_name -> header.KV
+	100,  // 212: header.Conversation.ratings:type_name -> header.Rating
+	73,   // 213: header.Conversation.matched_event:type_name -> header.Event
+	99,   // 214: header.Conversation.call:type_name -> header.CallInfo
+	356,  // 215: header.Conversation.call_request:type_name -> header.CallDriverRequest
+	676,  // 216: header.Conversation.traffic_utm:type_name -> common.SessionCampaign
+	183,  // 217: header.Conversation.form_submission:type_name -> header.FormSubmission
+	96,   // 218: header.Conversation.google_review:type_name -> header.GoogleReview
+	479,  // 219: header.Conversation.ticket:type_name -> header.Ticket
+	320,  // 220: header.Conversation.error:type_name -> header.Error
+	103,  // 221: header.Conversation.referrer:type_name -> header.MessageReferral
+	98,   // 222: header.GoogleReview.review_rely:type_name -> header.ReviewReply
+	97,   // 223: header.GoogleReview.reviewer:type_name -> header.Reviewer
+	223,  // 224: header.CallInfo.recorded_audio:type_name -> header.File
+	668,  // 225: header.Rating.ctx:type_name -> common.Context
+	503,  // 226: header.Rating.question:type_name -> header.Block
+	668,  // 227: header.Conversations.ctx:type_name -> common.Context
+	92,   // 228: header.Conversations.conversations:type_name -> header.Conversation
+	320,  // 229: header.Conversations.errors:type_name -> header.Error
+	668,  // 230: header.Message.ctx:type_name -> common.Context
+	109,  // 231: header.Message.attachments:type_name -> header.Attachment
+	503,  // 232: header.Message.block:type_name -> header.Block
+	313,  // 233: header.Message.fields:type_name -> header.KV
+	106,  // 234: header.Message.pongs:type_name -> header.MessagePong
+	669,  // 235: header.Message.i18n_quill_delta:type_name -> header.I18nString
+	607,  // 236: header.Message.i18n_block:type_name -> header.Message.I18nBlockEntry
+	105,  // 237: header.Message.story:type_name -> header.InstagramStory
+	103,  // 238: header.Message.referral:type_name -> header.MessageReferral
+	608,  // 239: header.Message.zns_template_data:type_name -> header.Message.ZnsTemplateDataEntry
+	609,  // 240: header.Message.zns_template_default_data:type_name -> header.Message.ZnsTemplateDefaultDataEntry
+	610,  // 241: header.Message.zns_template_data_field:type_name -> header.Message.ZnsTemplateDataFieldEntry
+	669,  // 242: header.Message.i18n_text:type_name -> header.I18nString
+	104,  // 243: header.MessageReferral.ads_context_data:type_name -> header.AdsContextData
+	320,  // 244: header.MessagePong.error:type_name -> header.Error
+	669,  // 245: header.MessageButton.old_i18n_title:type_name -> header.I18nString
+	611,  // 246: header.MessageButton.i18n_title:type_name -> header.MessageButton.I18nTitleEntry
+	107,  // 247: header.GenericElementTemplate.default_action:type_name -> header.MessageButton
+	107,  // 248: header.GenericElementTemplate.buttons:type_name -> header.MessageButton
+	669,  // 249: header.GenericElementTemplate.i18n_title:type_name -> header.I18nString
+	669,  // 250: header.GenericElementTemplate.i18n_subtitle:type_name -> header.I18nString
+	108,  // 251: header.Attachment.elements:type_name -> header.GenericElementTemplate
+	107,  // 252: header.Attachment.buttons:type_name -> header.MessageButton
+	110,  // 253: header.Attachment.quick_replies:type_name -> header.QuickReply
+	115,  // 254: header.Attachment.postback:type_name -> header.Postback
+	73,   // 255: header.Attachment.quote:type_name -> header.Event
+	303,  // 256: header.Attachment.product:type_name -> header.Product
+	110,  // 257: header.Attachment.quick_reply:type_name -> header.QuickReply
+	290,  // 258: header.Attachment.order:type_name -> header.Order
+	223,  // 259: header.Attachment.file:type_name -> header.File
+	184,  // 260: header.Attachment.form:type_name -> header.Form
+	183,  // 261: header.Attachment.form_submission:type_name -> header.FormSubmission
+	669,  // 262: header.QuickReply.i18n_title:type_name -> header.I18nString
+	668,  // 263: header.Tag.ctx:type_name -> common.Context
+	668,  // 264: header.Template.ctx:type_name -> common.Context
+	102,  // 265: header.Template.message:type_name -> header.Message
+	112,  // 266: header.Template.data:type_name -> header.TemplateData
+	668,  // 267: header.SearchTemplate.ctx:type_name -> common.Context
+	669,  // 268: header.BotPostback.i18n_title:type_name -> header.I18nString
+	668,  // 269: header.Integration.ctx:type_name -> common.Context
+	582,  // 270: header.Integration.zalo_zns_quota:type_name -> header.ZaloOAZNSQuota
+	490,  // 271: header.Integration.permissions:type_name -> header.ResourceGroupMember
+	668,  // 272: header.WorkflowSessionId.ctx:type_name -> common.Context
+	668,  // 273: header.AssignRequest.ctx:type_name -> common.Context
+	73,   // 274: header.AssignRequest.start_event:type_name -> header.Event
+	668,  // 275: header.EndchatSetting.ctx:type_name -> common.Context
+	120,  // 276: header.EndchatSetting.connector_settings:type_name -> header.EndchatConnectorSetting
+	120,  // 277: header.EndchatSetting.global_setting:type_name -> header.EndchatConnectorSetting
+	677,  // 278: header.Trigger.event_attributes:type_name -> header.EventConditionFilter
+	88,   // 279: header.BotCondition.locations:type_name -> header.LocationCondition
+	88,   // 280: header.BotCondition.exclude_locations:type_name -> header.LocationCondition
+	125,  // 281: header.BotCondition.user:type_name -> header.Condition
+	124,  // 282: header.BotCondition.order:type_name -> header.OrderCondition
+	87,   // 283: header.BotCondition.channel_condition:type_name -> header.ChannelCondition
+	678,  // 284: header.OrderCondition.total:type_name -> header.FloatCondition
+	88,   // 285: header.OrderCondition.shipping:type_name -> header.LocationCondition
+	88,   // 286: header.OrderCondition.exclude_shipping:type_name -> header.LocationCondition
+	668,  // 287: header.VisitProductSiteRequest.ctx:type_name -> common.Context
+	668,  // 288: header.Site.ctx:type_name -> common.Context
+	668,  // 289: header.Bot.ctx:type_name -> common.Context
+	131,  // 290: header.Bot.action:type_name -> header.BotAction
+	122,  // 291: header.Bot.triggers:type_name -> header.Trigger
+	150,  // 292: header.Bot.initiative_frequency:type_name -> header.Frequently
+	123,  // 293: header.Bot.conditions:type_name -> header.BotCondition
+	83,   // 294: header.Bot.condition:type_name -> header.Rule
+	102,  // 295: header.Bot.welcome_message:type_name -> header.Message
+	668,  // 296: header.Bots.ctx:type_name -> common.Context
+	128,  // 297: header.Bots.bots:type_name -> header.Bot
+	131,  // 298: header.NextBotAction.action:type_name -> header.BotAction
+	130,  // 299: header.BotAction.nexts:type_name -> header.NextBotAction
+	137,  // 300: header.BotAction.jump:type_name -> header.ActionJump
+	138,  // 301: header.BotAction.send_http:type_name -> header.ActionSendHttp
+	141,  // 302: header.BotAction.ask_question:type_name -> header.ActionAskQuestion
+	119,  // 303: header.BotAction.assign:type_name -> header.AssignRequest
+	136,  // 304: header.BotAction.update_conversation:type_name -> header.ActionUpdateConversation
+	142,  // 305: header.BotAction.update_user:type_name -> header.ActionUpdateUser
+	143,  // 306: header.BotAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
+	134,  // 307: header.BotAction.confirm_order:type_name -> header.ActionConfirmOrder
+	133,  // 308: header.BotAction.create_task:type_name -> header.ActionCreateTask
+	135,  // 309: header.BotAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
+	503,  // 310: header.ActionCreateTask.title_block:type_name -> header.Block
+	503,  // 311: header.ActionCreateTask.note_block:type_name -> header.Block
+	102,  // 312: header.ActionConfirmOrder.messages:type_name -> header.Message
+	102,  // 313: header.ActionConfirmOrder.invalid_messages:type_name -> header.Message
+	313,  // 314: header.ActionUpdateConversation.fields:type_name -> header.KV
+	313,  // 315: header.ActionSendHttp.header:type_name -> header.KV
+	503,  // 316: header.ActionSendHttp.block:type_name -> header.Block
+	102,  // 317: header.ActionSendTyping.message:type_name -> header.Message
+	102,  // 318: header.ActionSendMessage.messages:type_name -> header.Message
+	313,  // 319: header.ActionSendMessage.extra_fields:type_name -> header.KV
+	412,  // 320: header.ActionSendMessage.llm:type_name -> header.ActionLLM
+	102,  // 321: header.ActionAskQuestion.messages:type_name -> header.Message
+	102,  // 322: header.ActionAskQuestion.resume_message:type_name -> header.Message
+	38,   // 323: header.ActionUpdateUser.attr:type_name -> header.Attribute
+	38,   // 324: header.ActionUpdateUser.attrs:type_name -> header.Attribute
+	612,  // 325: header.ReportBotResponse.metrics:type_name -> header.ReportBotResponse.Metric
+	146,  // 326: header.BotrunMetrics.metrics:type_name -> header.BotrunMetric
+	613,  // 327: header.ActionrunMetrics.metrics:type_name -> header.ActionrunMetrics.ActionrunMetric
+	668,  // 328: header.RealtimeSubscription.ctx:type_name -> common.Context
+	668,  // 329: header.PollResult.ctx:type_name -> common.Context
+	73,   // 330: header.PollResult.events:type_name -> header.Event
+	668,  // 331: header.PsMessage.ctx:type_name -> common.Context
+	73,   // 332: header.PsMessage.event:type_name -> header.Event
+	668,  // 333: header.WidgetUserSetting.ctx:type_name -> common.Context
+	674,  // 334: header.WidgetUserSetting.account:type_name -> account.Account
+	672,  // 335: header.WidgetUserSetting.agents:type_name -> account.Agent
+	128,  // 336: header.WidgetUserSetting.bots:type_name -> header.Bot
+	167,  // 337: header.WidgetUserSetting.plugins:type_name -> header.WebPlugin
+	59,   // 338: header.WidgetUserSetting.location:type_name -> header.Location
+	668,  // 339: header.AccountWeb.ctx:type_name -> common.Context
+	674,  // 340: header.AccountWeb.account:type_name -> account.Account
+	672,  // 341: header.AccountWeb.agents:type_name -> account.Agent
+	128,  // 342: header.AccountWeb.bots:type_name -> header.Bot
+	167,  // 343: header.AccountWeb.plugins:type_name -> header.WebPlugin
+	284,  // 344: header.AccountWeb.payment_methods:type_name -> header.PaymentMethod
+	59,   // 345: header.AccountWeb.location:type_name -> header.Location
+	157,  // 346: header.WidgetHeader.links:type_name -> header.SocialLink
+	668,  // 347: header.WidgetSetting.ctx:type_name -> common.Context
+	672,  // 348: header.WidgetSetting.agents:type_name -> account.Agent
+	158,  // 349: header.WidgetSetting.header:type_name -> header.WidgetHeader
+	162,  // 350: header.WidgetSetting.offline_form:type_name -> header.WidgetForm
+	162,  // 351: header.WidgetSetting.prechat_form:type_name -> header.WidgetForm
+	163,  // 352: header.WidgetSetting.desktop_button:type_name -> header.WidgetChatButton
+	163,  // 353: header.WidgetSetting.mobile_button:type_name -> header.WidgetChatButton
+	164,  // 354: header.WidgetSetting.greeting:type_name -> header.WidgetGreeting
+	669,  // 355: header.WidgetSetting.caption:type_name -> header.I18nString
+	669,  // 356: header.WidgetSetting.tagline:type_name -> header.I18nString
+	669,  // 357: header.WidgetField.i18n_label:type_name -> header.I18nString
+	669,  // 358: header.WidgetField.i18n_placeholder:type_name -> header.I18nString
+	55,   // 359: header.WidgetField.def:type_name -> header.AttributeDefinition
+	614,  // 360: header.WidgetGroup.i18n_name:type_name -> header.WidgetGroup.I18nNameEntry
+	160,  // 361: header.WidgetForm.fields:type_name -> header.WidgetField
+	161,  // 362: header.WidgetForm.groups:type_name -> header.WidgetGroup
+	669,  // 363: header.WidgetForm.i18n_group_label:type_name -> header.I18nString
+	669,  // 364: header.WidgetForm.i18n_title:type_name -> header.I18nString
+	669,  // 365: header.WidgetForm.i18n_question_label:type_name -> header.I18nString
+	669,  // 366: header.WidgetGreeting.greeting:type_name -> header.I18nString
+	102,  // 367: header.CampaignNotification.user_email:type_name -> header.Message
+	668,  // 368: header.WebPlugins.ctx:type_name -> common.Context
+	167,  // 369: header.WebPlugins.plugins:type_name -> header.WebPlugin
+	668,  // 370: header.WebPlugin.ctx:type_name -> common.Context
+	122,  // 371: header.WebPlugin.triggers:type_name -> header.Trigger
+	150,  // 372: header.WebPlugin.initiative_frequency:type_name -> header.Frequently
+	123,  // 373: header.WebPlugin.conditions:type_name -> header.BotCondition
+	159,  // 374: header.WebPlugin.chatbox:type_name -> header.WidgetSetting
+	191,  // 375: header.WebPlugin.popup:type_name -> header.Popup
+	175,  // 376: header.WebPlugin.contact:type_name -> header.ContactComponent
+	174,  // 377: header.WebPlugin.notification:type_name -> header.Notif
+	165,  // 378: header.WebPlugin.conversion_notification:type_name -> header.CampaignNotification
+	669,  // 379: header.TextComponent.i18n_html:type_name -> header.I18nString
+	669,  // 380: header.TextComponent.i18n_quill_delta:type_name -> header.I18nString
+	503,  // 381: header.TextComponent.block:type_name -> header.Block
+	615,  // 382: header.TextComponent.i18n_block:type_name -> header.TextComponent.I18nBlockEntry
+	668,  // 383: header.NotifProfiles.ctx:type_name -> common.Context
+	172,  // 384: header.NotifProfiles.profiles:type_name -> header.NotifProfile
+	668,  // 385: header.NotifProfile.ctx:type_name -> common.Context
+	616,  // 386: header.I18nBlock.i18n:type_name -> header.I18nBlock.I18nEntry
+	172,  // 387: header.Notif.profiles:type_name -> header.NotifProfile
+	503,  // 388: header.Notif.title_block:type_name -> header.Block
+	617,  // 389: header.Notif.i18n_title_block:type_name -> header.Notif.I18nTitleBlockEntry
+	193,  // 390: header.Notif.title_style:type_name -> header.Style
+	503,  // 391: header.Notif.message_blocks:type_name -> header.Block
+	173,  // 392: header.Notif.i18n_message_blocks:type_name -> header.I18nBlock
+	193,  // 393: header.Notif.message_style:type_name -> header.Style
+	193,  // 394: header.Notif.background_style:type_name -> header.Style
+	193,  // 395: header.Notif.subtext_style:type_name -> header.Style
+	193,  // 396: header.Notif.avatar_style:type_name -> header.Style
+	618,  // 397: header.ContactComponent.buttons:type_name -> header.ContactComponent.ContactButton
+	619,  // 398: header.CallContactComponent.hotlines:type_name -> header.CallContactComponent.Hotline
+	620,  // 399: header.MapContactComponent.locations:type_name -> header.MapContactComponent.Location
+	669,  // 400: header.FormField.i18n_label:type_name -> header.I18nString
+	621,  // 401: header.FormField.options:type_name -> header.FormField.FormFieldOption
+	669,  // 402: header.FormField.i18n_placeholder:type_name -> header.I18nString
+	668,  // 403: header.FormSubmission.ctx:type_name -> common.Context
+	182,  // 404: header.FormSubmission.values:type_name -> header.FormField
+	670,  // 405: header.FormSubmission.device:type_name -> common.Device
+	668,  // 406: header.Form.ctx:type_name -> common.Context
+	161,  // 407: header.Form.groups:type_name -> header.WidgetGroup
+	669,  // 408: header.Form.i18n_group_label:type_name -> header.I18nString
+	669,  // 409: header.Form.i18n_title:type_name -> header.I18nString
+	669,  // 410: header.Form.i18n_question_label:type_name -> header.I18nString
+	503,  // 411: header.Form.components:type_name -> header.Block
+	223,  // 412: header.Form.logo:type_name -> header.File
+	223,  // 413: header.Form.cover_image:type_name -> header.File
+	193,  // 414: header.Form.header_style:type_name -> header.Style
+	193,  // 415: header.Form.text_style:type_name -> header.Style
+	193,  // 416: header.Form.input_style:type_name -> header.Style
+	182,  // 417: header.OldForm.fields:type_name -> header.FormField
+	161,  // 418: header.OldForm.groups:type_name -> header.WidgetGroup
+	669,  // 419: header.OldForm.i18n_group_label:type_name -> header.I18nString
+	669,  // 420: header.OldForm.i18n_title:type_name -> header.I18nString
+	669,  // 421: header.OldForm.i18n_question_label:type_name -> header.I18nString
+	186,  // 422: header.OldForm.form_groups:type_name -> header.FormGroup
+	182,  // 423: header.FormGroup.fields:type_name -> header.FormField
+	669,  // 424: header.FormGroup.i18n_title:type_name -> header.I18nString
+	200,  // 425: header.ButtonsComponent.primary_actions:type_name -> header.PopupButtonAction
+	669,  // 426: header.ButtonsComponent.i18n_primary_text:type_name -> header.I18nString
+	200,  // 427: header.ButtonsComponent.secondary_actions:type_name -> header.PopupButtonAction
+	669,  // 428: header.ButtonsComponent.i18n_secondary_text:type_name -> header.I18nString
+	193,  // 429: header.WebPluginComponent.style:type_name -> header.Style
+	193,  // 430: header.WebPluginComponent.mobile_style:type_name -> header.Style
+	168,  // 431: header.WebPluginComponent.text:type_name -> header.TextComponent
+	187,  // 432: header.WebPluginComponent.buttons:type_name -> header.ButtonsComponent
+	181,  // 433: header.WebPluginComponent.countdown:type_name -> header.CountdownComponent
+	185,  // 434: header.WebPluginComponent.form:type_name -> header.OldForm
+	192,  // 435: header.WebPluginComponent.link:type_name -> header.LinkComponent
+	170,  // 436: header.WebPluginComponent.image:type_name -> header.ImageComponent
+	169,  // 437: header.WebPluginComponent.line:type_name -> header.LineComponent
+	190,  // 438: header.WebPluginComponent.social_buttons:type_name -> header.SocialButtonsComponent
+	189,  // 439: header.WebPluginComponent.follow_facebook:type_name -> header.FollowFacebookComponent
+	194,  // 440: header.Popup.pages:type_name -> header.PopupPage
+	193,  // 441: header.Style.hover:type_name -> header.Style
+	188,  // 442: header.PopupPage.components:type_name -> header.WebPluginComponent
+	193,  // 443: header.PopupPage.style:type_name -> header.Style
+	193,  // 444: header.PopupPage.mobile_style:type_name -> header.Style
+	201,  // 445: header.PopupPage.background_click:type_name -> header.ButtonComponent
+	668,  // 446: header.Impression.ctx:type_name -> common.Context
+	670,  // 447: header.Impression.device:type_name -> common.Device
+	668,  // 448: header.Conversions.ctx:type_name -> common.Context
+	197,  // 449: header.Conversions.conversions:type_name -> header.Conversion
+	668,  // 450: header.Conversion.ctx:type_name -> common.Context
+	670,  // 451: header.Conversion.device:type_name -> common.Device
+	199,  // 452: header.Conversion.submission:type_name -> header.CampaignSubmission
+	45,   // 453: header.Conversion.user:type_name -> header.User
+	668,  // 454: header.UserCampaignStatus.ctx:type_name -> common.Context
+	668,  // 455: header.CampaignSubmission.ctx:type_name -> common.Context
+	160,  // 456: header.CampaignSubmission.fields:type_name -> header.WidgetField
+	200,  // 457: header.ButtonComponent.actions:type_name -> header.PopupButtonAction
+	668,  // 458: header.ReportCampaignResponse.ctx:type_name -> common.Context
+	668,  // 459: header.ReportWebPluginResponse.ctx:type_name -> common.Context
+	205,  // 460: header.ReportWebPluginResponse.metrics:type_name -> header.WebPluginMetric
+	668,  // 461: header.GreetingAudios.ctx:type_name -> common.Context
+	209,  // 462: header.GreetingAudios.greeting_audios:type_name -> header.GreetingAudio
+	668,  // 463: header.GreetingAudio.ctx:type_name -> common.Context
+	223,  // 464: header.GreetingAudio.file:type_name -> header.File
+	668,  // 465: header.UploadedImage.ctx:type_name -> common.Context
+	668,  // 466: header.UploadedImages.ctx:type_name -> common.Context
+	210,  // 467: header.UploadedImages.images:type_name -> header.UploadedImage
+	464,  // 468: header.EventFilter.condition:type_name -> header.WorkflowCondition
+	668,  // 469: header.EventDestination.ctx:type_name -> common.Context
+	213,  // 470: header.EventDestination.filters:type_name -> header.EventFilter
+	217,  // 471: header.EventDestination.webhook:type_name -> header.Webhook
+	216,  // 472: header.EventDestination.facebook_conversion_api:type_name -> header.FacebookConversionAPI
+	215,  // 473: header.EventDestination.mappings:type_name -> header.DataMapping
+	668,  // 474: header.Webhook.ctx:type_name -> common.Context
+	212,  // 475: header.Webhook.old_secret:type_name -> header.WebhookSecret
+	668,  // 476: header.WebhookDeliveries.ctx:type_name -> common.Context
+	219,  // 477: header.WebhookDeliveries.deliveries:type_name -> header.WebhookDelivery
+	668,  // 478: header.WebhookDelivery.ctx:type_name -> common.Context
+	313,  // 479: header.WebhookDelivery.resquest_headers:type_name -> header.KV
+	313,  // 480: header.WebhookDelivery.response_headers:type_name -> header.KV
+	668,  // 481: header.WebhookTestResult.ctx:type_name -> common.Context
+	668,  // 482: header.BackOffSleepWebhookEmail.ctx:type_name -> common.Context
+	668,  // 483: header.PresignResult.ctx:type_name -> common.Context
+	668,  // 484: header.File.ctx:type_name -> common.Context
+	668,  // 485: header.BotTerminated.ctx:type_name -> common.Context
+	668,  // 486: header.BlacklistIP.ctx:type_name -> common.Context
+	668,  // 487: header.BannedUser.ctx:type_name -> common.Context
+	668,  // 488: header.LoginSessions.ctx:type_name -> common.Context
+	228,  // 489: header.LoginSessions.sessions:type_name -> header.LoginSession
+	668,  // 490: header.LoginSession.ctx:type_name -> common.Context
+	670,  // 491: header.LoginSession.device:type_name -> common.Device
+	59,   // 492: header.LoginSession.location:type_name -> header.Location
+	231,  // 493: header.GoogleLocationSettings.settings:type_name -> header.GoogleLocationSetting
+	232,  // 494: header.GoogleLocationSetting.google_review_setting:type_name -> header.GoogleReviewSetting
+	233,  // 495: header.GoogleLocationSetting.google_question_setting:type_name -> header.GoogleQuestionSetting
+	622,  // 496: header.GoogleReviewSetting.repliesM:type_name -> header.GoogleReviewSetting.RepliesMEntry
+	503,  // 497: header.FbComment.block:type_name -> header.Block
+	668,  // 498: header.FbFanpageSetting.ctx:type_name -> common.Context
+	237,  // 499: header.FbFanpageSetting.general_comment_setting:type_name -> header.FbCommentSetting
+	237,  // 500: header.FbFanpageSetting.specific_post_comment_setting:type_name -> header.FbCommentSetting
+	237,  // 501: header.FbFanpageSetting.post_comment_settings:type_name -> header.FbCommentSetting
+	668,  // 502: header.FbFanpageSettings.ctx:type_name -> common.Context
+	235,  // 503: header.FbFanpageSettings.settings:type_name -> header.FbFanpageSetting
+	234,  // 504: header.FbCommentSetting.comments:type_name -> header.FbComment
+	102,  // 505: header.FbCommentSetting.message:type_name -> header.Message
+	102,  // 506: header.FbCommentSetting.message_for_comments_contain_phone_email_or_address:type_name -> header.Message
+	102,  // 507: header.FbCommentSetting.message_for_comments_contain_keyword:type_name -> header.Message
+	248,  // 508: header.FbCommentSetting.posts:type_name -> header.FacebookPost
+	668,  // 509: header.FacebookPosts.ctx:type_name -> common.Context
+	248,  // 510: header.FacebookPosts.posts:type_name -> header.FacebookPost
+	239,  // 511: header.FacebookPostAttachmentMedia.image:type_name -> header.FacebookPostAttachmentMediaImage
+	240,  // 512: header.FacebookPostAttachment.media:type_name -> header.FacebookPostAttachmentMedia
+	242,  // 513: header.FacebookPostAttachment.subattachments:type_name -> header.FacebookPostAttachemnts
+	241,  // 514: header.FacebookPostAttachemnts.data:type_name -> header.FacebookPostAttachment
+	248,  // 515: header.FbFacebookPosts.data:type_name -> header.FacebookPost
+	246,  // 516: header.FbFacebookPosts.paging:type_name -> header.FacebookPaging
+	245,  // 517: header.FacebookPaging.cursors:type_name -> header.FacebookPagingCursor
+	668,  // 518: header.InstagramMedia.ctx:type_name -> common.Context
+	668,  // 519: header.FacebookPost.ctx:type_name -> common.Context
+	243,  // 520: header.FacebookPost.from:type_name -> header.FacebookPostFrom
+	242,  // 521: header.FacebookPost.attachments:type_name -> header.FacebookPostAttachemnts
+	668,  // 522: header.UserOrderConfirmation.ctx:type_name -> common.Context
+	290,  // 523: header.UserOrderConfirmation.order:type_name -> header.Order
+	668,  // 524: header.LangMessage.ctx:type_name -> common.Context
+	668,  // 525: header.Lang.ctx:type_name -> common.Context
+	251,  // 526: header.Lang.messages:type_name -> header.LangMessage
+	668,  // 527: header.Locale.ctx:type_name -> common.Context
+	674,  // 528: header.AccountImage.img:type_name -> account.Account
+	672,  // 529: header.AccountImage.owner:type_name -> account.Agent
+	668,  // 530: header.UserViews.ctx:type_name -> common.Context
+	256,  // 531: header.UserViews.views:type_name -> header.UserView
+	668,  // 532: header.UserView.ctx:type_name -> common.Context
+	259,  // 533: header.UserView.condition:type_name -> header.UserViewCondition
+	668,  // 534: header.CountTouchpointResponse.ctx:type_name -> common.Context
+	623,  // 535: header.CountTouchpointResponse.counts:type_name -> header.CountTouchpointResponse.TouchpointCount
+	668,  // 536: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
+	668,  // 537: header.UserViewCondition.ctx:type_name -> common.Context
+	679,  // 538: header.UserViewCondition.text:type_name -> header.TextCondition
+	680,  // 539: header.UserViewCondition.boolean:type_name -> header.BooleanCondition
+	678,  // 540: header.UserViewCondition.number:type_name -> header.FloatCondition
+	681,  // 541: header.UserViewCondition.datetime:type_name -> header.DatetimeCondition
+	682,  // 542: header.UserViewCondition.event:type_name -> header.EventCondition
+	259,  // 543: header.UserViewCondition.all:type_name -> header.UserViewCondition
+	259,  // 544: header.UserViewCondition.one:type_name -> header.UserViewCondition
+	668,  // 545: header.ReportResponse.ctx:type_name -> common.Context
+	669,  // 546: header.InvoiceTemplate.i18n_terms_and_conditions:type_name -> header.I18nString
+	669,  // 547: header.InvoiceTemplate.i18n_tagline:type_name -> header.I18nString
+	669,  // 548: header.InvoiceTemplate.i18n_signature:type_name -> header.I18nString
+	668,  // 549: header.ShopSetting.ctx:type_name -> common.Context
+	264,  // 550: header.ShopSetting.other_currencies:type_name -> header.Currency
+	269,  // 551: header.ShopSetting.addresses:type_name -> header.Address
+	318,  // 552: header.ShopSetting.taxes:type_name -> header.Tax
+	284,  // 553: header.ShopSetting.payment_methods:type_name -> header.PaymentMethod
+	261,  // 554: header.ShopSetting.invoice_template:type_name -> header.InvoiceTemplate
+	321,  // 555: header.ShopSetting.shopee_shops:type_name -> header.ShopeeShop
+	282,  // 556: header.ShopSetting.shippings:type_name -> header.IntegratedShipping
+	281,  // 557: header.ShopSetting.shipping_policies:type_name -> header.ShippingPolicy
+	296,  // 558: header.ShopSetting.cancellation_codes:type_name -> header.CancellationCode
+	668,  // 559: header.Addresses.ctx:type_name -> common.Context
+	269,  // 560: header.Addresses.addresses:type_name -> header.Address
+	668,  // 561: header.Currency.ctx:type_name -> common.Context
+	265,  // 562: header.Currency.logs:type_name -> header.CurrencyLogEntry
+	303,  // 563: header.OrderItem.product:type_name -> header.Product
+	318,  // 564: header.OrderItem.tax:type_name -> header.Tax
+	668,  // 565: header.Address.ctx:type_name -> common.Context
+	268,  // 566: header.Address.ghn:type_name -> header.GHNAddress
+	269,  // 567: header.Address.ghtk:type_name -> header.Address
+	275,  // 568: header.GHNOrder.items:type_name -> header.GHNOrderItem
+	272,  // 569: header.GHNOrder.fee:type_name -> header.GHNOrderFee
+	274,  // 570: header.GHNOrder2.Fee:type_name -> header.GHNOrder2Fee
+	269,  // 571: header.ShippingInfo.address:type_name -> header.Address
+	269,  // 572: header.ShippingInfo.pickup_address:type_name -> header.Address
+	318,  // 573: header.ShippingInfo.tax:type_name -> header.Tax
+	279,  // 574: header.ShippingInfo.data:type_name -> header.ShippingData
+	276,  // 575: header.ShippingData.ghtk:type_name -> header.GHTKShippingData
+	277,  // 576: header.ShippingData.ghtk_order:type_name -> header.GHTKOrder
+	270,  // 577: header.ShippingData.ghn:type_name -> header.GHNShippingData
+	271,  // 578: header.ShippingData.ghn_order:type_name -> header.GHNOrder
+	668,  // 579: header.ShippingPolicies.ctx:type_name -> common.Context
+	281,  // 580: header.ShippingPolicies.shipping_policies:type_name -> header.ShippingPolicy
+	668,  // 581: header.ShippingPolicy.ctx:type_name -> common.Context
+	668,  // 582: header.IntegratedShipping.ctx:type_name -> common.Context
+	269,  // 583: header.IntegratedShipping.address:type_name -> header.Address
+	668,  // 584: header.IntegratedShippings.ctx:type_name -> common.Context
+	282,  // 585: header.IntegratedShippings.integrated_shippings:type_name -> header.IntegratedShipping
+	668,  // 586: header.PaymentMethod.ctx:type_name -> common.Context
+	668,  // 587: header.PaymentMethods.ctx:type_name -> common.Context
+	284,  // 588: header.PaymentMethods.payment_methods:type_name -> header.PaymentMethod
+	668,  // 589: header.Orders.ctx:type_name -> common.Context
+	286,  // 590: header.Orders.metrics:type_name -> header.OrderMetric
+	290,  // 591: header.Orders.orders:type_name -> header.Order
+	668,  // 592: header.CountOrdersResponse.ctx:type_name -> common.Context
+	668,  // 593: header.DownloadOrderRequest.ctx:type_name -> common.Context
+	290,  // 594: header.DownloadOrderRequest.order:type_name -> header.Order
+	261,  // 595: header.DownloadOrderRequest.template:type_name -> header.InvoiceTemplate
+	668,  // 596: header.Order.ctx:type_name -> common.Context
+	278,  // 597: header.Order.shipping:type_name -> header.ShippingInfo
+	284,  // 598: header.Order.payment_method:type_name -> header.PaymentMethod
+	267,  // 599: header.Order.items:type_name -> header.OrderItem
+	45,   // 600: header.Order.user:type_name -> header.User
+	624,  // 601: header.Order.fields:type_name -> header.Order.FieldsEntry
+	292,  // 602: header.Order.agents:type_name -> header.OrderAgent
+	291,  // 603: header.Order.stages:type_name -> header.OrderPipelineStage
+	111,  // 604: header.Order.tags:type_name -> header.Tag
+	320,  // 605: header.Order.error:type_name -> header.Error
+	668,  // 606: header.OrderPipelineStage.ctx:type_name -> common.Context
+	335,  // 607: header.OrderPipelineStage.tasks:type_name -> header.Task
+	668,  // 608: header.OrderAgent.ctx:type_name -> common.Context
+	668,  // 609: header.Bills.ctx:type_name -> common.Context
+	294,  // 610: header.Bills.bills:type_name -> header.Bill
+	668,  // 611: header.Bill.ctx:type_name -> common.Context
+	530,  // 612: header.Bill.bank_transfer_request:type_name -> header.BankTransferRequest
+	668,  // 613: header.CancellationCodes.ctx:type_name -> common.Context
+	296,  // 614: header.CancellationCodes.cancellation_codes:type_name -> header.CancellationCode
+	668,  // 615: header.CancellationCode.ctx:type_name -> common.Context
+	668,  // 616: header.OrderPipelineUpdated.ctx:type_name -> common.Context
+	668,  // 617: header.OrderStatusUpdated.ctx:type_name -> common.Context
+	73,   // 618: header.OrderHistoryEntry.event:type_name -> header.Event
+	73,   // 619: header.OrderHistoryEntry.ref_comment:type_name -> header.Event
+	668,  // 620: header.OrderHistoryEntries.ctx:type_name -> common.Context
+	299,  // 621: header.OrderHistoryEntries.entries:type_name -> header.OrderHistoryEntry
+	668,  // 622: header.Discount.ctx:type_name -> common.Context
+	223,  // 623: header.Discount.image:type_name -> header.File
+	668,  // 624: header.Product.ctx:type_name -> common.Context
+	303,  // 625: header.Product.other_variants:type_name -> header.Product
+	313,  // 626: header.Product.props:type_name -> header.KV
+	307,  // 627: header.Product.options:type_name -> header.ProductOption
+	266,  // 628: header.Product.price_rules:type_name -> header.PriceRule
+	305,  // 629: header.Product.stocks:type_name -> header.ProductStock
+	318,  // 630: header.Product.tax:type_name -> header.Tax
+	107,  // 631: header.Product.buttons:type_name -> header.MessageButton
+	625,  // 632: header.Product.i18n_description_block:type_name -> header.Product.I18nDescriptionBlockEntry
+	223,  // 633: header.Product.attachments:type_name -> header.File
+	301,  // 634: header.Product.validity:type_name -> header.ProductValidity
+	306,  // 635: header.Product.offers:type_name -> header.ProductOffer
+	304,  // 636: header.Product.enrich_sources:type_name -> header.ProductEnrichSource
+	320,  // 637: header.Product.error:type_name -> header.Error
+	668,  // 638: header.ProductOffer.ctx:type_name -> common.Context
+	668,  // 639: header.ProductFeeds.ctx:type_name -> common.Context
+	311,  // 640: header.ProductFeeds.product_feeds:type_name -> header.ProductFeed
+	668,  // 641: header.ProductFeed.ctx:type_name -> common.Context
+	309,  // 642: header.ProductFeed.shopee:type_name -> header.ShopeeProductFeed
+	308,  // 643: header.ProductFeed.google_sheet:type_name -> header.GoogleSheetProductFeed
+	668,  // 644: header.ProductsRequest.ctx:type_name -> common.Context
+	313,  // 645: header.ProductsRequest.props:type_name -> header.KV
+	313,  // 646: header.KV.kvs:type_name -> header.KV
+	503,  // 647: header.KV.value_block:type_name -> header.Block
+	503,  // 648: header.KV.value_blocks:type_name -> header.Block
+	470,  // 649: header.ProductCategoryBuildQueryExample.history:type_name -> header.LLMChatHistoryEntry
+	626,  // 650: header.ProductCategory.i18n_name:type_name -> header.ProductCategory.I18nNameEntry
+	627,  // 651: header.ProductCategory.attributes:type_name -> header.ProductCategory.AttributesEntry
+	314,  // 652: header.ProductCategory._build_query_examples:type_name -> header.ProductCategoryBuildQueryExample
+	316,  // 653: header.ProductCategory.keyword_extract_examples:type_name -> header.ProductCategoryExtractExample
+	668,  // 654: header.ProductCategories.ctx:type_name -> common.Context
+	668,  // 655: header.Tax.ctx:type_name -> common.Context
+	669,  // 656: header.Tax.i18n_name:type_name -> header.I18nString
+	628,  // 657: header.Error.fields:type_name -> header.Error.FieldsEntry
+	629,  // 658: header.Error._hidden:type_name -> header.Error.HiddenEntry
+	630,  // 659: header.Error.message:type_name -> header.Error.MessageEntry
+	631,  // 660: header.Error.attrs:type_name -> header.Error.AttrsEntry
+	632,  // 661: header.Error._hidden_attrs:type_name -> header.Error.HiddenAttrsEntry
+	668,  // 662: header.ShopeeShop.ctx:type_name -> common.Context
+	668,  // 663: header.ShopeeSyncProductResponse.ctx:type_name -> common.Context
+	668,  // 664: header.AddressAutocompleteResponses.ctx:type_name -> common.Context
+	324,  // 665: header.AddressAutocompleteResponses.responses:type_name -> header.AddressAutocompleteResponse
+	668,  // 666: header.AddressAutocompleteResponse.ctx:type_name -> common.Context
+	325,  // 667: header.AddressAutocompleteResponse.matched_substrings:type_name -> header.SubstringIndex
+	327,  // 668: header.PipelineStage.routes:type_name -> header.PipelineRule
+	335,  // 669: header.PipelineStage.tasks:type_name -> header.Task
+	668,  // 670: header.PipelineRule.ctx:type_name -> common.Context
+	123,  // 671: header.PipelineRule.conditions:type_name -> header.BotCondition
+	668,  // 672: header.Pipelines.ctx:type_name -> common.Context
+	329,  // 673: header.Pipelines.pipelines:type_name -> header.Pipeline
+	668,  // 674: header.Pipeline.ctx:type_name -> common.Context
+	326,  // 675: header.Pipeline.stages:type_name -> header.PipelineStage
+	668,  // 676: header.Tasks.ctx:type_name -> common.Context
+	335,  // 677: header.Tasks.tasks:type_name -> header.Task
+	668,  // 678: header.ImportLeadRequest.ctx:type_name -> common.Context
+	45,   // 679: header.ImportLeadRequest.users:type_name -> header.User
+	668,  // 680: header.ImportLeadResponse.ctx:type_name -> common.Context
+	668,  // 681: header.ImportProductRequest.ctx:type_name -> common.Context
+	303,  // 682: header.ImportProductRequest.products:type_name -> header.Product
+	668,  // 683: header.ImportProductResponse.ctx:type_name -> common.Context
+	303,  // 684: header.ImportProductResponse.products:type_name -> header.Product
+	668,  // 685: header.Task.ctx:type_name -> common.Context
+	73,   // 686: header.Task.data_email:type_name -> header.Event
+	223,  // 687: header.Task.files:type_name -> header.File
+	73,   // 688: header.Task.latest_comment:type_name -> header.Event
+	336,  // 689: header.Task.members:type_name -> header.TaskMember
+	503,  // 690: header.Task.note_block:type_name -> header.Block
+	503,  // 691: header.Task.title_block:type_name -> header.Block
+	73,   // 692: header.TaskHistoryEntry.event:type_name -> header.Event
+	73,   // 693: header.TaskHistoryEntry.ref_comment:type_name -> header.Event
+	668,  // 694: header.TaskHistoryEntries.ctx:type_name -> common.Context
+	337,  // 695: header.TaskHistoryEntries.entries:type_name -> header.TaskHistoryEntry
+	668,  // 696: header.AgentGroups.ctx:type_name -> common.Context
+	340,  // 697: header.AgentGroups.Groups:type_name -> header.AgentGroup
+	668,  // 698: header.AgentGroup.ctx:type_name -> common.Context
+	45,   // 699: header.DocHit.user:type_name -> header.User
+	341,  // 700: header.DocHit.secondary_doc:type_name -> header.DocHit
+	494,  // 701: header.DocHit.article:type_name -> header.Article
+	503,  // 702: header.DocHit.description_block:type_name -> header.Block
+	633,  // 703: header.DocHit.query_matchM:type_name -> header.DocHit.QueryMatchMEntry
+	668,  // 704: header.DocSearchResponse.ctx:type_name -> common.Context
+	341,  // 705: header.DocSearchResponse.hits:type_name -> header.DocHit
+	503,  // 706: header.ArticleHit.title_block:type_name -> header.Block
+	503,  // 707: header.ArticleHit.description_block:type_name -> header.Block
+	503,  // 708: header.ArticleHit.content_block:type_name -> header.Block
+	668,  // 709: header.ArticleSearchResponse.ctx:type_name -> common.Context
+	343,  // 710: header.ArticleSearchResponse.hits:type_name -> header.ArticleHit
+	668,  // 711: header.ZaloCodeChallenge.ctx:type_name -> common.Context
+	668,  // 712: header.ConversationModal.ctx:type_name -> common.Context
+	668,  // 713: header.ConversationModals.ctx:type_name -> common.Context
+	347,  // 714: header.ConversationModals.conversation_modals:type_name -> header.ConversationModal
+	668,  // 715: header.ConversationModalPickRequest.ctx:type_name -> common.Context
+	47,   // 716: header.ConversationModalPickRequest.touchpoint:type_name -> header.Touchpoint
+	668,  // 717: header.ConversationModalPicked.ctx:type_name -> common.Context
+	668,  // 718: header.FacebookPageRegister.ctx:type_name -> common.Context
+	668,  // 719: header.FacebookPage.ctx:type_name -> common.Context
+	355,  // 720: header.FacebookPage.instagram_account:type_name -> header.InstagramUser
+	668,  // 721: header.FacebookPageRequest.ctx:type_name -> common.Context
+	668,  // 722: header.FacebookPages.ctx:type_name -> common.Context
+	352,  // 723: header.FacebookPages.facebook_pages:type_name -> header.FacebookPage
+	668,  // 724: header.InstagramUser.ctx:type_name -> common.Context
+	668,  // 725: header.CallDriverRequest.ctx:type_name -> common.Context
+	40,   // 726: header.CallDriverRequest.phone_device:type_name -> header.PhoneDevice
+	117,  // 727: header.CallDriverRequest.integration:type_name -> header.Integration
+	40,   // 728: header.CallDriverResponse.phone_device:type_name -> header.PhoneDevice
+	99,   // 729: header.CallDriverResponse.call:type_name -> header.CallInfo
+	668,  // 730: header.BlockedNumbers.ctx:type_name -> common.Context
+	359,  // 731: header.BlockedNumbers.blocked_numbers:type_name -> header.BlockedNumber
+	668,  // 732: header.BlockedNumber.ctx:type_name -> common.Context
+	361,  // 733: header.TextToSpeech.speeches:type_name -> header.TTSVoiceSelection
+	223,  // 734: header.TTSVoiceSelection.file:type_name -> header.File
+	668,  // 735: header.BusinessHours.ctx:type_name -> common.Context
+	362,  // 736: header.BusinessHours.week_days:type_name -> header.BusinessHour
+	362,  // 737: header.BusinessHours.extra_hours:type_name -> header.BusinessHour
+	362,  // 738: header.BusinessHours.holidays:type_name -> header.BusinessHour
+	668,  // 739: header.RecentCallRecords.ctx:type_name -> common.Context
+	365,  // 740: header.RecentCallRecords.records:type_name -> header.RecentCallRecord
+	668,  // 741: header.ZaloUserRequest.ctx:type_name -> common.Context
+	668,  // 742: header.ZnsRequest.ctx:type_name -> common.Context
+	634,  // 743: header.ZnsRequest.template_data:type_name -> header.ZnsRequest.TemplateDataEntry
+	668,  // 744: header.SendOmniChannelMessageRequest.ctx:type_name -> common.Context
+	73,   // 745: header.SendOmniChannelMessageRequest.messages:type_name -> header.Event
+	668,  // 746: header.EventType.ctx:type_name -> common.Context
+	73,   // 747: header.EventType.first_event:type_name -> header.Event
+	73,   // 748: header.EventType.last_event:type_name -> header.Event
+	45,   // 749: header.EventType.first_user:type_name -> header.User
+	45,   // 750: header.EventType.last_user:type_name -> header.User
+	668,  // 751: header.Segment.ctx:type_name -> common.Context
+	259,  // 752: header.Segment.condition:type_name -> header.UserViewCondition
+	320,  // 753: header.Segment.fetch_error:type_name -> header.Error
+	490,  // 754: header.Segment.permissions:type_name -> header.ResourceGroupMember
+	668,  // 755: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
+	668,  // 756: header.SegmentSync.ctx:type_name -> common.Context
+	374,  // 757: header.SegmentSync.meta_audience:type_name -> header.MetaCustomAudience
+	668,  // 758: header.MetaCustomAudience.ctx:type_name -> common.Context
+	668,  // 759: header.CustomAudienceBatchResponse.ctx:type_name -> common.Context
+	668,  // 760: header.CustomAudienceBatchRequest.ctx:type_name -> common.Context
+	371,  // 761: header.CustomAudienceBatchRequest.session:type_name -> header.MetaSyncBatchSession
+	45,   // 762: header.CustomAudienceBatchRequest.users:type_name -> header.User
+	668,  // 763: header.Segments.ctx:type_name -> common.Context
+	370,  // 764: header.Segments.segments:type_name -> header.Segment
+	668,  // 765: header.SegmentUsers.ctx:type_name -> common.Context
+	668,  // 766: header.UserSegment.ctx:type_name -> common.Context
+	668,  // 767: header.Campaign.ctx:type_name -> common.Context
+	386,  // 768: header.Campaign.messages:type_name -> header.MarketingMessage
+	381,  // 769: header.Campaign.outbound_call:type_name -> header.OutboundCallCampaign
+	86,   // 770: header.Campaign.timming_condition:type_name -> header.TimmingCondition
+	259,  // 771: header.Campaign.trigger_condition:type_name -> header.UserViewCondition
+	529,  // 772: header.Campaign.audient_request:type_name -> header.UsersRequest
+	184,  // 773: header.OutboundCallCampaign.form:type_name -> header.Form
+	635,  // 774: header.OutboundCallCampaign.agent_weight:type_name -> header.OutboundCallCampaign.AgentWeightEntry
+	668,  // 775: header.ListOutboundCallRequest.ctx:type_name -> common.Context
+	259,  // 776: header.ListOutboundCallRequest.condition:type_name -> header.UserViewCondition
+	636,  // 777: header.ListOutboundCallRequest.agent_weight:type_name -> header.ListOutboundCallRequest.AgentWeightEntry
+	668,  // 778: header.OutboundCallEntries.ctx:type_name -> common.Context
+	385,  // 779: header.OutboundCallEntries.entries:type_name -> header.OutboundCallEntry
+	668,  // 780: header.ImportOutboundCallEntryRequest.ctx:type_name -> common.Context
+	385,  // 781: header.ImportOutboundCallEntryRequest.entries:type_name -> header.OutboundCallEntry
+	637,  // 782: header.ImportOutboundCallEntryRequest.agent_weight:type_name -> header.ImportOutboundCallEntryRequest.AgentWeightEntry
+	668,  // 783: header.OutboundCallEntry.ctx:type_name -> common.Context
+	183,  // 784: header.OutboundCallEntry.submission:type_name -> header.FormSubmission
+	86,   // 785: header.MarketingMessage.timming_condition:type_name -> header.TimmingCondition
+	87,   // 786: header.MarketingMessage.channel_condition:type_name -> header.ChannelCondition
+	102,  // 787: header.MarketingMessage.messages:type_name -> header.Message
+	668,  // 788: header.CampaignSendLogEntry.ctx:type_name -> common.Context
+	320,  // 789: header.CampaignSendLogEntry.error:type_name -> header.Error
+	668,  // 790: header.CampaignSendLog.ctx:type_name -> common.Context
+	387,  // 791: header.CampaignSendLog.entries:type_name -> header.CampaignSendLogEntry
+	668,  // 792: header.BroadcastCampaignMetrics.ctx:type_name -> common.Context
+	638,  // 793: header.BroadcastCampaignMetrics.metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
+	638,  // 794: header.BroadcastCampaignMetrics.per_message_metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
+	668,  // 795: header.BusinessEmailAddress.ctx:type_name -> common.Context
+	588,  // 796: header.BusinessEmailAddress.signature:type_name -> header.EmailSignature
+	668,  // 797: header.BusinessEmailAddresses.ctx:type_name -> common.Context
+	391,  // 798: header.BusinessEmailAddresses.business_email_addresses:type_name -> header.BusinessEmailAddress
+	668,  // 799: header.ListFormSubmissionRequest.ctx:type_name -> common.Context
+	668,  // 800: header.OutboundCallReportRequest.ctx:type_name -> common.Context
+	668,  // 801: header.ImportOutboundCallEntryResponse.ctx:type_name -> common.Context
+	668,  // 802: header.OutboundCallReportResponse.ctx:type_name -> common.Context
+	400,  // 803: header.OutboundCallReportResponse.agents:type_name -> header.OutboundCallAgentReport
+	399,  // 804: header.OutboundCallReportResponse.surveys:type_name -> header.OutboundCallSurveyReport
+	668,  // 805: header.LinkData.ctx:type_name -> common.Context
+	670,  // 806: header.LinkData.device:type_name -> common.Device
+	137,  // 807: header.WorkflowAction.jump:type_name -> header.ActionJump
+	138,  // 808: header.WorkflowAction.send_http:type_name -> header.ActionSendHttp
+	141,  // 809: header.WorkflowAction.ask_question:type_name -> header.ActionAskQuestion
+	119,  // 810: header.WorkflowAction.assign:type_name -> header.AssignRequest
+	136,  // 811: header.WorkflowAction.update_conversation:type_name -> header.ActionUpdateConversation
+	142,  // 812: header.WorkflowAction.update_user:type_name -> header.ActionUpdateUser
+	143,  // 813: header.WorkflowAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
+	134,  // 814: header.WorkflowAction.confirm_order:type_name -> header.ActionConfirmOrder
+	133,  // 815: header.WorkflowAction.create_task:type_name -> header.ActionCreateTask
+	135,  // 816: header.WorkflowAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
+	144,  // 817: header.WorkflowAction.update_user_segments:type_name -> header.ActionUpdateUserSegments
+	420,  // 818: header.WorkflowAction.wait_branches:type_name -> header.ActionWaitBranch
+	422,  // 819: header.WorkflowAction.branching:type_name -> header.ActionBranching
+	419,  // 820: header.WorkflowAction.percentage_split:type_name -> header.ActionPercentageSplit
+	140,  // 821: header.WorkflowAction.send_message:type_name -> header.ActionSendMessage
+	418,  // 822: header.WorkflowAction.send_http_req:type_name -> header.ActionSendHttpReq
+	416,  // 823: header.WorkflowAction.send_transcript:type_name -> header.ActionSendTranscript
+	415,  // 824: header.WorkflowAction.wait_message:type_name -> header.ActionWaitMessage
+	414,  // 825: header.WorkflowAction.create_order:type_name -> header.ActionCreateOrder
+	411,  // 826: header.WorkflowAction.ask_info:type_name -> header.ActionAskInfo
+	412,  // 827: header.WorkflowAction.llm:type_name -> header.ActionLLM
+	410,  // 828: header.WorkflowAction.start_thread:type_name -> header.ActionStartThread
+	409,  // 829: header.WorkflowAction.set_variable:type_name -> header.ActionSetVariable
+	408,  // 830: header.WorkflowAction.call_workflow:type_name -> header.ActionCallWorkflow
+	407,  // 831: header.WorkflowAction.assign_lead:type_name -> header.ActionAssignLead
+	139,  // 832: header.WorkflowAction.send_typing:type_name -> header.ActionSendTyping
+	406,  // 833: header.WorkflowAction.start_scope:type_name -> header.ActionStartScope
+	592,  // 834: header.WorkflowAction.ai_agent_track:type_name -> header.ActionAIAgentTrack
+	405,  // 835: header.WorkflowAction.terminate_bot:type_name -> header.ActionTerminateBot
+	404,  // 836: header.WorkflowAction.send_facebook_conversion:type_name -> header.ActionSendFacebookConversion
+	294,  // 837: header.ActionSendFacebookConversion.bill:type_name -> header.Bill
+	503,  // 838: header.ActionLLM.system_instruction_block:type_name -> header.Block
+	549,  // 839: header.ActionLLM.functions:type_name -> header.AIFunction
+	413,  // 840: header.ActionLLM.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
+	549,  // 841: header.ActionLLM.tool_choice_function:type_name -> header.AIFunction
+	548,  // 842: header.LLMResponseJSONSchemaFormat.schema:type_name -> header.JSONSchema
+	464,  // 843: header.ActionWaitMessage.condition:type_name -> header.WorkflowCondition
+	403,  // 844: header.RunWorkflowActionRequest.action:type_name -> header.WorkflowAction
+	45,   // 845: header.RunWorkflowActionRequest.user:type_name -> header.User
+	92,   // 846: header.RunWorkflowActionRequest.convo:type_name -> header.Conversation
+	290,  // 847: header.RunWorkflowActionRequest.order:type_name -> header.Order
+	479,  // 848: header.RunWorkflowActionRequest.ticket:type_name -> header.Ticket
+	464,  // 849: header.ActionWaitBranch.condition:type_name -> header.WorkflowCondition
+	464,  // 850: header.ActionBranchingBranch.condition:type_name -> header.WorkflowCondition
+	421,  // 851: header.ActionBranching.branches:type_name -> header.ActionBranchingBranch
+	668,  // 852: header.BouncedEmail.ctx:type_name -> common.Context
+	668,  // 853: header.BlockedEmail.ctx:type_name -> common.Context
+	320,  // 854: header.BlockedEmail.error:type_name -> header.Error
+	668,  // 855: header.Response.ctx:type_name -> common.Context
+	320,  // 856: header.Response.error:type_name -> header.Error
+	424,  // 857: header.Response.blocked_email:type_name -> header.BlockedEmail
+	424,  // 858: header.Response.blocked_emails:type_name -> header.BlockedEmail
+	423,  // 859: header.Response.bounced_email:type_name -> header.BouncedEmail
+	423,  // 860: header.Response.bounced_emails:type_name -> header.BouncedEmail
+	427,  // 861: header.Response.zalo_call_consent:type_name -> header.ZaloCallConsent
+	436,  // 862: header.Response.credit:type_name -> header.Credit
+	436,  // 863: header.Response.credits:type_name -> header.Credit
+	674,  // 864: header.Response.account:type_name -> account.Account
+	674,  // 865: header.Response.accounts:type_name -> account.Account
+	467,  // 866: header.Response.workflow:type_name -> header.Workflow
+	467,  // 867: header.Response.workflows:type_name -> header.Workflow
+	672,  // 868: header.Response.agent:type_name -> account.Agent
+	672,  // 869: header.Response.agents:type_name -> account.Agent
+	474,  // 870: header.Response.workflow_logs:type_name -> header.WorkflowLog
+	434,  // 871: header.Response.workflow_sessions:type_name -> header.WorkflowSession
+	434,  // 872: header.Response.workflow_session:type_name -> header.WorkflowSession
+	479,  // 873: header.Response.tickets:type_name -> header.Ticket
+	475,  // 874: header.Response.ticket_types:type_name -> header.TicketType
+	485,  // 875: header.Response.ticket_views:type_name -> header.TicketView
+	489,  // 876: header.Response.bot_templates:type_name -> header.BotTemplate
+	478,  // 877: header.Response.ticket_templates:type_name -> header.TicketTemplate
+	318,  // 878: header.Response.taxes:type_name -> header.Tax
+	491,  // 879: header.Response.sla_policies:type_name -> header.SLAPolicy
+	491,  // 880: header.Response.sla_policy:type_name -> header.SLAPolicy
+	482,  // 881: header.Response.sla_violations:type_name -> header.SLAViolation
+	499,  // 882: header.Response.knowledge_base:type_name -> header.KnowledgeBase
+	494,  // 883: header.Response.articles:type_name -> header.Article
+	495,  // 884: header.Response.article_categories:type_name -> header.ArticleCategory
+	499,  // 885: header.Response.knowledge_bases:type_name -> header.KnowledgeBase
+	494,  // 886: header.Response.article:type_name -> header.Article
+	495,  // 887: header.Response.article_category:type_name -> header.ArticleCategory
+	92,   // 888: header.Response.conversation:type_name -> header.Conversation
+	92,   // 889: header.Response.conversations:type_name -> header.Conversation
+	76,   // 890: header.Response.conversation_metas:type_name -> header.ConversationMeta
+	209,  // 891: header.Response.greeting_audios:type_name -> header.GreetingAudio
+	209,  // 892: header.Response.greeting_audio:type_name -> header.GreetingAudio
+	45,   // 893: header.Response.users:type_name -> header.User
+	45,   // 894: header.Response.user:type_name -> header.User
+	73,   // 895: header.Response.event:type_name -> header.Event
+	73,   // 896: header.Response.events:type_name -> header.Event
+	100,  // 897: header.Response.rating:type_name -> header.Rating
+	83,   // 898: header.Response.rule:type_name -> header.Rule
+	83,   // 899: header.Response.rules:type_name -> header.Rule
+	83,   // 900: header.Response.ticket_rule:type_name -> header.Rule
+	83,   // 901: header.Response.ticket_rules:type_name -> header.Rule
+	510,  // 902: header.Response.agent_profile:type_name -> header.AgentProfile
+	228,  // 903: header.Response.login_session:type_name -> header.LoginSession
+	515,  // 904: header.Response.promotion_code:type_name -> header.PromotionCode
+	515,  // 905: header.Response.promotion_codes:type_name -> header.PromotionCode
+	517,  // 906: header.Response.promotion_check_result:type_name -> header.PromotionCheckResult
+	100,  // 907: header.Response.ratings:type_name -> header.Rating
+	516,  // 908: header.Response.subiz_promotion_programs:type_name -> header.SubizPromotionProgram
+	519,  // 909: header.Response.subiz_payment_method:type_name -> header.SubizPaymentMethod
+	519,  // 910: header.Response.subiz_payment_methods:type_name -> header.SubizPaymentMethod
+	512,  // 911: header.Response.profile_email_usage:type_name -> header.ProfileEmailUsage
+	526,  // 912: header.Response.bank_account:type_name -> header.BankAccount
+	526,  // 913: header.Response.bank_accounts:type_name -> header.BankAccount
+	530,  // 914: header.Response.bank_transfer_request:type_name -> header.BankTransferRequest
+	527,  // 915: header.Response.workflow_counts:type_name -> header.WorkflowCount
+	117,  // 916: header.Response.integrations:type_name -> header.Integration
+	117,  // 917: header.Response.integration:type_name -> header.Integration
+	40,   // 918: header.Response.phone_devices:type_name -> header.PhoneDevice
+	369,  // 919: header.Response.event_types:type_name -> header.EventType
+	426,  // 920: header.Response.report_counts:type_name -> header.ReportCount
+	127,  // 921: header.Response.site:type_name -> header.Site
+	127,  // 922: header.Response.sites:type_name -> header.Site
+	55,   // 923: header.Response.attribute_definition:type_name -> header.AttributeDefinition
+	55,   // 924: header.Response.attribute_definitions:type_name -> header.AttributeDefinition
+	541,  // 925: header.Response.article_node:type_name -> header.ArticleNode
+	111,  // 926: header.Response.tag:type_name -> header.Tag
+	111,  // 927: header.Response.tags:type_name -> header.Tag
+	560,  // 928: header.Response.ai_data_entries:type_name -> header.AIDataEntry
+	560,  // 929: header.Response.ai_data_entry:type_name -> header.AIDataEntry
+	557,  // 930: header.Response.ai_data_groups:type_name -> header.AIDataGroup
+	557,  // 931: header.Response.ai_data_group:type_name -> header.AIDataGroup
+	544,  // 932: header.Response.ai_agents:type_name -> header.AIAgent
+	544,  // 933: header.Response.ai_agent:type_name -> header.AIAgent
+	561,  // 934: header.Response.ai_response_sources:type_name -> header.AiResponseSource
+	561,  // 935: header.Response.ai_response_source:type_name -> header.AiResponseSource
+	559,  // 936: header.Response.ai_data_chunks:type_name -> header.AIDataChunk
+	223,  // 937: header.Response.file:type_name -> header.File
+	223,  // 938: header.Response.files:type_name -> header.File
+	248,  // 939: header.Response.facebook_posts:type_name -> header.FacebookPost
+	248,  // 940: header.Response.facebook_post:type_name -> header.FacebookPost
+	113,  // 941: header.Response.templates:type_name -> header.Template
+	217,  // 942: header.Response.webhooks:type_name -> header.Webhook
+	37,   // 943: header.Response.notifications:type_name -> header.Noti
+	566,  // 944: header.Response.notification_setting:type_name -> header.NotiSetting
+	340,  // 945: header.Response.agent_groups:type_name -> header.AgentGroup
+	583,  // 946: header.Response.zns_templates:type_name -> header.ZNSTemplate
+	583,  // 947: header.Response.zns_template:type_name -> header.ZNSTemplate
+	587,  // 948: header.Response.zns_medias:type_name -> header.ZNSMedia
+	587,  // 949: header.Response.zns_media:type_name -> header.ZNSMedia
+	588,  // 950: header.Response.email_signatures:type_name -> header.EmailSignature
+	588,  // 951: header.Response.email_signature:type_name -> header.EmailSignature
+	380,  // 952: header.Response.campaigns:type_name -> header.Campaign
+	380,  // 953: header.Response.campaign:type_name -> header.Campaign
+	590,  // 954: header.Response.credit_usage:type_name -> header.CreditUsage
+	472,  // 955: header.Response.ai_agent_trace:type_name -> header.AIAgentTrace
+	472,  // 956: header.Response.ai_agent_traces:type_name -> header.AIAgentTrace
+	183,  // 957: header.Response.form_submissions:type_name -> header.FormSubmission
+	184,  // 958: header.Response.forms:type_name -> header.Form
+	184,  // 959: header.Response.form:type_name -> header.Form
+	183,  // 960: header.Response.form_submission:type_name -> header.FormSubmission
+	303,  // 961: header.Response.products:type_name -> header.Product
+	303,  // 962: header.Response.product:type_name -> header.Product
+	302,  // 963: header.Response.discounts:type_name -> header.Discount
+	302,  // 964: header.Response.discount:type_name -> header.Discount
+	294,  // 965: header.Response.bills:type_name -> header.Bill
+	290,  // 966: header.Response.orders:type_name -> header.Order
+	294,  // 967: header.Response.bill:type_name -> header.Bill
+	290,  // 968: header.Response.order:type_name -> header.Order
+	306,  // 969: header.Response.product_offer:type_name -> header.ProductOffer
+	306,  // 970: header.Response.product_offers:type_name -> header.ProductOffer
+	269,  // 971: header.Response.addresses:type_name -> header.Address
+	373,  // 972: header.Response.segment_sync:type_name -> header.SegmentSync
+	373,  // 973: header.Response.segment_syncs:type_name -> header.SegmentSync
+	372,  // 974: header.Response.segment_sync_user_status:type_name -> header.SegmentSyncUserStatus
+	596,  // 975: header.Response.meta_ad_account:type_name -> header.MetaAdAccount
+	596,  // 976: header.Response.meta_ad_accounts:type_name -> header.MetaAdAccount
+	235,  // 977: header.Response.fanpage_settings:type_name -> header.FbFanpageSetting
+	603,  // 978: header.Response.named_entities:type_name -> header.NamedEntity
+	603,  // 979: header.Response.named_entity:type_name -> header.NamedEntity
+	669,  // 980: header.ZaloCallConsent.message:type_name -> header.I18nString
+	668,  // 981: header.SendEmailRequest.ctx:type_name -> common.Context
+	639,  // 982: header.SendEmailRequest.header:type_name -> header.SendEmailRequest.HeaderEntry
+	430,  // 983: header.SendEmailRequest.attachments:type_name -> header.EmailAttachment
+	668,  // 984: header.Email.ctx:type_name -> common.Context
+	640,  // 985: header.Email.header:type_name -> header.Email.HeaderEntry
+	430,  // 986: header.Email.attachments:type_name -> header.EmailAttachment
+	433,  // 987: header.WorkflowStack.calls:type_name -> header.WorkflowStackItem
+	668,  // 988: header.WorkflowSession.ctx:type_name -> common.Context
+	403,  // 989: header.WorkflowSession.action:type_name -> header.WorkflowAction
+	641,  // 990: header.WorkflowSession.threads:type_name -> header.WorkflowSession.ThreadsEntry
+	73,   // 991: header.WorkflowSession.last_message_sent:type_name -> header.Event
+	668,  // 992: header.SchedulerTask.ctx:type_name -> common.Context
+	668,  // 993: header.Credit.ctx:type_name -> common.Context
+	668,  // 994: header.CreditSpendEntry.ctx:type_name -> common.Context
+	444,  // 995: header.CreditSpendEntry.data:type_name -> header.CreditEntryData
+	439,  // 996: header.CreditEntryData.agent:type_name -> header.CreditEntryDataAgent
+	441,  // 997: header.CreditEntryData.zalo_zns:type_name -> header.CreditEntryDataZaloZNS
+	443,  // 998: header.CreditEntryData.zalo_active_message:type_name -> header.CreditEntryDataZaloActiveMessage
+	440,  // 999: header.CreditEntryData.email:type_name -> header.CreditEntryDataEmail
+	438,  // 1000: header.CreditEntryData.file:type_name -> header.CreditEntryDataId
+	442,  // 1001: header.CreditEntryData.zalo_request_call:type_name -> header.CreditEntryDataZaloRequestCall
+	445,  // 1002: header.CreditEntryData.llm_completion:type_name -> header.CreditEntryDataLLMCompletion
+	446,  // 1003: header.CreditEntryData.text_embedding:type_name -> header.CreditEntryDataTextEmbedding
+	668,  // 1004: header.CreditSpendEntries.ctx:type_name -> common.Context
+	437,  // 1005: header.CreditSpendEntries.entries:type_name -> header.CreditSpendEntry
+	668,  // 1006: header.TrySpendCreditResponse.ctx:type_name -> common.Context
+	668,  // 1007: header.CreditSpendReportResponse.ctx:type_name -> common.Context
+	449,  // 1008: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
+	668,  // 1009: header.AccSub.ctx:type_name -> common.Context
+	674,  // 1010: header.AccSub.account:type_name -> account.Account
+	683,  // 1011: header.AccSub.subscription:type_name -> payment.Subscription
+	672,  // 1012: header.AccSub.agents:type_name -> account.Agent
+	436,  // 1013: header.AccSub.credits:type_name -> header.Credit
+	668,  // 1014: header.AccSubs.ctx:type_name -> common.Context
+	451,  // 1015: header.AccSubs.accsub:type_name -> header.AccSub
+	668,  // 1016: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
+	400,  // 1017: header.OutboundCallUpdateEvent.agents:type_name -> header.OutboundCallAgentReport
+	642,  // 1018: header.StrNumM.strsM:type_name -> header.StrNumM.StrsMEntry
+	643,  // 1019: header.NumStrM.numsM:type_name -> header.NumStrM.NumsMEntry
+	668,  // 1020: header.ConvoReportRequest.ctx:type_name -> common.Context
+	259,  // 1021: header.ConvoReportRequest.conditions:type_name -> header.UserViewCondition
+	674,  // 1022: header.ConvoReportRequest.account:type_name -> account.Account
+	668,  // 1023: header.ConvoReportResponse.ctx:type_name -> common.Context
+	460,  // 1024: header.ConvoReportResponse.metrics:type_name -> header.ConvoReportEntry
+	464,  // 1025: header.WorkflowGoal.condition:type_name -> header.WorkflowCondition
+	464,  // 1026: header.WorkflowTrigger.condition:type_name -> header.WorkflowCondition
+	87,   // 1027: header.WorkflowCondition.channel:type_name -> header.ChannelCondition
+	680,  // 1028: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
+	678,  // 1029: header.WorkflowCondition.number:type_name -> header.FloatCondition
+	681,  // 1030: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
+	682,  // 1031: header.WorkflowCondition.event:type_name -> header.EventCondition
+	679,  // 1032: header.WorkflowCondition.text:type_name -> header.TextCondition
+	463,  // 1033: header.WorkflowCondition.timming:type_name -> header.WorkflowTimming
+	465,  // 1034: header.WorkflowCondition.llm:type_name -> header.LLMCondition
+	464,  // 1035: header.WorkflowCondition.all:type_name -> header.WorkflowCondition
+	464,  // 1036: header.WorkflowCondition.one:type_name -> header.WorkflowCondition
+	503,  // 1037: header.LLMCondition.instruction_block:type_name -> header.Block
+	549,  // 1038: header.LLMCondition.functions:type_name -> header.AIFunction
+	413,  // 1039: header.LLMCondition.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
+	549,  // 1040: header.LLMCondition.tool_choice_function:type_name -> header.AIFunction
+	668,  // 1041: header.WorkflowLogRequest.ctx:type_name -> common.Context
+	668,  // 1042: header.Workflow.ctx:type_name -> common.Context
+	462,  // 1043: header.Workflow.triggers:type_name -> header.WorkflowTrigger
+	462,  // 1044: header.Workflow.computed_triggers:type_name -> header.WorkflowTrigger
+	464,  // 1045: header.Workflow.condition:type_name -> header.WorkflowCondition
+	464,  // 1046: header.Workflow.computed_condition:type_name -> header.WorkflowCondition
+	644,  // 1047: header.Workflow.actions:type_name -> header.Workflow.ActionsEntry
+	645,  // 1048: header.Workflow.computed_actions:type_name -> header.Workflow.ComputedActionsEntry
+	461,  // 1049: header.Workflow.goal:type_name -> header.WorkflowGoal
+	464,  // 1050: header.Workflow.exit_when:type_name -> header.WorkflowCondition
+	223,  // 1051: header.Workflow.avatar:type_name -> header.File
+	468,  // 1052: header.Workflow.kv_settings:type_name -> header.KvSetting
+	469,  // 1053: header.LLMChatHistoryEntry.tool:type_name -> header.LLMToolCall
+	646,  // 1054: header.LLMChatHistoryEntry.fields:type_name -> header.LLMChatHistoryEntry.FieldsEntry
+	109,  // 1055: header.LLMChatHistoryEntry.attachments:type_name -> header.Attachment
+	668,  // 1056: header.AIAgentTrace.ctx:type_name -> common.Context
+	471,  // 1057: header.AIAgentTrace.context_documents:type_name -> header.AIDataEntryUsed
+	469,  // 1058: header.AIAgentTrace.tool_calls:type_name -> header.LLMToolCall
+	543,  // 1059: header.AIAgentTrace.override_rules:type_name -> header.AIAgentOverrideRule
+	549,  // 1060: header.AIAgentSpan.tools:type_name -> header.AIFunction
+	413,  // 1061: header.AIAgentSpan.response_format:type_name -> header.LLMResponseJSONSchemaFormat
+	470,  // 1062: header.AIAgentSpan.chat_history:type_name -> header.LLMChatHistoryEntry
+	469,  // 1063: header.AIAgentSpan.tool_calls:type_name -> header.LLMToolCall
+	668,  // 1064: header.WorkflowLog.ctx:type_name -> common.Context
+	647,  // 1065: header.WorkflowLog.data:type_name -> header.WorkflowLog.DataEntry
+	73,   // 1066: header.WorkflowLog.event:type_name -> header.Event
+	72,   // 1067: header.WorkflowLog.by:type_name -> header.By
+	668,  // 1068: header.TicketType.ctx:type_name -> common.Context
+	55,   // 1069: header.TicketType.defs:type_name -> header.AttributeDefinition
+	490,  // 1070: header.TicketType.permissions:type_name -> header.ResourceGroupMember
+	320,  // 1071: header.TicketType.error:type_name -> header.Error
+	477,  // 1072: header.TicketType.auto_reply:type_name -> header.TicketAutoReply
+	476,  // 1073: header.TicketType.satisfaction:type_name -> header.TicketSatisfaction
+	668,  // 1074: header.TicketSatisfaction.ctx:type_name -> common.Context
+	503,  // 1075: header.TicketSatisfaction.question:type_name -> header.Block
+	668,  // 1076: header.TicketAutoReply.ctx:type_name -> common.Context
+	503,  // 1077: header.TicketAutoReply.body:type_name -> header.Block
+	503,  // 1078: header.TicketAutoReply.title:type_name -> header.Block
+	668,  // 1079: header.TicketTemplate.ctx:type_name -> common.Context
+	102,  // 1080: header.TicketTemplate.message:type_name -> header.Message
+	111,  // 1081: header.TicketTemplate.tags:type_name -> header.Tag
+	38,   // 1082: header.TicketTemplate.attrs:type_name -> header.Attribute
+	320,  // 1083: header.TicketTemplate.error:type_name -> header.Error
+	668,  // 1084: header.Ticket.ctx:type_name -> common.Context
+	90,   // 1085: header.Ticket.members:type_name -> header.ConversationMember
+	38,   // 1086: header.Ticket.attrs:type_name -> header.Attribute
+	102,  // 1087: header.Ticket.description:type_name -> header.Message
+	111,  // 1088: header.Ticket.tags:type_name -> header.Tag
+	45,   // 1089: header.Ticket.users:type_name -> header.User
+	47,   // 1090: header.Ticket.touchpoint:type_name -> header.Touchpoint
+	73,   // 1091: header.Ticket.last_internal_message_sent:type_name -> header.Event
+	89,   // 1092: header.Ticket.assigned_to:type_name -> header.RouteResult
+	89,   // 1093: header.Ticket.reassigned_to:type_name -> header.RouteResult
+	313,  // 1094: header.Ticket.fields:type_name -> header.KV
+	100,  // 1095: header.Ticket.ratings:type_name -> header.Rating
+	73,   // 1096: header.Ticket.matched_event:type_name -> header.Event
+	73,   // 1097: header.Ticket.last_event:type_name -> header.Event
+	320,  // 1098: header.Ticket.error:type_name -> header.Error
+	648,  // 1099: header.Ticket.memberM:type_name -> header.Ticket.MemberMEntry
+	480,  // 1100: header.Ticket.read_receipts:type_name -> header.ReceiptMember
+	668,  // 1101: header.ReceiptMember.ctx:type_name -> common.Context
+	668,  // 1102: header.SLAViolations.ctx:type_name -> common.Context
+	482,  // 1103: header.SLAViolations.violations:type_name -> header.SLAViolation
+	668,  // 1104: header.SLAViolation.ctx:type_name -> common.Context
+	73,   // 1105: header.TicketHistoryEntry.event:type_name -> header.Event
+	73,   // 1106: header.TicketHistoryEntry.ref_comment:type_name -> header.Event
+	668,  // 1107: header.ListTicketRequest.ctx:type_name -> common.Context
+	259,  // 1108: header.ListTicketRequest.condition:type_name -> header.UserViewCondition
+	47,   // 1109: header.ListTicketRequest.touchpoint:type_name -> header.Touchpoint
+	668,  // 1110: header.TicketView.ctx:type_name -> common.Context
+	486,  // 1111: header.TicketView.members:type_name -> header.TicketViewMember
+	259,  // 1112: header.TicketView.condition:type_name -> header.UserViewCondition
+	668,  // 1113: header.TicketViewMember.ctx:type_name -> common.Context
+	73,   // 1114: header.TicketViewMember.last_event:type_name -> header.Event
+	668,  // 1115: header.LiveUserView.ctx:type_name -> common.Context
+	259,  // 1116: header.LiveUserView.condition:type_name -> header.UserViewCondition
+	649,  // 1117: header.LiveUserView.metrics:type_name -> header.LiveUserView.MetricsEntry
+	668,  // 1118: header.BotTemplate.ctx:type_name -> common.Context
+	668,  // 1119: header.ResourceGroupMember.ctx:type_name -> common.Context
+	668,  // 1120: header.SLAPolicy.ctx:type_name -> common.Context
+	492,  // 1121: header.SLAPolicy.normal_priority_target:type_name -> header.SLATarget
+	492,  // 1122: header.SLAPolicy.high_priority_target:type_name -> header.SLATarget
+	492,  // 1123: header.SLAPolicy.urgent_priority_target:type_name -> header.SLATarget
+	87,   // 1124: header.SLAPolicy.channel_condition:type_name -> header.ChannelCondition
+	86,   // 1125: header.SLAPolicy.timming_condition:type_name -> header.TimmingCondition
+	125,  // 1126: header.SLAPolicy.form_conditions:type_name -> header.Condition
+	125,  // 1127: header.SLAPolicy.user_conditions:type_name -> header.Condition
+	650,  // 1128: header.ArticleSEOSetting.page_title:type_name -> header.ArticleSEOSetting.PageTitleEntry
+	651,  // 1129: header.ArticleSEOSetting.meta_description:type_name -> header.ArticleSEOSetting.MetaDescriptionEntry
+	652,  // 1130: header.ArticleSEOSetting.social_title:type_name -> header.ArticleSEOSetting.SocialTitleEntry
+	653,  // 1131: header.ArticleSEOSetting.social_description:type_name -> header.ArticleSEOSetting.SocialDescriptionEntry
+	668,  // 1132: header.Article.ctx:type_name -> common.Context
+	496,  // 1133: header.Article.topics:type_name -> header.ArticleTopic
+	654,  // 1134: header.Article.i18n_title:type_name -> header.Article.I18nTitleEntry
+	493,  // 1135: header.Article.seo_setting:type_name -> header.ArticleSEOSetting
+	655,  // 1136: header.Article.i18n_content:type_name -> header.Article.I18nContentEntry
+	656,  // 1137: header.Article.i18n_slug:type_name -> header.Article.I18nSlugEntry
+	668,  // 1138: header.ArticleCategory.ctx:type_name -> common.Context
+	657,  // 1139: header.ArticleCategory.i18n_title:type_name -> header.ArticleCategory.I18nTitleEntry
+	658,  // 1140: header.ArticleCategory.i18n_description:type_name -> header.ArticleCategory.I18nDescriptionEntry
+	495,  // 1141: header.ArticleCategory.article_categories:type_name -> header.ArticleCategory
+	659,  // 1142: header.ArticleCategory.i18n_slug:type_name -> header.ArticleCategory.I18nSlugEntry
+	668,  // 1143: header.ArticleTopic.ctx:type_name -> common.Context
+	660,  // 1144: header.ArticleTopic.title:type_name -> header.ArticleTopic.TitleEntry
+	668,  // 1145: header.ArticleTopics.ctx:type_name -> common.Context
+	496,  // 1146: header.ArticleTopics.topics:type_name -> header.ArticleTopic
+	668,  // 1147: header.ArticleTopicRequest.ctx:type_name -> common.Context
+	668,  // 1148: header.KnowledgeBase.ctx:type_name -> common.Context
+	669,  // 1149: header.KnowledgeBase.name:type_name -> header.I18nString
+	669,  // 1150: header.KnowledgeBase.description:type_name -> header.I18nString
+	223,  // 1151: header.KnowledgeBase.logo:type_name -> header.File
+	223,  // 1152: header.KnowledgeBase.favikon:type_name -> header.File
+	475,  // 1153: header.KnowledgeBase.ticket_type:type_name -> header.TicketType
+	490,  // 1154: header.KnowledgeBase.permissions:type_name -> header.ResourceGroupMember
+	661,  // 1155: header.KnowledgeBase.i18n_title:type_name -> header.KnowledgeBase.I18nTitleEntry
+	662,  // 1156: header.KnowledgeBase.i18n_description:type_name -> header.KnowledgeBase.I18nDescriptionEntry
+	501,  // 1157: header.KnowledgeBase.home_page:type_name -> header.KnowledgeBasePageStyle
+	500,  // 1158: header.KnowledgeBase.article_page:type_name -> header.KnowledgeBaseArticlePageSetting
+	501,  // 1159: header.KnowledgeBase.category_page:type_name -> header.KnowledgeBasePageStyle
+	501,  // 1160: header.KnowledgeBaseArticlePageSetting.style:type_name -> header.KnowledgeBasePageStyle
+	668,  // 1161: header.Job.ctx:type_name -> common.Context
+	503,  // 1162: header.Block.content:type_name -> header.Block
+	663,  // 1163: header.Block.input_options:type_name -> header.Block.InputOption
+	193,  // 1164: header.Block.style:type_name -> header.Style
+	223,  // 1165: header.Block.image:type_name -> header.File
+	664,  // 1166: header.Block.attrs:type_name -> header.Block.AttrsEntry
+	504,  // 1167: header.Block.llm_input_retry_policy:type_name -> header.LLMInputRetryPolicy
+	668,  // 1168: header.TicketUpdatedNotiEmail.ctx:type_name -> common.Context
+	479,  // 1169: header.TicketUpdatedNotiEmail.assigned_tickets:type_name -> header.Ticket
+	73,   // 1170: header.TicketUpdatedNotiEmail.updated_events:type_name -> header.Event
+	479,  // 1171: header.TicketUpdatedNotiEmail.new_tickets:type_name -> header.Ticket
+	479,  // 1172: header.TicketUpdatedNotiEmail.high_risk_sla_tickets:type_name -> header.Ticket
+	479,  // 1173: header.TicketUpdatedNotiEmail.breached_sla_tickets:type_name -> header.Ticket
+	668,  // 1174: header.ResetPasswordEmail.ctx:type_name -> common.Context
+	668,  // 1175: header.OTPEmail.ctx:type_name -> common.Context
+	668,  // 1176: header.InviteEmail.ctx:type_name -> common.Context
+	668,  // 1177: header.AgentProfile.ctx:type_name -> common.Context
+	223,  // 1178: header.AgentProfile.avatar:type_name -> header.File
+	673,  // 1179: header.AgentProfile.last_seen:type_name -> account.Presence
+	668,  // 1180: header.InvitationLink.ctx:type_name -> common.Context
+	223,  // 1181: header.InvitationLink.account_logo:type_name -> header.File
+	668,  // 1182: header.ProfileEmailUsage.ctx:type_name -> common.Context
+	668,  // 1183: header.InviteRequest.ctx:type_name -> common.Context
+	668,  // 1184: header.JoinAccountRequest.ctx:type_name -> common.Context
+	668,  // 1185: header.PromotionCode.ctx:type_name -> common.Context
+	668,  // 1186: header.SubizPromotionProgram.ctx:type_name -> common.Context
+	668,  // 1187: header.PromotionCodeUsage.ctx:type_name -> common.Context
+	684,  // 1188: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
+	675,  // 1189: header.PromotionCodeUsage.bills:type_name -> payment.Bill
+	668,  // 1190: header.SubizPaymentMethod.ctx:type_name -> common.Context
+	668,  // 1191: header.AndroidNotificationRequest.ctx:type_name -> common.Context
+	524,  // 1192: header.AndroidNotificationRequest.android_notifications:type_name -> header.AndroidNotification
+	525,  // 1193: header.AndroidNotificationRequest.android_device:type_name -> header.AndroidDevice
+	668,  // 1194: header.BankAccount.ctx:type_name -> common.Context
+	668,  // 1195: header.SuggestLeadFieldRequest.ctx:type_name -> common.Context
+	259,  // 1196: header.SuggestLeadFieldRequest.condition:type_name -> header.UserViewCondition
+	668,  // 1197: header.UsersRequest.ctx:type_name -> common.Context
+	259,  // 1198: header.UsersRequest.condition:type_name -> header.UserViewCondition
+	668,  // 1199: header.BankTransferRequest.ctx:type_name -> common.Context
+	47,   // 1200: header.BankTransferRequest.touchpoint:type_name -> header.Touchpoint
+	668,  // 1201: header.GenQrCodeRequest.ctx:type_name -> common.Context
+	668,  // 1202: header.QrCode.ctx:type_name -> common.Context
+	668,  // 1203: header.ReportUserEventRequest.ctx:type_name -> common.Context
+	668,  // 1204: header.ReportUserEventResponse.ctx:type_name -> common.Context
+	533,  // 1205: header.ReportUserEventResponse.entries:type_name -> header.ReportUserEventEntry
+	668,  // 1206: header.CounterReportResponse.ctx:type_name -> common.Context
+	668,  // 1207: header.SetupFeatureStatus.ctx:type_name -> common.Context
+	668,  // 1208: header.RelationUpdates.ctx:type_name -> common.Context
+	540,  // 1209: header.RelationUpdates.updates:type_name -> header.RelationUpdate
+	668,  // 1210: header.ArticleNode.ctx:type_name -> common.Context
+	665,  // 1211: header.ArticleNode.i18n_title:type_name -> header.ArticleNode.I18nTitleEntry
+	541,  // 1212: header.ArticleNode.children:type_name -> header.ArticleNode
+	549,  // 1213: header.AIAgentOverrideRule.functions:type_name -> header.AIFunction
+	556,  // 1214: header.AIAgentOverrideRule.intent:type_name -> header.AIIntent
+	464,  // 1215: header.AIAgentOverrideRule.condition:type_name -> header.WorkflowCondition
+	150,  // 1216: header.AIAgentOverrideRule.frequently:type_name -> header.Frequently
+	119,  // 1217: header.AIAgentOverrideRule.assign_to:type_name -> header.AssignRequest
+	668,  // 1218: header.AIAgent.ctx:type_name -> common.Context
+	223,  // 1219: header.AIAgent.avatar:type_name -> header.File
+	542,  // 1220: header.AIAgent.guardrails:type_name -> header.AIAgentGuardrail
+	544,  // 1221: header.AIAgent.sub_agents:type_name -> header.AIAgent
+	102,  // 1222: header.AIAgent.context_guard_message:type_name -> header.Message
+	549,  // 1223: header.AIAgent.functions:type_name -> header.AIFunction
+	102,  // 1224: header.AIAgent.unabled_to_answer_message:type_name -> header.Message
+	102,  // 1225: header.AIAgent.error_message:type_name -> header.Message
+	556,  // 1226: header.AIAgent.generated_intent:type_name -> header.AIIntent
+	547,  // 1227: header.AIAgent.data_store:type_name -> header.AIDataStore
+	546,  // 1228: header.AIAgent.init_flow:type_name -> header.InitFlow
+	543,  // 1229: header.AIAgent.override_rules:type_name -> header.AIAgentOverrideRule
+	184,  // 1230: header.AIAgent.collect_user_information:type_name -> header.Form
+	102,  // 1231: header.AIAgent.welcome_message:type_name -> header.Message
+	93,   // 1232: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
+	94,   // 1233: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
+	95,   // 1234: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
+	545,  // 1235: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
+	102,  // 1236: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
+	131,  // 1237: header.InitFlow.action:type_name -> header.BotAction
+	122,  // 1238: header.InitFlow.triggers:type_name -> header.Trigger
+	150,  // 1239: header.InitFlow.initiative_frequency:type_name -> header.Frequently
+	123,  // 1240: header.InitFlow.conditions:type_name -> header.BotCondition
+	83,   // 1241: header.InitFlow.rule:type_name -> header.Rule
+	666,  // 1242: header.JSONSchema.properties:type_name -> header.JSONSchema.PropertiesEntry
+	548,  // 1243: header.JSONSchema.items:type_name -> header.JSONSchema
+	313,  // 1244: header.AIFunction.headers:type_name -> header.KV
+	548,  // 1245: header.AIFunction.parameters:type_name -> header.JSONSchema
+	555,  // 1246: header.AIFunction.system_create_ticket:type_name -> header.CreateTicketFunction
+	554,  // 1247: header.AIFunction.workflow:type_name -> header.AutomationFunction
+	553,  // 1248: header.AIFunction.update_information:type_name -> header.UpdateUserInformation
+	552,  // 1249: header.AIFunction.collect_user_information:type_name -> header.CollectUserInformation
+	119,  // 1250: header.AIFunction.assign_agent:type_name -> header.AssignRequest
+	184,  // 1251: header.AIFunction.system_schedule_appointment:type_name -> header.Form
+	550,  // 1252: header.AIFunction.record_user_preference:type_name -> header.RecordUserPreference
+	549,  // 1253: header.AIFunction.functions:type_name -> header.AIFunction
+	551,  // 1254: header.CollectUserInformation.attributes:type_name -> header.CollectInfomationAttribute
+	464,  // 1255: header.AutomationFunction.condition:type_name -> header.WorkflowCondition
+	667,  // 1256: header.AutomationFunction.actions:type_name -> header.AutomationFunction.ActionsEntry
+	668,  // 1257: header.AIDataGroup.ctx:type_name -> common.Context
+	303,  // 1258: header.CrawlResponse.product:type_name -> header.Product
+	303,  // 1259: header.CrawlResponse.products:type_name -> header.Product
+	668,  // 1260: header.AIDataChunk.ctx:type_name -> common.Context
+	668,  // 1261: header.AIDataEntry.ctx:type_name -> common.Context
+	102,  // 1262: header.AIDataEntry.answer:type_name -> header.Message
+	223,  // 1263: header.AIDataEntry.file:type_name -> header.File
+	303,  // 1264: header.AIDataEntry.product:type_name -> header.Product
+	547,  // 1265: header.AIDataEntry.data_store:type_name -> header.AIDataStore
+	549,  // 1266: header.AIDataEntry.functions:type_name -> header.AIFunction
+	556,  // 1267: header.AIDataEntry.intent:type_name -> header.AIIntent
+	464,  // 1268: header.AIDataEntry.condition:type_name -> header.WorkflowCondition
+	668,  // 1269: header.AiResponseSource.ctx:type_name -> common.Context
+	560,  // 1270: header.AiResponseSource.data_entry:type_name -> header.AIDataEntry
+	668,  // 1271: header.FacebookAdsFlow.ctx:type_name -> common.Context
+	102,  // 1272: header.FacebookAdsFlow.welcome_message:type_name -> header.Message
+	668,  // 1273: header.RuleOrder.ctx:type_name -> common.Context
+	668,  // 1274: header.NotiSetting.ctx:type_name -> common.Context
+	564,  // 1275: header.NotiSetting.web:type_name -> header.NotiSubscription
+	564,  // 1276: header.NotiSetting.mobile:type_name -> header.NotiSubscription
+	564,  // 1277: header.NotiSetting.email:type_name -> header.NotiSubscription
+	564,  // 1278: header.NotiSetting.instant:type_name -> header.NotiSubscription
+	565,  // 1279: header.NotiSetting.ticket_types:type_name -> header.TicketTypeSubscription
+	567,  // 1280: header.NotiSetting.do_not_disturb:type_name -> header.DoNotDisturb
+	668,  // 1281: header.PushToken.ctx:type_name -> common.Context
+	571,  // 1282: header.ZNSTemplateLayoutComponentButtons.items:type_name -> header.ZNSTemplateLayoutComponentButton
+	573,  // 1283: header.ZNSTemplateLayoutComponentTable.rows:type_name -> header.ZNSTemplateLayoutComponentTableRow
+	575,  // 1284: header.ZNSTemplateLayoutComponentImages.items:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	575,  // 1285: header.ZNSTemplateLayoutComponentLogo.light:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	575,  // 1286: header.ZNSTemplateLayoutComponentLogo.dark:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	576,  // 1287: header.ZNSTemplateLayoutComponent.IMAGES:type_name -> header.ZNSTemplateLayoutComponentImages
+	577,  // 1288: header.ZNSTemplateLayoutComponent.LOGO:type_name -> header.ZNSTemplateLayoutComponentLogo
+	570,  // 1289: header.ZNSTemplateLayoutComponent.TITLE:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1290: header.ZNSTemplateLayoutComponent.PARAGRAPH:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1291: header.ZNSTemplateLayoutComponent.OTP:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1292: header.ZNSTemplateLayoutComponent.VOUCHER:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1293: header.ZNSTemplateLayoutComponent.PAYMENT:type_name -> header.ZNSTemplateLayoutComponentItem
+	572,  // 1294: header.ZNSTemplateLayoutComponent.BUTTONS:type_name -> header.ZNSTemplateLayoutComponentButtons
+	574,  // 1295: header.ZNSTemplateLayoutComponent.TABLE:type_name -> header.ZNSTemplateLayoutComponentTable
+	578,  // 1296: header.ZNSTemplateComponents.components:type_name -> header.ZNSTemplateLayoutComponent
+	579,  // 1297: header.ZNSTemplateLayout.header:type_name -> header.ZNSTemplateComponents
+	579,  // 1298: header.ZNSTemplateLayout.body:type_name -> header.ZNSTemplateComponents
+	579,  // 1299: header.ZNSTemplateLayout.footer:type_name -> header.ZNSTemplateComponents
+	580,  // 1300: header.ZNSTemplateRequest.layout:type_name -> header.ZNSTemplateLayout
+	569,  // 1301: header.ZNSTemplateRequest.params:type_name -> header.ZNSTemplateParam
+	668,  // 1302: header.ZNSTemplate.ctx:type_name -> common.Context
+	581,  // 1303: header.ZNSTemplate.request:type_name -> header.ZNSTemplateRequest
+	584,  // 1304: header.ZNSTemplate.template:type_name -> header.ZnsTemplate
+	586,  // 1305: header.ZnsTemplate.listParams:type_name -> header.ZNSParamDefinition
+	585,  // 1306: header.ZnsTemplate.listButtons:type_name -> header.ZNSButton
+	668,  // 1307: header.ZNSMedia.ctx:type_name -> common.Context
+	223,  // 1308: header.ZNSMedia.file:type_name -> header.File
+	668,  // 1309: header.EmailSignature.ctx:type_name -> common.Context
+	503,  // 1310: header.EmailSignature.block:type_name -> header.Block
+	668,  // 1311: header.TestMessageRequest.ctx:type_name -> common.Context
+	386,  // 1312: header.TestMessageRequest.message:type_name -> header.MarketingMessage
+	668,  // 1313: header.CreditUsage.ctx:type_name -> common.Context
+	569,  // 1314: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
+	668,  // 1315: header.MetaAdAccount.ctx:type_name -> common.Context
+	595,  // 1316: header.MetaAdAccount.business:type_name -> header.MetaBusiness
+	668,  // 1317: header.VectorSearchReq.ctx:type_name -> common.Context
+	668,  // 1318: header.VectorDoc.ctx:type_name -> common.Context
+	600,  // 1319: header.VectorDoc.props:type_name -> header.VectorDocProp
+	668,  // 1320: header.ListVectorRequest.ctx:type_name -> common.Context
+	600,  // 1321: header.VectorMatch.props:type_name -> header.VectorDocProp
+	668,  // 1322: header.VectorMatches.ctx:type_name -> common.Context
+	601,  // 1323: header.VectorMatches.matches:type_name -> header.VectorMatch
+	668,  // 1324: header.NamedEntity.ctx:type_name -> common.Context
+	668,  // 1325: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
+	290,  // 1326: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
+	303,  // 1327: header.ListAvaiableDiscountsRequest.products:type_name -> header.Product
+	74,   // 1328: header.Event.CustomDataEntry.value:type_name -> header.EventField
+	503,  // 1329: header.Message.I18nBlockEntry.value:type_name -> header.Block
+	612,  // 1330: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
+	503,  // 1331: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
+	503,  // 1332: header.I18nBlock.I18nEntry.value:type_name -> header.Block
+	503,  // 1333: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
+	177,  // 1334: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
+	176,  // 1335: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
+	178,  // 1336: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
+	179,  // 1337: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
+	180,  // 1338: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
+	669,  // 1339: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
+	503,  // 1340: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
+	548,  // 1341: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
+	319,  // 1342: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
+	319,  // 1343: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
+	431,  // 1344: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
+	403,  // 1345: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
+	403,  // 1346: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
+	90,   // 1347: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
+	487,  // 1348: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
+	503,  // 1349: header.Article.I18nContentEntry.value:type_name -> header.Block
+	548,  // 1350: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
+	403,  // 1351: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
+	1352, // [1352:1352] is the sub-list for method output_type
+	1352, // [1352:1352] is the sub-list for method input_type
+	1352, // [1352:1352] is the sub-list for extension type_name
+	1352, // [1352:1352] is the sub-list for extension extendee
+	0,    // [0:1352] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }
@@ -81051,7 +80818,7 @@ func file_header_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_header_proto_rawDesc), len(file_header_proto_rawDesc)),
 			NumEnums:      33,
-			NumMessages:   637,
+			NumMessages:   635,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

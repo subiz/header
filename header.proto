@@ -719,7 +719,7 @@ message Data {
 	UserView user_view = 56;
 	LoginSession login_session = 57;
 	ProductFeed product_feed = 58;
-	ProductCollection product_collection = 59;
+	// ProductCollection product_collection = 59;
 	Order order = 60;
 	Currency currency = 61;
 	ShopSetting shop_setting = 62;
@@ -4049,29 +4049,6 @@ message CurrencyLogEntry {
 	string updated_by = 6;
 }
 
-message ProductCollections {
-	common.Context ctx = 1;
-	repeated ProductCollection product_collections = 2;
-	string anchor = 3;
-	int64 total = 4;
-}
-
-message ProductCollection {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // use
-	string name = 4;
-	string visiblity = 5; // public || unpublished
-	string code = 6;
-	repeated string item_ids = 7;  // product ids
-
-	int64 created = 11;
-	string created_by = 12;
-
-	int64 updated = 13;
-	string updated_by = 14;
-}
-
 message PriceRule {
 	string feed_id = 4;
 	float price = 5;
@@ -4463,7 +4440,7 @@ message ShippingPolicy {
 	string name = 4;
 
 	repeated string product_ids = 5;
-	repeated string product_collections = 6;
+	// repeated string product_collections = 6;
 	repeated string exclude_product_ids = 7;
 
 	string country_code = 8; // alway vn
@@ -5174,7 +5151,7 @@ message ProductsRequest {
 	string visibility = 11; // published or hidden
 	repeated string ids = 12;
 	repeated int64 last_modifieds = 14; // ms
-	repeated string product_collection_ids = 15;
+	// repeated string product_collection_ids = 15;
 
 	bool include_deleted = 17;
 
@@ -7068,6 +7045,7 @@ message Response {
 	Product product = 201;
 
 	repeated Discount discounts = 203;
+	Discount discount = 209;
 
 	repeated Bill bills = 204;
 	repeated Order orders = 205;
