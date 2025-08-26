@@ -922,7 +922,6 @@ service Proder {
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders);
 
 	rpc MoveOrderToPrimary(header.Ids) returns (Empty);
-
 }
 
 service TaskMgr {

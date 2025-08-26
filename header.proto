@@ -795,6 +795,7 @@ message Data {
 	repeated EventDestination event_destinations = 141;
 
 	SegmentSync segment_sync = 144;
+	Discount discount = 145;
 }
 
 message ConversationMeta {
@@ -4897,6 +4898,7 @@ message Discount {
 	string visibility = 10; // public, private
 	int64 disabled = 11;
 
+	string category_id = 12; // product category id
 	repeated string exclude_products = 14;
 	repeated string products = 15;
 	int64 start_at = 16; // ms
@@ -5164,6 +5166,9 @@ message ProductsRequest {
 	string variant_of = 22;
 
 	string e_tag = 23;
+
+	bool has_discount = 24;
+	string discount_id = 25; // by discount
 }
 
 message KV {
@@ -9794,7 +9799,7 @@ message VectorDoc {
 
 	string collection = 3;
 	string id = 4;
-	repeated uint32 named_entities = 5; // higher score matching
+	// repeated uint32 named_entities = 5; // higher score matching
 	repeated float vector = 6;
 	repeated VectorDocProp props = 7;
 }
