@@ -854,11 +854,12 @@ service Proder {
 	rpc CreateProductFromFile(header.ConvertProductRequest) returns (header.Response);
 	// rpc FilterProduct2(header.FilterProductRequest) returns (header.Response);
 
-	rpc ListPromotionPrograms(Id) returns (header.Response);
-	rpc CreatePromotionProgram(header.PromotionProgram) returns (header.Response);
-	rpc UpdatePromotionProgram(header.PromotionProgram) returns (header.Response);
-	rpc DeletePromotionProgram(Id) returns (Empty);
-	rpc MatchPromotionPrograms(Ids) returns (header.Response);
+	rpc ListDiscounts(Id) returns (header.Response);
+	rpc CreateDiscount(header.Discount) returns (header.Response);
+	rpc UpdateDiscount(header.Discount) returns (header.Response);
+	rpc DeleteDiscount(Id) returns (Empty);
+	rpc MatchDiscounts(Ids) returns (header.Response);
+	rpc ListAvaiableDiscounts(ListAvaiableDiscountsRequest) returns (Response);
 
 	rpc ListProductCollections(Ids) returns (header.ProductCollections);
 	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);
@@ -926,6 +927,7 @@ service Proder {
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders);
 
 	rpc MoveOrderToPrimary(header.Ids) returns (Empty);
+
 }
 
 service TaskMgr {

@@ -4908,22 +4908,37 @@ message ProductValidity {
 	string to_date = 5;
 }
 
-message PromotionProgram {
+message Discount {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
 	string name = 4;
 	string description = 5;
+	File image = 7;
+	string url = 8;
+	string for = 9; // product, order (cart)
+	string visibility = 10; // public, private
+	int64 disabled = 11;
+
+	repeated string exclude_products = 14;
 	repeated string products = 15;
-	int64 start_ms = 16;
-	int64 end_ms = 17;
-	string discount_type = 18; // percentage, fixed_amount, fixed_price
-	int64 discount_value_fpv = 19;
-	string status = 20; // active, inactive, expired, draft
+	int64 start_at = 16; // ms
+	int64 end_at = 17; // ms
+	// 500k mỗi sản phẩm -> type = product, discount_type=amount, fpv_value=500_000
+	// 50% hoặc 300k tổng giá trị đơn hàng -> type = order, discount_type =amount, fpv_value=50, max_fpv_amount = 300_000
+	string discount_type = 18; // percentage, amount
+	float value = 19;
+	float max_amount = 20;
 	int64 created = 21;
 	string created_by = 22;
 	int64 updated = 23;
 	string updated_by = 24;
+
+	string note = 25;
+	string start_at_cel = 26; // now < product.props
+	string end_at_cel = 27; // now < product.props
+	string validation_cel = 28; // now < product.props
+	/// product.props.exists(p, p.key == "ngay khoi hanh") && date.parse(product.props.filter(p, p.key == "ngay khoi hanh")[0].value, "%d-%m-%Y") - duration("4d")
 }
 
 message Product {
@@ -7052,7 +7067,7 @@ message Response {
 	repeated Product products = 202;
 	Product product = 201;
 
-	repeated PromotionProgram promotion_programs = 203;
+	repeated Discount discounts = 203;
 
 	repeated Bill bills = 204;
 	repeated Order orders = 205;
@@ -7676,8 +7691,10 @@ message AIDataEntryUsed {
 	string chunk_id = 4;
 	string data_entry_id = 5;
 	string chunk = 6; // original
-	int64 score = 7;
+	int64 score = 7; // max 10000 => 100%
 	string embed_chunk = 11;
+	bool is_vector_search = 12;
+	bool is_full_text_search = 13;
 }
 
 message AIAgentTrace {
@@ -9846,4 +9863,15 @@ message NamedEntity {
 	string updated_by = 11;
 	int64 created = 12;
 	string created_by = 13;
+}
+
+message ListAvaiableDiscountsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string user_id = 3;
+	Order order = 4;
+	repeated Product products = 5; // for cart contains those product
+	string category_id = 6;
+	string visibility = 7;
 }

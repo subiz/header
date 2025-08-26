@@ -23875,11 +23875,12 @@ const (
 	Proder_DeleteProductOffer_FullMethodName      = "/header.Proder/DeleteProductOffer"
 	Proder_ListProductOffers_FullMethodName       = "/header.Proder/ListProductOffers"
 	Proder_CreateProductFromFile_FullMethodName   = "/header.Proder/CreateProductFromFile"
-	Proder_ListPromotionPrograms_FullMethodName   = "/header.Proder/ListPromotionPrograms"
-	Proder_CreatePromotionProgram_FullMethodName  = "/header.Proder/CreatePromotionProgram"
-	Proder_UpdatePromotionProgram_FullMethodName  = "/header.Proder/UpdatePromotionProgram"
-	Proder_DeletePromotionProgram_FullMethodName  = "/header.Proder/DeletePromotionProgram"
-	Proder_MatchPromotionPrograms_FullMethodName  = "/header.Proder/MatchPromotionPrograms"
+	Proder_ListDiscounts_FullMethodName           = "/header.Proder/ListDiscounts"
+	Proder_CreateDiscount_FullMethodName          = "/header.Proder/CreateDiscount"
+	Proder_UpdateDiscount_FullMethodName          = "/header.Proder/UpdateDiscount"
+	Proder_DeleteDiscount_FullMethodName          = "/header.Proder/DeleteDiscount"
+	Proder_MatchDiscounts_FullMethodName          = "/header.Proder/MatchDiscounts"
+	Proder_ListAvaiableDiscounts_FullMethodName   = "/header.Proder/ListAvaiableDiscounts"
 	Proder_ListProductCollections_FullMethodName  = "/header.Proder/ListProductCollections"
 	Proder_CreateProductCollection_FullMethodName = "/header.Proder/CreateProductCollection"
 	Proder_UpdateProductCollection_FullMethodName = "/header.Proder/UpdateProductCollection"
@@ -23951,11 +23952,12 @@ type ProderClient interface {
 	DeleteProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProductOffers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductFromFile(ctx context.Context, in *ConvertProductRequest, opts ...grpc.CallOption) (*Response, error)
-	ListPromotionPrograms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	CreatePromotionProgram(ctx context.Context, in *PromotionProgram, opts ...grpc.CallOption) (*Response, error)
-	UpdatePromotionProgram(ctx context.Context, in *PromotionProgram, opts ...grpc.CallOption) (*Response, error)
-	DeletePromotionProgram(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	MatchPromotionPrograms(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ListDiscounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error)
+	UpdateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error)
+	DeleteDiscount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchDiscounts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ListAvaiableDiscounts(ctx context.Context, in *ListAvaiableDiscountsRequest, opts ...grpc.CallOption) (*Response, error)
 	ListProductCollections(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*ProductCollections, error)
 	CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*ProductCollection, error)
 	UpdateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*ProductCollection, error)
@@ -24147,50 +24149,60 @@ func (c *proderClient) CreateProductFromFile(ctx context.Context, in *ConvertPro
 	return out, nil
 }
 
-func (c *proderClient) ListPromotionPrograms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) ListDiscounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_ListPromotionPrograms_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_ListDiscounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *proderClient) CreatePromotionProgram(ctx context.Context, in *PromotionProgram, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) CreateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_CreatePromotionProgram_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_CreateDiscount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *proderClient) UpdatePromotionProgram(ctx context.Context, in *PromotionProgram, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) UpdateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_UpdatePromotionProgram_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_UpdateDiscount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *proderClient) DeletePromotionProgram(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *proderClient) DeleteDiscount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Proder_DeletePromotionProgram_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_DeleteDiscount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *proderClient) MatchPromotionPrograms(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) MatchDiscounts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_MatchPromotionPrograms_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_MatchDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) ListAvaiableDiscounts(ctx context.Context, in *ListAvaiableDiscountsRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_ListAvaiableDiscounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24716,11 +24728,12 @@ type ProderServer interface {
 	DeleteProductOffer(context.Context, *Id) (*Empty, error)
 	ListProductOffers(context.Context, *Id) (*Response, error)
 	CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error)
-	ListPromotionPrograms(context.Context, *Id) (*Response, error)
-	CreatePromotionProgram(context.Context, *PromotionProgram) (*Response, error)
-	UpdatePromotionProgram(context.Context, *PromotionProgram) (*Response, error)
-	DeletePromotionProgram(context.Context, *Id) (*Empty, error)
-	MatchPromotionPrograms(context.Context, *Ids) (*Response, error)
+	ListDiscounts(context.Context, *Id) (*Response, error)
+	CreateDiscount(context.Context, *Discount) (*Response, error)
+	UpdateDiscount(context.Context, *Discount) (*Response, error)
+	DeleteDiscount(context.Context, *Id) (*Empty, error)
+	MatchDiscounts(context.Context, *Ids) (*Response, error)
+	ListAvaiableDiscounts(context.Context, *ListAvaiableDiscountsRequest) (*Response, error)
 	ListProductCollections(context.Context, *Ids) (*ProductCollections, error)
 	CreateProductCollection(context.Context, *ProductCollection) (*ProductCollection, error)
 	UpdateProductCollection(context.Context, *ProductCollection) (*ProductCollection, error)
@@ -24821,20 +24834,23 @@ func (UnimplementedProderServer) ListProductOffers(context.Context, *Id) (*Respo
 func (UnimplementedProderServer) CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProductFromFile not implemented")
 }
-func (UnimplementedProderServer) ListPromotionPrograms(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPromotionPrograms not implemented")
+func (UnimplementedProderServer) ListDiscounts(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDiscounts not implemented")
 }
-func (UnimplementedProderServer) CreatePromotionProgram(context.Context, *PromotionProgram) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePromotionProgram not implemented")
+func (UnimplementedProderServer) CreateDiscount(context.Context, *Discount) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDiscount not implemented")
 }
-func (UnimplementedProderServer) UpdatePromotionProgram(context.Context, *PromotionProgram) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePromotionProgram not implemented")
+func (UnimplementedProderServer) UpdateDiscount(context.Context, *Discount) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDiscount not implemented")
 }
-func (UnimplementedProderServer) DeletePromotionProgram(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePromotionProgram not implemented")
+func (UnimplementedProderServer) DeleteDiscount(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDiscount not implemented")
 }
-func (UnimplementedProderServer) MatchPromotionPrograms(context.Context, *Ids) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MatchPromotionPrograms not implemented")
+func (UnimplementedProderServer) MatchDiscounts(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchDiscounts not implemented")
+}
+func (UnimplementedProderServer) ListAvaiableDiscounts(context.Context, *ListAvaiableDiscountsRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAvaiableDiscounts not implemented")
 }
 func (UnimplementedProderServer) ListProductCollections(context.Context, *Ids) (*ProductCollections, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCollections not implemented")
@@ -25241,92 +25257,110 @@ func _Proder_CreateProductFromFile_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_ListPromotionPrograms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_ListDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).ListPromotionPrograms(ctx, in)
+		return srv.(ProderServer).ListDiscounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_ListPromotionPrograms_FullMethodName,
+		FullMethod: Proder_ListDiscounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).ListPromotionPrograms(ctx, req.(*Id))
+		return srv.(ProderServer).ListDiscounts(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_CreatePromotionProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PromotionProgram)
+func _Proder_CreateDiscount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Discount)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).CreatePromotionProgram(ctx, in)
+		return srv.(ProderServer).CreateDiscount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_CreatePromotionProgram_FullMethodName,
+		FullMethod: Proder_CreateDiscount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).CreatePromotionProgram(ctx, req.(*PromotionProgram))
+		return srv.(ProderServer).CreateDiscount(ctx, req.(*Discount))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_UpdatePromotionProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PromotionProgram)
+func _Proder_UpdateDiscount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Discount)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).UpdatePromotionProgram(ctx, in)
+		return srv.(ProderServer).UpdateDiscount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_UpdatePromotionProgram_FullMethodName,
+		FullMethod: Proder_UpdateDiscount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).UpdatePromotionProgram(ctx, req.(*PromotionProgram))
+		return srv.(ProderServer).UpdateDiscount(ctx, req.(*Discount))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_DeletePromotionProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_DeleteDiscount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).DeletePromotionProgram(ctx, in)
+		return srv.(ProderServer).DeleteDiscount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_DeletePromotionProgram_FullMethodName,
+		FullMethod: Proder_DeleteDiscount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).DeletePromotionProgram(ctx, req.(*Id))
+		return srv.(ProderServer).DeleteDiscount(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_MatchPromotionPrograms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_MatchDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ids)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).MatchPromotionPrograms(ctx, in)
+		return srv.(ProderServer).MatchDiscounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_MatchPromotionPrograms_FullMethodName,
+		FullMethod: Proder_MatchDiscounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).MatchPromotionPrograms(ctx, req.(*Ids))
+		return srv.(ProderServer).MatchDiscounts(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_ListAvaiableDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAvaiableDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListAvaiableDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListAvaiableDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListAvaiableDiscounts(ctx, req.(*ListAvaiableDiscountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26291,24 +26325,28 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Proder_CreateProductFromFile_Handler,
 		},
 		{
-			MethodName: "ListPromotionPrograms",
-			Handler:    _Proder_ListPromotionPrograms_Handler,
+			MethodName: "ListDiscounts",
+			Handler:    _Proder_ListDiscounts_Handler,
 		},
 		{
-			MethodName: "CreatePromotionProgram",
-			Handler:    _Proder_CreatePromotionProgram_Handler,
+			MethodName: "CreateDiscount",
+			Handler:    _Proder_CreateDiscount_Handler,
 		},
 		{
-			MethodName: "UpdatePromotionProgram",
-			Handler:    _Proder_UpdatePromotionProgram_Handler,
+			MethodName: "UpdateDiscount",
+			Handler:    _Proder_UpdateDiscount_Handler,
 		},
 		{
-			MethodName: "DeletePromotionProgram",
-			Handler:    _Proder_DeletePromotionProgram_Handler,
+			MethodName: "DeleteDiscount",
+			Handler:    _Proder_DeleteDiscount_Handler,
 		},
 		{
-			MethodName: "MatchPromotionPrograms",
-			Handler:    _Proder_MatchPromotionPrograms_Handler,
+			MethodName: "MatchDiscounts",
+			Handler:    _Proder_MatchDiscounts_Handler,
+		},
+		{
+			MethodName: "ListAvaiableDiscounts",
+			Handler:    _Proder_ListAvaiableDiscounts_Handler,
 		},
 		{
 			MethodName: "ListProductCollections",
