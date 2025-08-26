@@ -9669,7 +9669,6 @@ const (
 	WorkflowMgr_RetrainAIDataEntry_FullMethodName     = "/header.WorkflowMgr/RetrainAIDataEntry"
 	WorkflowMgr_DeleteAIDataEntry_FullMethodName      = "/header.WorkflowMgr/DeleteAIDataEntry"
 	WorkflowMgr_MatchDataEntries_FullMethodName       = "/header.WorkflowMgr/MatchDataEntries"
-	WorkflowMgr_ListAIResponseSources_FullMethodName  = "/header.WorkflowMgr/ListAIResponseSources"
 	WorkflowMgr_ListAIAgentSpans_FullMethodName       = "/header.WorkflowMgr/ListAIAgentSpans"
 	WorkflowMgr_ListAIAgentTraces_FullMethodName      = "/header.WorkflowMgr/ListAIAgentTraces"
 	WorkflowMgr_ReportAIAgent_FullMethodName          = "/header.WorkflowMgr/ReportAIAgent"
@@ -9727,7 +9726,6 @@ type WorkflowMgrClient interface {
 	RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	ListAIResponseSources(ctx context.Context, in *AiResponseSourceRequest, opts ...grpc.CallOption) (*Response, error)
 	ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error)
 	ListAIAgentTraces(ctx context.Context, in *LLMTracesRequest, opts ...grpc.CallOption) (*Response, error)
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
@@ -10140,16 +10138,6 @@ func (c *workflowMgrClient) MatchDataEntries(ctx context.Context, in *Ids, opts 
 	return out, nil
 }
 
-func (c *workflowMgrClient) ListAIResponseSources(ctx context.Context, in *AiResponseSourceRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIResponseSources_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *workflowMgrClient) ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -10313,7 +10301,6 @@ type WorkflowMgrServer interface {
 	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
 	DeleteAIDataEntry(context.Context, *Id) (*Empty, error)
 	MatchDataEntries(context.Context, *Ids) (*Response, error)
-	ListAIResponseSources(context.Context, *AiResponseSourceRequest) (*Response, error)
 	ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error)
 	ListAIAgentTraces(context.Context, *LLMTracesRequest) (*Response, error)
 	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
@@ -10452,9 +10439,6 @@ func (UnimplementedWorkflowMgrServer) DeleteAIDataEntry(context.Context, *Id) (*
 }
 func (UnimplementedWorkflowMgrServer) MatchDataEntries(context.Context, *Ids) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchDataEntries not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIResponseSources(context.Context, *AiResponseSourceRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAIResponseSources not implemented")
 }
 func (UnimplementedWorkflowMgrServer) ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAIAgentSpans not implemented")
@@ -11215,24 +11199,6 @@ func _WorkflowMgr_MatchDataEntries_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkflowMgr_ListAIResponseSources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AiResponseSourceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIResponseSources(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIResponseSources_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIResponseSources(ctx, req.(*AiResponseSourceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _WorkflowMgr_ListAIAgentSpans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LLMSpansRequest)
 	if err := dec(in); err != nil {
@@ -11611,10 +11577,6 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchDataEntries",
 			Handler:    _WorkflowMgr_MatchDataEntries_Handler,
-		},
-		{
-			MethodName: "ListAIResponseSources",
-			Handler:    _WorkflowMgr_ListAIResponseSources_Handler,
 		},
 		{
 			MethodName: "ListAIAgentSpans",

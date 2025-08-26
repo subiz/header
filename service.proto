@@ -380,7 +380,7 @@ service WorkflowMgr {
 	rpc DeleteAIDataEntry(Id) returns (Empty);
 	rpc MatchDataEntries(Ids) returns (Response);
 
-	rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
+	// rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
 
 	rpc ListAIAgentSpans(LLMSpansRequest) returns (Response);
 	rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
