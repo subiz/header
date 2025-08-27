@@ -856,6 +856,7 @@ service Proder {
 
 	rpc ListDiscounts(Id) returns (header.Response);
 	rpc CreateDiscount(header.Discount) returns (header.Response);
+	rpc GetDiscount(header.Id) returns (header.Response);
 	rpc UpdateDiscount(header.Discount) returns (header.Response);
 	rpc DeleteDiscount(Id) returns (Empty);
 	rpc MatchDiscounts(Ids) returns (header.Response);

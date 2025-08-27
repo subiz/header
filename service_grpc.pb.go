@@ -23877,6 +23877,7 @@ const (
 	Proder_CreateProductFromFile_FullMethodName     = "/header.Proder/CreateProductFromFile"
 	Proder_ListDiscounts_FullMethodName             = "/header.Proder/ListDiscounts"
 	Proder_CreateDiscount_FullMethodName            = "/header.Proder/CreateDiscount"
+	Proder_GetDiscount_FullMethodName               = "/header.Proder/GetDiscount"
 	Proder_UpdateDiscount_FullMethodName            = "/header.Proder/UpdateDiscount"
 	Proder_DeleteDiscount_FullMethodName            = "/header.Proder/DeleteDiscount"
 	Proder_MatchDiscounts_FullMethodName            = "/header.Proder/MatchDiscounts"
@@ -23951,6 +23952,7 @@ type ProderClient interface {
 	CreateProductFromFile(ctx context.Context, in *ConvertProductRequest, opts ...grpc.CallOption) (*Response, error)
 	ListDiscounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error)
+	GetDiscount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error)
 	DeleteDiscount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchDiscounts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
@@ -24157,6 +24159,16 @@ func (c *proderClient) CreateDiscount(ctx context.Context, in *Discount, opts ..
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_CreateDiscount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) GetDiscount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_GetDiscount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24694,6 +24706,7 @@ type ProderServer interface {
 	CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error)
 	ListDiscounts(context.Context, *Id) (*Response, error)
 	CreateDiscount(context.Context, *Discount) (*Response, error)
+	GetDiscount(context.Context, *Id) (*Response, error)
 	UpdateDiscount(context.Context, *Discount) (*Response, error)
 	DeleteDiscount(context.Context, *Id) (*Empty, error)
 	MatchDiscounts(context.Context, *Ids) (*Response, error)
@@ -24800,6 +24813,9 @@ func (UnimplementedProderServer) ListDiscounts(context.Context, *Id) (*Response,
 }
 func (UnimplementedProderServer) CreateDiscount(context.Context, *Discount) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDiscount not implemented")
+}
+func (UnimplementedProderServer) GetDiscount(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDiscount not implemented")
 }
 func (UnimplementedProderServer) UpdateDiscount(context.Context, *Discount) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDiscount not implemented")
@@ -25241,6 +25257,24 @@ func _Proder_CreateDiscount_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).CreateDiscount(ctx, req.(*Discount))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_GetDiscount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).GetDiscount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_GetDiscount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).GetDiscount(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26229,6 +26263,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateDiscount",
 			Handler:    _Proder_CreateDiscount_Handler,
+		},
+		{
+			MethodName: "GetDiscount",
+			Handler:    _Proder_GetDiscount_Handler,
 		},
 		{
 			MethodName: "UpdateDiscount",
