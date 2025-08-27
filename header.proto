@@ -1916,6 +1916,10 @@ message Integration {
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
 	string meta_scope = 123;
+
+	string pos_id = 124;
+	int64 pos_id_updated = 125;
+	string pos_id_updated_by = 126;
 }
 
 message WorkflowSessionId {
@@ -4900,8 +4904,8 @@ message Discount {
 	string for = 9; // product, order (cart)
 	string visibility = 10; // public, private
 	int64 disabled = 11;
-
 	string category_id = 12; // apply for product category id
+	string pos_id = 13; // only available for those pos
 	repeated string exclude_products = 14;
 	repeated string products = 15;
 	int64 start_at = 16; // ms
@@ -4909,6 +4913,7 @@ message Discount {
 	string discount_type = 18; // percentage, amount
 	float value = 19;
 	float max_amount = 20;
+
 	int64 created = 21;
 	string created_by = 22;
 	int64 updated = 23;
@@ -5097,17 +5102,11 @@ message ShopeeProductFeed {
 	string access_token = 4;
 }
 
-message ProductFeeds {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated ProductFeed product_feeds = 4;
-}
-
 message ProductFeed {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string type = 4; // google sheet, shopee, website json ld, api
+	string type = 4; // google_sheet, shopee, json ld, api
 
 	// google sheet
 	ShopeeProductFeed shopee = 5;
@@ -5128,6 +5127,7 @@ message ProductFeed {
 	int64 last_sucess_fetched = 30;
 
 	int64 disabled = 31;
+	int64 modified = 32;
 }
 
 message ProductsRequest {
@@ -7074,6 +7074,9 @@ message Response {
 
 	repeated NamedEntity named_entities = 229;
 	NamedEntity named_entity = 230;
+
+	repeated ProductFeed product_feeds = 233;
+	ProductFeed product_feed = 234;
 }
 
 message ReportCount {
@@ -9857,4 +9860,12 @@ message ListAvaiableDiscountsRequest {
 	repeated string product_ids = 5; // for cart contains those products
 	string category_id = 6;
 	string visibility = 7;
+}
+
+message ListDiscountRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string pos_id = 3;
+	string query = 4;
 }

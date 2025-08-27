@@ -854,19 +854,20 @@ service Proder {
 	rpc CreateProductFromFile(header.ConvertProductRequest) returns (header.Response);
 	// rpc FilterProduct2(header.FilterProductRequest) returns (header.Response);
 
-	rpc ListDiscounts(Id) returns (header.Response);
-	rpc CreateDiscount(header.Discount) returns (header.Response);
-	rpc GetDiscount(header.Id) returns (header.Response);
-	rpc UpdateDiscount(header.Discount) returns (header.Response);
+	rpc ListDiscounts(ListDiscountRequest) returns (Response);
+	rpc CreateDiscount(Discount) returns (Response);
+	rpc GetDiscount(header.Id) returns (Response);
+	rpc UpdateDiscount(header.Discount) returns (Response);
 	rpc DeleteDiscount(Id) returns (Empty);
 	rpc MatchDiscounts(Ids) returns (header.Response);
 	rpc ListAvaiableDiscounts(ListAvaiableDiscountsRequest) returns (Response);
 	rpc ListAllProductDiscountIds(header.Id) returns (header.Ids);
 
-	rpc ListProductFeeds(Id) returns (header.ProductFeeds);
-	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);
-	rpc UpdateProductFeed(header.ProductFeed) returns (header.ProductFeed);
+	rpc ListProductFeeds(Id) returns (header.Response);
+	rpc CreateProductFeed(header.ProductFeed) returns (header.Response);
+	rpc UpdateProductFeed(header.ProductFeed) returns (header.Response);
 	rpc DeleteProductFeed(Id) returns (Empty);
+	rpc MatchProductFeeds(Ids) returns (Response);
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);
 

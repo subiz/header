@@ -23887,6 +23887,7 @@ const (
 	Proder_CreateProductFeed_FullMethodName         = "/header.Proder/CreateProductFeed"
 	Proder_UpdateProductFeed_FullMethodName         = "/header.Proder/UpdateProductFeed"
 	Proder_DeleteProductFeed_FullMethodName         = "/header.Proder/DeleteProductFeed"
+	Proder_MatchProductFeeds_FullMethodName         = "/header.Proder/MatchProductFeeds"
 	Proder_ListProductCategories_FullMethodName     = "/header.Proder/ListProductCategories"
 	Proder_ReadOrder_FullMethodName                 = "/header.Proder/ReadOrder"
 	Proder_CreateOrder_FullMethodName               = "/header.Proder/CreateOrder"
@@ -23950,7 +23951,7 @@ type ProderClient interface {
 	DeleteProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProductOffers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductFromFile(ctx context.Context, in *ConvertProductRequest, opts ...grpc.CallOption) (*Response, error)
-	ListDiscounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListDiscounts(ctx context.Context, in *ListDiscountRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error)
 	GetDiscount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateDiscount(ctx context.Context, in *Discount, opts ...grpc.CallOption) (*Response, error)
@@ -23958,10 +23959,11 @@ type ProderClient interface {
 	MatchDiscounts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ListAvaiableDiscounts(ctx context.Context, in *ListAvaiableDiscountsRequest, opts ...grpc.CallOption) (*Response, error)
 	ListAllProductDiscountIds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Ids, error)
-	ListProductFeeds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ProductFeeds, error)
-	CreateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*ProductFeed, error)
-	UpdateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*ProductFeed, error)
+	ListProductFeeds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
+	UpdateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	DeleteProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchProductFeeds(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ListProductCategories(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*ProductCategories, error)
 	ReadOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	CreateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
@@ -24145,7 +24147,7 @@ func (c *proderClient) CreateProductFromFile(ctx context.Context, in *ConvertPro
 	return out, nil
 }
 
-func (c *proderClient) ListDiscounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) ListDiscounts(ctx context.Context, in *ListDiscountRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_ListDiscounts_FullMethodName, in, out, cOpts...)
@@ -24225,9 +24227,9 @@ func (c *proderClient) ListAllProductDiscountIds(ctx context.Context, in *Id, op
 	return out, nil
 }
 
-func (c *proderClient) ListProductFeeds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ProductFeeds, error) {
+func (c *proderClient) ListProductFeeds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ProductFeeds)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_ListProductFeeds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -24235,9 +24237,9 @@ func (c *proderClient) ListProductFeeds(ctx context.Context, in *Id, opts ...grp
 	return out, nil
 }
 
-func (c *proderClient) CreateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*ProductFeed, error) {
+func (c *proderClient) CreateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ProductFeed)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_CreateProductFeed_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -24245,9 +24247,9 @@ func (c *proderClient) CreateProductFeed(ctx context.Context, in *ProductFeed, o
 	return out, nil
 }
 
-func (c *proderClient) UpdateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*ProductFeed, error) {
+func (c *proderClient) UpdateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ProductFeed)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_UpdateProductFeed_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -24259,6 +24261,16 @@ func (c *proderClient) DeleteProductFeed(ctx context.Context, in *Id, opts ...gr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, Proder_DeleteProductFeed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) MatchProductFeeds(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_MatchProductFeeds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24704,7 +24716,7 @@ type ProderServer interface {
 	DeleteProductOffer(context.Context, *Id) (*Empty, error)
 	ListProductOffers(context.Context, *Id) (*Response, error)
 	CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error)
-	ListDiscounts(context.Context, *Id) (*Response, error)
+	ListDiscounts(context.Context, *ListDiscountRequest) (*Response, error)
 	CreateDiscount(context.Context, *Discount) (*Response, error)
 	GetDiscount(context.Context, *Id) (*Response, error)
 	UpdateDiscount(context.Context, *Discount) (*Response, error)
@@ -24712,10 +24724,11 @@ type ProderServer interface {
 	MatchDiscounts(context.Context, *Ids) (*Response, error)
 	ListAvaiableDiscounts(context.Context, *ListAvaiableDiscountsRequest) (*Response, error)
 	ListAllProductDiscountIds(context.Context, *Id) (*Ids, error)
-	ListProductFeeds(context.Context, *Id) (*ProductFeeds, error)
-	CreateProductFeed(context.Context, *ProductFeed) (*ProductFeed, error)
-	UpdateProductFeed(context.Context, *ProductFeed) (*ProductFeed, error)
+	ListProductFeeds(context.Context, *Id) (*Response, error)
+	CreateProductFeed(context.Context, *ProductFeed) (*Response, error)
+	UpdateProductFeed(context.Context, *ProductFeed) (*Response, error)
 	DeleteProductFeed(context.Context, *Id) (*Empty, error)
+	MatchProductFeeds(context.Context, *Ids) (*Response, error)
 	ListProductCategories(context.Context, *Ids) (*ProductCategories, error)
 	ReadOrder(context.Context, *Id) (*Order, error)
 	CreateOrder(context.Context, *Order) (*Order, error)
@@ -24808,7 +24821,7 @@ func (UnimplementedProderServer) ListProductOffers(context.Context, *Id) (*Respo
 func (UnimplementedProderServer) CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProductFromFile not implemented")
 }
-func (UnimplementedProderServer) ListDiscounts(context.Context, *Id) (*Response, error) {
+func (UnimplementedProderServer) ListDiscounts(context.Context, *ListDiscountRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDiscounts not implemented")
 }
 func (UnimplementedProderServer) CreateDiscount(context.Context, *Discount) (*Response, error) {
@@ -24832,17 +24845,20 @@ func (UnimplementedProderServer) ListAvaiableDiscounts(context.Context, *ListAva
 func (UnimplementedProderServer) ListAllProductDiscountIds(context.Context, *Id) (*Ids, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAllProductDiscountIds not implemented")
 }
-func (UnimplementedProderServer) ListProductFeeds(context.Context, *Id) (*ProductFeeds, error) {
+func (UnimplementedProderServer) ListProductFeeds(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductFeeds not implemented")
 }
-func (UnimplementedProderServer) CreateProductFeed(context.Context, *ProductFeed) (*ProductFeed, error) {
+func (UnimplementedProderServer) CreateProductFeed(context.Context, *ProductFeed) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProductFeed not implemented")
 }
-func (UnimplementedProderServer) UpdateProductFeed(context.Context, *ProductFeed) (*ProductFeed, error) {
+func (UnimplementedProderServer) UpdateProductFeed(context.Context, *ProductFeed) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductFeed not implemented")
 }
 func (UnimplementedProderServer) DeleteProductFeed(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductFeed not implemented")
+}
+func (UnimplementedProderServer) MatchProductFeeds(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchProductFeeds not implemented")
 }
 func (UnimplementedProderServer) ListProductCategories(context.Context, *Ids) (*ProductCategories, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCategories not implemented")
@@ -25226,7 +25242,7 @@ func _Proder_CreateProductFromFile_Handler(srv interface{}, ctx context.Context,
 }
 
 func _Proder_ListDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(ListDiscountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -25238,7 +25254,7 @@ func _Proder_ListDiscounts_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: Proder_ListDiscounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).ListDiscounts(ctx, req.(*Id))
+		return srv.(ProderServer).ListDiscounts(ctx, req.(*ListDiscountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -25437,6 +25453,24 @@ func _Proder_DeleteProductFeed_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).DeleteProductFeed(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_MatchProductFeeds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).MatchProductFeeds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_MatchProductFeeds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).MatchProductFeeds(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26303,6 +26337,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteProductFeed",
 			Handler:    _Proder_DeleteProductFeed_Handler,
+		},
+		{
+			MethodName: "MatchProductFeeds",
+			Handler:    _Proder_MatchProductFeeds_Handler,
 		},
 		{
 			MethodName: "ListProductCategories",
