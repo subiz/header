@@ -860,6 +860,7 @@ service Proder {
 	rpc DeleteDiscount(Id) returns (Empty);
 	rpc MatchDiscounts(Ids) returns (header.Response);
 	rpc ListAvaiableDiscounts(ListAvaiableDiscountsRequest) returns (Response);
+	rpc ListAllProductDiscountIds(header.Id) returns (header.Ids);
 
 	rpc ListProductFeeds(Id) returns (header.ProductFeeds);
 	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);

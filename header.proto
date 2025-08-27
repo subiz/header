@@ -24,6 +24,7 @@ message Id {
 	string profile_id = 7;
 	bool is_gen_qr = 8;
 	string version = 9;
+	string e_tag = 10;
 }
 
 message Ids {
@@ -4886,6 +4887,8 @@ message ProductValidity {
 	string to_date = 5;
 }
 
+// "500k tất cả sản phẩm" -> for=product, discount_type=amount, fpv_value=500_000
+// "50% tổng giá trị đơn hàng (ko quá 300k) -> for=order, discount_type=percentage, fpv_value=50, max_fpv_amount=300_000
 message Discount {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -4898,13 +4901,11 @@ message Discount {
 	string visibility = 10; // public, private
 	int64 disabled = 11;
 
-	string category_id = 12; // product category id
+	string category_id = 12; // apply for product category id
 	repeated string exclude_products = 14;
 	repeated string products = 15;
 	int64 start_at = 16; // ms
 	int64 end_at = 17; // ms
-	// 500k mỗi sản phẩm -> type = product, discount_type=amount, fpv_value=500_000
-	// 50% hoặc 300k tổng giá trị đơn hàng -> type = order, discount_type =amount, fpv_value=50, max_fpv_amount = 300_000
 	string discount_type = 18; // percentage, amount
 	float value = 19;
 	float max_amount = 20;
@@ -4914,10 +4915,7 @@ message Discount {
 	string updated_by = 24;
 
 	string note = 25;
-	// string start_at_cel = 26; // now < product.props
-	// string end_at_cel = 27; // now < product.props
 	string eligible_cel = 28; // now < product.props
-	/// product.props.exists(p, p.key == "ngay khoi hanh") && date.parse(product.props.filter(p, p.key == "ngay khoi hanh")[0].value, "%d-%m-%Y") - duration("4d")
 }
 
 message Product {
@@ -9336,7 +9334,7 @@ message AIDataEntry {
 	string id = 3;
 	string group_id = 4;
 
-	string type = 5; // qa, file, website, product, text (for testing), instruction
+	string type = 5; // qa, file, website, product, text (for testing), instruction, discount
 	Message answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
@@ -9344,6 +9342,7 @@ message AIDataEntry {
 
 	File file = 10;
 	Product product = 18;
+	Discount discount = 55;
 
 	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
