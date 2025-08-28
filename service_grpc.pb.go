@@ -20896,10 +20896,6 @@ const (
 	WidgetService_SearchImages_FullMethodName             = "/header.WidgetService/SearchImages"
 	WidgetService_ListNotifProfiles_FullMethodName        = "/header.WidgetService/ListNotifProfiles"
 	WidgetService_ListNotifBackgrounds_FullMethodName     = "/header.WidgetService/ListNotifBackgrounds"
-	WidgetService_ListSites_FullMethodName                = "/header.WidgetService/ListSites"
-	WidgetService_DeleteSite_FullMethodName               = "/header.WidgetService/DeleteSite"
-	WidgetService_CreateSite_FullMethodName               = "/header.WidgetService/CreateSite"
-	WidgetService_VerifySite_FullMethodName               = "/header.WidgetService/VerifySite"
 )
 
 // WidgetServiceClient is the client API for WidgetService service.
@@ -20934,10 +20930,6 @@ type WidgetServiceClient interface {
 	SearchImages(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UploadedImages, error)
 	ListNotifProfiles(ctx context.Context, in *Id, opts ...grpc.CallOption) (*NotifProfiles, error)
 	ListNotifBackgrounds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Urls, error)
-	ListSites(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	DeleteSite(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	CreateSite(ctx context.Context, in *Site, opts ...grpc.CallOption) (*Response, error)
-	VerifySite(ctx context.Context, in *Site, opts ...grpc.CallOption) (*Response, error)
 }
 
 type widgetServiceClient struct {
@@ -21208,46 +21200,6 @@ func (c *widgetServiceClient) ListNotifBackgrounds(ctx context.Context, in *Id, 
 	return out, nil
 }
 
-func (c *widgetServiceClient) ListSites(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WidgetService_ListSites_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *widgetServiceClient) DeleteSite(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WidgetService_DeleteSite_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *widgetServiceClient) CreateSite(ctx context.Context, in *Site, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WidgetService_CreateSite_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *widgetServiceClient) VerifySite(ctx context.Context, in *Site, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WidgetService_VerifySite_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // WidgetServiceServer is the server API for WidgetService service.
 // All implementations must embed UnimplementedWidgetServiceServer
 // for forward compatibility.
@@ -21280,10 +21232,6 @@ type WidgetServiceServer interface {
 	SearchImages(context.Context, *Id) (*UploadedImages, error)
 	ListNotifProfiles(context.Context, *Id) (*NotifProfiles, error)
 	ListNotifBackgrounds(context.Context, *Id) (*Urls, error)
-	ListSites(context.Context, *Id) (*Response, error)
-	DeleteSite(context.Context, *Id) (*Empty, error)
-	CreateSite(context.Context, *Site) (*Response, error)
-	VerifySite(context.Context, *Site) (*Response, error)
 	mustEmbedUnimplementedWidgetServiceServer()
 }
 
@@ -21371,18 +21319,6 @@ func (UnimplementedWidgetServiceServer) ListNotifProfiles(context.Context, *Id) 
 }
 func (UnimplementedWidgetServiceServer) ListNotifBackgrounds(context.Context, *Id) (*Urls, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListNotifBackgrounds not implemented")
-}
-func (UnimplementedWidgetServiceServer) ListSites(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSites not implemented")
-}
-func (UnimplementedWidgetServiceServer) DeleteSite(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteSite not implemented")
-}
-func (UnimplementedWidgetServiceServer) CreateSite(context.Context, *Site) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateSite not implemented")
-}
-func (UnimplementedWidgetServiceServer) VerifySite(context.Context, *Site) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method VerifySite not implemented")
 }
 func (UnimplementedWidgetServiceServer) mustEmbedUnimplementedWidgetServiceServer() {}
 func (UnimplementedWidgetServiceServer) testEmbeddedByValue()                       {}
@@ -21873,78 +21809,6 @@ func _WidgetService_ListNotifBackgrounds_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WidgetService_ListSites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).ListSites(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_ListSites_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).ListSites(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WidgetService_DeleteSite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).DeleteSite(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_DeleteSite_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).DeleteSite(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WidgetService_CreateSite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Site)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).CreateSite(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_CreateSite_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).CreateSite(ctx, req.(*Site))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WidgetService_VerifySite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Site)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).VerifySite(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_VerifySite_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).VerifySite(ctx, req.(*Site))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // WidgetService_ServiceDesc is the grpc.ServiceDesc for WidgetService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -22055,22 +21919,6 @@ var WidgetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListNotifBackgrounds",
 			Handler:    _WidgetService_ListNotifBackgrounds_Handler,
-		},
-		{
-			MethodName: "ListSites",
-			Handler:    _WidgetService_ListSites_Handler,
-		},
-		{
-			MethodName: "DeleteSite",
-			Handler:    _WidgetService_DeleteSite_Handler,
-		},
-		{
-			MethodName: "CreateSite",
-			Handler:    _WidgetService_CreateSite_Handler,
-		},
-		{
-			MethodName: "VerifySite",
-			Handler:    _WidgetService_VerifySite_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
