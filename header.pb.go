@@ -13651,7 +13651,7 @@ type Integration struct {
 	ConnectorId    string                 `protobuf:"bytes,3,opt,name=connector_id,json=connectorId,proto3" json:"connector_id,omitempty"`
 	LogoUrl        string                 `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"` // emoji for phone
 	Name           string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	ConnectorType  string                 `protobuf:"bytes,12,opt,name=connector_type,json=connectorType,proto3" json:"connector_type,omitempty"` // see facebook, call
+	ConnectorType  string                 `protobuf:"bytes,12,opt,name=connector_type,json=connectorType,proto3" json:"connector_type,omitempty"` // see facebook, call, website
 	Integrated     int64                  `protobuf:"varint,6,opt,name=integrated,proto3" json:"integrated,omitempty"`                            // first integrated
 	LastIntegrated int64                  `protobuf:"varint,7,opt,name=last_integrated,json=lastIntegrated,proto3" json:"last_integrated,omitempty"`
 	State          string                 `protobuf:"bytes,8,opt,name=state,proto3" json:"state,omitempty"` // more like status
@@ -13738,8 +13738,17 @@ type Integration struct {
 	PosId                     string                 `protobuf:"bytes,124,opt,name=pos_id,json=posId,proto3" json:"pos_id,omitempty"`
 	PosIdUpdated              int64                  `protobuf:"varint,125,opt,name=pos_id_updated,json=posIdUpdated,proto3" json:"pos_id_updated,omitempty"`
 	PosIdUpdatedBy            string                 `protobuf:"bytes,126,opt,name=pos_id_updated_by,json=posIdUpdatedBy,proto3" json:"pos_id_updated_by,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// website
+	WebsiteAgentAccepted            bool   `protobuf:"varint,135,opt,name=website_agent_accepted,json=websiteAgentAccepted,proto3" json:"website_agent_accepted,omitempty"`
+	WebsiteLastVisited              bool   `protobuf:"varint,136,opt,name=website_last_visited,json=websiteLastVisited,proto3" json:"website_last_visited,omitempty"`
+	WebsiteFirstVisited             bool   `protobuf:"varint,137,opt,name=website_first_visited,json=websiteFirstVisited,proto3" json:"website_first_visited,omitempty"`
+	WebsiteConfirmed                bool   `protobuf:"varint,138,opt,name=website_confirmed,json=websiteConfirmed,proto3" json:"website_confirmed,omitempty"`  // by system or dns
+	WebsiteImageHash                string `protobuf:"bytes,139,opt,name=website_image_hash,json=websiteImageHash,proto3" json:"website_image_hash,omitempty"` // MD5 sum of image (internal)
+	WebsiteDnsVerificationAttempted int64  `protobuf:"varint,140,opt,name=website_dns_verification_attempted,json=websiteDnsVerificationAttempted,proto3" json:"website_dns_verification_attempted,omitempty"`
+	WebsiteLastCrawled              int64  `protobuf:"varint,141,opt,name=website_last_crawled,json=websiteLastCrawled,proto3" json:"website_last_crawled,omitempty"`
+	WebsiteStatus                   string `protobuf:"bytes,142,opt,name=website_status,json=websiteStatus,proto3" json:"website_status,omitempty"` // confirmed
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *Integration) Reset() {
@@ -14370,6 +14379,62 @@ func (x *Integration) GetPosIdUpdated() int64 {
 func (x *Integration) GetPosIdUpdatedBy() string {
 	if x != nil {
 		return x.PosIdUpdatedBy
+	}
+	return ""
+}
+
+func (x *Integration) GetWebsiteAgentAccepted() bool {
+	if x != nil {
+		return x.WebsiteAgentAccepted
+	}
+	return false
+}
+
+func (x *Integration) GetWebsiteLastVisited() bool {
+	if x != nil {
+		return x.WebsiteLastVisited
+	}
+	return false
+}
+
+func (x *Integration) GetWebsiteFirstVisited() bool {
+	if x != nil {
+		return x.WebsiteFirstVisited
+	}
+	return false
+}
+
+func (x *Integration) GetWebsiteConfirmed() bool {
+	if x != nil {
+		return x.WebsiteConfirmed
+	}
+	return false
+}
+
+func (x *Integration) GetWebsiteImageHash() string {
+	if x != nil {
+		return x.WebsiteImageHash
+	}
+	return ""
+}
+
+func (x *Integration) GetWebsiteDnsVerificationAttempted() int64 {
+	if x != nil {
+		return x.WebsiteDnsVerificationAttempted
+	}
+	return 0
+}
+
+func (x *Integration) GetWebsiteLastCrawled() int64 {
+	if x != nil {
+		return x.WebsiteLastCrawled
+	}
+	return 0
+}
+
+func (x *Integration) GetWebsiteStatus() string {
+	if x != nil {
+		return x.WebsiteStatus
 	}
 	return ""
 }
@@ -34584,7 +34649,7 @@ type Discount struct {
 	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id              string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name            string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Description     string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"` // more benefits
 	Image           *File                  `protobuf:"bytes,7,opt,name=image,proto3" json:"image,omitempty"`
 	Url             string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
 	For             string                 `protobuf:"bytes,9,opt,name=for,proto3" json:"for,omitempty"`                // product, order (cart)
@@ -34596,7 +34661,7 @@ type Discount struct {
 	Products        []string               `protobuf:"bytes,15,rep,name=products,proto3" json:"products,omitempty"`
 	StartAt         int64                  `protobuf:"varint,16,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`               // ms
 	EndAt           int64                  `protobuf:"varint,17,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`                     // ms
-	DiscountType    string                 `protobuf:"bytes,18,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"` // percentage, amount
+	DiscountType    string                 `protobuf:"bytes,18,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"` // percentage, amount, description
 	Value           float32                `protobuf:"fixed32,19,opt,name=value,proto3" json:"value,omitempty"`
 	MaxAmount       float32                `protobuf:"fixed32,20,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	Created         int64                  `protobuf:"varint,21,opt,name=created,proto3" json:"created,omitempty"`
@@ -71995,7 +72060,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\xb2\x1e\n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xd7!\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72089,7 +72154,15 @@ const file_header_proto_rawDesc = "" +
 	"meta_scope\x18{ \x01(\tR\tmetaScope\x12\x15\n" +
 	"\x06pos_id\x18| \x01(\tR\x05posId\x12$\n" +
 	"\x0epos_id_updated\x18} \x01(\x03R\fposIdUpdated\x12)\n" +
-	"\x11pos_id_updated_by\x18~ \x01(\tR\x0eposIdUpdatedBy\"<\n" +
+	"\x11pos_id_updated_by\x18~ \x01(\tR\x0eposIdUpdatedBy\x125\n" +
+	"\x16website_agent_accepted\x18\x87\x01 \x01(\bR\x14websiteAgentAccepted\x121\n" +
+	"\x14website_last_visited\x18\x88\x01 \x01(\bR\x12websiteLastVisited\x123\n" +
+	"\x15website_first_visited\x18\x89\x01 \x01(\bR\x13websiteFirstVisited\x12,\n" +
+	"\x11website_confirmed\x18\x8a\x01 \x01(\bR\x10websiteConfirmed\x12-\n" +
+	"\x12website_image_hash\x18\x8b\x01 \x01(\tR\x10websiteImageHash\x12L\n" +
+	"\"website_dns_verification_attempted\x18\x8c\x01 \x01(\x03R\x1fwebsiteDnsVerificationAttempted\x121\n" +
+	"\x14website_last_crawled\x18\x8d\x01 \x01(\x03R\x12websiteLastCrawled\x12&\n" +
+	"\x0ewebsite_status\x18\x8e\x01 \x01(\tR\rwebsiteStatus\"<\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +

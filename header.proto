@@ -1805,7 +1805,7 @@ message Integration {
 	string logo_url = 4; // emoji for phone
 	string name = 5;
 
-	string connector_type = 12; // see facebook, call
+	string connector_type = 12; // see facebook, call, website
 	int64 integrated = 6; // first integrated
 	int64 last_integrated = 7;
 
@@ -1920,6 +1920,16 @@ message Integration {
 	string pos_id = 124;
 	int64 pos_id_updated = 125;
 	string pos_id_updated_by = 126;
+
+	// website
+	bool website_agent_accepted = 135;
+	bool website_last_visited = 136;
+	bool website_first_visited = 137;
+	bool website_confirmed = 138; // by system or dns
+	string website_image_hash = 139; // MD5 sum of image (internal)
+	int64 website_dns_verification_attempted = 140;
+	int64 website_last_crawled = 141;
+	string website_status = 142; // confirmed
 }
 
 message WorkflowSessionId {
@@ -4898,7 +4908,7 @@ message Discount {
 	string account_id = 2;
 	string id = 3;
 	string name = 4;
-	string description = 5;
+	string description = 5; // more benefits
 	File image = 7;
 	string url = 8;
 	string for = 9; // product, order (cart)
@@ -4910,7 +4920,7 @@ message Discount {
 	repeated string products = 15;
 	int64 start_at = 16; // ms
 	int64 end_at = 17; // ms
-	string discount_type = 18; // percentage, amount
+	string discount_type = 18; // percentage, amount, description
 	float value = 19;
 	float max_amount = 20;
 
