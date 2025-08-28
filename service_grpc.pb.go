@@ -2051,8 +2051,6 @@ const (
 	AccountMgr_GetSetupFeatureStatus_FullMethodName           = "/header.AccountMgr/GetSetupFeatureStatus"
 	AccountMgr_UpdateSetupFeatureStatus_FullMethodName        = "/header.AccountMgr/UpdateSetupFeatureStatus"
 	AccountMgr_ListActiveAccountIds_FullMethodName            = "/header.AccountMgr/ListActiveAccountIds"
-	AccountMgr_VerifyWebsiteByVisit_FullMethodName            = "/header.AccountMgr/VerifyWebsiteByVisit"
-	AccountMgr_VerifyWebsiteByDNS_FullMethodName              = "/header.AccountMgr/VerifyWebsiteByDNS"
 )
 
 // AccountMgrClient is the client API for AccountMgr service.
@@ -2172,8 +2170,6 @@ type AccountMgrClient interface {
 	GetSetupFeatureStatus(ctx context.Context, in *Id, opts ...grpc.CallOption) (*SetupFeatureStatus, error)
 	UpdateSetupFeatureStatus(ctx context.Context, in *SetupFeatureStatus, opts ...grpc.CallOption) (*SetupFeatureStatus, error)
 	ListActiveAccountIds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	VerifyWebsiteByVisit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type accountMgrClient struct {
@@ -3294,26 +3290,6 @@ func (c *accountMgrClient) ListActiveAccountIds(ctx context.Context, in *Id, opt
 	return out, nil
 }
 
-func (c *accountMgrClient) VerifyWebsiteByVisit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, AccountMgr_VerifyWebsiteByVisit_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, AccountMgr_VerifyWebsiteByDNS_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AccountMgrServer is the server API for AccountMgr service.
 // All implementations must embed UnimplementedAccountMgrServer
 // for forward compatibility.
@@ -3431,8 +3407,6 @@ type AccountMgrServer interface {
 	GetSetupFeatureStatus(context.Context, *Id) (*SetupFeatureStatus, error)
 	UpdateSetupFeatureStatus(context.Context, *SetupFeatureStatus) (*SetupFeatureStatus, error)
 	ListActiveAccountIds(context.Context, *Id) (*Response, error)
-	VerifyWebsiteByVisit(context.Context, *Id) (*Response, error)
-	VerifyWebsiteByDNS(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedAccountMgrServer()
 }
 
@@ -3775,12 +3749,6 @@ func (UnimplementedAccountMgrServer) UpdateSetupFeatureStatus(context.Context, *
 }
 func (UnimplementedAccountMgrServer) ListActiveAccountIds(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListActiveAccountIds not implemented")
-}
-func (UnimplementedAccountMgrServer) VerifyWebsiteByVisit(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method VerifyWebsiteByVisit not implemented")
-}
-func (UnimplementedAccountMgrServer) VerifyWebsiteByDNS(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method VerifyWebsiteByDNS not implemented")
 }
 func (UnimplementedAccountMgrServer) mustEmbedUnimplementedAccountMgrServer() {}
 func (UnimplementedAccountMgrServer) testEmbeddedByValue()                    {}
@@ -5801,42 +5769,6 @@ func _AccountMgr_ListActiveAccountIds_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_VerifyWebsiteByVisit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).VerifyWebsiteByVisit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_VerifyWebsiteByVisit_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).VerifyWebsiteByVisit(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_VerifyWebsiteByDNS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).VerifyWebsiteByDNS(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_VerifyWebsiteByDNS_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).VerifyWebsiteByDNS(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // AccountMgr_ServiceDesc is the grpc.ServiceDesc for AccountMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6287,14 +6219,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListActiveAccountIds",
 			Handler:    _AccountMgr_ListActiveAccountIds_Handler,
-		},
-		{
-			MethodName: "VerifyWebsiteByVisit",
-			Handler:    _AccountMgr_VerifyWebsiteByVisit_Handler,
-		},
-		{
-			MethodName: "VerifyWebsiteByDNS",
-			Handler:    _AccountMgr_VerifyWebsiteByDNS_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -11783,6 +11707,8 @@ const (
 	ConversationMgr_NotifyHuman_FullMethodName              = "/header.ConversationMgr/NotifyHuman"
 	ConversationMgr_MarkAsHumanHandled_FullMethodName       = "/header.ConversationMgr/MarkAsHumanHandled"
 	ConversationMgr_ReportMessages_FullMethodName           = "/header.ConversationMgr/ReportMessages"
+	ConversationMgr_VerifyWebsiteByVisit_FullMethodName     = "/header.ConversationMgr/VerifyWebsiteByVisit"
+	ConversationMgr_VerifyWebsiteByDNS_FullMethodName       = "/header.ConversationMgr/VerifyWebsiteByDNS"
 )
 
 // ConversationMgrClient is the client API for ConversationMgr service.
@@ -11869,6 +11795,8 @@ type ConversationMgrClient interface {
 	NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
 	MarkAsHumanHandled(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error)
+	VerifyWebsiteByVisit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conversationMgrClient struct {
@@ -12629,6 +12557,26 @@ func (c *conversationMgrClient) ReportMessages(ctx context.Context, in *ReportCo
 	return out, nil
 }
 
+func (c *conversationMgrClient) VerifyWebsiteByVisit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_VerifyWebsiteByVisit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_VerifyWebsiteByDNS_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationMgrServer is the server API for ConversationMgr service.
 // All implementations must embed UnimplementedConversationMgrServer
 // for forward compatibility.
@@ -12713,6 +12661,8 @@ type ConversationMgrServer interface {
 	NotifyHuman(context.Context, *Event) (*Response, error)
 	MarkAsHumanHandled(context.Context, *Id) (*Response, error)
 	ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error)
+	VerifyWebsiteByVisit(context.Context, *Id) (*Response, error)
+	VerifyWebsiteByDNS(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -12947,6 +12897,12 @@ func (UnimplementedConversationMgrServer) MarkAsHumanHandled(context.Context, *I
 }
 func (UnimplementedConversationMgrServer) ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportMessages not implemented")
+}
+func (UnimplementedConversationMgrServer) VerifyWebsiteByVisit(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyWebsiteByVisit not implemented")
+}
+func (UnimplementedConversationMgrServer) VerifyWebsiteByDNS(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyWebsiteByDNS not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
 func (UnimplementedConversationMgrServer) testEmbeddedByValue()                         {}
@@ -14319,6 +14275,42 @@ func _ConversationMgr_ReportMessages_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_VerifyWebsiteByVisit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).VerifyWebsiteByVisit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_VerifyWebsiteByVisit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).VerifyWebsiteByVisit(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_VerifyWebsiteByDNS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).VerifyWebsiteByDNS(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_VerifyWebsiteByDNS_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).VerifyWebsiteByDNS(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConversationMgr_ServiceDesc is the grpc.ServiceDesc for ConversationMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -14625,6 +14617,14 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportMessages",
 			Handler:    _ConversationMgr_ReportMessages_Handler,
+		},
+		{
+			MethodName: "VerifyWebsiteByVisit",
+			Handler:    _ConversationMgr_VerifyWebsiteByVisit_Handler,
+		},
+		{
+			MethodName: "VerifyWebsiteByDNS",
+			Handler:    _ConversationMgr_VerifyWebsiteByDNS_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

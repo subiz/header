@@ -1922,14 +1922,11 @@ message Integration {
 	string pos_id_updated_by = 126;
 
 	// website
-	bool website_agent_accepted = 135;
 	bool website_last_visited = 136;
-	bool website_first_visited = 137;
-	bool website_confirmed = 138; // by system or dns
-	string website_image_hash = 139; // MD5 sum of image (internal)
+	int64 website_confirmed = 138; // by system or dns
+	string website_logo_hash = 139; // MD5 sum of image (internal)
 	int64 website_dns_verification_attempted = 140;
 	int64 website_last_crawled = 141;
-	string website_status = 142; // confirmed
 }
 
 message WorkflowSessionId {

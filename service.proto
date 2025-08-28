@@ -214,8 +214,6 @@ service AccountMgr {
 	rpc GetSetupFeatureStatus(header.Id) returns (SetupFeatureStatus);
 	rpc UpdateSetupFeatureStatus(SetupFeatureStatus) returns (SetupFeatureStatus);
 	rpc ListActiveAccountIds(header.Id) returns (Response);
-	rpc VerifyWebsiteByVisit(header.Id) returns (Response);
-	rpc VerifyWebsiteByDNS(header.Id) returns (Response);
 }
 
 service UserCache {
@@ -514,6 +512,9 @@ service ConversationMgr {
 	rpc NotifyHuman(header.Event) returns (header.Response); // internal
 	rpc MarkAsHumanHandled(header.Id) returns (Response);
 	rpc ReportMessages(ReportConvoMessageRequest) returns (Response);
+
+	rpc VerifyWebsiteByVisit(header.Id) returns (Response);
+	rpc VerifyWebsiteByDNS(header.Id) returns (Response);
 }
 
 service TicketMgr {

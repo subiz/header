@@ -13739,14 +13739,11 @@ type Integration struct {
 	PosIdUpdated              int64                  `protobuf:"varint,125,opt,name=pos_id_updated,json=posIdUpdated,proto3" json:"pos_id_updated,omitempty"`
 	PosIdUpdatedBy            string                 `protobuf:"bytes,126,opt,name=pos_id_updated_by,json=posIdUpdatedBy,proto3" json:"pos_id_updated_by,omitempty"`
 	// website
-	WebsiteAgentAccepted            bool   `protobuf:"varint,135,opt,name=website_agent_accepted,json=websiteAgentAccepted,proto3" json:"website_agent_accepted,omitempty"`
 	WebsiteLastVisited              bool   `protobuf:"varint,136,opt,name=website_last_visited,json=websiteLastVisited,proto3" json:"website_last_visited,omitempty"`
-	WebsiteFirstVisited             bool   `protobuf:"varint,137,opt,name=website_first_visited,json=websiteFirstVisited,proto3" json:"website_first_visited,omitempty"`
-	WebsiteConfirmed                bool   `protobuf:"varint,138,opt,name=website_confirmed,json=websiteConfirmed,proto3" json:"website_confirmed,omitempty"`  // by system or dns
-	WebsiteImageHash                string `protobuf:"bytes,139,opt,name=website_image_hash,json=websiteImageHash,proto3" json:"website_image_hash,omitempty"` // MD5 sum of image (internal)
+	WebsiteConfirmed                int64  `protobuf:"varint,138,opt,name=website_confirmed,json=websiteConfirmed,proto3" json:"website_confirmed,omitempty"` // by system or dns
+	WebsiteLogoHash                 string `protobuf:"bytes,139,opt,name=website_logo_hash,json=websiteLogoHash,proto3" json:"website_logo_hash,omitempty"`   // MD5 sum of image (internal)
 	WebsiteDnsVerificationAttempted int64  `protobuf:"varint,140,opt,name=website_dns_verification_attempted,json=websiteDnsVerificationAttempted,proto3" json:"website_dns_verification_attempted,omitempty"`
 	WebsiteLastCrawled              int64  `protobuf:"varint,141,opt,name=website_last_crawled,json=websiteLastCrawled,proto3" json:"website_last_crawled,omitempty"`
-	WebsiteStatus                   string `protobuf:"bytes,142,opt,name=website_status,json=websiteStatus,proto3" json:"website_status,omitempty"` // confirmed
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
@@ -14383,13 +14380,6 @@ func (x *Integration) GetPosIdUpdatedBy() string {
 	return ""
 }
 
-func (x *Integration) GetWebsiteAgentAccepted() bool {
-	if x != nil {
-		return x.WebsiteAgentAccepted
-	}
-	return false
-}
-
 func (x *Integration) GetWebsiteLastVisited() bool {
 	if x != nil {
 		return x.WebsiteLastVisited
@@ -14397,23 +14387,16 @@ func (x *Integration) GetWebsiteLastVisited() bool {
 	return false
 }
 
-func (x *Integration) GetWebsiteFirstVisited() bool {
-	if x != nil {
-		return x.WebsiteFirstVisited
-	}
-	return false
-}
-
-func (x *Integration) GetWebsiteConfirmed() bool {
+func (x *Integration) GetWebsiteConfirmed() int64 {
 	if x != nil {
 		return x.WebsiteConfirmed
 	}
-	return false
+	return 0
 }
 
-func (x *Integration) GetWebsiteImageHash() string {
+func (x *Integration) GetWebsiteLogoHash() string {
 	if x != nil {
-		return x.WebsiteImageHash
+		return x.WebsiteLogoHash
 	}
 	return ""
 }
@@ -14430,13 +14413,6 @@ func (x *Integration) GetWebsiteLastCrawled() int64 {
 		return x.WebsiteLastCrawled
 	}
 	return 0
-}
-
-func (x *Integration) GetWebsiteStatus() string {
-	if x != nil {
-		return x.WebsiteStatus
-	}
-	return ""
 }
 
 type WorkflowSessionId struct {
@@ -72060,7 +72036,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\xd7!\n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xc1 \n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72154,15 +72130,12 @@ const file_header_proto_rawDesc = "" +
 	"meta_scope\x18{ \x01(\tR\tmetaScope\x12\x15\n" +
 	"\x06pos_id\x18| \x01(\tR\x05posId\x12$\n" +
 	"\x0epos_id_updated\x18} \x01(\x03R\fposIdUpdated\x12)\n" +
-	"\x11pos_id_updated_by\x18~ \x01(\tR\x0eposIdUpdatedBy\x125\n" +
-	"\x16website_agent_accepted\x18\x87\x01 \x01(\bR\x14websiteAgentAccepted\x121\n" +
-	"\x14website_last_visited\x18\x88\x01 \x01(\bR\x12websiteLastVisited\x123\n" +
-	"\x15website_first_visited\x18\x89\x01 \x01(\bR\x13websiteFirstVisited\x12,\n" +
-	"\x11website_confirmed\x18\x8a\x01 \x01(\bR\x10websiteConfirmed\x12-\n" +
-	"\x12website_image_hash\x18\x8b\x01 \x01(\tR\x10websiteImageHash\x12L\n" +
+	"\x11pos_id_updated_by\x18~ \x01(\tR\x0eposIdUpdatedBy\x121\n" +
+	"\x14website_last_visited\x18\x88\x01 \x01(\bR\x12websiteLastVisited\x12,\n" +
+	"\x11website_confirmed\x18\x8a\x01 \x01(\x03R\x10websiteConfirmed\x12+\n" +
+	"\x11website_logo_hash\x18\x8b\x01 \x01(\tR\x0fwebsiteLogoHash\x12L\n" +
 	"\"website_dns_verification_attempted\x18\x8c\x01 \x01(\x03R\x1fwebsiteDnsVerificationAttempted\x121\n" +
-	"\x14website_last_crawled\x18\x8d\x01 \x01(\x03R\x12websiteLastCrawled\x12&\n" +
-	"\x0ewebsite_status\x18\x8e\x01 \x01(\tR\rwebsiteStatus\"<\n" +
+	"\x14website_last_crawled\x18\x8d\x01 \x01(\x03R\x12websiteLastCrawled\"<\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +
