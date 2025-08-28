@@ -1918,14 +1918,14 @@ message Integration {
 	string meta_scope = 123;
 
 	string pos_id = 124;
-	int64 pos_id_updated = 125;
-	string pos_id_updated_by = 126;
+	// int64 pos_id_updated = 125;
+	// string pos_id_updated_by = 126;
 
 	// website
-	bool website_last_visited = 136;
-	int64 website_confirmed = 138; // by system or dns
+	int64 website_last_visited = 136;
+	int64 website_verified = 138; // by system or dns
 	string website_logo_hash = 139; // MD5 sum of image (internal)
-	int64 website_dns_verification_attempted = 140;
+	string website_last_visited_url = 140;
 	int64 website_last_crawled = 141;
 }
 
