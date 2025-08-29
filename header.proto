@@ -5131,6 +5131,7 @@ message ProductFeedLogEntry {
 	int64 num_link_visited = 21;
 	int64 num_link_success = 22;
 	int64 num_link_error = 23;
+	Error fetch_error = 24;
 }
 
 message ProductFeed {

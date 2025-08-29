@@ -353,7 +353,6 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 
 		// find the correct shard
 		parindex := int(crc32.ChecksumIEEE([]byte(pkey))) % numShard
-
 		// process if this is the correct shard
 		if int(parindex) == id {
 			return handler(ctx, in)
@@ -412,7 +411,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 	hostname, _ := os.Hostname()
 	sp := strings.Split(hostname, "-")
 	if len(sp) < 2 {
-		fmt.Println("invalid hostname: " + hostname)
+		// fmt.Println("invalid hostname: " + hostname)
 		sp = []string{"", "stg", "0"} // fake staging
 	}
 
@@ -434,6 +433,20 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 	}
 	// convo-stg-0.convo:{port}
 	hosts = append(hosts, sp[0]+"-stg-0."+servicename+":"+strconv.Itoa(grpcport))
+
+	// verify host
+	invalid := false
+	for i, host := range hosts {
+		if strings.HasPrefix(host, "-stg-0.:") || strings.HasPrefix(host, "-0.:") {
+			invalid = true
+			hosts[i] = fmt.Sprintf("127.0.0.1:%d", grpcport)
+		}
+	}
+	if invalid {
+		// local environment
+		ordinal_num = 0
+		hosts = Unique(hosts)
+	}
 
 	// in order to proxy (forward) the request to another grpc host,
 	// we must have an output object of the request's method (so we can marshal the response).
