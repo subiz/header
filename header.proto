@@ -5126,10 +5126,11 @@ message ProductFeedLogEntry {
 	string status = 7; // failed, success
 	int64 num_products = 8;
 	int64 num_updated_products = 9; // number of products that actually get updated
+	int64 num_update_errors = 10;
 
-	int64 num_link_visited = 10;
-	int64 num_link_success = 11;
-	int64 num_link_error = 12;
+	int64 num_link_visited = 21;
+	int64 num_link_success = 22;
+	int64 num_link_error = 23;
 }
 
 message ProductFeed {
@@ -5149,19 +5150,12 @@ message ProductFeed {
 	int64 updated = 22;
 	string updated_by = 23;
 
-	int64 last_fetched = 24;
-	int64 last_fetch_duration = 25;
-	string last_fetch_error = 26;
-	string fetch_status = 27; // success, failed
+	int64 inteval_sec = 24;
 
-	int64 last_success_fetched = 30;
+	ProductFeedLogEntry fetch_entry = 36;
 
 	int64 disabled = 31;
 	int64 modified = 32;
-
-	int64 num_products = 33;
-	int64 product_updated = 34;
-	string last_fetch_id = 35;
 }
 
 message ProductsRequest {
