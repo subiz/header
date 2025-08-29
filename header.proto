@@ -5101,8 +5101,15 @@ message ProductOption {
 	bool is_mandatory = 6;
 }
 
+message ColumnMapping {
+	string column_header = 3;
+	string product_field = 4; // name, sku, props.phan_khuc
+}
+
 message GoogleSheetProductFeed {
 	string url = 2;
+	string sheet = 3;
+	repeated ColumnMapping mapping = 4; // schema
 }
 
 message ShopeeProductFeed {
