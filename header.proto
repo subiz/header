@@ -5129,9 +5129,9 @@ message ProductFeed {
 	int64 last_fetched = 24;
 	int64 last_fetch_duration = 25;
 	string last_fetch_error = 26;
-	string last_fetch_status = 27; // success, failed
+	string fetch_status = 27; // success, failed
 
-	int64 last_sucess_fetched = 30;
+	int64 last_success_fetched = 30;
 
 	int64 disabled = 31;
 	int64 modified = 32;

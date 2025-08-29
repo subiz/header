@@ -35955,20 +35955,20 @@ type ProductFeed struct {
 	// google sheet
 	Shopee *ShopeeProductFeed `protobuf:"bytes,5,opt,name=shopee,proto3" json:"shopee,omitempty"`
 	// WebsiteProductFeed website = 6;
-	GoogleSheet       *GoogleSheetProductFeed `protobuf:"bytes,7,opt,name=google_sheet,json=googleSheet,proto3" json:"google_sheet,omitempty"`
-	Created           int64                   `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy         string                  `protobuf:"bytes,21,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated           int64                   `protobuf:"varint,22,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy         string                  `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	LastFetched       int64                   `protobuf:"varint,24,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
-	LastFetchDuration int64                   `protobuf:"varint,25,opt,name=last_fetch_duration,json=lastFetchDuration,proto3" json:"last_fetch_duration,omitempty"`
-	LastFetchError    string                  `protobuf:"bytes,26,opt,name=last_fetch_error,json=lastFetchError,proto3" json:"last_fetch_error,omitempty"`
-	LastFetchStatus   string                  `protobuf:"bytes,27,opt,name=last_fetch_status,json=lastFetchStatus,proto3" json:"last_fetch_status,omitempty"` // success, failed
-	LastSucessFetched int64                   `protobuf:"varint,30,opt,name=last_sucess_fetched,json=lastSucessFetched,proto3" json:"last_sucess_fetched,omitempty"`
-	Disabled          int64                   `protobuf:"varint,31,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	Modified          int64                   `protobuf:"varint,32,opt,name=modified,proto3" json:"modified,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	GoogleSheet        *GoogleSheetProductFeed `protobuf:"bytes,7,opt,name=google_sheet,json=googleSheet,proto3" json:"google_sheet,omitempty"`
+	Created            int64                   `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy          string                  `protobuf:"bytes,21,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated            int64                   `protobuf:"varint,22,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy          string                  `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	LastFetched        int64                   `protobuf:"varint,24,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
+	LastFetchDuration  int64                   `protobuf:"varint,25,opt,name=last_fetch_duration,json=lastFetchDuration,proto3" json:"last_fetch_duration,omitempty"`
+	LastFetchError     string                  `protobuf:"bytes,26,opt,name=last_fetch_error,json=lastFetchError,proto3" json:"last_fetch_error,omitempty"`
+	FetchStatus        string                  `protobuf:"bytes,27,opt,name=fetch_status,json=fetchStatus,proto3" json:"fetch_status,omitempty"` // success, failed
+	LastSuccessFetched int64                   `protobuf:"varint,30,opt,name=last_success_fetched,json=lastSuccessFetched,proto3" json:"last_success_fetched,omitempty"`
+	Disabled           int64                   `protobuf:"varint,31,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Modified           int64                   `protobuf:"varint,32,opt,name=modified,proto3" json:"modified,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ProductFeed) Reset() {
@@ -36092,16 +36092,16 @@ func (x *ProductFeed) GetLastFetchError() string {
 	return ""
 }
 
-func (x *ProductFeed) GetLastFetchStatus() string {
+func (x *ProductFeed) GetFetchStatus() string {
 	if x != nil {
-		return x.LastFetchStatus
+		return x.FetchStatus
 	}
 	return ""
 }
 
-func (x *ProductFeed) GetLastSucessFetched() int64 {
+func (x *ProductFeed) GetLastSuccessFetched() int64 {
 	if x != nil {
-		return x.LastSucessFetched
+		return x.LastSuccessFetched
 	}
 	return 0
 }
@@ -74747,7 +74747,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05sheet\x18\x03 \x01(\tR\x05sheet\x12/\n" +
 	"\amapping\x18\x04 \x03(\v2\x15.header.ColumnMappingR\amapping\"6\n" +
 	"\x11ShopeeProductFeed\x12!\n" +
-	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\"\xec\x04\n" +
+	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\"\xe5\x04\n" +
 	"\vProductFeed\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74764,9 +74764,9 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12!\n" +
 	"\flast_fetched\x18\x18 \x01(\x03R\vlastFetched\x12.\n" +
 	"\x13last_fetch_duration\x18\x19 \x01(\x03R\x11lastFetchDuration\x12(\n" +
-	"\x10last_fetch_error\x18\x1a \x01(\tR\x0elastFetchError\x12*\n" +
-	"\x11last_fetch_status\x18\x1b \x01(\tR\x0flastFetchStatus\x12.\n" +
-	"\x13last_sucess_fetched\x18\x1e \x01(\x03R\x11lastSucessFetched\x12\x1a\n" +
+	"\x10last_fetch_error\x18\x1a \x01(\tR\x0elastFetchError\x12!\n" +
+	"\ffetch_status\x18\x1b \x01(\tR\vfetchStatus\x120\n" +
+	"\x14last_success_fetched\x18\x1e \x01(\x03R\x12lastSuccessFetched\x12\x1a\n" +
 	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\x12\x1a\n" +
 	"\bmodified\x18  \x01(\x03R\bmodified\"\xb9\x05\n" +
 	"\x0fProductsRequest\x12!\n" +
