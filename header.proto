@@ -720,6 +720,7 @@ message Data {
 	UserView user_view = 56;
 	LoginSession login_session = 57;
 	ProductFeed product_feed = 58;
+
 	// ProductCollection product_collection = 59;
 	Order order = 60;
 	Currency currency = 61;
@@ -5109,15 +5110,37 @@ message ShopeeProductFeed {
 	string access_token = 4;
 }
 
+message WebsiteProductFeed {
+	string url = 4; // the domain must be verified
+	bool javascript_enabled = 12;
+	int64 crawl_depth = 15; // 0 default
+}
+
+message ProductFeedLogEntry {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string feed_id = 3;
+	string id = 4;
+	int64 created = 5;
+	int64 duration_sec = 6;
+	string status = 7; // failed, success
+	int64 num_products = 8;
+	int64 num_updated_products = 9; // number of products that actually get updated
+
+	int64 num_link_visited = 10;
+	int64 num_link_success = 11;
+	int64 num_link_error = 12;
+}
+
 message ProductFeed {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string type = 4; // google_sheet, shopee, json ld, api
+	string type = 4; // google_sheet, website, shopee
 
 	// google sheet
 	ShopeeProductFeed shopee = 5;
-	// WebsiteProductFeed website = 6;
+	WebsiteProductFeed website = 6;
 	GoogleSheetProductFeed google_sheet = 7;
 
 	int64 created = 20;
@@ -5135,6 +5158,10 @@ message ProductFeed {
 
 	int64 disabled = 31;
 	int64 modified = 32;
+
+	int64 num_products = 33;
+	int64 product_updated = 34;
+	string last_fetch_id = 35;
 }
 
 message ProductsRequest {
@@ -5175,6 +5202,9 @@ message ProductsRequest {
 	bool has_discount = 24;
 	string discount_id = 25; // by discount
 	string user_id = 26;
+
+	string feed_id = 27;
+	string feed_log_id = 28;
 }
 
 message KV {
@@ -7084,6 +7114,7 @@ message Response {
 
 	repeated ProductFeed product_feeds = 233;
 	ProductFeed product_feed = 234;
+	repeated ProductFeedLogEntry product_feed_log_entries = 235;
 }
 
 message ReportCount {

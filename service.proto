@@ -866,6 +866,8 @@ service Proder {
 	rpc UpdateProductFeed(header.ProductFeed) returns (header.Response);
 	rpc DeleteProductFeed(Id) returns (Empty);
 	rpc MatchProductFeeds(Ids) returns (Response);
+	rpc ListProductFeedLogs(header.Id) returns (header.Response);
+	rpc FetchProductFeed(header.Id) returns (header.Response);
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);
 
