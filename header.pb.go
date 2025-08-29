@@ -34840,19 +34840,18 @@ func (x *Discount) GetEligibleCel() string {
 }
 
 type Product struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Ctx            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId      string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id             string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`                                                 // generated
-	OtherVariants  []*Product             `protobuf:"bytes,4,rep,name=other_variants,json=otherVariants,proto3" json:"other_variants,omitempty"`      // [2] [3]
-	ProductGroupId string                 `protobuf:"bytes,5,opt,name=product_group_id,json=productGroupId,proto3" json:"product_group_id,omitempty"` // iphone-6-plus // parent id
-	Url            string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`                                               // (shared)
-	Handle         string                 `protobuf:"bytes,8,opt,name=handle,proto3" json:"handle,omitempty"`                                         // (shared) iphone-6-plus-128G
-	Name           string                 `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`                                             // I18nString i18n_name = 10; // (shared) apple Iphone 6 plus
-	Description    string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`                              // (shared)
-	// I18nString i18n_long_description_quill_delta = 13; // (shared)
-	LongDescription string `protobuf:"bytes,15,opt,name=long_description,json=longDescription,proto3" json:"long_description,omitempty"` // (shared)
-	Props           []*KV  `protobuf:"bytes,14,rep,name=props,proto3" json:"props,omitempty"`                                            // repeated ProductAttribute attrs = 55;
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Ctx             *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id              string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`                                                 // generated
+	OtherVariants   []*Product             `protobuf:"bytes,4,rep,name=other_variants,json=otherVariants,proto3" json:"other_variants,omitempty"`      // [2] [3]
+	ProductGroupId  string                 `protobuf:"bytes,5,opt,name=product_group_id,json=productGroupId,proto3" json:"product_group_id,omitempty"` // iphone-6-plus // parent id
+	Url             string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`                                               // (shared)
+	Handle          string                 `protobuf:"bytes,8,opt,name=handle,proto3" json:"handle,omitempty"`                                         // (shared) iphone-6-plus-128G
+	Name            string                 `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	Description     string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`                                // (shared)
+	LongDescription string                 `protobuf:"bytes,15,opt,name=long_description,json=longDescription,proto3" json:"long_description,omitempty"` // (shared)
+	Props           []*KV                  `protobuf:"bytes,14,rep,name=props,proto3" json:"props,omitempty"`
 	// accessory.watch
 	Category  string           `protobuf:"bytes,16,opt,name=category,proto3" json:"category,omitempty"` // (shared)
 	Brand     string           `protobuf:"bytes,18,opt,name=brand,proto3" json:"brand,omitempty"`       // (shared) brand name: apple, luis vuiton
@@ -34862,13 +34861,11 @@ type Product struct {
 	CreatedBy string           `protobuf:"bytes,22,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	UpdatedBy string           `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
-	Mpn              string   `protobuf:"bytes,26,opt,name=mpn,proto3" json:"mpn,omitempty"` // (shared)
-	Image            string   `protobuf:"bytes,30,opt,name=image,proto3" json:"image,omitempty"`
-	Images           []string `protobuf:"bytes,31,rep,name=images,proto3" json:"images,omitempty"`                                             // (shared)
-	AdditionalImages []string `protobuf:"bytes,32,rep,name=additional_images,json=additionalImages,proto3" json:"additional_images,omitempty"` // (shared)
-	Videos           []string `protobuf:"bytes,33,rep,name=videos,proto3" json:"videos,omitempty"`                                             // (shared)
-	AdditionalVideos []string `protobuf:"bytes,34,rep,name=additional_videos,json=additionalVideos,proto3" json:"additional_videos,omitempty"` // (shared)
-	Note             string   `protobuf:"bytes,35,opt,name=note,proto3" json:"note,omitempty"`                                                 // (shared)
+	Mpn    string   `protobuf:"bytes,26,opt,name=mpn,proto3" json:"mpn,omitempty"` // (shared)
+	Image  string   `protobuf:"bytes,30,opt,name=image,proto3" json:"image,omitempty"`
+	Images []string `protobuf:"bytes,31,rep,name=images,proto3" json:"images,omitempty"` // (shared)
+	Videos []string `protobuf:"bytes,33,rep,name=videos,proto3" json:"videos,omitempty"` // (shared)
+	Note   string   `protobuf:"bytes,35,opt,name=note,proto3" json:"note,omitempty"`     // (shared)
 	// shipping
 	RequiresShipping         bool                   `protobuf:"varint,36,opt,name=requires_shipping,json=requiresShipping,proto3" json:"requires_shipping,omitempty"`
 	DaysToShip               int64                  `protobuf:"varint,37,opt,name=days_to_ship,json=daysToShip,proto3" json:"days_to_ship,omitempty"`
@@ -35093,23 +35090,9 @@ func (x *Product) GetImages() []string {
 	return nil
 }
 
-func (x *Product) GetAdditionalImages() []string {
-	if x != nil {
-		return x.AdditionalImages
-	}
-	return nil
-}
-
 func (x *Product) GetVideos() []string {
 	if x != nil {
 		return x.Videos
-	}
-	return nil
-}
-
-func (x *Product) GetAdditionalVideos() []string {
-	if x != nil {
-		return x.AdditionalVideos
 	}
 	return nil
 }
@@ -74636,7 +74619,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x18 \x01(\tR\tupdatedBy\x12\x12\n" +
 	"\x04note\x18\x19 \x01(\tR\x04note\x12!\n" +
-	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xa0\x14\n" +
+	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xc6\x13\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74662,10 +74645,8 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x10\n" +
 	"\x03mpn\x18\x1a \x01(\tR\x03mpn\x12\x14\n" +
 	"\x05image\x18\x1e \x01(\tR\x05image\x12\x16\n" +
-	"\x06images\x18\x1f \x03(\tR\x06images\x12+\n" +
-	"\x11additional_images\x18  \x03(\tR\x10additionalImages\x12\x16\n" +
-	"\x06videos\x18! \x03(\tR\x06videos\x12+\n" +
-	"\x11additional_videos\x18\" \x03(\tR\x10additionalVideos\x12\x12\n" +
+	"\x06images\x18\x1f \x03(\tR\x06images\x12\x16\n" +
+	"\x06videos\x18! \x03(\tR\x06videos\x12\x12\n" +
 	"\x04note\x18# \x01(\tR\x04note\x12+\n" +
 	"\x11requires_shipping\x18$ \x01(\bR\x10requiresShipping\x12 \n" +
 	"\fdays_to_ship\x18% \x01(\x03R\n" +

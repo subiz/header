@@ -4943,19 +4943,12 @@ message Product {
 
 	string handle = 8; // (shared) iphone-6-plus-128G
 	string name = 9;
-	// I18nString i18n_name = 10; // (shared) apple Iphone 6 plus
 
 	string description = 11; // (shared)
-	// I18nString i18n_description = 12; // (shared) server generated
-
-	// I18nString i18n_long_description_quill_delta = 13; // (shared)
 	string long_description = 15; // (shared)
 
 	repeated KV props = 14;
-	// repeated ProductAttribute attrs = 55;
-
 	// string mobile_url = 17; // (shared)
-
 	// app_link = 11; // mobile deep link
 
 	// accessory.watch
@@ -4976,10 +4969,10 @@ message Product {
 
 	string image = 30;
 	repeated string images = 31; // (shared)
-	repeated string additional_images = 32; // (shared)
+	// repeated string additional_images = 32; // (shared)
 
 	repeated string videos = 33; // (shared)
-	repeated string additional_videos = 34; // (shared)
+	// repeated string additional_videos = 34; // (shared)
 
 	string note = 35; // (shared)
 
