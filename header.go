@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	hexa "encoding/hex"
 	"encoding/json"
+	"fmt"
 	"html"
 	"math"
 	"net/mail"
@@ -2521,4 +2522,9 @@ func IsValidVNPhoneNumber(phoneNumber string) bool {
 	}
 
 	return true
+}
+
+func Print(prefix string, a any) {
+	b, _ := json.Marshal(a)
+	fmt.Println(prefix, string(b))
 }

@@ -23786,76 +23786,77 @@ var NotiMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	Proder_ReadProduct_FullMethodName               = "/header.Proder/ReadProduct"
-	Proder_CreateProduct_FullMethodName             = "/header.Proder/CreateProduct"
-	Proder_UpdateProduct_FullMethodName             = "/header.Proder/UpdateProduct"
-	Proder_DeleteProduct_FullMethodName             = "/header.Proder/DeleteProduct"
-	Proder_ListProducts2_FullMethodName             = "/header.Proder/ListProducts2"
-	Proder_ListAllProductIds_FullMethodName         = "/header.Proder/ListAllProductIds"
-	Proder_ImportProduct_FullMethodName             = "/header.Proder/ImportProduct"
-	Proder_GetProductOffer_FullMethodName           = "/header.Proder/GetProductOffer"
-	Proder_CreateProductOffer_FullMethodName        = "/header.Proder/CreateProductOffer"
-	Proder_UpdateProductOffer_FullMethodName        = "/header.Proder/UpdateProductOffer"
-	Proder_DeleteProductOffer_FullMethodName        = "/header.Proder/DeleteProductOffer"
-	Proder_ListProductOffers_FullMethodName         = "/header.Proder/ListProductOffers"
-	Proder_CreateProductFromFile_FullMethodName     = "/header.Proder/CreateProductFromFile"
-	Proder_ListDiscounts_FullMethodName             = "/header.Proder/ListDiscounts"
-	Proder_CreateDiscount_FullMethodName            = "/header.Proder/CreateDiscount"
-	Proder_GetDiscount_FullMethodName               = "/header.Proder/GetDiscount"
-	Proder_UpdateDiscount_FullMethodName            = "/header.Proder/UpdateDiscount"
-	Proder_DeleteDiscount_FullMethodName            = "/header.Proder/DeleteDiscount"
-	Proder_MatchDiscounts_FullMethodName            = "/header.Proder/MatchDiscounts"
-	Proder_ListAvaiableDiscounts_FullMethodName     = "/header.Proder/ListAvaiableDiscounts"
-	Proder_ListAllProductDiscountIds_FullMethodName = "/header.Proder/ListAllProductDiscountIds"
-	Proder_ListProductFeeds_FullMethodName          = "/header.Proder/ListProductFeeds"
-	Proder_CreateProductFeed_FullMethodName         = "/header.Proder/CreateProductFeed"
-	Proder_UpdateProductFeed_FullMethodName         = "/header.Proder/UpdateProductFeed"
-	Proder_DeleteProductFeed_FullMethodName         = "/header.Proder/DeleteProductFeed"
-	Proder_MatchProductFeeds_FullMethodName         = "/header.Proder/MatchProductFeeds"
-	Proder_ListProductFeedLogs_FullMethodName       = "/header.Proder/ListProductFeedLogs"
-	Proder_FetchProductFeed_FullMethodName          = "/header.Proder/FetchProductFeed"
-	Proder_ListProductCategories_FullMethodName     = "/header.Proder/ListProductCategories"
-	Proder_ReadOrder_FullMethodName                 = "/header.Proder/ReadOrder"
-	Proder_CreateOrder_FullMethodName               = "/header.Proder/CreateOrder"
-	Proder_UpdateOrder_FullMethodName               = "/header.Proder/UpdateOrder"
-	Proder_DeleteOrder_FullMethodName               = "/header.Proder/DeleteOrder"
-	Proder_ListOrders_FullMethodName                = "/header.Proder/ListOrders"
-	Proder_CountOrders2_FullMethodName              = "/header.Proder/CountOrders2"
-	Proder_ImportOrders_FullMethodName              = "/header.Proder/ImportOrders"
-	Proder_MakeOrderPayment_FullMethodName          = "/header.Proder/MakeOrderPayment"
-	Proder_UpdatePurchase_FullMethodName            = "/header.Proder/UpdatePurchase"
-	Proder_CancelPurchase_FullMethodName            = "/header.Proder/CancelPurchase"
-	Proder_AddOrderComment_FullMethodName           = "/header.Proder/AddOrderComment"
-	Proder_EditOrderComment_FullMethodName          = "/header.Proder/EditOrderComment"
-	Proder_DeleteOrderComment_FullMethodName        = "/header.Proder/DeleteOrderComment"
-	Proder_ListOrderEvents_FullMethodName           = "/header.Proder/ListOrderEvents"
-	Proder_ListOrderBills_FullMethodName            = "/header.Proder/ListOrderBills"
-	Proder_DownloadOrder_FullMethodName             = "/header.Proder/DownloadOrder"
-	Proder_GetShopeeAuthUrl_FullMethodName          = "/header.Proder/GetShopeeAuthUrl"
-	Proder_AuthorizeShopeeShop_FullMethodName       = "/header.Proder/AuthorizeShopeeShop"
-	Proder_DeauthorizeShopeeShop_FullMethodName     = "/header.Proder/DeauthorizeShopeeShop"
-	Proder_SyncShopeeProducts_FullMethodName        = "/header.Proder/SyncShopeeProducts"
-	Proder_GHTKShippingStatus_FullMethodName        = "/header.Proder/GHTKShippingStatus"
-	Proder_GHNShippingStatus_FullMethodName         = "/header.Proder/GHNShippingStatus"
-	Proder_ShippingFee_FullMethodName               = "/header.Proder/ShippingFee"
-	Proder_ShipOrder_FullMethodName                 = "/header.Proder/ShipOrder"
-	Proder_UpdateShippingCode_FullMethodName        = "/header.Proder/UpdateShippingCode"
-	Proder_CancelShippingOrder_FullMethodName       = "/header.Proder/CancelShippingOrder"
-	Proder_PrintShippingOrders_FullMethodName       = "/header.Proder/PrintShippingOrders"
-	Proder_SeenOrder_FullMethodName                 = "/header.Proder/SeenOrder"
-	Proder_FollowOrder_FullMethodName               = "/header.Proder/FollowOrder"
-	Proder_UnfollowOrder_FullMethodName             = "/header.Proder/UnfollowOrder"
-	Proder_TagOrder_FullMethodName                  = "/header.Proder/TagOrder"
-	Proder_UntagOrder_FullMethodName                = "/header.Proder/UntagOrder"
-	Proder_ReadPipeline_FullMethodName              = "/header.Proder/ReadPipeline"
-	Proder_CreatePipeline_FullMethodName            = "/header.Proder/CreatePipeline"
-	Proder_UpdatePipeline_FullMethodName            = "/header.Proder/UpdatePipeline"
-	Proder_DeletePipeline_FullMethodName            = "/header.Proder/DeletePipeline"
-	Proder_ListPipelines_FullMethodName             = "/header.Proder/ListPipelines"
-	Proder_DeletePipelineStage_FullMethodName       = "/header.Proder/DeletePipelineStage"
-	Proder_PreselectPipeline_FullMethodName         = "/header.Proder/PreselectPipeline"
-	Proder_ReportOrder_FullMethodName               = "/header.Proder/ReportOrder"
-	Proder_MoveOrderToPrimary_FullMethodName        = "/header.Proder/MoveOrderToPrimary"
+	Proder_ReadProduct_FullMethodName                = "/header.Proder/ReadProduct"
+	Proder_CreateProduct_FullMethodName              = "/header.Proder/CreateProduct"
+	Proder_UpdateProduct_FullMethodName              = "/header.Proder/UpdateProduct"
+	Proder_DeleteProduct_FullMethodName              = "/header.Proder/DeleteProduct"
+	Proder_ListProducts2_FullMethodName              = "/header.Proder/ListProducts2"
+	Proder_ListAllProductIds_FullMethodName          = "/header.Proder/ListAllProductIds"
+	Proder_ImportProduct_FullMethodName              = "/header.Proder/ImportProduct"
+	Proder_GetProductOffer_FullMethodName            = "/header.Proder/GetProductOffer"
+	Proder_CreateProductOffer_FullMethodName         = "/header.Proder/CreateProductOffer"
+	Proder_UpdateProductOffer_FullMethodName         = "/header.Proder/UpdateProductOffer"
+	Proder_DeleteProductOffer_FullMethodName         = "/header.Proder/DeleteProductOffer"
+	Proder_ListProductOffers_FullMethodName          = "/header.Proder/ListProductOffers"
+	Proder_CreateProductFromFile_FullMethodName      = "/header.Proder/CreateProductFromFile"
+	Proder_ListDiscounts_FullMethodName              = "/header.Proder/ListDiscounts"
+	Proder_CreateDiscount_FullMethodName             = "/header.Proder/CreateDiscount"
+	Proder_GetDiscount_FullMethodName                = "/header.Proder/GetDiscount"
+	Proder_UpdateDiscount_FullMethodName             = "/header.Proder/UpdateDiscount"
+	Proder_DeleteDiscount_FullMethodName             = "/header.Proder/DeleteDiscount"
+	Proder_MatchDiscounts_FullMethodName             = "/header.Proder/MatchDiscounts"
+	Proder_ListAvaiableDiscounts_FullMethodName      = "/header.Proder/ListAvaiableDiscounts"
+	Proder_ListAllProductDiscountIds_FullMethodName  = "/header.Proder/ListAllProductDiscountIds"
+	Proder_ListProductFeeds_FullMethodName           = "/header.Proder/ListProductFeeds"
+	Proder_CreateProductFeed_FullMethodName          = "/header.Proder/CreateProductFeed"
+	Proder_UpdateProductFeed_FullMethodName          = "/header.Proder/UpdateProductFeed"
+	Proder_DeleteProductFeed_FullMethodName          = "/header.Proder/DeleteProductFeed"
+	Proder_MatchProductFeeds_FullMethodName          = "/header.Proder/MatchProductFeeds"
+	Proder_ListProductFeedRuns_FullMethodName        = "/header.Proder/ListProductFeedRuns"
+	Proder_RunProductFeed_FullMethodName             = "/header.Proder/RunProductFeed"
+	Proder_ListProductFeedRunProducts_FullMethodName = "/header.Proder/ListProductFeedRunProducts"
+	Proder_ListProductCategories_FullMethodName      = "/header.Proder/ListProductCategories"
+	Proder_ReadOrder_FullMethodName                  = "/header.Proder/ReadOrder"
+	Proder_CreateOrder_FullMethodName                = "/header.Proder/CreateOrder"
+	Proder_UpdateOrder_FullMethodName                = "/header.Proder/UpdateOrder"
+	Proder_DeleteOrder_FullMethodName                = "/header.Proder/DeleteOrder"
+	Proder_ListOrders_FullMethodName                 = "/header.Proder/ListOrders"
+	Proder_CountOrders2_FullMethodName               = "/header.Proder/CountOrders2"
+	Proder_ImportOrders_FullMethodName               = "/header.Proder/ImportOrders"
+	Proder_MakeOrderPayment_FullMethodName           = "/header.Proder/MakeOrderPayment"
+	Proder_UpdatePurchase_FullMethodName             = "/header.Proder/UpdatePurchase"
+	Proder_CancelPurchase_FullMethodName             = "/header.Proder/CancelPurchase"
+	Proder_AddOrderComment_FullMethodName            = "/header.Proder/AddOrderComment"
+	Proder_EditOrderComment_FullMethodName           = "/header.Proder/EditOrderComment"
+	Proder_DeleteOrderComment_FullMethodName         = "/header.Proder/DeleteOrderComment"
+	Proder_ListOrderEvents_FullMethodName            = "/header.Proder/ListOrderEvents"
+	Proder_ListOrderBills_FullMethodName             = "/header.Proder/ListOrderBills"
+	Proder_DownloadOrder_FullMethodName              = "/header.Proder/DownloadOrder"
+	Proder_GetShopeeAuthUrl_FullMethodName           = "/header.Proder/GetShopeeAuthUrl"
+	Proder_AuthorizeShopeeShop_FullMethodName        = "/header.Proder/AuthorizeShopeeShop"
+	Proder_DeauthorizeShopeeShop_FullMethodName      = "/header.Proder/DeauthorizeShopeeShop"
+	Proder_SyncShopeeProducts_FullMethodName         = "/header.Proder/SyncShopeeProducts"
+	Proder_GHTKShippingStatus_FullMethodName         = "/header.Proder/GHTKShippingStatus"
+	Proder_GHNShippingStatus_FullMethodName          = "/header.Proder/GHNShippingStatus"
+	Proder_ShippingFee_FullMethodName                = "/header.Proder/ShippingFee"
+	Proder_ShipOrder_FullMethodName                  = "/header.Proder/ShipOrder"
+	Proder_UpdateShippingCode_FullMethodName         = "/header.Proder/UpdateShippingCode"
+	Proder_CancelShippingOrder_FullMethodName        = "/header.Proder/CancelShippingOrder"
+	Proder_PrintShippingOrders_FullMethodName        = "/header.Proder/PrintShippingOrders"
+	Proder_SeenOrder_FullMethodName                  = "/header.Proder/SeenOrder"
+	Proder_FollowOrder_FullMethodName                = "/header.Proder/FollowOrder"
+	Proder_UnfollowOrder_FullMethodName              = "/header.Proder/UnfollowOrder"
+	Proder_TagOrder_FullMethodName                   = "/header.Proder/TagOrder"
+	Proder_UntagOrder_FullMethodName                 = "/header.Proder/UntagOrder"
+	Proder_ReadPipeline_FullMethodName               = "/header.Proder/ReadPipeline"
+	Proder_CreatePipeline_FullMethodName             = "/header.Proder/CreatePipeline"
+	Proder_UpdatePipeline_FullMethodName             = "/header.Proder/UpdatePipeline"
+	Proder_DeletePipeline_FullMethodName             = "/header.Proder/DeletePipeline"
+	Proder_ListPipelines_FullMethodName              = "/header.Proder/ListPipelines"
+	Proder_DeletePipelineStage_FullMethodName        = "/header.Proder/DeletePipelineStage"
+	Proder_PreselectPipeline_FullMethodName          = "/header.Proder/PreselectPipeline"
+	Proder_ReportOrder_FullMethodName                = "/header.Proder/ReportOrder"
+	Proder_MoveOrderToPrimary_FullMethodName         = "/header.Proder/MoveOrderToPrimary"
 )
 
 // ProderClient is the client API for Proder service.
@@ -23890,8 +23891,9 @@ type ProderClient interface {
 	UpdateProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	DeleteProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchProductFeeds(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	ListProductFeedLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	FetchProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListProductFeedRuns(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	RunProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListProductFeedRunProducts(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error)
 	ListProductCategories(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*ProductCategories, error)
 	ReadOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	CreateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
@@ -24205,20 +24207,30 @@ func (c *proderClient) MatchProductFeeds(ctx context.Context, in *Ids, opts ...g
 	return out, nil
 }
 
-func (c *proderClient) ListProductFeedLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) ListProductFeedRuns(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_ListProductFeedLogs_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_ListProductFeedRuns_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *proderClient) FetchProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) RunProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_FetchProductFeed_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_RunProductFeed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) ListProductFeedRunProducts(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_ListProductFeedRunProducts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24677,8 +24689,9 @@ type ProderServer interface {
 	UpdateProductFeed(context.Context, *ProductFeed) (*Response, error)
 	DeleteProductFeed(context.Context, *Id) (*Empty, error)
 	MatchProductFeeds(context.Context, *Ids) (*Response, error)
-	ListProductFeedLogs(context.Context, *Id) (*Response, error)
-	FetchProductFeed(context.Context, *Id) (*Response, error)
+	ListProductFeedRuns(context.Context, *Id) (*Response, error)
+	RunProductFeed(context.Context, *Id) (*Response, error)
+	ListProductFeedRunProducts(context.Context, *ProductFeedRun) (*Response, error)
 	ListProductCategories(context.Context, *Ids) (*ProductCategories, error)
 	ReadOrder(context.Context, *Id) (*Order, error)
 	CreateOrder(context.Context, *Order) (*Order, error)
@@ -24810,11 +24823,14 @@ func (UnimplementedProderServer) DeleteProductFeed(context.Context, *Id) (*Empty
 func (UnimplementedProderServer) MatchProductFeeds(context.Context, *Ids) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchProductFeeds not implemented")
 }
-func (UnimplementedProderServer) ListProductFeedLogs(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListProductFeedLogs not implemented")
+func (UnimplementedProderServer) ListProductFeedRuns(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductFeedRuns not implemented")
 }
-func (UnimplementedProderServer) FetchProductFeed(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FetchProductFeed not implemented")
+func (UnimplementedProderServer) RunProductFeed(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RunProductFeed not implemented")
+}
+func (UnimplementedProderServer) ListProductFeedRunProducts(context.Context, *ProductFeedRun) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductFeedRunProducts not implemented")
 }
 func (UnimplementedProderServer) ListProductCategories(context.Context, *Ids) (*ProductCategories, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCategories not implemented")
@@ -25431,38 +25447,56 @@ func _Proder_MatchProductFeeds_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_ListProductFeedLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_ListProductFeedRuns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).ListProductFeedLogs(ctx, in)
+		return srv.(ProderServer).ListProductFeedRuns(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_ListProductFeedLogs_FullMethodName,
+		FullMethod: Proder_ListProductFeedRuns_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).ListProductFeedLogs(ctx, req.(*Id))
+		return srv.(ProderServer).ListProductFeedRuns(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_FetchProductFeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_RunProductFeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).FetchProductFeed(ctx, in)
+		return srv.(ProderServer).RunProductFeed(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_FetchProductFeed_FullMethodName,
+		FullMethod: Proder_RunProductFeed_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).FetchProductFeed(ctx, req.(*Id))
+		return srv.(ProderServer).RunProductFeed(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_ListProductFeedRunProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductFeedRun)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListProductFeedRunProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListProductFeedRunProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListProductFeedRunProducts(ctx, req.(*ProductFeedRun))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26335,12 +26369,16 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Proder_MatchProductFeeds_Handler,
 		},
 		{
-			MethodName: "ListProductFeedLogs",
-			Handler:    _Proder_ListProductFeedLogs_Handler,
+			MethodName: "ListProductFeedRuns",
+			Handler:    _Proder_ListProductFeedRuns_Handler,
 		},
 		{
-			MethodName: "FetchProductFeed",
-			Handler:    _Proder_FetchProductFeed_Handler,
+			MethodName: "RunProductFeed",
+			Handler:    _Proder_RunProductFeed_Handler,
+		},
+		{
+			MethodName: "ListProductFeedRunProducts",
+			Handler:    _Proder_ListProductFeedRunProducts_Handler,
 		},
 		{
 			MethodName: "ListProductCategories",

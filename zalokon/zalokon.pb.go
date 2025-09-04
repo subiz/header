@@ -22,38 +22,38 @@ const (
 )
 
 type OfficialAccount struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	OaId                    string                 `protobuf:"bytes,2,opt,name=oa_id,json=oaId,proto3" json:"oa_id,omitempty"`
-	Description             string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Name                    string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Avatar                  string                 `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Cover                   string                 `protobuf:"bytes,6,opt,name=cover,proto3" json:"cover,omitempty"`
-	AccessToken             string                 `protobuf:"bytes,7,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	Authorized              int64                  `protobuf:"varint,8,opt,name=authorized,proto3" json:"authorized,omitempty"`
-	AccountId               string                 `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	StrOaId                 string                 `protobuf:"bytes,10,opt,name=str_oa_id,json=strOaId,proto3" json:"str_oa_id,omitempty"`
-	LastZaloHook            int64                  `protobuf:"varint,11,opt,name=last_zalo_hook,json=lastZaloHook,proto3" json:"last_zalo_hook,omitempty"`
-	State                   string                 `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"` // activated || deleted || failed
-	Version                 int32                  `protobuf:"varint,13,opt,name=version,proto3" json:"version,omitempty"`
-	LastRefreshTokenAt      int64                  `protobuf:"varint,14,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
-	RefreshToken            string                 `protobuf:"bytes,15,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	LastCalled              int64                  `protobuf:"varint,17,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
-	LastRefreshTokenErrorAt int64                  `protobuf:"varint,18,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt,proto3" json:"last_refresh_token_error_at,omitempty"`
-	AccessTokenExpiredAt    int64                  `protobuf:"varint,19,opt,name=access_token_expired_at,json=accessTokenExpiredAt,proto3" json:"access_token_expired_at,omitempty"`
-	OaType                  int64                  `protobuf:"varint,20,opt,name=oa_type,json=oaType,proto3" json:"oa_type,omitempty"`
-	IsVerified              bool                   `protobuf:"varint,21,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
-	OaAlias                 string                 `protobuf:"bytes,22,opt,name=oa_alias,json=oaAlias,proto3" json:"oa_alias,omitempty"`
-	CateName                string                 `protobuf:"bytes,23,opt,name=cate_name,json=cateName,proto3" json:"cate_name,omitempty"`
-	NumFollower             int64                  `protobuf:"varint,24,opt,name=num_follower,json=numFollower,proto3" json:"num_follower,omitempty"`
-	PackageName             string                 `protobuf:"bytes,25,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
-	PackageValidThroughDate string                 `protobuf:"bytes,26,opt,name=package_valid_through_date,json=packageValidThroughDate,proto3" json:"package_valid_through_date,omitempty"`
-	PackageAutoRenewDate    string                 `protobuf:"bytes,27,opt,name=package_auto_renew_date,json=packageAutoRenewDate,proto3" json:"package_auto_renew_date,omitempty"`
-	LinkedZCA               string                 `protobuf:"bytes,28,opt,name=linkedZCA,proto3" json:"linkedZCA,omitempty"`
-	IntegrationLinkStatus   string                 `protobuf:"bytes,29,opt,name=integration_link_status,json=integrationLinkStatus,proto3" json:"integration_link_status,omitempty"` // active, failed
-	ZnsQuota                *ZaloOAZNSQuota        `protobuf:"bytes,130,opt,name=zns_quota,json=znsQuota,proto3" json:"zns_quota,omitempty"`
-	ZnsTemplateTags         []string               `protobuf:"bytes,31,rep,name=zns_template_tags,json=znsTemplateTags,proto3" json:"zns_template_tags,omitempty"`
-	ZnsCurrentQuality       string                 `protobuf:"bytes,32,opt,name=zns_current_quality,json=znsCurrentQuality,proto3" json:"zns_current_quality,omitempty"`
-	Zns_7DayQuality         string                 `protobuf:"bytes,33,opt,name=zns_7_day_quality,json=zns7DayQuality,proto3" json:"zns_7_day_quality,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	OaId        string                 `protobuf:"bytes,2,opt,name=oa_id,json=oaId,proto3" json:"oa_id,omitempty"`
+	Description string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Avatar      string                 `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Cover       string                 `protobuf:"bytes,6,opt,name=cover,proto3" json:"cover,omitempty"`
+	AccessToken string                 `protobuf:"bytes,7,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	// int64 authorized = 8;
+	AccountId    string `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	StrOaId      string `protobuf:"bytes,10,opt,name=str_oa_id,json=strOaId,proto3" json:"str_oa_id,omitempty"`
+	LastZaloHook int64  `protobuf:"varint,11,opt,name=last_zalo_hook,json=lastZaloHook,proto3" json:"last_zalo_hook,omitempty"`
+	State        string `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"` // activated || deleted || failed
+	// int32 version = 13;
+	LastRefreshTokenAt      int64           `protobuf:"varint,14,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
+	RefreshToken            string          `protobuf:"bytes,15,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	LastCalled              int64           `protobuf:"varint,17,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
+	LastRefreshTokenErrorAt int64           `protobuf:"varint,18,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt,proto3" json:"last_refresh_token_error_at,omitempty"`
+	AccessTokenExpiredAt    int64           `protobuf:"varint,19,opt,name=access_token_expired_at,json=accessTokenExpiredAt,proto3" json:"access_token_expired_at,omitempty"`
+	OaType                  int64           `protobuf:"varint,20,opt,name=oa_type,json=oaType,proto3" json:"oa_type,omitempty"`
+	IsVerified              bool            `protobuf:"varint,21,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
+	OaAlias                 string          `protobuf:"bytes,22,opt,name=oa_alias,json=oaAlias,proto3" json:"oa_alias,omitempty"`
+	CateName                string          `protobuf:"bytes,23,opt,name=cate_name,json=cateName,proto3" json:"cate_name,omitempty"`
+	NumFollower             int64           `protobuf:"varint,24,opt,name=num_follower,json=numFollower,proto3" json:"num_follower,omitempty"`
+	PackageName             string          `protobuf:"bytes,25,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
+	PackageValidThroughDate string          `protobuf:"bytes,26,opt,name=package_valid_through_date,json=packageValidThroughDate,proto3" json:"package_valid_through_date,omitempty"`
+	PackageAutoRenewDate    string          `protobuf:"bytes,27,opt,name=package_auto_renew_date,json=packageAutoRenewDate,proto3" json:"package_auto_renew_date,omitempty"`
+	LinkedZCA               string          `protobuf:"bytes,28,opt,name=linkedZCA,proto3" json:"linkedZCA,omitempty"`
+	IntegrationLinkStatus   string          `protobuf:"bytes,29,opt,name=integration_link_status,json=integrationLinkStatus,proto3" json:"integration_link_status,omitempty"` // active, failed
+	ZnsQuota                *ZaloOAZNSQuota `protobuf:"bytes,130,opt,name=zns_quota,json=znsQuota,proto3" json:"zns_quota,omitempty"`
+	ZnsTemplateTags         []string        `protobuf:"bytes,31,rep,name=zns_template_tags,json=znsTemplateTags,proto3" json:"zns_template_tags,omitempty"`
+	ZnsCurrentQuality       string          `protobuf:"bytes,32,opt,name=zns_current_quality,json=znsCurrentQuality,proto3" json:"zns_current_quality,omitempty"`
+	Zns_7DayQuality         string          `protobuf:"bytes,33,opt,name=zns_7_day_quality,json=zns7DayQuality,proto3" json:"zns_7_day_quality,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -130,13 +130,6 @@ func (x *OfficialAccount) GetAccessToken() string {
 	return ""
 }
 
-func (x *OfficialAccount) GetAuthorized() int64 {
-	if x != nil {
-		return x.Authorized
-	}
-	return 0
-}
-
 func (x *OfficialAccount) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
@@ -163,13 +156,6 @@ func (x *OfficialAccount) GetState() string {
 		return x.State
 	}
 	return ""
-}
-
-func (x *OfficialAccount) GetVersion() int32 {
-	if x != nil {
-		return x.Version
-	}
-	return 0
 }
 
 func (x *OfficialAccount) GetLastRefreshTokenAt() int64 {
@@ -2157,24 +2143,20 @@ var File_zalokon_proto protoreflect.FileDescriptor
 
 const file_zalokon_proto_rawDesc = "" +
 	"\n" +
-	"\rzalokon.proto\x12\azalokon\"\x8c\t\n" +
+	"\rzalokon.proto\x12\azalokon\"\xd2\b\n" +
 	"\x0fOfficialAccount\x12\x13\n" +
 	"\x05oa_id\x18\x02 \x01(\tR\x04oaId\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
 	"\x06avatar\x18\x05 \x01(\tR\x06avatar\x12\x14\n" +
 	"\x05cover\x18\x06 \x01(\tR\x05cover\x12!\n" +
-	"\faccess_token\x18\a \x01(\tR\vaccessToken\x12\x1e\n" +
-	"\n" +
-	"authorized\x18\b \x01(\x03R\n" +
-	"authorized\x12\x1d\n" +
+	"\faccess_token\x18\a \x01(\tR\vaccessToken\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\t \x01(\tR\taccountId\x12\x1a\n" +
 	"\tstr_oa_id\x18\n" +
 	" \x01(\tR\astrOaId\x12$\n" +
 	"\x0elast_zalo_hook\x18\v \x01(\x03R\flastZaloHook\x12\x14\n" +
-	"\x05state\x18\f \x01(\tR\x05state\x12\x18\n" +
-	"\aversion\x18\r \x01(\x05R\aversion\x121\n" +
+	"\x05state\x18\f \x01(\tR\x05state\x121\n" +
 	"\x15last_refresh_token_at\x18\x0e \x01(\x03R\x12lastRefreshTokenAt\x12#\n" +
 	"\rrefresh_token\x18\x0f \x01(\tR\frefreshToken\x12\x1f\n" +
 	"\vlast_called\x18\x11 \x01(\x03R\n" +

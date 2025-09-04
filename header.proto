@@ -5116,7 +5116,7 @@ message WebsiteProductFeed {
 	int64 crawl_depth = 15; // 0 default
 }
 
-message ProductFeedLogEntry {
+message ProductFeedRun {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string feed_id = 3;
@@ -5132,6 +5132,11 @@ message ProductFeedLogEntry {
 	int64 num_link_success = 22;
 	int64 num_link_error = 23;
 	Error fetch_error = 24;
+
+	// for googlesheet
+	int64 num_rows = 30;
+	int64 file_size = 31;
+	int64 http_status = 32;
 }
 
 message ProductFeed {
@@ -5153,7 +5158,7 @@ message ProductFeed {
 
 	int64 inteval_sec = 24;
 
-	ProductFeedLogEntry fetch_entry = 36;
+	ProductFeedRun last_run = 36;
 
 	int64 disabled = 31;
 	int64 modified = 32;
@@ -7109,7 +7114,7 @@ message Response {
 
 	repeated ProductFeed product_feeds = 233;
 	ProductFeed product_feed = 234;
-	repeated ProductFeedLogEntry product_feed_log_entries = 235;
+	repeated ProductFeedRun product_feed_runs = 235;
 }
 
 message ReportCount {

@@ -36006,7 +36006,7 @@ func (x *WebsiteProductFeed) GetCrawlDepth() int64 {
 	return 0
 }
 
-type ProductFeedLogEntry struct {
+type ProductFeedRun struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId          string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -36022,24 +36022,28 @@ type ProductFeedLogEntry struct {
 	NumLinkSuccess     int64                  `protobuf:"varint,22,opt,name=num_link_success,json=numLinkSuccess,proto3" json:"num_link_success,omitempty"`
 	NumLinkError       int64                  `protobuf:"varint,23,opt,name=num_link_error,json=numLinkError,proto3" json:"num_link_error,omitempty"`
 	FetchError         *Error                 `protobuf:"bytes,24,opt,name=fetch_error,json=fetchError,proto3" json:"fetch_error,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// for googlesheet
+	NumRows       int64 `protobuf:"varint,30,opt,name=num_rows,json=numRows,proto3" json:"num_rows,omitempty"`
+	FileSize      int64 `protobuf:"varint,31,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	HttpStatus    int64 `protobuf:"varint,32,opt,name=http_status,json=httpStatus,proto3" json:"http_status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProductFeedLogEntry) Reset() {
-	*x = ProductFeedLogEntry{}
+func (x *ProductFeedRun) Reset() {
+	*x = ProductFeedRun{}
 	mi := &file_header_proto_msgTypes[279]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProductFeedLogEntry) String() string {
+func (x *ProductFeedRun) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProductFeedLogEntry) ProtoMessage() {}
+func (*ProductFeedRun) ProtoMessage() {}
 
-func (x *ProductFeedLogEntry) ProtoReflect() protoreflect.Message {
+func (x *ProductFeedRun) ProtoReflect() protoreflect.Message {
 	mi := &file_header_proto_msgTypes[279]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -36051,107 +36055,128 @@ func (x *ProductFeedLogEntry) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProductFeedLogEntry.ProtoReflect.Descriptor instead.
-func (*ProductFeedLogEntry) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProductFeedRun.ProtoReflect.Descriptor instead.
+func (*ProductFeedRun) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{279}
 }
 
-func (x *ProductFeedLogEntry) GetCtx() *common.Context {
+func (x *ProductFeedRun) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *ProductFeedLogEntry) GetAccountId() string {
+func (x *ProductFeedRun) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *ProductFeedLogEntry) GetFeedId() string {
+func (x *ProductFeedRun) GetFeedId() string {
 	if x != nil {
 		return x.FeedId
 	}
 	return ""
 }
 
-func (x *ProductFeedLogEntry) GetId() string {
+func (x *ProductFeedRun) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ProductFeedLogEntry) GetCreated() int64 {
+func (x *ProductFeedRun) GetCreated() int64 {
 	if x != nil {
 		return x.Created
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetDurationSec() int64 {
+func (x *ProductFeedRun) GetDurationSec() int64 {
 	if x != nil {
 		return x.DurationSec
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetStatus() string {
+func (x *ProductFeedRun) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *ProductFeedLogEntry) GetNumProducts() int64 {
+func (x *ProductFeedRun) GetNumProducts() int64 {
 	if x != nil {
 		return x.NumProducts
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetNumUpdatedProducts() int64 {
+func (x *ProductFeedRun) GetNumUpdatedProducts() int64 {
 	if x != nil {
 		return x.NumUpdatedProducts
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetNumUpdateErrors() int64 {
+func (x *ProductFeedRun) GetNumUpdateErrors() int64 {
 	if x != nil {
 		return x.NumUpdateErrors
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetNumLinkVisited() int64 {
+func (x *ProductFeedRun) GetNumLinkVisited() int64 {
 	if x != nil {
 		return x.NumLinkVisited
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetNumLinkSuccess() int64 {
+func (x *ProductFeedRun) GetNumLinkSuccess() int64 {
 	if x != nil {
 		return x.NumLinkSuccess
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetNumLinkError() int64 {
+func (x *ProductFeedRun) GetNumLinkError() int64 {
 	if x != nil {
 		return x.NumLinkError
 	}
 	return 0
 }
 
-func (x *ProductFeedLogEntry) GetFetchError() *Error {
+func (x *ProductFeedRun) GetFetchError() *Error {
 	if x != nil {
 		return x.FetchError
 	}
 	return nil
+}
+
+func (x *ProductFeedRun) GetNumRows() int64 {
+	if x != nil {
+		return x.NumRows
+	}
+	return 0
+}
+
+func (x *ProductFeedRun) GetFileSize() int64 {
+	if x != nil {
+		return x.FileSize
+	}
+	return 0
+}
+
+func (x *ProductFeedRun) GetHttpStatus() int64 {
+	if x != nil {
+		return x.HttpStatus
+	}
+	return 0
 }
 
 type ProductFeed struct {
@@ -36169,7 +36194,7 @@ type ProductFeed struct {
 	Updated       int64                   `protobuf:"varint,22,opt,name=updated,proto3" json:"updated,omitempty"`
 	UpdatedBy     string                  `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	IntevalSec    int64                   `protobuf:"varint,24,opt,name=inteval_sec,json=intevalSec,proto3" json:"inteval_sec,omitempty"`
-	FetchEntry    *ProductFeedLogEntry    `protobuf:"bytes,36,opt,name=fetch_entry,json=fetchEntry,proto3" json:"fetch_entry,omitempty"`
+	LastRun       *ProductFeedRun         `protobuf:"bytes,36,opt,name=last_run,json=lastRun,proto3" json:"last_run,omitempty"`
 	Disabled      int64                   `protobuf:"varint,31,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	Modified      int64                   `protobuf:"varint,32,opt,name=modified,proto3" json:"modified,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -36290,9 +36315,9 @@ func (x *ProductFeed) GetIntevalSec() int64 {
 	return 0
 }
 
-func (x *ProductFeed) GetFetchEntry() *ProductFeedLogEntry {
+func (x *ProductFeed) GetLastRun() *ProductFeedRun {
 	if x != nil {
-		return x.FetchEntry
+		return x.LastRun
 	}
 	return nil
 }
@@ -48703,7 +48728,7 @@ type Response struct {
 	NamedEntity           *NamedEntity           `protobuf:"bytes,230,opt,name=named_entity,json=namedEntity,proto3" json:"named_entity,omitempty"`
 	ProductFeeds          []*ProductFeed         `protobuf:"bytes,233,rep,name=product_feeds,json=productFeeds,proto3" json:"product_feeds,omitempty"`
 	ProductFeed           *ProductFeed           `protobuf:"bytes,234,opt,name=product_feed,json=productFeed,proto3" json:"product_feed,omitempty"`
-	ProductFeedLogEntries []*ProductFeedLogEntry `protobuf:"bytes,235,rep,name=product_feed_log_entries,json=productFeedLogEntries,proto3" json:"product_feed_log_entries,omitempty"`
+	ProductFeedRuns       []*ProductFeedRun      `protobuf:"bytes,235,rep,name=product_feed_runs,json=productFeedRuns,proto3" json:"product_feed_runs,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -49704,9 +49729,9 @@ func (x *Response) GetProductFeed() *ProductFeed {
 	return nil
 }
 
-func (x *Response) GetProductFeedLogEntries() []*ProductFeedLogEntry {
+func (x *Response) GetProductFeedRuns() []*ProductFeedRun {
 	if x != nil {
-		return x.ProductFeedLogEntries
+		return x.ProductFeedRuns
 	}
 	return nil
 }
@@ -74967,8 +74992,8 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12-\n" +
 	"\x12javascript_enabled\x18\f \x01(\bR\x11javascriptEnabled\x12\x1f\n" +
 	"\vcrawl_depth\x18\x0f \x01(\x03R\n" +
-	"crawlDepth\"\x80\x04\n" +
-	"\x13ProductFeedLogEntry\x12!\n" +
+	"crawlDepth\"\xd4\x04\n" +
+	"\x0eProductFeedRun\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x17\n" +
@@ -74985,7 +75010,11 @@ const file_header_proto_rawDesc = "" +
 	"\x10num_link_success\x18\x16 \x01(\x03R\x0enumLinkSuccess\x12$\n" +
 	"\x0enum_link_error\x18\x17 \x01(\x03R\fnumLinkError\x12.\n" +
 	"\vfetch_error\x18\x18 \x01(\v2\r.header.ErrorR\n" +
-	"fetchError\"\xa8\x04\n" +
+	"fetchError\x12\x19\n" +
+	"\bnum_rows\x18\x1e \x01(\x03R\anumRows\x12\x1b\n" +
+	"\tfile_size\x18\x1f \x01(\x03R\bfileSize\x12\x1f\n" +
+	"\vhttp_status\x18  \x01(\x03R\n" +
+	"httpStatus\"\x9d\x04\n" +
 	"\vProductFeed\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75002,9 +75031,8 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x1f\n" +
 	"\vinteval_sec\x18\x18 \x01(\x03R\n" +
-	"intevalSec\x12<\n" +
-	"\vfetch_entry\x18$ \x01(\v2\x1b.header.ProductFeedLogEntryR\n" +
-	"fetchEntry\x12\x1a\n" +
+	"intevalSec\x121\n" +
+	"\blast_run\x18$ \x01(\v2\x16.header.ProductFeedRunR\alastRun\x12\x1a\n" +
 	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\x12\x1a\n" +
 	"\bmodified\x18  \x01(\x03R\bmodified\"\xf2\x05\n" +
 	"\x0fProductsRequest\x12!\n" +
@@ -76466,7 +76494,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xae:\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\x9c:\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76614,8 +76642,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0enamed_entities\x18\xe5\x01 \x03(\v2\x13.header.NamedEntityR\rnamedEntities\x127\n" +
 	"\fnamed_entity\x18\xe6\x01 \x01(\v2\x13.header.NamedEntityR\vnamedEntity\x129\n" +
 	"\rproduct_feeds\x18\xe9\x01 \x03(\v2\x13.header.ProductFeedR\fproductFeeds\x127\n" +
-	"\fproduct_feed\x18\xea\x01 \x01(\v2\x13.header.ProductFeedR\vproductFeed\x12U\n" +
-	"\x18product_feed_log_entries\x18\xeb\x01 \x03(\v2\x1b.header.ProductFeedLogEntryR\x15productFeedLogEntries\"Y\n" +
+	"\fproduct_feed\x18\xea\x01 \x01(\v2\x13.header.ProductFeedR\vproductFeed\x12C\n" +
+	"\x11product_feed_runs\x18\xeb\x01 \x03(\v2\x16.header.ProductFeedRunR\x0fproductFeedRuns\"Y\n" +
 	"\vReportCount\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12\x1e\n" +
 	"\n" +
@@ -79505,7 +79533,7 @@ var file_header_proto_goTypes = []any{
 	(*GoogleSheetProductFeed)(nil),                  // 309: header.GoogleSheetProductFeed
 	(*ShopeeProductFeed)(nil),                       // 310: header.ShopeeProductFeed
 	(*WebsiteProductFeed)(nil),                      // 311: header.WebsiteProductFeed
-	(*ProductFeedLogEntry)(nil),                     // 312: header.ProductFeedLogEntry
+	(*ProductFeedRun)(nil),                          // 312: header.ProductFeedRun
 	(*ProductFeed)(nil),                             // 313: header.ProductFeed
 	(*ProductsRequest)(nil),                         // 314: header.ProductsRequest
 	(*KV)(nil),                                      // 315: header.KV
@@ -80524,13 +80552,13 @@ var file_header_proto_depIdxs = []int32{
 	322,  // 638: header.Product.error:type_name -> header.Error
 	671,  // 639: header.ProductOffer.ctx:type_name -> common.Context
 	308,  // 640: header.GoogleSheetProductFeed.mapping:type_name -> header.ColumnMapping
-	671,  // 641: header.ProductFeedLogEntry.ctx:type_name -> common.Context
-	322,  // 642: header.ProductFeedLogEntry.fetch_error:type_name -> header.Error
+	671,  // 641: header.ProductFeedRun.ctx:type_name -> common.Context
+	322,  // 642: header.ProductFeedRun.fetch_error:type_name -> header.Error
 	671,  // 643: header.ProductFeed.ctx:type_name -> common.Context
 	310,  // 644: header.ProductFeed.shopee:type_name -> header.ShopeeProductFeed
 	311,  // 645: header.ProductFeed.website:type_name -> header.WebsiteProductFeed
 	309,  // 646: header.ProductFeed.google_sheet:type_name -> header.GoogleSheetProductFeed
-	312,  // 647: header.ProductFeed.fetch_entry:type_name -> header.ProductFeedLogEntry
+	312,  // 647: header.ProductFeed.last_run:type_name -> header.ProductFeedRun
 	671,  // 648: header.ProductsRequest.ctx:type_name -> common.Context
 	315,  // 649: header.ProductsRequest.props:type_name -> header.KV
 	315,  // 650: header.KV.kvs:type_name -> header.KV
@@ -80869,7 +80897,7 @@ var file_header_proto_depIdxs = []int32{
 	605,  // 983: header.Response.named_entity:type_name -> header.NamedEntity
 	313,  // 984: header.Response.product_feeds:type_name -> header.ProductFeed
 	313,  // 985: header.Response.product_feed:type_name -> header.ProductFeed
-	312,  // 986: header.Response.product_feed_log_entries:type_name -> header.ProductFeedLogEntry
+	312,  // 986: header.Response.product_feed_runs:type_name -> header.ProductFeedRun
 	672,  // 987: header.ZaloCallConsent.message:type_name -> header.I18nString
 	671,  // 988: header.SendEmailRequest.ctx:type_name -> common.Context
 	642,  // 989: header.SendEmailRequest.header:type_name -> header.SendEmailRequest.HeaderEntry
