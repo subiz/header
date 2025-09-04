@@ -25,6 +25,7 @@ message Id {
 	bool is_gen_qr = 8;
 	string version = 9;
 	string e_tag = 10;
+	bool dry = 11;
 }
 
 message Ids {
@@ -5113,7 +5114,9 @@ message ShopeeProductFeed {
 message WebsiteProductFeed {
 	string url = 4; // the domain must be verified
 	bool javascript_enabled = 12;
-	int64 crawl_depth = 15; // 0 default
+	int64 max_depth = 15; // 0 default
+	int64 max_crawl_links = 8; // max 1000
+	string link_regex = 10;
 }
 
 message ProductFeedRun {
@@ -5156,7 +5159,7 @@ message ProductFeed {
 	int64 updated = 22;
 	string updated_by = 23;
 
-	int64 inteval_sec = 24;
+	int64 interval_sec = 24;
 
 	ProductFeedRun last_run = 36;
 
@@ -9353,6 +9356,8 @@ message CrawlResponse {
 
 	Product product = 12;
 	repeated Product products = 13;
+
+	map<string, int64> visited_link_statuses = 14;
 }
 
 message AIDataChunk {

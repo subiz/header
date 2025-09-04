@@ -6240,6 +6240,9 @@ type CrawlUrlRequest struct {
 	LinkOnly          bool                   `protobuf:"varint,4,opt,name=link_only,json=linkOnly,proto3" json:"link_only,omitempty"`
 	JavascriptEnabled bool                   `protobuf:"varint,5,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
 	Timeout           int64                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"` // ms 30_000 default
+	MaxDepth          int64                  `protobuf:"varint,7,opt,name=max_depth,json=maxDepth,proto3" json:"max_depth,omitempty"`
+	MaxLinks          int64                  `protobuf:"varint,8,opt,name=max_links,json=maxLinks,proto3" json:"max_links,omitempty"` // max 1000
+	LinkRegex         string                 `protobuf:"bytes,10,opt,name=link_regex,json=linkRegex,proto3" json:"link_regex,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -6314,6 +6317,27 @@ func (x *CrawlUrlRequest) GetTimeout() int64 {
 		return x.Timeout
 	}
 	return 0
+}
+
+func (x *CrawlUrlRequest) GetMaxDepth() int64 {
+	if x != nil {
+		return x.MaxDepth
+	}
+	return 0
+}
+
+func (x *CrawlUrlRequest) GetMaxLinks() int64 {
+	if x != nil {
+		return x.MaxLinks
+	}
+	return 0
+}
+
+func (x *CrawlUrlRequest) GetLinkRegex() string {
+	if x != nil {
+		return x.LinkRegex
+	}
+	return ""
 }
 
 type ListAIDataEntryRequest struct {
@@ -9267,14 +9291,19 @@ const file_request_proto_rawDesc = "" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12!\n" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\"\xc7\x01\n" +
+	"\x05email\x18\b \x01(\tR\x05email\"\xa0\x02\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
 	"\blast_md5\x18\x03 \x01(\tR\alastMd5\x12\x1b\n" +
 	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\x12-\n" +
 	"\x12javascript_enabled\x18\x05 \x01(\bR\x11javascriptEnabled\x12\x18\n" +
-	"\atimeout\x18\x06 \x01(\x03R\atimeout\"\xf9\x03\n" +
+	"\atimeout\x18\x06 \x01(\x03R\atimeout\x12\x1b\n" +
+	"\tmax_depth\x18\a \x01(\x03R\bmaxDepth\x12\x1b\n" +
+	"\tmax_links\x18\b \x01(\x03R\bmaxLinks\x12\x1d\n" +
+	"\n" +
+	"link_regex\x18\n" +
+	" \x01(\tR\tlinkRegex\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

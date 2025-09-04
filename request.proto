@@ -775,6 +775,10 @@ message CrawlUrlRequest {
 	bool link_only = 4;
 	bool javascript_enabled = 5;
 	int64 timeout = 6; // ms 30_000 default
+
+	int64 max_depth = 7;
+	int64 max_links = 8; // max 1000
+	string link_regex = 10;
 }
 
 message ListAIDataEntryRequest {
