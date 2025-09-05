@@ -365,11 +365,7 @@ service WorkflowMgr {
 	rpc DeleteAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
 	rpc AddAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
 
-	rpc ListAIDataGroup(Id) returns (Response);
 	rpc SuggestAIDataEntry(SuggestAIDataEntryRequest) returns (Response);
-	rpc CreateAIDataGroup(AIDataGroup) returns (Response);
-	rpc UpdateAIDataGroup(AIDataGroup) returns (Response);
-	rpc DeleteAIDatagroup(Id) returns (Empty);
 	rpc CreateAIDataEntry(AIDataEntry) returns (Response);
 	rpc ListAIDataEntry(ListAIDataEntryRequest) returns (Response);
 	rpc GetAIDataEntry(Id) returns (Response);
@@ -394,11 +390,11 @@ service WorkflowMgr {
 
 	rpc GetAIResponseTrace(AIAgentTraceRequest) returns (Response);
 
-	rpc ListNamedEntities(Id) returns (Response);
-	rpc CreateNamedEntity(NamedEntity) returns (Response);
-	rpc UpdateNamedEntity(NamedEntity) returns (Response);
-	rpc GetNamedEntity(Id) returns (Response);
-	rpc MatchNamedEntities(Ids) returns (Response);
+	// rpc ListNamedEntities(Id) returns (Response);
+	//rpc CreateNamedEntity(NamedEntity) returns (Response);
+	// rpc UpdateNamedEntity(NamedEntity) returns (Response);
+	// rpc GetNamedEntity(Id) returns (Response);
+	// rpc MatchNamedEntities(Ids) returns (Response);
 }
 
 service ConversationMgr {
@@ -867,8 +863,9 @@ service Proder {
 	rpc DeleteProductFeed(Id) returns (Empty);
 	rpc MatchProductFeeds(Ids) returns (Response);
 	rpc ListProductFeedRuns(header.Id) returns (header.Response);
-	rpc RunProductFeed(header.Id) returns (header.Response);
+	rpc RunProductFeed(header.ProductFeed) returns (header.Response);
 	rpc ListProductFeedRunProducts(header.ProductFeedRun) returns (header.Response);
+	rpc SuggestProductFeedMapping(header.ProductFeed) returns (header.Response);
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);
 

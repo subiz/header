@@ -786,7 +786,7 @@ message Data {
 	ArticleTopic article_topic = 130;
 	ArticleNode article_node = 131;
 	AIDataEntry ai_data_entry = 132;
-	AIDataGroup ai_data_group = 133;
+	// AIDataGroup ai_data_group = 133;
 	AIAgent ai_agent = 134;
 	ZNSTemplate zns_template = 135;
 	ZNSMedia zns_media = 136;
@@ -5140,6 +5140,8 @@ message ProductFeedRun {
 	int64 num_rows = 30;
 	int64 file_size = 31;
 	int64 http_status = 32;
+
+	repeated Product products = 33; // sample 5 products
 }
 
 message ProductFeed {
@@ -7036,8 +7038,8 @@ message Response {
 	repeated AIDataEntry ai_data_entries = 166;
 	AIDataEntry ai_data_entry = 167;
 
-	repeated AIDataGroup ai_data_groups = 168;
-	AIDataGroup ai_data_group = 169;
+	// repeated AIDataGroup ai_data_groups = 168;
+	// AIDataGroup ai_data_group = 169;
 
 	repeated AIAgent ai_agents = 170;
 	AIAgent ai_agent = 171;
@@ -7045,8 +7047,8 @@ message Response {
 	// AiQnASuggestion ai_qna_suggestion = 172;
 	// repeated AiQnASuggestion ai_qna_suggestions = 173;
 
-	repeated AiResponseSource ai_response_sources = 174;
-	AiResponseSource ai_response_source = 158;
+	// repeated AiResponseSource ai_response_sources = 174;
+	// AiResponseSource ai_response_source = 158;
 
 	repeated AIDataChunk ai_data_chunks = 175;
 	File file = 176;
@@ -7112,8 +7114,8 @@ message Response {
 
 	repeated FbFanpageSetting fanpage_settings = 228;
 
-	repeated NamedEntity named_entities = 229;
-	NamedEntity named_entity = 230;
+	// repeated NamedEntity named_entities = 229;
+	// NamedEntity named_entity = 230;
 
 	repeated ProductFeed product_feeds = 233;
 	ProductFeed product_feed = 234;
@@ -9049,7 +9051,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, update_context
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -9324,25 +9326,6 @@ message AIIntent {
 	int64 edited_by = 7;
 }
 
-message AIDataGroup {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // empty -> default, kb
-	string name = 6;
-	string description = 7;
-	// int64 disabled = 8;
-
-	int64 num_entries = 9;
-	int64 num_trainings = 10;
-	int64 num_pendings = 11;
-
-	int64 created = 13;
-	string created_by = 14;
-	string type = 15; // system, kb
-	int64 last_file_modified = 16;
-	int64 modified = 17;
-}
-
 message CrawlResponse {
 	string url = 3;
 	int64 status_code = 4;
@@ -9378,7 +9361,7 @@ message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string group_id = 4;
+	// string group_id = 4;
 
 	string type = 5; // qa, file, website, product, text (for testing), instruction, discount
 	Message answer = 6;
@@ -9443,19 +9426,6 @@ message AIDataEntry {
 	// int64 flagged = 64;
 	int64 read_at = 65;
 	string read_by = 66;
-}
-
-message AiResponseSource {
-	common.Context ctx = 1;
-	// string account_id = 2;
-	string call_id = 4;
-	string data_entry_id = 5;
-	string chunk = 6; // original
-	int64 score = 7;
-	int64 created = 8;
-
-	AIDataEntry data_entry = 9; // optional
-	string embed_chunk = 11;
 }
 
 message FacebookAdsFlow {
@@ -9876,22 +9846,6 @@ message VectorMatches {
 	string account_id = 2;
 	string collection = 3;
 	repeated VectorMatch matches = 4;
-}
-
-message NamedEntity {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // int32
-	string name = 4; // Paris
-	repeated string synonyms = 5;
-	string description = 8;
-
-	string merged_to = 9; // use the merged_to id, not this one
-
-	int64 updated = 10;
-	string updated_by = 11;
-	int64 created = 12;
-	string created_by = 13;
 }
 
 message ListAvaiableDiscountsRequest {

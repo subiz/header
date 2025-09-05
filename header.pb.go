@@ -2117,7 +2117,7 @@ func (x PushToken_Platform) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PushToken_Platform.Descriptor instead.
 func (PushToken_Platform) EnumDescriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{537, 0}
+	return file_header_proto_rawDescGZIP(), []int{535, 0}
 }
 
 type Empty struct {
@@ -6986,19 +6986,19 @@ type Data struct {
 	ArticleTopic         *ArticleTopic            `protobuf:"bytes,130,opt,name=article_topic,json=articleTopic,proto3" json:"article_topic,omitempty"`
 	ArticleNode          *ArticleNode             `protobuf:"bytes,131,opt,name=article_node,json=articleNode,proto3" json:"article_node,omitempty"`
 	AiDataEntry          *AIDataEntry             `protobuf:"bytes,132,opt,name=ai_data_entry,json=aiDataEntry,proto3" json:"ai_data_entry,omitempty"`
-	AiDataGroup          *AIDataGroup             `protobuf:"bytes,133,opt,name=ai_data_group,json=aiDataGroup,proto3" json:"ai_data_group,omitempty"`
-	AiAgent              *AIAgent                 `protobuf:"bytes,134,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
-	ZnsTemplate          *ZNSTemplate             `protobuf:"bytes,135,opt,name=zns_template,json=znsTemplate,proto3" json:"zns_template,omitempty"`
-	ZnsMedia             *ZNSMedia                `protobuf:"bytes,136,opt,name=zns_media,json=znsMedia,proto3" json:"zns_media,omitempty"`
-	EmailSignature       *EmailSignature          `protobuf:"bytes,137,opt,name=email_signature,json=emailSignature,proto3" json:"email_signature,omitempty"`
-	LlmToolCall          *LLMToolCall             `protobuf:"bytes,138,opt,name=llm_tool_call,json=llmToolCall,proto3" json:"llm_tool_call,omitempty"`
-	Form                 *Form                    `protobuf:"bytes,139,opt,name=form,proto3" json:"form,omitempty"`
-	EventDestination     *EventDestination        `protobuf:"bytes,140,opt,name=event_destination,json=eventDestination,proto3" json:"event_destination,omitempty"`
-	EventDestinations    []*EventDestination      `protobuf:"bytes,141,rep,name=event_destinations,json=eventDestinations,proto3" json:"event_destinations,omitempty"`
-	SegmentSync          *SegmentSync             `protobuf:"bytes,144,opt,name=segment_sync,json=segmentSync,proto3" json:"segment_sync,omitempty"`
-	Discount             *Discount                `protobuf:"bytes,145,opt,name=discount,proto3" json:"discount,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// AIDataGroup ai_data_group = 133;
+	AiAgent           *AIAgent            `protobuf:"bytes,134,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
+	ZnsTemplate       *ZNSTemplate        `protobuf:"bytes,135,opt,name=zns_template,json=znsTemplate,proto3" json:"zns_template,omitempty"`
+	ZnsMedia          *ZNSMedia           `protobuf:"bytes,136,opt,name=zns_media,json=znsMedia,proto3" json:"zns_media,omitempty"`
+	EmailSignature    *EmailSignature     `protobuf:"bytes,137,opt,name=email_signature,json=emailSignature,proto3" json:"email_signature,omitempty"`
+	LlmToolCall       *LLMToolCall        `protobuf:"bytes,138,opt,name=llm_tool_call,json=llmToolCall,proto3" json:"llm_tool_call,omitempty"`
+	Form              *Form               `protobuf:"bytes,139,opt,name=form,proto3" json:"form,omitempty"`
+	EventDestination  *EventDestination   `protobuf:"bytes,140,opt,name=event_destination,json=eventDestination,proto3" json:"event_destination,omitempty"`
+	EventDestinations []*EventDestination `protobuf:"bytes,141,rep,name=event_destinations,json=eventDestinations,proto3" json:"event_destinations,omitempty"`
+	SegmentSync       *SegmentSync        `protobuf:"bytes,144,opt,name=segment_sync,json=segmentSync,proto3" json:"segment_sync,omitempty"`
+	Discount          *Discount           `protobuf:"bytes,145,opt,name=discount,proto3" json:"discount,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Data) Reset() {
@@ -7629,13 +7629,6 @@ func (x *Data) GetArticleNode() *ArticleNode {
 func (x *Data) GetAiDataEntry() *AIDataEntry {
 	if x != nil {
 		return x.AiDataEntry
-	}
-	return nil
-}
-
-func (x *Data) GetAiDataGroup() *AIDataGroup {
-	if x != nil {
-		return x.AiDataGroup
 	}
 	return nil
 }
@@ -48697,12 +48690,8 @@ type Response struct {
 	Ids                    []string                 `protobuf:"bytes,165,rep,name=ids,proto3" json:"ids,omitempty"`
 	AiDataEntries          []*AIDataEntry           `protobuf:"bytes,166,rep,name=ai_data_entries,json=aiDataEntries,proto3" json:"ai_data_entries,omitempty"`
 	AiDataEntry            *AIDataEntry             `protobuf:"bytes,167,opt,name=ai_data_entry,json=aiDataEntry,proto3" json:"ai_data_entry,omitempty"`
-	AiDataGroups           []*AIDataGroup           `protobuf:"bytes,168,rep,name=ai_data_groups,json=aiDataGroups,proto3" json:"ai_data_groups,omitempty"`
-	AiDataGroup            *AIDataGroup             `protobuf:"bytes,169,opt,name=ai_data_group,json=aiDataGroup,proto3" json:"ai_data_group,omitempty"`
 	AiAgents               []*AIAgent               `protobuf:"bytes,170,rep,name=ai_agents,json=aiAgents,proto3" json:"ai_agents,omitempty"`
 	AiAgent                *AIAgent                 `protobuf:"bytes,171,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
-	AiResponseSources      []*AiResponseSource      `protobuf:"bytes,174,rep,name=ai_response_sources,json=aiResponseSources,proto3" json:"ai_response_sources,omitempty"`
-	AiResponseSource       *AiResponseSource        `protobuf:"bytes,158,opt,name=ai_response_source,json=aiResponseSource,proto3" json:"ai_response_source,omitempty"`
 	AiDataChunks           []*AIDataChunk           `protobuf:"bytes,175,rep,name=ai_data_chunks,json=aiDataChunks,proto3" json:"ai_data_chunks,omitempty"`
 	File                   *File                    `protobuf:"bytes,176,opt,name=file,proto3" json:"file,omitempty"`
 	Files                  []*File                  `protobuf:"bytes,177,rep,name=files,proto3" json:"files,omitempty"`
@@ -48748,8 +48737,6 @@ type Response struct {
 	MetaAdAccount         *MetaAdAccount         `protobuf:"bytes,226,opt,name=meta_ad_account,json=metaAdAccount,proto3" json:"meta_ad_account,omitempty"`
 	MetaAdAccounts        []*MetaAdAccount       `protobuf:"bytes,227,rep,name=meta_ad_accounts,json=metaAdAccounts,proto3" json:"meta_ad_accounts,omitempty"`
 	FanpageSettings       []*FbFanpageSetting    `protobuf:"bytes,228,rep,name=fanpage_settings,json=fanpageSettings,proto3" json:"fanpage_settings,omitempty"`
-	NamedEntities         []*NamedEntity         `protobuf:"bytes,229,rep,name=named_entities,json=namedEntities,proto3" json:"named_entities,omitempty"`
-	NamedEntity           *NamedEntity           `protobuf:"bytes,230,opt,name=named_entity,json=namedEntity,proto3" json:"named_entity,omitempty"`
 	ProductFeeds          []*ProductFeed         `protobuf:"bytes,233,rep,name=product_feeds,json=productFeeds,proto3" json:"product_feeds,omitempty"`
 	ProductFeed           *ProductFeed           `protobuf:"bytes,234,opt,name=product_feed,json=productFeed,proto3" json:"product_feed,omitempty"`
 	ProductFeedRuns       []*ProductFeedRun      `protobuf:"bytes,235,rep,name=product_feed_runs,json=productFeedRuns,proto3" json:"product_feed_runs,omitempty"`
@@ -49375,20 +49362,6 @@ func (x *Response) GetAiDataEntry() *AIDataEntry {
 	return nil
 }
 
-func (x *Response) GetAiDataGroups() []*AIDataGroup {
-	if x != nil {
-		return x.AiDataGroups
-	}
-	return nil
-}
-
-func (x *Response) GetAiDataGroup() *AIDataGroup {
-	if x != nil {
-		return x.AiDataGroup
-	}
-	return nil
-}
-
 func (x *Response) GetAiAgents() []*AIAgent {
 	if x != nil {
 		return x.AiAgents
@@ -49399,20 +49372,6 @@ func (x *Response) GetAiAgents() []*AIAgent {
 func (x *Response) GetAiAgent() *AIAgent {
 	if x != nil {
 		return x.AiAgent
-	}
-	return nil
-}
-
-func (x *Response) GetAiResponseSources() []*AiResponseSource {
-	if x != nil {
-		return x.AiResponseSources
-	}
-	return nil
-}
-
-func (x *Response) GetAiResponseSource() *AiResponseSource {
-	if x != nil {
-		return x.AiResponseSource
 	}
 	return nil
 }
@@ -49721,20 +49680,6 @@ func (x *Response) GetMetaAdAccounts() []*MetaAdAccount {
 func (x *Response) GetFanpageSettings() []*FbFanpageSetting {
 	if x != nil {
 		return x.FanpageSettings
-	}
-	return nil
-}
-
-func (x *Response) GetNamedEntities() []*NamedEntity {
-	if x != nil {
-		return x.NamedEntities
-	}
-	return nil
-}
-
-func (x *Response) GetNamedEntity() *NamedEntity {
-	if x != nil {
-		return x.NamedEntity
 	}
 	return nil
 }
@@ -63756,7 +63701,7 @@ type AIAgentOverrideRule struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Id          string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end
+	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, update_context
 	Functions   []*AIFunction          `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`     // use when action = function
 	Instruction string                 `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"` // use when action = remind
 	// string hook = 8; // ” = before_reply, after_reply
@@ -65439,146 +65384,6 @@ func (x *AIIntent) GetEditedBy() int64 {
 	return 0
 }
 
-type AIDataGroup struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Ctx              *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId        string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id               string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"` // empty -> default, kb
-	Name             string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"` // int64 disabled = 8;
-	NumEntries       int64                  `protobuf:"varint,9,opt,name=num_entries,json=numEntries,proto3" json:"num_entries,omitempty"`
-	NumTrainings     int64                  `protobuf:"varint,10,opt,name=num_trainings,json=numTrainings,proto3" json:"num_trainings,omitempty"`
-	NumPendings      int64                  `protobuf:"varint,11,opt,name=num_pendings,json=numPendings,proto3" json:"num_pendings,omitempty"`
-	Created          int64                  `protobuf:"varint,13,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy        string                 `protobuf:"bytes,14,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Type             string                 `protobuf:"bytes,15,opt,name=type,proto3" json:"type,omitempty"` // system, kb
-	LastFileModified int64                  `protobuf:"varint,16,opt,name=last_file_modified,json=lastFileModified,proto3" json:"last_file_modified,omitempty"`
-	Modified         int64                  `protobuf:"varint,17,opt,name=modified,proto3" json:"modified,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *AIDataGroup) Reset() {
-	*x = AIDataGroup{}
-	mi := &file_header_proto_msgTypes[526]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AIDataGroup) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AIDataGroup) ProtoMessage() {}
-
-func (x *AIDataGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[526]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AIDataGroup.ProtoReflect.Descriptor instead.
-func (*AIDataGroup) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{526}
-}
-
-func (x *AIDataGroup) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *AIDataGroup) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *AIDataGroup) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *AIDataGroup) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *AIDataGroup) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *AIDataGroup) GetNumEntries() int64 {
-	if x != nil {
-		return x.NumEntries
-	}
-	return 0
-}
-
-func (x *AIDataGroup) GetNumTrainings() int64 {
-	if x != nil {
-		return x.NumTrainings
-	}
-	return 0
-}
-
-func (x *AIDataGroup) GetNumPendings() int64 {
-	if x != nil {
-		return x.NumPendings
-	}
-	return 0
-}
-
-func (x *AIDataGroup) GetCreated() int64 {
-	if x != nil {
-		return x.Created
-	}
-	return 0
-}
-
-func (x *AIDataGroup) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
-}
-
-func (x *AIDataGroup) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *AIDataGroup) GetLastFileModified() int64 {
-	if x != nil {
-		return x.LastFileModified
-	}
-	return 0
-}
-
-func (x *AIDataGroup) GetModified() int64 {
-	if x != nil {
-		return x.Modified
-	}
-	return 0
-}
-
 type CrawlResponse struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Url                 string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
@@ -65599,7 +65404,7 @@ type CrawlResponse struct {
 
 func (x *CrawlResponse) Reset() {
 	*x = CrawlResponse{}
-	mi := &file_header_proto_msgTypes[527]
+	mi := &file_header_proto_msgTypes[526]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65611,7 +65416,7 @@ func (x *CrawlResponse) String() string {
 func (*CrawlResponse) ProtoMessage() {}
 
 func (x *CrawlResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[527]
+	mi := &file_header_proto_msgTypes[526]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65624,7 +65429,7 @@ func (x *CrawlResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CrawlResponse.ProtoReflect.Descriptor instead.
 func (*CrawlResponse) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{527}
+	return file_header_proto_rawDescGZIP(), []int{526}
 }
 
 func (x *CrawlResponse) GetUrl() string {
@@ -65728,7 +65533,7 @@ type AIDataChunk struct {
 
 func (x *AIDataChunk) Reset() {
 	*x = AIDataChunk{}
-	mi := &file_header_proto_msgTypes[528]
+	mi := &file_header_proto_msgTypes[527]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65740,7 +65545,7 @@ func (x *AIDataChunk) String() string {
 func (*AIDataChunk) ProtoMessage() {}
 
 func (x *AIDataChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[528]
+	mi := &file_header_proto_msgTypes[527]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65753,7 +65558,7 @@ func (x *AIDataChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataChunk.ProtoReflect.Descriptor instead.
 func (*AIDataChunk) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{528}
+	return file_header_proto_rawDescGZIP(), []int{527}
 }
 
 func (x *AIDataChunk) GetCtx() *common.Context {
@@ -65816,8 +65621,7 @@ type AIDataEntry struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId         string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id                string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	GroupId           string                 `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Id                string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`     // string group_id = 4;
 	Type              string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"` // qa, file, website, product, text (for testing), instruction, discount
 	Answer            *Message               `protobuf:"bytes,6,opt,name=answer,proto3" json:"answer,omitempty"`
 	Question          string                 `protobuf:"bytes,7,opt,name=question,proto3" json:"question,omitempty"`
@@ -65871,7 +65675,7 @@ type AIDataEntry struct {
 
 func (x *AIDataEntry) Reset() {
 	*x = AIDataEntry{}
-	mi := &file_header_proto_msgTypes[529]
+	mi := &file_header_proto_msgTypes[528]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -65883,7 +65687,7 @@ func (x *AIDataEntry) String() string {
 func (*AIDataEntry) ProtoMessage() {}
 
 func (x *AIDataEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[529]
+	mi := &file_header_proto_msgTypes[528]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65896,7 +65700,7 @@ func (x *AIDataEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIDataEntry.ProtoReflect.Descriptor instead.
 func (*AIDataEntry) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{529}
+	return file_header_proto_rawDescGZIP(), []int{528}
 }
 
 func (x *AIDataEntry) GetCtx() *common.Context {
@@ -65916,13 +65720,6 @@ func (x *AIDataEntry) GetAccountId() string {
 func (x *AIDataEntry) GetId() string {
 	if x != nil {
 		return x.Id
-	}
-	return ""
-}
-
-func (x *AIDataEntry) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
 	}
 	return ""
 }
@@ -66221,107 +66018,6 @@ func (x *AIDataEntry) GetReadBy() string {
 	return ""
 }
 
-type AiResponseSource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Ctx   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	// string account_id = 2;
-	CallId        string       `protobuf:"bytes,4,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`
-	DataEntryId   string       `protobuf:"bytes,5,opt,name=data_entry_id,json=dataEntryId,proto3" json:"data_entry_id,omitempty"`
-	Chunk         string       `protobuf:"bytes,6,opt,name=chunk,proto3" json:"chunk,omitempty"` // original
-	Score         int64        `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"`
-	Created       int64        `protobuf:"varint,8,opt,name=created,proto3" json:"created,omitempty"`
-	DataEntry     *AIDataEntry `protobuf:"bytes,9,opt,name=data_entry,json=dataEntry,proto3" json:"data_entry,omitempty"` // optional
-	EmbedChunk    string       `protobuf:"bytes,11,opt,name=embed_chunk,json=embedChunk,proto3" json:"embed_chunk,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AiResponseSource) Reset() {
-	*x = AiResponseSource{}
-	mi := &file_header_proto_msgTypes[530]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AiResponseSource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AiResponseSource) ProtoMessage() {}
-
-func (x *AiResponseSource) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[530]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AiResponseSource.ProtoReflect.Descriptor instead.
-func (*AiResponseSource) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{530}
-}
-
-func (x *AiResponseSource) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *AiResponseSource) GetCallId() string {
-	if x != nil {
-		return x.CallId
-	}
-	return ""
-}
-
-func (x *AiResponseSource) GetDataEntryId() string {
-	if x != nil {
-		return x.DataEntryId
-	}
-	return ""
-}
-
-func (x *AiResponseSource) GetChunk() string {
-	if x != nil {
-		return x.Chunk
-	}
-	return ""
-}
-
-func (x *AiResponseSource) GetScore() int64 {
-	if x != nil {
-		return x.Score
-	}
-	return 0
-}
-
-func (x *AiResponseSource) GetCreated() int64 {
-	if x != nil {
-		return x.Created
-	}
-	return 0
-}
-
-func (x *AiResponseSource) GetDataEntry() *AIDataEntry {
-	if x != nil {
-		return x.DataEntry
-	}
-	return nil
-}
-
-func (x *AiResponseSource) GetEmbedChunk() string {
-	if x != nil {
-		return x.EmbedChunk
-	}
-	return ""
-}
-
 type FacebookAdsFlow struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -66339,7 +66035,7 @@ type FacebookAdsFlow struct {
 
 func (x *FacebookAdsFlow) Reset() {
 	*x = FacebookAdsFlow{}
-	mi := &file_header_proto_msgTypes[531]
+	mi := &file_header_proto_msgTypes[529]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66351,7 +66047,7 @@ func (x *FacebookAdsFlow) String() string {
 func (*FacebookAdsFlow) ProtoMessage() {}
 
 func (x *FacebookAdsFlow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[531]
+	mi := &file_header_proto_msgTypes[529]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66364,7 +66060,7 @@ func (x *FacebookAdsFlow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookAdsFlow.ProtoReflect.Descriptor instead.
 func (*FacebookAdsFlow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{531}
+	return file_header_proto_rawDescGZIP(), []int{529}
 }
 
 func (x *FacebookAdsFlow) GetCtx() *common.Context {
@@ -66442,7 +66138,7 @@ type RuleOrder struct {
 
 func (x *RuleOrder) Reset() {
 	*x = RuleOrder{}
-	mi := &file_header_proto_msgTypes[532]
+	mi := &file_header_proto_msgTypes[530]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66454,7 +66150,7 @@ func (x *RuleOrder) String() string {
 func (*RuleOrder) ProtoMessage() {}
 
 func (x *RuleOrder) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[532]
+	mi := &file_header_proto_msgTypes[530]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66467,7 +66163,7 @@ func (x *RuleOrder) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RuleOrder.ProtoReflect.Descriptor instead.
 func (*RuleOrder) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{532}
+	return file_header_proto_rawDescGZIP(), []int{530}
 }
 
 func (x *RuleOrder) GetCtx() *common.Context {
@@ -66522,7 +66218,7 @@ type NotiSubscription struct {
 
 func (x *NotiSubscription) Reset() {
 	*x = NotiSubscription{}
-	mi := &file_header_proto_msgTypes[533]
+	mi := &file_header_proto_msgTypes[531]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66534,7 +66230,7 @@ func (x *NotiSubscription) String() string {
 func (*NotiSubscription) ProtoMessage() {}
 
 func (x *NotiSubscription) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[533]
+	mi := &file_header_proto_msgTypes[531]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66547,7 +66243,7 @@ func (x *NotiSubscription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotiSubscription.ProtoReflect.Descriptor instead.
 func (*NotiSubscription) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{533}
+	return file_header_proto_rawDescGZIP(), []int{531}
 }
 
 func (x *NotiSubscription) GetNewMessage() bool {
@@ -66672,7 +66368,7 @@ type TicketTypeSubscription struct {
 
 func (x *TicketTypeSubscription) Reset() {
 	*x = TicketTypeSubscription{}
-	mi := &file_header_proto_msgTypes[534]
+	mi := &file_header_proto_msgTypes[532]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66684,7 +66380,7 @@ func (x *TicketTypeSubscription) String() string {
 func (*TicketTypeSubscription) ProtoMessage() {}
 
 func (x *TicketTypeSubscription) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[534]
+	mi := &file_header_proto_msgTypes[532]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66697,7 +66393,7 @@ func (x *TicketTypeSubscription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketTypeSubscription.ProtoReflect.Descriptor instead.
 func (*TicketTypeSubscription) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{534}
+	return file_header_proto_rawDescGZIP(), []int{532}
 }
 
 func (x *TicketTypeSubscription) GetTicketType() string {
@@ -66733,7 +66429,7 @@ type NotiSetting struct {
 
 func (x *NotiSetting) Reset() {
 	*x = NotiSetting{}
-	mi := &file_header_proto_msgTypes[535]
+	mi := &file_header_proto_msgTypes[533]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66745,7 +66441,7 @@ func (x *NotiSetting) String() string {
 func (*NotiSetting) ProtoMessage() {}
 
 func (x *NotiSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[535]
+	mi := &file_header_proto_msgTypes[533]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66758,7 +66454,7 @@ func (x *NotiSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NotiSetting.ProtoReflect.Descriptor instead.
 func (*NotiSetting) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{535}
+	return file_header_proto_rawDescGZIP(), []int{533}
 }
 
 func (x *NotiSetting) GetCtx() *common.Context {
@@ -66850,7 +66546,7 @@ type DoNotDisturb struct {
 
 func (x *DoNotDisturb) Reset() {
 	*x = DoNotDisturb{}
-	mi := &file_header_proto_msgTypes[536]
+	mi := &file_header_proto_msgTypes[534]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66862,7 +66558,7 @@ func (x *DoNotDisturb) String() string {
 func (*DoNotDisturb) ProtoMessage() {}
 
 func (x *DoNotDisturb) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[536]
+	mi := &file_header_proto_msgTypes[534]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66875,7 +66571,7 @@ func (x *DoNotDisturb) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DoNotDisturb.ProtoReflect.Descriptor instead.
 func (*DoNotDisturb) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{536}
+	return file_header_proto_rawDescGZIP(), []int{534}
 }
 
 func (x *DoNotDisturb) GetDailyFrom() int64 {
@@ -66924,7 +66620,7 @@ type PushToken struct {
 
 func (x *PushToken) Reset() {
 	*x = PushToken{}
-	mi := &file_header_proto_msgTypes[537]
+	mi := &file_header_proto_msgTypes[535]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66936,7 +66632,7 @@ func (x *PushToken) String() string {
 func (*PushToken) ProtoMessage() {}
 
 func (x *PushToken) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[537]
+	mi := &file_header_proto_msgTypes[535]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66949,7 +66645,7 @@ func (x *PushToken) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushToken.ProtoReflect.Descriptor instead.
 func (*PushToken) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{537}
+	return file_header_proto_rawDescGZIP(), []int{535}
 }
 
 func (x *PushToken) GetCtx() *common.Context {
@@ -67033,7 +66729,7 @@ type ZNSTemplateParam struct {
 
 func (x *ZNSTemplateParam) Reset() {
 	*x = ZNSTemplateParam{}
-	mi := &file_header_proto_msgTypes[538]
+	mi := &file_header_proto_msgTypes[536]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67045,7 +66741,7 @@ func (x *ZNSTemplateParam) String() string {
 func (*ZNSTemplateParam) ProtoMessage() {}
 
 func (x *ZNSTemplateParam) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[538]
+	mi := &file_header_proto_msgTypes[536]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67058,7 +66754,7 @@ func (x *ZNSTemplateParam) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateParam.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateParam) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{538}
+	return file_header_proto_rawDescGZIP(), []int{536}
 }
 
 func (x *ZNSTemplateParam) GetType() string {
@@ -67104,7 +66800,7 @@ type ZNSTemplateLayoutComponentItem struct {
 
 func (x *ZNSTemplateLayoutComponentItem) Reset() {
 	*x = ZNSTemplateLayoutComponentItem{}
-	mi := &file_header_proto_msgTypes[539]
+	mi := &file_header_proto_msgTypes[537]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67116,7 +66812,7 @@ func (x *ZNSTemplateLayoutComponentItem) String() string {
 func (*ZNSTemplateLayoutComponentItem) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[539]
+	mi := &file_header_proto_msgTypes[537]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67129,7 +66825,7 @@ func (x *ZNSTemplateLayoutComponentItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentItem.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{539}
+	return file_header_proto_rawDescGZIP(), []int{537}
 }
 
 func (x *ZNSTemplateLayoutComponentItem) GetBankCode() string {
@@ -67241,7 +66937,7 @@ type ZNSTemplateLayoutComponentButton struct {
 
 func (x *ZNSTemplateLayoutComponentButton) Reset() {
 	*x = ZNSTemplateLayoutComponentButton{}
-	mi := &file_header_proto_msgTypes[540]
+	mi := &file_header_proto_msgTypes[538]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67253,7 +66949,7 @@ func (x *ZNSTemplateLayoutComponentButton) String() string {
 func (*ZNSTemplateLayoutComponentButton) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentButton) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[540]
+	mi := &file_header_proto_msgTypes[538]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67266,7 +66962,7 @@ func (x *ZNSTemplateLayoutComponentButton) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentButton.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentButton) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{540}
+	return file_header_proto_rawDescGZIP(), []int{538}
 }
 
 func (x *ZNSTemplateLayoutComponentButton) GetContent() string {
@@ -67299,7 +66995,7 @@ type ZNSTemplateLayoutComponentButtons struct {
 
 func (x *ZNSTemplateLayoutComponentButtons) Reset() {
 	*x = ZNSTemplateLayoutComponentButtons{}
-	mi := &file_header_proto_msgTypes[541]
+	mi := &file_header_proto_msgTypes[539]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67311,7 +67007,7 @@ func (x *ZNSTemplateLayoutComponentButtons) String() string {
 func (*ZNSTemplateLayoutComponentButtons) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentButtons) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[541]
+	mi := &file_header_proto_msgTypes[539]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67324,7 +67020,7 @@ func (x *ZNSTemplateLayoutComponentButtons) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ZNSTemplateLayoutComponentButtons.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentButtons) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{541}
+	return file_header_proto_rawDescGZIP(), []int{539}
 }
 
 func (x *ZNSTemplateLayoutComponentButtons) GetItems() []*ZNSTemplateLayoutComponentButton {
@@ -67345,7 +67041,7 @@ type ZNSTemplateLayoutComponentTableRow struct {
 
 func (x *ZNSTemplateLayoutComponentTableRow) Reset() {
 	*x = ZNSTemplateLayoutComponentTableRow{}
-	mi := &file_header_proto_msgTypes[542]
+	mi := &file_header_proto_msgTypes[540]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67357,7 +67053,7 @@ func (x *ZNSTemplateLayoutComponentTableRow) String() string {
 func (*ZNSTemplateLayoutComponentTableRow) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentTableRow) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[542]
+	mi := &file_header_proto_msgTypes[540]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67370,7 +67066,7 @@ func (x *ZNSTemplateLayoutComponentTableRow) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ZNSTemplateLayoutComponentTableRow.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentTableRow) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{542}
+	return file_header_proto_rawDescGZIP(), []int{540}
 }
 
 func (x *ZNSTemplateLayoutComponentTableRow) GetTitle() string {
@@ -67403,7 +67099,7 @@ type ZNSTemplateLayoutComponentTable struct {
 
 func (x *ZNSTemplateLayoutComponentTable) Reset() {
 	*x = ZNSTemplateLayoutComponentTable{}
-	mi := &file_header_proto_msgTypes[543]
+	mi := &file_header_proto_msgTypes[541]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67415,7 +67111,7 @@ func (x *ZNSTemplateLayoutComponentTable) String() string {
 func (*ZNSTemplateLayoutComponentTable) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentTable) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[543]
+	mi := &file_header_proto_msgTypes[541]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67428,7 +67124,7 @@ func (x *ZNSTemplateLayoutComponentTable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentTable.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentTable) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{543}
+	return file_header_proto_rawDescGZIP(), []int{541}
 }
 
 func (x *ZNSTemplateLayoutComponentTable) GetRows() []*ZNSTemplateLayoutComponentTableRow {
@@ -67448,7 +67144,7 @@ type ZNSTemplateLayoutComponentImageItem struct {
 
 func (x *ZNSTemplateLayoutComponentImageItem) Reset() {
 	*x = ZNSTemplateLayoutComponentImageItem{}
-	mi := &file_header_proto_msgTypes[544]
+	mi := &file_header_proto_msgTypes[542]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67460,7 +67156,7 @@ func (x *ZNSTemplateLayoutComponentImageItem) String() string {
 func (*ZNSTemplateLayoutComponentImageItem) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentImageItem) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[544]
+	mi := &file_header_proto_msgTypes[542]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67473,7 +67169,7 @@ func (x *ZNSTemplateLayoutComponentImageItem) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ZNSTemplateLayoutComponentImageItem.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentImageItem) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{544}
+	return file_header_proto_rawDescGZIP(), []int{542}
 }
 
 func (x *ZNSTemplateLayoutComponentImageItem) GetType() string {
@@ -67499,7 +67195,7 @@ type ZNSTemplateLayoutComponentImages struct {
 
 func (x *ZNSTemplateLayoutComponentImages) Reset() {
 	*x = ZNSTemplateLayoutComponentImages{}
-	mi := &file_header_proto_msgTypes[545]
+	mi := &file_header_proto_msgTypes[543]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67511,7 +67207,7 @@ func (x *ZNSTemplateLayoutComponentImages) String() string {
 func (*ZNSTemplateLayoutComponentImages) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentImages) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[545]
+	mi := &file_header_proto_msgTypes[543]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67524,7 +67220,7 @@ func (x *ZNSTemplateLayoutComponentImages) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentImages.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentImages) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{545}
+	return file_header_proto_rawDescGZIP(), []int{543}
 }
 
 func (x *ZNSTemplateLayoutComponentImages) GetItems() []*ZNSTemplateLayoutComponentImageItem {
@@ -67544,7 +67240,7 @@ type ZNSTemplateLayoutComponentLogo struct {
 
 func (x *ZNSTemplateLayoutComponentLogo) Reset() {
 	*x = ZNSTemplateLayoutComponentLogo{}
-	mi := &file_header_proto_msgTypes[546]
+	mi := &file_header_proto_msgTypes[544]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67556,7 +67252,7 @@ func (x *ZNSTemplateLayoutComponentLogo) String() string {
 func (*ZNSTemplateLayoutComponentLogo) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponentLogo) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[546]
+	mi := &file_header_proto_msgTypes[544]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67569,7 +67265,7 @@ func (x *ZNSTemplateLayoutComponentLogo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponentLogo.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponentLogo) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{546}
+	return file_header_proto_rawDescGZIP(), []int{544}
 }
 
 func (x *ZNSTemplateLayoutComponentLogo) GetLight() *ZNSTemplateLayoutComponentImageItem {
@@ -67603,7 +67299,7 @@ type ZNSTemplateLayoutComponent struct {
 
 func (x *ZNSTemplateLayoutComponent) Reset() {
 	*x = ZNSTemplateLayoutComponent{}
-	mi := &file_header_proto_msgTypes[547]
+	mi := &file_header_proto_msgTypes[545]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67615,7 +67311,7 @@ func (x *ZNSTemplateLayoutComponent) String() string {
 func (*ZNSTemplateLayoutComponent) ProtoMessage() {}
 
 func (x *ZNSTemplateLayoutComponent) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[547]
+	mi := &file_header_proto_msgTypes[545]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67628,7 +67324,7 @@ func (x *ZNSTemplateLayoutComponent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayoutComponent.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayoutComponent) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{547}
+	return file_header_proto_rawDescGZIP(), []int{545}
 }
 
 func (x *ZNSTemplateLayoutComponent) GetIMAGES() *ZNSTemplateLayoutComponentImages {
@@ -67703,7 +67399,7 @@ type ZNSTemplateComponents struct {
 
 func (x *ZNSTemplateComponents) Reset() {
 	*x = ZNSTemplateComponents{}
-	mi := &file_header_proto_msgTypes[548]
+	mi := &file_header_proto_msgTypes[546]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67715,7 +67411,7 @@ func (x *ZNSTemplateComponents) String() string {
 func (*ZNSTemplateComponents) ProtoMessage() {}
 
 func (x *ZNSTemplateComponents) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[548]
+	mi := &file_header_proto_msgTypes[546]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67728,7 +67424,7 @@ func (x *ZNSTemplateComponents) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateComponents.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateComponents) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{548}
+	return file_header_proto_rawDescGZIP(), []int{546}
 }
 
 func (x *ZNSTemplateComponents) GetComponents() []*ZNSTemplateLayoutComponent {
@@ -67749,7 +67445,7 @@ type ZNSTemplateLayout struct {
 
 func (x *ZNSTemplateLayout) Reset() {
 	*x = ZNSTemplateLayout{}
-	mi := &file_header_proto_msgTypes[549]
+	mi := &file_header_proto_msgTypes[547]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67761,7 +67457,7 @@ func (x *ZNSTemplateLayout) String() string {
 func (*ZNSTemplateLayout) ProtoMessage() {}
 
 func (x *ZNSTemplateLayout) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[549]
+	mi := &file_header_proto_msgTypes[547]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67774,7 +67470,7 @@ func (x *ZNSTemplateLayout) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateLayout.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateLayout) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{549}
+	return file_header_proto_rawDescGZIP(), []int{547}
 }
 
 func (x *ZNSTemplateLayout) GetHeader() *ZNSTemplateComponents {
@@ -67814,7 +67510,7 @@ type ZNSTemplateRequest struct {
 
 func (x *ZNSTemplateRequest) Reset() {
 	*x = ZNSTemplateRequest{}
-	mi := &file_header_proto_msgTypes[550]
+	mi := &file_header_proto_msgTypes[548]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67826,7 +67522,7 @@ func (x *ZNSTemplateRequest) String() string {
 func (*ZNSTemplateRequest) ProtoMessage() {}
 
 func (x *ZNSTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[550]
+	mi := &file_header_proto_msgTypes[548]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67839,7 +67535,7 @@ func (x *ZNSTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateRequest.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{550}
+	return file_header_proto_rawDescGZIP(), []int{548}
 }
 
 func (x *ZNSTemplateRequest) GetTemplateId() string {
@@ -67913,7 +67609,7 @@ type ZaloOAZNSQuota struct {
 
 func (x *ZaloOAZNSQuota) Reset() {
 	*x = ZaloOAZNSQuota{}
-	mi := &file_header_proto_msgTypes[551]
+	mi := &file_header_proto_msgTypes[549]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -67925,7 +67621,7 @@ func (x *ZaloOAZNSQuota) String() string {
 func (*ZaloOAZNSQuota) ProtoMessage() {}
 
 func (x *ZaloOAZNSQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[551]
+	mi := &file_header_proto_msgTypes[549]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67938,7 +67634,7 @@ func (x *ZaloOAZNSQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloOAZNSQuota.ProtoReflect.Descriptor instead.
 func (*ZaloOAZNSQuota) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{551}
+	return file_header_proto_rawDescGZIP(), []int{549}
 }
 
 func (x *ZaloOAZNSQuota) GetDailyQuota() int64 {
@@ -68016,7 +67712,7 @@ type ZNSTemplate struct {
 
 func (x *ZNSTemplate) Reset() {
 	*x = ZNSTemplate{}
-	mi := &file_header_proto_msgTypes[552]
+	mi := &file_header_proto_msgTypes[550]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68028,7 +67724,7 @@ func (x *ZNSTemplate) String() string {
 func (*ZNSTemplate) ProtoMessage() {}
 
 func (x *ZNSTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[552]
+	mi := &file_header_proto_msgTypes[550]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68041,7 +67737,7 @@ func (x *ZNSTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplate.ProtoReflect.Descriptor instead.
 func (*ZNSTemplate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{552}
+	return file_header_proto_rawDescGZIP(), []int{550}
 }
 
 func (x *ZNSTemplate) GetCtx() *common.Context {
@@ -68194,7 +67890,7 @@ type ZnsTemplate struct {
 
 func (x *ZnsTemplate) Reset() {
 	*x = ZnsTemplate{}
-	mi := &file_header_proto_msgTypes[553]
+	mi := &file_header_proto_msgTypes[551]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68206,7 +67902,7 @@ func (x *ZnsTemplate) String() string {
 func (*ZnsTemplate) ProtoMessage() {}
 
 func (x *ZnsTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[553]
+	mi := &file_header_proto_msgTypes[551]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68219,7 +67915,7 @@ func (x *ZnsTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZnsTemplate.ProtoReflect.Descriptor instead.
 func (*ZnsTemplate) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{553}
+	return file_header_proto_rawDescGZIP(), []int{551}
 }
 
 func (x *ZnsTemplate) GetTemplateId() int64 {
@@ -68345,7 +68041,7 @@ type ZNSButton struct {
 
 func (x *ZNSButton) Reset() {
 	*x = ZNSButton{}
-	mi := &file_header_proto_msgTypes[554]
+	mi := &file_header_proto_msgTypes[552]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68357,7 +68053,7 @@ func (x *ZNSButton) String() string {
 func (*ZNSButton) ProtoMessage() {}
 
 func (x *ZNSButton) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[554]
+	mi := &file_header_proto_msgTypes[552]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68370,7 +68066,7 @@ func (x *ZNSButton) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSButton.ProtoReflect.Descriptor instead.
 func (*ZNSButton) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{554}
+	return file_header_proto_rawDescGZIP(), []int{552}
 }
 
 func (x *ZNSButton) GetType() int64 {
@@ -68408,7 +68104,7 @@ type ZNSParamDefinition struct {
 
 func (x *ZNSParamDefinition) Reset() {
 	*x = ZNSParamDefinition{}
-	mi := &file_header_proto_msgTypes[555]
+	mi := &file_header_proto_msgTypes[553]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68420,7 +68116,7 @@ func (x *ZNSParamDefinition) String() string {
 func (*ZNSParamDefinition) ProtoMessage() {}
 
 func (x *ZNSParamDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[555]
+	mi := &file_header_proto_msgTypes[553]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68433,7 +68129,7 @@ func (x *ZNSParamDefinition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSParamDefinition.ProtoReflect.Descriptor instead.
 func (*ZNSParamDefinition) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{555}
+	return file_header_proto_rawDescGZIP(), []int{553}
 }
 
 func (x *ZNSParamDefinition) GetName() string {
@@ -68502,7 +68198,7 @@ type ZNSMedia struct {
 
 func (x *ZNSMedia) Reset() {
 	*x = ZNSMedia{}
-	mi := &file_header_proto_msgTypes[556]
+	mi := &file_header_proto_msgTypes[554]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68514,7 +68210,7 @@ func (x *ZNSMedia) String() string {
 func (*ZNSMedia) ProtoMessage() {}
 
 func (x *ZNSMedia) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[556]
+	mi := &file_header_proto_msgTypes[554]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68527,7 +68223,7 @@ func (x *ZNSMedia) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSMedia.ProtoReflect.Descriptor instead.
 func (*ZNSMedia) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{556}
+	return file_header_proto_rawDescGZIP(), []int{554}
 }
 
 func (x *ZNSMedia) GetCtx() *common.Context {
@@ -68607,7 +68303,7 @@ type EmailSignature struct {
 
 func (x *EmailSignature) Reset() {
 	*x = EmailSignature{}
-	mi := &file_header_proto_msgTypes[557]
+	mi := &file_header_proto_msgTypes[555]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68619,7 +68315,7 @@ func (x *EmailSignature) String() string {
 func (*EmailSignature) ProtoMessage() {}
 
 func (x *EmailSignature) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[557]
+	mi := &file_header_proto_msgTypes[555]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68632,7 +68328,7 @@ func (x *EmailSignature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailSignature.ProtoReflect.Descriptor instead.
 func (*EmailSignature) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{557}
+	return file_header_proto_rawDescGZIP(), []int{555}
 }
 
 func (x *EmailSignature) GetCtx() *common.Context {
@@ -68742,7 +68438,7 @@ type TestMessageRequest struct {
 
 func (x *TestMessageRequest) Reset() {
 	*x = TestMessageRequest{}
-	mi := &file_header_proto_msgTypes[558]
+	mi := &file_header_proto_msgTypes[556]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68754,7 +68450,7 @@ func (x *TestMessageRequest) String() string {
 func (*TestMessageRequest) ProtoMessage() {}
 
 func (x *TestMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[558]
+	mi := &file_header_proto_msgTypes[556]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68767,7 +68463,7 @@ func (x *TestMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestMessageRequest.ProtoReflect.Descriptor instead.
 func (*TestMessageRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{558}
+	return file_header_proto_rawDescGZIP(), []int{556}
 }
 
 func (x *TestMessageRequest) GetCtx() *common.Context {
@@ -68839,7 +68535,7 @@ type CreditUsage struct {
 
 func (x *CreditUsage) Reset() {
 	*x = CreditUsage{}
-	mi := &file_header_proto_msgTypes[559]
+	mi := &file_header_proto_msgTypes[557]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68851,7 +68547,7 @@ func (x *CreditUsage) String() string {
 func (*CreditUsage) ProtoMessage() {}
 
 func (x *CreditUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[559]
+	mi := &file_header_proto_msgTypes[557]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68864,7 +68560,7 @@ func (x *CreditUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditUsage.ProtoReflect.Descriptor instead.
 func (*CreditUsage) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{559}
+	return file_header_proto_rawDescGZIP(), []int{557}
 }
 
 func (x *CreditUsage) GetCtx() *common.Context {
@@ -68914,7 +68610,7 @@ type SendSubizZNSTestRequest struct {
 
 func (x *SendSubizZNSTestRequest) Reset() {
 	*x = SendSubizZNSTestRequest{}
-	mi := &file_header_proto_msgTypes[560]
+	mi := &file_header_proto_msgTypes[558]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68926,7 +68622,7 @@ func (x *SendSubizZNSTestRequest) String() string {
 func (*SendSubizZNSTestRequest) ProtoMessage() {}
 
 func (x *SendSubizZNSTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[560]
+	mi := &file_header_proto_msgTypes[558]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68939,7 +68635,7 @@ func (x *SendSubizZNSTestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendSubizZNSTestRequest.ProtoReflect.Descriptor instead.
 func (*SendSubizZNSTestRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{560}
+	return file_header_proto_rawDescGZIP(), []int{558}
 }
 
 func (x *SendSubizZNSTestRequest) GetAccountId() string {
@@ -68986,7 +68682,7 @@ type ActionAIAgentTrack struct {
 
 func (x *ActionAIAgentTrack) Reset() {
 	*x = ActionAIAgentTrack{}
-	mi := &file_header_proto_msgTypes[561]
+	mi := &file_header_proto_msgTypes[559]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -68998,7 +68694,7 @@ func (x *ActionAIAgentTrack) String() string {
 func (*ActionAIAgentTrack) ProtoMessage() {}
 
 func (x *ActionAIAgentTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[561]
+	mi := &file_header_proto_msgTypes[559]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69011,7 +68707,7 @@ func (x *ActionAIAgentTrack) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionAIAgentTrack.ProtoReflect.Descriptor instead.
 func (*ActionAIAgentTrack) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{561}
+	return file_header_proto_rawDescGZIP(), []int{559}
 }
 
 func (x *ActionAIAgentTrack) GetIsMissingSource() string {
@@ -69072,7 +68768,7 @@ type Markers struct {
 
 func (x *Markers) Reset() {
 	*x = Markers{}
-	mi := &file_header_proto_msgTypes[562]
+	mi := &file_header_proto_msgTypes[560]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69084,7 +68780,7 @@ func (x *Markers) String() string {
 func (*Markers) ProtoMessage() {}
 
 func (x *Markers) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[562]
+	mi := &file_header_proto_msgTypes[560]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69097,7 +68793,7 @@ func (x *Markers) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Markers.ProtoReflect.Descriptor instead.
 func (*Markers) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{562}
+	return file_header_proto_rawDescGZIP(), []int{560}
 }
 
 func (x *Markers) GetOffsets() []int64 {
@@ -69115,7 +68811,7 @@ type UserDataSource struct {
 
 func (x *UserDataSource) Reset() {
 	*x = UserDataSource{}
-	mi := &file_header_proto_msgTypes[563]
+	mi := &file_header_proto_msgTypes[561]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69127,7 +68823,7 @@ func (x *UserDataSource) String() string {
 func (*UserDataSource) ProtoMessage() {}
 
 func (x *UserDataSource) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[563]
+	mi := &file_header_proto_msgTypes[561]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69140,7 +68836,7 @@ func (x *UserDataSource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDataSource.ProtoReflect.Descriptor instead.
 func (*UserDataSource) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{563}
+	return file_header_proto_rawDescGZIP(), []int{561}
 }
 
 type MetaBusiness struct {
@@ -69153,7 +68849,7 @@ type MetaBusiness struct {
 
 func (x *MetaBusiness) Reset() {
 	*x = MetaBusiness{}
-	mi := &file_header_proto_msgTypes[564]
+	mi := &file_header_proto_msgTypes[562]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69165,7 +68861,7 @@ func (x *MetaBusiness) String() string {
 func (*MetaBusiness) ProtoMessage() {}
 
 func (x *MetaBusiness) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[564]
+	mi := &file_header_proto_msgTypes[562]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69178,7 +68874,7 @@ func (x *MetaBusiness) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaBusiness.ProtoReflect.Descriptor instead.
 func (*MetaBusiness) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{564}
+	return file_header_proto_rawDescGZIP(), []int{562}
 }
 
 func (x *MetaBusiness) GetId() string {
@@ -69221,7 +68917,7 @@ type MetaAdAccount struct {
 
 func (x *MetaAdAccount) Reset() {
 	*x = MetaAdAccount{}
-	mi := &file_header_proto_msgTypes[565]
+	mi := &file_header_proto_msgTypes[563]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69233,7 +68929,7 @@ func (x *MetaAdAccount) String() string {
 func (*MetaAdAccount) ProtoMessage() {}
 
 func (x *MetaAdAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[565]
+	mi := &file_header_proto_msgTypes[563]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69246,7 +68942,7 @@ func (x *MetaAdAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaAdAccount.ProtoReflect.Descriptor instead.
 func (*MetaAdAccount) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{565}
+	return file_header_proto_rawDescGZIP(), []int{563}
 }
 
 func (x *MetaAdAccount) GetCtx() *common.Context {
@@ -69389,7 +69085,7 @@ type VectorSearchReq struct {
 
 func (x *VectorSearchReq) Reset() {
 	*x = VectorSearchReq{}
-	mi := &file_header_proto_msgTypes[566]
+	mi := &file_header_proto_msgTypes[564]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69401,7 +69097,7 @@ func (x *VectorSearchReq) String() string {
 func (*VectorSearchReq) ProtoMessage() {}
 
 func (x *VectorSearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[566]
+	mi := &file_header_proto_msgTypes[564]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69414,7 +69110,7 @@ func (x *VectorSearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorSearchReq.ProtoReflect.Descriptor instead.
 func (*VectorSearchReq) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{566}
+	return file_header_proto_rawDescGZIP(), []int{564}
 }
 
 func (x *VectorSearchReq) GetCtx() *common.Context {
@@ -69474,7 +69170,7 @@ type VectorDoc struct {
 
 func (x *VectorDoc) Reset() {
 	*x = VectorDoc{}
-	mi := &file_header_proto_msgTypes[567]
+	mi := &file_header_proto_msgTypes[565]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69486,7 +69182,7 @@ func (x *VectorDoc) String() string {
 func (*VectorDoc) ProtoMessage() {}
 
 func (x *VectorDoc) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[567]
+	mi := &file_header_proto_msgTypes[565]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69499,7 +69195,7 @@ func (x *VectorDoc) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorDoc.ProtoReflect.Descriptor instead.
 func (*VectorDoc) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{567}
+	return file_header_proto_rawDescGZIP(), []int{565}
 }
 
 func (x *VectorDoc) GetCtx() *common.Context {
@@ -69557,7 +69253,7 @@ type ListVectorRequest struct {
 
 func (x *ListVectorRequest) Reset() {
 	*x = ListVectorRequest{}
-	mi := &file_header_proto_msgTypes[568]
+	mi := &file_header_proto_msgTypes[566]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69569,7 +69265,7 @@ func (x *ListVectorRequest) String() string {
 func (*ListVectorRequest) ProtoMessage() {}
 
 func (x *ListVectorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[568]
+	mi := &file_header_proto_msgTypes[566]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69582,7 +69278,7 @@ func (x *ListVectorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListVectorRequest.ProtoReflect.Descriptor instead.
 func (*ListVectorRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{568}
+	return file_header_proto_rawDescGZIP(), []int{566}
 }
 
 func (x *ListVectorRequest) GetCtx() *common.Context {
@@ -69631,7 +69327,7 @@ type VectorDocProp struct {
 
 func (x *VectorDocProp) Reset() {
 	*x = VectorDocProp{}
-	mi := &file_header_proto_msgTypes[569]
+	mi := &file_header_proto_msgTypes[567]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69643,7 +69339,7 @@ func (x *VectorDocProp) String() string {
 func (*VectorDocProp) ProtoMessage() {}
 
 func (x *VectorDocProp) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[569]
+	mi := &file_header_proto_msgTypes[567]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69656,7 +69352,7 @@ func (x *VectorDocProp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorDocProp.ProtoReflect.Descriptor instead.
 func (*VectorDocProp) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{569}
+	return file_header_proto_rawDescGZIP(), []int{567}
 }
 
 func (x *VectorDocProp) GetCollection() string {
@@ -69691,7 +69387,7 @@ type VectorMatch struct {
 
 func (x *VectorMatch) Reset() {
 	*x = VectorMatch{}
-	mi := &file_header_proto_msgTypes[570]
+	mi := &file_header_proto_msgTypes[568]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69703,7 +69399,7 @@ func (x *VectorMatch) String() string {
 func (*VectorMatch) ProtoMessage() {}
 
 func (x *VectorMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[570]
+	mi := &file_header_proto_msgTypes[568]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69716,7 +69412,7 @@ func (x *VectorMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorMatch.ProtoReflect.Descriptor instead.
 func (*VectorMatch) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{570}
+	return file_header_proto_rawDescGZIP(), []int{568}
 }
 
 func (x *VectorMatch) GetId() string {
@@ -69752,7 +69448,7 @@ type VectorMatches struct {
 
 func (x *VectorMatches) Reset() {
 	*x = VectorMatches{}
-	mi := &file_header_proto_msgTypes[571]
+	mi := &file_header_proto_msgTypes[569]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69764,7 +69460,7 @@ func (x *VectorMatches) String() string {
 func (*VectorMatches) ProtoMessage() {}
 
 func (x *VectorMatches) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[571]
+	mi := &file_header_proto_msgTypes[569]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69777,7 +69473,7 @@ func (x *VectorMatches) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorMatches.ProtoReflect.Descriptor instead.
 func (*VectorMatches) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{571}
+	return file_header_proto_rawDescGZIP(), []int{569}
 }
 
 func (x *VectorMatches) GetCtx() *common.Context {
@@ -69808,130 +69504,6 @@ func (x *VectorMatches) GetMatches() []*VectorMatch {
 	return nil
 }
 
-type NamedEntity struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`     // int32
-	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"` // Paris
-	Synonyms      []string               `protobuf:"bytes,5,rep,name=synonyms,proto3" json:"synonyms,omitempty"`
-	Description   string                 `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
-	MergedTo      string                 `protobuf:"bytes,9,opt,name=merged_to,json=mergedTo,proto3" json:"merged_to,omitempty"` // use the merged_to id, not this one
-	Updated       int64                  `protobuf:"varint,10,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy     string                 `protobuf:"bytes,11,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Created       int64                  `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,13,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *NamedEntity) Reset() {
-	*x = NamedEntity{}
-	mi := &file_header_proto_msgTypes[572]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *NamedEntity) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*NamedEntity) ProtoMessage() {}
-
-func (x *NamedEntity) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[572]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use NamedEntity.ProtoReflect.Descriptor instead.
-func (*NamedEntity) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{572}
-}
-
-func (x *NamedEntity) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *NamedEntity) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *NamedEntity) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *NamedEntity) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *NamedEntity) GetSynonyms() []string {
-	if x != nil {
-		return x.Synonyms
-	}
-	return nil
-}
-
-func (x *NamedEntity) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *NamedEntity) GetMergedTo() string {
-	if x != nil {
-		return x.MergedTo
-	}
-	return ""
-}
-
-func (x *NamedEntity) GetUpdated() int64 {
-	if x != nil {
-		return x.Updated
-	}
-	return 0
-}
-
-func (x *NamedEntity) GetUpdatedBy() string {
-	if x != nil {
-		return x.UpdatedBy
-	}
-	return ""
-}
-
-func (x *NamedEntity) GetCreated() int64 {
-	if x != nil {
-		return x.Created
-	}
-	return 0
-}
-
-func (x *NamedEntity) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
-}
-
 type ListAvaiableDiscountsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -69947,7 +69519,7 @@ type ListAvaiableDiscountsRequest struct {
 
 func (x *ListAvaiableDiscountsRequest) Reset() {
 	*x = ListAvaiableDiscountsRequest{}
-	mi := &file_header_proto_msgTypes[573]
+	mi := &file_header_proto_msgTypes[570]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -69959,7 +69531,7 @@ func (x *ListAvaiableDiscountsRequest) String() string {
 func (*ListAvaiableDiscountsRequest) ProtoMessage() {}
 
 func (x *ListAvaiableDiscountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[573]
+	mi := &file_header_proto_msgTypes[570]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69972,7 +69544,7 @@ func (x *ListAvaiableDiscountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAvaiableDiscountsRequest.ProtoReflect.Descriptor instead.
 func (*ListAvaiableDiscountsRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{573}
+	return file_header_proto_rawDescGZIP(), []int{570}
 }
 
 func (x *ListAvaiableDiscountsRequest) GetCtx() *common.Context {
@@ -70036,7 +69608,7 @@ type ListDiscountRequest struct {
 
 func (x *ListDiscountRequest) Reset() {
 	*x = ListDiscountRequest{}
-	mi := &file_header_proto_msgTypes[574]
+	mi := &file_header_proto_msgTypes[571]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70048,7 +69620,7 @@ func (x *ListDiscountRequest) String() string {
 func (*ListDiscountRequest) ProtoMessage() {}
 
 func (x *ListDiscountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[574]
+	mi := &file_header_proto_msgTypes[571]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70061,7 +69633,7 @@ func (x *ListDiscountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDiscountRequest.ProtoReflect.Descriptor instead.
 func (*ListDiscountRequest) Descriptor() ([]byte, []int) {
-	return file_header_proto_rawDescGZIP(), []int{574}
+	return file_header_proto_rawDescGZIP(), []int{571}
 }
 
 func (x *ListDiscountRequest) GetCtx() *common.Context {
@@ -70107,7 +69679,7 @@ type ReportBotResponse_Metric struct {
 
 func (x *ReportBotResponse_Metric) Reset() {
 	*x = ReportBotResponse_Metric{}
-	mi := &file_header_proto_msgTypes[582]
+	mi := &file_header_proto_msgTypes[579]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70119,7 +69691,7 @@ func (x *ReportBotResponse_Metric) String() string {
 func (*ReportBotResponse_Metric) ProtoMessage() {}
 
 func (x *ReportBotResponse_Metric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[582]
+	mi := &file_header_proto_msgTypes[579]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70198,7 +69770,7 @@ type ActionrunMetrics_ActionrunMetric struct {
 
 func (x *ActionrunMetrics_ActionrunMetric) Reset() {
 	*x = ActionrunMetrics_ActionrunMetric{}
-	mi := &file_header_proto_msgTypes[583]
+	mi := &file_header_proto_msgTypes[580]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70210,7 +69782,7 @@ func (x *ActionrunMetrics_ActionrunMetric) String() string {
 func (*ActionrunMetrics_ActionrunMetric) ProtoMessage() {}
 
 func (x *ActionrunMetrics_ActionrunMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[583]
+	mi := &file_header_proto_msgTypes[580]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70283,7 +69855,7 @@ type ContactComponent_ContactButton struct {
 
 func (x *ContactComponent_ContactButton) Reset() {
 	*x = ContactComponent_ContactButton{}
-	mi := &file_header_proto_msgTypes[588]
+	mi := &file_header_proto_msgTypes[585]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70295,7 +69867,7 @@ func (x *ContactComponent_ContactButton) String() string {
 func (*ContactComponent_ContactButton) ProtoMessage() {}
 
 func (x *ContactComponent_ContactButton) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[588]
+	mi := &file_header_proto_msgTypes[585]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70371,7 +69943,7 @@ type CallContactComponent_Hotline struct {
 
 func (x *CallContactComponent_Hotline) Reset() {
 	*x = CallContactComponent_Hotline{}
-	mi := &file_header_proto_msgTypes[589]
+	mi := &file_header_proto_msgTypes[586]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70383,7 +69955,7 @@ func (x *CallContactComponent_Hotline) String() string {
 func (*CallContactComponent_Hotline) ProtoMessage() {}
 
 func (x *CallContactComponent_Hotline) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[589]
+	mi := &file_header_proto_msgTypes[586]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70432,7 +70004,7 @@ type MapContactComponent_Location struct {
 
 func (x *MapContactComponent_Location) Reset() {
 	*x = MapContactComponent_Location{}
-	mi := &file_header_proto_msgTypes[590]
+	mi := &file_header_proto_msgTypes[587]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70444,7 +70016,7 @@ func (x *MapContactComponent_Location) String() string {
 func (*MapContactComponent_Location) ProtoMessage() {}
 
 func (x *MapContactComponent_Location) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[590]
+	mi := &file_header_proto_msgTypes[587]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70499,7 +70071,7 @@ type FormField_FormFieldOption struct {
 
 func (x *FormField_FormFieldOption) Reset() {
 	*x = FormField_FormFieldOption{}
-	mi := &file_header_proto_msgTypes[591]
+	mi := &file_header_proto_msgTypes[588]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70511,7 +70083,7 @@ func (x *FormField_FormFieldOption) String() string {
 func (*FormField_FormFieldOption) ProtoMessage() {}
 
 func (x *FormField_FormFieldOption) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[591]
+	mi := &file_header_proto_msgTypes[588]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70560,7 +70132,7 @@ type CountTouchpointResponse_TouchpointCount struct {
 
 func (x *CountTouchpointResponse_TouchpointCount) Reset() {
 	*x = CountTouchpointResponse_TouchpointCount{}
-	mi := &file_header_proto_msgTypes[593]
+	mi := &file_header_proto_msgTypes[590]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70572,7 +70144,7 @@ func (x *CountTouchpointResponse_TouchpointCount) String() string {
 func (*CountTouchpointResponse_TouchpointCount) ProtoMessage() {}
 
 func (x *CountTouchpointResponse_TouchpointCount) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[593]
+	mi := &file_header_proto_msgTypes[590]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70637,7 +70209,7 @@ type BroadcastCampaignMetrics_BroadcastCampaignMetric struct {
 
 func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) Reset() {
 	*x = BroadcastCampaignMetrics_BroadcastCampaignMetric{}
-	mi := &file_header_proto_msgTypes[608]
+	mi := &file_header_proto_msgTypes[605]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70649,7 +70221,7 @@ func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) String() string {
 func (*BroadcastCampaignMetrics_BroadcastCampaignMetric) ProtoMessage() {}
 
 func (x *BroadcastCampaignMetrics_BroadcastCampaignMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[608]
+	mi := &file_header_proto_msgTypes[605]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70815,7 +70387,7 @@ type Block_InputOption struct {
 
 func (x *Block_InputOption) Reset() {
 	*x = Block_InputOption{}
-	mi := &file_header_proto_msgTypes[633]
+	mi := &file_header_proto_msgTypes[630]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -70827,7 +70399,7 @@ func (x *Block_InputOption) String() string {
 func (*Block_InputOption) ProtoMessage() {}
 
 func (x *Block_InputOption) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[633]
+	mi := &file_header_proto_msgTypes[630]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -71431,7 +71003,7 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\ttimestamp\x12\x16\n" +
 	"\x06object\x18\v \x01(\tR\x06object\x12\x14\n" +
 	"\x05value\x18\f \x01(\tR\x05value\x12(\n" +
-	"\x05array\x18\x14 \x03(\v2\x12.header.EventFieldR\x05array\"\x8b)\n" +
+	"\x05array\x18\x14 \x03(\v2\x12.header.EventFieldR\x05array\"\xd1(\n" +
 	"\x04Data\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12$\n" +
 	"\x05agent\x18\x02 \x01(\v2\x0e.account.AgentR\x05agent\x12)\n" +
@@ -71530,8 +71102,7 @@ const file_header_proto_rawDesc = "" +
 	"\fbank_account\x18\x81\x01 \x01(\v2\x13.header.BankAccountR\vbankAccount\x12:\n" +
 	"\rarticle_topic\x18\x82\x01 \x01(\v2\x14.header.ArticleTopicR\farticleTopic\x127\n" +
 	"\farticle_node\x18\x83\x01 \x01(\v2\x13.header.ArticleNodeR\varticleNode\x128\n" +
-	"\rai_data_entry\x18\x84\x01 \x01(\v2\x13.header.AIDataEntryR\vaiDataEntry\x128\n" +
-	"\rai_data_group\x18\x85\x01 \x01(\v2\x13.header.AIDataGroupR\vaiDataGroup\x12+\n" +
+	"\rai_data_entry\x18\x84\x01 \x01(\v2\x13.header.AIDataEntryR\vaiDataEntry\x12+\n" +
 	"\bai_agent\x18\x86\x01 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x127\n" +
 	"\fzns_template\x18\x87\x01 \x01(\v2\x13.header.ZNSTemplateR\vznsTemplate\x12.\n" +
 	"\tzns_media\x18\x88\x01 \x01(\v2\x10.header.ZNSMediaR\bznsMedia\x12@\n" +
@@ -76529,7 +76100,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\x9c:\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\x9c7\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76622,13 +76193,9 @@ const file_header_proto_rawDesc = "" +
 	"\x04tags\x18\xa4\x01 \x03(\v2\v.header.TagR\x04tags\x12\x11\n" +
 	"\x03ids\x18\xa5\x01 \x03(\tR\x03ids\x12<\n" +
 	"\x0fai_data_entries\x18\xa6\x01 \x03(\v2\x13.header.AIDataEntryR\raiDataEntries\x128\n" +
-	"\rai_data_entry\x18\xa7\x01 \x01(\v2\x13.header.AIDataEntryR\vaiDataEntry\x12:\n" +
-	"\x0eai_data_groups\x18\xa8\x01 \x03(\v2\x13.header.AIDataGroupR\faiDataGroups\x128\n" +
-	"\rai_data_group\x18\xa9\x01 \x01(\v2\x13.header.AIDataGroupR\vaiDataGroup\x12-\n" +
+	"\rai_data_entry\x18\xa7\x01 \x01(\v2\x13.header.AIDataEntryR\vaiDataEntry\x12-\n" +
 	"\tai_agents\x18\xaa\x01 \x03(\v2\x0f.header.AIAgentR\baiAgents\x12+\n" +
-	"\bai_agent\x18\xab\x01 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12I\n" +
-	"\x13ai_response_sources\x18\xae\x01 \x03(\v2\x18.header.AiResponseSourceR\x11aiResponseSources\x12G\n" +
-	"\x12ai_response_source\x18\x9e\x01 \x01(\v2\x18.header.AiResponseSourceR\x10aiResponseSource\x12:\n" +
+	"\bai_agent\x18\xab\x01 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12:\n" +
 	"\x0eai_data_chunks\x18\xaf\x01 \x03(\v2\x13.header.AIDataChunkR\faiDataChunks\x12!\n" +
 	"\x04file\x18\xb0\x01 \x01(\v2\f.header.FileR\x04file\x12#\n" +
 	"\x05files\x18\xb1\x01 \x03(\v2\f.header.FileR\x05files\x12<\n" +
@@ -76673,9 +76240,7 @@ const file_header_proto_rawDesc = "" +
 	"\x18segment_sync_user_status\x18\xe1\x01 \x01(\v2\x1d.header.SegmentSyncUserStatusR\x15segmentSyncUserStatus\x12>\n" +
 	"\x0fmeta_ad_account\x18\xe2\x01 \x01(\v2\x15.header.MetaAdAccountR\rmetaAdAccount\x12@\n" +
 	"\x10meta_ad_accounts\x18\xe3\x01 \x03(\v2\x15.header.MetaAdAccountR\x0emetaAdAccounts\x12D\n" +
-	"\x10fanpage_settings\x18\xe4\x01 \x03(\v2\x18.header.FbFanpageSettingR\x0ffanpageSettings\x12;\n" +
-	"\x0enamed_entities\x18\xe5\x01 \x03(\v2\x13.header.NamedEntityR\rnamedEntities\x127\n" +
-	"\fnamed_entity\x18\xe6\x01 \x01(\v2\x13.header.NamedEntityR\vnamedEntity\x129\n" +
+	"\x10fanpage_settings\x18\xe4\x01 \x03(\v2\x18.header.FbFanpageSettingR\x0ffanpageSettings\x129\n" +
 	"\rproduct_feeds\x18\xe9\x01 \x03(\v2\x13.header.ProductFeedR\fproductFeeds\x127\n" +
 	"\fproduct_feed\x18\xea\x01 \x01(\v2\x13.header.ProductFeedR\vproductFeed\x12C\n" +
 	"\x11product_feed_runs\x18\xeb\x01 \x03(\v2\x16.header.ProductFeedRunR\x0fproductFeedRuns\"Y\n" +
@@ -78589,25 +78154,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x95\x03\n" +
-	"\vAIDataGroup\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x06 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\x12\x1f\n" +
-	"\vnum_entries\x18\t \x01(\x03R\n" +
-	"numEntries\x12#\n" +
-	"\rnum_trainings\x18\n" +
-	" \x01(\x03R\fnumTrainings\x12!\n" +
-	"\fnum_pendings\x18\v \x01(\x03R\vnumPendings\x12\x18\n" +
-	"\acreated\x18\r \x01(\x03R\acreated\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\x0e \x01(\tR\tcreatedBy\x12\x12\n" +
-	"\x04type\x18\x0f \x01(\tR\x04type\x12,\n" +
-	"\x12last_file_modified\x18\x10 \x01(\x03R\x10lastFileModified\x12\x1a\n" +
-	"\bmodified\x18\x11 \x01(\x03R\bmodified\"\x82\x04\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x82\x04\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -78635,13 +78182,12 @@ const file_header_proto_rawDesc = "" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
 	" \x01(\tR\x05model\x12%\n" +
-	"\x0enamed_entities\x18\f \x03(\rR\rnamedEntities\"\xf0\f\n" +
+	"\x0enamed_entities\x18\f \x03(\rR\rnamedEntities\"\xd5\f\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x12\x19\n" +
-	"\bgroup_id\x18\x04 \x01(\tR\agroupId\x12\x12\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12'\n" +
 	"\x06answer\x18\x06 \x01(\v2\x0f.header.MessageR\x06answer\x12\x1a\n" +
 	"\bquestion\x18\a \x01(\tR\bquestion\x12\x10\n" +
@@ -78690,18 +78236,7 @@ const file_header_proto_rawDesc = "" +
 	"message_id\x18> \x01(\tR\tmessageId\x12(\n" +
 	"\x10ai_agent_version\x18@ \x01(\x03R\x0eaiAgentVersion\x12\x17\n" +
 	"\aread_at\x18A \x01(\x03R\x06readAt\x12\x17\n" +
-	"\aread_by\x18B \x01(\tR\x06readBy\"\x8d\x02\n" +
-	"\x10AiResponseSource\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x17\n" +
-	"\acall_id\x18\x04 \x01(\tR\x06callId\x12\"\n" +
-	"\rdata_entry_id\x18\x05 \x01(\tR\vdataEntryId\x12\x14\n" +
-	"\x05chunk\x18\x06 \x01(\tR\x05chunk\x12\x14\n" +
-	"\x05score\x18\a \x01(\x03R\x05score\x12\x18\n" +
-	"\acreated\x18\b \x01(\x03R\acreated\x122\n" +
-	"\n" +
-	"data_entry\x18\t \x01(\v2\x13.header.AIDataEntryR\tdataEntry\x12\x1f\n" +
-	"\vembed_chunk\x18\v \x01(\tR\n" +
-	"embedChunk\"\xb3\x02\n" +
+	"\aread_by\x18B \x01(\tR\x06readBy\"\xb3\x02\n" +
 	"\x0fFacebookAdsFlow\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79064,23 +78599,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"collection\x18\x03 \x01(\tR\n" +
 	"collection\x12-\n" +
-	"\amatches\x18\x04 \x03(\v2\x13.header.VectorMatchR\amatches\"\xc0\x02\n" +
-	"\vNamedEntity\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1a\n" +
-	"\bsynonyms\x18\x05 \x03(\tR\bsynonyms\x12 \n" +
-	"\vdescription\x18\b \x01(\tR\vdescription\x12\x1b\n" +
-	"\tmerged_to\x18\t \x01(\tR\bmergedTo\x12\x18\n" +
-	"\aupdated\x18\n" +
-	" \x01(\x03R\aupdated\x12\x1d\n" +
-	"\n" +
-	"updated_by\x18\v \x01(\tR\tupdatedBy\x12\x18\n" +
-	"\acreated\x18\f \x01(\x03R\acreated\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\r \x01(\tR\tcreatedBy\"\x80\x02\n" +
+	"\amatches\x18\x04 \x03(\v2\x13.header.VectorMatchR\amatches\"\x80\x02\n" +
 	"\x1cListAvaiableDiscountsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79258,7 +78777,7 @@ func file_header_proto_rawDescGZIP() []byte {
 }
 
 var file_header_proto_enumTypes = make([]protoimpl.EnumInfo, 33)
-var file_header_proto_msgTypes = make([]protoimpl.MessageInfo, 639)
+var file_header_proto_msgTypes = make([]protoimpl.MessageInfo, 636)
 var file_header_proto_goTypes = []any{
 	(ConvoState)(0),                                 // 0: header.ConvoState
 	(AttachmentType)(0),                             // 1: header.AttachmentType
@@ -79819,154 +79338,151 @@ var file_header_proto_goTypes = []any{
 	(*AutomationFunction)(nil),                      // 556: header.AutomationFunction
 	(*CreateTicketFunction)(nil),                    // 557: header.CreateTicketFunction
 	(*AIIntent)(nil),                                // 558: header.AIIntent
-	(*AIDataGroup)(nil),                             // 559: header.AIDataGroup
-	(*CrawlResponse)(nil),                           // 560: header.CrawlResponse
-	(*AIDataChunk)(nil),                             // 561: header.AIDataChunk
-	(*AIDataEntry)(nil),                             // 562: header.AIDataEntry
-	(*AiResponseSource)(nil),                        // 563: header.AiResponseSource
-	(*FacebookAdsFlow)(nil),                         // 564: header.FacebookAdsFlow
-	(*RuleOrder)(nil),                               // 565: header.RuleOrder
-	(*NotiSubscription)(nil),                        // 566: header.NotiSubscription
-	(*TicketTypeSubscription)(nil),                  // 567: header.TicketTypeSubscription
-	(*NotiSetting)(nil),                             // 568: header.NotiSetting
-	(*DoNotDisturb)(nil),                            // 569: header.DoNotDisturb
-	(*PushToken)(nil),                               // 570: header.PushToken
-	(*ZNSTemplateParam)(nil),                        // 571: header.ZNSTemplateParam
-	(*ZNSTemplateLayoutComponentItem)(nil),          // 572: header.ZNSTemplateLayoutComponentItem
-	(*ZNSTemplateLayoutComponentButton)(nil),        // 573: header.ZNSTemplateLayoutComponentButton
-	(*ZNSTemplateLayoutComponentButtons)(nil),       // 574: header.ZNSTemplateLayoutComponentButtons
-	(*ZNSTemplateLayoutComponentTableRow)(nil),      // 575: header.ZNSTemplateLayoutComponentTableRow
-	(*ZNSTemplateLayoutComponentTable)(nil),         // 576: header.ZNSTemplateLayoutComponentTable
-	(*ZNSTemplateLayoutComponentImageItem)(nil),     // 577: header.ZNSTemplateLayoutComponentImageItem
-	(*ZNSTemplateLayoutComponentImages)(nil),        // 578: header.ZNSTemplateLayoutComponentImages
-	(*ZNSTemplateLayoutComponentLogo)(nil),          // 579: header.ZNSTemplateLayoutComponentLogo
-	(*ZNSTemplateLayoutComponent)(nil),              // 580: header.ZNSTemplateLayoutComponent
-	(*ZNSTemplateComponents)(nil),                   // 581: header.ZNSTemplateComponents
-	(*ZNSTemplateLayout)(nil),                       // 582: header.ZNSTemplateLayout
-	(*ZNSTemplateRequest)(nil),                      // 583: header.ZNSTemplateRequest
-	(*ZaloOAZNSQuota)(nil),                          // 584: header.ZaloOAZNSQuota
-	(*ZNSTemplate)(nil),                             // 585: header.ZNSTemplate
-	(*ZnsTemplate)(nil),                             // 586: header.ZnsTemplate
-	(*ZNSButton)(nil),                               // 587: header.ZNSButton
-	(*ZNSParamDefinition)(nil),                      // 588: header.ZNSParamDefinition
-	(*ZNSMedia)(nil),                                // 589: header.ZNSMedia
-	(*EmailSignature)(nil),                          // 590: header.EmailSignature
-	(*TestMessageRequest)(nil),                      // 591: header.TestMessageRequest
-	(*CreditUsage)(nil),                             // 592: header.CreditUsage
-	(*SendSubizZNSTestRequest)(nil),                 // 593: header.SendSubizZNSTestRequest
-	(*ActionAIAgentTrack)(nil),                      // 594: header.ActionAIAgentTrack
-	(*Markers)(nil),                                 // 595: header.Markers
-	(*UserDataSource)(nil),                          // 596: header.UserDataSource
-	(*MetaBusiness)(nil),                            // 597: header.MetaBusiness
-	(*MetaAdAccount)(nil),                           // 598: header.MetaAdAccount
-	(*VectorSearchReq)(nil),                         // 599: header.VectorSearchReq
-	(*VectorDoc)(nil),                               // 600: header.VectorDoc
-	(*ListVectorRequest)(nil),                       // 601: header.ListVectorRequest
-	(*VectorDocProp)(nil),                           // 602: header.VectorDocProp
-	(*VectorMatch)(nil),                             // 603: header.VectorMatch
-	(*VectorMatches)(nil),                           // 604: header.VectorMatches
-	(*NamedEntity)(nil),                             // 605: header.NamedEntity
-	(*ListAvaiableDiscountsRequest)(nil),            // 606: header.ListAvaiableDiscountsRequest
-	(*ListDiscountRequest)(nil),                     // 607: header.ListDiscountRequest
-	nil,                                             // 608: header.UserReportEntry.CategoryIdsEntry
-	nil,                                             // 609: header.Event.CustomDataEntry
-	nil,                                             // 610: header.Message.I18nBlockEntry
-	nil,                                             // 611: header.Message.ZnsTemplateDataEntry
-	nil,                                             // 612: header.Message.ZnsTemplateDefaultDataEntry
-	nil,                                             // 613: header.Message.ZnsTemplateDataFieldEntry
-	nil,                                             // 614: header.MessageButton.I18nTitleEntry
-	(*ReportBotResponse_Metric)(nil),                // 615: header.ReportBotResponse.Metric
-	(*ActionrunMetrics_ActionrunMetric)(nil),        // 616: header.ActionrunMetrics.ActionrunMetric
-	nil,                                             // 617: header.WidgetGroup.I18nNameEntry
-	nil,                                             // 618: header.TextComponent.I18nBlockEntry
-	nil,                                             // 619: header.I18nBlock.I18nEntry
-	nil,                                             // 620: header.Notif.I18nTitleBlockEntry
-	(*ContactComponent_ContactButton)(nil),          // 621: header.ContactComponent.ContactButton
-	(*CallContactComponent_Hotline)(nil),            // 622: header.CallContactComponent.Hotline
-	(*MapContactComponent_Location)(nil),            // 623: header.MapContactComponent.Location
-	(*FormField_FormFieldOption)(nil),               // 624: header.FormField.FormFieldOption
-	nil,                                             // 625: header.GoogleReviewSetting.RepliesMEntry
-	(*CountTouchpointResponse_TouchpointCount)(nil), // 626: header.CountTouchpointResponse.TouchpointCount
-	nil, // 627: header.Order.FieldsEntry
-	nil, // 628: header.Product.I18nDescriptionBlockEntry
-	nil, // 629: header.ProductCategory.I18nNameEntry
-	nil, // 630: header.ProductCategory.AttributesEntry
-	nil, // 631: header.Error.FieldsEntry
-	nil, // 632: header.Error.HiddenEntry
-	nil, // 633: header.Error.MessageEntry
-	nil, // 634: header.Error.AttrsEntry
-	nil, // 635: header.Error.HiddenAttrsEntry
-	nil, // 636: header.DocHit.QueryMatchMEntry
-	nil, // 637: header.ZnsRequest.TemplateDataEntry
-	nil, // 638: header.OutboundCallCampaign.AgentWeightEntry
-	nil, // 639: header.ListOutboundCallRequest.AgentWeightEntry
-	nil, // 640: header.ImportOutboundCallEntryRequest.AgentWeightEntry
-	(*BroadcastCampaignMetrics_BroadcastCampaignMetric)(nil), // 641: header.BroadcastCampaignMetrics.BroadcastCampaignMetric
-	nil,                            // 642: header.SendEmailRequest.HeaderEntry
-	nil,                            // 643: header.Email.HeaderEntry
-	nil,                            // 644: header.WorkflowSession.ThreadsEntry
-	nil,                            // 645: header.StrNumM.StrsMEntry
-	nil,                            // 646: header.NumStrM.NumsMEntry
-	nil,                            // 647: header.Workflow.ActionsEntry
-	nil,                            // 648: header.Workflow.ComputedActionsEntry
-	nil,                            // 649: header.LLMChatHistoryEntry.FieldsEntry
-	nil,                            // 650: header.WorkflowLog.DataEntry
-	nil,                            // 651: header.Ticket.MemberMEntry
-	nil,                            // 652: header.LiveUserView.MetricsEntry
-	nil,                            // 653: header.ArticleSEOSetting.PageTitleEntry
-	nil,                            // 654: header.ArticleSEOSetting.MetaDescriptionEntry
-	nil,                            // 655: header.ArticleSEOSetting.SocialTitleEntry
-	nil,                            // 656: header.ArticleSEOSetting.SocialDescriptionEntry
-	nil,                            // 657: header.Article.I18nTitleEntry
-	nil,                            // 658: header.Article.I18nContentEntry
-	nil,                            // 659: header.Article.I18nSlugEntry
-	nil,                            // 660: header.ArticleCategory.I18nTitleEntry
-	nil,                            // 661: header.ArticleCategory.I18nDescriptionEntry
-	nil,                            // 662: header.ArticleCategory.I18nSlugEntry
-	nil,                            // 663: header.ArticleTopic.TitleEntry
-	nil,                            // 664: header.KnowledgeBase.I18nTitleEntry
-	nil,                            // 665: header.KnowledgeBase.I18nDescriptionEntry
-	(*Block_InputOption)(nil),      // 666: header.Block.InputOption
-	nil,                            // 667: header.Block.AttrsEntry
-	nil,                            // 668: header.ArticleNode.I18nTitleEntry
-	nil,                            // 669: header.JSONSchema.PropertiesEntry
-	nil,                            // 670: header.AutomationFunction.ActionsEntry
-	nil,                            // 671: header.CrawlResponse.VisitedLinkStatusesEntry
-	(*common.Context)(nil),         // 672: common.Context
-	(*I18NString)(nil),             // 673: header.I18nString
-	(*common.Device)(nil),          // 674: common.Device
-	(*common.PackedDevice)(nil),    // 675: common.PackedDevice
-	(*account.Agent)(nil),          // 676: account.Agent
-	(*account.Presence)(nil),       // 677: account.Presence
-	(*account.Account)(nil),        // 678: account.Account
-	(*payment.Bill)(nil),           // 679: payment.Bill
-	(*common.SessionCampaign)(nil), // 680: common.SessionCampaign
-	(*EventConditionFilter)(nil),   // 681: header.EventConditionFilter
-	(*FloatCondition)(nil),         // 682: header.FloatCondition
-	(*TextCondition)(nil),          // 683: header.TextCondition
-	(*BooleanCondition)(nil),       // 684: header.BooleanCondition
-	(*DatetimeCondition)(nil),      // 685: header.DatetimeCondition
-	(*EventCondition)(nil),         // 686: header.EventCondition
-	(*payment.Subscription)(nil),   // 687: payment.Subscription
-	(*payment.Invoice)(nil),        // 688: payment.Invoice
+	(*CrawlResponse)(nil),                           // 559: header.CrawlResponse
+	(*AIDataChunk)(nil),                             // 560: header.AIDataChunk
+	(*AIDataEntry)(nil),                             // 561: header.AIDataEntry
+	(*FacebookAdsFlow)(nil),                         // 562: header.FacebookAdsFlow
+	(*RuleOrder)(nil),                               // 563: header.RuleOrder
+	(*NotiSubscription)(nil),                        // 564: header.NotiSubscription
+	(*TicketTypeSubscription)(nil),                  // 565: header.TicketTypeSubscription
+	(*NotiSetting)(nil),                             // 566: header.NotiSetting
+	(*DoNotDisturb)(nil),                            // 567: header.DoNotDisturb
+	(*PushToken)(nil),                               // 568: header.PushToken
+	(*ZNSTemplateParam)(nil),                        // 569: header.ZNSTemplateParam
+	(*ZNSTemplateLayoutComponentItem)(nil),          // 570: header.ZNSTemplateLayoutComponentItem
+	(*ZNSTemplateLayoutComponentButton)(nil),        // 571: header.ZNSTemplateLayoutComponentButton
+	(*ZNSTemplateLayoutComponentButtons)(nil),       // 572: header.ZNSTemplateLayoutComponentButtons
+	(*ZNSTemplateLayoutComponentTableRow)(nil),      // 573: header.ZNSTemplateLayoutComponentTableRow
+	(*ZNSTemplateLayoutComponentTable)(nil),         // 574: header.ZNSTemplateLayoutComponentTable
+	(*ZNSTemplateLayoutComponentImageItem)(nil),     // 575: header.ZNSTemplateLayoutComponentImageItem
+	(*ZNSTemplateLayoutComponentImages)(nil),        // 576: header.ZNSTemplateLayoutComponentImages
+	(*ZNSTemplateLayoutComponentLogo)(nil),          // 577: header.ZNSTemplateLayoutComponentLogo
+	(*ZNSTemplateLayoutComponent)(nil),              // 578: header.ZNSTemplateLayoutComponent
+	(*ZNSTemplateComponents)(nil),                   // 579: header.ZNSTemplateComponents
+	(*ZNSTemplateLayout)(nil),                       // 580: header.ZNSTemplateLayout
+	(*ZNSTemplateRequest)(nil),                      // 581: header.ZNSTemplateRequest
+	(*ZaloOAZNSQuota)(nil),                          // 582: header.ZaloOAZNSQuota
+	(*ZNSTemplate)(nil),                             // 583: header.ZNSTemplate
+	(*ZnsTemplate)(nil),                             // 584: header.ZnsTemplate
+	(*ZNSButton)(nil),                               // 585: header.ZNSButton
+	(*ZNSParamDefinition)(nil),                      // 586: header.ZNSParamDefinition
+	(*ZNSMedia)(nil),                                // 587: header.ZNSMedia
+	(*EmailSignature)(nil),                          // 588: header.EmailSignature
+	(*TestMessageRequest)(nil),                      // 589: header.TestMessageRequest
+	(*CreditUsage)(nil),                             // 590: header.CreditUsage
+	(*SendSubizZNSTestRequest)(nil),                 // 591: header.SendSubizZNSTestRequest
+	(*ActionAIAgentTrack)(nil),                      // 592: header.ActionAIAgentTrack
+	(*Markers)(nil),                                 // 593: header.Markers
+	(*UserDataSource)(nil),                          // 594: header.UserDataSource
+	(*MetaBusiness)(nil),                            // 595: header.MetaBusiness
+	(*MetaAdAccount)(nil),                           // 596: header.MetaAdAccount
+	(*VectorSearchReq)(nil),                         // 597: header.VectorSearchReq
+	(*VectorDoc)(nil),                               // 598: header.VectorDoc
+	(*ListVectorRequest)(nil),                       // 599: header.ListVectorRequest
+	(*VectorDocProp)(nil),                           // 600: header.VectorDocProp
+	(*VectorMatch)(nil),                             // 601: header.VectorMatch
+	(*VectorMatches)(nil),                           // 602: header.VectorMatches
+	(*ListAvaiableDiscountsRequest)(nil),            // 603: header.ListAvaiableDiscountsRequest
+	(*ListDiscountRequest)(nil),                     // 604: header.ListDiscountRequest
+	nil,                                             // 605: header.UserReportEntry.CategoryIdsEntry
+	nil,                                             // 606: header.Event.CustomDataEntry
+	nil,                                             // 607: header.Message.I18nBlockEntry
+	nil,                                             // 608: header.Message.ZnsTemplateDataEntry
+	nil,                                             // 609: header.Message.ZnsTemplateDefaultDataEntry
+	nil,                                             // 610: header.Message.ZnsTemplateDataFieldEntry
+	nil,                                             // 611: header.MessageButton.I18nTitleEntry
+	(*ReportBotResponse_Metric)(nil),                // 612: header.ReportBotResponse.Metric
+	(*ActionrunMetrics_ActionrunMetric)(nil),        // 613: header.ActionrunMetrics.ActionrunMetric
+	nil,                                             // 614: header.WidgetGroup.I18nNameEntry
+	nil,                                             // 615: header.TextComponent.I18nBlockEntry
+	nil,                                             // 616: header.I18nBlock.I18nEntry
+	nil,                                             // 617: header.Notif.I18nTitleBlockEntry
+	(*ContactComponent_ContactButton)(nil),          // 618: header.ContactComponent.ContactButton
+	(*CallContactComponent_Hotline)(nil),            // 619: header.CallContactComponent.Hotline
+	(*MapContactComponent_Location)(nil),            // 620: header.MapContactComponent.Location
+	(*FormField_FormFieldOption)(nil),               // 621: header.FormField.FormFieldOption
+	nil,                                             // 622: header.GoogleReviewSetting.RepliesMEntry
+	(*CountTouchpointResponse_TouchpointCount)(nil), // 623: header.CountTouchpointResponse.TouchpointCount
+	nil, // 624: header.Order.FieldsEntry
+	nil, // 625: header.Product.I18nDescriptionBlockEntry
+	nil, // 626: header.ProductCategory.I18nNameEntry
+	nil, // 627: header.ProductCategory.AttributesEntry
+	nil, // 628: header.Error.FieldsEntry
+	nil, // 629: header.Error.HiddenEntry
+	nil, // 630: header.Error.MessageEntry
+	nil, // 631: header.Error.AttrsEntry
+	nil, // 632: header.Error.HiddenAttrsEntry
+	nil, // 633: header.DocHit.QueryMatchMEntry
+	nil, // 634: header.ZnsRequest.TemplateDataEntry
+	nil, // 635: header.OutboundCallCampaign.AgentWeightEntry
+	nil, // 636: header.ListOutboundCallRequest.AgentWeightEntry
+	nil, // 637: header.ImportOutboundCallEntryRequest.AgentWeightEntry
+	(*BroadcastCampaignMetrics_BroadcastCampaignMetric)(nil), // 638: header.BroadcastCampaignMetrics.BroadcastCampaignMetric
+	nil,                            // 639: header.SendEmailRequest.HeaderEntry
+	nil,                            // 640: header.Email.HeaderEntry
+	nil,                            // 641: header.WorkflowSession.ThreadsEntry
+	nil,                            // 642: header.StrNumM.StrsMEntry
+	nil,                            // 643: header.NumStrM.NumsMEntry
+	nil,                            // 644: header.Workflow.ActionsEntry
+	nil,                            // 645: header.Workflow.ComputedActionsEntry
+	nil,                            // 646: header.LLMChatHistoryEntry.FieldsEntry
+	nil,                            // 647: header.WorkflowLog.DataEntry
+	nil,                            // 648: header.Ticket.MemberMEntry
+	nil,                            // 649: header.LiveUserView.MetricsEntry
+	nil,                            // 650: header.ArticleSEOSetting.PageTitleEntry
+	nil,                            // 651: header.ArticleSEOSetting.MetaDescriptionEntry
+	nil,                            // 652: header.ArticleSEOSetting.SocialTitleEntry
+	nil,                            // 653: header.ArticleSEOSetting.SocialDescriptionEntry
+	nil,                            // 654: header.Article.I18nTitleEntry
+	nil,                            // 655: header.Article.I18nContentEntry
+	nil,                            // 656: header.Article.I18nSlugEntry
+	nil,                            // 657: header.ArticleCategory.I18nTitleEntry
+	nil,                            // 658: header.ArticleCategory.I18nDescriptionEntry
+	nil,                            // 659: header.ArticleCategory.I18nSlugEntry
+	nil,                            // 660: header.ArticleTopic.TitleEntry
+	nil,                            // 661: header.KnowledgeBase.I18nTitleEntry
+	nil,                            // 662: header.KnowledgeBase.I18nDescriptionEntry
+	(*Block_InputOption)(nil),      // 663: header.Block.InputOption
+	nil,                            // 664: header.Block.AttrsEntry
+	nil,                            // 665: header.ArticleNode.I18nTitleEntry
+	nil,                            // 666: header.JSONSchema.PropertiesEntry
+	nil,                            // 667: header.AutomationFunction.ActionsEntry
+	nil,                            // 668: header.CrawlResponse.VisitedLinkStatusesEntry
+	(*common.Context)(nil),         // 669: common.Context
+	(*I18NString)(nil),             // 670: header.I18nString
+	(*common.Device)(nil),          // 671: common.Device
+	(*common.PackedDevice)(nil),    // 672: common.PackedDevice
+	(*account.Agent)(nil),          // 673: account.Agent
+	(*account.Presence)(nil),       // 674: account.Presence
+	(*account.Account)(nil),        // 675: account.Account
+	(*payment.Bill)(nil),           // 676: payment.Bill
+	(*common.SessionCampaign)(nil), // 677: common.SessionCampaign
+	(*EventConditionFilter)(nil),   // 678: header.EventConditionFilter
+	(*FloatCondition)(nil),         // 679: header.FloatCondition
+	(*TextCondition)(nil),          // 680: header.TextCondition
+	(*BooleanCondition)(nil),       // 681: header.BooleanCondition
+	(*DatetimeCondition)(nil),      // 682: header.DatetimeCondition
+	(*EventCondition)(nil),         // 683: header.EventCondition
+	(*payment.Subscription)(nil),   // 684: payment.Subscription
+	(*payment.Invoice)(nil),        // 685: payment.Invoice
 }
 var file_header_proto_depIdxs = []int32{
-	672,  // 0: header.Empty.ctx:type_name -> common.Context
-	672,  // 1: header.Id.ctx:type_name -> common.Context
-	672,  // 2: header.Ids.ctx:type_name -> common.Context
-	672,  // 3: header.Noti.ctx:type_name -> common.Context
+	669,  // 0: header.Empty.ctx:type_name -> common.Context
+	669,  // 1: header.Id.ctx:type_name -> common.Context
+	669,  // 2: header.Ids.ctx:type_name -> common.Context
+	669,  // 3: header.Noti.ctx:type_name -> common.Context
 	36,   // 4: header.Noti.meta:type_name -> header.NotiData
 	72,   // 5: header.Noti.tos:type_name -> header.By
 	39,   // 6: header.Attribute.related_values:type_name -> header.RelatedValue
-	672,  // 7: header.PhoneDevice.ctx:type_name -> common.Context
-	672,  // 8: header.CallSettings.ctx:type_name -> common.Context
+	669,  // 7: header.PhoneDevice.ctx:type_name -> common.Context
+	669,  // 8: header.CallSettings.ctx:type_name -> common.Context
 	42,   // 9: header.CallSettings.call_settings:type_name -> header.CallSetting
-	672,  // 10: header.CallSetting.ctx:type_name -> common.Context
+	669,  // 10: header.CallSetting.ctx:type_name -> common.Context
 	209,  // 11: header.CallSetting.greeting_message:type_name -> header.GreetingAudio
 	209,  // 12: header.CallSetting.missed_message:type_name -> header.GreetingAudio
-	672,  // 13: header.UserLeadOwner.ctx:type_name -> common.Context
+	669,  // 13: header.UserLeadOwner.ctx:type_name -> common.Context
 	43,   // 14: header.UserLeadOwner.lead_owners:type_name -> header.LeadOwner
-	672,  // 15: header.User.ctx:type_name -> common.Context
+	669,  // 15: header.User.ctx:type_name -> common.Context
 	38,   // 16: header.User.attributes:type_name -> header.Attribute
 	49,   // 17: header.User.labels:type_name -> header.UserLabel
 	73,   // 18: header.User.latest_content_view:type_name -> header.Event
@@ -79975,55 +79491,55 @@ var file_header_proto_depIdxs = []int32{
 	45,   // 21: header.User.secondaries:type_name -> header.User
 	322,  // 22: header.User.error:type_name -> header.Error
 	104,  // 23: header.UserAds.ads_context_data:type_name -> header.AdsContextData
-	672,  // 24: header.Touchpoint.ctx:type_name -> common.Context
+	669,  // 24: header.Touchpoint.ctx:type_name -> common.Context
 	315,  // 25: header.Touchpoint.fields:type_name -> header.KV
-	672,  // 26: header.ShippingAddresses.ctx:type_name -> common.Context
+	669,  // 26: header.ShippingAddresses.ctx:type_name -> common.Context
 	269,  // 27: header.ShippingAddresses.shipping_addresses:type_name -> header.Address
-	672,  // 28: header.Label.ctx:type_name -> common.Context
-	672,  // 29: header.Labels.ctx:type_name -> common.Context
+	669,  // 28: header.Label.ctx:type_name -> common.Context
+	669,  // 29: header.Labels.ctx:type_name -> common.Context
 	50,   // 30: header.Labels.labels:type_name -> header.Label
-	672,  // 31: header.TryUpdateUserResult.ctx:type_name -> common.Context
+	669,  // 31: header.TryUpdateUserResult.ctx:type_name -> common.Context
 	45,   // 32: header.TryUpdateUserResult.users:type_name -> header.User
 	45,   // 33: header.Users.users:type_name -> header.User
 	322,  // 34: header.Users.errors:type_name -> header.Error
 	45,   // 35: header.Users.secondaries:type_name -> header.User
-	673,  // 36: header.AttributeDefinitionListItem.i18n_label:type_name -> header.I18nString
-	672,  // 37: header.AttributeDefinition.ctx:type_name -> common.Context
-	673,  // 38: header.AttributeDefinition.i18n_label:type_name -> header.I18nString
+	670,  // 36: header.AttributeDefinitionListItem.i18n_label:type_name -> header.I18nString
+	669,  // 37: header.AttributeDefinition.ctx:type_name -> common.Context
+	670,  // 38: header.AttributeDefinition.i18n_label:type_name -> header.I18nString
 	54,   // 39: header.AttributeDefinition.items:type_name -> header.AttributeDefinitionListItem
-	672,  // 40: header.AttributeDefinitions.ctx:type_name -> common.Context
+	669,  // 40: header.AttributeDefinitions.ctx:type_name -> common.Context
 	55,   // 41: header.AttributeDefinitions.attributes:type_name -> header.AttributeDefinition
-	672,  // 42: header.Note.ctx:type_name -> common.Context
-	672,  // 43: header.Notes.ctx:type_name -> common.Context
+	669,  // 42: header.Note.ctx:type_name -> common.Context
+	669,  // 43: header.Notes.ctx:type_name -> common.Context
 	57,   // 44: header.Notes.notes:type_name -> header.Note
-	608,  // 45: header.UserReportEntry.category_ids:type_name -> header.UserReportEntry.CategoryIdsEntry
-	672,  // 46: header.UserReportResponse.ctx:type_name -> common.Context
+	605,  // 45: header.UserReportEntry.category_ids:type_name -> header.UserReportEntry.CategoryIdsEntry
+	669,  // 46: header.UserReportResponse.ctx:type_name -> common.Context
 	61,   // 47: header.UserReportResponse.users:type_name -> header.UserReportEntry
 	61,   // 48: header.UserReportResponse.leads:type_name -> header.UserReportEntry
-	672,  // 49: header.AIAgentReportResponse.ctx:type_name -> common.Context
+	669,  // 49: header.AIAgentReportResponse.ctx:type_name -> common.Context
 	63,   // 50: header.AIAgentReportResponse.metrics:type_name -> header.AIAgentReportMetric
 	65,   // 51: header.ConversationMetrics.metrics:type_name -> header.ConversationMetric
 	67,   // 52: header.AgentMetrics.metrics:type_name -> header.AgentMetric
 	69,   // 53: header.CallMetrics.metrics:type_name -> header.CallMetric
-	672,  // 54: header.Events.ctx:type_name -> common.Context
+	669,  // 54: header.Events.ctx:type_name -> common.Context
 	73,   // 55: header.Events.events:type_name -> header.Event
-	674,  // 56: header.By.device:type_name -> common.Device
-	675,  // 57: header.By.packed_device:type_name -> common.PackedDevice
-	672,  // 58: header.Event.ctx:type_name -> common.Context
+	671,  // 56: header.By.device:type_name -> common.Device
+	672,  // 57: header.By.packed_device:type_name -> common.PackedDevice
+	669,  // 58: header.Event.ctx:type_name -> common.Context
 	72,   // 59: header.Event.by:type_name -> header.By
 	47,   // 60: header.Event.touchpoint:type_name -> header.Touchpoint
 	75,   // 61: header.Event.data:type_name -> header.Data
 	75,   // 62: header.Event.old:type_name -> header.Data
 	75,   // 63: header.Event.ref:type_name -> header.Data
-	609,  // 64: header.Event.custom_data:type_name -> header.Event.CustomDataEntry
+	606,  // 64: header.Event.custom_data:type_name -> header.Event.CustomDataEntry
 	74,   // 65: header.EventField.array:type_name -> header.EventField
-	672,  // 66: header.Data.ctx:type_name -> common.Context
-	676,  // 67: header.Data.agent:type_name -> account.Agent
+	669,  // 66: header.Data.ctx:type_name -> common.Context
+	673,  // 67: header.Data.agent:type_name -> account.Agent
 	102,  // 68: header.Data.message:type_name -> header.Message
 	92,   // 69: header.Data.conversation:type_name -> header.Conversation
 	303,  // 70: header.Data.product:type_name -> header.Product
-	677,  // 71: header.Data.presence:type_name -> account.Presence
-	677,  // 72: header.Data.presences:type_name -> account.Presence
+	674,  // 71: header.Data.presence:type_name -> account.Presence
+	674,  // 72: header.Data.presences:type_name -> account.Presence
 	45,   // 73: header.Data.user:type_name -> header.User
 	37,   // 74: header.Data.notification:type_name -> header.Noti
 	37,   // 75: header.Data.noti:type_name -> header.Noti
@@ -80031,7 +79547,7 @@ var file_header_proto_depIdxs = []int32{
 	57,   // 77: header.Data.note:type_name -> header.Note
 	469,  // 78: header.Data.workflow:type_name -> header.Workflow
 	73,   // 79: header.Data.event:type_name -> header.Event
-	568,  // 80: header.Data.notification_setting:type_name -> header.NotiSetting
+	566,  // 80: header.Data.notification_setting:type_name -> header.NotiSetting
 	83,   // 81: header.Data.rule:type_name -> header.Rule
 	55,   // 82: header.Data.user_attribute:type_name -> header.AttributeDefinition
 	111,  // 83: header.Data.tag:type_name -> header.Tag
@@ -80073,7 +79589,7 @@ var file_header_proto_depIdxs = []int32{
 	77,   // 119: header.Data.webrtc_message:type_name -> header.WebRTCMessage
 	371,  // 120: header.Data.event_type:type_name -> header.EventType
 	322,  // 121: header.Data.error:type_name -> header.Error
-	678,  // 122: header.Data.account:type_name -> account.Account
+	675,  // 122: header.Data.account:type_name -> account.Account
 	372,  // 123: header.Data.segment:type_name -> header.Segment
 	382,  // 124: header.Data.campaign:type_name -> header.Campaign
 	394,  // 125: header.Data.business_email_address:type_name -> header.BusinessEmailAddresses
@@ -80082,7 +79598,7 @@ var file_header_proto_depIdxs = []int32{
 	455,  // 128: header.Data.outbound_call_update:type_name -> header.OutboundCallUpdateEvent
 	226,  // 129: header.Data.banned_user:type_name -> header.BannedUser
 	438,  // 130: header.Data.credit:type_name -> header.Credit
-	679,  // 131: header.Data.subiz_bill:type_name -> payment.Bill
+	676,  // 131: header.Data.subiz_bill:type_name -> payment.Bill
 	37,   // 132: header.Data.desktop_notification:type_name -> header.Noti
 	481,  // 133: header.Data.ticket:type_name -> header.Ticket
 	477,  // 134: header.Data.ticket_type:type_name -> header.TicketType
@@ -80102,1221 +79618,1210 @@ var file_header_proto_depIdxs = []int32{
 	528,  // 148: header.Data.bank_account:type_name -> header.BankAccount
 	498,  // 149: header.Data.article_topic:type_name -> header.ArticleTopic
 	543,  // 150: header.Data.article_node:type_name -> header.ArticleNode
-	562,  // 151: header.Data.ai_data_entry:type_name -> header.AIDataEntry
-	559,  // 152: header.Data.ai_data_group:type_name -> header.AIDataGroup
-	546,  // 153: header.Data.ai_agent:type_name -> header.AIAgent
-	585,  // 154: header.Data.zns_template:type_name -> header.ZNSTemplate
-	589,  // 155: header.Data.zns_media:type_name -> header.ZNSMedia
-	590,  // 156: header.Data.email_signature:type_name -> header.EmailSignature
-	471,  // 157: header.Data.llm_tool_call:type_name -> header.LLMToolCall
-	184,  // 158: header.Data.form:type_name -> header.Form
-	214,  // 159: header.Data.event_destination:type_name -> header.EventDestination
-	214,  // 160: header.Data.event_destinations:type_name -> header.EventDestination
-	375,  // 161: header.Data.segment_sync:type_name -> header.SegmentSync
-	302,  // 162: header.Data.discount:type_name -> header.Discount
-	47,   // 163: header.ConversationMeta.touchpoint:type_name -> header.Touchpoint
-	73,   // 164: header.ConversationMeta.event:type_name -> header.Event
-	672,  // 165: header.StartWorkflowSessionRequest.ctx:type_name -> common.Context
-	128,  // 166: header.StartWorkflowSessionRequest.bot:type_name -> header.Bot
-	131,  // 167: header.StartWorkflowSessionRequest.action:type_name -> header.BotAction
-	73,   // 168: header.StartWorkflowSessionRequest.event:type_name -> header.Event
-	672,  // 169: header.RunAiAgentRequest.ctx:type_name -> common.Context
-	128,  // 170: header.RunAiAgentRequest.bot:type_name -> header.Bot
-	131,  // 171: header.RunAiAgentRequest.action:type_name -> header.BotAction
-	73,   // 172: header.RunAiAgentRequest.event:type_name -> header.Event
-	73,   // 173: header.RunAiAgentRequest.last_message_sent:type_name -> header.Event
-	672,  // 174: header.BotRunRequest.ctx:type_name -> common.Context
-	315,  // 175: header.BotRunRequest.object_contexts:type_name -> header.KV
-	128,  // 176: header.BotRunRequest.bot:type_name -> header.Bot
-	131,  // 177: header.BotRunRequest.action:type_name -> header.BotAction
-	73,   // 178: header.BotRunRequest.event:type_name -> header.Event
-	672,  // 179: header.Rule.ctx:type_name -> common.Context
-	87,   // 180: header.Rule.channel_condition:type_name -> header.ChannelCondition
-	86,   // 181: header.Rule.timming_condition:type_name -> header.TimmingCondition
-	125,  // 182: header.Rule.form_conditions:type_name -> header.Condition
-	125,  // 183: header.Rule.user_conditions:type_name -> header.Condition
-	125,  // 184: header.Rule.user_start_content_view_conditions:type_name -> header.Condition
-	85,   // 185: header.Rule.call:type_name -> header.RingingSetting
-	209,  // 186: header.RingingSetting.greeting_message:type_name -> header.GreetingAudio
-	209,  // 187: header.RingingSetting.missed_message:type_name -> header.GreetingAudio
-	209,  // 188: header.RingingSetting.menu_message:type_name -> header.GreetingAudio
-	209,  // 189: header.RingingSetting.invalid_option_message:type_name -> header.GreetingAudio
-	83,   // 190: header.RingingSetting.menu_options:type_name -> header.Rule
-	83,   // 191: header.RingingSetting.menu_fallback:type_name -> header.Rule
-	88,   // 192: header.ChannelCondition.locations:type_name -> header.LocationCondition
-	88,   // 193: header.ChannelCondition.not_in_locations:type_name -> header.LocationCondition
-	84,   // 194: header.ChannelCondition.facebook:type_name -> header.FacebookCondition
-	672,  // 195: header.ConversationMember.ctx:type_name -> common.Context
-	72,   // 196: header.ConversationMember.invited_by:type_name -> header.By
-	102,  // 197: header.ConversationMember.bot_takeover_message:type_name -> header.Message
-	672,  // 198: header.StartRequest.ctx:type_name -> common.Context
-	45,   // 199: header.StartRequest.user:type_name -> header.User
-	90,   // 200: header.StartRequest.members:type_name -> header.ConversationMember
-	47,   // 201: header.StartRequest.touchpoint:type_name -> header.Touchpoint
-	183,  // 202: header.StartRequest.form_submission:type_name -> header.FormSubmission
-	96,   // 203: header.StartRequest.google_review:type_name -> header.GoogleReview
-	672,  // 204: header.Conversation.ctx:type_name -> common.Context
-	90,   // 205: header.Conversation.members:type_name -> header.ConversationMember
-	111,  // 206: header.Conversation.tags:type_name -> header.Tag
-	47,   // 207: header.Conversation.touchpoint:type_name -> header.Touchpoint
-	73,   // 208: header.Conversation.last_internal_message_sent:type_name -> header.Event
-	73,   // 209: header.Conversation.last_message_sent:type_name -> header.Event
-	89,   // 210: header.Conversation.assigned_to:type_name -> header.RouteResult
-	89,   // 211: header.Conversation.reassigned_to:type_name -> header.RouteResult
-	315,  // 212: header.Conversation.fields:type_name -> header.KV
-	100,  // 213: header.Conversation.ratings:type_name -> header.Rating
-	73,   // 214: header.Conversation.matched_event:type_name -> header.Event
-	99,   // 215: header.Conversation.call:type_name -> header.CallInfo
-	358,  // 216: header.Conversation.call_request:type_name -> header.CallDriverRequest
-	680,  // 217: header.Conversation.traffic_utm:type_name -> common.SessionCampaign
-	183,  // 218: header.Conversation.form_submission:type_name -> header.FormSubmission
-	96,   // 219: header.Conversation.google_review:type_name -> header.GoogleReview
-	481,  // 220: header.Conversation.ticket:type_name -> header.Ticket
-	322,  // 221: header.Conversation.error:type_name -> header.Error
-	103,  // 222: header.Conversation.referrer:type_name -> header.MessageReferral
-	98,   // 223: header.GoogleReview.review_rely:type_name -> header.ReviewReply
-	97,   // 224: header.GoogleReview.reviewer:type_name -> header.Reviewer
-	223,  // 225: header.CallInfo.recorded_audio:type_name -> header.File
-	672,  // 226: header.Rating.ctx:type_name -> common.Context
-	505,  // 227: header.Rating.question:type_name -> header.Block
-	672,  // 228: header.Conversations.ctx:type_name -> common.Context
-	92,   // 229: header.Conversations.conversations:type_name -> header.Conversation
-	322,  // 230: header.Conversations.errors:type_name -> header.Error
-	672,  // 231: header.Message.ctx:type_name -> common.Context
-	109,  // 232: header.Message.attachments:type_name -> header.Attachment
-	505,  // 233: header.Message.block:type_name -> header.Block
-	315,  // 234: header.Message.fields:type_name -> header.KV
-	106,  // 235: header.Message.pongs:type_name -> header.MessagePong
-	673,  // 236: header.Message.i18n_quill_delta:type_name -> header.I18nString
-	610,  // 237: header.Message.i18n_block:type_name -> header.Message.I18nBlockEntry
-	105,  // 238: header.Message.story:type_name -> header.InstagramStory
-	103,  // 239: header.Message.referral:type_name -> header.MessageReferral
-	611,  // 240: header.Message.zns_template_data:type_name -> header.Message.ZnsTemplateDataEntry
-	612,  // 241: header.Message.zns_template_default_data:type_name -> header.Message.ZnsTemplateDefaultDataEntry
-	613,  // 242: header.Message.zns_template_data_field:type_name -> header.Message.ZnsTemplateDataFieldEntry
-	673,  // 243: header.Message.i18n_text:type_name -> header.I18nString
-	104,  // 244: header.MessageReferral.ads_context_data:type_name -> header.AdsContextData
-	322,  // 245: header.MessagePong.error:type_name -> header.Error
-	673,  // 246: header.MessageButton.old_i18n_title:type_name -> header.I18nString
-	614,  // 247: header.MessageButton.i18n_title:type_name -> header.MessageButton.I18nTitleEntry
-	107,  // 248: header.GenericElementTemplate.default_action:type_name -> header.MessageButton
-	107,  // 249: header.GenericElementTemplate.buttons:type_name -> header.MessageButton
-	673,  // 250: header.GenericElementTemplate.i18n_title:type_name -> header.I18nString
-	673,  // 251: header.GenericElementTemplate.i18n_subtitle:type_name -> header.I18nString
-	108,  // 252: header.Attachment.elements:type_name -> header.GenericElementTemplate
-	107,  // 253: header.Attachment.buttons:type_name -> header.MessageButton
-	110,  // 254: header.Attachment.quick_replies:type_name -> header.QuickReply
-	115,  // 255: header.Attachment.postback:type_name -> header.Postback
-	73,   // 256: header.Attachment.quote:type_name -> header.Event
-	303,  // 257: header.Attachment.product:type_name -> header.Product
-	110,  // 258: header.Attachment.quick_reply:type_name -> header.QuickReply
-	290,  // 259: header.Attachment.order:type_name -> header.Order
-	223,  // 260: header.Attachment.file:type_name -> header.File
-	184,  // 261: header.Attachment.form:type_name -> header.Form
-	183,  // 262: header.Attachment.form_submission:type_name -> header.FormSubmission
-	673,  // 263: header.QuickReply.i18n_title:type_name -> header.I18nString
-	672,  // 264: header.Tag.ctx:type_name -> common.Context
-	672,  // 265: header.Template.ctx:type_name -> common.Context
-	102,  // 266: header.Template.message:type_name -> header.Message
-	112,  // 267: header.Template.data:type_name -> header.TemplateData
-	672,  // 268: header.SearchTemplate.ctx:type_name -> common.Context
-	673,  // 269: header.BotPostback.i18n_title:type_name -> header.I18nString
-	672,  // 270: header.Integration.ctx:type_name -> common.Context
-	584,  // 271: header.Integration.zalo_zns_quota:type_name -> header.ZaloOAZNSQuota
-	492,  // 272: header.Integration.permissions:type_name -> header.ResourceGroupMember
-	672,  // 273: header.WorkflowSessionId.ctx:type_name -> common.Context
-	672,  // 274: header.AssignRequest.ctx:type_name -> common.Context
-	73,   // 275: header.AssignRequest.start_event:type_name -> header.Event
-	672,  // 276: header.EndchatSetting.ctx:type_name -> common.Context
-	120,  // 277: header.EndchatSetting.connector_settings:type_name -> header.EndchatConnectorSetting
-	120,  // 278: header.EndchatSetting.global_setting:type_name -> header.EndchatConnectorSetting
-	681,  // 279: header.Trigger.event_attributes:type_name -> header.EventConditionFilter
-	88,   // 280: header.BotCondition.locations:type_name -> header.LocationCondition
-	88,   // 281: header.BotCondition.exclude_locations:type_name -> header.LocationCondition
-	125,  // 282: header.BotCondition.user:type_name -> header.Condition
-	124,  // 283: header.BotCondition.order:type_name -> header.OrderCondition
-	87,   // 284: header.BotCondition.channel_condition:type_name -> header.ChannelCondition
-	682,  // 285: header.OrderCondition.total:type_name -> header.FloatCondition
-	88,   // 286: header.OrderCondition.shipping:type_name -> header.LocationCondition
-	88,   // 287: header.OrderCondition.exclude_shipping:type_name -> header.LocationCondition
-	672,  // 288: header.VisitProductSiteRequest.ctx:type_name -> common.Context
-	672,  // 289: header.Site.ctx:type_name -> common.Context
-	672,  // 290: header.Bot.ctx:type_name -> common.Context
-	131,  // 291: header.Bot.action:type_name -> header.BotAction
-	122,  // 292: header.Bot.triggers:type_name -> header.Trigger
-	150,  // 293: header.Bot.initiative_frequency:type_name -> header.Frequently
-	123,  // 294: header.Bot.conditions:type_name -> header.BotCondition
-	83,   // 295: header.Bot.condition:type_name -> header.Rule
-	102,  // 296: header.Bot.welcome_message:type_name -> header.Message
-	672,  // 297: header.Bots.ctx:type_name -> common.Context
-	128,  // 298: header.Bots.bots:type_name -> header.Bot
-	131,  // 299: header.NextBotAction.action:type_name -> header.BotAction
-	130,  // 300: header.BotAction.nexts:type_name -> header.NextBotAction
-	137,  // 301: header.BotAction.jump:type_name -> header.ActionJump
-	138,  // 302: header.BotAction.send_http:type_name -> header.ActionSendHttp
-	141,  // 303: header.BotAction.ask_question:type_name -> header.ActionAskQuestion
-	119,  // 304: header.BotAction.assign:type_name -> header.AssignRequest
-	136,  // 305: header.BotAction.update_conversation:type_name -> header.ActionUpdateConversation
-	142,  // 306: header.BotAction.update_user:type_name -> header.ActionUpdateUser
-	143,  // 307: header.BotAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
-	134,  // 308: header.BotAction.confirm_order:type_name -> header.ActionConfirmOrder
-	133,  // 309: header.BotAction.create_task:type_name -> header.ActionCreateTask
-	135,  // 310: header.BotAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
-	505,  // 311: header.ActionCreateTask.title_block:type_name -> header.Block
-	505,  // 312: header.ActionCreateTask.note_block:type_name -> header.Block
-	102,  // 313: header.ActionConfirmOrder.messages:type_name -> header.Message
-	102,  // 314: header.ActionConfirmOrder.invalid_messages:type_name -> header.Message
-	315,  // 315: header.ActionUpdateConversation.fields:type_name -> header.KV
-	315,  // 316: header.ActionSendHttp.header:type_name -> header.KV
-	505,  // 317: header.ActionSendHttp.block:type_name -> header.Block
-	102,  // 318: header.ActionSendTyping.message:type_name -> header.Message
-	102,  // 319: header.ActionSendMessage.messages:type_name -> header.Message
-	315,  // 320: header.ActionSendMessage.extra_fields:type_name -> header.KV
-	414,  // 321: header.ActionSendMessage.llm:type_name -> header.ActionLLM
-	102,  // 322: header.ActionAskQuestion.messages:type_name -> header.Message
-	102,  // 323: header.ActionAskQuestion.resume_message:type_name -> header.Message
-	38,   // 324: header.ActionUpdateUser.attr:type_name -> header.Attribute
-	38,   // 325: header.ActionUpdateUser.attrs:type_name -> header.Attribute
-	615,  // 326: header.ReportBotResponse.metrics:type_name -> header.ReportBotResponse.Metric
-	146,  // 327: header.BotrunMetrics.metrics:type_name -> header.BotrunMetric
-	616,  // 328: header.ActionrunMetrics.metrics:type_name -> header.ActionrunMetrics.ActionrunMetric
-	672,  // 329: header.RealtimeSubscription.ctx:type_name -> common.Context
-	672,  // 330: header.PollResult.ctx:type_name -> common.Context
-	73,   // 331: header.PollResult.events:type_name -> header.Event
-	672,  // 332: header.PsMessage.ctx:type_name -> common.Context
-	73,   // 333: header.PsMessage.event:type_name -> header.Event
-	672,  // 334: header.WidgetUserSetting.ctx:type_name -> common.Context
-	678,  // 335: header.WidgetUserSetting.account:type_name -> account.Account
-	676,  // 336: header.WidgetUserSetting.agents:type_name -> account.Agent
-	128,  // 337: header.WidgetUserSetting.bots:type_name -> header.Bot
-	167,  // 338: header.WidgetUserSetting.plugins:type_name -> header.WebPlugin
-	59,   // 339: header.WidgetUserSetting.location:type_name -> header.Location
-	672,  // 340: header.AccountWeb.ctx:type_name -> common.Context
-	678,  // 341: header.AccountWeb.account:type_name -> account.Account
-	676,  // 342: header.AccountWeb.agents:type_name -> account.Agent
-	128,  // 343: header.AccountWeb.bots:type_name -> header.Bot
-	167,  // 344: header.AccountWeb.plugins:type_name -> header.WebPlugin
-	284,  // 345: header.AccountWeb.payment_methods:type_name -> header.PaymentMethod
-	59,   // 346: header.AccountWeb.location:type_name -> header.Location
-	157,  // 347: header.WidgetHeader.links:type_name -> header.SocialLink
-	672,  // 348: header.WidgetSetting.ctx:type_name -> common.Context
-	676,  // 349: header.WidgetSetting.agents:type_name -> account.Agent
-	158,  // 350: header.WidgetSetting.header:type_name -> header.WidgetHeader
-	162,  // 351: header.WidgetSetting.offline_form:type_name -> header.WidgetForm
-	162,  // 352: header.WidgetSetting.prechat_form:type_name -> header.WidgetForm
-	163,  // 353: header.WidgetSetting.desktop_button:type_name -> header.WidgetChatButton
-	163,  // 354: header.WidgetSetting.mobile_button:type_name -> header.WidgetChatButton
-	164,  // 355: header.WidgetSetting.greeting:type_name -> header.WidgetGreeting
-	673,  // 356: header.WidgetSetting.caption:type_name -> header.I18nString
-	673,  // 357: header.WidgetSetting.tagline:type_name -> header.I18nString
-	673,  // 358: header.WidgetField.i18n_label:type_name -> header.I18nString
-	673,  // 359: header.WidgetField.i18n_placeholder:type_name -> header.I18nString
-	55,   // 360: header.WidgetField.def:type_name -> header.AttributeDefinition
-	617,  // 361: header.WidgetGroup.i18n_name:type_name -> header.WidgetGroup.I18nNameEntry
-	160,  // 362: header.WidgetForm.fields:type_name -> header.WidgetField
-	161,  // 363: header.WidgetForm.groups:type_name -> header.WidgetGroup
-	673,  // 364: header.WidgetForm.i18n_group_label:type_name -> header.I18nString
-	673,  // 365: header.WidgetForm.i18n_title:type_name -> header.I18nString
-	673,  // 366: header.WidgetForm.i18n_question_label:type_name -> header.I18nString
-	673,  // 367: header.WidgetGreeting.greeting:type_name -> header.I18nString
-	102,  // 368: header.CampaignNotification.user_email:type_name -> header.Message
-	672,  // 369: header.WebPlugins.ctx:type_name -> common.Context
-	167,  // 370: header.WebPlugins.plugins:type_name -> header.WebPlugin
-	672,  // 371: header.WebPlugin.ctx:type_name -> common.Context
-	122,  // 372: header.WebPlugin.triggers:type_name -> header.Trigger
-	150,  // 373: header.WebPlugin.initiative_frequency:type_name -> header.Frequently
-	123,  // 374: header.WebPlugin.conditions:type_name -> header.BotCondition
-	159,  // 375: header.WebPlugin.chatbox:type_name -> header.WidgetSetting
-	191,  // 376: header.WebPlugin.popup:type_name -> header.Popup
-	175,  // 377: header.WebPlugin.contact:type_name -> header.ContactComponent
-	174,  // 378: header.WebPlugin.notification:type_name -> header.Notif
-	165,  // 379: header.WebPlugin.conversion_notification:type_name -> header.CampaignNotification
-	673,  // 380: header.TextComponent.i18n_html:type_name -> header.I18nString
-	673,  // 381: header.TextComponent.i18n_quill_delta:type_name -> header.I18nString
-	505,  // 382: header.TextComponent.block:type_name -> header.Block
-	618,  // 383: header.TextComponent.i18n_block:type_name -> header.TextComponent.I18nBlockEntry
-	672,  // 384: header.NotifProfiles.ctx:type_name -> common.Context
-	172,  // 385: header.NotifProfiles.profiles:type_name -> header.NotifProfile
-	672,  // 386: header.NotifProfile.ctx:type_name -> common.Context
-	619,  // 387: header.I18nBlock.i18n:type_name -> header.I18nBlock.I18nEntry
-	172,  // 388: header.Notif.profiles:type_name -> header.NotifProfile
-	505,  // 389: header.Notif.title_block:type_name -> header.Block
-	620,  // 390: header.Notif.i18n_title_block:type_name -> header.Notif.I18nTitleBlockEntry
-	193,  // 391: header.Notif.title_style:type_name -> header.Style
-	505,  // 392: header.Notif.message_blocks:type_name -> header.Block
-	173,  // 393: header.Notif.i18n_message_blocks:type_name -> header.I18nBlock
-	193,  // 394: header.Notif.message_style:type_name -> header.Style
-	193,  // 395: header.Notif.background_style:type_name -> header.Style
-	193,  // 396: header.Notif.subtext_style:type_name -> header.Style
-	193,  // 397: header.Notif.avatar_style:type_name -> header.Style
-	621,  // 398: header.ContactComponent.buttons:type_name -> header.ContactComponent.ContactButton
-	622,  // 399: header.CallContactComponent.hotlines:type_name -> header.CallContactComponent.Hotline
-	623,  // 400: header.MapContactComponent.locations:type_name -> header.MapContactComponent.Location
-	673,  // 401: header.FormField.i18n_label:type_name -> header.I18nString
-	624,  // 402: header.FormField.options:type_name -> header.FormField.FormFieldOption
-	673,  // 403: header.FormField.i18n_placeholder:type_name -> header.I18nString
-	672,  // 404: header.FormSubmission.ctx:type_name -> common.Context
-	182,  // 405: header.FormSubmission.values:type_name -> header.FormField
-	674,  // 406: header.FormSubmission.device:type_name -> common.Device
-	672,  // 407: header.Form.ctx:type_name -> common.Context
-	161,  // 408: header.Form.groups:type_name -> header.WidgetGroup
-	673,  // 409: header.Form.i18n_group_label:type_name -> header.I18nString
-	673,  // 410: header.Form.i18n_title:type_name -> header.I18nString
-	673,  // 411: header.Form.i18n_question_label:type_name -> header.I18nString
-	505,  // 412: header.Form.components:type_name -> header.Block
-	223,  // 413: header.Form.logo:type_name -> header.File
-	223,  // 414: header.Form.cover_image:type_name -> header.File
-	193,  // 415: header.Form.header_style:type_name -> header.Style
-	193,  // 416: header.Form.text_style:type_name -> header.Style
-	193,  // 417: header.Form.input_style:type_name -> header.Style
-	182,  // 418: header.OldForm.fields:type_name -> header.FormField
-	161,  // 419: header.OldForm.groups:type_name -> header.WidgetGroup
-	673,  // 420: header.OldForm.i18n_group_label:type_name -> header.I18nString
-	673,  // 421: header.OldForm.i18n_title:type_name -> header.I18nString
-	673,  // 422: header.OldForm.i18n_question_label:type_name -> header.I18nString
-	186,  // 423: header.OldForm.form_groups:type_name -> header.FormGroup
-	182,  // 424: header.FormGroup.fields:type_name -> header.FormField
-	673,  // 425: header.FormGroup.i18n_title:type_name -> header.I18nString
-	200,  // 426: header.ButtonsComponent.primary_actions:type_name -> header.PopupButtonAction
-	673,  // 427: header.ButtonsComponent.i18n_primary_text:type_name -> header.I18nString
-	200,  // 428: header.ButtonsComponent.secondary_actions:type_name -> header.PopupButtonAction
-	673,  // 429: header.ButtonsComponent.i18n_secondary_text:type_name -> header.I18nString
-	193,  // 430: header.WebPluginComponent.style:type_name -> header.Style
-	193,  // 431: header.WebPluginComponent.mobile_style:type_name -> header.Style
-	168,  // 432: header.WebPluginComponent.text:type_name -> header.TextComponent
-	187,  // 433: header.WebPluginComponent.buttons:type_name -> header.ButtonsComponent
-	181,  // 434: header.WebPluginComponent.countdown:type_name -> header.CountdownComponent
-	185,  // 435: header.WebPluginComponent.form:type_name -> header.OldForm
-	192,  // 436: header.WebPluginComponent.link:type_name -> header.LinkComponent
-	170,  // 437: header.WebPluginComponent.image:type_name -> header.ImageComponent
-	169,  // 438: header.WebPluginComponent.line:type_name -> header.LineComponent
-	190,  // 439: header.WebPluginComponent.social_buttons:type_name -> header.SocialButtonsComponent
-	189,  // 440: header.WebPluginComponent.follow_facebook:type_name -> header.FollowFacebookComponent
-	194,  // 441: header.Popup.pages:type_name -> header.PopupPage
-	193,  // 442: header.Style.hover:type_name -> header.Style
-	188,  // 443: header.PopupPage.components:type_name -> header.WebPluginComponent
-	193,  // 444: header.PopupPage.style:type_name -> header.Style
-	193,  // 445: header.PopupPage.mobile_style:type_name -> header.Style
-	201,  // 446: header.PopupPage.background_click:type_name -> header.ButtonComponent
-	672,  // 447: header.Impression.ctx:type_name -> common.Context
-	674,  // 448: header.Impression.device:type_name -> common.Device
-	672,  // 449: header.Conversions.ctx:type_name -> common.Context
-	197,  // 450: header.Conversions.conversions:type_name -> header.Conversion
-	672,  // 451: header.Conversion.ctx:type_name -> common.Context
-	674,  // 452: header.Conversion.device:type_name -> common.Device
-	199,  // 453: header.Conversion.submission:type_name -> header.CampaignSubmission
-	45,   // 454: header.Conversion.user:type_name -> header.User
-	672,  // 455: header.UserCampaignStatus.ctx:type_name -> common.Context
-	672,  // 456: header.CampaignSubmission.ctx:type_name -> common.Context
-	160,  // 457: header.CampaignSubmission.fields:type_name -> header.WidgetField
-	200,  // 458: header.ButtonComponent.actions:type_name -> header.PopupButtonAction
-	672,  // 459: header.ReportCampaignResponse.ctx:type_name -> common.Context
-	672,  // 460: header.ReportWebPluginResponse.ctx:type_name -> common.Context
-	205,  // 461: header.ReportWebPluginResponse.metrics:type_name -> header.WebPluginMetric
-	672,  // 462: header.GreetingAudios.ctx:type_name -> common.Context
-	209,  // 463: header.GreetingAudios.greeting_audios:type_name -> header.GreetingAudio
-	672,  // 464: header.GreetingAudio.ctx:type_name -> common.Context
-	223,  // 465: header.GreetingAudio.file:type_name -> header.File
-	672,  // 466: header.UploadedImage.ctx:type_name -> common.Context
-	672,  // 467: header.UploadedImages.ctx:type_name -> common.Context
-	210,  // 468: header.UploadedImages.images:type_name -> header.UploadedImage
-	466,  // 469: header.EventFilter.condition:type_name -> header.WorkflowCondition
-	672,  // 470: header.EventDestination.ctx:type_name -> common.Context
-	213,  // 471: header.EventDestination.filters:type_name -> header.EventFilter
-	217,  // 472: header.EventDestination.webhook:type_name -> header.Webhook
-	216,  // 473: header.EventDestination.facebook_conversion_api:type_name -> header.FacebookConversionAPI
-	215,  // 474: header.EventDestination.mappings:type_name -> header.DataMapping
-	672,  // 475: header.Webhook.ctx:type_name -> common.Context
-	212,  // 476: header.Webhook.old_secret:type_name -> header.WebhookSecret
-	672,  // 477: header.WebhookDeliveries.ctx:type_name -> common.Context
-	219,  // 478: header.WebhookDeliveries.deliveries:type_name -> header.WebhookDelivery
-	672,  // 479: header.WebhookDelivery.ctx:type_name -> common.Context
-	315,  // 480: header.WebhookDelivery.resquest_headers:type_name -> header.KV
-	315,  // 481: header.WebhookDelivery.response_headers:type_name -> header.KV
-	672,  // 482: header.WebhookTestResult.ctx:type_name -> common.Context
-	672,  // 483: header.BackOffSleepWebhookEmail.ctx:type_name -> common.Context
-	672,  // 484: header.PresignResult.ctx:type_name -> common.Context
-	672,  // 485: header.File.ctx:type_name -> common.Context
-	672,  // 486: header.BotTerminated.ctx:type_name -> common.Context
-	672,  // 487: header.BlacklistIP.ctx:type_name -> common.Context
-	672,  // 488: header.BannedUser.ctx:type_name -> common.Context
-	672,  // 489: header.LoginSessions.ctx:type_name -> common.Context
-	228,  // 490: header.LoginSessions.sessions:type_name -> header.LoginSession
-	672,  // 491: header.LoginSession.ctx:type_name -> common.Context
-	674,  // 492: header.LoginSession.device:type_name -> common.Device
-	59,   // 493: header.LoginSession.location:type_name -> header.Location
-	231,  // 494: header.GoogleLocationSettings.settings:type_name -> header.GoogleLocationSetting
-	232,  // 495: header.GoogleLocationSetting.google_review_setting:type_name -> header.GoogleReviewSetting
-	233,  // 496: header.GoogleLocationSetting.google_question_setting:type_name -> header.GoogleQuestionSetting
-	625,  // 497: header.GoogleReviewSetting.repliesM:type_name -> header.GoogleReviewSetting.RepliesMEntry
-	505,  // 498: header.FbComment.block:type_name -> header.Block
-	672,  // 499: header.FbFanpageSetting.ctx:type_name -> common.Context
-	237,  // 500: header.FbFanpageSetting.general_comment_setting:type_name -> header.FbCommentSetting
-	237,  // 501: header.FbFanpageSetting.specific_post_comment_setting:type_name -> header.FbCommentSetting
-	237,  // 502: header.FbFanpageSetting.post_comment_settings:type_name -> header.FbCommentSetting
-	672,  // 503: header.FbFanpageSettings.ctx:type_name -> common.Context
-	235,  // 504: header.FbFanpageSettings.settings:type_name -> header.FbFanpageSetting
-	234,  // 505: header.FbCommentSetting.comments:type_name -> header.FbComment
-	102,  // 506: header.FbCommentSetting.message:type_name -> header.Message
-	102,  // 507: header.FbCommentSetting.message_for_comments_contain_phone_email_or_address:type_name -> header.Message
-	102,  // 508: header.FbCommentSetting.message_for_comments_contain_keyword:type_name -> header.Message
-	248,  // 509: header.FbCommentSetting.posts:type_name -> header.FacebookPost
-	672,  // 510: header.FacebookPosts.ctx:type_name -> common.Context
-	248,  // 511: header.FacebookPosts.posts:type_name -> header.FacebookPost
-	239,  // 512: header.FacebookPostAttachmentMedia.image:type_name -> header.FacebookPostAttachmentMediaImage
-	240,  // 513: header.FacebookPostAttachment.media:type_name -> header.FacebookPostAttachmentMedia
-	242,  // 514: header.FacebookPostAttachment.subattachments:type_name -> header.FacebookPostAttachemnts
-	241,  // 515: header.FacebookPostAttachemnts.data:type_name -> header.FacebookPostAttachment
-	248,  // 516: header.FbFacebookPosts.data:type_name -> header.FacebookPost
-	246,  // 517: header.FbFacebookPosts.paging:type_name -> header.FacebookPaging
-	245,  // 518: header.FacebookPaging.cursors:type_name -> header.FacebookPagingCursor
-	672,  // 519: header.InstagramMedia.ctx:type_name -> common.Context
-	672,  // 520: header.FacebookPost.ctx:type_name -> common.Context
-	243,  // 521: header.FacebookPost.from:type_name -> header.FacebookPostFrom
-	242,  // 522: header.FacebookPost.attachments:type_name -> header.FacebookPostAttachemnts
-	672,  // 523: header.UserOrderConfirmation.ctx:type_name -> common.Context
-	290,  // 524: header.UserOrderConfirmation.order:type_name -> header.Order
-	672,  // 525: header.LangMessage.ctx:type_name -> common.Context
-	672,  // 526: header.Lang.ctx:type_name -> common.Context
-	251,  // 527: header.Lang.messages:type_name -> header.LangMessage
-	672,  // 528: header.Locale.ctx:type_name -> common.Context
-	678,  // 529: header.AccountImage.img:type_name -> account.Account
-	676,  // 530: header.AccountImage.owner:type_name -> account.Agent
-	672,  // 531: header.UserViews.ctx:type_name -> common.Context
-	256,  // 532: header.UserViews.views:type_name -> header.UserView
-	672,  // 533: header.UserView.ctx:type_name -> common.Context
-	259,  // 534: header.UserView.condition:type_name -> header.UserViewCondition
-	672,  // 535: header.CountTouchpointResponse.ctx:type_name -> common.Context
-	626,  // 536: header.CountTouchpointResponse.counts:type_name -> header.CountTouchpointResponse.TouchpointCount
-	672,  // 537: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
-	672,  // 538: header.UserViewCondition.ctx:type_name -> common.Context
-	683,  // 539: header.UserViewCondition.text:type_name -> header.TextCondition
-	684,  // 540: header.UserViewCondition.boolean:type_name -> header.BooleanCondition
-	682,  // 541: header.UserViewCondition.number:type_name -> header.FloatCondition
-	685,  // 542: header.UserViewCondition.datetime:type_name -> header.DatetimeCondition
-	686,  // 543: header.UserViewCondition.event:type_name -> header.EventCondition
-	259,  // 544: header.UserViewCondition.all:type_name -> header.UserViewCondition
-	259,  // 545: header.UserViewCondition.one:type_name -> header.UserViewCondition
-	672,  // 546: header.ReportResponse.ctx:type_name -> common.Context
-	673,  // 547: header.InvoiceTemplate.i18n_terms_and_conditions:type_name -> header.I18nString
-	673,  // 548: header.InvoiceTemplate.i18n_tagline:type_name -> header.I18nString
-	673,  // 549: header.InvoiceTemplate.i18n_signature:type_name -> header.I18nString
-	672,  // 550: header.ShopSetting.ctx:type_name -> common.Context
-	264,  // 551: header.ShopSetting.other_currencies:type_name -> header.Currency
-	269,  // 552: header.ShopSetting.addresses:type_name -> header.Address
-	320,  // 553: header.ShopSetting.taxes:type_name -> header.Tax
-	284,  // 554: header.ShopSetting.payment_methods:type_name -> header.PaymentMethod
-	261,  // 555: header.ShopSetting.invoice_template:type_name -> header.InvoiceTemplate
-	323,  // 556: header.ShopSetting.shopee_shops:type_name -> header.ShopeeShop
-	282,  // 557: header.ShopSetting.shippings:type_name -> header.IntegratedShipping
-	281,  // 558: header.ShopSetting.shipping_policies:type_name -> header.ShippingPolicy
-	296,  // 559: header.ShopSetting.cancellation_codes:type_name -> header.CancellationCode
-	672,  // 560: header.Addresses.ctx:type_name -> common.Context
-	269,  // 561: header.Addresses.addresses:type_name -> header.Address
-	672,  // 562: header.Currency.ctx:type_name -> common.Context
-	265,  // 563: header.Currency.logs:type_name -> header.CurrencyLogEntry
-	303,  // 564: header.OrderItem.product:type_name -> header.Product
-	320,  // 565: header.OrderItem.tax:type_name -> header.Tax
-	672,  // 566: header.Address.ctx:type_name -> common.Context
-	268,  // 567: header.Address.ghn:type_name -> header.GHNAddress
-	269,  // 568: header.Address.ghtk:type_name -> header.Address
-	275,  // 569: header.GHNOrder.items:type_name -> header.GHNOrderItem
-	272,  // 570: header.GHNOrder.fee:type_name -> header.GHNOrderFee
-	274,  // 571: header.GHNOrder2.Fee:type_name -> header.GHNOrder2Fee
-	269,  // 572: header.ShippingInfo.address:type_name -> header.Address
-	269,  // 573: header.ShippingInfo.pickup_address:type_name -> header.Address
-	320,  // 574: header.ShippingInfo.tax:type_name -> header.Tax
-	279,  // 575: header.ShippingInfo.data:type_name -> header.ShippingData
-	276,  // 576: header.ShippingData.ghtk:type_name -> header.GHTKShippingData
-	277,  // 577: header.ShippingData.ghtk_order:type_name -> header.GHTKOrder
-	270,  // 578: header.ShippingData.ghn:type_name -> header.GHNShippingData
-	271,  // 579: header.ShippingData.ghn_order:type_name -> header.GHNOrder
-	672,  // 580: header.ShippingPolicies.ctx:type_name -> common.Context
-	281,  // 581: header.ShippingPolicies.shipping_policies:type_name -> header.ShippingPolicy
-	672,  // 582: header.ShippingPolicy.ctx:type_name -> common.Context
-	672,  // 583: header.IntegratedShipping.ctx:type_name -> common.Context
-	269,  // 584: header.IntegratedShipping.address:type_name -> header.Address
-	672,  // 585: header.IntegratedShippings.ctx:type_name -> common.Context
-	282,  // 586: header.IntegratedShippings.integrated_shippings:type_name -> header.IntegratedShipping
-	672,  // 587: header.PaymentMethod.ctx:type_name -> common.Context
-	672,  // 588: header.PaymentMethods.ctx:type_name -> common.Context
-	284,  // 589: header.PaymentMethods.payment_methods:type_name -> header.PaymentMethod
-	672,  // 590: header.Orders.ctx:type_name -> common.Context
-	286,  // 591: header.Orders.metrics:type_name -> header.OrderMetric
-	290,  // 592: header.Orders.orders:type_name -> header.Order
-	672,  // 593: header.CountOrdersResponse.ctx:type_name -> common.Context
-	672,  // 594: header.DownloadOrderRequest.ctx:type_name -> common.Context
-	290,  // 595: header.DownloadOrderRequest.order:type_name -> header.Order
-	261,  // 596: header.DownloadOrderRequest.template:type_name -> header.InvoiceTemplate
-	672,  // 597: header.Order.ctx:type_name -> common.Context
-	278,  // 598: header.Order.shipping:type_name -> header.ShippingInfo
-	284,  // 599: header.Order.payment_method:type_name -> header.PaymentMethod
-	267,  // 600: header.Order.items:type_name -> header.OrderItem
-	45,   // 601: header.Order.user:type_name -> header.User
-	627,  // 602: header.Order.fields:type_name -> header.Order.FieldsEntry
-	292,  // 603: header.Order.agents:type_name -> header.OrderAgent
-	291,  // 604: header.Order.stages:type_name -> header.OrderPipelineStage
-	111,  // 605: header.Order.tags:type_name -> header.Tag
-	322,  // 606: header.Order.error:type_name -> header.Error
-	672,  // 607: header.OrderPipelineStage.ctx:type_name -> common.Context
-	337,  // 608: header.OrderPipelineStage.tasks:type_name -> header.Task
-	672,  // 609: header.OrderAgent.ctx:type_name -> common.Context
-	672,  // 610: header.Bills.ctx:type_name -> common.Context
-	294,  // 611: header.Bills.bills:type_name -> header.Bill
-	672,  // 612: header.Bill.ctx:type_name -> common.Context
-	532,  // 613: header.Bill.bank_transfer_request:type_name -> header.BankTransferRequest
-	672,  // 614: header.CancellationCodes.ctx:type_name -> common.Context
-	296,  // 615: header.CancellationCodes.cancellation_codes:type_name -> header.CancellationCode
-	672,  // 616: header.CancellationCode.ctx:type_name -> common.Context
-	672,  // 617: header.OrderPipelineUpdated.ctx:type_name -> common.Context
-	672,  // 618: header.OrderStatusUpdated.ctx:type_name -> common.Context
-	73,   // 619: header.OrderHistoryEntry.event:type_name -> header.Event
-	73,   // 620: header.OrderHistoryEntry.ref_comment:type_name -> header.Event
-	672,  // 621: header.OrderHistoryEntries.ctx:type_name -> common.Context
-	299,  // 622: header.OrderHistoryEntries.entries:type_name -> header.OrderHistoryEntry
-	672,  // 623: header.Discount.ctx:type_name -> common.Context
-	223,  // 624: header.Discount.image:type_name -> header.File
-	672,  // 625: header.Product.ctx:type_name -> common.Context
-	303,  // 626: header.Product.other_variants:type_name -> header.Product
-	315,  // 627: header.Product.props:type_name -> header.KV
-	307,  // 628: header.Product.options:type_name -> header.ProductOption
-	266,  // 629: header.Product.price_rules:type_name -> header.PriceRule
-	305,  // 630: header.Product.stocks:type_name -> header.ProductStock
-	320,  // 631: header.Product.tax:type_name -> header.Tax
-	107,  // 632: header.Product.buttons:type_name -> header.MessageButton
-	628,  // 633: header.Product.i18n_description_block:type_name -> header.Product.I18nDescriptionBlockEntry
-	223,  // 634: header.Product.attachments:type_name -> header.File
-	301,  // 635: header.Product.validity:type_name -> header.ProductValidity
-	306,  // 636: header.Product.offers:type_name -> header.ProductOffer
-	304,  // 637: header.Product.enrich_sources:type_name -> header.ProductEnrichSource
-	322,  // 638: header.Product.error:type_name -> header.Error
-	672,  // 639: header.ProductOffer.ctx:type_name -> common.Context
-	308,  // 640: header.GoogleSheetProductFeed.mapping:type_name -> header.ColumnMapping
-	672,  // 641: header.ProductFeedRun.ctx:type_name -> common.Context
-	322,  // 642: header.ProductFeedRun.fetch_error:type_name -> header.Error
-	672,  // 643: header.ProductFeed.ctx:type_name -> common.Context
-	310,  // 644: header.ProductFeed.shopee:type_name -> header.ShopeeProductFeed
-	311,  // 645: header.ProductFeed.website:type_name -> header.WebsiteProductFeed
-	309,  // 646: header.ProductFeed.google_sheet:type_name -> header.GoogleSheetProductFeed
-	312,  // 647: header.ProductFeed.last_run:type_name -> header.ProductFeedRun
-	672,  // 648: header.ProductsRequest.ctx:type_name -> common.Context
-	315,  // 649: header.ProductsRequest.props:type_name -> header.KV
-	315,  // 650: header.KV.kvs:type_name -> header.KV
-	505,  // 651: header.KV.value_block:type_name -> header.Block
-	505,  // 652: header.KV.value_blocks:type_name -> header.Block
-	472,  // 653: header.ProductCategoryBuildQueryExample.history:type_name -> header.LLMChatHistoryEntry
-	629,  // 654: header.ProductCategory.i18n_name:type_name -> header.ProductCategory.I18nNameEntry
-	630,  // 655: header.ProductCategory.attributes:type_name -> header.ProductCategory.AttributesEntry
-	316,  // 656: header.ProductCategory._build_query_examples:type_name -> header.ProductCategoryBuildQueryExample
-	318,  // 657: header.ProductCategory.keyword_extract_examples:type_name -> header.ProductCategoryExtractExample
-	672,  // 658: header.ProductCategories.ctx:type_name -> common.Context
-	672,  // 659: header.Tax.ctx:type_name -> common.Context
-	673,  // 660: header.Tax.i18n_name:type_name -> header.I18nString
-	631,  // 661: header.Error.fields:type_name -> header.Error.FieldsEntry
-	632,  // 662: header.Error._hidden:type_name -> header.Error.HiddenEntry
-	633,  // 663: header.Error.message:type_name -> header.Error.MessageEntry
-	634,  // 664: header.Error.attrs:type_name -> header.Error.AttrsEntry
-	635,  // 665: header.Error._hidden_attrs:type_name -> header.Error.HiddenAttrsEntry
-	672,  // 666: header.ShopeeShop.ctx:type_name -> common.Context
-	672,  // 667: header.ShopeeSyncProductResponse.ctx:type_name -> common.Context
-	672,  // 668: header.AddressAutocompleteResponses.ctx:type_name -> common.Context
-	326,  // 669: header.AddressAutocompleteResponses.responses:type_name -> header.AddressAutocompleteResponse
-	672,  // 670: header.AddressAutocompleteResponse.ctx:type_name -> common.Context
-	327,  // 671: header.AddressAutocompleteResponse.matched_substrings:type_name -> header.SubstringIndex
-	329,  // 672: header.PipelineStage.routes:type_name -> header.PipelineRule
-	337,  // 673: header.PipelineStage.tasks:type_name -> header.Task
-	672,  // 674: header.PipelineRule.ctx:type_name -> common.Context
-	123,  // 675: header.PipelineRule.conditions:type_name -> header.BotCondition
-	672,  // 676: header.Pipelines.ctx:type_name -> common.Context
-	331,  // 677: header.Pipelines.pipelines:type_name -> header.Pipeline
-	672,  // 678: header.Pipeline.ctx:type_name -> common.Context
-	328,  // 679: header.Pipeline.stages:type_name -> header.PipelineStage
-	672,  // 680: header.Tasks.ctx:type_name -> common.Context
-	337,  // 681: header.Tasks.tasks:type_name -> header.Task
-	672,  // 682: header.ImportLeadRequest.ctx:type_name -> common.Context
-	45,   // 683: header.ImportLeadRequest.users:type_name -> header.User
-	672,  // 684: header.ImportLeadResponse.ctx:type_name -> common.Context
-	672,  // 685: header.ImportProductRequest.ctx:type_name -> common.Context
-	303,  // 686: header.ImportProductRequest.products:type_name -> header.Product
-	672,  // 687: header.ImportProductResponse.ctx:type_name -> common.Context
-	303,  // 688: header.ImportProductResponse.products:type_name -> header.Product
-	672,  // 689: header.Task.ctx:type_name -> common.Context
-	73,   // 690: header.Task.data_email:type_name -> header.Event
-	223,  // 691: header.Task.files:type_name -> header.File
-	73,   // 692: header.Task.latest_comment:type_name -> header.Event
-	338,  // 693: header.Task.members:type_name -> header.TaskMember
-	505,  // 694: header.Task.note_block:type_name -> header.Block
-	505,  // 695: header.Task.title_block:type_name -> header.Block
-	73,   // 696: header.TaskHistoryEntry.event:type_name -> header.Event
-	73,   // 697: header.TaskHistoryEntry.ref_comment:type_name -> header.Event
-	672,  // 698: header.TaskHistoryEntries.ctx:type_name -> common.Context
-	339,  // 699: header.TaskHistoryEntries.entries:type_name -> header.TaskHistoryEntry
-	672,  // 700: header.AgentGroups.ctx:type_name -> common.Context
-	342,  // 701: header.AgentGroups.Groups:type_name -> header.AgentGroup
-	672,  // 702: header.AgentGroup.ctx:type_name -> common.Context
-	45,   // 703: header.DocHit.user:type_name -> header.User
-	343,  // 704: header.DocHit.secondary_doc:type_name -> header.DocHit
-	496,  // 705: header.DocHit.article:type_name -> header.Article
-	505,  // 706: header.DocHit.description_block:type_name -> header.Block
-	636,  // 707: header.DocHit.query_matchM:type_name -> header.DocHit.QueryMatchMEntry
-	672,  // 708: header.DocSearchResponse.ctx:type_name -> common.Context
-	343,  // 709: header.DocSearchResponse.hits:type_name -> header.DocHit
-	505,  // 710: header.ArticleHit.title_block:type_name -> header.Block
-	505,  // 711: header.ArticleHit.description_block:type_name -> header.Block
-	505,  // 712: header.ArticleHit.content_block:type_name -> header.Block
-	672,  // 713: header.ArticleSearchResponse.ctx:type_name -> common.Context
-	345,  // 714: header.ArticleSearchResponse.hits:type_name -> header.ArticleHit
-	672,  // 715: header.ZaloCodeChallenge.ctx:type_name -> common.Context
-	672,  // 716: header.ConversationModal.ctx:type_name -> common.Context
-	672,  // 717: header.ConversationModals.ctx:type_name -> common.Context
-	349,  // 718: header.ConversationModals.conversation_modals:type_name -> header.ConversationModal
-	672,  // 719: header.ConversationModalPickRequest.ctx:type_name -> common.Context
-	47,   // 720: header.ConversationModalPickRequest.touchpoint:type_name -> header.Touchpoint
-	672,  // 721: header.ConversationModalPicked.ctx:type_name -> common.Context
-	672,  // 722: header.FacebookPageRegister.ctx:type_name -> common.Context
-	672,  // 723: header.FacebookPage.ctx:type_name -> common.Context
-	357,  // 724: header.FacebookPage.instagram_account:type_name -> header.InstagramUser
-	672,  // 725: header.FacebookPageRequest.ctx:type_name -> common.Context
-	672,  // 726: header.FacebookPages.ctx:type_name -> common.Context
-	354,  // 727: header.FacebookPages.facebook_pages:type_name -> header.FacebookPage
-	672,  // 728: header.InstagramUser.ctx:type_name -> common.Context
-	672,  // 729: header.CallDriverRequest.ctx:type_name -> common.Context
-	40,   // 730: header.CallDriverRequest.phone_device:type_name -> header.PhoneDevice
-	117,  // 731: header.CallDriverRequest.integration:type_name -> header.Integration
-	40,   // 732: header.CallDriverResponse.phone_device:type_name -> header.PhoneDevice
-	99,   // 733: header.CallDriverResponse.call:type_name -> header.CallInfo
-	672,  // 734: header.BlockedNumbers.ctx:type_name -> common.Context
-	361,  // 735: header.BlockedNumbers.blocked_numbers:type_name -> header.BlockedNumber
-	672,  // 736: header.BlockedNumber.ctx:type_name -> common.Context
-	363,  // 737: header.TextToSpeech.speeches:type_name -> header.TTSVoiceSelection
-	223,  // 738: header.TTSVoiceSelection.file:type_name -> header.File
-	672,  // 739: header.BusinessHours.ctx:type_name -> common.Context
-	364,  // 740: header.BusinessHours.week_days:type_name -> header.BusinessHour
-	364,  // 741: header.BusinessHours.extra_hours:type_name -> header.BusinessHour
-	364,  // 742: header.BusinessHours.holidays:type_name -> header.BusinessHour
-	672,  // 743: header.RecentCallRecords.ctx:type_name -> common.Context
-	367,  // 744: header.RecentCallRecords.records:type_name -> header.RecentCallRecord
-	672,  // 745: header.ZaloUserRequest.ctx:type_name -> common.Context
-	672,  // 746: header.ZnsRequest.ctx:type_name -> common.Context
-	637,  // 747: header.ZnsRequest.template_data:type_name -> header.ZnsRequest.TemplateDataEntry
-	672,  // 748: header.SendOmniChannelMessageRequest.ctx:type_name -> common.Context
-	73,   // 749: header.SendOmniChannelMessageRequest.messages:type_name -> header.Event
-	672,  // 750: header.EventType.ctx:type_name -> common.Context
-	73,   // 751: header.EventType.first_event:type_name -> header.Event
-	73,   // 752: header.EventType.last_event:type_name -> header.Event
-	45,   // 753: header.EventType.first_user:type_name -> header.User
-	45,   // 754: header.EventType.last_user:type_name -> header.User
-	672,  // 755: header.Segment.ctx:type_name -> common.Context
-	259,  // 756: header.Segment.condition:type_name -> header.UserViewCondition
-	322,  // 757: header.Segment.fetch_error:type_name -> header.Error
-	492,  // 758: header.Segment.permissions:type_name -> header.ResourceGroupMember
-	672,  // 759: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
-	672,  // 760: header.SegmentSync.ctx:type_name -> common.Context
-	376,  // 761: header.SegmentSync.meta_audience:type_name -> header.MetaCustomAudience
-	672,  // 762: header.MetaCustomAudience.ctx:type_name -> common.Context
-	672,  // 763: header.CustomAudienceBatchResponse.ctx:type_name -> common.Context
-	672,  // 764: header.CustomAudienceBatchRequest.ctx:type_name -> common.Context
-	373,  // 765: header.CustomAudienceBatchRequest.session:type_name -> header.MetaSyncBatchSession
-	45,   // 766: header.CustomAudienceBatchRequest.users:type_name -> header.User
-	672,  // 767: header.Segments.ctx:type_name -> common.Context
-	372,  // 768: header.Segments.segments:type_name -> header.Segment
-	672,  // 769: header.SegmentUsers.ctx:type_name -> common.Context
-	672,  // 770: header.UserSegment.ctx:type_name -> common.Context
-	672,  // 771: header.Campaign.ctx:type_name -> common.Context
-	388,  // 772: header.Campaign.messages:type_name -> header.MarketingMessage
-	383,  // 773: header.Campaign.outbound_call:type_name -> header.OutboundCallCampaign
-	86,   // 774: header.Campaign.timming_condition:type_name -> header.TimmingCondition
-	259,  // 775: header.Campaign.trigger_condition:type_name -> header.UserViewCondition
-	531,  // 776: header.Campaign.audient_request:type_name -> header.UsersRequest
-	184,  // 777: header.OutboundCallCampaign.form:type_name -> header.Form
-	638,  // 778: header.OutboundCallCampaign.agent_weight:type_name -> header.OutboundCallCampaign.AgentWeightEntry
-	672,  // 779: header.ListOutboundCallRequest.ctx:type_name -> common.Context
-	259,  // 780: header.ListOutboundCallRequest.condition:type_name -> header.UserViewCondition
-	639,  // 781: header.ListOutboundCallRequest.agent_weight:type_name -> header.ListOutboundCallRequest.AgentWeightEntry
-	672,  // 782: header.OutboundCallEntries.ctx:type_name -> common.Context
-	387,  // 783: header.OutboundCallEntries.entries:type_name -> header.OutboundCallEntry
-	672,  // 784: header.ImportOutboundCallEntryRequest.ctx:type_name -> common.Context
-	387,  // 785: header.ImportOutboundCallEntryRequest.entries:type_name -> header.OutboundCallEntry
-	640,  // 786: header.ImportOutboundCallEntryRequest.agent_weight:type_name -> header.ImportOutboundCallEntryRequest.AgentWeightEntry
-	672,  // 787: header.OutboundCallEntry.ctx:type_name -> common.Context
-	183,  // 788: header.OutboundCallEntry.submission:type_name -> header.FormSubmission
-	86,   // 789: header.MarketingMessage.timming_condition:type_name -> header.TimmingCondition
-	87,   // 790: header.MarketingMessage.channel_condition:type_name -> header.ChannelCondition
-	102,  // 791: header.MarketingMessage.messages:type_name -> header.Message
-	672,  // 792: header.CampaignSendLogEntry.ctx:type_name -> common.Context
-	322,  // 793: header.CampaignSendLogEntry.error:type_name -> header.Error
-	672,  // 794: header.CampaignSendLog.ctx:type_name -> common.Context
-	389,  // 795: header.CampaignSendLog.entries:type_name -> header.CampaignSendLogEntry
-	672,  // 796: header.BroadcastCampaignMetrics.ctx:type_name -> common.Context
-	641,  // 797: header.BroadcastCampaignMetrics.metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
-	641,  // 798: header.BroadcastCampaignMetrics.per_message_metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
-	672,  // 799: header.BusinessEmailAddress.ctx:type_name -> common.Context
-	590,  // 800: header.BusinessEmailAddress.signature:type_name -> header.EmailSignature
-	672,  // 801: header.BusinessEmailAddresses.ctx:type_name -> common.Context
-	393,  // 802: header.BusinessEmailAddresses.business_email_addresses:type_name -> header.BusinessEmailAddress
-	672,  // 803: header.ListFormSubmissionRequest.ctx:type_name -> common.Context
-	672,  // 804: header.OutboundCallReportRequest.ctx:type_name -> common.Context
-	672,  // 805: header.ImportOutboundCallEntryResponse.ctx:type_name -> common.Context
-	672,  // 806: header.OutboundCallReportResponse.ctx:type_name -> common.Context
-	402,  // 807: header.OutboundCallReportResponse.agents:type_name -> header.OutboundCallAgentReport
-	401,  // 808: header.OutboundCallReportResponse.surveys:type_name -> header.OutboundCallSurveyReport
-	672,  // 809: header.LinkData.ctx:type_name -> common.Context
-	674,  // 810: header.LinkData.device:type_name -> common.Device
-	137,  // 811: header.WorkflowAction.jump:type_name -> header.ActionJump
-	138,  // 812: header.WorkflowAction.send_http:type_name -> header.ActionSendHttp
-	141,  // 813: header.WorkflowAction.ask_question:type_name -> header.ActionAskQuestion
-	119,  // 814: header.WorkflowAction.assign:type_name -> header.AssignRequest
-	136,  // 815: header.WorkflowAction.update_conversation:type_name -> header.ActionUpdateConversation
-	142,  // 816: header.WorkflowAction.update_user:type_name -> header.ActionUpdateUser
-	143,  // 817: header.WorkflowAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
-	134,  // 818: header.WorkflowAction.confirm_order:type_name -> header.ActionConfirmOrder
-	133,  // 819: header.WorkflowAction.create_task:type_name -> header.ActionCreateTask
-	135,  // 820: header.WorkflowAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
-	144,  // 821: header.WorkflowAction.update_user_segments:type_name -> header.ActionUpdateUserSegments
-	422,  // 822: header.WorkflowAction.wait_branches:type_name -> header.ActionWaitBranch
-	424,  // 823: header.WorkflowAction.branching:type_name -> header.ActionBranching
-	421,  // 824: header.WorkflowAction.percentage_split:type_name -> header.ActionPercentageSplit
-	140,  // 825: header.WorkflowAction.send_message:type_name -> header.ActionSendMessage
-	420,  // 826: header.WorkflowAction.send_http_req:type_name -> header.ActionSendHttpReq
-	418,  // 827: header.WorkflowAction.send_transcript:type_name -> header.ActionSendTranscript
-	417,  // 828: header.WorkflowAction.wait_message:type_name -> header.ActionWaitMessage
-	416,  // 829: header.WorkflowAction.create_order:type_name -> header.ActionCreateOrder
-	413,  // 830: header.WorkflowAction.ask_info:type_name -> header.ActionAskInfo
-	414,  // 831: header.WorkflowAction.llm:type_name -> header.ActionLLM
-	412,  // 832: header.WorkflowAction.start_thread:type_name -> header.ActionStartThread
-	411,  // 833: header.WorkflowAction.set_variable:type_name -> header.ActionSetVariable
-	410,  // 834: header.WorkflowAction.call_workflow:type_name -> header.ActionCallWorkflow
-	409,  // 835: header.WorkflowAction.assign_lead:type_name -> header.ActionAssignLead
-	139,  // 836: header.WorkflowAction.send_typing:type_name -> header.ActionSendTyping
-	408,  // 837: header.WorkflowAction.start_scope:type_name -> header.ActionStartScope
-	594,  // 838: header.WorkflowAction.ai_agent_track:type_name -> header.ActionAIAgentTrack
-	407,  // 839: header.WorkflowAction.terminate_bot:type_name -> header.ActionTerminateBot
-	406,  // 840: header.WorkflowAction.send_facebook_conversion:type_name -> header.ActionSendFacebookConversion
-	294,  // 841: header.ActionSendFacebookConversion.bill:type_name -> header.Bill
-	505,  // 842: header.ActionLLM.system_instruction_block:type_name -> header.Block
-	551,  // 843: header.ActionLLM.functions:type_name -> header.AIFunction
-	415,  // 844: header.ActionLLM.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
-	551,  // 845: header.ActionLLM.tool_choice_function:type_name -> header.AIFunction
-	550,  // 846: header.LLMResponseJSONSchemaFormat.schema:type_name -> header.JSONSchema
-	466,  // 847: header.ActionWaitMessage.condition:type_name -> header.WorkflowCondition
-	405,  // 848: header.RunWorkflowActionRequest.action:type_name -> header.WorkflowAction
-	45,   // 849: header.RunWorkflowActionRequest.user:type_name -> header.User
-	92,   // 850: header.RunWorkflowActionRequest.convo:type_name -> header.Conversation
-	290,  // 851: header.RunWorkflowActionRequest.order:type_name -> header.Order
-	481,  // 852: header.RunWorkflowActionRequest.ticket:type_name -> header.Ticket
-	466,  // 853: header.ActionWaitBranch.condition:type_name -> header.WorkflowCondition
-	466,  // 854: header.ActionBranchingBranch.condition:type_name -> header.WorkflowCondition
-	423,  // 855: header.ActionBranching.branches:type_name -> header.ActionBranchingBranch
-	672,  // 856: header.BouncedEmail.ctx:type_name -> common.Context
-	672,  // 857: header.BlockedEmail.ctx:type_name -> common.Context
-	322,  // 858: header.BlockedEmail.error:type_name -> header.Error
-	672,  // 859: header.Response.ctx:type_name -> common.Context
-	322,  // 860: header.Response.error:type_name -> header.Error
-	426,  // 861: header.Response.blocked_email:type_name -> header.BlockedEmail
-	426,  // 862: header.Response.blocked_emails:type_name -> header.BlockedEmail
-	425,  // 863: header.Response.bounced_email:type_name -> header.BouncedEmail
-	425,  // 864: header.Response.bounced_emails:type_name -> header.BouncedEmail
-	429,  // 865: header.Response.zalo_call_consent:type_name -> header.ZaloCallConsent
-	438,  // 866: header.Response.credit:type_name -> header.Credit
-	438,  // 867: header.Response.credits:type_name -> header.Credit
-	678,  // 868: header.Response.account:type_name -> account.Account
-	678,  // 869: header.Response.accounts:type_name -> account.Account
-	469,  // 870: header.Response.workflow:type_name -> header.Workflow
-	469,  // 871: header.Response.workflows:type_name -> header.Workflow
-	676,  // 872: header.Response.agent:type_name -> account.Agent
-	676,  // 873: header.Response.agents:type_name -> account.Agent
-	476,  // 874: header.Response.workflow_logs:type_name -> header.WorkflowLog
-	436,  // 875: header.Response.workflow_sessions:type_name -> header.WorkflowSession
-	436,  // 876: header.Response.workflow_session:type_name -> header.WorkflowSession
-	481,  // 877: header.Response.tickets:type_name -> header.Ticket
-	477,  // 878: header.Response.ticket_types:type_name -> header.TicketType
-	487,  // 879: header.Response.ticket_views:type_name -> header.TicketView
-	491,  // 880: header.Response.bot_templates:type_name -> header.BotTemplate
-	480,  // 881: header.Response.ticket_templates:type_name -> header.TicketTemplate
-	320,  // 882: header.Response.taxes:type_name -> header.Tax
-	493,  // 883: header.Response.sla_policies:type_name -> header.SLAPolicy
-	493,  // 884: header.Response.sla_policy:type_name -> header.SLAPolicy
-	484,  // 885: header.Response.sla_violations:type_name -> header.SLAViolation
-	501,  // 886: header.Response.knowledge_base:type_name -> header.KnowledgeBase
-	496,  // 887: header.Response.articles:type_name -> header.Article
-	497,  // 888: header.Response.article_categories:type_name -> header.ArticleCategory
-	501,  // 889: header.Response.knowledge_bases:type_name -> header.KnowledgeBase
-	496,  // 890: header.Response.article:type_name -> header.Article
-	497,  // 891: header.Response.article_category:type_name -> header.ArticleCategory
-	92,   // 892: header.Response.conversation:type_name -> header.Conversation
-	92,   // 893: header.Response.conversations:type_name -> header.Conversation
-	76,   // 894: header.Response.conversation_metas:type_name -> header.ConversationMeta
-	209,  // 895: header.Response.greeting_audios:type_name -> header.GreetingAudio
-	209,  // 896: header.Response.greeting_audio:type_name -> header.GreetingAudio
-	45,   // 897: header.Response.users:type_name -> header.User
-	45,   // 898: header.Response.user:type_name -> header.User
-	73,   // 899: header.Response.event:type_name -> header.Event
-	73,   // 900: header.Response.events:type_name -> header.Event
-	100,  // 901: header.Response.rating:type_name -> header.Rating
-	83,   // 902: header.Response.rule:type_name -> header.Rule
-	83,   // 903: header.Response.rules:type_name -> header.Rule
-	83,   // 904: header.Response.ticket_rule:type_name -> header.Rule
-	83,   // 905: header.Response.ticket_rules:type_name -> header.Rule
-	512,  // 906: header.Response.agent_profile:type_name -> header.AgentProfile
-	228,  // 907: header.Response.login_session:type_name -> header.LoginSession
-	517,  // 908: header.Response.promotion_code:type_name -> header.PromotionCode
-	517,  // 909: header.Response.promotion_codes:type_name -> header.PromotionCode
-	519,  // 910: header.Response.promotion_check_result:type_name -> header.PromotionCheckResult
-	100,  // 911: header.Response.ratings:type_name -> header.Rating
-	518,  // 912: header.Response.subiz_promotion_programs:type_name -> header.SubizPromotionProgram
-	521,  // 913: header.Response.subiz_payment_method:type_name -> header.SubizPaymentMethod
-	521,  // 914: header.Response.subiz_payment_methods:type_name -> header.SubizPaymentMethod
-	514,  // 915: header.Response.profile_email_usage:type_name -> header.ProfileEmailUsage
-	528,  // 916: header.Response.bank_account:type_name -> header.BankAccount
-	528,  // 917: header.Response.bank_accounts:type_name -> header.BankAccount
-	532,  // 918: header.Response.bank_transfer_request:type_name -> header.BankTransferRequest
-	529,  // 919: header.Response.workflow_counts:type_name -> header.WorkflowCount
-	117,  // 920: header.Response.integrations:type_name -> header.Integration
-	117,  // 921: header.Response.integration:type_name -> header.Integration
-	40,   // 922: header.Response.phone_devices:type_name -> header.PhoneDevice
-	371,  // 923: header.Response.event_types:type_name -> header.EventType
-	428,  // 924: header.Response.report_counts:type_name -> header.ReportCount
-	127,  // 925: header.Response.site:type_name -> header.Site
-	127,  // 926: header.Response.sites:type_name -> header.Site
-	55,   // 927: header.Response.attribute_definition:type_name -> header.AttributeDefinition
-	55,   // 928: header.Response.attribute_definitions:type_name -> header.AttributeDefinition
-	543,  // 929: header.Response.article_node:type_name -> header.ArticleNode
-	111,  // 930: header.Response.tag:type_name -> header.Tag
-	111,  // 931: header.Response.tags:type_name -> header.Tag
-	562,  // 932: header.Response.ai_data_entries:type_name -> header.AIDataEntry
-	562,  // 933: header.Response.ai_data_entry:type_name -> header.AIDataEntry
-	559,  // 934: header.Response.ai_data_groups:type_name -> header.AIDataGroup
-	559,  // 935: header.Response.ai_data_group:type_name -> header.AIDataGroup
-	546,  // 936: header.Response.ai_agents:type_name -> header.AIAgent
-	546,  // 937: header.Response.ai_agent:type_name -> header.AIAgent
-	563,  // 938: header.Response.ai_response_sources:type_name -> header.AiResponseSource
-	563,  // 939: header.Response.ai_response_source:type_name -> header.AiResponseSource
-	561,  // 940: header.Response.ai_data_chunks:type_name -> header.AIDataChunk
-	223,  // 941: header.Response.file:type_name -> header.File
-	223,  // 942: header.Response.files:type_name -> header.File
-	248,  // 943: header.Response.facebook_posts:type_name -> header.FacebookPost
-	248,  // 944: header.Response.facebook_post:type_name -> header.FacebookPost
-	113,  // 945: header.Response.templates:type_name -> header.Template
-	217,  // 946: header.Response.webhooks:type_name -> header.Webhook
-	37,   // 947: header.Response.notifications:type_name -> header.Noti
-	568,  // 948: header.Response.notification_setting:type_name -> header.NotiSetting
-	342,  // 949: header.Response.agent_groups:type_name -> header.AgentGroup
-	585,  // 950: header.Response.zns_templates:type_name -> header.ZNSTemplate
-	585,  // 951: header.Response.zns_template:type_name -> header.ZNSTemplate
-	589,  // 952: header.Response.zns_medias:type_name -> header.ZNSMedia
-	589,  // 953: header.Response.zns_media:type_name -> header.ZNSMedia
-	590,  // 954: header.Response.email_signatures:type_name -> header.EmailSignature
-	590,  // 955: header.Response.email_signature:type_name -> header.EmailSignature
-	382,  // 956: header.Response.campaigns:type_name -> header.Campaign
-	382,  // 957: header.Response.campaign:type_name -> header.Campaign
-	592,  // 958: header.Response.credit_usage:type_name -> header.CreditUsage
-	474,  // 959: header.Response.ai_agent_trace:type_name -> header.AIAgentTrace
-	474,  // 960: header.Response.ai_agent_traces:type_name -> header.AIAgentTrace
-	183,  // 961: header.Response.form_submissions:type_name -> header.FormSubmission
-	184,  // 962: header.Response.forms:type_name -> header.Form
-	184,  // 963: header.Response.form:type_name -> header.Form
-	183,  // 964: header.Response.form_submission:type_name -> header.FormSubmission
-	303,  // 965: header.Response.products:type_name -> header.Product
-	303,  // 966: header.Response.product:type_name -> header.Product
-	302,  // 967: header.Response.discounts:type_name -> header.Discount
-	302,  // 968: header.Response.discount:type_name -> header.Discount
-	294,  // 969: header.Response.bills:type_name -> header.Bill
-	290,  // 970: header.Response.orders:type_name -> header.Order
-	294,  // 971: header.Response.bill:type_name -> header.Bill
-	290,  // 972: header.Response.order:type_name -> header.Order
-	306,  // 973: header.Response.product_offer:type_name -> header.ProductOffer
-	306,  // 974: header.Response.product_offers:type_name -> header.ProductOffer
-	269,  // 975: header.Response.addresses:type_name -> header.Address
-	375,  // 976: header.Response.segment_sync:type_name -> header.SegmentSync
-	375,  // 977: header.Response.segment_syncs:type_name -> header.SegmentSync
-	374,  // 978: header.Response.segment_sync_user_status:type_name -> header.SegmentSyncUserStatus
-	598,  // 979: header.Response.meta_ad_account:type_name -> header.MetaAdAccount
-	598,  // 980: header.Response.meta_ad_accounts:type_name -> header.MetaAdAccount
-	235,  // 981: header.Response.fanpage_settings:type_name -> header.FbFanpageSetting
-	605,  // 982: header.Response.named_entities:type_name -> header.NamedEntity
-	605,  // 983: header.Response.named_entity:type_name -> header.NamedEntity
-	313,  // 984: header.Response.product_feeds:type_name -> header.ProductFeed
-	313,  // 985: header.Response.product_feed:type_name -> header.ProductFeed
-	312,  // 986: header.Response.product_feed_runs:type_name -> header.ProductFeedRun
-	673,  // 987: header.ZaloCallConsent.message:type_name -> header.I18nString
-	672,  // 988: header.SendEmailRequest.ctx:type_name -> common.Context
-	642,  // 989: header.SendEmailRequest.header:type_name -> header.SendEmailRequest.HeaderEntry
-	432,  // 990: header.SendEmailRequest.attachments:type_name -> header.EmailAttachment
-	672,  // 991: header.Email.ctx:type_name -> common.Context
-	643,  // 992: header.Email.header:type_name -> header.Email.HeaderEntry
-	432,  // 993: header.Email.attachments:type_name -> header.EmailAttachment
-	435,  // 994: header.WorkflowStack.calls:type_name -> header.WorkflowStackItem
-	672,  // 995: header.WorkflowSession.ctx:type_name -> common.Context
-	405,  // 996: header.WorkflowSession.action:type_name -> header.WorkflowAction
-	644,  // 997: header.WorkflowSession.threads:type_name -> header.WorkflowSession.ThreadsEntry
-	73,   // 998: header.WorkflowSession.last_message_sent:type_name -> header.Event
-	672,  // 999: header.SchedulerTask.ctx:type_name -> common.Context
-	672,  // 1000: header.Credit.ctx:type_name -> common.Context
-	672,  // 1001: header.CreditSpendEntry.ctx:type_name -> common.Context
-	446,  // 1002: header.CreditSpendEntry.data:type_name -> header.CreditEntryData
-	441,  // 1003: header.CreditEntryData.agent:type_name -> header.CreditEntryDataAgent
-	443,  // 1004: header.CreditEntryData.zalo_zns:type_name -> header.CreditEntryDataZaloZNS
-	445,  // 1005: header.CreditEntryData.zalo_active_message:type_name -> header.CreditEntryDataZaloActiveMessage
-	442,  // 1006: header.CreditEntryData.email:type_name -> header.CreditEntryDataEmail
-	440,  // 1007: header.CreditEntryData.file:type_name -> header.CreditEntryDataId
-	444,  // 1008: header.CreditEntryData.zalo_request_call:type_name -> header.CreditEntryDataZaloRequestCall
-	447,  // 1009: header.CreditEntryData.llm_completion:type_name -> header.CreditEntryDataLLMCompletion
-	448,  // 1010: header.CreditEntryData.text_embedding:type_name -> header.CreditEntryDataTextEmbedding
-	672,  // 1011: header.CreditSpendEntries.ctx:type_name -> common.Context
-	439,  // 1012: header.CreditSpendEntries.entries:type_name -> header.CreditSpendEntry
-	672,  // 1013: header.TrySpendCreditResponse.ctx:type_name -> common.Context
-	672,  // 1014: header.CreditSpendReportResponse.ctx:type_name -> common.Context
-	451,  // 1015: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
-	672,  // 1016: header.AccSub.ctx:type_name -> common.Context
-	678,  // 1017: header.AccSub.account:type_name -> account.Account
-	687,  // 1018: header.AccSub.subscription:type_name -> payment.Subscription
-	676,  // 1019: header.AccSub.agents:type_name -> account.Agent
-	438,  // 1020: header.AccSub.credits:type_name -> header.Credit
-	672,  // 1021: header.AccSubs.ctx:type_name -> common.Context
-	453,  // 1022: header.AccSubs.accsub:type_name -> header.AccSub
-	672,  // 1023: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
-	402,  // 1024: header.OutboundCallUpdateEvent.agents:type_name -> header.OutboundCallAgentReport
-	645,  // 1025: header.StrNumM.strsM:type_name -> header.StrNumM.StrsMEntry
-	646,  // 1026: header.NumStrM.numsM:type_name -> header.NumStrM.NumsMEntry
-	672,  // 1027: header.ConvoReportRequest.ctx:type_name -> common.Context
-	259,  // 1028: header.ConvoReportRequest.conditions:type_name -> header.UserViewCondition
-	678,  // 1029: header.ConvoReportRequest.account:type_name -> account.Account
-	672,  // 1030: header.ConvoReportResponse.ctx:type_name -> common.Context
-	462,  // 1031: header.ConvoReportResponse.metrics:type_name -> header.ConvoReportEntry
-	466,  // 1032: header.WorkflowGoal.condition:type_name -> header.WorkflowCondition
-	466,  // 1033: header.WorkflowTrigger.condition:type_name -> header.WorkflowCondition
-	87,   // 1034: header.WorkflowCondition.channel:type_name -> header.ChannelCondition
-	684,  // 1035: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
-	682,  // 1036: header.WorkflowCondition.number:type_name -> header.FloatCondition
-	685,  // 1037: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
-	686,  // 1038: header.WorkflowCondition.event:type_name -> header.EventCondition
-	683,  // 1039: header.WorkflowCondition.text:type_name -> header.TextCondition
-	465,  // 1040: header.WorkflowCondition.timming:type_name -> header.WorkflowTimming
-	467,  // 1041: header.WorkflowCondition.llm:type_name -> header.LLMCondition
-	466,  // 1042: header.WorkflowCondition.all:type_name -> header.WorkflowCondition
-	466,  // 1043: header.WorkflowCondition.one:type_name -> header.WorkflowCondition
-	505,  // 1044: header.LLMCondition.instruction_block:type_name -> header.Block
-	551,  // 1045: header.LLMCondition.functions:type_name -> header.AIFunction
-	415,  // 1046: header.LLMCondition.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
-	551,  // 1047: header.LLMCondition.tool_choice_function:type_name -> header.AIFunction
-	672,  // 1048: header.WorkflowLogRequest.ctx:type_name -> common.Context
-	672,  // 1049: header.Workflow.ctx:type_name -> common.Context
-	464,  // 1050: header.Workflow.triggers:type_name -> header.WorkflowTrigger
-	464,  // 1051: header.Workflow.computed_triggers:type_name -> header.WorkflowTrigger
-	466,  // 1052: header.Workflow.condition:type_name -> header.WorkflowCondition
-	466,  // 1053: header.Workflow.computed_condition:type_name -> header.WorkflowCondition
-	647,  // 1054: header.Workflow.actions:type_name -> header.Workflow.ActionsEntry
-	648,  // 1055: header.Workflow.computed_actions:type_name -> header.Workflow.ComputedActionsEntry
-	463,  // 1056: header.Workflow.goal:type_name -> header.WorkflowGoal
-	466,  // 1057: header.Workflow.exit_when:type_name -> header.WorkflowCondition
-	223,  // 1058: header.Workflow.avatar:type_name -> header.File
-	470,  // 1059: header.Workflow.kv_settings:type_name -> header.KvSetting
-	471,  // 1060: header.LLMChatHistoryEntry.tool:type_name -> header.LLMToolCall
-	649,  // 1061: header.LLMChatHistoryEntry.fields:type_name -> header.LLMChatHistoryEntry.FieldsEntry
-	109,  // 1062: header.LLMChatHistoryEntry.attachments:type_name -> header.Attachment
-	672,  // 1063: header.AIAgentTrace.ctx:type_name -> common.Context
-	473,  // 1064: header.AIAgentTrace.context_documents:type_name -> header.AIDataEntryUsed
-	471,  // 1065: header.AIAgentTrace.tool_calls:type_name -> header.LLMToolCall
-	545,  // 1066: header.AIAgentTrace.override_rules:type_name -> header.AIAgentOverrideRule
-	551,  // 1067: header.AIAgentSpan.tools:type_name -> header.AIFunction
-	415,  // 1068: header.AIAgentSpan.response_format:type_name -> header.LLMResponseJSONSchemaFormat
-	472,  // 1069: header.AIAgentSpan.chat_history:type_name -> header.LLMChatHistoryEntry
-	471,  // 1070: header.AIAgentSpan.tool_calls:type_name -> header.LLMToolCall
-	672,  // 1071: header.WorkflowLog.ctx:type_name -> common.Context
-	650,  // 1072: header.WorkflowLog.data:type_name -> header.WorkflowLog.DataEntry
-	73,   // 1073: header.WorkflowLog.event:type_name -> header.Event
-	72,   // 1074: header.WorkflowLog.by:type_name -> header.By
-	672,  // 1075: header.TicketType.ctx:type_name -> common.Context
-	55,   // 1076: header.TicketType.defs:type_name -> header.AttributeDefinition
-	492,  // 1077: header.TicketType.permissions:type_name -> header.ResourceGroupMember
-	322,  // 1078: header.TicketType.error:type_name -> header.Error
-	479,  // 1079: header.TicketType.auto_reply:type_name -> header.TicketAutoReply
-	478,  // 1080: header.TicketType.satisfaction:type_name -> header.TicketSatisfaction
-	672,  // 1081: header.TicketSatisfaction.ctx:type_name -> common.Context
-	505,  // 1082: header.TicketSatisfaction.question:type_name -> header.Block
-	672,  // 1083: header.TicketAutoReply.ctx:type_name -> common.Context
-	505,  // 1084: header.TicketAutoReply.body:type_name -> header.Block
-	505,  // 1085: header.TicketAutoReply.title:type_name -> header.Block
-	672,  // 1086: header.TicketTemplate.ctx:type_name -> common.Context
-	102,  // 1087: header.TicketTemplate.message:type_name -> header.Message
-	111,  // 1088: header.TicketTemplate.tags:type_name -> header.Tag
-	38,   // 1089: header.TicketTemplate.attrs:type_name -> header.Attribute
-	322,  // 1090: header.TicketTemplate.error:type_name -> header.Error
-	672,  // 1091: header.Ticket.ctx:type_name -> common.Context
-	90,   // 1092: header.Ticket.members:type_name -> header.ConversationMember
-	38,   // 1093: header.Ticket.attrs:type_name -> header.Attribute
-	102,  // 1094: header.Ticket.description:type_name -> header.Message
-	111,  // 1095: header.Ticket.tags:type_name -> header.Tag
-	45,   // 1096: header.Ticket.users:type_name -> header.User
-	47,   // 1097: header.Ticket.touchpoint:type_name -> header.Touchpoint
-	73,   // 1098: header.Ticket.last_internal_message_sent:type_name -> header.Event
-	89,   // 1099: header.Ticket.assigned_to:type_name -> header.RouteResult
-	89,   // 1100: header.Ticket.reassigned_to:type_name -> header.RouteResult
-	315,  // 1101: header.Ticket.fields:type_name -> header.KV
-	100,  // 1102: header.Ticket.ratings:type_name -> header.Rating
-	73,   // 1103: header.Ticket.matched_event:type_name -> header.Event
-	73,   // 1104: header.Ticket.last_event:type_name -> header.Event
-	322,  // 1105: header.Ticket.error:type_name -> header.Error
-	651,  // 1106: header.Ticket.memberM:type_name -> header.Ticket.MemberMEntry
-	482,  // 1107: header.Ticket.read_receipts:type_name -> header.ReceiptMember
-	672,  // 1108: header.ReceiptMember.ctx:type_name -> common.Context
-	672,  // 1109: header.SLAViolations.ctx:type_name -> common.Context
-	484,  // 1110: header.SLAViolations.violations:type_name -> header.SLAViolation
-	672,  // 1111: header.SLAViolation.ctx:type_name -> common.Context
-	73,   // 1112: header.TicketHistoryEntry.event:type_name -> header.Event
-	73,   // 1113: header.TicketHistoryEntry.ref_comment:type_name -> header.Event
-	672,  // 1114: header.ListTicketRequest.ctx:type_name -> common.Context
-	259,  // 1115: header.ListTicketRequest.condition:type_name -> header.UserViewCondition
-	47,   // 1116: header.ListTicketRequest.touchpoint:type_name -> header.Touchpoint
-	672,  // 1117: header.TicketView.ctx:type_name -> common.Context
-	488,  // 1118: header.TicketView.members:type_name -> header.TicketViewMember
-	259,  // 1119: header.TicketView.condition:type_name -> header.UserViewCondition
-	672,  // 1120: header.TicketViewMember.ctx:type_name -> common.Context
-	73,   // 1121: header.TicketViewMember.last_event:type_name -> header.Event
-	672,  // 1122: header.LiveUserView.ctx:type_name -> common.Context
-	259,  // 1123: header.LiveUserView.condition:type_name -> header.UserViewCondition
-	652,  // 1124: header.LiveUserView.metrics:type_name -> header.LiveUserView.MetricsEntry
-	672,  // 1125: header.BotTemplate.ctx:type_name -> common.Context
-	672,  // 1126: header.ResourceGroupMember.ctx:type_name -> common.Context
-	672,  // 1127: header.SLAPolicy.ctx:type_name -> common.Context
-	494,  // 1128: header.SLAPolicy.normal_priority_target:type_name -> header.SLATarget
-	494,  // 1129: header.SLAPolicy.high_priority_target:type_name -> header.SLATarget
-	494,  // 1130: header.SLAPolicy.urgent_priority_target:type_name -> header.SLATarget
-	87,   // 1131: header.SLAPolicy.channel_condition:type_name -> header.ChannelCondition
-	86,   // 1132: header.SLAPolicy.timming_condition:type_name -> header.TimmingCondition
-	125,  // 1133: header.SLAPolicy.form_conditions:type_name -> header.Condition
-	125,  // 1134: header.SLAPolicy.user_conditions:type_name -> header.Condition
-	653,  // 1135: header.ArticleSEOSetting.page_title:type_name -> header.ArticleSEOSetting.PageTitleEntry
-	654,  // 1136: header.ArticleSEOSetting.meta_description:type_name -> header.ArticleSEOSetting.MetaDescriptionEntry
-	655,  // 1137: header.ArticleSEOSetting.social_title:type_name -> header.ArticleSEOSetting.SocialTitleEntry
-	656,  // 1138: header.ArticleSEOSetting.social_description:type_name -> header.ArticleSEOSetting.SocialDescriptionEntry
-	672,  // 1139: header.Article.ctx:type_name -> common.Context
-	498,  // 1140: header.Article.topics:type_name -> header.ArticleTopic
-	657,  // 1141: header.Article.i18n_title:type_name -> header.Article.I18nTitleEntry
-	495,  // 1142: header.Article.seo_setting:type_name -> header.ArticleSEOSetting
-	658,  // 1143: header.Article.i18n_content:type_name -> header.Article.I18nContentEntry
-	659,  // 1144: header.Article.i18n_slug:type_name -> header.Article.I18nSlugEntry
-	672,  // 1145: header.ArticleCategory.ctx:type_name -> common.Context
-	660,  // 1146: header.ArticleCategory.i18n_title:type_name -> header.ArticleCategory.I18nTitleEntry
-	661,  // 1147: header.ArticleCategory.i18n_description:type_name -> header.ArticleCategory.I18nDescriptionEntry
-	497,  // 1148: header.ArticleCategory.article_categories:type_name -> header.ArticleCategory
-	662,  // 1149: header.ArticleCategory.i18n_slug:type_name -> header.ArticleCategory.I18nSlugEntry
-	672,  // 1150: header.ArticleTopic.ctx:type_name -> common.Context
-	663,  // 1151: header.ArticleTopic.title:type_name -> header.ArticleTopic.TitleEntry
-	672,  // 1152: header.ArticleTopics.ctx:type_name -> common.Context
-	498,  // 1153: header.ArticleTopics.topics:type_name -> header.ArticleTopic
-	672,  // 1154: header.ArticleTopicRequest.ctx:type_name -> common.Context
-	672,  // 1155: header.KnowledgeBase.ctx:type_name -> common.Context
-	673,  // 1156: header.KnowledgeBase.name:type_name -> header.I18nString
-	673,  // 1157: header.KnowledgeBase.description:type_name -> header.I18nString
-	223,  // 1158: header.KnowledgeBase.logo:type_name -> header.File
-	223,  // 1159: header.KnowledgeBase.favikon:type_name -> header.File
-	477,  // 1160: header.KnowledgeBase.ticket_type:type_name -> header.TicketType
-	492,  // 1161: header.KnowledgeBase.permissions:type_name -> header.ResourceGroupMember
-	664,  // 1162: header.KnowledgeBase.i18n_title:type_name -> header.KnowledgeBase.I18nTitleEntry
-	665,  // 1163: header.KnowledgeBase.i18n_description:type_name -> header.KnowledgeBase.I18nDescriptionEntry
-	503,  // 1164: header.KnowledgeBase.home_page:type_name -> header.KnowledgeBasePageStyle
-	502,  // 1165: header.KnowledgeBase.article_page:type_name -> header.KnowledgeBaseArticlePageSetting
-	503,  // 1166: header.KnowledgeBase.category_page:type_name -> header.KnowledgeBasePageStyle
-	503,  // 1167: header.KnowledgeBaseArticlePageSetting.style:type_name -> header.KnowledgeBasePageStyle
-	672,  // 1168: header.Job.ctx:type_name -> common.Context
-	505,  // 1169: header.Block.content:type_name -> header.Block
-	666,  // 1170: header.Block.input_options:type_name -> header.Block.InputOption
-	193,  // 1171: header.Block.style:type_name -> header.Style
-	223,  // 1172: header.Block.image:type_name -> header.File
-	667,  // 1173: header.Block.attrs:type_name -> header.Block.AttrsEntry
-	506,  // 1174: header.Block.llm_input_retry_policy:type_name -> header.LLMInputRetryPolicy
-	672,  // 1175: header.TicketUpdatedNotiEmail.ctx:type_name -> common.Context
-	481,  // 1176: header.TicketUpdatedNotiEmail.assigned_tickets:type_name -> header.Ticket
-	73,   // 1177: header.TicketUpdatedNotiEmail.updated_events:type_name -> header.Event
-	481,  // 1178: header.TicketUpdatedNotiEmail.new_tickets:type_name -> header.Ticket
-	481,  // 1179: header.TicketUpdatedNotiEmail.high_risk_sla_tickets:type_name -> header.Ticket
-	481,  // 1180: header.TicketUpdatedNotiEmail.breached_sla_tickets:type_name -> header.Ticket
-	672,  // 1181: header.ResetPasswordEmail.ctx:type_name -> common.Context
-	672,  // 1182: header.OTPEmail.ctx:type_name -> common.Context
-	672,  // 1183: header.InviteEmail.ctx:type_name -> common.Context
-	672,  // 1184: header.AgentProfile.ctx:type_name -> common.Context
-	223,  // 1185: header.AgentProfile.avatar:type_name -> header.File
-	677,  // 1186: header.AgentProfile.last_seen:type_name -> account.Presence
-	672,  // 1187: header.InvitationLink.ctx:type_name -> common.Context
-	223,  // 1188: header.InvitationLink.account_logo:type_name -> header.File
-	672,  // 1189: header.ProfileEmailUsage.ctx:type_name -> common.Context
-	672,  // 1190: header.InviteRequest.ctx:type_name -> common.Context
-	672,  // 1191: header.JoinAccountRequest.ctx:type_name -> common.Context
-	672,  // 1192: header.PromotionCode.ctx:type_name -> common.Context
-	672,  // 1193: header.SubizPromotionProgram.ctx:type_name -> common.Context
-	672,  // 1194: header.PromotionCodeUsage.ctx:type_name -> common.Context
-	688,  // 1195: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
-	679,  // 1196: header.PromotionCodeUsage.bills:type_name -> payment.Bill
-	672,  // 1197: header.SubizPaymentMethod.ctx:type_name -> common.Context
-	672,  // 1198: header.AndroidNotificationRequest.ctx:type_name -> common.Context
-	526,  // 1199: header.AndroidNotificationRequest.android_notifications:type_name -> header.AndroidNotification
-	527,  // 1200: header.AndroidNotificationRequest.android_device:type_name -> header.AndroidDevice
-	672,  // 1201: header.BankAccount.ctx:type_name -> common.Context
-	672,  // 1202: header.SuggestLeadFieldRequest.ctx:type_name -> common.Context
-	259,  // 1203: header.SuggestLeadFieldRequest.condition:type_name -> header.UserViewCondition
-	672,  // 1204: header.UsersRequest.ctx:type_name -> common.Context
-	259,  // 1205: header.UsersRequest.condition:type_name -> header.UserViewCondition
-	672,  // 1206: header.BankTransferRequest.ctx:type_name -> common.Context
-	47,   // 1207: header.BankTransferRequest.touchpoint:type_name -> header.Touchpoint
-	672,  // 1208: header.GenQrCodeRequest.ctx:type_name -> common.Context
-	672,  // 1209: header.QrCode.ctx:type_name -> common.Context
-	672,  // 1210: header.ReportUserEventRequest.ctx:type_name -> common.Context
-	672,  // 1211: header.ReportUserEventResponse.ctx:type_name -> common.Context
-	535,  // 1212: header.ReportUserEventResponse.entries:type_name -> header.ReportUserEventEntry
-	672,  // 1213: header.CounterReportResponse.ctx:type_name -> common.Context
-	672,  // 1214: header.SetupFeatureStatus.ctx:type_name -> common.Context
-	672,  // 1215: header.RelationUpdates.ctx:type_name -> common.Context
-	542,  // 1216: header.RelationUpdates.updates:type_name -> header.RelationUpdate
-	672,  // 1217: header.ArticleNode.ctx:type_name -> common.Context
-	668,  // 1218: header.ArticleNode.i18n_title:type_name -> header.ArticleNode.I18nTitleEntry
-	543,  // 1219: header.ArticleNode.children:type_name -> header.ArticleNode
-	551,  // 1220: header.AIAgentOverrideRule.functions:type_name -> header.AIFunction
-	558,  // 1221: header.AIAgentOverrideRule.intent:type_name -> header.AIIntent
-	466,  // 1222: header.AIAgentOverrideRule.condition:type_name -> header.WorkflowCondition
-	150,  // 1223: header.AIAgentOverrideRule.frequently:type_name -> header.Frequently
-	119,  // 1224: header.AIAgentOverrideRule.assign_to:type_name -> header.AssignRequest
-	672,  // 1225: header.AIAgent.ctx:type_name -> common.Context
-	223,  // 1226: header.AIAgent.avatar:type_name -> header.File
-	544,  // 1227: header.AIAgent.guardrails:type_name -> header.AIAgentGuardrail
-	546,  // 1228: header.AIAgent.sub_agents:type_name -> header.AIAgent
-	102,  // 1229: header.AIAgent.context_guard_message:type_name -> header.Message
-	551,  // 1230: header.AIAgent.functions:type_name -> header.AIFunction
-	102,  // 1231: header.AIAgent.unabled_to_answer_message:type_name -> header.Message
-	102,  // 1232: header.AIAgent.error_message:type_name -> header.Message
-	558,  // 1233: header.AIAgent.generated_intent:type_name -> header.AIIntent
-	549,  // 1234: header.AIAgent.data_store:type_name -> header.AIDataStore
-	548,  // 1235: header.AIAgent.init_flow:type_name -> header.InitFlow
-	545,  // 1236: header.AIAgent.override_rules:type_name -> header.AIAgentOverrideRule
-	184,  // 1237: header.AIAgent.collect_user_information:type_name -> header.Form
-	102,  // 1238: header.AIAgent.welcome_message:type_name -> header.Message
-	93,   // 1239: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
-	94,   // 1240: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
-	95,   // 1241: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
-	547,  // 1242: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
-	102,  // 1243: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
-	131,  // 1244: header.InitFlow.action:type_name -> header.BotAction
-	122,  // 1245: header.InitFlow.triggers:type_name -> header.Trigger
-	150,  // 1246: header.InitFlow.initiative_frequency:type_name -> header.Frequently
-	123,  // 1247: header.InitFlow.conditions:type_name -> header.BotCondition
-	83,   // 1248: header.InitFlow.rule:type_name -> header.Rule
-	669,  // 1249: header.JSONSchema.properties:type_name -> header.JSONSchema.PropertiesEntry
-	550,  // 1250: header.JSONSchema.items:type_name -> header.JSONSchema
-	315,  // 1251: header.AIFunction.headers:type_name -> header.KV
-	550,  // 1252: header.AIFunction.parameters:type_name -> header.JSONSchema
-	557,  // 1253: header.AIFunction.system_create_ticket:type_name -> header.CreateTicketFunction
-	556,  // 1254: header.AIFunction.workflow:type_name -> header.AutomationFunction
-	555,  // 1255: header.AIFunction.update_information:type_name -> header.UpdateUserInformation
-	554,  // 1256: header.AIFunction.collect_user_information:type_name -> header.CollectUserInformation
-	119,  // 1257: header.AIFunction.assign_agent:type_name -> header.AssignRequest
-	184,  // 1258: header.AIFunction.system_schedule_appointment:type_name -> header.Form
-	552,  // 1259: header.AIFunction.record_user_preference:type_name -> header.RecordUserPreference
-	551,  // 1260: header.AIFunction.functions:type_name -> header.AIFunction
-	553,  // 1261: header.CollectUserInformation.attributes:type_name -> header.CollectInfomationAttribute
-	466,  // 1262: header.AutomationFunction.condition:type_name -> header.WorkflowCondition
-	670,  // 1263: header.AutomationFunction.actions:type_name -> header.AutomationFunction.ActionsEntry
-	672,  // 1264: header.AIDataGroup.ctx:type_name -> common.Context
-	303,  // 1265: header.CrawlResponse.product:type_name -> header.Product
-	303,  // 1266: header.CrawlResponse.products:type_name -> header.Product
-	671,  // 1267: header.CrawlResponse.visited_link_statuses:type_name -> header.CrawlResponse.VisitedLinkStatusesEntry
-	672,  // 1268: header.AIDataChunk.ctx:type_name -> common.Context
-	672,  // 1269: header.AIDataEntry.ctx:type_name -> common.Context
-	102,  // 1270: header.AIDataEntry.answer:type_name -> header.Message
-	223,  // 1271: header.AIDataEntry.file:type_name -> header.File
-	303,  // 1272: header.AIDataEntry.product:type_name -> header.Product
-	302,  // 1273: header.AIDataEntry.discount:type_name -> header.Discount
-	549,  // 1274: header.AIDataEntry.data_store:type_name -> header.AIDataStore
-	551,  // 1275: header.AIDataEntry.functions:type_name -> header.AIFunction
-	558,  // 1276: header.AIDataEntry.intent:type_name -> header.AIIntent
-	466,  // 1277: header.AIDataEntry.condition:type_name -> header.WorkflowCondition
-	672,  // 1278: header.AiResponseSource.ctx:type_name -> common.Context
-	562,  // 1279: header.AiResponseSource.data_entry:type_name -> header.AIDataEntry
-	672,  // 1280: header.FacebookAdsFlow.ctx:type_name -> common.Context
-	102,  // 1281: header.FacebookAdsFlow.welcome_message:type_name -> header.Message
-	672,  // 1282: header.RuleOrder.ctx:type_name -> common.Context
-	672,  // 1283: header.NotiSetting.ctx:type_name -> common.Context
-	566,  // 1284: header.NotiSetting.web:type_name -> header.NotiSubscription
-	566,  // 1285: header.NotiSetting.mobile:type_name -> header.NotiSubscription
-	566,  // 1286: header.NotiSetting.email:type_name -> header.NotiSubscription
-	566,  // 1287: header.NotiSetting.instant:type_name -> header.NotiSubscription
-	567,  // 1288: header.NotiSetting.ticket_types:type_name -> header.TicketTypeSubscription
-	569,  // 1289: header.NotiSetting.do_not_disturb:type_name -> header.DoNotDisturb
-	672,  // 1290: header.PushToken.ctx:type_name -> common.Context
-	573,  // 1291: header.ZNSTemplateLayoutComponentButtons.items:type_name -> header.ZNSTemplateLayoutComponentButton
-	575,  // 1292: header.ZNSTemplateLayoutComponentTable.rows:type_name -> header.ZNSTemplateLayoutComponentTableRow
-	577,  // 1293: header.ZNSTemplateLayoutComponentImages.items:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	577,  // 1294: header.ZNSTemplateLayoutComponentLogo.light:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	577,  // 1295: header.ZNSTemplateLayoutComponentLogo.dark:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	578,  // 1296: header.ZNSTemplateLayoutComponent.IMAGES:type_name -> header.ZNSTemplateLayoutComponentImages
-	579,  // 1297: header.ZNSTemplateLayoutComponent.LOGO:type_name -> header.ZNSTemplateLayoutComponentLogo
-	572,  // 1298: header.ZNSTemplateLayoutComponent.TITLE:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1299: header.ZNSTemplateLayoutComponent.PARAGRAPH:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1300: header.ZNSTemplateLayoutComponent.OTP:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1301: header.ZNSTemplateLayoutComponent.VOUCHER:type_name -> header.ZNSTemplateLayoutComponentItem
-	572,  // 1302: header.ZNSTemplateLayoutComponent.PAYMENT:type_name -> header.ZNSTemplateLayoutComponentItem
-	574,  // 1303: header.ZNSTemplateLayoutComponent.BUTTONS:type_name -> header.ZNSTemplateLayoutComponentButtons
-	576,  // 1304: header.ZNSTemplateLayoutComponent.TABLE:type_name -> header.ZNSTemplateLayoutComponentTable
-	580,  // 1305: header.ZNSTemplateComponents.components:type_name -> header.ZNSTemplateLayoutComponent
-	581,  // 1306: header.ZNSTemplateLayout.header:type_name -> header.ZNSTemplateComponents
-	581,  // 1307: header.ZNSTemplateLayout.body:type_name -> header.ZNSTemplateComponents
-	581,  // 1308: header.ZNSTemplateLayout.footer:type_name -> header.ZNSTemplateComponents
-	582,  // 1309: header.ZNSTemplateRequest.layout:type_name -> header.ZNSTemplateLayout
-	571,  // 1310: header.ZNSTemplateRequest.params:type_name -> header.ZNSTemplateParam
-	672,  // 1311: header.ZNSTemplate.ctx:type_name -> common.Context
-	583,  // 1312: header.ZNSTemplate.request:type_name -> header.ZNSTemplateRequest
-	586,  // 1313: header.ZNSTemplate.template:type_name -> header.ZnsTemplate
-	588,  // 1314: header.ZnsTemplate.listParams:type_name -> header.ZNSParamDefinition
-	587,  // 1315: header.ZnsTemplate.listButtons:type_name -> header.ZNSButton
-	672,  // 1316: header.ZNSMedia.ctx:type_name -> common.Context
-	223,  // 1317: header.ZNSMedia.file:type_name -> header.File
-	672,  // 1318: header.EmailSignature.ctx:type_name -> common.Context
-	505,  // 1319: header.EmailSignature.block:type_name -> header.Block
-	672,  // 1320: header.TestMessageRequest.ctx:type_name -> common.Context
-	388,  // 1321: header.TestMessageRequest.message:type_name -> header.MarketingMessage
-	672,  // 1322: header.CreditUsage.ctx:type_name -> common.Context
-	571,  // 1323: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
-	672,  // 1324: header.MetaAdAccount.ctx:type_name -> common.Context
-	597,  // 1325: header.MetaAdAccount.business:type_name -> header.MetaBusiness
-	672,  // 1326: header.VectorSearchReq.ctx:type_name -> common.Context
-	672,  // 1327: header.VectorDoc.ctx:type_name -> common.Context
-	602,  // 1328: header.VectorDoc.props:type_name -> header.VectorDocProp
-	672,  // 1329: header.ListVectorRequest.ctx:type_name -> common.Context
-	602,  // 1330: header.VectorMatch.props:type_name -> header.VectorDocProp
-	672,  // 1331: header.VectorMatches.ctx:type_name -> common.Context
-	603,  // 1332: header.VectorMatches.matches:type_name -> header.VectorMatch
-	672,  // 1333: header.NamedEntity.ctx:type_name -> common.Context
-	672,  // 1334: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
-	290,  // 1335: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
-	672,  // 1336: header.ListDiscountRequest.ctx:type_name -> common.Context
-	74,   // 1337: header.Event.CustomDataEntry.value:type_name -> header.EventField
-	505,  // 1338: header.Message.I18nBlockEntry.value:type_name -> header.Block
-	615,  // 1339: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
-	505,  // 1340: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
-	505,  // 1341: header.I18nBlock.I18nEntry.value:type_name -> header.Block
-	505,  // 1342: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
-	177,  // 1343: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
-	176,  // 1344: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
-	178,  // 1345: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
-	179,  // 1346: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
-	180,  // 1347: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
-	673,  // 1348: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
-	505,  // 1349: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
-	550,  // 1350: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
-	321,  // 1351: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
-	321,  // 1352: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
-	433,  // 1353: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
-	405,  // 1354: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
-	405,  // 1355: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
-	90,   // 1356: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
-	489,  // 1357: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
-	505,  // 1358: header.Article.I18nContentEntry.value:type_name -> header.Block
-	550,  // 1359: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
-	405,  // 1360: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
-	1361, // [1361:1361] is the sub-list for method output_type
-	1361, // [1361:1361] is the sub-list for method input_type
-	1361, // [1361:1361] is the sub-list for extension type_name
-	1361, // [1361:1361] is the sub-list for extension extendee
-	0,    // [0:1361] is the sub-list for field type_name
+	561,  // 151: header.Data.ai_data_entry:type_name -> header.AIDataEntry
+	546,  // 152: header.Data.ai_agent:type_name -> header.AIAgent
+	583,  // 153: header.Data.zns_template:type_name -> header.ZNSTemplate
+	587,  // 154: header.Data.zns_media:type_name -> header.ZNSMedia
+	588,  // 155: header.Data.email_signature:type_name -> header.EmailSignature
+	471,  // 156: header.Data.llm_tool_call:type_name -> header.LLMToolCall
+	184,  // 157: header.Data.form:type_name -> header.Form
+	214,  // 158: header.Data.event_destination:type_name -> header.EventDestination
+	214,  // 159: header.Data.event_destinations:type_name -> header.EventDestination
+	375,  // 160: header.Data.segment_sync:type_name -> header.SegmentSync
+	302,  // 161: header.Data.discount:type_name -> header.Discount
+	47,   // 162: header.ConversationMeta.touchpoint:type_name -> header.Touchpoint
+	73,   // 163: header.ConversationMeta.event:type_name -> header.Event
+	669,  // 164: header.StartWorkflowSessionRequest.ctx:type_name -> common.Context
+	128,  // 165: header.StartWorkflowSessionRequest.bot:type_name -> header.Bot
+	131,  // 166: header.StartWorkflowSessionRequest.action:type_name -> header.BotAction
+	73,   // 167: header.StartWorkflowSessionRequest.event:type_name -> header.Event
+	669,  // 168: header.RunAiAgentRequest.ctx:type_name -> common.Context
+	128,  // 169: header.RunAiAgentRequest.bot:type_name -> header.Bot
+	131,  // 170: header.RunAiAgentRequest.action:type_name -> header.BotAction
+	73,   // 171: header.RunAiAgentRequest.event:type_name -> header.Event
+	73,   // 172: header.RunAiAgentRequest.last_message_sent:type_name -> header.Event
+	669,  // 173: header.BotRunRequest.ctx:type_name -> common.Context
+	315,  // 174: header.BotRunRequest.object_contexts:type_name -> header.KV
+	128,  // 175: header.BotRunRequest.bot:type_name -> header.Bot
+	131,  // 176: header.BotRunRequest.action:type_name -> header.BotAction
+	73,   // 177: header.BotRunRequest.event:type_name -> header.Event
+	669,  // 178: header.Rule.ctx:type_name -> common.Context
+	87,   // 179: header.Rule.channel_condition:type_name -> header.ChannelCondition
+	86,   // 180: header.Rule.timming_condition:type_name -> header.TimmingCondition
+	125,  // 181: header.Rule.form_conditions:type_name -> header.Condition
+	125,  // 182: header.Rule.user_conditions:type_name -> header.Condition
+	125,  // 183: header.Rule.user_start_content_view_conditions:type_name -> header.Condition
+	85,   // 184: header.Rule.call:type_name -> header.RingingSetting
+	209,  // 185: header.RingingSetting.greeting_message:type_name -> header.GreetingAudio
+	209,  // 186: header.RingingSetting.missed_message:type_name -> header.GreetingAudio
+	209,  // 187: header.RingingSetting.menu_message:type_name -> header.GreetingAudio
+	209,  // 188: header.RingingSetting.invalid_option_message:type_name -> header.GreetingAudio
+	83,   // 189: header.RingingSetting.menu_options:type_name -> header.Rule
+	83,   // 190: header.RingingSetting.menu_fallback:type_name -> header.Rule
+	88,   // 191: header.ChannelCondition.locations:type_name -> header.LocationCondition
+	88,   // 192: header.ChannelCondition.not_in_locations:type_name -> header.LocationCondition
+	84,   // 193: header.ChannelCondition.facebook:type_name -> header.FacebookCondition
+	669,  // 194: header.ConversationMember.ctx:type_name -> common.Context
+	72,   // 195: header.ConversationMember.invited_by:type_name -> header.By
+	102,  // 196: header.ConversationMember.bot_takeover_message:type_name -> header.Message
+	669,  // 197: header.StartRequest.ctx:type_name -> common.Context
+	45,   // 198: header.StartRequest.user:type_name -> header.User
+	90,   // 199: header.StartRequest.members:type_name -> header.ConversationMember
+	47,   // 200: header.StartRequest.touchpoint:type_name -> header.Touchpoint
+	183,  // 201: header.StartRequest.form_submission:type_name -> header.FormSubmission
+	96,   // 202: header.StartRequest.google_review:type_name -> header.GoogleReview
+	669,  // 203: header.Conversation.ctx:type_name -> common.Context
+	90,   // 204: header.Conversation.members:type_name -> header.ConversationMember
+	111,  // 205: header.Conversation.tags:type_name -> header.Tag
+	47,   // 206: header.Conversation.touchpoint:type_name -> header.Touchpoint
+	73,   // 207: header.Conversation.last_internal_message_sent:type_name -> header.Event
+	73,   // 208: header.Conversation.last_message_sent:type_name -> header.Event
+	89,   // 209: header.Conversation.assigned_to:type_name -> header.RouteResult
+	89,   // 210: header.Conversation.reassigned_to:type_name -> header.RouteResult
+	315,  // 211: header.Conversation.fields:type_name -> header.KV
+	100,  // 212: header.Conversation.ratings:type_name -> header.Rating
+	73,   // 213: header.Conversation.matched_event:type_name -> header.Event
+	99,   // 214: header.Conversation.call:type_name -> header.CallInfo
+	358,  // 215: header.Conversation.call_request:type_name -> header.CallDriverRequest
+	677,  // 216: header.Conversation.traffic_utm:type_name -> common.SessionCampaign
+	183,  // 217: header.Conversation.form_submission:type_name -> header.FormSubmission
+	96,   // 218: header.Conversation.google_review:type_name -> header.GoogleReview
+	481,  // 219: header.Conversation.ticket:type_name -> header.Ticket
+	322,  // 220: header.Conversation.error:type_name -> header.Error
+	103,  // 221: header.Conversation.referrer:type_name -> header.MessageReferral
+	98,   // 222: header.GoogleReview.review_rely:type_name -> header.ReviewReply
+	97,   // 223: header.GoogleReview.reviewer:type_name -> header.Reviewer
+	223,  // 224: header.CallInfo.recorded_audio:type_name -> header.File
+	669,  // 225: header.Rating.ctx:type_name -> common.Context
+	505,  // 226: header.Rating.question:type_name -> header.Block
+	669,  // 227: header.Conversations.ctx:type_name -> common.Context
+	92,   // 228: header.Conversations.conversations:type_name -> header.Conversation
+	322,  // 229: header.Conversations.errors:type_name -> header.Error
+	669,  // 230: header.Message.ctx:type_name -> common.Context
+	109,  // 231: header.Message.attachments:type_name -> header.Attachment
+	505,  // 232: header.Message.block:type_name -> header.Block
+	315,  // 233: header.Message.fields:type_name -> header.KV
+	106,  // 234: header.Message.pongs:type_name -> header.MessagePong
+	670,  // 235: header.Message.i18n_quill_delta:type_name -> header.I18nString
+	607,  // 236: header.Message.i18n_block:type_name -> header.Message.I18nBlockEntry
+	105,  // 237: header.Message.story:type_name -> header.InstagramStory
+	103,  // 238: header.Message.referral:type_name -> header.MessageReferral
+	608,  // 239: header.Message.zns_template_data:type_name -> header.Message.ZnsTemplateDataEntry
+	609,  // 240: header.Message.zns_template_default_data:type_name -> header.Message.ZnsTemplateDefaultDataEntry
+	610,  // 241: header.Message.zns_template_data_field:type_name -> header.Message.ZnsTemplateDataFieldEntry
+	670,  // 242: header.Message.i18n_text:type_name -> header.I18nString
+	104,  // 243: header.MessageReferral.ads_context_data:type_name -> header.AdsContextData
+	322,  // 244: header.MessagePong.error:type_name -> header.Error
+	670,  // 245: header.MessageButton.old_i18n_title:type_name -> header.I18nString
+	611,  // 246: header.MessageButton.i18n_title:type_name -> header.MessageButton.I18nTitleEntry
+	107,  // 247: header.GenericElementTemplate.default_action:type_name -> header.MessageButton
+	107,  // 248: header.GenericElementTemplate.buttons:type_name -> header.MessageButton
+	670,  // 249: header.GenericElementTemplate.i18n_title:type_name -> header.I18nString
+	670,  // 250: header.GenericElementTemplate.i18n_subtitle:type_name -> header.I18nString
+	108,  // 251: header.Attachment.elements:type_name -> header.GenericElementTemplate
+	107,  // 252: header.Attachment.buttons:type_name -> header.MessageButton
+	110,  // 253: header.Attachment.quick_replies:type_name -> header.QuickReply
+	115,  // 254: header.Attachment.postback:type_name -> header.Postback
+	73,   // 255: header.Attachment.quote:type_name -> header.Event
+	303,  // 256: header.Attachment.product:type_name -> header.Product
+	110,  // 257: header.Attachment.quick_reply:type_name -> header.QuickReply
+	290,  // 258: header.Attachment.order:type_name -> header.Order
+	223,  // 259: header.Attachment.file:type_name -> header.File
+	184,  // 260: header.Attachment.form:type_name -> header.Form
+	183,  // 261: header.Attachment.form_submission:type_name -> header.FormSubmission
+	670,  // 262: header.QuickReply.i18n_title:type_name -> header.I18nString
+	669,  // 263: header.Tag.ctx:type_name -> common.Context
+	669,  // 264: header.Template.ctx:type_name -> common.Context
+	102,  // 265: header.Template.message:type_name -> header.Message
+	112,  // 266: header.Template.data:type_name -> header.TemplateData
+	669,  // 267: header.SearchTemplate.ctx:type_name -> common.Context
+	670,  // 268: header.BotPostback.i18n_title:type_name -> header.I18nString
+	669,  // 269: header.Integration.ctx:type_name -> common.Context
+	582,  // 270: header.Integration.zalo_zns_quota:type_name -> header.ZaloOAZNSQuota
+	492,  // 271: header.Integration.permissions:type_name -> header.ResourceGroupMember
+	669,  // 272: header.WorkflowSessionId.ctx:type_name -> common.Context
+	669,  // 273: header.AssignRequest.ctx:type_name -> common.Context
+	73,   // 274: header.AssignRequest.start_event:type_name -> header.Event
+	669,  // 275: header.EndchatSetting.ctx:type_name -> common.Context
+	120,  // 276: header.EndchatSetting.connector_settings:type_name -> header.EndchatConnectorSetting
+	120,  // 277: header.EndchatSetting.global_setting:type_name -> header.EndchatConnectorSetting
+	678,  // 278: header.Trigger.event_attributes:type_name -> header.EventConditionFilter
+	88,   // 279: header.BotCondition.locations:type_name -> header.LocationCondition
+	88,   // 280: header.BotCondition.exclude_locations:type_name -> header.LocationCondition
+	125,  // 281: header.BotCondition.user:type_name -> header.Condition
+	124,  // 282: header.BotCondition.order:type_name -> header.OrderCondition
+	87,   // 283: header.BotCondition.channel_condition:type_name -> header.ChannelCondition
+	679,  // 284: header.OrderCondition.total:type_name -> header.FloatCondition
+	88,   // 285: header.OrderCondition.shipping:type_name -> header.LocationCondition
+	88,   // 286: header.OrderCondition.exclude_shipping:type_name -> header.LocationCondition
+	669,  // 287: header.VisitProductSiteRequest.ctx:type_name -> common.Context
+	669,  // 288: header.Site.ctx:type_name -> common.Context
+	669,  // 289: header.Bot.ctx:type_name -> common.Context
+	131,  // 290: header.Bot.action:type_name -> header.BotAction
+	122,  // 291: header.Bot.triggers:type_name -> header.Trigger
+	150,  // 292: header.Bot.initiative_frequency:type_name -> header.Frequently
+	123,  // 293: header.Bot.conditions:type_name -> header.BotCondition
+	83,   // 294: header.Bot.condition:type_name -> header.Rule
+	102,  // 295: header.Bot.welcome_message:type_name -> header.Message
+	669,  // 296: header.Bots.ctx:type_name -> common.Context
+	128,  // 297: header.Bots.bots:type_name -> header.Bot
+	131,  // 298: header.NextBotAction.action:type_name -> header.BotAction
+	130,  // 299: header.BotAction.nexts:type_name -> header.NextBotAction
+	137,  // 300: header.BotAction.jump:type_name -> header.ActionJump
+	138,  // 301: header.BotAction.send_http:type_name -> header.ActionSendHttp
+	141,  // 302: header.BotAction.ask_question:type_name -> header.ActionAskQuestion
+	119,  // 303: header.BotAction.assign:type_name -> header.AssignRequest
+	136,  // 304: header.BotAction.update_conversation:type_name -> header.ActionUpdateConversation
+	142,  // 305: header.BotAction.update_user:type_name -> header.ActionUpdateUser
+	143,  // 306: header.BotAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
+	134,  // 307: header.BotAction.confirm_order:type_name -> header.ActionConfirmOrder
+	133,  // 308: header.BotAction.create_task:type_name -> header.ActionCreateTask
+	135,  // 309: header.BotAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
+	505,  // 310: header.ActionCreateTask.title_block:type_name -> header.Block
+	505,  // 311: header.ActionCreateTask.note_block:type_name -> header.Block
+	102,  // 312: header.ActionConfirmOrder.messages:type_name -> header.Message
+	102,  // 313: header.ActionConfirmOrder.invalid_messages:type_name -> header.Message
+	315,  // 314: header.ActionUpdateConversation.fields:type_name -> header.KV
+	315,  // 315: header.ActionSendHttp.header:type_name -> header.KV
+	505,  // 316: header.ActionSendHttp.block:type_name -> header.Block
+	102,  // 317: header.ActionSendTyping.message:type_name -> header.Message
+	102,  // 318: header.ActionSendMessage.messages:type_name -> header.Message
+	315,  // 319: header.ActionSendMessage.extra_fields:type_name -> header.KV
+	414,  // 320: header.ActionSendMessage.llm:type_name -> header.ActionLLM
+	102,  // 321: header.ActionAskQuestion.messages:type_name -> header.Message
+	102,  // 322: header.ActionAskQuestion.resume_message:type_name -> header.Message
+	38,   // 323: header.ActionUpdateUser.attr:type_name -> header.Attribute
+	38,   // 324: header.ActionUpdateUser.attrs:type_name -> header.Attribute
+	612,  // 325: header.ReportBotResponse.metrics:type_name -> header.ReportBotResponse.Metric
+	146,  // 326: header.BotrunMetrics.metrics:type_name -> header.BotrunMetric
+	613,  // 327: header.ActionrunMetrics.metrics:type_name -> header.ActionrunMetrics.ActionrunMetric
+	669,  // 328: header.RealtimeSubscription.ctx:type_name -> common.Context
+	669,  // 329: header.PollResult.ctx:type_name -> common.Context
+	73,   // 330: header.PollResult.events:type_name -> header.Event
+	669,  // 331: header.PsMessage.ctx:type_name -> common.Context
+	73,   // 332: header.PsMessage.event:type_name -> header.Event
+	669,  // 333: header.WidgetUserSetting.ctx:type_name -> common.Context
+	675,  // 334: header.WidgetUserSetting.account:type_name -> account.Account
+	673,  // 335: header.WidgetUserSetting.agents:type_name -> account.Agent
+	128,  // 336: header.WidgetUserSetting.bots:type_name -> header.Bot
+	167,  // 337: header.WidgetUserSetting.plugins:type_name -> header.WebPlugin
+	59,   // 338: header.WidgetUserSetting.location:type_name -> header.Location
+	669,  // 339: header.AccountWeb.ctx:type_name -> common.Context
+	675,  // 340: header.AccountWeb.account:type_name -> account.Account
+	673,  // 341: header.AccountWeb.agents:type_name -> account.Agent
+	128,  // 342: header.AccountWeb.bots:type_name -> header.Bot
+	167,  // 343: header.AccountWeb.plugins:type_name -> header.WebPlugin
+	284,  // 344: header.AccountWeb.payment_methods:type_name -> header.PaymentMethod
+	59,   // 345: header.AccountWeb.location:type_name -> header.Location
+	157,  // 346: header.WidgetHeader.links:type_name -> header.SocialLink
+	669,  // 347: header.WidgetSetting.ctx:type_name -> common.Context
+	673,  // 348: header.WidgetSetting.agents:type_name -> account.Agent
+	158,  // 349: header.WidgetSetting.header:type_name -> header.WidgetHeader
+	162,  // 350: header.WidgetSetting.offline_form:type_name -> header.WidgetForm
+	162,  // 351: header.WidgetSetting.prechat_form:type_name -> header.WidgetForm
+	163,  // 352: header.WidgetSetting.desktop_button:type_name -> header.WidgetChatButton
+	163,  // 353: header.WidgetSetting.mobile_button:type_name -> header.WidgetChatButton
+	164,  // 354: header.WidgetSetting.greeting:type_name -> header.WidgetGreeting
+	670,  // 355: header.WidgetSetting.caption:type_name -> header.I18nString
+	670,  // 356: header.WidgetSetting.tagline:type_name -> header.I18nString
+	670,  // 357: header.WidgetField.i18n_label:type_name -> header.I18nString
+	670,  // 358: header.WidgetField.i18n_placeholder:type_name -> header.I18nString
+	55,   // 359: header.WidgetField.def:type_name -> header.AttributeDefinition
+	614,  // 360: header.WidgetGroup.i18n_name:type_name -> header.WidgetGroup.I18nNameEntry
+	160,  // 361: header.WidgetForm.fields:type_name -> header.WidgetField
+	161,  // 362: header.WidgetForm.groups:type_name -> header.WidgetGroup
+	670,  // 363: header.WidgetForm.i18n_group_label:type_name -> header.I18nString
+	670,  // 364: header.WidgetForm.i18n_title:type_name -> header.I18nString
+	670,  // 365: header.WidgetForm.i18n_question_label:type_name -> header.I18nString
+	670,  // 366: header.WidgetGreeting.greeting:type_name -> header.I18nString
+	102,  // 367: header.CampaignNotification.user_email:type_name -> header.Message
+	669,  // 368: header.WebPlugins.ctx:type_name -> common.Context
+	167,  // 369: header.WebPlugins.plugins:type_name -> header.WebPlugin
+	669,  // 370: header.WebPlugin.ctx:type_name -> common.Context
+	122,  // 371: header.WebPlugin.triggers:type_name -> header.Trigger
+	150,  // 372: header.WebPlugin.initiative_frequency:type_name -> header.Frequently
+	123,  // 373: header.WebPlugin.conditions:type_name -> header.BotCondition
+	159,  // 374: header.WebPlugin.chatbox:type_name -> header.WidgetSetting
+	191,  // 375: header.WebPlugin.popup:type_name -> header.Popup
+	175,  // 376: header.WebPlugin.contact:type_name -> header.ContactComponent
+	174,  // 377: header.WebPlugin.notification:type_name -> header.Notif
+	165,  // 378: header.WebPlugin.conversion_notification:type_name -> header.CampaignNotification
+	670,  // 379: header.TextComponent.i18n_html:type_name -> header.I18nString
+	670,  // 380: header.TextComponent.i18n_quill_delta:type_name -> header.I18nString
+	505,  // 381: header.TextComponent.block:type_name -> header.Block
+	615,  // 382: header.TextComponent.i18n_block:type_name -> header.TextComponent.I18nBlockEntry
+	669,  // 383: header.NotifProfiles.ctx:type_name -> common.Context
+	172,  // 384: header.NotifProfiles.profiles:type_name -> header.NotifProfile
+	669,  // 385: header.NotifProfile.ctx:type_name -> common.Context
+	616,  // 386: header.I18nBlock.i18n:type_name -> header.I18nBlock.I18nEntry
+	172,  // 387: header.Notif.profiles:type_name -> header.NotifProfile
+	505,  // 388: header.Notif.title_block:type_name -> header.Block
+	617,  // 389: header.Notif.i18n_title_block:type_name -> header.Notif.I18nTitleBlockEntry
+	193,  // 390: header.Notif.title_style:type_name -> header.Style
+	505,  // 391: header.Notif.message_blocks:type_name -> header.Block
+	173,  // 392: header.Notif.i18n_message_blocks:type_name -> header.I18nBlock
+	193,  // 393: header.Notif.message_style:type_name -> header.Style
+	193,  // 394: header.Notif.background_style:type_name -> header.Style
+	193,  // 395: header.Notif.subtext_style:type_name -> header.Style
+	193,  // 396: header.Notif.avatar_style:type_name -> header.Style
+	618,  // 397: header.ContactComponent.buttons:type_name -> header.ContactComponent.ContactButton
+	619,  // 398: header.CallContactComponent.hotlines:type_name -> header.CallContactComponent.Hotline
+	620,  // 399: header.MapContactComponent.locations:type_name -> header.MapContactComponent.Location
+	670,  // 400: header.FormField.i18n_label:type_name -> header.I18nString
+	621,  // 401: header.FormField.options:type_name -> header.FormField.FormFieldOption
+	670,  // 402: header.FormField.i18n_placeholder:type_name -> header.I18nString
+	669,  // 403: header.FormSubmission.ctx:type_name -> common.Context
+	182,  // 404: header.FormSubmission.values:type_name -> header.FormField
+	671,  // 405: header.FormSubmission.device:type_name -> common.Device
+	669,  // 406: header.Form.ctx:type_name -> common.Context
+	161,  // 407: header.Form.groups:type_name -> header.WidgetGroup
+	670,  // 408: header.Form.i18n_group_label:type_name -> header.I18nString
+	670,  // 409: header.Form.i18n_title:type_name -> header.I18nString
+	670,  // 410: header.Form.i18n_question_label:type_name -> header.I18nString
+	505,  // 411: header.Form.components:type_name -> header.Block
+	223,  // 412: header.Form.logo:type_name -> header.File
+	223,  // 413: header.Form.cover_image:type_name -> header.File
+	193,  // 414: header.Form.header_style:type_name -> header.Style
+	193,  // 415: header.Form.text_style:type_name -> header.Style
+	193,  // 416: header.Form.input_style:type_name -> header.Style
+	182,  // 417: header.OldForm.fields:type_name -> header.FormField
+	161,  // 418: header.OldForm.groups:type_name -> header.WidgetGroup
+	670,  // 419: header.OldForm.i18n_group_label:type_name -> header.I18nString
+	670,  // 420: header.OldForm.i18n_title:type_name -> header.I18nString
+	670,  // 421: header.OldForm.i18n_question_label:type_name -> header.I18nString
+	186,  // 422: header.OldForm.form_groups:type_name -> header.FormGroup
+	182,  // 423: header.FormGroup.fields:type_name -> header.FormField
+	670,  // 424: header.FormGroup.i18n_title:type_name -> header.I18nString
+	200,  // 425: header.ButtonsComponent.primary_actions:type_name -> header.PopupButtonAction
+	670,  // 426: header.ButtonsComponent.i18n_primary_text:type_name -> header.I18nString
+	200,  // 427: header.ButtonsComponent.secondary_actions:type_name -> header.PopupButtonAction
+	670,  // 428: header.ButtonsComponent.i18n_secondary_text:type_name -> header.I18nString
+	193,  // 429: header.WebPluginComponent.style:type_name -> header.Style
+	193,  // 430: header.WebPluginComponent.mobile_style:type_name -> header.Style
+	168,  // 431: header.WebPluginComponent.text:type_name -> header.TextComponent
+	187,  // 432: header.WebPluginComponent.buttons:type_name -> header.ButtonsComponent
+	181,  // 433: header.WebPluginComponent.countdown:type_name -> header.CountdownComponent
+	185,  // 434: header.WebPluginComponent.form:type_name -> header.OldForm
+	192,  // 435: header.WebPluginComponent.link:type_name -> header.LinkComponent
+	170,  // 436: header.WebPluginComponent.image:type_name -> header.ImageComponent
+	169,  // 437: header.WebPluginComponent.line:type_name -> header.LineComponent
+	190,  // 438: header.WebPluginComponent.social_buttons:type_name -> header.SocialButtonsComponent
+	189,  // 439: header.WebPluginComponent.follow_facebook:type_name -> header.FollowFacebookComponent
+	194,  // 440: header.Popup.pages:type_name -> header.PopupPage
+	193,  // 441: header.Style.hover:type_name -> header.Style
+	188,  // 442: header.PopupPage.components:type_name -> header.WebPluginComponent
+	193,  // 443: header.PopupPage.style:type_name -> header.Style
+	193,  // 444: header.PopupPage.mobile_style:type_name -> header.Style
+	201,  // 445: header.PopupPage.background_click:type_name -> header.ButtonComponent
+	669,  // 446: header.Impression.ctx:type_name -> common.Context
+	671,  // 447: header.Impression.device:type_name -> common.Device
+	669,  // 448: header.Conversions.ctx:type_name -> common.Context
+	197,  // 449: header.Conversions.conversions:type_name -> header.Conversion
+	669,  // 450: header.Conversion.ctx:type_name -> common.Context
+	671,  // 451: header.Conversion.device:type_name -> common.Device
+	199,  // 452: header.Conversion.submission:type_name -> header.CampaignSubmission
+	45,   // 453: header.Conversion.user:type_name -> header.User
+	669,  // 454: header.UserCampaignStatus.ctx:type_name -> common.Context
+	669,  // 455: header.CampaignSubmission.ctx:type_name -> common.Context
+	160,  // 456: header.CampaignSubmission.fields:type_name -> header.WidgetField
+	200,  // 457: header.ButtonComponent.actions:type_name -> header.PopupButtonAction
+	669,  // 458: header.ReportCampaignResponse.ctx:type_name -> common.Context
+	669,  // 459: header.ReportWebPluginResponse.ctx:type_name -> common.Context
+	205,  // 460: header.ReportWebPluginResponse.metrics:type_name -> header.WebPluginMetric
+	669,  // 461: header.GreetingAudios.ctx:type_name -> common.Context
+	209,  // 462: header.GreetingAudios.greeting_audios:type_name -> header.GreetingAudio
+	669,  // 463: header.GreetingAudio.ctx:type_name -> common.Context
+	223,  // 464: header.GreetingAudio.file:type_name -> header.File
+	669,  // 465: header.UploadedImage.ctx:type_name -> common.Context
+	669,  // 466: header.UploadedImages.ctx:type_name -> common.Context
+	210,  // 467: header.UploadedImages.images:type_name -> header.UploadedImage
+	466,  // 468: header.EventFilter.condition:type_name -> header.WorkflowCondition
+	669,  // 469: header.EventDestination.ctx:type_name -> common.Context
+	213,  // 470: header.EventDestination.filters:type_name -> header.EventFilter
+	217,  // 471: header.EventDestination.webhook:type_name -> header.Webhook
+	216,  // 472: header.EventDestination.facebook_conversion_api:type_name -> header.FacebookConversionAPI
+	215,  // 473: header.EventDestination.mappings:type_name -> header.DataMapping
+	669,  // 474: header.Webhook.ctx:type_name -> common.Context
+	212,  // 475: header.Webhook.old_secret:type_name -> header.WebhookSecret
+	669,  // 476: header.WebhookDeliveries.ctx:type_name -> common.Context
+	219,  // 477: header.WebhookDeliveries.deliveries:type_name -> header.WebhookDelivery
+	669,  // 478: header.WebhookDelivery.ctx:type_name -> common.Context
+	315,  // 479: header.WebhookDelivery.resquest_headers:type_name -> header.KV
+	315,  // 480: header.WebhookDelivery.response_headers:type_name -> header.KV
+	669,  // 481: header.WebhookTestResult.ctx:type_name -> common.Context
+	669,  // 482: header.BackOffSleepWebhookEmail.ctx:type_name -> common.Context
+	669,  // 483: header.PresignResult.ctx:type_name -> common.Context
+	669,  // 484: header.File.ctx:type_name -> common.Context
+	669,  // 485: header.BotTerminated.ctx:type_name -> common.Context
+	669,  // 486: header.BlacklistIP.ctx:type_name -> common.Context
+	669,  // 487: header.BannedUser.ctx:type_name -> common.Context
+	669,  // 488: header.LoginSessions.ctx:type_name -> common.Context
+	228,  // 489: header.LoginSessions.sessions:type_name -> header.LoginSession
+	669,  // 490: header.LoginSession.ctx:type_name -> common.Context
+	671,  // 491: header.LoginSession.device:type_name -> common.Device
+	59,   // 492: header.LoginSession.location:type_name -> header.Location
+	231,  // 493: header.GoogleLocationSettings.settings:type_name -> header.GoogleLocationSetting
+	232,  // 494: header.GoogleLocationSetting.google_review_setting:type_name -> header.GoogleReviewSetting
+	233,  // 495: header.GoogleLocationSetting.google_question_setting:type_name -> header.GoogleQuestionSetting
+	622,  // 496: header.GoogleReviewSetting.repliesM:type_name -> header.GoogleReviewSetting.RepliesMEntry
+	505,  // 497: header.FbComment.block:type_name -> header.Block
+	669,  // 498: header.FbFanpageSetting.ctx:type_name -> common.Context
+	237,  // 499: header.FbFanpageSetting.general_comment_setting:type_name -> header.FbCommentSetting
+	237,  // 500: header.FbFanpageSetting.specific_post_comment_setting:type_name -> header.FbCommentSetting
+	237,  // 501: header.FbFanpageSetting.post_comment_settings:type_name -> header.FbCommentSetting
+	669,  // 502: header.FbFanpageSettings.ctx:type_name -> common.Context
+	235,  // 503: header.FbFanpageSettings.settings:type_name -> header.FbFanpageSetting
+	234,  // 504: header.FbCommentSetting.comments:type_name -> header.FbComment
+	102,  // 505: header.FbCommentSetting.message:type_name -> header.Message
+	102,  // 506: header.FbCommentSetting.message_for_comments_contain_phone_email_or_address:type_name -> header.Message
+	102,  // 507: header.FbCommentSetting.message_for_comments_contain_keyword:type_name -> header.Message
+	248,  // 508: header.FbCommentSetting.posts:type_name -> header.FacebookPost
+	669,  // 509: header.FacebookPosts.ctx:type_name -> common.Context
+	248,  // 510: header.FacebookPosts.posts:type_name -> header.FacebookPost
+	239,  // 511: header.FacebookPostAttachmentMedia.image:type_name -> header.FacebookPostAttachmentMediaImage
+	240,  // 512: header.FacebookPostAttachment.media:type_name -> header.FacebookPostAttachmentMedia
+	242,  // 513: header.FacebookPostAttachment.subattachments:type_name -> header.FacebookPostAttachemnts
+	241,  // 514: header.FacebookPostAttachemnts.data:type_name -> header.FacebookPostAttachment
+	248,  // 515: header.FbFacebookPosts.data:type_name -> header.FacebookPost
+	246,  // 516: header.FbFacebookPosts.paging:type_name -> header.FacebookPaging
+	245,  // 517: header.FacebookPaging.cursors:type_name -> header.FacebookPagingCursor
+	669,  // 518: header.InstagramMedia.ctx:type_name -> common.Context
+	669,  // 519: header.FacebookPost.ctx:type_name -> common.Context
+	243,  // 520: header.FacebookPost.from:type_name -> header.FacebookPostFrom
+	242,  // 521: header.FacebookPost.attachments:type_name -> header.FacebookPostAttachemnts
+	669,  // 522: header.UserOrderConfirmation.ctx:type_name -> common.Context
+	290,  // 523: header.UserOrderConfirmation.order:type_name -> header.Order
+	669,  // 524: header.LangMessage.ctx:type_name -> common.Context
+	669,  // 525: header.Lang.ctx:type_name -> common.Context
+	251,  // 526: header.Lang.messages:type_name -> header.LangMessage
+	669,  // 527: header.Locale.ctx:type_name -> common.Context
+	675,  // 528: header.AccountImage.img:type_name -> account.Account
+	673,  // 529: header.AccountImage.owner:type_name -> account.Agent
+	669,  // 530: header.UserViews.ctx:type_name -> common.Context
+	256,  // 531: header.UserViews.views:type_name -> header.UserView
+	669,  // 532: header.UserView.ctx:type_name -> common.Context
+	259,  // 533: header.UserView.condition:type_name -> header.UserViewCondition
+	669,  // 534: header.CountTouchpointResponse.ctx:type_name -> common.Context
+	623,  // 535: header.CountTouchpointResponse.counts:type_name -> header.CountTouchpointResponse.TouchpointCount
+	669,  // 536: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
+	669,  // 537: header.UserViewCondition.ctx:type_name -> common.Context
+	680,  // 538: header.UserViewCondition.text:type_name -> header.TextCondition
+	681,  // 539: header.UserViewCondition.boolean:type_name -> header.BooleanCondition
+	679,  // 540: header.UserViewCondition.number:type_name -> header.FloatCondition
+	682,  // 541: header.UserViewCondition.datetime:type_name -> header.DatetimeCondition
+	683,  // 542: header.UserViewCondition.event:type_name -> header.EventCondition
+	259,  // 543: header.UserViewCondition.all:type_name -> header.UserViewCondition
+	259,  // 544: header.UserViewCondition.one:type_name -> header.UserViewCondition
+	669,  // 545: header.ReportResponse.ctx:type_name -> common.Context
+	670,  // 546: header.InvoiceTemplate.i18n_terms_and_conditions:type_name -> header.I18nString
+	670,  // 547: header.InvoiceTemplate.i18n_tagline:type_name -> header.I18nString
+	670,  // 548: header.InvoiceTemplate.i18n_signature:type_name -> header.I18nString
+	669,  // 549: header.ShopSetting.ctx:type_name -> common.Context
+	264,  // 550: header.ShopSetting.other_currencies:type_name -> header.Currency
+	269,  // 551: header.ShopSetting.addresses:type_name -> header.Address
+	320,  // 552: header.ShopSetting.taxes:type_name -> header.Tax
+	284,  // 553: header.ShopSetting.payment_methods:type_name -> header.PaymentMethod
+	261,  // 554: header.ShopSetting.invoice_template:type_name -> header.InvoiceTemplate
+	323,  // 555: header.ShopSetting.shopee_shops:type_name -> header.ShopeeShop
+	282,  // 556: header.ShopSetting.shippings:type_name -> header.IntegratedShipping
+	281,  // 557: header.ShopSetting.shipping_policies:type_name -> header.ShippingPolicy
+	296,  // 558: header.ShopSetting.cancellation_codes:type_name -> header.CancellationCode
+	669,  // 559: header.Addresses.ctx:type_name -> common.Context
+	269,  // 560: header.Addresses.addresses:type_name -> header.Address
+	669,  // 561: header.Currency.ctx:type_name -> common.Context
+	265,  // 562: header.Currency.logs:type_name -> header.CurrencyLogEntry
+	303,  // 563: header.OrderItem.product:type_name -> header.Product
+	320,  // 564: header.OrderItem.tax:type_name -> header.Tax
+	669,  // 565: header.Address.ctx:type_name -> common.Context
+	268,  // 566: header.Address.ghn:type_name -> header.GHNAddress
+	269,  // 567: header.Address.ghtk:type_name -> header.Address
+	275,  // 568: header.GHNOrder.items:type_name -> header.GHNOrderItem
+	272,  // 569: header.GHNOrder.fee:type_name -> header.GHNOrderFee
+	274,  // 570: header.GHNOrder2.Fee:type_name -> header.GHNOrder2Fee
+	269,  // 571: header.ShippingInfo.address:type_name -> header.Address
+	269,  // 572: header.ShippingInfo.pickup_address:type_name -> header.Address
+	320,  // 573: header.ShippingInfo.tax:type_name -> header.Tax
+	279,  // 574: header.ShippingInfo.data:type_name -> header.ShippingData
+	276,  // 575: header.ShippingData.ghtk:type_name -> header.GHTKShippingData
+	277,  // 576: header.ShippingData.ghtk_order:type_name -> header.GHTKOrder
+	270,  // 577: header.ShippingData.ghn:type_name -> header.GHNShippingData
+	271,  // 578: header.ShippingData.ghn_order:type_name -> header.GHNOrder
+	669,  // 579: header.ShippingPolicies.ctx:type_name -> common.Context
+	281,  // 580: header.ShippingPolicies.shipping_policies:type_name -> header.ShippingPolicy
+	669,  // 581: header.ShippingPolicy.ctx:type_name -> common.Context
+	669,  // 582: header.IntegratedShipping.ctx:type_name -> common.Context
+	269,  // 583: header.IntegratedShipping.address:type_name -> header.Address
+	669,  // 584: header.IntegratedShippings.ctx:type_name -> common.Context
+	282,  // 585: header.IntegratedShippings.integrated_shippings:type_name -> header.IntegratedShipping
+	669,  // 586: header.PaymentMethod.ctx:type_name -> common.Context
+	669,  // 587: header.PaymentMethods.ctx:type_name -> common.Context
+	284,  // 588: header.PaymentMethods.payment_methods:type_name -> header.PaymentMethod
+	669,  // 589: header.Orders.ctx:type_name -> common.Context
+	286,  // 590: header.Orders.metrics:type_name -> header.OrderMetric
+	290,  // 591: header.Orders.orders:type_name -> header.Order
+	669,  // 592: header.CountOrdersResponse.ctx:type_name -> common.Context
+	669,  // 593: header.DownloadOrderRequest.ctx:type_name -> common.Context
+	290,  // 594: header.DownloadOrderRequest.order:type_name -> header.Order
+	261,  // 595: header.DownloadOrderRequest.template:type_name -> header.InvoiceTemplate
+	669,  // 596: header.Order.ctx:type_name -> common.Context
+	278,  // 597: header.Order.shipping:type_name -> header.ShippingInfo
+	284,  // 598: header.Order.payment_method:type_name -> header.PaymentMethod
+	267,  // 599: header.Order.items:type_name -> header.OrderItem
+	45,   // 600: header.Order.user:type_name -> header.User
+	624,  // 601: header.Order.fields:type_name -> header.Order.FieldsEntry
+	292,  // 602: header.Order.agents:type_name -> header.OrderAgent
+	291,  // 603: header.Order.stages:type_name -> header.OrderPipelineStage
+	111,  // 604: header.Order.tags:type_name -> header.Tag
+	322,  // 605: header.Order.error:type_name -> header.Error
+	669,  // 606: header.OrderPipelineStage.ctx:type_name -> common.Context
+	337,  // 607: header.OrderPipelineStage.tasks:type_name -> header.Task
+	669,  // 608: header.OrderAgent.ctx:type_name -> common.Context
+	669,  // 609: header.Bills.ctx:type_name -> common.Context
+	294,  // 610: header.Bills.bills:type_name -> header.Bill
+	669,  // 611: header.Bill.ctx:type_name -> common.Context
+	532,  // 612: header.Bill.bank_transfer_request:type_name -> header.BankTransferRequest
+	669,  // 613: header.CancellationCodes.ctx:type_name -> common.Context
+	296,  // 614: header.CancellationCodes.cancellation_codes:type_name -> header.CancellationCode
+	669,  // 615: header.CancellationCode.ctx:type_name -> common.Context
+	669,  // 616: header.OrderPipelineUpdated.ctx:type_name -> common.Context
+	669,  // 617: header.OrderStatusUpdated.ctx:type_name -> common.Context
+	73,   // 618: header.OrderHistoryEntry.event:type_name -> header.Event
+	73,   // 619: header.OrderHistoryEntry.ref_comment:type_name -> header.Event
+	669,  // 620: header.OrderHistoryEntries.ctx:type_name -> common.Context
+	299,  // 621: header.OrderHistoryEntries.entries:type_name -> header.OrderHistoryEntry
+	669,  // 622: header.Discount.ctx:type_name -> common.Context
+	223,  // 623: header.Discount.image:type_name -> header.File
+	669,  // 624: header.Product.ctx:type_name -> common.Context
+	303,  // 625: header.Product.other_variants:type_name -> header.Product
+	315,  // 626: header.Product.props:type_name -> header.KV
+	307,  // 627: header.Product.options:type_name -> header.ProductOption
+	266,  // 628: header.Product.price_rules:type_name -> header.PriceRule
+	305,  // 629: header.Product.stocks:type_name -> header.ProductStock
+	320,  // 630: header.Product.tax:type_name -> header.Tax
+	107,  // 631: header.Product.buttons:type_name -> header.MessageButton
+	625,  // 632: header.Product.i18n_description_block:type_name -> header.Product.I18nDescriptionBlockEntry
+	223,  // 633: header.Product.attachments:type_name -> header.File
+	301,  // 634: header.Product.validity:type_name -> header.ProductValidity
+	306,  // 635: header.Product.offers:type_name -> header.ProductOffer
+	304,  // 636: header.Product.enrich_sources:type_name -> header.ProductEnrichSource
+	322,  // 637: header.Product.error:type_name -> header.Error
+	669,  // 638: header.ProductOffer.ctx:type_name -> common.Context
+	308,  // 639: header.GoogleSheetProductFeed.mapping:type_name -> header.ColumnMapping
+	669,  // 640: header.ProductFeedRun.ctx:type_name -> common.Context
+	322,  // 641: header.ProductFeedRun.fetch_error:type_name -> header.Error
+	669,  // 642: header.ProductFeed.ctx:type_name -> common.Context
+	310,  // 643: header.ProductFeed.shopee:type_name -> header.ShopeeProductFeed
+	311,  // 644: header.ProductFeed.website:type_name -> header.WebsiteProductFeed
+	309,  // 645: header.ProductFeed.google_sheet:type_name -> header.GoogleSheetProductFeed
+	312,  // 646: header.ProductFeed.last_run:type_name -> header.ProductFeedRun
+	669,  // 647: header.ProductsRequest.ctx:type_name -> common.Context
+	315,  // 648: header.ProductsRequest.props:type_name -> header.KV
+	315,  // 649: header.KV.kvs:type_name -> header.KV
+	505,  // 650: header.KV.value_block:type_name -> header.Block
+	505,  // 651: header.KV.value_blocks:type_name -> header.Block
+	472,  // 652: header.ProductCategoryBuildQueryExample.history:type_name -> header.LLMChatHistoryEntry
+	626,  // 653: header.ProductCategory.i18n_name:type_name -> header.ProductCategory.I18nNameEntry
+	627,  // 654: header.ProductCategory.attributes:type_name -> header.ProductCategory.AttributesEntry
+	316,  // 655: header.ProductCategory._build_query_examples:type_name -> header.ProductCategoryBuildQueryExample
+	318,  // 656: header.ProductCategory.keyword_extract_examples:type_name -> header.ProductCategoryExtractExample
+	669,  // 657: header.ProductCategories.ctx:type_name -> common.Context
+	669,  // 658: header.Tax.ctx:type_name -> common.Context
+	670,  // 659: header.Tax.i18n_name:type_name -> header.I18nString
+	628,  // 660: header.Error.fields:type_name -> header.Error.FieldsEntry
+	629,  // 661: header.Error._hidden:type_name -> header.Error.HiddenEntry
+	630,  // 662: header.Error.message:type_name -> header.Error.MessageEntry
+	631,  // 663: header.Error.attrs:type_name -> header.Error.AttrsEntry
+	632,  // 664: header.Error._hidden_attrs:type_name -> header.Error.HiddenAttrsEntry
+	669,  // 665: header.ShopeeShop.ctx:type_name -> common.Context
+	669,  // 666: header.ShopeeSyncProductResponse.ctx:type_name -> common.Context
+	669,  // 667: header.AddressAutocompleteResponses.ctx:type_name -> common.Context
+	326,  // 668: header.AddressAutocompleteResponses.responses:type_name -> header.AddressAutocompleteResponse
+	669,  // 669: header.AddressAutocompleteResponse.ctx:type_name -> common.Context
+	327,  // 670: header.AddressAutocompleteResponse.matched_substrings:type_name -> header.SubstringIndex
+	329,  // 671: header.PipelineStage.routes:type_name -> header.PipelineRule
+	337,  // 672: header.PipelineStage.tasks:type_name -> header.Task
+	669,  // 673: header.PipelineRule.ctx:type_name -> common.Context
+	123,  // 674: header.PipelineRule.conditions:type_name -> header.BotCondition
+	669,  // 675: header.Pipelines.ctx:type_name -> common.Context
+	331,  // 676: header.Pipelines.pipelines:type_name -> header.Pipeline
+	669,  // 677: header.Pipeline.ctx:type_name -> common.Context
+	328,  // 678: header.Pipeline.stages:type_name -> header.PipelineStage
+	669,  // 679: header.Tasks.ctx:type_name -> common.Context
+	337,  // 680: header.Tasks.tasks:type_name -> header.Task
+	669,  // 681: header.ImportLeadRequest.ctx:type_name -> common.Context
+	45,   // 682: header.ImportLeadRequest.users:type_name -> header.User
+	669,  // 683: header.ImportLeadResponse.ctx:type_name -> common.Context
+	669,  // 684: header.ImportProductRequest.ctx:type_name -> common.Context
+	303,  // 685: header.ImportProductRequest.products:type_name -> header.Product
+	669,  // 686: header.ImportProductResponse.ctx:type_name -> common.Context
+	303,  // 687: header.ImportProductResponse.products:type_name -> header.Product
+	669,  // 688: header.Task.ctx:type_name -> common.Context
+	73,   // 689: header.Task.data_email:type_name -> header.Event
+	223,  // 690: header.Task.files:type_name -> header.File
+	73,   // 691: header.Task.latest_comment:type_name -> header.Event
+	338,  // 692: header.Task.members:type_name -> header.TaskMember
+	505,  // 693: header.Task.note_block:type_name -> header.Block
+	505,  // 694: header.Task.title_block:type_name -> header.Block
+	73,   // 695: header.TaskHistoryEntry.event:type_name -> header.Event
+	73,   // 696: header.TaskHistoryEntry.ref_comment:type_name -> header.Event
+	669,  // 697: header.TaskHistoryEntries.ctx:type_name -> common.Context
+	339,  // 698: header.TaskHistoryEntries.entries:type_name -> header.TaskHistoryEntry
+	669,  // 699: header.AgentGroups.ctx:type_name -> common.Context
+	342,  // 700: header.AgentGroups.Groups:type_name -> header.AgentGroup
+	669,  // 701: header.AgentGroup.ctx:type_name -> common.Context
+	45,   // 702: header.DocHit.user:type_name -> header.User
+	343,  // 703: header.DocHit.secondary_doc:type_name -> header.DocHit
+	496,  // 704: header.DocHit.article:type_name -> header.Article
+	505,  // 705: header.DocHit.description_block:type_name -> header.Block
+	633,  // 706: header.DocHit.query_matchM:type_name -> header.DocHit.QueryMatchMEntry
+	669,  // 707: header.DocSearchResponse.ctx:type_name -> common.Context
+	343,  // 708: header.DocSearchResponse.hits:type_name -> header.DocHit
+	505,  // 709: header.ArticleHit.title_block:type_name -> header.Block
+	505,  // 710: header.ArticleHit.description_block:type_name -> header.Block
+	505,  // 711: header.ArticleHit.content_block:type_name -> header.Block
+	669,  // 712: header.ArticleSearchResponse.ctx:type_name -> common.Context
+	345,  // 713: header.ArticleSearchResponse.hits:type_name -> header.ArticleHit
+	669,  // 714: header.ZaloCodeChallenge.ctx:type_name -> common.Context
+	669,  // 715: header.ConversationModal.ctx:type_name -> common.Context
+	669,  // 716: header.ConversationModals.ctx:type_name -> common.Context
+	349,  // 717: header.ConversationModals.conversation_modals:type_name -> header.ConversationModal
+	669,  // 718: header.ConversationModalPickRequest.ctx:type_name -> common.Context
+	47,   // 719: header.ConversationModalPickRequest.touchpoint:type_name -> header.Touchpoint
+	669,  // 720: header.ConversationModalPicked.ctx:type_name -> common.Context
+	669,  // 721: header.FacebookPageRegister.ctx:type_name -> common.Context
+	669,  // 722: header.FacebookPage.ctx:type_name -> common.Context
+	357,  // 723: header.FacebookPage.instagram_account:type_name -> header.InstagramUser
+	669,  // 724: header.FacebookPageRequest.ctx:type_name -> common.Context
+	669,  // 725: header.FacebookPages.ctx:type_name -> common.Context
+	354,  // 726: header.FacebookPages.facebook_pages:type_name -> header.FacebookPage
+	669,  // 727: header.InstagramUser.ctx:type_name -> common.Context
+	669,  // 728: header.CallDriverRequest.ctx:type_name -> common.Context
+	40,   // 729: header.CallDriverRequest.phone_device:type_name -> header.PhoneDevice
+	117,  // 730: header.CallDriverRequest.integration:type_name -> header.Integration
+	40,   // 731: header.CallDriverResponse.phone_device:type_name -> header.PhoneDevice
+	99,   // 732: header.CallDriverResponse.call:type_name -> header.CallInfo
+	669,  // 733: header.BlockedNumbers.ctx:type_name -> common.Context
+	361,  // 734: header.BlockedNumbers.blocked_numbers:type_name -> header.BlockedNumber
+	669,  // 735: header.BlockedNumber.ctx:type_name -> common.Context
+	363,  // 736: header.TextToSpeech.speeches:type_name -> header.TTSVoiceSelection
+	223,  // 737: header.TTSVoiceSelection.file:type_name -> header.File
+	669,  // 738: header.BusinessHours.ctx:type_name -> common.Context
+	364,  // 739: header.BusinessHours.week_days:type_name -> header.BusinessHour
+	364,  // 740: header.BusinessHours.extra_hours:type_name -> header.BusinessHour
+	364,  // 741: header.BusinessHours.holidays:type_name -> header.BusinessHour
+	669,  // 742: header.RecentCallRecords.ctx:type_name -> common.Context
+	367,  // 743: header.RecentCallRecords.records:type_name -> header.RecentCallRecord
+	669,  // 744: header.ZaloUserRequest.ctx:type_name -> common.Context
+	669,  // 745: header.ZnsRequest.ctx:type_name -> common.Context
+	634,  // 746: header.ZnsRequest.template_data:type_name -> header.ZnsRequest.TemplateDataEntry
+	669,  // 747: header.SendOmniChannelMessageRequest.ctx:type_name -> common.Context
+	73,   // 748: header.SendOmniChannelMessageRequest.messages:type_name -> header.Event
+	669,  // 749: header.EventType.ctx:type_name -> common.Context
+	73,   // 750: header.EventType.first_event:type_name -> header.Event
+	73,   // 751: header.EventType.last_event:type_name -> header.Event
+	45,   // 752: header.EventType.first_user:type_name -> header.User
+	45,   // 753: header.EventType.last_user:type_name -> header.User
+	669,  // 754: header.Segment.ctx:type_name -> common.Context
+	259,  // 755: header.Segment.condition:type_name -> header.UserViewCondition
+	322,  // 756: header.Segment.fetch_error:type_name -> header.Error
+	492,  // 757: header.Segment.permissions:type_name -> header.ResourceGroupMember
+	669,  // 758: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
+	669,  // 759: header.SegmentSync.ctx:type_name -> common.Context
+	376,  // 760: header.SegmentSync.meta_audience:type_name -> header.MetaCustomAudience
+	669,  // 761: header.MetaCustomAudience.ctx:type_name -> common.Context
+	669,  // 762: header.CustomAudienceBatchResponse.ctx:type_name -> common.Context
+	669,  // 763: header.CustomAudienceBatchRequest.ctx:type_name -> common.Context
+	373,  // 764: header.CustomAudienceBatchRequest.session:type_name -> header.MetaSyncBatchSession
+	45,   // 765: header.CustomAudienceBatchRequest.users:type_name -> header.User
+	669,  // 766: header.Segments.ctx:type_name -> common.Context
+	372,  // 767: header.Segments.segments:type_name -> header.Segment
+	669,  // 768: header.SegmentUsers.ctx:type_name -> common.Context
+	669,  // 769: header.UserSegment.ctx:type_name -> common.Context
+	669,  // 770: header.Campaign.ctx:type_name -> common.Context
+	388,  // 771: header.Campaign.messages:type_name -> header.MarketingMessage
+	383,  // 772: header.Campaign.outbound_call:type_name -> header.OutboundCallCampaign
+	86,   // 773: header.Campaign.timming_condition:type_name -> header.TimmingCondition
+	259,  // 774: header.Campaign.trigger_condition:type_name -> header.UserViewCondition
+	531,  // 775: header.Campaign.audient_request:type_name -> header.UsersRequest
+	184,  // 776: header.OutboundCallCampaign.form:type_name -> header.Form
+	635,  // 777: header.OutboundCallCampaign.agent_weight:type_name -> header.OutboundCallCampaign.AgentWeightEntry
+	669,  // 778: header.ListOutboundCallRequest.ctx:type_name -> common.Context
+	259,  // 779: header.ListOutboundCallRequest.condition:type_name -> header.UserViewCondition
+	636,  // 780: header.ListOutboundCallRequest.agent_weight:type_name -> header.ListOutboundCallRequest.AgentWeightEntry
+	669,  // 781: header.OutboundCallEntries.ctx:type_name -> common.Context
+	387,  // 782: header.OutboundCallEntries.entries:type_name -> header.OutboundCallEntry
+	669,  // 783: header.ImportOutboundCallEntryRequest.ctx:type_name -> common.Context
+	387,  // 784: header.ImportOutboundCallEntryRequest.entries:type_name -> header.OutboundCallEntry
+	637,  // 785: header.ImportOutboundCallEntryRequest.agent_weight:type_name -> header.ImportOutboundCallEntryRequest.AgentWeightEntry
+	669,  // 786: header.OutboundCallEntry.ctx:type_name -> common.Context
+	183,  // 787: header.OutboundCallEntry.submission:type_name -> header.FormSubmission
+	86,   // 788: header.MarketingMessage.timming_condition:type_name -> header.TimmingCondition
+	87,   // 789: header.MarketingMessage.channel_condition:type_name -> header.ChannelCondition
+	102,  // 790: header.MarketingMessage.messages:type_name -> header.Message
+	669,  // 791: header.CampaignSendLogEntry.ctx:type_name -> common.Context
+	322,  // 792: header.CampaignSendLogEntry.error:type_name -> header.Error
+	669,  // 793: header.CampaignSendLog.ctx:type_name -> common.Context
+	389,  // 794: header.CampaignSendLog.entries:type_name -> header.CampaignSendLogEntry
+	669,  // 795: header.BroadcastCampaignMetrics.ctx:type_name -> common.Context
+	638,  // 796: header.BroadcastCampaignMetrics.metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
+	638,  // 797: header.BroadcastCampaignMetrics.per_message_metrics:type_name -> header.BroadcastCampaignMetrics.BroadcastCampaignMetric
+	669,  // 798: header.BusinessEmailAddress.ctx:type_name -> common.Context
+	588,  // 799: header.BusinessEmailAddress.signature:type_name -> header.EmailSignature
+	669,  // 800: header.BusinessEmailAddresses.ctx:type_name -> common.Context
+	393,  // 801: header.BusinessEmailAddresses.business_email_addresses:type_name -> header.BusinessEmailAddress
+	669,  // 802: header.ListFormSubmissionRequest.ctx:type_name -> common.Context
+	669,  // 803: header.OutboundCallReportRequest.ctx:type_name -> common.Context
+	669,  // 804: header.ImportOutboundCallEntryResponse.ctx:type_name -> common.Context
+	669,  // 805: header.OutboundCallReportResponse.ctx:type_name -> common.Context
+	402,  // 806: header.OutboundCallReportResponse.agents:type_name -> header.OutboundCallAgentReport
+	401,  // 807: header.OutboundCallReportResponse.surveys:type_name -> header.OutboundCallSurveyReport
+	669,  // 808: header.LinkData.ctx:type_name -> common.Context
+	671,  // 809: header.LinkData.device:type_name -> common.Device
+	137,  // 810: header.WorkflowAction.jump:type_name -> header.ActionJump
+	138,  // 811: header.WorkflowAction.send_http:type_name -> header.ActionSendHttp
+	141,  // 812: header.WorkflowAction.ask_question:type_name -> header.ActionAskQuestion
+	119,  // 813: header.WorkflowAction.assign:type_name -> header.AssignRequest
+	136,  // 814: header.WorkflowAction.update_conversation:type_name -> header.ActionUpdateConversation
+	142,  // 815: header.WorkflowAction.update_user:type_name -> header.ActionUpdateUser
+	143,  // 816: header.WorkflowAction.update_user_labels:type_name -> header.ActionUpdateUserLabels
+	134,  // 817: header.WorkflowAction.confirm_order:type_name -> header.ActionConfirmOrder
+	133,  // 818: header.WorkflowAction.create_task:type_name -> header.ActionCreateTask
+	135,  // 819: header.WorkflowAction.send_chat_transcript:type_name -> header.ActionSendChatTranscript
+	144,  // 820: header.WorkflowAction.update_user_segments:type_name -> header.ActionUpdateUserSegments
+	422,  // 821: header.WorkflowAction.wait_branches:type_name -> header.ActionWaitBranch
+	424,  // 822: header.WorkflowAction.branching:type_name -> header.ActionBranching
+	421,  // 823: header.WorkflowAction.percentage_split:type_name -> header.ActionPercentageSplit
+	140,  // 824: header.WorkflowAction.send_message:type_name -> header.ActionSendMessage
+	420,  // 825: header.WorkflowAction.send_http_req:type_name -> header.ActionSendHttpReq
+	418,  // 826: header.WorkflowAction.send_transcript:type_name -> header.ActionSendTranscript
+	417,  // 827: header.WorkflowAction.wait_message:type_name -> header.ActionWaitMessage
+	416,  // 828: header.WorkflowAction.create_order:type_name -> header.ActionCreateOrder
+	413,  // 829: header.WorkflowAction.ask_info:type_name -> header.ActionAskInfo
+	414,  // 830: header.WorkflowAction.llm:type_name -> header.ActionLLM
+	412,  // 831: header.WorkflowAction.start_thread:type_name -> header.ActionStartThread
+	411,  // 832: header.WorkflowAction.set_variable:type_name -> header.ActionSetVariable
+	410,  // 833: header.WorkflowAction.call_workflow:type_name -> header.ActionCallWorkflow
+	409,  // 834: header.WorkflowAction.assign_lead:type_name -> header.ActionAssignLead
+	139,  // 835: header.WorkflowAction.send_typing:type_name -> header.ActionSendTyping
+	408,  // 836: header.WorkflowAction.start_scope:type_name -> header.ActionStartScope
+	592,  // 837: header.WorkflowAction.ai_agent_track:type_name -> header.ActionAIAgentTrack
+	407,  // 838: header.WorkflowAction.terminate_bot:type_name -> header.ActionTerminateBot
+	406,  // 839: header.WorkflowAction.send_facebook_conversion:type_name -> header.ActionSendFacebookConversion
+	294,  // 840: header.ActionSendFacebookConversion.bill:type_name -> header.Bill
+	505,  // 841: header.ActionLLM.system_instruction_block:type_name -> header.Block
+	551,  // 842: header.ActionLLM.functions:type_name -> header.AIFunction
+	415,  // 843: header.ActionLLM.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
+	551,  // 844: header.ActionLLM.tool_choice_function:type_name -> header.AIFunction
+	550,  // 845: header.LLMResponseJSONSchemaFormat.schema:type_name -> header.JSONSchema
+	466,  // 846: header.ActionWaitMessage.condition:type_name -> header.WorkflowCondition
+	405,  // 847: header.RunWorkflowActionRequest.action:type_name -> header.WorkflowAction
+	45,   // 848: header.RunWorkflowActionRequest.user:type_name -> header.User
+	92,   // 849: header.RunWorkflowActionRequest.convo:type_name -> header.Conversation
+	290,  // 850: header.RunWorkflowActionRequest.order:type_name -> header.Order
+	481,  // 851: header.RunWorkflowActionRequest.ticket:type_name -> header.Ticket
+	466,  // 852: header.ActionWaitBranch.condition:type_name -> header.WorkflowCondition
+	466,  // 853: header.ActionBranchingBranch.condition:type_name -> header.WorkflowCondition
+	423,  // 854: header.ActionBranching.branches:type_name -> header.ActionBranchingBranch
+	669,  // 855: header.BouncedEmail.ctx:type_name -> common.Context
+	669,  // 856: header.BlockedEmail.ctx:type_name -> common.Context
+	322,  // 857: header.BlockedEmail.error:type_name -> header.Error
+	669,  // 858: header.Response.ctx:type_name -> common.Context
+	322,  // 859: header.Response.error:type_name -> header.Error
+	426,  // 860: header.Response.blocked_email:type_name -> header.BlockedEmail
+	426,  // 861: header.Response.blocked_emails:type_name -> header.BlockedEmail
+	425,  // 862: header.Response.bounced_email:type_name -> header.BouncedEmail
+	425,  // 863: header.Response.bounced_emails:type_name -> header.BouncedEmail
+	429,  // 864: header.Response.zalo_call_consent:type_name -> header.ZaloCallConsent
+	438,  // 865: header.Response.credit:type_name -> header.Credit
+	438,  // 866: header.Response.credits:type_name -> header.Credit
+	675,  // 867: header.Response.account:type_name -> account.Account
+	675,  // 868: header.Response.accounts:type_name -> account.Account
+	469,  // 869: header.Response.workflow:type_name -> header.Workflow
+	469,  // 870: header.Response.workflows:type_name -> header.Workflow
+	673,  // 871: header.Response.agent:type_name -> account.Agent
+	673,  // 872: header.Response.agents:type_name -> account.Agent
+	476,  // 873: header.Response.workflow_logs:type_name -> header.WorkflowLog
+	436,  // 874: header.Response.workflow_sessions:type_name -> header.WorkflowSession
+	436,  // 875: header.Response.workflow_session:type_name -> header.WorkflowSession
+	481,  // 876: header.Response.tickets:type_name -> header.Ticket
+	477,  // 877: header.Response.ticket_types:type_name -> header.TicketType
+	487,  // 878: header.Response.ticket_views:type_name -> header.TicketView
+	491,  // 879: header.Response.bot_templates:type_name -> header.BotTemplate
+	480,  // 880: header.Response.ticket_templates:type_name -> header.TicketTemplate
+	320,  // 881: header.Response.taxes:type_name -> header.Tax
+	493,  // 882: header.Response.sla_policies:type_name -> header.SLAPolicy
+	493,  // 883: header.Response.sla_policy:type_name -> header.SLAPolicy
+	484,  // 884: header.Response.sla_violations:type_name -> header.SLAViolation
+	501,  // 885: header.Response.knowledge_base:type_name -> header.KnowledgeBase
+	496,  // 886: header.Response.articles:type_name -> header.Article
+	497,  // 887: header.Response.article_categories:type_name -> header.ArticleCategory
+	501,  // 888: header.Response.knowledge_bases:type_name -> header.KnowledgeBase
+	496,  // 889: header.Response.article:type_name -> header.Article
+	497,  // 890: header.Response.article_category:type_name -> header.ArticleCategory
+	92,   // 891: header.Response.conversation:type_name -> header.Conversation
+	92,   // 892: header.Response.conversations:type_name -> header.Conversation
+	76,   // 893: header.Response.conversation_metas:type_name -> header.ConversationMeta
+	209,  // 894: header.Response.greeting_audios:type_name -> header.GreetingAudio
+	209,  // 895: header.Response.greeting_audio:type_name -> header.GreetingAudio
+	45,   // 896: header.Response.users:type_name -> header.User
+	45,   // 897: header.Response.user:type_name -> header.User
+	73,   // 898: header.Response.event:type_name -> header.Event
+	73,   // 899: header.Response.events:type_name -> header.Event
+	100,  // 900: header.Response.rating:type_name -> header.Rating
+	83,   // 901: header.Response.rule:type_name -> header.Rule
+	83,   // 902: header.Response.rules:type_name -> header.Rule
+	83,   // 903: header.Response.ticket_rule:type_name -> header.Rule
+	83,   // 904: header.Response.ticket_rules:type_name -> header.Rule
+	512,  // 905: header.Response.agent_profile:type_name -> header.AgentProfile
+	228,  // 906: header.Response.login_session:type_name -> header.LoginSession
+	517,  // 907: header.Response.promotion_code:type_name -> header.PromotionCode
+	517,  // 908: header.Response.promotion_codes:type_name -> header.PromotionCode
+	519,  // 909: header.Response.promotion_check_result:type_name -> header.PromotionCheckResult
+	100,  // 910: header.Response.ratings:type_name -> header.Rating
+	518,  // 911: header.Response.subiz_promotion_programs:type_name -> header.SubizPromotionProgram
+	521,  // 912: header.Response.subiz_payment_method:type_name -> header.SubizPaymentMethod
+	521,  // 913: header.Response.subiz_payment_methods:type_name -> header.SubizPaymentMethod
+	514,  // 914: header.Response.profile_email_usage:type_name -> header.ProfileEmailUsage
+	528,  // 915: header.Response.bank_account:type_name -> header.BankAccount
+	528,  // 916: header.Response.bank_accounts:type_name -> header.BankAccount
+	532,  // 917: header.Response.bank_transfer_request:type_name -> header.BankTransferRequest
+	529,  // 918: header.Response.workflow_counts:type_name -> header.WorkflowCount
+	117,  // 919: header.Response.integrations:type_name -> header.Integration
+	117,  // 920: header.Response.integration:type_name -> header.Integration
+	40,   // 921: header.Response.phone_devices:type_name -> header.PhoneDevice
+	371,  // 922: header.Response.event_types:type_name -> header.EventType
+	428,  // 923: header.Response.report_counts:type_name -> header.ReportCount
+	127,  // 924: header.Response.site:type_name -> header.Site
+	127,  // 925: header.Response.sites:type_name -> header.Site
+	55,   // 926: header.Response.attribute_definition:type_name -> header.AttributeDefinition
+	55,   // 927: header.Response.attribute_definitions:type_name -> header.AttributeDefinition
+	543,  // 928: header.Response.article_node:type_name -> header.ArticleNode
+	111,  // 929: header.Response.tag:type_name -> header.Tag
+	111,  // 930: header.Response.tags:type_name -> header.Tag
+	561,  // 931: header.Response.ai_data_entries:type_name -> header.AIDataEntry
+	561,  // 932: header.Response.ai_data_entry:type_name -> header.AIDataEntry
+	546,  // 933: header.Response.ai_agents:type_name -> header.AIAgent
+	546,  // 934: header.Response.ai_agent:type_name -> header.AIAgent
+	560,  // 935: header.Response.ai_data_chunks:type_name -> header.AIDataChunk
+	223,  // 936: header.Response.file:type_name -> header.File
+	223,  // 937: header.Response.files:type_name -> header.File
+	248,  // 938: header.Response.facebook_posts:type_name -> header.FacebookPost
+	248,  // 939: header.Response.facebook_post:type_name -> header.FacebookPost
+	113,  // 940: header.Response.templates:type_name -> header.Template
+	217,  // 941: header.Response.webhooks:type_name -> header.Webhook
+	37,   // 942: header.Response.notifications:type_name -> header.Noti
+	566,  // 943: header.Response.notification_setting:type_name -> header.NotiSetting
+	342,  // 944: header.Response.agent_groups:type_name -> header.AgentGroup
+	583,  // 945: header.Response.zns_templates:type_name -> header.ZNSTemplate
+	583,  // 946: header.Response.zns_template:type_name -> header.ZNSTemplate
+	587,  // 947: header.Response.zns_medias:type_name -> header.ZNSMedia
+	587,  // 948: header.Response.zns_media:type_name -> header.ZNSMedia
+	588,  // 949: header.Response.email_signatures:type_name -> header.EmailSignature
+	588,  // 950: header.Response.email_signature:type_name -> header.EmailSignature
+	382,  // 951: header.Response.campaigns:type_name -> header.Campaign
+	382,  // 952: header.Response.campaign:type_name -> header.Campaign
+	590,  // 953: header.Response.credit_usage:type_name -> header.CreditUsage
+	474,  // 954: header.Response.ai_agent_trace:type_name -> header.AIAgentTrace
+	474,  // 955: header.Response.ai_agent_traces:type_name -> header.AIAgentTrace
+	183,  // 956: header.Response.form_submissions:type_name -> header.FormSubmission
+	184,  // 957: header.Response.forms:type_name -> header.Form
+	184,  // 958: header.Response.form:type_name -> header.Form
+	183,  // 959: header.Response.form_submission:type_name -> header.FormSubmission
+	303,  // 960: header.Response.products:type_name -> header.Product
+	303,  // 961: header.Response.product:type_name -> header.Product
+	302,  // 962: header.Response.discounts:type_name -> header.Discount
+	302,  // 963: header.Response.discount:type_name -> header.Discount
+	294,  // 964: header.Response.bills:type_name -> header.Bill
+	290,  // 965: header.Response.orders:type_name -> header.Order
+	294,  // 966: header.Response.bill:type_name -> header.Bill
+	290,  // 967: header.Response.order:type_name -> header.Order
+	306,  // 968: header.Response.product_offer:type_name -> header.ProductOffer
+	306,  // 969: header.Response.product_offers:type_name -> header.ProductOffer
+	269,  // 970: header.Response.addresses:type_name -> header.Address
+	375,  // 971: header.Response.segment_sync:type_name -> header.SegmentSync
+	375,  // 972: header.Response.segment_syncs:type_name -> header.SegmentSync
+	374,  // 973: header.Response.segment_sync_user_status:type_name -> header.SegmentSyncUserStatus
+	596,  // 974: header.Response.meta_ad_account:type_name -> header.MetaAdAccount
+	596,  // 975: header.Response.meta_ad_accounts:type_name -> header.MetaAdAccount
+	235,  // 976: header.Response.fanpage_settings:type_name -> header.FbFanpageSetting
+	313,  // 977: header.Response.product_feeds:type_name -> header.ProductFeed
+	313,  // 978: header.Response.product_feed:type_name -> header.ProductFeed
+	312,  // 979: header.Response.product_feed_runs:type_name -> header.ProductFeedRun
+	670,  // 980: header.ZaloCallConsent.message:type_name -> header.I18nString
+	669,  // 981: header.SendEmailRequest.ctx:type_name -> common.Context
+	639,  // 982: header.SendEmailRequest.header:type_name -> header.SendEmailRequest.HeaderEntry
+	432,  // 983: header.SendEmailRequest.attachments:type_name -> header.EmailAttachment
+	669,  // 984: header.Email.ctx:type_name -> common.Context
+	640,  // 985: header.Email.header:type_name -> header.Email.HeaderEntry
+	432,  // 986: header.Email.attachments:type_name -> header.EmailAttachment
+	435,  // 987: header.WorkflowStack.calls:type_name -> header.WorkflowStackItem
+	669,  // 988: header.WorkflowSession.ctx:type_name -> common.Context
+	405,  // 989: header.WorkflowSession.action:type_name -> header.WorkflowAction
+	641,  // 990: header.WorkflowSession.threads:type_name -> header.WorkflowSession.ThreadsEntry
+	73,   // 991: header.WorkflowSession.last_message_sent:type_name -> header.Event
+	669,  // 992: header.SchedulerTask.ctx:type_name -> common.Context
+	669,  // 993: header.Credit.ctx:type_name -> common.Context
+	669,  // 994: header.CreditSpendEntry.ctx:type_name -> common.Context
+	446,  // 995: header.CreditSpendEntry.data:type_name -> header.CreditEntryData
+	441,  // 996: header.CreditEntryData.agent:type_name -> header.CreditEntryDataAgent
+	443,  // 997: header.CreditEntryData.zalo_zns:type_name -> header.CreditEntryDataZaloZNS
+	445,  // 998: header.CreditEntryData.zalo_active_message:type_name -> header.CreditEntryDataZaloActiveMessage
+	442,  // 999: header.CreditEntryData.email:type_name -> header.CreditEntryDataEmail
+	440,  // 1000: header.CreditEntryData.file:type_name -> header.CreditEntryDataId
+	444,  // 1001: header.CreditEntryData.zalo_request_call:type_name -> header.CreditEntryDataZaloRequestCall
+	447,  // 1002: header.CreditEntryData.llm_completion:type_name -> header.CreditEntryDataLLMCompletion
+	448,  // 1003: header.CreditEntryData.text_embedding:type_name -> header.CreditEntryDataTextEmbedding
+	669,  // 1004: header.CreditSpendEntries.ctx:type_name -> common.Context
+	439,  // 1005: header.CreditSpendEntries.entries:type_name -> header.CreditSpendEntry
+	669,  // 1006: header.TrySpendCreditResponse.ctx:type_name -> common.Context
+	669,  // 1007: header.CreditSpendReportResponse.ctx:type_name -> common.Context
+	451,  // 1008: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
+	669,  // 1009: header.AccSub.ctx:type_name -> common.Context
+	675,  // 1010: header.AccSub.account:type_name -> account.Account
+	684,  // 1011: header.AccSub.subscription:type_name -> payment.Subscription
+	673,  // 1012: header.AccSub.agents:type_name -> account.Agent
+	438,  // 1013: header.AccSub.credits:type_name -> header.Credit
+	669,  // 1014: header.AccSubs.ctx:type_name -> common.Context
+	453,  // 1015: header.AccSubs.accsub:type_name -> header.AccSub
+	669,  // 1016: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
+	402,  // 1017: header.OutboundCallUpdateEvent.agents:type_name -> header.OutboundCallAgentReport
+	642,  // 1018: header.StrNumM.strsM:type_name -> header.StrNumM.StrsMEntry
+	643,  // 1019: header.NumStrM.numsM:type_name -> header.NumStrM.NumsMEntry
+	669,  // 1020: header.ConvoReportRequest.ctx:type_name -> common.Context
+	259,  // 1021: header.ConvoReportRequest.conditions:type_name -> header.UserViewCondition
+	675,  // 1022: header.ConvoReportRequest.account:type_name -> account.Account
+	669,  // 1023: header.ConvoReportResponse.ctx:type_name -> common.Context
+	462,  // 1024: header.ConvoReportResponse.metrics:type_name -> header.ConvoReportEntry
+	466,  // 1025: header.WorkflowGoal.condition:type_name -> header.WorkflowCondition
+	466,  // 1026: header.WorkflowTrigger.condition:type_name -> header.WorkflowCondition
+	87,   // 1027: header.WorkflowCondition.channel:type_name -> header.ChannelCondition
+	681,  // 1028: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
+	679,  // 1029: header.WorkflowCondition.number:type_name -> header.FloatCondition
+	682,  // 1030: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
+	683,  // 1031: header.WorkflowCondition.event:type_name -> header.EventCondition
+	680,  // 1032: header.WorkflowCondition.text:type_name -> header.TextCondition
+	465,  // 1033: header.WorkflowCondition.timming:type_name -> header.WorkflowTimming
+	467,  // 1034: header.WorkflowCondition.llm:type_name -> header.LLMCondition
+	466,  // 1035: header.WorkflowCondition.all:type_name -> header.WorkflowCondition
+	466,  // 1036: header.WorkflowCondition.one:type_name -> header.WorkflowCondition
+	505,  // 1037: header.LLMCondition.instruction_block:type_name -> header.Block
+	551,  // 1038: header.LLMCondition.functions:type_name -> header.AIFunction
+	415,  // 1039: header.LLMCondition.json_schema:type_name -> header.LLMResponseJSONSchemaFormat
+	551,  // 1040: header.LLMCondition.tool_choice_function:type_name -> header.AIFunction
+	669,  // 1041: header.WorkflowLogRequest.ctx:type_name -> common.Context
+	669,  // 1042: header.Workflow.ctx:type_name -> common.Context
+	464,  // 1043: header.Workflow.triggers:type_name -> header.WorkflowTrigger
+	464,  // 1044: header.Workflow.computed_triggers:type_name -> header.WorkflowTrigger
+	466,  // 1045: header.Workflow.condition:type_name -> header.WorkflowCondition
+	466,  // 1046: header.Workflow.computed_condition:type_name -> header.WorkflowCondition
+	644,  // 1047: header.Workflow.actions:type_name -> header.Workflow.ActionsEntry
+	645,  // 1048: header.Workflow.computed_actions:type_name -> header.Workflow.ComputedActionsEntry
+	463,  // 1049: header.Workflow.goal:type_name -> header.WorkflowGoal
+	466,  // 1050: header.Workflow.exit_when:type_name -> header.WorkflowCondition
+	223,  // 1051: header.Workflow.avatar:type_name -> header.File
+	470,  // 1052: header.Workflow.kv_settings:type_name -> header.KvSetting
+	471,  // 1053: header.LLMChatHistoryEntry.tool:type_name -> header.LLMToolCall
+	646,  // 1054: header.LLMChatHistoryEntry.fields:type_name -> header.LLMChatHistoryEntry.FieldsEntry
+	109,  // 1055: header.LLMChatHistoryEntry.attachments:type_name -> header.Attachment
+	669,  // 1056: header.AIAgentTrace.ctx:type_name -> common.Context
+	473,  // 1057: header.AIAgentTrace.context_documents:type_name -> header.AIDataEntryUsed
+	471,  // 1058: header.AIAgentTrace.tool_calls:type_name -> header.LLMToolCall
+	545,  // 1059: header.AIAgentTrace.override_rules:type_name -> header.AIAgentOverrideRule
+	551,  // 1060: header.AIAgentSpan.tools:type_name -> header.AIFunction
+	415,  // 1061: header.AIAgentSpan.response_format:type_name -> header.LLMResponseJSONSchemaFormat
+	472,  // 1062: header.AIAgentSpan.chat_history:type_name -> header.LLMChatHistoryEntry
+	471,  // 1063: header.AIAgentSpan.tool_calls:type_name -> header.LLMToolCall
+	669,  // 1064: header.WorkflowLog.ctx:type_name -> common.Context
+	647,  // 1065: header.WorkflowLog.data:type_name -> header.WorkflowLog.DataEntry
+	73,   // 1066: header.WorkflowLog.event:type_name -> header.Event
+	72,   // 1067: header.WorkflowLog.by:type_name -> header.By
+	669,  // 1068: header.TicketType.ctx:type_name -> common.Context
+	55,   // 1069: header.TicketType.defs:type_name -> header.AttributeDefinition
+	492,  // 1070: header.TicketType.permissions:type_name -> header.ResourceGroupMember
+	322,  // 1071: header.TicketType.error:type_name -> header.Error
+	479,  // 1072: header.TicketType.auto_reply:type_name -> header.TicketAutoReply
+	478,  // 1073: header.TicketType.satisfaction:type_name -> header.TicketSatisfaction
+	669,  // 1074: header.TicketSatisfaction.ctx:type_name -> common.Context
+	505,  // 1075: header.TicketSatisfaction.question:type_name -> header.Block
+	669,  // 1076: header.TicketAutoReply.ctx:type_name -> common.Context
+	505,  // 1077: header.TicketAutoReply.body:type_name -> header.Block
+	505,  // 1078: header.TicketAutoReply.title:type_name -> header.Block
+	669,  // 1079: header.TicketTemplate.ctx:type_name -> common.Context
+	102,  // 1080: header.TicketTemplate.message:type_name -> header.Message
+	111,  // 1081: header.TicketTemplate.tags:type_name -> header.Tag
+	38,   // 1082: header.TicketTemplate.attrs:type_name -> header.Attribute
+	322,  // 1083: header.TicketTemplate.error:type_name -> header.Error
+	669,  // 1084: header.Ticket.ctx:type_name -> common.Context
+	90,   // 1085: header.Ticket.members:type_name -> header.ConversationMember
+	38,   // 1086: header.Ticket.attrs:type_name -> header.Attribute
+	102,  // 1087: header.Ticket.description:type_name -> header.Message
+	111,  // 1088: header.Ticket.tags:type_name -> header.Tag
+	45,   // 1089: header.Ticket.users:type_name -> header.User
+	47,   // 1090: header.Ticket.touchpoint:type_name -> header.Touchpoint
+	73,   // 1091: header.Ticket.last_internal_message_sent:type_name -> header.Event
+	89,   // 1092: header.Ticket.assigned_to:type_name -> header.RouteResult
+	89,   // 1093: header.Ticket.reassigned_to:type_name -> header.RouteResult
+	315,  // 1094: header.Ticket.fields:type_name -> header.KV
+	100,  // 1095: header.Ticket.ratings:type_name -> header.Rating
+	73,   // 1096: header.Ticket.matched_event:type_name -> header.Event
+	73,   // 1097: header.Ticket.last_event:type_name -> header.Event
+	322,  // 1098: header.Ticket.error:type_name -> header.Error
+	648,  // 1099: header.Ticket.memberM:type_name -> header.Ticket.MemberMEntry
+	482,  // 1100: header.Ticket.read_receipts:type_name -> header.ReceiptMember
+	669,  // 1101: header.ReceiptMember.ctx:type_name -> common.Context
+	669,  // 1102: header.SLAViolations.ctx:type_name -> common.Context
+	484,  // 1103: header.SLAViolations.violations:type_name -> header.SLAViolation
+	669,  // 1104: header.SLAViolation.ctx:type_name -> common.Context
+	73,   // 1105: header.TicketHistoryEntry.event:type_name -> header.Event
+	73,   // 1106: header.TicketHistoryEntry.ref_comment:type_name -> header.Event
+	669,  // 1107: header.ListTicketRequest.ctx:type_name -> common.Context
+	259,  // 1108: header.ListTicketRequest.condition:type_name -> header.UserViewCondition
+	47,   // 1109: header.ListTicketRequest.touchpoint:type_name -> header.Touchpoint
+	669,  // 1110: header.TicketView.ctx:type_name -> common.Context
+	488,  // 1111: header.TicketView.members:type_name -> header.TicketViewMember
+	259,  // 1112: header.TicketView.condition:type_name -> header.UserViewCondition
+	669,  // 1113: header.TicketViewMember.ctx:type_name -> common.Context
+	73,   // 1114: header.TicketViewMember.last_event:type_name -> header.Event
+	669,  // 1115: header.LiveUserView.ctx:type_name -> common.Context
+	259,  // 1116: header.LiveUserView.condition:type_name -> header.UserViewCondition
+	649,  // 1117: header.LiveUserView.metrics:type_name -> header.LiveUserView.MetricsEntry
+	669,  // 1118: header.BotTemplate.ctx:type_name -> common.Context
+	669,  // 1119: header.ResourceGroupMember.ctx:type_name -> common.Context
+	669,  // 1120: header.SLAPolicy.ctx:type_name -> common.Context
+	494,  // 1121: header.SLAPolicy.normal_priority_target:type_name -> header.SLATarget
+	494,  // 1122: header.SLAPolicy.high_priority_target:type_name -> header.SLATarget
+	494,  // 1123: header.SLAPolicy.urgent_priority_target:type_name -> header.SLATarget
+	87,   // 1124: header.SLAPolicy.channel_condition:type_name -> header.ChannelCondition
+	86,   // 1125: header.SLAPolicy.timming_condition:type_name -> header.TimmingCondition
+	125,  // 1126: header.SLAPolicy.form_conditions:type_name -> header.Condition
+	125,  // 1127: header.SLAPolicy.user_conditions:type_name -> header.Condition
+	650,  // 1128: header.ArticleSEOSetting.page_title:type_name -> header.ArticleSEOSetting.PageTitleEntry
+	651,  // 1129: header.ArticleSEOSetting.meta_description:type_name -> header.ArticleSEOSetting.MetaDescriptionEntry
+	652,  // 1130: header.ArticleSEOSetting.social_title:type_name -> header.ArticleSEOSetting.SocialTitleEntry
+	653,  // 1131: header.ArticleSEOSetting.social_description:type_name -> header.ArticleSEOSetting.SocialDescriptionEntry
+	669,  // 1132: header.Article.ctx:type_name -> common.Context
+	498,  // 1133: header.Article.topics:type_name -> header.ArticleTopic
+	654,  // 1134: header.Article.i18n_title:type_name -> header.Article.I18nTitleEntry
+	495,  // 1135: header.Article.seo_setting:type_name -> header.ArticleSEOSetting
+	655,  // 1136: header.Article.i18n_content:type_name -> header.Article.I18nContentEntry
+	656,  // 1137: header.Article.i18n_slug:type_name -> header.Article.I18nSlugEntry
+	669,  // 1138: header.ArticleCategory.ctx:type_name -> common.Context
+	657,  // 1139: header.ArticleCategory.i18n_title:type_name -> header.ArticleCategory.I18nTitleEntry
+	658,  // 1140: header.ArticleCategory.i18n_description:type_name -> header.ArticleCategory.I18nDescriptionEntry
+	497,  // 1141: header.ArticleCategory.article_categories:type_name -> header.ArticleCategory
+	659,  // 1142: header.ArticleCategory.i18n_slug:type_name -> header.ArticleCategory.I18nSlugEntry
+	669,  // 1143: header.ArticleTopic.ctx:type_name -> common.Context
+	660,  // 1144: header.ArticleTopic.title:type_name -> header.ArticleTopic.TitleEntry
+	669,  // 1145: header.ArticleTopics.ctx:type_name -> common.Context
+	498,  // 1146: header.ArticleTopics.topics:type_name -> header.ArticleTopic
+	669,  // 1147: header.ArticleTopicRequest.ctx:type_name -> common.Context
+	669,  // 1148: header.KnowledgeBase.ctx:type_name -> common.Context
+	670,  // 1149: header.KnowledgeBase.name:type_name -> header.I18nString
+	670,  // 1150: header.KnowledgeBase.description:type_name -> header.I18nString
+	223,  // 1151: header.KnowledgeBase.logo:type_name -> header.File
+	223,  // 1152: header.KnowledgeBase.favikon:type_name -> header.File
+	477,  // 1153: header.KnowledgeBase.ticket_type:type_name -> header.TicketType
+	492,  // 1154: header.KnowledgeBase.permissions:type_name -> header.ResourceGroupMember
+	661,  // 1155: header.KnowledgeBase.i18n_title:type_name -> header.KnowledgeBase.I18nTitleEntry
+	662,  // 1156: header.KnowledgeBase.i18n_description:type_name -> header.KnowledgeBase.I18nDescriptionEntry
+	503,  // 1157: header.KnowledgeBase.home_page:type_name -> header.KnowledgeBasePageStyle
+	502,  // 1158: header.KnowledgeBase.article_page:type_name -> header.KnowledgeBaseArticlePageSetting
+	503,  // 1159: header.KnowledgeBase.category_page:type_name -> header.KnowledgeBasePageStyle
+	503,  // 1160: header.KnowledgeBaseArticlePageSetting.style:type_name -> header.KnowledgeBasePageStyle
+	669,  // 1161: header.Job.ctx:type_name -> common.Context
+	505,  // 1162: header.Block.content:type_name -> header.Block
+	663,  // 1163: header.Block.input_options:type_name -> header.Block.InputOption
+	193,  // 1164: header.Block.style:type_name -> header.Style
+	223,  // 1165: header.Block.image:type_name -> header.File
+	664,  // 1166: header.Block.attrs:type_name -> header.Block.AttrsEntry
+	506,  // 1167: header.Block.llm_input_retry_policy:type_name -> header.LLMInputRetryPolicy
+	669,  // 1168: header.TicketUpdatedNotiEmail.ctx:type_name -> common.Context
+	481,  // 1169: header.TicketUpdatedNotiEmail.assigned_tickets:type_name -> header.Ticket
+	73,   // 1170: header.TicketUpdatedNotiEmail.updated_events:type_name -> header.Event
+	481,  // 1171: header.TicketUpdatedNotiEmail.new_tickets:type_name -> header.Ticket
+	481,  // 1172: header.TicketUpdatedNotiEmail.high_risk_sla_tickets:type_name -> header.Ticket
+	481,  // 1173: header.TicketUpdatedNotiEmail.breached_sla_tickets:type_name -> header.Ticket
+	669,  // 1174: header.ResetPasswordEmail.ctx:type_name -> common.Context
+	669,  // 1175: header.OTPEmail.ctx:type_name -> common.Context
+	669,  // 1176: header.InviteEmail.ctx:type_name -> common.Context
+	669,  // 1177: header.AgentProfile.ctx:type_name -> common.Context
+	223,  // 1178: header.AgentProfile.avatar:type_name -> header.File
+	674,  // 1179: header.AgentProfile.last_seen:type_name -> account.Presence
+	669,  // 1180: header.InvitationLink.ctx:type_name -> common.Context
+	223,  // 1181: header.InvitationLink.account_logo:type_name -> header.File
+	669,  // 1182: header.ProfileEmailUsage.ctx:type_name -> common.Context
+	669,  // 1183: header.InviteRequest.ctx:type_name -> common.Context
+	669,  // 1184: header.JoinAccountRequest.ctx:type_name -> common.Context
+	669,  // 1185: header.PromotionCode.ctx:type_name -> common.Context
+	669,  // 1186: header.SubizPromotionProgram.ctx:type_name -> common.Context
+	669,  // 1187: header.PromotionCodeUsage.ctx:type_name -> common.Context
+	685,  // 1188: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
+	676,  // 1189: header.PromotionCodeUsage.bills:type_name -> payment.Bill
+	669,  // 1190: header.SubizPaymentMethod.ctx:type_name -> common.Context
+	669,  // 1191: header.AndroidNotificationRequest.ctx:type_name -> common.Context
+	526,  // 1192: header.AndroidNotificationRequest.android_notifications:type_name -> header.AndroidNotification
+	527,  // 1193: header.AndroidNotificationRequest.android_device:type_name -> header.AndroidDevice
+	669,  // 1194: header.BankAccount.ctx:type_name -> common.Context
+	669,  // 1195: header.SuggestLeadFieldRequest.ctx:type_name -> common.Context
+	259,  // 1196: header.SuggestLeadFieldRequest.condition:type_name -> header.UserViewCondition
+	669,  // 1197: header.UsersRequest.ctx:type_name -> common.Context
+	259,  // 1198: header.UsersRequest.condition:type_name -> header.UserViewCondition
+	669,  // 1199: header.BankTransferRequest.ctx:type_name -> common.Context
+	47,   // 1200: header.BankTransferRequest.touchpoint:type_name -> header.Touchpoint
+	669,  // 1201: header.GenQrCodeRequest.ctx:type_name -> common.Context
+	669,  // 1202: header.QrCode.ctx:type_name -> common.Context
+	669,  // 1203: header.ReportUserEventRequest.ctx:type_name -> common.Context
+	669,  // 1204: header.ReportUserEventResponse.ctx:type_name -> common.Context
+	535,  // 1205: header.ReportUserEventResponse.entries:type_name -> header.ReportUserEventEntry
+	669,  // 1206: header.CounterReportResponse.ctx:type_name -> common.Context
+	669,  // 1207: header.SetupFeatureStatus.ctx:type_name -> common.Context
+	669,  // 1208: header.RelationUpdates.ctx:type_name -> common.Context
+	542,  // 1209: header.RelationUpdates.updates:type_name -> header.RelationUpdate
+	669,  // 1210: header.ArticleNode.ctx:type_name -> common.Context
+	665,  // 1211: header.ArticleNode.i18n_title:type_name -> header.ArticleNode.I18nTitleEntry
+	543,  // 1212: header.ArticleNode.children:type_name -> header.ArticleNode
+	551,  // 1213: header.AIAgentOverrideRule.functions:type_name -> header.AIFunction
+	558,  // 1214: header.AIAgentOverrideRule.intent:type_name -> header.AIIntent
+	466,  // 1215: header.AIAgentOverrideRule.condition:type_name -> header.WorkflowCondition
+	150,  // 1216: header.AIAgentOverrideRule.frequently:type_name -> header.Frequently
+	119,  // 1217: header.AIAgentOverrideRule.assign_to:type_name -> header.AssignRequest
+	669,  // 1218: header.AIAgent.ctx:type_name -> common.Context
+	223,  // 1219: header.AIAgent.avatar:type_name -> header.File
+	544,  // 1220: header.AIAgent.guardrails:type_name -> header.AIAgentGuardrail
+	546,  // 1221: header.AIAgent.sub_agents:type_name -> header.AIAgent
+	102,  // 1222: header.AIAgent.context_guard_message:type_name -> header.Message
+	551,  // 1223: header.AIAgent.functions:type_name -> header.AIFunction
+	102,  // 1224: header.AIAgent.unabled_to_answer_message:type_name -> header.Message
+	102,  // 1225: header.AIAgent.error_message:type_name -> header.Message
+	558,  // 1226: header.AIAgent.generated_intent:type_name -> header.AIIntent
+	549,  // 1227: header.AIAgent.data_store:type_name -> header.AIDataStore
+	548,  // 1228: header.AIAgent.init_flow:type_name -> header.InitFlow
+	545,  // 1229: header.AIAgent.override_rules:type_name -> header.AIAgentOverrideRule
+	184,  // 1230: header.AIAgent.collect_user_information:type_name -> header.Form
+	102,  // 1231: header.AIAgent.welcome_message:type_name -> header.Message
+	93,   // 1232: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
+	94,   // 1233: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
+	95,   // 1234: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
+	547,  // 1235: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
+	102,  // 1236: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
+	131,  // 1237: header.InitFlow.action:type_name -> header.BotAction
+	122,  // 1238: header.InitFlow.triggers:type_name -> header.Trigger
+	150,  // 1239: header.InitFlow.initiative_frequency:type_name -> header.Frequently
+	123,  // 1240: header.InitFlow.conditions:type_name -> header.BotCondition
+	83,   // 1241: header.InitFlow.rule:type_name -> header.Rule
+	666,  // 1242: header.JSONSchema.properties:type_name -> header.JSONSchema.PropertiesEntry
+	550,  // 1243: header.JSONSchema.items:type_name -> header.JSONSchema
+	315,  // 1244: header.AIFunction.headers:type_name -> header.KV
+	550,  // 1245: header.AIFunction.parameters:type_name -> header.JSONSchema
+	557,  // 1246: header.AIFunction.system_create_ticket:type_name -> header.CreateTicketFunction
+	556,  // 1247: header.AIFunction.workflow:type_name -> header.AutomationFunction
+	555,  // 1248: header.AIFunction.update_information:type_name -> header.UpdateUserInformation
+	554,  // 1249: header.AIFunction.collect_user_information:type_name -> header.CollectUserInformation
+	119,  // 1250: header.AIFunction.assign_agent:type_name -> header.AssignRequest
+	184,  // 1251: header.AIFunction.system_schedule_appointment:type_name -> header.Form
+	552,  // 1252: header.AIFunction.record_user_preference:type_name -> header.RecordUserPreference
+	551,  // 1253: header.AIFunction.functions:type_name -> header.AIFunction
+	553,  // 1254: header.CollectUserInformation.attributes:type_name -> header.CollectInfomationAttribute
+	466,  // 1255: header.AutomationFunction.condition:type_name -> header.WorkflowCondition
+	667,  // 1256: header.AutomationFunction.actions:type_name -> header.AutomationFunction.ActionsEntry
+	303,  // 1257: header.CrawlResponse.product:type_name -> header.Product
+	303,  // 1258: header.CrawlResponse.products:type_name -> header.Product
+	668,  // 1259: header.CrawlResponse.visited_link_statuses:type_name -> header.CrawlResponse.VisitedLinkStatusesEntry
+	669,  // 1260: header.AIDataChunk.ctx:type_name -> common.Context
+	669,  // 1261: header.AIDataEntry.ctx:type_name -> common.Context
+	102,  // 1262: header.AIDataEntry.answer:type_name -> header.Message
+	223,  // 1263: header.AIDataEntry.file:type_name -> header.File
+	303,  // 1264: header.AIDataEntry.product:type_name -> header.Product
+	302,  // 1265: header.AIDataEntry.discount:type_name -> header.Discount
+	549,  // 1266: header.AIDataEntry.data_store:type_name -> header.AIDataStore
+	551,  // 1267: header.AIDataEntry.functions:type_name -> header.AIFunction
+	558,  // 1268: header.AIDataEntry.intent:type_name -> header.AIIntent
+	466,  // 1269: header.AIDataEntry.condition:type_name -> header.WorkflowCondition
+	669,  // 1270: header.FacebookAdsFlow.ctx:type_name -> common.Context
+	102,  // 1271: header.FacebookAdsFlow.welcome_message:type_name -> header.Message
+	669,  // 1272: header.RuleOrder.ctx:type_name -> common.Context
+	669,  // 1273: header.NotiSetting.ctx:type_name -> common.Context
+	564,  // 1274: header.NotiSetting.web:type_name -> header.NotiSubscription
+	564,  // 1275: header.NotiSetting.mobile:type_name -> header.NotiSubscription
+	564,  // 1276: header.NotiSetting.email:type_name -> header.NotiSubscription
+	564,  // 1277: header.NotiSetting.instant:type_name -> header.NotiSubscription
+	565,  // 1278: header.NotiSetting.ticket_types:type_name -> header.TicketTypeSubscription
+	567,  // 1279: header.NotiSetting.do_not_disturb:type_name -> header.DoNotDisturb
+	669,  // 1280: header.PushToken.ctx:type_name -> common.Context
+	571,  // 1281: header.ZNSTemplateLayoutComponentButtons.items:type_name -> header.ZNSTemplateLayoutComponentButton
+	573,  // 1282: header.ZNSTemplateLayoutComponentTable.rows:type_name -> header.ZNSTemplateLayoutComponentTableRow
+	575,  // 1283: header.ZNSTemplateLayoutComponentImages.items:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	575,  // 1284: header.ZNSTemplateLayoutComponentLogo.light:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	575,  // 1285: header.ZNSTemplateLayoutComponentLogo.dark:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	576,  // 1286: header.ZNSTemplateLayoutComponent.IMAGES:type_name -> header.ZNSTemplateLayoutComponentImages
+	577,  // 1287: header.ZNSTemplateLayoutComponent.LOGO:type_name -> header.ZNSTemplateLayoutComponentLogo
+	570,  // 1288: header.ZNSTemplateLayoutComponent.TITLE:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1289: header.ZNSTemplateLayoutComponent.PARAGRAPH:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1290: header.ZNSTemplateLayoutComponent.OTP:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1291: header.ZNSTemplateLayoutComponent.VOUCHER:type_name -> header.ZNSTemplateLayoutComponentItem
+	570,  // 1292: header.ZNSTemplateLayoutComponent.PAYMENT:type_name -> header.ZNSTemplateLayoutComponentItem
+	572,  // 1293: header.ZNSTemplateLayoutComponent.BUTTONS:type_name -> header.ZNSTemplateLayoutComponentButtons
+	574,  // 1294: header.ZNSTemplateLayoutComponent.TABLE:type_name -> header.ZNSTemplateLayoutComponentTable
+	578,  // 1295: header.ZNSTemplateComponents.components:type_name -> header.ZNSTemplateLayoutComponent
+	579,  // 1296: header.ZNSTemplateLayout.header:type_name -> header.ZNSTemplateComponents
+	579,  // 1297: header.ZNSTemplateLayout.body:type_name -> header.ZNSTemplateComponents
+	579,  // 1298: header.ZNSTemplateLayout.footer:type_name -> header.ZNSTemplateComponents
+	580,  // 1299: header.ZNSTemplateRequest.layout:type_name -> header.ZNSTemplateLayout
+	569,  // 1300: header.ZNSTemplateRequest.params:type_name -> header.ZNSTemplateParam
+	669,  // 1301: header.ZNSTemplate.ctx:type_name -> common.Context
+	581,  // 1302: header.ZNSTemplate.request:type_name -> header.ZNSTemplateRequest
+	584,  // 1303: header.ZNSTemplate.template:type_name -> header.ZnsTemplate
+	586,  // 1304: header.ZnsTemplate.listParams:type_name -> header.ZNSParamDefinition
+	585,  // 1305: header.ZnsTemplate.listButtons:type_name -> header.ZNSButton
+	669,  // 1306: header.ZNSMedia.ctx:type_name -> common.Context
+	223,  // 1307: header.ZNSMedia.file:type_name -> header.File
+	669,  // 1308: header.EmailSignature.ctx:type_name -> common.Context
+	505,  // 1309: header.EmailSignature.block:type_name -> header.Block
+	669,  // 1310: header.TestMessageRequest.ctx:type_name -> common.Context
+	388,  // 1311: header.TestMessageRequest.message:type_name -> header.MarketingMessage
+	669,  // 1312: header.CreditUsage.ctx:type_name -> common.Context
+	569,  // 1313: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
+	669,  // 1314: header.MetaAdAccount.ctx:type_name -> common.Context
+	595,  // 1315: header.MetaAdAccount.business:type_name -> header.MetaBusiness
+	669,  // 1316: header.VectorSearchReq.ctx:type_name -> common.Context
+	669,  // 1317: header.VectorDoc.ctx:type_name -> common.Context
+	600,  // 1318: header.VectorDoc.props:type_name -> header.VectorDocProp
+	669,  // 1319: header.ListVectorRequest.ctx:type_name -> common.Context
+	600,  // 1320: header.VectorMatch.props:type_name -> header.VectorDocProp
+	669,  // 1321: header.VectorMatches.ctx:type_name -> common.Context
+	601,  // 1322: header.VectorMatches.matches:type_name -> header.VectorMatch
+	669,  // 1323: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
+	290,  // 1324: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
+	669,  // 1325: header.ListDiscountRequest.ctx:type_name -> common.Context
+	74,   // 1326: header.Event.CustomDataEntry.value:type_name -> header.EventField
+	505,  // 1327: header.Message.I18nBlockEntry.value:type_name -> header.Block
+	612,  // 1328: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
+	505,  // 1329: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
+	505,  // 1330: header.I18nBlock.I18nEntry.value:type_name -> header.Block
+	505,  // 1331: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
+	177,  // 1332: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
+	176,  // 1333: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
+	178,  // 1334: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
+	179,  // 1335: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
+	180,  // 1336: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
+	670,  // 1337: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
+	505,  // 1338: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
+	550,  // 1339: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
+	321,  // 1340: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
+	321,  // 1341: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
+	433,  // 1342: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
+	405,  // 1343: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
+	405,  // 1344: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
+	90,   // 1345: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
+	489,  // 1346: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
+	505,  // 1347: header.Article.I18nContentEntry.value:type_name -> header.Block
+	550,  // 1348: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
+	405,  // 1349: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
+	1350, // [1350:1350] is the sub-list for method output_type
+	1350, // [1350:1350] is the sub-list for method input_type
+	1350, // [1350:1350] is the sub-list for extension type_name
+	1350, // [1350:1350] is the sub-list for extension extendee
+	0,    // [0:1350] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }
@@ -81332,7 +80837,7 @@ func file_header_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_header_proto_rawDesc), len(file_header_proto_rawDesc)),
 			NumEnums:      33,
-			NumMessages:   639,
+			NumMessages:   636,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
