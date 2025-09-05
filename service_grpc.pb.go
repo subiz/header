@@ -23473,6 +23473,7 @@ const (
 	Proder_ListProductFeedRuns_FullMethodName        = "/header.Proder/ListProductFeedRuns"
 	Proder_RunProductFeed_FullMethodName             = "/header.Proder/RunProductFeed"
 	Proder_ListProductFeedRunProducts_FullMethodName = "/header.Proder/ListProductFeedRunProducts"
+	Proder_SuggestProductFeedMapping_FullMethodName  = "/header.Proder/SuggestProductFeedMapping"
 	Proder_ListProductCategories_FullMethodName      = "/header.Proder/ListProductCategories"
 	Proder_ReadOrder_FullMethodName                  = "/header.Proder/ReadOrder"
 	Proder_CreateOrder_FullMethodName                = "/header.Proder/CreateOrder"
@@ -23550,8 +23551,9 @@ type ProderClient interface {
 	DeleteProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchProductFeeds(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ListProductFeedRuns(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	RunProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	RunProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	ListProductFeedRunProducts(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error)
+	SuggestProductFeedMapping(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	ListProductCategories(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*ProductCategories, error)
 	ReadOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	CreateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
@@ -23875,7 +23877,7 @@ func (c *proderClient) ListProductFeedRuns(ctx context.Context, in *Id, opts ...
 	return out, nil
 }
 
-func (c *proderClient) RunProductFeed(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) RunProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_RunProductFeed_FullMethodName, in, out, cOpts...)
@@ -23889,6 +23891,16 @@ func (c *proderClient) ListProductFeedRunProducts(ctx context.Context, in *Produ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_ListProductFeedRunProducts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) SuggestProductFeedMapping(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_SuggestProductFeedMapping_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24348,8 +24360,9 @@ type ProderServer interface {
 	DeleteProductFeed(context.Context, *Id) (*Empty, error)
 	MatchProductFeeds(context.Context, *Ids) (*Response, error)
 	ListProductFeedRuns(context.Context, *Id) (*Response, error)
-	RunProductFeed(context.Context, *Id) (*Response, error)
+	RunProductFeed(context.Context, *ProductFeed) (*Response, error)
 	ListProductFeedRunProducts(context.Context, *ProductFeedRun) (*Response, error)
+	SuggestProductFeedMapping(context.Context, *ProductFeed) (*Response, error)
 	ListProductCategories(context.Context, *Ids) (*ProductCategories, error)
 	ReadOrder(context.Context, *Id) (*Order, error)
 	CreateOrder(context.Context, *Order) (*Order, error)
@@ -24484,11 +24497,14 @@ func (UnimplementedProderServer) MatchProductFeeds(context.Context, *Ids) (*Resp
 func (UnimplementedProderServer) ListProductFeedRuns(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductFeedRuns not implemented")
 }
-func (UnimplementedProderServer) RunProductFeed(context.Context, *Id) (*Response, error) {
+func (UnimplementedProderServer) RunProductFeed(context.Context, *ProductFeed) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RunProductFeed not implemented")
 }
 func (UnimplementedProderServer) ListProductFeedRunProducts(context.Context, *ProductFeedRun) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductFeedRunProducts not implemented")
+}
+func (UnimplementedProderServer) SuggestProductFeedMapping(context.Context, *ProductFeed) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SuggestProductFeedMapping not implemented")
 }
 func (UnimplementedProderServer) ListProductCategories(context.Context, *Ids) (*ProductCategories, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCategories not implemented")
@@ -25124,7 +25140,7 @@ func _Proder_ListProductFeedRuns_Handler(srv interface{}, ctx context.Context, d
 }
 
 func _Proder_RunProductFeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(ProductFeed)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -25136,7 +25152,7 @@ func _Proder_RunProductFeed_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: Proder_RunProductFeed_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).RunProductFeed(ctx, req.(*Id))
+		return srv.(ProderServer).RunProductFeed(ctx, req.(*ProductFeed))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -25155,6 +25171,24 @@ func _Proder_ListProductFeedRunProducts_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).ListProductFeedRunProducts(ctx, req.(*ProductFeedRun))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_SuggestProductFeedMapping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductFeed)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).SuggestProductFeedMapping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_SuggestProductFeedMapping_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).SuggestProductFeedMapping(ctx, req.(*ProductFeed))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26037,6 +26071,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListProductFeedRunProducts",
 			Handler:    _Proder_ListProductFeedRunProducts_Handler,
+		},
+		{
+			MethodName: "SuggestProductFeedMapping",
+			Handler:    _Proder_SuggestProductFeedMapping_Handler,
 		},
 		{
 			MethodName: "ListProductCategories",
