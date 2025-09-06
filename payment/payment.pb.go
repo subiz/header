@@ -1050,7 +1050,6 @@ type Bill struct {
 	FpvReferrerCommissionVnd *int64  `protobuf:"varint,36,opt,name=fpv_referrer_commission_vnd,json=fpvReferrerCommissionVnd" json:"fpv_referrer_commission_vnd,omitempty"` // hidden
 	ReferrerAgentId          *string `protobuf:"bytes,37,opt,name=referrer_agent_id,json=referrerAgentId" json:"referrer_agent_id,omitempty"`
 	FpvReferrerCommissionUsd *int64  `protobuf:"varint,38,opt,name=fpv_referrer_commission_usd,json=fpvReferrerCommissionUsd" json:"fpv_referrer_commission_usd,omitempty"` // hidden
-	IsPromotion              *bool   `protobuf:"varint,40,opt,name=is_promotion,json=isPromotion" json:"is_promotion,omitempty"`                                            // empty or promotion
 	PromotionCode            *string `protobuf:"bytes,39,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
@@ -1224,13 +1223,6 @@ func (x *Bill) GetFpvReferrerCommissionUsd() int64 {
 		return *x.FpvReferrerCommissionUsd
 	}
 	return 0
-}
-
-func (x *Bill) GetIsPromotion() bool {
-	if x != nil && x.IsPromotion != nil {
-		return *x.IsPromotion
-	}
-	return false
 }
 
 func (x *Bill) GetPromotionCode() string {
@@ -1510,33 +1502,32 @@ type Invoice struct {
 	AccountId *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	Id        *string                `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
 	// optional float amount_due = 4;
-	PromotionCode         *string        `protobuf:"bytes,5,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
-	Description           *string        `protobuf:"bytes,6,opt,name=description" json:"description,omitempty"`
-	BillingInfo           *BillingInfo   `protobuf:"bytes,8,opt,name=billing_info,json=billingInfo" json:"billing_info,omitempty"`
-	DueDate               *int64         `protobuf:"varint,9,opt,name=due_date,json=dueDate" json:"due_date,omitempty"`
-	State                 *string        `protobuf:"bytes,10,opt,name=state" json:"state,omitempty"`
-	Created               *int64         `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
-	Items                 []*InvoiceItem `protobuf:"bytes,12,rep,name=items" json:"items,omitempty"`
-	Subtotal              *float32       `protobuf:"fixed32,14,opt,name=subtotal" json:"subtotal,omitempty"`
-	TaxPercent            *float32       `protobuf:"fixed32,15,opt,name=tax_percent,json=taxPercent" json:"tax_percent,omitempty"`
-	Tax                   *float32       `protobuf:"fixed32,16,opt,name=tax" json:"tax,omitempty"`
-	Total                 *float32       `protobuf:"fixed32,17,opt,name=total" json:"total,omitempty"`
-	Updated               *int64         `protobuf:"varint,18,opt,name=updated" json:"updated,omitempty"`
-	Year                  *int32         `protobuf:"varint,19,opt,name=year" json:"year,omitempty"` // optional
-	Notes                 []*Note        `protobuf:"bytes,22,rep,name=notes" json:"notes,omitempty"`
-	Bills                 []string       `protobuf:"bytes,23,rep,name=bills" json:"bills,omitempty"`
-	PaymentMade           *float32       `protobuf:"fixed32,24,opt,name=payment_made,json=paymentMade" json:"payment_made,omitempty"`
-	CurrentSub            *Subscription  `protobuf:"bytes,25,opt,name=current_sub,json=currentSub" json:"current_sub,omitempty"`    // optional
-	CurrentPlan           *Plan          `protobuf:"bytes,26,opt,name=current_plan,json=currentPlan" json:"current_plan,omitempty"` // optional
-	CreditId              *string        `protobuf:"bytes,27,opt,name=credit_id,json=creditId" json:"credit_id,omitempty"`
-	Currency              *string        `protobuf:"bytes,28,opt,name=currency" json:"currency,omitempty"`                                                             // VND
-	FpvTotalVnd           *int64         `protobuf:"varint,29,opt,name=fpv_total_vnd,json=fpvTotalVnd" json:"fpv_total_vnd,omitempty"`                                 // read only
-	FpvPaymentMadeVnd     *int64         `protobuf:"varint,30,opt,name=fpv_payment_made_vnd,json=fpvPaymentMadeVnd" json:"fpv_payment_made_vnd,omitempty"`             // read only
-	IsGenQr               *bool          `protobuf:"varint,31,opt,name=is_gen_qr,json=isGenQr" json:"is_gen_qr,omitempty"`                                             // not save in db
-	CreatedBy             *string        `protobuf:"bytes,32,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`                                          // system
-	PromotionCodePriceFpv *int64         `protobuf:"varint,33,opt,name=promotion_code_price_fpv,json=promotionCodePriceFpv" json:"promotion_code_price_fpv,omitempty"` // system
-	FpvDiscountVnd        *int64         `protobuf:"varint,34,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`                        // read only
-	FpvSubtotalVnd        *int64         `protobuf:"varint,35,opt,name=fpv_subtotal_vnd,json=fpvSubtotalVnd" json:"fpv_subtotal_vnd,omitempty"`                        // read only
+	PromotionCode *string        `protobuf:"bytes,5,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
+	Description   *string        `protobuf:"bytes,6,opt,name=description" json:"description,omitempty"`
+	BillingInfo   *BillingInfo   `protobuf:"bytes,8,opt,name=billing_info,json=billingInfo" json:"billing_info,omitempty"`
+	DueDate       *int64         `protobuf:"varint,9,opt,name=due_date,json=dueDate" json:"due_date,omitempty"`
+	State         *string        `protobuf:"bytes,10,opt,name=state" json:"state,omitempty"`
+	Created       *int64         `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	Items         []*InvoiceItem `protobuf:"bytes,12,rep,name=items" json:"items,omitempty"`
+	Subtotal      *float32       `protobuf:"fixed32,14,opt,name=subtotal" json:"subtotal,omitempty"`
+	TaxPercent    *float32       `protobuf:"fixed32,15,opt,name=tax_percent,json=taxPercent" json:"tax_percent,omitempty"`
+	Tax           *float32       `protobuf:"fixed32,16,opt,name=tax" json:"tax,omitempty"`
+	Total         *float32       `protobuf:"fixed32,17,opt,name=total" json:"total,omitempty"`
+	Updated       *int64         `protobuf:"varint,18,opt,name=updated" json:"updated,omitempty"`
+	// optional int32 year = 19; // optional
+	Notes             []*Note       `protobuf:"bytes,22,rep,name=notes" json:"notes,omitempty"`
+	Bills             []string      `protobuf:"bytes,23,rep,name=bills" json:"bills,omitempty"`
+	PaymentMade       *float32      `protobuf:"fixed32,24,opt,name=payment_made,json=paymentMade" json:"payment_made,omitempty"`
+	CurrentSub        *Subscription `protobuf:"bytes,25,opt,name=current_sub,json=currentSub" json:"current_sub,omitempty"`    // optional
+	CurrentPlan       *Plan         `protobuf:"bytes,26,opt,name=current_plan,json=currentPlan" json:"current_plan,omitempty"` // optional
+	CreditId          *string       `protobuf:"bytes,27,opt,name=credit_id,json=creditId" json:"credit_id,omitempty"`
+	Currency          *string       `protobuf:"bytes,28,opt,name=currency" json:"currency,omitempty"`                                                 // VND
+	FpvTotalVnd       *int64        `protobuf:"varint,29,opt,name=fpv_total_vnd,json=fpvTotalVnd" json:"fpv_total_vnd,omitempty"`                     // read only
+	FpvPaymentMadeVnd *int64        `protobuf:"varint,30,opt,name=fpv_payment_made_vnd,json=fpvPaymentMadeVnd" json:"fpv_payment_made_vnd,omitempty"` // read only
+	IsGenQr           *bool         `protobuf:"varint,31,opt,name=is_gen_qr,json=isGenQr" json:"is_gen_qr,omitempty"`                                 // not save in db
+	CreatedBy         *string       `protobuf:"bytes,32,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`                              // system
+	FpvDiscountVnd    *int64        `protobuf:"varint,34,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`            // read only
+	FpvSubtotalVnd    *int64        `protobuf:"varint,35,opt,name=fpv_subtotal_vnd,json=fpvSubtotalVnd" json:"fpv_subtotal_vnd,omitempty"`            // read only
 	// optional int64 fpv_promotion_vnd = 36; // read only
 	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
 	// optional int64 fpv_referrer_commission_vnd = 36; // hidden
@@ -1687,13 +1678,6 @@ func (x *Invoice) GetUpdated() int64 {
 	return 0
 }
 
-func (x *Invoice) GetYear() int32 {
-	if x != nil && x.Year != nil {
-		return *x.Year
-	}
-	return 0
-}
-
 func (x *Invoice) GetNotes() []*Note {
 	if x != nil {
 		return x.Notes
@@ -1769,13 +1753,6 @@ func (x *Invoice) GetCreatedBy() string {
 		return *x.CreatedBy
 	}
 	return ""
-}
-
-func (x *Invoice) GetPromotionCodePriceFpv() int64 {
-	if x != nil && x.PromotionCodePriceFpv != nil {
-		return *x.PromotionCodePriceFpv
-	}
-	return 0
 }
 
 func (x *Invoice) GetFpvDiscountVnd() int64 {
@@ -2750,7 +2727,7 @@ type PayRequest struct {
 	Currency      *string  `protobuf:"bytes,14,opt,name=currency" json:"currency,omitempty"` // VND or USD
 	BankAccountId *string  `protobuf:"bytes,15,opt,name=bank_account_id,json=bankAccountId" json:"bank_account_id,omitempty"`
 	ByAgentId     *string  `protobuf:"bytes,16,opt,name=by_agent_id,json=byAgentId" json:"by_agent_id,omitempty"`
-	Method        *string  `protobuf:"bytes,17,opt,name=method" json:"method,omitempty"` // bank_transfer, promotion
+	Method        *string  `protobuf:"bytes,17,opt,name=method" json:"method,omitempty"`
 	PaymentMethod *string  `protobuf:"bytes,18,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"`
 	PromotionCode *string  `protobuf:"bytes,21,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3465,7 +3442,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x0fnext_num_agents\x184 \x01(\x03R\rnextNumAgents\x122\n" +
 	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
 	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x12\x12\n" +
-	"\x04note\x188 \x01(\tR\x04note\"\xbd\x06\n" +
+	"\x04note\x188 \x01(\tR\x04note\"\x9a\x06\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
@@ -3490,8 +3467,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x0efpv_amount_usd\x18\x18 \x01(\x03R\ffpvAmountUsd\x12=\n" +
 	"\x1bfpv_referrer_commission_vnd\x18$ \x01(\x03R\x18fpvReferrerCommissionVnd\x12*\n" +
 	"\x11referrer_agent_id\x18% \x01(\tR\x0freferrerAgentId\x12=\n" +
-	"\x1bfpv_referrer_commission_usd\x18& \x01(\x03R\x18fpvReferrerCommissionUsd\x12!\n" +
-	"\fis_promotion\x18( \x01(\bR\visPromotion\x12%\n" +
+	"\x1bfpv_referrer_commission_usd\x18& \x01(\x03R\x18fpvReferrerCommissionUsd\x12%\n" +
 	"\x0epromotion_code\x18' \x01(\tR\rpromotionCode\"n\n" +
 	"\x05Bills\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -3514,7 +3490,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x06anchor\x18\x04 \x01(\tR\x06anchor\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x05 \x01(\tR\taccountId\x12\x1b\n" +
-	"\tcredit_id\x18\x06 \x01(\tR\bcreditId\"\xf5\n" +
+	"\tcredit_id\x18\x06 \x01(\tR\bcreditId\"\xa8\n" +
 	"\n" +
 	"\aInvoice\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -3534,8 +3510,7 @@ const file_payment_proto_rawDesc = "" +
 	"taxPercent\x12\x10\n" +
 	"\x03tax\x18\x10 \x01(\x02R\x03tax\x12\x14\n" +
 	"\x05total\x18\x11 \x01(\x02R\x05total\x12\x18\n" +
-	"\aupdated\x18\x12 \x01(\x03R\aupdated\x12\x12\n" +
-	"\x04year\x18\x13 \x01(\x05R\x04year\x12#\n" +
+	"\aupdated\x18\x12 \x01(\x03R\aupdated\x12#\n" +
 	"\x05notes\x18\x16 \x03(\v2\r.payment.NoteR\x05notes\x12\x14\n" +
 	"\x05bills\x18\x17 \x03(\tR\x05bills\x12!\n" +
 	"\fpayment_made\x18\x18 \x01(\x02R\vpaymentMade\x126\n" +
@@ -3548,8 +3523,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x14fpv_payment_made_vnd\x18\x1e \x01(\x03R\x11fpvPaymentMadeVnd\x12\x1a\n" +
 	"\tis_gen_qr\x18\x1f \x01(\bR\aisGenQr\x12\x1d\n" +
 	"\n" +
-	"created_by\x18  \x01(\tR\tcreatedBy\x127\n" +
-	"\x18promotion_code_price_fpv\x18! \x01(\x03R\x15promotionCodePriceFpv\x12(\n" +
+	"created_by\x18  \x01(\tR\tcreatedBy\x12(\n" +
 	"\x10fpv_discount_vnd\x18\" \x01(\x03R\x0efpvDiscountVnd\x12(\n" +
 	"\x10fpv_subtotal_vnd\x18# \x01(\x03R\x0efpvSubtotalVnd\x12*\n" +
 	"\x11referrer_agent_id\x18% \x01(\tR\x0freferrerAgentId\x12(\n" +

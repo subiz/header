@@ -142,7 +142,6 @@ message Account {
 	optional bool currency_locked = 42;
 
 	optional int64 login_locked = 43;
-	optional UserAttributeSetting user_attribute_setting = 46;
 	optional string deleted_by_agent = 47;
 	optional InvoiceInfo invoice_info = 48;
 
@@ -169,21 +168,10 @@ message InvoiceInfo {
 	optional int64 disabled = 22;
 }
 
-message UserAttributeSetting {
-	repeated string basic_fields = 3;
-}
-
 message LeadSetting {
 	optional string assign_conversation_as_lead = 3; // all_assigned, assigned [default], joined, none (do no thing)
 	optional int64 auto_update_phone = 4;
 	optional int64 auto_update_email = 5;
-}
-
-message Token {
-	optional common.Context ctx = 1;
-	optional bool is_set = 2; // true
-	optional string token = 3;
-	optional string account_id = 4;
 }
 
 message InvoiceEmail {

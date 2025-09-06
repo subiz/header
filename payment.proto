@@ -143,7 +143,6 @@ message Bill {
 	optional string referrer_agent_id = 37;
 	optional int64 fpv_referrer_commission_usd = 38; // hidden
 
-	optional bool is_promotion = 40; // empty or promotion
 	optional string promotion_code = 39;
 }
 
@@ -199,7 +198,7 @@ message Invoice {
 	optional float tax = 16;
 	optional float total = 17;
 	optional int64 updated = 18;
-	optional int32 year = 19; // optional
+	// optional int32 year = 19; // optional
 	repeated Note notes = 22;
 	repeated string bills = 23;
 	optional float payment_made = 24;
@@ -213,7 +212,7 @@ message Invoice {
 	optional int64 fpv_payment_made_vnd = 30; // read only
 	optional bool is_gen_qr = 31; // not save in db
 	optional string created_by = 32; // system
-	optional int64 promotion_code_price_fpv = 33; // system
+	// optional int64 promotion_code_price_fpv = 33; // read-only system
 
 	optional int64 fpv_discount_vnd = 34; // read only
 
@@ -378,10 +377,9 @@ message PayRequest {
 	optional string currency = 14; // VND or USD
 	optional string bank_account_id = 15;
 	optional string by_agent_id = 16;
-	optional string method = 17; // bank_transfer, promotion
+	optional string method = 17;
 
 	optional string payment_method = 18;
-
 	optional string promotion_code = 21;
 }
 
