@@ -143,6 +143,7 @@ message Bill {
 	optional string referrer_agent_id = 37;
 	optional int64 fpv_referrer_commission_usd = 38; // hidden
 
+	optional bool is_promotion = 40; // empty or promotion
 	optional string promotion_code = 39;
 }
 
@@ -354,7 +355,6 @@ message Log {
 	optional int64 created = 4;
 	optional string description = 5;
 	optional string account_id = 6;
-	optional int32 month = 7;
 	optional string stack = 9;
 	optional string ref_ctx = 10;
 }
@@ -378,9 +378,11 @@ message PayRequest {
 	optional string currency = 14; // VND or USD
 	optional string bank_account_id = 15;
 	optional string by_agent_id = 16;
-	optional string method = 17; // bank_transfer
+	optional string method = 17; // bank_transfer, promotion
 
 	optional string payment_method = 18;
+
+	optional string promotion_code = 21;
 }
 
 message AutoPayRequest {

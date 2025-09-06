@@ -14,7 +14,6 @@ type refCountedMutex struct {
 	refCount int
 }
 
-// The array of shards.
 var _locks [shardCount]*sync.Mutex
 var _shards [shardCount]map[string]*refCountedMutex
 
@@ -51,7 +50,7 @@ func getShard(key string) int {
 	return int(hasher.Sum32() % shardCount)
 }
 
-// KLock creates a lock for a given key. It returns an unlock function.
+// KLock locks a given key. It returns an unlock function.
 func KLock(key string) func() {
 	shard := getShard(key)
 	lock := _locks[shard]

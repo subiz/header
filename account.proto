@@ -116,6 +116,7 @@ message Account {
 		deleted = 3; // haven't refreshed token in the last 90 days
 		inactive = 4; // haven't refreshed token in the last 60 days
 	}
+
 	optional string city = 14;
 	optional int32 zip_code = 16;
 	// optional string tax_id = 17;

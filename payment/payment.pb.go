@@ -1050,6 +1050,7 @@ type Bill struct {
 	FpvReferrerCommissionVnd *int64  `protobuf:"varint,36,opt,name=fpv_referrer_commission_vnd,json=fpvReferrerCommissionVnd" json:"fpv_referrer_commission_vnd,omitempty"` // hidden
 	ReferrerAgentId          *string `protobuf:"bytes,37,opt,name=referrer_agent_id,json=referrerAgentId" json:"referrer_agent_id,omitempty"`
 	FpvReferrerCommissionUsd *int64  `protobuf:"varint,38,opt,name=fpv_referrer_commission_usd,json=fpvReferrerCommissionUsd" json:"fpv_referrer_commission_usd,omitempty"` // hidden
+	IsPromotion              *bool   `protobuf:"varint,40,opt,name=is_promotion,json=isPromotion" json:"is_promotion,omitempty"`                                            // empty or promotion
 	PromotionCode            *string `protobuf:"bytes,39,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
@@ -1223,6 +1224,13 @@ func (x *Bill) GetFpvReferrerCommissionUsd() int64 {
 		return *x.FpvReferrerCommissionUsd
 	}
 	return 0
+}
+
+func (x *Bill) GetIsPromotion() bool {
+	if x != nil && x.IsPromotion != nil {
+		return *x.IsPromotion
+	}
+	return false
 }
 
 func (x *Bill) GetPromotionCode() string {
@@ -2576,7 +2584,6 @@ type Log struct {
 	Created       *int64                 `protobuf:"varint,4,opt,name=created" json:"created,omitempty"`
 	Description   *string                `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
 	AccountId     *string                `protobuf:"bytes,6,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Month         *int32                 `protobuf:"varint,7,opt,name=month" json:"month,omitempty"`
 	Stack         *string                `protobuf:"bytes,9,opt,name=stack" json:"stack,omitempty"`
 	RefCtx        *string                `protobuf:"bytes,10,opt,name=ref_ctx,json=refCtx" json:"ref_ctx,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2662,13 +2669,6 @@ func (x *Log) GetAccountId() string {
 	return ""
 }
 
-func (x *Log) GetMonth() int32 {
-	if x != nil && x.Month != nil {
-		return *x.Month
-	}
-	return 0
-}
-
 func (x *Log) GetStack() string {
 	if x != nil && x.Stack != nil {
 		return *x.Stack
@@ -2750,8 +2750,9 @@ type PayRequest struct {
 	Currency      *string  `protobuf:"bytes,14,opt,name=currency" json:"currency,omitempty"` // VND or USD
 	BankAccountId *string  `protobuf:"bytes,15,opt,name=bank_account_id,json=bankAccountId" json:"bank_account_id,omitempty"`
 	ByAgentId     *string  `protobuf:"bytes,16,opt,name=by_agent_id,json=byAgentId" json:"by_agent_id,omitempty"`
-	Method        *string  `protobuf:"bytes,17,opt,name=method" json:"method,omitempty"` // bank_transfer
+	Method        *string  `protobuf:"bytes,17,opt,name=method" json:"method,omitempty"` // bank_transfer, promotion
 	PaymentMethod *string  `protobuf:"bytes,18,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"`
+	PromotionCode *string  `protobuf:"bytes,21,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2880,6 +2881,13 @@ func (x *PayRequest) GetMethod() string {
 func (x *PayRequest) GetPaymentMethod() string {
 	if x != nil && x.PaymentMethod != nil {
 		return *x.PaymentMethod
+	}
+	return ""
+}
+
+func (x *PayRequest) GetPromotionCode() string {
+	if x != nil && x.PromotionCode != nil {
+		return *x.PromotionCode
 	}
 	return ""
 }
@@ -3457,7 +3465,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x0fnext_num_agents\x184 \x01(\x03R\rnextNumAgents\x122\n" +
 	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
 	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x12\x12\n" +
-	"\x04note\x188 \x01(\tR\x04note\"\x9a\x06\n" +
+	"\x04note\x188 \x01(\tR\x04note\"\xbd\x06\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
@@ -3482,7 +3490,8 @@ const file_payment_proto_rawDesc = "" +
 	"\x0efpv_amount_usd\x18\x18 \x01(\x03R\ffpvAmountUsd\x12=\n" +
 	"\x1bfpv_referrer_commission_vnd\x18$ \x01(\x03R\x18fpvReferrerCommissionVnd\x12*\n" +
 	"\x11referrer_agent_id\x18% \x01(\tR\x0freferrerAgentId\x12=\n" +
-	"\x1bfpv_referrer_commission_usd\x18& \x01(\x03R\x18fpvReferrerCommissionUsd\x12%\n" +
+	"\x1bfpv_referrer_commission_usd\x18& \x01(\x03R\x18fpvReferrerCommissionUsd\x12!\n" +
+	"\fis_promotion\x18( \x01(\bR\visPromotion\x12%\n" +
 	"\x0epromotion_code\x18' \x01(\tR\rpromotionCode\"n\n" +
 	"\x05Bills\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -3630,7 +3639,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05email\x18\a \x01(\tR\x05email\"K\n" +
 	"\x04Logs\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
-	"\x04logs\x18\x05 \x03(\v2\f.payment.LogR\x04logs\"\xa8\x05\n" +
+	"\x04logs\x18\x05 \x03(\v2\f.payment.LogR\x04logs\"\x92\x05\n" +
 	"\x03Log\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x12\n" +
 	"\x04user\x18\x02 \x01(\tR\x04user\x12\x0e\n" +
@@ -3640,7 +3649,6 @@ const file_payment_proto_rawDesc = "" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x06 \x01(\tR\taccountId\x12\x14\n" +
-	"\x05month\x18\a \x01(\x05R\x05month\x12\x14\n" +
 	"\x05stack\x18\t \x01(\tR\x05stack\x12\x17\n" +
 	"\aref_ctx\x18\n" +
 	" \x01(\tR\x06refCtx\"\xa1\x03\n" +
@@ -3670,7 +3678,7 @@ const file_payment_proto_rawDesc = "" +
 	"\tdowngrade\x10\x14\"=\n" +
 	"\x06String\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
-	"\x03str\x18\x02 \x01(\tR\x03str\"\xc1\x03\n" +
+	"\x03str\x18\x02 \x01(\tR\x03str\"\xe8\x03\n" +
 	"\n" +
 	"PayRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1b\n" +
@@ -3691,7 +3699,8 @@ const file_payment_proto_rawDesc = "" +
 	"\x0fbank_account_id\x18\x0f \x01(\tR\rbankAccountId\x12\x1e\n" +
 	"\vby_agent_id\x18\x10 \x01(\tR\tbyAgentId\x12\x16\n" +
 	"\x06method\x18\x11 \x01(\tR\x06method\x12%\n" +
-	"\x0epayment_method\x18\x12 \x01(\tR\rpaymentMethod\"\xd2\x01\n" +
+	"\x0epayment_method\x18\x12 \x01(\tR\rpaymentMethod\x12%\n" +
+	"\x0epromotion_code\x18\x15 \x01(\tR\rpromotionCode\"\xd2\x01\n" +
 	"\x0eAutoPayRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
 	"\vdescription\x18\a \x01(\tR\vdescription\x12&\n" +

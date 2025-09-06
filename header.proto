@@ -7713,6 +7713,7 @@ message LLMChatHistoryEntry {
 	int64 timeout = 8; // ms
 	repeated Attachment attachments = 9;
 	repeated string more_expected_contents = 10;
+
 }
 
 message AIDataEntryUsed {
@@ -8798,7 +8799,7 @@ message WorkflowPulse {
 
 message WorkflowTimeup {
 	string workflow_id = 6;
-	int64 term = 7;
+	// int64 term = 7;
 	string session_id = 8;
 	string action_id = 9;
 	int64 timeup_sec = 10;
@@ -9051,7 +9052,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, update_context
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context
 
 	repeated AIFunction functions = 9; // use when action = function
 
