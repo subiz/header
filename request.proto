@@ -781,6 +781,9 @@ message CrawlUrlRequest {
 	string link_regex = 10;
 
 	int64 use_sitemap_xml = 11;
+	string sitemap_url = 12; // default domain/robots.txt
+
+	string anchor = 13;
 }
 
 message ListAIDataEntryRequest {

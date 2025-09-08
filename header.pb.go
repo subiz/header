@@ -35955,6 +35955,7 @@ type WebsiteProductFeed struct {
 	MaxCrawlLinks     int64                  `protobuf:"varint,8,opt,name=max_crawl_links,json=maxCrawlLinks,proto3" json:"max_crawl_links,omitempty"` // max 1000
 	LinkRegex         string                 `protobuf:"bytes,10,opt,name=link_regex,json=linkRegex,proto3" json:"link_regex,omitempty"`
 	UseSitemapXml     int64                  `protobuf:"varint,11,opt,name=use_sitemap_xml,json=useSitemapXml,proto3" json:"use_sitemap_xml,omitempty"`
+	SitemapUrl        string                 `protobuf:"bytes,13,opt,name=sitemap_url,json=sitemapUrl,proto3" json:"sitemap_url,omitempty"` // default domain/robots.txt
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -36029,6 +36030,13 @@ func (x *WebsiteProductFeed) GetUseSitemapXml() int64 {
 		return x.UseSitemapXml
 	}
 	return 0
+}
+
+func (x *WebsiteProductFeed) GetSitemapUrl() string {
+	if x != nil {
+		return x.SitemapUrl
+	}
+	return ""
 }
 
 type ProductFeedRun struct {
@@ -65407,6 +65415,7 @@ type CrawlResponse struct {
 	Product             *Product               `protobuf:"bytes,12,opt,name=product,proto3" json:"product,omitempty"`
 	Products            []*Product             `protobuf:"bytes,13,rep,name=products,proto3" json:"products,omitempty"`
 	VisitedLinkStatuses map[string]int64       `protobuf:"bytes,14,rep,name=visited_link_statuses,json=visitedLinkStatuses,proto3" json:"visited_link_statuses,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	Anchor              string                 `protobuf:"bytes,15,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -65523,6 +65532,13 @@ func (x *CrawlResponse) GetVisitedLinkStatuses() map[string]int64 {
 		return x.VisitedLinkStatuses
 	}
 	return nil
+}
+
+func (x *CrawlResponse) GetAnchor() string {
+	if x != nil {
+		return x.Anchor
+	}
+	return ""
 }
 
 type AIDataChunk struct {
@@ -74600,7 +74616,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05sheet\x18\x03 \x01(\tR\x05sheet\x12/\n" +
 	"\amapping\x18\x04 \x03(\v2\x15.header.ColumnMappingR\amapping\"6\n" +
 	"\x11ShopeeProductFeed\x12!\n" +
-	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\"\xe1\x01\n" +
+	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\"\x82\x02\n" +
 	"\x12WebsiteProductFeed\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12-\n" +
 	"\x12javascript_enabled\x18\f \x01(\bR\x11javascriptEnabled\x12\x1b\n" +
@@ -74609,7 +74625,9 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"link_regex\x18\n" +
 	" \x01(\tR\tlinkRegex\x12&\n" +
-	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\"\x81\x05\n" +
+	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\x12\x1f\n" +
+	"\vsitemap_url\x18\r \x01(\tR\n" +
+	"sitemapUrl\"\x81\x05\n" +
 	"\x0eProductFeedRun\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -78164,7 +78182,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x82\x04\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x9a\x04\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -78179,7 +78197,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0enum_characters\x18\v \x01(\x03R\rnumCharacters\x12)\n" +
 	"\aproduct\x18\f \x01(\v2\x0f.header.ProductR\aproduct\x12+\n" +
 	"\bproducts\x18\r \x03(\v2\x0f.header.ProductR\bproducts\x12b\n" +
-	"\x15visited_link_statuses\x18\x0e \x03(\v2..header.CrawlResponse.VisitedLinkStatusesEntryR\x13visitedLinkStatuses\x1aF\n" +
+	"\x15visited_link_statuses\x18\x0e \x03(\v2..header.CrawlResponse.VisitedLinkStatusesEntryR\x13visitedLinkStatuses\x12\x16\n" +
+	"\x06anchor\x18\x0f \x01(\tR\x06anchor\x1aF\n" +
 	"\x18VisitedLinkStatusesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\x8a\x02\n" +

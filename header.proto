@@ -5118,6 +5118,7 @@ message WebsiteProductFeed {
 	int64 max_crawl_links = 8; // max 1000
 	string link_regex = 10;
 	int64 use_sitemap_xml = 11;
+	string sitemap_url = 13; // default domain/robots.txt
 }
 
 message ProductFeedRun {
@@ -9343,6 +9344,8 @@ message CrawlResponse {
 	repeated Product products = 13;
 
 	map<string, int64> visited_link_statuses = 14;
+
+	string anchor = 15;
 }
 
 message AIDataChunk {

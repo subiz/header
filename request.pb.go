@@ -6244,6 +6244,8 @@ type CrawlUrlRequest struct {
 	MaxLinks          int64                  `protobuf:"varint,8,opt,name=max_links,json=maxLinks,proto3" json:"max_links,omitempty"` // max 1000
 	LinkRegex         string                 `protobuf:"bytes,10,opt,name=link_regex,json=linkRegex,proto3" json:"link_regex,omitempty"`
 	UseSitemapXml     int64                  `protobuf:"varint,11,opt,name=use_sitemap_xml,json=useSitemapXml,proto3" json:"use_sitemap_xml,omitempty"`
+	SitemapUrl        string                 `protobuf:"bytes,12,opt,name=sitemap_url,json=sitemapUrl,proto3" json:"sitemap_url,omitempty"` // default domain/robots.txt
+	Anchor            string                 `protobuf:"bytes,13,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -6346,6 +6348,20 @@ func (x *CrawlUrlRequest) GetUseSitemapXml() int64 {
 		return x.UseSitemapXml
 	}
 	return 0
+}
+
+func (x *CrawlUrlRequest) GetSitemapUrl() string {
+	if x != nil {
+		return x.SitemapUrl
+	}
+	return ""
+}
+
+func (x *CrawlUrlRequest) GetAnchor() string {
+	if x != nil {
+		return x.Anchor
+	}
+	return ""
 }
 
 type ListAIDataEntryRequest struct {
@@ -9299,7 +9315,7 @@ const file_request_proto_rawDesc = "" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12!\n" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\"\xc8\x02\n" +
+	"\x05email\x18\b \x01(\tR\x05email\"\x81\x03\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
@@ -9312,7 +9328,10 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"link_regex\x18\n" +
 	" \x01(\tR\tlinkRegex\x12&\n" +
-	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\"\xf9\x03\n" +
+	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\x12\x1f\n" +
+	"\vsitemap_url\x18\f \x01(\tR\n" +
+	"sitemapUrl\x12\x16\n" +
+	"\x06anchor\x18\r \x01(\tR\x06anchor\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
