@@ -779,6 +779,8 @@ message CrawlUrlRequest {
 	int64 max_depth = 7;
 	int64 max_links = 8; // max 1000
 	string link_regex = 10;
+
+	int64 use_sitemap_xml = 11;
 }
 
 message ListAIDataEntryRequest {

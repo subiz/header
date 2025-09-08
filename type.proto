@@ -352,6 +352,7 @@ enum RealtimeType {
 	human_handled = 354; // conversation
 
 	workflow_thread_heartbeat = 355; // manually trigger workflow waiting thread
+	workflow_action_created = 356; // pulse
 }
 
 message TextTransform {

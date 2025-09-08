@@ -5117,6 +5117,7 @@ message WebsiteProductFeed {
 	int64 max_depth = 15; // 0 default
 	int64 max_crawl_links = 8; // max 1000
 	string link_regex = 10;
+	int64 use_sitemap_xml = 11;
 }
 
 message ProductFeedRun {

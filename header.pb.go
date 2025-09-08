@@ -35954,6 +35954,7 @@ type WebsiteProductFeed struct {
 	MaxDepth          int64                  `protobuf:"varint,15,opt,name=max_depth,json=maxDepth,proto3" json:"max_depth,omitempty"`                 // 0 default
 	MaxCrawlLinks     int64                  `protobuf:"varint,8,opt,name=max_crawl_links,json=maxCrawlLinks,proto3" json:"max_crawl_links,omitempty"` // max 1000
 	LinkRegex         string                 `protobuf:"bytes,10,opt,name=link_regex,json=linkRegex,proto3" json:"link_regex,omitempty"`
+	UseSitemapXml     int64                  `protobuf:"varint,11,opt,name=use_sitemap_xml,json=useSitemapXml,proto3" json:"use_sitemap_xml,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -36021,6 +36022,13 @@ func (x *WebsiteProductFeed) GetLinkRegex() string {
 		return x.LinkRegex
 	}
 	return ""
+}
+
+func (x *WebsiteProductFeed) GetUseSitemapXml() int64 {
+	if x != nil {
+		return x.UseSitemapXml
+	}
+	return 0
 }
 
 type ProductFeedRun struct {
@@ -74592,7 +74600,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05sheet\x18\x03 \x01(\tR\x05sheet\x12/\n" +
 	"\amapping\x18\x04 \x03(\v2\x15.header.ColumnMappingR\amapping\"6\n" +
 	"\x11ShopeeProductFeed\x12!\n" +
-	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\"\xb9\x01\n" +
+	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\"\xe1\x01\n" +
 	"\x12WebsiteProductFeed\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12-\n" +
 	"\x12javascript_enabled\x18\f \x01(\bR\x11javascriptEnabled\x12\x1b\n" +
@@ -74600,7 +74608,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fmax_crawl_links\x18\b \x01(\x03R\rmaxCrawlLinks\x12\x1d\n" +
 	"\n" +
 	"link_regex\x18\n" +
-	" \x01(\tR\tlinkRegex\"\x81\x05\n" +
+	" \x01(\tR\tlinkRegex\x12&\n" +
+	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\"\x81\x05\n" +
 	"\x0eProductFeedRun\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
