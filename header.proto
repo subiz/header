@@ -5117,6 +5117,7 @@ message WebsiteProductFeed {
 	int64 max_depth = 15; // 0 default
 	int64 max_crawl_links = 8; // max 1000
 	string link_regex = 10;
+	repeated string link_exclude_regexs = 14;
 	int64 use_sitemap_xml = 11;
 	string sitemap_url = 13; // default domain/robots.txt
 }
@@ -5133,9 +5134,9 @@ message ProductFeedRun {
 	int64 num_updated_products = 9; // number of products that actually get updated
 	int64 num_update_errors = 10;
 
-	int64 num_link_visited = 21;
-	int64 num_link_success = 22;
-	int64 num_link_error = 23;
+	int64 num_visited_links = 21;
+	int64 num_has_product_links = 22;
+
 	Error fetch_error = 24;
 
 	// for googlesheet
@@ -5144,6 +5145,8 @@ message ProductFeedRun {
 	int64 http_status = 32;
 
 	repeated Product products = 33; // sample 5 products
+
+	string anchor = 34;
 }
 
 message ProductFeed {
@@ -9343,9 +9346,10 @@ message CrawlResponse {
 	Product product = 12;
 	repeated Product products = 13;
 
-	map<string, int64> visited_link_statuses = 14;
-
 	string anchor = 15;
+
+	int64 num_visited_links = 16;
+	int64 num_has_product_links = 17;
 }
 
 message AIDataChunk {
