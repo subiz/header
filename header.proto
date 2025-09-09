@@ -7125,6 +7125,7 @@ message Response {
 	repeated ProductFeed product_feeds = 233;
 	ProductFeed product_feed = 234;
 	repeated ProductFeedRun product_feed_runs = 235;
+	ProductFeedRun product_feed_run = 236;
 }
 
 message ReportCount {
