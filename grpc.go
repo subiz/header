@@ -613,8 +613,8 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 	opts = append(opts, WithErrorStack())
 	opts = append(opts, grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`))
 	opts = append(opts, grpc.WithKeepaliveParams(keepalive.ClientParameters{
-		Time:    time.Duration(10) * time.Second,
-		Timeout: time.Duration(60) * time.Second,
+		Time:    time.Duration(60) * time.Second,
+		Timeout: time.Duration(20) * time.Second,
 	}))
 	opts = append(opts, grpc.WithChainUnaryInterceptor(prommetrics.UnaryClientInterceptor()))
 	opts = append(opts, grpc.WithStatsHandler(otelgrpc.NewClientHandler()))

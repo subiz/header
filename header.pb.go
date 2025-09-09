@@ -36064,6 +36064,7 @@ type ProductFeedRun struct {
 	CancelledBy        string                 `protobuf:"bytes,13,opt,name=cancelled_by,json=cancelledBy,proto3" json:"cancelled_by,omitempty"`
 	NumVisitedLinks    int64                  `protobuf:"varint,21,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
 	NumHasProductLinks int64                  `protobuf:"varint,22,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
+	NumDiscoveredLinks int64                  `protobuf:"varint,23,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
 	FetchError         *Error                 `protobuf:"bytes,24,opt,name=fetch_error,json=fetchError,proto3" json:"fetch_error,omitempty"`
 	// for googlesheet
 	NumRows       int64      `protobuf:"varint,30,opt,name=num_rows,json=numRows,proto3" json:"num_rows,omitempty"`
@@ -36206,6 +36207,13 @@ func (x *ProductFeedRun) GetNumVisitedLinks() int64 {
 func (x *ProductFeedRun) GetNumHasProductLinks() int64 {
 	if x != nil {
 		return x.NumHasProductLinks
+	}
+	return 0
+}
+
+func (x *ProductFeedRun) GetNumDiscoveredLinks() int64 {
+	if x != nil {
+		return x.NumDiscoveredLinks
 	}
 	return 0
 }
@@ -65457,6 +65465,7 @@ type CrawlResponse struct {
 	Anchor             string                 `protobuf:"bytes,15,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	NumVisitedLinks    int64                  `protobuf:"varint,16,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
 	NumHasProductLinks int64                  `protobuf:"varint,17,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
+	NumDiscoveredLinks int64                  `protobuf:"varint,18,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -65585,6 +65594,13 @@ func (x *CrawlResponse) GetNumVisitedLinks() int64 {
 func (x *CrawlResponse) GetNumHasProductLinks() int64 {
 	if x != nil {
 		return x.NumHasProductLinks
+	}
+	return 0
+}
+
+func (x *CrawlResponse) GetNumDiscoveredLinks() int64 {
+	if x != nil {
+		return x.NumDiscoveredLinks
 	}
 	return 0
 }
@@ -74676,7 +74692,7 @@ const file_header_proto_rawDesc = "" +
 	"\x13link_exclude_regexs\x18\x0e \x03(\tR\x11linkExcludeRegexs\x12&\n" +
 	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\x12\x1f\n" +
 	"\vsitemap_url\x18\r \x01(\tR\n" +
-	"sitemapUrl\"\xd9\x05\n" +
+	"sitemapUrl\"\x8b\x06\n" +
 	"\x0eProductFeedRun\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74694,7 +74710,8 @@ const file_header_proto_rawDesc = "" +
 	"\tcancelled\x18\f \x01(\x03R\tcancelled\x12!\n" +
 	"\fcancelled_by\x18\r \x01(\tR\vcancelledBy\x12*\n" +
 	"\x11num_visited_links\x18\x15 \x01(\x03R\x0fnumVisitedLinks\x121\n" +
-	"\x15num_has_product_links\x18\x16 \x01(\x03R\x12numHasProductLinks\x12.\n" +
+	"\x15num_has_product_links\x18\x16 \x01(\x03R\x12numHasProductLinks\x120\n" +
+	"\x14num_discovered_links\x18\x17 \x01(\x03R\x12numDiscoveredLinks\x12.\n" +
 	"\vfetch_error\x18\x18 \x01(\v2\r.header.ErrorR\n" +
 	"fetchError\x12\x19\n" +
 	"\bnum_rows\x18\x1e \x01(\x03R\anumRows\x12\x1b\n" +
@@ -78235,7 +78252,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xcd\x03\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xff\x03\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -78252,7 +78269,8 @@ const file_header_proto_rawDesc = "" +
 	"\bproducts\x18\r \x03(\v2\x0f.header.ProductR\bproducts\x12\x16\n" +
 	"\x06anchor\x18\x0f \x01(\tR\x06anchor\x12*\n" +
 	"\x11num_visited_links\x18\x10 \x01(\x03R\x0fnumVisitedLinks\x121\n" +
-	"\x15num_has_product_links\x18\x11 \x01(\x03R\x12numHasProductLinks\"\x8a\x02\n" +
+	"\x15num_has_product_links\x18\x11 \x01(\x03R\x12numHasProductLinks\x120\n" +
+	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\"\x8a\x02\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x05 \x01(\tR\x02id\x12\x16\n" +

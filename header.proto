@@ -5140,6 +5140,7 @@ message ProductFeedRun {
 
 	int64 num_visited_links = 21;
 	int64 num_has_product_links = 22;
+	int64 num_discovered_links = 23;
 
 	Error fetch_error = 24;
 
@@ -5151,7 +5152,6 @@ message ProductFeedRun {
 	repeated Product products = 33; // sample 5 products
 
 	string anchor = 34;
-
 }
 
 message ProductFeed {
@@ -9356,6 +9356,7 @@ message CrawlResponse {
 
 	int64 num_visited_links = 16;
 	int64 num_has_product_links = 17;
+	int64 num_discovered_links = 18;
 }
 
 message AIDataChunk {
