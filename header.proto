@@ -5134,6 +5134,10 @@ message ProductFeedRun {
 	int64 num_updated_products = 9; // number of products that actually get updated
 	int64 num_update_errors = 10;
 
+	int64 updated = 11;
+	int64 cancelled = 12;
+	string cancelled_by = 13;
+
 	int64 num_visited_links = 21;
 	int64 num_has_product_links = 22;
 
@@ -5147,6 +5151,7 @@ message ProductFeedRun {
 	repeated Product products = 33; // sample 5 products
 
 	string anchor = 34;
+
 }
 
 message ProductFeed {

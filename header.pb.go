@@ -36059,6 +36059,9 @@ type ProductFeedRun struct {
 	NumProducts        int64                  `protobuf:"varint,8,opt,name=num_products,json=numProducts,proto3" json:"num_products,omitempty"`
 	NumUpdatedProducts int64                  `protobuf:"varint,9,opt,name=num_updated_products,json=numUpdatedProducts,proto3" json:"num_updated_products,omitempty"` // number of products that actually get updated
 	NumUpdateErrors    int64                  `protobuf:"varint,10,opt,name=num_update_errors,json=numUpdateErrors,proto3" json:"num_update_errors,omitempty"`
+	Updated            int64                  `protobuf:"varint,11,opt,name=updated,proto3" json:"updated,omitempty"`
+	Cancelled          int64                  `protobuf:"varint,12,opt,name=cancelled,proto3" json:"cancelled,omitempty"`
+	CancelledBy        string                 `protobuf:"bytes,13,opt,name=cancelled_by,json=cancelledBy,proto3" json:"cancelled_by,omitempty"`
 	NumVisitedLinks    int64                  `protobuf:"varint,21,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
 	NumHasProductLinks int64                  `protobuf:"varint,22,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
 	FetchError         *Error                 `protobuf:"bytes,24,opt,name=fetch_error,json=fetchError,proto3" json:"fetch_error,omitempty"`
@@ -36170,6 +36173,27 @@ func (x *ProductFeedRun) GetNumUpdateErrors() int64 {
 		return x.NumUpdateErrors
 	}
 	return 0
+}
+
+func (x *ProductFeedRun) GetUpdated() int64 {
+	if x != nil {
+		return x.Updated
+	}
+	return 0
+}
+
+func (x *ProductFeedRun) GetCancelled() int64 {
+	if x != nil {
+		return x.Cancelled
+	}
+	return 0
+}
+
+func (x *ProductFeedRun) GetCancelledBy() string {
+	if x != nil {
+		return x.CancelledBy
+	}
+	return ""
 }
 
 func (x *ProductFeedRun) GetNumVisitedLinks() int64 {
@@ -74652,7 +74676,7 @@ const file_header_proto_rawDesc = "" +
 	"\x13link_exclude_regexs\x18\x0e \x03(\tR\x11linkExcludeRegexs\x12&\n" +
 	"\x0fuse_sitemap_xml\x18\v \x01(\x03R\ruseSitemapXml\x12\x1f\n" +
 	"\vsitemap_url\x18\r \x01(\tR\n" +
-	"sitemapUrl\"\xfe\x04\n" +
+	"sitemapUrl\"\xd9\x05\n" +
 	"\x0eProductFeedRun\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74665,7 +74689,10 @@ const file_header_proto_rawDesc = "" +
 	"\fnum_products\x18\b \x01(\x03R\vnumProducts\x120\n" +
 	"\x14num_updated_products\x18\t \x01(\x03R\x12numUpdatedProducts\x12*\n" +
 	"\x11num_update_errors\x18\n" +
-	" \x01(\x03R\x0fnumUpdateErrors\x12*\n" +
+	" \x01(\x03R\x0fnumUpdateErrors\x12\x18\n" +
+	"\aupdated\x18\v \x01(\x03R\aupdated\x12\x1c\n" +
+	"\tcancelled\x18\f \x01(\x03R\tcancelled\x12!\n" +
+	"\fcancelled_by\x18\r \x01(\tR\vcancelledBy\x12*\n" +
 	"\x11num_visited_links\x18\x15 \x01(\x03R\x0fnumVisitedLinks\x121\n" +
 	"\x15num_has_product_links\x18\x16 \x01(\x03R\x12numHasProductLinks\x12.\n" +
 	"\vfetch_error\x18\x18 \x01(\v2\r.header.ErrorR\n" +

@@ -866,6 +866,7 @@ service Proder {
 	rpc RunProductFeed(header.ProductFeed) returns (header.Response);
 	rpc ListProductFeedRunProducts(header.ProductFeedRun) returns (header.Response);
 	rpc GetProductFeedRun(header.ProductFeedRun) returns (header.Response);
+	rpc CancelProductFeedRun(header.ProductFeedRun) returns (header.Response);
 	rpc SuggestProductFeedMapping(header.ProductFeed) returns (header.Response);
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);

@@ -23474,6 +23474,7 @@ const (
 	Proder_RunProductFeed_FullMethodName             = "/header.Proder/RunProductFeed"
 	Proder_ListProductFeedRunProducts_FullMethodName = "/header.Proder/ListProductFeedRunProducts"
 	Proder_GetProductFeedRun_FullMethodName          = "/header.Proder/GetProductFeedRun"
+	Proder_CancelProductFeedRun_FullMethodName       = "/header.Proder/CancelProductFeedRun"
 	Proder_SuggestProductFeedMapping_FullMethodName  = "/header.Proder/SuggestProductFeedMapping"
 	Proder_ListProductCategories_FullMethodName      = "/header.Proder/ListProductCategories"
 	Proder_ReadOrder_FullMethodName                  = "/header.Proder/ReadOrder"
@@ -23555,6 +23556,7 @@ type ProderClient interface {
 	RunProductFeed(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	ListProductFeedRunProducts(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error)
 	GetProductFeedRun(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error)
+	CancelProductFeedRun(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error)
 	SuggestProductFeedMapping(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	ListProductCategories(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*ProductCategories, error)
 	ReadOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
@@ -23903,6 +23905,16 @@ func (c *proderClient) GetProductFeedRun(ctx context.Context, in *ProductFeedRun
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_GetProductFeedRun_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) CancelProductFeedRun(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_CancelProductFeedRun_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24375,6 +24387,7 @@ type ProderServer interface {
 	RunProductFeed(context.Context, *ProductFeed) (*Response, error)
 	ListProductFeedRunProducts(context.Context, *ProductFeedRun) (*Response, error)
 	GetProductFeedRun(context.Context, *ProductFeedRun) (*Response, error)
+	CancelProductFeedRun(context.Context, *ProductFeedRun) (*Response, error)
 	SuggestProductFeedMapping(context.Context, *ProductFeed) (*Response, error)
 	ListProductCategories(context.Context, *Ids) (*ProductCategories, error)
 	ReadOrder(context.Context, *Id) (*Order, error)
@@ -24518,6 +24531,9 @@ func (UnimplementedProderServer) ListProductFeedRunProducts(context.Context, *Pr
 }
 func (UnimplementedProderServer) GetProductFeedRun(context.Context, *ProductFeedRun) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProductFeedRun not implemented")
+}
+func (UnimplementedProderServer) CancelProductFeedRun(context.Context, *ProductFeedRun) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelProductFeedRun not implemented")
 }
 func (UnimplementedProderServer) SuggestProductFeedMapping(context.Context, *ProductFeed) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuggestProductFeedMapping not implemented")
@@ -25205,6 +25221,24 @@ func _Proder_GetProductFeedRun_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).GetProductFeedRun(ctx, req.(*ProductFeedRun))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_CancelProductFeedRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductFeedRun)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).CancelProductFeedRun(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_CancelProductFeedRun_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).CancelProductFeedRun(ctx, req.(*ProductFeedRun))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26109,6 +26143,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProductFeedRun",
 			Handler:    _Proder_GetProductFeedRun_Handler,
+		},
+		{
+			MethodName: "CancelProductFeedRun",
+			Handler:    _Proder_CancelProductFeedRun_Handler,
 		},
 		{
 			MethodName: "SuggestProductFeedMapping",
