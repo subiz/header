@@ -65462,6 +65462,7 @@ type CrawlResponse struct {
 	NumCharacters      int64                  `protobuf:"varint,11,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Product            *Product               `protobuf:"bytes,12,opt,name=product,proto3" json:"product,omitempty"`
 	Products           []*Product             `protobuf:"bytes,13,rep,name=products,proto3" json:"products,omitempty"`
+	BodyLength         int64                  `protobuf:"varint,14,opt,name=body_length,json=bodyLength,proto3" json:"body_length,omitempty"`
 	Anchor             string                 `protobuf:"bytes,15,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	NumVisitedLinks    int64                  `protobuf:"varint,16,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
 	NumHasProductLinks int64                  `protobuf:"varint,17,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
@@ -65575,6 +65576,13 @@ func (x *CrawlResponse) GetProducts() []*Product {
 		return x.Products
 	}
 	return nil
+}
+
+func (x *CrawlResponse) GetBodyLength() int64 {
+	if x != nil {
+		return x.BodyLength
+	}
+	return 0
 }
 
 func (x *CrawlResponse) GetAnchor() string {
@@ -78252,7 +78260,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xff\x03\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xa0\x04\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -78266,7 +78274,9 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\x05title\x12%\n" +
 	"\x0enum_characters\x18\v \x01(\x03R\rnumCharacters\x12)\n" +
 	"\aproduct\x18\f \x01(\v2\x0f.header.ProductR\aproduct\x12+\n" +
-	"\bproducts\x18\r \x03(\v2\x0f.header.ProductR\bproducts\x12\x16\n" +
+	"\bproducts\x18\r \x03(\v2\x0f.header.ProductR\bproducts\x12\x1f\n" +
+	"\vbody_length\x18\x0e \x01(\x03R\n" +
+	"bodyLength\x12\x16\n" +
 	"\x06anchor\x18\x0f \x01(\tR\x06anchor\x12*\n" +
 	"\x11num_visited_links\x18\x10 \x01(\x03R\x0fnumVisitedLinks\x121\n" +
 	"\x15num_has_product_links\x18\x11 \x01(\x03R\x12numHasProductLinks\x120\n" +

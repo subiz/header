@@ -9348,9 +9348,9 @@ message CrawlResponse {
 	string content_type = 9;
 	string title = 10;
 	int64 num_characters = 11;
-
 	Product product = 12;
 	repeated Product products = 13;
+	int64 body_length = 14;
 
 	string anchor = 15;
 
