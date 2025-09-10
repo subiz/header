@@ -785,6 +785,10 @@ message CrawlUrlRequest {
 	string sitemap_url = 12; // default domain/robots.txt
 
 	string anchor = 13;
+
+	bool force = 15;
+	string account_id = 16;
+	string crawl_key = 17;
 }
 
 message ListAIDataEntryRequest {
