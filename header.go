@@ -4,7 +4,6 @@ import (
 	_ "embed"
 	hexa "encoding/hex"
 	"encoding/json"
-	"fmt"
 	"html"
 	"math"
 	"net/mail"
@@ -2468,17 +2467,6 @@ func TruncateUser(user *User) {
 	user.Attributes = newuserattributes
 }
 
-func Unmarshal(data []byte, msg proto.Message) error {
-	if len(data) == 0 {
-		return nil
-	}
-	return proto.Unmarshal(data, msg)
-}
-
-func Marshal(msg proto.Message) ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
 // Define a regular expression for a basic email address pattern.
 const emailRegexPattern = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
 
@@ -2522,9 +2510,4 @@ func IsValidVNPhoneNumber(phoneNumber string) bool {
 	}
 
 	return true
-}
-
-func Print(prefix string, a any) {
-	b, _ := json.Marshal(a)
-	fmt.Println(prefix, string(b))
 }
