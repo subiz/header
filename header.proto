@@ -4030,6 +4030,8 @@ message ShopSetting {
 	int64 shop_address_fetch_status = 23;
 	string shop_address_fetch_msg = 24;
 	int64 shop_address_auto_fetch_disabled = 25;
+
+	ProductCategory default_product_category = 26;
 }
 
 message Addresses {
