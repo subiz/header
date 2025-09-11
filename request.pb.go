@@ -6235,7 +6235,7 @@ func (x *NewPassword) GetEmail() string {
 type CrawlUrlRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Url               string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	AccountId         string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	LastMd5           string                 `protobuf:"bytes,3,opt,name=last_md5,json=lastMd5,proto3" json:"last_md5,omitempty"`
 	LinkOnly          bool                   `protobuf:"varint,4,opt,name=link_only,json=linkOnly,proto3" json:"link_only,omitempty"`
 	JavascriptEnabled bool                   `protobuf:"varint,5,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
@@ -6248,7 +6248,7 @@ type CrawlUrlRequest struct {
 	SitemapUrl        string                 `protobuf:"bytes,12,opt,name=sitemap_url,json=sitemapUrl,proto3" json:"sitemap_url,omitempty"` // default domain/robots.txt
 	Anchor            string                 `protobuf:"bytes,13,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	Force             bool                   `protobuf:"varint,15,opt,name=force,proto3" json:"force,omitempty"`
-	AccountId         string                 `protobuf:"bytes,16,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Url               string                 `protobuf:"bytes,16,opt,name=url,proto3" json:"url,omitempty"`
 	CrawlKey          string                 `protobuf:"bytes,17,opt,name=crawl_key,json=crawlKey,proto3" json:"crawl_key,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -6291,9 +6291,9 @@ func (x *CrawlUrlRequest) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *CrawlUrlRequest) GetUrl() string {
+func (x *CrawlUrlRequest) GetAccountId() string {
 	if x != nil {
-		return x.Url
+		return x.AccountId
 	}
 	return ""
 }
@@ -6382,9 +6382,9 @@ func (x *CrawlUrlRequest) GetForce() bool {
 	return false
 }
 
-func (x *CrawlUrlRequest) GetAccountId() string {
+func (x *CrawlUrlRequest) GetUrl() string {
 	if x != nil {
-		return x.AccountId
+		return x.Url
 	}
 	return ""
 }
@@ -9349,8 +9349,9 @@ const file_request_proto_rawDesc = "" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
 	"\x05email\x18\b \x01(\tR\x05email\"\x83\x04\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url\x12\x19\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x19\n" +
 	"\blast_md5\x18\x03 \x01(\tR\alastMd5\x12\x1b\n" +
 	"\tlink_only\x18\x04 \x01(\bR\blinkOnly\x12-\n" +
 	"\x12javascript_enabled\x18\x05 \x01(\bR\x11javascriptEnabled\x12\x18\n" +
@@ -9365,9 +9366,8 @@ const file_request_proto_rawDesc = "" +
 	"\vsitemap_url\x18\f \x01(\tR\n" +
 	"sitemapUrl\x12\x16\n" +
 	"\x06anchor\x18\r \x01(\tR\x06anchor\x12\x14\n" +
-	"\x05force\x18\x0f \x01(\bR\x05force\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\x10 \x01(\tR\taccountId\x12\x1b\n" +
+	"\x05force\x18\x0f \x01(\bR\x05force\x12\x10\n" +
+	"\x03url\x18\x10 \x01(\tR\x03url\x12\x1b\n" +
 	"\tcrawl_key\x18\x11 \x01(\tR\bcrawlKey\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +

@@ -23450,6 +23450,7 @@ const (
 	Proder_DeleteProduct_FullMethodName              = "/header.Proder/DeleteProduct"
 	Proder_ListProducts2_FullMethodName              = "/header.Proder/ListProducts2"
 	Proder_ListAllProductIds_FullMethodName          = "/header.Proder/ListAllProductIds"
+	Proder_MatchProducts_FullMethodName              = "/header.Proder/MatchProducts"
 	Proder_ImportProduct_FullMethodName              = "/header.Proder/ImportProduct"
 	Proder_GetProductOffer_FullMethodName            = "/header.Proder/GetProductOffer"
 	Proder_CreateProductOffer_FullMethodName         = "/header.Proder/CreateProductOffer"
@@ -23532,6 +23533,7 @@ type ProderClient interface {
 	DeleteProduct(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProducts2(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
 	ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Ids, error)
+	MatchProducts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
 	GetProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductOffer(ctx context.Context, in *ProductOffer, opts ...grpc.CallOption) (*Response, error)
@@ -23665,6 +23667,16 @@ func (c *proderClient) ListAllProductIds(ctx context.Context, in *ProductsReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Ids)
 	err := c.cc.Invoke(ctx, Proder_ListAllProductIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) MatchProducts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_MatchProducts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -24363,6 +24375,7 @@ type ProderServer interface {
 	DeleteProduct(context.Context, *Id) (*Empty, error)
 	ListProducts2(context.Context, *ProductsRequest) (*Response, error)
 	ListAllProductIds(context.Context, *ProductsRequest) (*Ids, error)
+	MatchProducts(context.Context, *Ids) (*Response, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
 	GetProductOffer(context.Context, *Id) (*Response, error)
 	CreateProductOffer(context.Context, *ProductOffer) (*Response, error)
@@ -24459,6 +24472,9 @@ func (UnimplementedProderServer) ListProducts2(context.Context, *ProductsRequest
 }
 func (UnimplementedProderServer) ListAllProductIds(context.Context, *ProductsRequest) (*Ids, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAllProductIds not implemented")
+}
+func (UnimplementedProderServer) MatchProducts(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchProducts not implemented")
 }
 func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportProduct not implemented")
@@ -24789,6 +24805,24 @@ func _Proder_ListAllProductIds_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).ListAllProductIds(ctx, req.(*ProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_MatchProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).MatchProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_MatchProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).MatchProducts(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26047,6 +26081,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAllProductIds",
 			Handler:    _Proder_ListAllProductIds_Handler,
+		},
+		{
+			MethodName: "MatchProducts",
+			Handler:    _Proder_MatchProducts_Handler,
 		},
 		{
 			MethodName: "ImportProduct",

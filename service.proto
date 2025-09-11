@@ -837,6 +837,7 @@ service Proder {
 	rpc DeleteProduct(Id) returns (Empty);
 	rpc ListProducts2(header.ProductsRequest) returns (header.Response);
 	rpc ListAllProductIds(header.ProductsRequest) returns (header.Ids);
+	rpc MatchProducts(Ids) returns (Response);
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
 	rpc GetProductOffer(header.Id) returns (header.Response);

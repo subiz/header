@@ -770,7 +770,7 @@ message NewPassword {
 
 message CrawlUrlRequest {
 	common.Context ctx = 1;
-	string url = 2;
+	string account_id = 2;
 	string last_md5 = 3;
 	bool link_only = 4;
 	bool javascript_enabled = 5;
@@ -787,7 +787,7 @@ message CrawlUrlRequest {
 	string anchor = 13;
 
 	bool force = 15;
-	string account_id = 16;
+	string url = 16;
 	string crawl_key = 17;
 }
 
