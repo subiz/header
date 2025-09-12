@@ -7705,8 +7705,9 @@ message AIAgentTrace {
 	string error = 22; //
 	repeated int32 query_topics = 25;
 	repeated string query_terms = 26;
-
 	int64 total_credit_fpv = 30; // vnd
+	repeated Product context_products = 28; // used
+	string product_mention = 29;
 }
 
 message AIAgentSpan {
