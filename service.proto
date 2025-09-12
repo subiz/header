@@ -32,7 +32,7 @@ service DocSearch {
 	rpc ReportCall(header.CallMetricsRequest) returns (header.CallMetrics);
 	rpc ListCallIds(header.CallMetricsRequest) returns (header.Conversations);
 	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
-	//healthcheck
+	// healthcheck
 	rpc HealthCheckReport(header.Empty) returns (header.Empty);
 	rpc HealthCheckIndex(header.Empty) returns (header.Empty);
 }
@@ -144,11 +144,11 @@ service AccountMgr {
 	rpc UpdateTax(header.Tax) returns (header.Tax);
 	rpc DeleteTax(Id) returns (Empty);
 
-	rpc CheckShippingPolicy(header.Order) returns (header.ShippingPolicies);
-	rpc ListShippingPolicies(Id) returns (header.ShippingPolicies);
-	rpc CreateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
-	rpc UpdateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
-	rpc DeleteShippingPolicy(Id) returns (Empty);
+	// rpc CheckShippingPolicy(header.Order) returns (header.ShippingPolicies);
+	// rpc ListShippingPolicies(Id) returns (header.ShippingPolicies);
+	// rpc CreateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
+	// rpc UpdateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
+	// rpc DeleteShippingPolicy(Id) returns (Empty);
 
 	rpc CreateCancellationCode(header.CancellationCode) returns (header.CancellationCode);
 	rpc ListCancellationCodes(Id) returns (header.CancellationCodes);

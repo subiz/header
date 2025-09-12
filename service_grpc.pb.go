@@ -1997,11 +1997,6 @@ const (
 	AccountMgr_CreateTax_FullMethodName                       = "/header.AccountMgr/CreateTax"
 	AccountMgr_UpdateTax_FullMethodName                       = "/header.AccountMgr/UpdateTax"
 	AccountMgr_DeleteTax_FullMethodName                       = "/header.AccountMgr/DeleteTax"
-	AccountMgr_CheckShippingPolicy_FullMethodName             = "/header.AccountMgr/CheckShippingPolicy"
-	AccountMgr_ListShippingPolicies_FullMethodName            = "/header.AccountMgr/ListShippingPolicies"
-	AccountMgr_CreateShippingPolicy_FullMethodName            = "/header.AccountMgr/CreateShippingPolicy"
-	AccountMgr_UpdateShippingPolicy_FullMethodName            = "/header.AccountMgr/UpdateShippingPolicy"
-	AccountMgr_DeleteShippingPolicy_FullMethodName            = "/header.AccountMgr/DeleteShippingPolicy"
 	AccountMgr_CreateCancellationCode_FullMethodName          = "/header.AccountMgr/CreateCancellationCode"
 	AccountMgr_ListCancellationCodes_FullMethodName           = "/header.AccountMgr/ListCancellationCodes"
 	AccountMgr_UpdateCancellationCode_FullMethodName          = "/header.AccountMgr/UpdateCancellationCode"
@@ -2115,11 +2110,6 @@ type AccountMgrClient interface {
 	CreateTax(ctx context.Context, in *Tax, opts ...grpc.CallOption) (*Tax, error)
 	UpdateTax(ctx context.Context, in *Tax, opts ...grpc.CallOption) (*Tax, error)
 	DeleteTax(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	CheckShippingPolicy(ctx context.Context, in *Order, opts ...grpc.CallOption) (*ShippingPolicies, error)
-	ListShippingPolicies(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ShippingPolicies, error)
-	CreateShippingPolicy(ctx context.Context, in *ShippingPolicy, opts ...grpc.CallOption) (*ShippingPolicy, error)
-	UpdateShippingPolicy(ctx context.Context, in *ShippingPolicy, opts ...grpc.CallOption) (*ShippingPolicy, error)
-	DeleteShippingPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	CreateCancellationCode(ctx context.Context, in *CancellationCode, opts ...grpc.CallOption) (*CancellationCode, error)
 	ListCancellationCodes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*CancellationCodes, error)
 	UpdateCancellationCode(ctx context.Context, in *CancellationCode, opts ...grpc.CallOption) (*CancellationCode, error)
@@ -2750,56 +2740,6 @@ func (c *accountMgrClient) DeleteTax(ctx context.Context, in *Id, opts ...grpc.C
 	return out, nil
 }
 
-func (c *accountMgrClient) CheckShippingPolicy(ctx context.Context, in *Order, opts ...grpc.CallOption) (*ShippingPolicies, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ShippingPolicies)
-	err := c.cc.Invoke(ctx, AccountMgr_CheckShippingPolicy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) ListShippingPolicies(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ShippingPolicies, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ShippingPolicies)
-	err := c.cc.Invoke(ctx, AccountMgr_ListShippingPolicies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) CreateShippingPolicy(ctx context.Context, in *ShippingPolicy, opts ...grpc.CallOption) (*ShippingPolicy, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ShippingPolicy)
-	err := c.cc.Invoke(ctx, AccountMgr_CreateShippingPolicy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) UpdateShippingPolicy(ctx context.Context, in *ShippingPolicy, opts ...grpc.CallOption) (*ShippingPolicy, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ShippingPolicy)
-	err := c.cc.Invoke(ctx, AccountMgr_UpdateShippingPolicy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) DeleteShippingPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, AccountMgr_DeleteShippingPolicy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountMgrClient) CreateCancellationCode(ctx context.Context, in *CancellationCode, opts ...grpc.CallOption) (*CancellationCode, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CancellationCode)
@@ -3352,11 +3292,6 @@ type AccountMgrServer interface {
 	CreateTax(context.Context, *Tax) (*Tax, error)
 	UpdateTax(context.Context, *Tax) (*Tax, error)
 	DeleteTax(context.Context, *Id) (*Empty, error)
-	CheckShippingPolicy(context.Context, *Order) (*ShippingPolicies, error)
-	ListShippingPolicies(context.Context, *Id) (*ShippingPolicies, error)
-	CreateShippingPolicy(context.Context, *ShippingPolicy) (*ShippingPolicy, error)
-	UpdateShippingPolicy(context.Context, *ShippingPolicy) (*ShippingPolicy, error)
-	DeleteShippingPolicy(context.Context, *Id) (*Empty, error)
 	CreateCancellationCode(context.Context, *CancellationCode) (*CancellationCode, error)
 	ListCancellationCodes(context.Context, *Id) (*CancellationCodes, error)
 	UpdateCancellationCode(context.Context, *CancellationCode) (*CancellationCode, error)
@@ -3587,21 +3522,6 @@ func (UnimplementedAccountMgrServer) UpdateTax(context.Context, *Tax) (*Tax, err
 }
 func (UnimplementedAccountMgrServer) DeleteTax(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTax not implemented")
-}
-func (UnimplementedAccountMgrServer) CheckShippingPolicy(context.Context, *Order) (*ShippingPolicies, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckShippingPolicy not implemented")
-}
-func (UnimplementedAccountMgrServer) ListShippingPolicies(context.Context, *Id) (*ShippingPolicies, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListShippingPolicies not implemented")
-}
-func (UnimplementedAccountMgrServer) CreateShippingPolicy(context.Context, *ShippingPolicy) (*ShippingPolicy, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateShippingPolicy not implemented")
-}
-func (UnimplementedAccountMgrServer) UpdateShippingPolicy(context.Context, *ShippingPolicy) (*ShippingPolicy, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateShippingPolicy not implemented")
-}
-func (UnimplementedAccountMgrServer) DeleteShippingPolicy(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteShippingPolicy not implemented")
 }
 func (UnimplementedAccountMgrServer) CreateCancellationCode(context.Context, *CancellationCode) (*CancellationCode, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCancellationCode not implemented")
@@ -4797,96 +4717,6 @@ func _AccountMgr_DeleteTax_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_CheckShippingPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Order)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).CheckShippingPolicy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_CheckShippingPolicy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).CheckShippingPolicy(ctx, req.(*Order))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_ListShippingPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).ListShippingPolicies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_ListShippingPolicies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).ListShippingPolicies(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_CreateShippingPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ShippingPolicy)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).CreateShippingPolicy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_CreateShippingPolicy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).CreateShippingPolicy(ctx, req.(*ShippingPolicy))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_UpdateShippingPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ShippingPolicy)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).UpdateShippingPolicy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_UpdateShippingPolicy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).UpdateShippingPolicy(ctx, req.(*ShippingPolicy))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_DeleteShippingPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).DeleteShippingPolicy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_DeleteShippingPolicy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).DeleteShippingPolicy(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountMgr_CreateCancellationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CancellationCode)
 	if err := dec(in); err != nil {
@@ -6003,26 +5833,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteTax",
 			Handler:    _AccountMgr_DeleteTax_Handler,
-		},
-		{
-			MethodName: "CheckShippingPolicy",
-			Handler:    _AccountMgr_CheckShippingPolicy_Handler,
-		},
-		{
-			MethodName: "ListShippingPolicies",
-			Handler:    _AccountMgr_ListShippingPolicies_Handler,
-		},
-		{
-			MethodName: "CreateShippingPolicy",
-			Handler:    _AccountMgr_CreateShippingPolicy_Handler,
-		},
-		{
-			MethodName: "UpdateShippingPolicy",
-			Handler:    _AccountMgr_UpdateShippingPolicy_Handler,
-		},
-		{
-			MethodName: "DeleteShippingPolicy",
-			Handler:    _AccountMgr_DeleteShippingPolicy_Handler,
 		},
 		{
 			MethodName: "CreateCancellationCode",

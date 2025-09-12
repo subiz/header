@@ -509,16 +509,16 @@ message Notes {
 }
 
 message Location {
-	string isp = 3;                 // filled
-	string continent_name = 4;      // filled
-	string country_code = 5;        // filled
+	string isp = 3;               // filled
+	string continent_name = 4;    // filled
+	string country_code = 5;      // filled
 
-	string city_name = 6;            // filled
-	string country_name = 7;         // filled
-	string continent_code = 8;      // filled
-	float latitude = 9;             // filled
-	float longitude = 10;            // filled
-	string postal_code = 11;         // filled
+	string city_name = 6;         // filled
+	string country_name = 7;      // filled
+	string continent_code = 8;    // filled
+	float latitude = 9;           // filled
+	float longitude = 10;         // filled
+	string postal_code = 11;      // filled
 
 	string ip = 12;
 }
@@ -714,7 +714,7 @@ message Data {
 	Webhook webhook = 44;
 	// UserAlias user_alias = 45;
 	Conversion conversion = 47;
-	Site site = 52;
+	// Site site = 52;
 	// WebpageCheck webpage_check = 53;
 	LangMessage language_message = 54;
 	Label label = 55;
@@ -2065,7 +2065,7 @@ message BotCondition {
 	bool offline = 25; // only run when there is no online agent
 	bool returning_visitor = 26;
 	bool user_is_a_contact = 27; // has a way to re-connnect to user (email or phone)
-	OrderCondition order = 28; // order
+	// OrderCondition order = 28; // order
 
 	repeated string conversation_tags = 29;
 	repeated string exclude_conversation_tags = 30;
@@ -2074,24 +2074,6 @@ message BotCondition {
 	bool has_conversation_member_online = 32;
 
 	ChannelCondition channel_condition = 33;
-}
-
-message OrderCondition {
-	string key = 2; // product, order_total, pos, shipping
-
-	repeated string product_ids = 3;
-	repeated string exclude_product_ids = 4;
-
-	repeated string pos_ids = 5;
-	repeated string exclude_pos_ids = 6;
-
-	repeated string currencies = 7;
-	repeated string exclude_currencies = 8;
-
-	FloatCondition total = 9;
-
-	repeated LocationCondition shipping = 10;
-	repeated LocationCondition exclude_shipping = 11;
 }
 
 message Condition {
@@ -2111,7 +2093,7 @@ message VisitProductSiteRequest {
 	int64 created = 6;
 }
 
-message Site {
+/*message Site {
 	common.Context ctx = 1;
 	string account_id = 2; // web, messenger, zalo
 	string id = 3; // web:abc.com, web:xyz.com, facebook:423084234234, zalo:3903002404
@@ -2132,7 +2114,7 @@ message Site {
 	string desktop_screenshoot_url = 14;
 
 	int64 last_crawled = 15;
-}
+}*/
 
 message Bot {
 	common.Context ctx = 1;
@@ -4019,8 +4001,8 @@ message ShopSetting {
 	InvoiceTemplate invoice_template = 13;
 	string due_date_term = 14;
 	repeated ShopeeShop shopee_shops = 15; // read only
-	repeated IntegratedShipping shippings = 16;
-	repeated ShippingPolicy shipping_policies = 17;
+	// repeated IntegratedShipping shippings = 16;
+	// repeated ShippingPolicy shipping_policies = 17;
 
 	repeated CancellationCode cancellation_codes = 19;
 
@@ -4442,48 +4424,6 @@ enum ShippingProvider {
 	viettelpost = 12;
 	ghn = 13;
 	none = 20;
-}
-
-message ShippingPolicies {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated ShippingPolicy shipping_policies = 5;
-}
-
-message ShippingPolicy {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string name = 4;
-
-	repeated string product_ids = 5;
-	// repeated string product_collections = 6;
-	repeated string exclude_product_ids = 7;
-
-	string country_code = 8; // alway vn
-	string province = 9;
-	repeated string districts = 13;
-
-	bool use_weight = 10;
-	int64 weight_gt = 11; // gram
-	int64 weight_lt = 12; // gram
-
-	bool use_order_total = 16;
-	float order_total_lt = 17;
-	int64 fpv_order_total_lt = 18; // (readonly from client)
-
-	float order_total_gt = 19;
-	int64 fpv_order_total_gt = 20; // (readonly from client)
-
-	float price = 21; // 0 => freeship
-	int64 fpv_price = 22; // (readonly from client)
-
-	bool disabled = 23;
-
-	int64 created = 24;
-	int64 updated = 26;
-	string created_by = 27;
-	string updated_by = 28;
 }
 
 message IntegratedShipping {
@@ -6717,7 +6657,7 @@ message WorkflowAction {
 	ActionAssignLead assign_lead = 105;
 	ActionSendTyping send_typing = 107;
 	ActionStartScope start_scope = 108;
-	ActionAIAgentTrack ai_agent_track = 109;
+	// ActionAIAgentTrack ai_agent_track = 109;
 	string output_error_variable = 106;
 
 	ActionTerminateBot terminate_bot = 110;
@@ -7037,8 +6977,8 @@ message Response {
 
 	repeated EventType event_types = 152;
 	repeated ReportCount report_counts = 153;
-	Site site = 156;
-	repeated Site sites = 157;
+	// Site site = 156;
+	// repeated Site sites = 157;
 
 	AttributeDefinition attribute_definition = 160;
 	repeated AttributeDefinition attribute_definitions = 161;
@@ -7245,9 +7185,6 @@ message WorkflowSession {
 
 	int64 num_active_threads = 30;
 	int64 thread_counter = 31;
-
-	int64 llm_total_spend_fpv = 32;
-	int64 llm_spend_limit_fpv = 33;
 }
 
 message SchedulerTask {
@@ -9765,17 +9702,6 @@ message SendSubizZNSTestRequest {
 	string phone = 4;
 	string template_id = 5;
 	repeated ZNSTemplateParam params = 6;
-}
-
-message ActionAIAgentTrack {
-	string is_missing_source = 3;
-	string event_id = 4;
-	string is_unhandled = 5; // unable to handle
-	string is_refused = 6;  // guardrail, refuse
-	// string rating = 9;
-	int64 input_tokens = 10;
-	int64 output_tokens = 11;
-	string status = 12; // success, error
 }
 
 message Markers {
