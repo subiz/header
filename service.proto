@@ -107,7 +107,6 @@ service AccountMgr {
 	rpc MatchAgent(Ids) returns (header.Response);
 
 	rpc DeleteGroup(Id) returns (Empty);
-	rpc ListGroups(Id) returns (header.AgentGroups);
 	rpc ListGroups2(Id) returns (header.Response);
 	rpc MatchGroup(Ids) returns (header.Response);
 
@@ -156,7 +155,7 @@ service AccountMgr {
 
 	rpc MakeDefaultTax(Id) returns (Empty);
 
-	rpc ListPaymentMethods(Id) returns (header.PaymentMethods);
+	rpc ListPaymentMethods(Id) returns (header.Response);
 	rpc CreatePaymentMethod(header.PaymentMethod) returns (header.PaymentMethod);
 	rpc UpdatePaymentMethod(header.PaymentMethod) returns (header.PaymentMethod);
 	rpc DeletePaymentMethod(Id) returns (Empty);
@@ -484,7 +483,7 @@ service ConversationMgr {
 	// rpc ListOutgoingBlockedNumbers(Id) returns (Response);
 	// rpc UnblockOutgoingNumber(OutgoingBlockRule) returns (Empty);
 
-	rpc ListGreetingAudio(Id) returns (GreetingAudios);
+	rpc ListGreetingAudio(Id) returns (Response);
 	rpc CreateGreetingAudio(GreetingAudio) returns (GreetingAudio);
 	rpc UpdateGreetingAudio(GreetingAudio) returns (Response);
 	rpc DeleteGreetingAudio(Id) returns (Response);

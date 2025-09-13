@@ -1970,7 +1970,6 @@ const (
 	AccountMgr_ListAgents_FullMethodName                      = "/header.AccountMgr/ListAgents"
 	AccountMgr_MatchAgent_FullMethodName                      = "/header.AccountMgr/MatchAgent"
 	AccountMgr_DeleteGroup_FullMethodName                     = "/header.AccountMgr/DeleteGroup"
-	AccountMgr_ListGroups_FullMethodName                      = "/header.AccountMgr/ListGroups"
 	AccountMgr_ListGroups2_FullMethodName                     = "/header.AccountMgr/ListGroups2"
 	AccountMgr_MatchGroup_FullMethodName                      = "/header.AccountMgr/MatchGroup"
 	AccountMgr_SbzChangeEmail_FullMethodName                  = "/header.AccountMgr/SbzChangeEmail"
@@ -2082,7 +2081,6 @@ type AccountMgrClient interface {
 	ListAgents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ListGroups(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AgentGroups, error)
 	ListGroups2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchGroup(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	SbzChangeEmail(ctx context.Context, in *AgentProfile, opts ...grpc.CallOption) (*AgentProfile, error)
@@ -2114,7 +2112,7 @@ type AccountMgrClient interface {
 	ListCancellationCodes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*CancellationCodes, error)
 	UpdateCancellationCode(ctx context.Context, in *CancellationCode, opts ...grpc.CallOption) (*CancellationCode, error)
 	MakeDefaultTax(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ListPaymentMethods(ctx context.Context, in *Id, opts ...grpc.CallOption) (*PaymentMethods, error)
+	ListPaymentMethods(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreatePaymentMethod(ctx context.Context, in *PaymentMethod, opts ...grpc.CallOption) (*PaymentMethod, error)
 	UpdatePaymentMethod(ctx context.Context, in *PaymentMethod, opts ...grpc.CallOption) (*PaymentMethod, error)
 	DeletePaymentMethod(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -2470,16 +2468,6 @@ func (c *accountMgrClient) DeleteGroup(ctx context.Context, in *Id, opts ...grpc
 	return out, nil
 }
 
-func (c *accountMgrClient) ListGroups(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AgentGroups, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AgentGroups)
-	err := c.cc.Invoke(ctx, AccountMgr_ListGroups_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountMgrClient) ListGroups2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -2780,9 +2768,9 @@ func (c *accountMgrClient) MakeDefaultTax(ctx context.Context, in *Id, opts ...g
 	return out, nil
 }
 
-func (c *accountMgrClient) ListPaymentMethods(ctx context.Context, in *Id, opts ...grpc.CallOption) (*PaymentMethods, error) {
+func (c *accountMgrClient) ListPaymentMethods(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PaymentMethods)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, AccountMgr_ListPaymentMethods_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -3264,7 +3252,6 @@ type AccountMgrServer interface {
 	ListAgents(context.Context, *Id) (*Response, error)
 	MatchAgent(context.Context, *Ids) (*Response, error)
 	DeleteGroup(context.Context, *Id) (*Empty, error)
-	ListGroups(context.Context, *Id) (*AgentGroups, error)
 	ListGroups2(context.Context, *Id) (*Response, error)
 	MatchGroup(context.Context, *Ids) (*Response, error)
 	SbzChangeEmail(context.Context, *AgentProfile) (*AgentProfile, error)
@@ -3296,7 +3283,7 @@ type AccountMgrServer interface {
 	ListCancellationCodes(context.Context, *Id) (*CancellationCodes, error)
 	UpdateCancellationCode(context.Context, *CancellationCode) (*CancellationCode, error)
 	MakeDefaultTax(context.Context, *Id) (*Empty, error)
-	ListPaymentMethods(context.Context, *Id) (*PaymentMethods, error)
+	ListPaymentMethods(context.Context, *Id) (*Response, error)
 	CreatePaymentMethod(context.Context, *PaymentMethod) (*PaymentMethod, error)
 	UpdatePaymentMethod(context.Context, *PaymentMethod) (*PaymentMethod, error)
 	DeletePaymentMethod(context.Context, *Id) (*Empty, error)
@@ -3442,9 +3429,6 @@ func (UnimplementedAccountMgrServer) MatchAgent(context.Context, *Ids) (*Respons
 func (UnimplementedAccountMgrServer) DeleteGroup(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
 }
-func (UnimplementedAccountMgrServer) ListGroups(context.Context, *Id) (*AgentGroups, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListGroups not implemented")
-}
 func (UnimplementedAccountMgrServer) ListGroups2(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGroups2 not implemented")
 }
@@ -3535,7 +3519,7 @@ func (UnimplementedAccountMgrServer) UpdateCancellationCode(context.Context, *Ca
 func (UnimplementedAccountMgrServer) MakeDefaultTax(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakeDefaultTax not implemented")
 }
-func (UnimplementedAccountMgrServer) ListPaymentMethods(context.Context, *Id) (*PaymentMethods, error) {
+func (UnimplementedAccountMgrServer) ListPaymentMethods(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentMethods not implemented")
 }
 func (UnimplementedAccountMgrServer) CreatePaymentMethod(context.Context, *PaymentMethod) (*PaymentMethod, error) {
@@ -4227,24 +4211,6 @@ func _AccountMgr_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountMgrServer).DeleteGroup(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_ListGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).ListGroups(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_ListGroups_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).ListGroups(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5725,10 +5691,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteGroup",
 			Handler:    _AccountMgr_DeleteGroup_Handler,
-		},
-		{
-			MethodName: "ListGroups",
-			Handler:    _AccountMgr_ListGroups_Handler,
 		},
 		{
 			MethodName: "ListGroups2",
@@ -11244,7 +11206,7 @@ type ConversationMgrClient interface {
 	BlockNumber(ctx context.Context, in *BlockedNumber, opts ...grpc.CallOption) (*BlockedNumber, error)
 	ListBlockedNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*BlockedNumbers, error)
 	UnblockNumber(ctx context.Context, in *BlockedNumber, opts ...grpc.CallOption) (*Empty, error)
-	ListGreetingAudio(ctx context.Context, in *Id, opts ...grpc.CallOption) (*GreetingAudios, error)
+	ListGreetingAudio(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateGreetingAudio(ctx context.Context, in *GreetingAudio, opts ...grpc.CallOption) (*GreetingAudio, error)
 	UpdateGreetingAudio(ctx context.Context, in *GreetingAudio, opts ...grpc.CallOption) (*Response, error)
 	DeleteGreetingAudio(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -11865,9 +11827,9 @@ func (c *conversationMgrClient) UnblockNumber(ctx context.Context, in *BlockedNu
 	return out, nil
 }
 
-func (c *conversationMgrClient) ListGreetingAudio(ctx context.Context, in *Id, opts ...grpc.CallOption) (*GreetingAudios, error) {
+func (c *conversationMgrClient) ListGreetingAudio(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GreetingAudios)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_ListGreetingAudio_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -12110,7 +12072,7 @@ type ConversationMgrServer interface {
 	BlockNumber(context.Context, *BlockedNumber) (*BlockedNumber, error)
 	ListBlockedNumbers(context.Context, *Id) (*BlockedNumbers, error)
 	UnblockNumber(context.Context, *BlockedNumber) (*Empty, error)
-	ListGreetingAudio(context.Context, *Id) (*GreetingAudios, error)
+	ListGreetingAudio(context.Context, *Id) (*Response, error)
 	CreateGreetingAudio(context.Context, *GreetingAudio) (*GreetingAudio, error)
 	UpdateGreetingAudio(context.Context, *GreetingAudio) (*Response, error)
 	DeleteGreetingAudio(context.Context, *Id) (*Response, error)
@@ -12318,7 +12280,7 @@ func (UnimplementedConversationMgrServer) ListBlockedNumbers(context.Context, *I
 func (UnimplementedConversationMgrServer) UnblockNumber(context.Context, *BlockedNumber) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnblockNumber not implemented")
 }
-func (UnimplementedConversationMgrServer) ListGreetingAudio(context.Context, *Id) (*GreetingAudios, error) {
+func (UnimplementedConversationMgrServer) ListGreetingAudio(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGreetingAudio not implemented")
 }
 func (UnimplementedConversationMgrServer) CreateGreetingAudio(context.Context, *GreetingAudio) (*GreetingAudio, error) {
