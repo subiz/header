@@ -6594,9 +6594,6 @@ enum E {
 
 	invalid_order_status = 146;
 
-	invalid_product_category = 148;
-	invalid_product_visibility = 149;
-
 	invalid_conversation_modal_secret = 170;
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
@@ -7663,15 +7660,14 @@ message LLMChatHistoryEntry {
 	int64 timeout = 8; // ms
 	repeated Attachment attachments = 9;
 	repeated string more_expected_contents = 10;
-
 }
 
 message AIDataEntryUsed {
 	string chunk_id = 4;
 	string data_entry_id = 5;
-	string chunk = 6; // original
+	string chunk = 6; // chunk that is being used
 	int64 score = 7; // max 10000 => 100%
-	string embed_chunk = 11;
+	string origin_chunk = 11;
 	bool is_vector_search = 12;
 	bool is_full_text_search = 13;
 }
@@ -7706,50 +7702,10 @@ message AIAgentTrace {
 	repeated int32 query_topics = 25;
 	repeated string query_terms = 26;
 	int64 total_credit_fpv = 30; // vnd
+	string category_id = 24;
+	repeated Discount context_discounts = 27;
 	repeated Product context_products = 28; // used
 	string product_mention = 29;
-}
-
-message AIAgentSpan {
-	string trace_id = 3;
-	string span_id = 4;
-	int64 started = 5;
-	int64 ended = 6;
-
-	// input
-	string type = 7; // agent_main, agent_triage, send_message
-	string instruction = 8;
-	int64 max_output_tokens = 9;
-	string model = 10;
-	// int64 parallel_tool_calls = 7;
-	string status = 11; // completed
-	int64 temperature = 12;
-	int64 top_p = 13;
-
-	string tool_choice = 14; // auto
-	repeated AIFunction tools = 15; // function calling
-	string response_format_type = 16; // json_schema
-	LLMResponseJSONSchemaFormat response_format = 17;
-
-	repeated LLMChatHistoryEntry chat_history = 18;
-	repeated LLMToolCall tool_calls = 19;
-
-	string output = 20;
-
-	string explain = 21;
-	string command = 22; // text, escalate, transfer
-	string to_id = 23;
-	string text = 24;
-
-	string conversation_id = 25;
-	string input_message_id = 26;
-	string output_message_id = 27;
-
-	// usage
-	int64 input_tokens = 30; // ok
-	int64 output_tokens = 31; // ok
-
-	string override_rule = 32;
 }
 
 message WorkflowLog {
@@ -9310,7 +9266,7 @@ message AIDataChunk {
 	int64 num_characters = 9;
 	string model = 10;
 
-	repeated uint32 named_entities = 12;
+	// repeated uint32 named_entities = 12;
 }
 
 message AIDataEntry {
@@ -9371,7 +9327,7 @@ message AIDataEntry {
 	AIIntent intent = 52; // instruction trigger
 	WorkflowCondition condition = 53; // instruction condition
 
-	repeated uint32 named_entities = 54; // for debugging
+	// repeated uint32 named_entities = 54; // for debugging
 
 	// suggestion
 	string conversation_id = 60;
@@ -9744,6 +9700,7 @@ message MetaAdAccount {
 	string access_token = 23;
 }
 
+// unique by doc id
 message VectorSearchReq {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -9760,7 +9717,6 @@ message VectorDoc {
 
 	string collection = 3;
 	string id = 4;
-	// repeated uint32 named_entities = 5; // higher score matching
 	repeated float vector = 6;
 	repeated VectorDocProp props = 7;
 }
@@ -9770,7 +9726,6 @@ message ListVectorRequest {
 	string account_id = 2;
 
 	string collection = 3;
-	repeated uint32 named_entities = 4; // higher score matching
 	int64 shard = 5; // 0 -> 127
 }
 
