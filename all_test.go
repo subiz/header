@@ -952,3 +952,38 @@ func TestBlockToHTML2(t *testing.T) {
 		t.Errorf("SHOULDBEEQ")
 	}
 }
+
+func TestBlockToEle(t *testing.T) {
+	var lasthtml string
+	for range 100 {
+		html := eleToHTML(blockToEle(nil, &Block{
+			Type: "div",
+			Content: []*Block{
+				{
+					Type: "paragraph",
+					Content: []*Block{
+						{
+							Type:  "IFRAME",
+							Text:  "",
+							Title: "YouTube video player",
+							Style: &Style{
+								Width:  "43rem",
+								Height: "380px",
+							},
+						},
+					},
+				},
+			},
+		},
+		))
+
+		if lasthtml == "" {
+			lasthtml = html
+		}
+
+		if lasthtml != html {
+			t.Errorf("NO %s", html)
+		}
+		lasthtml = html
+	}
+}

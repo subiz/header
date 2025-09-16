@@ -2011,11 +2011,14 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 	ele := &sanitiziedHTMLElement{}
 	ele.Style = ""
 	if block.Style != nil {
-		b, _ := json.Marshal(StyleToString(block.Style))
-		m := map[string]string{}
-		json.Unmarshal(b, &m)
-		for k, v := range m {
-			ele.Style += html.EscapeString(k) + ": " + html.EscapeString(v) + ";"
+		stylem := StyleToString(block.Style)
+		styles := []string{}
+		for k, v := range stylem {
+			styles = append(styles, html.EscapeString(k)+": "+html.EscapeString(v))
+		}
+		if len(styles) > 0 {
+			sort.Strings(styles)
+			ele.Style = strings.Join(styles, ";")
 		}
 	}
 
