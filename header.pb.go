@@ -34206,6 +34206,7 @@ type Product struct {
 	EnrichSources            []*ProductEnrichSource `protobuf:"bytes,94,rep,name=enrich_sources,json=enrichSources,proto3" json:"enrich_sources,omitempty"`
 	FpvTotalEnrichedCost     int64                  `protobuf:"varint,95,opt,name=fpv_total_enriched_cost,json=fpvTotalEnrichedCost,proto3" json:"fpv_total_enriched_cost,omitempty"` // vnd
 	FpvLastEnrichedCost      int64                  `protobuf:"varint,96,opt,name=fpv_last_enriched_cost,json=fpvLastEnrichedCost,proto3" json:"fpv_last_enriched_cost,omitempty"`    // vnd
+	FromUrl                  string                 `protobuf:"bytes,97,opt,name=from_url,json=fromUrl,proto3" json:"from_url,omitempty"`                                             // read only, crawled from this url
 	Modified                 int64                  `protobuf:"varint,99,opt,name=modified,proto3" json:"modified,omitempty"`
 	Error                    *Error                 `protobuf:"bytes,100,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -34681,6 +34682,13 @@ func (x *Product) GetFpvLastEnrichedCost() int64 {
 		return x.FpvLastEnrichedCost
 	}
 	return 0
+}
+
+func (x *Product) GetFromUrl() string {
+	if x != nil {
+		return x.FromUrl
+	}
+	return ""
 }
 
 func (x *Product) GetModified() int64 {
@@ -73253,7 +73261,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x18 \x01(\tR\tupdatedBy\x12\x12\n" +
 	"\x04note\x18\x19 \x01(\tR\x04note\x12!\n" +
-	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xc6\x13\n" +
+	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xe1\x13\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73327,7 +73335,8 @@ const file_header_proto_rawDesc = "" +
 	"autoEnrich\x12B\n" +
 	"\x0eenrich_sources\x18^ \x03(\v2\x1b.header.ProductEnrichSourceR\renrichSources\x125\n" +
 	"\x17fpv_total_enriched_cost\x18_ \x01(\x03R\x14fpvTotalEnrichedCost\x123\n" +
-	"\x16fpv_last_enriched_cost\x18` \x01(\x03R\x13fpvLastEnrichedCost\x12\x1a\n" +
+	"\x16fpv_last_enriched_cost\x18` \x01(\x03R\x13fpvLastEnrichedCost\x12\x19\n" +
+	"\bfrom_url\x18a \x01(\tR\afromUrl\x12\x1a\n" +
 	"\bmodified\x18c \x01(\x03R\bmodified\x12#\n" +
 	"\x05error\x18d \x01(\v2\r.header.ErrorR\x05error\x1aV\n" +
 	"\x19I18nDescriptionBlockEntry\x12\x10\n" +

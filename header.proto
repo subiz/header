@@ -4975,8 +4975,11 @@ message Product {
 	int64 fpv_total_enriched_cost = 95; // vnd
 	int64 fpv_last_enriched_cost = 96; // vnd
 
+	string from_url = 97; // read only, crawled from this url
+
 	int64 modified = 99;
 	Error error = 100;
+
 }
 
 message ProductEnrichSource {
