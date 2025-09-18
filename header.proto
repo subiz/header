@@ -7603,10 +7603,10 @@ message Workflow {
 message LLMToolCall {
 	string type = 4;    // function_call, message
 	string status = 5;  // completed
-	string name = 6;    // transfer_to_history_tutor
+	// string name = 6;    // transfer_to_history_tutor
 	string id = 7;      // fc_67dcda987f9881919507ee94ff0e62150383ade9cf9a9f3a
 	string call_id = 8; // call_p91wu5fTWWetoL90RyiDKHFX
-	string arguments = 9;
+	// string arguments = 9;
 
 	string error = 10;
 	string output = 11;
@@ -7620,6 +7620,13 @@ message LLMToolCall {
 
 	// tracking
 	string conversation_id = 18;
+
+	LLMToolFunction function = 19;
+}
+
+message LLMToolFunction {
+	string name = 3;
+	string arguments = 4;
 }
 
 message OpenAIMessageContentImageUrl {
