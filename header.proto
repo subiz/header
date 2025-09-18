@@ -7531,7 +7531,6 @@ message LLMCondition {
 	string tracking_purpose = 18;
 	string tool_choice = 19; // auto (default), required, function
 	AIFunction tool_choice_function = 20;
-
 }
 
 message WorkflowLogRequest {
@@ -7642,6 +7641,8 @@ message LLMChatHistoryEntry {
 	string name = 12;
 	LLMToolCall tool = 5;
 	string id = 6;
+	string tool_call_id = 13;
+	repeated LLMToolCall tool_calls = 14;
 
 	// extra field in the message
 	map<string, string> fields = 7; // key -> jsonified value. eg "by_agent_id": "\"ag1\""
@@ -7649,6 +7650,8 @@ message LLMChatHistoryEntry {
 	// for testing
 	int64 timeout = 8; // ms
 	repeated Attachment attachments = 9;
+
+	string refusal = 15;
 }
 
 message AIDataEntryUsed {
