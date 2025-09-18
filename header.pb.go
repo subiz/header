@@ -64818,7 +64818,6 @@ type AIDataEntry struct {
 	Discount          *Discount              `protobuf:"bytes,55,opt,name=discount,proto3" json:"discount,omitempty"`
 	DataStore         *AIDataStore           `protobuf:"bytes,43,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"` // read-only, for product only when search infomation about a specific product
 	// url only
-	// int64 num_sub_links = 11;
 	LastCrawled     int64  `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
 	CrawlingStatus  string `protobuf:"bytes,13,opt,name=crawling_status,json=crawlingStatus,proto3" json:"crawling_status,omitempty"` // crawling, done
 	CrawlingError   string `protobuf:"bytes,25,opt,name=crawling_error,json=crawlingError,proto3" json:"crawling_error,omitempty"`    // crawling, done
@@ -64837,6 +64836,7 @@ type AIDataEntry struct {
 	ChunkAttempted      int64              `protobuf:"varint,40,opt,name=chunk_attempted,json=chunkAttempted,proto3" json:"chunk_attempted,omitempty"`
 	LastChunkDuration   int64              `protobuf:"varint,41,opt,name=last_chunk_duration,json=lastChunkDuration,proto3" json:"last_chunk_duration,omitempty"` // ms
 	Title               string             `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"`                                                     // title for url, file name for file
+	LlmSummary          string             `protobuf:"bytes,42,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`                         // read-only
 	NumCharacters       int64              `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	NumChunks           int64              `protobuf:"varint,37,opt,name=num_chunks,json=numChunks,proto3" json:"num_chunks,omitempty"`
 	FpvLastChunkingCost int64              `protobuf:"varint,47,opt,name=fpv_last_chunking_cost,json=fpvLastChunkingCost,proto3" json:"fpv_last_chunking_cost,omitempty"`
@@ -65087,6 +65087,13 @@ func (x *AIDataEntry) GetLastChunkDuration() int64 {
 func (x *AIDataEntry) GetTitle() string {
 	if x != nil {
 		return x.Title
+	}
+	return ""
+}
+
+func (x *AIDataEntry) GetLlmSummary() string {
+	if x != nil {
+		return x.LlmSummary
 	}
 	return ""
 }
@@ -77159,7 +77166,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\"\xae\f\n" +
+	" \x01(\tR\x05model\"\xcf\f\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77195,7 +77202,9 @@ const file_header_proto_rawDesc = "" +
 	"\x13last_failed_chunked\x18' \x01(\x03R\x11lastFailedChunked\x12'\n" +
 	"\x0fchunk_attempted\x18( \x01(\x03R\x0echunkAttempted\x12.\n" +
 	"\x13last_chunk_duration\x18) \x01(\x03R\x11lastChunkDuration\x12\x14\n" +
-	"\x05title\x18& \x01(\tR\x05title\x12%\n" +
+	"\x05title\x18& \x01(\tR\x05title\x12\x1f\n" +
+	"\vllm_summary\x18* \x01(\tR\n" +
+	"llmSummary\x12%\n" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1d\n" +
 	"\n" +
 	"num_chunks\x18% \x01(\x03R\tnumChunks\x123\n" +

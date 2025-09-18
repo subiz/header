@@ -9289,14 +9289,10 @@ message AIDataEntry {
 	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
 	// url only
-	// int64 num_sub_links = 11;
 	int64 last_crawled = 12;
 	string crawling_status = 13; // crawling, done
 	string crawling_error = 25; // crawling, done
 	int64 crawl_status_code = 14;
-	// int64 crawl_depth = 15; // 2 default
-	// string referer_entry_id = 16;
-	// int64 referer_entry_id_last_crawled = 33;
 
 	string status = 17; // pending, crawling, training, ready, unlinked, token-limit
 	int64 created = 19;
@@ -9315,6 +9311,7 @@ message AIDataEntry {
 	int64 last_chunk_duration = 41; // ms
 
 	string title = 38; // title for url, file name for file
+	string llm_summary = 42; // read-only
 
 	int64 num_characters = 36;
 	int64 num_chunks = 37;
@@ -9327,8 +9324,6 @@ message AIDataEntry {
 	string instruction = 51; // type=instruction
 	AIIntent intent = 52; // instruction trigger
 	WorkflowCondition condition = 53; // instruction condition
-
-	// repeated uint32 named_entities = 54; // for debugging
 
 	// suggestion
 	string conversation_id = 60;
