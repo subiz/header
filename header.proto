@@ -7623,10 +7623,23 @@ message LLMToolCall {
 	string conversation_id = 18;
 }
 
+message OpenAIMessageContentImageUrl {
+	string url = 4;
+	string detail = 5;
+}
+
+message OpenAIMessageContent {
+	string text = 4;
+	string type = 5;
+	OpenAIMessageContentImageUrl image_url = 6;
+}
+
 message LLMChatHistoryEntry {
 	int64 created = 2; // ms
 	string role = 3; // user | agent
 	string content = 4;
+	repeated OpenAIMessageContent contents = 11;
+	string name = 12;
 	LLMToolCall tool = 5;
 	string id = 6;
 
@@ -7636,7 +7649,6 @@ message LLMChatHistoryEntry {
 	// for testing
 	int64 timeout = 8; // ms
 	repeated Attachment attachments = 9;
-	repeated string more_expected_contents = 10;
 }
 
 message AIDataEntryUsed {
