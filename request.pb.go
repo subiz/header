@@ -6250,6 +6250,7 @@ type CrawlUrlRequest struct {
 	Force             bool                   `protobuf:"varint,15,opt,name=force,proto3" json:"force,omitempty"`
 	Url               string                 `protobuf:"bytes,16,opt,name=url,proto3" json:"url,omitempty"`
 	CrawlKey          string                 `protobuf:"bytes,17,opt,name=crawl_key,json=crawlKey,proto3" json:"crawl_key,omitempty"`
+	SummaryModel      string                 `protobuf:"bytes,18,opt,name=summary_model,json=summaryModel,proto3" json:"summary_model,omitempty"` // use llm to summary the webpage
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -6392,6 +6393,13 @@ func (x *CrawlUrlRequest) GetUrl() string {
 func (x *CrawlUrlRequest) GetCrawlKey() string {
 	if x != nil {
 		return x.CrawlKey
+	}
+	return ""
+}
+
+func (x *CrawlUrlRequest) GetSummaryModel() string {
+	if x != nil {
+		return x.SummaryModel
 	}
 	return ""
 }
@@ -9347,7 +9355,7 @@ const file_request_proto_rawDesc = "" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12!\n" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\"\x83\x04\n" +
+	"\x05email\x18\b \x01(\tR\x05email\"\xa8\x04\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9368,7 +9376,8 @@ const file_request_proto_rawDesc = "" +
 	"\x06anchor\x18\r \x01(\tR\x06anchor\x12\x14\n" +
 	"\x05force\x18\x0f \x01(\bR\x05force\x12\x10\n" +
 	"\x03url\x18\x10 \x01(\tR\x03url\x12\x1b\n" +
-	"\tcrawl_key\x18\x11 \x01(\tR\bcrawlKey\"\xf9\x03\n" +
+	"\tcrawl_key\x18\x11 \x01(\tR\bcrawlKey\x12#\n" +
+	"\rsummary_model\x18\x12 \x01(\tR\fsummaryModel\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

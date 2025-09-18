@@ -789,6 +789,9 @@ message CrawlUrlRequest {
 	bool force = 15;
 	string url = 16;
 	string crawl_key = 17;
+
+	string summary_model = 18; // use llm to summary the webpage
+
 }
 
 message ListAIDataEntryRequest {

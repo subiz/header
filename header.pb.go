@@ -64556,6 +64556,7 @@ type CrawlResponse struct {
 	NumVisitedLinks    int64                  `protobuf:"varint,16,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
 	NumHasProductLinks int64                  `protobuf:"varint,17,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
 	NumDiscoveredLinks int64                  `protobuf:"varint,18,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
+	LlmSummary         string                 `protobuf:"bytes,19,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -64700,6 +64701,13 @@ func (x *CrawlResponse) GetNumDiscoveredLinks() int64 {
 		return x.NumDiscoveredLinks
 	}
 	return 0
+}
+
+func (x *CrawlResponse) GetLlmSummary() string {
+	if x != nil {
+		return x.LlmSummary
+	}
+	return ""
 }
 
 type AIDataChunk struct {
@@ -77120,7 +77128,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xa0\x04\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xc1\x04\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -77140,7 +77148,9 @@ const file_header_proto_rawDesc = "" +
 	"\x06anchor\x18\x0f \x01(\tR\x06anchor\x12*\n" +
 	"\x11num_visited_links\x18\x10 \x01(\x03R\x0fnumVisitedLinks\x121\n" +
 	"\x15num_has_product_links\x18\x11 \x01(\x03R\x12numHasProductLinks\x120\n" +
-	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\"\xe3\x01\n" +
+	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
+	"\vllm_summary\x18\x13 \x01(\tR\n" +
+	"llmSummary\"\xe3\x01\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x05 \x01(\tR\x02id\x12\x16\n" +

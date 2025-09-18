@@ -9252,6 +9252,8 @@ message CrawlResponse {
 	int64 num_visited_links = 16;
 	int64 num_has_product_links = 17;
 	int64 num_discovered_links = 18;
+
+	string llm_summary = 19;
 }
 
 message AIDataChunk {
