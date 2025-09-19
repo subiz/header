@@ -6233,26 +6233,27 @@ func (x *NewPassword) GetEmail() string {
 }
 
 type CrawlUrlRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId         string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	LastMd5           string                 `protobuf:"bytes,3,opt,name=last_md5,json=lastMd5,proto3" json:"last_md5,omitempty"`
-	LinkOnly          bool                   `protobuf:"varint,4,opt,name=link_only,json=linkOnly,proto3" json:"link_only,omitempty"`
-	JavascriptEnabled bool                   `protobuf:"varint,5,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
-	Timeout           int64                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"` // ms 30_000 default
-	MaxDepth          int64                  `protobuf:"varint,7,opt,name=max_depth,json=maxDepth,proto3" json:"max_depth,omitempty"`
-	MaxLinks          int64                  `protobuf:"varint,8,opt,name=max_links,json=maxLinks,proto3" json:"max_links,omitempty"` // max 1000
-	LinkRegex         string                 `protobuf:"bytes,10,opt,name=link_regex,json=linkRegex,proto3" json:"link_regex,omitempty"`
-	LinkExcludeRegexs []string               `protobuf:"bytes,14,rep,name=link_exclude_regexs,json=linkExcludeRegexs,proto3" json:"link_exclude_regexs,omitempty"`
-	UseSitemapXml     int64                  `protobuf:"varint,11,opt,name=use_sitemap_xml,json=useSitemapXml,proto3" json:"use_sitemap_xml,omitempty"`
-	SitemapUrl        string                 `protobuf:"bytes,12,opt,name=sitemap_url,json=sitemapUrl,proto3" json:"sitemap_url,omitempty"` // default domain/robots.txt
-	Anchor            string                 `protobuf:"bytes,13,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	Force             bool                   `protobuf:"varint,15,opt,name=force,proto3" json:"force,omitempty"`
-	Url               string                 `protobuf:"bytes,16,opt,name=url,proto3" json:"url,omitempty"`
-	CrawlKey          string                 `protobuf:"bytes,17,opt,name=crawl_key,json=crawlKey,proto3" json:"crawl_key,omitempty"`
-	SummaryModel      string                 `protobuf:"bytes,18,opt,name=summary_model,json=summaryModel,proto3" json:"summary_model,omitempty"` // use llm to summary the webpage
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	LastMd5                       string                 `protobuf:"bytes,3,opt,name=last_md5,json=lastMd5,proto3" json:"last_md5,omitempty"`
+	LinkOnly                      bool                   `protobuf:"varint,4,opt,name=link_only,json=linkOnly,proto3" json:"link_only,omitempty"`
+	JavascriptEnabled             bool                   `protobuf:"varint,5,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
+	Timeout                       int64                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"` // ms 30_000 default
+	MaxDepth                      int64                  `protobuf:"varint,7,opt,name=max_depth,json=maxDepth,proto3" json:"max_depth,omitempty"`
+	MaxLinks                      int64                  `protobuf:"varint,8,opt,name=max_links,json=maxLinks,proto3" json:"max_links,omitempty"` // max 1000
+	LinkRegex                     string                 `protobuf:"bytes,10,opt,name=link_regex,json=linkRegex,proto3" json:"link_regex,omitempty"`
+	LinkExcludeRegexs             []string               `protobuf:"bytes,14,rep,name=link_exclude_regexs,json=linkExcludeRegexs,proto3" json:"link_exclude_regexs,omitempty"`
+	UseSitemapXml                 int64                  `protobuf:"varint,11,opt,name=use_sitemap_xml,json=useSitemapXml,proto3" json:"use_sitemap_xml,omitempty"`
+	SitemapUrl                    string                 `protobuf:"bytes,12,opt,name=sitemap_url,json=sitemapUrl,proto3" json:"sitemap_url,omitempty"` // default domain/robots.txt
+	Anchor                        string                 `protobuf:"bytes,13,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	Force                         bool                   `protobuf:"varint,15,opt,name=force,proto3" json:"force,omitempty"`
+	Url                           string                 `protobuf:"bytes,16,opt,name=url,proto3" json:"url,omitempty"`
+	CrawlKey                      string                 `protobuf:"bytes,17,opt,name=crawl_key,json=crawlKey,proto3" json:"crawl_key,omitempty"`
+	SummaryModel                  string                 `protobuf:"bytes,18,opt,name=summary_model,json=summaryModel,proto3" json:"summary_model,omitempty"` // use llm to summary the webpage
+	ByPassDomainVerificationCheck bool                   `protobuf:"varint,19,opt,name=by_pass_domain_verification_check,json=byPassDomainVerificationCheck,proto3" json:"by_pass_domain_verification_check,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *CrawlUrlRequest) Reset() {
@@ -6402,6 +6403,13 @@ func (x *CrawlUrlRequest) GetSummaryModel() string {
 		return x.SummaryModel
 	}
 	return ""
+}
+
+func (x *CrawlUrlRequest) GetByPassDomainVerificationCheck() bool {
+	if x != nil {
+		return x.ByPassDomainVerificationCheck
+	}
+	return false
 }
 
 type ListAIDataEntryRequest struct {
@@ -9355,7 +9363,7 @@ const file_request_proto_rawDesc = "" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12!\n" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\"\xa8\x04\n" +
+	"\x05email\x18\b \x01(\tR\x05email\"\xf2\x04\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9377,7 +9385,8 @@ const file_request_proto_rawDesc = "" +
 	"\x05force\x18\x0f \x01(\bR\x05force\x12\x10\n" +
 	"\x03url\x18\x10 \x01(\tR\x03url\x12\x1b\n" +
 	"\tcrawl_key\x18\x11 \x01(\tR\bcrawlKey\x12#\n" +
-	"\rsummary_model\x18\x12 \x01(\tR\fsummaryModel\"\xf9\x03\n" +
+	"\rsummary_model\x18\x12 \x01(\tR\fsummaryModel\x12H\n" +
+	"!by_pass_domain_verification_check\x18\x13 \x01(\bR\x1dbyPassDomainVerificationCheck\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

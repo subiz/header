@@ -791,7 +791,7 @@ message CrawlUrlRequest {
 	string crawl_key = 17;
 
 	string summary_model = 18; // use llm to summary the webpage
-
+	bool by_pass_domain_verification_check = 19;
 }
 
 message ListAIDataEntryRequest {
