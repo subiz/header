@@ -7669,6 +7669,7 @@ message AIDataEntryUsed {
 	string origin_chunk = 11;
 	bool is_vector_search = 12;
 	bool is_full_text_search = 13;
+	int64 chunk_index = 14;
 }
 
 message AIAgentTrace {
@@ -9259,7 +9260,7 @@ message CrawlResponse {
 message AIDataChunk {
 	common.Context ctx = 1;
 
-	string entry_id = 3;
+	string data_entry_id = 3;
 	string id = 5; // md5 of embedded_chunk
 	repeated float vector = 11;
 	string original_chunk = 7;
@@ -9267,7 +9268,7 @@ message AIDataChunk {
 	int64 num_characters = 9;
 	string model = 10;
 
-	int64 index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
+	int64 chunk_index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	// repeated uint32 named_entities = 12;
 }
 

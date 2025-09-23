@@ -53582,6 +53582,7 @@ type AIDataEntryUsed struct {
 	OriginChunk      string                 `protobuf:"bytes,11,opt,name=origin_chunk,json=originChunk,proto3" json:"origin_chunk,omitempty"`
 	IsVectorSearch   bool                   `protobuf:"varint,12,opt,name=is_vector_search,json=isVectorSearch,proto3" json:"is_vector_search,omitempty"`
 	IsFullTextSearch bool                   `protobuf:"varint,13,opt,name=is_full_text_search,json=isFullTextSearch,proto3" json:"is_full_text_search,omitempty"`
+	ChunkIndex       int64                  `protobuf:"varint,14,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -53663,6 +53664,13 @@ func (x *AIDataEntryUsed) GetIsFullTextSearch() bool {
 		return x.IsFullTextSearch
 	}
 	return false
+}
+
+func (x *AIDataEntryUsed) GetChunkIndex() int64 {
+	if x != nil {
+		return x.ChunkIndex
+	}
+	return 0
 }
 
 type AIAgentTrace struct {
@@ -64713,14 +64721,14 @@ func (x *CrawlResponse) GetLlmSummary() string {
 type AIDataChunk struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	EntryId       string                 `protobuf:"bytes,3,opt,name=entry_id,json=entryId,proto3" json:"entry_id,omitempty"`
+	DataEntryId   string                 `protobuf:"bytes,3,opt,name=data_entry_id,json=dataEntryId,proto3" json:"data_entry_id,omitempty"`
 	Id            string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"` // md5 of embedded_chunk
 	Vector        []float32              `protobuf:"fixed32,11,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	OriginalChunk string                 `protobuf:"bytes,7,opt,name=original_chunk,json=originalChunk,proto3" json:"original_chunk,omitempty"`
 	EmbeddedChunk string                 `protobuf:"bytes,8,opt,name=embedded_chunk,json=embeddedChunk,proto3" json:"embedded_chunk,omitempty"`
 	NumCharacters int64                  `protobuf:"varint,9,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Model         string                 `protobuf:"bytes,10,opt,name=model,proto3" json:"model,omitempty"`
-	Index         int64                  `protobuf:"varint,12,opt,name=index,proto3" json:"index,omitempty"` // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
+	ChunkIndex    int64                  `protobuf:"varint,12,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"` // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -64762,9 +64770,9 @@ func (x *AIDataChunk) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *AIDataChunk) GetEntryId() string {
+func (x *AIDataChunk) GetDataEntryId() string {
 	if x != nil {
-		return x.EntryId
+		return x.DataEntryId
 	}
 	return ""
 }
@@ -64811,9 +64819,9 @@ func (x *AIDataChunk) GetModel() string {
 	return ""
 }
 
-func (x *AIDataChunk) GetIndex() int64 {
+func (x *AIDataChunk) GetChunkIndex() int64 {
 	if x != nil {
-		return x.Index
+		return x.ChunkIndex
 	}
 	return 0
 }
@@ -75758,7 +75766,7 @@ const file_header_proto_rawDesc = "" +
 	"\arefusal\x18\x0f \x01(\tR\arefusal\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf8\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x99\x02\n" +
 	"\x0fAIDataEntryUsed\x12\x19\n" +
 	"\bchunk_id\x18\x04 \x01(\tR\achunkId\x12\"\n" +
 	"\rdata_entry_id\x18\x05 \x01(\tR\vdataEntryId\x12\x14\n" +
@@ -75766,7 +75774,9 @@ const file_header_proto_rawDesc = "" +
 	"\x05score\x18\a \x01(\x03R\x05score\x12!\n" +
 	"\forigin_chunk\x18\v \x01(\tR\voriginChunk\x12(\n" +
 	"\x10is_vector_search\x18\f \x01(\bR\x0eisVectorSearch\x12-\n" +
-	"\x13is_full_text_search\x18\r \x01(\bR\x10isFullTextSearch\"\xe9\b\n" +
+	"\x13is_full_text_search\x18\r \x01(\bR\x10isFullTextSearch\x12\x1f\n" +
+	"\vchunk_index\x18\x0e \x01(\x03R\n" +
+	"chunkIndex\"\xe9\b\n" +
 	"\fAIAgentTrace\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77172,18 +77182,19 @@ const file_header_proto_rawDesc = "" +
 	"\x15num_has_product_links\x18\x11 \x01(\x03R\x12numHasProductLinks\x120\n" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
-	"llmSummary\"\x94\x02\n" +
+	"llmSummary\"\xa8\x02\n" +
 	"\vAIDataChunk\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x19\n" +
-	"\bentry_id\x18\x03 \x01(\tR\aentryId\x12\x0e\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\"\n" +
+	"\rdata_entry_id\x18\x03 \x01(\tR\vdataEntryId\x12\x0e\n" +
 	"\x02id\x18\x05 \x01(\tR\x02id\x12\x16\n" +
 	"\x06vector\x18\v \x03(\x02R\x06vector\x12%\n" +
 	"\x0eoriginal_chunk\x18\a \x01(\tR\roriginalChunk\x12%\n" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\x12\x14\n" +
-	"\x05index\x18\f \x01(\x03R\x05index\"\xcf\f\n" +
+	" \x01(\tR\x05model\x12\x1f\n" +
+	"\vchunk_index\x18\f \x01(\x03R\n" +
+	"chunkIndex\"\xcf\f\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
