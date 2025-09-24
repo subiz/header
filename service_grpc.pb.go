@@ -11139,6 +11139,7 @@ const (
 	ConversationMgr_ReportMessages_FullMethodName           = "/header.ConversationMgr/ReportMessages"
 	ConversationMgr_VerifyWebsiteByVisit_FullMethodName     = "/header.ConversationMgr/VerifyWebsiteByVisit"
 	ConversationMgr_VerifyWebsiteByDNS_FullMethodName       = "/header.ConversationMgr/VerifyWebsiteByDNS"
+	ConversationMgr_ForceVerifyWebsite_FullMethodName       = "/header.ConversationMgr/ForceVerifyWebsite"
 )
 
 // ConversationMgrClient is the client API for ConversationMgr service.
@@ -11227,6 +11228,7 @@ type ConversationMgrClient interface {
 	ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error)
 	VerifyWebsiteByVisit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ForceVerifyWebsite(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conversationMgrClient struct {
@@ -12007,6 +12009,16 @@ func (c *conversationMgrClient) VerifyWebsiteByDNS(ctx context.Context, in *Id, 
 	return out, nil
 }
 
+func (c *conversationMgrClient) ForceVerifyWebsite(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_ForceVerifyWebsite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationMgrServer is the server API for ConversationMgr service.
 // All implementations must embed UnimplementedConversationMgrServer
 // for forward compatibility.
@@ -12093,6 +12105,7 @@ type ConversationMgrServer interface {
 	ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error)
 	VerifyWebsiteByVisit(context.Context, *Id) (*Response, error)
 	VerifyWebsiteByDNS(context.Context, *Id) (*Response, error)
+	ForceVerifyWebsite(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -12333,6 +12346,9 @@ func (UnimplementedConversationMgrServer) VerifyWebsiteByVisit(context.Context, 
 }
 func (UnimplementedConversationMgrServer) VerifyWebsiteByDNS(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyWebsiteByDNS not implemented")
+}
+func (UnimplementedConversationMgrServer) ForceVerifyWebsite(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ForceVerifyWebsite not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
 func (UnimplementedConversationMgrServer) testEmbeddedByValue()                         {}
@@ -13741,6 +13757,24 @@ func _ConversationMgr_VerifyWebsiteByDNS_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_ForceVerifyWebsite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ForceVerifyWebsite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ForceVerifyWebsite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ForceVerifyWebsite(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConversationMgr_ServiceDesc is the grpc.ServiceDesc for ConversationMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -14055,6 +14089,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyWebsiteByDNS",
 			Handler:    _ConversationMgr_VerifyWebsiteByDNS_Handler,
+		},
+		{
+			MethodName: "ForceVerifyWebsite",
+			Handler:    _ConversationMgr_ForceVerifyWebsite_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

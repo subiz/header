@@ -510,6 +510,7 @@ service ConversationMgr {
 
 	rpc VerifyWebsiteByVisit(header.Id) returns (Response);
 	rpc VerifyWebsiteByDNS(header.Id) returns (Response);
+	rpc ForceVerifyWebsite(header.Id) returns (Response);
 }
 
 service TicketMgr {
