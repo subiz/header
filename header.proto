@@ -7671,6 +7671,7 @@ message LLMChatHistoryEntry {
 
 	repeated string criteria = 16;
 	int64 score = 17;
+	string score_explain = 18;
 }
 
 message AIDataEntryUsed {
@@ -9103,6 +9104,11 @@ message AIAgentTestcase {
 	repeated LLMChatHistoryEntry messages = 6;
 	Conversation conversation = 7;
 	User user = 8;
+
+	int64 created = 20;
+	int64 updated = 21;
+	string updated_by = 22;
+	string created_by = 23;
 }
 
 message AIAgentTestRunResult {
@@ -9113,11 +9119,13 @@ message AIAgentTestRunResult {
 	string testcase_id = 5;
 
 	repeated LLMChatHistoryEntry messages = 6;
+	Conversation conversation = 7;
+	User user = 8;
 
 	// output
 	int64 avg_score = 9;
 	int64 created = 10;
-	string status = 11; // pass, failed
+	string status = 11; // pending, pass, failed
 }
 
 message AIAgentTestRun {
@@ -9134,7 +9142,8 @@ message AIAgentTestRun {
 
 	int64 duration_sec = 10;
 	int64 created = 11;
-	string status = 13; // success, failed, queued, running
+	string status = 13; // success, failed, pending, running, cancelled
+	int64 updated = 14;
 }
 
 message RewriteQueryExample {
