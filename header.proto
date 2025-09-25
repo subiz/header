@@ -7664,7 +7664,7 @@ message LLMChatHistoryEntry {
 message AIDataEntryUsed {
 	string chunk_id = 4;
 	string data_entry_id = 5;
-	string chunk = 6; // chunk that is being used
+	// string chunk = 6; // chunk that is being used
 	int64 score = 7; // max 10000 => 100%
 	string origin_chunk = 11;
 	bool is_vector_search = 12;
@@ -8987,7 +8987,7 @@ message AIAgent {
 	string id = 3;
 	string fullname = 4;
 	File avatar = 5;
-	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
+	string description = 6;
 	string avatar_url = 7;
 
 	string brand = 9;
@@ -9076,6 +9076,17 @@ message AIAgent {
 
 	string operation_mode = 84; // foreground, background
 	AIAgentUsageLimit usage_limit = 85;
+
+	RewriteQuerySetting rewrite_query = 86;
+}
+
+message RewriteQueryExample {
+	repeated LLMChatHistoryEntry messages = 3;
+}
+
+message RewriteQuerySetting {
+	string extra_prompt = 3;
+	repeated RewriteQueryExample examples = 4;
 }
 
 message AIAgentUsageLimit {
