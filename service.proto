@@ -394,6 +394,17 @@ service WorkflowMgr {
 	// rpc UpdateNamedEntity(NamedEntity) returns (Response);
 	// rpc GetNamedEntity(Id) returns (Response);
 	// rpc MatchNamedEntities(Ids) returns (Response);
+
+	rpc CreateAIAgentTestRun(AIAgentTestRun) returns (Response);
+	rpc ListAIAgentTestRuns(Id) returns (Response);
+	rpc ListAIAgentTestRunResults(AIAgentTestRun) returns (Response);
+	rpc GetAIAgentTestRunResult(AIAgentTestRunResult) returns (Response);
+	rpc CancelAIAgentTestRun(AIAgentTestRun) returns (Response);
+
+	rpc CreateAIAgentTestcase(AIAgentTestcase) returns (Response);
+	rpc UpdateAIAgentTestcase(AIAgentTestcase) returns (Response);
+	rpc DeleteAIAgentTestcase(AIAgentTestcase) returns (Response);
+	rpc ListAIAgentTestcases(Id) returns (Response);
 }
 
 service ConversationMgr {

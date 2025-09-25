@@ -7057,6 +7057,15 @@ message Response {
 	ProductFeedRun product_feed_run = 236;
 
 	repeated PaymentMethod payment_methods = 237;
+
+	AIAgentTestRun ai_agent_test_run = 240;
+	repeated AIAgentTestRun ai_agent_test_runs = 241;
+
+	repeated AIAgentTestcase ai_agent_testcases = 242;
+	AIAgentTestcase ai_agent_testcase = 243;
+
+	repeated AIAgentTestRunResult ai_agent_test_run_results = 244;
+	AIAgentTestRunResult ai_agent_test_run_result = 245;
 }
 
 message ReportCount {
@@ -7659,6 +7668,9 @@ message LLMChatHistoryEntry {
 	repeated Attachment attachments = 9;
 
 	string refusal = 15;
+
+	repeated string criteria = 16;
+	int64 score = 17;
 }
 
 message AIDataEntryUsed {
@@ -9078,6 +9090,49 @@ message AIAgent {
 	AIAgentUsageLimit usage_limit = 85;
 
 	RewriteQuerySetting rewrite_query = 86;
+}
+
+message AIAgentTestcase {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4;
+
+	int64 disabled = 5;
+
+	repeated LLMChatHistoryEntry messages = 6;
+	Conversation conversation = 7;
+	User user = 8;
+}
+
+message AIAgentTestRunResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string run_id = 4;
+	string testcase_id = 5;
+
+	repeated LLMChatHistoryEntry messages = 6;
+
+	// output
+	int64 avg_score = 9;
+	int64 created = 10;
+	string status = 11; // pass, failed
+}
+
+message AIAgentTestRun {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4;
+
+	int64 avg_score = 6;
+	int64 num_passes = 8;
+	int64 num_faileds = 9;
+
+	int64 duration_sec = 10;
+	int64 created = 11;
+	string status = 13; // success, failed, queued, running
 }
 
 message RewriteQueryExample {
