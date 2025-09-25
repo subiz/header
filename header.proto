@@ -9109,7 +9109,7 @@ message AIAgentTestRunResult {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	string run_id = 4;
+	string test_run_id = 4;
 	string testcase_id = 5;
 
 	repeated LLMChatHistoryEntry messages = 6;
@@ -9125,6 +9125,8 @@ message AIAgentTestRun {
 	string account_id = 2;
 	string agent_id = 3;
 	string id = 4;
+
+	repeated AIAgentTestcase testcases = 5;
 
 	int64 avg_score = 6;
 	int64 num_passes = 8;
