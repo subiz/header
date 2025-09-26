@@ -9104,10 +9104,12 @@ message AIAgentTestcase {
 	Conversation conversation = 10;
 	User user = 11;
 
-	int64 score = 12;
-	string test_status = 13;
+	int64 last_score = 12;
+	string last_status = 13; // pass fail pending running
 	int64 last_run_at = 14;
 	string test_result_id = 15;
+
+	string status = 16; // pass fail pending running <empty>
 
 	int64 created = 20;
 	int64 updated = 21;
@@ -9128,7 +9130,7 @@ message AIAgentTestResult {
 	User user = 11;
 
 	// output
-	int64 avg_score = 13;
+	int64 score = 13;
 	int64 created = 14;
 	string status = 15; // pending, pass, failed
 

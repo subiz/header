@@ -63584,10 +63584,11 @@ type AIAgentTestcase struct {
 	Messages      []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
 	Conversation  *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
 	User          *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
-	Score         int64                  `protobuf:"varint,12,opt,name=score,proto3" json:"score,omitempty"`
-	TestStatus    string                 `protobuf:"bytes,13,opt,name=test_status,json=testStatus,proto3" json:"test_status,omitempty"`
+	LastScore     int64                  `protobuf:"varint,12,opt,name=last_score,json=lastScore,proto3" json:"last_score,omitempty"`
+	LastStatus    string                 `protobuf:"bytes,13,opt,name=last_status,json=lastStatus,proto3" json:"last_status,omitempty"` // pass fail pending running
 	LastRunAt     int64                  `protobuf:"varint,14,opt,name=last_run_at,json=lastRunAt,proto3" json:"last_run_at,omitempty"`
 	TestResultId  string                 `protobuf:"bytes,15,opt,name=test_result_id,json=testResultId,proto3" json:"test_result_id,omitempty"`
+	Status        string                 `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"` // pass fail pending running <empty>
 	Created       int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
 	Updated       int64                  `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
 	UpdatedBy     string                 `protobuf:"bytes,22,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
@@ -63689,16 +63690,16 @@ func (x *AIAgentTestcase) GetUser() *User {
 	return nil
 }
 
-func (x *AIAgentTestcase) GetScore() int64 {
+func (x *AIAgentTestcase) GetLastScore() int64 {
 	if x != nil {
-		return x.Score
+		return x.LastScore
 	}
 	return 0
 }
 
-func (x *AIAgentTestcase) GetTestStatus() string {
+func (x *AIAgentTestcase) GetLastStatus() string {
 	if x != nil {
-		return x.TestStatus
+		return x.LastStatus
 	}
 	return ""
 }
@@ -63713,6 +63714,13 @@ func (x *AIAgentTestcase) GetLastRunAt() int64 {
 func (x *AIAgentTestcase) GetTestResultId() string {
 	if x != nil {
 		return x.TestResultId
+	}
+	return ""
+}
+
+func (x *AIAgentTestcase) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -63757,7 +63765,7 @@ type AIAgentTestResult struct {
 	Conversation *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
 	User         *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
 	// output
-	AvgScore      int64  `protobuf:"varint,13,opt,name=avg_score,json=avgScore,proto3" json:"avg_score,omitempty"`
+	Score         int64  `protobuf:"varint,13,opt,name=score,proto3" json:"score,omitempty"`
 	Created       int64  `protobuf:"varint,14,opt,name=created,proto3" json:"created,omitempty"`
 	Status        string `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"` // pending, pass, failed
 	Ran           int64  `protobuf:"varint,16,opt,name=ran,proto3" json:"ran,omitempty"`      // ms
@@ -63861,9 +63869,9 @@ func (x *AIAgentTestResult) GetUser() *User {
 	return nil
 }
 
-func (x *AIAgentTestResult) GetAvgScore() int64 {
+func (x *AIAgentTestResult) GetScore() int64 {
 	if x != nil {
-		return x.AvgScore
+		return x.Score
 	}
 	return 0
 }
@@ -77559,7 +77567,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eoperation_mode\x18T \x01(\tR\roperationMode\x12:\n" +
 	"\vusage_limit\x18U \x01(\v2\x19.header.AIAgentUsageLimitR\n" +
 	"usageLimit\x12@\n" +
-	"\rrewrite_query\x18V \x01(\v2\x1b.header.RewriteQuerySettingR\frewriteQuery\"\xb2\x04\n" +
+	"\rrewrite_query\x18V \x01(\v2\x1b.header.RewriteQuerySettingR\frewriteQuery\"\xd3\x04\n" +
 	"\x0fAIAgentTestcase\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77571,18 +77579,20 @@ const file_header_proto_rawDesc = "" +
 	"\bmessages\x18\t \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\x128\n" +
 	"\fconversation\x18\n" +
 	" \x01(\v2\x14.header.ConversationR\fconversation\x12 \n" +
-	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x14\n" +
-	"\x05score\x18\f \x01(\x03R\x05score\x12\x1f\n" +
-	"\vtest_status\x18\r \x01(\tR\n" +
-	"testStatus\x12\x1e\n" +
+	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x1d\n" +
+	"\n" +
+	"last_score\x18\f \x01(\x03R\tlastScore\x12\x1f\n" +
+	"\vlast_status\x18\r \x01(\tR\n" +
+	"lastStatus\x12\x1e\n" +
 	"\vlast_run_at\x18\x0e \x01(\x03R\tlastRunAt\x12$\n" +
-	"\x0etest_result_id\x18\x0f \x01(\tR\ftestResultId\x12\x18\n" +
+	"\x0etest_result_id\x18\x0f \x01(\tR\ftestResultId\x12\x16\n" +
+	"\x06status\x18\x10 \x01(\tR\x06status\x12\x18\n" +
 	"\acreated\x18\x14 \x01(\x03R\acreated\x12\x18\n" +
 	"\aupdated\x18\x15 \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
 	"updated_by\x18\x16 \x01(\tR\tupdatedBy\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\x17 \x01(\tR\tcreatedBy\"\x85\x04\n" +
+	"created_by\x18\x17 \x01(\tR\tcreatedBy\"\xfe\x03\n" +
 	"\x11AIAgentTestResult\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77595,8 +77605,8 @@ const file_header_proto_rawDesc = "" +
 	"\bmessages\x18\t \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\x128\n" +
 	"\fconversation\x18\n" +
 	" \x01(\v2\x14.header.ConversationR\fconversation\x12 \n" +
-	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x1b\n" +
-	"\tavg_score\x18\r \x01(\x03R\bavgScore\x12\x18\n" +
+	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x14\n" +
+	"\x05score\x18\r \x01(\x03R\x05score\x12\x18\n" +
 	"\acreated\x18\x0e \x01(\x03R\acreated\x12\x16\n" +
 	"\x06status\x18\x0f \x01(\tR\x06status\x12\x10\n" +
 	"\x03ran\x18\x10 \x01(\x03R\x03ran\x12!\n" +
