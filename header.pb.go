@@ -63733,6 +63733,7 @@ type AIAgentTestResult struct {
 	Ctx          *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId    string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AgentId      string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Id           string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	TestcaseId   string                 `protobuf:"bytes,5,opt,name=testcase_id,json=testcaseId,proto3" json:"testcase_id,omitempty"`
 	Name         string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	Messages     []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
@@ -63795,6 +63796,13 @@ func (x *AIAgentTestResult) GetAccountId() string {
 func (x *AIAgentTestResult) GetAgentId() string {
 	if x != nil {
 		return x.AgentId
+	}
+	return ""
+}
+
+func (x *AIAgentTestResult) GetId() string {
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
@@ -77538,12 +77546,13 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x16 \x01(\tR\tupdatedBy\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\x17 \x01(\tR\tcreatedBy\"\xbe\x03\n" +
+	"created_by\x18\x17 \x01(\tR\tcreatedBy\"\xce\x03\n" +
 	"\x11AIAgentTestResult\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x1f\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1f\n" +
 	"\vtestcase_id\x18\x05 \x01(\tR\n" +
 	"testcaseId\x12\x12\n" +
 	"\x04name\x18\x06 \x01(\tR\x04name\x127\n" +

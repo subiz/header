@@ -9116,6 +9116,7 @@ message AIAgentTestResult {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
+	string id = 4;
 	string testcase_id = 5;
 
 	string name = 6;
