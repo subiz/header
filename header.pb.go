@@ -63591,6 +63591,10 @@ type AIAgentTestcase struct {
 	Messages      []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
 	Conversation  *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
 	User          *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
+	Score         int64                  `protobuf:"varint,12,opt,name=score,proto3" json:"score,omitempty"`
+	Status        string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	LastRunAt     int64                  `protobuf:"varint,14,opt,name=last_run_at,json=lastRunAt,proto3" json:"last_run_at,omitempty"`
+	LastRunId     int64                  `protobuf:"varint,15,opt,name=last_run_id,json=lastRunId,proto3" json:"last_run_id,omitempty"`
 	Created       int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
 	Updated       int64                  `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
 	UpdatedBy     string                 `protobuf:"bytes,22,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
@@ -63690,6 +63694,34 @@ func (x *AIAgentTestcase) GetUser() *User {
 		return x.User
 	}
 	return nil
+}
+
+func (x *AIAgentTestcase) GetScore() int64 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *AIAgentTestcase) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *AIAgentTestcase) GetLastRunAt() int64 {
+	if x != nil {
+		return x.LastRunAt
+	}
+	return 0
+}
+
+func (x *AIAgentTestcase) GetLastRunId() int64 {
+	if x != nil {
+		return x.LastRunId
+	}
+	return 0
 }
 
 func (x *AIAgentTestcase) GetCreated() int64 {
@@ -77659,7 +77691,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eoperation_mode\x18T \x01(\tR\roperationMode\x12:\n" +
 	"\vusage_limit\x18U \x01(\v2\x19.header.AIAgentUsageLimitR\n" +
 	"usageLimit\x12@\n" +
-	"\rrewrite_query\x18V \x01(\v2\x1b.header.RewriteQuerySettingR\frewriteQuery\"\xb5\x03\n" +
+	"\rrewrite_query\x18V \x01(\v2\x1b.header.RewriteQuerySettingR\frewriteQuery\"\xa3\x04\n" +
 	"\x0fAIAgentTestcase\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77671,7 +77703,11 @@ const file_header_proto_rawDesc = "" +
 	"\bmessages\x18\t \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\x128\n" +
 	"\fconversation\x18\n" +
 	" \x01(\v2\x14.header.ConversationR\fconversation\x12 \n" +
-	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x18\n" +
+	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x14\n" +
+	"\x05score\x18\f \x01(\x03R\x05score\x12\x16\n" +
+	"\x06status\x18\r \x01(\tR\x06status\x12\x1e\n" +
+	"\vlast_run_at\x18\x0e \x01(\x03R\tlastRunAt\x12\x1e\n" +
+	"\vlast_run_id\x18\x0f \x01(\x03R\tlastRunId\x12\x18\n" +
 	"\acreated\x18\x14 \x01(\x03R\acreated\x12\x18\n" +
 	"\aupdated\x18\x15 \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +

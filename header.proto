@@ -9105,6 +9105,11 @@ message AIAgentTestcase {
 	Conversation conversation = 10;
 	User user = 11;
 
+	int64 score = 12;
+	string status = 13;
+	int64 last_run_at = 14;
+	int64 last_run_id = 15;
+
 	int64 created = 20;
 	int64 updated = 21;
 	string updated_by = 22;

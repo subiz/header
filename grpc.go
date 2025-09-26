@@ -737,7 +737,6 @@ func staggingTarget(target string) string {
 
 func isNormalService(target string) bool {
 	return strings.Contains(target, "account") ||
-		strings.Contains(target, "automation") ||
 		strings.Contains(target, "bizbot") ||
 		strings.Contains(target, "counter") ||
 		strings.Contains(target, "email") ||
