@@ -7666,9 +7666,11 @@ message LLMChatHistoryEntry {
 
 	string refusal = 15;
 
+	// for running testcase
 	repeated string criteria = 16;
 	int64 score = 17;
 	string score_explain = 18;
+	AIAgentTrace trace = 19;
 }
 
 message AIDataEntryUsed {
@@ -9103,8 +9105,9 @@ message AIAgentTestcase {
 	User user = 11;
 
 	int64 score = 12;
-	string status = 13;
+	string test_status = 13;
 	int64 last_run_at = 14;
+	string test_result_id = 15;
 
 	int64 created = 20;
 	int64 updated = 21;
@@ -9131,6 +9134,10 @@ message AIAgentTestResult {
 
 	int64 ran = 16; // ms
 	int64 duration_sec = 17;
+
+	int64 updated = 18;
+
+	string error_log = 19;
 }
 
 message RewriteQueryExample {
