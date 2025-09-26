@@ -4937,8 +4937,8 @@ message Product {
 	repeated ProductStock stocks = 63;
 
 	string source_id = 61;
-
-	bool has_inventory = 62; // share
+	string availability = 68; // in_stock, out_of_stock, online_only, pre_order, pre_sale, sold_out
+	// bool has_inventory = 62; // share
 
 	Tax tax = 64; // (shared)
 
@@ -9132,7 +9132,7 @@ message AIAgentTestResult {
 	// output
 	int64 score = 13;
 	int64 created = 14;
-	string status = 15; // pending, pass, failed
+	string status = 15; // pending, pass, fail
 
 	int64 ran = 16; // ms
 	int64 duration_sec = 17;

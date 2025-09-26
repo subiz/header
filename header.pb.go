@@ -34186,8 +34186,8 @@ type Product struct {
 	Stock                    int64                  `protobuf:"varint,60,opt,name=stock,proto3" json:"stock,omitempty"`                            //
 	Stocks                   []*ProductStock        `protobuf:"bytes,63,rep,name=stocks,proto3" json:"stocks,omitempty"`
 	SourceId                 string                 `protobuf:"bytes,61,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
-	HasInventory             bool                   `protobuf:"varint,62,opt,name=has_inventory,json=hasInventory,proto3" json:"has_inventory,omitempty"` // share
-	Tax                      *Tax                   `protobuf:"bytes,64,opt,name=tax,proto3" json:"tax,omitempty"`                                        // (shared)
+	Availability             string                 `protobuf:"bytes,68,opt,name=availability,proto3" json:"availability,omitempty"` // in_stock, out_of_stock, online_only, pre_order, pre_sale, sold_out
+	Tax                      *Tax                   `protobuf:"bytes,64,opt,name=tax,proto3" json:"tax,omitempty"`                   // (shared)
 	Currency                 string                 `protobuf:"bytes,65,opt,name=currency,proto3" json:"currency,omitempty"`
 	Buttons                  []*MessageButton       `protobuf:"bytes,66,rep,name=buttons,proto3" json:"buttons,omitempty"`                                                                                                                                   // for message attachment
 	ViewDurationSec          int64                  `protobuf:"varint,67,opt,name=view_duration_sec,json=viewDurationSec,proto3" json:"view_duration_sec,omitempty"`                                                                                         // for event content_view only
@@ -34544,11 +34544,11 @@ func (x *Product) GetSourceId() string {
 	return ""
 }
 
-func (x *Product) GetHasInventory() bool {
+func (x *Product) GetAvailability() string {
 	if x != nil {
-		return x.HasInventory
+		return x.Availability
 	}
-	return false
+	return ""
 }
 
 func (x *Product) GetTax() *Tax {
@@ -63767,7 +63767,7 @@ type AIAgentTestResult struct {
 	// output
 	Score         int64  `protobuf:"varint,13,opt,name=score,proto3" json:"score,omitempty"`
 	Created       int64  `protobuf:"varint,14,opt,name=created,proto3" json:"created,omitempty"`
-	Status        string `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"` // pending, pass, failed
+	Status        string `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"` // pending, pass, fail
 	Ran           int64  `protobuf:"varint,16,opt,name=ran,proto3" json:"ran,omitempty"`      // ms
 	DurationSec   int64  `protobuf:"varint,17,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`
 	Updated       int64  `protobuf:"varint,18,opt,name=updated,proto3" json:"updated,omitempty"`
@@ -73995,7 +73995,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x18 \x01(\tR\tupdatedBy\x12\x12\n" +
 	"\x04note\x18\x19 \x01(\tR\x04note\x12!\n" +
-	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xe1\x13\n" +
+	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xe0\x13\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74048,8 +74048,8 @@ const file_header_proto_rawDesc = "" +
 	"priceRules\x12\x14\n" +
 	"\x05stock\x18< \x01(\x03R\x05stock\x12,\n" +
 	"\x06stocks\x18? \x03(\v2\x14.header.ProductStockR\x06stocks\x12\x1b\n" +
-	"\tsource_id\x18= \x01(\tR\bsourceId\x12#\n" +
-	"\rhas_inventory\x18> \x01(\bR\fhasInventory\x12\x1d\n" +
+	"\tsource_id\x18= \x01(\tR\bsourceId\x12\"\n" +
+	"\favailability\x18D \x01(\tR\favailability\x12\x1d\n" +
 	"\x03tax\x18@ \x01(\v2\v.header.TaxR\x03tax\x12\x1a\n" +
 	"\bcurrency\x18A \x01(\tR\bcurrency\x12/\n" +
 	"\abuttons\x18B \x03(\v2\x15.header.MessageButtonR\abuttons\x12*\n" +
