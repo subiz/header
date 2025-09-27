@@ -4041,16 +4041,6 @@ message CurrencyLogEntry {
 	string updated_by = 6;
 }
 
-message PriceRule {
-	string feed_id = 4;
-	float price = 5;
-	int64 fpv_price = 6;
-
-	string currency = 8;
-	int64 from_count = 9;
-	int64 to_count = 10;
-}
-
 message OrderItem {
 	string order_id = 3;
 	string id = 4;
@@ -4868,10 +4858,7 @@ message Product {
 	string id = 3; // generated
 	repeated Product other_variants = 4; // [2] [3]
 	string product_group_id = 5; // iphone-6-plus // parent id
-	// string title = 6; // deprecated // should be use for name
-
 	string url = 7; // (shared)
-
 	string handle = 8; // (shared) iphone-6-plus-128G
 	string name = 9;
 
@@ -4900,17 +4887,12 @@ message Product {
 
 	string image = 30;
 	repeated string images = 31; // (shared)
-	// repeated string additional_images = 32; // (shared)
-
 	repeated string videos = 33; // (shared)
-	// repeated string additional_videos = 34; // (shared)
-
 	string note = 35; // (shared)
 
 	// shipping
-	bool requires_shipping = 36;
-
-	int64 days_to_ship = 37;
+	// bool requires_shipping = 36;
+	// int64 days_to_ship = 37;
 	float dimension_width = 38;
 	float dimension_height = 39;
 	float dimension_length = 40;
@@ -4931,17 +4913,16 @@ message Product {
 	float price = 51;
 	int64 fpv_price = 52; // (readonly from client)
 
-	repeated PriceRule price_rules = 54; // (shared)
+	// repeated PriceRule price_rules = 54; // (shared)
 	int64 stock = 60; //
 
+	// pos_id based stock
 	repeated ProductStock stocks = 63;
 
 	string source_id = 61;
 	string availability = 68; // in_stock, out_of_stock, online_only, pre_order, pre_sale, sold_out
-	// bool has_inventory = 62; // share
 
 	Tax tax = 64; // (shared)
-
 	string currency = 65;
 	repeated MessageButton buttons = 66; // for message attachment
 
@@ -4955,13 +4936,7 @@ message Product {
 	// string category_id = 81;
 
 	ProductValidity validity = 82;
-
-	// repeated File files = 83;
-	// repeated ProductNote notes = 84;
-	// repeated string urls = 91;
-
 	int64 purchase_deadline = 85; // no available for sale after this ms
-
 	string availability_url = 86; // (shared)
 	int64 disable_availability_fetch = 87;
 	string last_availability_fetched = 88; // ms
@@ -4979,7 +4954,6 @@ message Product {
 
 	int64 modified = 99;
 	Error error = 100;
-
 }
 
 message ProductEnrichSource {
@@ -5002,6 +4976,7 @@ message ProductEnrichSource {
 message ProductStock {
 	string pos_id = 4;
 	int64 stock = 5;
+	string availability = 6;
 }
 
 message ProductOffer {
@@ -9020,7 +8995,7 @@ message AIAgent {
 
 	string model = 23; // gpt-4o-mini
 
-	repeated AIAgent sub_agents = 25;
+	// repeated AIAgent sub_agents = 25;
 	repeated string form_ids = 27; // readonly
 
 	string token_limit = 28; // short, balanced, long
@@ -9044,7 +9019,7 @@ message AIAgent {
 	string generated_goal = 49;
 	// repeated string generated_topics = 39;
 	AIIntent generated_intent = 56;
-	string generated_hash = 48; // skip regenerate intent
+	// string generated_hash = 48; // skip regenerate intent
 	string generated_refuse_message = 46;
 	int64 active_version = 45; // only root
 
