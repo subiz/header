@@ -63464,27 +63464,28 @@ func (x *AIAgent) GetRewriteQuery() *RewriteQuerySetting {
 }
 
 type AIAgentTestcase struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	AgentId       string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	Id            string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Disabled      int64                  `protobuf:"varint,8,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	Messages      []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
-	Conversation  *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
-	User          *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
-	LastScore     int64                  `protobuf:"varint,12,opt,name=last_score,json=lastScore,proto3" json:"last_score,omitempty"`
-	LastStatus    string                 `protobuf:"bytes,13,opt,name=last_status,json=lastStatus,proto3" json:"last_status,omitempty"` // pass fail pending running
-	LastRunAt     int64                  `protobuf:"varint,14,opt,name=last_run_at,json=lastRunAt,proto3" json:"last_run_at,omitempty"`
-	TestResultId  string                 `protobuf:"bytes,15,opt,name=test_result_id,json=testResultId,proto3" json:"test_result_id,omitempty"`
-	Status        string                 `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"` // pass fail pending running <empty>
-	Created       int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
-	Updated       int64                  `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy     string                 `protobuf:"bytes,22,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,23,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Ctx             *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AgentId         string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Id              string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	Name            string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Disabled        int64                  `protobuf:"varint,8,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Messages        []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
+	Conversation    *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
+	User            *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
+	LastScore       int64                  `protobuf:"varint,12,opt,name=last_score,json=lastScore,proto3" json:"last_score,omitempty"`
+	LastStatus      string                 `protobuf:"bytes,13,opt,name=last_status,json=lastStatus,proto3" json:"last_status,omitempty"` // pass fail pending running
+	LastRunAt       int64                  `protobuf:"varint,14,opt,name=last_run_at,json=lastRunAt,proto3" json:"last_run_at,omitempty"`
+	TestResultId    string                 `protobuf:"bytes,15,opt,name=test_result_id,json=testResultId,proto3" json:"test_result_id,omitempty"`
+	Status          string                 `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"` // pass fail pending running <empty>
+	Created         int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
+	Updated         int64                  `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy       string                 `protobuf:"bytes,22,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedBy       string                 `protobuf:"bytes,23,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	FpvTotalCostVnd int64                  `protobuf:"varint,24,opt,name=fpv_total_cost_vnd,json=fpvTotalCostVnd,proto3" json:"fpv_total_cost_vnd,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *AIAgentTestcase) Reset() {
@@ -63643,6 +63644,13 @@ func (x *AIAgentTestcase) GetCreatedBy() string {
 	return ""
 }
 
+func (x *AIAgentTestcase) GetFpvTotalCostVnd() int64 {
+	if x != nil {
+		return x.FpvTotalCostVnd
+	}
+	return 0
+}
+
 type AIAgentTestResult struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	Ctx          *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -63662,6 +63670,7 @@ type AIAgentTestResult struct {
 	DurationSec   int64  `protobuf:"varint,17,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`
 	Updated       int64  `protobuf:"varint,18,opt,name=updated,proto3" json:"updated,omitempty"`
 	ErrorLog      string `protobuf:"bytes,19,opt,name=error_log,json=errorLog,proto3" json:"error_log,omitempty"`
+	FpvCostVnd    int64  `protobuf:"varint,20,opt,name=fpv_cost_vnd,json=fpvCostVnd,proto3" json:"fpv_cost_vnd,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -63806,6 +63815,13 @@ func (x *AIAgentTestResult) GetErrorLog() string {
 		return x.ErrorLog
 	}
 	return ""
+}
+
+func (x *AIAgentTestResult) GetFpvCostVnd() int64 {
+	if x != nil {
+		return x.FpvCostVnd
+	}
+	return 0
 }
 
 type RewriteQueryExample struct {
@@ -77441,7 +77457,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eoperation_mode\x18T \x01(\tR\roperationMode\x12:\n" +
 	"\vusage_limit\x18U \x01(\v2\x19.header.AIAgentUsageLimitR\n" +
 	"usageLimit\x12@\n" +
-	"\rrewrite_query\x18V \x01(\v2\x1b.header.RewriteQuerySettingR\frewriteQuery\"\xd3\x04\n" +
+	"\rrewrite_query\x18V \x01(\v2\x1b.header.RewriteQuerySettingR\frewriteQuery\"\x80\x05\n" +
 	"\x0fAIAgentTestcase\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77466,7 +77482,8 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x16 \x01(\tR\tupdatedBy\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\x17 \x01(\tR\tcreatedBy\"\xfe\x03\n" +
+	"created_by\x18\x17 \x01(\tR\tcreatedBy\x12+\n" +
+	"\x12fpv_total_cost_vnd\x18\x18 \x01(\x03R\x0ffpvTotalCostVnd\"\xa0\x04\n" +
 	"\x11AIAgentTestResult\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77486,7 +77503,9 @@ const file_header_proto_rawDesc = "" +
 	"\x03ran\x18\x10 \x01(\x03R\x03ran\x12!\n" +
 	"\fduration_sec\x18\x11 \x01(\x03R\vdurationSec\x12\x18\n" +
 	"\aupdated\x18\x12 \x01(\x03R\aupdated\x12\x1b\n" +
-	"\terror_log\x18\x13 \x01(\tR\berrorLog\"N\n" +
+	"\terror_log\x18\x13 \x01(\tR\berrorLog\x12 \n" +
+	"\ffpv_cost_vnd\x18\x14 \x01(\x03R\n" +
+	"fpvCostVnd\"N\n" +
 	"\x13RewriteQueryExample\x127\n" +
 	"\bmessages\x18\x03 \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\"q\n" +
 	"\x13RewriteQuerySetting\x12!\n" +

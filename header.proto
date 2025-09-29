@@ -9090,6 +9090,7 @@ message AIAgentTestcase {
 	int64 updated = 21;
 	string updated_by = 22;
 	string created_by = 23;
+	int64 fpv_total_cost_vnd = 24;
 }
 
 message AIAgentTestResult {
@@ -9115,6 +9116,7 @@ message AIAgentTestResult {
 	int64 updated = 18;
 
 	string error_log = 19;
+	int64 fpv_cost_vnd = 20;
 }
 
 message RewriteQueryExample {

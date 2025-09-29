@@ -205,16 +205,16 @@ func (Account_State) EnumDescriptor() ([]byte, []int) {
 type DashboardAgent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// optional int64 bot_build_showed = 12;
-	PinnedUserViews                []string          `protobuf:"bytes,13,rep,name=pinned_user_views,json=pinnedUserViews" json:"pinned_user_views,omitempty"` // list of agents that pinned this view
-	UserViewDisplayFields          []string          `protobuf:"bytes,14,rep,name=user_view_display_fields,json=userViewDisplayFields" json:"user_view_display_fields,omitempty"`
-	UserViewOrderBy                []string          `protobuf:"bytes,15,rep,name=user_view_order_by,json=userViewOrderBy" json:"user_view_order_by,omitempty"` // +attr:fullname, -attr:email
-	OrderDisplayFields             []string          `protobuf:"bytes,16,rep,name=order_display_fields,json=orderDisplayFields" json:"order_display_fields,omitempty"`
-	OrderDisplayOrderBy            []string          `protobuf:"bytes,17,rep,name=order_display_order_by,json=orderDisplayOrderBy" json:"order_display_order_by,omitempty"`
-	DefaultPos                     *string           `protobuf:"bytes,18,opt,name=default_pos,json=defaultPos" json:"default_pos,omitempty"`
-	DefaultShippingProvider        *string           `protobuf:"bytes,19,opt,name=default_shipping_provider,json=defaultShippingProvider" json:"default_shipping_provider,omitempty"`
-	OrderFilter                    *string           `protobuf:"bytes,20,opt,name=order_filter,json=orderFilter" json:"order_filter,omitempty"` // json
-	ConversationSeen               *int64            `protobuf:"varint,21,opt,name=conversation_seen,json=conversationSeen" json:"conversation_seen,omitempty"`
-	PriceFunction                  *string           `protobuf:"bytes,22,opt,name=price_function,json=priceFunction" json:"price_function,omitempty"`
+	PinnedUserViews         []string `protobuf:"bytes,13,rep,name=pinned_user_views,json=pinnedUserViews" json:"pinned_user_views,omitempty"` // list of agents that pinned this view
+	UserViewDisplayFields   []string `protobuf:"bytes,14,rep,name=user_view_display_fields,json=userViewDisplayFields" json:"user_view_display_fields,omitempty"`
+	UserViewOrderBy         []string `protobuf:"bytes,15,rep,name=user_view_order_by,json=userViewOrderBy" json:"user_view_order_by,omitempty"` // +attr:fullname, -attr:email
+	OrderDisplayFields      []string `protobuf:"bytes,16,rep,name=order_display_fields,json=orderDisplayFields" json:"order_display_fields,omitempty"`
+	OrderDisplayOrderBy     []string `protobuf:"bytes,17,rep,name=order_display_order_by,json=orderDisplayOrderBy" json:"order_display_order_by,omitempty"`
+	DefaultPos              *string  `protobuf:"bytes,18,opt,name=default_pos,json=defaultPos" json:"default_pos,omitempty"`
+	DefaultShippingProvider *string  `protobuf:"bytes,19,opt,name=default_shipping_provider,json=defaultShippingProvider" json:"default_shipping_provider,omitempty"`
+	OrderFilter             *string  `protobuf:"bytes,20,opt,name=order_filter,json=orderFilter" json:"order_filter,omitempty"` // json
+	ConversationSeen        *int64   `protobuf:"varint,21,opt,name=conversation_seen,json=conversationSeen" json:"conversation_seen,omitempty"`
+	// optional string price_function = 22;
 	UserInfoFields                 []string          `protobuf:"bytes,23,rep,name=user_info_fields,json=userInfoFields" json:"user_info_fields,omitempty"`
 	LastCallDevice                 *string           `protobuf:"bytes,25,opt,name=last_call_device,json=lastCallDevice" json:"last_call_device,omitempty"`
 	LastCallNumber                 *string           `protobuf:"bytes,26,opt,name=last_call_number,json=lastCallNumber" json:"last_call_number,omitempty"`                      // main number
@@ -333,13 +333,6 @@ func (x *DashboardAgent) GetConversationSeen() int64 {
 		return *x.ConversationSeen
 	}
 	return 0
-}
-
-func (x *DashboardAgent) GetPriceFunction() string {
-	if x != nil && x.PriceFunction != nil {
-		return *x.PriceFunction
-	}
-	return ""
 }
 
 func (x *DashboardAgent) GetUserInfoFields() []string {
@@ -2821,7 +2814,7 @@ var File_account_proto protoreflect.FileDescriptor
 
 const file_account_proto_rawDesc = "" +
 	"\n" +
-	"\raccount.proto\x12\aaccount\x1a\fcommon.proto\"\xd4\x0f\n" +
+	"\raccount.proto\x12\aaccount\x1a\fcommon.proto\"\xad\x0f\n" +
 	"\x0eDashboardAgent\x12*\n" +
 	"\x11pinned_user_views\x18\r \x03(\tR\x0fpinnedUserViews\x127\n" +
 	"\x18user_view_display_fields\x18\x0e \x03(\tR\x15userViewDisplayFields\x12+\n" +
@@ -2832,8 +2825,7 @@ const file_account_proto_rawDesc = "" +
 	"defaultPos\x12:\n" +
 	"\x19default_shipping_provider\x18\x13 \x01(\tR\x17defaultShippingProvider\x12!\n" +
 	"\forder_filter\x18\x14 \x01(\tR\vorderFilter\x12+\n" +
-	"\x11conversation_seen\x18\x15 \x01(\x03R\x10conversationSeen\x12%\n" +
-	"\x0eprice_function\x18\x16 \x01(\tR\rpriceFunction\x12(\n" +
+	"\x11conversation_seen\x18\x15 \x01(\x03R\x10conversationSeen\x12(\n" +
 	"\x10user_info_fields\x18\x17 \x03(\tR\x0euserInfoFields\x12(\n" +
 	"\x10last_call_device\x18\x19 \x01(\tR\x0elastCallDevice\x12(\n" +
 	"\x10last_call_number\x18\x1a \x01(\tR\x0elastCallNumber\x126\n" +
