@@ -34075,12 +34075,10 @@ type Product struct {
 	Updated   int64            `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
 	CreatedBy string           `protobuf:"bytes,22,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	UpdatedBy string           `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
-	Mpn    string   `protobuf:"bytes,26,opt,name=mpn,proto3" json:"mpn,omitempty"` // (shared)
-	Image  string   `protobuf:"bytes,30,opt,name=image,proto3" json:"image,omitempty"`
-	Images []string `protobuf:"bytes,31,rep,name=images,proto3" json:"images,omitempty"` // (shared)
-	Videos []string `protobuf:"bytes,33,rep,name=videos,proto3" json:"videos,omitempty"` // (shared)
-	Note   string   `protobuf:"bytes,35,opt,name=note,proto3" json:"note,omitempty"`     // (shared)
+	Image     string           `protobuf:"bytes,30,opt,name=image,proto3" json:"image,omitempty"`
+	Images    []string         `protobuf:"bytes,31,rep,name=images,proto3" json:"images,omitempty"` // (shared)
+	Videos    []string         `protobuf:"bytes,33,rep,name=videos,proto3" json:"videos,omitempty"` // (shared)
+	Note      string           `protobuf:"bytes,35,opt,name=note,proto3" json:"note,omitempty"`     // (shared)
 	// shipping
 	// bool requires_shipping = 36;
 	// int64 days_to_ship = 37;
@@ -34282,13 +34280,6 @@ func (x *Product) GetCreatedBy() string {
 func (x *Product) GetUpdatedBy() string {
 	if x != nil {
 		return x.UpdatedBy
-	}
-	return ""
-}
-
-func (x *Product) GetMpn() string {
-	if x != nil {
-		return x.Mpn
 	}
 	return ""
 }
@@ -49072,7 +49063,7 @@ type SendEmailRequest struct {
 	Created       int64                  `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`
 	TtlSec        int64                  `protobuf:"varint,5,opt,name=ttl_sec,json=ttlSec,proto3" json:"ttl_sec,omitempty"`
 	From          string                 `protobuf:"bytes,6,opt,name=from,proto3" json:"from,omitempty"`
-	Template      string                 `protobuf:"bytes,7,opt,name=template,proto3" json:"template,omitempty"`
+	Template      string                 `protobuf:"bytes,7,opt,name=template,proto3" json:"template,omitempty"` // transcript
 	Data          []byte                 `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`
 	Subject       string                 `protobuf:"bytes,10,opt,name=subject,proto3" json:"subject,omitempty"`
 	To            []string               `protobuf:"bytes,11,rep,name=to,proto3" json:"to,omitempty"`
@@ -63659,6 +63650,7 @@ type AIAgentTestResult struct {
 	Id           string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	TestcaseId   string                 `protobuf:"bytes,5,opt,name=testcase_id,json=testcaseId,proto3" json:"testcase_id,omitempty"`
 	Name         string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Version      int64                  `protobuf:"varint,7,opt,name=version,proto3" json:"version,omitempty"` // agent version
 	Messages     []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
 	Conversation *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
 	User         *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
@@ -63745,6 +63737,13 @@ func (x *AIAgentTestResult) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *AIAgentTestResult) GetVersion() int64 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
 }
 
 func (x *AIAgentTestResult) GetMessages() []*LLMChatHistoryEntry {
@@ -73892,7 +73891,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x18 \x01(\tR\tupdatedBy\x12\x12\n" +
 	"\x04note\x18\x19 \x01(\tR\x04note\x12!\n" +
-	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xdd\x12\n" +
+	"\feligible_cel\x18\x1c \x01(\tR\veligibleCel\"\xcb\x12\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73915,8 +73914,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"created_by\x18\x16 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x10\n" +
-	"\x03mpn\x18\x1a \x01(\tR\x03mpn\x12\x14\n" +
+	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x14\n" +
 	"\x05image\x18\x1e \x01(\tR\x05image\x12\x16\n" +
 	"\x06images\x18\x1f \x03(\tR\x06images\x12\x16\n" +
 	"\x06videos\x18! \x03(\tR\x06videos\x12\x12\n" +
@@ -77483,7 +77481,7 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x16 \x01(\tR\tupdatedBy\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\x17 \x01(\tR\tcreatedBy\x12+\n" +
-	"\x12fpv_total_cost_vnd\x18\x18 \x01(\x03R\x0ffpvTotalCostVnd\"\xa0\x04\n" +
+	"\x12fpv_total_cost_vnd\x18\x18 \x01(\x03R\x0ffpvTotalCostVnd\"\xba\x04\n" +
 	"\x11AIAgentTestResult\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77492,7 +77490,8 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1f\n" +
 	"\vtestcase_id\x18\x05 \x01(\tR\n" +
 	"testcaseId\x12\x12\n" +
-	"\x04name\x18\x06 \x01(\tR\x04name\x127\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\x12\x18\n" +
+	"\aversion\x18\a \x01(\x03R\aversion\x127\n" +
 	"\bmessages\x18\t \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\x128\n" +
 	"\fconversation\x18\n" +
 	" \x01(\v2\x14.header.ConversationR\fconversation\x12 \n" +

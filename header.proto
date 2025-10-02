@@ -4882,9 +4882,6 @@ message Product {
 	string created_by = 22;
 	string updated_by = 23;
 
-	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
-	string mpn = 26; // (shared)
-
 	string image = 30;
 	repeated string images = 31; // (shared)
 	repeated string videos = 33; // (shared)
@@ -7060,7 +7057,7 @@ message SendEmailRequest {
 	int64 ttl_sec = 5;
 	string from = 6;
 
-	string template = 7;
+	string template = 7; // transcript
 	bytes data = 8;
 
 	string subject = 10;
@@ -9101,6 +9098,7 @@ message AIAgentTestResult {
 	string testcase_id = 5;
 
 	string name = 6;
+	int64 version = 7; // agent version
 	repeated LLMChatHistoryEntry messages = 9;
 	Conversation conversation = 10;
 	User user = 11;
