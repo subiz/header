@@ -7654,6 +7654,7 @@ message AIDataEntryUsed {
 	bool is_vector_search = 12;
 	bool is_full_text_search = 13;
 	int64 chunk_index = 14;
+	bool is_cover = 15;
 }
 
 message AIAgentTrace {
@@ -9318,6 +9319,8 @@ message AIDataChunk {
 
 	int64 chunk_index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	// repeated uint32 named_entities = 12;
+
+	bool is_cover = 13;
 }
 
 message AIDataEntry {
