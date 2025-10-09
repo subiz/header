@@ -52,7 +52,7 @@ func TestNormEmail1(t *testing.T) {
 	}{
 		{"", ""},
 		{"Get started", ""},
-		{"thanhpk@live.com, thanhpk@live.com 't@a.com', b@.com", "thanhpk@live.com,t@a.com"},
+		{"thanhpk@live.com, thanhpk@live.com 't@a.com', b@.com", "t@a.com,thanhpk@live.com"},
 		{"Here (thanhpk@live.com)", "thanhpk@live.com"},
 		{"OK <thanhpk@live.com>", "thanhpk@live.com"},
 	}
@@ -985,5 +985,96 @@ func TestBlockToEle(t *testing.T) {
 			t.Errorf("NO %s", html)
 		}
 		lasthtml = html
+	}
+}
+
+func TestFirstN(t *testing.T) {
+	tests := []struct {
+		name   string
+		input  string
+		n      int
+		expect string
+	}{
+		// Basic ASCII
+		{"ascii normal", "abcdef", 3, "abc"},
+		{"ascii full length", "abcdef", 6, "abcdef"},
+		{"ascii beyond length", "abcdef", 10, "abcdef"},
+		{"ascii zero n", "abcdef", 0, ""},
+		{"ascii negative n", "abcdef", -2, ""},
+		{"ascii empty", "", 3, ""},
+
+		// Unicode text
+		{"unicode simple", "nói chuyện", 3, "nói"},
+		{"unicode mid", "nói chuyện", 5, "nói c"},
+		{"unicode full", "nói chuyện", 9, "nói chuyệ"},
+		{"unicode beyond", "nói chuyện", 100, "nói chuyện"},
+
+		// Multibyte runes (Chinese)
+		{"chinese short", "你好世界", 2, "你好"},
+		{"chinese full", "你好世界", 4, "你好世界"},
+		{"chinese beyond", "你好世界", 10, "你好世界"},
+
+		// Emoji / combining marks
+		{"emoji single", "🙂😂🤣", 2, "🙂😂"},
+		{"emoji full", "🙂😂🤣", 3, "🙂😂🤣"},
+		{"emoji beyond", "🙂😂🤣", 10, "🙂😂🤣"},
+
+		// Combining characters (e.g. accent marks)
+		{"combining accents", "e\u0301clair", 1, "e"}, // e
+		{"combining longer", "e\u0301clair", 2, "e\u0301"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := FirstN(tt.input, tt.n)
+			if got != tt.expect {
+				t.Errorf("FirstN(%q, %d) = %q; want %q", tt.input, tt.n, got, tt.expect)
+			}
+		})
+	}
+}
+
+
+func TestNormString(t *testing.T) {
+	tests := []struct {
+		name   string
+		input  string
+		max    int
+		expect string
+	}{
+		// ✅ Basic trimming
+		{"trim spaces", "   hello world   ", 0, "hello world"},
+		{"trim tabs", "\t\thello\t", 0, "hello"},
+
+        // ✅ Control chars & invalid unicode
+		{"remove control char", "abc\u0017def", 0, "abcdef"},
+		{"remove multiple control chars", "\u0000hi\u0007\u0008", 0, "hi"},
+		{"keep normal chars", "nói chuyện", 0, "nói chuyện"},
+
+		// ✅ Truncation
+		{"truncate ascii", "abcdef", 3, "abc"},
+		{"truncate unicode", "nói chuyện", 4, "nói"},
+		{"truncate emoji", "🙂😂🤣", 2, "🙂😂"},
+		{"truncate chinese", "你好世界", 2, "你好"},
+		{"truncate beyond length", "hello", 10, "hello"},
+		{"truncate zero max", "abcdef", 0, "abcdef"},
+		{"truncate negative max", "abcdef", -5, "abcdef"},
+
+		// ✅ Combination: trim + clean + truncate
+		{"combo trim clean truncate", "  nói tr\u0017  ", 4, "nói"},
+
+		// ✅ Empty & edge cases
+		{"empty string", "", 5, ""},
+		{"only spaces", "     ", 5, ""},
+		{"only invalid chars", "\u0001\u0007\u0008", 5, ""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := Norm(tt.input, tt.max)
+			if got != tt.expect {
+				t.Errorf("Norm(%q, %d) = %q; want %q", tt.input, tt.max, got, tt.expect)
+			}
+		})
 	}
 }

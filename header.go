@@ -972,7 +972,7 @@ func NormPhone(phone string) []string {
 			}
 		}
 		number := string(arr)
-		if number != "" {
+		if len(number) > 5 {
 			phones = append(phones, number)
 		}
 	}
@@ -982,7 +982,7 @@ func NormPhone(phone string) []string {
 			phones[i] = "0" + phone[2:]
 		}
 	}
-
+	sort.Strings(phones)
 	// strings.Join(phones, ",")
 	return phones
 }
@@ -1130,7 +1130,7 @@ func ExtractEmails(email string) []string {
 			if email == "" {
 				continue
 			}
-			email = Substring(email, 0, 320)
+			email = FirstN(email, 320)
 			emails[email] = true
 		}
 	}
@@ -1139,6 +1139,7 @@ func ExtractEmails(email string) []string {
 	for email := range emails {
 		ems = append(ems, email)
 	}
+	sort.Strings(ems)
 	return ems
 }
 
@@ -1183,7 +1184,7 @@ func EmailAddress(email string) string {
 	// address in MAIL and RCPT commands of 256 characters.  Since addresses
 	// that do not fit in those fields are not normally useful, the upper
 	// limit on address lengths should normally be considered to be 256.
-	return Substring(email, 0, 320)
+	return FirstN(email, 320)
 }
 
 // return 84.. phone number
@@ -1322,29 +1323,6 @@ func Unique(slice []string) []string {
 		return slice
 	}
 	return list
-}
-
-func Substring(s string, start int, end int) string {
-	if s == "" {
-		return ""
-	}
-
-	if start == 0 && end >= len(s) {
-		return s
-	}
-
-	start_str_idx := 0
-	i := 0
-	for j := range s {
-		if i == start {
-			start_str_idx = j
-		}
-		if i == end {
-			return s[start_str_idx:j]
-		}
-		i++
-	}
-	return s[start_str_idx:]
 }
 
 func Fnv32(key string) uint32 {
