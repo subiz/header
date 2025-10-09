@@ -10,7 +10,6 @@ import (
 	"unicode"
 
 	apb "github.com/subiz/header/account"
-	"github.com/thanhpk/ascii"
 	"github.com/tidwall/gjson"
 )
 
@@ -58,7 +57,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 		str = strings.ToLower(str)
 	}
 	if !cond.GetAccentSensitive() {
-		str = ascii.Convert(str)
+		str = Ascii(str)
 	}
 
 	switch cond.GetOp() {
@@ -80,7 +79,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.TrimSpace(str) == strings.TrimSpace(cs) {
@@ -98,7 +97,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.TrimSpace(str) == strings.TrimSpace(cs) {
@@ -121,7 +120,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -139,7 +138,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -166,7 +165,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -183,7 +182,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -200,7 +199,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -229,7 +228,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 	}
 	if !cond.GetAccentSensitive() {
 		for i, str := range strs {
-			strs[i] = ascii.Convert(str)
+			strs[i] = Ascii(str)
 		}
 	}
 
@@ -249,7 +248,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 
@@ -269,7 +268,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 				if strings.TrimSpace(str) == strings.TrimSpace(cs) {
@@ -291,7 +290,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 				if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -307,7 +306,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			for _, str := range strs {
@@ -323,7 +322,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 				if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -338,7 +337,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 				if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -353,7 +352,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 				if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -369,7 +368,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			for _, str := range strs {
 				if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
@@ -706,11 +705,11 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 
 	if cond.GetKey() == "keyword" && len(cond.GetText().GetContain()) > 0 { // email phone or name
 		// remove space
-		keyword := ascii.Convert(SpaceStringsBuilder(strings.ToLower(cond.GetText().GetContain()[0])))
+		keyword := Ascii(SpaceStringsBuilder(strings.ToLower(cond.GetText().GetContain()[0])))
 
 		for _, attr := range u.Attributes {
 			if attr.Text != "" {
-				if strings.Contains(ascii.Convert(strings.ToLower(SpaceStringsBuilder(attr.Text))), keyword) {
+				if strings.Contains(Ascii(strings.ToLower(SpaceStringsBuilder(attr.Text))), keyword) {
 					return true
 				}
 			}
@@ -1076,7 +1075,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.Eq[i] = strings.TrimSpace(cs)
 		}
@@ -1086,7 +1085,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.Neq[i] = strings.TrimSpace(cs)
 		}
@@ -1096,7 +1095,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.StartWith[i] = strings.TrimSpace(cs)
 		}
@@ -1106,7 +1105,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.EndWith[i] = strings.TrimSpace(cs)
 		}
@@ -1116,7 +1115,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.Contain[i] = strings.TrimSpace(cs)
 		}
@@ -1126,7 +1125,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.NotContain[i] = strings.TrimSpace(cs)
 		}
@@ -1136,7 +1135,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 			cond.NotStartWith[i] = strings.TrimSpace(cs)
 		}
@@ -1146,7 +1145,7 @@ func NormalizeTextCond(cond *TextCondition) {
 				cs = strings.ToLower(cs)
 			}
 			if !cond.GetAccentSensitive() {
-				cs = ascii.Convert(cs)
+				cs = Ascii(cs)
 			}
 
 			cond.NotEndWith[i] = strings.TrimSpace(cs)

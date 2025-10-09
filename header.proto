@@ -8944,7 +8944,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, updated_welcome_message
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -8964,6 +8964,9 @@ message AIAgentOverrideRule {
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
 	AssignRequest assign_to = 19;
+
+	Message welcome_message = 20;
+	string welcome_message_prompt = 21;
 }
 
 message AIAgent {
@@ -9053,6 +9056,7 @@ message AIAgent {
   Form collect_user_information = 78;
 
 	Message welcome_message = 79;
+	string welcome_message_prompt = 80;
 
 	// async behaviour
 	AIAgentAutoSendThankSetting background_send_thank = 81;
