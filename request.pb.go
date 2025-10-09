@@ -6252,6 +6252,7 @@ type CrawlUrlRequest struct {
 	CrawlKey                      string                 `protobuf:"bytes,17,opt,name=crawl_key,json=crawlKey,proto3" json:"crawl_key,omitempty"`
 	SummaryModel                  string                 `protobuf:"bytes,18,opt,name=summary_model,json=summaryModel,proto3" json:"summary_model,omitempty"` // use llm to summary the webpage
 	ByPassDomainVerificationCheck bool                   `protobuf:"varint,19,opt,name=by_pass_domain_verification_check,json=byPassDomainVerificationCheck,proto3" json:"by_pass_domain_verification_check,omitempty"`
+	Screenshoot                   string                 `protobuf:"bytes,20,opt,name=screenshoot,proto3" json:"screenshoot,omitempty"` // true || 1366x768
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -6410,6 +6411,13 @@ func (x *CrawlUrlRequest) GetByPassDomainVerificationCheck() bool {
 		return x.ByPassDomainVerificationCheck
 	}
 	return false
+}
+
+func (x *CrawlUrlRequest) GetScreenshoot() string {
+	if x != nil {
+		return x.Screenshoot
+	}
+	return ""
 }
 
 type ListAIDataEntryRequest struct {
@@ -9363,7 +9371,7 @@ const file_request_proto_rawDesc = "" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12!\n" +
 	"\fold_password\x18\x05 \x01(\tR\voldPassword\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\"\xf2\x04\n" +
+	"\x05email\x18\b \x01(\tR\x05email\"\x94\x05\n" +
 	"\x0fCrawlUrlRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9386,7 +9394,8 @@ const file_request_proto_rawDesc = "" +
 	"\x03url\x18\x10 \x01(\tR\x03url\x12\x1b\n" +
 	"\tcrawl_key\x18\x11 \x01(\tR\bcrawlKey\x12#\n" +
 	"\rsummary_model\x18\x12 \x01(\tR\fsummaryModel\x12H\n" +
-	"!by_pass_domain_verification_check\x18\x13 \x01(\bR\x1dbyPassDomainVerificationCheck\"\xf9\x03\n" +
+	"!by_pass_domain_verification_check\x18\x13 \x01(\bR\x1dbyPassDomainVerificationCheck\x12 \n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xf9\x03\n" +
 	"\x16ListAIDataEntryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

@@ -792,6 +792,8 @@ message CrawlUrlRequest {
 
 	string summary_model = 18; // use llm to summary the webpage
 	bool by_pass_domain_verification_check = 19;
+
+	string screenshoot = 20; // true || 1366x768
 }
 
 message ListAIDataEntryRequest {

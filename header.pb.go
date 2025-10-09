@@ -62824,7 +62824,7 @@ type AIAgentOverrideRule struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Id          string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, updated_welcome_message
+	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message
 	Functions   []*AIFunction          `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`     // use when action = function
 	Instruction string                 `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"` // use when action = remind
 	// string hook = 8; // ” = before_reply, after_reply
@@ -65009,6 +65009,7 @@ type CrawlResponse struct {
 	NumHasProductLinks int64                  `protobuf:"varint,17,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
 	NumDiscoveredLinks int64                  `protobuf:"varint,18,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
 	LlmSummary         string                 `protobuf:"bytes,19,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
+	Screenshoot        string                 `protobuf:"bytes,20,opt,name=screenshoot,proto3" json:"screenshoot,omitempty"` // base64
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -65158,6 +65159,13 @@ func (x *CrawlResponse) GetNumDiscoveredLinks() int64 {
 func (x *CrawlResponse) GetLlmSummary() string {
 	if x != nil {
 		return x.LlmSummary
+	}
+	return ""
+}
+
+func (x *CrawlResponse) GetScreenshoot() string {
+	if x != nil {
+		return x.Screenshoot
 	}
 	return ""
 }
@@ -77661,7 +77669,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xc1\x04\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xe3\x04\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -77683,7 +77691,8 @@ const file_header_proto_rawDesc = "" +
 	"\x15num_has_product_links\x18\x11 \x01(\x03R\x12numHasProductLinks\x120\n" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
-	"llmSummary\"\xc3\x02\n" +
+	"llmSummary\x12 \n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xc3\x02\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\"\n" +
 	"\rdata_entry_id\x18\x03 \x01(\tR\vdataEntryId\x12\x0e\n" +

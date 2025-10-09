@@ -8944,7 +8944,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, updated_welcome_message
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -9308,6 +9308,7 @@ message CrawlResponse {
 	int64 num_discovered_links = 18;
 
 	string llm_summary = 19;
+	string screenshoot = 20; // base64
 }
 
 message AIDataChunk {
