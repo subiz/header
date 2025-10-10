@@ -8967,6 +8967,7 @@ message AIAgentOverrideRule {
 
 	Message welcome_message = 20;
 	string welcome_message_prompt = 21;
+	repeated Trigger welcome_message_triggers = 22;
 }
 
 message AIAgent {
@@ -9057,6 +9058,7 @@ message AIAgent {
 
 	Message welcome_message = 79;
 	string welcome_message_prompt = 80;
+	repeated Trigger welcome_message_triggers = 87;
 
 	// async behaviour
 	AIAgentAutoSendThankSetting background_send_thank = 81;
