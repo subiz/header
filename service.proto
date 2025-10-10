@@ -1067,6 +1067,7 @@ service Counter {
 // internal
 service Crawler {
 	rpc Crawl(CrawlUrlRequest) returns (CrawlResponse); // cached
+	rpc ScreenShoot(CrawlUrlRequest) returns (CrawlResponse); // cached
 }
 
 service Marker {

@@ -30327,7 +30327,8 @@ var Counter_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	Crawler_Crawl_FullMethodName = "/header.Crawler/Crawl"
+	Crawler_Crawl_FullMethodName       = "/header.Crawler/Crawl"
+	Crawler_ScreenShoot_FullMethodName = "/header.Crawler/ScreenShoot"
 )
 
 // CrawlerClient is the client API for Crawler service.
@@ -30337,6 +30338,7 @@ const (
 // internal
 type CrawlerClient interface {
 	Crawl(ctx context.Context, in *CrawlUrlRequest, opts ...grpc.CallOption) (*CrawlResponse, error)
+	ScreenShoot(ctx context.Context, in *CrawlUrlRequest, opts ...grpc.CallOption) (*CrawlResponse, error)
 }
 
 type crawlerClient struct {
@@ -30357,6 +30359,16 @@ func (c *crawlerClient) Crawl(ctx context.Context, in *CrawlUrlRequest, opts ...
 	return out, nil
 }
 
+func (c *crawlerClient) ScreenShoot(ctx context.Context, in *CrawlUrlRequest, opts ...grpc.CallOption) (*CrawlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CrawlResponse)
+	err := c.cc.Invoke(ctx, Crawler_ScreenShoot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CrawlerServer is the server API for Crawler service.
 // All implementations must embed UnimplementedCrawlerServer
 // for forward compatibility.
@@ -30364,6 +30376,7 @@ func (c *crawlerClient) Crawl(ctx context.Context, in *CrawlUrlRequest, opts ...
 // internal
 type CrawlerServer interface {
 	Crawl(context.Context, *CrawlUrlRequest) (*CrawlResponse, error)
+	ScreenShoot(context.Context, *CrawlUrlRequest) (*CrawlResponse, error)
 	mustEmbedUnimplementedCrawlerServer()
 }
 
@@ -30376,6 +30389,9 @@ type UnimplementedCrawlerServer struct{}
 
 func (UnimplementedCrawlerServer) Crawl(context.Context, *CrawlUrlRequest) (*CrawlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Crawl not implemented")
+}
+func (UnimplementedCrawlerServer) ScreenShoot(context.Context, *CrawlUrlRequest) (*CrawlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ScreenShoot not implemented")
 }
 func (UnimplementedCrawlerServer) mustEmbedUnimplementedCrawlerServer() {}
 func (UnimplementedCrawlerServer) testEmbeddedByValue()                 {}
@@ -30416,6 +30432,24 @@ func _Crawler_Crawl_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Crawler_ScreenShoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CrawlUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CrawlerServer).ScreenShoot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Crawler_ScreenShoot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CrawlerServer).ScreenShoot(ctx, req.(*CrawlUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Crawler_ServiceDesc is the grpc.ServiceDesc for Crawler service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -30426,6 +30460,10 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Crawl",
 			Handler:    _Crawler_Crawl_Handler,
+		},
+		{
+			MethodName: "ScreenShoot",
+			Handler:    _Crawler_ScreenShoot_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
