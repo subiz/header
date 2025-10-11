@@ -2628,6 +2628,8 @@ message WidgetChatButton {
 	string background_image_url = 1;
 	string background_mask_url = 11;
 
+	// empty -> use agent profile or account logo
+
 	int32 width = 2;
 	int32 height = 3;
 	string background = 4;
@@ -9326,8 +9328,8 @@ message AIDataChunk {
 
 	int64 chunk_index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	// repeated uint32 named_entities = 12;
-
 	bool is_cover = 13;
+	string chunk_original_link = 14;
 }
 
 message AIDataEntry {

@@ -65197,9 +65197,11 @@ type AIDataChunk struct {
 	NumCharacters int64                  `protobuf:"varint,9,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Model         string                 `protobuf:"bytes,10,opt,name=model,proto3" json:"model,omitempty"`
 	ChunkIndex    int64                  `protobuf:"varint,12,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"` // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
-	IsCover       bool                   `protobuf:"varint,13,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// repeated uint32 named_entities = 12;
+	IsCover           bool   `protobuf:"varint,13,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
+	ChunkOriginalLink string `protobuf:"bytes,14,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *AIDataChunk) Reset() {
@@ -65300,6 +65302,13 @@ func (x *AIDataChunk) GetIsCover() bool {
 		return x.IsCover
 	}
 	return false
+}
+
+func (x *AIDataChunk) GetChunkOriginalLink() string {
+	if x != nil {
+		return x.ChunkOriginalLink
+	}
+	return ""
 }
 
 type AIDataEntry struct {
@@ -77710,7 +77719,7 @@ const file_header_proto_rawDesc = "" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
 	"llmSummary\x12 \n" +
-	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xc3\x02\n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xf3\x02\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\"\n" +
 	"\rdata_entry_id\x18\x03 \x01(\tR\vdataEntryId\x12\x0e\n" +
@@ -77723,7 +77732,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\x05model\x12\x1f\n" +
 	"\vchunk_index\x18\f \x01(\x03R\n" +
 	"chunkIndex\x12\x19\n" +
-	"\bis_cover\x18\r \x01(\bR\aisCover\"\xcf\f\n" +
+	"\bis_cover\x18\r \x01(\bR\aisCover\x12.\n" +
+	"\x13chunk_original_link\x18\x0e \x01(\tR\x11chunkOriginalLink\"\xcf\f\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
