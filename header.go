@@ -1930,6 +1930,9 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 	}
 	out := "<" + root.Tag
 
+	if root.Id != "" {
+		out += ` id="` + root.Id + `" `
+	}
 	if root.ExtraTag != "" {
 		out += "><" + root.ExtraTag
 	}
@@ -1973,6 +1976,7 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 var selftClosingTag = map[string]bool{"br": true, "img": true, "hr": true}
 
 type sanitiziedHTMLElement struct {
+	Id       string
 	Tag      string
 	ExtraTag string
 	Content  []*sanitiziedHTMLElement
@@ -2008,6 +2012,7 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 		ele.Attrs["href"] = html.EscapeString(block.Href)
 	}
 
+	ele.Id = html.EscapeString(block.Id)
 	ele.Class = html.EscapeString(block.Class)
 	for k, v := range block.Attrs {
 		ele.Attrs[html.EscapeString(k)] = html.EscapeString(v)
