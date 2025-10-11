@@ -7658,6 +7658,7 @@ message AIDataEntryUsed {
 	int64 chunk_index = 14;
 	bool is_cover = 15;
 	string chunk_original_link = 16;
+	string chunk_title = 17;
 }
 
 message AIAgentTrace {
@@ -9331,6 +9332,7 @@ message AIDataChunk {
 	// repeated uint32 named_entities = 12;
 	bool is_cover = 13;
 	string chunk_original_link = 14;
+	string title = 15;
 }
 
 message AIDataEntry {

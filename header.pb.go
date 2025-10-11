@@ -53545,6 +53545,7 @@ type AIDataEntryUsed struct {
 	ChunkIndex        int64  `protobuf:"varint,14,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"`
 	IsCover           bool   `protobuf:"varint,15,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
 	ChunkOriginalLink string `protobuf:"bytes,16,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"`
+	ChunkTitle        string `protobuf:"bytes,17,opt,name=chunk_title,json=chunkTitle,proto3" json:"chunk_title,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -53638,6 +53639,13 @@ func (x *AIDataEntryUsed) GetIsCover() bool {
 func (x *AIDataEntryUsed) GetChunkOriginalLink() string {
 	if x != nil {
 		return x.ChunkOriginalLink
+	}
+	return ""
+}
+
+func (x *AIDataEntryUsed) GetChunkTitle() string {
+	if x != nil {
+		return x.ChunkTitle
 	}
 	return ""
 }
@@ -65208,6 +65216,7 @@ type AIDataChunk struct {
 	// repeated uint32 named_entities = 12;
 	IsCover           bool   `protobuf:"varint,13,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
 	ChunkOriginalLink string `protobuf:"bytes,14,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"`
+	Title             string `protobuf:"bytes,15,opt,name=title,proto3" json:"title,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -65315,6 +65324,13 @@ func (x *AIDataChunk) GetIsCover() bool {
 func (x *AIDataChunk) GetChunkOriginalLink() string {
 	if x != nil {
 		return x.ChunkOriginalLink
+	}
+	return ""
+}
+
+func (x *AIDataChunk) GetTitle() string {
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
@@ -76253,7 +76269,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05trace\x18\x13 \x01(\v2\x14.header.AIAgentTraceR\x05trace\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xce\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xef\x02\n" +
 	"\x0fAIDataEntryUsed\x12\x19\n" +
 	"\bchunk_id\x18\x04 \x01(\tR\achunkId\x12\"\n" +
 	"\rdata_entry_id\x18\x05 \x01(\tR\vdataEntryId\x12\x14\n" +
@@ -76264,7 +76280,9 @@ const file_header_proto_rawDesc = "" +
 	"\vchunk_index\x18\x0e \x01(\x03R\n" +
 	"chunkIndex\x12\x19\n" +
 	"\bis_cover\x18\x0f \x01(\bR\aisCover\x12.\n" +
-	"\x13chunk_original_link\x18\x10 \x01(\tR\x11chunkOriginalLink\"\xe9\b\n" +
+	"\x13chunk_original_link\x18\x10 \x01(\tR\x11chunkOriginalLink\x12\x1f\n" +
+	"\vchunk_title\x18\x11 \x01(\tR\n" +
+	"chunkTitle\"\xe9\b\n" +
 	"\fAIAgentTrace\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77728,7 +77746,7 @@ const file_header_proto_rawDesc = "" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
 	"llmSummary\x12 \n" +
-	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xf3\x02\n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\x89\x03\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\"\n" +
 	"\rdata_entry_id\x18\x03 \x01(\tR\vdataEntryId\x12\x0e\n" +
@@ -77742,7 +77760,8 @@ const file_header_proto_rawDesc = "" +
 	"\vchunk_index\x18\f \x01(\x03R\n" +
 	"chunkIndex\x12\x19\n" +
 	"\bis_cover\x18\r \x01(\bR\aisCover\x12.\n" +
-	"\x13chunk_original_link\x18\x0e \x01(\tR\x11chunkOriginalLink\"\xcf\f\n" +
+	"\x13chunk_original_link\x18\x0e \x01(\tR\x11chunkOriginalLink\x12\x14\n" +
+	"\x05title\x18\x0f \x01(\tR\x05title\"\xcf\f\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
