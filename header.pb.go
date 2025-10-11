@@ -53538,14 +53538,15 @@ type AIDataEntryUsed struct {
 	ChunkId     string                 `protobuf:"bytes,4,opt,name=chunk_id,json=chunkId,proto3" json:"chunk_id,omitempty"`
 	DataEntryId string                 `protobuf:"bytes,5,opt,name=data_entry_id,json=dataEntryId,proto3" json:"data_entry_id,omitempty"`
 	// string chunk = 6; // chunk that is being used
-	Score            int64  `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"` // max 10000 => 100%
-	OriginChunk      string `protobuf:"bytes,11,opt,name=origin_chunk,json=originChunk,proto3" json:"origin_chunk,omitempty"`
-	IsVectorSearch   bool   `protobuf:"varint,12,opt,name=is_vector_search,json=isVectorSearch,proto3" json:"is_vector_search,omitempty"`
-	IsFullTextSearch bool   `protobuf:"varint,13,opt,name=is_full_text_search,json=isFullTextSearch,proto3" json:"is_full_text_search,omitempty"`
-	ChunkIndex       int64  `protobuf:"varint,14,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"`
-	IsCover          bool   `protobuf:"varint,15,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	Score             int64  `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"` // max 10000 => 100%
+	OriginChunk       string `protobuf:"bytes,11,opt,name=origin_chunk,json=originChunk,proto3" json:"origin_chunk,omitempty"`
+	IsVectorSearch    bool   `protobuf:"varint,12,opt,name=is_vector_search,json=isVectorSearch,proto3" json:"is_vector_search,omitempty"`
+	IsFullTextSearch  bool   `protobuf:"varint,13,opt,name=is_full_text_search,json=isFullTextSearch,proto3" json:"is_full_text_search,omitempty"`
+	ChunkIndex        int64  `protobuf:"varint,14,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"`
+	IsCover           bool   `protobuf:"varint,15,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
+	ChunkOriginalLink string `protobuf:"bytes,16,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *AIDataEntryUsed) Reset() {
@@ -53632,6 +53633,13 @@ func (x *AIDataEntryUsed) GetIsCover() bool {
 		return x.IsCover
 	}
 	return false
+}
+
+func (x *AIDataEntryUsed) GetChunkOriginalLink() string {
+	if x != nil {
+		return x.ChunkOriginalLink
+	}
+	return ""
 }
 
 type AIAgentTrace struct {
@@ -65197,9 +65205,11 @@ type AIDataChunk struct {
 	NumCharacters int64                  `protobuf:"varint,9,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Model         string                 `protobuf:"bytes,10,opt,name=model,proto3" json:"model,omitempty"`
 	ChunkIndex    int64                  `protobuf:"varint,12,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"` // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
-	IsCover       bool                   `protobuf:"varint,13,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// repeated uint32 named_entities = 12;
+	IsCover           bool   `protobuf:"varint,13,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
+	ChunkOriginalLink string `protobuf:"bytes,14,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *AIDataChunk) Reset() {
@@ -65300,6 +65310,13 @@ func (x *AIDataChunk) GetIsCover() bool {
 		return x.IsCover
 	}
 	return false
+}
+
+func (x *AIDataChunk) GetChunkOriginalLink() string {
+	if x != nil {
+		return x.ChunkOriginalLink
+	}
+	return ""
 }
 
 type AIDataEntry struct {
@@ -76236,7 +76253,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05trace\x18\x13 \x01(\v2\x14.header.AIAgentTraceR\x05trace\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9e\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xce\x02\n" +
 	"\x0fAIDataEntryUsed\x12\x19\n" +
 	"\bchunk_id\x18\x04 \x01(\tR\achunkId\x12\"\n" +
 	"\rdata_entry_id\x18\x05 \x01(\tR\vdataEntryId\x12\x14\n" +
@@ -76246,7 +76263,8 @@ const file_header_proto_rawDesc = "" +
 	"\x13is_full_text_search\x18\r \x01(\bR\x10isFullTextSearch\x12\x1f\n" +
 	"\vchunk_index\x18\x0e \x01(\x03R\n" +
 	"chunkIndex\x12\x19\n" +
-	"\bis_cover\x18\x0f \x01(\bR\aisCover\"\xe9\b\n" +
+	"\bis_cover\x18\x0f \x01(\bR\aisCover\x12.\n" +
+	"\x13chunk_original_link\x18\x10 \x01(\tR\x11chunkOriginalLink\"\xe9\b\n" +
 	"\fAIAgentTrace\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77710,7 +77728,7 @@ const file_header_proto_rawDesc = "" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
 	"llmSummary\x12 \n" +
-	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xc3\x02\n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xf3\x02\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\"\n" +
 	"\rdata_entry_id\x18\x03 \x01(\tR\vdataEntryId\x12\x0e\n" +
@@ -77723,7 +77741,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\x05model\x12\x1f\n" +
 	"\vchunk_index\x18\f \x01(\x03R\n" +
 	"chunkIndex\x12\x19\n" +
-	"\bis_cover\x18\r \x01(\bR\aisCover\"\xcf\f\n" +
+	"\bis_cover\x18\r \x01(\bR\aisCover\x12.\n" +
+	"\x13chunk_original_link\x18\x0e \x01(\tR\x11chunkOriginalLink\"\xcf\f\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
