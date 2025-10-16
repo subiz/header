@@ -8988,6 +8988,7 @@ message AIAgent {
 
 	string job_title = 11; // customer_support, sale
 	string tone = 12; // casual, friendly, professional
+	bool prefer_show_sources = 13;
 
 	repeated AIAgentGuardrail guardrails = 8;
 
