@@ -1342,6 +1342,7 @@ message AIAgentAutoTakeoverSetting {
 message AIAgentAutoFollowUpSetting {
 	int64 enabled = 4; // maximum twice
 	// int64 max_attempts = 5;
+	int64 delay_min = 8;
 	repeated string instructions = 6;
 	repeated string examples = 7;
 }
@@ -8948,7 +8949,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_background_follow_up_delay_min
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -8972,6 +8973,8 @@ message AIAgentOverrideRule {
 	Message welcome_message = 20;
 	string welcome_message_prompt = 21;
 	repeated Trigger welcome_message_triggers = 22;
+
+	int64 background_follow_up_delay_min = 23;
 }
 
 message AIAgent {
@@ -8988,7 +8991,6 @@ message AIAgent {
 
 	string job_title = 11; // customer_support, sale
 	string tone = 12; // casual, friendly, professional
-	bool prefer_show_sources = 13;
 
 	repeated AIAgentGuardrail guardrails = 8;
 

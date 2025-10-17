@@ -10854,6 +10854,7 @@ type AIAgentAutoFollowUpSetting struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	Enabled int64                  `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"` // maximum twice
 	// int64 max_attempts = 5;
+	DelayMin      int64    `protobuf:"varint,8,opt,name=delay_min,json=delayMin,proto3" json:"delay_min,omitempty"`
 	Instructions  []string `protobuf:"bytes,6,rep,name=instructions,proto3" json:"instructions,omitempty"`
 	Examples      []string `protobuf:"bytes,7,rep,name=examples,proto3" json:"examples,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -10893,6 +10894,13 @@ func (*AIAgentAutoFollowUpSetting) Descriptor() ([]byte, []int) {
 func (x *AIAgentAutoFollowUpSetting) GetEnabled() int64 {
 	if x != nil {
 		return x.Enabled
+	}
+	return 0
+}
+
+func (x *AIAgentAutoFollowUpSetting) GetDelayMin() int64 {
+	if x != nil {
+		return x.DelayMin
 	}
 	return 0
 }
@@ -62840,7 +62848,7 @@ type AIAgentOverrideRule struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Id          string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message
+	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_background_follow_up_delay_min
 	Functions   []*AIFunction          `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`     // use when action = function
 	Instruction string                 `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"` // use when action = remind
 	// string hook = 8; // ” = before_reply, after_reply
@@ -62853,12 +62861,13 @@ type AIAgentOverrideRule struct {
 	ForAgentIds    []string           `protobuf:"bytes,18,rep,name=for_agent_ids,json=forAgentIds,proto3" json:"for_agent_ids,omitempty"`           // empty -> all-agent
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
-	AssignTo               *AssignRequest `protobuf:"bytes,19,opt,name=assign_to,json=assignTo,proto3" json:"assign_to,omitempty"`
-	WelcomeMessage         *Message       `protobuf:"bytes,20,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
-	WelcomeMessagePrompt   string         `protobuf:"bytes,21,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
-	WelcomeMessageTriggers []*Trigger     `protobuf:"bytes,22,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	AssignTo                   *AssignRequest `protobuf:"bytes,19,opt,name=assign_to,json=assignTo,proto3" json:"assign_to,omitempty"`
+	WelcomeMessage             *Message       `protobuf:"bytes,20,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
+	WelcomeMessagePrompt       string         `protobuf:"bytes,21,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
+	WelcomeMessageTriggers     []*Trigger     `protobuf:"bytes,22,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
+	BackgroundFollowUpDelayMin int64          `protobuf:"varint,23,opt,name=background_follow_up_delay_min,json=backgroundFollowUpDelayMin,proto3" json:"background_follow_up_delay_min,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *AIAgentOverrideRule) Reset() {
@@ -63003,27 +63012,33 @@ func (x *AIAgentOverrideRule) GetWelcomeMessageTriggers() []*Trigger {
 	return nil
 }
 
+func (x *AIAgentOverrideRule) GetBackgroundFollowUpDelayMin() int64 {
+	if x != nil {
+		return x.BackgroundFollowUpDelayMin
+	}
+	return 0
+}
+
 type AIAgent struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId         string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id                string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Fullname          string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"`
-	Avatar            *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Description       string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	AvatarUrl         string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Brand             string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
-	BrandDescription  string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
-	JobTitle          string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"` // customer_support, sale
-	Tone              string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                         // casual, friendly, professional
-	PreferShowSources bool                   `protobuf:"varint,13,opt,name=prefer_show_sources,json=preferShowSources,proto3" json:"prefer_show_sources,omitempty"`
-	Guardrails        []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
-	Created           int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy         string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated           int64                  `protobuf:"varint,19,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy         string                 `protobuf:"bytes,20,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	State             string                 `protobuf:"bytes,22,opt,name=state,proto3" json:"state,omitempty"` // active, inactive
-	Model             string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"` // gpt-4o-mini, custom_webhook
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Ctx              *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId        string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id               string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Fullname         string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Avatar           *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Description      string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	AvatarUrl        string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Brand            string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
+	BrandDescription string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
+	JobTitle         string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"` // customer_support, sale
+	Tone             string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                         // casual, friendly, professional
+	Guardrails       []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
+	Created          int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy        string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated          int64                  `protobuf:"varint,19,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy        string                 `protobuf:"bytes,20,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	State            string                 `protobuf:"bytes,22,opt,name=state,proto3" json:"state,omitempty"` // active, inactive
+	Model            string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"` // gpt-4o-mini, custom_webhook
 	// repeated AIAgent sub_agents = 25;
 	FormIds                []string      `protobuf:"bytes,27,rep,name=form_ids,json=formIds,proto3" json:"form_ids,omitempty"`                                       // readonly
 	TokenLimit             string        `protobuf:"bytes,28,opt,name=token_limit,json=tokenLimit,proto3" json:"token_limit,omitempty"`                              // short, balanced, long
@@ -63182,13 +63197,6 @@ func (x *AIAgent) GetTone() string {
 		return x.Tone
 	}
 	return ""
-}
-
-func (x *AIAgent) GetPreferShowSources() bool {
-	if x != nil {
-		return x.PreferShowSources
-	}
-	return false
 }
 
 func (x *AIAgent) GetGuardrails() []*AIAgentGuardrail {
@@ -71248,9 +71256,10 @@ const file_header_proto_rawDesc = "" +
 	"\ragent_timeout\x18\x05 \x01(\x03R\fagentTimeout\"[\n" +
 	"\x1aAIAgentAutoTakeoverSetting\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\x03R\aenabled\x12#\n" +
-	"\ragent_timeout\x18\x04 \x01(\x03R\fagentTimeout\"v\n" +
+	"\ragent_timeout\x18\x04 \x01(\x03R\fagentTimeout\"\x93\x01\n" +
 	"\x1aAIAgentAutoFollowUpSetting\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\x03R\aenabled\x12\"\n" +
+	"\aenabled\x18\x04 \x01(\x03R\aenabled\x12\x1b\n" +
+	"\tdelay_min\x18\b \x01(\x03R\bdelayMin\x12\"\n" +
 	"\finstructions\x18\x06 \x03(\tR\finstructions\x12\x1a\n" +
 	"\bexamples\x18\a \x03(\tR\bexamples\"\xb9\x02\n" +
 	"\fGoogleReview\x12\x1b\n" +
@@ -77569,7 +77578,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12 \n" +
 	"\vinstruction\x18\x06 \x01(\tR\vinstruction\x12\x1c\n" +
 	"\treasoning\x18\a \x01(\bR\treasoning\x12\x16\n" +
-	"\x06action\x18\b \x01(\tR\x06action\"\xb0\x05\n" +
+	"\x06action\x18\b \x01(\tR\x06action\"\xf4\x05\n" +
 	"\x13AIAgentOverrideRule\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
@@ -77588,7 +77597,8 @@ const file_header_proto_rawDesc = "" +
 	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\x128\n" +
 	"\x0fwelcome_message\x18\x14 \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x124\n" +
 	"\x16welcome_message_prompt\x18\x15 \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
-	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\"\xf2\x15\n" +
+	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\x12B\n" +
+	"\x1ebackground_follow_up_delay_min\x18\x17 \x01(\x03R\x1abackgroundFollowUpDelayMin\"\xc2\x15\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77603,8 +77613,7 @@ const file_header_proto_rawDesc = "" +
 	"\x11brand_description\x18\n" +
 	" \x01(\tR\x10brandDescription\x12\x1b\n" +
 	"\tjob_title\x18\v \x01(\tR\bjobTitle\x12\x12\n" +
-	"\x04tone\x18\f \x01(\tR\x04tone\x12.\n" +
-	"\x13prefer_show_sources\x18\r \x01(\bR\x11preferShowSources\x128\n" +
+	"\x04tone\x18\f \x01(\tR\x04tone\x128\n" +
 	"\n" +
 	"guardrails\x18\b \x03(\v2\x18.header.AIAgentGuardrailR\n" +
 	"guardrails\x12\x18\n" +
