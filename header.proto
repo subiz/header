@@ -9000,7 +9000,7 @@ message AIAgent {
 
 	string state = 22; // active, inactive
 
-	string model = 23; // gpt-4o-mini
+	string model = 23; // gpt-4o-mini, custom_webhook
 
 	// repeated AIAgent sub_agents = 25;
 	repeated string form_ids = 27; // readonly
@@ -9074,6 +9074,22 @@ message AIAgent {
 	AIAgentUsageLimit usage_limit = 85;
 
 	RewriteQuerySetting rewrite_query = 86;
+
+  AIAgentWebhook custom_webhook = 88;
+}
+
+message AIAgentWebhook {
+	// TODO: authentication
+	// return 204 to stop the bot from response
+	string url = 6;
+	string method = 7; // GET, POST, DELETE
+	repeated KV headers = 8;
+
+	repeated string fields = 10; // messages, conversation, user
+	//repeated LLMChatHistoryEntry messages = 9;
+	//Conversation conversation = 10;
+	//User user = 11;
+	int64 timeout_sec = 11;
 }
 
 message AIAgentTestcase {
