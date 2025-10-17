@@ -8949,7 +8949,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_background_follow_up_delay_min
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_ai_agent
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -8974,7 +8974,7 @@ message AIAgentOverrideRule {
 	string welcome_message_prompt = 21;
 	repeated Trigger welcome_message_triggers = 22;
 
-	int64 background_follow_up_delay_min = 23;
+	AIAgent ai_agent = 23;
 }
 
 message AIAgent {
