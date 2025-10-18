@@ -1342,7 +1342,7 @@ message AIAgentAutoTakeoverSetting {
 message AIAgentAutoFollowUpSetting {
 	int64 enabled = 4; // maximum twice
 	// int64 max_attempts = 5;
-	int64 delay_min = 8;
+	int64 delay_sec = 8;
 	repeated string instructions = 6;
 	repeated string examples = 7;
 }
@@ -1668,7 +1668,7 @@ enum AttachmentType {
 }
 
 message Attachment {
-	string type = 12; // form, form_submission
+	string type = 12; // form, form_submission, quick_replies
 	// file
 	string mimetype = 2;
 	string url = 3;
@@ -8949,7 +8949,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_ai_agent
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent
 
 	repeated AIFunction functions = 9; // use when action = function
 

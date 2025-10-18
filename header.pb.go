@@ -10854,7 +10854,7 @@ type AIAgentAutoFollowUpSetting struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	Enabled int64                  `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"` // maximum twice
 	// int64 max_attempts = 5;
-	DelayMin      int64    `protobuf:"varint,8,opt,name=delay_min,json=delayMin,proto3" json:"delay_min,omitempty"`
+	DelaySec      int64    `protobuf:"varint,8,opt,name=delay_sec,json=delaySec,proto3" json:"delay_sec,omitempty"`
 	Instructions  []string `protobuf:"bytes,6,rep,name=instructions,proto3" json:"instructions,omitempty"`
 	Examples      []string `protobuf:"bytes,7,rep,name=examples,proto3" json:"examples,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -10898,9 +10898,9 @@ func (x *AIAgentAutoFollowUpSetting) GetEnabled() int64 {
 	return 0
 }
 
-func (x *AIAgentAutoFollowUpSetting) GetDelayMin() int64 {
+func (x *AIAgentAutoFollowUpSetting) GetDelaySec() int64 {
 	if x != nil {
-		return x.DelayMin
+		return x.DelaySec
 	}
 	return 0
 }
@@ -12666,7 +12666,7 @@ func (x *GenericElementTemplate) GetI18NSubtitle() *I18NString {
 
 type Attachment struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Type  string                 `protobuf:"bytes,12,opt,name=type,proto3" json:"type,omitempty"` // form, form_submission
+	Type  string                 `protobuf:"bytes,12,opt,name=type,proto3" json:"type,omitempty"` // form, form_submission, quick_replies
 	// file
 	Mimetype     string `protobuf:"bytes,2,opt,name=mimetype,proto3" json:"mimetype,omitempty"`
 	Url          string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
@@ -62848,7 +62848,7 @@ type AIAgentOverrideRule struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Id          string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_ai_agent
+	Action      string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`           // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent
 	Functions   []*AIFunction          `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`     // use when action = function
 	Instruction string                 `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"` // use when action = remind
 	// string hook = 8; // ” = before_reply, after_reply
@@ -71259,7 +71259,7 @@ const file_header_proto_rawDesc = "" +
 	"\ragent_timeout\x18\x04 \x01(\x03R\fagentTimeout\"\x93\x01\n" +
 	"\x1aAIAgentAutoFollowUpSetting\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\x03R\aenabled\x12\x1b\n" +
-	"\tdelay_min\x18\b \x01(\x03R\bdelayMin\x12\"\n" +
+	"\tdelay_sec\x18\b \x01(\x03R\bdelaySec\x12\"\n" +
 	"\finstructions\x18\x06 \x03(\tR\finstructions\x12\x1a\n" +
 	"\bexamples\x18\a \x03(\tR\bexamples\"\xb9\x02\n" +
 	"\fGoogleReview\x12\x1b\n" +
