@@ -9078,6 +9078,9 @@ message AIAgent {
 	RewriteQuerySetting rewrite_query = 86;
 
   AIAgentWebhook custom_webhook = 88;
+
+	repeated string supervisors = 89;
+	repeated string tags = 90;
 }
 
 message AIAgentWebhook {
@@ -9361,7 +9364,7 @@ message AIDataEntry {
 	// string group_id = 4;
 
 	string type = 5; // qa, file, website, product, text (for testing), instruction, discount
-	Message answer = 6;
+	Message answer = 6; // solution
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
 	bool javascript_enabled = 9;
@@ -9370,7 +9373,7 @@ message AIDataEntry {
 	Product product = 18;
 	Discount discount = 55;
 
-	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
+	AIDataStore data_store = 43; // read-only, for product only when search information about a specific product
 
 	// url only
 	int64 last_crawled = 12;
@@ -9386,6 +9389,17 @@ message AIDataEntry {
 	string updated_by = 22;
 	string md5 = 23;
 	string chunked_md5 = 24;
+	repeated string aliases = 33; // for the question
+	string category = 26; // howto | feature | troubleshooting | product | policy
+
+	// key=product value=mySaaS
+	// key=features value=["integrations", "notifications"]
+	// key=version value=v2.1
+	// key=platforms value=["web", "api"]
+	repeated KV metadata = 27;
+
+	repeated string tags = 28;
+	repeated string related_articles = 29;
 
 	// int64 deleted = 32;
 	int64 modified = 34;
