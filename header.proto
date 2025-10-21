@@ -1123,7 +1123,7 @@ message RouteResult {
 	// string state = 6; // ???
 	int64 assigned = 7; // ms
 
-	string bot_id = 8; // strategy == bot
+	// string bot_id = 8; // strategy == bot
 	string debug = 9;
 
 	string status = 10; // waiting_for_agent, assigned
@@ -9152,6 +9152,10 @@ message AIAgentTestResult {
 
 message RewriteQueryExample {
 	repeated LLMChatHistoryEntry messages = 3;
+
+	string type = 4; // sub | stepback
+	string question = 5; // original (full-context) query
+	repeated string rewritten_questions = 6;
 }
 
 message RewriteQuerySetting {

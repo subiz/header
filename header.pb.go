@@ -9578,8 +9578,8 @@ type RouteResult struct {
 	AgentIds []string               `protobuf:"bytes,4,rep,name=agent_ids,json=agentIds,proto3" json:"agent_ids,omitempty"`
 	GroupId  string                 `protobuf:"bytes,5,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
 	// string state = 6; // ???
-	Assigned      int64  `protobuf:"varint,7,opt,name=assigned,proto3" json:"assigned,omitempty"`       // ms
-	BotId         string `protobuf:"bytes,8,opt,name=bot_id,json=botId,proto3" json:"bot_id,omitempty"` // strategy == bot
+	Assigned int64 `protobuf:"varint,7,opt,name=assigned,proto3" json:"assigned,omitempty"` // ms
+	// string bot_id = 8; // strategy == bot
 	Debug         string `protobuf:"bytes,9,opt,name=debug,proto3" json:"debug,omitempty"`
 	Status        string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"` // waiting_for_agent, assigned
 	AssignedTo    string `protobuf:"bytes,11,opt,name=assigned_to,json=assignedTo,proto3" json:"assigned_to,omitempty"`
@@ -9650,13 +9650,6 @@ func (x *RouteResult) GetAssigned() int64 {
 		return x.Assigned
 	}
 	return 0
-}
-
-func (x *RouteResult) GetBotId() string {
-	if x != nil {
-		return x.BotId
-	}
-	return ""
 }
 
 func (x *RouteResult) GetDebug() string {
@@ -64009,10 +64002,13 @@ func (x *AIAgentTestResult) GetFpvCostVnd() int64 {
 }
 
 type RewriteQueryExample struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Messages      []*LLMChatHistoryEntry `protobuf:"bytes,3,rep,name=messages,proto3" json:"messages,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Messages           []*LLMChatHistoryEntry `protobuf:"bytes,3,rep,name=messages,proto3" json:"messages,omitempty"`
+	Type               string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`         // sub | stepback
+	Question           string                 `protobuf:"bytes,5,opt,name=question,proto3" json:"question,omitempty"` // original (full-context) query
+	RewrittenQuestions []string               `protobuf:"bytes,6,rep,name=rewritten_questions,json=rewrittenQuestions,proto3" json:"rewritten_questions,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *RewriteQueryExample) Reset() {
@@ -64048,6 +64044,27 @@ func (*RewriteQueryExample) Descriptor() ([]byte, []int) {
 func (x *RewriteQueryExample) GetMessages() []*LLMChatHistoryEntry {
 	if x != nil {
 		return x.Messages
+	}
+	return nil
+}
+
+func (x *RewriteQueryExample) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *RewriteQueryExample) GetQuestion() string {
+	if x != nil {
+		return x.Question
+	}
+	return ""
+}
+
+func (x *RewriteQueryExample) GetRewrittenQuestions() []string {
+	if x != nil {
+		return x.RewrittenQuestions
 	}
 	return nil
 }
@@ -71145,14 +71162,13 @@ const file_header_proto_rawDesc = "" +
 	"\tcity_name\x18\x03 \x01(\tR\bcityName\x12!\n" +
 	"\fcountry_code\x18\x04 \x01(\tR\vcountryCode\x12\x1a\n" +
 	"\bprovince\x18\x05 \x01(\tR\bprovince\x12\x1c\n" +
-	"\tdistricts\x18\x06 \x03(\tR\tdistricts\"\xfc\x01\n" +
+	"\tdistricts\x18\x06 \x03(\tR\tdistricts\"\xe5\x01\n" +
 	"\vRouteResult\x12\x17\n" +
 	"\arule_id\x18\x01 \x01(\tR\x06ruleId\x12\x1a\n" +
 	"\bstrategy\x18\x03 \x01(\tR\bstrategy\x12\x1b\n" +
 	"\tagent_ids\x18\x04 \x03(\tR\bagentIds\x12\x19\n" +
 	"\bgroup_id\x18\x05 \x01(\tR\agroupId\x12\x1a\n" +
-	"\bassigned\x18\a \x01(\x03R\bassigned\x12\x15\n" +
-	"\x06bot_id\x18\b \x01(\tR\x05botId\x12\x14\n" +
+	"\bassigned\x18\a \x01(\x03R\bassigned\x12\x14\n" +
 	"\x05debug\x18\t \x01(\tR\x05debug\x12\x16\n" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1f\n" +
@@ -77789,9 +77805,12 @@ const file_header_proto_rawDesc = "" +
 	"\aupdated\x18\x12 \x01(\x03R\aupdated\x12\x1b\n" +
 	"\terror_log\x18\x13 \x01(\tR\berrorLog\x12 \n" +
 	"\ffpv_cost_vnd\x18\x14 \x01(\x03R\n" +
-	"fpvCostVnd\"N\n" +
+	"fpvCostVnd\"\xaf\x01\n" +
 	"\x13RewriteQueryExample\x127\n" +
-	"\bmessages\x18\x03 \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\"q\n" +
+	"\bmessages\x18\x03 \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x12\x1a\n" +
+	"\bquestion\x18\x05 \x01(\tR\bquestion\x12/\n" +
+	"\x13rewritten_questions\x18\x06 \x03(\tR\x12rewrittenQuestions\"q\n" +
 	"\x13RewriteQuerySetting\x12!\n" +
 	"\fextra_prompt\x18\x03 \x01(\tR\vextraPrompt\x127\n" +
 	"\bexamples\x18\x04 \x03(\v2\x1b.header.RewriteQueryExampleR\bexamples\"\x97\x03\n" +
