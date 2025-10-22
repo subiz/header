@@ -7683,7 +7683,7 @@ message AIAgentTrace {
 	bool context_guard = 15;
 
 	int64 duration = 16; // ms
-	repeated string rewriten_queries = 17;
+	repeated string rewritten_queries = 17;
 	repeated AIDataEntryUsed context_documents = 18;
 	repeated string context_instructions = 19;
 	repeated LLMToolCall tool_calls = 20;
@@ -8958,6 +8958,7 @@ message AIAgentOverrideRule {
 	// string hook = 8; // '' = before_reply, after_reply
 	string agent_id = 6; // use when action = assign
 
+
 	AIIntent intent = 13;
 	WorkflowCondition condition = 14;
 	int64 disabled = 15;
@@ -8975,6 +8976,8 @@ message AIAgentOverrideRule {
 	repeated Trigger welcome_message_triggers = 22;
 
 	AIAgent ai_agent = 23;
+
+	bool run_once = 24;
 }
 
 message AIAgent {
@@ -9313,7 +9316,7 @@ message CreateTicketFunction {
 
 message AIIntent {
 	string name = 3; // unique
-	string description = 4;
+	string description = 4; // system_start
 	repeated string examples = 5; // new line delimiter
 	int64 edited = 6;
 	int64 edited_by = 7;

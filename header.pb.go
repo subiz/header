@@ -53668,7 +53668,7 @@ type AIAgentTrace struct {
 	Model               string                 `protobuf:"bytes,14,opt,name=model,proto3" json:"model,omitempty"`
 	ContextGuard        bool                   `protobuf:"varint,15,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`
 	Duration            int64                  `protobuf:"varint,16,opt,name=duration,proto3" json:"duration,omitempty"` // ms
-	RewritenQueries     []string               `protobuf:"bytes,17,rep,name=rewriten_queries,json=rewritenQueries,proto3" json:"rewriten_queries,omitempty"`
+	RewrittenQueries    []string               `protobuf:"bytes,17,rep,name=rewritten_queries,json=rewrittenQueries,proto3" json:"rewritten_queries,omitempty"`
 	ContextDocuments    []*AIDataEntryUsed     `protobuf:"bytes,18,rep,name=context_documents,json=contextDocuments,proto3" json:"context_documents,omitempty"`
 	ContextInstructions []string               `protobuf:"bytes,19,rep,name=context_instructions,json=contextInstructions,proto3" json:"context_instructions,omitempty"`
 	ToolCalls           []*LLMToolCall         `protobuf:"bytes,20,rep,name=tool_calls,json=toolCalls,proto3" json:"tool_calls,omitempty"`
@@ -53820,9 +53820,9 @@ func (x *AIAgentTrace) GetDuration() int64 {
 	return 0
 }
 
-func (x *AIAgentTrace) GetRewritenQueries() []string {
+func (x *AIAgentTrace) GetRewrittenQueries() []string {
 	if x != nil {
-		return x.RewritenQueries
+		return x.RewrittenQueries
 	}
 	return nil
 }
@@ -62859,6 +62859,7 @@ type AIAgentOverrideRule struct {
 	WelcomeMessagePrompt   string         `protobuf:"bytes,21,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
 	WelcomeMessageTriggers []*Trigger     `protobuf:"bytes,22,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
 	AiAgent                *AIAgent       `protobuf:"bytes,23,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
+	RunOnce                bool           `protobuf:"varint,24,opt,name=run_once,json=runOnce,proto3" json:"run_once,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -63010,6 +63011,13 @@ func (x *AIAgentOverrideRule) GetAiAgent() *AIAgent {
 		return x.AiAgent
 	}
 	return nil
+}
+
+func (x *AIAgentOverrideRule) GetRunOnce() bool {
+	if x != nil {
+		return x.RunOnce
+	}
+	return false
 }
 
 type AIAgent struct {
@@ -65086,9 +65094,9 @@ func (x *CreateTicketFunction) GetDueAt() string {
 
 type AIIntent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"` // unique
-	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Examples      []string               `protobuf:"bytes,5,rep,name=examples,proto3" json:"examples,omitempty"` // new line delimiter
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`               // unique
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"` // system_start
+	Examples      []string               `protobuf:"bytes,5,rep,name=examples,proto3" json:"examples,omitempty"`       // new line delimiter
 	Edited        int64                  `protobuf:"varint,6,opt,name=edited,proto3" json:"edited,omitempty"`
 	EditedBy      int64                  `protobuf:"varint,7,opt,name=edited_by,json=editedBy,proto3" json:"edited_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76464,7 +76472,7 @@ const file_header_proto_rawDesc = "" +
 	"\bis_cover\x18\x0f \x01(\bR\aisCover\x12.\n" +
 	"\x13chunk_original_link\x18\x10 \x01(\tR\x11chunkOriginalLink\x12\x1f\n" +
 	"\vchunk_title\x18\x11 \x01(\tR\n" +
-	"chunkTitle\"\xe9\b\n" +
+	"chunkTitle\"\xeb\b\n" +
 	"\fAIAgentTrace\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76484,8 +76492,8 @@ const file_header_proto_rawDesc = "" +
 	"\x12transfer_to_agents\x18\r \x03(\tR\x10transferToAgents\x12\x14\n" +
 	"\x05model\x18\x0e \x01(\tR\x05model\x12#\n" +
 	"\rcontext_guard\x18\x0f \x01(\bR\fcontextGuard\x12\x1a\n" +
-	"\bduration\x18\x10 \x01(\x03R\bduration\x12)\n" +
-	"\x10rewriten_queries\x18\x11 \x03(\tR\x0frewritenQueries\x12D\n" +
+	"\bduration\x18\x10 \x01(\x03R\bduration\x12+\n" +
+	"\x11rewritten_queries\x18\x11 \x03(\tR\x10rewrittenQueries\x12D\n" +
 	"\x11context_documents\x18\x12 \x03(\v2\x17.header.AIDataEntryUsedR\x10contextDocuments\x121\n" +
 	"\x14context_instructions\x18\x13 \x03(\tR\x13contextInstructions\x122\n" +
 	"\n" +
@@ -77654,7 +77662,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12 \n" +
 	"\vinstruction\x18\x06 \x01(\tR\vinstruction\x12\x1c\n" +
 	"\treasoning\x18\a \x01(\bR\treasoning\x12\x16\n" +
-	"\x06action\x18\b \x01(\tR\x06action\"\xdc\x05\n" +
+	"\x06action\x18\b \x01(\tR\x06action\"\xf7\x05\n" +
 	"\x13AIAgentOverrideRule\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
@@ -77674,7 +77682,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fwelcome_message\x18\x14 \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x124\n" +
 	"\x16welcome_message_prompt\x18\x15 \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
 	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\x12*\n" +
-	"\bai_agent\x18\x17 \x01(\v2\x0f.header.AIAgentR\aaiAgent\"\xf8\x15\n" +
+	"\bai_agent\x18\x17 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12\x19\n" +
+	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\xf8\x15\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
