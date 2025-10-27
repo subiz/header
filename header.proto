@@ -2551,7 +2551,7 @@ message WidgetSetting {
 	WidgetForm prechat_form = 24;
 	WidgetChatButton desktop_button = 25;
 	WidgetChatButton mobile_button = 26;
-	WidgetGreeting greeting = 27;
+	WidgetGreeting greeting = 27; // preview
 	string title = 28;
 	string introduction = 29;
 	bool auto_request_rating = 33;
@@ -2655,6 +2655,8 @@ message WidgetGreeting {
 	I18nString greeting = 6;
 
 	bool mobile_disabled = 7;
+
+	int64 hide_quick_replies = 8;
 }
 
 ////////////// CAMPAIGN //////////////
@@ -9346,8 +9348,10 @@ message CrawlResponse {
 	string screenshoot = 20; // base64
 }
 
+// chunk and excerpt
 message AIDataChunk {
 	common.Context ctx = 1;
+	string account_id = 2;
 
 	string data_entry_id = 3;
 	string id = 5; // md5 of embedded_chunk
@@ -9360,8 +9364,16 @@ message AIDataChunk {
 	int64 chunk_index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	// repeated uint32 named_entities = 12;
 	bool is_cover = 13;
-	string chunk_original_link = 14;
+	string chunk_original_link = 14; // source url
 	string title = 15;
+
+	int64 created = 19;
+	// for excerpts
+	Message content = 20;
+	string summary = 21;
+	repeated string keywords = 22;
+	string category = 23; // troubleshooting -> [login_issue, billing, payment]
+	string type = 24; // user_guide, technical_specification, feature_description, troubleshooting, installation_guide
 }
 
 message AIDataEntry {
