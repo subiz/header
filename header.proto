@@ -2686,6 +2686,7 @@ message WebPlugin {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
+	string domain = 4;
 
 	string name = 5;
 	// chatbox, popup, contact, notification

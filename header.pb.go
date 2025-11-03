@@ -18972,6 +18972,7 @@ type WebPlugin struct {
 	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id        string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Domain    string                 `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
 	Name      string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// chatbox, popup, contact, notification
 	Type                   string                `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
@@ -19053,6 +19054,13 @@ func (x *WebPlugin) GetAccountId() string {
 func (x *WebPlugin) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *WebPlugin) GetDomain() string {
+	if x != nil {
+		return x.Domain
 	}
 	return ""
 }
@@ -72440,12 +72448,14 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12+\n" +
-	"\aplugins\x18\x03 \x03(\v2\x11.header.WebPluginR\aplugins\"\xea\t\n" +
+	"\aplugins\x18\x03 \x03(\v2\x11.header.WebPluginR\aplugins\"\x82\n" +
+	"\n" +
 	"\tWebPlugin\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x16\n" +
+	"\x06domain\x18\x04 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x06 \x01(\tR\x04type\x12\x18\n" +
 	"\acreated\x18\n" +
