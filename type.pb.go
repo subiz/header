@@ -842,27 +842,27 @@ func (x *TextTransform) GetName() string {
 	return ""
 }
 
-type FloatTransform struct {
+type NumberTransform struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // round, ceil, floor
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FloatTransform) Reset() {
-	*x = FloatTransform{}
+func (x *NumberTransform) Reset() {
+	*x = NumberTransform{}
 	mi := &file_type_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FloatTransform) String() string {
+func (x *NumberTransform) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FloatTransform) ProtoMessage() {}
+func (*NumberTransform) ProtoMessage() {}
 
-func (x *FloatTransform) ProtoReflect() protoreflect.Message {
+func (x *NumberTransform) ProtoReflect() protoreflect.Message {
 	mi := &file_type_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -874,12 +874,12 @@ func (x *FloatTransform) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FloatTransform.ProtoReflect.Descriptor instead.
-func (*FloatTransform) Descriptor() ([]byte, []int) {
+// Deprecated: Use NumberTransform.ProtoReflect.Descriptor instead.
+func (*NumberTransform) Descriptor() ([]byte, []int) {
 	return file_type_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *FloatTransform) GetName() string {
+func (x *NumberTransform) GetName() string {
 	if x != nil {
 		return x.Name
 	}
@@ -1137,7 +1137,7 @@ type EventConditionFilter struct {
 	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
 	Text          *TextCondition         `protobuf:"bytes,6,opt,name=text,proto3" json:"text,omitempty"`
 	Boolean       *BooleanCondition      `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
-	Number        *FloatCondition        `protobuf:"bytes,9,opt,name=number,proto3" json:"number,omitempty"`
+	Number        *NumberCondition       `protobuf:"bytes,9,opt,name=number,proto3" json:"number,omitempty"`
 	Datetime      *DatetimeCondition     `protobuf:"bytes,10,opt,name=datetime,proto3" json:"datetime,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1208,7 +1208,7 @@ func (x *EventConditionFilter) GetBoolean() *BooleanCondition {
 	return nil
 }
 
-func (x *EventConditionFilter) GetNumber() *FloatCondition {
+func (x *EventConditionFilter) GetNumber() *NumberCondition {
 	if x != nil {
 		return x.Number
 	}
@@ -1351,10 +1351,10 @@ func (x *BooleanCondition) GetOp() string {
 	return ""
 }
 
-type FloatCondition struct {
+type NumberCondition struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Op            string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"`
-	Transforms    []*FloatTransform      `protobuf:"bytes,3,rep,name=transforms,proto3" json:"transforms,omitempty"`
+	Transforms    []*NumberTransform     `protobuf:"bytes,3,rep,name=transforms,proto3" json:"transforms,omitempty"`
 	HasValue      bool                   `protobuf:"varint,4,opt,name=has_value,json=hasValue,proto3" json:"has_value,omitempty"`
 	Gt            float64                `protobuf:"fixed64,5,opt,name=gt,proto3" json:"gt,omitempty"`
 	Gte           float64                `protobuf:"fixed64,6,opt,name=gte,proto3" json:"gte,omitempty"`
@@ -1374,20 +1374,20 @@ type FloatCondition struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FloatCondition) Reset() {
-	*x = FloatCondition{}
+func (x *NumberCondition) Reset() {
+	*x = NumberCondition{}
 	mi := &file_type_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FloatCondition) String() string {
+func (x *NumberCondition) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FloatCondition) ProtoMessage() {}
+func (*NumberCondition) ProtoMessage() {}
 
-func (x *FloatCondition) ProtoReflect() protoreflect.Message {
+func (x *NumberCondition) ProtoReflect() protoreflect.Message {
 	mi := &file_type_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1399,124 +1399,124 @@ func (x *FloatCondition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FloatCondition.ProtoReflect.Descriptor instead.
-func (*FloatCondition) Descriptor() ([]byte, []int) {
+// Deprecated: Use NumberCondition.ProtoReflect.Descriptor instead.
+func (*NumberCondition) Descriptor() ([]byte, []int) {
 	return file_type_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *FloatCondition) GetOp() string {
+func (x *NumberCondition) GetOp() string {
 	if x != nil {
 		return x.Op
 	}
 	return ""
 }
 
-func (x *FloatCondition) GetTransforms() []*FloatTransform {
+func (x *NumberCondition) GetTransforms() []*NumberTransform {
 	if x != nil {
 		return x.Transforms
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetHasValue() bool {
+func (x *NumberCondition) GetHasValue() bool {
 	if x != nil {
 		return x.HasValue
 	}
 	return false
 }
 
-func (x *FloatCondition) GetGt() float64 {
+func (x *NumberCondition) GetGt() float64 {
 	if x != nil {
 		return x.Gt
 	}
 	return 0
 }
 
-func (x *FloatCondition) GetGte() float64 {
+func (x *NumberCondition) GetGte() float64 {
 	if x != nil {
 		return x.Gte
 	}
 	return 0
 }
 
-func (x *FloatCondition) GetLt() float64 {
+func (x *NumberCondition) GetLt() float64 {
 	if x != nil {
 		return x.Lt
 	}
 	return 0
 }
 
-func (x *FloatCondition) GetLte() float64 {
+func (x *NumberCondition) GetLte() float64 {
 	if x != nil {
 		return x.Lte
 	}
 	return 0
 }
 
-func (x *FloatCondition) GetEq() []float64 {
+func (x *NumberCondition) GetEq() []float64 {
 	if x != nil {
 		return x.Eq
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetNeq() []float64 {
+func (x *NumberCondition) GetNeq() []float64 {
 	if x != nil {
 		return x.Neq
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetInRange() []float64 {
+func (x *NumberCondition) GetInRange() []float64 {
 	if x != nil {
 		return x.InRange
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetNotInRange() []float64 {
+func (x *NumberCondition) GetNotInRange() []float64 {
 	if x != nil {
 		return x.NotInRange
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetEqVar() []string {
+func (x *NumberCondition) GetEqVar() []string {
 	if x != nil {
 		return x.EqVar
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetNeqVar() []string {
+func (x *NumberCondition) GetNeqVar() []string {
 	if x != nil {
 		return x.NeqVar
 	}
 	return nil
 }
 
-func (x *FloatCondition) GetGtVar() string {
+func (x *NumberCondition) GetGtVar() string {
 	if x != nil {
 		return x.GtVar
 	}
 	return ""
 }
 
-func (x *FloatCondition) GetGteVar() string {
+func (x *NumberCondition) GetGteVar() string {
 	if x != nil {
 		return x.GteVar
 	}
 	return ""
 }
 
-func (x *FloatCondition) GetLtVar() string {
+func (x *NumberCondition) GetLtVar() string {
 	if x != nil {
 		return x.LtVar
 	}
 	return ""
 }
 
-func (x *FloatCondition) GetLteVar() string {
+func (x *NumberCondition) GetLteVar() string {
 	if x != nil {
 		return x.LteVar
 	}
@@ -1697,8 +1697,8 @@ const file_type_proto_rawDesc = "" +
 	"\n" +
 	"type.proto\x12\x06header\"#\n" +
 	"\rTextTransform\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"$\n" +
-	"\x0eFloatTransform\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"%\n" +
+	"\x0fNumberTransform\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"\xcf\x06\n" +
 	"\rTextCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\x125\n" +
@@ -1735,14 +1735,14 @@ const file_type_proto_rawDesc = "" +
 	"\x0fnot_contain_var\x185 \x03(\tR\rnotContainVar\x12+\n" +
 	"\x12not_start_with_var\x187 \x03(\tR\x0fnotStartWithVar\x12'\n" +
 	"\x10not_end_with_var\x188 \x03(\tR\rnotEndWithVar\x12(\n" +
-	"\x10contain_all_varr\x18: \x03(\tR\x0econtainAllVarr\"\x92\x02\n" +
+	"\x10contain_all_varr\x18: \x03(\tR\x0econtainAllVarr\"\x93\x02\n" +
 	"\x14EventConditionFilter\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x10\n" +
 	"\x03key\x18\x04 \x01(\tR\x03key\x12\x12\n" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12)\n" +
 	"\x04text\x18\x06 \x01(\v2\x15.header.TextConditionR\x04text\x122\n" +
-	"\aboolean\x18\b \x01(\v2\x18.header.BooleanConditionR\aboolean\x12.\n" +
-	"\x06number\x18\t \x01(\v2\x16.header.FloatConditionR\x06number\x125\n" +
+	"\aboolean\x18\b \x01(\v2\x18.header.BooleanConditionR\aboolean\x12/\n" +
+	"\x06number\x18\t \x01(\v2\x17.header.NumberConditionR\x06number\x125\n" +
 	"\bdatetime\x18\n" +
 	" \x01(\v2\x19.header.DatetimeConditionR\bdatetime\"\xdf\x01\n" +
 	"\x0eEventCondition\x12\x12\n" +
@@ -1753,11 +1753,11 @@ const file_type_proto_rawDesc = "" +
 	"\acreated\x18\a \x01(\v2\x19.header.DatetimeConditionR\acreated\x126\n" +
 	"\afilters\x18\b \x03(\v2\x1c.header.EventConditionFilterR\afilters\"\"\n" +
 	"\x10BooleanCondition\x12\x0e\n" +
-	"\x02op\x18\x02 \x01(\tR\x02op\"\xa8\x03\n" +
-	"\x0eFloatCondition\x12\x0e\n" +
-	"\x02op\x18\x02 \x01(\tR\x02op\x126\n" +
+	"\x02op\x18\x02 \x01(\tR\x02op\"\xaa\x03\n" +
+	"\x0fNumberCondition\x12\x0e\n" +
+	"\x02op\x18\x02 \x01(\tR\x02op\x127\n" +
 	"\n" +
-	"transforms\x18\x03 \x03(\v2\x16.header.FloatTransformR\n" +
+	"transforms\x18\x03 \x03(\v2\x17.header.NumberTransformR\n" +
 	"transforms\x12\x1b\n" +
 	"\thas_value\x18\x04 \x01(\bR\bhasValue\x12\x0e\n" +
 	"\x02gt\x18\x05 \x01(\x01R\x02gt\x12\x10\n" +
@@ -2064,23 +2064,23 @@ var file_type_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_type_proto_goTypes = []any{
 	(RealtimeType)(0),            // 0: header.RealtimeType
 	(*TextTransform)(nil),        // 1: header.TextTransform
-	(*FloatTransform)(nil),       // 2: header.FloatTransform
+	(*NumberTransform)(nil),      // 2: header.NumberTransform
 	(*TextCondition)(nil),        // 3: header.TextCondition
 	(*EventConditionFilter)(nil), // 4: header.EventConditionFilter
 	(*EventCondition)(nil),       // 5: header.EventCondition
 	(*BooleanCondition)(nil),     // 6: header.BooleanCondition
-	(*FloatCondition)(nil),       // 7: header.FloatCondition
+	(*NumberCondition)(nil),      // 7: header.NumberCondition
 	(*DatetimeCondition)(nil),    // 8: header.DatetimeCondition
 }
 var file_type_proto_depIdxs = []int32{
 	1, // 0: header.TextCondition.transforms:type_name -> header.TextTransform
 	3, // 1: header.EventConditionFilter.text:type_name -> header.TextCondition
 	6, // 2: header.EventConditionFilter.boolean:type_name -> header.BooleanCondition
-	7, // 3: header.EventConditionFilter.number:type_name -> header.FloatCondition
+	7, // 3: header.EventConditionFilter.number:type_name -> header.NumberCondition
 	8, // 4: header.EventConditionFilter.datetime:type_name -> header.DatetimeCondition
 	8, // 5: header.EventCondition.created:type_name -> header.DatetimeCondition
 	4, // 6: header.EventCondition.filters:type_name -> header.EventConditionFilter
-	2, // 7: header.FloatCondition.transforms:type_name -> header.FloatTransform
+	2, // 7: header.NumberCondition.transforms:type_name -> header.NumberTransform
 	8, // [8:8] is the sub-list for method output_type
 	8, // [8:8] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name

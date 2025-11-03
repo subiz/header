@@ -3943,7 +3943,7 @@ message UserViewCondition {
 
 	TextCondition text = 6;
 	BooleanCondition boolean = 8;
-	FloatCondition number = 9;
+	NumberCondition number = 9;
 	DatetimeCondition datetime = 10;
 	EventCondition event = 11;
 
@@ -7478,7 +7478,7 @@ message WorkflowCondition {
 	string type = 7; // boolean, number, datetime, event, text, timming, llm
 
 	BooleanCondition boolean = 8;
-	FloatCondition number = 9;
+	NumberCondition number = 9;
 	DatetimeCondition datetime = 10;
 	EventCondition event = 11;
 	TextCondition text = 12;
@@ -9126,6 +9126,8 @@ message AIAgentTestcase {
 	string updated_by = 22;
 	string created_by = 23;
 	int64 fpv_total_cost_vnd = 24;
+
+	string referrer_website = 25;
 }
 
 message AIAgentTestResult {
@@ -9362,14 +9364,14 @@ message AIDataChunk {
 	string model = 10;
 
 	int64 chunk_index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
-	// repeated uint32 named_entities = 12;
+	// repeated uint32 named_entities = 12; // iphone, iphone 16
 	bool is_cover = 13;
 	string chunk_original_link = 14; // source url
 	string title = 15;
 
 	int64 created = 19;
+
 	// for excerpts
-	Message content = 20;
 	string summary = 21;
 	repeated string keywords = 22;
 	string category = 23; // troubleshooting -> [login_issue, billing, payment]
@@ -9447,6 +9449,8 @@ message AIDataEntry {
 	string ai_agent_id = 61;
 	string message_id = 62;
 	int64 ai_agent_version = 64;
+
+	string extracted_entities = 67;
 
 	// int64 flagged = 64;
 	int64 read_at = 65;

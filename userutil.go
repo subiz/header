@@ -45,7 +45,7 @@ func applyTextTransform(str string, transforms []*TextTransform) string {
 	return applyTextTransform(str, transforms[1:])
 }
 
-func applyFloatTransform(fl float64, transforms []*FloatTransform) float64 {
+func applyFloatTransform(fl float64, transforms []*NumberTransform) float64 {
 	return fl
 }
 
@@ -384,7 +384,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 	return true
 }
 
-func EvaluateFloat(found bool, fl float64, cond *FloatCondition) bool {
+func EvaluateFloat(found bool, fl float64, cond *NumberCondition) bool {
 	fl = applyFloatTransform(fl, cond.GetTransforms())
 
 	switch cond.GetOp() {
