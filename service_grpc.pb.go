@@ -20645,7 +20645,6 @@ const (
 	WidgetService_Read_FullMethodName                     = "/header.WidgetService/Read"
 	WidgetService_Update_FullMethodName                   = "/header.WidgetService/Update"
 	WidgetService_ReadUserSetting_FullMethodName          = "/header.WidgetService/ReadUserSetting"
-	WidgetService_ReadAccountSetting_FullMethodName       = "/header.WidgetService/ReadAccountSetting"
 	WidgetService_ReadAccountSetting2_FullMethodName      = "/header.WidgetService/ReadAccountSetting2"
 	WidgetService_SubmitImpression_FullMethodName         = "/header.WidgetService/SubmitImpression"
 	WidgetService_SubmitConversion_FullMethodName         = "/header.WidgetService/SubmitConversion"
@@ -20679,7 +20678,6 @@ type WidgetServiceClient interface {
 	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetSetting, error)
 	Update(ctx context.Context, in *WidgetSetting, opts ...grpc.CallOption) (*WidgetSetting, error)
 	ReadUserSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetUserSetting, error)
-	ReadAccountSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccountWeb, error)
 	ReadAccountSetting2(ctx context.Context, in *WidgetSettingRequest, opts ...grpc.CallOption) (*AccountWeb, error)
 	SubmitImpression(ctx context.Context, in *Impression, opts ...grpc.CallOption) (*Impression, error)
 	SubmitConversion(ctx context.Context, in *Conversion, opts ...grpc.CallOption) (*Conversion, error)
@@ -20736,16 +20734,6 @@ func (c *widgetServiceClient) ReadUserSetting(ctx context.Context, in *Id, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(WidgetUserSetting)
 	err := c.cc.Invoke(ctx, WidgetService_ReadUserSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *widgetServiceClient) ReadAccountSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccountWeb, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AccountWeb)
-	err := c.cc.Invoke(ctx, WidgetService_ReadAccountSetting_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -20981,7 +20969,6 @@ type WidgetServiceServer interface {
 	Read(context.Context, *Id) (*WidgetSetting, error)
 	Update(context.Context, *WidgetSetting) (*WidgetSetting, error)
 	ReadUserSetting(context.Context, *Id) (*WidgetUserSetting, error)
-	ReadAccountSetting(context.Context, *Id) (*AccountWeb, error)
 	ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error)
 	SubmitImpression(context.Context, *Impression) (*Impression, error)
 	SubmitConversion(context.Context, *Conversion) (*Conversion, error)
@@ -21022,9 +21009,6 @@ func (UnimplementedWidgetServiceServer) Update(context.Context, *WidgetSetting) 
 }
 func (UnimplementedWidgetServiceServer) ReadUserSetting(context.Context, *Id) (*WidgetUserSetting, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadUserSetting not implemented")
-}
-func (UnimplementedWidgetServiceServer) ReadAccountSetting(context.Context, *Id) (*AccountWeb, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadAccountSetting not implemented")
 }
 func (UnimplementedWidgetServiceServer) ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadAccountSetting2 not implemented")
@@ -21163,24 +21147,6 @@ func _WidgetService_ReadUserSetting_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WidgetServiceServer).ReadUserSetting(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WidgetService_ReadAccountSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).ReadAccountSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_ReadAccountSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).ReadAccountSetting(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -21599,10 +21565,6 @@ var WidgetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadUserSetting",
 			Handler:    _WidgetService_ReadUserSetting_Handler,
-		},
-		{
-			MethodName: "ReadAccountSetting",
-			Handler:    _WidgetService_ReadAccountSetting_Handler,
 		},
 		{
 			MethodName: "ReadAccountSetting2",

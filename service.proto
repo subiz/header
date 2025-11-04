@@ -745,7 +745,6 @@ service WidgetService {
 	rpc Update(header.WidgetSetting) returns (header.WidgetSetting);
 	rpc ReadUserSetting(Id) returns (header.WidgetUserSetting);
 
-	rpc ReadAccountSetting(Id) returns (header.AccountWeb);
 	rpc ReadAccountSetting2(WidgetSettingRequest) returns (header.AccountWeb);
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);

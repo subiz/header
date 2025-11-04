@@ -45,7 +45,7 @@ func applyTextTransform(str string, transforms []*TextTransform) string {
 	return applyTextTransform(str, transforms[1:])
 }
 
-func applyFloatTransform(fl float64, transforms []*NumberTransform) float64 {
+func applyNumberTransform(fl float64, transforms []*NumberTransform) float64 {
 	return fl
 }
 
@@ -251,7 +251,6 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 				cs = Ascii(cs)
 			}
 			for _, str := range strs {
-
 				if strings.TrimSpace(str) == strings.TrimSpace(cs) {
 					return true
 				}
@@ -384,8 +383,8 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 	return true
 }
 
-func EvaluateFloat(found bool, fl float64, cond *NumberCondition) bool {
-	fl = applyFloatTransform(fl, cond.GetTransforms())
+func EvaluateNumber(found bool, fl float64, cond *NumberCondition) bool {
+	fl = applyNumberTransform(fl, cond.GetTransforms())
 
 	switch cond.GetOp() {
 	case "has_value":
@@ -909,7 +908,7 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 		}
 
 		if defType == "number" {
-			return EvaluateFloat(found, num, cond.GetNumber())
+			return EvaluateNumber(found, num, cond.GetNumber())
 		}
 		if defType == "boolean" {
 			return EvaluateBoolean(found, boo, cond.GetBoolean())
