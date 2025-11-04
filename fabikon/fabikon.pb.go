@@ -23,9 +23,9 @@ const (
 
 type FacebookDataset struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccountId     *string                `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
-	PageId        *string                `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3,oneof" json:"page_id,omitempty"`
-	Id            *string                `protobuf:"bytes,4,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	AccountId     string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	PageId        string                 `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
+	Id            string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61,30 +61,30 @@ func (*FacebookDataset) Descriptor() ([]byte, []int) {
 }
 
 func (x *FacebookDataset) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
 
 func (x *FacebookDataset) GetPageId() string {
-	if x != nil && x.PageId != nil {
-		return *x.PageId
+	if x != nil {
+		return x.PageId
 	}
 	return ""
 }
 
 func (x *FacebookDataset) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 type MetaBusiness struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -120,52 +120,52 @@ func (*MetaBusiness) Descriptor() ([]byte, []int) {
 }
 
 func (x *MetaBusiness) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *MetaBusiness) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 type FacebookPage struct {
 	state                    protoimpl.MessageState `protogen:"open.v1"`
-	AccountId                *string                `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
-	Id                       *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Created                  *int64                 `protobuf:"varint,3,opt,name=created,proto3,oneof" json:"created,omitempty"`
-	PictureUrl               *string                `protobuf:"bytes,4,opt,name=picture_url,json=pictureUrl,proto3,oneof" json:"picture_url,omitempty"`
-	Name                     *string                `protobuf:"bytes,5,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	OriginalAccessToken      *string                `protobuf:"bytes,8,opt,name=original_access_token,json=originalAccessToken,proto3,oneof" json:"original_access_token,omitempty"`
-	AccessToken              *string                `protobuf:"bytes,6,opt,name=access_token,json=accessToken,proto3,oneof" json:"access_token,omitempty"`
-	Updated                  *int64                 `protobuf:"varint,7,opt,name=updated,proto3,oneof" json:"updated,omitempty"`
-	LastFacebookHook         *int64                 `protobuf:"varint,9,opt,name=last_facebook_hook,json=lastFacebookHook,proto3,oneof" json:"last_facebook_hook,omitempty"`
-	LinkedPageId             *string                `protobuf:"bytes,11,opt,name=linked_page_id,json=linkedPageId,proto3,oneof" json:"linked_page_id,omitempty"` // instagram <-> facebook
-	IsInstagram              *bool                  `protobuf:"varint,12,opt,name=is_instagram,json=isInstagram,proto3,oneof" json:"is_instagram,omitempty"`
-	InstagramAccount         *InstagramUser         `protobuf:"bytes,13,opt,name=instagram_account,json=instagramAccount,proto3,oneof" json:"instagram_account,omitempty"`
-	LastSuccessRequestAt     *int64                 `protobuf:"varint,14,opt,name=last_success_request_at,json=lastSuccessRequestAt,proto3,oneof" json:"last_success_request_at,omitempty"`
-	LastFailedRequestAt      *int64                 `protobuf:"varint,15,opt,name=last_failed_request_at,json=lastFailedRequestAt,proto3,oneof" json:"last_failed_request_at,omitempty"`
-	LastMessageSentSuccessAt *int64                 `protobuf:"varint,16,opt,name=last_message_sent_success_at,json=lastMessageSentSuccessAt,proto3,oneof" json:"last_message_sent_success_at,omitempty"`
-	LastMessageSentFailedAt  *int64                 `protobuf:"varint,17,opt,name=last_message_sent_failed_at,json=lastMessageSentFailedAt,proto3,oneof" json:"last_message_sent_failed_at,omitempty"`
-	TokenStatus              *string                `protobuf:"bytes,19,opt,name=token_status,json=tokenStatus,proto3,oneof" json:"token_status,omitempty"` // '' || failed
-	TokenStatusUpdated       *int64                 `protobuf:"varint,20,opt,name=token_status_updated,json=tokenStatusUpdated,proto3,oneof" json:"token_status_updated,omitempty"`
-	TokenScope               *string                `protobuf:"bytes,29,opt,name=token_scope,json=tokenScope,proto3,oneof" json:"token_scope,omitempty"` // empty=page, business, ads
-	TokenUpdated             *int64                 `protobuf:"varint,30,opt,name=token_updated,json=tokenUpdated,proto3,oneof" json:"token_updated,omitempty"`
-	LastFailedUrl            *string                `protobuf:"bytes,21,opt,name=last_failed_url,json=lastFailedUrl,proto3,oneof" json:"last_failed_url,omitempty"`
-	LastFailedBody           *string                `protobuf:"bytes,22,opt,name=last_failed_body,json=lastFailedBody,proto3,oneof" json:"last_failed_body,omitempty"` // optional string integration_link_status = 23; // active, failed // remove
-	LastConversionSynced     *int64                 `protobuf:"varint,24,opt,name=last_conversion_synced,json=lastConversionSynced,proto3,oneof" json:"last_conversion_synced,omitempty"`
-	SyncConversionDisabled   *int64                 `protobuf:"varint,25,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3,oneof" json:"sync_conversion_disabled,omitempty"` // replicated of integration.sync_conversation_disabled
-	DatasetId                *string                `protobuf:"bytes,28,opt,name=dataset_id,json=datasetId,proto3,oneof" json:"dataset_id,omitempty"`
-	IsBusiness               *bool                  `protobuf:"varint,32,opt,name=is_business,json=isBusiness,proto3,oneof" json:"is_business,omitempty"`
-	SystemUserToken          *string                `protobuf:"bytes,33,opt,name=system_user_token,json=systemUserToken,proto3,oneof" json:"system_user_token,omitempty"`
-	State                    *string                `protobuf:"bytes,34,opt,name=state,proto3,oneof" json:"state,omitempty"`                                             // replicated of integration.state
-	CommentDisabled          *int64                 `protobuf:"varint,35,opt,name=comment_disabled,json=commentDisabled,proto3,oneof" json:"comment_disabled,omitempty"` // replicated of integration.comment_disabled
-	LastSyncFromConvo        *int64                 `protobuf:"varint,36,opt,name=last_sync_from_convo,json=lastSyncFromConvo,proto3,oneof" json:"last_sync_from_convo,omitempty"`
-	Business                 *MetaBusiness          `protobuf:"bytes,37,opt,name=business,proto3,oneof" json:"business,omitempty"`
+	AccountId                string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id                       string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Created                  int64                  `protobuf:"varint,3,opt,name=created,proto3" json:"created,omitempty"`
+	PictureUrl               string                 `protobuf:"bytes,4,opt,name=picture_url,json=pictureUrl,proto3" json:"picture_url,omitempty"`
+	Name                     string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	OriginalAccessToken      string                 `protobuf:"bytes,8,opt,name=original_access_token,json=originalAccessToken,proto3" json:"original_access_token,omitempty"`
+	AccessToken              string                 `protobuf:"bytes,6,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	Updated                  int64                  `protobuf:"varint,7,opt,name=updated,proto3" json:"updated,omitempty"`
+	LastFacebookHook         int64                  `protobuf:"varint,9,opt,name=last_facebook_hook,json=lastFacebookHook,proto3" json:"last_facebook_hook,omitempty"`
+	LinkedPageId             string                 `protobuf:"bytes,11,opt,name=linked_page_id,json=linkedPageId,proto3" json:"linked_page_id,omitempty"` // instagram <-> facebook
+	IsInstagram              bool                   `protobuf:"varint,12,opt,name=is_instagram,json=isInstagram,proto3" json:"is_instagram,omitempty"`
+	InstagramAccount         *InstagramUser         `protobuf:"bytes,13,opt,name=instagram_account,json=instagramAccount,proto3" json:"instagram_account,omitempty"`
+	LastSuccessRequestAt     int64                  `protobuf:"varint,14,opt,name=last_success_request_at,json=lastSuccessRequestAt,proto3" json:"last_success_request_at,omitempty"`
+	LastFailedRequestAt      int64                  `protobuf:"varint,15,opt,name=last_failed_request_at,json=lastFailedRequestAt,proto3" json:"last_failed_request_at,omitempty"`
+	LastMessageSentSuccessAt int64                  `protobuf:"varint,16,opt,name=last_message_sent_success_at,json=lastMessageSentSuccessAt,proto3" json:"last_message_sent_success_at,omitempty"`
+	LastMessageSentFailedAt  int64                  `protobuf:"varint,17,opt,name=last_message_sent_failed_at,json=lastMessageSentFailedAt,proto3" json:"last_message_sent_failed_at,omitempty"`
+	TokenStatus              string                 `protobuf:"bytes,19,opt,name=token_status,json=tokenStatus,proto3" json:"token_status,omitempty"` // '' || failed
+	TokenStatusUpdated       int64                  `protobuf:"varint,20,opt,name=token_status_updated,json=tokenStatusUpdated,proto3" json:"token_status_updated,omitempty"`
+	TokenScope               string                 `protobuf:"bytes,29,opt,name=token_scope,json=tokenScope,proto3" json:"token_scope,omitempty"` // empty=page, business, ads
+	TokenUpdated             int64                  `protobuf:"varint,30,opt,name=token_updated,json=tokenUpdated,proto3" json:"token_updated,omitempty"`
+	LastFailedUrl            string                 `protobuf:"bytes,21,opt,name=last_failed_url,json=lastFailedUrl,proto3" json:"last_failed_url,omitempty"`
+	LastFailedBody           string                 `protobuf:"bytes,22,opt,name=last_failed_body,json=lastFailedBody,proto3" json:"last_failed_body,omitempty"` // optional string integration_link_status = 23; // active, failed // remove
+	LastConversionSynced     int64                  `protobuf:"varint,24,opt,name=last_conversion_synced,json=lastConversionSynced,proto3" json:"last_conversion_synced,omitempty"`
+	SyncConversionDisabled   int64                  `protobuf:"varint,25,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3" json:"sync_conversion_disabled,omitempty"` // replicated of integration.sync_conversation_disabled
+	DatasetId                string                 `protobuf:"bytes,28,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
+	IsBusiness               bool                   `protobuf:"varint,32,opt,name=is_business,json=isBusiness,proto3" json:"is_business,omitempty"`
+	SystemUserToken          string                 `protobuf:"bytes,33,opt,name=system_user_token,json=systemUserToken,proto3" json:"system_user_token,omitempty"`
+	State                    string                 `protobuf:"bytes,34,opt,name=state,proto3" json:"state,omitempty"`                                             // replicated of integration.state
+	CommentDisabled          int64                  `protobuf:"varint,35,opt,name=comment_disabled,json=commentDisabled,proto3" json:"comment_disabled,omitempty"` // replicated of integration.comment_disabled
+	LastSyncFromConvo        int64                  `protobuf:"varint,36,opt,name=last_sync_from_convo,json=lastSyncFromConvo,proto3" json:"last_sync_from_convo,omitempty"`
+	Business                 *MetaBusiness          `protobuf:"bytes,37,opt,name=business,proto3" json:"business,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -201,78 +201,78 @@ func (*FacebookPage) Descriptor() ([]byte, []int) {
 }
 
 func (x *FacebookPage) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetCreated() int64 {
-	if x != nil && x.Created != nil {
-		return *x.Created
+	if x != nil {
+		return x.Created
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetPictureUrl() string {
-	if x != nil && x.PictureUrl != nil {
-		return *x.PictureUrl
+	if x != nil {
+		return x.PictureUrl
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetOriginalAccessToken() string {
-	if x != nil && x.OriginalAccessToken != nil {
-		return *x.OriginalAccessToken
+	if x != nil {
+		return x.OriginalAccessToken
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetUpdated() int64 {
-	if x != nil && x.Updated != nil {
-		return *x.Updated
+	if x != nil {
+		return x.Updated
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLastFacebookHook() int64 {
-	if x != nil && x.LastFacebookHook != nil {
-		return *x.LastFacebookHook
+	if x != nil {
+		return x.LastFacebookHook
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLinkedPageId() string {
-	if x != nil && x.LinkedPageId != nil {
-		return *x.LinkedPageId
+	if x != nil {
+		return x.LinkedPageId
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetIsInstagram() bool {
-	if x != nil && x.IsInstagram != nil {
-		return *x.IsInstagram
+	if x != nil {
+		return x.IsInstagram
 	}
 	return false
 }
@@ -285,127 +285,127 @@ func (x *FacebookPage) GetInstagramAccount() *InstagramUser {
 }
 
 func (x *FacebookPage) GetLastSuccessRequestAt() int64 {
-	if x != nil && x.LastSuccessRequestAt != nil {
-		return *x.LastSuccessRequestAt
+	if x != nil {
+		return x.LastSuccessRequestAt
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLastFailedRequestAt() int64 {
-	if x != nil && x.LastFailedRequestAt != nil {
-		return *x.LastFailedRequestAt
+	if x != nil {
+		return x.LastFailedRequestAt
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLastMessageSentSuccessAt() int64 {
-	if x != nil && x.LastMessageSentSuccessAt != nil {
-		return *x.LastMessageSentSuccessAt
+	if x != nil {
+		return x.LastMessageSentSuccessAt
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLastMessageSentFailedAt() int64 {
-	if x != nil && x.LastMessageSentFailedAt != nil {
-		return *x.LastMessageSentFailedAt
+	if x != nil {
+		return x.LastMessageSentFailedAt
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetTokenStatus() string {
-	if x != nil && x.TokenStatus != nil {
-		return *x.TokenStatus
+	if x != nil {
+		return x.TokenStatus
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetTokenStatusUpdated() int64 {
-	if x != nil && x.TokenStatusUpdated != nil {
-		return *x.TokenStatusUpdated
+	if x != nil {
+		return x.TokenStatusUpdated
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetTokenScope() string {
-	if x != nil && x.TokenScope != nil {
-		return *x.TokenScope
+	if x != nil {
+		return x.TokenScope
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetTokenUpdated() int64 {
-	if x != nil && x.TokenUpdated != nil {
-		return *x.TokenUpdated
+	if x != nil {
+		return x.TokenUpdated
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLastFailedUrl() string {
-	if x != nil && x.LastFailedUrl != nil {
-		return *x.LastFailedUrl
+	if x != nil {
+		return x.LastFailedUrl
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetLastFailedBody() string {
-	if x != nil && x.LastFailedBody != nil {
-		return *x.LastFailedBody
+	if x != nil {
+		return x.LastFailedBody
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetLastConversionSynced() int64 {
-	if x != nil && x.LastConversionSynced != nil {
-		return *x.LastConversionSynced
+	if x != nil {
+		return x.LastConversionSynced
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetSyncConversionDisabled() int64 {
-	if x != nil && x.SyncConversionDisabled != nil {
-		return *x.SyncConversionDisabled
+	if x != nil {
+		return x.SyncConversionDisabled
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetDatasetId() string {
-	if x != nil && x.DatasetId != nil {
-		return *x.DatasetId
+	if x != nil {
+		return x.DatasetId
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetIsBusiness() bool {
-	if x != nil && x.IsBusiness != nil {
-		return *x.IsBusiness
+	if x != nil {
+		return x.IsBusiness
 	}
 	return false
 }
 
 func (x *FacebookPage) GetSystemUserToken() string {
-	if x != nil && x.SystemUserToken != nil {
-		return *x.SystemUserToken
+	if x != nil {
+		return x.SystemUserToken
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetState() string {
-	if x != nil && x.State != nil {
-		return *x.State
+	if x != nil {
+		return x.State
 	}
 	return ""
 }
 
 func (x *FacebookPage) GetCommentDisabled() int64 {
-	if x != nil && x.CommentDisabled != nil {
-		return *x.CommentDisabled
+	if x != nil {
+		return x.CommentDisabled
 	}
 	return 0
 }
 
 func (x *FacebookPage) GetLastSyncFromConvo() int64 {
-	if x != nil && x.LastSyncFromConvo != nil {
-		return *x.LastSyncFromConvo
+	if x != nil {
+		return x.LastSyncFromConvo
 	}
 	return 0
 }
@@ -5490,92 +5490,53 @@ var File_fabikon_proto protoreflect.FileDescriptor
 
 const file_fabikon_proto_rawDesc = "" +
 	"\n" +
-	"\rfabikon.proto\x12\afabikon\"\x8a\x01\n" +
-	"\x0fFacebookDataset\x12\"\n" +
+	"\rfabikon.proto\x12\afabikon\"Y\n" +
+	"\x0fFacebookDataset\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tH\x00R\taccountId\x88\x01\x01\x12\x1c\n" +
-	"\apage_id\x18\x03 \x01(\tH\x01R\x06pageId\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x04 \x01(\tH\x02R\x02id\x88\x01\x01B\r\n" +
-	"\v_account_idB\n" +
+	"account_id\x18\x01 \x01(\tR\taccountId\x12\x17\n" +
+	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\"2\n" +
+	"\fMetaBusiness\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\x91\n" +
 	"\n" +
-	"\b_page_idB\x05\n" +
-	"\x03_id\"L\n" +
-	"\fMetaBusiness\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x04 \x01(\tH\x01R\x04name\x88\x01\x01B\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_name\"\x8e\x10\n" +
-	"\fFacebookPage\x12\"\n" +
+	"\fFacebookPage\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tH\x00R\taccountId\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x02 \x01(\tH\x01R\x02id\x88\x01\x01\x12\x1d\n" +
-	"\acreated\x18\x03 \x01(\x03H\x02R\acreated\x88\x01\x01\x12$\n" +
-	"\vpicture_url\x18\x04 \x01(\tH\x03R\n" +
-	"pictureUrl\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x05 \x01(\tH\x04R\x04name\x88\x01\x01\x127\n" +
-	"\x15original_access_token\x18\b \x01(\tH\x05R\x13originalAccessToken\x88\x01\x01\x12&\n" +
-	"\faccess_token\x18\x06 \x01(\tH\x06R\vaccessToken\x88\x01\x01\x12\x1d\n" +
-	"\aupdated\x18\a \x01(\x03H\aR\aupdated\x88\x01\x01\x121\n" +
-	"\x12last_facebook_hook\x18\t \x01(\x03H\bR\x10lastFacebookHook\x88\x01\x01\x12)\n" +
-	"\x0elinked_page_id\x18\v \x01(\tH\tR\flinkedPageId\x88\x01\x01\x12&\n" +
-	"\fis_instagram\x18\f \x01(\bH\n" +
-	"R\visInstagram\x88\x01\x01\x12H\n" +
-	"\x11instagram_account\x18\r \x01(\v2\x16.fabikon.InstagramUserH\vR\x10instagramAccount\x88\x01\x01\x12:\n" +
-	"\x17last_success_request_at\x18\x0e \x01(\x03H\fR\x14lastSuccessRequestAt\x88\x01\x01\x128\n" +
-	"\x16last_failed_request_at\x18\x0f \x01(\x03H\rR\x13lastFailedRequestAt\x88\x01\x01\x12C\n" +
-	"\x1clast_message_sent_success_at\x18\x10 \x01(\x03H\x0eR\x18lastMessageSentSuccessAt\x88\x01\x01\x12A\n" +
-	"\x1blast_message_sent_failed_at\x18\x11 \x01(\x03H\x0fR\x17lastMessageSentFailedAt\x88\x01\x01\x12&\n" +
-	"\ftoken_status\x18\x13 \x01(\tH\x10R\vtokenStatus\x88\x01\x01\x125\n" +
-	"\x14token_status_updated\x18\x14 \x01(\x03H\x11R\x12tokenStatusUpdated\x88\x01\x01\x12$\n" +
-	"\vtoken_scope\x18\x1d \x01(\tH\x12R\n" +
-	"tokenScope\x88\x01\x01\x12(\n" +
-	"\rtoken_updated\x18\x1e \x01(\x03H\x13R\ftokenUpdated\x88\x01\x01\x12+\n" +
-	"\x0flast_failed_url\x18\x15 \x01(\tH\x14R\rlastFailedUrl\x88\x01\x01\x12-\n" +
-	"\x10last_failed_body\x18\x16 \x01(\tH\x15R\x0elastFailedBody\x88\x01\x01\x129\n" +
-	"\x16last_conversion_synced\x18\x18 \x01(\x03H\x16R\x14lastConversionSynced\x88\x01\x01\x12=\n" +
-	"\x18sync_conversion_disabled\x18\x19 \x01(\x03H\x17R\x16syncConversionDisabled\x88\x01\x01\x12\"\n" +
+	"account_id\x18\x01 \x01(\tR\taccountId\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x18\n" +
+	"\acreated\x18\x03 \x01(\x03R\acreated\x12\x1f\n" +
+	"\vpicture_url\x18\x04 \x01(\tR\n" +
+	"pictureUrl\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x122\n" +
+	"\x15original_access_token\x18\b \x01(\tR\x13originalAccessToken\x12!\n" +
+	"\faccess_token\x18\x06 \x01(\tR\vaccessToken\x12\x18\n" +
+	"\aupdated\x18\a \x01(\x03R\aupdated\x12,\n" +
+	"\x12last_facebook_hook\x18\t \x01(\x03R\x10lastFacebookHook\x12$\n" +
+	"\x0elinked_page_id\x18\v \x01(\tR\flinkedPageId\x12!\n" +
+	"\fis_instagram\x18\f \x01(\bR\visInstagram\x12C\n" +
+	"\x11instagram_account\x18\r \x01(\v2\x16.fabikon.InstagramUserR\x10instagramAccount\x125\n" +
+	"\x17last_success_request_at\x18\x0e \x01(\x03R\x14lastSuccessRequestAt\x123\n" +
+	"\x16last_failed_request_at\x18\x0f \x01(\x03R\x13lastFailedRequestAt\x12>\n" +
+	"\x1clast_message_sent_success_at\x18\x10 \x01(\x03R\x18lastMessageSentSuccessAt\x12<\n" +
+	"\x1blast_message_sent_failed_at\x18\x11 \x01(\x03R\x17lastMessageSentFailedAt\x12!\n" +
+	"\ftoken_status\x18\x13 \x01(\tR\vtokenStatus\x120\n" +
+	"\x14token_status_updated\x18\x14 \x01(\x03R\x12tokenStatusUpdated\x12\x1f\n" +
+	"\vtoken_scope\x18\x1d \x01(\tR\n" +
+	"tokenScope\x12#\n" +
+	"\rtoken_updated\x18\x1e \x01(\x03R\ftokenUpdated\x12&\n" +
+	"\x0flast_failed_url\x18\x15 \x01(\tR\rlastFailedUrl\x12(\n" +
+	"\x10last_failed_body\x18\x16 \x01(\tR\x0elastFailedBody\x124\n" +
+	"\x16last_conversion_synced\x18\x18 \x01(\x03R\x14lastConversionSynced\x128\n" +
+	"\x18sync_conversion_disabled\x18\x19 \x01(\x03R\x16syncConversionDisabled\x12\x1d\n" +
 	"\n" +
-	"dataset_id\x18\x1c \x01(\tH\x18R\tdatasetId\x88\x01\x01\x12$\n" +
-	"\vis_business\x18  \x01(\bH\x19R\n" +
-	"isBusiness\x88\x01\x01\x12/\n" +
-	"\x11system_user_token\x18! \x01(\tH\x1aR\x0fsystemUserToken\x88\x01\x01\x12\x19\n" +
-	"\x05state\x18\" \x01(\tH\x1bR\x05state\x88\x01\x01\x12.\n" +
-	"\x10comment_disabled\x18# \x01(\x03H\x1cR\x0fcommentDisabled\x88\x01\x01\x124\n" +
-	"\x14last_sync_from_convo\x18$ \x01(\x03H\x1dR\x11lastSyncFromConvo\x88\x01\x01\x126\n" +
-	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessH\x1eR\bbusiness\x88\x01\x01B\r\n" +
-	"\v_account_idB\x05\n" +
-	"\x03_idB\n" +
-	"\n" +
-	"\b_createdB\x0e\n" +
-	"\f_picture_urlB\a\n" +
-	"\x05_nameB\x18\n" +
-	"\x16_original_access_tokenB\x0f\n" +
-	"\r_access_tokenB\n" +
-	"\n" +
-	"\b_updatedB\x15\n" +
-	"\x13_last_facebook_hookB\x11\n" +
-	"\x0f_linked_page_idB\x0f\n" +
-	"\r_is_instagramB\x14\n" +
-	"\x12_instagram_accountB\x1a\n" +
-	"\x18_last_success_request_atB\x19\n" +
-	"\x17_last_failed_request_atB\x1f\n" +
-	"\x1d_last_message_sent_success_atB\x1e\n" +
-	"\x1c_last_message_sent_failed_atB\x0f\n" +
-	"\r_token_statusB\x17\n" +
-	"\x15_token_status_updatedB\x0e\n" +
-	"\f_token_scopeB\x10\n" +
-	"\x0e_token_updatedB\x12\n" +
-	"\x10_last_failed_urlB\x13\n" +
-	"\x11_last_failed_bodyB\x19\n" +
-	"\x17_last_conversion_syncedB\x1b\n" +
-	"\x19_sync_conversion_disabledB\r\n" +
-	"\v_dataset_idB\x0e\n" +
-	"\f_is_businessB\x14\n" +
-	"\x12_system_user_tokenB\b\n" +
-	"\x06_stateB\x13\n" +
-	"\x11_comment_disabledB\x17\n" +
-	"\x15_last_sync_from_convoB\v\n" +
-	"\t_business\"`\n" +
+	"dataset_id\x18\x1c \x01(\tR\tdatasetId\x12\x1f\n" +
+	"\vis_business\x18  \x01(\bR\n" +
+	"isBusiness\x12*\n" +
+	"\x11system_user_token\x18! \x01(\tR\x0fsystemUserToken\x12\x14\n" +
+	"\x05state\x18\" \x01(\tR\x05state\x12)\n" +
+	"\x10comment_disabled\x18# \x01(\x03R\x0fcommentDisabled\x12/\n" +
+	"\x14last_sync_from_convo\x18$ \x01(\x03R\x11lastSyncFromConvo\x121\n" +
+	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\"`\n" +
 	"\x0eFbWebhookEvent\x12\x1b\n" +
 	"\x06object\x18\x02 \x01(\tH\x00R\x06object\x88\x01\x01\x12&\n" +
 	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entryB\t\n" +
@@ -6558,9 +6519,6 @@ func file_fabikon_proto_init() {
 	if File_fabikon_proto != nil {
 		return
 	}
-	file_fabikon_proto_msgTypes[0].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[1].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[2].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[3].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[4].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[5].OneofWrappers = []any{}
