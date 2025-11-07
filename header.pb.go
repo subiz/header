@@ -46700,30 +46700,29 @@ func (x *ActionAskInfo) GetOnUnhandled() string {
 }
 
 type ActionLLM struct {
-	state                        protoimpl.MessageState       `protogen:"open.v1"`
-	SystemInstruction            string                       `protobuf:"bytes,4,opt,name=system_instruction,json=systemInstruction,proto3" json:"system_instruction,omitempty"`
-	Model                        string                       `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`                                                                   // chatgpt-4
-	SystemInstructionBlock       *Block                       `protobuf:"bytes,6,opt,name=system_instruction_block,json=systemInstructionBlock,proto3" json:"system_instruction_block,omitempty"` // dynamic prompt
-	Temperature                  int64                        `protobuf:"varint,7,opt,name=temperature,proto3" json:"temperature,omitempty"`                                                      // 10000 * 10000
-	TopP                         int64                        `protobuf:"varint,15,opt,name=top_p,json=topP,proto3" json:"top_p,omitempty"`                                                       // *100000
-	MaxToken                     int64                        `protobuf:"varint,8,opt,name=max_token,json=maxToken,proto3" json:"max_token,omitempty"`
-	UseUserAttribute             bool                         `protobuf:"varint,24,opt,name=use_user_attribute,json=useUserAttribute,proto3" json:"use_user_attribute,omitempty"`
-	PackedHistory                bool                         `protobuf:"varint,22,opt,name=packed_history,json=packedHistory,proto3" json:"packed_history,omitempty"`
-	HistoryEntryLimit            int64                        `protobuf:"varint,21,opt,name=history_entry_limit,json=historyEntryLimit,proto3" json:"history_entry_limit,omitempty"`
-	SkipConversationHistory      bool                         `protobuf:"varint,9,opt,name=skip_conversation_history,json=skipConversationHistory,proto3" json:"skip_conversation_history,omitempty"`                   // do not inject chat history to system instruction
-	AgentViewConversationHistory bool                         `protobuf:"varint,10,opt,name=agent_view_conversation_history,json=agentViewConversationHistory,proto3" json:"agent_view_conversation_history,omitempty"` // filter msg that does not belong to current agent
-	Functions                    []*AIFunction                `protobuf:"bytes,11,rep,name=functions,proto3" json:"functions,omitempty"`                                                                                // function calling
-	TimeoutSec                   int64                        `protobuf:"varint,12,opt,name=timeout_sec,json=timeoutSec,proto3" json:"timeout_sec,omitempty"`
-	ResponseFormat               string                       `protobuf:"bytes,13,opt,name=response_format,json=responseFormat,proto3" json:"response_format,omitempty"` // json_schema
-	JsonSchema                   *LLMResponseJSONSchemaFormat `protobuf:"bytes,14,opt,name=json_schema,json=jsonSchema,proto3" json:"json_schema,omitempty"`
-	OnRefusal                    string                       `protobuf:"bytes,17,opt,name=on_refusal,json=onRefusal,proto3" json:"on_refusal,omitempty"`
-	TrackingPurpose              string                       `protobuf:"bytes,18,opt,name=tracking_purpose,json=trackingPurpose,proto3" json:"tracking_purpose,omitempty"`
-	ToolChoice                   string                       `protobuf:"bytes,19,opt,name=tool_choice,json=toolChoice,proto3" json:"tool_choice,omitempty"` // auto (default), required, function
-	ToolChoiceFunction           *AIFunction                  `protobuf:"bytes,20,opt,name=tool_choice_function,json=toolChoiceFunction,proto3" json:"tool_choice_function,omitempty"`
-	StopAfterFunctionCall        bool                         `protobuf:"varint,23,opt,name=stop_after_function_call,json=stopAfterFunctionCall,proto3" json:"stop_after_function_call,omitempty"` // only call function without completion
-	AppendInstructionVariable    string                       `protobuf:"bytes,26,opt,name=append_instruction_variable,json=appendInstructionVariable,proto3" json:"append_instruction_variable,omitempty"`
-	unknownFields                protoimpl.UnknownFields
-	sizeCache                    protoimpl.SizeCache
+	state                     protoimpl.MessageState       `protogen:"open.v1"`
+	SystemInstruction         string                       `protobuf:"bytes,4,opt,name=system_instruction,json=systemInstruction,proto3" json:"system_instruction,omitempty"`
+	Model                     string                       `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`                                                                   // chatgpt-4
+	SystemInstructionBlock    *Block                       `protobuf:"bytes,6,opt,name=system_instruction_block,json=systemInstructionBlock,proto3" json:"system_instruction_block,omitempty"` // dynamic prompt
+	Temperature               int64                        `protobuf:"varint,7,opt,name=temperature,proto3" json:"temperature,omitempty"`                                                      // 10000 * 10000
+	TopP                      int64                        `protobuf:"varint,15,opt,name=top_p,json=topP,proto3" json:"top_p,omitempty"`                                                       // *100000
+	MaxToken                  int64                        `protobuf:"varint,8,opt,name=max_token,json=maxToken,proto3" json:"max_token,omitempty"`
+	UseUserAttribute          bool                         `protobuf:"varint,24,opt,name=use_user_attribute,json=useUserAttribute,proto3" json:"use_user_attribute,omitempty"`
+	PackedHistory             bool                         `protobuf:"varint,22,opt,name=packed_history,json=packedHistory,proto3" json:"packed_history,omitempty"`
+	HistoryEntryLimit         int64                        `protobuf:"varint,21,opt,name=history_entry_limit,json=historyEntryLimit,proto3" json:"history_entry_limit,omitempty"`
+	SkipConversationHistory   bool                         `protobuf:"varint,9,opt,name=skip_conversation_history,json=skipConversationHistory,proto3" json:"skip_conversation_history,omitempty"` // do not inject chat history to system instruction
+	Functions                 []*AIFunction                `protobuf:"bytes,11,rep,name=functions,proto3" json:"functions,omitempty"`                                                              // function calling
+	TimeoutSec                int64                        `protobuf:"varint,12,opt,name=timeout_sec,json=timeoutSec,proto3" json:"timeout_sec,omitempty"`
+	ResponseFormat            string                       `protobuf:"bytes,13,opt,name=response_format,json=responseFormat,proto3" json:"response_format,omitempty"` // json_schema
+	JsonSchema                *LLMResponseJSONSchemaFormat `protobuf:"bytes,14,opt,name=json_schema,json=jsonSchema,proto3" json:"json_schema,omitempty"`
+	OnRefusal                 string                       `protobuf:"bytes,17,opt,name=on_refusal,json=onRefusal,proto3" json:"on_refusal,omitempty"`
+	TrackingPurpose           string                       `protobuf:"bytes,18,opt,name=tracking_purpose,json=trackingPurpose,proto3" json:"tracking_purpose,omitempty"`
+	ToolChoice                string                       `protobuf:"bytes,19,opt,name=tool_choice,json=toolChoice,proto3" json:"tool_choice,omitempty"` // auto (default), required, function
+	ToolChoiceFunction        *AIFunction                  `protobuf:"bytes,20,opt,name=tool_choice_function,json=toolChoiceFunction,proto3" json:"tool_choice_function,omitempty"`
+	StopAfterFunctionCall     bool                         `protobuf:"varint,23,opt,name=stop_after_function_call,json=stopAfterFunctionCall,proto3" json:"stop_after_function_call,omitempty"` // only call function without completion
+	AppendInstructionVariable string                       `protobuf:"bytes,26,opt,name=append_instruction_variable,json=appendInstructionVariable,proto3" json:"append_instruction_variable,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ActionLLM) Reset() {
@@ -46822,13 +46821,6 @@ func (x *ActionLLM) GetHistoryEntryLimit() int64 {
 func (x *ActionLLM) GetSkipConversationHistory() bool {
 	if x != nil {
 		return x.SkipConversationHistory
-	}
-	return false
-}
-
-func (x *ActionLLM) GetAgentViewConversationHistory() bool {
-	if x != nil {
-		return x.AgentViewConversationHistory
 	}
 	return false
 }
@@ -62870,14 +62862,15 @@ type AIAgentOverrideRule struct {
 	ForAgentIds    []string           `protobuf:"bytes,18,rep,name=for_agent_ids,json=forAgentIds,proto3" json:"for_agent_ids,omitempty"`           // empty -> all-agent
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
-	AssignTo               *AssignRequest `protobuf:"bytes,19,opt,name=assign_to,json=assignTo,proto3" json:"assign_to,omitempty"`
-	WelcomeMessage         *Message       `protobuf:"bytes,20,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
-	WelcomeMessagePrompt   string         `protobuf:"bytes,21,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
-	WelcomeMessageTriggers []*Trigger     `protobuf:"bytes,22,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
-	AiAgent                *AIAgent       `protobuf:"bytes,23,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
-	RunOnce                bool           `protobuf:"varint,24,opt,name=run_once,json=runOnce,proto3" json:"run_once,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	AssignTo                *AssignRequest `protobuf:"bytes,19,opt,name=assign_to,json=assignTo,proto3" json:"assign_to,omitempty"`
+	ReportAssignedAgentName bool           `protobuf:"varint,25,opt,name=report_assigned_agent_name,json=reportAssignedAgentName,proto3" json:"report_assigned_agent_name,omitempty"`
+	WelcomeMessage          *Message       `protobuf:"bytes,20,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
+	WelcomeMessagePrompt    string         `protobuf:"bytes,21,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
+	WelcomeMessageTriggers  []*Trigger     `protobuf:"bytes,22,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
+	AiAgent                 *AIAgent       `protobuf:"bytes,23,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
+	RunOnce                 bool           `protobuf:"varint,24,opt,name=run_once,json=runOnce,proto3" json:"run_once,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *AIAgentOverrideRule) Reset() {
@@ -62999,6 +62992,13 @@ func (x *AIAgentOverrideRule) GetAssignTo() *AssignRequest {
 		return x.AssignTo
 	}
 	return nil
+}
+
+func (x *AIAgentOverrideRule) GetReportAssignedAgentName() bool {
+	if x != nil {
+		return x.ReportAssignedAgentName
+	}
+	return false
 }
 
 func (x *AIAgentOverrideRule) GetWelcomeMessage() *Message {
@@ -75788,7 +75788,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0erequired_level\x18\x04 \x01(\tR\rrequiredLevel\x12!\n" +
 	"\fon_collected\x18\a \x01(\tR\vonCollected\x12%\n" +
 	"\x0eon_uncollected\x18\b \x01(\tR\ronUncollected\x12!\n" +
-	"\fon_unhandled\x18\t \x01(\tR\vonUnhandled\"\xe1\a\n" +
+	"\fon_unhandled\x18\t \x01(\tR\vonUnhandled\"\x9a\a\n" +
 	"\tActionLLM\x12-\n" +
 	"\x12system_instruction\x18\x04 \x01(\tR\x11systemInstruction\x12\x14\n" +
 	"\x05model\x18\x05 \x01(\tR\x05model\x12G\n" +
@@ -75799,9 +75799,7 @@ const file_header_proto_rawDesc = "" +
 	"\x12use_user_attribute\x18\x18 \x01(\bR\x10useUserAttribute\x12%\n" +
 	"\x0epacked_history\x18\x16 \x01(\bR\rpackedHistory\x12.\n" +
 	"\x13history_entry_limit\x18\x15 \x01(\x03R\x11historyEntryLimit\x12:\n" +
-	"\x19skip_conversation_history\x18\t \x01(\bR\x17skipConversationHistory\x12E\n" +
-	"\x1fagent_view_conversation_history\x18\n" +
-	" \x01(\bR\x1cagentViewConversationHistory\x120\n" +
+	"\x19skip_conversation_history\x18\t \x01(\bR\x17skipConversationHistory\x120\n" +
 	"\tfunctions\x18\v \x03(\v2\x12.header.AIFunctionR\tfunctions\x12\x1f\n" +
 	"\vtimeout_sec\x18\f \x01(\x03R\n" +
 	"timeoutSec\x12'\n" +
@@ -77747,7 +77745,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12 \n" +
 	"\vinstruction\x18\x06 \x01(\tR\vinstruction\x12\x1c\n" +
 	"\treasoning\x18\a \x01(\bR\treasoning\x12\x16\n" +
-	"\x06action\x18\b \x01(\tR\x06action\"\xf7\x05\n" +
+	"\x06action\x18\b \x01(\tR\x06action\"\xb4\x06\n" +
 	"\x13AIAgentOverrideRule\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
@@ -77763,7 +77761,8 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x18\x11 \x01(\v2\x12.header.FrequentlyR\n" +
 	"frequently\x12\"\n" +
 	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x122\n" +
-	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\x128\n" +
+	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\x12;\n" +
+	"\x1areport_assigned_agent_name\x18\x19 \x01(\bR\x17reportAssignedAgentName\x128\n" +
 	"\x0fwelcome_message\x18\x14 \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x124\n" +
 	"\x16welcome_message_prompt\x18\x15 \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
 	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\x12*\n" +

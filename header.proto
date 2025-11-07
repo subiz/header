@@ -6714,7 +6714,7 @@ message ActionLLM {
 	bool packed_history = 22;
 	int64 history_entry_limit = 21;
 	bool skip_conversation_history = 9; // do not inject chat history to system instruction
-	bool agent_view_conversation_history = 10; // filter msg that does not belong to current agent
+	// bool agent_view_conversation_history = 10; // filter msg that does not belong to current agent
 
 	repeated AIFunction functions = 11; // function calling
 	int64 timeout_sec = 12;
@@ -8973,6 +8973,7 @@ message AIAgentOverrideRule {
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
 	AssignRequest assign_to = 19;
+	bool report_assigned_agent_name = 25;
 
 	Message welcome_message = 20;
 	string welcome_message_prompt = 21;

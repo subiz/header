@@ -64,21 +64,21 @@ message FacebookPage {
 }
 
 message FbWebhookEvent {
-	optional string object = 2; // instagram, page
+	string object = 2; // instagram, page
 	repeated FbEntry entry = 3;
 }
 
 message FbEntry {
-	optional string id = 3;
-	optional int64 time = 5;
+	string id = 3;
+	int64 time = 5;
 	repeated FbMessaging messaging = 6;
 	repeated FbChange changes = 7;
 	repeated FbMessaging standby = 8;
 }
 
 message FbChange {
-	optional string field = 2; // feed, comments
-	optional FbChangeValue value = 3;
+	string field = 2; // feed, comments
+	FbChangeValue value = 3;
 }
 
 message FbFrom {

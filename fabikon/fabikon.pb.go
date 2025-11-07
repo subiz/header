@@ -419,7 +419,7 @@ func (x *FacebookPage) GetBusiness() *MetaBusiness {
 
 type FbWebhookEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Object        *string                `protobuf:"bytes,2,opt,name=object,proto3,oneof" json:"object,omitempty"` // instagram, page
+	Object        string                 `protobuf:"bytes,2,opt,name=object,proto3" json:"object,omitempty"` // instagram, page
 	Entry         []*FbEntry             `protobuf:"bytes,3,rep,name=entry,proto3" json:"entry,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -456,8 +456,8 @@ func (*FbWebhookEvent) Descriptor() ([]byte, []int) {
 }
 
 func (x *FbWebhookEvent) GetObject() string {
-	if x != nil && x.Object != nil {
-		return *x.Object
+	if x != nil {
+		return x.Object
 	}
 	return ""
 }
@@ -471,8 +471,8 @@ func (x *FbWebhookEvent) GetEntry() []*FbEntry {
 
 type FbEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Time          *int64                 `protobuf:"varint,5,opt,name=time,proto3,oneof" json:"time,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Time          int64                  `protobuf:"varint,5,opt,name=time,proto3" json:"time,omitempty"`
 	Messaging     []*FbMessaging         `protobuf:"bytes,6,rep,name=messaging,proto3" json:"messaging,omitempty"`
 	Changes       []*FbChange            `protobuf:"bytes,7,rep,name=changes,proto3" json:"changes,omitempty"`
 	Standby       []*FbMessaging         `protobuf:"bytes,8,rep,name=standby,proto3" json:"standby,omitempty"`
@@ -511,15 +511,15 @@ func (*FbEntry) Descriptor() ([]byte, []int) {
 }
 
 func (x *FbEntry) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbEntry) GetTime() int64 {
-	if x != nil && x.Time != nil {
-		return *x.Time
+	if x != nil {
+		return x.Time
 	}
 	return 0
 }
@@ -547,8 +547,8 @@ func (x *FbEntry) GetStandby() []*FbMessaging {
 
 type FbChange struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Field         *string                `protobuf:"bytes,2,opt,name=field,proto3,oneof" json:"field,omitempty"` // feed, comments
-	Value         *FbChangeValue         `protobuf:"bytes,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
+	Field         string                 `protobuf:"bytes,2,opt,name=field,proto3" json:"field,omitempty"` // feed, comments
+	Value         *FbChangeValue         `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -584,8 +584,8 @@ func (*FbChange) Descriptor() ([]byte, []int) {
 }
 
 func (x *FbChange) GetField() string {
-	if x != nil && x.Field != nil {
-		return *x.Field
+	if x != nil {
+		return x.Field
 	}
 	return ""
 }
@@ -5536,24 +5536,19 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x05state\x18\" \x01(\tR\x05state\x12)\n" +
 	"\x10comment_disabled\x18# \x01(\x03R\x0fcommentDisabled\x12/\n" +
 	"\x14last_sync_from_convo\x18$ \x01(\x03R\x11lastSyncFromConvo\x121\n" +
-	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\"`\n" +
-	"\x0eFbWebhookEvent\x12\x1b\n" +
-	"\x06object\x18\x02 \x01(\tH\x00R\x06object\x88\x01\x01\x12&\n" +
-	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entryB\t\n" +
-	"\a_object\"\xd8\x01\n" +
-	"\aFbEntry\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04time\x18\x05 \x01(\x03H\x01R\x04time\x88\x01\x01\x122\n" +
+	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\"P\n" +
+	"\x0eFbWebhookEvent\x12\x16\n" +
+	"\x06object\x18\x02 \x01(\tR\x06object\x12&\n" +
+	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entry\"\xbe\x01\n" +
+	"\aFbEntry\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
+	"\x04time\x18\x05 \x01(\x03R\x04time\x122\n" +
 	"\tmessaging\x18\x06 \x03(\v2\x14.fabikon.FbMessagingR\tmessaging\x12+\n" +
 	"\achanges\x18\a \x03(\v2\x11.fabikon.FbChangeR\achanges\x12.\n" +
-	"\astandby\x18\b \x03(\v2\x14.fabikon.FbMessagingR\astandbyB\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_time\"l\n" +
-	"\bFbChange\x12\x19\n" +
-	"\x05field\x18\x02 \x01(\tH\x00R\x05field\x88\x01\x01\x121\n" +
-	"\x05value\x18\x03 \x01(\v2\x16.fabikon.FbChangeValueH\x01R\x05value\x88\x01\x01B\b\n" +
-	"\x06_fieldB\b\n" +
-	"\x06_value\"t\n" +
+	"\astandby\x18\b \x03(\v2\x14.fabikon.FbMessagingR\astandby\"N\n" +
+	"\bFbChange\x12\x14\n" +
+	"\x05field\x18\x02 \x01(\tR\x05field\x12,\n" +
+	"\x05value\x18\x03 \x01(\v2\x16.fabikon.FbChangeValueR\x05value\"t\n" +
 	"\x06FbFrom\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
 	"\x04from\x18\x02 \x01(\tH\x01R\x04from\x88\x01\x01\x12\x1f\n" +
@@ -6519,9 +6514,6 @@ func file_fabikon_proto_init() {
 	if File_fabikon_proto != nil {
 		return
 	}
-	file_fabikon_proto_msgTypes[3].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[4].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[5].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[6].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[7].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[8].OneofWrappers = []any{}
