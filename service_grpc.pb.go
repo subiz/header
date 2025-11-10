@@ -19818,7 +19818,7 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ZalopersonService_SendEventToZalo_FullMethodName         = "/header.ZalopersonService/SendEventToZalo"
+	ZalopersonService_SendEventToZaloPersonal_FullMethodName = "/header.ZalopersonService/SendEventToZaloPersonal"
 	ZalopersonService_RemoveFriendRequest_FullMethodName     = "/header.ZalopersonService/RemoveFriendRequest"
 	ZalopersonService_SendFriendRequest_FullMethodName       = "/header.ZalopersonService/SendFriendRequest"
 	ZalopersonService_ListFriendRequests_FullMethodName      = "/header.ZalopersonService/ListFriendRequests"
@@ -19837,7 +19837,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ZalopersonServiceClient interface {
-	SendEventToZalo(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
+	SendEventToZaloPersonal(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
 	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
 	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
 	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
@@ -19852,7 +19852,7 @@ type ZalopersonServiceClient interface {
 	CreateZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	DisbandZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	GetZaloGroupInvitedLink(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
-	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*ZaloLoginStatus, error)
+	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error)
 }
 
 type zalopersonServiceClient struct {
@@ -19863,10 +19863,10 @@ func NewZalopersonServiceClient(cc grpc.ClientConnInterface) ZalopersonServiceCl
 	return &zalopersonServiceClient{cc}
 }
 
-func (c *zalopersonServiceClient) SendEventToZalo(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
+func (c *zalopersonServiceClient) SendEventToZaloPersonal(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, ZalopersonService_SendEventToZalo_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ZalopersonService_SendEventToZaloPersonal_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -19983,9 +19983,9 @@ func (c *zalopersonServiceClient) GetZaloGroupInvitedLink(ctx context.Context, i
 	return out, nil
 }
 
-func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*ZaloLoginStatus, error) {
+func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ZaloLoginStatus)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, ZalopersonService_TryZaloLogin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -19997,7 +19997,7 @@ func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLogi
 // All implementations must embed UnimplementedZalopersonServiceServer
 // for forward compatibility.
 type ZalopersonServiceServer interface {
-	SendEventToZalo(context.Context, *Events) (*Empty, error)
+	SendEventToZaloPersonal(context.Context, *Events) (*Empty, error)
 	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
 	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
 	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
@@ -20012,7 +20012,7 @@ type ZalopersonServiceServer interface {
 	CreateZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	DisbandZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error)
-	TryZaloLogin(context.Context, *ZaloLoginStatus) (*ZaloLoginStatus, error)
+	TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error)
 	mustEmbedUnimplementedZalopersonServiceServer()
 }
 
@@ -20023,8 +20023,8 @@ type ZalopersonServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedZalopersonServiceServer struct{}
 
-func (UnimplementedZalopersonServiceServer) SendEventToZalo(context.Context, *Events) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendEventToZalo not implemented")
+func (UnimplementedZalopersonServiceServer) SendEventToZaloPersonal(context.Context, *Events) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEventToZaloPersonal not implemented")
 }
 func (UnimplementedZalopersonServiceServer) RemoveFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFriendRequest not implemented")
@@ -20059,7 +20059,7 @@ func (UnimplementedZalopersonServiceServer) DisbandZaloGroup(context.Context, *Z
 func (UnimplementedZalopersonServiceServer) GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetZaloGroupInvitedLink not implemented")
 }
-func (UnimplementedZalopersonServiceServer) TryZaloLogin(context.Context, *ZaloLoginStatus) (*ZaloLoginStatus, error) {
+func (UnimplementedZalopersonServiceServer) TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryZaloLogin not implemented")
 }
 func (UnimplementedZalopersonServiceServer) mustEmbedUnimplementedZalopersonServiceServer() {}
@@ -20083,20 +20083,20 @@ func RegisterZalopersonServiceServer(s grpc.ServiceRegistrar, srv ZalopersonServ
 	s.RegisterService(&ZalopersonService_ServiceDesc, srv)
 }
 
-func _ZalopersonService_SendEventToZalo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ZalopersonService_SendEventToZaloPersonal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Events)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ZalopersonServiceServer).SendEventToZalo(ctx, in)
+		return srv.(ZalopersonServiceServer).SendEventToZaloPersonal(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ZalopersonService_SendEventToZalo_FullMethodName,
+		FullMethod: ZalopersonService_SendEventToZaloPersonal_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ZalopersonServiceServer).SendEventToZalo(ctx, req.(*Events))
+		return srv.(ZalopersonServiceServer).SendEventToZaloPersonal(ctx, req.(*Events))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -20325,8 +20325,8 @@ var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ZalopersonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendEventToZalo",
-			Handler:    _ZalopersonService_SendEventToZalo_Handler,
+			MethodName: "SendEventToZaloPersonal",
+			Handler:    _ZalopersonService_SendEventToZaloPersonal_Handler,
 		},
 		{
 			MethodName: "RemoveFriendRequest",

@@ -756,9 +756,9 @@ const file_service_proto_rawDesc = "" +
 	"\x0eMatchZNSMedias\x12\v.header.Ids\x1a\x10.header.Response\x124\n" +
 	"\x0eCreateZNSMedia\x12\x10.header.ZNSMedia\x1a\x10.header.Response\x12+\n" +
 	"\x0eDeleteZNSMedia\x12\n" +
-	".header.Id\x1a\r.header.Empty2\xa9\x06\n" +
-	"\x11ZalopersonService\x120\n" +
-	"\x0fSendEventToZalo\x12\x0e.header.Events\x1a\r.header.Empty\x12B\n" +
+	".header.Id\x1a\r.header.Empty2\xaa\x06\n" +
+	"\x11ZalopersonService\x128\n" +
+	"\x17SendEventToZaloPersonal\x12\x0e.header.Events\x1a\r.header.Empty\x12B\n" +
 	"\x13RemoveFriendRequest\x12\x19.header.ZaloFriendRequest\x1a\x10.header.Response\x12@\n" +
 	"\x11SendFriendRequest\x12\x19.header.ZaloFriendRequest\x1a\x10.header.Response\x122\n" +
 	"\x12ListFriendRequests\x12\n" +
@@ -772,8 +772,8 @@ const file_service_proto_rawDesc = "" +
 	"\x13RejectFriendRequest\x12\x19.header.ZaloFriendRequest\x1a\x10.header.Response\x126\n" +
 	"\x0fCreateZaloGroup\x12\x11.header.ZaloGroup\x1a\x10.header.Response\x127\n" +
 	"\x10DisbandZaloGroup\x12\x11.header.ZaloGroup\x1a\x10.header.Response\x12>\n" +
-	"\x17GetZaloGroupInvitedLink\x12\x11.header.ZaloGroup\x1a\x10.header.Response\x12@\n" +
-	"\fTryZaloLogin\x12\x17.header.ZaloLoginStatus\x1a\x17.header.ZaloLoginStatus2\xeb\t\n" +
+	"\x17GetZaloGroupInvitedLink\x12\x11.header.ZaloGroup\x1a\x10.header.Response\x129\n" +
+	"\fTryZaloLogin\x12\x17.header.ZaloLoginStatus\x1a\x10.header.Response2\xeb\t\n" +
 	"\x0eMailkonService\x12*\n" +
 	"\tSendEmail\x12\x0e.header.Events\x1a\r.header.Empty\x12?\n" +
 	"\x13CreateEmailIdentity\x12\x13.header.Integration\x1a\x13.header.Integration\x129\n" +
@@ -1984,7 +1984,7 @@ var file_service_proto_depIdxs = []int32{
 	14,  // 480: header.ZalokonService.MatchZNSMedias:input_type -> header.Ids
 	150, // 481: header.ZalokonService.CreateZNSMedia:input_type -> header.ZNSMedia
 	1,   // 482: header.ZalokonService.DeleteZNSMedia:input_type -> header.Id
-	0,   // 483: header.ZalopersonService.SendEventToZalo:input_type -> header.Events
+	0,   // 483: header.ZalopersonService.SendEventToZaloPersonal:input_type -> header.Events
 	151, // 484: header.ZalopersonService.RemoveFriendRequest:input_type -> header.ZaloFriendRequest
 	151, // 485: header.ZalopersonService.SendFriendRequest:input_type -> header.ZaloFriendRequest
 	1,   // 486: header.ZalopersonService.ListFriendRequests:input_type -> header.Id
@@ -2738,7 +2738,7 @@ var file_service_proto_depIdxs = []int32{
 	261, // 1234: header.ZalokonService.MatchZNSMedias:output_type -> header.Response
 	261, // 1235: header.ZalokonService.CreateZNSMedia:output_type -> header.Response
 	9,   // 1236: header.ZalokonService.DeleteZNSMedia:output_type -> header.Empty
-	9,   // 1237: header.ZalopersonService.SendEventToZalo:output_type -> header.Empty
+	9,   // 1237: header.ZalopersonService.SendEventToZaloPersonal:output_type -> header.Empty
 	261, // 1238: header.ZalopersonService.RemoveFriendRequest:output_type -> header.Response
 	261, // 1239: header.ZalopersonService.SendFriendRequest:output_type -> header.Response
 	261, // 1240: header.ZalopersonService.ListFriendRequests:output_type -> header.Response
@@ -2750,7 +2750,7 @@ var file_service_proto_depIdxs = []int32{
 	261, // 1246: header.ZalopersonService.CreateZaloGroup:output_type -> header.Response
 	261, // 1247: header.ZalopersonService.DisbandZaloGroup:output_type -> header.Response
 	261, // 1248: header.ZalopersonService.GetZaloGroupInvitedLink:output_type -> header.Response
-	154, // 1249: header.ZalopersonService.TryZaloLogin:output_type -> header.ZaloLoginStatus
+	261, // 1249: header.ZalopersonService.TryZaloLogin:output_type -> header.Response
 	9,   // 1250: header.MailkonService.SendEmail:output_type -> header.Empty
 	109, // 1251: header.MailkonService.CreateEmailIdentity:output_type -> header.Integration
 	9,   // 1252: header.MailkonService.DeleteEmailIdentity:output_type -> header.Empty

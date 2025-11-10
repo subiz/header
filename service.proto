@@ -710,7 +710,7 @@ service ZalokonService {
 }
 
 service ZalopersonService {
-	rpc SendEventToZalo(header.Events) returns (Empty); // zalo
+	rpc SendEventToZaloPersonal(header.Events) returns (Empty); // zalo
 	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
 	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
 	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
@@ -725,7 +725,7 @@ service ZalopersonService {
 	rpc CreateZaloGroup(ZaloGroup) returns (Response);
 	rpc DisbandZaloGroup(ZaloGroup) returns (Response);
 	rpc GetZaloGroupInvitedLink(ZaloGroup) returns(Response);
-	rpc TryZaloLogin(ZaloLoginStatus) returns (ZaloLoginStatus); // return qr code or login sucess
+	rpc TryZaloLogin(ZaloLoginStatus) returns (Response); // return qr code or login sucess
 }
 
 service MailkonService {
