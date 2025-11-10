@@ -725,7 +725,7 @@ service ZalopersonService {
 	rpc CreateZaloGroup(ZaloGroup) returns (Response);
 	rpc DisbandZaloGroup(ZaloGroup) returns (Response);
 	rpc GetZaloGroupInvitedLink(ZaloGroup) returns(Response);
-	rpc TryZaloLogin(ZaloLoginStatus) returns (ZaloLoginStatus); // return qr code or login sucess
+	rpc TryZaloLogin(ZaloLoginStatus) returns (Response); // return qr code or login sucess
 }
 
 service MailkonService {

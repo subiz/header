@@ -7055,6 +7055,8 @@ message Response {
 	ZaloGroup zalo_group = 251;
 	repeated ZaloPersonalAccount zalo_personal_accounts = 252;
 	ZaloPersonalAccount zalo_personal_account = 253;
+
+	ZaloLoginStatus zalo_login_status = 254;
 }
 
 message ReportCount {
@@ -10011,11 +10013,13 @@ message ZaloPersonalAccount {
 	int64 created = 56;
 	string state = 57; // activated || deleted || failed
 	string account_id = 58;
-	int64 last_ws_event_at = 59;
+	int64 last_ws_payload_received = 59;
 	int64 last_login = 60;
 	int64 last_request_successed = 61;
 	int64 last_request_failed = 62;
 	string integration_link_status = 63; // active, failed
+	int64 ws_connected = 66;
+	int64 last_synced = 67;
 }
 
 message ZaloLoginStatus {
@@ -10024,8 +10028,8 @@ message ZaloLoginStatus {
 
 	string session_id = 3;
 
-	string qr_code = 5;
-
-	string status = 6; // waiting, success, failed, expired
+	string qr_code = 5; // base64 img of token
+	string status = 6; // waiting, success, failed
 	int64 created = 7;
+	string token = 9;
 }

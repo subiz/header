@@ -19852,7 +19852,7 @@ type ZalopersonServiceClient interface {
 	CreateZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	DisbandZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	GetZaloGroupInvitedLink(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
-	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*ZaloLoginStatus, error)
+	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error)
 }
 
 type zalopersonServiceClient struct {
@@ -19983,9 +19983,9 @@ func (c *zalopersonServiceClient) GetZaloGroupInvitedLink(ctx context.Context, i
 	return out, nil
 }
 
-func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*ZaloLoginStatus, error) {
+func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ZaloLoginStatus)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, ZalopersonService_TryZaloLogin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -20012,7 +20012,7 @@ type ZalopersonServiceServer interface {
 	CreateZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	DisbandZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error)
-	TryZaloLogin(context.Context, *ZaloLoginStatus) (*ZaloLoginStatus, error)
+	TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error)
 	mustEmbedUnimplementedZalopersonServiceServer()
 }
 
@@ -20059,7 +20059,7 @@ func (UnimplementedZalopersonServiceServer) DisbandZaloGroup(context.Context, *Z
 func (UnimplementedZalopersonServiceServer) GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetZaloGroupInvitedLink not implemented")
 }
-func (UnimplementedZalopersonServiceServer) TryZaloLogin(context.Context, *ZaloLoginStatus) (*ZaloLoginStatus, error) {
+func (UnimplementedZalopersonServiceServer) TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryZaloLogin not implemented")
 }
 func (UnimplementedZalopersonServiceServer) mustEmbedUnimplementedZalopersonServiceServer() {}
