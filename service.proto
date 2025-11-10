@@ -709,6 +709,25 @@ service ZalokonService {
 	rpc DeleteZNSMedia(Id) returns (Empty);
 }
 
+service ZalopersonService {
+	rpc SendEventToZalo(header.Events) returns (Empty); // zalo
+	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
+	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
+	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
+	rpc RemoveFriendRequest(header.ZaloFriendRequest) returns (Response);
+	rpc SendFriendRequest(header.ZaloFriendRequest) returns (Response);
+	rpc ListFriendRequests(Id) returns (header.Response); // zalo_personal_accounts
+	rpc ListFriendRecommends(Id) returns (header.Response);  // zalo_personal_accounts
+	rpc ListZaloGroupChats(Id) returns (header.Response); // zalo_group
+	rpc LookupZaloPhone(ZaloPhoneLookupRequest) returns (Response); // zalo_personal_account
+	rpc AcceptFriendRequest(ZaloFriendRequest) returns (Response);
+	rpc RejectFriendRequest(ZaloFriendRequest) returns (Response);
+	rpc CreateZaloGroup(ZaloGroup) returns (Response);
+	rpc DisbandZaloGroup(ZaloGroup) returns (Response);
+	rpc GetZaloGroupInvitedLink(ZaloGroup) returns(Response);
+	rpc TryZaloLogin(ZaloLoginStatus) returns (ZaloLoginStatus); // return qr code or login sucess
+}
+
 service MailkonService {
 	rpc SendEmail(header.Events) returns (header.Empty); // mailkon
 

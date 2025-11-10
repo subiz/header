@@ -19818,6 +19818,570 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	ZalopersonService_SendEventToZalo_FullMethodName         = "/header.ZalopersonService/SendEventToZalo"
+	ZalopersonService_RemoveFriendRequest_FullMethodName     = "/header.ZalopersonService/RemoveFriendRequest"
+	ZalopersonService_SendFriendRequest_FullMethodName       = "/header.ZalopersonService/SendFriendRequest"
+	ZalopersonService_ListFriendRequests_FullMethodName      = "/header.ZalopersonService/ListFriendRequests"
+	ZalopersonService_ListFriendRecommends_FullMethodName    = "/header.ZalopersonService/ListFriendRecommends"
+	ZalopersonService_ListZaloGroupChats_FullMethodName      = "/header.ZalopersonService/ListZaloGroupChats"
+	ZalopersonService_LookupZaloPhone_FullMethodName         = "/header.ZalopersonService/LookupZaloPhone"
+	ZalopersonService_AcceptFriendRequest_FullMethodName     = "/header.ZalopersonService/AcceptFriendRequest"
+	ZalopersonService_RejectFriendRequest_FullMethodName     = "/header.ZalopersonService/RejectFriendRequest"
+	ZalopersonService_CreateZaloGroup_FullMethodName         = "/header.ZalopersonService/CreateZaloGroup"
+	ZalopersonService_DisbandZaloGroup_FullMethodName        = "/header.ZalopersonService/DisbandZaloGroup"
+	ZalopersonService_GetZaloGroupInvitedLink_FullMethodName = "/header.ZalopersonService/GetZaloGroupInvitedLink"
+	ZalopersonService_TryZaloLogin_FullMethodName            = "/header.ZalopersonService/TryZaloLogin"
+)
+
+// ZalopersonServiceClient is the client API for ZalopersonService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ZalopersonServiceClient interface {
+	SendEventToZalo(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
+	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
+	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
+	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
+	RemoveFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
+	SendFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
+	ListFriendRequests(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListFriendRecommends(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListZaloGroupChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	LookupZaloPhone(ctx context.Context, in *ZaloPhoneLookupRequest, opts ...grpc.CallOption) (*Response, error)
+	AcceptFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
+	RejectFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
+	CreateZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	DisbandZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	GetZaloGroupInvitedLink(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*ZaloLoginStatus, error)
+}
+
+type zalopersonServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewZalopersonServiceClient(cc grpc.ClientConnInterface) ZalopersonServiceClient {
+	return &zalopersonServiceClient{cc}
+}
+
+func (c *zalopersonServiceClient) SendEventToZalo(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ZalopersonService_SendEventToZalo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) RemoveFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_RemoveFriendRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) SendFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_SendFriendRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) ListFriendRequests(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_ListFriendRequests_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) ListFriendRecommends(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_ListFriendRecommends_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) ListZaloGroupChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_ListZaloGroupChats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) LookupZaloPhone(ctx context.Context, in *ZaloPhoneLookupRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_LookupZaloPhone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) AcceptFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_AcceptFriendRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) RejectFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_RejectFriendRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) CreateZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_CreateZaloGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) DisbandZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_DisbandZaloGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) GetZaloGroupInvitedLink(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_GetZaloGroupInvitedLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*ZaloLoginStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ZaloLoginStatus)
+	err := c.cc.Invoke(ctx, ZalopersonService_TryZaloLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ZalopersonServiceServer is the server API for ZalopersonService service.
+// All implementations must embed UnimplementedZalopersonServiceServer
+// for forward compatibility.
+type ZalopersonServiceServer interface {
+	SendEventToZalo(context.Context, *Events) (*Empty, error)
+	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
+	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
+	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
+	RemoveFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
+	SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
+	ListFriendRequests(context.Context, *Id) (*Response, error)
+	ListFriendRecommends(context.Context, *Id) (*Response, error)
+	ListZaloGroupChats(context.Context, *Id) (*Response, error)
+	LookupZaloPhone(context.Context, *ZaloPhoneLookupRequest) (*Response, error)
+	AcceptFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
+	RejectFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
+	CreateZaloGroup(context.Context, *ZaloGroup) (*Response, error)
+	DisbandZaloGroup(context.Context, *ZaloGroup) (*Response, error)
+	GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error)
+	TryZaloLogin(context.Context, *ZaloLoginStatus) (*ZaloLoginStatus, error)
+	mustEmbedUnimplementedZalopersonServiceServer()
+}
+
+// UnimplementedZalopersonServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedZalopersonServiceServer struct{}
+
+func (UnimplementedZalopersonServiceServer) SendEventToZalo(context.Context, *Events) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEventToZalo not implemented")
+}
+func (UnimplementedZalopersonServiceServer) RemoveFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFriendRequest not implemented")
+}
+func (UnimplementedZalopersonServiceServer) SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendFriendRequest not implemented")
+}
+func (UnimplementedZalopersonServiceServer) ListFriendRequests(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFriendRequests not implemented")
+}
+func (UnimplementedZalopersonServiceServer) ListFriendRecommends(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFriendRecommends not implemented")
+}
+func (UnimplementedZalopersonServiceServer) ListZaloGroupChats(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListZaloGroupChats not implemented")
+}
+func (UnimplementedZalopersonServiceServer) LookupZaloPhone(context.Context, *ZaloPhoneLookupRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LookupZaloPhone not implemented")
+}
+func (UnimplementedZalopersonServiceServer) AcceptFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptFriendRequest not implemented")
+}
+func (UnimplementedZalopersonServiceServer) RejectFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RejectFriendRequest not implemented")
+}
+func (UnimplementedZalopersonServiceServer) CreateZaloGroup(context.Context, *ZaloGroup) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateZaloGroup not implemented")
+}
+func (UnimplementedZalopersonServiceServer) DisbandZaloGroup(context.Context, *ZaloGroup) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DisbandZaloGroup not implemented")
+}
+func (UnimplementedZalopersonServiceServer) GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetZaloGroupInvitedLink not implemented")
+}
+func (UnimplementedZalopersonServiceServer) TryZaloLogin(context.Context, *ZaloLoginStatus) (*ZaloLoginStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TryZaloLogin not implemented")
+}
+func (UnimplementedZalopersonServiceServer) mustEmbedUnimplementedZalopersonServiceServer() {}
+func (UnimplementedZalopersonServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafeZalopersonServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ZalopersonServiceServer will
+// result in compilation errors.
+type UnsafeZalopersonServiceServer interface {
+	mustEmbedUnimplementedZalopersonServiceServer()
+}
+
+func RegisterZalopersonServiceServer(s grpc.ServiceRegistrar, srv ZalopersonServiceServer) {
+	// If the following call pancis, it indicates UnimplementedZalopersonServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ZalopersonService_ServiceDesc, srv)
+}
+
+func _ZalopersonService_SendEventToZalo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Events)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).SendEventToZalo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_SendEventToZalo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).SendEventToZalo(ctx, req.(*Events))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_RemoveFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).RemoveFriendRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_RemoveFriendRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).RemoveFriendRequest(ctx, req.(*ZaloFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_SendFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).SendFriendRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_SendFriendRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).SendFriendRequest(ctx, req.(*ZaloFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_ListFriendRequests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).ListFriendRequests(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_ListFriendRequests_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).ListFriendRequests(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_ListFriendRecommends_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).ListFriendRecommends(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_ListFriendRecommends_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).ListFriendRecommends(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_ListZaloGroupChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).ListZaloGroupChats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_ListZaloGroupChats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).ListZaloGroupChats(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_LookupZaloPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloPhoneLookupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).LookupZaloPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_LookupZaloPhone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).LookupZaloPhone(ctx, req.(*ZaloPhoneLookupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_AcceptFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).AcceptFriendRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_AcceptFriendRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).AcceptFriendRequest(ctx, req.(*ZaloFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_RejectFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).RejectFriendRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_RejectFriendRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).RejectFriendRequest(ctx, req.(*ZaloFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_CreateZaloGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).CreateZaloGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_CreateZaloGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).CreateZaloGroup(ctx, req.(*ZaloGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_DisbandZaloGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).DisbandZaloGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_DisbandZaloGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).DisbandZaloGroup(ctx, req.(*ZaloGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_GetZaloGroupInvitedLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).GetZaloGroupInvitedLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_GetZaloGroupInvitedLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).GetZaloGroupInvitedLink(ctx, req.(*ZaloGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_TryZaloLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloLoginStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).TryZaloLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_TryZaloLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).TryZaloLogin(ctx, req.(*ZaloLoginStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ZalopersonService_ServiceDesc is the grpc.ServiceDesc for ZalopersonService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ZalopersonService",
+	HandlerType: (*ZalopersonServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SendEventToZalo",
+			Handler:    _ZalopersonService_SendEventToZalo_Handler,
+		},
+		{
+			MethodName: "RemoveFriendRequest",
+			Handler:    _ZalopersonService_RemoveFriendRequest_Handler,
+		},
+		{
+			MethodName: "SendFriendRequest",
+			Handler:    _ZalopersonService_SendFriendRequest_Handler,
+		},
+		{
+			MethodName: "ListFriendRequests",
+			Handler:    _ZalopersonService_ListFriendRequests_Handler,
+		},
+		{
+			MethodName: "ListFriendRecommends",
+			Handler:    _ZalopersonService_ListFriendRecommends_Handler,
+		},
+		{
+			MethodName: "ListZaloGroupChats",
+			Handler:    _ZalopersonService_ListZaloGroupChats_Handler,
+		},
+		{
+			MethodName: "LookupZaloPhone",
+			Handler:    _ZalopersonService_LookupZaloPhone_Handler,
+		},
+		{
+			MethodName: "AcceptFriendRequest",
+			Handler:    _ZalopersonService_AcceptFriendRequest_Handler,
+		},
+		{
+			MethodName: "RejectFriendRequest",
+			Handler:    _ZalopersonService_RejectFriendRequest_Handler,
+		},
+		{
+			MethodName: "CreateZaloGroup",
+			Handler:    _ZalopersonService_CreateZaloGroup_Handler,
+		},
+		{
+			MethodName: "DisbandZaloGroup",
+			Handler:    _ZalopersonService_DisbandZaloGroup_Handler,
+		},
+		{
+			MethodName: "GetZaloGroupInvitedLink",
+			Handler:    _ZalopersonService_GetZaloGroupInvitedLink_Handler,
+		},
+		{
+			MethodName: "TryZaloLogin",
+			Handler:    _ZalopersonService_TryZaloLogin_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	MailkonService_SendEmail_FullMethodName                     = "/header.MailkonService/SendEmail"
 	MailkonService_CreateEmailIdentity_FullMethodName           = "/header.MailkonService/CreateEmailIdentity"
 	MailkonService_DeleteEmailIdentity_FullMethodName           = "/header.MailkonService/DeleteEmailIdentity"

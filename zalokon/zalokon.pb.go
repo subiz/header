@@ -21,6 +21,122 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ZaloPersonalUser struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uid           string                 `protobuf:"bytes,3,opt,name=uid,proto3" json:"uid,omitempty"`
+	Avatar        string                 `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Cover         string                 `protobuf:"bytes,5,opt,name=cover,proto3" json:"cover,omitempty"`
+	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
+	Gender        int64                  `protobuf:"varint,7,opt,name=gender,proto3" json:"gender,omitempty"`
+	Dob           int64                  `protobuf:"varint,12,opt,name=dob,proto3" json:"dob,omitempty"`
+	Sdob          string                 `protobuf:"bytes,13,opt,name=sdob,proto3" json:"sdob,omitempty"`
+	GlobalId      string                 `protobuf:"bytes,14,opt,name=globalId,proto3" json:"globalId,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,15,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	ZaloName      string                 `protobuf:"bytes,16,opt,name=zalo_name,json=zaloName,proto3" json:"zalo_name,omitempty"` // BusinessPackage bizPkg = 17;
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ZaloPersonalUser) Reset() {
+	*x = ZaloPersonalUser{}
+	mi := &file_zalokon_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ZaloPersonalUser) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZaloPersonalUser) ProtoMessage() {}
+
+func (x *ZaloPersonalUser) ProtoReflect() protoreflect.Message {
+	mi := &file_zalokon_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ZaloPersonalUser.ProtoReflect.Descriptor instead.
+func (*ZaloPersonalUser) Descriptor() ([]byte, []int) {
+	return file_zalokon_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ZaloPersonalUser) GetUid() string {
+	if x != nil {
+		return x.Uid
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetAvatar() string {
+	if x != nil {
+		return x.Avatar
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetCover() string {
+	if x != nil {
+		return x.Cover
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetGender() int64 {
+	if x != nil {
+		return x.Gender
+	}
+	return 0
+}
+
+func (x *ZaloPersonalUser) GetDob() int64 {
+	if x != nil {
+		return x.Dob
+	}
+	return 0
+}
+
+func (x *ZaloPersonalUser) GetSdob() string {
+	if x != nil {
+		return x.Sdob
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetGlobalId() string {
+	if x != nil {
+		return x.GlobalId
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *ZaloPersonalUser) GetZaloName() string {
+	if x != nil {
+		return x.ZaloName
+	}
+	return ""
+}
+
 type OfficialAccount struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	OaId        string                 `protobuf:"bytes,2,opt,name=oa_id,json=oaId,proto3" json:"oa_id,omitempty"`
@@ -60,7 +176,7 @@ type OfficialAccount struct {
 
 func (x *OfficialAccount) Reset() {
 	*x = OfficialAccount{}
-	mi := &file_zalokon_proto_msgTypes[0]
+	mi := &file_zalokon_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -72,7 +188,7 @@ func (x *OfficialAccount) String() string {
 func (*OfficialAccount) ProtoMessage() {}
 
 func (x *OfficialAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[0]
+	mi := &file_zalokon_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -85,7 +201,7 @@ func (x *OfficialAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OfficialAccount.ProtoReflect.Descriptor instead.
 func (*OfficialAccount) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{0}
+	return file_zalokon_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *OfficialAccount) GetOaId() string {
@@ -306,7 +422,7 @@ type ZaloOAZNSQuota struct {
 
 func (x *ZaloOAZNSQuota) Reset() {
 	*x = ZaloOAZNSQuota{}
-	mi := &file_zalokon_proto_msgTypes[1]
+	mi := &file_zalokon_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -318,7 +434,7 @@ func (x *ZaloOAZNSQuota) String() string {
 func (*ZaloOAZNSQuota) ProtoMessage() {}
 
 func (x *ZaloOAZNSQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[1]
+	mi := &file_zalokon_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -331,7 +447,7 @@ func (x *ZaloOAZNSQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloOAZNSQuota.ProtoReflect.Descriptor instead.
 func (*ZaloOAZNSQuota) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{1}
+	return file_zalokon_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ZaloOAZNSQuota) GetDailyQuota() int64 {
@@ -400,7 +516,7 @@ type ZaloUser struct {
 
 func (x *ZaloUser) Reset() {
 	*x = ZaloUser{}
-	mi := &file_zalokon_proto_msgTypes[2]
+	mi := &file_zalokon_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +528,7 @@ func (x *ZaloUser) String() string {
 func (*ZaloUser) ProtoMessage() {}
 
 func (x *ZaloUser) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[2]
+	mi := &file_zalokon_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +541,7 @@ func (x *ZaloUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloUser.ProtoReflect.Descriptor instead.
 func (*ZaloUser) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{2}
+	return file_zalokon_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ZaloUser) GetUserGender() int32 {
@@ -495,7 +611,7 @@ type ZaloUserResponse struct {
 
 func (x *ZaloUserResponse) Reset() {
 	*x = ZaloUserResponse{}
-	mi := &file_zalokon_proto_msgTypes[3]
+	mi := &file_zalokon_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +623,7 @@ func (x *ZaloUserResponse) String() string {
 func (*ZaloUserResponse) ProtoMessage() {}
 
 func (x *ZaloUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[3]
+	mi := &file_zalokon_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +636,7 @@ func (x *ZaloUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloUserResponse.ProtoReflect.Descriptor instead.
 func (*ZaloUserResponse) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{3}
+	return file_zalokon_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ZaloUserResponse) GetError() int32 {
@@ -555,7 +671,7 @@ type OfficalAccountResponse struct {
 
 func (x *OfficalAccountResponse) Reset() {
 	*x = OfficalAccountResponse{}
-	mi := &file_zalokon_proto_msgTypes[4]
+	mi := &file_zalokon_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -567,7 +683,7 @@ func (x *OfficalAccountResponse) String() string {
 func (*OfficalAccountResponse) ProtoMessage() {}
 
 func (x *OfficalAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[4]
+	mi := &file_zalokon_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -580,7 +696,7 @@ func (x *OfficalAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OfficalAccountResponse.ProtoReflect.Descriptor instead.
 func (*OfficalAccountResponse) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{4}
+	return file_zalokon_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OfficalAccountResponse) GetError() int32 {
@@ -633,7 +749,7 @@ type ResponseData struct {
 
 func (x *ResponseData) Reset() {
 	*x = ResponseData{}
-	mi := &file_zalokon_proto_msgTypes[5]
+	mi := &file_zalokon_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -645,7 +761,7 @@ func (x *ResponseData) String() string {
 func (*ResponseData) ProtoMessage() {}
 
 func (x *ResponseData) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[5]
+	mi := &file_zalokon_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -658,7 +774,7 @@ func (x *ResponseData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResponseData.ProtoReflect.Descriptor instead.
 func (*ResponseData) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{5}
+	return file_zalokon_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ResponseData) GetMessageId() string {
@@ -819,7 +935,7 @@ type ConsentResponse struct {
 
 func (x *ConsentResponse) Reset() {
 	*x = ConsentResponse{}
-	mi := &file_zalokon_proto_msgTypes[6]
+	mi := &file_zalokon_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -831,7 +947,7 @@ func (x *ConsentResponse) String() string {
 func (*ConsentResponse) ProtoMessage() {}
 
 func (x *ConsentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[6]
+	mi := &file_zalokon_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -844,7 +960,7 @@ func (x *ConsentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConsentResponse.ProtoReflect.Descriptor instead.
 func (*ConsentResponse) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{6}
+	return file_zalokon_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ConsentResponse) GetError() int32 {
@@ -887,7 +1003,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_zalokon_proto_msgTypes[7]
+	mi := &file_zalokon_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -899,7 +1015,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[7]
+	mi := &file_zalokon_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -912,7 +1028,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{7}
+	return file_zalokon_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Response) GetError() int32 {
@@ -999,7 +1115,7 @@ type Info struct {
 
 func (x *Info) Reset() {
 	*x = Info{}
-	mi := &file_zalokon_proto_msgTypes[8]
+	mi := &file_zalokon_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1011,7 +1127,7 @@ func (x *Info) String() string {
 func (*Info) ProtoMessage() {}
 
 func (x *Info) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[8]
+	mi := &file_zalokon_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1024,7 +1140,7 @@ func (x *Info) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Info.ProtoReflect.Descriptor instead.
 func (*Info) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{8}
+	return file_zalokon_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Info) GetAddress() string {
@@ -1079,7 +1195,7 @@ type DefaultActionPayload struct {
 
 func (x *DefaultActionPayload) Reset() {
 	*x = DefaultActionPayload{}
-	mi := &file_zalokon_proto_msgTypes[9]
+	mi := &file_zalokon_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1091,7 +1207,7 @@ func (x *DefaultActionPayload) String() string {
 func (*DefaultActionPayload) ProtoMessage() {}
 
 func (x *DefaultActionPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[9]
+	mi := &file_zalokon_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1104,7 +1220,7 @@ func (x *DefaultActionPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DefaultActionPayload.ProtoReflect.Descriptor instead.
 func (*DefaultActionPayload) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{9}
+	return file_zalokon_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DefaultActionPayload) GetType() string {
@@ -1131,7 +1247,7 @@ type DefaultAction struct {
 
 func (x *DefaultAction) Reset() {
 	*x = DefaultAction{}
-	mi := &file_zalokon_proto_msgTypes[10]
+	mi := &file_zalokon_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1143,7 +1259,7 @@ func (x *DefaultAction) String() string {
 func (*DefaultAction) ProtoMessage() {}
 
 func (x *DefaultAction) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[10]
+	mi := &file_zalokon_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1156,7 +1272,7 @@ func (x *DefaultAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DefaultAction.ProtoReflect.Descriptor instead.
 func (*DefaultAction) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{10}
+	return file_zalokon_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DefaultAction) GetType() string {
@@ -1188,7 +1304,7 @@ type TemplateElement struct {
 
 func (x *TemplateElement) Reset() {
 	*x = TemplateElement{}
-	mi := &file_zalokon_proto_msgTypes[11]
+	mi := &file_zalokon_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1200,7 +1316,7 @@ func (x *TemplateElement) String() string {
 func (*TemplateElement) ProtoMessage() {}
 
 func (x *TemplateElement) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[11]
+	mi := &file_zalokon_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1213,7 +1329,7 @@ func (x *TemplateElement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TemplateElement.ProtoReflect.Descriptor instead.
 func (*TemplateElement) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{11}
+	return file_zalokon_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TemplateElement) GetMediaType() string {
@@ -1286,7 +1402,7 @@ type AttachmentPayload struct {
 
 func (x *AttachmentPayload) Reset() {
 	*x = AttachmentPayload{}
-	mi := &file_zalokon_proto_msgTypes[12]
+	mi := &file_zalokon_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1298,7 +1414,7 @@ func (x *AttachmentPayload) String() string {
 func (*AttachmentPayload) ProtoMessage() {}
 
 func (x *AttachmentPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[12]
+	mi := &file_zalokon_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1311,7 +1427,7 @@ func (x *AttachmentPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentPayload.ProtoReflect.Descriptor instead.
 func (*AttachmentPayload) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{12}
+	return file_zalokon_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *AttachmentPayload) GetThumbnail() string {
@@ -1415,7 +1531,7 @@ type Button struct {
 
 func (x *Button) Reset() {
 	*x = Button{}
-	mi := &file_zalokon_proto_msgTypes[13]
+	mi := &file_zalokon_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1427,7 +1543,7 @@ func (x *Button) String() string {
 func (*Button) ProtoMessage() {}
 
 func (x *Button) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[13]
+	mi := &file_zalokon_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1440,7 +1556,7 @@ func (x *Button) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Button.ProtoReflect.Descriptor instead.
 func (*Button) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{13}
+	return file_zalokon_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *Button) GetTitle() string {
@@ -1467,7 +1583,7 @@ type Attachment struct {
 
 func (x *Attachment) Reset() {
 	*x = Attachment{}
-	mi := &file_zalokon_proto_msgTypes[14]
+	mi := &file_zalokon_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1479,7 +1595,7 @@ func (x *Attachment) String() string {
 func (*Attachment) ProtoMessage() {}
 
 func (x *Attachment) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[14]
+	mi := &file_zalokon_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1492,7 +1608,7 @@ func (x *Attachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attachment.ProtoReflect.Descriptor instead.
 func (*Attachment) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{14}
+	return file_zalokon_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Attachment) GetType() string {
@@ -1527,7 +1643,7 @@ type Message struct {
 
 func (x *Message) Reset() {
 	*x = Message{}
-	mi := &file_zalokon_proto_msgTypes[15]
+	mi := &file_zalokon_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1539,7 +1655,7 @@ func (x *Message) String() string {
 func (*Message) ProtoMessage() {}
 
 func (x *Message) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[15]
+	mi := &file_zalokon_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1552,7 +1668,7 @@ func (x *Message) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Message.ProtoReflect.Descriptor instead.
 func (*Message) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{15}
+	return file_zalokon_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Message) GetText() string {
@@ -1671,7 +1787,7 @@ type Request struct {
 
 func (x *Request) Reset() {
 	*x = Request{}
-	mi := &file_zalokon_proto_msgTypes[16]
+	mi := &file_zalokon_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1683,7 +1799,7 @@ func (x *Request) String() string {
 func (*Request) ProtoMessage() {}
 
 func (x *Request) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[16]
+	mi := &file_zalokon_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1696,7 +1812,7 @@ func (x *Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Request.ProtoReflect.Descriptor instead.
 func (*Request) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{16}
+	return file_zalokon_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *Request) GetSender() *Sender {
@@ -1849,7 +1965,7 @@ type ZNSTemplateStatus struct {
 
 func (x *ZNSTemplateStatus) Reset() {
 	*x = ZNSTemplateStatus{}
-	mi := &file_zalokon_proto_msgTypes[17]
+	mi := &file_zalokon_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1861,7 +1977,7 @@ func (x *ZNSTemplateStatus) String() string {
 func (*ZNSTemplateStatus) ProtoMessage() {}
 
 func (x *ZNSTemplateStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[17]
+	mi := &file_zalokon_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1874,7 +1990,7 @@ func (x *ZNSTemplateStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZNSTemplateStatus.ProtoReflect.Descriptor instead.
 func (*ZNSTemplateStatus) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{17}
+	return file_zalokon_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ZNSTemplateStatus) GetPrevStatus() string {
@@ -1900,7 +2016,7 @@ type ZlFollower struct {
 
 func (x *ZlFollower) Reset() {
 	*x = ZlFollower{}
-	mi := &file_zalokon_proto_msgTypes[18]
+	mi := &file_zalokon_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1912,7 +2028,7 @@ func (x *ZlFollower) String() string {
 func (*ZlFollower) ProtoMessage() {}
 
 func (x *ZlFollower) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[18]
+	mi := &file_zalokon_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1925,7 +2041,7 @@ func (x *ZlFollower) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZlFollower.ProtoReflect.Descriptor instead.
 func (*ZlFollower) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{18}
+	return file_zalokon_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ZlFollower) GetId() string {
@@ -1947,7 +2063,7 @@ type Sender struct {
 
 func (x *Sender) Reset() {
 	*x = Sender{}
-	mi := &file_zalokon_proto_msgTypes[19]
+	mi := &file_zalokon_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1959,7 +2075,7 @@ func (x *Sender) String() string {
 func (*Sender) ProtoMessage() {}
 
 func (x *Sender) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[19]
+	mi := &file_zalokon_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1972,7 +2088,7 @@ func (x *Sender) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Sender.ProtoReflect.Descriptor instead.
 func (*Sender) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{19}
+	return file_zalokon_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Sender) GetId() string {
@@ -2016,7 +2132,7 @@ type Zl2SbEvent struct {
 
 func (x *Zl2SbEvent) Reset() {
 	*x = Zl2SbEvent{}
-	mi := &file_zalokon_proto_msgTypes[20]
+	mi := &file_zalokon_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2028,7 +2144,7 @@ func (x *Zl2SbEvent) String() string {
 func (*Zl2SbEvent) ProtoMessage() {}
 
 func (x *Zl2SbEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[20]
+	mi := &file_zalokon_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2041,7 +2157,7 @@ func (x *Zl2SbEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Zl2SbEvent.ProtoReflect.Descriptor instead.
 func (*Zl2SbEvent) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{20}
+	return file_zalokon_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *Zl2SbEvent) GetZlmid() string {
@@ -2090,7 +2206,7 @@ type ResponseQuota struct {
 
 func (x *ResponseQuota) Reset() {
 	*x = ResponseQuota{}
-	mi := &file_zalokon_proto_msgTypes[21]
+	mi := &file_zalokon_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2102,7 +2218,7 @@ func (x *ResponseQuota) String() string {
 func (*ResponseQuota) ProtoMessage() {}
 
 func (x *ResponseQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_zalokon_proto_msgTypes[21]
+	mi := &file_zalokon_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2115,7 +2231,7 @@ func (x *ResponseQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResponseQuota.ProtoReflect.Descriptor instead.
 func (*ResponseQuota) Descriptor() ([]byte, []int) {
-	return file_zalokon_proto_rawDescGZIP(), []int{21}
+	return file_zalokon_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ResponseQuota) GetTotal() int64 {
@@ -2143,7 +2259,18 @@ var File_zalokon_proto protoreflect.FileDescriptor
 
 const file_zalokon_proto_rawDesc = "" +
 	"\n" +
-	"\rzalokon.proto\x12\azalokon\"\xd2\b\n" +
+	"\rzalokon.proto\x12\azalokon\"\x84\x02\n" +
+	"\x10ZaloPersonalUser\x12\x10\n" +
+	"\x03uid\x18\x03 \x01(\tR\x03uid\x12\x16\n" +
+	"\x06avatar\x18\x04 \x01(\tR\x06avatar\x12\x14\n" +
+	"\x05cover\x18\x05 \x01(\tR\x05cover\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\x12\x16\n" +
+	"\x06gender\x18\a \x01(\x03R\x06gender\x12\x10\n" +
+	"\x03dob\x18\f \x01(\x03R\x03dob\x12\x12\n" +
+	"\x04sdob\x18\r \x01(\tR\x04sdob\x12\x1a\n" +
+	"\bglobalId\x18\x0e \x01(\tR\bglobalId\x12!\n" +
+	"\fdisplay_name\x18\x0f \x01(\tR\vdisplayName\x12\x1b\n" +
+	"\tzalo_name\x18\x10 \x01(\tR\bzaloName\"\xd2\b\n" +
 	"\x0fOfficialAccount\x12\x13\n" +
 	"\x05oa_id\x18\x02 \x01(\tR\x04oaId\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x12\n" +
@@ -2386,52 +2513,53 @@ func file_zalokon_proto_rawDescGZIP() []byte {
 	return file_zalokon_proto_rawDescData
 }
 
-var file_zalokon_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_zalokon_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_zalokon_proto_goTypes = []any{
-	(*OfficialAccount)(nil),        // 0: zalokon.OfficialAccount
-	(*ZaloOAZNSQuota)(nil),         // 1: zalokon.ZaloOAZNSQuota
-	(*ZaloUser)(nil),               // 2: zalokon.ZaloUser
-	(*ZaloUserResponse)(nil),       // 3: zalokon.ZaloUserResponse
-	(*OfficalAccountResponse)(nil), // 4: zalokon.OfficalAccountResponse
-	(*ResponseData)(nil),           // 5: zalokon.ResponseData
-	(*ConsentResponse)(nil),        // 6: zalokon.ConsentResponse
-	(*Response)(nil),               // 7: zalokon.Response
-	(*Info)(nil),                   // 8: zalokon.Info
-	(*DefaultActionPayload)(nil),   // 9: zalokon.DefaultActionPayload
-	(*DefaultAction)(nil),          // 10: zalokon.DefaultAction
-	(*TemplateElement)(nil),        // 11: zalokon.TemplateElement
-	(*AttachmentPayload)(nil),      // 12: zalokon.AttachmentPayload
-	(*Button)(nil),                 // 13: zalokon.Button
-	(*Attachment)(nil),             // 14: zalokon.Attachment
-	(*Message)(nil),                // 15: zalokon.Message
-	(*Request)(nil),                // 16: zalokon.Request
-	(*ZNSTemplateStatus)(nil),      // 17: zalokon.ZNSTemplateStatus
-	(*ZlFollower)(nil),             // 18: zalokon.ZlFollower
-	(*Sender)(nil),                 // 19: zalokon.Sender
-	(*Zl2SbEvent)(nil),             // 20: zalokon.Zl2SbEvent
-	(*ResponseQuota)(nil),          // 21: zalokon.ResponseQuota
-	nil,                            // 22: zalokon.ZaloUser.AvatarsEntry
+	(*ZaloPersonalUser)(nil),       // 0: zalokon.ZaloPersonalUser
+	(*OfficialAccount)(nil),        // 1: zalokon.OfficialAccount
+	(*ZaloOAZNSQuota)(nil),         // 2: zalokon.ZaloOAZNSQuota
+	(*ZaloUser)(nil),               // 3: zalokon.ZaloUser
+	(*ZaloUserResponse)(nil),       // 4: zalokon.ZaloUserResponse
+	(*OfficalAccountResponse)(nil), // 5: zalokon.OfficalAccountResponse
+	(*ResponseData)(nil),           // 6: zalokon.ResponseData
+	(*ConsentResponse)(nil),        // 7: zalokon.ConsentResponse
+	(*Response)(nil),               // 8: zalokon.Response
+	(*Info)(nil),                   // 9: zalokon.Info
+	(*DefaultActionPayload)(nil),   // 10: zalokon.DefaultActionPayload
+	(*DefaultAction)(nil),          // 11: zalokon.DefaultAction
+	(*TemplateElement)(nil),        // 12: zalokon.TemplateElement
+	(*AttachmentPayload)(nil),      // 13: zalokon.AttachmentPayload
+	(*Button)(nil),                 // 14: zalokon.Button
+	(*Attachment)(nil),             // 15: zalokon.Attachment
+	(*Message)(nil),                // 16: zalokon.Message
+	(*Request)(nil),                // 17: zalokon.Request
+	(*ZNSTemplateStatus)(nil),      // 18: zalokon.ZNSTemplateStatus
+	(*ZlFollower)(nil),             // 19: zalokon.ZlFollower
+	(*Sender)(nil),                 // 20: zalokon.Sender
+	(*Zl2SbEvent)(nil),             // 21: zalokon.Zl2SbEvent
+	(*ResponseQuota)(nil),          // 22: zalokon.ResponseQuota
+	nil,                            // 23: zalokon.ZaloUser.AvatarsEntry
 }
 var file_zalokon_proto_depIdxs = []int32{
-	1,  // 0: zalokon.OfficialAccount.zns_quota:type_name -> zalokon.ZaloOAZNSQuota
-	8,  // 1: zalokon.ZaloUser.shared_info:type_name -> zalokon.Info
-	22, // 2: zalokon.ZaloUser.avatars:type_name -> zalokon.ZaloUser.AvatarsEntry
-	2,  // 3: zalokon.ZaloUserResponse.data:type_name -> zalokon.ZaloUser
-	0,  // 4: zalokon.OfficalAccountResponse.data:type_name -> zalokon.OfficialAccount
-	21, // 5: zalokon.ResponseData.quota:type_name -> zalokon.ResponseQuota
-	5,  // 6: zalokon.Response.data:type_name -> zalokon.ResponseData
-	9,  // 7: zalokon.DefaultAction.payload:type_name -> zalokon.DefaultActionPayload
-	11, // 8: zalokon.AttachmentPayload.elements:type_name -> zalokon.TemplateElement
-	13, // 9: zalokon.AttachmentPayload.buttons:type_name -> zalokon.Button
-	12, // 10: zalokon.Attachment.payload:type_name -> zalokon.AttachmentPayload
-	14, // 11: zalokon.Message.attachments:type_name -> zalokon.Attachment
-	14, // 12: zalokon.Message.attachment:type_name -> zalokon.Attachment
-	19, // 13: zalokon.Request.sender:type_name -> zalokon.Sender
-	19, // 14: zalokon.Request.recipient:type_name -> zalokon.Sender
-	8,  // 15: zalokon.Request.info:type_name -> zalokon.Info
-	15, // 16: zalokon.Request.message:type_name -> zalokon.Message
-	18, // 17: zalokon.Request.follower:type_name -> zalokon.ZlFollower
-	17, // 18: zalokon.Request.status:type_name -> zalokon.ZNSTemplateStatus
+	2,  // 0: zalokon.OfficialAccount.zns_quota:type_name -> zalokon.ZaloOAZNSQuota
+	9,  // 1: zalokon.ZaloUser.shared_info:type_name -> zalokon.Info
+	23, // 2: zalokon.ZaloUser.avatars:type_name -> zalokon.ZaloUser.AvatarsEntry
+	3,  // 3: zalokon.ZaloUserResponse.data:type_name -> zalokon.ZaloUser
+	1,  // 4: zalokon.OfficalAccountResponse.data:type_name -> zalokon.OfficialAccount
+	22, // 5: zalokon.ResponseData.quota:type_name -> zalokon.ResponseQuota
+	6,  // 6: zalokon.Response.data:type_name -> zalokon.ResponseData
+	10, // 7: zalokon.DefaultAction.payload:type_name -> zalokon.DefaultActionPayload
+	12, // 8: zalokon.AttachmentPayload.elements:type_name -> zalokon.TemplateElement
+	14, // 9: zalokon.AttachmentPayload.buttons:type_name -> zalokon.Button
+	13, // 10: zalokon.Attachment.payload:type_name -> zalokon.AttachmentPayload
+	15, // 11: zalokon.Message.attachments:type_name -> zalokon.Attachment
+	15, // 12: zalokon.Message.attachment:type_name -> zalokon.Attachment
+	20, // 13: zalokon.Request.sender:type_name -> zalokon.Sender
+	20, // 14: zalokon.Request.recipient:type_name -> zalokon.Sender
+	9,  // 15: zalokon.Request.info:type_name -> zalokon.Info
+	16, // 16: zalokon.Request.message:type_name -> zalokon.Message
+	19, // 17: zalokon.Request.follower:type_name -> zalokon.ZlFollower
+	18, // 18: zalokon.Request.status:type_name -> zalokon.ZNSTemplateStatus
 	19, // [19:19] is the sub-list for method output_type
 	19, // [19:19] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
@@ -2450,7 +2578,7 @@ func file_zalokon_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zalokon_proto_rawDesc), len(file_zalokon_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

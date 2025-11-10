@@ -4,6 +4,20 @@ package zalokon;
 
 option go_package = "github.com/subiz/header/zalokon";
 
+message ZaloPersonalUser {
+	string uid = 3;
+	string avatar = 4;
+	string cover = 5;
+	string status = 6;
+	int64 gender = 7;
+	int64 dob = 12;
+	string sdob = 13;
+	string globalId = 14;
+	string display_name = 15;
+	string zalo_name = 16;
+	// BusinessPackage bizPkg = 17;
+}
+
 message OfficialAccount {
 	string oa_id = 2;
 	string description = 3;
