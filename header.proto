@@ -9906,49 +9906,49 @@ message ZaloFriendRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string zalo_personal_id = 3;
-	string zalo_user_id = 4;
+	string zalo_user_id = 3;
+	string zalo_friend_id = 4;
 	string message = 5;
 	string language = 6; // vi
 }
 
 message ZaloGroupSetting {
-	int64 blockName = 5;
-	int64 signAdminMsg = 6;
-	int64 addMemberOnly = 7;
-	int64 setTopicOnly = 8;
-	int64 enableMsgHistory = 9;
-	int64 lockCreatePost = 10;
-	int64 lockCreatePoll = 11;
-	int64 joinAppr = 12;
-	int64 bannFeature = 13;
-	int64 dirtyMedia = 14;
-	int64 banDuration = 15;
-	int64 lockSendMsg = 16;
-	int64 lockViewMember = 17;
+	int64 block_name = 5;
+	int64 sign_admin_msg = 6;
+	int64 add_member_only = 7;
+	int64 set_topic_only = 8;
+	int64 enable_msg_history = 9;
+	int64 lock_create_post = 10;
+	int64 lock_create_poll = 11;
+	int64 join_appr = 12;
+	int64 bann_feature = 13;
+	int64 dirty_media = 14;
+	int64 ban_duration = 15;
+	int64 lock_send_msg = 16;
+	int64 lock_view_member = 17;
 }
 
 message ZaloGroup {
 	common.Context ctx = 1;
-	string zalo_personal_id = 3;
-	string groupId = 4;
+	string zalo_user_id = 3;
+	string group_id = 4;
 	string name = 5;
 	string desc = 6;
 	int64 type = 7;
-	string creatorId = 8;
+	string creator_id = 8;
 	string version = 10;
-	string avt = 11;
-	string fullAvt = 12;
-	repeated string memVerList = 13;
+	string avarta = 11;
+	string full_avatar = 12;
+	repeated string mem_ver_list = 13;
 	ZaloGroupSetting setting = 15;
-	int64 createdTime = 17;
+	int64 created_time = 17;
 	int64 visibility = 18;
-	string globalId = 19;
+	string global_id = 19;
 	int64 e2ee = 20;
 }
 
 message ZaloBusinessPackage {
-	int64 pgkId = 6;
+	int64 pkgId = 6;
 }
 
 message ZaloRecommendInformation {
@@ -9965,45 +9965,45 @@ message ZaloFriendRequestInfo {
 message ZaloPhoneLookupRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string zalo_personal_id = 3;
+	string zalo_user_id = 3;
 	string phone_number = 4;
 }
 
 message ZaloPersonalAccount {
-	string userId = 4;
+	string user_id = 4;
 	string username = 5;
-	string displayName = 6;
-	string zaloName = 7;
+	string display_name = 6;
+	string zalo_name = 7;
 	string avatar = 8;
-	string bgavatar = 9;
+	string bg_avatar = 9;
 	string cover = 10;
 	int64 gender = 11;
-	int64 dob = 12;
-	string sdob = 13;
+	int64 dob = 12; // date of birth int
+	string sdob = 13; // date of birth string
 	string status = 14;
-	string phoneNumber = 15;
-	int64 isFr =  16;
-	int64 isBlocked = 17;
-	int64 lastActionTime = 18;
-	int64 lastUpdateTime = 19;
-	int64 isActive = 20;
+	string phone_number = 15;
+	int64 is_fr =  16;
+	int64 is_blocked = 17;
+	int64 last_action_time = 18;
+	int64 last_update_time = 19;
+	int64 is_active = 20;
 	int64 key = 21;
 	int64 type = 28;
-	int64 isActivePC = 29;
-	int64 isActiveWeb = 30;
-	string userKey = 31;
-	int64 accountStatus = 32;
+	int64 is_active_PC = 29;
+	int64 is_active_web = 30;
+	string user_key = 31;
+	int64 account_status = 32;
 	int64 user_mode = 33;
-	string globalId = 34;
-	int64 createdTs = 35;
+	string global_id = 34;
+	int64 created_ts = 35;
 	ZaloFriendRequestInfo fReqInfo = 36;
-	ZaloBusinessPackage bizPkg = 37;
-	int64 isSeenFriendReq = 38;
-	ZaloRecommendInformation recommInfo = 39;
-	int64 recommType = 40;
-	int64 recommSrc = 41;
-	int64 recommTime = 42;
-	int64 isValid = 43;
+	ZaloBusinessPackage biz_pkg = 37;
+	int64 is_seen_friend_req = 38;
+	ZaloRecommendInformation recomm_info = 39;
+	int64 recomm_type = 40;
+	int64 recomm_src = 41;
+	int64 recomm_time = 42;
+	int64 is_valid = 43;
 
 	string cookie = 50;
 	string encrypt_key = 51;
@@ -10015,12 +10015,15 @@ message ZaloPersonalAccount {
 	string state = 57; // activated || deleted || failed
 	string account_id = 58;
 	int64 last_ws_payload_received = 59;
-	int64 last_login = 60;
+	int64 last_logged_in = 60;
 	int64 last_request_successed = 61;
 	int64 last_request_failed = 62;
 	string integration_link_status = 63; // active, failed
 	int64 ws_connected = 66;
 	int64 last_synced = 67;
+	string zcid = 68;
+	string zcid_ext = 69;
+	string enc_ver = 70;
 }
 
 message ZaloLoginStatus {
