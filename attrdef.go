@@ -281,6 +281,13 @@ func ListDefaultDefs() []*AttributeDefinition {
 			IsSystem:  true,
 		},
 		&AttributeDefinition{
+			Label:     "Bạn của",
+			I18NLabel: &I18NString{Vi_VN: "Bạn của", En_US: "Friend of"},
+			Type:      "text",
+			Key:       "friend_of",
+			IsSystem:  true,
+		},
+		&AttributeDefinition{
 			Name:       "Tổng số đơn",
 			Label:      "Tổng số đơn",
 			I18NLabel:  &I18NString{Vi_VN: "Tổng số đơn", En_US: "Number of orders"},
