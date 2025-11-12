@@ -10007,7 +10007,7 @@ message ZaloPersonalAccount {
 
 	string cookie = 50;
 	string encrypt_key = 51;
-	string websocket_key = 52;
+	string ws_key = 52;
 	string last_ws_event_id = 53;
 	string client_id = 54;
 	string user_agent = 55;
@@ -10022,9 +10022,10 @@ message ZaloPersonalAccount {
 	int64 connection_status_updated = 64; // ok, failed
 	int64 ws_connected = 66;
 	int64 last_synced = 67;
-	string zcid = 68;
-	string zcid_ext = 69;
-	string enc_ver = 70;
+	string ws_session_id = 68;
+	string ws_status = 69; // ok
+	int64 ws_status_updated = 70;
+	string ws_error = 71; // ok
 }
 
 message ZaloLoginStatus {

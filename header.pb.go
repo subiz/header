@@ -70326,7 +70326,7 @@ type ZaloPersonalAccount struct {
 	IsValid                 int64                     `protobuf:"varint,43,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
 	Cookie                  string                    `protobuf:"bytes,50,opt,name=cookie,proto3" json:"cookie,omitempty"`
 	EncryptKey              string                    `protobuf:"bytes,51,opt,name=encrypt_key,json=encryptKey,proto3" json:"encrypt_key,omitempty"`
-	WebsocketKey            string                    `protobuf:"bytes,52,opt,name=websocket_key,json=websocketKey,proto3" json:"websocket_key,omitempty"`
+	WsKey                   string                    `protobuf:"bytes,52,opt,name=ws_key,json=wsKey,proto3" json:"ws_key,omitempty"`
 	LastWsEventId           string                    `protobuf:"bytes,53,opt,name=last_ws_event_id,json=lastWsEventId,proto3" json:"last_ws_event_id,omitempty"`
 	ClientId                string                    `protobuf:"bytes,54,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 	UserAgent               string                    `protobuf:"bytes,55,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
@@ -70341,9 +70341,10 @@ type ZaloPersonalAccount struct {
 	ConnectionStatusUpdated int64                     `protobuf:"varint,64,opt,name=connection_status_updated,json=connectionStatusUpdated,proto3" json:"connection_status_updated,omitempty"` // ok, failed
 	WsConnected             int64                     `protobuf:"varint,66,opt,name=ws_connected,json=wsConnected,proto3" json:"ws_connected,omitempty"`
 	LastSynced              int64                     `protobuf:"varint,67,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`
-	Zcid                    string                    `protobuf:"bytes,68,opt,name=zcid,proto3" json:"zcid,omitempty"`
-	ZcidExt                 string                    `protobuf:"bytes,69,opt,name=zcid_ext,json=zcidExt,proto3" json:"zcid_ext,omitempty"`
-	EncVer                  string                    `protobuf:"bytes,70,opt,name=enc_ver,json=encVer,proto3" json:"enc_ver,omitempty"`
+	WsSessionId             string                    `protobuf:"bytes,68,opt,name=ws_session_id,json=wsSessionId,proto3" json:"ws_session_id,omitempty"`
+	WsStatus                string                    `protobuf:"bytes,69,opt,name=ws_status,json=wsStatus,proto3" json:"ws_status,omitempty"` // ok
+	WsStatusUpdated         int64                     `protobuf:"varint,70,opt,name=ws_status_updated,json=wsStatusUpdated,proto3" json:"ws_status_updated,omitempty"`
+	WsError                 string                    `protobuf:"bytes,71,opt,name=ws_error,json=wsError,proto3" json:"ws_error,omitempty"` // ok
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -70630,9 +70631,9 @@ func (x *ZaloPersonalAccount) GetEncryptKey() string {
 	return ""
 }
 
-func (x *ZaloPersonalAccount) GetWebsocketKey() string {
+func (x *ZaloPersonalAccount) GetWsKey() string {
 	if x != nil {
-		return x.WebsocketKey
+		return x.WsKey
 	}
 	return ""
 }
@@ -70735,23 +70736,30 @@ func (x *ZaloPersonalAccount) GetLastSynced() int64 {
 	return 0
 }
 
-func (x *ZaloPersonalAccount) GetZcid() string {
+func (x *ZaloPersonalAccount) GetWsSessionId() string {
 	if x != nil {
-		return x.Zcid
+		return x.WsSessionId
 	}
 	return ""
 }
 
-func (x *ZaloPersonalAccount) GetZcidExt() string {
+func (x *ZaloPersonalAccount) GetWsStatus() string {
 	if x != nil {
-		return x.ZcidExt
+		return x.WsStatus
 	}
 	return ""
 }
 
-func (x *ZaloPersonalAccount) GetEncVer() string {
+func (x *ZaloPersonalAccount) GetWsStatusUpdated() int64 {
 	if x != nil {
-		return x.EncVer
+		return x.WsStatusUpdated
+	}
+	return 0
+}
+
+func (x *ZaloPersonalAccount) GetWsError() string {
+	if x != nil {
+		return x.WsError
 	}
 	return ""
 }
@@ -79880,7 +79888,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12 \n" +
 	"\fzalo_user_id\x18\x03 \x01(\tR\n" +
 	"zaloUserId\x12!\n" +
-	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\xa3\x0e\n" +
+	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\xd5\x0e\n" +
 	"\x13ZaloPersonalAccount\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x12!\n" +
@@ -79926,8 +79934,8 @@ const file_header_proto_rawDesc = "" +
 	"\bis_valid\x18+ \x01(\x03R\aisValid\x12\x16\n" +
 	"\x06cookie\x182 \x01(\tR\x06cookie\x12\x1f\n" +
 	"\vencrypt_key\x183 \x01(\tR\n" +
-	"encryptKey\x12#\n" +
-	"\rwebsocket_key\x184 \x01(\tR\fwebsocketKey\x12'\n" +
+	"encryptKey\x12\x15\n" +
+	"\x06ws_key\x184 \x01(\tR\x05wsKey\x12'\n" +
 	"\x10last_ws_event_id\x185 \x01(\tR\rlastWsEventId\x12\x1b\n" +
 	"\tclient_id\x186 \x01(\tR\bclientId\x12\x1d\n" +
 	"\n" +
@@ -79944,10 +79952,11 @@ const file_header_proto_rawDesc = "" +
 	"\x19connection_status_updated\x18@ \x01(\x03R\x17connectionStatusUpdated\x12!\n" +
 	"\fws_connected\x18B \x01(\x03R\vwsConnected\x12\x1f\n" +
 	"\vlast_synced\x18C \x01(\x03R\n" +
-	"lastSynced\x12\x12\n" +
-	"\x04zcid\x18D \x01(\tR\x04zcid\x12\x19\n" +
-	"\bzcid_ext\x18E \x01(\tR\azcidExt\x12\x17\n" +
-	"\aenc_ver\x18F \x01(\tR\x06encVer\"\xf5\x01\n" +
+	"lastSynced\x12\"\n" +
+	"\rws_session_id\x18D \x01(\tR\vwsSessionId\x12\x1b\n" +
+	"\tws_status\x18E \x01(\tR\bwsStatus\x12*\n" +
+	"\x11ws_status_updated\x18F \x01(\x03R\x0fwsStatusUpdated\x12\x19\n" +
+	"\bws_error\x18G \x01(\tR\awsError\"\xf5\x01\n" +
 	"\x0fZaloLoginStatus\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
