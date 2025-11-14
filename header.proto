@@ -3368,13 +3368,14 @@ enum ChannelType {
 	facebook = 2; // ott
 	viber = 3;
 	facebook_comment = 4; // public, dont close conversation
-	zalo = 5;
+	zalo = 5; // zalo OA
 	call = 6;
 	instagram = 7;
 	instagram_comment = 8;
 	google_review = 9;
 	google_question = 10;
 	zns = 12;
+	zalo_personal = 13;
 }
 
 message WebhookSecret {
@@ -9937,9 +9938,10 @@ message ZaloGroup {
 	int64 type = 7;
 	string creator_id = 8;
 	string version = 10;
-	string avarta = 11;
-	string full_avatar = 12;
-	repeated string mem_ver_list = 13;
+	File avatar = 11;
+	File full_avatar = 12;
+	repeated string members = 13;
+	int64 total_members = 14;
 	ZaloGroupSetting setting = 15;
 	int64 created_time = 17;
 	int64 visibility = 18;
@@ -10026,6 +10028,7 @@ message ZaloPersonalAccount {
 	string ws_status = 69; // ok
 	int64 ws_status_updated = 70;
 	string ws_error = 71; // ok
+	int64 ws_last_ping = 72;
 }
 
 message ZaloLoginStatus {

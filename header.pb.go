@@ -292,13 +292,14 @@ const (
 	ChannelType_facebook          ChannelType = 2 // ott
 	ChannelType_viber             ChannelType = 3
 	ChannelType_facebook_comment  ChannelType = 4 // public, dont close conversation
-	ChannelType_zalo              ChannelType = 5
+	ChannelType_zalo              ChannelType = 5 // zalo OA
 	ChannelType_call              ChannelType = 6
 	ChannelType_instagram         ChannelType = 7
 	ChannelType_instagram_comment ChannelType = 8
 	ChannelType_google_review     ChannelType = 9
 	ChannelType_google_question   ChannelType = 10
 	ChannelType_zns               ChannelType = 12
+	ChannelType_zalo_personal     ChannelType = 13
 )
 
 // Enum value maps for ChannelType.
@@ -316,6 +317,7 @@ var (
 		9:  "google_review",
 		10: "google_question",
 		12: "zns",
+		13: "zalo_personal",
 	}
 	ChannelType_value = map[string]int32{
 		"subiz":             0,
@@ -330,6 +332,7 @@ var (
 		"google_review":     9,
 		"google_question":   10,
 		"zns":               12,
+		"zalo_personal":     13,
 	}
 )
 
@@ -69910,9 +69913,10 @@ type ZaloGroup struct {
 	Type          int64                  `protobuf:"varint,7,opt,name=type,proto3" json:"type,omitempty"`
 	CreatorId     string                 `protobuf:"bytes,8,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
 	Version       string                 `protobuf:"bytes,10,opt,name=version,proto3" json:"version,omitempty"`
-	Avarta        string                 `protobuf:"bytes,11,opt,name=avarta,proto3" json:"avarta,omitempty"`
-	FullAvatar    string                 `protobuf:"bytes,12,opt,name=full_avatar,json=fullAvatar,proto3" json:"full_avatar,omitempty"`
-	MemVerList    []string               `protobuf:"bytes,13,rep,name=mem_ver_list,json=memVerList,proto3" json:"mem_ver_list,omitempty"`
+	Avatar        *File                  `protobuf:"bytes,11,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	FullAvatar    *File                  `protobuf:"bytes,12,opt,name=full_avatar,json=fullAvatar,proto3" json:"full_avatar,omitempty"`
+	Members       []string               `protobuf:"bytes,13,rep,name=members,proto3" json:"members,omitempty"`
+	TotalMembers  int64                  `protobuf:"varint,14,opt,name=total_members,json=totalMembers,proto3" json:"total_members,omitempty"`
 	Setting       *ZaloGroupSetting      `protobuf:"bytes,15,opt,name=setting,proto3" json:"setting,omitempty"`
 	CreatedTime   int64                  `protobuf:"varint,17,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
 	Visibility    int64                  `protobuf:"varint,18,opt,name=visibility,proto3" json:"visibility,omitempty"`
@@ -70008,25 +70012,32 @@ func (x *ZaloGroup) GetVersion() string {
 	return ""
 }
 
-func (x *ZaloGroup) GetAvarta() string {
+func (x *ZaloGroup) GetAvatar() *File {
 	if x != nil {
-		return x.Avarta
+		return x.Avatar
 	}
-	return ""
+	return nil
 }
 
-func (x *ZaloGroup) GetFullAvatar() string {
+func (x *ZaloGroup) GetFullAvatar() *File {
 	if x != nil {
 		return x.FullAvatar
 	}
-	return ""
+	return nil
 }
 
-func (x *ZaloGroup) GetMemVerList() []string {
+func (x *ZaloGroup) GetMembers() []string {
 	if x != nil {
-		return x.MemVerList
+		return x.Members
 	}
 	return nil
+}
+
+func (x *ZaloGroup) GetTotalMembers() int64 {
+	if x != nil {
+		return x.TotalMembers
+	}
+	return 0
 }
 
 func (x *ZaloGroup) GetSetting() *ZaloGroupSetting {
@@ -70345,6 +70356,7 @@ type ZaloPersonalAccount struct {
 	WsStatus                string                    `protobuf:"bytes,69,opt,name=ws_status,json=wsStatus,proto3" json:"ws_status,omitempty"` // ok
 	WsStatusUpdated         int64                     `protobuf:"varint,70,opt,name=ws_status_updated,json=wsStatusUpdated,proto3" json:"ws_status_updated,omitempty"`
 	WsError                 string                    `protobuf:"bytes,71,opt,name=ws_error,json=wsError,proto3" json:"ws_error,omitempty"` // ok
+	WsLastPing              int64                     `protobuf:"varint,72,opt,name=ws_last_ping,json=wsLastPing,proto3" json:"ws_last_ping,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -70762,6 +70774,13 @@ func (x *ZaloPersonalAccount) GetWsError() string {
 		return x.WsError
 	}
 	return ""
+}
+
+func (x *ZaloPersonalAccount) GetWsLastPing() int64 {
+	if x != nil {
+		return x.WsLastPing
+	}
+	return 0
 }
 
 type ZaloLoginStatus struct {
@@ -79848,7 +79867,7 @@ const file_header_proto_rawDesc = "" +
 	"dirtyMedia\x12!\n" +
 	"\fban_duration\x18\x0f \x01(\x03R\vbanDuration\x12\"\n" +
 	"\rlock_send_msg\x18\x10 \x01(\x03R\vlockSendMsg\x12(\n" +
-	"\x10lock_view_member\x18\x11 \x01(\x03R\x0elockViewMember\"\xe3\x03\n" +
+	"\x10lock_view_member\x18\x11 \x01(\x03R\x0elockViewMember\"\x9c\x04\n" +
 	"\tZaloGroup\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
 	"\fzalo_user_id\x18\x03 \x01(\tR\n" +
@@ -79860,12 +79879,12 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"creator_id\x18\b \x01(\tR\tcreatorId\x12\x18\n" +
 	"\aversion\x18\n" +
-	" \x01(\tR\aversion\x12\x16\n" +
-	"\x06avarta\x18\v \x01(\tR\x06avarta\x12\x1f\n" +
-	"\vfull_avatar\x18\f \x01(\tR\n" +
-	"fullAvatar\x12 \n" +
-	"\fmem_ver_list\x18\r \x03(\tR\n" +
-	"memVerList\x122\n" +
+	" \x01(\tR\aversion\x12$\n" +
+	"\x06avatar\x18\v \x01(\v2\f.header.FileR\x06avatar\x12-\n" +
+	"\vfull_avatar\x18\f \x01(\v2\f.header.FileR\n" +
+	"fullAvatar\x12\x18\n" +
+	"\amembers\x18\r \x03(\tR\amembers\x12#\n" +
+	"\rtotal_members\x18\x0e \x01(\x03R\ftotalMembers\x122\n" +
 	"\asetting\x18\x0f \x01(\v2\x18.header.ZaloGroupSettingR\asetting\x12!\n" +
 	"\fcreated_time\x18\x11 \x01(\x03R\vcreatedTime\x12\x1e\n" +
 	"\n" +
@@ -79888,7 +79907,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12 \n" +
 	"\fzalo_user_id\x18\x03 \x01(\tR\n" +
 	"zaloUserId\x12!\n" +
-	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\xd5\x0e\n" +
+	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\xf7\x0e\n" +
 	"\x13ZaloPersonalAccount\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x12!\n" +
@@ -79956,7 +79975,9 @@ const file_header_proto_rawDesc = "" +
 	"\rws_session_id\x18D \x01(\tR\vwsSessionId\x12\x1b\n" +
 	"\tws_status\x18E \x01(\tR\bwsStatus\x12*\n" +
 	"\x11ws_status_updated\x18F \x01(\x03R\x0fwsStatusUpdated\x12\x19\n" +
-	"\bws_error\x18G \x01(\tR\awsError\"\xf5\x01\n" +
+	"\bws_error\x18G \x01(\tR\awsError\x12 \n" +
+	"\fws_last_ping\x18H \x01(\x03R\n" +
+	"wsLastPing\"\xf5\x01\n" +
 	"\x0fZaloLoginStatus\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -80027,7 +80048,7 @@ const file_header_proto_rawDesc = "" +
 	"view_order\x10\x16\x12\x11\n" +
 	"\rconfirm_order\x10\x17\x12\x0f\n" +
 	"\vcreate_task\x10\x18\x12\x18\n" +
-	"\x14update_user_segments\x10\x19*\xbd\x01\n" +
+	"\x14update_user_segments\x10\x19*\xd0\x01\n" +
 	"\vChannelType\x12\t\n" +
 	"\x05subiz\x10\x00\x12\t\n" +
 	"\x05email\x10\x01\x12\f\n" +
@@ -80041,7 +80062,8 @@ const file_header_proto_rawDesc = "" +
 	"\rgoogle_review\x10\t\x12\x13\n" +
 	"\x0fgoogle_question\x10\n" +
 	"\x12\a\n" +
-	"\x03zns\x10\f*\xd6\x01\n" +
+	"\x03zns\x10\f\x12\x11\n" +
+	"\rzalo_personal\x10\r*\xd6\x01\n" +
 	"\x10ShippingProvider\x12\n" +
 	"\n" +
 	"\x06direct\x10\x00\x12\v\n" +
@@ -82161,41 +82183,43 @@ var file_header_proto_depIdxs = []int32{
 	675,  // 1336: header.ListDiscountRequest.ctx:type_name -> common.Context
 	675,  // 1337: header.ZaloFriendRequest.ctx:type_name -> common.Context
 	675,  // 1338: header.ZaloGroup.ctx:type_name -> common.Context
-	604,  // 1339: header.ZaloGroup.setting:type_name -> header.ZaloGroupSetting
-	675,  // 1340: header.ZaloPhoneLookupRequest.ctx:type_name -> common.Context
-	608,  // 1341: header.ZaloPersonalAccount.fReqInfo:type_name -> header.ZaloFriendRequestInfo
-	606,  // 1342: header.ZaloPersonalAccount.biz_pkg:type_name -> header.ZaloBusinessPackage
-	607,  // 1343: header.ZaloPersonalAccount.recomm_info:type_name -> header.ZaloRecommendInformation
-	675,  // 1344: header.ZaloLoginStatus.ctx:type_name -> common.Context
-	74,   // 1345: header.Event.CustomDataEntry.value:type_name -> header.EventField
-	499,  // 1346: header.Message.I18nBlockEntry.value:type_name -> header.Block
-	619,  // 1347: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
-	499,  // 1348: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
-	499,  // 1349: header.I18nBlock.I18nEntry.value:type_name -> header.Block
-	499,  // 1350: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
-	175,  // 1351: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
-	174,  // 1352: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
-	176,  // 1353: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
-	177,  // 1354: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
-	178,  // 1355: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
-	676,  // 1356: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
-	499,  // 1357: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
-	549,  // 1358: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
-	314,  // 1359: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
-	314,  // 1360: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
-	426,  // 1361: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
-	397,  // 1362: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
-	397,  // 1363: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
-	90,   // 1364: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
-	483,  // 1365: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
-	499,  // 1366: header.Article.I18nContentEntry.value:type_name -> header.Block
-	549,  // 1367: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
-	397,  // 1368: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
-	1369, // [1369:1369] is the sub-list for method output_type
-	1369, // [1369:1369] is the sub-list for method input_type
-	1369, // [1369:1369] is the sub-list for extension type_name
-	1369, // [1369:1369] is the sub-list for extension extendee
-	0,    // [0:1369] is the sub-list for field type_name
+	220,  // 1339: header.ZaloGroup.avatar:type_name -> header.File
+	220,  // 1340: header.ZaloGroup.full_avatar:type_name -> header.File
+	604,  // 1341: header.ZaloGroup.setting:type_name -> header.ZaloGroupSetting
+	675,  // 1342: header.ZaloPhoneLookupRequest.ctx:type_name -> common.Context
+	608,  // 1343: header.ZaloPersonalAccount.fReqInfo:type_name -> header.ZaloFriendRequestInfo
+	606,  // 1344: header.ZaloPersonalAccount.biz_pkg:type_name -> header.ZaloBusinessPackage
+	607,  // 1345: header.ZaloPersonalAccount.recomm_info:type_name -> header.ZaloRecommendInformation
+	675,  // 1346: header.ZaloLoginStatus.ctx:type_name -> common.Context
+	74,   // 1347: header.Event.CustomDataEntry.value:type_name -> header.EventField
+	499,  // 1348: header.Message.I18nBlockEntry.value:type_name -> header.Block
+	619,  // 1349: header.ReportBotResponse.Metric.submetrics:type_name -> header.ReportBotResponse.Metric
+	499,  // 1350: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
+	499,  // 1351: header.I18nBlock.I18nEntry.value:type_name -> header.Block
+	499,  // 1352: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
+	175,  // 1353: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
+	174,  // 1354: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
+	176,  // 1355: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
+	177,  // 1356: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
+	178,  // 1357: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
+	676,  // 1358: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
+	499,  // 1359: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
+	549,  // 1360: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
+	314,  // 1361: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
+	314,  // 1362: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
+	426,  // 1363: header.WorkflowSession.ThreadsEntry.value:type_name -> header.WorkflowThread
+	397,  // 1364: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
+	397,  // 1365: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
+	90,   // 1366: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
+	483,  // 1367: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
+	499,  // 1368: header.Article.I18nContentEntry.value:type_name -> header.Block
+	549,  // 1369: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
+	397,  // 1370: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
+	1371, // [1371:1371] is the sub-list for method output_type
+	1371, // [1371:1371] is the sub-list for method input_type
+	1371, // [1371:1371] is the sub-list for extension type_name
+	1371, // [1371:1371] is the sub-list for extension extendee
+	0,    // [0:1371] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }
