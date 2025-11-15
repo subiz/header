@@ -6403,6 +6403,7 @@ const (
 	UserMgr_RestoreUser_FullMethodName                      = "/header.UserMgr/RestoreUser"
 	UserMgr_ReadUser_FullMethodName                         = "/header.UserMgr/ReadUser"
 	UserMgr_ReadOrCreateUserByContactProfile_FullMethodName = "/header.UserMgr/ReadOrCreateUserByContactProfile"
+	UserMgr_ListUsersByContactProfile_FullMethodName        = "/header.UserMgr/ListUsersByContactProfile"
 	UserMgr_MatchUsers_FullMethodName                       = "/header.UserMgr/MatchUsers"
 	UserMgr_BanUser_FullMethodName                          = "/header.UserMgr/BanUser"
 	UserMgr_UnbanUser_FullMethodName                        = "/header.UserMgr/UnbanUser"
@@ -6477,6 +6478,7 @@ type UserMgrClient interface {
 	RestoreUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReadUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	ReadOrCreateUserByContactProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
+	ListUsersByContactProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchUsers(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Users, error)
 	BanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	UnbanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
@@ -6628,6 +6630,16 @@ func (c *userMgrClient) ReadOrCreateUserByContactProfile(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(User)
 	err := c.cc.Invoke(ctx, UserMgr_ReadOrCreateUserByContactProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) ListUsersByContactProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_ListUsersByContactProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7219,6 +7231,7 @@ type UserMgrServer interface {
 	RestoreUser(context.Context, *Id) (*Empty, error)
 	ReadUser(context.Context, *Id) (*User, error)
 	ReadOrCreateUserByContactProfile(context.Context, *Id) (*User, error)
+	ListUsersByContactProfile(context.Context, *Id) (*Response, error)
 	MatchUsers(context.Context, *Ids) (*Users, error)
 	BanUser(context.Context, *Id) (*User, error)
 	UnbanUser(context.Context, *Id) (*User, error)
@@ -7312,6 +7325,9 @@ func (UnimplementedUserMgrServer) ReadUser(context.Context, *Id) (*User, error) 
 }
 func (UnimplementedUserMgrServer) ReadOrCreateUserByContactProfile(context.Context, *Id) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadOrCreateUserByContactProfile not implemented")
+}
+func (UnimplementedUserMgrServer) ListUsersByContactProfile(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUsersByContactProfile not implemented")
 }
 func (UnimplementedUserMgrServer) MatchUsers(context.Context, *Ids) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchUsers not implemented")
@@ -7663,6 +7679,24 @@ func _UserMgr_ReadOrCreateUserByContactProfile_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).ReadOrCreateUserByContactProfile(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_ListUsersByContactProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).ListUsersByContactProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_ListUsersByContactProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).ListUsersByContactProfile(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8735,6 +8769,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadOrCreateUserByContactProfile",
 			Handler:    _UserMgr_ReadOrCreateUserByContactProfile_Handler,
+		},
+		{
+			MethodName: "ListUsersByContactProfile",
+			Handler:    _UserMgr_ListUsersByContactProfile_Handler,
 		},
 		{
 			MethodName: "MatchUsers",
@@ -19838,9 +19876,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ZalopersonServiceClient interface {
 	SendEventToZaloPersonal(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
-	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
-	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
-	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
 	RemoveFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	SendFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	ListFriendRequests(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -19998,9 +20033,6 @@ func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLogi
 // for forward compatibility.
 type ZalopersonServiceServer interface {
 	SendEventToZaloPersonal(context.Context, *Events) (*Empty, error)
-	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
-	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
-	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
 	RemoveFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	ListFriendRequests(context.Context, *Id) (*Response, error)
