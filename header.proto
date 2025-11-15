@@ -1598,7 +1598,7 @@ message MessagePong {
 	string ref_link = 11;
 	int32 rating = 12;
 	string comment = 13;
-	string zns_message_id = 14;
+	string source_message_id = 14;
 	Error error = 15; // use this instead of ack_error
 }
 

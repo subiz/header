@@ -12287,22 +12287,22 @@ func (x *InstagramStory) GetLink() string {
 }
 
 type MessagePong struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MemberId      string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Created       int64                  `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
-	AckError      string                 `protobuf:"bytes,6,opt,name=ack_error,json=ackError,proto3" json:"ack_error,omitempty"` // used in ack
-	Count         int64                  `protobuf:"varint,7,opt,name=count,proto3" json:"count,omitempty"`
-	Url           string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"` // for clicked
-	RefUserId     string                 `protobuf:"bytes,9,opt,name=ref_user_id,json=refUserId,proto3" json:"ref_user_id,omitempty"`
-	RefPsid       string                 `protobuf:"bytes,10,opt,name=ref_psid,json=refPsid,proto3" json:"ref_psid,omitempty"`
-	RefLink       string                 `protobuf:"bytes,11,opt,name=ref_link,json=refLink,proto3" json:"ref_link,omitempty"`
-	Rating        int32                  `protobuf:"varint,12,opt,name=rating,proto3" json:"rating,omitempty"`
-	Comment       string                 `protobuf:"bytes,13,opt,name=comment,proto3" json:"comment,omitempty"`
-	ZnsMessageId  string                 `protobuf:"bytes,14,opt,name=zns_message_id,json=znsMessageId,proto3" json:"zns_message_id,omitempty"`
-	Error         *Error                 `protobuf:"bytes,15,opt,name=error,proto3" json:"error,omitempty"` // use this instead of ack_error
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	MemberId        string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
+	Type            string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Created         int64                  `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	AckError        string                 `protobuf:"bytes,6,opt,name=ack_error,json=ackError,proto3" json:"ack_error,omitempty"` // used in ack
+	Count           int64                  `protobuf:"varint,7,opt,name=count,proto3" json:"count,omitempty"`
+	Url             string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"` // for clicked
+	RefUserId       string                 `protobuf:"bytes,9,opt,name=ref_user_id,json=refUserId,proto3" json:"ref_user_id,omitempty"`
+	RefPsid         string                 `protobuf:"bytes,10,opt,name=ref_psid,json=refPsid,proto3" json:"ref_psid,omitempty"`
+	RefLink         string                 `protobuf:"bytes,11,opt,name=ref_link,json=refLink,proto3" json:"ref_link,omitempty"`
+	Rating          int32                  `protobuf:"varint,12,opt,name=rating,proto3" json:"rating,omitempty"`
+	Comment         string                 `protobuf:"bytes,13,opt,name=comment,proto3" json:"comment,omitempty"`
+	SourceMessageId string                 `protobuf:"bytes,14,opt,name=source_message_id,json=sourceMessageId,proto3" json:"source_message_id,omitempty"`
+	Error           *Error                 `protobuf:"bytes,15,opt,name=error,proto3" json:"error,omitempty"` // use this instead of ack_error
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *MessagePong) Reset() {
@@ -12412,9 +12412,9 @@ func (x *MessagePong) GetComment() string {
 	return ""
 }
 
-func (x *MessagePong) GetZnsMessageId() string {
+func (x *MessagePong) GetSourceMessageId() string {
 	if x != nil {
-		return x.ZnsMessageId
+		return x.SourceMessageId
 	}
 	return ""
 }
@@ -72947,7 +72947,7 @@ const file_header_proto_rawDesc = "" +
 	"product_id\x18\t \x01(\tR\tproductId\"4\n" +
 	"\x0eInstagramStory\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04link\x18\x04 \x01(\tR\x04link\"\x90\x06\n" +
+	"\x04link\x18\x04 \x01(\tR\x04link\"\x96\x06\n" +
 	"\vMessagePong\x12\x1b\n" +
 	"\tmember_id\x18\x03 \x01(\tR\bmemberId\x12\x12\n" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x18\n" +
@@ -72960,8 +72960,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\arefPsid\x12\x19\n" +
 	"\bref_link\x18\v \x01(\tR\arefLink\x12\x16\n" +
 	"\x06rating\x18\f \x01(\x05R\x06rating\x12\x18\n" +
-	"\acomment\x18\r \x01(\tR\acomment\x12$\n" +
-	"\x0ezns_message_id\x18\x0e \x01(\tR\fznsMessageId\x12#\n" +
+	"\acomment\x18\r \x01(\tR\acomment\x12*\n" +
+	"\x11source_message_id\x18\x0e \x01(\tR\x0fsourceMessageId\x12#\n" +
 	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\"\x9d\x03\n" +
 	"\x04Type\x12\x05\n" +
 	"\x01n\x10\x00\x12\a\n" +
