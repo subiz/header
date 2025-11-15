@@ -12663,6 +12663,7 @@ func (x *GenericElementTemplate) GetI18NSubtitle() *I18NString {
 type Attachment struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Type  string                 `protobuf:"bytes,12,opt,name=type,proto3" json:"type,omitempty"` // form, form_submission, quick_replies
+	Index int64                  `protobuf:"varint,7,opt,name=index,proto3" json:"index,omitempty"`
 	// file
 	Mimetype     string `protobuf:"bytes,2,opt,name=mimetype,proto3" json:"mimetype,omitempty"`
 	Url          string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
@@ -12740,6 +12741,13 @@ func (x *Attachment) GetType() string {
 		return x.Type
 	}
 	return ""
+}
+
+func (x *Attachment) GetIndex() int64 {
+	if x != nil {
+		return x.Index
+	}
+	return 0
 }
 
 func (x *Attachment) GetMimetype() string {
@@ -63164,25 +63172,26 @@ func (x *AIAgentOverrideRule) GetRunOnce() bool {
 }
 
 type AIAgent struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Ctx              *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId        string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id               string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Fullname         string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"`
-	Avatar           *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Description      string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	AvatarUrl        string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Brand            string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
-	BrandDescription string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
-	JobTitle         string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"` // customer_support, sale
-	Tone             string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                         // casual, friendly, professional
-	Guardrails       []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
-	Created          int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy        string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated          int64                  `protobuf:"varint,19,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy        string                 `protobuf:"bytes,20,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	State            string                 `protobuf:"bytes,22,opt,name=state,proto3" json:"state,omitempty"` // active, inactive
-	Model            string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"` // gpt-4o-mini, custom_webhook
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId             string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id                    string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Fullname              string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Avatar                *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Description           string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	AvatarUrl             string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Brand                 string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
+	BrandDescription      string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
+	JobTitle              string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"` // customer_support, sale
+	Tone                  string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                         // casual, friendly, professional
+	Guardrails            []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
+	Created               int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy             string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated               int64                  `protobuf:"varint,19,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy             string                 `protobuf:"bytes,20,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	State                 string                 `protobuf:"bytes,22,opt,name=state,proto3" json:"state,omitempty"` // active, inactive
+	Model                 string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"` // gpt-4o-mini, custom_webhook
+	MinimumAnswerDelaySec int64                  `protobuf:"varint,24,opt,name=minimum_answer_delay_sec,json=minimumAnswerDelaySec,proto3" json:"minimum_answer_delay_sec,omitempty"`
 	// repeated AIAgent sub_agents = 25;
 	FormIds                []string      `protobuf:"bytes,27,rep,name=form_ids,json=formIds,proto3" json:"form_ids,omitempty"`                                       // readonly
 	TokenLimit             string        `protobuf:"bytes,28,opt,name=token_limit,json=tokenLimit,proto3" json:"token_limit,omitempty"`                              // short, balanced, long
@@ -63392,6 +63401,13 @@ func (x *AIAgent) GetModel() string {
 		return x.Model
 	}
 	return ""
+}
+
+func (x *AIAgent) GetMinimumAnswerDelaySec() int64 {
+	if x != nil {
+		return x.MinimumAnswerDelaySec
+	}
+	return 0
 }
 
 func (x *AIAgent) GetFormIds() []string {
@@ -73022,10 +73038,11 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\a \x01(\tR\x02id\x121\n" +
 	"\n" +
 	"i18n_title\x18\b \x01(\v2\x12.header.I18nStringR\ti18nTitle\x127\n" +
-	"\ri18n_subtitle\x18\t \x01(\v2\x12.header.I18nStringR\fi18nSubtitle\"\xee\b\n" +
+	"\ri18n_subtitle\x18\t \x01(\v2\x12.header.I18nStringR\fi18nSubtitle\"\x84\t\n" +
 	"\n" +
 	"Attachment\x12\x12\n" +
-	"\x04type\x18\f \x01(\tR\x04type\x12\x1a\n" +
+	"\x04type\x18\f \x01(\tR\x04type\x12\x14\n" +
+	"\x05index\x18\a \x01(\x03R\x05index\x12\x1a\n" +
 	"\bmimetype\x18\x02 \x01(\tR\bmimetype\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12#\n" +
 	"\rthumbnail_url\x18\x04 \x01(\tR\fthumbnailUrl\x12\x12\n" +
@@ -79115,7 +79132,7 @@ const file_header_proto_rawDesc = "" +
 	"\x16welcome_message_prompt\x18\x15 \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
 	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\x12*\n" +
 	"\bai_agent\x18\x17 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12\x19\n" +
-	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\xf8\x15\n" +
+	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\xb1\x16\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79141,7 +79158,8 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x14 \x01(\tR\tupdatedBy\x12\x14\n" +
 	"\x05state\x18\x16 \x01(\tR\x05state\x12\x14\n" +
-	"\x05model\x18\x17 \x01(\tR\x05model\x12\x19\n" +
+	"\x05model\x18\x17 \x01(\tR\x05model\x127\n" +
+	"\x18minimum_answer_delay_sec\x18\x18 \x01(\x03R\x15minimumAnswerDelaySec\x12\x19\n" +
 	"\bform_ids\x18\x1b \x03(\tR\aformIds\x12\x1f\n" +
 	"\vtoken_limit\x18\x1c \x01(\tR\n" +
 	"tokenLimit\x120\n" +

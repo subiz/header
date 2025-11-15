@@ -1669,6 +1669,7 @@ enum AttachmentType {
 
 message Attachment {
 	string type = 12; // form, form_submission, quick_replies
+	int64 index = 7;
 	// file
 	string mimetype = 2;
 	string url = 3;
@@ -9027,6 +9028,7 @@ message AIAgent {
 	string state = 22; // active, inactive
 
 	string model = 23; // gpt-4o-mini, custom_webhook
+	int64 minimum_answer_delay_sec = 24;
 
 	// repeated AIAgent sub_agents = 25;
 	repeated string form_ids = 27; // readonly
