@@ -244,6 +244,7 @@ service UserMgr {
 
 	rpc ReadUser(Id) returns (header.User); // ok
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
+	rpc ListUsersByContactProfile(UserIds) returns (header.Response); // for better sync
 	rpc MatchUsers(Ids) returns (header.Users); // ok
 
 	rpc BanUser(Id) returns (header.User); // ok
@@ -711,15 +712,12 @@ service ZalokonService {
 
 service ZalopersonService {
 	rpc SendEventToZaloPersonal(header.Events) returns (Empty); // zalo
-	// user { channel: "zalo_personal", source: "zalo_personal", id: zalo_personal_id }
-	// convo { channel: "zalo_personal_group": source: "zalo_personal_id", id groupid}
-	// convo { channel: "zalo_personal": source: "zalo_personal_id", id to_user_id}
 	rpc RemoveFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc SendFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc ListFriendRequests(Id) returns (header.Response); // zalo_personal_accounts
 	rpc ListFriendRecommends(Id) returns (header.Response);  // zalo_personal_accounts
 	rpc ListZaloGroupChats(Id) returns (header.Response); // zalo_group
-	rpc LookupZaloPhone(ZaloPhoneLookupRequest) returns (Response); // zalo_personal_account
+	rpc LookupZaloPhone(ZaloPhoneLookupRequest) returns (Response); // user
 	rpc AcceptFriendRequest(ZaloFriendRequest) returns (Response);
 	rpc RejectFriendRequest(ZaloFriendRequest) returns (Response);
 	rpc CreateZaloGroup(ZaloGroup) returns (Response);

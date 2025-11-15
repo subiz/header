@@ -28,6 +28,12 @@ message Id {
 	bool dry = 11;
 }
 
+message UserIds {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Id ids = 3;
+}
+
 message Ids {
 	common.Context ctx = 1;
 	string account_id = 2;
