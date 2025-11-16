@@ -727,11 +727,7 @@ const WHITELIST ObjectType = "whitelist"
 const SUBSCRIPTION ObjectType = "subscription"
 const WORKFLOW ObjectType = "workflow"
 const ZNS_TEMPLATE ObjectType = "zns_template"
-const AI_DATA ObjectType = "ai_data"
-const AI_AGENT ObjectType = "ai_agent"
 const BANK_ACCOUNT ObjectType = "bank_account"
-
-// const INVOICE ObjectType = "invoice"
 const BOT ObjectType = "bot"
 const LIVE ObjectType = "live"
 const ATTRIBUTE ObjectType = "attribute"
@@ -2363,10 +2359,12 @@ func ToErr(err *Error) *log.AError {
 	}
 }
 
-func FromErr(err *log.AError) *Error {
-	if err == nil {
+func FromErr(baseerr error) *Error {
+	if baseerr == nil {
 		return nil
 	}
+
+	err := log.NewError(baseerr, log.M{})
 	return &Error{
 		Id:      err.Id,
 		Code:    err.Code,

@@ -28,6 +28,21 @@ func ListDefaultDefs() []*AttributeDefinition {
 			IsSystem:    true,
 		},
 		&AttributeDefinition{
+			// alway move forward
+			Label:     "Bạn bè Zalo",
+			I18NLabel: &I18NString{Vi_VN: "Bạn bè Zalo", En_US: "Zalo Friend Status"},
+			Type:      "text",
+			Select:    "dropdown",
+			Items: []*AttributeDefinitionListItem{
+				{Value: "stranger", I18NLabel: &I18NString{En_US: "Stranger", Vi_VN: "Người lạ"}, Label: "Người lạ"},
+				{Value: "requested", I18NLabel: &I18NString{En_US: "Requested", Vi_VN: "Đã yêu cầu"}, Label: "Đã yêu cầu"},
+				{Value: "requested_seen", I18NLabel: &I18NString{En_US: "Requsted and seen", Vi_VN: "Yêu cầu đã được xem"}, Label: "Yêu cầu đã được xem"},
+				{Value: "being_requested", I18NLabel: &I18NString{En_US: "Being Requested", Vi_VN: "Đợi bạn phản hồi"}, Label: "Đợi bạn phản hồi"},
+				{Value: "rejected", I18NLabel: &I18NString{En_US: "Rejected", Vi_VN: "Đã từ chối"}, Label: "Đã từ chối"},
+			},
+			Key: "zalo_friend_status",
+		},
+		&AttributeDefinition{
 			Name:        "Đã theo dõi",
 			Label:       "Đã theo dõi",
 			Description: "Người dùng đã theo dõi Zalo OA hoặc Instagram",
@@ -93,6 +108,14 @@ func ListDefaultDefs() []*AttributeDefinition {
 			Type:       "datetime",
 			IsSystem:   true,
 			IsReadonly: true,
+		},
+		&AttributeDefinition{
+			Name:      "Ngày sinh",
+			Label:     "Ngày sinh",
+			Key:       "lead_assigned_at",
+			I18NLabel: &I18NString{Vi_VN: "Ngày sinh", En_US: "Date of birth"},
+			Type:      "datetime",
+			IsSystem:  true,
 		},
 		&AttributeDefinition{
 			Name:      "Status",

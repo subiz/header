@@ -237,6 +237,7 @@ service UserMgr {
 
 	rpc CreateUser2(header.User) returns (header.User); // ok
 	rpc UpdateUser(header.User) returns (header.User);  // ok
+	rpc UpdateUsers(header.Users) returns (header.Response);
 	rpc TryUpdateUser(header.User) returns (header.TryUpdateUserResult); // ok
 
 	rpc RemoveUser(header.Id) returns (header.Empty); // ok
@@ -712,7 +713,7 @@ service ZalokonService {
 
 service ZalopersonService {
 	rpc SendEventToZaloPersonal(header.Events) returns (Empty); // zalo
-	rpc RemoveFriendRequest(header.ZaloFriendRequest) returns (Response);
+	rpc UndoFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc SendFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc ListFriendRequests(Id) returns (header.Response); // zalo_personal_accounts
 	rpc ListFriendRecommends(Id) returns (header.Response);  // zalo_personal_accounts

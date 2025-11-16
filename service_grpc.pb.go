@@ -6398,6 +6398,7 @@ const (
 	UserMgr_DetachUser_FullMethodName                       = "/header.UserMgr/DetachUser"
 	UserMgr_CreateUser2_FullMethodName                      = "/header.UserMgr/CreateUser2"
 	UserMgr_UpdateUser_FullMethodName                       = "/header.UserMgr/UpdateUser"
+	UserMgr_UpdateUsers_FullMethodName                      = "/header.UserMgr/UpdateUsers"
 	UserMgr_TryUpdateUser_FullMethodName                    = "/header.UserMgr/TryUpdateUser"
 	UserMgr_RemoveUser_FullMethodName                       = "/header.UserMgr/RemoveUser"
 	UserMgr_RestoreUser_FullMethodName                      = "/header.UserMgr/RestoreUser"
@@ -6473,6 +6474,7 @@ type UserMgrClient interface {
 	DetachUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	CreateUser2(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	UpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	UpdateUsers(ctx context.Context, in *Users, opts ...grpc.CallOption) (*Response, error)
 	TryUpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*TryUpdateUserResult, error)
 	RemoveUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	RestoreUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -6580,6 +6582,16 @@ func (c *userMgrClient) UpdateUser(ctx context.Context, in *User, opts ...grpc.C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(User)
 	err := c.cc.Invoke(ctx, UserMgr_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) UpdateUsers(ctx context.Context, in *Users, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_UpdateUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7226,6 +7238,7 @@ type UserMgrServer interface {
 	DetachUser(context.Context, *Id) (*Empty, error)
 	CreateUser2(context.Context, *User) (*User, error)
 	UpdateUser(context.Context, *User) (*User, error)
+	UpdateUsers(context.Context, *Users) (*Response, error)
 	TryUpdateUser(context.Context, *User) (*TryUpdateUserResult, error)
 	RemoveUser(context.Context, *Id) (*Empty, error)
 	RestoreUser(context.Context, *Id) (*Empty, error)
@@ -7310,6 +7323,9 @@ func (UnimplementedUserMgrServer) CreateUser2(context.Context, *User) (*User, er
 }
 func (UnimplementedUserMgrServer) UpdateUser(context.Context, *User) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUserMgrServer) UpdateUsers(context.Context, *Users) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUsers not implemented")
 }
 func (UnimplementedUserMgrServer) TryUpdateUser(context.Context, *User) (*TryUpdateUserResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryUpdateUser not implemented")
@@ -7589,6 +7605,24 @@ func _UserMgr_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).UpdateUser(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_UpdateUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Users)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).UpdateUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_UpdateUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).UpdateUsers(ctx, req.(*Users))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8749,6 +8783,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _UserMgr_UpdateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUsers",
+			Handler:    _UserMgr_UpdateUsers_Handler,
 		},
 		{
 			MethodName: "TryUpdateUser",
@@ -19857,7 +19895,7 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 
 const (
 	ZalopersonService_SendEventToZaloPersonal_FullMethodName = "/header.ZalopersonService/SendEventToZaloPersonal"
-	ZalopersonService_RemoveFriendRequest_FullMethodName     = "/header.ZalopersonService/RemoveFriendRequest"
+	ZalopersonService_UndoFriendRequest_FullMethodName       = "/header.ZalopersonService/UndoFriendRequest"
 	ZalopersonService_SendFriendRequest_FullMethodName       = "/header.ZalopersonService/SendFriendRequest"
 	ZalopersonService_ListFriendRequests_FullMethodName      = "/header.ZalopersonService/ListFriendRequests"
 	ZalopersonService_ListFriendRecommends_FullMethodName    = "/header.ZalopersonService/ListFriendRecommends"
@@ -19876,7 +19914,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ZalopersonServiceClient interface {
 	SendEventToZaloPersonal(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
-	RemoveFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
+	UndoFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	SendFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	ListFriendRequests(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListFriendRecommends(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -19908,10 +19946,10 @@ func (c *zalopersonServiceClient) SendEventToZaloPersonal(ctx context.Context, i
 	return out, nil
 }
 
-func (c *zalopersonServiceClient) RemoveFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *zalopersonServiceClient) UndoFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, ZalopersonService_RemoveFriendRequest_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ZalopersonService_UndoFriendRequest_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -20033,7 +20071,7 @@ func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLogi
 // for forward compatibility.
 type ZalopersonServiceServer interface {
 	SendEventToZaloPersonal(context.Context, *Events) (*Empty, error)
-	RemoveFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
+	UndoFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	ListFriendRequests(context.Context, *Id) (*Response, error)
 	ListFriendRecommends(context.Context, *Id) (*Response, error)
@@ -20058,8 +20096,8 @@ type UnimplementedZalopersonServiceServer struct{}
 func (UnimplementedZalopersonServiceServer) SendEventToZaloPersonal(context.Context, *Events) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEventToZaloPersonal not implemented")
 }
-func (UnimplementedZalopersonServiceServer) RemoveFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveFriendRequest not implemented")
+func (UnimplementedZalopersonServiceServer) UndoFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UndoFriendRequest not implemented")
 }
 func (UnimplementedZalopersonServiceServer) SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendFriendRequest not implemented")
@@ -20133,20 +20171,20 @@ func _ZalopersonService_SendEventToZaloPersonal_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ZalopersonService_RemoveFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ZalopersonService_UndoFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ZaloFriendRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ZalopersonServiceServer).RemoveFriendRequest(ctx, in)
+		return srv.(ZalopersonServiceServer).UndoFriendRequest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ZalopersonService_RemoveFriendRequest_FullMethodName,
+		FullMethod: ZalopersonService_UndoFriendRequest_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ZalopersonServiceServer).RemoveFriendRequest(ctx, req.(*ZaloFriendRequest))
+		return srv.(ZalopersonServiceServer).UndoFriendRequest(ctx, req.(*ZaloFriendRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -20361,8 +20399,8 @@ var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ZalopersonService_SendEventToZaloPersonal_Handler,
 		},
 		{
-			MethodName: "RemoveFriendRequest",
-			Handler:    _ZalopersonService_RemoveFriendRequest_Handler,
+			MethodName: "UndoFriendRequest",
+			Handler:    _ZalopersonService_UndoFriendRequest_Handler,
 		},
 		{
 			MethodName: "SendFriendRequest",
