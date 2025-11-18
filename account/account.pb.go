@@ -238,6 +238,7 @@ type DashboardAgent struct {
 	DefaultTicketViewId            *string           `protobuf:"bytes,45,opt,name=default_ticket_view_id,json=defaultTicketViewId" json:"default_ticket_view_id,omitempty"`
 	DefaultTicketViewSortBy        *string           `protobuf:"bytes,47,opt,name=default_ticket_view_sort_by,json=defaultTicketViewSortBy" json:"default_ticket_view_sort_by,omitempty"`
 	DefaultEmailSignatureId        *string           `protobuf:"bytes,48,opt,name=default_email_signature_id,json=defaultEmailSignatureId" json:"default_email_signature_id,omitempty"`
+	DefaultZaloPersonalAccount     *string           `protobuf:"bytes,50,opt,name=default_zalo_personal_account,json=defaultZaloPersonalAccount" json:"default_zalo_personal_account,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -492,6 +493,13 @@ func (x *DashboardAgent) GetDefaultTicketViewSortBy() string {
 func (x *DashboardAgent) GetDefaultEmailSignatureId() string {
 	if x != nil && x.DefaultEmailSignatureId != nil {
 		return *x.DefaultEmailSignatureId
+	}
+	return ""
+}
+
+func (x *DashboardAgent) GetDefaultZaloPersonalAccount() string {
+	if x != nil && x.DefaultZaloPersonalAccount != nil {
+		return *x.DefaultZaloPersonalAccount
 	}
 	return ""
 }
@@ -2814,7 +2822,7 @@ var File_account_proto protoreflect.FileDescriptor
 
 const file_account_proto_rawDesc = "" +
 	"\n" +
-	"\raccount.proto\x12\aaccount\x1a\fcommon.proto\"\xad\x0f\n" +
+	"\raccount.proto\x12\aaccount\x1a\fcommon.proto\"\xf0\x0f\n" +
 	"\x0eDashboardAgent\x12*\n" +
 	"\x11pinned_user_views\x18\r \x03(\tR\x0fpinnedUserViews\x127\n" +
 	"\x18user_view_display_fields\x18\x0e \x03(\tR\x15userViewDisplayFields\x12+\n" +
@@ -2849,7 +2857,8 @@ const file_account_proto_rawDesc = "" +
 	"\flive_metrics\x18, \x03(\tR\vliveMetrics\x123\n" +
 	"\x16default_ticket_view_id\x18- \x01(\tR\x13defaultTicketViewId\x12<\n" +
 	"\x1bdefault_ticket_view_sort_by\x18/ \x01(\tR\x17defaultTicketViewSortBy\x12;\n" +
-	"\x1adefault_email_signature_id\x180 \x01(\tR\x17defaultEmailSignatureId\x1aA\n" +
+	"\x1adefault_email_signature_id\x180 \x01(\tR\x17defaultEmailSignatureId\x12A\n" +
+	"\x1ddefault_zalo_personal_account\x182 \x01(\tR\x1adefaultZaloPersonalAccount\x1aA\n" +
 	"\x13SegmentOrderByEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aG\n" +

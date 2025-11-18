@@ -50,6 +50,8 @@ message DashboardAgent {
 	optional string default_ticket_view_id = 45;
 	optional string default_ticket_view_sort_by = 47;
 	optional string default_email_signature_id = 48;
+
+	optional string default_zalo_personal_account = 50;
 }
 
 message Agent {

@@ -39,6 +39,7 @@ func ListDefaultDefs() []*AttributeDefinition {
 				{Value: "requested_seen", I18NLabel: &I18NString{En_US: "Requsted and seen", Vi_VN: "Yêu cầu đã được xem"}, Label: "Yêu cầu đã được xem"},
 				{Value: "being_requested", I18NLabel: &I18NString{En_US: "Being Requested", Vi_VN: "Đợi bạn phản hồi"}, Label: "Đợi bạn phản hồi"},
 				{Value: "rejected", I18NLabel: &I18NString{En_US: "Rejected", Vi_VN: "Đã từ chối"}, Label: "Đã từ chối"},
+				{Value: "friend", I18NLabel: &I18NString{En_US: "Friend", Vi_VN: "Bạn bè"}, Label: "Bạn bè"},
 			},
 			Key: "zalo_friend_status",
 		},
