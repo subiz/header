@@ -5554,6 +5554,7 @@ message DocHit {
 	Block description_block = 18;
 	map<string,bool> query_matchM = 19; // part_query
 	int64 score = 20;
+	string zalo_friend_status = 21;
 }
 
 message DocSearchResponse {

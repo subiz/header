@@ -38831,6 +38831,7 @@ type DocHit struct {
 	DescriptionBlock *Block                 `protobuf:"bytes,18,opt,name=description_block,json=descriptionBlock,proto3" json:"description_block,omitempty"`
 	QueryMatchM      map[string]bool        `protobuf:"bytes,19,rep,name=query_matchM,json=queryMatchM,proto3" json:"query_matchM,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // part_query
 	Score            int64                  `protobuf:"varint,20,opt,name=score,proto3" json:"score,omitempty"`
+	ZaloFriendStatus string                 `protobuf:"bytes,21,opt,name=zalo_friend_status,json=zaloFriendStatus,proto3" json:"zalo_friend_status,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -38989,6 +38990,13 @@ func (x *DocHit) GetScore() int64 {
 		return x.Score
 	}
 	return 0
+}
+
+func (x *DocHit) GetZaloFriendStatus() string {
+	if x != nil {
+		return x.ZaloFriendStatus
+	}
+	return ""
 }
 
 type DocSearchResponse struct {
@@ -76254,7 +76262,7 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x11 \x01(\tR\tupdatedBy\x12\x19\n" +
 	"\blogo_url\x18\x12 \x01(\tR\alogoUrl\x12 \n" +
 	"\vsupervisors\x18\x13 \x03(\tR\vsupervisors\x123\n" +
-	"\x16agent_ring_timeout_sec\x18\x14 \x01(\x03R\x13agentRingTimeoutSec\"\xa5\x05\n" +
+	"\x16agent_ring_timeout_sec\x18\x14 \x01(\x03R\x13agentRingTimeoutSec\"\xd3\x05\n" +
 	"\x06DocHit\x12\x1f\n" +
 	"\vdocument_id\x18\x03 \x01(\tR\n" +
 	"documentId\x12\x12\n" +
@@ -76276,7 +76284,8 @@ const file_header_proto_rawDesc = "" +
 	"\aarticle\x18\x11 \x01(\v2\x0f.header.ArticleR\aarticle\x12:\n" +
 	"\x11description_block\x18\x12 \x01(\v2\r.header.BlockR\x10descriptionBlock\x12B\n" +
 	"\fquery_matchM\x18\x13 \x03(\v2\x1f.header.DocHit.QueryMatchMEntryR\vqueryMatchM\x12\x14\n" +
-	"\x05score\x18\x14 \x01(\x03R\x05score\x1a>\n" +
+	"\x05score\x18\x14 \x01(\x03R\x05score\x12,\n" +
+	"\x12zalo_friend_status\x18\x15 \x01(\tR\x10zaloFriendStatus\x1a>\n" +
 	"\x10QueryMatchMEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01\"\x93\x01\n" +
