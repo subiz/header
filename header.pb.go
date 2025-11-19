@@ -13747,11 +13747,13 @@ type Integration struct {
 	ZaloIsVerified              bool            `protobuf:"varint,61,opt,name=zalo_is_verified,json=zaloIsVerified,proto3" json:"zalo_is_verified,omitempty"`
 	ZaloOaAlias                 string          `protobuf:"bytes,62,opt,name=zalo_oa_alias,json=zaloOaAlias,proto3" json:"zalo_oa_alias,omitempty"`
 	ZaloCateName                string          `protobuf:"bytes,63,opt,name=zalo_cate_name,json=zaloCateName,proto3" json:"zalo_cate_name,omitempty"`
-	ZaloNumFollower             int64           `protobuf:"varint,64,opt,name=zalo_num_follower,json=zaloNumFollower,proto3" json:"zalo_num_follower,omitempty"`
+	ZaloNumFollowers            int64           `protobuf:"varint,64,opt,name=zalo_num_followers,json=zaloNumFollowers,proto3" json:"zalo_num_followers,omitempty"`
 	ZaloPackageName             string          `protobuf:"bytes,65,opt,name=zalo_package_name,json=zaloPackageName,proto3" json:"zalo_package_name,omitempty"`
 	ZaloPackageValidThroughDate string          `protobuf:"bytes,66,opt,name=zalo_package_valid_through_date,json=zaloPackageValidThroughDate,proto3" json:"zalo_package_valid_through_date,omitempty"`
 	ZaloPackageAutoRenewDate    string          `protobuf:"bytes,67,opt,name=zalo_package_auto_renew_date,json=zaloPackageAutoRenewDate,proto3" json:"zalo_package_auto_renew_date,omitempty"`
 	ZaloLinkedZCA               string          `protobuf:"bytes,68,opt,name=zalo_linkedZCA,json=zaloLinkedZCA,proto3" json:"zalo_linkedZCA,omitempty"`
+	ZaloPhoneNumber             string          `protobuf:"bytes,69,opt,name=zalo_phone_number,json=zaloPhoneNumber,proto3" json:"zalo_phone_number,omitempty"`
+	ZaloNumFriends              int64           `protobuf:"varint,76,opt,name=zalo_num_friends,json=zaloNumFriends,proto3" json:"zalo_num_friends,omitempty"`
 	ZaloZnsQuota                *ZaloOAZNSQuota `protobuf:"bytes,130,opt,name=zalo_zns_quota,json=zaloZnsQuota,proto3" json:"zalo_zns_quota,omitempty"`
 	ZaloZnsTemplateTags         []string        `protobuf:"bytes,131,rep,name=zalo_zns_template_tags,json=zaloZnsTemplateTags,proto3" json:"zalo_zns_template_tags,omitempty"`
 	ZaloZnsCurrentQuality       string          `protobuf:"bytes,132,opt,name=zalo_zns_current_quality,json=zaloZnsCurrentQuality,proto3" json:"zalo_zns_current_quality,omitempty"` // HIGH, MEDIUM, LOW, UNDEFINED
@@ -14095,9 +14097,9 @@ func (x *Integration) GetZaloCateName() string {
 	return ""
 }
 
-func (x *Integration) GetZaloNumFollower() int64 {
+func (x *Integration) GetZaloNumFollowers() int64 {
 	if x != nil {
-		return x.ZaloNumFollower
+		return x.ZaloNumFollowers
 	}
 	return 0
 }
@@ -14128,6 +14130,20 @@ func (x *Integration) GetZaloLinkedZCA() string {
 		return x.ZaloLinkedZCA
 	}
 	return ""
+}
+
+func (x *Integration) GetZaloPhoneNumber() string {
+	if x != nil {
+		return x.ZaloPhoneNumber
+	}
+	return ""
+}
+
+func (x *Integration) GetZaloNumFriends() int64 {
+	if x != nil {
+		return x.ZaloNumFriends
+	}
+	return 0
 }
 
 func (x *Integration) GetZaloZnsQuota() *ZaloOAZNSQuota {
@@ -70441,6 +70457,7 @@ type ZaloPersonalAccount struct {
 	WsStatusUpdated         int64                     `protobuf:"varint,70,opt,name=ws_status_updated,json=wsStatusUpdated,proto3" json:"ws_status_updated,omitempty"`
 	WsError                 string                    `protobuf:"bytes,71,opt,name=ws_error,json=wsError,proto3" json:"ws_error,omitempty"` // ok
 	WsLastPing              int64                     `protobuf:"varint,72,opt,name=ws_last_ping,json=wsLastPing,proto3" json:"ws_last_ping,omitempty"`
+	NumFriends              int64                     `protobuf:"varint,73,opt,name=num_friends,json=numFriends,proto3" json:"num_friends,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -70863,6 +70880,13 @@ func (x *ZaloPersonalAccount) GetWsError() string {
 func (x *ZaloPersonalAccount) GetWsLastPing() int64 {
 	if x != nil {
 		return x.WsLastPing
+	}
+	return 0
+}
+
+func (x *ZaloPersonalAccount) GetNumFriends() int64 {
+	if x != nil {
+		return x.NumFriends
 	}
 	return 0
 }
@@ -73224,7 +73248,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\xda\x1f\n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xb2 \n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73266,12 +73290,14 @@ const file_header_proto_rawDesc = "" +
 	"\tzalo_type\x18< \x01(\x03R\bzaloType\x12(\n" +
 	"\x10zalo_is_verified\x18= \x01(\bR\x0ezaloIsVerified\x12\"\n" +
 	"\rzalo_oa_alias\x18> \x01(\tR\vzaloOaAlias\x12$\n" +
-	"\x0ezalo_cate_name\x18? \x01(\tR\fzaloCateName\x12*\n" +
-	"\x11zalo_num_follower\x18@ \x01(\x03R\x0fzaloNumFollower\x12*\n" +
+	"\x0ezalo_cate_name\x18? \x01(\tR\fzaloCateName\x12,\n" +
+	"\x12zalo_num_followers\x18@ \x01(\x03R\x10zaloNumFollowers\x12*\n" +
 	"\x11zalo_package_name\x18A \x01(\tR\x0fzaloPackageName\x12D\n" +
 	"\x1fzalo_package_valid_through_date\x18B \x01(\tR\x1bzaloPackageValidThroughDate\x12>\n" +
 	"\x1czalo_package_auto_renew_date\x18C \x01(\tR\x18zaloPackageAutoRenewDate\x12%\n" +
-	"\x0ezalo_linkedZCA\x18D \x01(\tR\rzaloLinkedZCA\x12=\n" +
+	"\x0ezalo_linkedZCA\x18D \x01(\tR\rzaloLinkedZCA\x12*\n" +
+	"\x11zalo_phone_number\x18E \x01(\tR\x0fzaloPhoneNumber\x12(\n" +
+	"\x10zalo_num_friends\x18L \x01(\x03R\x0ezaloNumFriends\x12=\n" +
 	"\x0ezalo_zns_quota\x18\x82\x01 \x01(\v2\x16.header.ZaloOAZNSQuotaR\fzaloZnsQuota\x124\n" +
 	"\x16zalo_zns_template_tags\x18\x83\x01 \x03(\tR\x13zaloZnsTemplateTags\x128\n" +
 	"\x18zalo_zns_current_quality\x18\x84\x01 \x01(\tR\x15zaloZnsCurrentQuality\x123\n" +
@@ -80000,7 +80026,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12 \n" +
 	"\fzalo_user_id\x18\x03 \x01(\tR\n" +
 	"zaloUserId\x12!\n" +
-	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\xf7\x0e\n" +
+	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\x98\x0f\n" +
 	"\x13ZaloPersonalAccount\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x12!\n" +
@@ -80070,7 +80096,9 @@ const file_header_proto_rawDesc = "" +
 	"\x11ws_status_updated\x18F \x01(\x03R\x0fwsStatusUpdated\x12\x19\n" +
 	"\bws_error\x18G \x01(\tR\awsError\x12 \n" +
 	"\fws_last_ping\x18H \x01(\x03R\n" +
-	"wsLastPing\"\xf5\x01\n" +
+	"wsLastPing\x12\x1f\n" +
+	"\vnum_friends\x18I \x01(\x03R\n" +
+	"numFriends\"\xf5\x01\n" +
 	"\x0fZaloLoginStatus\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

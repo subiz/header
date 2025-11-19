@@ -1869,11 +1869,14 @@ message Integration {
 	bool zalo_is_verified = 61;
 	string zalo_oa_alias = 62;
 	string zalo_cate_name = 63;
-	int64 zalo_num_follower = 64;
+	int64 zalo_num_followers = 64;
 	string zalo_package_name = 65;
 	string zalo_package_valid_through_date = 66;
 	string zalo_package_auto_renew_date = 67;
 	string zalo_linkedZCA = 68;
+	string zalo_phone_number = 69;
+	int64 zalo_num_friends = 76;
+
 	ZaloOAZNSQuota zalo_zns_quota = 130;
 	repeated string zalo_zns_template_tags = 131;
 	string zalo_zns_current_quality = 132; // HIGH, MEDIUM, LOW, UNDEFINED
@@ -10038,6 +10041,8 @@ message ZaloPersonalAccount {
 	int64 ws_status_updated = 70;
 	string ws_error = 71; // ok
 	int64 ws_last_ping = 72;
+
+	int64 num_friends = 73;
 }
 
 message ZaloLoginStatus {
