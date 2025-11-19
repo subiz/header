@@ -70400,66 +70400,67 @@ func (x *ZaloPhoneLookupRequest) GetPhoneNumber() string {
 }
 
 type ZaloPersonalAccount struct {
-	state                   protoimpl.MessageState    `protogen:"open.v1"`
-	UserId                  string                    `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Username                string                    `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
-	DisplayName             string                    `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	ZaloName                string                    `protobuf:"bytes,7,opt,name=zalo_name,json=zaloName,proto3" json:"zalo_name,omitempty"`
-	Avatar                  string                    `protobuf:"bytes,8,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	BgAvatar                string                    `protobuf:"bytes,9,opt,name=bg_avatar,json=bgAvatar,proto3" json:"bg_avatar,omitempty"`
-	Cover                   string                    `protobuf:"bytes,10,opt,name=cover,proto3" json:"cover,omitempty"`
-	Gender                  int64                     `protobuf:"varint,11,opt,name=gender,proto3" json:"gender,omitempty"`
-	Dob                     int64                     `protobuf:"varint,12,opt,name=dob,proto3" json:"dob,omitempty"`  // date of birth int
-	Sdob                    string                    `protobuf:"bytes,13,opt,name=sdob,proto3" json:"sdob,omitempty"` // date of birth string
-	Status                  string                    `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
-	PhoneNumber             string                    `protobuf:"bytes,15,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	IsFr                    int64                     `protobuf:"varint,16,opt,name=is_fr,json=isFr,proto3" json:"is_fr,omitempty"`
-	IsBlocked               int64                     `protobuf:"varint,17,opt,name=is_blocked,json=isBlocked,proto3" json:"is_blocked,omitempty"`
-	LastActionTime          int64                     `protobuf:"varint,18,opt,name=last_action_time,json=lastActionTime,proto3" json:"last_action_time,omitempty"`
-	LastUpdateTime          int64                     `protobuf:"varint,19,opt,name=last_update_time,json=lastUpdateTime,proto3" json:"last_update_time,omitempty"`
-	IsActive                int64                     `protobuf:"varint,20,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	Key                     int64                     `protobuf:"varint,21,opt,name=key,proto3" json:"key,omitempty"`
-	Type                    int64                     `protobuf:"varint,28,opt,name=type,proto3" json:"type,omitempty"`
-	IsActive_PC             int64                     `protobuf:"varint,29,opt,name=is_active_PC,json=isActivePC,proto3" json:"is_active_PC,omitempty"`
-	IsActiveWeb             int64                     `protobuf:"varint,30,opt,name=is_active_web,json=isActiveWeb,proto3" json:"is_active_web,omitempty"`
-	UserKey                 string                    `protobuf:"bytes,31,opt,name=user_key,json=userKey,proto3" json:"user_key,omitempty"`
-	AccountStatus           int64                     `protobuf:"varint,32,opt,name=account_status,json=accountStatus,proto3" json:"account_status,omitempty"`
-	UserMode                int64                     `protobuf:"varint,33,opt,name=user_mode,json=userMode,proto3" json:"user_mode,omitempty"`
-	GlobalId                string                    `protobuf:"bytes,34,opt,name=global_id,json=globalId,proto3" json:"global_id,omitempty"`
-	CreatedTs               int64                     `protobuf:"varint,35,opt,name=created_ts,json=createdTs,proto3" json:"created_ts,omitempty"`
-	FReqInfo                *ZaloFriendRequestInfo    `protobuf:"bytes,36,opt,name=fReqInfo,proto3" json:"fReqInfo,omitempty"`
-	BizPkg                  *ZaloBusinessPackage      `protobuf:"bytes,37,opt,name=biz_pkg,json=bizPkg,proto3" json:"biz_pkg,omitempty"`
-	IsSeenFriendReq         int64                     `protobuf:"varint,38,opt,name=is_seen_friend_req,json=isSeenFriendReq,proto3" json:"is_seen_friend_req,omitempty"`
-	RecommInfo              *ZaloRecommendInformation `protobuf:"bytes,39,opt,name=recomm_info,json=recommInfo,proto3" json:"recomm_info,omitempty"`
-	RecommType              int64                     `protobuf:"varint,40,opt,name=recomm_type,json=recommType,proto3" json:"recomm_type,omitempty"`
-	RecommSrc               int64                     `protobuf:"varint,41,opt,name=recomm_src,json=recommSrc,proto3" json:"recomm_src,omitempty"`
-	RecommTime              int64                     `protobuf:"varint,42,opt,name=recomm_time,json=recommTime,proto3" json:"recomm_time,omitempty"`
-	IsValid                 int64                     `protobuf:"varint,43,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
-	Cookie                  string                    `protobuf:"bytes,50,opt,name=cookie,proto3" json:"cookie,omitempty"`
-	EncryptKey              string                    `protobuf:"bytes,51,opt,name=encrypt_key,json=encryptKey,proto3" json:"encrypt_key,omitempty"`
-	WsKey                   string                    `protobuf:"bytes,52,opt,name=ws_key,json=wsKey,proto3" json:"ws_key,omitempty"`
-	LastWsEventId           string                    `protobuf:"bytes,53,opt,name=last_ws_event_id,json=lastWsEventId,proto3" json:"last_ws_event_id,omitempty"`
-	ClientId                string                    `protobuf:"bytes,54,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	UserAgent               string                    `protobuf:"bytes,55,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	Created                 int64                     `protobuf:"varint,56,opt,name=created,proto3" json:"created,omitempty"`
-	State                   string                    `protobuf:"bytes,57,opt,name=state,proto3" json:"state,omitempty"` // activated || deleted || failed, sync from integration
-	AccountId               string                    `protobuf:"bytes,58,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	LastWsPayloadReceived   int64                     `protobuf:"varint,59,opt,name=last_ws_payload_received,json=lastWsPayloadReceived,proto3" json:"last_ws_payload_received,omitempty"`
-	LastLoggedIn            int64                     `protobuf:"varint,60,opt,name=last_logged_in,json=lastLoggedIn,proto3" json:"last_logged_in,omitempty"`
-	LastRequestSuccessed    int64                     `protobuf:"varint,61,opt,name=last_request_successed,json=lastRequestSuccessed,proto3" json:"last_request_successed,omitempty"`
-	LastRequestFailed       int64                     `protobuf:"varint,62,opt,name=last_request_failed,json=lastRequestFailed,proto3" json:"last_request_failed,omitempty"`
-	ConnectionStatus        string                    `protobuf:"bytes,63,opt,name=connection_status,json=connectionStatus,proto3" json:"connection_status,omitempty"`                         // ok, failed
-	ConnectionStatusUpdated int64                     `protobuf:"varint,64,opt,name=connection_status_updated,json=connectionStatusUpdated,proto3" json:"connection_status_updated,omitempty"` // ok, failed
-	WsConnected             int64                     `protobuf:"varint,66,opt,name=ws_connected,json=wsConnected,proto3" json:"ws_connected,omitempty"`
-	LastSynced              int64                     `protobuf:"varint,67,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`
-	WsSessionId             string                    `protobuf:"bytes,68,opt,name=ws_session_id,json=wsSessionId,proto3" json:"ws_session_id,omitempty"`
-	WsStatus                string                    `protobuf:"bytes,69,opt,name=ws_status,json=wsStatus,proto3" json:"ws_status,omitempty"` // ok
-	WsStatusUpdated         int64                     `protobuf:"varint,70,opt,name=ws_status_updated,json=wsStatusUpdated,proto3" json:"ws_status_updated,omitempty"`
-	WsError                 string                    `protobuf:"bytes,71,opt,name=ws_error,json=wsError,proto3" json:"ws_error,omitempty"` // ok
-	WsLastPing              int64                     `protobuf:"varint,72,opt,name=ws_last_ping,json=wsLastPing,proto3" json:"ws_last_ping,omitempty"`
-	NumFriends              int64                     `protobuf:"varint,73,opt,name=num_friends,json=numFriends,proto3" json:"num_friends,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"open.v1"`
+	UserId               string                    `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username             string                    `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	DisplayName          string                    `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	ZaloName             string                    `protobuf:"bytes,7,opt,name=zalo_name,json=zaloName,proto3" json:"zalo_name,omitempty"`
+	Avatar               string                    `protobuf:"bytes,8,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	BgAvatar             string                    `protobuf:"bytes,9,opt,name=bg_avatar,json=bgAvatar,proto3" json:"bg_avatar,omitempty"`
+	Cover                string                    `protobuf:"bytes,10,opt,name=cover,proto3" json:"cover,omitempty"`
+	Gender               int64                     `protobuf:"varint,11,opt,name=gender,proto3" json:"gender,omitempty"`
+	Dob                  int64                     `protobuf:"varint,12,opt,name=dob,proto3" json:"dob,omitempty"`  // date of birth int
+	Sdob                 string                    `protobuf:"bytes,13,opt,name=sdob,proto3" json:"sdob,omitempty"` // date of birth string
+	Status               string                    `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
+	PhoneNumber          string                    `protobuf:"bytes,15,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	IsFr                 int64                     `protobuf:"varint,16,opt,name=is_fr,json=isFr,proto3" json:"is_fr,omitempty"`
+	IsBlocked            int64                     `protobuf:"varint,17,opt,name=is_blocked,json=isBlocked,proto3" json:"is_blocked,omitempty"`
+	LastActionTime       int64                     `protobuf:"varint,18,opt,name=last_action_time,json=lastActionTime,proto3" json:"last_action_time,omitempty"`
+	LastUpdateTime       int64                     `protobuf:"varint,19,opt,name=last_update_time,json=lastUpdateTime,proto3" json:"last_update_time,omitempty"`
+	IsActive             int64                     `protobuf:"varint,20,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	Key                  int64                     `protobuf:"varint,21,opt,name=key,proto3" json:"key,omitempty"`
+	Type                 int64                     `protobuf:"varint,28,opt,name=type,proto3" json:"type,omitempty"`
+	IsActive_PC          int64                     `protobuf:"varint,29,opt,name=is_active_PC,json=isActivePC,proto3" json:"is_active_PC,omitempty"`
+	IsActiveWeb          int64                     `protobuf:"varint,30,opt,name=is_active_web,json=isActiveWeb,proto3" json:"is_active_web,omitempty"`
+	UserKey              string                    `protobuf:"bytes,31,opt,name=user_key,json=userKey,proto3" json:"user_key,omitempty"`
+	AccountStatus        int64                     `protobuf:"varint,32,opt,name=account_status,json=accountStatus,proto3" json:"account_status,omitempty"`
+	UserMode             int64                     `protobuf:"varint,33,opt,name=user_mode,json=userMode,proto3" json:"user_mode,omitempty"`
+	GlobalId             string                    `protobuf:"bytes,34,opt,name=global_id,json=globalId,proto3" json:"global_id,omitempty"`
+	CreatedTs            int64                     `protobuf:"varint,35,opt,name=created_ts,json=createdTs,proto3" json:"created_ts,omitempty"`
+	FReqInfo             *ZaloFriendRequestInfo    `protobuf:"bytes,36,opt,name=fReqInfo,proto3" json:"fReqInfo,omitempty"`
+	BizPkg               *ZaloBusinessPackage      `protobuf:"bytes,37,opt,name=biz_pkg,json=bizPkg,proto3" json:"biz_pkg,omitempty"`
+	IsSeenFriendReq      int64                     `protobuf:"varint,38,opt,name=is_seen_friend_req,json=isSeenFriendReq,proto3" json:"is_seen_friend_req,omitempty"`
+	RecommInfo           *ZaloRecommendInformation `protobuf:"bytes,39,opt,name=recomm_info,json=recommInfo,proto3" json:"recomm_info,omitempty"`
+	RecommType           int64                     `protobuf:"varint,40,opt,name=recomm_type,json=recommType,proto3" json:"recomm_type,omitempty"`
+	RecommSrc            int64                     `protobuf:"varint,41,opt,name=recomm_src,json=recommSrc,proto3" json:"recomm_src,omitempty"`
+	RecommTime           int64                     `protobuf:"varint,42,opt,name=recomm_time,json=recommTime,proto3" json:"recomm_time,omitempty"`
+	IsValid              int64                     `protobuf:"varint,43,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
+	Cookie               string                    `protobuf:"bytes,50,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	EncryptKey           string                    `protobuf:"bytes,51,opt,name=encrypt_key,json=encryptKey,proto3" json:"encrypt_key,omitempty"`
+	WsKey                string                    `protobuf:"bytes,52,opt,name=ws_key,json=wsKey,proto3" json:"ws_key,omitempty"`
+	LastWsEventId        string                    `protobuf:"bytes,53,opt,name=last_ws_event_id,json=lastWsEventId,proto3" json:"last_ws_event_id,omitempty"`
+	ClientId             string                    `protobuf:"bytes,54,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	UserAgent            string                    `protobuf:"bytes,55,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
+	Created              int64                     `protobuf:"varint,56,opt,name=created,proto3" json:"created,omitempty"`
+	State                string                    `protobuf:"bytes,57,opt,name=state,proto3" json:"state,omitempty"` // activated || deleted || failed, sync from integration
+	AccountId            string                    `protobuf:"bytes,58,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	LastWsReceived       int64                     `protobuf:"varint,59,opt,name=last_ws_received,json=lastWsReceived,proto3" json:"last_ws_received,omitempty"`
+	LastLoggedIn         int64                     `protobuf:"varint,60,opt,name=last_logged_in,json=lastLoggedIn,proto3" json:"last_logged_in,omitempty"`
+	LastRequestSuccessed int64                     `protobuf:"varint,61,opt,name=last_request_successed,json=lastRequestSuccessed,proto3" json:"last_request_successed,omitempty"`
+	LastRequestFailed    int64                     `protobuf:"varint,62,opt,name=last_request_failed,json=lastRequestFailed,proto3" json:"last_request_failed,omitempty"`
+	ApiStatus            string                    `protobuf:"bytes,63,opt,name=api_status,json=apiStatus,proto3" json:"api_status,omitempty"`                         // ok, failed
+	ApiStatusUpdated     int64                     `protobuf:"varint,64,opt,name=api_status_updated,json=apiStatusUpdated,proto3" json:"api_status_updated,omitempty"` // ok, failed
+	WsConnected          int64                     `protobuf:"varint,66,opt,name=ws_connected,json=wsConnected,proto3" json:"ws_connected,omitempty"`
+	LastSynced           int64                     `protobuf:"varint,67,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`
+	WsSessionId          string                    `protobuf:"bytes,68,opt,name=ws_session_id,json=wsSessionId,proto3" json:"ws_session_id,omitempty"`
+	WsStatus             string                    `protobuf:"bytes,69,opt,name=ws_status,json=wsStatus,proto3" json:"ws_status,omitempty"` // ok
+	WsStatusUpdated      int64                     `protobuf:"varint,70,opt,name=ws_status_updated,json=wsStatusUpdated,proto3" json:"ws_status_updated,omitempty"`
+	WsError              string                    `protobuf:"bytes,71,opt,name=ws_error,json=wsError,proto3" json:"ws_error,omitempty"` // ok
+	WsLastPing           int64                     `protobuf:"varint,72,opt,name=ws_last_ping,json=wsLastPing,proto3" json:"ws_last_ping,omitempty"`
+	NumFriends           int64                     `protobuf:"varint,73,opt,name=num_friends,json=numFriends,proto3" json:"num_friends,omitempty"`
+	WsDisconnected       int64                     `protobuf:"varint,74,opt,name=ws_disconnected,json=wsDisconnected,proto3" json:"ws_disconnected,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ZaloPersonalAccount) Reset() {
@@ -70793,9 +70794,9 @@ func (x *ZaloPersonalAccount) GetAccountId() string {
 	return ""
 }
 
-func (x *ZaloPersonalAccount) GetLastWsPayloadReceived() int64 {
+func (x *ZaloPersonalAccount) GetLastWsReceived() int64 {
 	if x != nil {
-		return x.LastWsPayloadReceived
+		return x.LastWsReceived
 	}
 	return 0
 }
@@ -70821,16 +70822,16 @@ func (x *ZaloPersonalAccount) GetLastRequestFailed() int64 {
 	return 0
 }
 
-func (x *ZaloPersonalAccount) GetConnectionStatus() string {
+func (x *ZaloPersonalAccount) GetApiStatus() string {
 	if x != nil {
-		return x.ConnectionStatus
+		return x.ApiStatus
 	}
 	return ""
 }
 
-func (x *ZaloPersonalAccount) GetConnectionStatusUpdated() int64 {
+func (x *ZaloPersonalAccount) GetApiStatusUpdated() int64 {
 	if x != nil {
-		return x.ConnectionStatusUpdated
+		return x.ApiStatusUpdated
 	}
 	return 0
 }
@@ -70887,6 +70888,13 @@ func (x *ZaloPersonalAccount) GetWsLastPing() int64 {
 func (x *ZaloPersonalAccount) GetNumFriends() int64 {
 	if x != nil {
 		return x.NumFriends
+	}
+	return 0
+}
+
+func (x *ZaloPersonalAccount) GetWsDisconnected() int64 {
+	if x != nil {
+		return x.WsDisconnected
 	}
 	return 0
 }
@@ -80026,7 +80034,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12 \n" +
 	"\fzalo_user_id\x18\x03 \x01(\tR\n" +
 	"zaloUserId\x12!\n" +
-	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\x98\x0f\n" +
+	"\fphone_number\x18\x04 \x01(\tR\vphoneNumber\"\x96\x0f\n" +
 	"\x13ZaloPersonalAccount\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x12!\n" +
@@ -80081,13 +80089,14 @@ const file_header_proto_rawDesc = "" +
 	"\acreated\x188 \x01(\x03R\acreated\x12\x14\n" +
 	"\x05state\x189 \x01(\tR\x05state\x12\x1d\n" +
 	"\n" +
-	"account_id\x18: \x01(\tR\taccountId\x127\n" +
-	"\x18last_ws_payload_received\x18; \x01(\x03R\x15lastWsPayloadReceived\x12$\n" +
+	"account_id\x18: \x01(\tR\taccountId\x12(\n" +
+	"\x10last_ws_received\x18; \x01(\x03R\x0elastWsReceived\x12$\n" +
 	"\x0elast_logged_in\x18< \x01(\x03R\flastLoggedIn\x124\n" +
 	"\x16last_request_successed\x18= \x01(\x03R\x14lastRequestSuccessed\x12.\n" +
-	"\x13last_request_failed\x18> \x01(\x03R\x11lastRequestFailed\x12+\n" +
-	"\x11connection_status\x18? \x01(\tR\x10connectionStatus\x12:\n" +
-	"\x19connection_status_updated\x18@ \x01(\x03R\x17connectionStatusUpdated\x12!\n" +
+	"\x13last_request_failed\x18> \x01(\x03R\x11lastRequestFailed\x12\x1d\n" +
+	"\n" +
+	"api_status\x18? \x01(\tR\tapiStatus\x12,\n" +
+	"\x12api_status_updated\x18@ \x01(\x03R\x10apiStatusUpdated\x12!\n" +
 	"\fws_connected\x18B \x01(\x03R\vwsConnected\x12\x1f\n" +
 	"\vlast_synced\x18C \x01(\x03R\n" +
 	"lastSynced\x12\"\n" +
@@ -80098,7 +80107,8 @@ const file_header_proto_rawDesc = "" +
 	"\fws_last_ping\x18H \x01(\x03R\n" +
 	"wsLastPing\x12\x1f\n" +
 	"\vnum_friends\x18I \x01(\x03R\n" +
-	"numFriends\"\xf5\x01\n" +
+	"numFriends\x12'\n" +
+	"\x0fws_disconnected\x18J \x01(\x03R\x0ewsDisconnected\"\xf5\x01\n" +
 	"\x0fZaloLoginStatus\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

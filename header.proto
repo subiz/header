@@ -10028,12 +10028,12 @@ message ZaloPersonalAccount {
 	int64 created = 56;
 	string state = 57; // activated || deleted || failed, sync from integration
 	string account_id = 58;
-	int64 last_ws_payload_received = 59;
+	int64 last_ws_received = 59;
 	int64 last_logged_in = 60;
 	int64 last_request_successed = 61;
 	int64 last_request_failed = 62;
-	string connection_status = 63; // ok, failed
-	int64 connection_status_updated = 64; // ok, failed
+	string api_status = 63; // ok, failed
+	int64 api_status_updated = 64; // ok, failed
 	int64 ws_connected = 66;
 	int64 last_synced = 67;
 	string ws_session_id = 68;
@@ -10041,8 +10041,8 @@ message ZaloPersonalAccount {
 	int64 ws_status_updated = 70;
 	string ws_error = 71; // ok
 	int64 ws_last_ping = 72;
-
 	int64 num_friends = 73;
+	int64 ws_disconnected = 74;
 }
 
 message ZaloLoginStatus {
