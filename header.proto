@@ -1940,6 +1940,8 @@ message Integration {
 	string website_logo_hash = 139; // MD5 sum of image (internal)
 	string website_last_visited_url = 140;
 	int64 website_last_crawled = 141;
+
+	int64 last_synced = 142;
 }
 
 message WorkflowSessionId {

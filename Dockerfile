@@ -1,4 +1,4 @@
-FROM golang:1.24.2
+FROM golang:1.25
 WORKDIR /tmp
 RUN apt update && apt install -y unzip curl
 
@@ -12,11 +12,11 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # install protobuf v32.0
-RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v32.0/protoc-32.0-linux-x86_64.zip -O protoc.zip
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v33.1/protoc-33.1-linux-x86_64.zip -O protoc.zip
 RUN unzip protoc.zip
 
 # install protoc gengo
-RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.8
+RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.10
 RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1
 
 ENV PROTOC=/tmp/bin/protoc

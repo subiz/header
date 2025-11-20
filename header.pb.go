@@ -13804,6 +13804,7 @@ type Integration struct {
 	WebsiteLogoHash       string `protobuf:"bytes,139,opt,name=website_logo_hash,json=websiteLogoHash,proto3" json:"website_logo_hash,omitempty"` // MD5 sum of image (internal)
 	WebsiteLastVisitedUrl string `protobuf:"bytes,140,opt,name=website_last_visited_url,json=websiteLastVisitedUrl,proto3" json:"website_last_visited_url,omitempty"`
 	WebsiteLastCrawled    int64  `protobuf:"varint,141,opt,name=website_last_crawled,json=websiteLastCrawled,proto3" json:"website_last_crawled,omitempty"`
+	LastSynced            int64  `protobuf:"varint,142,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -14471,6 +14472,13 @@ func (x *Integration) GetWebsiteLastVisitedUrl() string {
 func (x *Integration) GetWebsiteLastCrawled() int64 {
 	if x != nil {
 		return x.WebsiteLastCrawled
+	}
+	return 0
+}
+
+func (x *Integration) GetLastSynced() int64 {
+	if x != nil {
+		return x.LastSynced
 	}
 	return 0
 }
@@ -73256,7 +73264,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\xb2 \n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xd4 \n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73355,7 +73363,9 @@ const file_header_proto_rawDesc = "" +
 	"\x10website_verified\x18\x8a\x01 \x01(\x03R\x0fwebsiteVerified\x12+\n" +
 	"\x11website_logo_hash\x18\x8b\x01 \x01(\tR\x0fwebsiteLogoHash\x128\n" +
 	"\x18website_last_visited_url\x18\x8c\x01 \x01(\tR\x15websiteLastVisitedUrl\x121\n" +
-	"\x14website_last_crawled\x18\x8d\x01 \x01(\x03R\x12websiteLastCrawled\"<\n" +
+	"\x14website_last_crawled\x18\x8d\x01 \x01(\x03R\x12websiteLastCrawled\x12 \n" +
+	"\vlast_synced\x18\x8e\x01 \x01(\x03R\n" +
+	"lastSynced\"<\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +

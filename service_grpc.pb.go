@@ -6420,6 +6420,7 @@ const (
 	UserMgr_GetSegment_FullMethodName                       = "/header.UserMgr/GetSegment"
 	UserMgr_ListSegments_FullMethodName                     = "/header.UserMgr/ListSegments"
 	UserMgr_AddToSegment_FullMethodName                     = "/header.UserMgr/AddToSegment"
+	UserMgr_RebuildSegment_FullMethodName                   = "/header.UserMgr/RebuildSegment"
 	UserMgr_RemoveFromSegment_FullMethodName                = "/header.UserMgr/RemoveFromSegment"
 	UserMgr_ListSegmentSyncs_FullMethodName                 = "/header.UserMgr/ListSegmentSyncs"
 	UserMgr_UpdateSegmentSync_FullMethodName                = "/header.UserMgr/UpdateSegmentSync"
@@ -6496,6 +6497,7 @@ type UserMgrClient interface {
 	GetSegment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segment, error)
 	ListSegments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segments, error)
 	AddToSegment(ctx context.Context, in *SegmentUsers, opts ...grpc.CallOption) (*Empty, error)
+	RebuildSegment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segment, error)
 	RemoveFromSegment(ctx context.Context, in *SegmentUsers, opts ...grpc.CallOption) (*Empty, error)
 	ListSegmentSyncs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateSegmentSync(ctx context.Context, in *SegmentSync, opts ...grpc.CallOption) (*Response, error)
@@ -6802,6 +6804,16 @@ func (c *userMgrClient) AddToSegment(ctx context.Context, in *SegmentUsers, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, UserMgr_AddToSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) RebuildSegment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Segment)
+	err := c.cc.Invoke(ctx, UserMgr_RebuildSegment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7260,6 +7272,7 @@ type UserMgrServer interface {
 	GetSegment(context.Context, *Id) (*Segment, error)
 	ListSegments(context.Context, *Id) (*Segments, error)
 	AddToSegment(context.Context, *SegmentUsers) (*Empty, error)
+	RebuildSegment(context.Context, *Id) (*Segment, error)
 	RemoveFromSegment(context.Context, *SegmentUsers) (*Empty, error)
 	ListSegmentSyncs(context.Context, *Id) (*Response, error)
 	UpdateSegmentSync(context.Context, *SegmentSync) (*Response, error)
@@ -7389,6 +7402,9 @@ func (UnimplementedUserMgrServer) ListSegments(context.Context, *Id) (*Segments,
 }
 func (UnimplementedUserMgrServer) AddToSegment(context.Context, *SegmentUsers) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddToSegment not implemented")
+}
+func (UnimplementedUserMgrServer) RebuildSegment(context.Context, *Id) (*Segment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RebuildSegment not implemented")
 }
 func (UnimplementedUserMgrServer) RemoveFromSegment(context.Context, *SegmentUsers) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFromSegment not implemented")
@@ -8001,6 +8017,24 @@ func _UserMgr_AddToSegment_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).AddToSegment(ctx, req.(*SegmentUsers))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_RebuildSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).RebuildSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_RebuildSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).RebuildSegment(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8871,6 +8905,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddToSegment",
 			Handler:    _UserMgr_AddToSegment_Handler,
+		},
+		{
+			MethodName: "RebuildSegment",
+			Handler:    _UserMgr_RebuildSegment_Handler,
 		},
 		{
 			MethodName: "RemoveFromSegment",
