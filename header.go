@@ -1359,6 +1359,10 @@ func GetUserType(u *User) string {
 	}
 
 	for _, attr := range u.GetAttributes() {
+		if attr.Key == "zalo_friend_status" && attr.Text == "friend" {
+			return "contact"
+		}
+
 		if attr.Key == "lifecycle_stage" {
 			if attr.Text != "" {
 				typ = "lead"
