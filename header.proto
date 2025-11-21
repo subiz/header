@@ -271,10 +271,10 @@ message User {
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	string type = 47; // empty = guest - lead - contact
-	string primary_id = 49; // deprecated
+	string primary_id = 49;
 	// repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
-	string channel_source = 53; // pvcombank require verification
+	string channel_source = 53; //
 	string channel = 54; // account => require verification, acc logo
 
 	Event latest_content_view = 55; // readonly @deprecated
@@ -9816,7 +9816,6 @@ message Markers {
 }
 
 message UserDataSource {
-
 }
 
 message MetaBusiness {
@@ -10045,6 +10044,12 @@ message ZaloPersonalAccount {
 	int64 ws_last_ping = 72;
 	int64 num_friends = 73;
 	int64 ws_disconnected = 74;
+	string proxy_addr = 75;
+	int64 last_proxy_changed = 76;
+
+	// for debugging
+	int64 ws_last_try = 90;
+	int64 ws_last_out = 91;
 }
 
 message ZaloLoginStatus {

@@ -195,7 +195,7 @@ func TestAssignByte(t *testing.T) {
 }
 
 func TestPartition(t *testing.T) {
-	fmt.Println("PAR", Fnv32("ussjstoefhepuuajrardi")%50)
+	fmt.Println("PAR", Fnv32("usrqhgvjafsyegefuvruv")%50) // 21
 	shardNumber := int(crc32.ChecksumIEEE([]byte("acriviayfmabzskstrpq"))) % 4
 	fmt.Println(shardNumber)
 }
@@ -283,7 +283,7 @@ func TestUserViewCondition(t *testing.T) {
 				Text: &TextCondition{Eq: []string{"dang-ky"}},
 			}, {
 				Key:    "data.form.fields#(key=\"company-size\"]).first",
-				Number: &FloatCondition{Gt: 20},
+				Number: &NumberCondition{Gt: 20},
 			}},
 		}, {
 			Id:   "2",
