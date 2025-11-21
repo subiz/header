@@ -637,10 +637,15 @@ func HasDeletedCond(cond *UserViewCondition) bool {
 	return cond.GetKey() == "deleted" && cond.GetBoolean().GetOp() == "true"
 }
 
-func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
+// must pass in primary user and its secondaries
+func RsCheck(acc *apb.Account, users []*User, cond *UserViewCondition, deleted bool) bool {
+	if len(users) == 0 {
+		return true
+	}
+
 	if len(cond.GetOne()) > 0 {
 		for _, c := range cond.GetOne() {
-			if RsCheck(acc, u, c, deleted) {
+			if RsCheck(acc, users, c, deleted) {
 				return true
 			}
 		}
@@ -649,13 +654,84 @@ func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) b
 
 	if len(cond.GetAll()) > 0 {
 		for _, c := range cond.GetAll() {
-			if !RsCheck(acc, u, c, deleted) {
+			if !RsCheck(acc, users, c, deleted) {
 				return false
 			}
 		}
 		return true
 	}
-	return evaluateSingleCond(acc, u, cond, deleted)
+
+	primary := users[0]
+	for _, u := range users {
+		if u.PrimaryId == "" || u.PrimaryId == u.Id {
+			primary = u
+			break
+		}
+	}
+
+	if isPrimaryCond(cond) {
+		return evaluateSingleCond(acc, primary, cond, deleted)
+	}
+
+	if isPositiveCond(cond) {
+		// positive condition like equal, just one match -> group match
+		for _, u := range users {
+			if pass := evaluateSingleCond(acc, u, cond, deleted); pass {
+				return true
+			}
+		}
+		return false
+	}
+
+	// negative condition like not not_eq -> all element must pass
+	for _, u := range users {
+		if pass := evaluateSingleCond(acc, u, cond, deleted); !pass {
+			return false
+		}
+	}
+	return true
+}
+
+func isPrimaryCond(cond *UserViewCondition) bool {
+	key := cond.GetKey()
+	if strings.HasPrefix(key, "attr:") || strings.HasPrefix(key, "attr.") {
+		key = key[5:]
+	}
+
+	return key == "lifecycle_stage" || key == "owner"
+}
+
+func isPositiveCond(cond *UserViewCondition) bool {
+	switch cond.GetType() {
+	case "number":
+		switch cond.GetNumber().GetOp() {
+		case "is_empty", "not_end_with", "not_start_with", "not_contain", "neq", "not_in_range", "outside":
+			return false
+		}
+		return true
+
+	case "datetime":
+		switch cond.GetDatetime().GetOp() {
+		case "is_empty", "not_end_with", "not_start_with", "not_contain", "neq", "not_in_range", "false", "non_business_hour", "outside":
+			return false
+		}
+		return true
+
+	case "bool", "boolean":
+		switch cond.GetBoolean().GetOp() {
+		case "is_empty", "false":
+			return false
+		}
+		return true
+	}
+
+	// fallback to text
+	switch cond.GetText().GetOp() {
+	case "is_empty", "not_end_with", "not_start_with", "not_contain", "neq", "not_in_range", "outside":
+		return false
+	}
+
+	return true
 }
 
 func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
