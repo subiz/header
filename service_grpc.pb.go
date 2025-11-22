@@ -19942,7 +19942,10 @@ const (
 	ZalopersonService_AcceptFriendRequest_FullMethodName     = "/header.ZalopersonService/AcceptFriendRequest"
 	ZalopersonService_RejectFriendRequest_FullMethodName     = "/header.ZalopersonService/RejectFriendRequest"
 	ZalopersonService_CreateZaloGroup_FullMethodName         = "/header.ZalopersonService/CreateZaloGroup"
+	ZalopersonService_InviteUserToGroup_FullMethodName       = "/header.ZalopersonService/InviteUserToGroup"
+	ZalopersonService_RemoveUserFromGroup_FullMethodName     = "/header.ZalopersonService/RemoveUserFromGroup"
 	ZalopersonService_DisbandZaloGroup_FullMethodName        = "/header.ZalopersonService/DisbandZaloGroup"
+	ZalopersonService_LeaveZaloGroup_FullMethodName          = "/header.ZalopersonService/LeaveZaloGroup"
 	ZalopersonService_GetZaloGroupInvitedLink_FullMethodName = "/header.ZalopersonService/GetZaloGroupInvitedLink"
 	ZalopersonService_TryZaloLogin_FullMethodName            = "/header.ZalopersonService/TryZaloLogin"
 )
@@ -19961,7 +19964,10 @@ type ZalopersonServiceClient interface {
 	AcceptFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	RejectFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	InviteUserToGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	RemoveUserFromGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	DisbandZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	LeaveZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	GetZaloGroupInvitedLink(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error)
 }
@@ -20074,10 +20080,40 @@ func (c *zalopersonServiceClient) CreateZaloGroup(ctx context.Context, in *ZaloG
 	return out, nil
 }
 
+func (c *zalopersonServiceClient) InviteUserToGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_InviteUserToGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) RemoveUserFromGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_RemoveUserFromGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *zalopersonServiceClient) DisbandZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, ZalopersonService_DisbandZaloGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) LeaveZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_LeaveZaloGroup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -20118,7 +20154,10 @@ type ZalopersonServiceServer interface {
 	AcceptFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	RejectFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	CreateZaloGroup(context.Context, *ZaloGroup) (*Response, error)
+	InviteUserToGroup(context.Context, *ZaloGroup) (*Response, error)
+	RemoveUserFromGroup(context.Context, *ZaloGroup) (*Response, error)
 	DisbandZaloGroup(context.Context, *ZaloGroup) (*Response, error)
+	LeaveZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error)
 	TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error)
 	mustEmbedUnimplementedZalopersonServiceServer()
@@ -20161,8 +20200,17 @@ func (UnimplementedZalopersonServiceServer) RejectFriendRequest(context.Context,
 func (UnimplementedZalopersonServiceServer) CreateZaloGroup(context.Context, *ZaloGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateZaloGroup not implemented")
 }
+func (UnimplementedZalopersonServiceServer) InviteUserToGroup(context.Context, *ZaloGroup) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InviteUserToGroup not implemented")
+}
+func (UnimplementedZalopersonServiceServer) RemoveUserFromGroup(context.Context, *ZaloGroup) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveUserFromGroup not implemented")
+}
 func (UnimplementedZalopersonServiceServer) DisbandZaloGroup(context.Context, *ZaloGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisbandZaloGroup not implemented")
+}
+func (UnimplementedZalopersonServiceServer) LeaveZaloGroup(context.Context, *ZaloGroup) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LeaveZaloGroup not implemented")
 }
 func (UnimplementedZalopersonServiceServer) GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetZaloGroupInvitedLink not implemented")
@@ -20371,6 +20419,42 @@ func _ZalopersonService_CreateZaloGroup_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ZalopersonService_InviteUserToGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).InviteUserToGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_InviteUserToGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).InviteUserToGroup(ctx, req.(*ZaloGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_RemoveUserFromGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).RemoveUserFromGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_RemoveUserFromGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).RemoveUserFromGroup(ctx, req.(*ZaloGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ZalopersonService_DisbandZaloGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ZaloGroup)
 	if err := dec(in); err != nil {
@@ -20385,6 +20469,24 @@ func _ZalopersonService_DisbandZaloGroup_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZalopersonServiceServer).DisbandZaloGroup(ctx, req.(*ZaloGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_LeaveZaloGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).LeaveZaloGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_LeaveZaloGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).LeaveZaloGroup(ctx, req.(*ZaloGroup))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -20473,8 +20575,20 @@ var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ZalopersonService_CreateZaloGroup_Handler,
 		},
 		{
+			MethodName: "InviteUserToGroup",
+			Handler:    _ZalopersonService_InviteUserToGroup_Handler,
+		},
+		{
+			MethodName: "RemoveUserFromGroup",
+			Handler:    _ZalopersonService_RemoveUserFromGroup_Handler,
+		},
+		{
 			MethodName: "DisbandZaloGroup",
 			Handler:    _ZalopersonService_DisbandZaloGroup_Handler,
+		},
+		{
+			MethodName: "LeaveZaloGroup",
+			Handler:    _ZalopersonService_LeaveZaloGroup_Handler,
 		},
 		{
 			MethodName: "GetZaloGroupInvitedLink",

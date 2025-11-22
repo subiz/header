@@ -61830,6 +61830,7 @@ type UsersRequest struct {
 	Condition     *UserViewCondition     `protobuf:"bytes,3,opt,name=condition,proto3" json:"condition,omitempty"`
 	IgnoreUids    []string               `protobuf:"bytes,4,rep,name=ignore_uids,json=ignoreUids,proto3" json:"ignore_uids,omitempty"`
 	UserIds       []string               `protobuf:"bytes,5,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	KeepSecondary bool                   `protobuf:"varint,6,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61897,6 +61898,13 @@ func (x *UsersRequest) GetUserIds() []string {
 		return x.UserIds
 	}
 	return nil
+}
+
+func (x *UsersRequest) GetKeepSecondary() bool {
+	if x != nil {
+		return x.KeepSecondary
+	}
+	return false
 }
 
 type BankTransferRequest struct {
@@ -70014,6 +70022,7 @@ func (x *ZaloGroupSetting) GetLockViewMember() int64 {
 type ZaloGroup struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	ZaloUserId    string                 `protobuf:"bytes,3,opt,name=zalo_user_id,json=zaloUserId,proto3" json:"zalo_user_id,omitempty"`
 	GroupId       string                 `protobuf:"bytes,4,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
 	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
@@ -70023,7 +70032,7 @@ type ZaloGroup struct {
 	Version       string                 `protobuf:"bytes,10,opt,name=version,proto3" json:"version,omitempty"`
 	Avatar        *File                  `protobuf:"bytes,11,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	FullAvatar    *File                  `protobuf:"bytes,12,opt,name=full_avatar,json=fullAvatar,proto3" json:"full_avatar,omitempty"`
-	Members       []string               `protobuf:"bytes,13,rep,name=members,proto3" json:"members,omitempty"`
+	Members       []string               `protobuf:"bytes,13,rep,name=members,proto3" json:"members,omitempty"` // zalo id
 	TotalMembers  int64                  `protobuf:"varint,14,opt,name=total_members,json=totalMembers,proto3" json:"total_members,omitempty"`
 	Setting       *ZaloGroupSetting      `protobuf:"bytes,15,opt,name=setting,proto3" json:"setting,omitempty"`
 	CreatedTime   int64                  `protobuf:"varint,17,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
@@ -70069,6 +70078,13 @@ func (x *ZaloGroup) GetCtx() *common.Context {
 		return x.Ctx
 	}
 	return nil
+}
+
+func (x *ZaloGroup) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *ZaloGroup) GetZaloUserId() string {
@@ -79120,7 +79136,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x127\n" +
 	"\tcondition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\tcondition\x12\x10\n" +
-	"\x03key\x18\x05 \x01(\tR\x03key\"\xc5\x01\n" +
+	"\x03key\x18\x05 \x01(\tR\x03key\"\xec\x01\n" +
 	"\fUsersRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79128,7 +79144,8 @@ const file_header_proto_rawDesc = "" +
 	"\tcondition\x18\x03 \x01(\v2\x19.header.UserViewConditionR\tcondition\x12\x1f\n" +
 	"\vignore_uids\x18\x04 \x03(\tR\n" +
 	"ignoreUids\x12\x19\n" +
-	"\buser_ids\x18\x05 \x03(\tR\auserIds\"\xb6\x05\n" +
+	"\buser_ids\x18\x05 \x03(\tR\auserIds\x12%\n" +
+	"\x0ekeep_secondary\x18\x06 \x01(\bR\rkeepSecondary\"\xb6\x05\n" +
 	"\x13BankTransferRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -80037,9 +80054,11 @@ const file_header_proto_rawDesc = "" +
 	"dirtyMedia\x12!\n" +
 	"\fban_duration\x18\x0f \x01(\x03R\vbanDuration\x12\"\n" +
 	"\rlock_send_msg\x18\x10 \x01(\x03R\vlockSendMsg\x12(\n" +
-	"\x10lock_view_member\x18\x11 \x01(\x03R\x0elockViewMember\"\x9c\x04\n" +
+	"\x10lock_view_member\x18\x11 \x01(\x03R\x0elockViewMember\"\xbb\x04\n" +
 	"\tZaloGroup\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12 \n" +
 	"\fzalo_user_id\x18\x03 \x01(\tR\n" +
 	"zaloUserId\x12\x19\n" +
 	"\bgroup_id\x18\x04 \x01(\tR\agroupId\x12\x12\n" +

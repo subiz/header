@@ -581,6 +581,7 @@ message DocSearchRequest {
 	string locale = 13;
 	bool is_shorten = 14;
 	int64 from_month = 15;
+	bool keep_secondary = 16; // return secondary, do not transform to primary
 }
 
 message CreateAgentRequest {

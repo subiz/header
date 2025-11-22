@@ -724,7 +724,10 @@ service ZalopersonService {
 	rpc AcceptFriendRequest(ZaloFriendRequest) returns (Response);
 	rpc RejectFriendRequest(ZaloFriendRequest) returns (Response);
 	rpc CreateZaloGroup(ZaloGroup) returns (Response);
+	rpc InviteUserToGroup(ZaloGroup) returns (Response);
+	rpc RemoveUserFromGroup(ZaloGroup) returns (Response);
 	rpc DisbandZaloGroup(ZaloGroup) returns (Response);
+	rpc LeaveZaloGroup(ZaloGroup) returns (Response);
 	rpc GetZaloGroupInvitedLink(ZaloGroup) returns(Response);
 	rpc TryZaloLogin(ZaloLoginStatus) returns (Response); // return qr code or login sucess
 }

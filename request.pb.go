@@ -4587,6 +4587,7 @@ type DocSearchRequest struct {
 	Locale        string                 `protobuf:"bytes,13,opt,name=locale,proto3" json:"locale,omitempty"`
 	IsShorten     bool                   `protobuf:"varint,14,opt,name=is_shorten,json=isShorten,proto3" json:"is_shorten,omitempty"`
 	FromMonth     int64                  `protobuf:"varint,15,opt,name=from_month,json=fromMonth,proto3" json:"from_month,omitempty"`
+	KeepSecondary bool                   `protobuf:"varint,16,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4717,6 +4718,13 @@ func (x *DocSearchRequest) GetFromMonth() int64 {
 		return x.FromMonth
 	}
 	return 0
+}
+
+func (x *DocSearchRequest) GetKeepSecondary() bool {
+	if x != nil {
+		return x.KeepSecondary
+	}
+	return false
 }
 
 type CreateAgentRequest struct {
@@ -9183,7 +9191,7 @@ const file_request_proto_rawDesc = "" +
 	"\x06owners\x18\t \x03(\tR\x06owners\x12.\n" +
 	"\x13primary_document_id\x18\r \x01(\tR\x11primaryDocumentId\x12\x10\n" +
 	"\x03sec\x18\x0e \x01(\x03R\x03sec\x12\x16\n" +
-	"\x06locale\x18\x0f \x01(\tR\x06locale\"\xba\x03\n" +
+	"\x06locale\x18\x0f \x01(\tR\x06locale\"\xe1\x03\n" +
 	"\x10DocSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9206,7 +9214,8 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"is_shorten\x18\x0e \x01(\bR\tisShorten\x12\x1d\n" +
 	"\n" +
-	"from_month\x18\x0f \x01(\x03R\tfromMonth\"\x8a\x03\n" +
+	"from_month\x18\x0f \x01(\x03R\tfromMonth\x12%\n" +
+	"\x0ekeep_secondary\x18\x10 \x01(\bR\rkeepSecondary\"\x8a\x03\n" +
 	"\x12CreateAgentRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

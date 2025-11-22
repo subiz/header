@@ -8835,6 +8835,7 @@ message UsersRequest {
 	repeated string ignore_uids = 4;
 
 	repeated string user_ids = 5;
+	bool keep_secondary = 6; // return secondary, do not transform to primary
 }
 
 message BankTransferRequest {
@@ -9944,6 +9945,7 @@ message ZaloGroupSetting {
 
 message ZaloGroup {
 	common.Context ctx = 1;
+	string account_id = 2;
 	string zalo_user_id = 3;
 	string group_id = 4;
 	string name = 5;
@@ -9953,7 +9955,7 @@ message ZaloGroup {
 	string version = 10;
 	File avatar = 11;
 	File full_avatar = 12;
-	repeated string members = 13;
+	repeated string members = 13; // zalo id
 	int64 total_members = 14;
 	ZaloGroupSetting setting = 15;
 	int64 created_time = 17;
