@@ -259,7 +259,6 @@ service UserMgr {
 	rpc GetView(Id) returns (header.UserView);
 	rpc ListViews(Id) returns (header.UserViews);
 
-
 	rpc UpdateSegment(header.Segment) returns (header.Segment);
 	rpc CreateSegment(header.Segment) returns (header.Segment);
 	rpc DeleteSegment(Id) returns (Empty);
@@ -724,10 +723,11 @@ service ZalopersonService {
 	rpc AcceptFriendRequest(ZaloFriendRequest) returns (Response);
 	rpc RejectFriendRequest(ZaloFriendRequest) returns (Response);
 	rpc CreateZaloGroup(ZaloGroup) returns (Response);
-	rpc InviteUserToGroup(ZaloGroup) returns (Response);
-	rpc RemoveUserFromGroup(ZaloGroup) returns (Response);
+	rpc InviteUsersToGroup(ZaloGroup) returns (Response);
+	rpc RemoveUsersFromGroup(ZaloGroup) returns (Response);
 	rpc DisbandZaloGroup(ZaloGroup) returns (Response);
 	rpc LeaveZaloGroup(ZaloGroup) returns (Response);
+	rpc UpdateZaloGroup(ZaloGroup) returns (Response); // name only
 	rpc GetZaloGroupInvitedLink(ZaloGroup) returns(Response);
 	rpc TryZaloLogin(ZaloLoginStatus) returns (Response); // return qr code or login sucess
 }
