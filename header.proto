@@ -1592,9 +1592,11 @@ message MessagePong {
 		care = 30;
 		remove_care = 31;
 		ref = 33;
-	}
-	string type = 4;
 
+		emoji = 34;
+		remove_emoji = 35;
+	}
+	string type = 4; // empty (add) or remove
 	int64 created = 5;
 	string ack_error = 6; // used in ack
 	int64 count = 7;
@@ -1606,6 +1608,9 @@ message MessagePong {
 	string comment = 13;
 	string source_message_id = 14;
 	Error error = 15; // use this instead of ack_error
+
+	string emoticon = 16;
+
 }
 
 message MessageButton {
@@ -9115,9 +9120,7 @@ message AIAgent {
 	AIAgentUsageLimit usage_limit = 85;
 
 	RewriteQuerySetting rewrite_query = 86;
-
   AIAgentWebhook custom_webhook = 88;
-
 	repeated string supervisors = 89;
 	repeated string tags = 90;
 }

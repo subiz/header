@@ -971,6 +971,8 @@ const (
 	MessagePong_care           MessagePong_Type = 30
 	MessagePong_remove_care    MessagePong_Type = 31
 	MessagePong_ref            MessagePong_Type = 33
+	MessagePong_emoji          MessagePong_Type = 34
+	MessagePong_remove_emoji   MessagePong_Type = 35
 )
 
 // Enum value maps for MessagePong_Type.
@@ -1007,6 +1009,8 @@ var (
 		30: "care",
 		31: "remove_care",
 		33: "ref",
+		34: "emoji",
+		35: "remove_emoji",
 	}
 	MessagePong_Type_value = map[string]int32{
 		"n":              0,
@@ -1040,6 +1044,8 @@ var (
 		"care":           30,
 		"remove_care":    31,
 		"ref":            33,
+		"emoji":          34,
+		"remove_emoji":   35,
 	}
 )
 
@@ -12349,7 +12355,7 @@ func (x *InstagramStory) GetLink() string {
 type MessagePong struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	MemberId        string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Type            string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Type            string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"` // empty (add) or remove
 	Created         int64                  `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
 	AckError        string                 `protobuf:"bytes,6,opt,name=ack_error,json=ackError,proto3" json:"ack_error,omitempty"` // used in ack
 	Count           int64                  `protobuf:"varint,7,opt,name=count,proto3" json:"count,omitempty"`
@@ -12361,6 +12367,7 @@ type MessagePong struct {
 	Comment         string                 `protobuf:"bytes,13,opt,name=comment,proto3" json:"comment,omitempty"`
 	SourceMessageId string                 `protobuf:"bytes,14,opt,name=source_message_id,json=sourceMessageId,proto3" json:"source_message_id,omitempty"`
 	Error           *Error                 `protobuf:"bytes,15,opt,name=error,proto3" json:"error,omitempty"` // use this instead of ack_error
+	Emoticon        string                 `protobuf:"bytes,16,opt,name=emoticon,proto3" json:"emoticon,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -12484,6 +12491,13 @@ func (x *MessagePong) GetError() *Error {
 		return x.Error
 	}
 	return nil
+}
+
+func (x *MessagePong) GetEmoticon() string {
+	if x != nil {
+		return x.Emoticon
+	}
+	return ""
 }
 
 type MessageButton struct {
@@ -73110,7 +73124,7 @@ const file_header_proto_rawDesc = "" +
 	"product_id\x18\t \x01(\tR\tproductId\"4\n" +
 	"\x0eInstagramStory\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04link\x18\x04 \x01(\tR\x04link\"\x96\x06\n" +
+	"\x04link\x18\x04 \x01(\tR\x04link\"\xcf\x06\n" +
 	"\vMessagePong\x12\x1b\n" +
 	"\tmember_id\x18\x03 \x01(\tR\bmemberId\x12\x12\n" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x18\n" +
@@ -73125,7 +73139,8 @@ const file_header_proto_rawDesc = "" +
 	"\x06rating\x18\f \x01(\x05R\x06rating\x12\x18\n" +
 	"\acomment\x18\r \x01(\tR\acomment\x12*\n" +
 	"\x11source_message_id\x18\x0e \x01(\tR\x0fsourceMessageId\x12#\n" +
-	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\"\x9d\x03\n" +
+	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\x12\x1a\n" +
+	"\bemoticon\x18\x10 \x01(\tR\bemoticon\"\xba\x03\n" +
 	"\x04Type\x12\x05\n" +
 	"\x01n\x10\x00\x12\a\n" +
 	"\x03ack\x10\x01\x12\b\n" +
@@ -73163,7 +73178,9 @@ const file_header_proto_rawDesc = "" +
 	"\x0eremove_dislike\x10\x1c\x12\b\n" +
 	"\x04care\x10\x1e\x12\x0f\n" +
 	"\vremove_care\x10\x1f\x12\a\n" +
-	"\x03ref\x10!\"\xe6\x04\n" +
+	"\x03ref\x10!\x12\t\n" +
+	"\x05emoji\x10\"\x12\x10\n" +
+	"\fremove_emoji\x10#\"\xe6\x04\n" +
 	"\rMessageButton\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x0e\n" +
 	"\x02id\x18\x0f \x01(\tR\x02id\x12\x14\n" +
