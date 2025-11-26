@@ -838,7 +838,6 @@ var DocSearch_ServiceDesc = grpc.ServiceDesc{
 const (
 	NumberRegistry_Compact_FullMethodName        = "/header.NumberRegistry/Compact"
 	NumberRegistry_Uncompact_FullMethodName      = "/header.NumberRegistry/Uncompact"
-	NumberRegistry_CompactM_FullMethodName       = "/header.NumberRegistry/CompactM"
 	NumberRegistry_ShortenPayment_FullMethodName = "/header.NumberRegistry/ShortenPayment"
 	NumberRegistry_LookupPayment_FullMethodName  = "/header.NumberRegistry/LookupPayment"
 	NumberRegistry_ShortenLink_FullMethodName    = "/header.NumberRegistry/ShortenLink"
@@ -853,7 +852,6 @@ const (
 type NumberRegistryClient interface {
 	Compact(ctx context.Context, in *String, opts ...grpc.CallOption) (*Number, error)
 	Uncompact(ctx context.Context, in *Number, opts ...grpc.CallOption) (*String, error)
-	CompactM(ctx context.Context, in *StrNumM, opts ...grpc.CallOption) (*StrNumM, error)
 	ShortenPayment(ctx context.Context, in *String, opts ...grpc.CallOption) (*String, error)
 	LookupPayment(ctx context.Context, in *String, opts ...grpc.CallOption) (*String, error)
 	ShortenLink(ctx context.Context, in *Link, opts ...grpc.CallOption) (*String, error)
@@ -884,16 +882,6 @@ func (c *numberRegistryClient) Uncompact(ctx context.Context, in *Number, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(String)
 	err := c.cc.Invoke(ctx, NumberRegistry_Uncompact_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *numberRegistryClient) CompactM(ctx context.Context, in *StrNumM, opts ...grpc.CallOption) (*StrNumM, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StrNumM)
-	err := c.cc.Invoke(ctx, NumberRegistry_CompactM_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -966,7 +954,6 @@ func (c *numberRegistryClient) GetLastID(ctx context.Context, in *Id, opts ...gr
 type NumberRegistryServer interface {
 	Compact(context.Context, *String) (*Number, error)
 	Uncompact(context.Context, *Number) (*String, error)
-	CompactM(context.Context, *StrNumM) (*StrNumM, error)
 	ShortenPayment(context.Context, *String) (*String, error)
 	LookupPayment(context.Context, *String) (*String, error)
 	ShortenLink(context.Context, *Link) (*String, error)
@@ -988,9 +975,6 @@ func (UnimplementedNumberRegistryServer) Compact(context.Context, *String) (*Num
 }
 func (UnimplementedNumberRegistryServer) Uncompact(context.Context, *Number) (*String, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Uncompact not implemented")
-}
-func (UnimplementedNumberRegistryServer) CompactM(context.Context, *StrNumM) (*StrNumM, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompactM not implemented")
 }
 func (UnimplementedNumberRegistryServer) ShortenPayment(context.Context, *String) (*String, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShortenPayment not implemented")
@@ -1063,24 +1047,6 @@ func _NumberRegistry_Uncompact_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NumberRegistryServer).Uncompact(ctx, req.(*Number))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NumberRegistry_CompactM_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StrNumM)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NumberRegistryServer).CompactM(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NumberRegistry_CompactM_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NumberRegistryServer).CompactM(ctx, req.(*StrNumM))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1207,10 +1173,6 @@ var NumberRegistry_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Uncompact",
 			Handler:    _NumberRegistry_Uncompact_Handler,
-		},
-		{
-			MethodName: "CompactM",
-			Handler:    _NumberRegistry_CompactM_Handler,
 		},
 		{
 			MethodName: "ShortenPayment",

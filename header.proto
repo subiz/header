@@ -7410,14 +7410,6 @@ message Number {
 	string version = 2; //version 2 is version for convo
 }
 
-message StrNumM {
-	map<string,int64> strsM = 1;
-}
-
-message NumStrM {
-	map<int64,string> numsM = 1;
-}
-
 message ConvoReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -10068,4 +10060,13 @@ message ZaloLoginStatus {
 	string token = 9;
 
 	string zalo_user_id = 10;
+}
+
+message Link {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string url = 3;
+	string description = 4;
+
+	int64 created = 5;
 }
