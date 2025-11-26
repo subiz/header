@@ -45,6 +45,9 @@ service NumberRegistry {
 	rpc ShortenPayment(String) returns (String);
 	rpc LookupPayment(String) returns (String);
 
+	rpc ShortenLink(Link) returns (String);
+	rpc LookupLink(String) returns (Link);
+
 	rpc NewID2(header.Id) returns (header.Id);
 	rpc GetLastID(header.Id) returns (header.Id);
 }

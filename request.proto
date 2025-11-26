@@ -1065,3 +1065,12 @@ message WidgetSettingRequest {
 	repeated string include_bot_ids = 4;
 	string user_id = 5;
 }
+
+message Link {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string url = 3;
+	string description = 4;
+
+	int64 created = 5;
+}

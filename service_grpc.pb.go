@@ -841,6 +841,8 @@ const (
 	NumberRegistry_CompactM_FullMethodName       = "/header.NumberRegistry/CompactM"
 	NumberRegistry_ShortenPayment_FullMethodName = "/header.NumberRegistry/ShortenPayment"
 	NumberRegistry_LookupPayment_FullMethodName  = "/header.NumberRegistry/LookupPayment"
+	NumberRegistry_ShortenLink_FullMethodName    = "/header.NumberRegistry/ShortenLink"
+	NumberRegistry_LookupLink_FullMethodName     = "/header.NumberRegistry/LookupLink"
 	NumberRegistry_NewID2_FullMethodName         = "/header.NumberRegistry/NewID2"
 	NumberRegistry_GetLastID_FullMethodName      = "/header.NumberRegistry/GetLastID"
 )
@@ -854,6 +856,8 @@ type NumberRegistryClient interface {
 	CompactM(ctx context.Context, in *StrNumM, opts ...grpc.CallOption) (*StrNumM, error)
 	ShortenPayment(ctx context.Context, in *String, opts ...grpc.CallOption) (*String, error)
 	LookupPayment(ctx context.Context, in *String, opts ...grpc.CallOption) (*String, error)
+	ShortenLink(ctx context.Context, in *Link, opts ...grpc.CallOption) (*String, error)
+	LookupLink(ctx context.Context, in *String, opts ...grpc.CallOption) (*Link, error)
 	NewID2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	GetLastID(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 }
@@ -916,6 +920,26 @@ func (c *numberRegistryClient) LookupPayment(ctx context.Context, in *String, op
 	return out, nil
 }
 
+func (c *numberRegistryClient) ShortenLink(ctx context.Context, in *Link, opts ...grpc.CallOption) (*String, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(String)
+	err := c.cc.Invoke(ctx, NumberRegistry_ShortenLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *numberRegistryClient) LookupLink(ctx context.Context, in *String, opts ...grpc.CallOption) (*Link, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Link)
+	err := c.cc.Invoke(ctx, NumberRegistry_LookupLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *numberRegistryClient) NewID2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Id)
@@ -945,6 +969,8 @@ type NumberRegistryServer interface {
 	CompactM(context.Context, *StrNumM) (*StrNumM, error)
 	ShortenPayment(context.Context, *String) (*String, error)
 	LookupPayment(context.Context, *String) (*String, error)
+	ShortenLink(context.Context, *Link) (*String, error)
+	LookupLink(context.Context, *String) (*Link, error)
 	NewID2(context.Context, *Id) (*Id, error)
 	GetLastID(context.Context, *Id) (*Id, error)
 	mustEmbedUnimplementedNumberRegistryServer()
@@ -971,6 +997,12 @@ func (UnimplementedNumberRegistryServer) ShortenPayment(context.Context, *String
 }
 func (UnimplementedNumberRegistryServer) LookupPayment(context.Context, *String) (*String, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LookupPayment not implemented")
+}
+func (UnimplementedNumberRegistryServer) ShortenLink(context.Context, *Link) (*String, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShortenLink not implemented")
+}
+func (UnimplementedNumberRegistryServer) LookupLink(context.Context, *String) (*Link, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LookupLink not implemented")
 }
 func (UnimplementedNumberRegistryServer) NewID2(context.Context, *Id) (*Id, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewID2 not implemented")
@@ -1089,6 +1121,42 @@ func _NumberRegistry_LookupPayment_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NumberRegistry_ShortenLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Link)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NumberRegistryServer).ShortenLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NumberRegistry_ShortenLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NumberRegistryServer).ShortenLink(ctx, req.(*Link))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NumberRegistry_LookupLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(String)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NumberRegistryServer).LookupLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NumberRegistry_LookupLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NumberRegistryServer).LookupLink(ctx, req.(*String))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NumberRegistry_NewID2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -1151,6 +1219,14 @@ var NumberRegistry_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LookupPayment",
 			Handler:    _NumberRegistry_LookupPayment_Handler,
+		},
+		{
+			MethodName: "ShortenLink",
+			Handler:    _NumberRegistry_ShortenLink_Handler,
+		},
+		{
+			MethodName: "LookupLink",
+			Handler:    _NumberRegistry_LookupLink_Handler,
 		},
 		{
 			MethodName: "NewID2",

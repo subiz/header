@@ -12355,7 +12355,7 @@ func (x *InstagramStory) GetLink() string {
 type MessagePong struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	MemberId        string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Type            string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"` // empty (add) or remove
+	Type            string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	Created         int64                  `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
 	AckError        string                 `protobuf:"bytes,6,opt,name=ack_error,json=ackError,proto3" json:"ack_error,omitempty"` // used in ack
 	Count           int64                  `protobuf:"varint,7,opt,name=count,proto3" json:"count,omitempty"`

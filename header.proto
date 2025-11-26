@@ -1596,7 +1596,7 @@ message MessagePong {
 		emoji = 34;
 		remove_emoji = 35;
 	}
-	string type = 4; // empty (add) or remove
+	string type = 4;
 	int64 created = 5;
 	string ack_error = 6; // used in ack
 	int64 count = 7;
@@ -1610,7 +1610,6 @@ message MessagePong {
 	Error error = 15; // use this instead of ack_error
 
 	string emoticon = 16;
-
 }
 
 message MessageButton {
