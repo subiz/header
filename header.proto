@@ -10019,7 +10019,7 @@ message ZaloPersonalAccount {
 	string cookie = 50;
 	string encrypt_key = 51;
 	string ws_key = 52;
-	string last_ws_event_id = 53;
+	// string last_ws_event_id = 53;
 	string client_id = 54;
 	string user_agent = 55;
 	int64 created = 56;
@@ -10046,6 +10046,8 @@ message ZaloPersonalAccount {
 	// for debugging
 	int64 ws_last_try = 90;
 	int64 ws_last_out = 91;
+
+	map<string, string> last_queue_action_ids = 92;
 }
 
 message ZaloLoginStatus {
