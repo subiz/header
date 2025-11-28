@@ -163,10 +163,6 @@ message Limit {
 	// uint32 max_agents = 8;
 	bool can_buy_agent = 10;
 
-	uint32 automation_webhook_quota = 12;
-	uint32 automation_email_quota = 13;
-	uint32 automation_message_quota = 14;
-
 	uint32 max_rules = 16;
 
 	bool facebook = 17;
@@ -180,4 +176,8 @@ message Limit {
 	int64 total_call_log_size =  24; // bytes
 	int64 call_recording_ttl = 25; // sec
 	bool ticket = 26; // pending || active
+
+	int64 max_zalo_personals = 27;
+	int64 max_ai_bots = 28;
+	int64 max_active_agents = 29; // 20 14
 }

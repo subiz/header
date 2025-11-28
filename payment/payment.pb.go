@@ -825,7 +825,8 @@ type Subscription struct {
 	Plan                       *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"` // trial, standard, standard_unlmited, advanced, custom
 	NextPlan                   *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`
 	Credit                     *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
-	Limit                      *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`
+	Limit                      *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`                                         // plan limit + override limit
+	OverrideLimits             []string               `protobuf:"bytes,43,rep,name=override_limits,json=overrideLimits" json:"override_limits,omitempty"` // fields
 	Ended                      *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
 	Churned                    *int64                 `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
 	FpvCreditVnd               *int64                 `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`                                               // translate from credit, do not store in db
@@ -944,6 +945,13 @@ func (x *Subscription) GetCredit() float32 {
 func (x *Subscription) GetLimit() *common.Limit {
 	if x != nil {
 		return x.Limit
+	}
+	return nil
+}
+
+func (x *Subscription) GetOverrideLimits() []string {
+	if x != nil {
+		return x.OverrideLimits
 	}
 	return nil
 }
@@ -3416,7 +3424,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x129\n" +
 	"\x19fpv_unlimited_agent_price\x181 \x01(\x03R\x16fpvUnlimitedAgentPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\xab\x06\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xd4\x06\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3429,7 +3437,8 @@ const file_payment_proto_rawDesc = "" +
 	"\x04plan\x18\x11 \x01(\tR\x04plan\x12\x1b\n" +
 	"\tnext_plan\x18\x12 \x01(\tR\bnextPlan\x12\x16\n" +
 	"\x06credit\x18\x1b \x01(\x02R\x06credit\x12#\n" +
-	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12\x14\n" +
+	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12'\n" +
+	"\x0foverride_limits\x18+ \x03(\tR\x0eoverrideLimits\x12\x14\n" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12\x18\n" +
 	"\achurned\x18/ \x01(\x03R\achurned\x12$\n" +
 	"\x0efpv_credit_vnd\x180 \x01(\x03R\ffpvCreditVnd\x129\n" +

@@ -96,7 +96,9 @@ message Subscription {
 	optional string next_plan = 18;
 
 	optional float credit = 27;
-	optional common.Limit limit = 42;
+	optional common.Limit limit = 42; // plan limit + override limit
+	repeated string override_limits = 43; // fields
+
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 

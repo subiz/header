@@ -1044,23 +1044,23 @@ type Limit struct {
 	// optional uint32 max_conversations = 6;
 	MaxSegments uint32 `protobuf:"varint,7,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
 	// uint32 max_agents = 8;
-	CanBuyAgent            bool   `protobuf:"varint,10,opt,name=can_buy_agent,json=canBuyAgent,proto3" json:"can_buy_agent,omitempty"`
-	AutomationWebhookQuota uint32 `protobuf:"varint,12,opt,name=automation_webhook_quota,json=automationWebhookQuota,proto3" json:"automation_webhook_quota,omitempty"`
-	AutomationEmailQuota   uint32 `protobuf:"varint,13,opt,name=automation_email_quota,json=automationEmailQuota,proto3" json:"automation_email_quota,omitempty"`
-	AutomationMessageQuota uint32 `protobuf:"varint,14,opt,name=automation_message_quota,json=automationMessageQuota,proto3" json:"automation_message_quota,omitempty"`
-	MaxRules               uint32 `protobuf:"varint,16,opt,name=max_rules,json=maxRules,proto3" json:"max_rules,omitempty"`
-	Facebook               bool   `protobuf:"varint,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
-	Zalo                   bool   `protobuf:"varint,18,opt,name=zalo,proto3" json:"zalo,omitempty"`
-	Email                  bool   `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
-	WebPlugin              bool   `protobuf:"varint,20,opt,name=web_plugin,json=webPlugin,proto3" json:"web_plugin,omitempty"`
-	Bot                    bool   `protobuf:"varint,21,opt,name=bot,proto3" json:"bot,omitempty"`
-	Shop                   string `protobuf:"bytes,22,opt,name=shop,proto3" json:"shop,omitempty"`                                                      //   pending || active
-	TotalFileSize          int64  `protobuf:"varint,23,opt,name=total_file_size,json=totalFileSize,proto3" json:"total_file_size,omitempty"`            // bytes
-	TotalCallLogSize       int64  `protobuf:"varint,24,opt,name=total_call_log_size,json=totalCallLogSize,proto3" json:"total_call_log_size,omitempty"` // bytes
-	CallRecordingTtl       int64  `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
-	Ticket                 bool   `protobuf:"varint,26,opt,name=ticket,proto3" json:"ticket,omitempty"`                                                 // pending || active
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	CanBuyAgent      bool   `protobuf:"varint,10,opt,name=can_buy_agent,json=canBuyAgent,proto3" json:"can_buy_agent,omitempty"`
+	MaxRules         uint32 `protobuf:"varint,16,opt,name=max_rules,json=maxRules,proto3" json:"max_rules,omitempty"`
+	Facebook         bool   `protobuf:"varint,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
+	Zalo             bool   `protobuf:"varint,18,opt,name=zalo,proto3" json:"zalo,omitempty"`
+	Email            bool   `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
+	WebPlugin        bool   `protobuf:"varint,20,opt,name=web_plugin,json=webPlugin,proto3" json:"web_plugin,omitempty"`
+	Bot              bool   `protobuf:"varint,21,opt,name=bot,proto3" json:"bot,omitempty"`
+	Shop             string `protobuf:"bytes,22,opt,name=shop,proto3" json:"shop,omitempty"`                                                      //   pending || active
+	TotalFileSize    int64  `protobuf:"varint,23,opt,name=total_file_size,json=totalFileSize,proto3" json:"total_file_size,omitempty"`            // bytes
+	TotalCallLogSize int64  `protobuf:"varint,24,opt,name=total_call_log_size,json=totalCallLogSize,proto3" json:"total_call_log_size,omitempty"` // bytes
+	CallRecordingTtl int64  `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
+	Ticket           bool   `protobuf:"varint,26,opt,name=ticket,proto3" json:"ticket,omitempty"`                                                 // pending || active
+	MaxZaloPersonals int64  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`
+	MaxAiBots        int64  `protobuf:"varint,28,opt,name=max_ai_bots,json=maxAiBots,proto3" json:"max_ai_bots,omitempty"`
+	MaxActiveAgents  int64  `protobuf:"varint,29,opt,name=max_active_agents,json=maxActiveAgents,proto3" json:"max_active_agents,omitempty"` // 20 14
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Limit) Reset() {
@@ -1126,27 +1126,6 @@ func (x *Limit) GetCanBuyAgent() bool {
 		return x.CanBuyAgent
 	}
 	return false
-}
-
-func (x *Limit) GetAutomationWebhookQuota() uint32 {
-	if x != nil {
-		return x.AutomationWebhookQuota
-	}
-	return 0
-}
-
-func (x *Limit) GetAutomationEmailQuota() uint32 {
-	if x != nil {
-		return x.AutomationEmailQuota
-	}
-	return 0
-}
-
-func (x *Limit) GetAutomationMessageQuota() uint32 {
-	if x != nil {
-		return x.AutomationMessageQuota
-	}
-	return 0
 }
 
 func (x *Limit) GetMaxRules() uint32 {
@@ -1224,6 +1203,27 @@ func (x *Limit) GetTicket() bool {
 		return x.Ticket
 	}
 	return false
+}
+
+func (x *Limit) GetMaxZaloPersonals() int64 {
+	if x != nil {
+		return x.MaxZaloPersonals
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxAiBots() int64 {
+	if x != nil {
+		return x.MaxAiBots
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxActiveAgents() int64 {
+	if x != nil {
+		return x.MaxActiveAgents
+	}
+	return 0
 }
 
 var File_common_proto protoreflect.FileDescriptor
@@ -1344,7 +1344,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\xa8\x05\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xf8\x04\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1352,10 +1352,7 @@ const file_common_proto_rawDesc = "" +
 	"\x0fmax_automations\x18\x04 \x01(\rR\x0emaxAutomations\x12!\n" +
 	"\fmax_segments\x18\a \x01(\rR\vmaxSegments\x12\"\n" +
 	"\rcan_buy_agent\x18\n" +
-	" \x01(\bR\vcanBuyAgent\x128\n" +
-	"\x18automation_webhook_quota\x18\f \x01(\rR\x16automationWebhookQuota\x124\n" +
-	"\x16automation_email_quota\x18\r \x01(\rR\x14automationEmailQuota\x128\n" +
-	"\x18automation_message_quota\x18\x0e \x01(\rR\x16automationMessageQuota\x12\x1b\n" +
+	" \x01(\bR\vcanBuyAgent\x12\x1b\n" +
 	"\tmax_rules\x18\x10 \x01(\rR\bmaxRules\x12\x1a\n" +
 	"\bfacebook\x18\x11 \x01(\bR\bfacebook\x12\x12\n" +
 	"\x04zalo\x18\x12 \x01(\bR\x04zalo\x12\x14\n" +
@@ -1367,7 +1364,10 @@ const file_common_proto_rawDesc = "" +
 	"\x0ftotal_file_size\x18\x17 \x01(\x03R\rtotalFileSize\x12-\n" +
 	"\x13total_call_log_size\x18\x18 \x01(\x03R\x10totalCallLogSize\x12,\n" +
 	"\x12call_recording_ttl\x18\x19 \x01(\x03R\x10callRecordingTtl\x12\x16\n" +
-	"\x06ticket\x18\x1a \x01(\bR\x06ticket*d\n" +
+	"\x06ticket\x18\x1a \x01(\bR\x06ticket\x12,\n" +
+	"\x12max_zalo_personals\x18\x1b \x01(\x03R\x10maxZaloPersonals\x12\x1e\n" +
+	"\vmax_ai_bots\x18\x1c \x01(\x03R\tmaxAiBots\x12*\n" +
+	"\x11max_active_agents\x18\x1d \x01(\x03R\x0fmaxActiveAgents*d\n" +
 	"\x04Type\x12\v\n" +
 	"\aunknown\x10\x00\x12\b\n" +
 	"\x04user\x10\x01\x12\t\n" +
