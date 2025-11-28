@@ -1946,6 +1946,7 @@ message Integration {
 	int64 website_last_crawled = 141;
 
 	int64 last_synced = 142;
+	int64 sending_blocked = 143; //
 }
 
 message WorkflowSessionId {

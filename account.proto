@@ -144,6 +144,7 @@ message Account {
 	optional bool currency_locked = 42;
 
 	optional int64 login_locked = 43;
+	optional string locked_code = 44; // policy, payment
 	optional string deleted_by_agent = 47;
 	optional InvoiceInfo invoice_info = 48;
 

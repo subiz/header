@@ -765,6 +765,7 @@ type Account struct {
 	Currency             *string        `protobuf:"bytes,41,opt,name=currency" json:"currency,omitempty"`                                         // VND or USD cannot change
 	CurrencyLocked       *bool          `protobuf:"varint,42,opt,name=currency_locked,json=currencyLocked" json:"currency_locked,omitempty"`
 	LoginLocked          *int64         `protobuf:"varint,43,opt,name=login_locked,json=loginLocked" json:"login_locked,omitempty"`
+	LockedCode           *string        `protobuf:"bytes,44,opt,name=locked_code,json=lockedCode" json:"locked_code,omitempty"` // policy, payment
 	DeletedByAgent       *string        `protobuf:"bytes,47,opt,name=deleted_by_agent,json=deletedByAgent" json:"deleted_by_agent,omitempty"`
 	InvoiceInfo          *InvoiceInfo   `protobuf:"bytes,48,opt,name=invoice_info,json=invoiceInfo" json:"invoice_info,omitempty"`
 	Plan                 *string        `protobuf:"bytes,49,opt,name=plan" json:"plan,omitempty"` // readonly
@@ -1006,6 +1007,13 @@ func (x *Account) GetLoginLocked() int64 {
 		return *x.LoginLocked
 	}
 	return 0
+}
+
+func (x *Account) GetLockedCode() string {
+	if x != nil && x.LockedCode != nil {
+		return *x.LockedCode
+	}
+	return ""
 }
 
 func (x *Account) GetDeletedByAgent() string {
@@ -2907,7 +2915,7 @@ const file_account_proto_rawDesc = "" +
 	"\n" +
 	"\x06active\x10\x01\x12\f\n" +
 	"\binactive\x10\x02\x12\v\n" +
-	"\adeleted\x10\x03\"\x93\t\n" +
+	"\adeleted\x10\x03\"\xb4\t\n" +
 	"\aAccount\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
@@ -2941,7 +2949,9 @@ const file_account_proto_rawDesc = "" +
 	"\x11supported_locales\x18( \x03(\tR\x10supportedLocales\x12\x1a\n" +
 	"\bcurrency\x18) \x01(\tR\bcurrency\x12'\n" +
 	"\x0fcurrency_locked\x18* \x01(\bR\x0ecurrencyLocked\x12!\n" +
-	"\flogin_locked\x18+ \x01(\x03R\vloginLocked\x12(\n" +
+	"\flogin_locked\x18+ \x01(\x03R\vloginLocked\x12\x1f\n" +
+	"\vlocked_code\x18, \x01(\tR\n" +
+	"lockedCode\x12(\n" +
 	"\x10deleted_by_agent\x18/ \x01(\tR\x0edeletedByAgent\x127\n" +
 	"\finvoice_info\x180 \x01(\v2\x14.account.InvoiceInfoR\vinvoiceInfo\x12\x12\n" +
 	"\x04plan\x181 \x01(\tR\x04plan\x12\x1f\n" +

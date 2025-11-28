@@ -24,12 +24,11 @@ const (
 type Type int32
 
 const (
-	Type_unknown Type = 0
-	Type_user    Type = 1
-	Type_agent   Type = 2
-	Type_subiz   Type = 3 // system, internal service
-	// app = 4; // dashboard, accmgr
-	Type_connector Type = 6 // fabikon, mailkon, subiz-driver, stringee-driver
+	Type_unknown   Type = 0
+	Type_user      Type = 1
+	Type_agent     Type = 2
+	Type_subiz     Type = 3 // system, internal service
+	Type_connector Type = 6 // fabikon, mailkon, subiz-driver
 	Type_bot       Type = 7 // subiz bot
 	Type_dummy     Type = 8 // agent that cannot handle action
 	Type_workflow  Type = 9
