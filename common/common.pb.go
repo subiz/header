@@ -1058,6 +1058,7 @@ type Limit struct {
 	MaxZaloPersonals int64  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`
 	MaxAiBots        int64  `protobuf:"varint,28,opt,name=max_ai_bots,json=maxAiBots,proto3" json:"max_ai_bots,omitempty"`
 	MaxActiveAgents  int64  `protobuf:"varint,29,opt,name=max_active_agents,json=maxActiveAgents,proto3" json:"max_active_agents,omitempty"` // 20 14
+	MaxFanpages      int64  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1225,6 +1226,13 @@ func (x *Limit) GetMaxActiveAgents() int64 {
 	return 0
 }
 
+func (x *Limit) GetMaxFanpages() int64 {
+	if x != nil {
+		return x.MaxFanpages
+	}
+	return 0
+}
+
 var File_common_proto protoreflect.FileDescriptor
 
 const file_common_proto_rawDesc = "" +
@@ -1343,7 +1351,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\xf8\x04\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\x9b\x05\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1366,7 +1374,8 @@ const file_common_proto_rawDesc = "" +
 	"\x06ticket\x18\x1a \x01(\bR\x06ticket\x12,\n" +
 	"\x12max_zalo_personals\x18\x1b \x01(\x03R\x10maxZaloPersonals\x12\x1e\n" +
 	"\vmax_ai_bots\x18\x1c \x01(\x03R\tmaxAiBots\x12*\n" +
-	"\x11max_active_agents\x18\x1d \x01(\x03R\x0fmaxActiveAgents*d\n" +
+	"\x11max_active_agents\x18\x1d \x01(\x03R\x0fmaxActiveAgents\x12!\n" +
+	"\fmax_fanpages\x18\x1e \x01(\x03R\vmaxFanpages*d\n" +
 	"\x04Type\x12\v\n" +
 	"\aunknown\x10\x00\x12\b\n" +
 	"\x04user\x10\x01\x12\t\n" +

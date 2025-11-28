@@ -179,4 +179,6 @@ message Limit {
 	int64 max_zalo_personals = 27;
 	int64 max_ai_bots = 28;
 	int64 max_active_agents = 29; // 20 14
+
+	int64 max_fanpages = 30;
 }
