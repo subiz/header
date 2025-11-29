@@ -257,7 +257,7 @@ func (x *Log_Action) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use Log_Action.Descriptor instead.
 func (Log_Action) EnumDescriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{22, 0}
+	return file_payment_proto_rawDescGZIP(), []int{24, 0}
 }
 
 type Comments struct {
@@ -814,32 +814,31 @@ func (x *PurchaseRequest) GetNumAgents() int64 {
 }
 
 type Subscription struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                        *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId                  *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Created                    *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
-	PromotionCode              *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"` // last recurring promotion code
-	Started                    *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                 // ms
-	BillingCycleMonth          *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
-	NextBillingCycleMonth      *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"`
-	Plan                       *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"` // trial, standard, standard_unlmited, advanced, custom
-	NextPlan                   *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`
-	Credit                     *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
-	Limit                      *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`                                         // plan limit + override limit
-	OverrideLimits             []string               `protobuf:"bytes,43,rep,name=override_limits,json=overrideLimits" json:"override_limits,omitempty"` // fields
-	Ended                      *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
-	Churned                    *int64                 `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
-	FpvCreditVnd               *int64                 `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`                                               // translate from credit, do not store in db
-	FpvUnlimitedAgentPrice     *int64                 `protobuf:"varint,49,opt,name=fpv_unlimited_agent_price,json=fpvUnlimitedAgentPrice" json:"fpv_unlimited_agent_price,omitempty"`               // usd, custom price, only edited by subiz
-	FpvNextUnlimitedAgentPrice *int64                 `protobuf:"varint,53,opt,name=fpv_next_unlimited_agent_price,json=fpvNextUnlimitedAgentPrice" json:"fpv_next_unlimited_agent_price,omitempty"` // usd, custom price only edited by subiz
-	NumAgents                  *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
-	UseTicket                  *int64                 `protobuf:"varint,51,opt,name=use_ticket,json=useTicket" json:"use_ticket,omitempty"`
-	NextNumAgents              *int64                 `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
-	UnlimitedAiSpending        *int64                 `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
-	FpvCreditUsd               *int64                 `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
-	Note                       *string                `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                   *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId             *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Created               *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	PromotionCode         *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"` // last recurring promotion code
+	Started               *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                 // ms
+	BillingCycleMonth     *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
+	NextBillingCycleMonth *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"`
+	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"` // trial, standard, standard_unlmited, advanced, custom
+	NextPlan              *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`
+	Credit                *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
+	Limit                 *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"` //
+	Ended                 *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
+	Churned               *int64                 `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
+	FpvCreditVnd          *int64                 `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`                     // translate from credit, do not store in db
+	FpvCustomPrice        *int64                 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"`               // usd, custom price, only edited by subiz
+	FpvNextCustomPrice    *int64                 `protobuf:"varint,53,opt,name=fpv_next_custom_price,json=fpvNextCustomPrice" json:"fpv_next_custom_price,omitempty"` // usd, custom price only edited by subiz
+	NumAgents             *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
+	UseTicket             *int64                 `protobuf:"varint,51,opt,name=use_ticket,json=useTicket" json:"use_ticket,omitempty"`
+	NextNumAgents         *int64                 `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
+	UnlimitedAiSpending   *int64                 `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
+	FpvCreditUsd          *int64                 `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
+	Note                  *string                `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Subscription) Reset() {
@@ -949,13 +948,6 @@ func (x *Subscription) GetLimit() *common.Limit {
 	return nil
 }
 
-func (x *Subscription) GetOverrideLimits() []string {
-	if x != nil {
-		return x.OverrideLimits
-	}
-	return nil
-}
-
 func (x *Subscription) GetEnded() int64 {
 	if x != nil && x.Ended != nil {
 		return *x.Ended
@@ -977,16 +969,16 @@ func (x *Subscription) GetFpvCreditVnd() int64 {
 	return 0
 }
 
-func (x *Subscription) GetFpvUnlimitedAgentPrice() int64 {
-	if x != nil && x.FpvUnlimitedAgentPrice != nil {
-		return *x.FpvUnlimitedAgentPrice
+func (x *Subscription) GetFpvCustomPrice() int64 {
+	if x != nil && x.FpvCustomPrice != nil {
+		return *x.FpvCustomPrice
 	}
 	return 0
 }
 
-func (x *Subscription) GetFpvNextUnlimitedAgentPrice() int64 {
-	if x != nil && x.FpvNextUnlimitedAgentPrice != nil {
-		return *x.FpvNextUnlimitedAgentPrice
+func (x *Subscription) GetFpvNextCustomPrice() int64 {
+	if x != nil && x.FpvNextCustomPrice != nil {
+		return *x.FpvNextCustomPrice
 	}
 	return 0
 }
@@ -1833,6 +1825,159 @@ func (x *Invoice) GetPaymentNum() string {
 	return ""
 }
 
+type FanpagesInvoiceItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional string plan = 3;
+	DayLeft       *int32 `protobuf:"varint,4,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
+	Count         *int32 `protobuf:"varint,8,opt,name=count" json:"count,omitempty"`
+	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FanpagesInvoiceItem) Reset() {
+	*x = FanpagesInvoiceItem{}
+	mi := &file_payment_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FanpagesInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FanpagesInvoiceItem) ProtoMessage() {}
+
+func (x *FanpagesInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FanpagesInvoiceItem.ProtoReflect.Descriptor instead.
+func (*FanpagesInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_payment_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *FanpagesInvoiceItem) GetDayLeft() int32 {
+	if x != nil && x.DayLeft != nil {
+		return *x.DayLeft
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetCount() int32 {
+	if x != nil && x.Count != nil {
+		return *x.Count
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetFullCycle() bool {
+	if x != nil && x.FullCycle != nil {
+		return *x.FullCycle
+	}
+	return false
+}
+
+type ZaloPersonalsInvoiceItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DayLeft       *int32                 `protobuf:"varint,4,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
+	Count         *int32                 `protobuf:"varint,8,opt,name=count" json:"count,omitempty"`
+	Started       *int64                 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64                 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool                  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ZaloPersonalsInvoiceItem) Reset() {
+	*x = ZaloPersonalsInvoiceItem{}
+	mi := &file_payment_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ZaloPersonalsInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZaloPersonalsInvoiceItem) ProtoMessage() {}
+
+func (x *ZaloPersonalsInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ZaloPersonalsInvoiceItem.ProtoReflect.Descriptor instead.
+func (*ZaloPersonalsInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_payment_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetDayLeft() int32 {
+	if x != nil && x.DayLeft != nil {
+		return *x.DayLeft
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetCount() int32 {
+	if x != nil && x.Count != nil {
+		return *x.Count
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetFullCycle() bool {
+	if x != nil && x.FullCycle != nil {
+		return *x.FullCycle
+	}
+	return false
+}
+
 type AgentInvoiceItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Plan          *string                `protobuf:"bytes,3,opt,name=plan" json:"plan,omitempty"`
@@ -1846,7 +1991,7 @@ type AgentInvoiceItem struct {
 
 func (x *AgentInvoiceItem) Reset() {
 	*x = AgentInvoiceItem{}
-	mi := &file_payment_proto_msgTypes[13]
+	mi := &file_payment_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1858,7 +2003,7 @@ func (x *AgentInvoiceItem) String() string {
 func (*AgentInvoiceItem) ProtoMessage() {}
 
 func (x *AgentInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[13]
+	mi := &file_payment_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1871,7 +2016,7 @@ func (x *AgentInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentInvoiceItem.ProtoReflect.Descriptor instead.
 func (*AgentInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{13}
+	return file_payment_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AgentInvoiceItem) GetPlan() string {
@@ -1922,7 +2067,7 @@ type RenewInvoiceItem struct {
 
 func (x *RenewInvoiceItem) Reset() {
 	*x = RenewInvoiceItem{}
-	mi := &file_payment_proto_msgTypes[14]
+	mi := &file_payment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1934,7 +2079,7 @@ func (x *RenewInvoiceItem) String() string {
 func (*RenewInvoiceItem) ProtoMessage() {}
 
 func (x *RenewInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[14]
+	mi := &file_payment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1947,7 +2092,7 @@ func (x *RenewInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenewInvoiceItem.ProtoReflect.Descriptor instead.
 func (*RenewInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{14}
+	return file_payment_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *RenewInvoiceItem) GetPlan() string {
@@ -2001,7 +2146,7 @@ type ReservedPlanInvoiceItem struct {
 
 func (x *ReservedPlanInvoiceItem) Reset() {
 	*x = ReservedPlanInvoiceItem{}
-	mi := &file_payment_proto_msgTypes[15]
+	mi := &file_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2013,7 +2158,7 @@ func (x *ReservedPlanInvoiceItem) String() string {
 func (*ReservedPlanInvoiceItem) ProtoMessage() {}
 
 func (x *ReservedPlanInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[15]
+	mi := &file_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2026,7 +2171,7 @@ func (x *ReservedPlanInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReservedPlanInvoiceItem.ProtoReflect.Descriptor instead.
 func (*ReservedPlanInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{15}
+	return file_payment_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ReservedPlanInvoiceItem) GetOldPlan() string {
@@ -2090,7 +2235,7 @@ type PlanInvoiceItem struct {
 
 func (x *PlanInvoiceItem) Reset() {
 	*x = PlanInvoiceItem{}
-	mi := &file_payment_proto_msgTypes[16]
+	mi := &file_payment_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2102,7 +2247,7 @@ func (x *PlanInvoiceItem) String() string {
 func (*PlanInvoiceItem) ProtoMessage() {}
 
 func (x *PlanInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[16]
+	mi := &file_payment_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2115,7 +2260,7 @@ func (x *PlanInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlanInvoiceItem.ProtoReflect.Descriptor instead.
 func (*PlanInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{16}
+	return file_payment_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *PlanInvoiceItem) GetAgentCount() uint32 {
@@ -2204,7 +2349,7 @@ type MarketingInvoiceItem struct {
 
 func (x *MarketingInvoiceItem) Reset() {
 	*x = MarketingInvoiceItem{}
-	mi := &file_payment_proto_msgTypes[17]
+	mi := &file_payment_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2216,7 +2361,7 @@ func (x *MarketingInvoiceItem) String() string {
 func (*MarketingInvoiceItem) ProtoMessage() {}
 
 func (x *MarketingInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[17]
+	mi := &file_payment_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2229,7 +2374,7 @@ func (x *MarketingInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarketingInvoiceItem.ProtoReflect.Descriptor instead.
 func (*MarketingInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{17}
+	return file_payment_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *MarketingInvoiceItem) GetExpired() int64 {
@@ -2248,7 +2393,7 @@ type NoVATInvoiceItem struct {
 
 func (x *NoVATInvoiceItem) Reset() {
 	*x = NoVATInvoiceItem{}
-	mi := &file_payment_proto_msgTypes[18]
+	mi := &file_payment_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2260,7 +2405,7 @@ func (x *NoVATInvoiceItem) String() string {
 func (*NoVATInvoiceItem) ProtoMessage() {}
 
 func (x *NoVATInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[18]
+	mi := &file_payment_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2273,7 +2418,7 @@ func (x *NoVATInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoVATInvoiceItem.ProtoReflect.Descriptor instead.
 func (*NoVATInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{18}
+	return file_payment_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *NoVATInvoiceItem) GetExpired() int64 {
@@ -2305,7 +2450,7 @@ type InvoiceItem struct {
 
 func (x *InvoiceItem) Reset() {
 	*x = InvoiceItem{}
-	mi := &file_payment_proto_msgTypes[19]
+	mi := &file_payment_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2317,7 +2462,7 @@ func (x *InvoiceItem) String() string {
 func (*InvoiceItem) ProtoMessage() {}
 
 func (x *InvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[19]
+	mi := &file_payment_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2330,7 +2475,7 @@ func (x *InvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceItem.ProtoReflect.Descriptor instead.
 func (*InvoiceItem) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{19}
+	return file_payment_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *InvoiceItem) GetHeadline() string {
@@ -2438,7 +2583,7 @@ type BillingInfo struct {
 
 func (x *BillingInfo) Reset() {
 	*x = BillingInfo{}
-	mi := &file_payment_proto_msgTypes[20]
+	mi := &file_payment_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2450,7 +2595,7 @@ func (x *BillingInfo) String() string {
 func (*BillingInfo) ProtoMessage() {}
 
 func (x *BillingInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[20]
+	mi := &file_payment_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2463,7 +2608,7 @@ func (x *BillingInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BillingInfo.ProtoReflect.Descriptor instead.
 func (*BillingInfo) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{20}
+	return file_payment_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *BillingInfo) GetName() string {
@@ -2518,7 +2663,7 @@ type Logs struct {
 
 func (x *Logs) Reset() {
 	*x = Logs{}
-	mi := &file_payment_proto_msgTypes[21]
+	mi := &file_payment_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2530,7 +2675,7 @@ func (x *Logs) String() string {
 func (*Logs) ProtoMessage() {}
 
 func (x *Logs) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[21]
+	mi := &file_payment_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2543,7 +2688,7 @@ func (x *Logs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Logs.ProtoReflect.Descriptor instead.
 func (*Logs) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{21}
+	return file_payment_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *Logs) GetCtx() *common.Context {
@@ -2577,7 +2722,7 @@ type Log struct {
 
 func (x *Log) Reset() {
 	*x = Log{}
-	mi := &file_payment_proto_msgTypes[22]
+	mi := &file_payment_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2589,7 +2734,7 @@ func (x *Log) String() string {
 func (*Log) ProtoMessage() {}
 
 func (x *Log) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[22]
+	mi := &file_payment_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2602,7 +2747,7 @@ func (x *Log) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Log.ProtoReflect.Descriptor instead.
 func (*Log) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{22}
+	return file_payment_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *Log) GetCtx() *common.Context {
@@ -2678,7 +2823,7 @@ type String struct {
 
 func (x *String) Reset() {
 	*x = String{}
-	mi := &file_payment_proto_msgTypes[23]
+	mi := &file_payment_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2690,7 +2835,7 @@ func (x *String) String() string {
 func (*String) ProtoMessage() {}
 
 func (x *String) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[23]
+	mi := &file_payment_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2703,7 +2848,7 @@ func (x *String) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use String.ProtoReflect.Descriptor instead.
 func (*String) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{23}
+	return file_payment_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *String) GetCtx() *common.Context {
@@ -2744,7 +2889,7 @@ type PayRequest struct {
 
 func (x *PayRequest) Reset() {
 	*x = PayRequest{}
-	mi := &file_payment_proto_msgTypes[24]
+	mi := &file_payment_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2756,7 +2901,7 @@ func (x *PayRequest) String() string {
 func (*PayRequest) ProtoMessage() {}
 
 func (x *PayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[24]
+	mi := &file_payment_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2769,7 +2914,7 @@ func (x *PayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PayRequest.ProtoReflect.Descriptor instead.
 func (*PayRequest) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{24}
+	return file_payment_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *PayRequest) GetCtx() *common.Context {
@@ -2891,7 +3036,7 @@ type AutoPayRequest struct {
 
 func (x *AutoPayRequest) Reset() {
 	*x = AutoPayRequest{}
-	mi := &file_payment_proto_msgTypes[25]
+	mi := &file_payment_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2903,7 +3048,7 @@ func (x *AutoPayRequest) String() string {
 func (*AutoPayRequest) ProtoMessage() {}
 
 func (x *AutoPayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[25]
+	mi := &file_payment_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2916,7 +3061,7 @@ func (x *AutoPayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AutoPayRequest.ProtoReflect.Descriptor instead.
 func (*AutoPayRequest) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{25}
+	return file_payment_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AutoPayRequest) GetCtx() *common.Context {
@@ -2975,7 +3120,7 @@ type InvoiceCreatedEmail struct {
 
 func (x *InvoiceCreatedEmail) Reset() {
 	*x = InvoiceCreatedEmail{}
-	mi := &file_payment_proto_msgTypes[26]
+	mi := &file_payment_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2987,7 +3132,7 @@ func (x *InvoiceCreatedEmail) String() string {
 func (*InvoiceCreatedEmail) ProtoMessage() {}
 
 func (x *InvoiceCreatedEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[26]
+	mi := &file_payment_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3000,7 +3145,7 @@ func (x *InvoiceCreatedEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceCreatedEmail.ProtoReflect.Descriptor instead.
 func (*InvoiceCreatedEmail) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{26}
+	return file_payment_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *InvoiceCreatedEmail) GetCtx() *common.Context {
@@ -3057,7 +3202,7 @@ type TrialEndingEmail struct {
 
 func (x *TrialEndingEmail) Reset() {
 	*x = TrialEndingEmail{}
-	mi := &file_payment_proto_msgTypes[27]
+	mi := &file_payment_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3069,7 +3214,7 @@ func (x *TrialEndingEmail) String() string {
 func (*TrialEndingEmail) ProtoMessage() {}
 
 func (x *TrialEndingEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[27]
+	mi := &file_payment_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3082,7 +3227,7 @@ func (x *TrialEndingEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrialEndingEmail.ProtoReflect.Descriptor instead.
 func (*TrialEndingEmail) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{27}
+	return file_payment_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *TrialEndingEmail) GetCtx() *common.Context {
@@ -3126,7 +3271,7 @@ type UpdatePlanEmail struct {
 
 func (x *UpdatePlanEmail) Reset() {
 	*x = UpdatePlanEmail{}
-	mi := &file_payment_proto_msgTypes[28]
+	mi := &file_payment_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3138,7 +3283,7 @@ func (x *UpdatePlanEmail) String() string {
 func (*UpdatePlanEmail) ProtoMessage() {}
 
 func (x *UpdatePlanEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[28]
+	mi := &file_payment_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3151,7 +3296,7 @@ func (x *UpdatePlanEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePlanEmail.ProtoReflect.Descriptor instead.
 func (*UpdatePlanEmail) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{28}
+	return file_payment_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *UpdatePlanEmail) GetCtx() *common.Context {
@@ -3203,7 +3348,7 @@ type PaidInvoiceEmail struct {
 
 func (x *PaidInvoiceEmail) Reset() {
 	*x = PaidInvoiceEmail{}
-	mi := &file_payment_proto_msgTypes[29]
+	mi := &file_payment_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3215,7 +3360,7 @@ func (x *PaidInvoiceEmail) String() string {
 func (*PaidInvoiceEmail) ProtoMessage() {}
 
 func (x *PaidInvoiceEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[29]
+	mi := &file_payment_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3228,7 +3373,7 @@ func (x *PaidInvoiceEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaidInvoiceEmail.ProtoReflect.Descriptor instead.
 func (*PaidInvoiceEmail) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{29}
+	return file_payment_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *PaidInvoiceEmail) GetCtx() *common.Context {
@@ -3274,20 +3419,22 @@ func (x *PaidInvoiceEmail) GetInvoiceLink() string {
 }
 
 type InvoiceItem_Data struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Renew         *RenewInvoiceItem        `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
-	Agent         *AgentInvoiceItem        `protobuf:"bytes,3,opt,name=agent" json:"agent,omitempty"`
-	Plan          *PlanInvoiceItem         `protobuf:"bytes,5,opt,name=plan" json:"plan,omitempty"`
-	Marketing     *MarketingInvoiceItem    `protobuf:"bytes,6,opt,name=marketing" json:"marketing,omitempty"`
-	ReservedPlan  *ReservedPlanInvoiceItem `protobuf:"bytes,7,opt,name=reserved_plan,json=reservedPlan" json:"reserved_plan,omitempty"`
-	Novat         *NoVATInvoiceItem        `protobuf:"bytes,8,opt,name=novat" json:"novat,omitempty"`
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Renew         *RenewInvoiceItem         `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
+	Agent         *AgentInvoiceItem         `protobuf:"bytes,3,opt,name=agent" json:"agent,omitempty"`
+	Plan          *PlanInvoiceItem          `protobuf:"bytes,5,opt,name=plan" json:"plan,omitempty"`
+	Marketing     *MarketingInvoiceItem     `protobuf:"bytes,6,opt,name=marketing" json:"marketing,omitempty"`
+	ReservedPlan  *ReservedPlanInvoiceItem  `protobuf:"bytes,7,opt,name=reserved_plan,json=reservedPlan" json:"reserved_plan,omitempty"`
+	Novat         *NoVATInvoiceItem         `protobuf:"bytes,8,opt,name=novat" json:"novat,omitempty"`
+	Fanpages      *FanpagesInvoiceItem      `protobuf:"bytes,9,opt,name=fanpages" json:"fanpages,omitempty"`
+	ZaloPersonals *ZaloPersonalsInvoiceItem `protobuf:"bytes,10,opt,name=zalo_personals,json=zaloPersonals" json:"zalo_personals,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *InvoiceItem_Data) Reset() {
 	*x = InvoiceItem_Data{}
-	mi := &file_payment_proto_msgTypes[30]
+	mi := &file_payment_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3299,7 +3446,7 @@ func (x *InvoiceItem_Data) String() string {
 func (*InvoiceItem_Data) ProtoMessage() {}
 
 func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[30]
+	mi := &file_payment_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3312,7 +3459,7 @@ func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceItem_Data.ProtoReflect.Descriptor instead.
 func (*InvoiceItem_Data) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{19, 0}
+	return file_payment_proto_rawDescGZIP(), []int{21, 0}
 }
 
 func (x *InvoiceItem_Data) GetRenew() *RenewInvoiceItem {
@@ -3353,6 +3500,20 @@ func (x *InvoiceItem_Data) GetReservedPlan() *ReservedPlanInvoiceItem {
 func (x *InvoiceItem_Data) GetNovat() *NoVATInvoiceItem {
 	if x != nil {
 		return x.Novat
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetFanpages() *FanpagesInvoiceItem {
+	if x != nil {
+		return x.Fanpages
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetZaloPersonals() *ZaloPersonalsInvoiceItem {
+	if x != nil {
+		return x.ZaloPersonals
 	}
 	return nil
 }
@@ -3424,7 +3585,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x129\n" +
 	"\x19fpv_unlimited_agent_price\x181 \x01(\x03R\x16fpvUnlimitedAgentPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\xd4\x06\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\x89\x06\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3437,13 +3598,12 @@ const file_payment_proto_rawDesc = "" +
 	"\x04plan\x18\x11 \x01(\tR\x04plan\x12\x1b\n" +
 	"\tnext_plan\x18\x12 \x01(\tR\bnextPlan\x12\x16\n" +
 	"\x06credit\x18\x1b \x01(\x02R\x06credit\x12#\n" +
-	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12'\n" +
-	"\x0foverride_limits\x18+ \x03(\tR\x0eoverrideLimits\x12\x14\n" +
+	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12\x14\n" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12\x18\n" +
 	"\achurned\x18/ \x01(\x03R\achurned\x12$\n" +
-	"\x0efpv_credit_vnd\x180 \x01(\x03R\ffpvCreditVnd\x129\n" +
-	"\x19fpv_unlimited_agent_price\x181 \x01(\x03R\x16fpvUnlimitedAgentPrice\x12B\n" +
-	"\x1efpv_next_unlimited_agent_price\x185 \x01(\x03R\x1afpvNextUnlimitedAgentPrice\x12\x1d\n" +
+	"\x0efpv_credit_vnd\x180 \x01(\x03R\ffpvCreditVnd\x12(\n" +
+	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x121\n" +
+	"\x15fpv_next_custom_price\x185 \x01(\x03R\x12fpvNextCustomPrice\x12\x1d\n" +
 	"\n" +
 	"num_agents\x182 \x01(\x03R\tnumAgents\x12\x1d\n" +
 	"\n" +
@@ -3548,7 +3708,23 @@ const file_payment_proto_rawDesc = "" +
 	"\x05draft\x10\x00\x12\b\n" +
 	"\x04open\x10\x01\x12\b\n" +
 	"\x04paid\x10\x03\x12\b\n" +
-	"\x04void\x10\x04\"\x92\x01\n" +
+	"\x04void\x10\x04\"\x95\x01\n" +
+	"\x13FanpagesInvoiceItem\x12\x19\n" +
+	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12\x14\n" +
+	"\x05count\x18\b \x01(\x05R\x05count\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\x12\x1d\n" +
+	"\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x9a\x01\n" +
+	"\x18ZaloPersonalsInvoiceItem\x12\x19\n" +
+	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12\x14\n" +
+	"\x05count\x18\b \x01(\x05R\x05count\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\x12\x1d\n" +
+	"\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x92\x01\n" +
 	"\x10AgentInvoiceItem\x12\x12\n" +
 	"\x04plan\x18\x03 \x01(\tR\x04plan\x12\x19\n" +
 	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12\x1f\n" +
@@ -3589,7 +3765,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x14MarketingInvoiceItem\x12\x18\n" +
 	"\aexpired\x18\x04 \x01(\x03R\aexpired\",\n" +
 	"\x10NoVATInvoiceItem\x12\x18\n" +
-	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xa9\x06\n" +
+	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xad\a\n" +
 	"\vInvoiceItem\x12\x1a\n" +
 	"\bheadline\x18\x04 \x01(\tR\bheadline\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
@@ -3605,14 +3781,17 @@ const file_payment_proto_rawDesc = "" +
 	"\x10fpv_discount_vnd\x18\r \x01(\x03R\x0efpvDiscountVnd\x12\"\n" +
 	"\rfpv_price_usd\x18\x0f \x01(\x03R\vfpvPriceUsd\x12-\n" +
 	"\x13fpv_total_price_usd\x18\x10 \x01(\x03R\x10fpvTotalPriceUsd\x12(\n" +
-	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xcb\x02\n" +
+	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xcf\x03\n" +
 	"\x04Data\x12/\n" +
 	"\x05renew\x18\x02 \x01(\v2\x19.payment.RenewInvoiceItemR\x05renew\x12/\n" +
 	"\x05agent\x18\x03 \x01(\v2\x19.payment.AgentInvoiceItemR\x05agent\x12,\n" +
 	"\x04plan\x18\x05 \x01(\v2\x18.payment.PlanInvoiceItemR\x04plan\x12;\n" +
 	"\tmarketing\x18\x06 \x01(\v2\x1d.payment.MarketingInvoiceItemR\tmarketing\x12E\n" +
 	"\rreserved_plan\x18\a \x01(\v2 .payment.ReservedPlanInvoiceItemR\freservedPlan\x12/\n" +
-	"\x05novat\x18\b \x01(\v2\x19.payment.NoVATInvoiceItemR\x05novat\"\xa0\x01\n" +
+	"\x05novat\x18\b \x01(\v2\x19.payment.NoVATInvoiceItemR\x05novat\x128\n" +
+	"\bfanpages\x18\t \x01(\v2\x1c.payment.FanpagesInvoiceItemR\bfanpages\x12H\n" +
+	"\x0ezalo_personals\x18\n" +
+	" \x01(\v2!.payment.ZaloPersonalsInvoiceItemR\rzaloPersonals\"\xa0\x01\n" +
 	"\vBillingInfo\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x10\n" +
@@ -3738,92 +3917,96 @@ func file_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_payment_proto_goTypes = []any{
-	(Plan_Type)(0),                  // 0: payment.Plan.Type
-	(Invoice_State)(0),              // 1: payment.Invoice.State
-	(Log_Action)(0),                 // 2: payment.Log.Action
-	(*Comments)(nil),                // 3: payment.Comments
-	(*Comment)(nil),                 // 4: payment.Comment
-	(*Plans)(nil),                   // 5: payment.Plans
-	(*DiffSubRequest)(nil),          // 6: payment.DiffSubRequest
-	(*Plan)(nil),                    // 7: payment.Plan
-	(*PurchaseRequest)(nil),         // 8: payment.PurchaseRequest
-	(*Subscription)(nil),            // 9: payment.Subscription
-	(*Bill)(nil),                    // 10: payment.Bill
-	(*Bills)(nil),                   // 11: payment.Bills
-	(*Note)(nil),                    // 12: payment.Note
-	(*Invoices)(nil),                // 13: payment.Invoices
-	(*ListInvoiceRequest)(nil),      // 14: payment.ListInvoiceRequest
-	(*Invoice)(nil),                 // 15: payment.Invoice
-	(*AgentInvoiceItem)(nil),        // 16: payment.AgentInvoiceItem
-	(*RenewInvoiceItem)(nil),        // 17: payment.RenewInvoiceItem
-	(*ReservedPlanInvoiceItem)(nil), // 18: payment.ReservedPlanInvoiceItem
-	(*PlanInvoiceItem)(nil),         // 19: payment.PlanInvoiceItem
-	(*MarketingInvoiceItem)(nil),    // 20: payment.MarketingInvoiceItem
-	(*NoVATInvoiceItem)(nil),        // 21: payment.NoVATInvoiceItem
-	(*InvoiceItem)(nil),             // 22: payment.InvoiceItem
-	(*BillingInfo)(nil),             // 23: payment.BillingInfo
-	(*Logs)(nil),                    // 24: payment.Logs
-	(*Log)(nil),                     // 25: payment.Log
-	(*String)(nil),                  // 26: payment.String
-	(*PayRequest)(nil),              // 27: payment.PayRequest
-	(*AutoPayRequest)(nil),          // 28: payment.AutoPayRequest
-	(*InvoiceCreatedEmail)(nil),     // 29: payment.InvoiceCreatedEmail
-	(*TrialEndingEmail)(nil),        // 30: payment.TrialEndingEmail
-	(*UpdatePlanEmail)(nil),         // 31: payment.UpdatePlanEmail
-	(*PaidInvoiceEmail)(nil),        // 32: payment.PaidInvoiceEmail
-	(*InvoiceItem_Data)(nil),        // 33: payment.InvoiceItem.Data
-	(*common.Context)(nil),          // 34: common.Context
-	(*common.Limit)(nil),            // 35: common.Limit
+	(Plan_Type)(0),                   // 0: payment.Plan.Type
+	(Invoice_State)(0),               // 1: payment.Invoice.State
+	(Log_Action)(0),                  // 2: payment.Log.Action
+	(*Comments)(nil),                 // 3: payment.Comments
+	(*Comment)(nil),                  // 4: payment.Comment
+	(*Plans)(nil),                    // 5: payment.Plans
+	(*DiffSubRequest)(nil),           // 6: payment.DiffSubRequest
+	(*Plan)(nil),                     // 7: payment.Plan
+	(*PurchaseRequest)(nil),          // 8: payment.PurchaseRequest
+	(*Subscription)(nil),             // 9: payment.Subscription
+	(*Bill)(nil),                     // 10: payment.Bill
+	(*Bills)(nil),                    // 11: payment.Bills
+	(*Note)(nil),                     // 12: payment.Note
+	(*Invoices)(nil),                 // 13: payment.Invoices
+	(*ListInvoiceRequest)(nil),       // 14: payment.ListInvoiceRequest
+	(*Invoice)(nil),                  // 15: payment.Invoice
+	(*FanpagesInvoiceItem)(nil),      // 16: payment.FanpagesInvoiceItem
+	(*ZaloPersonalsInvoiceItem)(nil), // 17: payment.ZaloPersonalsInvoiceItem
+	(*AgentInvoiceItem)(nil),         // 18: payment.AgentInvoiceItem
+	(*RenewInvoiceItem)(nil),         // 19: payment.RenewInvoiceItem
+	(*ReservedPlanInvoiceItem)(nil),  // 20: payment.ReservedPlanInvoiceItem
+	(*PlanInvoiceItem)(nil),          // 21: payment.PlanInvoiceItem
+	(*MarketingInvoiceItem)(nil),     // 22: payment.MarketingInvoiceItem
+	(*NoVATInvoiceItem)(nil),         // 23: payment.NoVATInvoiceItem
+	(*InvoiceItem)(nil),              // 24: payment.InvoiceItem
+	(*BillingInfo)(nil),              // 25: payment.BillingInfo
+	(*Logs)(nil),                     // 26: payment.Logs
+	(*Log)(nil),                      // 27: payment.Log
+	(*String)(nil),                   // 28: payment.String
+	(*PayRequest)(nil),               // 29: payment.PayRequest
+	(*AutoPayRequest)(nil),           // 30: payment.AutoPayRequest
+	(*InvoiceCreatedEmail)(nil),      // 31: payment.InvoiceCreatedEmail
+	(*TrialEndingEmail)(nil),         // 32: payment.TrialEndingEmail
+	(*UpdatePlanEmail)(nil),          // 33: payment.UpdatePlanEmail
+	(*PaidInvoiceEmail)(nil),         // 34: payment.PaidInvoiceEmail
+	(*InvoiceItem_Data)(nil),         // 35: payment.InvoiceItem.Data
+	(*common.Context)(nil),           // 36: common.Context
+	(*common.Limit)(nil),             // 37: common.Limit
 }
 var file_payment_proto_depIdxs = []int32{
-	34, // 0: payment.Comments.ctx:type_name -> common.Context
+	36, // 0: payment.Comments.ctx:type_name -> common.Context
 	4,  // 1: payment.Comments.comments:type_name -> payment.Comment
-	34, // 2: payment.Comment.ctx:type_name -> common.Context
+	36, // 2: payment.Comment.ctx:type_name -> common.Context
 	7,  // 3: payment.Plans.plans:type_name -> payment.Plan
 	9,  // 4: payment.DiffSubRequest.old_subscription:type_name -> payment.Subscription
 	9,  // 5: payment.DiffSubRequest.new_subscription:type_name -> payment.Subscription
-	35, // 6: payment.Plan.limit:type_name -> common.Limit
-	34, // 7: payment.PurchaseRequest.ctx:type_name -> common.Context
-	35, // 8: payment.PurchaseRequest.limit:type_name -> common.Limit
-	34, // 9: payment.Subscription.ctx:type_name -> common.Context
-	35, // 10: payment.Subscription.limit:type_name -> common.Limit
-	34, // 11: payment.Bill.ctx:type_name -> common.Context
-	34, // 12: payment.Bills.ctx:type_name -> common.Context
+	37, // 6: payment.Plan.limit:type_name -> common.Limit
+	36, // 7: payment.PurchaseRequest.ctx:type_name -> common.Context
+	37, // 8: payment.PurchaseRequest.limit:type_name -> common.Limit
+	36, // 9: payment.Subscription.ctx:type_name -> common.Context
+	37, // 10: payment.Subscription.limit:type_name -> common.Limit
+	36, // 11: payment.Bill.ctx:type_name -> common.Context
+	36, // 12: payment.Bills.ctx:type_name -> common.Context
 	10, // 13: payment.Bills.bills:type_name -> payment.Bill
-	34, // 14: payment.Note.ctx:type_name -> common.Context
-	34, // 15: payment.Invoices.ctx:type_name -> common.Context
+	36, // 14: payment.Note.ctx:type_name -> common.Context
+	36, // 15: payment.Invoices.ctx:type_name -> common.Context
 	15, // 16: payment.Invoices.invoices:type_name -> payment.Invoice
-	34, // 17: payment.ListInvoiceRequest.ctx:type_name -> common.Context
-	34, // 18: payment.Invoice.ctx:type_name -> common.Context
-	23, // 19: payment.Invoice.billing_info:type_name -> payment.BillingInfo
-	22, // 20: payment.Invoice.items:type_name -> payment.InvoiceItem
+	36, // 17: payment.ListInvoiceRequest.ctx:type_name -> common.Context
+	36, // 18: payment.Invoice.ctx:type_name -> common.Context
+	25, // 19: payment.Invoice.billing_info:type_name -> payment.BillingInfo
+	24, // 20: payment.Invoice.items:type_name -> payment.InvoiceItem
 	12, // 21: payment.Invoice.notes:type_name -> payment.Note
 	9,  // 22: payment.Invoice.current_sub:type_name -> payment.Subscription
 	7,  // 23: payment.Invoice.current_plan:type_name -> payment.Plan
-	33, // 24: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
-	34, // 25: payment.Logs.ctx:type_name -> common.Context
-	25, // 26: payment.Logs.logs:type_name -> payment.Log
-	34, // 27: payment.Log.ctx:type_name -> common.Context
-	34, // 28: payment.String.ctx:type_name -> common.Context
-	34, // 29: payment.PayRequest.ctx:type_name -> common.Context
-	34, // 30: payment.AutoPayRequest.ctx:type_name -> common.Context
-	34, // 31: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	34, // 32: payment.TrialEndingEmail.ctx:type_name -> common.Context
-	34, // 33: payment.UpdatePlanEmail.ctx:type_name -> common.Context
-	34, // 34: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
-	17, // 35: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
-	16, // 36: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
-	19, // 37: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
-	20, // 38: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
-	18, // 39: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedPlanInvoiceItem
-	21, // 40: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
-	41, // [41:41] is the sub-list for method output_type
-	41, // [41:41] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	35, // 24: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
+	36, // 25: payment.Logs.ctx:type_name -> common.Context
+	27, // 26: payment.Logs.logs:type_name -> payment.Log
+	36, // 27: payment.Log.ctx:type_name -> common.Context
+	36, // 28: payment.String.ctx:type_name -> common.Context
+	36, // 29: payment.PayRequest.ctx:type_name -> common.Context
+	36, // 30: payment.AutoPayRequest.ctx:type_name -> common.Context
+	36, // 31: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	36, // 32: payment.TrialEndingEmail.ctx:type_name -> common.Context
+	36, // 33: payment.UpdatePlanEmail.ctx:type_name -> common.Context
+	36, // 34: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
+	19, // 35: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
+	18, // 36: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
+	21, // 37: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
+	22, // 38: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
+	20, // 39: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedPlanInvoiceItem
+	23, // 40: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
+	16, // 41: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
+	17, // 42: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
+	43, // [43:43] is the sub-list for method output_type
+	43, // [43:43] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }
@@ -3837,7 +4020,7 @@ func file_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_proto_rawDesc), len(file_payment_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   31,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

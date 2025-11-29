@@ -96,15 +96,14 @@ message Subscription {
 	optional string next_plan = 18;
 
 	optional float credit = 27;
-	optional common.Limit limit = 42; // plan limit + override limit
-	repeated string override_limits = 43; // fields
+	optional common.Limit limit = 42; //
 
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48; // translate from credit, do not store in db
-	optional int64 fpv_unlimited_agent_price = 49; // usd, custom price, only edited by subiz
-	optional int64 fpv_next_unlimited_agent_price = 53; // usd, custom price only edited by subiz
+	optional int64 fpv_custom_price = 49; // usd, custom price, only edited by subiz
+	optional int64 fpv_next_custom_price = 53; // usd, custom price only edited by subiz
 
 	optional int64 num_agents = 50;
 	optional int64 use_ticket = 51;
@@ -235,6 +234,23 @@ message Invoice {
 	optional string payment_num = 45;
 }
 
+message FanpagesInvoiceItem {
+	// optional string plan = 3;
+	optional int32 day_left = 4;
+	optional int32 count = 8;
+	optional int64 started = 9;
+	optional int64 ended = 10;
+	optional bool full_cycle = 11;
+}
+
+message ZaloPersonalsInvoiceItem {
+	optional int32 day_left = 4;
+	optional int32 count = 8;
+	optional int64 started = 9;
+	optional int64 ended = 10;
+	optional bool full_cycle = 11;
+}
+
 message AgentInvoiceItem {
 	optional string plan = 3;
 	optional int32 day_left = 4;
@@ -298,6 +314,8 @@ message InvoiceItem {
 		optional MarketingInvoiceItem marketing = 6;
 		optional ReservedPlanInvoiceItem reserved_plan = 7;
 		optional NoVATInvoiceItem novat = 8;
+		optional FanpagesInvoiceItem fanpages = 9;
+		optional ZaloPersonalsInvoiceItem zalo_personals = 10;
 	}
 	optional string type = 18;
 	optional Data data = 9;
