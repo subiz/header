@@ -31,6 +31,7 @@ const (
 	Plan_advanced                 Plan_Type = 3 // per agent
 	Plan_standard_unlimited_agent Plan_Type = 4
 	Plan_advanced_unlimited_agent Plan_Type = 6
+	Plan_custom                   Plan_Type = 7
 )
 
 // Enum value maps for Plan_Type.
@@ -41,6 +42,7 @@ var (
 		3: "advanced",
 		4: "standard_unlimited_agent",
 		6: "advanced_unlimited_agent",
+		7: "custom",
 	}
 	Plan_Type_value = map[string]int32{
 		"trial":                    0,
@@ -48,6 +50,7 @@ var (
 		"advanced":                 3,
 		"standard_unlimited_agent": 4,
 		"advanced_unlimited_agent": 6,
+		"custom":                   7,
 	}
 )
 
@@ -672,10 +675,10 @@ type PurchaseRequest struct {
 	AutoCharge            *bool                  `protobuf:"varint,44,opt,name=auto_charge,json=autoCharge" json:"auto_charge,omitempty"`
 	Ended                 *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"` // optional int64 churned = 47;
 	// optional int64 fpv_credit_vnd = 48;
-	FpvUnlimitedAgentPrice *int64 `protobuf:"varint,49,opt,name=fpv_unlimited_agent_price,json=fpvUnlimitedAgentPrice" json:"fpv_unlimited_agent_price,omitempty"` // usd
-	NumAgents              *int64 `protobuf:"varint,51,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	FpvCustomPrice *int64 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"` // usd
+	NumAgents      *int64 `protobuf:"varint,51,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *PurchaseRequest) Reset() {
@@ -799,9 +802,9 @@ func (x *PurchaseRequest) GetEnded() int64 {
 	return 0
 }
 
-func (x *PurchaseRequest) GetFpvUnlimitedAgentPrice() int64 {
-	if x != nil && x.FpvUnlimitedAgentPrice != nil {
-		return *x.FpvUnlimitedAgentPrice
+func (x *PurchaseRequest) GetFpvCustomPrice() int64 {
+	if x != nil && x.FpvCustomPrice != nil {
+		return *x.FpvCustomPrice
 	}
 	return 0
 }
@@ -822,7 +825,7 @@ type Subscription struct {
 	Started               *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                 // ms
 	BillingCycleMonth     *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
 	NextBillingCycleMonth *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"`
-	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"` // trial, standard, standard_unlmited, advanced, custom
+	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"` // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
 	NextPlan              *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`
 	Credit                *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
 	Limit                 *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"` //
@@ -832,13 +835,13 @@ type Subscription struct {
 	FpvCustomPrice        *int64                 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"`               // usd, custom price, only edited by subiz
 	FpvNextCustomPrice    *int64                 `protobuf:"varint,53,opt,name=fpv_next_custom_price,json=fpvNextCustomPrice" json:"fpv_next_custom_price,omitempty"` // usd, custom price only edited by subiz
 	NumAgents             *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
-	UseTicket             *int64                 `protobuf:"varint,51,opt,name=use_ticket,json=useTicket" json:"use_ticket,omitempty"`
-	NextNumAgents         *int64                 `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
-	UnlimitedAiSpending   *int64                 `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
-	FpvCreditUsd          *int64                 `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
-	Note                  *string                `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// optional int64 use_ticket = 51;
+	NextNumAgents       *int64  `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
+	UnlimitedAiSpending *int64  `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
+	FpvCreditUsd        *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
+	Note                *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Subscription) Reset() {
@@ -986,13 +989,6 @@ func (x *Subscription) GetFpvNextCustomPrice() int64 {
 func (x *Subscription) GetNumAgents() int64 {
 	if x != nil && x.NumAgents != nil {
 		return *x.NumAgents
-	}
-	return 0
-}
-
-func (x *Subscription) GetUseTicket() int64 {
-	if x != nil && x.UseTicket != nil {
-		return *x.UseTicket
 	}
 	return 0
 }
@@ -1828,7 +1824,7 @@ func (x *Invoice) GetPaymentNum() string {
 type FanpagesInvoiceItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// optional string plan = 3;
-	DayLeft       *int32 `protobuf:"varint,4,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
+	// optional int32 day_left = 4;
 	Count         *int32 `protobuf:"varint,8,opt,name=count" json:"count,omitempty"`
 	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
 	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
@@ -1867,13 +1863,6 @@ func (*FanpagesInvoiceItem) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *FanpagesInvoiceItem) GetDayLeft() int32 {
-	if x != nil && x.DayLeft != nil {
-		return *x.DayLeft
-	}
-	return 0
-}
-
 func (x *FanpagesInvoiceItem) GetCount() int32 {
 	if x != nil && x.Count != nil {
 		return *x.Count
@@ -1903,12 +1892,12 @@ func (x *FanpagesInvoiceItem) GetFullCycle() bool {
 }
 
 type ZaloPersonalsInvoiceItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DayLeft       *int32                 `protobuf:"varint,4,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
-	Count         *int32                 `protobuf:"varint,8,opt,name=count" json:"count,omitempty"`
-	Started       *int64                 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
-	Ended         *int64                 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
-	FullCycle     *bool                  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional int32 day_left = 4;
+	Count         *int32 `protobuf:"varint,8,opt,name=count" json:"count,omitempty"`
+	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1941,13 +1930,6 @@ func (x *ZaloPersonalsInvoiceItem) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ZaloPersonalsInvoiceItem.ProtoReflect.Descriptor instead.
 func (*ZaloPersonalsInvoiceItem) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *ZaloPersonalsInvoiceItem) GetDayLeft() int32 {
-	if x != nil && x.DayLeft != nil {
-		return *x.DayLeft
-	}
-	return 0
 }
 
 func (x *ZaloPersonalsInvoiceItem) GetCount() int32 {
@@ -3546,7 +3528,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05plans\x18\x02 \x03(\v2\r.payment.PlanR\x05plans\"\x94\x01\n" +
 	"\x0eDiffSubRequest\x12@\n" +
 	"\x10old_subscription\x18\x04 \x01(\v2\x15.payment.SubscriptionR\x0foldSubscription\x12@\n" +
-	"\x10new_subscription\x18\x05 \x01(\v2\x15.payment.SubscriptionR\x0fnewSubscription\"\xd1\x04\n" +
+	"\x10new_subscription\x18\x05 \x01(\v2\x15.payment.SubscriptionR\x0fnewSubscription\"\xdd\x04\n" +
 	"\x04Plan\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12#\n" +
 	"\x05limit\x18\x03 \x01(\v2\r.common.LimitR\x05limit\x12\x1b\n" +
@@ -3559,13 +3541,15 @@ const file_payment_proto_rawDesc = "" +
 	" \x01(\x03R\x18mininumBillingCycleMonth\x12\"\n" +
 	"\rfpv_price_usd\x18\v \x01(\x03R\vfpvPriceUsd\x12\"\n" +
 	"\rfpv_price_vnd\x18\f \x01(\x03R\vfpvPriceVnd\x127\n" +
-	"\x18is_unlimited_ai_spending\x18\r \x01(\x03R\x15isUnlimitedAiSpending\"i\n" +
+	"\x18is_unlimited_ai_spending\x18\r \x01(\x03R\x15isUnlimitedAiSpending\"u\n" +
 	"\x04Type\x12\t\n" +
 	"\x05trial\x10\x00\x12\f\n" +
 	"\bstandard\x10\x02\x12\f\n" +
 	"\badvanced\x10\x03\x12\x1c\n" +
 	"\x18standard_unlimited_agent\x10\x04\x12\x1c\n" +
-	"\x18advanced_unlimited_agent\x10\x06\"\xa7\x04\n" +
+	"\x18advanced_unlimited_agent\x10\x06\x12\n" +
+	"\n" +
+	"\x06custom\x10\a\"\x96\x04\n" +
 	"\x0fPurchaseRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3582,10 +3566,10 @@ const file_payment_proto_rawDesc = "" +
 	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12\x1f\n" +
 	"\vauto_charge\x18, \x01(\bR\n" +
 	"autoCharge\x12\x14\n" +
-	"\x05ended\x18- \x01(\x03R\x05ended\x129\n" +
-	"\x19fpv_unlimited_agent_price\x181 \x01(\x03R\x16fpvUnlimitedAgentPrice\x12\x1d\n" +
+	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
+	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\x89\x06\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xea\x05\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3605,9 +3589,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x121\n" +
 	"\x15fpv_next_custom_price\x185 \x01(\x03R\x12fpvNextCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x182 \x01(\x03R\tnumAgents\x12\x1d\n" +
-	"\n" +
-	"use_ticket\x183 \x01(\x03R\tuseTicket\x12&\n" +
+	"num_agents\x182 \x01(\x03R\tnumAgents\x12&\n" +
 	"\x0fnext_num_agents\x184 \x01(\x03R\rnextNumAgents\x122\n" +
 	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
 	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x12\x12\n" +
@@ -3708,17 +3690,15 @@ const file_payment_proto_rawDesc = "" +
 	"\x05draft\x10\x00\x12\b\n" +
 	"\x04open\x10\x01\x12\b\n" +
 	"\x04paid\x10\x03\x12\b\n" +
-	"\x04void\x10\x04\"\x95\x01\n" +
-	"\x13FanpagesInvoiceItem\x12\x19\n" +
-	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12\x14\n" +
+	"\x04void\x10\x04\"z\n" +
+	"\x13FanpagesInvoiceItem\x12\x14\n" +
 	"\x05count\x18\b \x01(\x05R\x05count\x12\x18\n" +
 	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
 	"\x05ended\x18\n" +
 	" \x01(\x03R\x05ended\x12\x1d\n" +
 	"\n" +
-	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x9a\x01\n" +
-	"\x18ZaloPersonalsInvoiceItem\x12\x19\n" +
-	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12\x14\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x7f\n" +
+	"\x18ZaloPersonalsInvoiceItem\x12\x14\n" +
 	"\x05count\x18\b \x01(\x05R\x05count\x12\x18\n" +
 	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
 	"\x05ended\x18\n" +

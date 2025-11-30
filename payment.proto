@@ -50,6 +50,7 @@ message Plan {
 		advanced = 3; // per agent
 		standard_unlimited_agent = 4;
 		advanced_unlimited_agent = 6;
+		custom = 7;
 	}
 	optional int64 fpv_price_usd = 11; // usd // permonth
 	optional int64 fpv_price_vnd = 12; // usd // permonth
@@ -78,7 +79,7 @@ message PurchaseRequest {
 	// optional int64 churned = 47;
 
 	// optional int64 fpv_credit_vnd = 48;
-	optional int64 fpv_unlimited_agent_price = 49; // usd
+	optional int64 fpv_custom_price = 49; // usd
 	optional int64 num_agents = 51;
 }
 
@@ -92,7 +93,7 @@ message Subscription {
 	optional uint32 billing_cycle_month = 15;
 	optional uint32 next_billing_cycle_month = 16;
 
-	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom
+	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
 	optional string next_plan = 18;
 
 	optional float credit = 27;
@@ -106,7 +107,7 @@ message Subscription {
 	optional int64 fpv_next_custom_price = 53; // usd, custom price only edited by subiz
 
 	optional int64 num_agents = 50;
-	optional int64 use_ticket = 51;
+	// optional int64 use_ticket = 51;
 	optional int64 next_num_agents = 52;
 	optional int64 unlimited_ai_spending = 54;
 	optional int64 fpv_credit_usd = 55; // soft
@@ -236,7 +237,7 @@ message Invoice {
 
 message FanpagesInvoiceItem {
 	// optional string plan = 3;
-	optional int32 day_left = 4;
+	// optional int32 day_left = 4;
 	optional int32 count = 8;
 	optional int64 started = 9;
 	optional int64 ended = 10;
@@ -244,7 +245,7 @@ message FanpagesInvoiceItem {
 }
 
 message ZaloPersonalsInvoiceItem {
-	optional int32 day_left = 4;
+	// optional int32 day_left = 4;
 	optional int32 count = 8;
 	optional int64 started = 9;
 	optional int64 ended = 10;
