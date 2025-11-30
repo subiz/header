@@ -7076,6 +7076,7 @@ message Response {
 	ZaloPersonalAccount zalo_personal_account = 253;
 
 	ZaloLoginStatus zalo_login_status = 254;
+	repeated Plan plans = 255;
 }
 
 message ReportCount {
@@ -10072,4 +10073,28 @@ message Link {
 	string description = 4;
 
 	int64 created = 5;
+}
+
+message Plan {
+	optional string name = 2;
+	optional common.Limit limit = 3;
+	optional int64 fpv_price = 8; // usd // permonth
+	optional bool is_unlimited_agent = 5;
+	optional bool renewable = 6;
+	optional int64 inactive_days_after_churned = 7;
+	optional bool long_billing_cycle_discount = 9;
+	optional int64 mininum_billing_cycle_month = 10;
+	// cho phep renew
+	enum Type {
+		trial = 0;
+		standard = 2; // per agent
+		advanced = 3; // per agent
+		standard_unlimited_agent = 4;
+		advanced_unlimited_agent = 6;
+		custom = 7;
+	}
+	optional int64 fpv_price_usd = 11; // usd // permonth
+	optional int64 fpv_price_vnd = 12; // usd // permonth
+
+	optional int64 is_unlimited_ai_spending = 13;
 }

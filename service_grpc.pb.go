@@ -17588,7 +17588,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentMgrClient interface {
-	ListPlans(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Plans, error)
+	ListPlans(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*AccSubs, error)
 	GetSub(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccSub, error)
 	Purchase(ctx context.Context, in *payment.PurchaseRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
@@ -17617,9 +17617,9 @@ func NewPaymentMgrClient(cc grpc.ClientConnInterface) PaymentMgrClient {
 	return &paymentMgrClient{cc}
 }
 
-func (c *paymentMgrClient) ListPlans(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Plans, error) {
+func (c *paymentMgrClient) ListPlans(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(payment.Plans)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, PaymentMgr_ListPlans_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -17801,7 +17801,7 @@ func (c *paymentMgrClient) ListPaymentLogs(ctx context.Context, in *Id, opts ...
 // All implementations must embed UnimplementedPaymentMgrServer
 // for forward compatibility.
 type PaymentMgrServer interface {
-	ListPlans(context.Context, *Id) (*payment.Plans, error)
+	ListPlans(context.Context, *Id) (*Response, error)
 	SearchSub(context.Context, *account.SearchSubRequest) (*AccSubs, error)
 	GetSub(context.Context, *Id) (*AccSub, error)
 	Purchase(context.Context, *payment.PurchaseRequest) (*payment.Invoice, error)
@@ -17830,7 +17830,7 @@ type PaymentMgrServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPaymentMgrServer struct{}
 
-func (UnimplementedPaymentMgrServer) ListPlans(context.Context, *Id) (*payment.Plans, error) {
+func (UnimplementedPaymentMgrServer) ListPlans(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
 }
 func (UnimplementedPaymentMgrServer) SearchSub(context.Context, *account.SearchSubRequest) (*AccSubs, error) {
