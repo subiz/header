@@ -2112,7 +2112,7 @@ func (x *RenewInvoiceItem) GetFpvSavePercentage() int64 {
 	return 0
 }
 
-type ReservedPlanInvoiceItem struct {
+type ReservedInvoiceItem struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	OldPlan              *string                `protobuf:"bytes,3,opt,name=old_plan,json=oldPlan" json:"old_plan,omitempty"`
 	OldAgentCount        *int64                 `protobuf:"varint,4,opt,name=old_agent_count,json=oldAgentCount" json:"old_agent_count,omitempty"`
@@ -2122,24 +2122,25 @@ type ReservedPlanInvoiceItem struct {
 	DayLeft       *int32 `protobuf:"varint,7,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
 	OldStarted    *int64 `protobuf:"varint,8,opt,name=old_started,json=oldStarted" json:"old_started,omitempty"` // now (not sub.started)
 	OldEnded      *int64 `protobuf:"varint,9,opt,name=old_ended,json=oldEnded" json:"old_ended,omitempty"`
+	OldCount      *int64 `protobuf:"varint,10,opt,name=old_count,json=oldCount" json:"old_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ReservedPlanInvoiceItem) Reset() {
-	*x = ReservedPlanInvoiceItem{}
+func (x *ReservedInvoiceItem) Reset() {
+	*x = ReservedInvoiceItem{}
 	mi := &file_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReservedPlanInvoiceItem) String() string {
+func (x *ReservedInvoiceItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReservedPlanInvoiceItem) ProtoMessage() {}
+func (*ReservedInvoiceItem) ProtoMessage() {}
 
-func (x *ReservedPlanInvoiceItem) ProtoReflect() protoreflect.Message {
+func (x *ReservedInvoiceItem) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2151,49 +2152,56 @@ func (x *ReservedPlanInvoiceItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReservedPlanInvoiceItem.ProtoReflect.Descriptor instead.
-func (*ReservedPlanInvoiceItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReservedInvoiceItem.ProtoReflect.Descriptor instead.
+func (*ReservedInvoiceItem) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *ReservedPlanInvoiceItem) GetOldPlan() string {
+func (x *ReservedInvoiceItem) GetOldPlan() string {
 	if x != nil && x.OldPlan != nil {
 		return *x.OldPlan
 	}
 	return ""
 }
 
-func (x *ReservedPlanInvoiceItem) GetOldAgentCount() int64 {
+func (x *ReservedInvoiceItem) GetOldAgentCount() int64 {
 	if x != nil && x.OldAgentCount != nil {
 		return *x.OldAgentCount
 	}
 	return 0
 }
 
-func (x *ReservedPlanInvoiceItem) GetOldBillingCycleMonth() int64 {
+func (x *ReservedInvoiceItem) GetOldBillingCycleMonth() int64 {
 	if x != nil && x.OldBillingCycleMonth != nil {
 		return *x.OldBillingCycleMonth
 	}
 	return 0
 }
 
-func (x *ReservedPlanInvoiceItem) GetDayLeft() int32 {
+func (x *ReservedInvoiceItem) GetDayLeft() int32 {
 	if x != nil && x.DayLeft != nil {
 		return *x.DayLeft
 	}
 	return 0
 }
 
-func (x *ReservedPlanInvoiceItem) GetOldStarted() int64 {
+func (x *ReservedInvoiceItem) GetOldStarted() int64 {
 	if x != nil && x.OldStarted != nil {
 		return *x.OldStarted
 	}
 	return 0
 }
 
-func (x *ReservedPlanInvoiceItem) GetOldEnded() int64 {
+func (x *ReservedInvoiceItem) GetOldEnded() int64 {
 	if x != nil && x.OldEnded != nil {
 		return *x.OldEnded
+	}
+	return 0
+}
+
+func (x *ReservedInvoiceItem) GetOldCount() int64 {
+	if x != nil && x.OldCount != nil {
+		return *x.OldCount
 	}
 	return 0
 }
@@ -3401,17 +3409,19 @@ func (x *PaidInvoiceEmail) GetInvoiceLink() string {
 }
 
 type InvoiceItem_Data struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Renew         *RenewInvoiceItem         `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
-	Agent         *AgentInvoiceItem         `protobuf:"bytes,3,opt,name=agent" json:"agent,omitempty"`
-	Plan          *PlanInvoiceItem          `protobuf:"bytes,5,opt,name=plan" json:"plan,omitempty"`
-	Marketing     *MarketingInvoiceItem     `protobuf:"bytes,6,opt,name=marketing" json:"marketing,omitempty"`
-	ReservedPlan  *ReservedPlanInvoiceItem  `protobuf:"bytes,7,opt,name=reserved_plan,json=reservedPlan" json:"reserved_plan,omitempty"`
-	Novat         *NoVATInvoiceItem         `protobuf:"bytes,8,opt,name=novat" json:"novat,omitempty"`
-	Fanpages      *FanpagesInvoiceItem      `protobuf:"bytes,9,opt,name=fanpages" json:"fanpages,omitempty"`
-	ZaloPersonals *ZaloPersonalsInvoiceItem `protobuf:"bytes,10,opt,name=zalo_personals,json=zaloPersonals" json:"zalo_personals,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState    `protogen:"open.v1"`
+	Renew                 *RenewInvoiceItem         `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
+	Agent                 *AgentInvoiceItem         `protobuf:"bytes,3,opt,name=agent" json:"agent,omitempty"`
+	Plan                  *PlanInvoiceItem          `protobuf:"bytes,5,opt,name=plan" json:"plan,omitempty"`
+	Marketing             *MarketingInvoiceItem     `protobuf:"bytes,6,opt,name=marketing" json:"marketing,omitempty"`
+	ReservedPlan          *ReservedInvoiceItem      `protobuf:"bytes,7,opt,name=reserved_plan,json=reservedPlan" json:"reserved_plan,omitempty"`
+	Novat                 *NoVATInvoiceItem         `protobuf:"bytes,8,opt,name=novat" json:"novat,omitempty"`
+	Fanpages              *FanpagesInvoiceItem      `protobuf:"bytes,9,opt,name=fanpages" json:"fanpages,omitempty"`
+	ZaloPersonals         *ZaloPersonalsInvoiceItem `protobuf:"bytes,10,opt,name=zalo_personals,json=zaloPersonals" json:"zalo_personals,omitempty"`
+	ReservedFanpages      *ReservedInvoiceItem      `protobuf:"bytes,11,opt,name=reserved_fanpages,json=reservedFanpages" json:"reserved_fanpages,omitempty"`
+	ReservedZaloPersonals *ReservedInvoiceItem      `protobuf:"bytes,12,opt,name=reserved_zalo_personals,json=reservedZaloPersonals" json:"reserved_zalo_personals,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *InvoiceItem_Data) Reset() {
@@ -3472,7 +3482,7 @@ func (x *InvoiceItem_Data) GetMarketing() *MarketingInvoiceItem {
 	return nil
 }
 
-func (x *InvoiceItem_Data) GetReservedPlan() *ReservedPlanInvoiceItem {
+func (x *InvoiceItem_Data) GetReservedPlan() *ReservedInvoiceItem {
 	if x != nil {
 		return x.ReservedPlan
 	}
@@ -3496,6 +3506,20 @@ func (x *InvoiceItem_Data) GetFanpages() *FanpagesInvoiceItem {
 func (x *InvoiceItem_Data) GetZaloPersonals() *ZaloPersonalsInvoiceItem {
 	if x != nil {
 		return x.ZaloPersonals
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetReservedFanpages() *ReservedInvoiceItem {
+	if x != nil {
+		return x.ReservedFanpages
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetReservedZaloPersonals() *ReservedInvoiceItem {
+	if x != nil {
+		return x.ReservedZaloPersonals
 	}
 	return nil
 }
@@ -3719,15 +3743,17 @@ const file_payment_proto_rawDesc = "" +
 	"\vagent_count\x18\x05 \x01(\rR\n" +
 	"agentCount\x12\x1b\n" +
 	"\tfrom_time\x18\x06 \x01(\x03R\bfromTime\x12.\n" +
-	"\x13fpv_save_percentage\x18\a \x01(\x03R\x11fpvSavePercentage\"\xec\x01\n" +
-	"\x17ReservedPlanInvoiceItem\x12\x19\n" +
+	"\x13fpv_save_percentage\x18\a \x01(\x03R\x11fpvSavePercentage\"\x85\x02\n" +
+	"\x13ReservedInvoiceItem\x12\x19\n" +
 	"\bold_plan\x18\x03 \x01(\tR\aoldPlan\x12&\n" +
 	"\x0fold_agent_count\x18\x04 \x01(\x03R\roldAgentCount\x125\n" +
 	"\x17old_billing_cycle_month\x18\x05 \x01(\x03R\x14oldBillingCycleMonth\x12\x19\n" +
 	"\bday_left\x18\a \x01(\x05R\adayLeft\x12\x1f\n" +
 	"\vold_started\x18\b \x01(\x03R\n" +
 	"oldStarted\x12\x1b\n" +
-	"\told_ended\x18\t \x01(\x03R\boldEnded\"\x92\x03\n" +
+	"\told_ended\x18\t \x01(\x03R\boldEnded\x12\x1b\n" +
+	"\told_count\x18\n" +
+	" \x01(\x03R\boldCount\"\x92\x03\n" +
 	"\x0fPlanInvoiceItem\x12\x1f\n" +
 	"\vagent_count\x18\x02 \x01(\rR\n" +
 	"agentCount\x12.\n" +
@@ -3745,7 +3771,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x14MarketingInvoiceItem\x12\x18\n" +
 	"\aexpired\x18\x04 \x01(\x03R\aexpired\",\n" +
 	"\x10NoVATInvoiceItem\x12\x18\n" +
-	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xad\a\n" +
+	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xca\b\n" +
 	"\vInvoiceItem\x12\x1a\n" +
 	"\bheadline\x18\x04 \x01(\tR\bheadline\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
@@ -3761,17 +3787,19 @@ const file_payment_proto_rawDesc = "" +
 	"\x10fpv_discount_vnd\x18\r \x01(\x03R\x0efpvDiscountVnd\x12\"\n" +
 	"\rfpv_price_usd\x18\x0f \x01(\x03R\vfpvPriceUsd\x12-\n" +
 	"\x13fpv_total_price_usd\x18\x10 \x01(\x03R\x10fpvTotalPriceUsd\x12(\n" +
-	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xcf\x03\n" +
+	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xec\x04\n" +
 	"\x04Data\x12/\n" +
 	"\x05renew\x18\x02 \x01(\v2\x19.payment.RenewInvoiceItemR\x05renew\x12/\n" +
 	"\x05agent\x18\x03 \x01(\v2\x19.payment.AgentInvoiceItemR\x05agent\x12,\n" +
 	"\x04plan\x18\x05 \x01(\v2\x18.payment.PlanInvoiceItemR\x04plan\x12;\n" +
-	"\tmarketing\x18\x06 \x01(\v2\x1d.payment.MarketingInvoiceItemR\tmarketing\x12E\n" +
-	"\rreserved_plan\x18\a \x01(\v2 .payment.ReservedPlanInvoiceItemR\freservedPlan\x12/\n" +
+	"\tmarketing\x18\x06 \x01(\v2\x1d.payment.MarketingInvoiceItemR\tmarketing\x12A\n" +
+	"\rreserved_plan\x18\a \x01(\v2\x1c.payment.ReservedInvoiceItemR\freservedPlan\x12/\n" +
 	"\x05novat\x18\b \x01(\v2\x19.payment.NoVATInvoiceItemR\x05novat\x128\n" +
 	"\bfanpages\x18\t \x01(\v2\x1c.payment.FanpagesInvoiceItemR\bfanpages\x12H\n" +
 	"\x0ezalo_personals\x18\n" +
-	" \x01(\v2!.payment.ZaloPersonalsInvoiceItemR\rzaloPersonals\"\xa0\x01\n" +
+	" \x01(\v2!.payment.ZaloPersonalsInvoiceItemR\rzaloPersonals\x12I\n" +
+	"\x11reserved_fanpages\x18\v \x01(\v2\x1c.payment.ReservedInvoiceItemR\x10reservedFanpages\x12T\n" +
+	"\x17reserved_zalo_personals\x18\f \x01(\v2\x1c.payment.ReservedInvoiceItemR\x15reservedZaloPersonals\"\xa0\x01\n" +
 	"\vBillingInfo\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x10\n" +
@@ -3919,7 +3947,7 @@ var file_payment_proto_goTypes = []any{
 	(*ZaloPersonalsInvoiceItem)(nil), // 17: payment.ZaloPersonalsInvoiceItem
 	(*AgentInvoiceItem)(nil),         // 18: payment.AgentInvoiceItem
 	(*RenewInvoiceItem)(nil),         // 19: payment.RenewInvoiceItem
-	(*ReservedPlanInvoiceItem)(nil),  // 20: payment.ReservedPlanInvoiceItem
+	(*ReservedInvoiceItem)(nil),      // 20: payment.ReservedInvoiceItem
 	(*PlanInvoiceItem)(nil),          // 21: payment.PlanInvoiceItem
 	(*MarketingInvoiceItem)(nil),     // 22: payment.MarketingInvoiceItem
 	(*NoVATInvoiceItem)(nil),         // 23: payment.NoVATInvoiceItem
@@ -3978,15 +4006,17 @@ var file_payment_proto_depIdxs = []int32{
 	18, // 36: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
 	21, // 37: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
 	22, // 38: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
-	20, // 39: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedPlanInvoiceItem
+	20, // 39: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
 	23, // 40: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
 	16, // 41: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
 	17, // 42: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
-	43, // [43:43] is the sub-list for method output_type
-	43, // [43:43] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	20, // 43: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
+	20, // 44: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }

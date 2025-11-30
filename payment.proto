@@ -268,7 +268,7 @@ message RenewInvoiceItem {
 	optional int64 fpv_save_percentage = 7;
 }
 
-message ReservedPlanInvoiceItem {
+message ReservedInvoiceItem {
 	optional string old_plan = 3;
 	optional int64 old_agent_count = 4;
 	optional int64 old_billing_cycle_month = 5;
@@ -277,6 +277,8 @@ message ReservedPlanInvoiceItem {
 	optional int32 day_left = 7;
 	optional int64 old_started = 8; // now (not sub.started)
 	optional int64 old_ended = 9;
+
+	optional int64 old_count = 10;
 }
 
 message PlanInvoiceItem {
@@ -313,10 +315,13 @@ message InvoiceItem {
 		optional AgentInvoiceItem agent = 3;
 		optional PlanInvoiceItem plan = 5;
 		optional MarketingInvoiceItem marketing = 6;
-		optional ReservedPlanInvoiceItem reserved_plan = 7;
+		optional ReservedInvoiceItem reserved_plan = 7;
 		optional NoVATInvoiceItem novat = 8;
 		optional FanpagesInvoiceItem fanpages = 9;
 		optional ZaloPersonalsInvoiceItem zalo_personals = 10;
+		optional ReservedInvoiceItem reserved_fanpages = 11;
+		optional ReservedInvoiceItem reserved_zalo_personals = 12;
+
 	}
 	optional string type = 18;
 	optional Data data = 9;
