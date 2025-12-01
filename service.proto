@@ -642,6 +642,7 @@ service PaymentMgr {
 	rpc UpdateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
 	rpc DraftInvoice(payment.Subscription) returns (payment.Invoice);
+	rpc DoPaidSubscription(payment.Subscription) returns (payment.Invoice); // upgrade and generate invoice
 
 	rpc ListComments(Id) returns (payment.Comments);
 	rpc AddComment(payment.Comment) returns (payment.Comment);

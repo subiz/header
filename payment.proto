@@ -66,7 +66,7 @@ message Subscription {
 	optional uint32 next_billing_cycle_month = 16; // @deprecated
 
 	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
-	optional string next_plan = 18;
+	optional string next_plan = 18; // @deprecated
 
 	optional float credit = 27;
 	optional common.Limit limit = 42; // combined from plan.limit and purchased_limit
@@ -81,7 +81,7 @@ message Subscription {
 
 	optional int64 num_agents = 50;
 	// optional int64 use_ticket = 51;
-	optional int64 next_num_agents = 52;
+	optional int64 next_num_agents = 52; // @deprecated
 	optional int64 unlimited_ai_spending = 54;
 	optional int64 fpv_credit_usd = 55; // soft
 
@@ -155,7 +155,7 @@ message Invoice {
 	optional string id = 3;
 	// optional float amount_due = 4;
 	optional string promotion_code = 5;
-	optional string description = 6;
+	// optional string description = 6;
 	optional BillingInfo billing_info = 8;
 	optional int64 due_date = 9;
 
@@ -214,6 +214,8 @@ message Invoice {
 
 	optional string payment_num = 45;
 	optional bool auto_generated = 46;
+
+	optional Subscription sub = 50;
 }
 
 message FanpagesInvoiceItem {

@@ -17575,6 +17575,7 @@ const (
 	PaymentMgr_UpdateInvoice_FullMethodName        = "/header.PaymentMgr/UpdateInvoice"
 	PaymentMgr_FilterInvoices_FullMethodName       = "/header.PaymentMgr/FilterInvoices"
 	PaymentMgr_DraftInvoice_FullMethodName         = "/header.PaymentMgr/DraftInvoice"
+	PaymentMgr_DoPaidSubscription_FullMethodName   = "/header.PaymentMgr/DoPaidSubscription"
 	PaymentMgr_ListComments_FullMethodName         = "/header.PaymentMgr/ListComments"
 	PaymentMgr_AddComment_FullMethodName           = "/header.PaymentMgr/AddComment"
 	PaymentMgr_ExportInvoice_FullMethodName        = "/header.PaymentMgr/ExportInvoice"
@@ -17599,6 +17600,7 @@ type PaymentMgrClient interface {
 	UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error)
 	DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
+	DoPaidSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
 	ListComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Comments, error)
 	AddComment(ctx context.Context, in *payment.Comment, opts ...grpc.CallOption) (*payment.Comment, error)
 	ExportInvoice(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.String, error)
@@ -17727,6 +17729,16 @@ func (c *paymentMgrClient) DraftInvoice(ctx context.Context, in *payment.Subscri
 	return out, nil
 }
 
+func (c *paymentMgrClient) DoPaidSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, PaymentMgr_DoPaidSubscription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentMgrClient) ListComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Comments, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(payment.Comments)
@@ -17812,6 +17824,7 @@ type PaymentMgrServer interface {
 	UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error)
 	DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error)
+	DoPaidSubscription(context.Context, *payment.Subscription) (*payment.Invoice, error)
 	ListComments(context.Context, *Id) (*payment.Comments, error)
 	AddComment(context.Context, *payment.Comment) (*payment.Comment, error)
 	ExportInvoice(context.Context, *Id) (*payment.String, error)
@@ -17862,6 +17875,9 @@ func (UnimplementedPaymentMgrServer) FilterInvoices(context.Context, *payment.Li
 }
 func (UnimplementedPaymentMgrServer) DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DraftInvoice not implemented")
+}
+func (UnimplementedPaymentMgrServer) DoPaidSubscription(context.Context, *payment.Subscription) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DoPaidSubscription not implemented")
 }
 func (UnimplementedPaymentMgrServer) ListComments(context.Context, *Id) (*payment.Comments, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListComments not implemented")
@@ -18103,6 +18119,24 @@ func _PaymentMgr_DraftInvoice_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PaymentMgr_DoPaidSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DoPaidSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentMgr_DoPaidSubscription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DoPaidSubscription(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PaymentMgr_ListComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -18279,6 +18313,10 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DraftInvoice",
 			Handler:    _PaymentMgr_DraftInvoice_Handler,
+		},
+		{
+			MethodName: "DoPaidSubscription",
+			Handler:    _PaymentMgr_DoPaidSubscription_Handler,
 		},
 		{
 			MethodName: "ListComments",

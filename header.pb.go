@@ -62226,6 +62226,7 @@ type QrCode struct {
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	QrImage       string                 `protobuf:"bytes,3,opt,name=qr_image,json=qrImage,proto3" json:"qr_image,omitempty"` // base 64
 	QrCode        string                 `protobuf:"bytes,4,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"`
+	QrId          string                 `protobuf:"bytes,5,opt,name=qr_id,json=qrId,proto3" json:"qr_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -62284,6 +62285,13 @@ func (x *QrCode) GetQrImage() string {
 func (x *QrCode) GetQrCode() string {
 	if x != nil {
 		return x.QrCode
+	}
+	return ""
+}
+
+func (x *QrCode) GetQrId() string {
+	if x != nil {
+		return x.QrId
 	}
 	return ""
 }
@@ -79381,13 +79389,14 @@ const file_header_proto_rawDesc = "" +
 	"\x04note\x18\b \x01(\tR\x04note\x12\x1a\n" +
 	"\bcurrency\x18\t \x01(\tR\bcurrency\x12!\n" +
 	"\fcountry_code\x18\n" +
-	" \x01(\tR\vcountryCode\"~\n" +
+	" \x01(\tR\vcountryCode\"\x93\x01\n" +
 	"\x06QrCode\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x19\n" +
 	"\bqr_image\x18\x03 \x01(\tR\aqrImage\x12\x17\n" +
-	"\aqr_code\x18\x04 \x01(\tR\x06qrCode\"t\n" +
+	"\aqr_code\x18\x04 \x01(\tR\x06qrCode\x12\x13\n" +
+	"\x05qr_id\x18\x05 \x01(\tR\x04qrId\"t\n" +
 	"\x14ReportUserEventEntry\x12\x1c\n" +
 	"\ttimestamp\x18\x02 \x01(\tR\ttimestamp\x12\x1d\n" +
 	"\n" +

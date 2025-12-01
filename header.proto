@@ -8882,6 +8882,7 @@ message QrCode{
 	string account_id = 2;
 	string qr_image = 3; // base 64
 	string qr_code = 4;
+	string qr_id = 5;
 }
 
 message ReportUserEventEntry {

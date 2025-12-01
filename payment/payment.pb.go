@@ -596,7 +596,7 @@ type Subscription struct {
 	BillingCycleMonth     *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`               // read-only
 	NextBillingCycleMonth *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"` // @deprecated
 	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`                                                                     // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
-	NextPlan              *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`
+	NextPlan              *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`                                             // @deprecated
 	Credit                *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
 	Limit                 *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`         // combined from plan.limit and purchased_limit
 	Purchased             *common.Limit          `protobuf:"bytes,43,opt,name=purchased" json:"purchased,omitempty"` //
@@ -607,7 +607,7 @@ type Subscription struct {
 	FpvNextCustomPrice    *int64                 `protobuf:"varint,53,opt,name=fpv_next_custom_price,json=fpvNextCustomPrice" json:"fpv_next_custom_price,omitempty"` // @depreacated usd, custom price only edited by subiz
 	NumAgents             *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
 	// optional int64 use_ticket = 51;
-	NextNumAgents       *int64  `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
+	NextNumAgents       *int64  `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"` // @deprecated
 	UnlimitedAiSpending *int64  `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
 	FpvCreditUsd        *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
 	Note                *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
@@ -1276,18 +1276,18 @@ type Invoice struct {
 	AccountId *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	Id        *string                `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
 	// optional float amount_due = 4;
-	PromotionCode *string        `protobuf:"bytes,5,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
-	Description   *string        `protobuf:"bytes,6,opt,name=description" json:"description,omitempty"`
-	BillingInfo   *BillingInfo   `protobuf:"bytes,8,opt,name=billing_info,json=billingInfo" json:"billing_info,omitempty"`
-	DueDate       *int64         `protobuf:"varint,9,opt,name=due_date,json=dueDate" json:"due_date,omitempty"`
-	State         *string        `protobuf:"bytes,10,opt,name=state" json:"state,omitempty"`
-	Created       *int64         `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
-	Items         []*InvoiceItem `protobuf:"bytes,12,rep,name=items" json:"items,omitempty"`
-	Subtotal      *float32       `protobuf:"fixed32,14,opt,name=subtotal" json:"subtotal,omitempty"`
-	TaxPercent    *float32       `protobuf:"fixed32,15,opt,name=tax_percent,json=taxPercent" json:"tax_percent,omitempty"`
-	Tax           *float32       `protobuf:"fixed32,16,opt,name=tax" json:"tax,omitempty"`
-	Total         *float32       `protobuf:"fixed32,17,opt,name=total" json:"total,omitempty"`
-	Updated       *int64         `protobuf:"varint,18,opt,name=updated" json:"updated,omitempty"`
+	PromotionCode *string `protobuf:"bytes,5,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
+	// optional string description = 6;
+	BillingInfo *BillingInfo   `protobuf:"bytes,8,opt,name=billing_info,json=billingInfo" json:"billing_info,omitempty"`
+	DueDate     *int64         `protobuf:"varint,9,opt,name=due_date,json=dueDate" json:"due_date,omitempty"`
+	State       *string        `protobuf:"bytes,10,opt,name=state" json:"state,omitempty"`
+	Created     *int64         `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	Items       []*InvoiceItem `protobuf:"bytes,12,rep,name=items" json:"items,omitempty"`
+	Subtotal    *float32       `protobuf:"fixed32,14,opt,name=subtotal" json:"subtotal,omitempty"`
+	TaxPercent  *float32       `protobuf:"fixed32,15,opt,name=tax_percent,json=taxPercent" json:"tax_percent,omitempty"`
+	Tax         *float32       `protobuf:"fixed32,16,opt,name=tax" json:"tax,omitempty"`
+	Total       *float32       `protobuf:"fixed32,17,opt,name=total" json:"total,omitempty"`
+	Updated     *int64         `protobuf:"varint,18,opt,name=updated" json:"updated,omitempty"`
 	// optional int32 year = 19; // optional
 	Notes             []*Note       `protobuf:"bytes,22,rep,name=notes" json:"notes,omitempty"`
 	Bills             []string      `protobuf:"bytes,23,rep,name=bills" json:"bills,omitempty"`
@@ -1304,15 +1304,16 @@ type Invoice struct {
 	// optional int64 fpv_promotion_vnd = 36; // read only
 	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
 	// optional int64 fpv_referrer_commission_vnd = 36; // hidden
-	ReferrerAgentId   *string `protobuf:"bytes,37,opt,name=referrer_agent_id,json=referrerAgentId" json:"referrer_agent_id,omitempty"` // read only
-	FpvSubtotalUsd    *int64  `protobuf:"varint,38,opt,name=fpv_subtotal_usd,json=fpvSubtotalUsd" json:"fpv_subtotal_usd,omitempty"`
-	FpvTaxPercent     *int64  `protobuf:"varint,39,opt,name=fpv_tax_percent,json=fpvTaxPercent" json:"fpv_tax_percent,omitempty"`
-	FpvTaxUsd         *int64  `protobuf:"varint,40,opt,name=fpv_tax_usd,json=fpvTaxUsd" json:"fpv_tax_usd,omitempty"`
-	FpvTotalUsd       *int64  `protobuf:"varint,41,opt,name=fpv_total_usd,json=fpvTotalUsd" json:"fpv_total_usd,omitempty"`
-	FpvPaymentMadeUsd *int64  `protobuf:"varint,42,opt,name=fpv_payment_made_usd,json=fpvPaymentMadeUsd" json:"fpv_payment_made_usd,omitempty"`
-	FpvDiscountUsd    *int64  `protobuf:"varint,43,opt,name=fpv_discount_usd,json=fpvDiscountUsd" json:"fpv_discount_usd,omitempty"` // read only
-	PaymentNum        *string `protobuf:"bytes,45,opt,name=payment_num,json=paymentNum" json:"payment_num,omitempty"`
-	AutoGenerated     *bool   `protobuf:"varint,46,opt,name=auto_generated,json=autoGenerated" json:"auto_generated,omitempty"`
+	ReferrerAgentId   *string       `protobuf:"bytes,37,opt,name=referrer_agent_id,json=referrerAgentId" json:"referrer_agent_id,omitempty"` // read only
+	FpvSubtotalUsd    *int64        `protobuf:"varint,38,opt,name=fpv_subtotal_usd,json=fpvSubtotalUsd" json:"fpv_subtotal_usd,omitempty"`
+	FpvTaxPercent     *int64        `protobuf:"varint,39,opt,name=fpv_tax_percent,json=fpvTaxPercent" json:"fpv_tax_percent,omitempty"`
+	FpvTaxUsd         *int64        `protobuf:"varint,40,opt,name=fpv_tax_usd,json=fpvTaxUsd" json:"fpv_tax_usd,omitempty"`
+	FpvTotalUsd       *int64        `protobuf:"varint,41,opt,name=fpv_total_usd,json=fpvTotalUsd" json:"fpv_total_usd,omitempty"`
+	FpvPaymentMadeUsd *int64        `protobuf:"varint,42,opt,name=fpv_payment_made_usd,json=fpvPaymentMadeUsd" json:"fpv_payment_made_usd,omitempty"`
+	FpvDiscountUsd    *int64        `protobuf:"varint,43,opt,name=fpv_discount_usd,json=fpvDiscountUsd" json:"fpv_discount_usd,omitempty"` // read only
+	PaymentNum        *string       `protobuf:"bytes,45,opt,name=payment_num,json=paymentNum" json:"payment_num,omitempty"`
+	AutoGenerated     *bool         `protobuf:"varint,46,opt,name=auto_generated,json=autoGenerated" json:"auto_generated,omitempty"`
+	Sub               *Subscription `protobuf:"bytes,50,opt,name=sub" json:"sub,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1371,13 +1372,6 @@ func (x *Invoice) GetId() string {
 func (x *Invoice) GetPromotionCode() string {
 	if x != nil && x.PromotionCode != nil {
 		return *x.PromotionCode
-	}
-	return ""
-}
-
-func (x *Invoice) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
 	}
 	return ""
 }
@@ -1597,6 +1591,13 @@ func (x *Invoice) GetAutoGenerated() bool {
 		return *x.AutoGenerated
 	}
 	return false
+}
+
+func (x *Invoice) GetSub() *Subscription {
+	if x != nil {
+		return x.Sub
+	}
+	return nil
 }
 
 type FanpagesInvoiceItem struct {
@@ -3421,15 +3422,14 @@ const file_payment_proto_rawDesc = "" +
 	"\x06anchor\x18\x04 \x01(\tR\x06anchor\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x05 \x01(\tR\taccountId\x12\x1b\n" +
-	"\tcredit_id\x18\x06 \x01(\tR\bcreditId\"\xaa\n" +
+	"\tcredit_id\x18\x06 \x01(\tR\bcreditId\"\xb1\n" +
 	"\n" +
 	"\aInvoice\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12%\n" +
-	"\x0epromotion_code\x18\x05 \x01(\tR\rpromotionCode\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x127\n" +
+	"\x0epromotion_code\x18\x05 \x01(\tR\rpromotionCode\x127\n" +
 	"\fbilling_info\x18\b \x01(\v2\x14.payment.BillingInfoR\vbillingInfo\x12\x19\n" +
 	"\bdue_date\x18\t \x01(\x03R\adueDate\x12\x14\n" +
 	"\x05state\x18\n" +
@@ -3465,7 +3465,8 @@ const file_payment_proto_rawDesc = "" +
 	"\x10fpv_discount_usd\x18+ \x01(\x03R\x0efpvDiscountUsd\x12\x1f\n" +
 	"\vpayment_num\x18- \x01(\tR\n" +
 	"paymentNum\x12%\n" +
-	"\x0eauto_generated\x18. \x01(\bR\rautoGenerated\"=\n" +
+	"\x0eauto_generated\x18. \x01(\bR\rautoGenerated\x12'\n" +
+	"\x03sub\x182 \x01(\v2\x15.payment.SubscriptionR\x03sub\"=\n" +
 	"\x05State\x12\t\n" +
 	"\x05draft\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\b\n" +
@@ -3743,32 +3744,33 @@ var file_payment_proto_depIdxs = []int32{
 	21, // 19: payment.Invoice.items:type_name -> payment.InvoiceItem
 	9,  // 20: payment.Invoice.notes:type_name -> payment.Note
 	6,  // 21: payment.Invoice.current_sub:type_name -> payment.Subscription
-	32, // 22: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
-	33, // 23: payment.Logs.ctx:type_name -> common.Context
-	24, // 24: payment.Logs.logs:type_name -> payment.Log
-	33, // 25: payment.Log.ctx:type_name -> common.Context
-	33, // 26: payment.String.ctx:type_name -> common.Context
-	33, // 27: payment.PayRequest.ctx:type_name -> common.Context
-	33, // 28: payment.AutoPayRequest.ctx:type_name -> common.Context
-	33, // 29: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	33, // 30: payment.TrialEndingEmail.ctx:type_name -> common.Context
-	33, // 31: payment.UpdatePlanEmail.ctx:type_name -> common.Context
-	33, // 32: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
-	16, // 33: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
-	15, // 34: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
-	18, // 35: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
-	19, // 36: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
-	17, // 37: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
-	20, // 38: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
-	13, // 39: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
-	14, // 40: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
-	17, // 41: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
-	17, // 42: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
-	43, // [43:43] is the sub-list for method output_type
-	43, // [43:43] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	6,  // 22: payment.Invoice.sub:type_name -> payment.Subscription
+	32, // 23: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
+	33, // 24: payment.Logs.ctx:type_name -> common.Context
+	24, // 25: payment.Logs.logs:type_name -> payment.Log
+	33, // 26: payment.Log.ctx:type_name -> common.Context
+	33, // 27: payment.String.ctx:type_name -> common.Context
+	33, // 28: payment.PayRequest.ctx:type_name -> common.Context
+	33, // 29: payment.AutoPayRequest.ctx:type_name -> common.Context
+	33, // 30: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	33, // 31: payment.TrialEndingEmail.ctx:type_name -> common.Context
+	33, // 32: payment.UpdatePlanEmail.ctx:type_name -> common.Context
+	33, // 33: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
+	16, // 34: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
+	15, // 35: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
+	18, // 36: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
+	19, // 37: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
+	17, // 38: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
+	20, // 39: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
+	13, // 40: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
+	14, // 41: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
+	17, // 42: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
+	17, // 43: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
+	44, // [44:44] is the sub-list for method output_type
+	44, // [44:44] is the sub-list for method input_type
+	44, // [44:44] is the sub-list for extension type_name
+	44, // [44:44] is the sub-list for extension extendee
+	0,  // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }
