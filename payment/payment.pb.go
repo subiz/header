@@ -591,19 +591,20 @@ type Subscription struct {
 	Ctx                   *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
 	AccountId             *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	Created               *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
-	PromotionCode         *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`                 // last recurring promotion code
-	Started               *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                                 // ms
-	BillingCycleMonth     *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"` // read-only
-	NextBillingCycleMonth *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"`
-	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"` // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
+	PromotionCode         *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`                               // last recurring promotion code
+	Started               *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                                               // ms
+	BillingCycleMonth     *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`               // read-only
+	NextBillingCycleMonth *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"` // @deprecated
+	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`                                                                     // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
 	NextPlan              *string                `protobuf:"bytes,18,opt,name=next_plan,json=nextPlan" json:"next_plan,omitempty"`
 	Credit                *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
-	Limit                 *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"` //
+	Limit                 *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`         // combined from plan.limit and purchased_limit
+	Purchased             *common.Limit          `protobuf:"bytes,43,opt,name=purchased" json:"purchased,omitempty"` //
 	Ended                 *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
 	Churned               *int64                 `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
 	FpvCreditVnd          *int64                 `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`                     // translate from credit, do not store in db
 	FpvCustomPrice        *int64                 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"`               // usd, custom price, only edited by subiz
-	FpvNextCustomPrice    *int64                 `protobuf:"varint,53,opt,name=fpv_next_custom_price,json=fpvNextCustomPrice" json:"fpv_next_custom_price,omitempty"` // usd, custom price only edited by subiz
+	FpvNextCustomPrice    *int64                 `protobuf:"varint,53,opt,name=fpv_next_custom_price,json=fpvNextCustomPrice" json:"fpv_next_custom_price,omitempty"` // @depreacated usd, custom price only edited by subiz
 	NumAgents             *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
 	// optional int64 use_ticket = 51;
 	NextNumAgents       *int64  `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
@@ -717,6 +718,13 @@ func (x *Subscription) GetCredit() float32 {
 func (x *Subscription) GetLimit() *common.Limit {
 	if x != nil {
 		return x.Limit
+	}
+	return nil
+}
+
+func (x *Subscription) GetPurchased() *common.Limit {
+	if x != nil {
+		return x.Purchased
 	}
 	return nil
 }
@@ -3340,7 +3348,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\xea\x05\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\x97\x06\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3353,7 +3361,8 @@ const file_payment_proto_rawDesc = "" +
 	"\x04plan\x18\x11 \x01(\tR\x04plan\x12\x1b\n" +
 	"\tnext_plan\x18\x12 \x01(\tR\bnextPlan\x12\x16\n" +
 	"\x06credit\x18\x1b \x01(\x02R\x06credit\x12#\n" +
-	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12\x14\n" +
+	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12+\n" +
+	"\tpurchased\x18+ \x01(\v2\r.common.LimitR\tpurchased\x12\x14\n" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12\x18\n" +
 	"\achurned\x18/ \x01(\x03R\achurned\x12$\n" +
 	"\x0efpv_credit_vnd\x180 \x01(\x03R\ffpvCreditVnd\x12(\n" +
@@ -3721,44 +3730,45 @@ var file_payment_proto_depIdxs = []int32{
 	34, // 6: payment.PurchaseRequest.limit:type_name -> common.Limit
 	33, // 7: payment.Subscription.ctx:type_name -> common.Context
 	34, // 8: payment.Subscription.limit:type_name -> common.Limit
-	33, // 9: payment.Bill.ctx:type_name -> common.Context
-	33, // 10: payment.Bills.ctx:type_name -> common.Context
-	7,  // 11: payment.Bills.bills:type_name -> payment.Bill
-	33, // 12: payment.Note.ctx:type_name -> common.Context
-	33, // 13: payment.Invoices.ctx:type_name -> common.Context
-	12, // 14: payment.Invoices.invoices:type_name -> payment.Invoice
-	33, // 15: payment.ListInvoiceRequest.ctx:type_name -> common.Context
-	33, // 16: payment.Invoice.ctx:type_name -> common.Context
-	22, // 17: payment.Invoice.billing_info:type_name -> payment.BillingInfo
-	21, // 18: payment.Invoice.items:type_name -> payment.InvoiceItem
-	9,  // 19: payment.Invoice.notes:type_name -> payment.Note
-	6,  // 20: payment.Invoice.current_sub:type_name -> payment.Subscription
-	32, // 21: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
-	33, // 22: payment.Logs.ctx:type_name -> common.Context
-	24, // 23: payment.Logs.logs:type_name -> payment.Log
-	33, // 24: payment.Log.ctx:type_name -> common.Context
-	33, // 25: payment.String.ctx:type_name -> common.Context
-	33, // 26: payment.PayRequest.ctx:type_name -> common.Context
-	33, // 27: payment.AutoPayRequest.ctx:type_name -> common.Context
-	33, // 28: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	33, // 29: payment.TrialEndingEmail.ctx:type_name -> common.Context
-	33, // 30: payment.UpdatePlanEmail.ctx:type_name -> common.Context
-	33, // 31: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
-	16, // 32: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
-	15, // 33: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
-	18, // 34: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
-	19, // 35: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
-	17, // 36: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
-	20, // 37: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
-	13, // 38: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
-	14, // 39: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
-	17, // 40: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
-	17, // 41: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
-	42, // [42:42] is the sub-list for method output_type
-	42, // [42:42] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	34, // 9: payment.Subscription.purchased:type_name -> common.Limit
+	33, // 10: payment.Bill.ctx:type_name -> common.Context
+	33, // 11: payment.Bills.ctx:type_name -> common.Context
+	7,  // 12: payment.Bills.bills:type_name -> payment.Bill
+	33, // 13: payment.Note.ctx:type_name -> common.Context
+	33, // 14: payment.Invoices.ctx:type_name -> common.Context
+	12, // 15: payment.Invoices.invoices:type_name -> payment.Invoice
+	33, // 16: payment.ListInvoiceRequest.ctx:type_name -> common.Context
+	33, // 17: payment.Invoice.ctx:type_name -> common.Context
+	22, // 18: payment.Invoice.billing_info:type_name -> payment.BillingInfo
+	21, // 19: payment.Invoice.items:type_name -> payment.InvoiceItem
+	9,  // 20: payment.Invoice.notes:type_name -> payment.Note
+	6,  // 21: payment.Invoice.current_sub:type_name -> payment.Subscription
+	32, // 22: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
+	33, // 23: payment.Logs.ctx:type_name -> common.Context
+	24, // 24: payment.Logs.logs:type_name -> payment.Log
+	33, // 25: payment.Log.ctx:type_name -> common.Context
+	33, // 26: payment.String.ctx:type_name -> common.Context
+	33, // 27: payment.PayRequest.ctx:type_name -> common.Context
+	33, // 28: payment.AutoPayRequest.ctx:type_name -> common.Context
+	33, // 29: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	33, // 30: payment.TrialEndingEmail.ctx:type_name -> common.Context
+	33, // 31: payment.UpdatePlanEmail.ctx:type_name -> common.Context
+	33, // 32: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
+	16, // 33: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
+	15, // 34: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
+	18, // 35: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
+	19, // 36: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
+	17, // 37: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
+	20, // 38: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
+	13, // 39: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
+	14, // 40: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
+	17, // 41: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
+	17, // 42: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
+	43, // [43:43] is the sub-list for method output_type
+	43, // [43:43] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }

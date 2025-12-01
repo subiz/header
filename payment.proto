@@ -63,20 +63,21 @@ message Subscription {
 
 	optional int64 started = 5; // ms
 	optional uint32 billing_cycle_month = 15; // read-only
-	optional uint32 next_billing_cycle_month = 16;
+	optional uint32 next_billing_cycle_month = 16; // @deprecated
 
 	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
 	optional string next_plan = 18;
 
 	optional float credit = 27;
-	optional common.Limit limit = 42; //
+	optional common.Limit limit = 42; // combined from plan.limit and purchased_limit
+	optional common.Limit purchased = 43; //
 
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48; // translate from credit, do not store in db
 	optional int64 fpv_custom_price = 49; // usd, custom price, only edited by subiz
-	optional int64 fpv_next_custom_price = 53; // usd, custom price only edited by subiz
+	optional int64 fpv_next_custom_price = 53; // @depreacated usd, custom price only edited by subiz
 
 	optional int64 num_agents = 50;
 	// optional int64 use_ticket = 51;

@@ -177,9 +177,7 @@ message Limit {
 	bool ticket = 26; // pending || active
 
 	int64 max_zalo_personals = 27; // plan limit + additional
-	int64 additional_zalo_personals = 28; //
-	int64 use_zalo_personals = 29;
+	int64 use_zalo_personals = 28;
 
 	int64 max_fanpages = 30;
-	int64 additional_fanpages = 31;
 }
