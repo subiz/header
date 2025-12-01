@@ -236,7 +236,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 	case "any":
 		return true
 	case "has_value":
-		return len(strs) == 0
+		return len(strs) != 0
 	case "is_empty":
 		return len(strs) == 0
 	case "eq":
@@ -315,7 +315,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 			}
 		}
 		return false
-	case "contain":
+	case "contain", "con":
 		for _, cs := range cond.GetContain() {
 			if !cond.GetCaseSensitive() {
 				cs = strings.ToLower(cs)

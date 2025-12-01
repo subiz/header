@@ -194,6 +194,18 @@ func TestAssignByte(t *testing.T) {
 	}
 }
 
+func TestEvaluateTexts(t *testing.T) {
+	out := EvaluateTexts([]string{"tgrxbcekpikzytebnqim", "tgrxbceofffubqtjyddj"}, &TextCondition{Op: "eq", Eq: []string{"yes", "tgrxbcekpikzytebnqim"}})
+	if out != true {
+		t.Error("should be true")
+	}
+
+	out = EvaluateTexts([]string{"tgrxbcekpikzytebnqim", "tgrxbceofffubqtjyddj"}, &TextCondition{Op: "has_value"})
+	if out != true {
+		t.Error("should be true")
+	}
+}
+
 func TestPartition(t *testing.T) {
 	fmt.Println("PAR", Fnv32("usrqhgvjafsyegefuvruv")%50) // 21
 	shardNumber := int(crc32.ChecksumIEEE([]byte("acriviayfmabzskstrpq"))) % 4
@@ -1034,7 +1046,6 @@ func TestFirstN(t *testing.T) {
 	}
 }
 
-
 func TestNormString(t *testing.T) {
 	tests := []struct {
 		name   string
@@ -1046,7 +1057,7 @@ func TestNormString(t *testing.T) {
 		{"trim spaces", "   hello world   ", 0, "hello world"},
 		{"trim tabs", "\t\thello\t", 0, "hello"},
 
-        // ✅ Control chars & invalid unicode
+		// ✅ Control chars & invalid unicode
 		{"remove control char", "abc\u0017def", 0, "abcdef"},
 		{"remove multiple control chars", "\u0000hi\u0007\u0008", 0, "hi"},
 		{"keep normal chars", "nói chuyện", 0, "nói chuyện"},

@@ -1057,6 +1057,7 @@ type Limit struct {
 	Ticket                  bool   `protobuf:"varint,26,opt,name=ticket,proto3" json:"ticket,omitempty"`                                                                    // pending || active
 	MaxZaloPersonals        int64  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`                      // plan limit + additional
 	AdditionalZaloPersonals int64  `protobuf:"varint,28,opt,name=additional_zalo_personals,json=additionalZaloPersonals,proto3" json:"additional_zalo_personals,omitempty"` //
+	UseZaloPersonals        int64  `protobuf:"varint,29,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
 	MaxFanpages             int64  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
 	AdditionalFanpages      int64  `protobuf:"varint,31,opt,name=additional_fanpages,json=additionalFanpages,proto3" json:"additional_fanpages,omitempty"`
 	unknownFields           protoimpl.UnknownFields
@@ -1219,6 +1220,13 @@ func (x *Limit) GetAdditionalZaloPersonals() int64 {
 	return 0
 }
 
+func (x *Limit) GetUseZaloPersonals() int64 {
+	if x != nil {
+		return x.UseZaloPersonals
+	}
+	return 0
+}
+
 func (x *Limit) GetMaxFanpages() int64 {
 	if x != nil {
 		return x.MaxFanpages
@@ -1351,7 +1359,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\xbc\x05\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xea\x05\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1373,7 +1381,8 @@ const file_common_proto_rawDesc = "" +
 	"\x12call_recording_ttl\x18\x19 \x01(\x03R\x10callRecordingTtl\x12\x16\n" +
 	"\x06ticket\x18\x1a \x01(\bR\x06ticket\x12,\n" +
 	"\x12max_zalo_personals\x18\x1b \x01(\x03R\x10maxZaloPersonals\x12:\n" +
-	"\x19additional_zalo_personals\x18\x1c \x01(\x03R\x17additionalZaloPersonals\x12!\n" +
+	"\x19additional_zalo_personals\x18\x1c \x01(\x03R\x17additionalZaloPersonals\x12,\n" +
+	"\x12use_zalo_personals\x18\x1d \x01(\x03R\x10useZaloPersonals\x12!\n" +
 	"\fmax_fanpages\x18\x1e \x01(\x03R\vmaxFanpages\x12/\n" +
 	"\x13additional_fanpages\x18\x1f \x01(\x03R\x12additionalFanpages*d\n" +
 	"\x04Type\x12\v\n" +
