@@ -176,9 +176,9 @@ message Limit {
 	int64 call_recording_ttl = 25; // sec
 	bool ticket = 26; // pending || active
 
-	int64 max_zalo_personals = 27;
-	int64 max_ai_bots = 28;
-	int64 max_active_agents = 29; // 20 14
+	int64 max_zalo_personals = 27; // plan limit + additional
+	int64 additional_zalo_personals = 28; //
 
 	int64 max_fanpages = 30;
+	int64 additional_fanpages = 31;
 }
