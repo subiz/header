@@ -41,7 +41,7 @@ message PurchaseRequest {
 	optional bool auto_renew = 9;
 
 	optional uint32 billing_cycle_month = 15;
-	optional uint32 next_billing_cycle_month = 16;
+	// optional uint32 next_billing_cycle_month = 16;
 	optional string plan = 17;
 
 	optional string payment_method = 32;

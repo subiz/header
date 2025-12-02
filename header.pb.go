@@ -51925,6 +51925,7 @@ type String struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Str           string                 `protobuf:"bytes,1,opt,name=str,proto3" json:"str,omitempty"`
 	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"` //version 2 is version for convo
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -51969,6 +51970,13 @@ func (x *String) GetStr() string {
 func (x *String) GetVersion() string {
 	if x != nil {
 		return x.Version
+	}
+	return ""
+}
+
+func (x *String) GetCode() string {
+	if x != nil {
+		return x.Code
 	}
 	return ""
 }
@@ -78074,10 +78082,11 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"total_open\x18\x0e \x01(\x03R\ttotalOpen\x12\x1b\n" +
 	"\ttotal_all\x18\x0f \x01(\x03R\btotalAll\x127\n" +
-	"\x06agents\x18\x06 \x03(\v2\x1f.header.OutboundCallAgentReportR\x06agents\"4\n" +
+	"\x06agents\x18\x06 \x03(\v2\x1f.header.OutboundCallAgentReportR\x06agents\"H\n" +
 	"\x06String\x12\x10\n" +
 	"\x03str\x18\x01 \x01(\tR\x03str\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\tR\aversion\":\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\":\n" +
 	"\x06Number\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\x03R\x06number\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\"\xca\x03\n" +

@@ -430,20 +430,20 @@ func (x *DiffSubRequest) GetNewSubscription() *Subscription {
 }
 
 type PurchaseRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                   *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId             *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Created               *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
-	PromotionCode         *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"` // optional string name = 7;
-	Started               *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`
-	AutoRenew             *bool                  `protobuf:"varint,9,opt,name=auto_renew,json=autoRenew" json:"auto_renew,omitempty"`
-	BillingCycleMonth     *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
-	NextBillingCycleMonth *uint32                `protobuf:"varint,16,opt,name=next_billing_cycle_month,json=nextBillingCycleMonth" json:"next_billing_cycle_month,omitempty"`
-	Plan                  *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`
-	PaymentMethod         *string                `protobuf:"bytes,32,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"`
-	Limit                 *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`
-	AutoCharge            *bool                  `protobuf:"varint,44,opt,name=auto_charge,json=autoCharge" json:"auto_charge,omitempty"`
-	Ended                 *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"` // optional int64 churned = 47;
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId         *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Created           *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	PromotionCode     *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"` // optional string name = 7;
+	Started           *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`
+	AutoRenew         *bool                  `protobuf:"varint,9,opt,name=auto_renew,json=autoRenew" json:"auto_renew,omitempty"`
+	BillingCycleMonth *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
+	// optional uint32 next_billing_cycle_month = 16;
+	Plan          *string       `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`
+	PaymentMethod *string       `protobuf:"bytes,32,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"`
+	Limit         *common.Limit `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`
+	AutoCharge    *bool         `protobuf:"varint,44,opt,name=auto_charge,json=autoCharge" json:"auto_charge,omitempty"`
+	Ended         *int64        `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"` // optional int64 churned = 47;
 	// optional int64 fpv_credit_vnd = 48;
 	FpvCustomPrice *int64 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"` // usd
 	NumAgents      *int64 `protobuf:"varint,51,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
@@ -526,13 +526,6 @@ func (x *PurchaseRequest) GetAutoRenew() bool {
 func (x *PurchaseRequest) GetBillingCycleMonth() uint32 {
 	if x != nil && x.BillingCycleMonth != nil {
 		return *x.BillingCycleMonth
-	}
-	return 0
-}
-
-func (x *PurchaseRequest) GetNextBillingCycleMonth() uint32 {
-	if x != nil && x.NextBillingCycleMonth != nil {
-		return *x.NextBillingCycleMonth
 	}
 	return 0
 }
@@ -3329,7 +3322,7 @@ const file_payment_proto_rawDesc = "" +
 	"\acreated\x18\f \x01(\x03R\acreated\"\x94\x01\n" +
 	"\x0eDiffSubRequest\x12@\n" +
 	"\x10old_subscription\x18\x04 \x01(\v2\x15.payment.SubscriptionR\x0foldSubscription\x12@\n" +
-	"\x10new_subscription\x18\x05 \x01(\v2\x15.payment.SubscriptionR\x0fnewSubscription\"\x96\x04\n" +
+	"\x10new_subscription\x18\x05 \x01(\v2\x15.payment.SubscriptionR\x0fnewSubscription\"\xdd\x03\n" +
 	"\x0fPurchaseRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3339,8 +3332,7 @@ const file_payment_proto_rawDesc = "" +
 	"\astarted\x18\x05 \x01(\x03R\astarted\x12\x1d\n" +
 	"\n" +
 	"auto_renew\x18\t \x01(\bR\tautoRenew\x12.\n" +
-	"\x13billing_cycle_month\x18\x0f \x01(\rR\x11billingCycleMonth\x127\n" +
-	"\x18next_billing_cycle_month\x18\x10 \x01(\rR\x15nextBillingCycleMonth\x12\x12\n" +
+	"\x13billing_cycle_month\x18\x0f \x01(\rR\x11billingCycleMonth\x12\x12\n" +
 	"\x04plan\x18\x11 \x01(\tR\x04plan\x12%\n" +
 	"\x0epayment_method\x18  \x01(\tR\rpaymentMethod\x12#\n" +
 	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12\x1f\n" +

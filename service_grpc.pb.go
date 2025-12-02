@@ -2079,7 +2079,6 @@ const (
 	AccountMgr_ListBankAccounts_FullMethodName                = "/header.AccountMgr/ListBankAccounts"
 	AccountMgr_VerifyBankAccount_FullMethodName               = "/header.AccountMgr/VerifyBankAccount"
 	AccountMgr_GenerateBankTransferRequest_FullMethodName     = "/header.AccountMgr/GenerateBankTransferRequest"
-	AccountMgr_GenerateQrCodeRequest_FullMethodName           = "/header.AccountMgr/GenerateQrCodeRequest"
 	AccountMgr_GetSetupFeatureStatus_FullMethodName           = "/header.AccountMgr/GetSetupFeatureStatus"
 	AccountMgr_UpdateSetupFeatureStatus_FullMethodName        = "/header.AccountMgr/UpdateSetupFeatureStatus"
 	AccountMgr_ListActiveAccountIds_FullMethodName            = "/header.AccountMgr/ListActiveAccountIds"
@@ -2192,7 +2191,6 @@ type AccountMgrClient interface {
 	ListBankAccounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	VerifyBankAccount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	GenerateBankTransferRequest(ctx context.Context, in *BankTransferRequest, opts ...grpc.CallOption) (*Response, error)
-	GenerateQrCodeRequest(ctx context.Context, in *GenQrCodeRequest, opts ...grpc.CallOption) (*QrCode, error)
 	GetSetupFeatureStatus(ctx context.Context, in *Id, opts ...grpc.CallOption) (*SetupFeatureStatus, error)
 	UpdateSetupFeatureStatus(ctx context.Context, in *SetupFeatureStatus, opts ...grpc.CallOption) (*SetupFeatureStatus, error)
 	ListActiveAccountIds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -3216,16 +3214,6 @@ func (c *accountMgrClient) GenerateBankTransferRequest(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *accountMgrClient) GenerateQrCodeRequest(ctx context.Context, in *GenQrCodeRequest, opts ...grpc.CallOption) (*QrCode, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(QrCode)
-	err := c.cc.Invoke(ctx, AccountMgr_GenerateQrCodeRequest_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountMgrClient) GetSetupFeatureStatus(ctx context.Context, in *Id, opts ...grpc.CallOption) (*SetupFeatureStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetupFeatureStatus)
@@ -3363,7 +3351,6 @@ type AccountMgrServer interface {
 	ListBankAccounts(context.Context, *Id) (*Response, error)
 	VerifyBankAccount(context.Context, *Id) (*Response, error)
 	GenerateBankTransferRequest(context.Context, *BankTransferRequest) (*Response, error)
-	GenerateQrCodeRequest(context.Context, *GenQrCodeRequest) (*QrCode, error)
 	GetSetupFeatureStatus(context.Context, *Id) (*SetupFeatureStatus, error)
 	UpdateSetupFeatureStatus(context.Context, *SetupFeatureStatus) (*SetupFeatureStatus, error)
 	ListActiveAccountIds(context.Context, *Id) (*Response, error)
@@ -3679,9 +3666,6 @@ func (UnimplementedAccountMgrServer) VerifyBankAccount(context.Context, *Id) (*R
 }
 func (UnimplementedAccountMgrServer) GenerateBankTransferRequest(context.Context, *BankTransferRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateBankTransferRequest not implemented")
-}
-func (UnimplementedAccountMgrServer) GenerateQrCodeRequest(context.Context, *GenQrCodeRequest) (*QrCode, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GenerateQrCodeRequest not implemented")
 }
 func (UnimplementedAccountMgrServer) GetSetupFeatureStatus(context.Context, *Id) (*SetupFeatureStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSetupFeatureStatus not implemented")
@@ -5531,24 +5515,6 @@ func _AccountMgr_GenerateBankTransferRequest_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_GenerateQrCodeRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GenQrCodeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).GenerateQrCodeRequest(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_GenerateQrCodeRequest_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).GenerateQrCodeRequest(ctx, req.(*GenQrCodeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountMgr_GetSetupFeatureStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -6013,10 +5979,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateBankTransferRequest",
 			Handler:    _AccountMgr_GenerateBankTransferRequest_Handler,
-		},
-		{
-			MethodName: "GenerateQrCodeRequest",
-			Handler:    _AccountMgr_GenerateQrCodeRequest_Handler,
 		},
 		{
 			MethodName: "GetSetupFeatureStatus",
