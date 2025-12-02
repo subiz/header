@@ -7405,6 +7405,7 @@ message OutboundCallUpdateEvent {
 message String {
 	string str = 1;
 	string version = 2; //version 2 is version for convo
+	string code = 3;
 }
 
 message Number {

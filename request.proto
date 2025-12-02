@@ -1065,3 +1065,15 @@ message WidgetSettingRequest {
 	repeated string include_bot_ids = 4;
 	string user_id = 5;
 }
+
+message AutoPayRequest {
+	common.Context ctx = 1;
+	// optional string account_id = 2;
+	// optional string credit_id = 3;
+
+	string description = 7;
+	string bank_account_id = 8;
+	int64 created = 9;
+	int64 fpv_amount = 10; // 3_000_000_000_000 (3 tr)
+	string currency = 17; // VND or USD
+}

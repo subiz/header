@@ -34,6 +34,7 @@ message PurchaseRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional int64 created = 11;
+
 	optional string promotion_code = 4;
 	// optional string name = 7;
 
@@ -41,7 +42,7 @@ message PurchaseRequest {
 	optional bool auto_renew = 9;
 
 	optional uint32 billing_cycle_month = 15;
-	optional uint32 next_billing_cycle_month = 16;
+	// optional uint32 next_billing_cycle_month = 16;
 	optional string plan = 17;
 
 	optional string payment_method = 32;
@@ -63,10 +64,10 @@ message Subscription {
 
 	optional int64 started = 5; // ms
 	optional uint32 billing_cycle_month = 15; // read-only
-	optional uint32 next_billing_cycle_month = 16; // @deprecated
+	// optional uint32 next_billing_cycle_month = 16; // @deprecated
 
 	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
-	optional string next_plan = 18; // @deprecated
+	// optional string next_plan = 18; // @deprecated
 
 	optional float credit = 27;
 	optional common.Limit limit = 42; // combined from plan.limit and purchased_limit
@@ -77,11 +78,11 @@ message Subscription {
 
 	optional int64 fpv_credit_vnd = 48; // translate from credit, do not store in db
 	optional int64 fpv_custom_price = 49; // usd, custom price, only edited by subiz
-	optional int64 fpv_next_custom_price = 53; // @depreacated usd, custom price only edited by subiz
+	// optional int64 fpv_next_custom_price = 53; // @depreacated usd, custom price only edited by subiz
 
 	optional int64 num_agents = 50;
 	// optional int64 use_ticket = 51;
-	optional int64 next_num_agents = 52; // @deprecated
+	// optional int64 next_num_agents = 52; // @deprecated
 	optional int64 unlimited_ai_spending = 54;
 	optional int64 fpv_credit_usd = 55; // soft
 
@@ -156,7 +157,7 @@ message Invoice {
 	// optional float amount_due = 4;
 	optional string promotion_code = 5;
 	// optional string description = 6;
-	optional BillingInfo billing_info = 8;
+	// optional BillingInfo billing_info = 8;
 	optional int64 due_date = 9;
 
 	enum State {
@@ -221,7 +222,7 @@ message Invoice {
 message FanpagesInvoiceItem {
 	// optional string plan = 3;
 	// optional int32 day_left = 4;
-	optional int32 count = 8;
+	optional int64 pack_size = 8; // typical 500
 	optional int64 started = 9;
 	optional int64 ended = 10;
 	optional bool full_cycle = 11;
@@ -229,7 +230,7 @@ message FanpagesInvoiceItem {
 
 message ZaloPersonalsInvoiceItem {
 	// optional int32 day_left = 4;
-	optional int32 count = 8;
+	optional int32 pack_size = 8; // typical 5
 	optional int64 started = 9;
 	optional int64 ended = 10;
 	optional bool full_cycle = 11;
@@ -318,15 +319,6 @@ message InvoiceItem {
 	optional int64 fpv_discount_usd = 17;
 }
 
-message BillingInfo {
-	optional string name = 2;
-	optional string address = 3;
-	optional string vat = 4;
-	optional string country_code = 5;
-	optional string country = 6;
-	optional string email = 7;
-}
-
 message Logs {
 	optional common.Context ctx = 1;
 	repeated Log logs = 5;
@@ -389,18 +381,6 @@ message PayRequest {
 
 	optional string payment_method = 18;
 	optional string promotion_code = 21;
-}
-
-message AutoPayRequest {
-	optional common.Context ctx = 1;
-	// optional string account_id = 2;
-	// optional string credit_id = 3;
-
-	optional string description = 7;
-	optional string bank_account_id = 8;
-	optional int64 created = 9;
-	optional int64 fpv_amount = 10; // 3_000_000_000_000 (3 tr)
-	optional string currency = 17; // VND or USD
 }
 
 message InvoiceCreatedEmail {
