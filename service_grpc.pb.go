@@ -17558,7 +17558,7 @@ type PaymentMgrClient interface {
 	GetSub(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccSub, error)
 	Purchase(ctx context.Context, in *payment.PurchaseRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
-	UpdateSub(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
+	UpdateSub(ctx context.Context, in *payment.UpdateSubscriptionRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	GetInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	GetSubscription(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Subscription, error)
 	Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
@@ -17636,9 +17636,9 @@ func (c *paymentMgrClient) UpdateSubscription(ctx context.Context, in *payment.S
 	return out, nil
 }
 
-func (c *paymentMgrClient) UpdateSub(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error) {
+func (c *paymentMgrClient) UpdateSub(ctx context.Context, in *payment.UpdateSubscriptionRequest, opts ...grpc.CallOption) (*payment.Invoice, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(payment.Subscription)
+	out := new(payment.Invoice)
 	err := c.cc.Invoke(ctx, PaymentMgr_UpdateSub_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -17805,7 +17805,7 @@ type PaymentMgrServer interface {
 	GetSub(context.Context, *Id) (*AccSub, error)
 	Purchase(context.Context, *payment.PurchaseRequest) (*payment.Invoice, error)
 	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
-	UpdateSub(context.Context, *payment.Subscription) (*payment.Subscription, error)
+	UpdateSub(context.Context, *payment.UpdateSubscriptionRequest) (*payment.Invoice, error)
 	GetInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	GetSubscription(context.Context, *Id) (*payment.Subscription, error)
 	Pay(context.Context, *payment.PayRequest) (*payment.Bill, error)
@@ -17848,7 +17848,7 @@ func (UnimplementedPaymentMgrServer) Purchase(context.Context, *payment.Purchase
 func (UnimplementedPaymentMgrServer) UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubscription not implemented")
 }
-func (UnimplementedPaymentMgrServer) UpdateSub(context.Context, *payment.Subscription) (*payment.Subscription, error) {
+func (UnimplementedPaymentMgrServer) UpdateSub(context.Context, *payment.UpdateSubscriptionRequest) (*payment.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSub not implemented")
 }
 func (UnimplementedPaymentMgrServer) GetInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error) {
@@ -18008,7 +18008,7 @@ func _PaymentMgr_UpdateSubscription_Handler(srv interface{}, ctx context.Context
 }
 
 func _PaymentMgr_UpdateSub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(payment.Subscription)
+	in := new(payment.UpdateSubscriptionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -18020,7 +18020,7 @@ func _PaymentMgr_UpdateSub_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: PaymentMgr_UpdateSub_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).UpdateSub(ctx, req.(*payment.Subscription))
+		return srv.(PaymentMgrServer).UpdateSub(ctx, req.(*payment.UpdateSubscriptionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
