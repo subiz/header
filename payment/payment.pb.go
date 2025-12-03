@@ -2980,6 +2980,7 @@ type UpdateSubscriptionRequest struct {
 	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	Subscription  *Subscription          `protobuf:"bytes,4,opt,name=subscription" json:"subscription,omitempty"`
 	InvoiceMode   *string                `protobuf:"bytes,5,opt,name=invoice_mode,json=invoiceMode" json:"invoice_mode,omitempty"` // none (only subiz can do this), open (create invoice), pending (just create draft invoice without update, update after paid)
+	Now           *int64                 `protobuf:"varint,6,opt,name=now" json:"now,omitempty"`                                   // for testing only
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3040,6 +3041,13 @@ func (x *UpdateSubscriptionRequest) GetInvoiceMode() string {
 		return *x.InvoiceMode
 	}
 	return ""
+}
+
+func (x *UpdateSubscriptionRequest) GetNow() int64 {
+	if x != nil && x.Now != nil {
+		return *x.Now
+	}
+	return 0
 }
 
 type InvoiceItem_Data struct {
@@ -3500,13 +3508,14 @@ const file_payment_proto_rawDesc = "" +
 	"invoice_id\x18\x05 \x01(\tR\tinvoiceId\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\x03R\acreated\x12'\n" +
 	"\x0finvoice_created\x18\b \x01(\tR\x0einvoiceCreated\x12!\n" +
-	"\finvoice_link\x18\t \x01(\tR\vinvoiceLink\"\xbb\x01\n" +
+	"\finvoice_link\x18\t \x01(\tR\vinvoiceLink\"\xcd\x01\n" +
 	"\x19UpdateSubscriptionRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x129\n" +
 	"\fsubscription\x18\x04 \x01(\v2\x15.payment.SubscriptionR\fsubscription\x12!\n" +
-	"\finvoice_mode\x18\x05 \x01(\tR\vinvoiceModeB!Z\x1fgithub.com/subiz/header/payment"
+	"\finvoice_mode\x18\x05 \x01(\tR\vinvoiceMode\x12\x10\n" +
+	"\x03now\x18\x06 \x01(\x03R\x03nowB!Z\x1fgithub.com/subiz/header/payment"
 
 var (
 	file_payment_proto_rawDescOnce sync.Once

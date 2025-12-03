@@ -422,4 +422,5 @@ message UpdateSubscriptionRequest {
 
 	optional Subscription subscription = 4;
 	optional string invoice_mode = 5; // none (only subiz can do this), open (create invoice), pending (just create draft invoice without update, update after paid)
+	optional int64 now = 6; // for testing only
 }
