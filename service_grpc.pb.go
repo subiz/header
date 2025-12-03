@@ -17531,6 +17531,8 @@ const (
 	PaymentMgr_GetSub_FullMethodName               = "/header.PaymentMgr/GetSub"
 	PaymentMgr_Purchase_FullMethodName             = "/header.PaymentMgr/Purchase"
 	PaymentMgr_UpdateSubscription_FullMethodName   = "/header.PaymentMgr/UpdateSubscription"
+	PaymentMgr_UpdateSub_FullMethodName            = "/header.PaymentMgr/UpdateSub"
+	PaymentMgr_GetInvoice_FullMethodName           = "/header.PaymentMgr/GetInvoice"
 	PaymentMgr_GetSubscription_FullMethodName      = "/header.PaymentMgr/GetSubscription"
 	PaymentMgr_Pay_FullMethodName                  = "/header.PaymentMgr/Pay"
 	PaymentMgr_CreateInvoice_FullMethodName        = "/header.PaymentMgr/CreateInvoice"
@@ -17556,12 +17558,15 @@ type PaymentMgrClient interface {
 	GetSub(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccSub, error)
 	Purchase(ctx context.Context, in *payment.PurchaseRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
+	UpdateSub(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
+	GetInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	GetSubscription(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Subscription, error)
 	Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
 	CreateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error)
 	DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
+	// call when receive bank transfer
 	DoPaidSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
 	ListComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Comments, error)
 	AddComment(ctx context.Context, in *payment.Comment, opts ...grpc.CallOption) (*payment.Comment, error)
@@ -17625,6 +17630,26 @@ func (c *paymentMgrClient) UpdateSubscription(ctx context.Context, in *payment.S
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(payment.Subscription)
 	err := c.cc.Invoke(ctx, PaymentMgr_UpdateSubscription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateSub(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(payment.Subscription)
+	err := c.cc.Invoke(ctx, PaymentMgr_UpdateSub_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, PaymentMgr_GetInvoice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -17780,12 +17805,15 @@ type PaymentMgrServer interface {
 	GetSub(context.Context, *Id) (*AccSub, error)
 	Purchase(context.Context, *payment.PurchaseRequest) (*payment.Invoice, error)
 	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
+	UpdateSub(context.Context, *payment.Subscription) (*payment.Subscription, error)
+	GetInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	GetSubscription(context.Context, *Id) (*payment.Subscription, error)
 	Pay(context.Context, *payment.PayRequest) (*payment.Bill, error)
 	CreateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error)
 	DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error)
+	// call when receive bank transfer
 	DoPaidSubscription(context.Context, *payment.Subscription) (*payment.Invoice, error)
 	ListComments(context.Context, *Id) (*payment.Comments, error)
 	AddComment(context.Context, *payment.Comment) (*payment.Comment, error)
@@ -17819,6 +17847,12 @@ func (UnimplementedPaymentMgrServer) Purchase(context.Context, *payment.Purchase
 }
 func (UnimplementedPaymentMgrServer) UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubscription not implemented")
+}
+func (UnimplementedPaymentMgrServer) UpdateSub(context.Context, *payment.Subscription) (*payment.Subscription, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSub not implemented")
+}
+func (UnimplementedPaymentMgrServer) GetInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
 }
 func (UnimplementedPaymentMgrServer) GetSubscription(context.Context, *Id) (*payment.Subscription, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSubscription not implemented")
@@ -17969,6 +18003,42 @@ func _PaymentMgr_UpdateSubscription_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentMgrServer).UpdateSubscription(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateSub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateSub(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentMgr_UpdateSub_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateSub(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentMgr_GetInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetInvoice(ctx, req.(*payment.Invoice))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -18251,6 +18321,14 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateSubscription",
 			Handler:    _PaymentMgr_UpdateSubscription_Handler,
+		},
+		{
+			MethodName: "UpdateSub",
+			Handler:    _PaymentMgr_UpdateSub_Handler,
+		},
+		{
+			MethodName: "GetInvoice",
+			Handler:    _PaymentMgr_GetInvoice_Handler,
 		},
 		{
 			MethodName: "GetSubscription",

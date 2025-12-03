@@ -633,14 +633,20 @@ service PaymentMgr {
 	rpc ListPlans(Id) returns (Response);
 	rpc SearchSub(account.SearchSubRequest) returns (AccSubs);
 	rpc GetSub(header.Id) returns (AccSub);
-	rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice);
+	rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription);
+
+	rpc UpdateSub(payment.Subscription) returns (payment.Subscription);
+	rpc GetInvoice(payment.Invoice) returns (payment.Invoice);
+
 	rpc GetSubscription(Id) returns (payment.Subscription);
 	rpc Pay(payment.PayRequest) returns (payment.Bill);
 	rpc CreateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc UpdateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
 	rpc DraftInvoice(payment.Subscription) returns (payment.Invoice);
+
+	// call when receive bank transfer
 	rpc DoPaidSubscription(payment.Subscription) returns (payment.Invoice); // upgrade and generate invoice
 
 	rpc ListComments(Id) returns (payment.Comments);

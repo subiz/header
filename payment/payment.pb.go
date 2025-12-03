@@ -2974,6 +2974,74 @@ func (x *PaidInvoiceEmail) GetInvoiceLink() string {
 	return ""
 }
 
+type UpdateSubscriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Subscription  *Subscription          `protobuf:"bytes,4,opt,name=subscription" json:"subscription,omitempty"`
+	InvoiceMode   *string                `protobuf:"bytes,5,opt,name=invoice_mode,json=invoiceMode" json:"invoice_mode,omitempty"` // none (only subiz can do this), open (create invoice), pending (just create draft invoice without update, update after paid)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateSubscriptionRequest) Reset() {
+	*x = UpdateSubscriptionRequest{}
+	mi := &file_payment_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateSubscriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateSubscriptionRequest) ProtoMessage() {}
+
+func (x *UpdateSubscriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateSubscriptionRequest.ProtoReflect.Descriptor instead.
+func (*UpdateSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return file_payment_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *UpdateSubscriptionRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *UpdateSubscriptionRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *UpdateSubscriptionRequest) GetSubscription() *Subscription {
+	if x != nil {
+		return x.Subscription
+	}
+	return nil
+}
+
+func (x *UpdateSubscriptionRequest) GetInvoiceMode() string {
+	if x != nil && x.InvoiceMode != nil {
+		return *x.InvoiceMode
+	}
+	return ""
+}
+
 type InvoiceItem_Data struct {
 	state                 protoimpl.MessageState    `protogen:"open.v1"`
 	Renew                 *RenewInvoiceItem         `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
@@ -2992,7 +3060,7 @@ type InvoiceItem_Data struct {
 
 func (x *InvoiceItem_Data) Reset() {
 	*x = InvoiceItem_Data{}
-	mi := &file_payment_proto_msgTypes[28]
+	mi := &file_payment_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3004,7 +3072,7 @@ func (x *InvoiceItem_Data) String() string {
 func (*InvoiceItem_Data) ProtoMessage() {}
 
 func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[28]
+	mi := &file_payment_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3432,7 +3500,13 @@ const file_payment_proto_rawDesc = "" +
 	"invoice_id\x18\x05 \x01(\tR\tinvoiceId\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\x03R\acreated\x12'\n" +
 	"\x0finvoice_created\x18\b \x01(\tR\x0einvoiceCreated\x12!\n" +
-	"\finvoice_link\x18\t \x01(\tR\vinvoiceLinkB!Z\x1fgithub.com/subiz/header/payment"
+	"\finvoice_link\x18\t \x01(\tR\vinvoiceLink\"\xbb\x01\n" +
+	"\x19UpdateSubscriptionRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x129\n" +
+	"\fsubscription\x18\x04 \x01(\v2\x15.payment.SubscriptionR\fsubscription\x12!\n" +
+	"\finvoice_mode\x18\x05 \x01(\tR\vinvoiceModeB!Z\x1fgithub.com/subiz/header/payment"
 
 var (
 	file_payment_proto_rawDescOnce sync.Once
@@ -3447,90 +3521,93 @@ func file_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_payment_proto_goTypes = []any{
-	(Invoice_State)(0),               // 0: payment.Invoice.State
-	(Log_Action)(0),                  // 1: payment.Log.Action
-	(*Comments)(nil),                 // 2: payment.Comments
-	(*Comment)(nil),                  // 3: payment.Comment
-	(*DiffSubRequest)(nil),           // 4: payment.DiffSubRequest
-	(*PurchaseRequest)(nil),          // 5: payment.PurchaseRequest
-	(*Subscription)(nil),             // 6: payment.Subscription
-	(*Bill)(nil),                     // 7: payment.Bill
-	(*Bills)(nil),                    // 8: payment.Bills
-	(*Note)(nil),                     // 9: payment.Note
-	(*Invoices)(nil),                 // 10: payment.Invoices
-	(*ListInvoiceRequest)(nil),       // 11: payment.ListInvoiceRequest
-	(*Invoice)(nil),                  // 12: payment.Invoice
-	(*FanpagesInvoiceItem)(nil),      // 13: payment.FanpagesInvoiceItem
-	(*ZaloPersonalsInvoiceItem)(nil), // 14: payment.ZaloPersonalsInvoiceItem
-	(*AgentInvoiceItem)(nil),         // 15: payment.AgentInvoiceItem
-	(*RenewInvoiceItem)(nil),         // 16: payment.RenewInvoiceItem
-	(*ReservedInvoiceItem)(nil),      // 17: payment.ReservedInvoiceItem
-	(*PlanInvoiceItem)(nil),          // 18: payment.PlanInvoiceItem
-	(*MarketingInvoiceItem)(nil),     // 19: payment.MarketingInvoiceItem
-	(*NoVATInvoiceItem)(nil),         // 20: payment.NoVATInvoiceItem
-	(*InvoiceItem)(nil),              // 21: payment.InvoiceItem
-	(*Logs)(nil),                     // 22: payment.Logs
-	(*Log)(nil),                      // 23: payment.Log
-	(*String)(nil),                   // 24: payment.String
-	(*PayRequest)(nil),               // 25: payment.PayRequest
-	(*InvoiceCreatedEmail)(nil),      // 26: payment.InvoiceCreatedEmail
-	(*TrialEndingEmail)(nil),         // 27: payment.TrialEndingEmail
-	(*UpdatePlanEmail)(nil),          // 28: payment.UpdatePlanEmail
-	(*PaidInvoiceEmail)(nil),         // 29: payment.PaidInvoiceEmail
-	(*InvoiceItem_Data)(nil),         // 30: payment.InvoiceItem.Data
-	(*common.Context)(nil),           // 31: common.Context
-	(*common.Limit)(nil),             // 32: common.Limit
+	(Invoice_State)(0),                // 0: payment.Invoice.State
+	(Log_Action)(0),                   // 1: payment.Log.Action
+	(*Comments)(nil),                  // 2: payment.Comments
+	(*Comment)(nil),                   // 3: payment.Comment
+	(*DiffSubRequest)(nil),            // 4: payment.DiffSubRequest
+	(*PurchaseRequest)(nil),           // 5: payment.PurchaseRequest
+	(*Subscription)(nil),              // 6: payment.Subscription
+	(*Bill)(nil),                      // 7: payment.Bill
+	(*Bills)(nil),                     // 8: payment.Bills
+	(*Note)(nil),                      // 9: payment.Note
+	(*Invoices)(nil),                  // 10: payment.Invoices
+	(*ListInvoiceRequest)(nil),        // 11: payment.ListInvoiceRequest
+	(*Invoice)(nil),                   // 12: payment.Invoice
+	(*FanpagesInvoiceItem)(nil),       // 13: payment.FanpagesInvoiceItem
+	(*ZaloPersonalsInvoiceItem)(nil),  // 14: payment.ZaloPersonalsInvoiceItem
+	(*AgentInvoiceItem)(nil),          // 15: payment.AgentInvoiceItem
+	(*RenewInvoiceItem)(nil),          // 16: payment.RenewInvoiceItem
+	(*ReservedInvoiceItem)(nil),       // 17: payment.ReservedInvoiceItem
+	(*PlanInvoiceItem)(nil),           // 18: payment.PlanInvoiceItem
+	(*MarketingInvoiceItem)(nil),      // 19: payment.MarketingInvoiceItem
+	(*NoVATInvoiceItem)(nil),          // 20: payment.NoVATInvoiceItem
+	(*InvoiceItem)(nil),               // 21: payment.InvoiceItem
+	(*Logs)(nil),                      // 22: payment.Logs
+	(*Log)(nil),                       // 23: payment.Log
+	(*String)(nil),                    // 24: payment.String
+	(*PayRequest)(nil),                // 25: payment.PayRequest
+	(*InvoiceCreatedEmail)(nil),       // 26: payment.InvoiceCreatedEmail
+	(*TrialEndingEmail)(nil),          // 27: payment.TrialEndingEmail
+	(*UpdatePlanEmail)(nil),           // 28: payment.UpdatePlanEmail
+	(*PaidInvoiceEmail)(nil),          // 29: payment.PaidInvoiceEmail
+	(*UpdateSubscriptionRequest)(nil), // 30: payment.UpdateSubscriptionRequest
+	(*InvoiceItem_Data)(nil),          // 31: payment.InvoiceItem.Data
+	(*common.Context)(nil),            // 32: common.Context
+	(*common.Limit)(nil),              // 33: common.Limit
 }
 var file_payment_proto_depIdxs = []int32{
-	31, // 0: payment.Comments.ctx:type_name -> common.Context
+	32, // 0: payment.Comments.ctx:type_name -> common.Context
 	3,  // 1: payment.Comments.comments:type_name -> payment.Comment
-	31, // 2: payment.Comment.ctx:type_name -> common.Context
+	32, // 2: payment.Comment.ctx:type_name -> common.Context
 	6,  // 3: payment.DiffSubRequest.old_subscription:type_name -> payment.Subscription
 	6,  // 4: payment.DiffSubRequest.new_subscription:type_name -> payment.Subscription
-	31, // 5: payment.PurchaseRequest.ctx:type_name -> common.Context
-	32, // 6: payment.PurchaseRequest.limit:type_name -> common.Limit
-	31, // 7: payment.Subscription.ctx:type_name -> common.Context
-	32, // 8: payment.Subscription.limit:type_name -> common.Limit
-	32, // 9: payment.Subscription.purchased:type_name -> common.Limit
-	31, // 10: payment.Bill.ctx:type_name -> common.Context
-	31, // 11: payment.Bills.ctx:type_name -> common.Context
+	32, // 5: payment.PurchaseRequest.ctx:type_name -> common.Context
+	33, // 6: payment.PurchaseRequest.limit:type_name -> common.Limit
+	32, // 7: payment.Subscription.ctx:type_name -> common.Context
+	33, // 8: payment.Subscription.limit:type_name -> common.Limit
+	33, // 9: payment.Subscription.purchased:type_name -> common.Limit
+	32, // 10: payment.Bill.ctx:type_name -> common.Context
+	32, // 11: payment.Bills.ctx:type_name -> common.Context
 	7,  // 12: payment.Bills.bills:type_name -> payment.Bill
-	31, // 13: payment.Note.ctx:type_name -> common.Context
-	31, // 14: payment.Invoices.ctx:type_name -> common.Context
+	32, // 13: payment.Note.ctx:type_name -> common.Context
+	32, // 14: payment.Invoices.ctx:type_name -> common.Context
 	12, // 15: payment.Invoices.invoices:type_name -> payment.Invoice
-	31, // 16: payment.ListInvoiceRequest.ctx:type_name -> common.Context
-	31, // 17: payment.Invoice.ctx:type_name -> common.Context
+	32, // 16: payment.ListInvoiceRequest.ctx:type_name -> common.Context
+	32, // 17: payment.Invoice.ctx:type_name -> common.Context
 	21, // 18: payment.Invoice.items:type_name -> payment.InvoiceItem
 	9,  // 19: payment.Invoice.notes:type_name -> payment.Note
 	6,  // 20: payment.Invoice.current_sub:type_name -> payment.Subscription
 	6,  // 21: payment.Invoice.sub:type_name -> payment.Subscription
-	30, // 22: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
-	31, // 23: payment.Logs.ctx:type_name -> common.Context
+	31, // 22: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
+	32, // 23: payment.Logs.ctx:type_name -> common.Context
 	23, // 24: payment.Logs.logs:type_name -> payment.Log
-	31, // 25: payment.Log.ctx:type_name -> common.Context
-	31, // 26: payment.String.ctx:type_name -> common.Context
-	31, // 27: payment.PayRequest.ctx:type_name -> common.Context
-	31, // 28: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	31, // 29: payment.TrialEndingEmail.ctx:type_name -> common.Context
-	31, // 30: payment.UpdatePlanEmail.ctx:type_name -> common.Context
-	31, // 31: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
-	16, // 32: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
-	15, // 33: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
-	18, // 34: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
-	19, // 35: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
-	17, // 36: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
-	20, // 37: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
-	13, // 38: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
-	14, // 39: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
-	17, // 40: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
-	17, // 41: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
-	42, // [42:42] is the sub-list for method output_type
-	42, // [42:42] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	32, // 25: payment.Log.ctx:type_name -> common.Context
+	32, // 26: payment.String.ctx:type_name -> common.Context
+	32, // 27: payment.PayRequest.ctx:type_name -> common.Context
+	32, // 28: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	32, // 29: payment.TrialEndingEmail.ctx:type_name -> common.Context
+	32, // 30: payment.UpdatePlanEmail.ctx:type_name -> common.Context
+	32, // 31: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
+	32, // 32: payment.UpdateSubscriptionRequest.ctx:type_name -> common.Context
+	6,  // 33: payment.UpdateSubscriptionRequest.subscription:type_name -> payment.Subscription
+	16, // 34: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
+	15, // 35: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
+	18, // 36: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
+	19, // 37: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
+	17, // 38: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedInvoiceItem
+	20, // 39: payment.InvoiceItem.Data.novat:type_name -> payment.NoVATInvoiceItem
+	13, // 40: payment.InvoiceItem.Data.fanpages:type_name -> payment.FanpagesInvoiceItem
+	14, // 41: payment.InvoiceItem.Data.zalo_personals:type_name -> payment.ZaloPersonalsInvoiceItem
+	17, // 42: payment.InvoiceItem.Data.reserved_fanpages:type_name -> payment.ReservedInvoiceItem
+	17, // 43: payment.InvoiceItem.Data.reserved_zalo_personals:type_name -> payment.ReservedInvoiceItem
+	44, // [44:44] is the sub-list for method output_type
+	44, // [44:44] is the sub-list for method input_type
+	44, // [44:44] is the sub-list for extension type_name
+	44, // [44:44] is the sub-list for extension extendee
+	0,  // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }
@@ -3544,7 +3621,7 @@ func file_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_proto_rawDesc), len(file_payment_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   29,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

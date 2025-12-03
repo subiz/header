@@ -415,3 +415,11 @@ message PaidInvoiceEmail {
 	optional string invoice_created = 8;
 	optional string invoice_link = 9;
 }
+
+message UpdateSubscriptionRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+
+	optional Subscription subscription = 4;
+	optional string invoice_mode = 5; // none (only subiz can do this), open (create invoice), pending (just create draft invoice without update, update after paid)
+}
