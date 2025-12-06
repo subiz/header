@@ -29,7 +29,6 @@ message DashboardAgent {
 	optional int64 appphone_disabled = 29;
 
 	// optional int64 call_promote_shown = 30;
-
 	optional string on_call = 31;
 	optional int64 last_close_task_notification = 32;
 	optional int64 order_seen = 33;
@@ -62,6 +61,7 @@ message Agent {
 	optional string fullname = 4;
 	optional string email = 5; // reflect from agent profile
 	optional string phone = 8; // reflect form agent profile
+	optional int64 phone_confirmed = 10;
 	optional string job_title = 11; // deprecated
 
 	enum Gender {

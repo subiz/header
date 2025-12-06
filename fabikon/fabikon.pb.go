@@ -166,6 +166,7 @@ type FacebookPage struct {
 	CommentDisabled          int64                  `protobuf:"varint,35,opt,name=comment_disabled,json=commentDisabled,proto3" json:"comment_disabled,omitempty"` // replicated of integration.comment_disabled
 	LastSyncFromConvo        int64                  `protobuf:"varint,36,opt,name=last_sync_from_convo,json=lastSyncFromConvo,proto3" json:"last_sync_from_convo,omitempty"`
 	Business                 *MetaBusiness          `protobuf:"bytes,37,opt,name=business,proto3" json:"business,omitempty"`
+	LastSync                 int64                  `protobuf:"varint,38,opt,name=last_sync,json=lastSync,proto3" json:"last_sync,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -415,6 +416,13 @@ func (x *FacebookPage) GetBusiness() *MetaBusiness {
 		return x.Business
 	}
 	return nil
+}
+
+func (x *FacebookPage) GetLastSync() int64 {
+	if x != nil {
+		return x.LastSync
+	}
+	return 0
 }
 
 type FbWebhookEvent struct {
@@ -5498,7 +5506,7 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x02id\x18\x04 \x01(\tR\x02id\"2\n" +
 	"\fMetaBusiness\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\x91\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\xae\n" +
 	"\n" +
 	"\fFacebookPage\x12\x1d\n" +
 	"\n" +
@@ -5536,7 +5544,8 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x05state\x18\" \x01(\tR\x05state\x12)\n" +
 	"\x10comment_disabled\x18# \x01(\x03R\x0fcommentDisabled\x12/\n" +
 	"\x14last_sync_from_convo\x18$ \x01(\x03R\x11lastSyncFromConvo\x121\n" +
-	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\"P\n" +
+	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\x12\x1b\n" +
+	"\tlast_sync\x18& \x01(\x03R\blastSync\"P\n" +
 	"\x0eFbWebhookEvent\x12\x16\n" +
 	"\x06object\x18\x02 \x01(\tR\x06object\x12&\n" +
 	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entry\"\xbe\x01\n" +

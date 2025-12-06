@@ -61,6 +61,7 @@ message FacebookPage {
 	int64 last_sync_from_convo = 36;
 
 	MetaBusiness business = 37;
+	int64 last_sync = 38;
 }
 
 message FbWebhookEvent {

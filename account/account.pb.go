@@ -215,13 +215,14 @@ type DashboardAgent struct {
 	OrderFilter             *string  `protobuf:"bytes,20,opt,name=order_filter,json=orderFilter" json:"order_filter,omitempty"` // json
 	ConversationSeen        *int64   `protobuf:"varint,21,opt,name=conversation_seen,json=conversationSeen" json:"conversation_seen,omitempty"`
 	// optional string price_function = 22;
-	UserInfoFields                 []string          `protobuf:"bytes,23,rep,name=user_info_fields,json=userInfoFields" json:"user_info_fields,omitempty"`
-	LastCallDevice                 *string           `protobuf:"bytes,25,opt,name=last_call_device,json=lastCallDevice" json:"last_call_device,omitempty"`
-	LastCallNumber                 *string           `protobuf:"bytes,26,opt,name=last_call_number,json=lastCallNumber" json:"last_call_number,omitempty"`                      // main number
-	OutboundNumbersPicker          *string           `protobuf:"bytes,46,opt,name=outbound_numbers_picker,json=outboundNumbersPicker" json:"outbound_numbers_picker,omitempty"` // ''=last samenet random
-	MuteCallUntil                  *int64            `protobuf:"varint,27,opt,name=mute_call_until,json=muteCallUntil" json:"mute_call_until,omitempty"`                        // ms
-	WebphoneDisabled               *int64            `protobuf:"varint,28,opt,name=webphone_disabled,json=webphoneDisabled" json:"webphone_disabled,omitempty"`
-	AppphoneDisabled               *int64            `protobuf:"varint,29,opt,name=appphone_disabled,json=appphoneDisabled" json:"appphone_disabled,omitempty"`
+	UserInfoFields        []string `protobuf:"bytes,23,rep,name=user_info_fields,json=userInfoFields" json:"user_info_fields,omitempty"`
+	LastCallDevice        *string  `protobuf:"bytes,25,opt,name=last_call_device,json=lastCallDevice" json:"last_call_device,omitempty"`
+	LastCallNumber        *string  `protobuf:"bytes,26,opt,name=last_call_number,json=lastCallNumber" json:"last_call_number,omitempty"`                      // main number
+	OutboundNumbersPicker *string  `protobuf:"bytes,46,opt,name=outbound_numbers_picker,json=outboundNumbersPicker" json:"outbound_numbers_picker,omitempty"` // ''=last samenet random
+	MuteCallUntil         *int64   `protobuf:"varint,27,opt,name=mute_call_until,json=muteCallUntil" json:"mute_call_until,omitempty"`                        // ms
+	WebphoneDisabled      *int64   `protobuf:"varint,28,opt,name=webphone_disabled,json=webphoneDisabled" json:"webphone_disabled,omitempty"`
+	AppphoneDisabled      *int64   `protobuf:"varint,29,opt,name=appphone_disabled,json=appphoneDisabled" json:"appphone_disabled,omitempty"`
+	// optional int64 call_promote_shown = 30;
 	OnCall                         *string           `protobuf:"bytes,31,opt,name=on_call,json=onCall" json:"on_call,omitempty"`
 	LastCloseTaskNotification      *int64            `protobuf:"varint,32,opt,name=last_close_task_notification,json=lastCloseTaskNotification" json:"last_close_task_notification,omitempty"`
 	OrderSeen                      *int64            `protobuf:"varint,33,opt,name=order_seen,json=orderSeen" json:"order_seen,omitempty"`
@@ -510,8 +511,9 @@ type Agent struct {
 	Id               *string                `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
 	AccountId        *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"` // subiz only
 	Fullname         *string                `protobuf:"bytes,4,opt,name=fullname" json:"fullname,omitempty"`
-	Email            *string                `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`                        // reflect from agent profile
-	Phone            *string                `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`                        // reflect form agent profile
+	Email            *string                `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"` // reflect from agent profile
+	Phone            *string                `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"` // reflect form agent profile
+	PhoneConfirmed   *int64                 `protobuf:"varint,10,opt,name=phone_confirmed,json=phoneConfirmed" json:"phone_confirmed,omitempty"`
 	JobTitle         *string                `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"` // deprecated
 	Gender           *string                `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`                     // reflect from agent profile
 	AvatarUrl        *string                `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
@@ -605,6 +607,13 @@ func (x *Agent) GetPhone() string {
 		return *x.Phone
 	}
 	return ""
+}
+
+func (x *Agent) GetPhoneConfirmed() int64 {
+	if x != nil && x.PhoneConfirmed != nil {
+		return *x.PhoneConfirmed
+	}
+	return 0
 }
 
 func (x *Agent) GetJobTitle() string {
@@ -2875,7 +2884,7 @@ const file_account_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aH\n" +
 	"\x1aSegmentUserViewsOrderEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd5\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xfe\x06\n" +
 	"\x05Agent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -2883,7 +2892,9 @@ const file_account_proto_rawDesc = "" +
 	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1a\n" +
 	"\bfullname\x18\x04 \x01(\tR\bfullname\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\b \x01(\tR\x05phone\x12\x1b\n" +
+	"\x05phone\x18\b \x01(\tR\x05phone\x12'\n" +
+	"\x0fphone_confirmed\x18\n" +
+	" \x01(\x03R\x0ephoneConfirmed\x12\x1b\n" +
 	"\tjob_title\x18\v \x01(\tR\bjobTitle\x12\x16\n" +
 	"\x06gender\x18\f \x01(\tR\x06gender\x12\x1d\n" +
 	"\n" +
