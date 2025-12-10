@@ -6,7 +6,7 @@ require (
 	github.com/gocql/gocql v1.7.0
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.1.0
 	github.com/prometheus/client_golang v1.23.2
-	github.com/subiz/log v1.0.14
+	github.com/subiz/log v1.0.16
 	github.com/tidwall/gjson v1.18.0
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.64.0
 	google.golang.org/grpc v1.77.0

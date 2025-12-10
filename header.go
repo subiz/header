@@ -2360,22 +2360,14 @@ func ToErr(err *Error) *log.AError {
 		if v == nil {
 			continue
 		}
-		logattrs[k] = &log.ErrorAttribute{
-			Key:   k,
-			Value: v.Value,
-			Type:  v.Type,
-		}
+		logattrs[k] = &log.ErrorAttribute{Value: v.Value, Type: v.Type}
 	}
 
 	for k, v := range err.XHiddenAttrs {
 		if v == nil {
 			continue
 		}
-		loghiddenattrs[k] = &log.ErrorAttribute{
-			Key:   k,
-			Value: v.Value,
-			Type:  v.Type,
-		}
+		loghiddenattrs[k] = &log.ErrorAttribute{Value: v.Value, Type: v.Type}
 	}
 
 	return &log.AError{
