@@ -1337,7 +1337,7 @@ func E400(err error, code E, v ...interface{}) error {
 		field[strconv.Itoa(i)] = vv
 	}
 
-	return log.Error3(err, field, log.E_invalid_input, log.E(code.String()))
+	return log.Error3("", err, field, log.E_invalid_input, log.E(code.String()))
 }
 
 func GetUserType(u *User) string {
@@ -2353,13 +2353,40 @@ func ToErr(err *Error) *log.AError {
 	if err == nil {
 		return nil
 	}
+
+	logattrs := map[string]*log.ErrorAttribute{}
+	loghiddenattrs := map[string]*log.ErrorAttribute{}
+	for k, v := range err.Attrs {
+		if v == nil {
+			continue
+		}
+		logattrs[k] = &log.ErrorAttribute{
+			Key:   k,
+			Value: v.Value,
+			Type:  v.Type,
+		}
+	}
+
+	for k, v := range err.XHiddenAttrs {
+		if v == nil {
+			continue
+		}
+		loghiddenattrs[k] = &log.ErrorAttribute{
+			Key:   k,
+			Value: v.Value,
+			Type:  v.Type,
+		}
+	}
+
 	return &log.AError{
-		Id:      err.Id,
-		Code:    err.Code,
-		Number:  err.Number,
-		Fields:  err.Fields,
-		XHidden: err.XHidden,
-		Message: err.Message,
+		Id:           err.Id,
+		Code:         err.Code,
+		Number:       err.Number,
+		Attrs:        logattrs,
+		XHiddenAttrs: loghiddenattrs,
+		Message:      err.Message,
+		SpanId:       err.SpanId,
+		TraceId:      err.TraceId,
 	}
 }
 
@@ -2368,13 +2395,40 @@ func FromErr(baseerr error) *Error {
 		return nil
 	}
 
+	attrs := map[string]*ErrorAttribute{}
+	hiddenattrs := map[string]*ErrorAttribute{}
 	err := log.NewError(baseerr, log.M{})
+	for k, v := range err.Attrs {
+		if v == nil {
+			continue
+		}
+		attrs[k] = &ErrorAttribute{
+			Key:   k,
+			Value: v.Value,
+			Type:  v.Type,
+		}
+	}
+
+	for k, v := range err.XHiddenAttrs {
+		if v == nil {
+			continue
+		}
+		hiddenattrs[k] = &ErrorAttribute{
+			Key:   k,
+			Value: v.Value,
+			Type:  v.Type,
+		}
+	}
+
 	return &Error{
-		Id:      err.Id,
-		Code:    err.Code,
-		Number:  err.Number,
-		Fields:  err.Fields,
-		Message: err.Message,
+		Id:           err.Id,
+		Code:         err.Code,
+		Number:       err.Number,
+		Attrs:        attrs,
+		XHiddenAttrs: hiddenattrs,
+		Message:      err.Message,
+		SpanId:       err.SpanId,
+		TraceId:      err.TraceId,
 	}
 }
 

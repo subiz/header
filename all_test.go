@@ -1089,3 +1089,28 @@ func TestNormString(t *testing.T) {
 		})
 	}
 }
+
+func TestRsCondition(t *testing.T) {
+	users := []*User{{
+		Id: "usskpnvcidvsyttyubipl",
+		Attributes: []*Attribute{
+			{Key: "owner", Text: "agshilbuxlafmkneqn"},
+		},
+		LeadOwners: []string{"agshilbuxlafmkneqn"},
+	}, {
+		Id:         "usskpnvlfmyqwfclpabcg",
+		Attributes: []*Attribute{{Key: "owner", Text: "agsgwxcgiakayqqpmi"}},
+		LeadOwners: []string{"agsgwxcgiakayqqpmi"},
+	}, {
+		Id: "usskpnwgtggqaugkkwjlv",
+	}, {
+		Id: "usskpnvcidvsyttyubipl",
+	}}
+
+	out := RsCheck(nil, users, &UserViewCondition{
+		Key:  "attr:owner",
+		Type: "text",
+		Text: &TextCondition{Op: "is_empty"},
+	}, false)
+	fmt.Println("OUT", out)
+}

@@ -1819,6 +1819,7 @@ message Integration {
 	string logo_url = 4; // emoji for phone
 	string name = 5;
 
+	string alias = 9; // just name
 	string connector_type = 12; // see facebook, call, website
 	int64 integrated = 6; // first integrated
 	int64 last_integrated = 7;
@@ -1840,7 +1841,7 @@ message Integration {
 	string username = 19;
 	string linked_page_id = 20;
 
-	string call_center_driver = 43; // empty => subiz, stringee
+	// string call_center_driver = 43; // empty => subiz
 	string sip_provider = 44; // itel, fpt, vnpt; for call only
 
 	int64 last_outbound_called = 45;
@@ -5230,20 +5231,22 @@ message ErrorAttribute {
 }
 
 message Error {
-	int64 id = 4; // unused
+	// int64 id = 4; // unused
+	string id = 5;
 	string code = 7; // should be general database_error, access_deny
 	// string sub_code = 8;
 	string number = 12; // unique, or hash of stack 4930543478 for grouping error
 	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
-	map<string, string> fields = 15; // deprecated
-	map<string, string> _hidden = 16; // deprecated
+	// map<string, string> fields = 15; // deprecated
+	// map<string, string> _hidden = 16; // deprecated
 
 	map<string, string> message = 18;
 	map<string, ErrorAttribute> attrs = 19;
 	map<string, ErrorAttribute> _hidden_attrs = 20;
 
-	string _stack = 21;
+	// string _stack = 21;
 	string trace_id = 22;
+	string span_id = 23;
 }
 
 message ShopeeShop {

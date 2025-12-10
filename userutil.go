@@ -669,11 +669,11 @@ func RsCheck(acc *apb.Account, users []*User, cond *UserViewCondition, deleted b
 		}
 	}
 
-	if isPrimaryCond(cond) {
+	if IsPrimaryCond(cond) {
 		return evaluateSingleCond(acc, primary, cond, deleted)
 	}
 
-	if isPositiveCond(cond) {
+	if IsPositiveCond(cond) {
 		// positive condition like equal, just one match -> group match
 		for _, u := range users {
 			if pass := evaluateSingleCond(acc, u, cond, deleted); pass {
@@ -692,7 +692,7 @@ func RsCheck(acc *apb.Account, users []*User, cond *UserViewCondition, deleted b
 	return true
 }
 
-func isPrimaryCond(cond *UserViewCondition) bool {
+func IsPrimaryCond(cond *UserViewCondition) bool {
 	key := cond.GetKey()
 	if strings.HasPrefix(key, "attr:") || strings.HasPrefix(key, "attr.") {
 		key = key[5:]
@@ -701,7 +701,7 @@ func isPrimaryCond(cond *UserViewCondition) bool {
 	return key == "lifecycle_stage" || key == "owner"
 }
 
-func isPositiveCond(cond *UserViewCondition) bool {
+func IsPositiveCond(cond *UserViewCondition) bool {
 	switch cond.GetType() {
 	case "number":
 		switch cond.GetNumber().GetOp() {
