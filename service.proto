@@ -1100,12 +1100,6 @@ service Crawler {
 	rpc ScreenShoot(CrawlUrlRequest) returns (CrawlResponse); // cached
 }
 
-service Marker {
-	rpc Mark(MarkRequest) returns (Empty); //
-	rpc Commit(CommitRequest) returns (Empty);
-	rpc ListMarkers(MarkRequest) returns (Markers);
-}
-
 service VectorDB {
 	rpc UpsertVector(VectorDoc) returns (Empty);
 	rpc DeleteVector(VectorDoc) returns (Empty);

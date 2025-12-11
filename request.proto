@@ -1010,20 +1010,6 @@ message FilterProductRequest {
 	repeated string exclude_products = 9;
 }
 
-message MarkRequest {
-	common.Context ctx = 1;
-	string topic = 4;
-	int32 partition = 5;
-	repeated int64 offsets = 6;
-}
-
-message CommitRequest {
-	common.Context ctx = 1;
-	string topic = 4;
-	int32 partition = 5;
-	int64 offset = 6;
-}
-
 message SegmentUsersRequest {
 	common.Context ctx = 1;
 	string account_id = 3;

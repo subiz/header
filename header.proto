@@ -1227,6 +1227,8 @@ message StartRequest {
 	GoogleReview google_review = 47;
 
 	bool is_testing = 50;
+
+	Event greeting_message = 51;
 }
 
 enum ConvoState {
@@ -9811,10 +9813,6 @@ message SendSubizZNSTestRequest {
 	string phone = 4;
 	string template_id = 5;
 	repeated ZNSTemplateParam params = 6;
-}
-
-message Markers {
-	repeated int64 offsets = 4;
 }
 
 message UserDataSource {
