@@ -637,6 +637,7 @@ service PaymentMgr {
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription); // @depreacted
 
 	rpc UpdateSub(payment.UpdateSubscriptionRequest) returns (payment.Invoice);
+	rpc GetSubscriptionUsage(Id) returns (Response); // subscription.purchased
 	rpc GetInvoice(payment.Invoice) returns (payment.Invoice);
 
 	rpc GetSubscription(Id) returns (payment.Subscription);
@@ -823,7 +824,6 @@ service Bizbot {
 	rpc ReportAction(header.ActionrunMetricsRequest) returns (header.ActionrunMetrics);
 
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
-	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
 }
 
 // sendback services

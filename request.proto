@@ -248,13 +248,6 @@ message ReportAIAgentRequest {
 	string anchor = 10;
 }
 
-message ReportBotRequest {
-	string account_id = 2;
-	string bot_id = 3;
-	int64 day_from = 4;
-	int64 day_to = 5;
-}
-
 message ActionrunMetricsRequest {
 	string dim = 2;
 	int32 tz = 3;

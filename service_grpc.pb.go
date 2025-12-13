@@ -17532,6 +17532,7 @@ const (
 	PaymentMgr_Purchase_FullMethodName             = "/header.PaymentMgr/Purchase"
 	PaymentMgr_UpdateSubscription_FullMethodName   = "/header.PaymentMgr/UpdateSubscription"
 	PaymentMgr_UpdateSub_FullMethodName            = "/header.PaymentMgr/UpdateSub"
+	PaymentMgr_GetSubscriptionUsage_FullMethodName = "/header.PaymentMgr/GetSubscriptionUsage"
 	PaymentMgr_GetInvoice_FullMethodName           = "/header.PaymentMgr/GetInvoice"
 	PaymentMgr_GetSubscription_FullMethodName      = "/header.PaymentMgr/GetSubscription"
 	PaymentMgr_Pay_FullMethodName                  = "/header.PaymentMgr/Pay"
@@ -17559,6 +17560,7 @@ type PaymentMgrClient interface {
 	Purchase(ctx context.Context, in *payment.PurchaseRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
 	UpdateSub(ctx context.Context, in *payment.UpdateSubscriptionRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
+	GetSubscriptionUsage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	GetInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	GetSubscription(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Subscription, error)
 	Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
@@ -17640,6 +17642,16 @@ func (c *paymentMgrClient) UpdateSub(ctx context.Context, in *payment.UpdateSubs
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(payment.Invoice)
 	err := c.cc.Invoke(ctx, PaymentMgr_UpdateSub_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetSubscriptionUsage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, PaymentMgr_GetSubscriptionUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -17806,6 +17818,7 @@ type PaymentMgrServer interface {
 	Purchase(context.Context, *payment.PurchaseRequest) (*payment.Invoice, error)
 	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
 	UpdateSub(context.Context, *payment.UpdateSubscriptionRequest) (*payment.Invoice, error)
+	GetSubscriptionUsage(context.Context, *Id) (*Response, error)
 	GetInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	GetSubscription(context.Context, *Id) (*payment.Subscription, error)
 	Pay(context.Context, *payment.PayRequest) (*payment.Bill, error)
@@ -17850,6 +17863,9 @@ func (UnimplementedPaymentMgrServer) UpdateSubscription(context.Context, *paymen
 }
 func (UnimplementedPaymentMgrServer) UpdateSub(context.Context, *payment.UpdateSubscriptionRequest) (*payment.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSub not implemented")
+}
+func (UnimplementedPaymentMgrServer) GetSubscriptionUsage(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubscriptionUsage not implemented")
 }
 func (UnimplementedPaymentMgrServer) GetInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
@@ -18021,6 +18037,24 @@ func _PaymentMgr_UpdateSub_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentMgrServer).UpdateSub(ctx, req.(*payment.UpdateSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetSubscriptionUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetSubscriptionUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentMgr_GetSubscriptionUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetSubscriptionUsage(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -18325,6 +18359,10 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateSub",
 			Handler:    _PaymentMgr_UpdateSub_Handler,
+		},
+		{
+			MethodName: "GetSubscriptionUsage",
+			Handler:    _PaymentMgr_GetSubscriptionUsage_Handler,
 		},
 		{
 			MethodName: "GetInvoice",
@@ -22613,7 +22651,6 @@ const (
 	Bizbot_ReportBot2_FullMethodName        = "/header.Bizbot/ReportBot2"
 	Bizbot_ReportAction_FullMethodName      = "/header.Bizbot/ReportAction"
 	Bizbot_ListObjects_FullMethodName       = "/header.Bizbot/ListObjects"
-	Bizbot_ReportBot_FullMethodName         = "/header.Bizbot/ReportBot"
 )
 
 // BizbotClient is the client API for Bizbot service.
@@ -22635,7 +22672,6 @@ type BizbotClient interface {
 	ReportBot2(ctx context.Context, in *BotrunMetricsRequest, opts ...grpc.CallOption) (*BotrunMetrics, error)
 	ReportAction(ctx context.Context, in *ActionrunMetricsRequest, opts ...grpc.CallOption) (*ActionrunMetrics, error)
 	ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error)
-	ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error)
 }
 
 type bizbotClient struct {
@@ -22776,16 +22812,6 @@ func (c *bizbotClient) ListObjects(ctx context.Context, in *ListObjectsRequest, 
 	return out, nil
 }
 
-func (c *bizbotClient) ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReportBotResponse)
-	err := c.cc.Invoke(ctx, Bizbot_ReportBot_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BizbotServer is the server API for Bizbot service.
 // All implementations must embed UnimplementedBizbotServer
 // for forward compatibility.
@@ -22805,7 +22831,6 @@ type BizbotServer interface {
 	ReportBot2(context.Context, *BotrunMetricsRequest) (*BotrunMetrics, error)
 	ReportAction(context.Context, *ActionrunMetricsRequest) (*ActionrunMetrics, error)
 	ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error)
-	ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error)
 	mustEmbedUnimplementedBizbotServer()
 }
 
@@ -22854,9 +22879,6 @@ func (UnimplementedBizbotServer) ReportAction(context.Context, *ActionrunMetrics
 }
 func (UnimplementedBizbotServer) ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListObjects not implemented")
-}
-func (UnimplementedBizbotServer) ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReportBot not implemented")
 }
 func (UnimplementedBizbotServer) mustEmbedUnimplementedBizbotServer() {}
 func (UnimplementedBizbotServer) testEmbeddedByValue()                {}
@@ -23113,24 +23135,6 @@ func _Bizbot_ListObjects_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Bizbot_ReportBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReportBotRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BizbotServer).ReportBot(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Bizbot_ReportBot_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BizbotServer).ReportBot(ctx, req.(*ReportBotRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Bizbot_ServiceDesc is the grpc.ServiceDesc for Bizbot service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -23189,10 +23193,6 @@ var Bizbot_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListObjects",
 			Handler:    _Bizbot_ListObjects_Handler,
-		},
-		{
-			MethodName: "ReportBot",
-			Handler:    _Bizbot_ReportBot_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
