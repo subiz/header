@@ -1051,8 +1051,8 @@ type Limit struct {
 	MaxZaloPersonals    int64                  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`   // plan limit + additional
 	UseZaloPersonals    int64                  `protobuf:"varint,28,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
 	MaxFanpages         int64                  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
-	UnlimitedAiSpending int64                  `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"`
-	UseTicket           int64                  `protobuf:"varint,32,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"` // pending || active
+	UnlimitedAiSpending int64                  `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"` // > 0: active; <= 0 -> disabled
+	UseTicket           int64                  `protobuf:"varint,32,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"`                                 // > 0: active; <= 0 -> disabled
 	MaxAgents           int64                  `protobuf:"varint,33,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"`
 	MaxSegments         int64                  `protobuf:"varint,34,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
 	MaxAutomations      int64                  `protobuf:"varint,35,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`

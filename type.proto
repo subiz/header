@@ -367,8 +367,8 @@ message TextCondition {
 	string op = 2; // end_with
 	repeated TextTransform transforms = 3;
 
-	bool has_value = 4; // true or false
-	bool empty = 5; // true or false
+	// bool has_value = 4; // true or false
+	// bool empty = 5; // true or false
 
 	repeated string eq = 6;
 	repeated string neq = 7;
@@ -430,7 +430,7 @@ message BooleanCondition {
 message NumberCondition {
 	string op = 2;
 	repeated NumberTransform transforms = 3;
-	bool has_value = 4;
+	// bool has_value = 4;
   double gt = 5;
   double gte = 6;
 	double lt = 7;
@@ -454,7 +454,7 @@ message DatetimeCondition {
 	// absolute: before, after, between, outside
 	string op = 2;
 
-	bool has_value = 5;
+	// bool has_value = 5;
 	// repeated NumberTransform transforms = 3;
 	// repeated int64 hour_of_day
 

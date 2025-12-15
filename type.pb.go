@@ -890,8 +890,6 @@ type TextCondition struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Op              string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // end_with
 	Transforms      []*TextTransform       `protobuf:"bytes,3,rep,name=transforms,proto3" json:"transforms,omitempty"`
-	HasValue        bool                   `protobuf:"varint,4,opt,name=has_value,json=hasValue,proto3" json:"has_value,omitempty"` // true or false
-	Empty           bool                   `protobuf:"varint,5,opt,name=empty,proto3" json:"empty,omitempty"`                       // true or false
 	Eq              []string               `protobuf:"bytes,6,rep,name=eq,proto3" json:"eq,omitempty"`
 	Neq             []string               `protobuf:"bytes,7,rep,name=neq,proto3" json:"neq,omitempty"`
 	StartWith       []string               `protobuf:"bytes,8,rep,name=start_with,json=startWith,proto3" json:"start_with,omitempty"`
@@ -960,20 +958,6 @@ func (x *TextCondition) GetTransforms() []*TextTransform {
 		return x.Transforms
 	}
 	return nil
-}
-
-func (x *TextCondition) GetHasValue() bool {
-	if x != nil {
-		return x.HasValue
-	}
-	return false
-}
-
-func (x *TextCondition) GetEmpty() bool {
-	if x != nil {
-		return x.Empty
-	}
-	return false
 }
 
 func (x *TextCondition) GetEq() []string {
@@ -1352,24 +1336,24 @@ func (x *BooleanCondition) GetOp() string {
 }
 
 type NumberCondition struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Op            string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"`
-	Transforms    []*NumberTransform     `protobuf:"bytes,3,rep,name=transforms,proto3" json:"transforms,omitempty"`
-	HasValue      bool                   `protobuf:"varint,4,opt,name=has_value,json=hasValue,proto3" json:"has_value,omitempty"`
-	Gt            float64                `protobuf:"fixed64,5,opt,name=gt,proto3" json:"gt,omitempty"`
-	Gte           float64                `protobuf:"fixed64,6,opt,name=gte,proto3" json:"gte,omitempty"`
-	Lt            float64                `protobuf:"fixed64,7,opt,name=lt,proto3" json:"lt,omitempty"`
-	Lte           float64                `protobuf:"fixed64,8,opt,name=lte,proto3" json:"lte,omitempty"`
-	Eq            []float64              `protobuf:"fixed64,10,rep,packed,name=eq,proto3" json:"eq,omitempty"`
-	Neq           []float64              `protobuf:"fixed64,11,rep,packed,name=neq,proto3" json:"neq,omitempty"`
-	InRange       []float64              `protobuf:"fixed64,13,rep,packed,name=in_range,json=inRange,proto3" json:"in_range,omitempty"`
-	NotInRange    []float64              `protobuf:"fixed64,14,rep,packed,name=not_in_range,json=notInRange,proto3" json:"not_in_range,omitempty"`
-	EqVar         []string               `protobuf:"bytes,15,rep,name=eq_var,json=eqVar,proto3" json:"eq_var,omitempty"`
-	NeqVar        []string               `protobuf:"bytes,16,rep,name=neq_var,json=neqVar,proto3" json:"neq_var,omitempty"`
-	GtVar         string                 `protobuf:"bytes,17,opt,name=gt_var,json=gtVar,proto3" json:"gt_var,omitempty"`
-	GteVar        string                 `protobuf:"bytes,18,opt,name=gte_var,json=gteVar,proto3" json:"gte_var,omitempty"`
-	LtVar         string                 `protobuf:"bytes,19,opt,name=lt_var,json=ltVar,proto3" json:"lt_var,omitempty"`
-	LteVar        string                 `protobuf:"bytes,20,opt,name=lte_var,json=lteVar,proto3" json:"lte_var,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Op         string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"`
+	Transforms []*NumberTransform     `protobuf:"bytes,3,rep,name=transforms,proto3" json:"transforms,omitempty"`
+	// bool has_value = 4;
+	Gt            float64   `protobuf:"fixed64,5,opt,name=gt,proto3" json:"gt,omitempty"`
+	Gte           float64   `protobuf:"fixed64,6,opt,name=gte,proto3" json:"gte,omitempty"`
+	Lt            float64   `protobuf:"fixed64,7,opt,name=lt,proto3" json:"lt,omitempty"`
+	Lte           float64   `protobuf:"fixed64,8,opt,name=lte,proto3" json:"lte,omitempty"`
+	Eq            []float64 `protobuf:"fixed64,10,rep,packed,name=eq,proto3" json:"eq,omitempty"`
+	Neq           []float64 `protobuf:"fixed64,11,rep,packed,name=neq,proto3" json:"neq,omitempty"`
+	InRange       []float64 `protobuf:"fixed64,13,rep,packed,name=in_range,json=inRange,proto3" json:"in_range,omitempty"`
+	NotInRange    []float64 `protobuf:"fixed64,14,rep,packed,name=not_in_range,json=notInRange,proto3" json:"not_in_range,omitempty"`
+	EqVar         []string  `protobuf:"bytes,15,rep,name=eq_var,json=eqVar,proto3" json:"eq_var,omitempty"`
+	NeqVar        []string  `protobuf:"bytes,16,rep,name=neq_var,json=neqVar,proto3" json:"neq_var,omitempty"`
+	GtVar         string    `protobuf:"bytes,17,opt,name=gt_var,json=gtVar,proto3" json:"gt_var,omitempty"`
+	GteVar        string    `protobuf:"bytes,18,opt,name=gte_var,json=gteVar,proto3" json:"gte_var,omitempty"`
+	LtVar         string    `protobuf:"bytes,19,opt,name=lt_var,json=ltVar,proto3" json:"lt_var,omitempty"`
+	LteVar        string    `protobuf:"bytes,20,opt,name=lte_var,json=lteVar,proto3" json:"lte_var,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1416,13 +1400,6 @@ func (x *NumberCondition) GetTransforms() []*NumberTransform {
 		return x.Transforms
 	}
 	return nil
-}
-
-func (x *NumberCondition) GetHasValue() bool {
-	if x != nil {
-		return x.HasValue
-	}
-	return false
 }
 
 func (x *NumberCondition) GetGt() float64 {
@@ -1528,7 +1505,6 @@ type DatetimeCondition struct {
 	// relative: is_empty, in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
 	// absolute: before, after, between, outside
 	Op         string   `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"`
-	HasValue   bool     `protobuf:"varint,5,opt,name=has_value,json=hasValue,proto3" json:"has_value,omitempty"`
 	DaysOfWeek []string `protobuf:"bytes,10,rep,name=days_of_week,json=daysOfWeek,proto3" json:"days_of_week,omitempty"` // monday
 	After      int64    `protobuf:"varint,11,opt,name=after,proto3" json:"after,omitempty"`
 	Before     int64    `protobuf:"varint,12,opt,name=before,proto3" json:"before,omitempty"`
@@ -1583,13 +1559,6 @@ func (x *DatetimeCondition) GetOp() string {
 		return x.Op
 	}
 	return ""
-}
-
-func (x *DatetimeCondition) GetHasValue() bool {
-	if x != nil {
-		return x.HasValue
-	}
-	return false
 }
 
 func (x *DatetimeCondition) GetDaysOfWeek() []string {
@@ -1699,14 +1668,12 @@ const file_type_proto_rawDesc = "" +
 	"\rTextTransform\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"%\n" +
 	"\x0fNumberTransform\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"\xcf\x06\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\x9c\x06\n" +
 	"\rTextCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\x125\n" +
 	"\n" +
 	"transforms\x18\x03 \x03(\v2\x15.header.TextTransformR\n" +
-	"transforms\x12\x1b\n" +
-	"\thas_value\x18\x04 \x01(\bR\bhasValue\x12\x14\n" +
-	"\x05empty\x18\x05 \x01(\bR\x05empty\x12\x0e\n" +
+	"transforms\x12\x0e\n" +
 	"\x02eq\x18\x06 \x03(\tR\x02eq\x12\x10\n" +
 	"\x03neq\x18\a \x03(\tR\x03neq\x12\x1d\n" +
 	"\n" +
@@ -1753,13 +1720,12 @@ const file_type_proto_rawDesc = "" +
 	"\acreated\x18\a \x01(\v2\x19.header.DatetimeConditionR\acreated\x126\n" +
 	"\afilters\x18\b \x03(\v2\x1c.header.EventConditionFilterR\afilters\"\"\n" +
 	"\x10BooleanCondition\x12\x0e\n" +
-	"\x02op\x18\x02 \x01(\tR\x02op\"\xaa\x03\n" +
+	"\x02op\x18\x02 \x01(\tR\x02op\"\x8d\x03\n" +
 	"\x0fNumberCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\x127\n" +
 	"\n" +
 	"transforms\x18\x03 \x03(\v2\x17.header.NumberTransformR\n" +
-	"transforms\x12\x1b\n" +
-	"\thas_value\x18\x04 \x01(\bR\bhasValue\x12\x0e\n" +
+	"transforms\x12\x0e\n" +
 	"\x02gt\x18\x05 \x01(\x01R\x02gt\x12\x10\n" +
 	"\x03gte\x18\x06 \x01(\x01R\x03gte\x12\x0e\n" +
 	"\x02lt\x18\a \x01(\x01R\x02lt\x12\x10\n" +
@@ -1775,10 +1741,9 @@ const file_type_proto_rawDesc = "" +
 	"\x06gt_var\x18\x11 \x01(\tR\x05gtVar\x12\x17\n" +
 	"\agte_var\x18\x12 \x01(\tR\x06gteVar\x12\x15\n" +
 	"\x06lt_var\x18\x13 \x01(\tR\x05ltVar\x12\x17\n" +
-	"\alte_var\x18\x14 \x01(\tR\x06lteVar\"\xfa\x03\n" +
+	"\alte_var\x18\x14 \x01(\tR\x06lteVar\"\xdd\x03\n" +
 	"\x11DatetimeCondition\x12\x0e\n" +
-	"\x02op\x18\x02 \x01(\tR\x02op\x12\x1b\n" +
-	"\thas_value\x18\x05 \x01(\bR\bhasValue\x12 \n" +
+	"\x02op\x18\x02 \x01(\tR\x02op\x12 \n" +
 	"\fdays_of_week\x18\n" +
 	" \x03(\tR\n" +
 	"daysOfWeek\x12\x14\n" +

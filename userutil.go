@@ -65,7 +65,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 		return true
 	case "has_value":
 		return has && str != ""
-	case "is_empty":
+	case "is_empty", "empty":
 		return strings.TrimSpace(str) == ""
 	case "eq":
 		if len(cond.GetEq()) == 0 {
@@ -237,7 +237,7 @@ func EvaluateTexts(strs []string, cond *TextCondition) bool {
 		return true
 	case "has_value":
 		return len(strs) != 0
-	case "is_empty":
+	case "is_empty", "empty":
 		return len(strs) == 0
 	case "eq":
 		if len(cond.GetEq()) == 0 {
@@ -388,12 +388,8 @@ func EvaluateNumber(found bool, fl float64, cond *NumberCondition) bool {
 
 	switch cond.GetOp() {
 	case "has_value":
-		if !cond.GetHasValue() {
-			return !found
-		}
 		return found
-
-	case "is_empty":
+	case "is_empty", "empty":
 		return !found
 	case "eq":
 		if len(cond.GetEq()) == 0 {

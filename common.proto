@@ -181,9 +181,9 @@ message Limit {
 
 	int64 max_fanpages = 30;
 
-	int64 unlimited_ai_spending = 31;
+	int64 unlimited_ai_spending = 31; // > 0: active; <= 0 -> disabled
 
-	int64 use_ticket = 32; // pending || active
+	int64 use_ticket = 32; // > 0: active; <= 0 -> disabled
 	int64 max_agents = 33;
 	int64 max_segments = 34;
 	int64 max_automations = 35;
