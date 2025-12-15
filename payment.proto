@@ -63,7 +63,7 @@ message Subscription {
 	optional string promotion_code = 4; // last recurring promotion code
 
 	optional int64 started = 5; // ms
-	optional uint32 billing_cycle_month = 15; // read-only
+	optional uint32 billing_cycle_month = 15; // only use when renew
 	// optional uint32 next_billing_cycle_month = 16; // @deprecated
 
 	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
@@ -87,6 +87,7 @@ message Subscription {
 	optional int64 fpv_credit_usd = 55; // soft
 
 	optional string note = 56;
+	optional int64 fpv_price_per_day_usd = 57; // read only after upgrade
 }
 
 message Bill {

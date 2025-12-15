@@ -586,7 +586,7 @@ type Subscription struct {
 	Created           *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
 	PromotionCode     *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`                 // last recurring promotion code
 	Started           *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                                 // ms
-	BillingCycleMonth *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"` // read-only
+	BillingCycleMonth *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"` // only use when renew
 	Plan              *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`                                                       // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
 	Credit            *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
 	Limit             *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`         // combined from plan.limit and purchased_limit
@@ -601,6 +601,7 @@ type Subscription struct {
 	UnlimitedAiSpending *int64  `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
 	FpvCreditUsd        *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
 	Note                *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
+	FpvPricePerDayUsd   *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -759,6 +760,13 @@ func (x *Subscription) GetNote() string {
 		return *x.Note
 	}
 	return ""
+}
+
+func (x *Subscription) GetFpvPricePerDayUsd() int64 {
+	if x != nil && x.FpvPricePerDayUsd != nil {
+		return *x.FpvPricePerDayUsd
+	}
+	return 0
 }
 
 type Bill struct {
@@ -3211,7 +3219,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\xe6\x04\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\x98\x05\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3232,7 +3240,8 @@ const file_payment_proto_rawDesc = "" +
 	"num_agents\x182 \x01(\x03R\tnumAgents\x122\n" +
 	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
 	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x12\x12\n" +
-	"\x04note\x188 \x01(\tR\x04note\"\x9a\x06\n" +
+	"\x04note\x188 \x01(\tR\x04note\x120\n" +
+	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\"\x9a\x06\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +

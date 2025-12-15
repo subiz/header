@@ -1043,7 +1043,6 @@ type Limit struct {
 	// optional uint32 max_conversations = 6;
 	MaxSegments         uint32 `protobuf:"varint,7,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
 	MaxAgents           uint32 `protobuf:"varint,8,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"` // bool can_buy_agent = 10;
-	MaxRules            uint32 `protobuf:"varint,16,opt,name=max_rules,json=maxRules,proto3" json:"max_rules,omitempty"`
 	Facebook            bool   `protobuf:"varint,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
 	Zalo                bool   `protobuf:"varint,18,opt,name=zalo,proto3" json:"zalo,omitempty"`
 	Email               bool   `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
@@ -1122,13 +1121,6 @@ func (x *Limit) GetMaxSegments() uint32 {
 func (x *Limit) GetMaxAgents() uint32 {
 	if x != nil {
 		return x.MaxAgents
-	}
-	return 0
-}
-
-func (x *Limit) GetMaxRules() uint32 {
-	if x != nil {
-		return x.MaxRules
 	}
 	return 0
 }
@@ -1342,7 +1334,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\x98\x05\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xfb\x04\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1350,8 +1342,7 @@ const file_common_proto_rawDesc = "" +
 	"\x0fmax_automations\x18\x04 \x01(\rR\x0emaxAutomations\x12!\n" +
 	"\fmax_segments\x18\a \x01(\rR\vmaxSegments\x12\x1d\n" +
 	"\n" +
-	"max_agents\x18\b \x01(\rR\tmaxAgents\x12\x1b\n" +
-	"\tmax_rules\x18\x10 \x01(\rR\bmaxRules\x12\x1a\n" +
+	"max_agents\x18\b \x01(\rR\tmaxAgents\x12\x1a\n" +
 	"\bfacebook\x18\x11 \x01(\bR\bfacebook\x12\x12\n" +
 	"\x04zalo\x18\x12 \x01(\bR\x04zalo\x12\x14\n" +
 	"\x05email\x18\x13 \x01(\bR\x05email\x12\x1d\n" +

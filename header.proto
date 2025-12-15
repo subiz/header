@@ -10068,8 +10068,7 @@ message Link {
 message Plan {
 	optional string name = 2;
 	optional common.Limit limit = 3;
-	optional int64 fpv_price = 8; // usd // permonth
-	optional bool is_unlimited_agent = 5;
+	// optional bool is_unlimited_agent = 5; // @deprecated
 	optional bool renewable = 6;
 	optional int64 inactive_days_after_churned = 7;
 	optional bool long_billing_cycle_discount = 9;
@@ -10084,7 +10083,7 @@ message Plan {
 		custom = 7;
 	}
 	optional int64 fpv_price_usd = 11; // usd // permonth
-	optional int64 fpv_price_vnd = 12; // usd // permonth
+	optional int64 fpv_price_vnd = 12; // vnd // permonth
 
-	optional int64 is_unlimited_ai_spending = 13;
+	optional int64 is_unlimited_ai_spending = 13; // @deprecated
 }

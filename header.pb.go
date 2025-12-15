@@ -71057,18 +71057,17 @@ func (x *Link) GetCreated() int64 {
 }
 
 type Plan struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Name                     *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Limit                    *common.Limit          `protobuf:"bytes,3,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
-	FpvPrice                 *int64                 `protobuf:"varint,8,opt,name=fpv_price,json=fpvPrice,proto3,oneof" json:"fpv_price,omitempty"` // usd // permonth
-	IsUnlimitedAgent         *bool                  `protobuf:"varint,5,opt,name=is_unlimited_agent,json=isUnlimitedAgent,proto3,oneof" json:"is_unlimited_agent,omitempty"`
-	Renewable                *bool                  `protobuf:"varint,6,opt,name=renewable,proto3,oneof" json:"renewable,omitempty"`
-	InactiveDaysAfterChurned *int64                 `protobuf:"varint,7,opt,name=inactive_days_after_churned,json=inactiveDaysAfterChurned,proto3,oneof" json:"inactive_days_after_churned,omitempty"`
-	LongBillingCycleDiscount *bool                  `protobuf:"varint,9,opt,name=long_billing_cycle_discount,json=longBillingCycleDiscount,proto3,oneof" json:"long_billing_cycle_discount,omitempty"`
-	MininumBillingCycleMonth *int64                 `protobuf:"varint,10,opt,name=mininum_billing_cycle_month,json=mininumBillingCycleMonth,proto3,oneof" json:"mininum_billing_cycle_month,omitempty"`
-	FpvPriceUsd              *int64                 `protobuf:"varint,11,opt,name=fpv_price_usd,json=fpvPriceUsd,proto3,oneof" json:"fpv_price_usd,omitempty"` // usd // permonth
-	FpvPriceVnd              *int64                 `protobuf:"varint,12,opt,name=fpv_price_vnd,json=fpvPriceVnd,proto3,oneof" json:"fpv_price_vnd,omitempty"` // usd // permonth
-	IsUnlimitedAiSpending    *int64                 `protobuf:"varint,13,opt,name=is_unlimited_ai_spending,json=isUnlimitedAiSpending,proto3,oneof" json:"is_unlimited_ai_spending,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Name  *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Limit *common.Limit          `protobuf:"bytes,3,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	// optional bool is_unlimited_agent = 5; // @deprecated
+	Renewable                *bool  `protobuf:"varint,6,opt,name=renewable,proto3,oneof" json:"renewable,omitempty"`
+	InactiveDaysAfterChurned *int64 `protobuf:"varint,7,opt,name=inactive_days_after_churned,json=inactiveDaysAfterChurned,proto3,oneof" json:"inactive_days_after_churned,omitempty"`
+	LongBillingCycleDiscount *bool  `protobuf:"varint,9,opt,name=long_billing_cycle_discount,json=longBillingCycleDiscount,proto3,oneof" json:"long_billing_cycle_discount,omitempty"`
+	MininumBillingCycleMonth *int64 `protobuf:"varint,10,opt,name=mininum_billing_cycle_month,json=mininumBillingCycleMonth,proto3,oneof" json:"mininum_billing_cycle_month,omitempty"`
+	FpvPriceUsd              *int64 `protobuf:"varint,11,opt,name=fpv_price_usd,json=fpvPriceUsd,proto3,oneof" json:"fpv_price_usd,omitempty"`                                 // usd // permonth
+	FpvPriceVnd              *int64 `protobuf:"varint,12,opt,name=fpv_price_vnd,json=fpvPriceVnd,proto3,oneof" json:"fpv_price_vnd,omitempty"`                                 // vnd // permonth
+	IsUnlimitedAiSpending    *int64 `protobuf:"varint,13,opt,name=is_unlimited_ai_spending,json=isUnlimitedAiSpending,proto3,oneof" json:"is_unlimited_ai_spending,omitempty"` // @deprecated
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -71115,20 +71114,6 @@ func (x *Plan) GetLimit() *common.Limit {
 		return x.Limit
 	}
 	return nil
-}
-
-func (x *Plan) GetFpvPrice() int64 {
-	if x != nil && x.FpvPrice != nil {
-		return *x.FpvPrice
-	}
-	return 0
-}
-
-func (x *Plan) GetIsUnlimitedAgent() bool {
-	if x != nil && x.IsUnlimitedAgent != nil {
-		return *x.IsUnlimitedAgent
-	}
-	return false
 }
 
 func (x *Plan) GetRenewable() bool {
@@ -80202,21 +80187,18 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x18\n" +
-	"\acreated\x18\x05 \x01(\x03R\acreated\"\xfb\x06\n" +
+	"\acreated\x18\x05 \x01(\x03R\acreated\"\x81\x06\n" +
 	"\x04Plan\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12(\n" +
-	"\x05limit\x18\x03 \x01(\v2\r.common.LimitH\x01R\x05limit\x88\x01\x01\x12 \n" +
-	"\tfpv_price\x18\b \x01(\x03H\x02R\bfpvPrice\x88\x01\x01\x121\n" +
-	"\x12is_unlimited_agent\x18\x05 \x01(\bH\x03R\x10isUnlimitedAgent\x88\x01\x01\x12!\n" +
-	"\trenewable\x18\x06 \x01(\bH\x04R\trenewable\x88\x01\x01\x12B\n" +
-	"\x1binactive_days_after_churned\x18\a \x01(\x03H\x05R\x18inactiveDaysAfterChurned\x88\x01\x01\x12B\n" +
-	"\x1blong_billing_cycle_discount\x18\t \x01(\bH\x06R\x18longBillingCycleDiscount\x88\x01\x01\x12B\n" +
+	"\x05limit\x18\x03 \x01(\v2\r.common.LimitH\x01R\x05limit\x88\x01\x01\x12!\n" +
+	"\trenewable\x18\x06 \x01(\bH\x02R\trenewable\x88\x01\x01\x12B\n" +
+	"\x1binactive_days_after_churned\x18\a \x01(\x03H\x03R\x18inactiveDaysAfterChurned\x88\x01\x01\x12B\n" +
+	"\x1blong_billing_cycle_discount\x18\t \x01(\bH\x04R\x18longBillingCycleDiscount\x88\x01\x01\x12B\n" +
 	"\x1bmininum_billing_cycle_month\x18\n" +
-	" \x01(\x03H\aR\x18mininumBillingCycleMonth\x88\x01\x01\x12'\n" +
-	"\rfpv_price_usd\x18\v \x01(\x03H\bR\vfpvPriceUsd\x88\x01\x01\x12'\n" +
-	"\rfpv_price_vnd\x18\f \x01(\x03H\tR\vfpvPriceVnd\x88\x01\x01\x12<\n" +
-	"\x18is_unlimited_ai_spending\x18\r \x01(\x03H\n" +
-	"R\x15isUnlimitedAiSpending\x88\x01\x01\"u\n" +
+	" \x01(\x03H\x05R\x18mininumBillingCycleMonth\x88\x01\x01\x12'\n" +
+	"\rfpv_price_usd\x18\v \x01(\x03H\x06R\vfpvPriceUsd\x88\x01\x01\x12'\n" +
+	"\rfpv_price_vnd\x18\f \x01(\x03H\aR\vfpvPriceVnd\x88\x01\x01\x12<\n" +
+	"\x18is_unlimited_ai_spending\x18\r \x01(\x03H\bR\x15isUnlimitedAiSpending\x88\x01\x01\"u\n" +
 	"\x04Type\x12\t\n" +
 	"\x05trial\x10\x00\x12\f\n" +
 	"\bstandard\x10\x02\x12\f\n" +
@@ -80227,9 +80209,6 @@ const file_header_proto_rawDesc = "" +
 	"\x06custom\x10\aB\a\n" +
 	"\x05_nameB\b\n" +
 	"\x06_limitB\f\n" +
-	"\n" +
-	"_fpv_priceB\x15\n" +
-	"\x13_is_unlimited_agentB\f\n" +
 	"\n" +
 	"_renewableB\x1e\n" +
 	"\x1c_inactive_days_after_churnedB\x1e\n" +

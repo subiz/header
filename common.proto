@@ -162,7 +162,7 @@ message Limit {
 	uint32 max_agents = 8;
 	// bool can_buy_agent = 10;
 
-	uint32 max_rules = 16;
+	// uint32 max_rules = 16;
 
 	bool facebook = 17;
 	bool zalo = 18;
