@@ -1036,26 +1036,26 @@ func (x *PackedSessionCampaign) GetId() int64 {
 }
 
 type Limit struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Ctx            *Context               `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId      string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	MaxAutomations uint32                 `protobuf:"varint,4,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
-	// optional uint32 max_conversations = 6;
-	MaxSegments         uint32 `protobuf:"varint,7,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
-	MaxAgents           uint32 `protobuf:"varint,8,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"` // bool can_buy_agent = 10;
-	Facebook            bool   `protobuf:"varint,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
-	Zalo                bool   `protobuf:"varint,18,opt,name=zalo,proto3" json:"zalo,omitempty"`
-	Email               bool   `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
-	WebPlugin           bool   `protobuf:"varint,20,opt,name=web_plugin,json=webPlugin,proto3" json:"web_plugin,omitempty"`
-	Bot                 bool   `protobuf:"varint,21,opt,name=bot,proto3" json:"bot,omitempty"`                                                       // string shop = 22; //   pending || active
-	TotalFileSize       int64  `protobuf:"varint,23,opt,name=total_file_size,json=totalFileSize,proto3" json:"total_file_size,omitempty"`            // bytes
-	TotalCallLogSize    int64  `protobuf:"varint,24,opt,name=total_call_log_size,json=totalCallLogSize,proto3" json:"total_call_log_size,omitempty"` // bytes
-	CallRecordingTtl    int64  `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
-	Ticket              bool   `protobuf:"varint,26,opt,name=ticket,proto3" json:"ticket,omitempty"`                                                 // pending || active
-	MaxZaloPersonals    int64  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`   // plan limit + additional
-	UseZaloPersonals    int64  `protobuf:"varint,28,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
-	MaxFanpages         int64  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
-	UnlimitedAiSpending int64  `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"`
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                 *Context               `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId           string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Facebook            bool                   `protobuf:"varint,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
+	Zalo                bool                   `protobuf:"varint,18,opt,name=zalo,proto3" json:"zalo,omitempty"`
+	Email               bool                   `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
+	WebPlugin           bool                   `protobuf:"varint,20,opt,name=web_plugin,json=webPlugin,proto3" json:"web_plugin,omitempty"`
+	Bot                 bool                   `protobuf:"varint,21,opt,name=bot,proto3" json:"bot,omitempty"`                                                       // string shop = 22; //   pending || active
+	TotalFileSize       int64                  `protobuf:"varint,23,opt,name=total_file_size,json=totalFileSize,proto3" json:"total_file_size,omitempty"`            // bytes
+	TotalCallLogSize    int64                  `protobuf:"varint,24,opt,name=total_call_log_size,json=totalCallLogSize,proto3" json:"total_call_log_size,omitempty"` // bytes
+	CallRecordingTtl    int64                  `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
+	Ticket              bool                   `protobuf:"varint,26,opt,name=ticket,proto3" json:"ticket,omitempty"`                                                 // @deprecated
+	MaxZaloPersonals    int64                  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`   // plan limit + additional
+	UseZaloPersonals    int64                  `protobuf:"varint,28,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
+	MaxFanpages         int64                  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
+	UnlimitedAiSpending int64                  `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"`
+	UseTicket           int64                  `protobuf:"varint,32,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"` // pending || active
+	MaxAgents           int64                  `protobuf:"varint,33,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"`
+	MaxSegments         int64                  `protobuf:"varint,34,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
+	MaxAutomations      int64                  `protobuf:"varint,35,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1102,27 +1102,6 @@ func (x *Limit) GetAccountId() string {
 		return x.AccountId
 	}
 	return ""
-}
-
-func (x *Limit) GetMaxAutomations() uint32 {
-	if x != nil {
-		return x.MaxAutomations
-	}
-	return 0
-}
-
-func (x *Limit) GetMaxSegments() uint32 {
-	if x != nil {
-		return x.MaxSegments
-	}
-	return 0
-}
-
-func (x *Limit) GetMaxAgents() uint32 {
-	if x != nil {
-		return x.MaxAgents
-	}
-	return 0
 }
 
 func (x *Limit) GetFacebook() bool {
@@ -1212,6 +1191,34 @@ func (x *Limit) GetMaxFanpages() int64 {
 func (x *Limit) GetUnlimitedAiSpending() int64 {
 	if x != nil {
 		return x.UnlimitedAiSpending
+	}
+	return 0
+}
+
+func (x *Limit) GetUseTicket() int64 {
+	if x != nil {
+		return x.UseTicket
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxAgents() int64 {
+	if x != nil {
+		return x.MaxAgents
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxSegments() int64 {
+	if x != nil {
+		return x.MaxSegments
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxAutomations() int64 {
+	if x != nil {
+		return x.MaxAutomations
 	}
 	return 0
 }
@@ -1334,15 +1341,11 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\xfb\x04\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\x9a\x05\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x03 \x01(\tR\taccountId\x12'\n" +
-	"\x0fmax_automations\x18\x04 \x01(\rR\x0emaxAutomations\x12!\n" +
-	"\fmax_segments\x18\a \x01(\rR\vmaxSegments\x12\x1d\n" +
-	"\n" +
-	"max_agents\x18\b \x01(\rR\tmaxAgents\x12\x1a\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1a\n" +
 	"\bfacebook\x18\x11 \x01(\bR\bfacebook\x12\x12\n" +
 	"\x04zalo\x18\x12 \x01(\bR\x04zalo\x12\x14\n" +
 	"\x05email\x18\x13 \x01(\bR\x05email\x12\x1d\n" +
@@ -1356,7 +1359,13 @@ const file_common_proto_rawDesc = "" +
 	"\x12max_zalo_personals\x18\x1b \x01(\x03R\x10maxZaloPersonals\x12,\n" +
 	"\x12use_zalo_personals\x18\x1c \x01(\x03R\x10useZaloPersonals\x12!\n" +
 	"\fmax_fanpages\x18\x1e \x01(\x03R\vmaxFanpages\x122\n" +
-	"\x15unlimited_ai_spending\x18\x1f \x01(\x03R\x13unlimitedAiSpending*d\n" +
+	"\x15unlimited_ai_spending\x18\x1f \x01(\x03R\x13unlimitedAiSpending\x12\x1d\n" +
+	"\n" +
+	"use_ticket\x18  \x01(\x03R\tuseTicket\x12\x1d\n" +
+	"\n" +
+	"max_agents\x18! \x01(\x03R\tmaxAgents\x12!\n" +
+	"\fmax_segments\x18\" \x01(\x03R\vmaxSegments\x12'\n" +
+	"\x0fmax_automations\x18# \x01(\x03R\x0emaxAutomations*d\n" +
 	"\x04Type\x12\v\n" +
 	"\aunknown\x10\x00\x12\b\n" +
 	"\x04user\x10\x01\x12\t\n" +
