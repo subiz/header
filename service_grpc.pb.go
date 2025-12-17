@@ -2072,7 +2072,6 @@ const (
 	AccountMgr_CreateStripeCheckoutSession_FullMethodName     = "/header.AccountMgr/CreateStripeCheckoutSession"
 	AccountMgr_OnStripeEvent_FullMethodName                   = "/header.AccountMgr/OnStripeEvent"
 	AccountMgr_LookupStripePaymentMethod_FullMethodName       = "/header.AccountMgr/LookupStripePaymentMethod"
-	AccountMgr_DiffSubscription_FullMethodName                = "/header.AccountMgr/DiffSubscription"
 	AccountMgr_AddBankAccount_FullMethodName                  = "/header.AccountMgr/AddBankAccount"
 	AccountMgr_UpdateBankAccount_FullMethodName               = "/header.AccountMgr/UpdateBankAccount"
 	AccountMgr_DeleteBankAccount_FullMethodName               = "/header.AccountMgr/DeleteBankAccount"
@@ -2184,7 +2183,6 @@ type AccountMgrClient interface {
 	CreateStripeCheckoutSession(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	OnStripeEvent(ctx context.Context, in *StripeWebhookEvent, opts ...grpc.CallOption) (*Empty, error)
 	LookupStripePaymentMethod(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	DiffSubscription(ctx context.Context, in *payment.DiffSubRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	AddBankAccount(ctx context.Context, in *BankAccount, opts ...grpc.CallOption) (*Response, error)
 	UpdateBankAccount(ctx context.Context, in *BankAccount, opts ...grpc.CallOption) (*Response, error)
 	DeleteBankAccount(ctx context.Context, in *BankAccount, opts ...grpc.CallOption) (*Response, error)
@@ -3144,16 +3142,6 @@ func (c *accountMgrClient) LookupStripePaymentMethod(ctx context.Context, in *Id
 	return out, nil
 }
 
-func (c *accountMgrClient) DiffSubscription(ctx context.Context, in *payment.DiffSubRequest, opts ...grpc.CallOption) (*payment.Invoice, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(payment.Invoice)
-	err := c.cc.Invoke(ctx, AccountMgr_DiffSubscription_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountMgrClient) AddBankAccount(ctx context.Context, in *BankAccount, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -3344,7 +3332,6 @@ type AccountMgrServer interface {
 	CreateStripeCheckoutSession(context.Context, *Id) (*Id, error)
 	OnStripeEvent(context.Context, *StripeWebhookEvent) (*Empty, error)
 	LookupStripePaymentMethod(context.Context, *Id) (*Response, error)
-	DiffSubscription(context.Context, *payment.DiffSubRequest) (*payment.Invoice, error)
 	AddBankAccount(context.Context, *BankAccount) (*Response, error)
 	UpdateBankAccount(context.Context, *BankAccount) (*Response, error)
 	DeleteBankAccount(context.Context, *BankAccount) (*Response, error)
@@ -3645,9 +3632,6 @@ func (UnimplementedAccountMgrServer) OnStripeEvent(context.Context, *StripeWebho
 }
 func (UnimplementedAccountMgrServer) LookupStripePaymentMethod(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LookupStripePaymentMethod not implemented")
-}
-func (UnimplementedAccountMgrServer) DiffSubscription(context.Context, *payment.DiffSubRequest) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DiffSubscription not implemented")
 }
 func (UnimplementedAccountMgrServer) AddBankAccount(context.Context, *BankAccount) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddBankAccount not implemented")
@@ -5389,24 +5373,6 @@ func _AccountMgr_LookupStripePaymentMethod_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_DiffSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(payment.DiffSubRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).DiffSubscription(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_DiffSubscription_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).DiffSubscription(ctx, req.(*payment.DiffSubRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountMgr_AddBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BankAccount)
 	if err := dec(in); err != nil {
@@ -5951,10 +5917,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LookupStripePaymentMethod",
 			Handler:    _AccountMgr_LookupStripePaymentMethod_Handler,
-		},
-		{
-			MethodName: "DiffSubscription",
-			Handler:    _AccountMgr_DiffSubscription_Handler,
 		},
 		{
 			MethodName: "AddBankAccount",
@@ -17529,7 +17491,6 @@ const (
 	PaymentMgr_ListPlans_FullMethodName            = "/header.PaymentMgr/ListPlans"
 	PaymentMgr_SearchSub_FullMethodName            = "/header.PaymentMgr/SearchSub"
 	PaymentMgr_GetSub_FullMethodName               = "/header.PaymentMgr/GetSub"
-	PaymentMgr_Purchase_FullMethodName             = "/header.PaymentMgr/Purchase"
 	PaymentMgr_UpdateSubscription_FullMethodName   = "/header.PaymentMgr/UpdateSubscription"
 	PaymentMgr_UpdateSub_FullMethodName            = "/header.PaymentMgr/UpdateSub"
 	PaymentMgr_GetSubscriptionUsage_FullMethodName = "/header.PaymentMgr/GetSubscriptionUsage"
@@ -17557,7 +17518,7 @@ type PaymentMgrClient interface {
 	ListPlans(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*AccSubs, error)
 	GetSub(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccSub, error)
-	Purchase(ctx context.Context, in *payment.PurchaseRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
+	// rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
 	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
 	UpdateSub(ctx context.Context, in *payment.UpdateSubscriptionRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	GetSubscriptionUsage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -17612,16 +17573,6 @@ func (c *paymentMgrClient) GetSub(ctx context.Context, in *Id, opts ...grpc.Call
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AccSub)
 	err := c.cc.Invoke(ctx, PaymentMgr_GetSub_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentMgrClient) Purchase(ctx context.Context, in *payment.PurchaseRequest, opts ...grpc.CallOption) (*payment.Invoice, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(payment.Invoice)
-	err := c.cc.Invoke(ctx, PaymentMgr_Purchase_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -17815,7 +17766,7 @@ type PaymentMgrServer interface {
 	ListPlans(context.Context, *Id) (*Response, error)
 	SearchSub(context.Context, *account.SearchSubRequest) (*AccSubs, error)
 	GetSub(context.Context, *Id) (*AccSub, error)
-	Purchase(context.Context, *payment.PurchaseRequest) (*payment.Invoice, error)
+	// rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
 	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
 	UpdateSub(context.Context, *payment.UpdateSubscriptionRequest) (*payment.Invoice, error)
 	GetSubscriptionUsage(context.Context, *Id) (*Response, error)
@@ -17854,9 +17805,6 @@ func (UnimplementedPaymentMgrServer) SearchSub(context.Context, *account.SearchS
 }
 func (UnimplementedPaymentMgrServer) GetSub(context.Context, *Id) (*AccSub, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSub not implemented")
-}
-func (UnimplementedPaymentMgrServer) Purchase(context.Context, *payment.PurchaseRequest) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Purchase not implemented")
 }
 func (UnimplementedPaymentMgrServer) UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubscription not implemented")
@@ -17983,24 +17931,6 @@ func _PaymentMgr_GetSub_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentMgrServer).GetSub(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PaymentMgr_Purchase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(payment.PurchaseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PaymentMgrServer).Purchase(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PaymentMgr_Purchase_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).Purchase(ctx, req.(*payment.PurchaseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -18347,10 +18277,6 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSub",
 			Handler:    _PaymentMgr_GetSub_Handler,
-		},
-		{
-			MethodName: "Purchase",
-			Handler:    _PaymentMgr_Purchase_Handler,
 		},
 		{
 			MethodName: "UpdateSubscription",

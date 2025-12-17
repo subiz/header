@@ -201,7 +201,7 @@ service AccountMgr {
 	rpc CreateStripeCheckoutSession(header.Id) returns (header.Id);
 	rpc OnStripeEvent(header.StripeWebhookEvent) returns (header.Empty);
 	rpc LookupStripePaymentMethod(header.Id) returns (header.Response);
-	rpc DiffSubscription(payment.DiffSubRequest) returns (payment.Invoice); // @deprecated
+	// rpc DiffSubscription(payment.DiffSubRequest) returns (payment.Invoice); // @deprecated
 
 	rpc AddBankAccount(header.BankAccount) returns (Response);
 	rpc UpdateBankAccount(header.BankAccount) returns (Response);
@@ -633,7 +633,7 @@ service PaymentMgr {
 	rpc ListPlans(Id) returns (Response);
 	rpc SearchSub(account.SearchSubRequest) returns (AccSubs);
 	rpc GetSub(header.Id) returns (AccSub);
-	rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
+	// rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription); // @depreacted
 
 	rpc UpdateSub(payment.UpdateSubscriptionRequest) returns (payment.Invoice);

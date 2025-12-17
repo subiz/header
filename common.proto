@@ -164,8 +164,8 @@ message Limit {
 
 	// uint32 max_rules = 16;
 
-	bool facebook = 17;
-	bool zalo = 18;
+	// bool facebook = 17;
+	// bool zalo = 18;
 	bool email = 19;
 	bool web_plugin = 20;
 	bool bot = 21;
@@ -174,7 +174,7 @@ message Limit {
 	int64 total_file_size = 23; // bytes
 	int64 total_call_log_size =  24; // bytes
 	int64 call_recording_ttl = 25; // sec
-	bool ticket = 26; // @deprecated
+	// bool ticket = 26; // @deprecated
 
 	int64 max_zalo_personals = 27; // plan limit + additional
 	int64 use_zalo_personals = 28;

@@ -1036,26 +1036,25 @@ func (x *PackedSessionCampaign) GetId() int64 {
 }
 
 type Limit struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                 *Context               `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId           string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Facebook            bool                   `protobuf:"varint,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
-	Zalo                bool                   `protobuf:"varint,18,opt,name=zalo,proto3" json:"zalo,omitempty"`
-	Email               bool                   `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
-	WebPlugin           bool                   `protobuf:"varint,20,opt,name=web_plugin,json=webPlugin,proto3" json:"web_plugin,omitempty"`
-	Bot                 bool                   `protobuf:"varint,21,opt,name=bot,proto3" json:"bot,omitempty"`                                                       // string shop = 22; //   pending || active
-	TotalFileSize       int64                  `protobuf:"varint,23,opt,name=total_file_size,json=totalFileSize,proto3" json:"total_file_size,omitempty"`            // bytes
-	TotalCallLogSize    int64                  `protobuf:"varint,24,opt,name=total_call_log_size,json=totalCallLogSize,proto3" json:"total_call_log_size,omitempty"` // bytes
-	CallRecordingTtl    int64                  `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
-	Ticket              bool                   `protobuf:"varint,26,opt,name=ticket,proto3" json:"ticket,omitempty"`                                                 // @deprecated
-	MaxZaloPersonals    int64                  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`   // plan limit + additional
-	UseZaloPersonals    int64                  `protobuf:"varint,28,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
-	MaxFanpages         int64                  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
-	UnlimitedAiSpending int64                  `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"` // > 0: active; <= 0 -> disabled
-	UseTicket           int64                  `protobuf:"varint,32,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"`                                 // > 0: active; <= 0 -> disabled
-	MaxAgents           int64                  `protobuf:"varint,33,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"`
-	MaxSegments         int64                  `protobuf:"varint,34,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
-	MaxAutomations      int64                  `protobuf:"varint,35,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Ctx       *Context               `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// bool facebook = 17;
+	// bool zalo = 18;
+	Email               bool  `protobuf:"varint,19,opt,name=email,proto3" json:"email,omitempty"`
+	WebPlugin           bool  `protobuf:"varint,20,opt,name=web_plugin,json=webPlugin,proto3" json:"web_plugin,omitempty"`
+	Bot                 bool  `protobuf:"varint,21,opt,name=bot,proto3" json:"bot,omitempty"`                                                       // string shop = 22; //   pending || active
+	TotalFileSize       int64 `protobuf:"varint,23,opt,name=total_file_size,json=totalFileSize,proto3" json:"total_file_size,omitempty"`            // bytes
+	TotalCallLogSize    int64 `protobuf:"varint,24,opt,name=total_call_log_size,json=totalCallLogSize,proto3" json:"total_call_log_size,omitempty"` // bytes
+	CallRecordingTtl    int64 `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
+	MaxZaloPersonals    int64 `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`   // plan limit + additional
+	UseZaloPersonals    int64 `protobuf:"varint,28,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
+	MaxFanpages         int64 `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
+	UnlimitedAiSpending int64 `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"` // > 0: active; <= 0 -> disabled
+	UseTicket           int64 `protobuf:"varint,32,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"`                                 // > 0: active; <= 0 -> disabled
+	MaxAgents           int64 `protobuf:"varint,33,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"`
+	MaxSegments         int64 `protobuf:"varint,34,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
+	MaxAutomations      int64 `protobuf:"varint,35,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1104,20 +1103,6 @@ func (x *Limit) GetAccountId() string {
 	return ""
 }
 
-func (x *Limit) GetFacebook() bool {
-	if x != nil {
-		return x.Facebook
-	}
-	return false
-}
-
-func (x *Limit) GetZalo() bool {
-	if x != nil {
-		return x.Zalo
-	}
-	return false
-}
-
 func (x *Limit) GetEmail() bool {
 	if x != nil {
 		return x.Email
@@ -1158,13 +1143,6 @@ func (x *Limit) GetCallRecordingTtl() int64 {
 		return x.CallRecordingTtl
 	}
 	return 0
-}
-
-func (x *Limit) GetTicket() bool {
-	if x != nil {
-		return x.Ticket
-	}
-	return false
 }
 
 func (x *Limit) GetMaxZaloPersonals() int64 {
@@ -1341,21 +1319,18 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\x9a\x05\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xd2\x04\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1a\n" +
-	"\bfacebook\x18\x11 \x01(\bR\bfacebook\x12\x12\n" +
-	"\x04zalo\x18\x12 \x01(\bR\x04zalo\x12\x14\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x14\n" +
 	"\x05email\x18\x13 \x01(\bR\x05email\x12\x1d\n" +
 	"\n" +
 	"web_plugin\x18\x14 \x01(\bR\twebPlugin\x12\x10\n" +
 	"\x03bot\x18\x15 \x01(\bR\x03bot\x12&\n" +
 	"\x0ftotal_file_size\x18\x17 \x01(\x03R\rtotalFileSize\x12-\n" +
 	"\x13total_call_log_size\x18\x18 \x01(\x03R\x10totalCallLogSize\x12,\n" +
-	"\x12call_recording_ttl\x18\x19 \x01(\x03R\x10callRecordingTtl\x12\x16\n" +
-	"\x06ticket\x18\x1a \x01(\bR\x06ticket\x12,\n" +
+	"\x12call_recording_ttl\x18\x19 \x01(\x03R\x10callRecordingTtl\x12,\n" +
 	"\x12max_zalo_personals\x18\x1b \x01(\x03R\x10maxZaloPersonals\x12,\n" +
 	"\x12use_zalo_personals\x18\x1c \x01(\x03R\x10useZaloPersonals\x12!\n" +
 	"\fmax_fanpages\x18\x1e \x01(\x03R\vmaxFanpages\x122\n" +
