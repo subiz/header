@@ -4941,11 +4941,8 @@ message Product {
 	map<string, Block> i18n_description_block = 70; // (shared) long description generated
 
 	string llm_summary = 71;
-
 	repeated File attachments = 80;
-
 	// string category_id = 81;
-
 	ProductValidity validity = 82;
 	int64 purchase_deadline = 85; // no available for sale after this ms
 	string availability_url = 86; // (shared)
@@ -4960,7 +4957,6 @@ message Product {
 	repeated ProductEnrichSource enrich_sources = 94;
 	int64 fpv_total_enriched_cost = 95; // vnd
 	int64 fpv_last_enriched_cost = 96; // vnd
-
 	string from_url = 97; // read only, crawled from this url
 
 	int64 modified = 99;
@@ -7715,11 +7711,13 @@ message AIAgentTrace {
 	string error = 22; //
 	repeated int32 query_topics = 25;
 	repeated string query_terms = 26;
-	int64 total_credit_fpv = 30; // vnd
+	int64 total_credit_fpv_vnd = 30; // vnd
 	string category_id = 24;
 	repeated Discount context_discounts = 27;
 	repeated Product context_products = 28; // used
 	string product_mention = 29;
+
+	string collect_information_strategy = 32;
 }
 
 message WorkflowLog {
@@ -9018,6 +9016,7 @@ message AIAgent {
 
 	string brand = 9;
 	string brand_description = 10;
+	string brand_category = 13; // @readonly generated from brand and brand description
 
 	string job_title = 11; // customer_support, sale
 	string tone = 12; // casual, friendly, professional
@@ -9090,8 +9089,10 @@ message AIAgent {
 
 	repeated AIAgentOverrideRule override_rules = 66; // only root
 
+	// [convert lead (second brain)]
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
 	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
+	string collect_user_information_prompt = 75;
   Form collect_user_information = 78;
 
 	Message welcome_message = 79;

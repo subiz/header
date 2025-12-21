@@ -1,7 +1,9 @@
 package header
 
 import (
+	"bytes"
 	"strings"
+	"text/template"
 	"unicode"
 	"unicode/utf8"
 )
@@ -131,4 +133,19 @@ func isInvalidRune(r rune) bool {
 	}
 
 	return false
+}
+
+func CompileString(templ string, data map[string]string) string {
+	tmpl, err := template.New("").Parse(templ)
+	if err != nil {
+		return templ
+	}
+
+	var buf bytes.Buffer
+	err = tmpl.Execute(&buf, data)
+	if err != nil {
+		return templ
+	}
+
+	return buf.String()
 }

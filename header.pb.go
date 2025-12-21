@@ -34256,17 +34256,18 @@ type Product struct {
 	// repeated PriceRule price_rules = 54; // (shared)
 	Stock int64 `protobuf:"varint,60,opt,name=stock,proto3" json:"stock,omitempty"` //
 	// pos_id based stock
-	Stocks                   []*ProductStock        `protobuf:"bytes,63,rep,name=stocks,proto3" json:"stocks,omitempty"`
-	SourceId                 string                 `protobuf:"bytes,61,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
-	Availability             string                 `protobuf:"bytes,68,opt,name=availability,proto3" json:"availability,omitempty"` // in_stock, out_of_stock, online_only, pre_order, pre_sale, sold_out
-	Tax                      *Tax                   `protobuf:"bytes,64,opt,name=tax,proto3" json:"tax,omitempty"`                   // (shared)
-	Currency                 string                 `protobuf:"bytes,65,opt,name=currency,proto3" json:"currency,omitempty"`
-	Buttons                  []*MessageButton       `protobuf:"bytes,66,rep,name=buttons,proto3" json:"buttons,omitempty"`                                                                                                                                   // for message attachment
-	ViewDurationSec          int64                  `protobuf:"varint,67,opt,name=view_duration_sec,json=viewDurationSec,proto3" json:"view_duration_sec,omitempty"`                                                                                         // for event content_view only
-	NumVariants              int64                  `protobuf:"varint,69,opt,name=num_variants,json=numVariants,proto3" json:"num_variants,omitempty"`                                                                                                       // computed, readonly
-	I18NDescriptionBlock     map[string]*Block      `protobuf:"bytes,70,rep,name=i18n_description_block,json=i18nDescriptionBlock,proto3" json:"i18n_description_block,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // (shared) long description generated
-	LlmSummary               string                 `protobuf:"bytes,71,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
-	Attachments              []*File                `protobuf:"bytes,80,rep,name=attachments,proto3" json:"attachments,omitempty"`
+	Stocks               []*ProductStock   `protobuf:"bytes,63,rep,name=stocks,proto3" json:"stocks,omitempty"`
+	SourceId             string            `protobuf:"bytes,61,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	Availability         string            `protobuf:"bytes,68,opt,name=availability,proto3" json:"availability,omitempty"` // in_stock, out_of_stock, online_only, pre_order, pre_sale, sold_out
+	Tax                  *Tax              `protobuf:"bytes,64,opt,name=tax,proto3" json:"tax,omitempty"`                   // (shared)
+	Currency             string            `protobuf:"bytes,65,opt,name=currency,proto3" json:"currency,omitempty"`
+	Buttons              []*MessageButton  `protobuf:"bytes,66,rep,name=buttons,proto3" json:"buttons,omitempty"`                                                                                                                                   // for message attachment
+	ViewDurationSec      int64             `protobuf:"varint,67,opt,name=view_duration_sec,json=viewDurationSec,proto3" json:"view_duration_sec,omitempty"`                                                                                         // for event content_view only
+	NumVariants          int64             `protobuf:"varint,69,opt,name=num_variants,json=numVariants,proto3" json:"num_variants,omitempty"`                                                                                                       // computed, readonly
+	I18NDescriptionBlock map[string]*Block `protobuf:"bytes,70,rep,name=i18n_description_block,json=i18nDescriptionBlock,proto3" json:"i18n_description_block,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // (shared) long description generated
+	LlmSummary           string            `protobuf:"bytes,71,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
+	Attachments          []*File           `protobuf:"bytes,80,rep,name=attachments,proto3" json:"attachments,omitempty"`
+	// string category_id = 81;
 	Validity                 *ProductValidity       `protobuf:"bytes,82,opt,name=validity,proto3" json:"validity,omitempty"`
 	PurchaseDeadline         int64                  `protobuf:"varint,85,opt,name=purchase_deadline,json=purchaseDeadline,proto3" json:"purchase_deadline,omitempty"` // no available for sale after this ms
 	AvailabilityUrl          string                 `protobuf:"bytes,86,opt,name=availability_url,json=availabilityUrl,proto3" json:"availability_url,omitempty"`     // (shared)
@@ -53846,37 +53847,38 @@ func (x *AIDataEntryUsed) GetChunkTitle() string {
 }
 
 type AIAgentTrace struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                 *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId           string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	MessageId           string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
-	TraceId             string                 `protobuf:"bytes,5,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
-	Started             int64                  `protobuf:"varint,6,opt,name=started,proto3" json:"started,omitempty"`
-	UserMessageId       string                 `protobuf:"bytes,7,opt,name=user_message_id,json=userMessageId,proto3" json:"user_message_id,omitempty"`
-	ConversationId      string                 `protobuf:"bytes,8,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
-	SessionId           string                 `protobuf:"bytes,9,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	AgentId             string                 `protobuf:"bytes,10,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	AgentVersion        int64                  `protobuf:"varint,11,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
-	HumanTransfered     bool                   `protobuf:"varint,12,opt,name=human_transfered,json=humanTransfered,proto3" json:"human_transfered,omitempty"`
-	TransferToAgents    []string               `protobuf:"bytes,13,rep,name=transfer_to_agents,json=transferToAgents,proto3" json:"transfer_to_agents,omitempty"`
-	Model               string                 `protobuf:"bytes,14,opt,name=model,proto3" json:"model,omitempty"`
-	ContextGuard        bool                   `protobuf:"varint,15,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`
-	Duration            int64                  `protobuf:"varint,16,opt,name=duration,proto3" json:"duration,omitempty"` // ms
-	RewrittenQueries    []string               `protobuf:"bytes,17,rep,name=rewritten_queries,json=rewrittenQueries,proto3" json:"rewritten_queries,omitempty"`
-	ContextDocuments    []*AIDataEntryUsed     `protobuf:"bytes,18,rep,name=context_documents,json=contextDocuments,proto3" json:"context_documents,omitempty"`
-	ContextInstructions []string               `protobuf:"bytes,19,rep,name=context_instructions,json=contextInstructions,proto3" json:"context_instructions,omitempty"`
-	ToolCalls           []*LLMToolCall         `protobuf:"bytes,20,rep,name=tool_calls,json=toolCalls,proto3" json:"tool_calls,omitempty"`
-	OverrideRules       []*AIAgentOverrideRule `protobuf:"bytes,23,rep,name=override_rules,json=overrideRules,proto3" json:"override_rules,omitempty"`
-	Error               string                 `protobuf:"bytes,22,opt,name=error,proto3" json:"error,omitempty"` //
-	QueryTopics         []int32                `protobuf:"varint,25,rep,packed,name=query_topics,json=queryTopics,proto3" json:"query_topics,omitempty"`
-	QueryTerms          []string               `protobuf:"bytes,26,rep,name=query_terms,json=queryTerms,proto3" json:"query_terms,omitempty"`
-	TotalCreditFpv      int64                  `protobuf:"varint,30,opt,name=total_credit_fpv,json=totalCreditFpv,proto3" json:"total_credit_fpv,omitempty"` // vnd
-	CategoryId          string                 `protobuf:"bytes,24,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	ContextDiscounts    []*Discount            `protobuf:"bytes,27,rep,name=context_discounts,json=contextDiscounts,proto3" json:"context_discounts,omitempty"`
-	ContextProducts     []*Product             `protobuf:"bytes,28,rep,name=context_products,json=contextProducts,proto3" json:"context_products,omitempty"` // used
-	ProductMention      string                 `protobuf:"bytes,29,opt,name=product_mention,json=productMention,proto3" json:"product_mention,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                        *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                  string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	MessageId                  string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	TraceId                    string                 `protobuf:"bytes,5,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	Started                    int64                  `protobuf:"varint,6,opt,name=started,proto3" json:"started,omitempty"`
+	UserMessageId              string                 `protobuf:"bytes,7,opt,name=user_message_id,json=userMessageId,proto3" json:"user_message_id,omitempty"`
+	ConversationId             string                 `protobuf:"bytes,8,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	SessionId                  string                 `protobuf:"bytes,9,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	AgentId                    string                 `protobuf:"bytes,10,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	AgentVersion               int64                  `protobuf:"varint,11,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
+	HumanTransfered            bool                   `protobuf:"varint,12,opt,name=human_transfered,json=humanTransfered,proto3" json:"human_transfered,omitempty"`
+	TransferToAgents           []string               `protobuf:"bytes,13,rep,name=transfer_to_agents,json=transferToAgents,proto3" json:"transfer_to_agents,omitempty"`
+	Model                      string                 `protobuf:"bytes,14,opt,name=model,proto3" json:"model,omitempty"`
+	ContextGuard               bool                   `protobuf:"varint,15,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`
+	Duration                   int64                  `protobuf:"varint,16,opt,name=duration,proto3" json:"duration,omitempty"` // ms
+	RewrittenQueries           []string               `protobuf:"bytes,17,rep,name=rewritten_queries,json=rewrittenQueries,proto3" json:"rewritten_queries,omitempty"`
+	ContextDocuments           []*AIDataEntryUsed     `protobuf:"bytes,18,rep,name=context_documents,json=contextDocuments,proto3" json:"context_documents,omitempty"`
+	ContextInstructions        []string               `protobuf:"bytes,19,rep,name=context_instructions,json=contextInstructions,proto3" json:"context_instructions,omitempty"`
+	ToolCalls                  []*LLMToolCall         `protobuf:"bytes,20,rep,name=tool_calls,json=toolCalls,proto3" json:"tool_calls,omitempty"`
+	OverrideRules              []*AIAgentOverrideRule `protobuf:"bytes,23,rep,name=override_rules,json=overrideRules,proto3" json:"override_rules,omitempty"`
+	Error                      string                 `protobuf:"bytes,22,opt,name=error,proto3" json:"error,omitempty"` //
+	QueryTopics                []int32                `protobuf:"varint,25,rep,packed,name=query_topics,json=queryTopics,proto3" json:"query_topics,omitempty"`
+	QueryTerms                 []string               `protobuf:"bytes,26,rep,name=query_terms,json=queryTerms,proto3" json:"query_terms,omitempty"`
+	TotalCreditFpvVnd          int64                  `protobuf:"varint,30,opt,name=total_credit_fpv_vnd,json=totalCreditFpvVnd,proto3" json:"total_credit_fpv_vnd,omitempty"` // vnd
+	CategoryId                 string                 `protobuf:"bytes,24,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	ContextDiscounts           []*Discount            `protobuf:"bytes,27,rep,name=context_discounts,json=contextDiscounts,proto3" json:"context_discounts,omitempty"`
+	ContextProducts            []*Product             `protobuf:"bytes,28,rep,name=context_products,json=contextProducts,proto3" json:"context_products,omitempty"` // used
+	ProductMention             string                 `protobuf:"bytes,29,opt,name=product_mention,json=productMention,proto3" json:"product_mention,omitempty"`
+	CollectInformationStrategy string                 `protobuf:"bytes,32,opt,name=collect_information_strategy,json=collectInformationStrategy,proto3" json:"collect_information_strategy,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *AIAgentTrace) Reset() {
@@ -54070,9 +54072,9 @@ func (x *AIAgentTrace) GetQueryTerms() []string {
 	return nil
 }
 
-func (x *AIAgentTrace) GetTotalCreditFpv() int64 {
+func (x *AIAgentTrace) GetTotalCreditFpvVnd() int64 {
 	if x != nil {
-		return x.TotalCreditFpv
+		return x.TotalCreditFpvVnd
 	}
 	return 0
 }
@@ -54101,6 +54103,13 @@ func (x *AIAgentTrace) GetContextProducts() []*Product {
 func (x *AIAgentTrace) GetProductMention() string {
 	if x != nil {
 		return x.ProductMention
+	}
+	return ""
+}
+
+func (x *AIAgentTrace) GetCollectInformationStrategy() string {
+	if x != nil {
+		return x.CollectInformationStrategy
 	}
 	return ""
 }
@@ -63249,8 +63258,9 @@ type AIAgent struct {
 	AvatarUrl             string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	Brand                 string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
 	BrandDescription      string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
-	JobTitle              string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"` // customer_support, sale
-	Tone                  string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                         // casual, friendly, professional
+	BrandCategory         string                 `protobuf:"bytes,13,opt,name=brand_category,json=brandCategory,proto3" json:"brand_category,omitempty"` // @readonly generated from brand and brand description
+	JobTitle              string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`                // customer_support, sale
+	Tone                  string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                                        // casual, friendly, professional
 	Guardrails            []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
 	Created               int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
 	CreatedBy             string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
@@ -63288,18 +63298,20 @@ type AIAgent struct {
 	GoalReachedLast_7Days    int64 `protobuf:"varint,54,opt,name=goal_reached_last_7days,json=goalReachedLast7days,proto3" json:"goal_reached_last_7days,omitempty"`
 	TotalGoalReacheds        int64 `protobuf:"varint,55,opt,name=total_goal_reacheds,json=totalGoalReacheds,proto3" json:"total_goal_reacheds,omitempty"`
 	// string job_title = 69;
-	Channels                 []string               `protobuf:"bytes,70,rep,name=channels,proto3" json:"channels,omitempty"`                              // default: all channel
-	LastExecuted             int64                  `protobuf:"varint,71,opt,name=last_executed,json=lastExecuted,proto3" json:"last_executed,omitempty"` // ms
-	InitFlow                 *InitFlow              `protobuf:"bytes,60,opt,name=init_flow,json=initFlow,proto3" json:"init_flow,omitempty"`
-	Locale                   string                 `protobuf:"bytes,64,opt,name=locale,proto3" json:"locale,omitempty"` // can be auto
-	Locales                  []string               `protobuf:"bytes,65,rep,name=locales,proto3" json:"locales,omitempty"`
-	OverrideRules            []*AIAgentOverrideRule `protobuf:"bytes,66,rep,name=override_rules,json=overrideRules,proto3" json:"override_rules,omitempty"`                                      // only root
-	CollectUserInformationOn string                 `protobuf:"bytes,76,opt,name=collect_user_information_on,json=collectUserInformationOn,proto3" json:"collect_user_information_on,omitempty"` // none | chat_started | interest_detected
-	InterestedTopics         []string               `protobuf:"bytes,77,rep,name=interested_topics,json=interestedTopics,proto3" json:"interested_topics,omitempty"`                             // "product", "pricing", "features", "availability"
-	CollectUserInformation   *Form                  `protobuf:"bytes,78,opt,name=collect_user_information,json=collectUserInformation,proto3" json:"collect_user_information,omitempty"`
-	WelcomeMessage           *Message               `protobuf:"bytes,79,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
-	WelcomeMessagePrompt     string                 `protobuf:"bytes,80,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
-	WelcomeMessageTriggers   []*Trigger             `protobuf:"bytes,87,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
+	Channels      []string               `protobuf:"bytes,70,rep,name=channels,proto3" json:"channels,omitempty"`                              // default: all channel
+	LastExecuted  int64                  `protobuf:"varint,71,opt,name=last_executed,json=lastExecuted,proto3" json:"last_executed,omitempty"` // ms
+	InitFlow      *InitFlow              `protobuf:"bytes,60,opt,name=init_flow,json=initFlow,proto3" json:"init_flow,omitempty"`
+	Locale        string                 `protobuf:"bytes,64,opt,name=locale,proto3" json:"locale,omitempty"` // can be auto
+	Locales       []string               `protobuf:"bytes,65,rep,name=locales,proto3" json:"locales,omitempty"`
+	OverrideRules []*AIAgentOverrideRule `protobuf:"bytes,66,rep,name=override_rules,json=overrideRules,proto3" json:"override_rules,omitempty"` // only root
+	// [convert lead (second brain)]
+	CollectUserInformationOn     string     `protobuf:"bytes,76,opt,name=collect_user_information_on,json=collectUserInformationOn,proto3" json:"collect_user_information_on,omitempty"` // none | chat_started | interest_detected
+	InterestedTopics             []string   `protobuf:"bytes,77,rep,name=interested_topics,json=interestedTopics,proto3" json:"interested_topics,omitempty"`                             // "product", "pricing", "features", "availability"
+	CollectUserInformationPrompt string     `protobuf:"bytes,75,opt,name=collect_user_information_prompt,json=collectUserInformationPrompt,proto3" json:"collect_user_information_prompt,omitempty"`
+	CollectUserInformation       *Form      `protobuf:"bytes,78,opt,name=collect_user_information,json=collectUserInformation,proto3" json:"collect_user_information,omitempty"`
+	WelcomeMessage               *Message   `protobuf:"bytes,79,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
+	WelcomeMessagePrompt         string     `protobuf:"bytes,80,opt,name=welcome_message_prompt,json=welcomeMessagePrompt,proto3" json:"welcome_message_prompt,omitempty"`
+	WelcomeMessageTriggers       []*Trigger `protobuf:"bytes,87,rep,name=welcome_message_triggers,json=welcomeMessageTriggers,proto3" json:"welcome_message_triggers,omitempty"`
 	// async behaviour
 	BackgroundSendThank *AIAgentAutoSendThankSetting `protobuf:"bytes,81,opt,name=background_send_thank,json=backgroundSendThank,proto3" json:"background_send_thank,omitempty"`
 	AutoTakeover        *AIAgentAutoTakeoverSetting  `protobuf:"bytes,82,opt,name=auto_takeover,json=autoTakeover,proto3" json:"auto_takeover,omitempty"`
@@ -63403,6 +63415,13 @@ func (x *AIAgent) GetBrand() string {
 func (x *AIAgent) GetBrandDescription() string {
 	if x != nil {
 		return x.BrandDescription
+	}
+	return ""
+}
+
+func (x *AIAgent) GetBrandCategory() string {
+	if x != nil {
+		return x.BrandCategory
 	}
 	return ""
 }
@@ -63692,6 +63711,13 @@ func (x *AIAgent) GetInterestedTopics() []string {
 		return x.InterestedTopics
 	}
 	return nil
+}
+
+func (x *AIAgent) GetCollectUserInformationPrompt() string {
+	if x != nil {
+		return x.CollectUserInformationPrompt
+	}
+	return ""
 }
 
 func (x *AIAgent) GetCollectUserInformation() *Form {
@@ -78078,7 +78104,7 @@ const file_header_proto_rawDesc = "" +
 	"\bis_cover\x18\x0f \x01(\bR\aisCover\x12.\n" +
 	"\x13chunk_original_link\x18\x10 \x01(\tR\x11chunkOriginalLink\x12\x1f\n" +
 	"\vchunk_title\x18\x11 \x01(\tR\n" +
-	"chunkTitle\"\xeb\b\n" +
+	"chunkTitle\"\xb4\t\n" +
 	"\fAIAgentTrace\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -78108,13 +78134,14 @@ const file_header_proto_rawDesc = "" +
 	"\x05error\x18\x16 \x01(\tR\x05error\x12!\n" +
 	"\fquery_topics\x18\x19 \x03(\x05R\vqueryTopics\x12\x1f\n" +
 	"\vquery_terms\x18\x1a \x03(\tR\n" +
-	"queryTerms\x12(\n" +
-	"\x10total_credit_fpv\x18\x1e \x01(\x03R\x0etotalCreditFpv\x12\x1f\n" +
+	"queryTerms\x12/\n" +
+	"\x14total_credit_fpv_vnd\x18\x1e \x01(\x03R\x11totalCreditFpvVnd\x12\x1f\n" +
 	"\vcategory_id\x18\x18 \x01(\tR\n" +
 	"categoryId\x12=\n" +
 	"\x11context_discounts\x18\x1b \x03(\v2\x10.header.DiscountR\x10contextDiscounts\x12:\n" +
 	"\x10context_products\x18\x1c \x03(\v2\x0f.header.ProductR\x0fcontextProducts\x12'\n" +
-	"\x0fproduct_mention\x18\x1d \x01(\tR\x0eproductMention\"\xc0\x06\n" +
+	"\x0fproduct_mention\x18\x1d \x01(\tR\x0eproductMention\x12@\n" +
+	"\x1ccollect_information_strategy\x18  \x01(\tR\x1acollectInformationStrategy\"\xc0\x06\n" +
 	"\vWorkflowLog\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x13\n" +
 	"\x05wf_id\x18\x02 \x01(\tR\x04wfId\x12\x1d\n" +
@@ -79292,7 +79319,7 @@ const file_header_proto_rawDesc = "" +
 	"\x16welcome_message_prompt\x18\x15 \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
 	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\x12*\n" +
 	"\bai_agent\x18\x17 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12\x19\n" +
-	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\xb1\x16\n" +
+	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\x9f\x17\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79305,7 +79332,8 @@ const file_header_proto_rawDesc = "" +
 	"avatar_url\x18\a \x01(\tR\tavatarUrl\x12\x14\n" +
 	"\x05brand\x18\t \x01(\tR\x05brand\x12+\n" +
 	"\x11brand_description\x18\n" +
-	" \x01(\tR\x10brandDescription\x12\x1b\n" +
+	" \x01(\tR\x10brandDescription\x12%\n" +
+	"\x0ebrand_category\x18\r \x01(\tR\rbrandCategory\x12\x1b\n" +
 	"\tjob_title\x18\v \x01(\tR\bjobTitle\x12\x12\n" +
 	"\x04tone\x18\f \x01(\tR\x04tone\x128\n" +
 	"\n" +
@@ -79352,7 +79380,8 @@ const file_header_proto_rawDesc = "" +
 	"\alocales\x18A \x03(\tR\alocales\x12B\n" +
 	"\x0eoverride_rules\x18B \x03(\v2\x1b.header.AIAgentOverrideRuleR\roverrideRules\x12=\n" +
 	"\x1bcollect_user_information_on\x18L \x01(\tR\x18collectUserInformationOn\x12+\n" +
-	"\x11interested_topics\x18M \x03(\tR\x10interestedTopics\x12F\n" +
+	"\x11interested_topics\x18M \x03(\tR\x10interestedTopics\x12E\n" +
+	"\x1fcollect_user_information_prompt\x18K \x01(\tR\x1ccollectUserInformationPrompt\x12F\n" +
 	"\x18collect_user_information\x18N \x01(\v2\f.header.FormR\x16collectUserInformation\x128\n" +
 	"\x0fwelcome_message\x18O \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x124\n" +
 	"\x16welcome_message_prompt\x18P \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
