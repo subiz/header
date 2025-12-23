@@ -8854,28 +8854,6 @@ message BankTransferRequest {
 	string zalo_bank_transfer_text = 20;
 }
 
-message GenQrCodeRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	bool one_time = 3;
-	string service_type = 4;
-	int64 fpv_amount = 5;
-	string bank_bin = 6;
-	string account_number = 7;
-	string note = 8;
-	string currency = 9; // VND, USD
-	string country_code = 10; // VN
-}
-
-message QrCode{
-	common.Context ctx = 1;
-	string account_id = 2;
-	string qr_image = 3; // base 64
-	string qr_code = 4;
-	string qr_id = 5;
-}
-
 message ReportUserEventEntry {
 	string timestamp = 2; // ms (24h)
 	string event_type = 3;
@@ -8934,20 +8912,6 @@ message SetupFeatureStatus {
 	string integrate_call = 10;
 	string add_agent = 11;
 	string create_rule = 12;
-}
-
-message RelationUpdates {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated RelationUpdate updates = 3;
-}
-
-message RelationUpdate {
-	string operation = 5; // add, delete
-	string type = 6;
-	string from_user = 7;
-	string to_user = 8;
-	string reason = 9;
 }
 
 message ArticleNode {
@@ -9054,10 +9018,10 @@ message AIAgent {
 	int64 version = 42;
 
 	// string transfer_prompt = 43;
-	string generated_description = 44; // read-only
-	string generated_goal = 49;
+	// string generated_description = 44; // read-only
+	// string generated_goal = 49;
 	// repeated string generated_topics = 39;
-	AIIntent generated_intent = 56;
+	// AIIntent generated_intent = 56;
 	// string generated_hash = 48; // skip regenerate intent
 	string generated_refuse_message = 46;
 	int64 active_version = 45; // only root

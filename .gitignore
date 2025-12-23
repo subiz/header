@@ -6,3 +6,4 @@
 ./protoc
 /.vscode
 .idea/
+.DS_Store

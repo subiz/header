@@ -112,7 +112,7 @@
       "product": "update delete",
       "promotion_program": "update delete",
       "ticket_type": "create update",
-      "user_view": "update",
+      "user_view": "update delete",
       "segment": "delete update",
       "ticket_template": "update",
       "file": "delete",
