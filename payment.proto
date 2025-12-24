@@ -305,7 +305,6 @@ message InvoiceItem {
 		optional ZaloPersonalsInvoiceItem zalo_personals = 10;
 		optional ReservedInvoiceItem reserved_fanpages = 11;
 		optional ReservedInvoiceItem reserved_zalo_personals = 12;
-
 	}
 	optional string type = 18;
 	optional Data data = 9;
@@ -323,6 +322,7 @@ message InvoiceItem {
 message Logs {
 	optional common.Context ctx = 1;
 	repeated Log logs = 5;
+	optional string next_anchor = 6;
 }
 
 message Log {

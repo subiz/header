@@ -17518,7 +17518,6 @@ type PaymentMgrClient interface {
 	ListPlans(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*AccSubs, error)
 	GetSub(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AccSub, error)
-	// rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
 	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
 	UpdateSub(ctx context.Context, in *payment.UpdateSubscriptionRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	GetSubscriptionUsage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -17537,7 +17536,6 @@ type PaymentMgrClient interface {
 	ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error)
 	GetExchangeRate(ctx context.Context, in *ExchangeRate, opts ...grpc.CallOption) (*ExchangeRate, error)
 	TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
-	// rpc AddCredit(payment.PayRequest) returns (Empty);
 	ListPaymentLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Logs, error)
 }
 
@@ -17766,7 +17764,6 @@ type PaymentMgrServer interface {
 	ListPlans(context.Context, *Id) (*Response, error)
 	SearchSub(context.Context, *account.SearchSubRequest) (*AccSubs, error)
 	GetSub(context.Context, *Id) (*AccSub, error)
-	// rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice); // @deprecated, use UpdateSubscription
 	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
 	UpdateSub(context.Context, *payment.UpdateSubscriptionRequest) (*payment.Invoice, error)
 	GetSubscriptionUsage(context.Context, *Id) (*Response, error)
@@ -17785,7 +17782,6 @@ type PaymentMgrServer interface {
 	ConvertInvoiceToHtml(context.Context, *payment.Invoice) (*payment.String, error)
 	GetExchangeRate(context.Context, *ExchangeRate) (*ExchangeRate, error)
 	TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error)
-	// rpc AddCredit(payment.PayRequest) returns (Empty);
 	ListPaymentLogs(context.Context, *Id) (*payment.Logs, error)
 	mustEmbedUnimplementedPaymentMgrServer()
 }

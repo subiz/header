@@ -2305,6 +2305,7 @@ type Logs struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
 	Logs          []*Log                 `protobuf:"bytes,5,rep,name=logs" json:"logs,omitempty"`
+	NextAnchor    *string                `protobuf:"bytes,6,opt,name=next_anchor,json=nextAnchor" json:"next_anchor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2351,6 +2352,13 @@ func (x *Logs) GetLogs() []*Log {
 		return x.Logs
 	}
 	return nil
+}
+
+func (x *Logs) GetNextAnchor() string {
+	if x != nil && x.NextAnchor != nil {
+		return *x.NextAnchor
+	}
+	return ""
 }
 
 type Log struct {
@@ -3422,10 +3430,12 @@ const file_payment_proto_rawDesc = "" +
 	"\x0ezalo_personals\x18\n" +
 	" \x01(\v2!.payment.ZaloPersonalsInvoiceItemR\rzaloPersonals\x12I\n" +
 	"\x11reserved_fanpages\x18\v \x01(\v2\x1c.payment.ReservedInvoiceItemR\x10reservedFanpages\x12T\n" +
-	"\x17reserved_zalo_personals\x18\f \x01(\v2\x1c.payment.ReservedInvoiceItemR\x15reservedZaloPersonals\"K\n" +
+	"\x17reserved_zalo_personals\x18\f \x01(\v2\x1c.payment.ReservedInvoiceItemR\x15reservedZaloPersonals\"l\n" +
 	"\x04Logs\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
-	"\x04logs\x18\x05 \x03(\v2\f.payment.LogR\x04logs\"\x92\x05\n" +
+	"\x04logs\x18\x05 \x03(\v2\f.payment.LogR\x04logs\x12\x1f\n" +
+	"\vnext_anchor\x18\x06 \x01(\tR\n" +
+	"nextAnchor\"\x92\x05\n" +
 	"\x03Log\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x12\n" +
 	"\x04user\x18\x02 \x01(\tR\x04user\x12\x0e\n" +
