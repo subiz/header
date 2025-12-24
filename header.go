@@ -1881,7 +1881,15 @@ func blockToPlainText(block *Block) string {
 	}
 
 	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
-		return out + block.Text
+		link := out + block.Text
+		if strings.TrimSpace(block.Href) != "" {
+			if strings.Contains(block.Href, ")") || strings.Contains(block.Href, "(") {
+				link += " (<" + strings.TrimSpace(block.Href) + ">)"
+			} else {
+				link += " (" + strings.TrimSpace(block.Href) + ")"
+			}
+		}
+		return link
 	}
 
 	if block.Type == "mention-agent" || block.Type == "mention" {

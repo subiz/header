@@ -857,6 +857,63 @@ func TestCompileBlock2(t *testing.T) {
 	fmt.Println("OUT", out)
 }
 
+func TestCompileBlock3(t *testing.T) {
+	block := &Block{
+		Type: "div",
+		Content: []*Block{
+			{
+				Type: "paragraph",
+				Content: []*Block{{
+					Type: "text",
+					Text: "Subiz",
+				}},
+			},
+			{
+				Type: "paragraph",
+				Content: []*Block{{
+					Type: "text",
+					Text: "sau:",
+				}},
+			},
+			{
+				Type: "bullet_list",
+				Content: []*Block{
+					{
+						Type: "list_item",
+						Content: []*Block{{
+							Type: "link",
+							Text: "Quản lý nhiều website",
+							Href: "https://subiz.com.vn/docs/158663500-quan-ly-nhieu-website",
+						}},
+					},
+					{
+						Type: "list_item",
+						Content: []*Block{{
+							Type: "link",
+							Text: "Làm quen với Subiz",
+							Href: "https://subiz.com.vn/docs/220677403-lam-quen-voi-subiz&",
+						}},
+					},
+				},
+			},
+		},
+	}
+	CompileBlock(block, nil)
+	fmt.Println("OUT1c", block)
+	CompileBlock(block, map[string]string{
+		"user.fullname": "thanh",
+		"cvid":          "4",
+	})
+	out := BlockToPlainText(block)
+	expect := `Subiz
+sau:
+* Quản lý nhiều website (https://subiz.com.vn/docs/158663500-quan-ly-nhieu-website)
+* Làm quen với Subiz (https://subiz.com.vn/docs/220677403-lam-quen-voi-subiz&)`
+	if out != expect {
+		t.Error("should eq")
+	}
+}
+
 func TestBlockToHTML(t *testing.T) {
 	block := &Block{
 		Type:  "paragraph",
