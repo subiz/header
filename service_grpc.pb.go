@@ -20024,6 +20024,8 @@ const (
 	ZalopersonService_LeaveZaloGroup_FullMethodName          = "/header.ZalopersonService/LeaveZaloGroup"
 	ZalopersonService_UpdateZaloGroup_FullMethodName         = "/header.ZalopersonService/UpdateZaloGroup"
 	ZalopersonService_GetZaloGroupInvitedLink_FullMethodName = "/header.ZalopersonService/GetZaloGroupInvitedLink"
+	ZalopersonService_GetZaloGroupByLink_FullMethodName      = "/header.ZalopersonService/GetZaloGroupByLink"
+	ZalopersonService_JoinZaloGroupByLink_FullMethodName     = "/header.ZalopersonService/JoinZaloGroupByLink"
 	ZalopersonService_TryZaloLogin_FullMethodName            = "/header.ZalopersonService/TryZaloLogin"
 )
 
@@ -20047,6 +20049,8 @@ type ZalopersonServiceClient interface {
 	LeaveZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	UpdateZaloGroup(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
 	GetZaloGroupInvitedLink(ctx context.Context, in *ZaloGroup, opts ...grpc.CallOption) (*Response, error)
+	GetZaloGroupByLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	JoinZaloGroupByLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error)
 }
 
@@ -20218,6 +20222,26 @@ func (c *zalopersonServiceClient) GetZaloGroupInvitedLink(ctx context.Context, i
 	return out, nil
 }
 
+func (c *zalopersonServiceClient) GetZaloGroupByLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_GetZaloGroupByLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *zalopersonServiceClient) JoinZaloGroupByLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ZalopersonService_JoinZaloGroupByLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLoginStatus, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -20248,6 +20272,8 @@ type ZalopersonServiceServer interface {
 	LeaveZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	UpdateZaloGroup(context.Context, *ZaloGroup) (*Response, error)
 	GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error)
+	GetZaloGroupByLink(context.Context, *Id) (*Response, error)
+	JoinZaloGroupByLink(context.Context, *Id) (*Response, error)
 	TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error)
 	mustEmbedUnimplementedZalopersonServiceServer()
 }
@@ -20306,6 +20332,12 @@ func (UnimplementedZalopersonServiceServer) UpdateZaloGroup(context.Context, *Za
 }
 func (UnimplementedZalopersonServiceServer) GetZaloGroupInvitedLink(context.Context, *ZaloGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetZaloGroupInvitedLink not implemented")
+}
+func (UnimplementedZalopersonServiceServer) GetZaloGroupByLink(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetZaloGroupByLink not implemented")
+}
+func (UnimplementedZalopersonServiceServer) JoinZaloGroupByLink(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinZaloGroupByLink not implemented")
 }
 func (UnimplementedZalopersonServiceServer) TryZaloLogin(context.Context, *ZaloLoginStatus) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryZaloLogin not implemented")
@@ -20619,6 +20651,42 @@ func _ZalopersonService_GetZaloGroupInvitedLink_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ZalopersonService_GetZaloGroupByLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).GetZaloGroupByLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_GetZaloGroupByLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).GetZaloGroupByLink(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ZalopersonService_JoinZaloGroupByLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).JoinZaloGroupByLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_JoinZaloGroupByLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).JoinZaloGroupByLink(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ZalopersonService_TryZaloLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ZaloLoginStatus)
 	if err := dec(in); err != nil {
@@ -20707,6 +20775,14 @@ var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetZaloGroupInvitedLink",
 			Handler:    _ZalopersonService_GetZaloGroupInvitedLink_Handler,
+		},
+		{
+			MethodName: "GetZaloGroupByLink",
+			Handler:    _ZalopersonService_GetZaloGroupByLink_Handler,
+		},
+		{
+			MethodName: "JoinZaloGroupByLink",
+			Handler:    _ZalopersonService_JoinZaloGroupByLink_Handler,
 		},
 		{
 			MethodName: "TryZaloLogin",

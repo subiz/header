@@ -1580,6 +1580,7 @@ func GetConversationIdFromEv(e *Event) string {
 	switch e.GetType() {
 	case RealtimeType_message_sent.String(),
 		RealtimeType_message_updated.String(),
+		RealtimeType_message_deleted.String(),
 		RealtimeType_message_pong.String(),
 		RealtimeType_message_referral.String():
 		return e.GetData().GetMessage().GetConversationId()

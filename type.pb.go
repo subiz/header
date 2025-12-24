@@ -32,22 +32,23 @@ const (
 	RealtimeType_agent_deleted       RealtimeType = 15
 	RealtimeType_agent_updated       RealtimeType = 16
 	// agent_permission_updated = 17;
-	RealtimeType_my_user_upserted                   RealtimeType = 19
-	RealtimeType_user_info_updated                  RealtimeType = 20
-	RealtimeType_agent_presence_updated             RealtimeType = 21
-	RealtimeType_user_created                       RealtimeType = 22
-	RealtimeType_note_created                       RealtimeType = 23
-	RealtimeType_presence_updated                   RealtimeType = 24
-	RealtimeType_content_viewed                     RealtimeType = 25
-	RealtimeType_topic_read                         RealtimeType = 30
-	RealtimeType_subscribed_topic_updated           RealtimeType = 31
-	RealtimeType_user_attribute_updated             RealtimeType = 33
-	RealtimeType_user_attribute_deleted             RealtimeType = 34
-	RealtimeType_notification_setting_updated       RealtimeType = 39
-	RealtimeType_conversation_updated               RealtimeType = 40
-	RealtimeType_message_sent                       RealtimeType = 41 // event.data.message
-	RealtimeType_conversation_state_updated         RealtimeType = 42 // event.data.conversation
-	RealtimeType_message_pong                       RealtimeType = 43 // event.data.message.pongs.0
+	RealtimeType_my_user_upserted             RealtimeType = 19
+	RealtimeType_user_info_updated            RealtimeType = 20
+	RealtimeType_agent_presence_updated       RealtimeType = 21
+	RealtimeType_user_created                 RealtimeType = 22
+	RealtimeType_note_created                 RealtimeType = 23
+	RealtimeType_presence_updated             RealtimeType = 24
+	RealtimeType_content_viewed               RealtimeType = 25
+	RealtimeType_topic_read                   RealtimeType = 30
+	RealtimeType_subscribed_topic_updated     RealtimeType = 31
+	RealtimeType_user_attribute_updated       RealtimeType = 33
+	RealtimeType_user_attribute_deleted       RealtimeType = 34
+	RealtimeType_notification_setting_updated RealtimeType = 39
+	RealtimeType_conversation_updated         RealtimeType = 40
+	RealtimeType_message_sent                 RealtimeType = 41 // event.data.message
+	RealtimeType_conversation_state_updated   RealtimeType = 42 // event.data.conversation
+	RealtimeType_message_pong                 RealtimeType = 43 // event.data.message.pongs.0
+	// message_postback = 50; // event.data.postback
 	RealtimeType_conversation_joined                RealtimeType = 44 // event.data.conversation.memebers.0
 	RealtimeType_conversation_invited               RealtimeType = 45
 	RealtimeType_conversation_left                  RealtimeType = 46
@@ -65,6 +66,7 @@ const (
 	RealtimeType_conversation_viewing               RealtimeType = 59
 	RealtimeType_conversation_rating_requested      RealtimeType = 60 // event.data.conversation
 	RealtimeType_conversation_rated                 RealtimeType = 61 // event.data.conversation
+	RealtimeType_message_deleted                    RealtimeType = 62 // event.data.message.pongs.0
 	RealtimeType_my_conversation_list_updated       RealtimeType = 65 // conversation // actived = -1 => removed
 	RealtimeType_tag_updated                        RealtimeType = 70
 	RealtimeType_tag_deleted                        RealtimeType = 71
@@ -316,6 +318,7 @@ var (
 		59:  "conversation_viewing",
 		60:  "conversation_rating_requested",
 		61:  "conversation_rated",
+		62:  "message_deleted",
 		65:  "my_conversation_list_updated",
 		70:  "tag_updated",
 		71:  "tag_deleted",
@@ -563,6 +566,7 @@ var (
 		"conversation_viewing":               59,
 		"conversation_rating_requested":      60,
 		"conversation_rated":                 61,
+		"message_deleted":                    62,
 		"my_conversation_list_updated":       65,
 		"tag_updated":                        70,
 		"tag_deleted":                        71,
@@ -1762,7 +1766,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xff.\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\x94/\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1804,7 +1808,8 @@ const file_type_proto_rawDesc = "" +
 	"\x0fmessage_updated\x10:\x12\x18\n" +
 	"\x14conversation_viewing\x10;\x12!\n" +
 	"\x1dconversation_rating_requested\x10<\x12\x16\n" +
-	"\x12conversation_rated\x10=\x12 \n" +
+	"\x12conversation_rated\x10=\x12\x13\n" +
+	"\x0fmessage_deleted\x10>\x12 \n" +
 	"\x1cmy_conversation_list_updated\x10A\x12\x0f\n" +
 	"\vtag_updated\x10F\x12\x0f\n" +
 	"\vtag_deleted\x10G\x12\x1c\n" +

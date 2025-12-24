@@ -736,6 +736,8 @@ service ZalopersonService {
 	rpc LeaveZaloGroup(ZaloGroup) returns (Response);
 	rpc UpdateZaloGroup(ZaloGroup) returns (Response); // name only
 	rpc GetZaloGroupInvitedLink(ZaloGroup) returns(Response);
+	rpc GetZaloGroupByLink(Id) returns(Response);
+	rpc JoinZaloGroupByLink(Id) returns(Response);
 	rpc TryZaloLogin(ZaloLoginStatus) returns (Response); // return qr code or login sucess
 }
 

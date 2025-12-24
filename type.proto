@@ -38,7 +38,6 @@ enum RealtimeType {
 
 	message_pong = 43; // event.data.message.pongs.0
 	// message_postback = 50; // event.data.postback
-
 	conversation_joined = 44; // event.data.conversation.memebers.0
 	conversation_invited = 45;
 	conversation_left = 46;
@@ -60,6 +59,7 @@ enum RealtimeType {
 
 	conversation_rating_requested = 60; // event.data.conversation
 	conversation_rated = 61; // event.data.conversation
+	message_deleted = 62; // event.data.message.pongs.0
 
 	my_conversation_list_updated = 65; // conversation // actived = -1 => removed
 
