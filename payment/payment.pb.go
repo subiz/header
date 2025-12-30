@@ -588,18 +588,19 @@ type Subscription struct {
 	Started           *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                                 // ms
 	BillingCycleMonth *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"` // only use when renew
 	Plan              *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`                                                       // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
-	Credit            *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`
-	Limit             *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`         // combined from plan.limit and purchased_limit
-	Purchased         *common.Limit          `protobuf:"bytes,43,opt,name=purchased" json:"purchased,omitempty"` //
+	Credit            *float32               `protobuf:"fixed32,27,opt,name=credit" json:"credit,omitempty"`                                                 // @deprecated
+	Limit             *common.Limit          `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`                                                     // combined from plan.limit and purchased_limit
+	Purchased         *common.Limit          `protobuf:"bytes,43,opt,name=purchased" json:"purchased,omitempty"`                                             //
 	Ended             *int64                 `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
 	Churned           *int64                 `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
-	FpvCreditVnd      *int64                 `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`       // translate from credit, do not store in db
+	FpvCreditVnd      *int64                 `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`       // @deprecated, translate from credit, do not store in db
 	FpvCustomPrice    *int64                 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"` // usd, custom price, only edited by subiz
-	NumAgents         *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
+	NumAgents         *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`                  // @deprecated
 	// optional int64 use_ticket = 51;
 	// optional int64 next_num_agents = 52; // @deprecated
 	UnlimitedAiSpending *int64  `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
-	FpvCreditUsd        *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
+	FpvCreditUsd        *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft = total bill - total invoice
+	UsageCredit         *int64  `protobuf:"varint,58,opt,name=usage_credit,json=usageCredit" json:"usage_credit,omitempty"`      // soft = total invoice(type=novat) - total spend
 	Note                *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
 	FpvPricePerDayUsd   *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
 	unknownFields       protoimpl.UnknownFields
@@ -751,6 +752,13 @@ func (x *Subscription) GetUnlimitedAiSpending() int64 {
 func (x *Subscription) GetFpvCreditUsd() int64 {
 	if x != nil && x.FpvCreditUsd != nil {
 		return *x.FpvCreditUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetUsageCredit() int64 {
+	if x != nil && x.UsageCredit != nil {
+		return *x.UsageCredit
 	}
 	return 0
 }
@@ -3227,7 +3235,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\x98\x05\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xbb\x05\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3247,7 +3255,8 @@ const file_payment_proto_rawDesc = "" +
 	"\n" +
 	"num_agents\x182 \x01(\x03R\tnumAgents\x122\n" +
 	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
-	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x12\x12\n" +
+	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x12!\n" +
+	"\fusage_credit\x18: \x01(\x03R\vusageCredit\x12\x12\n" +
 	"\x04note\x188 \x01(\tR\x04note\x120\n" +
 	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\"\x9a\x06\n" +
 	"\x04Bill\x12!\n" +
