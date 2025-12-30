@@ -4911,7 +4911,7 @@ message Product {
 	float grams = 43;
 	bool allow_preorder = 44;
 
-	string condition = 47; // (shared) new, refurbished, used
+	string condition = 47; // (shared) new, refurbished, damaged, used
 	string visibility = 48; // (shared) published, staging, hidden, deleted
 
 	string sku = 49;

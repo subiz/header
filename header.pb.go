@@ -34246,7 +34246,7 @@ type Product struct {
 	WeightUnit      string  `protobuf:"bytes,42,opt,name=weight_unit,json=weightUnit,proto3" json:"weight_unit,omitempty"` // g, kg
 	Grams           float32 `protobuf:"fixed32,43,opt,name=grams,proto3" json:"grams,omitempty"`
 	AllowPreorder   bool    `protobuf:"varint,44,opt,name=allow_preorder,json=allowPreorder,proto3" json:"allow_preorder,omitempty"`
-	Condition       string  `protobuf:"bytes,47,opt,name=condition,proto3" json:"condition,omitempty"`   // (shared) new, refurbished, used
+	Condition       string  `protobuf:"bytes,47,opt,name=condition,proto3" json:"condition,omitempty"`   // (shared) new, refurbished, damaged, used
 	Visibility      string  `protobuf:"bytes,48,opt,name=visibility,proto3" json:"visibility,omitempty"` // (shared) published, staging, hidden, deleted
 	Sku             string  `protobuf:"bytes,49,opt,name=sku,proto3" json:"sku,omitempty"`
 	Barcode         string  `protobuf:"bytes,50,opt,name=barcode,proto3" json:"barcode,omitempty"`
