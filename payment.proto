@@ -69,22 +69,23 @@ message Subscription {
 	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
 	// optional string next_plan = 18; // @deprecated
 
-	optional float credit = 27;
+	// optional float credit = 27; // @deprecated
 	optional common.Limit limit = 42; // combined from plan.limit and purchased_limit
 	optional common.Limit purchased = 43; //
 
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 
-	optional int64 fpv_credit_vnd = 48; // translate from credit, do not store in db
+	// optional int64 fpv_credit_vnd = 48; // @deprecated, translate from credit, do not store in db
 	optional int64 fpv_custom_price = 49; // usd, custom price, only edited by subiz
 	// optional int64 fpv_next_custom_price = 53; // @depreacated usd, custom price only edited by subiz
 
-	optional int64 num_agents = 50;
+	optional int64 num_agents = 50; // @deprecated
 	// optional int64 use_ticket = 51;
 	// optional int64 next_num_agents = 52; // @deprecated
 	optional int64 unlimited_ai_spending = 54;
-	optional int64 fpv_credit_usd = 55; // soft
+	optional int64 fpv_credit_usd = 55; // soft = total bill - total invoice
+	optional int64 fpv_usage_credit_usd = 58; // soft = total invoice(type=novat) - total spend
 
 	optional string note = 56;
 	optional int64 fpv_price_per_day_usd = 57; // read only after upgrade
@@ -145,10 +146,12 @@ message Invoices {
 
 message ListInvoiceRequest {
 	optional common.Context ctx = 1;
-	optional string anchor = 4;
-	optional string account_id = 5;
+	optional string account_id = 2;
+
+	// optional string anchor = 4;
 
 	optional string credit_id = 6;
+	optional bool compute_draft = 7;
 }
 
 message Invoice {
