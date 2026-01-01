@@ -28789,9 +28789,6 @@ const (
 	CreditMgr_TrySpendCredit_FullMethodName      = "/header.CreditMgr/TrySpendCredit"
 	CreditMgr_ReportCreditSpend_FullMethodName   = "/header.CreditMgr/ReportCreditSpend"
 	CreditMgr_ListCreditSpendLog_FullMethodName  = "/header.CreditMgr/ListCreditSpendLog"
-	CreditMgr_ListCredits_FullMethodName         = "/header.CreditMgr/ListCredits"
-	CreditMgr_UpdateCredit_FullMethodName        = "/header.CreditMgr/UpdateCredit"
-	CreditMgr_MatchCredits_FullMethodName        = "/header.CreditMgr/MatchCredits"
 	CreditMgr_GetTotalCreditSpend_FullMethodName = "/header.CreditMgr/GetTotalCreditSpend"
 )
 
@@ -28802,11 +28799,11 @@ type CreditMgrClient interface {
 	TrySpendCredit(ctx context.Context, in *CreditSpendEntry, opts ...grpc.CallOption) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(ctx context.Context, in *CreditSpendReportRequest, opts ...grpc.CallOption) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(ctx context.Context, in *CreditSpendLogRequest, opts ...grpc.CallOption) (*CreditSpendEntries, error)
-	ListCredits(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// rpc ListCredits(header.Id) returns (header.Response); // credit
 	// rpc AddCredit(header.Credit) returns (header.Response); // credit
 	// rpc DeleteCredit(header.Id) returns (header.Response); // empty
-	UpdateCredit(ctx context.Context, in *Credit, opts ...grpc.CallOption) (*Response, error)
-	MatchCredits(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	// rpc UpdateCredit(header.Credit) returns (header.Response); // credit
+	// rpc MatchCredits(Ids) returns (header.Response);
 	GetTotalCreditSpend(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
@@ -28848,36 +28845,6 @@ func (c *creditMgrClient) ListCreditSpendLog(ctx context.Context, in *CreditSpen
 	return out, nil
 }
 
-func (c *creditMgrClient) ListCredits(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, CreditMgr_ListCredits_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *creditMgrClient) UpdateCredit(ctx context.Context, in *Credit, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, CreditMgr_UpdateCredit_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *creditMgrClient) MatchCredits(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, CreditMgr_MatchCredits_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *creditMgrClient) GetTotalCreditSpend(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -28895,11 +28862,11 @@ type CreditMgrServer interface {
 	TrySpendCredit(context.Context, *CreditSpendEntry) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(context.Context, *CreditSpendReportRequest) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error)
-	ListCredits(context.Context, *Id) (*Response, error)
+	// rpc ListCredits(header.Id) returns (header.Response); // credit
 	// rpc AddCredit(header.Credit) returns (header.Response); // credit
 	// rpc DeleteCredit(header.Id) returns (header.Response); // empty
-	UpdateCredit(context.Context, *Credit) (*Response, error)
-	MatchCredits(context.Context, *Ids) (*Response, error)
+	// rpc UpdateCredit(header.Credit) returns (header.Response); // credit
+	// rpc MatchCredits(Ids) returns (header.Response);
 	GetTotalCreditSpend(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedCreditMgrServer()
 }
@@ -28919,15 +28886,6 @@ func (UnimplementedCreditMgrServer) ReportCreditSpend(context.Context, *CreditSp
 }
 func (UnimplementedCreditMgrServer) ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCreditSpendLog not implemented")
-}
-func (UnimplementedCreditMgrServer) ListCredits(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCredits not implemented")
-}
-func (UnimplementedCreditMgrServer) UpdateCredit(context.Context, *Credit) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCredit not implemented")
-}
-func (UnimplementedCreditMgrServer) MatchCredits(context.Context, *Ids) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MatchCredits not implemented")
 }
 func (UnimplementedCreditMgrServer) GetTotalCreditSpend(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTotalCreditSpend not implemented")
@@ -29007,60 +28965,6 @@ func _CreditMgr_ListCreditSpendLog_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CreditMgr_ListCredits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CreditMgrServer).ListCredits(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CreditMgr_ListCredits_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CreditMgrServer).ListCredits(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CreditMgr_UpdateCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Credit)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CreditMgrServer).UpdateCredit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CreditMgr_UpdateCredit_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CreditMgrServer).UpdateCredit(ctx, req.(*Credit))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CreditMgr_MatchCredits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CreditMgrServer).MatchCredits(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CreditMgr_MatchCredits_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CreditMgrServer).MatchCredits(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _CreditMgr_GetTotalCreditSpend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -29097,18 +29001,6 @@ var CreditMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCreditSpendLog",
 			Handler:    _CreditMgr_ListCreditSpendLog_Handler,
-		},
-		{
-			MethodName: "ListCredits",
-			Handler:    _CreditMgr_ListCredits_Handler,
-		},
-		{
-			MethodName: "UpdateCredit",
-			Handler:    _CreditMgr_UpdateCredit_Handler,
-		},
-		{
-			MethodName: "MatchCredits",
-			Handler:    _CreditMgr_MatchCredits_Handler,
 		},
 		{
 			MethodName: "GetTotalCreditSpend",

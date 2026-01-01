@@ -767,7 +767,7 @@ message Data {
 
 	OutboundCallUpdateEvent outbound_call_update = 108;
 	BannedUser banned_user = 109;
-	Credit credit = 110;
+	// Credit credit = 110;
 	payment.Bill subiz_bill = 111;
 
 	Noti desktop_notification = 113;
@@ -6880,8 +6880,8 @@ message Response {
 	BouncedEmail bounced_email = 12;
 	repeated BouncedEmail bounced_emails = 13;
 	ZaloCallConsent zalo_call_consent = 14;
-	Credit credit = 15;
-	repeated Credit credits = 16;
+	// Credit credit = 15;
+	// repeated Credit credits = 16;
 	account.Account account = 17;
 	repeated account.Account accounts = 18;
 	Workflow workflow = 19;
@@ -7191,34 +7191,6 @@ message SchedulerTask {
 	string host = 10;
 }
 
-message Credit {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-
-	string name = 4;
-	int64 fpv_balance = 5; // fpv - read-only = fpv_total_paid - fpv_total_spend
-
-	int64 fpv_credit_limit = 7; // 0 - 40 only set by subiz
-	int64 fpv_tax = 8; // 1000 -> 10%
-
-	int64 created = 9;
-	string created_by = 10;
-
-	int64 updated = 11;
-	string updated_by = 12;
-
-	string billing_name = 13;
-	string billing_address = 14;
-	string billing_email = 15;
-	string tax_code = 16;
-	string currency = 18; // default USD, VND
-	int64 fpv_total_spent = 20; // fpv - read-only
-	int64 fpv_total_paid = 21; // fpv - read-only
-	int64 modified = 22;
-	// int64 negative_at = 19;
-}
-
 message CreditSpendEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7361,7 +7333,7 @@ message AccSub {
 	repeated account.Agent agents = 5;
 	string stringify = 6;
 	int64 num_open_invoices = 7;
-	repeated Credit credits = 8;
+	// repeated Credit credits = 8;
 }
 
 message AccSubs {
