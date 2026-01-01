@@ -598,13 +598,13 @@ type Subscription struct {
 	NumAgents      *int64 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`                  // @deprecated
 	// optional int64 use_ticket = 51;
 	// optional int64 next_num_agents = 52; // @deprecated
-	UnlimitedAiSpending *int64  `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
-	FpvCreditUsd        *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"`                     // soft = total bill - total invoice
-	FpvNovatBalanceUsd  *int64  `protobuf:"varint,58,opt,name=fpv_novat_balance_usd,json=fpvNovatBalanceUsd" json:"fpv_novat_balance_usd,omitempty"` // soft = total invoice(type=novat) - total spend
-	Note                *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
-	FpvPricePerDayUsd   *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// optional int64 unlimited_ai_spending = 54;
+	FpvCreditUsd       *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"`                     // soft = total bill - total invoice
+	FpvNovatBalanceUsd *int64  `protobuf:"varint,58,opt,name=fpv_novat_balance_usd,json=fpvNovatBalanceUsd" json:"fpv_novat_balance_usd,omitempty"` // soft = total invoice(type=novat) - total spend
+	Note               *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
+	FpvPricePerDayUsd  *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Subscription) Reset() {
@@ -724,13 +724,6 @@ func (x *Subscription) GetFpvCustomPrice() int64 {
 func (x *Subscription) GetNumAgents() int64 {
 	if x != nil && x.NumAgents != nil {
 		return *x.NumAgents
-	}
-	return 0
-}
-
-func (x *Subscription) GetUnlimitedAiSpending() int64 {
-	if x != nil && x.UnlimitedAiSpending != nil {
-		return *x.UnlimitedAiSpending
 	}
 	return 0
 }
@@ -3221,7 +3214,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\x8d\x05\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xd9\x04\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3237,8 +3230,7 @@ const file_payment_proto_rawDesc = "" +
 	"\achurned\x18/ \x01(\x03R\achurned\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x182 \x01(\x03R\tnumAgents\x122\n" +
-	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
+	"num_agents\x182 \x01(\x03R\tnumAgents\x12$\n" +
 	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x121\n" +
 	"\x15fpv_novat_balance_usd\x18: \x01(\x03R\x12fpvNovatBalanceUsd\x12\x12\n" +
 	"\x04note\x188 \x01(\tR\x04note\x120\n" +

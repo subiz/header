@@ -83,7 +83,7 @@ message Subscription {
 	optional int64 num_agents = 50; // @deprecated
 	// optional int64 use_ticket = 51;
 	// optional int64 next_num_agents = 52; // @deprecated
-	optional int64 unlimited_ai_spending = 54;
+	// optional int64 unlimited_ai_spending = 54;
 	optional int64 fpv_credit_usd = 55; // soft = total bill - total invoice
 	optional int64 fpv_novat_balance_usd = 58; // soft = total invoice(type=novat) - total spend
 

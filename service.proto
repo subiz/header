@@ -656,6 +656,7 @@ service PaymentMgr {
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill); // only subiz
 
+	rpc RecomputeCredit(Id) returns (Empty); // internal
 	rpc ListPaymentLogs(Id) returns (payment.Logs);
 }
 

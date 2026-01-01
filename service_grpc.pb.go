@@ -17508,6 +17508,7 @@ const (
 	PaymentMgr_ConvertInvoiceToHtml_FullMethodName = "/header.PaymentMgr/ConvertInvoiceToHtml"
 	PaymentMgr_GetExchangeRate_FullMethodName      = "/header.PaymentMgr/GetExchangeRate"
 	PaymentMgr_TransferMoney_FullMethodName        = "/header.PaymentMgr/TransferMoney"
+	PaymentMgr_RecomputeCredit_FullMethodName      = "/header.PaymentMgr/RecomputeCredit"
 	PaymentMgr_ListPaymentLogs_FullMethodName      = "/header.PaymentMgr/ListPaymentLogs"
 )
 
@@ -17536,6 +17537,7 @@ type PaymentMgrClient interface {
 	ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error)
 	GetExchangeRate(ctx context.Context, in *ExchangeRate, opts ...grpc.CallOption) (*ExchangeRate, error)
 	TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
+	RecomputeCredit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListPaymentLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Logs, error)
 }
 
@@ -17747,6 +17749,16 @@ func (c *paymentMgrClient) TransferMoney(ctx context.Context, in *payment.PayReq
 	return out, nil
 }
 
+func (c *paymentMgrClient) RecomputeCredit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, PaymentMgr_RecomputeCredit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentMgrClient) ListPaymentLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Logs, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(payment.Logs)
@@ -17782,6 +17794,7 @@ type PaymentMgrServer interface {
 	ConvertInvoiceToHtml(context.Context, *payment.Invoice) (*payment.String, error)
 	GetExchangeRate(context.Context, *ExchangeRate) (*ExchangeRate, error)
 	TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error)
+	RecomputeCredit(context.Context, *Id) (*Empty, error)
 	ListPaymentLogs(context.Context, *Id) (*payment.Logs, error)
 	mustEmbedUnimplementedPaymentMgrServer()
 }
@@ -17852,6 +17865,9 @@ func (UnimplementedPaymentMgrServer) GetExchangeRate(context.Context, *ExchangeR
 }
 func (UnimplementedPaymentMgrServer) TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferMoney not implemented")
+}
+func (UnimplementedPaymentMgrServer) RecomputeCredit(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecomputeCredit not implemented")
 }
 func (UnimplementedPaymentMgrServer) ListPaymentLogs(context.Context, *Id) (*payment.Logs, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentLogs not implemented")
@@ -18237,6 +18253,24 @@ func _PaymentMgr_TransferMoney_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PaymentMgr_RecomputeCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).RecomputeCredit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentMgr_RecomputeCredit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).RecomputeCredit(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PaymentMgr_ListPaymentLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -18341,6 +18375,10 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TransferMoney",
 			Handler:    _PaymentMgr_TransferMoney_Handler,
+		},
+		{
+			MethodName: "RecomputeCredit",
+			Handler:    _PaymentMgr_RecomputeCredit_Handler,
 		},
 		{
 			MethodName: "ListPaymentLogs",
