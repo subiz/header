@@ -108,7 +108,7 @@ message Bill {
 	optional string description = 12;
 
 	optional string credit_id = 15;
-	//	optional string status = 16;
+	// optional string status = 16;
 	optional string currency = 17; // VND, USD
 
 	optional string original_bank_transfer_note = 18;
@@ -196,7 +196,7 @@ message Invoice {
 	optional Subscription current_sub = 25; // optional
 	// optional Plan current_plan = 26; // optional
 
-	optional string credit_id = 27;
+	optional string credit_id = 27; // @deprecated
 	optional string currency = 28; // VND
 
 	optional int64 fpv_total_vnd = 29; // read only
@@ -225,6 +225,9 @@ message Invoice {
 	optional bool auto_generated = 46;
 
 	optional Subscription sub = 50;
+
+	optional int64 fpv_refcom_usd = 52;
+	optional int64 fpv_refcom_vnd = 53; // read only
 }
 
 message FanpagesInvoiceItem {

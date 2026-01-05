@@ -51213,9 +51213,10 @@ func (x *TrySpendCreditResponse) GetAllow() bool {
 
 type CreditSpendReportResponseData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ItemId        string                 `protobuf:"bytes,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"` // remove
+	ItemId        string                 `protobuf:"bytes,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"` // @deprecated
 	Label         string                 `protobuf:"bytes,5,opt,name=label,proto3" json:"label,omitempty"`
 	Data          []int64                `protobuf:"varint,4,rep,packed,name=data,proto3" json:"data,omitempty"` // by time
+	DataRegular   []int64                `protobuf:"varint,6,rep,packed,name=data_regular,json=dataRegular,proto3" json:"data_regular,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -51267,6 +51268,13 @@ func (x *CreditSpendReportResponseData) GetLabel() string {
 func (x *CreditSpendReportResponseData) GetData() []int64 {
 	if x != nil {
 		return x.Data
+	}
+	return nil
+}
+
+func (x *CreditSpendReportResponseData) GetDataRegular() []int64 {
+	if x != nil {
+		return x.DataRegular
 	}
 	return nil
 }
@@ -77247,11 +77255,12 @@ const file_header_proto_rawDesc = "" +
 	"service_id\x18\x04 \x01(\tR\tserviceId\x12\x1f\n" +
 	"\vbalance_fpv\x18\x06 \x01(\x03R\n" +
 	"balanceFpv\x12\x14\n" +
-	"\x05allow\x18\a \x01(\bR\x05allow\"b\n" +
+	"\x05allow\x18\a \x01(\bR\x05allow\"\x85\x01\n" +
 	"\x1dCreditSpendReportResponseData\x12\x17\n" +
 	"\aitem_id\x18\x03 \x01(\tR\x06itemId\x12\x14\n" +
 	"\x05label\x18\x05 \x01(\tR\x05label\x12\x12\n" +
-	"\x04data\x18\x04 \x03(\x03R\x04data\"\xd4\x01\n" +
+	"\x04data\x18\x04 \x03(\x03R\x04data\x12!\n" +
+	"\fdata_regular\x18\x06 \x03(\x03R\vdataRegular\"\xd4\x01\n" +
 	"\x19CreditSpendReportResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

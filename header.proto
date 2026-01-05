@@ -7312,9 +7312,10 @@ message TrySpendCreditResponse {
 }
 
 message CreditSpendReportResponseData {
-	string item_id = 3; // remove
+	string item_id = 3; // @deprecated
 	string label = 5;
 	repeated int64 data = 4; // by time
+	repeated int64 data_regular = 6;
 }
 
 message CreditSpendReportResponse {
