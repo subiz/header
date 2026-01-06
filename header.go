@@ -2554,3 +2554,10 @@ func IsValidVNPhoneNumber(phoneNumber string) bool {
 
 	return true
 }
+
+func IsEmptyMessage(channel string, msg *Message) bool {
+	if channel == "zns" {
+		return msg.GetZnsPhone() == "" || msg.GetZnsTemplateId() == ""
+	}
+	return strings.TrimSpace(msg.GetText()) == "" && msg.GetBlock() == nil && len(msg.GetAttachments()) == 0
+}
