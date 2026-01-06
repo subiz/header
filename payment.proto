@@ -88,11 +88,13 @@ message Subscription {
 	optional int64 fpv_novat_balance_usd = 58; // soft = total invoice(type=novat) - total novat spend
 	optional int64 fpv_marketing_balance_vnd = 59; // soft = total invoice(type=marketing) - total marketing spend
 
-	optional int64 fpv_marketing_credit_limit_vnd = 60; // 0 - 40 only set by subiz
-	optional int64 fpv_novat_credit_limit_usd = 61; // 0 - 40 only set by subiz
+	// optional int64 fpv_marketing_credit_limit_vnd = 60; // 0 - 40 only set by subiz
+	// optional int64 fpv_novat_credit_limit_usd = 61; // 0 - 40 only set by subiz
 
 	optional string note = 56;
 	optional int64 fpv_price_per_day_usd = 57; // read only after upgrade
+
+	optional int64 auto_renew_disabled = 62;
 }
 
 message Bill {

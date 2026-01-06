@@ -599,15 +599,14 @@ type Subscription struct {
 	// optional int64 use_ticket = 51;
 	// optional int64 next_num_agents = 52; // @deprecated
 	// optional int64 unlimited_ai_spending = 54;
-	FpvCreditUsd               *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"`                                               // soft = total bill - total invoice
-	FpvNovatBalanceUsd         *int64  `protobuf:"varint,58,opt,name=fpv_novat_balance_usd,json=fpvNovatBalanceUsd" json:"fpv_novat_balance_usd,omitempty"`                           // soft = total invoice(type=novat) - total novat spend
-	FpvMarketingBalanceVnd     *int64  `protobuf:"varint,59,opt,name=fpv_marketing_balance_vnd,json=fpvMarketingBalanceVnd" json:"fpv_marketing_balance_vnd,omitempty"`               // soft = total invoice(type=marketing) - total marketing spend
-	FpvMarketingCreditLimitVnd *int64  `protobuf:"varint,60,opt,name=fpv_marketing_credit_limit_vnd,json=fpvMarketingCreditLimitVnd" json:"fpv_marketing_credit_limit_vnd,omitempty"` // 0 - 40 only set by subiz
-	FpvNovatCreditLimitUsd     *int64  `protobuf:"varint,61,opt,name=fpv_novat_credit_limit_usd,json=fpvNovatCreditLimitUsd" json:"fpv_novat_credit_limit_usd,omitempty"`             // 0 - 40 only set by subiz
-	Note                       *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
-	FpvPricePerDayUsd          *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	FpvCreditUsd           *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"`                                 // soft = total bill - total invoice
+	FpvNovatBalanceUsd     *int64  `protobuf:"varint,58,opt,name=fpv_novat_balance_usd,json=fpvNovatBalanceUsd" json:"fpv_novat_balance_usd,omitempty"`             // soft = total invoice(type=novat) - total novat spend
+	FpvMarketingBalanceVnd *int64  `protobuf:"varint,59,opt,name=fpv_marketing_balance_vnd,json=fpvMarketingBalanceVnd" json:"fpv_marketing_balance_vnd,omitempty"` // soft = total invoice(type=marketing) - total marketing spend
+	Note                   *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
+	FpvPricePerDayUsd      *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
+	AutoRenewDisabled      *int64  `protobuf:"varint,62,opt,name=auto_renew_disabled,json=autoRenewDisabled" json:"auto_renew_disabled,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Subscription) Reset() {
@@ -752,20 +751,6 @@ func (x *Subscription) GetFpvMarketingBalanceVnd() int64 {
 	return 0
 }
 
-func (x *Subscription) GetFpvMarketingCreditLimitVnd() int64 {
-	if x != nil && x.FpvMarketingCreditLimitVnd != nil {
-		return *x.FpvMarketingCreditLimitVnd
-	}
-	return 0
-}
-
-func (x *Subscription) GetFpvNovatCreditLimitUsd() int64 {
-	if x != nil && x.FpvNovatCreditLimitUsd != nil {
-		return *x.FpvNovatCreditLimitUsd
-	}
-	return 0
-}
-
 func (x *Subscription) GetNote() string {
 	if x != nil && x.Note != nil {
 		return *x.Note
@@ -776,6 +761,13 @@ func (x *Subscription) GetNote() string {
 func (x *Subscription) GetFpvPricePerDayUsd() int64 {
 	if x != nil && x.FpvPricePerDayUsd != nil {
 		return *x.FpvPricePerDayUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetAutoRenewDisabled() int64 {
+	if x != nil && x.AutoRenewDisabled != nil {
+		return *x.AutoRenewDisabled
 	}
 	return 0
 }
@@ -3231,7 +3223,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\x94\x06\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xc4\x05\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3250,11 +3242,10 @@ const file_payment_proto_rawDesc = "" +
 	"num_agents\x182 \x01(\x03R\tnumAgents\x12$\n" +
 	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x121\n" +
 	"\x15fpv_novat_balance_usd\x18: \x01(\x03R\x12fpvNovatBalanceUsd\x129\n" +
-	"\x19fpv_marketing_balance_vnd\x18; \x01(\x03R\x16fpvMarketingBalanceVnd\x12B\n" +
-	"\x1efpv_marketing_credit_limit_vnd\x18< \x01(\x03R\x1afpvMarketingCreditLimitVnd\x12:\n" +
-	"\x1afpv_novat_credit_limit_usd\x18= \x01(\x03R\x16fpvNovatCreditLimitUsd\x12\x12\n" +
+	"\x19fpv_marketing_balance_vnd\x18; \x01(\x03R\x16fpvMarketingBalanceVnd\x12\x12\n" +
 	"\x04note\x188 \x01(\tR\x04note\x120\n" +
-	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\"\xf3\x05\n" +
+	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\x12.\n" +
+	"\x13auto_renew_disabled\x18> \x01(\x03R\x11autoRenewDisabled\"\xf3\x05\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
