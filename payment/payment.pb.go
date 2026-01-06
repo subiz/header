@@ -805,7 +805,6 @@ type Bill struct {
 	FpvReferrerCommissionVnd *int64  `protobuf:"varint,36,opt,name=fpv_referrer_commission_vnd,json=fpvReferrerCommissionVnd" json:"fpv_referrer_commission_vnd,omitempty"` // hidden
 	ReferrerAgentId          *string `protobuf:"bytes,37,opt,name=referrer_agent_id,json=referrerAgentId" json:"referrer_agent_id,omitempty"`
 	FpvReferrerCommissionUsd *int64  `protobuf:"varint,38,opt,name=fpv_referrer_commission_usd,json=fpvReferrerCommissionUsd" json:"fpv_referrer_commission_usd,omitempty"` // hidden
-	PromotionCode            *string `protobuf:"bytes,39,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -978,13 +977,6 @@ func (x *Bill) GetFpvReferrerCommissionUsd() int64 {
 		return *x.FpvReferrerCommissionUsd
 	}
 	return 0
-}
-
-func (x *Bill) GetPromotionCode() string {
-	if x != nil && x.PromotionCode != nil {
-		return *x.PromotionCode
-	}
-	return ""
 }
 
 type Bills struct {
@@ -1270,18 +1262,18 @@ type Invoice struct {
 	Total      *float32       `protobuf:"fixed32,17,opt,name=total" json:"total,omitempty"`
 	Updated    *int64         `protobuf:"varint,18,opt,name=updated" json:"updated,omitempty"`
 	// optional int32 year = 19; // optional
-	Notes             []*Note       `protobuf:"bytes,22,rep,name=notes" json:"notes,omitempty"`
-	Bills             []string      `protobuf:"bytes,23,rep,name=bills" json:"bills,omitempty"`
-	PaymentMade       *float32      `protobuf:"fixed32,24,opt,name=payment_made,json=paymentMade" json:"payment_made,omitempty"`
-	CurrentSub        *Subscription `protobuf:"bytes,25,opt,name=current_sub,json=currentSub" json:"current_sub,omitempty"`                           // optional
-	CreditId          *string       `protobuf:"bytes,27,opt,name=credit_id,json=creditId" json:"credit_id,omitempty"`                                 // @deprecated
-	Currency          *string       `protobuf:"bytes,28,opt,name=currency" json:"currency,omitempty"`                                                 // VND
-	FpvTotalVnd       *int64        `protobuf:"varint,29,opt,name=fpv_total_vnd,json=fpvTotalVnd" json:"fpv_total_vnd,omitempty"`                     // read only
-	FpvPaymentMadeVnd *int64        `protobuf:"varint,30,opt,name=fpv_payment_made_vnd,json=fpvPaymentMadeVnd" json:"fpv_payment_made_vnd,omitempty"` // read only
-	IsGenQr           *bool         `protobuf:"varint,31,opt,name=is_gen_qr,json=isGenQr" json:"is_gen_qr,omitempty"`                                 // not save in db
-	CreatedBy         *string       `protobuf:"bytes,32,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`                              // system
-	FpvDiscountVnd    *int64        `protobuf:"varint,34,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`            // read only
-	FpvSubtotalVnd    *int64        `protobuf:"varint,35,opt,name=fpv_subtotal_vnd,json=fpvSubtotalVnd" json:"fpv_subtotal_vnd,omitempty"`            // read only
+	Notes       []*Note       `protobuf:"bytes,22,rep,name=notes" json:"notes,omitempty"`
+	Bills       []string      `protobuf:"bytes,23,rep,name=bills" json:"bills,omitempty"`
+	PaymentMade *float32      `protobuf:"fixed32,24,opt,name=payment_made,json=paymentMade" json:"payment_made,omitempty"`
+	CurrentSub  *Subscription `protobuf:"bytes,25,opt,name=current_sub,json=currentSub" json:"current_sub,omitempty"` // optional
+	// optional string credit_id = 27; // @deprecated
+	Currency          *string `protobuf:"bytes,28,opt,name=currency" json:"currency,omitempty"`                                                 // VND
+	FpvTotalVnd       *int64  `protobuf:"varint,29,opt,name=fpv_total_vnd,json=fpvTotalVnd" json:"fpv_total_vnd,omitempty"`                     // read only
+	FpvPaymentMadeVnd *int64  `protobuf:"varint,30,opt,name=fpv_payment_made_vnd,json=fpvPaymentMadeVnd" json:"fpv_payment_made_vnd,omitempty"` // read only
+	IsGenQr           *bool   `protobuf:"varint,31,opt,name=is_gen_qr,json=isGenQr" json:"is_gen_qr,omitempty"`                                 // not save in db
+	CreatedBy         *string `protobuf:"bytes,32,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`                              // system
+	FpvDiscountVnd    *int64  `protobuf:"varint,34,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`            // read only
+	FpvSubtotalVnd    *int64  `protobuf:"varint,35,opt,name=fpv_subtotal_vnd,json=fpvSubtotalVnd" json:"fpv_subtotal_vnd,omitempty"`            // read only
 	// optional int64 fpv_promotion_vnd = 36; // read only
 	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
 	// optional int64 fpv_referrer_commission_vnd = 36; // hidden
@@ -1295,7 +1287,6 @@ type Invoice struct {
 	PaymentNum        *string       `protobuf:"bytes,45,opt,name=payment_num,json=paymentNum" json:"payment_num,omitempty"`
 	AutoGenerated     *bool         `protobuf:"varint,46,opt,name=auto_generated,json=autoGenerated" json:"auto_generated,omitempty"`
 	Sub               *Subscription `protobuf:"bytes,50,opt,name=sub" json:"sub,omitempty"`
-	FpvRefcomUsd      *int64        `protobuf:"varint,52,opt,name=fpv_refcom_usd,json=fpvRefcomUsd" json:"fpv_refcom_usd,omitempty"`
 	FpvRefcomVnd      *int64        `protobuf:"varint,53,opt,name=fpv_refcom_vnd,json=fpvRefcomVnd" json:"fpv_refcom_vnd,omitempty"` // read only
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -1450,13 +1441,6 @@ func (x *Invoice) GetCurrentSub() *Subscription {
 	return nil
 }
 
-func (x *Invoice) GetCreditId() string {
-	if x != nil && x.CreditId != nil {
-		return *x.CreditId
-	}
-	return ""
-}
-
 func (x *Invoice) GetCurrency() string {
 	if x != nil && x.Currency != nil {
 		return *x.Currency
@@ -1574,13 +1558,6 @@ func (x *Invoice) GetSub() *Subscription {
 		return x.Sub
 	}
 	return nil
-}
-
-func (x *Invoice) GetFpvRefcomUsd() int64 {
-	if x != nil && x.FpvRefcomUsd != nil {
-		return *x.FpvRefcomUsd
-	}
-	return 0
 }
 
 func (x *Invoice) GetFpvRefcomVnd() int64 {
@@ -3277,7 +3254,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x1efpv_marketing_credit_limit_vnd\x18< \x01(\x03R\x1afpvMarketingCreditLimitVnd\x12:\n" +
 	"\x1afpv_novat_credit_limit_usd\x18= \x01(\x03R\x16fpvNovatCreditLimitUsd\x12\x12\n" +
 	"\x04note\x188 \x01(\tR\x04note\x120\n" +
-	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\"\x9a\x06\n" +
+	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\"\xf3\x05\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
@@ -3302,8 +3279,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x0efpv_amount_usd\x18\x18 \x01(\x03R\ffpvAmountUsd\x12=\n" +
 	"\x1bfpv_referrer_commission_vnd\x18$ \x01(\x03R\x18fpvReferrerCommissionVnd\x12*\n" +
 	"\x11referrer_agent_id\x18% \x01(\tR\x0freferrerAgentId\x12=\n" +
-	"\x1bfpv_referrer_commission_usd\x18& \x01(\x03R\x18fpvReferrerCommissionUsd\x12%\n" +
-	"\x0epromotion_code\x18' \x01(\tR\rpromotionCode\"n\n" +
+	"\x1bfpv_referrer_commission_usd\x18& \x01(\x03R\x18fpvReferrerCommissionUsd\"n\n" +
 	"\x05Bills\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3325,7 +3301,7 @@ const file_payment_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1b\n" +
 	"\tcredit_id\x18\x06 \x01(\tR\bcreditId\x12#\n" +
-	"\rcompute_draft\x18\a \x01(\bR\fcomputeDraft\"\xc4\n" +
+	"\rcompute_draft\x18\a \x01(\bR\fcomputeDraft\"\x81\n" +
 	"\n" +
 	"\aInvoice\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -3348,8 +3324,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05bills\x18\x17 \x03(\tR\x05bills\x12!\n" +
 	"\fpayment_made\x18\x18 \x01(\x02R\vpaymentMade\x126\n" +
 	"\vcurrent_sub\x18\x19 \x01(\v2\x15.payment.SubscriptionR\n" +
-	"currentSub\x12\x1b\n" +
-	"\tcredit_id\x18\x1b \x01(\tR\bcreditId\x12\x1a\n" +
+	"currentSub\x12\x1a\n" +
 	"\bcurrency\x18\x1c \x01(\tR\bcurrency\x12\"\n" +
 	"\rfpv_total_vnd\x18\x1d \x01(\x03R\vfpvTotalVnd\x12/\n" +
 	"\x14fpv_payment_made_vnd\x18\x1e \x01(\x03R\x11fpvPaymentMadeVnd\x12\x1a\n" +
@@ -3369,7 +3344,6 @@ const file_payment_proto_rawDesc = "" +
 	"paymentNum\x12%\n" +
 	"\x0eauto_generated\x18. \x01(\bR\rautoGenerated\x12'\n" +
 	"\x03sub\x182 \x01(\v2\x15.payment.SubscriptionR\x03sub\x12$\n" +
-	"\x0efpv_refcom_usd\x184 \x01(\x03R\ffpvRefcomUsd\x12$\n" +
 	"\x0efpv_refcom_vnd\x185 \x01(\x03R\ffpvRefcomVnd\"=\n" +
 	"\x05State\x12\t\n" +
 	"\x05draft\x10\x00\x12\v\n" +
