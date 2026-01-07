@@ -62721,9 +62721,10 @@ type AIAgent struct {
 	AvatarUrl             string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	Brand                 string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
 	BrandDescription      string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
-	BrandCategory         string                 `protobuf:"bytes,13,opt,name=brand_category,json=brandCategory,proto3" json:"brand_category,omitempty"` // @readonly generated from brand and brand description
-	JobTitle              string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`                // customer_support, sale
-	Tone                  string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                                        // casual, friendly, professional
+	BrandCategory         string                 `protobuf:"bytes,13,opt,name=brand_category,json=brandCategory,proto3" json:"brand_category,omitempty"`             // @readonly generated from brand and brand description
+	JobTitle              string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`                            // customer_support, sale
+	Tone                  string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                                                    // casual, friendly, professional
+	SourceAttribution     string                 `protobuf:"bytes,14,opt,name=source_attribution,json=sourceAttribution,proto3" json:"source_attribution,omitempty"` // unlikely | empty=neutral | likely
 	Guardrails            []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
 	Created               int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
 	CreatedBy             string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
@@ -62899,6 +62900,13 @@ func (x *AIAgent) GetJobTitle() string {
 func (x *AIAgent) GetTone() string {
 	if x != nil {
 		return x.Tone
+	}
+	return ""
+}
+
+func (x *AIAgent) GetSourceAttribution() string {
+	if x != nil {
+		return x.SourceAttribution
 	}
 	return ""
 }
@@ -78701,7 +78709,7 @@ const file_header_proto_rawDesc = "" +
 	"\x16welcome_message_prompt\x18\x15 \x01(\tR\x14welcomeMessagePrompt\x12I\n" +
 	"\x18welcome_message_triggers\x18\x16 \x03(\v2\x0f.header.TriggerR\x16welcomeMessageTriggers\x12*\n" +
 	"\bai_agent\x18\x17 \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12\x19\n" +
-	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\x86\x16\n" +
+	"\brun_once\x18\x18 \x01(\bR\arunOnce\"\xb5\x16\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -78717,7 +78725,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\x10brandDescription\x12%\n" +
 	"\x0ebrand_category\x18\r \x01(\tR\rbrandCategory\x12\x1b\n" +
 	"\tjob_title\x18\v \x01(\tR\bjobTitle\x12\x12\n" +
-	"\x04tone\x18\f \x01(\tR\x04tone\x128\n" +
+	"\x04tone\x18\f \x01(\tR\x04tone\x12-\n" +
+	"\x12source_attribution\x18\x0e \x01(\tR\x11sourceAttribution\x128\n" +
 	"\n" +
 	"guardrails\x18\b \x03(\v2\x18.header.AIAgentGuardrailR\n" +
 	"guardrails\x12\x18\n" +

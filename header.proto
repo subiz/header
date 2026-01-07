@@ -8958,6 +8958,8 @@ message AIAgent {
 	string job_title = 11; // customer_support, sale
 	string tone = 12; // casual, friendly, professional
 
+	string source_attribution = 14; // unlikely | empty=neutral | likely
+
 	repeated AIAgentGuardrail guardrails = 8;
 
 	int64 created = 17;
