@@ -377,7 +377,7 @@ message String {
 
 message PayRequest {
 	optional common.Context ctx = 1;
-	optional string credit_id = 3;
+	// optional string credit_id = 3;
 	optional string account_id = 8;
 	repeated string invoice_ids = 6;
 	optional string description = 7;
@@ -393,6 +393,9 @@ message PayRequest {
 
 	optional string payment_method = 18;
 	optional string promotion_code = 21;
+
+	optional Subscription subscription = 22; // for purchasing new
+	optional Invoice invoice = 23; // for marketing and novat only
 }
 
 message InvoiceCreatedEmail {

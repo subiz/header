@@ -1054,7 +1054,6 @@ type Limit struct {
 	MaxSegments         int64                  `protobuf:"varint,34,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
 	MaxAutomations      int64                  `protobuf:"varint,35,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
 	UseAutomation       int64                  `protobuf:"varint,36,opt,name=use_automation,json=useAutomation,proto3" json:"use_automation,omitempty"`
-	UseCampaign         int64                  `protobuf:"varint,37,opt,name=use_campaign,json=useCampaign,proto3" json:"use_campaign,omitempty"`
 	UseChatbotAi        int64                  `protobuf:"varint,38,opt,name=use_chatbot_ai,json=useChatbotAi,proto3" json:"use_chatbot_ai,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1209,13 +1208,6 @@ func (x *Limit) GetUseAutomation() int64 {
 	return 0
 }
 
-func (x *Limit) GetUseCampaign() int64 {
-	if x != nil {
-		return x.UseCampaign
-	}
-	return 0
-}
-
 func (x *Limit) GetUseChatbotAi() int64 {
 	if x != nil {
 		return x.UseChatbotAi
@@ -1341,7 +1333,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\xc2\x05\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\x9f\x05\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1363,8 +1355,7 @@ const file_common_proto_rawDesc = "" +
 	"max_agents\x18! \x01(\x03R\tmaxAgents\x12!\n" +
 	"\fmax_segments\x18\" \x01(\x03R\vmaxSegments\x12'\n" +
 	"\x0fmax_automations\x18# \x01(\x03R\x0emaxAutomations\x12%\n" +
-	"\x0euse_automation\x18$ \x01(\x03R\ruseAutomation\x12!\n" +
-	"\fuse_campaign\x18% \x01(\x03R\vuseCampaign\x12$\n" +
+	"\x0euse_automation\x18$ \x01(\x03R\ruseAutomation\x12$\n" +
 	"\x0euse_chatbot_ai\x18& \x01(\x03R\fuseChatbotAi*d\n" +
 	"\x04Type\x12\v\n" +
 	"\aunknown\x10\x00\x12\b\n" +

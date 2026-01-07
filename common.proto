@@ -178,6 +178,5 @@ message Limit {
 	int64 max_automations = 35;
 
 	int64 use_automation = 36;
-	int64 use_campaign = 37;
 	int64 use_chatbot_ai = 38;
 }
