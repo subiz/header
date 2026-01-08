@@ -194,6 +194,7 @@ func (Device_SourceType) EnumDescriptor() ([]byte, []int) {
 
 type Context struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
+	AccountId  string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Credential *Credential            `protobuf:"bytes,6,opt,name=credential,proto3" json:"credential,omitempty"`
 	ByDevice   *Device                `protobuf:"bytes,10,opt,name=by_device,json=byDevice,proto3" json:"by_device,omitempty"`
 	// list of used fields in the object
@@ -235,6 +236,13 @@ func (x *Context) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Context.ProtoReflect.Descriptor instead.
 func (*Context) Descriptor() ([]byte, []int) {
 	return file_common_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Context) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *Context) GetCredential() *Credential {
@@ -741,12 +749,12 @@ func (x *PackedDevice) GetUtm() *PackedSessionCampaign {
 }
 
 type Credential struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // @deprecated
-	Issuer    string                 `protobuf:"bytes,3,opt,name=issuer,proto3" json:"issuer,omitempty"`
-	Type      Type                   `protobuf:"varint,4,opt,name=type,proto3,enum=common.Type" json:"type,omitempty"` // should be agent, user or connector
-	ClientId  string                 `protobuf:"bytes,7,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	Scopes    []string               `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// string account_id = 1; // @deprecated
+	Issuer   string   `protobuf:"bytes,3,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	Type     Type     `protobuf:"varint,4,opt,name=type,proto3,enum=common.Type" json:"type,omitempty"` // should be agent, user or connector
+	ClientId string   `protobuf:"bytes,7,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	Scopes   []string `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
 	// for x-signed-key
 	SignedObjects []string `protobuf:"bytes,9,rep,name=signed_objects,json=signedObjects,proto3" json:"signed_objects,omitempty"`
 	SignedType    string   `protobuf:"bytes,10,opt,name=signed_type,json=signedType,proto3" json:"signed_type,omitempty"`
@@ -788,13 +796,6 @@ func (x *Credential) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Credential.ProtoReflect.Descriptor instead.
 func (*Credential) Descriptor() ([]byte, []int) {
 	return file_common_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *Credential) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
 }
 
 func (x *Credential) GetIssuer() string {
@@ -1226,8 +1227,10 @@ var File_common_proto protoreflect.FileDescriptor
 
 const file_common_proto_rawDesc = "" +
 	"\n" +
-	"\fcommon.proto\x12\x06common\"\x9e\x02\n" +
-	"\aContext\x122\n" +
+	"\fcommon.proto\x12\x06common\"\xbd\x02\n" +
+	"\aContext\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x122\n" +
 	"\n" +
 	"credential\x18\x06 \x01(\v2\x12.common.CredentialR\n" +
 	"credential\x12+\n" +
@@ -1308,11 +1311,9 @@ const file_common_proto_rawDesc = "" +
 	"\vads_network\x18\x0f \x01(\x03R\n" +
 	"adsNetwork\x12\x16\n" +
 	"\x06source\x18\x10 \x01(\x05R\x06source\x12/\n" +
-	"\x03utm\x18\x11 \x01(\v2\x1d.common.PackedSessionCampaignR\x03utm\"\x8e\x03\n" +
+	"\x03utm\x18\x11 \x01(\v2\x1d.common.PackedSessionCampaignR\x03utm\"\xef\x02\n" +
 	"\n" +
-	"Credential\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\x12\x16\n" +
+	"Credential\x12\x16\n" +
 	"\x06issuer\x18\x03 \x01(\tR\x06issuer\x12 \n" +
 	"\x04type\x18\x04 \x01(\x0e2\f.common.TypeR\x04type\x12\x1b\n" +
 	"\tclient_id\x18\a \x01(\tR\bclientId\x12\x16\n" +

@@ -586,7 +586,7 @@ func GetAccountId(ctx context.Context, message interface{}) string {
 	}
 
 	if accid == "" {
-		accid = FromGrpcCtx(ctx).GetCredential().GetAccountId()
+		accid = FromGrpcCtx(ctx).GetAccountId()
 	}
 
 	return accid
@@ -741,6 +741,7 @@ func isNormalService(target string) bool {
 		strings.Contains(target, "counter") ||
 		strings.Contains(target, "email") ||
 		strings.Contains(target, "fabikon") ||
+		strings.Contains(target, "zaloperson") ||
 		strings.Contains(target, "googlekon") ||
 		strings.Contains(target, "zalokon") ||
 		strings.Contains(target, "mailkon") ||

@@ -5,6 +5,7 @@ package common;
 option go_package = "github.com/subiz/header/common";
 
 message Context {
+	string account_id = 2;
 	Credential credential = 6;
 	Device by_device = 10;
 
@@ -17,6 +18,7 @@ message Context {
 
 	string trace_id = 25;
 	string span_id = 26;
+
 }
 
 message Uint128 {
@@ -104,7 +106,7 @@ message PackedDevice {
 }
 
 message Credential {
-	string account_id = 1; // @deprecated
+	// string account_id = 1; // @deprecated
 	string issuer = 3;
 	Type type = 4; // should be agent, user or connector
 	string client_id = 7;
