@@ -2053,7 +2053,6 @@ const (
 	AccountMgr_SendGHNAffiliateOTP_FullMethodName             = "/header.AccountMgr/SendGHNAffiliateOTP"
 	AccountMgr_EnterGHNAffiliateOTP_FullMethodName            = "/header.AccountMgr/EnterGHNAffiliateOTP"
 	AccountMgr_UpdateAgentPresence_FullMethodName             = "/header.AccountMgr/UpdateAgentPresence"
-	AccountMgr_ListAgentPresences_FullMethodName              = "/header.AccountMgr/ListAgentPresences"
 	AccountMgr_ListAgentOnlines_FullMethodName                = "/header.AccountMgr/ListAgentOnlines"
 	AccountMgr_ReportAvailibilities_FullMethodName            = "/header.AccountMgr/ReportAvailibilities"
 	AccountMgr_NewID_FullMethodName                           = "/header.AccountMgr/NewID"
@@ -2163,7 +2162,6 @@ type AccountMgrClient interface {
 	SendGHNAffiliateOTP(ctx context.Context, in *IntegratedShipping, opts ...grpc.CallOption) (*IntegratedShipping, error)
 	EnterGHNAffiliateOTP(ctx context.Context, in *IntegratedShipping, opts ...grpc.CallOption) (*IntegratedShipping, error)
 	UpdateAgentPresence(ctx context.Context, in *account.Presence, opts ...grpc.CallOption) (*account.Presence, error)
-	ListAgentPresences(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Presences, error)
 	ListAgentOnlines(ctx context.Context, in *ListAgentOnlineRequest, opts ...grpc.CallOption) (*account.Presences, error)
 	ReportAvailibilities(ctx context.Context, in *AvailibilityReportRequest, opts ...grpc.CallOption) (*ReportResponse, error)
 	NewID(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
@@ -2952,16 +2950,6 @@ func (c *accountMgrClient) UpdateAgentPresence(ctx context.Context, in *account.
 	return out, nil
 }
 
-func (c *accountMgrClient) ListAgentPresences(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Presences, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(account.Presences)
-	err := c.cc.Invoke(ctx, AccountMgr_ListAgentPresences_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *accountMgrClient) ListAgentOnlines(ctx context.Context, in *ListAgentOnlineRequest, opts ...grpc.CallOption) (*account.Presences, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(account.Presences)
@@ -3312,7 +3300,6 @@ type AccountMgrServer interface {
 	SendGHNAffiliateOTP(context.Context, *IntegratedShipping) (*IntegratedShipping, error)
 	EnterGHNAffiliateOTP(context.Context, *IntegratedShipping) (*IntegratedShipping, error)
 	UpdateAgentPresence(context.Context, *account.Presence) (*account.Presence, error)
-	ListAgentPresences(context.Context, *Id) (*account.Presences, error)
 	ListAgentOnlines(context.Context, *ListAgentOnlineRequest) (*account.Presences, error)
 	ReportAvailibilities(context.Context, *AvailibilityReportRequest) (*ReportResponse, error)
 	NewID(context.Context, *Id) (*Id, error)
@@ -3575,9 +3562,6 @@ func (UnimplementedAccountMgrServer) EnterGHNAffiliateOTP(context.Context, *Inte
 }
 func (UnimplementedAccountMgrServer) UpdateAgentPresence(context.Context, *account.Presence) (*account.Presence, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgentPresence not implemented")
-}
-func (UnimplementedAccountMgrServer) ListAgentPresences(context.Context, *Id) (*account.Presences, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAgentPresences not implemented")
 }
 func (UnimplementedAccountMgrServer) ListAgentOnlines(context.Context, *ListAgentOnlineRequest) (*account.Presences, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAgentOnlines not implemented")
@@ -5031,24 +5015,6 @@ func _AccountMgr_UpdateAgentPresence_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_ListAgentPresences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).ListAgentPresences(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_ListAgentPresences_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).ListAgentPresences(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AccountMgr_ListAgentOnlines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAgentOnlineRequest)
 	if err := dec(in); err != nil {
@@ -5841,10 +5807,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAgentPresence",
 			Handler:    _AccountMgr_UpdateAgentPresence_Handler,
-		},
-		{
-			MethodName: "ListAgentPresences",
-			Handler:    _AccountMgr_ListAgentPresences_Handler,
 		},
 		{
 			MethodName: "ListAgentOnlines",
@@ -17499,9 +17461,7 @@ const (
 	PaymentMgr_Pay_FullMethodName                  = "/header.PaymentMgr/Pay"
 	PaymentMgr_CreateInvoice_FullMethodName        = "/header.PaymentMgr/CreateInvoice"
 	PaymentMgr_UpdateInvoice_FullMethodName        = "/header.PaymentMgr/UpdateInvoice"
-	PaymentMgr_DeleteInvoice_FullMethodName        = "/header.PaymentMgr/DeleteInvoice"
 	PaymentMgr_FilterInvoices_FullMethodName       = "/header.PaymentMgr/FilterInvoices"
-	PaymentMgr_DraftInvoice_FullMethodName         = "/header.PaymentMgr/DraftInvoice"
 	PaymentMgr_DoPaidSubscription_FullMethodName   = "/header.PaymentMgr/DoPaidSubscription"
 	PaymentMgr_ListComments_FullMethodName         = "/header.PaymentMgr/ListComments"
 	PaymentMgr_AddComment_FullMethodName           = "/header.PaymentMgr/AddComment"
@@ -17528,9 +17488,7 @@ type PaymentMgrClient interface {
 	Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
 	CreateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
 	UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
-	DeleteInvoice(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error)
-	DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
 	// call when receive bank transfer
 	DoPaidSubscription(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
 	ListComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Comments, error)
@@ -17661,30 +17619,10 @@ func (c *paymentMgrClient) UpdateInvoice(ctx context.Context, in *payment.Invoic
 	return out, nil
 }
 
-func (c *paymentMgrClient) DeleteInvoice(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, PaymentMgr_DeleteInvoice_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *paymentMgrClient) FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(payment.Invoices)
 	err := c.cc.Invoke(ctx, PaymentMgr_FilterInvoices_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentMgrClient) DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(payment.Invoice)
-	err := c.cc.Invoke(ctx, PaymentMgr_DraftInvoice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -17796,9 +17734,7 @@ type PaymentMgrServer interface {
 	Pay(context.Context, *payment.PayRequest) (*payment.Bill, error)
 	CreateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
 	UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
-	DeleteInvoice(context.Context, *Id) (*Empty, error)
 	FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error)
-	DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error)
 	// call when receive bank transfer
 	DoPaidSubscription(context.Context, *payment.PayRequest) (*payment.Invoice, error)
 	ListComments(context.Context, *Id) (*payment.Comments, error)
@@ -17852,14 +17788,8 @@ func (UnimplementedPaymentMgrServer) CreateInvoice(context.Context, *payment.Inv
 func (UnimplementedPaymentMgrServer) UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
 }
-func (UnimplementedPaymentMgrServer) DeleteInvoice(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteInvoice not implemented")
-}
 func (UnimplementedPaymentMgrServer) FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FilterInvoices not implemented")
-}
-func (UnimplementedPaymentMgrServer) DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DraftInvoice not implemented")
 }
 func (UnimplementedPaymentMgrServer) DoPaidSubscription(context.Context, *payment.PayRequest) (*payment.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DoPaidSubscription not implemented")
@@ -18107,24 +18037,6 @@ func _PaymentMgr_UpdateInvoice_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentMgr_DeleteInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PaymentMgrServer).DeleteInvoice(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PaymentMgr_DeleteInvoice_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).DeleteInvoice(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _PaymentMgr_FilterInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(payment.ListInvoiceRequest)
 	if err := dec(in); err != nil {
@@ -18139,24 +18051,6 @@ func _PaymentMgr_FilterInvoices_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentMgrServer).FilterInvoices(ctx, req.(*payment.ListInvoiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PaymentMgr_DraftInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(payment.Subscription)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PaymentMgrServer).DraftInvoice(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PaymentMgr_DraftInvoice_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).DraftInvoice(ctx, req.(*payment.Subscription))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -18375,16 +18269,8 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PaymentMgr_UpdateInvoice_Handler,
 		},
 		{
-			MethodName: "DeleteInvoice",
-			Handler:    _PaymentMgr_DeleteInvoice_Handler,
-		},
-		{
 			MethodName: "FilterInvoices",
 			Handler:    _PaymentMgr_FilterInvoices_Handler,
-		},
-		{
-			MethodName: "DraftInvoice",
-			Handler:    _PaymentMgr_DraftInvoice_Handler,
 		},
 		{
 			MethodName: "DoPaidSubscription",

@@ -175,7 +175,6 @@ service AccountMgr {
 	rpc EnterGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
 
 	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);
-	rpc ListAgentPresences (Id) returns (account.Presences); // @deprecated internal only
 	rpc ListAgentOnlines (ListAgentOnlineRequest) returns (account.Presences); // internal only
 
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
@@ -201,7 +200,6 @@ service AccountMgr {
 	rpc CreateStripeCheckoutSession(header.Id) returns (header.Id);
 	rpc OnStripeEvent(header.StripeWebhookEvent) returns (header.Empty);
 	rpc LookupStripePaymentMethod(header.Id) returns (header.Response);
-	// rpc DiffSubscription(payment.DiffSubRequest) returns (payment.Invoice); // @deprecated
 
 	rpc AddBankAccount(header.BankAccount) returns (Response);
 	rpc UpdateBankAccount(header.BankAccount) returns (Response);
@@ -643,10 +641,8 @@ service PaymentMgr {
 	rpc Pay(payment.PayRequest) returns (payment.Bill);
 	rpc CreateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc UpdateInvoice(payment.Invoice) returns (payment.Invoice);
-	rpc DeleteInvoice(Id) returns (Empty); // internal only
 
 	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
-	rpc DraftInvoice(payment.Subscription) returns (payment.Invoice);
 
 	// call when receive bank transfer
 	rpc DoPaidSubscription(payment.PayRequest) returns (payment.Invoice); // upgrade and generate invoice

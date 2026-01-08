@@ -742,12 +742,11 @@ func (x *PackedDevice) GetUtm() *PackedSessionCampaign {
 
 type Credential struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
-	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AccountId string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // @deprecated
 	Issuer    string                 `protobuf:"bytes,3,opt,name=issuer,proto3" json:"issuer,omitempty"`
 	Type      Type                   `protobuf:"varint,4,opt,name=type,proto3,enum=common.Type" json:"type,omitempty"` // should be agent, user or connector
-	// Permission perm = 6;
-	ClientId string   `protobuf:"bytes,7,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	Scopes   []string `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	ClientId  string                 `protobuf:"bytes,7,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	Scopes    []string               `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
 	// for x-signed-key
 	SignedObjects []string `protobuf:"bytes,9,rep,name=signed_objects,json=signedObjects,proto3" json:"signed_objects,omitempty"`
 	SignedType    string   `protobuf:"bytes,10,opt,name=signed_type,json=signedType,proto3" json:"signed_type,omitempty"`
@@ -756,6 +755,7 @@ type Credential struct {
 	AgentAccessTokenId string `protobuf:"bytes,12,opt,name=agent_access_token_id,json=agentAccessTokenId,proto3" json:"agent_access_token_id,omitempty"`
 	Inspect            bool   `protobuf:"varint,13,opt,name=inspect,proto3" json:"inspect,omitempty"`
 	ClientType         string `protobuf:"bytes,14,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"` // dashboard, widget, bot id
+	AdminRole          string `protobuf:"bytes,15,opt,name=admin_role,json=adminRole,proto3" json:"admin_role,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -863,6 +863,13 @@ func (x *Credential) GetInspect() bool {
 func (x *Credential) GetClientType() string {
 	if x != nil {
 		return x.ClientType
+	}
+	return ""
+}
+
+func (x *Credential) GetAdminRole() string {
+	if x != nil {
+		return x.AdminRole
 	}
 	return ""
 }
@@ -1301,7 +1308,7 @@ const file_common_proto_rawDesc = "" +
 	"\vads_network\x18\x0f \x01(\x03R\n" +
 	"adsNetwork\x12\x16\n" +
 	"\x06source\x18\x10 \x01(\x05R\x06source\x12/\n" +
-	"\x03utm\x18\x11 \x01(\v2\x1d.common.PackedSessionCampaignR\x03utm\"\xef\x02\n" +
+	"\x03utm\x18\x11 \x01(\v2\x1d.common.PackedSessionCampaignR\x03utm\"\x8e\x03\n" +
 	"\n" +
 	"Credential\x12\x1d\n" +
 	"\n" +
@@ -1319,7 +1326,9 @@ const file_common_proto_rawDesc = "" +
 	"\x15agent_access_token_id\x18\f \x01(\tR\x12agentAccessTokenId\x12\x18\n" +
 	"\ainspect\x18\r \x01(\bR\ainspect\x12\x1f\n" +
 	"\vclient_type\x18\x0e \x01(\tR\n" +
-	"clientType\"\x93\x01\n" +
+	"clientType\x12\x1d\n" +
+	"\n" +
+	"admin_role\x18\x0f \x01(\tR\tadminRole\"\x93\x01\n" +
 	"\x0fSessionCampaign\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
 	"\x06source\x18\x03 \x01(\tR\x06source\x12\x16\n" +

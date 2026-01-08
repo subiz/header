@@ -152,6 +152,6 @@
   },
   "segment_manager": {
     "scope": "segment_member",
-    "perm": { "segment": "update" }
+    "perm": { "segment":  "update" }
   }
 }

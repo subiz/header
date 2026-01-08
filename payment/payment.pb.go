@@ -782,9 +782,9 @@ type Bill struct {
 	Created    *int64   `protobuf:"varint,7,opt,name=created" json:"created,omitempty"`
 	// optional Contact customer_info = 8;
 	PaymentMethod *string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"` // auto
-	Year          *int32  `protobuf:"varint,11,opt,name=year" json:"year,omitempty"`
-	Description   *string `protobuf:"bytes,12,opt,name=description" json:"description,omitempty"`
-	CreditId      *string `protobuf:"bytes,15,opt,name=credit_id,json=creditId" json:"credit_id,omitempty"`
+	// optional int32 year = 11;
+	Description *string `protobuf:"bytes,12,opt,name=description" json:"description,omitempty"`
+	// optional string credit_id = 15;
 	// optional string status = 16;
 	Currency                 *string `protobuf:"bytes,17,opt,name=currency" json:"currency,omitempty"` // VND, USD
 	OriginalBankTransferNote *string `protobuf:"bytes,18,opt,name=original_bank_transfer_note,json=originalBankTransferNote" json:"original_bank_transfer_note,omitempty"`
@@ -873,23 +873,9 @@ func (x *Bill) GetPaymentMethod() string {
 	return ""
 }
 
-func (x *Bill) GetYear() int32 {
-	if x != nil && x.Year != nil {
-		return *x.Year
-	}
-	return 0
-}
-
 func (x *Bill) GetDescription() string {
 	if x != nil && x.Description != nil {
 		return *x.Description
-	}
-	return ""
-}
-
-func (x *Bill) GetCreditId() string {
-	if x != nil && x.CreditId != nil {
-		return *x.CreditId
 	}
 	return ""
 }
@@ -3254,7 +3240,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x19fpv_marketing_balance_vnd\x18; \x01(\x03R\x16fpvMarketingBalanceVnd\x12\x12\n" +
 	"\x04note\x188 \x01(\tR\x04note\x120\n" +
 	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\x12.\n" +
-	"\x13auto_renew_disabled\x18> \x01(\x03R\x11autoRenewDisabled\"\xf3\x05\n" +
+	"\x13auto_renew_disabled\x18> \x01(\x03R\x11autoRenewDisabled\"\xc2\x05\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
@@ -3264,10 +3250,8 @@ const file_payment_proto_rawDesc = "" +
 	"invoiceIds\x12\x18\n" +
 	"\acreated\x18\a \x01(\x03R\acreated\x12%\n" +
 	"\x0epayment_method\x18\n" +
-	" \x01(\tR\rpaymentMethod\x12\x12\n" +
-	"\x04year\x18\v \x01(\x05R\x04year\x12 \n" +
-	"\vdescription\x18\f \x01(\tR\vdescription\x12\x1b\n" +
-	"\tcredit_id\x18\x0f \x01(\tR\bcreditId\x12\x1a\n" +
+	" \x01(\tR\rpaymentMethod\x12 \n" +
+	"\vdescription\x18\f \x01(\tR\vdescription\x12\x1a\n" +
 	"\bcurrency\x18\x11 \x01(\tR\bcurrency\x12=\n" +
 	"\x1boriginal_bank_transfer_note\x18\x12 \x01(\tR\x18originalBankTransferNote\x12,\n" +
 	"\x12bank_transfer_note\x18\x13 \x01(\tR\x10bankTransferNote\x12$\n" +

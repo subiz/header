@@ -106,10 +106,10 @@ message Bill {
 	optional int64 created = 7;
 	// optional Contact customer_info = 8;
 	optional string payment_method = 10; // auto
-	optional int32 year = 11;
+	// optional int32 year = 11;
 	optional string description = 12;
 
-	optional string credit_id = 15;
+	// optional string credit_id = 15;
 	// optional string status = 16;
 	optional string currency = 17; // VND, USD
 

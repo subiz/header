@@ -104,10 +104,9 @@ message PackedDevice {
 }
 
 message Credential {
-	string account_id = 1;
+	string account_id = 1; // @deprecated
 	string issuer = 3;
 	Type type = 4; // should be agent, user or connector
-	// Permission perm = 6;
 	string client_id = 7;
 	repeated string scopes = 8;
 
@@ -121,6 +120,8 @@ message Credential {
 
 	bool inspect = 13;
 	string client_type = 14; // dashboard, widget, bot id
+
+	string admin_role = 15;
 }
 
 enum Type {
