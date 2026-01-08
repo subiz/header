@@ -219,8 +219,9 @@ message BusinessHours {
 
 message SyncPublicHolidaysRequest {
 	optional common.Context ctx = 1;
-	optional string country_code = 2;
+	optional string account_id = 2;
 	optional string lang = 3;
+	optional string country_code = 4;
 }
 
 message SearchSubRequest {

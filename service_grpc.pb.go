@@ -24428,6 +24428,12 @@ const (
 	Proder_ListAllProductIds_FullMethodName          = "/header.Proder/ListAllProductIds"
 	Proder_MatchProducts_FullMethodName              = "/header.Proder/MatchProducts"
 	Proder_ImportProduct_FullMethodName              = "/header.Proder/ImportProduct"
+	Proder_ListProductCollections_FullMethodName     = "/header.Proder/ListProductCollections"
+	Proder_CreateProductCollection_FullMethodName    = "/header.Proder/CreateProductCollection"
+	Proder_GetProductCollection_FullMethodName       = "/header.Proder/GetProductCollection"
+	Proder_UpdateProductCollection_FullMethodName    = "/header.Proder/UpdateProductCollection"
+	Proder_DeleteProductCollection_FullMethodName    = "/header.Proder/DeleteProductCollection"
+	Proder_MatchProductCollections_FullMethodName    = "/header.Proder/MatchProductCollections"
 	Proder_GetProductOffer_FullMethodName            = "/header.Proder/GetProductOffer"
 	Proder_CreateProductOffer_FullMethodName         = "/header.Proder/CreateProductOffer"
 	Proder_UpdateProductOffer_FullMethodName         = "/header.Proder/UpdateProductOffer"
@@ -24511,6 +24517,12 @@ type ProderClient interface {
 	ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Ids, error)
 	MatchProducts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
+	ListProductCollections(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
+	GetProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	UpdateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
+	DeleteProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchProductCollections(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	GetProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductOffer(ctx context.Context, in *ProductOffer, opts ...grpc.CallOption) (*Response, error)
 	UpdateProductOffer(ctx context.Context, in *ProductOffer, opts ...grpc.CallOption) (*Response, error)
@@ -24663,6 +24675,66 @@ func (c *proderClient) ImportProduct(ctx context.Context, in *ImportProductReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ImportProductResponse)
 	err := c.cc.Invoke(ctx, Proder_ImportProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) ListProductCollections(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_ListProductCollections_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_CreateProductCollection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) GetProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_GetProductCollection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) UpdateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_UpdateProductCollection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) DeleteProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Proder_DeleteProductCollection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) MatchProductCollections(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_MatchProductCollections_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -25353,6 +25425,12 @@ type ProderServer interface {
 	ListAllProductIds(context.Context, *ProductsRequest) (*Ids, error)
 	MatchProducts(context.Context, *Ids) (*Response, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
+	ListProductCollections(context.Context, *Id) (*Response, error)
+	CreateProductCollection(context.Context, *ProductCollection) (*Response, error)
+	GetProductCollection(context.Context, *Id) (*Response, error)
+	UpdateProductCollection(context.Context, *ProductCollection) (*Response, error)
+	DeleteProductCollection(context.Context, *Id) (*Empty, error)
+	MatchProductCollections(context.Context, *Ids) (*Response, error)
 	GetProductOffer(context.Context, *Id) (*Response, error)
 	CreateProductOffer(context.Context, *ProductOffer) (*Response, error)
 	UpdateProductOffer(context.Context, *ProductOffer) (*Response, error)
@@ -25454,6 +25532,24 @@ func (UnimplementedProderServer) MatchProducts(context.Context, *Ids) (*Response
 }
 func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportProduct not implemented")
+}
+func (UnimplementedProderServer) ListProductCollections(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductCollections not implemented")
+}
+func (UnimplementedProderServer) CreateProductCollection(context.Context, *ProductCollection) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProductCollection not implemented")
+}
+func (UnimplementedProderServer) GetProductCollection(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductCollection not implemented")
+}
+func (UnimplementedProderServer) UpdateProductCollection(context.Context, *ProductCollection) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductCollection not implemented")
+}
+func (UnimplementedProderServer) DeleteProductCollection(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductCollection not implemented")
+}
+func (UnimplementedProderServer) MatchProductCollections(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchProductCollections not implemented")
 }
 func (UnimplementedProderServer) GetProductOffer(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProductOffer not implemented")
@@ -25817,6 +25913,114 @@ func _Proder_ImportProduct_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).ImportProduct(ctx, req.(*ImportProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_ListProductCollections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListProductCollections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListProductCollections_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListProductCollections(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_CreateProductCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductCollection)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).CreateProductCollection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_CreateProductCollection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).CreateProductCollection(ctx, req.(*ProductCollection))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_GetProductCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).GetProductCollection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_GetProductCollection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).GetProductCollection(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_UpdateProductCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductCollection)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).UpdateProductCollection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_UpdateProductCollection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).UpdateProductCollection(ctx, req.(*ProductCollection))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_DeleteProductCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).DeleteProductCollection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_DeleteProductCollection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).DeleteProductCollection(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_MatchProductCollections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).MatchProductCollections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_MatchProductCollections_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).MatchProductCollections(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -27065,6 +27269,30 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ImportProduct",
 			Handler:    _Proder_ImportProduct_Handler,
+		},
+		{
+			MethodName: "ListProductCollections",
+			Handler:    _Proder_ListProductCollections_Handler,
+		},
+		{
+			MethodName: "CreateProductCollection",
+			Handler:    _Proder_CreateProductCollection_Handler,
+		},
+		{
+			MethodName: "GetProductCollection",
+			Handler:    _Proder_GetProductCollection_Handler,
+		},
+		{
+			MethodName: "UpdateProductCollection",
+			Handler:    _Proder_UpdateProductCollection_Handler,
+		},
+		{
+			MethodName: "DeleteProductCollection",
+			Handler:    _Proder_DeleteProductCollection_Handler,
+		},
+		{
+			MethodName: "MatchProductCollections",
+			Handler:    _Proder_MatchProductCollections_Handler,
 		},
 		{
 			MethodName: "GetProductOffer",

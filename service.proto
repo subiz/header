@@ -879,6 +879,13 @@ service Proder {
 	rpc MatchProducts(Ids) returns (Response);
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
+	rpc ListProductCollections(Id) returns (Response);
+	rpc CreateProductCollection(ProductCollection) returns (Response);
+	rpc GetProductCollection(header.Id) returns (Response);
+	rpc UpdateProductCollection(ProductCollection) returns (Response);
+	rpc DeleteProductCollection(Id) returns (Empty);
+	rpc MatchProductCollections(Ids) returns (header.Response);
+
 	rpc GetProductOffer(header.Id) returns (header.Response);
 	rpc CreateProductOffer(header.ProductOffer) returns (header.Response);
 	rpc UpdateProductOffer(header.ProductOffer) returns (header.Response);

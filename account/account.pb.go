@@ -1490,8 +1490,9 @@ func (x *BusinessHours) GetHolidays() []*BusinessHours_Holiday {
 type SyncPublicHolidaysRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	CountryCode   *string                `protobuf:"bytes,2,opt,name=country_code,json=countryCode" json:"country_code,omitempty"`
+	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	Lang          *string                `protobuf:"bytes,3,opt,name=lang" json:"lang,omitempty"`
+	CountryCode   *string                `protobuf:"bytes,4,opt,name=country_code,json=countryCode" json:"country_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1533,9 +1534,9 @@ func (x *SyncPublicHolidaysRequest) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *SyncPublicHolidaysRequest) GetCountryCode() string {
-	if x != nil && x.CountryCode != nil {
-		return *x.CountryCode
+func (x *SyncPublicHolidaysRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
 	}
 	return ""
 }
@@ -1543,6 +1544,13 @@ func (x *SyncPublicHolidaysRequest) GetCountryCode() string {
 func (x *SyncPublicHolidaysRequest) GetLang() string {
 	if x != nil && x.Lang != nil {
 		return *x.Lang
+	}
+	return ""
+}
+
+func (x *SyncPublicHolidaysRequest) GetCountryCode() string {
+	if x != nil && x.CountryCode != nil {
+		return *x.CountryCode
 	}
 	return ""
 }
@@ -3032,11 +3040,13 @@ const file_account_proto_rawDesc = "" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\tR\tstartTime\x12\x19\n" +
-	"\bend_time\x18\a \x01(\tR\aendTime\"u\n" +
+	"\bend_time\x18\a \x01(\tR\aendTime\"\x94\x01\n" +
 	"\x19SyncPublicHolidaysRequest\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12!\n" +
-	"\fcountry_code\x18\x02 \x01(\tR\vcountryCode\x12\x12\n" +
-	"\x04lang\x18\x03 \x01(\tR\x04lang\"\xdd\x01\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x12\n" +
+	"\x04lang\x18\x03 \x01(\tR\x04lang\x12!\n" +
+	"\fcountry_code\x18\x04 \x01(\tR\vcountryCode\"\xdd\x01\n" +
 	"\x10SearchSubRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x14\n" +
 	"\x05query\x18\x04 \x01(\tR\x05query\x12\x16\n" +

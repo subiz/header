@@ -728,7 +728,8 @@ message Data {
 	LoginSession login_session = 57;
 	ProductFeed product_feed = 58;
 
-	// ProductCollection product_collection = 59;
+	ProductCollection product_collection = 59;
+
 	Order order = 60;
 	Currency currency = 61;
 	ShopSetting shop_setting = 62;
@@ -4330,6 +4331,7 @@ message GHTKOrder {
 }
 
 message ShippingInfo {
+	string account_id = 2;
 	Address address = 5;
 	Address pickup_address = 4;
 
@@ -4532,6 +4534,7 @@ message OrderMetric {
 
 message Orders {
 	common.Context ctx = 1;
+	string account_id = 2;
 
 	repeated OrderMetric metrics = 3;
 	repeated Order orders = 4;
@@ -5114,7 +5117,7 @@ message ProductsRequest {
 	string visibility = 11; // published or hidden
 	repeated string ids = 12;
 	repeated int64 last_modifieds = 14; // ms
-	// repeated string product_collection_ids = 15;
+	repeated string product_collection_ids = 15;
 
 	bool include_deleted = 17;
 
@@ -5291,6 +5294,7 @@ message SubstringIndex {
 }
 
 message PipelineStage {
+	string account_id = 2;
 	string pipeline = 20;
 	string id = 3; // gen by client
 	int64 created = 5;
@@ -5387,7 +5391,8 @@ message ImportLeadResponse {
 
 message ImportProductRequest {
 	common.Context ctx = 1;
-	repeated Product products = 2;
+	string account_id = 2;
+	repeated Product products = 3;
 	bool dry_run = 5; // true to preview
 }
 
@@ -7030,6 +7035,8 @@ message Response {
 
 	ProductOffer product_offer = 210;
 	repeated ProductOffer product_offers = 211;
+	ProductCollection product_collection = 212;
+	repeated ProductCollection product_collections = 213;
 
 	repeated Address addresses = 222;
 
@@ -7071,6 +7078,22 @@ message ReportCount {
 	string type = 7;
 	repeated int64 datapoints = 8;
 	repeated string labels = 9;
+}
+
+message ProductCollection {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // use
+	string name = 4;
+	string visiblity = 5; // public || unpublished
+	// string code = 6;
+	repeated string product_ids = 7;  // product ids
+
+	int64 created = 11;
+	string created_by = 12;
+
+	int64 updated = 13;
+	string updated_by = 14;
 }
 
 message ZaloCallConsent {
