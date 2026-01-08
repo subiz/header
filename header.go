@@ -736,7 +736,6 @@ const WEBHOOK ObjectType = "webhook"
 const SLA_POLICY ObjectType = "sla_policy"
 const KNOWLEGE_BASE ObjectType = "knowledge_base"
 const ARTICLE ObjectType = "article"
-const ACCMGR ObjectType = "accmgr"
 const REPORT ObjectType = "report"
 
 func CalcTotalOrder(order *Order) {

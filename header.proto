@@ -7165,7 +7165,7 @@ message WorkflowSession {
 	string status = 13; // creating, running, waiting, ended, error
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
-	map<string, WorkflowThread> threads = 18; // thread id -> term, remove after 10 June, 2025
+	// map<string, WorkflowThread> threads = 18; // thread id -> term, remove after 10 June, 2025
 	string obj_id = 17; // for this obj
 
 	int64 last_error_at = 19;

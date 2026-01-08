@@ -134,8 +134,7 @@
   },
   "owner": { "scope": "account_manage account_setting" },
   "subiz": {
-    "scope": "account_manage account_setting",
-    "perm": { "accmgr": "read update" }
+    "scope": "account_manage account_setting"
   },
   "all": { "scope": "subiz" },
   "ticket_type_member": {
@@ -152,6 +151,6 @@
   },
   "segment_manager": {
     "scope": "segment_member",
-    "perm": { "segment":  "update" }
+    "perm": { "segment": "update" }
   }
 }
