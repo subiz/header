@@ -2792,7 +2792,8 @@ func (x *SearchLocationsRequest) GetLimit() int64 {
 type RecentIndexDeliveryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	WebhookId     string                 `protobuf:"bytes,2,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WebhookId     string                 `protobuf:"bytes,4,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`
 	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2835,6 +2836,13 @@ func (x *RecentIndexDeliveryRequest) GetCtx() *common.Context {
 	return nil
 }
 
+func (x *RecentIndexDeliveryRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
 func (x *RecentIndexDeliveryRequest) GetWebhookId() string {
 	if x != nil {
 		return x.WebhookId
@@ -2852,7 +2860,8 @@ func (x *RecentIndexDeliveryRequest) GetLimit() int32 {
 type DeliveryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	WebhookId     string                 `protobuf:"bytes,2,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WebhookId     string                 `protobuf:"bytes,4,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`
 	Id            int32                  `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2893,6 +2902,13 @@ func (x *DeliveryRequest) GetCtx() *common.Context {
 		return x.Ctx
 	}
 	return nil
+}
+
+func (x *DeliveryRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *DeliveryRequest) GetWebhookId() string {
@@ -8863,16 +8879,20 @@ const file_request_proto_rawDesc = "" +
 	"\x16SearchLocationsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x14\n" +
 	"\x05query\x18\x02 \x01(\tR\x05query\x12\x14\n" +
-	"\x05limit\x18\x04 \x01(\x03R\x05limit\"t\n" +
+	"\x05limit\x18\x04 \x01(\x03R\x05limit\"\x93\x01\n" +
 	"\x1aRecentIndexDeliveryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
-	"webhook_id\x18\x02 \x01(\tR\twebhookId\x12\x14\n" +
-	"\x05limit\x18\x03 \x01(\x05R\x05limit\"c\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1d\n" +
+	"\n" +
+	"webhook_id\x18\x04 \x01(\tR\twebhookId\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x05R\x05limit\"\x82\x01\n" +
 	"\x0fDeliveryRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
-	"webhook_id\x18\x02 \x01(\tR\twebhookId\x12\x0e\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1d\n" +
+	"\n" +
+	"webhook_id\x18\x04 \x01(\tR\twebhookId\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\x05R\x02id\"\xfe\x02\n" +
 	"\rSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
