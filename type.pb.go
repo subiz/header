@@ -108,6 +108,8 @@ const (
 	RealtimeType_rule_deleted                       RealtimeType = 124
 	RealtimeType_ticket_rule_updated                RealtimeType = 125
 	RealtimeType_ticket_rule_deleted                RealtimeType = 126
+	RealtimeType_product_collection_updated         RealtimeType = 128
+	RealtimeType_product_collection_deleted         RealtimeType = 129
 	RealtimeType_product_updated                    RealtimeType = 130
 	RealtimeType_product_deleted                    RealtimeType = 131
 	RealtimeType_product_feed_updated               RealtimeType = 132
@@ -360,6 +362,8 @@ var (
 		124: "rule_deleted",
 		125: "ticket_rule_updated",
 		126: "ticket_rule_deleted",
+		128: "product_collection_updated",
+		129: "product_collection_deleted",
 		130: "product_updated",
 		131: "product_deleted",
 		132: "product_feed_updated",
@@ -608,6 +612,8 @@ var (
 		"rule_deleted":                       124,
 		"ticket_rule_updated":                125,
 		"ticket_rule_deleted":                126,
+		"product_collection_updated":         128,
+		"product_collection_deleted":         129,
 		"product_updated":                    130,
 		"product_deleted":                    131,
 		"product_feed_updated":               132,
@@ -1766,7 +1772,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\x94/\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xd6/\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1850,7 +1856,9 @@ const file_type_proto_rawDesc = "" +
 	"\frule_updated\x10{\x12\x10\n" +
 	"\frule_deleted\x10|\x12\x17\n" +
 	"\x13ticket_rule_updated\x10}\x12\x17\n" +
-	"\x13ticket_rule_deleted\x10~\x12\x14\n" +
+	"\x13ticket_rule_deleted\x10~\x12\x1f\n" +
+	"\x1aproduct_collection_updated\x10\x80\x01\x12\x1f\n" +
+	"\x1aproduct_collection_deleted\x10\x81\x01\x12\x14\n" +
 	"\x0fproduct_updated\x10\x82\x01\x12\x14\n" +
 	"\x0fproduct_deleted\x10\x83\x01\x12\x19\n" +
 	"\x14product_feed_updated\x10\x84\x01\x12\x19\n" +

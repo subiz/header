@@ -5800,7 +5800,8 @@ message TextToSpeech {
 }
 
 message TTSVoiceSelection {
-	string text = 2; // derived
+	string account_id = 2;
+	string text = 9; // derived
 	string language_code = 3;
 	int32 ssml_gender = 4;
 	string name = 5;
@@ -6789,11 +6790,13 @@ message ActionSendTranscript {
 }
 
 message RunWorkflowActionRequest {
-	WorkflowAction action = 1;
-	User user = 2;
-	Conversation convo = 3;
-	Order order = 4;
-	Ticket ticket = 5;
+	string account_id = 2;
+	WorkflowAction action = 3;
+
+	User user = 4;
+	Conversation convo = 5;
+	Order order = 6;
+	Ticket ticket = 7;
 }
 
 message ActionSendHttpReq {
@@ -8700,6 +8703,8 @@ message StripeWebhookEvent {
 }
 
 message WorkflowPulse {
+	string account_id = 2;
+
 	string workflow_id = 6;
 	int64 term = 7;
 	string session_id = 8;

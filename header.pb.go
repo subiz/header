@@ -40939,7 +40939,8 @@ func (x *TextToSpeech) GetSpeeches() []*TTSVoiceSelection {
 
 type TTSVoiceSelection struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Text            string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"` // derived
+	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Text            string                 `protobuf:"bytes,9,opt,name=text,proto3" json:"text,omitempty"` // derived
 	LanguageCode    string                 `protobuf:"bytes,3,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
 	SsmlGender      int32                  `protobuf:"varint,4,opt,name=ssml_gender,json=ssmlGender,proto3" json:"ssml_gender,omitempty"`
 	Name            string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
@@ -40978,6 +40979,13 @@ func (x *TTSVoiceSelection) ProtoReflect() protoreflect.Message {
 // Deprecated: Use TTSVoiceSelection.ProtoReflect.Descriptor instead.
 func (*TTSVoiceSelection) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{322}
+}
+
+func (x *TTSVoiceSelection) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *TTSVoiceSelection) GetText() string {
@@ -47437,11 +47445,12 @@ func (x *ActionSendTranscript) GetTosEmail() []string {
 
 type RunWorkflowActionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Action        *WorkflowAction        `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
-	Convo         *Conversation          `protobuf:"bytes,3,opt,name=convo,proto3" json:"convo,omitempty"`
-	Order         *Order                 `protobuf:"bytes,4,opt,name=order,proto3" json:"order,omitempty"`
-	Ticket        *Ticket                `protobuf:"bytes,5,opt,name=ticket,proto3" json:"ticket,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Action        *WorkflowAction        `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
+	User          *User                  `protobuf:"bytes,4,opt,name=user,proto3" json:"user,omitempty"`
+	Convo         *Conversation          `protobuf:"bytes,5,opt,name=convo,proto3" json:"convo,omitempty"`
+	Order         *Order                 `protobuf:"bytes,6,opt,name=order,proto3" json:"order,omitempty"`
+	Ticket        *Ticket                `protobuf:"bytes,7,opt,name=ticket,proto3" json:"ticket,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -47474,6 +47483,13 @@ func (x *RunWorkflowActionRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RunWorkflowActionRequest.ProtoReflect.Descriptor instead.
 func (*RunWorkflowActionRequest) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{379}
+}
+
+func (x *RunWorkflowActionRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *RunWorkflowActionRequest) GetAction() *WorkflowAction {
@@ -60882,6 +60898,7 @@ func (x *StripeWebhookEvent) GetMode() string {
 
 type WorkflowPulse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
+	AccountId        string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	WorkflowId       string                 `protobuf:"bytes,6,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
 	Term             int64                  `protobuf:"varint,7,opt,name=term,proto3" json:"term,omitempty"`
 	SessionId        string                 `protobuf:"bytes,8,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
@@ -60923,6 +60940,13 @@ func (x *WorkflowPulse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use WorkflowPulse.ProtoReflect.Descriptor instead.
 func (*WorkflowPulse) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{482}
+}
+
+func (x *WorkflowPulse) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *WorkflowPulse) GetWorkflowId() string {
@@ -76238,9 +76262,11 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x04 \x01(\tR\taccountId\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x125\n" +
-	"\bspeeches\x18\x03 \x03(\v2\x19.header.TTSVoiceSelectionR\bspeeches\"\xf0\x01\n" +
-	"\x11TTSVoiceSelection\x12\x12\n" +
-	"\x04text\x18\x02 \x01(\tR\x04text\x12#\n" +
+	"\bspeeches\x18\x03 \x03(\v2\x19.header.TTSVoiceSelectionR\bspeeches\"\x8f\x02\n" +
+	"\x11TTSVoiceSelection\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x12\n" +
+	"\x04text\x18\t \x01(\tR\x04text\x12#\n" +
 	"\rlanguage_code\x18\x03 \x01(\tR\flanguageCode\x12\x1f\n" +
 	"\vssml_gender\x18\x04 \x01(\x05R\n" +
 	"ssmlGender\x12\x12\n" +
@@ -77019,13 +77045,15 @@ const file_header_proto_rawDesc = "" +
 	"\bwait_sec\x18\x01 \x01(\x03R\awaitSec\x127\n" +
 	"\tcondition\x18\x02 \x01(\v2\x19.header.WorkflowConditionR\tcondition\"3\n" +
 	"\x14ActionSendTranscript\x12\x1b\n" +
-	"\ttos_email\x18\x01 \x03(\tR\btosEmail\"\xe5\x01\n" +
-	"\x18RunWorkflowActionRequest\x12.\n" +
-	"\x06action\x18\x01 \x01(\v2\x16.header.WorkflowActionR\x06action\x12 \n" +
-	"\x04user\x18\x02 \x01(\v2\f.header.UserR\x04user\x12*\n" +
-	"\x05convo\x18\x03 \x01(\v2\x14.header.ConversationR\x05convo\x12#\n" +
-	"\x05order\x18\x04 \x01(\v2\r.header.OrderR\x05order\x12&\n" +
-	"\x06ticket\x18\x05 \x01(\v2\x0e.header.TicketR\x06ticket\"|\n" +
+	"\ttos_email\x18\x01 \x03(\tR\btosEmail\"\x84\x02\n" +
+	"\x18RunWorkflowActionRequest\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12.\n" +
+	"\x06action\x18\x03 \x01(\v2\x16.header.WorkflowActionR\x06action\x12 \n" +
+	"\x04user\x18\x04 \x01(\v2\f.header.UserR\x04user\x12*\n" +
+	"\x05convo\x18\x05 \x01(\v2\x14.header.ConversationR\x05convo\x12#\n" +
+	"\x05order\x18\x06 \x01(\v2\r.header.OrderR\x05order\x12&\n" +
+	"\x06ticket\x18\a \x01(\v2\x0e.header.TicketR\x06ticket\"|\n" +
 	"\x11ActionSendHttpReq\x12\x1d\n" +
 	"\n" +
 	"webhook_id\x18\x01 \x01(\tR\twebhookId\x12!\n" +
@@ -78665,8 +78693,10 @@ const file_header_proto_rawDesc = "" +
 	"\acreated\x18\x03 \x01(\x03R\acreated\x12\x12\n" +
 	"\x04body\x18\x04 \x01(\fR\x04body\x12\x1c\n" +
 	"\tsignature\x18\x05 \x01(\tR\tsignature\x12\x12\n" +
-	"\x04mode\x18\x06 \x01(\tR\x04mode\"\xaa\x02\n" +
-	"\rWorkflowPulse\x12\x1f\n" +
+	"\x04mode\x18\x06 \x01(\tR\x04mode\"\xc9\x02\n" +
+	"\rWorkflowPulse\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1f\n" +
 	"\vworkflow_id\x18\x06 \x01(\tR\n" +
 	"workflowId\x12\x12\n" +
 	"\x04term\x18\a \x01(\x03R\x04term\x12\x1d\n" +

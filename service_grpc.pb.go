@@ -2014,7 +2014,6 @@ const (
 	AccountMgr_SyncPublicHolidays_FullMethodName              = "/header.AccountMgr/SyncPublicHolidays"
 	AccountMgr_TransferOwner_FullMethodName                   = "/header.AccountMgr/TransferOwner"
 	AccountMgr_CheckLoginSession_FullMethodName               = "/header.AccountMgr/CheckLoginSession"
-	AccountMgr_CreateLoginSession_FullMethodName              = "/header.AccountMgr/CreateLoginSession"
 	AccountMgr_ListLoginSessions_FullMethodName               = "/header.AccountMgr/ListLoginSessions"
 	AccountMgr_ListApiKeys_FullMethodName                     = "/header.AccountMgr/ListApiKeys"
 	AccountMgr_LogoutSession_FullMethodName                   = "/header.AccountMgr/LogoutSession"
@@ -2122,7 +2121,6 @@ type AccountMgrClient interface {
 	SyncPublicHolidays(ctx context.Context, in *account.SyncPublicHolidaysRequest, opts ...grpc.CallOption) (*account.BusinessHours, error)
 	TransferOwner(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Agent, error)
 	CheckLoginSession(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*LoginSession, error)
-	CreateLoginSession(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSession, error)
 	ListLoginSessions(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSessions, error)
 	ListApiKeys(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSessions, error)
 	LogoutSession(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -2554,16 +2552,6 @@ func (c *accountMgrClient) CheckLoginSession(ctx context.Context, in *LoginSessi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginSession)
 	err := c.cc.Invoke(ctx, AccountMgr_CheckLoginSession_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) CreateLoginSession(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSession, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginSession)
-	err := c.cc.Invoke(ctx, AccountMgr_CreateLoginSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3260,7 +3248,6 @@ type AccountMgrServer interface {
 	SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error)
 	TransferOwner(context.Context, *Id) (*account.Agent, error)
 	CheckLoginSession(context.Context, *LoginSession) (*LoginSession, error)
-	CreateLoginSession(context.Context, *Id) (*LoginSession, error)
 	ListLoginSessions(context.Context, *Id) (*LoginSessions, error)
 	ListApiKeys(context.Context, *Id) (*LoginSessions, error)
 	LogoutSession(context.Context, *Id) (*Empty, error)
@@ -3445,9 +3432,6 @@ func (UnimplementedAccountMgrServer) TransferOwner(context.Context, *Id) (*accou
 }
 func (UnimplementedAccountMgrServer) CheckLoginSession(context.Context, *LoginSession) (*LoginSession, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckLoginSession not implemented")
-}
-func (UnimplementedAccountMgrServer) CreateLoginSession(context.Context, *Id) (*LoginSession, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateLoginSession not implemented")
 }
 func (UnimplementedAccountMgrServer) ListLoginSessions(context.Context, *Id) (*LoginSessions, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLoginSessions not implemented")
@@ -4309,24 +4293,6 @@ func _AccountMgr_CheckLoginSession_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountMgrServer).CheckLoginSession(ctx, req.(*LoginSession))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_CreateLoginSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).CreateLoginSession(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_CreateLoginSession_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).CreateLoginSession(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5651,10 +5617,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckLoginSession",
 			Handler:    _AccountMgr_CheckLoginSession_Handler,
-		},
-		{
-			MethodName: "CreateLoginSession",
-			Handler:    _AccountMgr_CreateLoginSession_Handler,
 		},
 		{
 			MethodName: "ListLoginSessions",
@@ -14520,12 +14482,12 @@ type TicketMgrClient interface {
 	UpdateTicketView(ctx context.Context, in *TicketView, opts ...grpc.CallOption) (*TicketView, error)
 	DeleteTicketView(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	GetTicketView(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketView, error)
-	ListTicketViews(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
+	ListTicketViews(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateTicketTemplate(ctx context.Context, in *TicketTemplate, opts ...grpc.CallOption) (*TicketTemplate, error)
 	UpdateTicketTemplate(ctx context.Context, in *TicketTemplate, opts ...grpc.CallOption) (*TicketTemplate, error)
 	DeleteTicketTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	GetTicketTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketTemplate, error)
-	ListTicketTemplates(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
+	ListTicketTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	PongTicketEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	TagTicket(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
 	UntagTicket(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -14543,7 +14505,7 @@ type TicketMgrClient interface {
 	CreateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*SLAPolicy, error)
 	UpdateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*SLAPolicy, error)
 	DeleteSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ListSLAPolicies(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
+	ListSLAPolicies(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	GetSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*SLAPolicy, error)
 	ListTicketSLAViolations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	RateTicket(ctx context.Context, in *Rating, opts ...grpc.CallOption) (*Response, error)
@@ -14730,7 +14692,7 @@ func (c *ticketMgrClient) GetTicketView(ctx context.Context, in *Id, opts ...grp
 	return out, nil
 }
 
-func (c *ticketMgrClient) ListTicketViews(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
+func (c *ticketMgrClient) ListTicketViews(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, TicketMgr_ListTicketViews_FullMethodName, in, out, cOpts...)
@@ -14780,7 +14742,7 @@ func (c *ticketMgrClient) GetTicketTemplate(ctx context.Context, in *Id, opts ..
 	return out, nil
 }
 
-func (c *ticketMgrClient) ListTicketTemplates(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
+func (c *ticketMgrClient) ListTicketTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, TicketMgr_ListTicketTemplates_FullMethodName, in, out, cOpts...)
@@ -14960,7 +14922,7 @@ func (c *ticketMgrClient) DeleteSLAPolicy(ctx context.Context, in *Id, opts ...g
 	return out, nil
 }
 
-func (c *ticketMgrClient) ListSLAPolicies(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
+func (c *ticketMgrClient) ListSLAPolicies(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, TicketMgr_ListSLAPolicies_FullMethodName, in, out, cOpts...)
@@ -15141,12 +15103,12 @@ type TicketMgrServer interface {
 	UpdateTicketView(context.Context, *TicketView) (*TicketView, error)
 	DeleteTicketView(context.Context, *Id) (*Empty, error)
 	GetTicketView(context.Context, *Id) (*TicketView, error)
-	ListTicketViews(context.Context, *Empty) (*Response, error)
+	ListTicketViews(context.Context, *Id) (*Response, error)
 	CreateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error)
 	UpdateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error)
 	DeleteTicketTemplate(context.Context, *Id) (*Empty, error)
 	GetTicketTemplate(context.Context, *Id) (*TicketTemplate, error)
-	ListTicketTemplates(context.Context, *Empty) (*Response, error)
+	ListTicketTemplates(context.Context, *Id) (*Response, error)
 	PongTicketEvent(context.Context, *Event) (*Event, error)
 	TagTicket(context.Context, *TagRequest) (*Empty, error)
 	UntagTicket(context.Context, *TagRequest) (*Empty, error)
@@ -15164,7 +15126,7 @@ type TicketMgrServer interface {
 	CreateSLAPolicy(context.Context, *SLAPolicy) (*SLAPolicy, error)
 	UpdateSLAPolicy(context.Context, *SLAPolicy) (*SLAPolicy, error)
 	DeleteSLAPolicy(context.Context, *Id) (*Empty, error)
-	ListSLAPolicies(context.Context, *Empty) (*Response, error)
+	ListSLAPolicies(context.Context, *Id) (*Response, error)
 	GetSLAPolicy(context.Context, *Id) (*SLAPolicy, error)
 	ListTicketSLAViolations(context.Context, *Id) (*Response, error)
 	RateTicket(context.Context, *Rating) (*Response, error)
@@ -15239,7 +15201,7 @@ func (UnimplementedTicketMgrServer) DeleteTicketView(context.Context, *Id) (*Emp
 func (UnimplementedTicketMgrServer) GetTicketView(context.Context, *Id) (*TicketView, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicketView not implemented")
 }
-func (UnimplementedTicketMgrServer) ListTicketViews(context.Context, *Empty) (*Response, error) {
+func (UnimplementedTicketMgrServer) ListTicketViews(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTicketViews not implemented")
 }
 func (UnimplementedTicketMgrServer) CreateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error) {
@@ -15254,7 +15216,7 @@ func (UnimplementedTicketMgrServer) DeleteTicketTemplate(context.Context, *Id) (
 func (UnimplementedTicketMgrServer) GetTicketTemplate(context.Context, *Id) (*TicketTemplate, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicketTemplate not implemented")
 }
-func (UnimplementedTicketMgrServer) ListTicketTemplates(context.Context, *Empty) (*Response, error) {
+func (UnimplementedTicketMgrServer) ListTicketTemplates(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTicketTemplates not implemented")
 }
 func (UnimplementedTicketMgrServer) PongTicketEvent(context.Context, *Event) (*Event, error) {
@@ -15308,7 +15270,7 @@ func (UnimplementedTicketMgrServer) UpdateSLAPolicy(context.Context, *SLAPolicy)
 func (UnimplementedTicketMgrServer) DeleteSLAPolicy(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSLAPolicy not implemented")
 }
-func (UnimplementedTicketMgrServer) ListSLAPolicies(context.Context, *Empty) (*Response, error) {
+func (UnimplementedTicketMgrServer) ListSLAPolicies(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSLAPolicies not implemented")
 }
 func (UnimplementedTicketMgrServer) GetSLAPolicy(context.Context, *Id) (*SLAPolicy, error) {
@@ -15666,7 +15628,7 @@ func _TicketMgr_GetTicketView_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _TicketMgr_ListTicketViews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -15678,7 +15640,7 @@ func _TicketMgr_ListTicketViews_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: TicketMgr_ListTicketViews_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).ListTicketViews(ctx, req.(*Empty))
+		return srv.(TicketMgrServer).ListTicketViews(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -15756,7 +15718,7 @@ func _TicketMgr_GetTicketTemplate_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _TicketMgr_ListTicketTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -15768,7 +15730,7 @@ func _TicketMgr_ListTicketTemplates_Handler(srv interface{}, ctx context.Context
 		FullMethod: TicketMgr_ListTicketTemplates_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).ListTicketTemplates(ctx, req.(*Empty))
+		return srv.(TicketMgrServer).ListTicketTemplates(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -16080,7 +16042,7 @@ func _TicketMgr_DeleteSLAPolicy_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _TicketMgr_ListSLAPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -16092,7 +16054,7 @@ func _TicketMgr_ListSLAPolicies_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: TicketMgr_ListSLAPolicies_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).ListSLAPolicies(ctx, req.(*Empty))
+		return srv.(TicketMgrServer).ListSLAPolicies(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -24429,7 +24391,7 @@ const (
 	Proder_MatchProducts_FullMethodName              = "/header.Proder/MatchProducts"
 	Proder_ImportProduct_FullMethodName              = "/header.Proder/ImportProduct"
 	Proder_ListProductCollections_FullMethodName     = "/header.Proder/ListProductCollections"
-	Proder_CreateProductCollection_FullMethodName    = "/header.Proder/CreateProductCollection"
+	Proder_CreateProductCollectin_FullMethodName     = "/header.Proder/CreateProductCollectin"
 	Proder_GetProductCollection_FullMethodName       = "/header.Proder/GetProductCollection"
 	Proder_UpdateProductCollection_FullMethodName    = "/header.Proder/UpdateProductCollection"
 	Proder_DeleteProductCollection_FullMethodName    = "/header.Proder/DeleteProductCollection"
@@ -24518,7 +24480,7 @@ type ProderClient interface {
 	MatchProducts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
 	ListProductCollections(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
+	CreateProductCollectin(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
 	GetProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
 	DeleteProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -24691,10 +24653,10 @@ func (c *proderClient) ListProductCollections(ctx context.Context, in *Id, opts 
 	return out, nil
 }
 
-func (c *proderClient) CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) CreateProductCollectin(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_CreateProductCollection_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_CreateProductCollectin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -25426,7 +25388,7 @@ type ProderServer interface {
 	MatchProducts(context.Context, *Ids) (*Response, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
 	ListProductCollections(context.Context, *Id) (*Response, error)
-	CreateProductCollection(context.Context, *ProductCollection) (*Response, error)
+	CreateProductCollectin(context.Context, *ProductCollection) (*Response, error)
 	GetProductCollection(context.Context, *Id) (*Response, error)
 	UpdateProductCollection(context.Context, *ProductCollection) (*Response, error)
 	DeleteProductCollection(context.Context, *Id) (*Empty, error)
@@ -25536,8 +25498,8 @@ func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRe
 func (UnimplementedProderServer) ListProductCollections(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCollections not implemented")
 }
-func (UnimplementedProderServer) CreateProductCollection(context.Context, *ProductCollection) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateProductCollection not implemented")
+func (UnimplementedProderServer) CreateProductCollectin(context.Context, *ProductCollection) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProductCollectin not implemented")
 }
 func (UnimplementedProderServer) GetProductCollection(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProductCollection not implemented")
@@ -25935,20 +25897,20 @@ func _Proder_ListProductCollections_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_CreateProductCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_CreateProductCollectin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCollection)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).CreateProductCollection(ctx, in)
+		return srv.(ProderServer).CreateProductCollectin(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_CreateProductCollection_FullMethodName,
+		FullMethod: Proder_CreateProductCollectin_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).CreateProductCollection(ctx, req.(*ProductCollection))
+		return srv.(ProderServer).CreateProductCollectin(ctx, req.(*ProductCollection))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -27275,8 +27237,8 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Proder_ListProductCollections_Handler,
 		},
 		{
-			MethodName: "CreateProductCollection",
-			Handler:    _Proder_CreateProductCollection_Handler,
+			MethodName: "CreateProductCollectin",
+			Handler:    _Proder_CreateProductCollectin_Handler,
 		},
 		{
 			MethodName: "GetProductCollection",

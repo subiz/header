@@ -117,7 +117,7 @@ service AccountMgr {
 	rpc TransferOwner(Id) returns (account.Agent);
 
 	rpc CheckLoginSession(LoginSession) returns (LoginSession);
-	rpc CreateLoginSession(header.Id) returns (LoginSession);
+	// rpc CreateLoginSession(header.Id) returns (LoginSession);
 
 	rpc ListLoginSessions(Id) returns (LoginSessions);
 	rpc ListApiKeys(Id) returns (LoginSessions);
@@ -545,13 +545,13 @@ service TicketMgr {
 	rpc UpdateTicketView(header.TicketView) returns (header.TicketView);
 	rpc DeleteTicketView(Id) returns (Empty);
 	rpc GetTicketView(Id) returns (header.TicketView);
-	rpc ListTicketViews(Empty) returns (Response);
+	rpc ListTicketViews(Id) returns (Response);
 
 	rpc CreateTicketTemplate(header.TicketTemplate) returns (header.TicketTemplate);
 	rpc UpdateTicketTemplate(header.TicketTemplate) returns (header.TicketTemplate);
 	rpc DeleteTicketTemplate(Id) returns (Empty);
 	rpc GetTicketTemplate(Id) returns (header.TicketTemplate);
-	rpc ListTicketTemplates(Empty) returns (Response);
+	rpc ListTicketTemplates(Id) returns (Response);
 
 	rpc PongTicketEvent(header.Event) returns (header.Event);
 
@@ -578,7 +578,7 @@ service TicketMgr {
 	rpc CreateSLAPolicy(header.SLAPolicy) returns (header.SLAPolicy);
 	rpc UpdateSLAPolicy(header.SLAPolicy) returns (header.SLAPolicy);
 	rpc DeleteSLAPolicy(header.Id) returns (Empty);
-	rpc ListSLAPolicies(header.Empty) returns (Response);
+	rpc ListSLAPolicies(Id) returns (Response);
 	rpc GetSLAPolicy(Id) returns (header.SLAPolicy);
 
 	rpc ListTicketSLAViolations(header.Id) returns (Response);
@@ -880,7 +880,7 @@ service Proder {
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
 	rpc ListProductCollections(Id) returns (Response);
-	rpc CreateProductCollection(ProductCollection) returns (Response);
+	rpc CreateProductCollectin(ProductCollection) returns (Response);
 	rpc GetProductCollection(header.Id) returns (Response);
 	rpc UpdateProductCollection(ProductCollection) returns (Response);
 	rpc DeleteProductCollection(Id) returns (Empty);
