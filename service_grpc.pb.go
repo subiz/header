@@ -24390,6 +24390,8 @@ const (
 	Proder_ListAllProductIds_FullMethodName          = "/header.Proder/ListAllProductIds"
 	Proder_MatchProducts_FullMethodName              = "/header.Proder/MatchProducts"
 	Proder_ImportProduct_FullMethodName              = "/header.Proder/ImportProduct"
+	Proder_ListProductProps_FullMethodName           = "/header.Proder/ListProductProps"
+	Proder_ListProductPropValues_FullMethodName      = "/header.Proder/ListProductPropValues"
 	Proder_ListProductCollections_FullMethodName     = "/header.Proder/ListProductCollections"
 	Proder_CreateProductCollection_FullMethodName    = "/header.Proder/CreateProductCollection"
 	Proder_GetProductCollection_FullMethodName       = "/header.Proder/GetProductCollection"
@@ -24477,6 +24479,8 @@ type ProderClient interface {
 	ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Ids, error)
 	MatchProducts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
+	ListProductProps(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
+	ListProductPropValues(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
 	ListProductCollections(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
 	GetProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -24635,6 +24639,26 @@ func (c *proderClient) ImportProduct(ctx context.Context, in *ImportProductReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ImportProductResponse)
 	err := c.cc.Invoke(ctx, Proder_ImportProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) ListProductProps(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_ListProductProps_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) ListProductPropValues(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_ListProductPropValues_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -25383,6 +25407,8 @@ type ProderServer interface {
 	ListAllProductIds(context.Context, *ProductsRequest) (*Ids, error)
 	MatchProducts(context.Context, *Ids) (*Response, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
+	ListProductProps(context.Context, *ProductsRequest) (*Response, error)
+	ListProductPropValues(context.Context, *ProductsRequest) (*Response, error)
 	ListProductCollections(context.Context, *Id) (*Response, error)
 	CreateProductCollection(context.Context, *ProductCollection) (*Response, error)
 	GetProductCollection(context.Context, *Id) (*Response, error)
@@ -25490,6 +25516,12 @@ func (UnimplementedProderServer) MatchProducts(context.Context, *Ids) (*Response
 }
 func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportProduct not implemented")
+}
+func (UnimplementedProderServer) ListProductProps(context.Context, *ProductsRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductProps not implemented")
+}
+func (UnimplementedProderServer) ListProductPropValues(context.Context, *ProductsRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductPropValues not implemented")
 }
 func (UnimplementedProderServer) ListProductCollections(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCollections not implemented")
@@ -25871,6 +25903,42 @@ func _Proder_ImportProduct_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).ImportProduct(ctx, req.(*ImportProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_ListProductProps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListProductProps(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListProductProps_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListProductProps(ctx, req.(*ProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_ListProductPropValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListProductPropValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListProductPropValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListProductPropValues(ctx, req.(*ProductsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -27227,6 +27295,14 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ImportProduct",
 			Handler:    _Proder_ImportProduct_Handler,
+		},
+		{
+			MethodName: "ListProductProps",
+			Handler:    _Proder_ListProductProps_Handler,
+		},
+		{
+			MethodName: "ListProductPropValues",
+			Handler:    _Proder_ListProductPropValues_Handler,
 		},
 		{
 			MethodName: "ListProductCollections",

@@ -4868,6 +4868,17 @@ message Discount {
 	string eligible_cel = 28; // now < product.props
 }
 
+message ProductProp {
+	string key = 5;
+	int64 product_count = 6;
+	int64 unique_values = 7;
+}
+
+message ProductPropValue {
+	string value = 6;
+	int64 product_count = 8;
+}
+
 message Product {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -5117,7 +5128,7 @@ message ProductsRequest {
 	string visibility = 11; // published or hidden
 	repeated string ids = 12;
 	repeated int64 last_modifieds = 14; // ms
-	repeated string product_collection_ids = 15;
+	repeated string collection_ids = 15;
 
 	bool include_deleted = 17;
 
@@ -5137,6 +5148,8 @@ message ProductsRequest {
 
 	string feed_id = 27;
 	string feed_log_id = 28;
+
+	string prop_key = 29;
 }
 
 message KV {
@@ -7075,6 +7088,9 @@ message Response {
 
 	ZaloLoginStatus zalo_login_status = 254;
 	repeated Plan plans = 255;
+
+	repeated ProductProp product_props = 256;
+	repeated ProductPropValue product_prop_values = 257;
 }
 
 message ReportCount {

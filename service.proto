@@ -878,6 +878,9 @@ service Proder {
 	rpc MatchProducts(Ids) returns (Response);
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
+	rpc ListProductProps(header.ProductsRequest) returns (header.Response);
+	rpc ListProductPropValues(header.ProductsRequest) returns (header.Response);
+
 	rpc ListProductCollections(Id) returns (Response);
 	rpc CreateProductCollection(ProductCollection) returns (Response);
 	rpc GetProductCollection(header.Id) returns (Response);
