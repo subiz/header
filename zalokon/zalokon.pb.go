@@ -504,12 +504,12 @@ type ZaloUser struct {
 	UserGender int32                  `protobuf:"varint,2,opt,name=user_gender,json=userGender,proto3" json:"user_gender,omitempty"`
 	UserId     string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// int64 user_id_by_app = 4;
-	Avatar        string           `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	DisplayName   string           `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	BirthDate     int32            `protobuf:"varint,7,opt,name=birth_date,json=birthDate,proto3" json:"birth_date,omitempty"`
-	SharedInfo    *Info            `protobuf:"bytes,8,opt,name=shared_info,json=sharedInfo,proto3" json:"shared_info,omitempty"`
-	Avatars       map[int32]string `protobuf:"bytes,9,rep,name=avatars,proto3" json:"avatars,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	UserIdByApp   string           `protobuf:"bytes,10,opt,name=user_id_by_app,json=userIdByApp,proto3" json:"user_id_by_app,omitempty"`
+	Avatar      string `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	DisplayName string `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// int32 birth_date = 7;
+	SharedInfo *Info `protobuf:"bytes,8,opt,name=shared_info,json=sharedInfo,proto3" json:"shared_info,omitempty"`
+	// map<int32, string> avatars = 9;
+	UserIdByApp   string `protobuf:"bytes,10,opt,name=user_id_by_app,json=userIdByApp,proto3" json:"user_id_by_app,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -572,23 +572,9 @@ func (x *ZaloUser) GetDisplayName() string {
 	return ""
 }
 
-func (x *ZaloUser) GetBirthDate() int32 {
-	if x != nil {
-		return x.BirthDate
-	}
-	return 0
-}
-
 func (x *ZaloUser) GetSharedInfo() *Info {
 	if x != nil {
 		return x.SharedInfo
-	}
-	return nil
-}
-
-func (x *ZaloUser) GetAvatars() map[int32]string {
-	if x != nil {
-		return x.Avatars
 	}
 	return nil
 }
@@ -2315,23 +2301,17 @@ const file_zalokon_proto_rawDesc = "" +
 	"\x15monthlyPromotionQuota\x18\b \x01(\x03R\x15monthlyPromotionQuota\x12F\n" +
 	"\x1eremainingMonthlyPromotionQuota\x18\t \x01(\x03R\x1eremainingMonthlyPromotionQuota\x12J\n" +
 	" estimatedNextMonthPromotionQuota\x18\n" +
-	" \x01(\x03R estimatedNextMonthPromotionQuota\"\xe9\x02\n" +
+	" \x01(\x03R estimatedNextMonthPromotionQuota\"\xd4\x01\n" +
 	"\bZaloUser\x12\x1f\n" +
 	"\vuser_gender\x18\x02 \x01(\x05R\n" +
 	"userGender\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06avatar\x18\x05 \x01(\tR\x06avatar\x12!\n" +
-	"\fdisplay_name\x18\x06 \x01(\tR\vdisplayName\x12\x1d\n" +
-	"\n" +
-	"birth_date\x18\a \x01(\x05R\tbirthDate\x12.\n" +
+	"\fdisplay_name\x18\x06 \x01(\tR\vdisplayName\x12.\n" +
 	"\vshared_info\x18\b \x01(\v2\r.zalokon.InfoR\n" +
-	"sharedInfo\x128\n" +
-	"\aavatars\x18\t \x03(\v2\x1e.zalokon.ZaloUser.AvatarsEntryR\aavatars\x12#\n" +
+	"sharedInfo\x12#\n" +
 	"\x0euser_id_by_app\x18\n" +
-	" \x01(\tR\vuserIdByApp\x1a:\n" +
-	"\fAvatarsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"i\n" +
+	" \x01(\tR\vuserIdByApp\"i\n" +
 	"\x10ZaloUserResponse\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\x05R\x05error\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12%\n" +
@@ -2513,7 +2493,7 @@ func file_zalokon_proto_rawDescGZIP() []byte {
 	return file_zalokon_proto_rawDescData
 }
 
-var file_zalokon_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_zalokon_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_zalokon_proto_goTypes = []any{
 	(*ZaloPersonalUser)(nil),       // 0: zalokon.ZaloPersonalUser
 	(*OfficialAccount)(nil),        // 1: zalokon.OfficialAccount
@@ -2538,33 +2518,31 @@ var file_zalokon_proto_goTypes = []any{
 	(*Sender)(nil),                 // 20: zalokon.Sender
 	(*Zl2SbEvent)(nil),             // 21: zalokon.Zl2SbEvent
 	(*ResponseQuota)(nil),          // 22: zalokon.ResponseQuota
-	nil,                            // 23: zalokon.ZaloUser.AvatarsEntry
 }
 var file_zalokon_proto_depIdxs = []int32{
 	2,  // 0: zalokon.OfficialAccount.zns_quota:type_name -> zalokon.ZaloOAZNSQuota
 	9,  // 1: zalokon.ZaloUser.shared_info:type_name -> zalokon.Info
-	23, // 2: zalokon.ZaloUser.avatars:type_name -> zalokon.ZaloUser.AvatarsEntry
-	3,  // 3: zalokon.ZaloUserResponse.data:type_name -> zalokon.ZaloUser
-	1,  // 4: zalokon.OfficalAccountResponse.data:type_name -> zalokon.OfficialAccount
-	22, // 5: zalokon.ResponseData.quota:type_name -> zalokon.ResponseQuota
-	6,  // 6: zalokon.Response.data:type_name -> zalokon.ResponseData
-	10, // 7: zalokon.DefaultAction.payload:type_name -> zalokon.DefaultActionPayload
-	12, // 8: zalokon.AttachmentPayload.elements:type_name -> zalokon.TemplateElement
-	14, // 9: zalokon.AttachmentPayload.buttons:type_name -> zalokon.Button
-	13, // 10: zalokon.Attachment.payload:type_name -> zalokon.AttachmentPayload
-	15, // 11: zalokon.Message.attachments:type_name -> zalokon.Attachment
-	15, // 12: zalokon.Message.attachment:type_name -> zalokon.Attachment
-	20, // 13: zalokon.Request.sender:type_name -> zalokon.Sender
-	20, // 14: zalokon.Request.recipient:type_name -> zalokon.Sender
-	9,  // 15: zalokon.Request.info:type_name -> zalokon.Info
-	16, // 16: zalokon.Request.message:type_name -> zalokon.Message
-	19, // 17: zalokon.Request.follower:type_name -> zalokon.ZlFollower
-	18, // 18: zalokon.Request.status:type_name -> zalokon.ZNSTemplateStatus
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	3,  // 2: zalokon.ZaloUserResponse.data:type_name -> zalokon.ZaloUser
+	1,  // 3: zalokon.OfficalAccountResponse.data:type_name -> zalokon.OfficialAccount
+	22, // 4: zalokon.ResponseData.quota:type_name -> zalokon.ResponseQuota
+	6,  // 5: zalokon.Response.data:type_name -> zalokon.ResponseData
+	10, // 6: zalokon.DefaultAction.payload:type_name -> zalokon.DefaultActionPayload
+	12, // 7: zalokon.AttachmentPayload.elements:type_name -> zalokon.TemplateElement
+	14, // 8: zalokon.AttachmentPayload.buttons:type_name -> zalokon.Button
+	13, // 9: zalokon.Attachment.payload:type_name -> zalokon.AttachmentPayload
+	15, // 10: zalokon.Message.attachments:type_name -> zalokon.Attachment
+	15, // 11: zalokon.Message.attachment:type_name -> zalokon.Attachment
+	20, // 12: zalokon.Request.sender:type_name -> zalokon.Sender
+	20, // 13: zalokon.Request.recipient:type_name -> zalokon.Sender
+	9,  // 14: zalokon.Request.info:type_name -> zalokon.Info
+	16, // 15: zalokon.Request.message:type_name -> zalokon.Message
+	19, // 16: zalokon.Request.follower:type_name -> zalokon.ZlFollower
+	18, // 17: zalokon.Request.status:type_name -> zalokon.ZNSTemplateStatus
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_zalokon_proto_init() }
@@ -2578,7 +2556,7 @@ func file_zalokon_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zalokon_proto_rawDesc), len(file_zalokon_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
