@@ -914,7 +914,7 @@ const file_service_proto_rawDesc = "" +
 	"\fMarkOpenNoti\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12/\n" +
 	"\x12DeleteNotification\x12\n" +
-	".header.Id\x1a\r.header.Empty2\xee\"\n" +
+	".header.Id\x1a\r.header.Empty2\xef\"\n" +
 	"\x06Proder\x12/\n" +
 	"\vReadProduct\x12\x0f.header.Product\x1a\x0f.header.Product\x121\n" +
 	"\rCreateProduct\x12\x0f.header.Product\x1a\x0f.header.Product\x121\n" +
@@ -926,8 +926,8 @@ const file_service_proto_rawDesc = "" +
 	"\rMatchProducts\x12\v.header.Ids\x1a\x10.header.Response\x12L\n" +
 	"\rImportProduct\x12\x1c.header.ImportProductRequest\x1a\x1d.header.ImportProductResponse\x126\n" +
 	"\x16ListProductCollections\x12\n" +
-	".header.Id\x1a\x10.header.Response\x12E\n" +
-	"\x16CreateProductCollectin\x12\x19.header.ProductCollection\x1a\x10.header.Response\x124\n" +
+	".header.Id\x1a\x10.header.Response\x12F\n" +
+	"\x17CreateProductCollection\x12\x19.header.ProductCollection\x1a\x10.header.Response\x124\n" +
 	"\x14GetProductCollection\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12F\n" +
 	"\x17UpdateProductCollection\x12\x19.header.ProductCollection\x1a\x10.header.Response\x124\n" +
@@ -2110,7 +2110,7 @@ var file_service_proto_depIdxs = []int32{
 	14,  // 597: header.Proder.MatchProducts:input_type -> header.Ids
 	184, // 598: header.Proder.ImportProduct:input_type -> header.ImportProductRequest
 	1,   // 599: header.Proder.ListProductCollections:input_type -> header.Id
-	185, // 600: header.Proder.CreateProductCollectin:input_type -> header.ProductCollection
+	185, // 600: header.Proder.CreateProductCollection:input_type -> header.ProductCollection
 	1,   // 601: header.Proder.GetProductCollection:input_type -> header.Id
 	185, // 602: header.Proder.UpdateProductCollection:input_type -> header.ProductCollection
 	1,   // 603: header.Proder.DeleteProductCollection:input_type -> header.Id
@@ -2872,7 +2872,7 @@ var file_service_proto_depIdxs = []int32{
 	257, // 1359: header.Proder.MatchProducts:output_type -> header.Response
 	316, // 1360: header.Proder.ImportProduct:output_type -> header.ImportProductResponse
 	257, // 1361: header.Proder.ListProductCollections:output_type -> header.Response
-	257, // 1362: header.Proder.CreateProductCollectin:output_type -> header.Response
+	257, // 1362: header.Proder.CreateProductCollection:output_type -> header.Response
 	257, // 1363: header.Proder.GetProductCollection:output_type -> header.Response
 	257, // 1364: header.Proder.UpdateProductCollection:output_type -> header.Response
 	9,   // 1365: header.Proder.DeleteProductCollection:output_type -> header.Empty

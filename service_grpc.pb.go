@@ -24391,7 +24391,7 @@ const (
 	Proder_MatchProducts_FullMethodName              = "/header.Proder/MatchProducts"
 	Proder_ImportProduct_FullMethodName              = "/header.Proder/ImportProduct"
 	Proder_ListProductCollections_FullMethodName     = "/header.Proder/ListProductCollections"
-	Proder_CreateProductCollectin_FullMethodName     = "/header.Proder/CreateProductCollectin"
+	Proder_CreateProductCollection_FullMethodName    = "/header.Proder/CreateProductCollection"
 	Proder_GetProductCollection_FullMethodName       = "/header.Proder/GetProductCollection"
 	Proder_UpdateProductCollection_FullMethodName    = "/header.Proder/UpdateProductCollection"
 	Proder_DeleteProductCollection_FullMethodName    = "/header.Proder/DeleteProductCollection"
@@ -24468,8 +24468,6 @@ const (
 // ProderClient is the client API for Proder service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// proder services
 type ProderClient interface {
 	ReadProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	CreateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
@@ -24480,7 +24478,7 @@ type ProderClient interface {
 	MatchProducts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
 	ListProductCollections(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	CreateProductCollectin(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
+	CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
 	GetProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error)
 	DeleteProductCollection(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -24653,10 +24651,10 @@ func (c *proderClient) ListProductCollections(ctx context.Context, in *Id, opts 
 	return out, nil
 }
 
-func (c *proderClient) CreateProductCollectin(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) CreateProductCollection(ctx context.Context, in *ProductCollection, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_CreateProductCollectin_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Proder_CreateProductCollection_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -25376,8 +25374,6 @@ func (c *proderClient) MoveOrderToPrimary(ctx context.Context, in *Ids, opts ...
 // ProderServer is the server API for Proder service.
 // All implementations must embed UnimplementedProderServer
 // for forward compatibility.
-//
-// proder services
 type ProderServer interface {
 	ReadProduct(context.Context, *Product) (*Product, error)
 	CreateProduct(context.Context, *Product) (*Product, error)
@@ -25388,7 +25384,7 @@ type ProderServer interface {
 	MatchProducts(context.Context, *Ids) (*Response, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
 	ListProductCollections(context.Context, *Id) (*Response, error)
-	CreateProductCollectin(context.Context, *ProductCollection) (*Response, error)
+	CreateProductCollection(context.Context, *ProductCollection) (*Response, error)
 	GetProductCollection(context.Context, *Id) (*Response, error)
 	UpdateProductCollection(context.Context, *ProductCollection) (*Response, error)
 	DeleteProductCollection(context.Context, *Id) (*Empty, error)
@@ -25498,8 +25494,8 @@ func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRe
 func (UnimplementedProderServer) ListProductCollections(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProductCollections not implemented")
 }
-func (UnimplementedProderServer) CreateProductCollectin(context.Context, *ProductCollection) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateProductCollectin not implemented")
+func (UnimplementedProderServer) CreateProductCollection(context.Context, *ProductCollection) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProductCollection not implemented")
 }
 func (UnimplementedProderServer) GetProductCollection(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProductCollection not implemented")
@@ -25897,20 +25893,20 @@ func _Proder_ListProductCollections_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_CreateProductCollectin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Proder_CreateProductCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductCollection)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProderServer).CreateProductCollectin(ctx, in)
+		return srv.(ProderServer).CreateProductCollection(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Proder_CreateProductCollectin_FullMethodName,
+		FullMethod: Proder_CreateProductCollection_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).CreateProductCollectin(ctx, req.(*ProductCollection))
+		return srv.(ProderServer).CreateProductCollection(ctx, req.(*ProductCollection))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -27237,8 +27233,8 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Proder_ListProductCollections_Handler,
 		},
 		{
-			MethodName: "CreateProductCollectin",
-			Handler:    _Proder_CreateProductCollectin_Handler,
+			MethodName: "CreateProductCollection",
+			Handler:    _Proder_CreateProductCollection_Handler,
 		},
 		{
 			MethodName: "GetProductCollection",

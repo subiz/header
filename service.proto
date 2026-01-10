@@ -868,7 +868,6 @@ service NotiMgr {
 	rpc DeleteNotification(Id) returns (Empty);
 }
 
-// proder services
 service Proder {
 	rpc ReadProduct(header.Product) returns (header.Product);
 	rpc CreateProduct(header.Product) returns (header.Product);
@@ -880,7 +879,7 @@ service Proder {
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
 	rpc ListProductCollections(Id) returns (Response);
-	rpc CreateProductCollectin(ProductCollection) returns (Response);
+	rpc CreateProductCollection(ProductCollection) returns (Response);
 	rpc GetProductCollection(header.Id) returns (Response);
 	rpc UpdateProductCollection(ProductCollection) returns (Response);
 	rpc DeleteProductCollection(Id) returns (Empty);

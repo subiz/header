@@ -50409,8 +50409,7 @@ type CreditSpendEntry struct {
 	CreditId            string                 `protobuf:"bytes,9,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	FpvUnitPrice        int64                  `protobuf:"varint,10,opt,name=fpv_unit_price,json=fpvUnitPrice,proto3" json:"fpv_unit_price,omitempty"`
 	FpvRegularUnitPrice int64                  `protobuf:"varint,11,opt,name=fpv_regular_unit_price,json=fpvRegularUnitPrice,proto3" json:"fpv_regular_unit_price,omitempty"` //
-	ServiceId           string                 `protobuf:"bytes,12,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`                                    //
-	ServiceType         string                 `protobuf:"bytes,13,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`                              // campaign, bot, popup
+	ServiceId           string                 `protobuf:"bytes,12,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`                                    // cp13
 	Item                string                 `protobuf:"bytes,14,opt,name=item,proto3" json:"item,omitempty"`                                                               // type of product used, e.g: zns, call, llm, textembedding
 	ItemId              string                 `protobuf:"bytes,15,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`                                             // product id
 	Tags                []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`                                                               // indexing [model.23048234, conversation.2304823904]
@@ -50515,13 +50514,6 @@ func (x *CreditSpendEntry) GetFpvRegularUnitPrice() int64 {
 func (x *CreditSpendEntry) GetServiceId() string {
 	if x != nil {
 		return x.ServiceId
-	}
-	return ""
-}
-
-func (x *CreditSpendEntry) GetServiceType() string {
-	if x != nil {
-		return x.ServiceType
 	}
 	return ""
 }
@@ -77390,7 +77382,7 @@ const file_header_proto_rawDesc = "" +
 	"\tpartition\x18\b \x01(\x05R\tpartition\x12\x10\n" +
 	"\x03key\x18\t \x01(\tR\x03key\x12\x12\n" +
 	"\x04host\x18\n" +
-	" \x01(\tR\x04host\"\xe2\x03\n" +
+	" \x01(\tR\x04host\"\xbf\x03\n" +
 	"\x10CreditSpendEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77404,8 +77396,7 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\x03R\ffpvUnitPrice\x123\n" +
 	"\x16fpv_regular_unit_price\x18\v \x01(\x03R\x13fpvRegularUnitPrice\x12\x1d\n" +
 	"\n" +
-	"service_id\x18\f \x01(\tR\tserviceId\x12!\n" +
-	"\fservice_type\x18\r \x01(\tR\vserviceType\x12\x12\n" +
+	"service_id\x18\f \x01(\tR\tserviceId\x12\x12\n" +
 	"\x04item\x18\x0e \x01(\tR\x04item\x12\x17\n" +
 	"\aitem_id\x18\x0f \x01(\tR\x06itemId\x12\x12\n" +
 	"\x04tags\x18\x12 \x03(\tR\x04tags\x12\x1e\n" +

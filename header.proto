@@ -7230,14 +7230,12 @@ message CreditSpendEntry {
 	int64 fpv_unit_price = 10;
 	int64 fpv_regular_unit_price = 11; //
 
-	string service_id = 12; //
-	string service_type = 13; // campaign, bot, popup
+	string service_id = 12; // cp13
+	// string service_type = 13; // campaign, bot, popup
 
 	string item = 14; // type of product used, e.g: zns, call, llm, textembedding
 	string item_id = 15; // product id
-
 	repeated string tags = 18; // indexing [model.23048234, conversation.2304823904]
-
 	string by_agent_id = 16;
 }
 
