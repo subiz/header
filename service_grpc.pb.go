@@ -6284,7 +6284,6 @@ const (
 	UserMgr_DetachUser_FullMethodName                       = "/header.UserMgr/DetachUser"
 	UserMgr_CreateUser2_FullMethodName                      = "/header.UserMgr/CreateUser2"
 	UserMgr_UpdateUser_FullMethodName                       = "/header.UserMgr/UpdateUser"
-	UserMgr_UpdateUsers_FullMethodName                      = "/header.UserMgr/UpdateUsers"
 	UserMgr_TryUpdateUser_FullMethodName                    = "/header.UserMgr/TryUpdateUser"
 	UserMgr_RemoveUser_FullMethodName                       = "/header.UserMgr/RemoveUser"
 	UserMgr_RestoreUser_FullMethodName                      = "/header.UserMgr/RestoreUser"
@@ -6361,7 +6360,7 @@ type UserMgrClient interface {
 	DetachUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	CreateUser2(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	UpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
-	UpdateUsers(ctx context.Context, in *Users, opts ...grpc.CallOption) (*Response, error)
+	// rpc UpdateUsers(header.Users) returns (header.Response);
 	TryUpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*TryUpdateUserResult, error)
 	RemoveUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	RestoreUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -6470,16 +6469,6 @@ func (c *userMgrClient) UpdateUser(ctx context.Context, in *User, opts ...grpc.C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(User)
 	err := c.cc.Invoke(ctx, UserMgr_UpdateUser_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) UpdateUsers(ctx context.Context, in *Users, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserMgr_UpdateUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7136,7 +7125,7 @@ type UserMgrServer interface {
 	DetachUser(context.Context, *Id) (*Empty, error)
 	CreateUser2(context.Context, *User) (*User, error)
 	UpdateUser(context.Context, *User) (*User, error)
-	UpdateUsers(context.Context, *Users) (*Response, error)
+	// rpc UpdateUsers(header.Users) returns (header.Response);
 	TryUpdateUser(context.Context, *User) (*TryUpdateUserResult, error)
 	RemoveUser(context.Context, *Id) (*Empty, error)
 	RestoreUser(context.Context, *Id) (*Empty, error)
@@ -7222,9 +7211,6 @@ func (UnimplementedUserMgrServer) CreateUser2(context.Context, *User) (*User, er
 }
 func (UnimplementedUserMgrServer) UpdateUser(context.Context, *User) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
-}
-func (UnimplementedUserMgrServer) UpdateUsers(context.Context, *Users) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUsers not implemented")
 }
 func (UnimplementedUserMgrServer) TryUpdateUser(context.Context, *User) (*TryUpdateUserResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryUpdateUser not implemented")
@@ -7507,24 +7493,6 @@ func _UserMgr_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).UpdateUser(ctx, req.(*User))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_UpdateUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Users)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).UpdateUsers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserMgr_UpdateUsers_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).UpdateUsers(ctx, req.(*Users))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8703,10 +8671,6 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _UserMgr_UpdateUser_Handler,
-		},
-		{
-			MethodName: "UpdateUsers",
-			Handler:    _UserMgr_UpdateUsers_Handler,
 		},
 		{
 			MethodName: "TryUpdateUser",

@@ -4806,6 +4806,7 @@ type Users struct {
 	SortedValues  []string               `protobuf:"bytes,8,rep,name=sorted_values,json=sortedValues,proto3" json:"sorted_values,omitempty"`
 	Anchor        string                 `protobuf:"bytes,9,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	Secondaries   []*User                `protobuf:"bytes,10,rep,name=secondaries,proto3" json:"secondaries,omitempty"`
+	AccountId     string                 `protobuf:"bytes,11,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4901,6 +4902,13 @@ func (x *Users) GetSecondaries() []*User {
 		return x.Secondaries
 	}
 	return nil
+}
+
+func (x *Users) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 type AttributeDefinitionListItem struct {
@@ -71962,7 +71970,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05users\x18\b \x03(\v2\f.header.UserR\x05users\x12+\n" +
 	"\x11duplicated_fields\x18\t \x03(\tR\x10duplicatedFields\x12+\n" +
 	"\x11duplicated_values\x18\n" +
-	" \x03(\tR\x10duplicatedValues\"\xa4\x02\n" +
+	" \x03(\tR\x10duplicatedValues\"\xc3\x02\n" +
 	"\x05Users\x12\"\n" +
 	"\x05users\x18\x01 \x03(\v2\f.header.UserR\x05users\x12%\n" +
 	"\x06errors\x18\x02 \x03(\v2\r.header.ErrorR\x06errors\x12\x1c\n" +
@@ -71974,7 +71982,9 @@ const file_header_proto_rawDesc = "" +
 	"\rsorted_values\x18\b \x03(\tR\fsortedValues\x12\x16\n" +
 	"\x06anchor\x18\t \x01(\tR\x06anchor\x12.\n" +
 	"\vsecondaries\x18\n" +
-	" \x03(\v2\f.header.UserR\vsecondaries\"|\n" +
+	" \x03(\v2\f.header.UserR\vsecondaries\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\v \x01(\tR\taccountId\"|\n" +
 	"\x1bAttributeDefinitionListItem\x12\x14\n" +
 	"\x05value\x18\x04 \x01(\tR\x05value\x121\n" +
 	"\n" +
