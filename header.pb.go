@@ -35915,7 +35915,7 @@ type ProductsRequest struct {
 	Offset    int32                  `protobuf:"varint,16,opt,name=offset,proto3" json:"offset,omitempty"`
 	PriceGte  int64                  `protobuf:"varint,6,opt,name=price_gte,json=priceGte,proto3" json:"price_gte,omitempty"`
 	PriceLte  int64                  `protobuf:"varint,7,opt,name=price_lte,json=priceLte,proto3" json:"price_lte,omitempty"`
-	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
+	// [{key: 'colors', value:'red,blue'}, {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
 	Props          []*KV    `protobuf:"bytes,8,rep,name=props,proto3" json:"props,omitempty"`
 	Availability   string   `protobuf:"bytes,9,opt,name=availability,proto3" json:"availability,omitempty"` // instock, out_of_stock
@@ -35937,6 +35937,7 @@ type ProductsRequest struct {
 	FeedId         string   `protobuf:"bytes,27,opt,name=feed_id,json=feedId,proto3" json:"feed_id,omitempty"`
 	FeedLogId      string   `protobuf:"bytes,28,opt,name=feed_log_id,json=feedLogId,proto3" json:"feed_log_id,omitempty"`
 	PropKey        string   `protobuf:"bytes,29,opt,name=prop_key,json=propKey,proto3" json:"prop_key,omitempty"`
+	IdOnly         bool     `protobuf:"varint,30,opt,name=id_only,json=idOnly,proto3" json:"id_only,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -36165,6 +36166,13 @@ func (x *ProductsRequest) GetPropKey() string {
 		return x.PropKey
 	}
 	return ""
+}
+
+func (x *ProductsRequest) GetIdOnly() bool {
+	if x != nil {
+		return x.IdOnly
+	}
+	return false
 }
 
 type KV struct {
@@ -75781,7 +75789,7 @@ const file_header_proto_rawDesc = "" +
 	"\finterval_sec\x18\x18 \x01(\x03R\vintervalSec\x121\n" +
 	"\blast_run\x18$ \x01(\v2\x16.header.ProductFeedRunR\alastRun\x12\x1a\n" +
 	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\x12\x1a\n" +
-	"\bmodified\x18  \x01(\x03R\bmodified\"\xb4\x06\n" +
+	"\bmodified\x18  \x01(\x03R\bmodified\"\xcd\x06\n" +
 	"\x0fProductsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75817,7 +75825,8 @@ const file_header_proto_rawDesc = "" +
 	"\auser_id\x18\x1a \x01(\tR\x06userId\x12\x17\n" +
 	"\afeed_id\x18\x1b \x01(\tR\x06feedId\x12\x1e\n" +
 	"\vfeed_log_id\x18\x1c \x01(\tR\tfeedLogId\x12\x19\n" +
-	"\bprop_key\x18\x1d \x01(\tR\apropKey\"\xe4\x02\n" +
+	"\bprop_key\x18\x1d \x01(\tR\apropKey\x12\x17\n" +
+	"\aid_only\x18\x1e \x01(\bR\x06idOnly\"\xe4\x02\n" +
 	"\x02KV\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\tR\x05value\x12\x15\n" +

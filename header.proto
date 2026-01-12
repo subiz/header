@@ -5118,7 +5118,7 @@ message ProductsRequest {
 	int64 price_gte = 6;
 	int64 price_lte = 7;
 
-	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
+	// [{key: 'colors', value:'red,blue'}, {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
 	repeated KV props = 8;
 
@@ -5150,6 +5150,8 @@ message ProductsRequest {
 	string feed_log_id = 28;
 
 	string prop_key = 29;
+
+	bool id_only = 30;
 }
 
 message KV {
