@@ -4934,7 +4934,7 @@ message Product {
 	float market_price = 45;
 
 	float price = 51;
-	int64 fpv_price = 52; // (readonly from client)
+	// int64 fpv_price = 52; // (readonly from client)
 
 	// repeated PriceRule price_rules = 54; // (shared)
 	int64 stock = 60; //
@@ -5115,8 +5115,8 @@ message ProductsRequest {
 	string anchor = 5;
 	int32 offset = 16;
 
-	int64 price_gte = 6;
-	int64 price_lte = 7;
+	float price_gte = 6;
+	float price_lte = 7;
 
 	// [{key: 'colors', value:'red,blue'}, {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl

@@ -34379,8 +34379,7 @@ type Product struct {
 	Sku             string  `protobuf:"bytes,49,opt,name=sku,proto3" json:"sku,omitempty"`
 	Barcode         string  `protobuf:"bytes,50,opt,name=barcode,proto3" json:"barcode,omitempty"`
 	MarketPrice     float32 `protobuf:"fixed32,45,opt,name=market_price,json=marketPrice,proto3" json:"market_price,omitempty"`
-	Price           float32 `protobuf:"fixed32,51,opt,name=price,proto3" json:"price,omitempty"`
-	FpvPrice        int64   `protobuf:"varint,52,opt,name=fpv_price,json=fpvPrice,proto3" json:"fpv_price,omitempty"` // (readonly from client)
+	Price           float32 `protobuf:"fixed32,51,opt,name=price,proto3" json:"price,omitempty"` // int64 fpv_price = 52; // (readonly from client)
 	// repeated PriceRule price_rules = 54; // (shared)
 	Stock int64 `protobuf:"varint,60,opt,name=stock,proto3" json:"stock,omitempty"` //
 	// pos_id based stock
@@ -34679,13 +34678,6 @@ func (x *Product) GetMarketPrice() float32 {
 func (x *Product) GetPrice() float32 {
 	if x != nil {
 		return x.Price
-	}
-	return 0
-}
-
-func (x *Product) GetFpvPrice() int64 {
-	if x != nil {
-		return x.FpvPrice
 	}
 	return 0
 }
@@ -35913,8 +35905,8 @@ type ProductsRequest struct {
 	Limit     int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"` // 200
 	Anchor    string                 `protobuf:"bytes,5,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	Offset    int32                  `protobuf:"varint,16,opt,name=offset,proto3" json:"offset,omitempty"`
-	PriceGte  int64                  `protobuf:"varint,6,opt,name=price_gte,json=priceGte,proto3" json:"price_gte,omitempty"`
-	PriceLte  int64                  `protobuf:"varint,7,opt,name=price_lte,json=priceLte,proto3" json:"price_lte,omitempty"`
+	PriceGte  float32                `protobuf:"fixed32,6,opt,name=price_gte,json=priceGte,proto3" json:"price_gte,omitempty"`
+	PriceLte  float32                `protobuf:"fixed32,7,opt,name=price_lte,json=priceLte,proto3" json:"price_lte,omitempty"`
 	// [{key: 'colors', value:'red,blue'}, {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
 	Props          []*KV    `protobuf:"bytes,8,rep,name=props,proto3" json:"props,omitempty"`
@@ -36014,14 +36006,14 @@ func (x *ProductsRequest) GetOffset() int32 {
 	return 0
 }
 
-func (x *ProductsRequest) GetPriceGte() int64 {
+func (x *ProductsRequest) GetPriceGte() float32 {
 	if x != nil {
 		return x.PriceGte
 	}
 	return 0
 }
 
-func (x *ProductsRequest) GetPriceLte() int64 {
+func (x *ProductsRequest) GetPriceLte() float32 {
 	if x != nil {
 		return x.PriceLte
 	}
@@ -75606,7 +75598,7 @@ const file_header_proto_rawDesc = "" +
 	"\runique_values\x18\a \x01(\x03R\funiqueValues\"M\n" +
 	"\x10ProductPropValue\x12\x14\n" +
 	"\x05value\x18\x06 \x01(\tR\x05value\x12#\n" +
-	"\rproduct_count\x18\b \x01(\x03R\fproductCount\"\xc1\x12\n" +
+	"\rproduct_count\x18\b \x01(\x03R\fproductCount\"\xa4\x12\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75648,8 +75640,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03sku\x181 \x01(\tR\x03sku\x12\x18\n" +
 	"\abarcode\x182 \x01(\tR\abarcode\x12!\n" +
 	"\fmarket_price\x18- \x01(\x02R\vmarketPrice\x12\x14\n" +
-	"\x05price\x183 \x01(\x02R\x05price\x12\x1b\n" +
-	"\tfpv_price\x184 \x01(\x03R\bfpvPrice\x12\x14\n" +
+	"\x05price\x183 \x01(\x02R\x05price\x12\x14\n" +
 	"\x05stock\x18< \x01(\x03R\x05stock\x12,\n" +
 	"\x06stocks\x18? \x03(\v2\x14.header.ProductStockR\x06stocks\x12\x1b\n" +
 	"\tsource_id\x18= \x01(\tR\bsourceId\x12\"\n" +
@@ -75798,8 +75789,8 @@ const file_header_proto_rawDesc = "" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06anchor\x18\x05 \x01(\tR\x06anchor\x12\x16\n" +
 	"\x06offset\x18\x10 \x01(\x05R\x06offset\x12\x1b\n" +
-	"\tprice_gte\x18\x06 \x01(\x03R\bpriceGte\x12\x1b\n" +
-	"\tprice_lte\x18\a \x01(\x03R\bpriceLte\x12 \n" +
+	"\tprice_gte\x18\x06 \x01(\x02R\bpriceGte\x12\x1b\n" +
+	"\tprice_lte\x18\a \x01(\x02R\bpriceLte\x12 \n" +
 	"\x05props\x18\b \x03(\v2\n" +
 	".header.KVR\x05props\x12\"\n" +
 	"\favailability\x18\t \x01(\tR\favailability\x12\x1a\n" +
