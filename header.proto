@@ -1683,7 +1683,7 @@ enum AttachmentType {
 }
 
 message Attachment {
-	string type = 12; // form, form_submission, quick_replies
+	string type = 12; // form, form_submission, quick_replies, zalo_call
 	int64 index = 7;
 	// file
 	string mimetype = 2;
@@ -1737,6 +1737,17 @@ message Attachment {
 
 	Form form = 50;
 	FormSubmission form_submission = 51;
+
+	ZaloCall zalo_call = 52;
+}
+
+message ZaloCall {
+	string action = 3; // recommened.misscall
+	int64 duration = 4;
+	string reason = 5;
+	int64 is_caller = 6;
+	int64 is_enable_callback = 7;
+	string calltype = 8;
 }
 
 message QuickReply {
