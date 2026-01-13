@@ -56787,6 +56787,8 @@ type ResourceGroupMember struct {
 	// string role = 6; // reviewer, member, manager, admin, ...
 	Scopes        []string `protobuf:"bytes,10,rep,name=scopes,proto3" json:"scopes,omitempty"`
 	IsSubscribed  string   `protobuf:"bytes,11,opt,name=is_subscribed,json=isSubscribed,proto3" json:"is_subscribed,omitempty"`
+	Updated       int64    `protobuf:"varint,12,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy     int64    `protobuf:"varint,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -56889,6 +56891,20 @@ func (x *ResourceGroupMember) GetIsSubscribed() string {
 		return x.IsSubscribed
 	}
 	return ""
+}
+
+func (x *ResourceGroupMember) GetUpdated() int64 {
+	if x != nil {
+		return x.Updated
+	}
+	return 0
+}
+
+func (x *ResourceGroupMember) GetUpdatedBy() int64 {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return 0
 }
 
 type SLAPolicy struct {
@@ -78270,7 +78286,7 @@ const file_header_proto_rawDesc = "" +
 	"webhookUrl\x12\x12\n" +
 	"\x04mode\x18\f \x01(\tR\x04mode\x12\x18\n" +
 	"\aupdated\x18\r \x01(\x03R\aupdated\x12&\n" +
-	"\x0ftest_account_id\x18\x0f \x01(\tR\rtestAccountId\"\xcc\x02\n" +
+	"\x0ftest_account_id\x18\x0f \x01(\tR\rtestAccountId\"\x85\x03\n" +
 	"\x13ResourceGroupMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -78284,7 +78300,10 @@ const file_header_proto_rawDesc = "" +
 	"\x06joined\x18\t \x01(\x03R\x06joined\x12\x16\n" +
 	"\x06scopes\x18\n" +
 	" \x03(\tR\x06scopes\x12#\n" +
-	"\ris_subscribed\x18\v \x01(\tR\fisSubscribed\"\xb1\a\n" +
+	"\ris_subscribed\x18\v \x01(\tR\fisSubscribed\x12\x18\n" +
+	"\aupdated\x18\f \x01(\x03R\aupdated\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\r \x01(\x03R\tupdatedBy\"\xb1\a\n" +
 	"\tSLAPolicy\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

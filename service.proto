@@ -462,8 +462,7 @@ service ConversationMgr {
 	rpc UpsertIntegration(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
 
-	rpc UpdateIntegrationMember(ResourceGroupMember) returns (ResourceGroupMember);
-	rpc RemoveIntegrationMember(ResourceGroupMember) returns (header.Empty);
+	rpc UpdateIntegrationMembers(header.Integration) returns (header.Integration);
 
 	rpc UpdateRule(header.Rule) returns (header.Rule);
 	rpc CreateRule(header.Rule) returns (header.Rule);

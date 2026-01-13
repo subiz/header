@@ -8113,6 +8113,9 @@ message ResourceGroupMember {
 	// string role = 6; // reviewer, member, manager, admin, ...
 	repeated string scopes = 10;
 	string is_subscribed = 11;
+
+	int64 updated = 12;
+	int64 updated_by = 13;
 }
 
 message SLAPolicy {

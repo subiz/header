@@ -11367,8 +11367,7 @@ const (
 	ConversationMgr_Integrate_FullMethodName                = "/header.ConversationMgr/Integrate"
 	ConversationMgr_UpsertIntegration_FullMethodName        = "/header.ConversationMgr/UpsertIntegration"
 	ConversationMgr_GetIntegration_FullMethodName           = "/header.ConversationMgr/GetIntegration"
-	ConversationMgr_UpdateIntegrationMember_FullMethodName  = "/header.ConversationMgr/UpdateIntegrationMember"
-	ConversationMgr_RemoveIntegrationMember_FullMethodName  = "/header.ConversationMgr/RemoveIntegrationMember"
+	ConversationMgr_UpdateIntegrationMembers_FullMethodName = "/header.ConversationMgr/UpdateIntegrationMembers"
 	ConversationMgr_UpdateRule_FullMethodName               = "/header.ConversationMgr/UpdateRule"
 	ConversationMgr_CreateRule_FullMethodName               = "/header.ConversationMgr/CreateRule"
 	ConversationMgr_DeleteRule_FullMethodName               = "/header.ConversationMgr/DeleteRule"
@@ -11453,8 +11452,7 @@ type ConversationMgrClient interface {
 	Integrate(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
 	UpsertIntegration(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
 	GetIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
-	UpdateIntegrationMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error)
-	RemoveIntegrationMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error)
+	UpdateIntegrationMembers(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
 	UpdateRule(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Rule, error)
 	CreateRule(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Rule, error)
 	DeleteRule(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -11877,20 +11875,10 @@ func (c *conversationMgrClient) GetIntegration(ctx context.Context, in *Id, opts
 	return out, nil
 }
 
-func (c *conversationMgrClient) UpdateIntegrationMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error) {
+func (c *conversationMgrClient) UpdateIntegrationMembers(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ResourceGroupMember)
-	err := c.cc.Invoke(ctx, ConversationMgr_UpdateIntegrationMember_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *conversationMgrClient) RemoveIntegrationMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, ConversationMgr_RemoveIntegrationMember_FullMethodName, in, out, cOpts...)
+	out := new(Integration)
+	err := c.cc.Invoke(ctx, ConversationMgr_UpdateIntegrationMembers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12330,8 +12318,7 @@ type ConversationMgrServer interface {
 	Integrate(context.Context, *Integration) (*Integration, error)
 	UpsertIntegration(context.Context, *Integration) (*Integration, error)
 	GetIntegration(context.Context, *Id) (*Integration, error)
-	UpdateIntegrationMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error)
-	RemoveIntegrationMember(context.Context, *ResourceGroupMember) (*Empty, error)
+	UpdateIntegrationMembers(context.Context, *Integration) (*Integration, error)
 	UpdateRule(context.Context, *Rule) (*Rule, error)
 	CreateRule(context.Context, *Rule) (*Rule, error)
 	DeleteRule(context.Context, *Id) (*Empty, error)
@@ -12495,11 +12482,8 @@ func (UnimplementedConversationMgrServer) UpsertIntegration(context.Context, *In
 func (UnimplementedConversationMgrServer) GetIntegration(context.Context, *Id) (*Integration, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIntegration not implemented")
 }
-func (UnimplementedConversationMgrServer) UpdateIntegrationMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateIntegrationMember not implemented")
-}
-func (UnimplementedConversationMgrServer) RemoveIntegrationMember(context.Context, *ResourceGroupMember) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveIntegrationMember not implemented")
+func (UnimplementedConversationMgrServer) UpdateIntegrationMembers(context.Context, *Integration) (*Integration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateIntegrationMembers not implemented")
 }
 func (UnimplementedConversationMgrServer) UpdateRule(context.Context, *Rule) (*Rule, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRule not implemented")
@@ -13305,38 +13289,20 @@ func _ConversationMgr_GetIntegration_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationMgr_UpdateIntegrationMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResourceGroupMember)
+func _ConversationMgr_UpdateIntegrationMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Integration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationMgrServer).UpdateIntegrationMember(ctx, in)
+		return srv.(ConversationMgrServer).UpdateIntegrationMembers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ConversationMgr_UpdateIntegrationMember_FullMethodName,
+		FullMethod: ConversationMgr_UpdateIntegrationMembers_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).UpdateIntegrationMember(ctx, req.(*ResourceGroupMember))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ConversationMgr_RemoveIntegrationMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResourceGroupMember)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ConversationMgrServer).RemoveIntegrationMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ConversationMgr_RemoveIntegrationMember_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).RemoveIntegrationMember(ctx, req.(*ResourceGroupMember))
+		return srv.(ConversationMgrServer).UpdateIntegrationMembers(ctx, req.(*Integration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14199,12 +14165,8 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ConversationMgr_GetIntegration_Handler,
 		},
 		{
-			MethodName: "UpdateIntegrationMember",
-			Handler:    _ConversationMgr_UpdateIntegrationMember_Handler,
-		},
-		{
-			MethodName: "RemoveIntegrationMember",
-			Handler:    _ConversationMgr_RemoveIntegrationMember_Handler,
+			MethodName: "UpdateIntegrationMembers",
+			Handler:    _ConversationMgr_UpdateIntegrationMembers_Handler,
 		},
 		{
 			MethodName: "UpdateRule",
