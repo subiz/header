@@ -769,12 +769,7 @@ service MailkonService {
 	rpc UnblockEmail(Id) returns (Response);
 }
 
-// widget services
 service WidgetService {
-	rpc Read(Id) returns (header.WidgetSetting);
-	rpc Update(header.WidgetSetting) returns (header.WidgetSetting);
-	rpc ReadUserSetting(Id) returns (header.WidgetUserSetting);
-
 	rpc ReadAccountSetting2(WidgetSettingRequest) returns (header.AccountWeb);
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
@@ -789,14 +784,14 @@ service WidgetService {
 	rpc ListUploadedImage(Id) returns (header.UploadedImages);
 	rpc DeleteUploadedImage(header.UploadedImage) returns (Empty);
 
-	rpc ListWebPlugins(Id) returns (WebPlugins);
+	rpc ListWebPlugins(Id) returns (Response);
 	rpc UpdateWebPlugin(WebPlugin) returns (WebPlugin);
 	rpc UpdateWebPluginEnabled(WebPlugin) returns (WebPlugin);
 	rpc CreateWebPlugin(WebPlugin) returns (WebPlugin);
 	rpc DeleteWebPlugin(Id) returns (Empty);
 
 	rpc UpdateWebPluginTemplate(header.WebPlugin) returns (header.WebPlugin);
-	rpc ListWebPluginTemplates(Id) returns (header.WebPlugins);
+	rpc ListWebPluginTemplates(Id) returns (header.Response);
 	rpc DeleteWebPluginTemplate(Id) returns (Empty);
 
 	rpc ReportWebPlugin(header.ReportWebPluginRequest) returns (header.ReportWebPluginResponse);

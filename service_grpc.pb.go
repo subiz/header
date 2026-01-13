@@ -21468,9 +21468,6 @@ var MailkonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	WidgetService_Read_FullMethodName                     = "/header.WidgetService/Read"
-	WidgetService_Update_FullMethodName                   = "/header.WidgetService/Update"
-	WidgetService_ReadUserSetting_FullMethodName          = "/header.WidgetService/ReadUserSetting"
 	WidgetService_ReadAccountSetting2_FullMethodName      = "/header.WidgetService/ReadAccountSetting2"
 	WidgetService_SubmitImpression_FullMethodName         = "/header.WidgetService/SubmitImpression"
 	WidgetService_SubmitConversion_FullMethodName         = "/header.WidgetService/SubmitConversion"
@@ -21498,12 +21495,7 @@ const (
 // WidgetServiceClient is the client API for WidgetService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// widget services
 type WidgetServiceClient interface {
-	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetSetting, error)
-	Update(ctx context.Context, in *WidgetSetting, opts ...grpc.CallOption) (*WidgetSetting, error)
-	ReadUserSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetUserSetting, error)
 	ReadAccountSetting2(ctx context.Context, in *WidgetSettingRequest, opts ...grpc.CallOption) (*AccountWeb, error)
 	SubmitImpression(ctx context.Context, in *Impression, opts ...grpc.CallOption) (*Impression, error)
 	SubmitConversion(ctx context.Context, in *Conversion, opts ...grpc.CallOption) (*Conversion, error)
@@ -21514,13 +21506,13 @@ type WidgetServiceClient interface {
 	UploadImage(ctx context.Context, in *UploadedImage, opts ...grpc.CallOption) (*UploadedImage, error)
 	ListUploadedImage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UploadedImages, error)
 	DeleteUploadedImage(ctx context.Context, in *UploadedImage, opts ...grpc.CallOption) (*Empty, error)
-	ListWebPlugins(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WebPlugins, error)
+	ListWebPlugins(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateWebPlugin(ctx context.Context, in *WebPlugin, opts ...grpc.CallOption) (*WebPlugin, error)
 	UpdateWebPluginEnabled(ctx context.Context, in *WebPlugin, opts ...grpc.CallOption) (*WebPlugin, error)
 	CreateWebPlugin(ctx context.Context, in *WebPlugin, opts ...grpc.CallOption) (*WebPlugin, error)
 	DeleteWebPlugin(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	UpdateWebPluginTemplate(ctx context.Context, in *WebPlugin, opts ...grpc.CallOption) (*WebPlugin, error)
-	ListWebPluginTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WebPlugins, error)
+	ListWebPluginTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	DeleteWebPluginTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReportWebPlugin(ctx context.Context, in *ReportWebPluginRequest, opts ...grpc.CallOption) (*ReportWebPluginResponse, error)
 	SearchImages(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UploadedImages, error)
@@ -21534,36 +21526,6 @@ type widgetServiceClient struct {
 
 func NewWidgetServiceClient(cc grpc.ClientConnInterface) WidgetServiceClient {
 	return &widgetServiceClient{cc}
-}
-
-func (c *widgetServiceClient) Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetSetting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WidgetSetting)
-	err := c.cc.Invoke(ctx, WidgetService_Read_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *widgetServiceClient) Update(ctx context.Context, in *WidgetSetting, opts ...grpc.CallOption) (*WidgetSetting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WidgetSetting)
-	err := c.cc.Invoke(ctx, WidgetService_Update_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *widgetServiceClient) ReadUserSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WidgetUserSetting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WidgetUserSetting)
-	err := c.cc.Invoke(ctx, WidgetService_ReadUserSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *widgetServiceClient) ReadAccountSetting2(ctx context.Context, in *WidgetSettingRequest, opts ...grpc.CallOption) (*AccountWeb, error) {
@@ -21666,9 +21628,9 @@ func (c *widgetServiceClient) DeleteUploadedImage(ctx context.Context, in *Uploa
 	return out, nil
 }
 
-func (c *widgetServiceClient) ListWebPlugins(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WebPlugins, error) {
+func (c *widgetServiceClient) ListWebPlugins(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WebPlugins)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, WidgetService_ListWebPlugins_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -21726,9 +21688,9 @@ func (c *widgetServiceClient) UpdateWebPluginTemplate(ctx context.Context, in *W
 	return out, nil
 }
 
-func (c *widgetServiceClient) ListWebPluginTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*WebPlugins, error) {
+func (c *widgetServiceClient) ListWebPluginTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WebPlugins)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, WidgetService_ListWebPluginTemplates_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -21789,12 +21751,7 @@ func (c *widgetServiceClient) ListNotifBackgrounds(ctx context.Context, in *Id, 
 // WidgetServiceServer is the server API for WidgetService service.
 // All implementations must embed UnimplementedWidgetServiceServer
 // for forward compatibility.
-//
-// widget services
 type WidgetServiceServer interface {
-	Read(context.Context, *Id) (*WidgetSetting, error)
-	Update(context.Context, *WidgetSetting) (*WidgetSetting, error)
-	ReadUserSetting(context.Context, *Id) (*WidgetUserSetting, error)
 	ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error)
 	SubmitImpression(context.Context, *Impression) (*Impression, error)
 	SubmitConversion(context.Context, *Conversion) (*Conversion, error)
@@ -21805,13 +21762,13 @@ type WidgetServiceServer interface {
 	UploadImage(context.Context, *UploadedImage) (*UploadedImage, error)
 	ListUploadedImage(context.Context, *Id) (*UploadedImages, error)
 	DeleteUploadedImage(context.Context, *UploadedImage) (*Empty, error)
-	ListWebPlugins(context.Context, *Id) (*WebPlugins, error)
+	ListWebPlugins(context.Context, *Id) (*Response, error)
 	UpdateWebPlugin(context.Context, *WebPlugin) (*WebPlugin, error)
 	UpdateWebPluginEnabled(context.Context, *WebPlugin) (*WebPlugin, error)
 	CreateWebPlugin(context.Context, *WebPlugin) (*WebPlugin, error)
 	DeleteWebPlugin(context.Context, *Id) (*Empty, error)
 	UpdateWebPluginTemplate(context.Context, *WebPlugin) (*WebPlugin, error)
-	ListWebPluginTemplates(context.Context, *Id) (*WebPlugins, error)
+	ListWebPluginTemplates(context.Context, *Id) (*Response, error)
 	DeleteWebPluginTemplate(context.Context, *Id) (*Empty, error)
 	ReportWebPlugin(context.Context, *ReportWebPluginRequest) (*ReportWebPluginResponse, error)
 	SearchImages(context.Context, *Id) (*UploadedImages, error)
@@ -21827,15 +21784,6 @@ type WidgetServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWidgetServiceServer struct{}
 
-func (UnimplementedWidgetServiceServer) Read(context.Context, *Id) (*WidgetSetting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
-}
-func (UnimplementedWidgetServiceServer) Update(context.Context, *WidgetSetting) (*WidgetSetting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (UnimplementedWidgetServiceServer) ReadUserSetting(context.Context, *Id) (*WidgetUserSetting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadUserSetting not implemented")
-}
 func (UnimplementedWidgetServiceServer) ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadAccountSetting2 not implemented")
 }
@@ -21866,7 +21814,7 @@ func (UnimplementedWidgetServiceServer) ListUploadedImage(context.Context, *Id) 
 func (UnimplementedWidgetServiceServer) DeleteUploadedImage(context.Context, *UploadedImage) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUploadedImage not implemented")
 }
-func (UnimplementedWidgetServiceServer) ListWebPlugins(context.Context, *Id) (*WebPlugins, error) {
+func (UnimplementedWidgetServiceServer) ListWebPlugins(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWebPlugins not implemented")
 }
 func (UnimplementedWidgetServiceServer) UpdateWebPlugin(context.Context, *WebPlugin) (*WebPlugin, error) {
@@ -21884,7 +21832,7 @@ func (UnimplementedWidgetServiceServer) DeleteWebPlugin(context.Context, *Id) (*
 func (UnimplementedWidgetServiceServer) UpdateWebPluginTemplate(context.Context, *WebPlugin) (*WebPlugin, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWebPluginTemplate not implemented")
 }
-func (UnimplementedWidgetServiceServer) ListWebPluginTemplates(context.Context, *Id) (*WebPlugins, error) {
+func (UnimplementedWidgetServiceServer) ListWebPluginTemplates(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWebPluginTemplates not implemented")
 }
 func (UnimplementedWidgetServiceServer) DeleteWebPluginTemplate(context.Context, *Id) (*Empty, error) {
@@ -21921,60 +21869,6 @@ func RegisterWidgetServiceServer(s grpc.ServiceRegistrar, srv WidgetServiceServe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&WidgetService_ServiceDesc, srv)
-}
-
-func _WidgetService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).Read(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_Read_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).Read(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WidgetService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WidgetSetting)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_Update_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).Update(ctx, req.(*WidgetSetting))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WidgetService_ReadUserSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WidgetServiceServer).ReadUserSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WidgetService_ReadUserSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).ReadUserSetting(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _WidgetService_ReadAccountSetting2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -22380,18 +22274,6 @@ var WidgetService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.WidgetService",
 	HandlerType: (*WidgetServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Read",
-			Handler:    _WidgetService_Read_Handler,
-		},
-		{
-			MethodName: "Update",
-			Handler:    _WidgetService_Update_Handler,
-		},
-		{
-			MethodName: "ReadUserSetting",
-			Handler:    _WidgetService_ReadUserSetting_Handler,
-		},
 		{
 			MethodName: "ReadAccountSetting2",
 			Handler:    _WidgetService_ReadAccountSetting2_Handler,

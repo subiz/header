@@ -1747,7 +1747,7 @@ message ZaloCall {
 	int64 reason = 5;
 	int64 is_caller = 6;
 	int64 is_enable_callback = 7;
-	string call_type = 8;
+	int64 call_type = 8;
 }
 
 message QuickReply {
@@ -2480,29 +2480,6 @@ message PsMessage {
 	bool not_urgent = 6;
 }
 
-// widget -- deprecated
-message WidgetUserSetting {
-	common.Context ctx = 1;
-	account.Account account = 3;
-	repeated account.Agent agents = 5;
-	string account_id = 2; // subiz use only
-	string user_id = 7; // subiz use only
-	string language = 6;
-	repeated Bot bots = 14;
-	repeated WebPlugin plugins = 15;
-
-	bool is_online = 20; // remove
-	bool is_in_business_hour = 21; // remove
-
-	int64 last_modified = 22;
-
-	// repeated Address addresses = 23;
-	// repeated PaymentMethod payment_methods = 24;
-	Location location = 25;
-
-	string device_type = 26;  // mobile desktop tablet
-}
-
 message AccountWeb {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -2697,12 +2674,6 @@ message CampaignNotification {
 	bool roundrobin_agent = 15;
 
 	Message user_email = 14;
-}
-
-message WebPlugins {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated WebPlugin plugins = 3;
 }
 
 message WebPlugin {
@@ -7108,6 +7079,8 @@ message Response {
 
 	repeated ProductProp product_props = 256;
 	repeated ProductPropValue product_prop_values = 257;
+
+	repeated WebPlugin plugins = 260;
 }
 
 message ReportCount {
