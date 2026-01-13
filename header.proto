@@ -2540,6 +2540,8 @@ message WidgetHeader {
 	repeated SocialLink links = 3;
 	// agents whose avatar will be display in the header
 	repeated string agent_ids = 4;
+
+	string logo_url = 5;
 }
 
 message WidgetSetting {

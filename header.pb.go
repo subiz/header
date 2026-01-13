@@ -18141,6 +18141,7 @@ type WidgetHeader struct {
 	Links []*SocialLink `protobuf:"bytes,3,rep,name=links,proto3" json:"links,omitempty"`
 	// agents whose avatar will be display in the header
 	AgentIds      []string `protobuf:"bytes,4,rep,name=agent_ids,json=agentIds,proto3" json:"agent_ids,omitempty"`
+	LogoUrl       string   `protobuf:"bytes,5,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -18194,6 +18195,13 @@ func (x *WidgetHeader) GetAgentIds() []string {
 		return x.AgentIds
 	}
 	return nil
+}
+
+func (x *WidgetHeader) GetLogoUrl() string {
+	if x != nil {
+		return x.LogoUrl
+	}
+	return ""
 }
 
 type WidgetSetting struct {
@@ -73757,11 +73765,12 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"SocialLink\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url\"\xa0\x01\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"\xbb\x01\n" +
 	"\fWidgetHeader\x12\x16\n" +
 	"\x06layout\x18\x02 \x01(\tR\x06layout\x12(\n" +
 	"\x05links\x18\x03 \x03(\v2\x12.header.SocialLinkR\x05links\x12\x1b\n" +
-	"\tagent_ids\x18\x04 \x03(\tR\bagentIds\"1\n" +
+	"\tagent_ids\x18\x04 \x03(\tR\bagentIds\x12\x19\n" +
+	"\blogo_url\x18\x05 \x01(\tR\alogoUrl\"1\n" +
 	"\fHeaderLayout\x12\b\n" +
 	"\x04team\x10\x00\x12\n" +
 	"\n" +
