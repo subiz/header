@@ -13133,12 +13133,12 @@ func (x *Attachment) GetZaloCall() *ZaloCall {
 
 type ZaloCall struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Action           string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"` // recommened.misscall
-	Duration         int64                  `protobuf:"varint,4,opt,name=duration,proto3" json:"duration,omitempty"`
-	Reason           string                 `protobuf:"bytes,5,opt,name=reason,proto3" json:"reason,omitempty"`
+	Action           string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"` // recommened.misscall, recommened.calltime
+	DurationSec      int64                  `protobuf:"varint,4,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`
+	Reason           int64                  `protobuf:"varint,5,opt,name=reason,proto3" json:"reason,omitempty"`
 	IsCaller         int64                  `protobuf:"varint,6,opt,name=is_caller,json=isCaller,proto3" json:"is_caller,omitempty"`
 	IsEnableCallback int64                  `protobuf:"varint,7,opt,name=is_enable_callback,json=isEnableCallback,proto3" json:"is_enable_callback,omitempty"`
-	Calltype         string                 `protobuf:"bytes,8,opt,name=calltype,proto3" json:"calltype,omitempty"`
+	CallType         string                 `protobuf:"bytes,8,opt,name=call_type,json=callType,proto3" json:"call_type,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -13180,18 +13180,18 @@ func (x *ZaloCall) GetAction() string {
 	return ""
 }
 
-func (x *ZaloCall) GetDuration() int64 {
+func (x *ZaloCall) GetDurationSec() int64 {
 	if x != nil {
-		return x.Duration
+		return x.DurationSec
 	}
 	return 0
 }
 
-func (x *ZaloCall) GetReason() string {
+func (x *ZaloCall) GetReason() int64 {
 	if x != nil {
 		return x.Reason
 	}
-	return ""
+	return 0
 }
 
 func (x *ZaloCall) GetIsCaller() int64 {
@@ -13208,9 +13208,9 @@ func (x *ZaloCall) GetIsEnableCallback() int64 {
 	return 0
 }
 
-func (x *ZaloCall) GetCalltype() string {
+func (x *ZaloCall) GetCallType() string {
 	if x != nil {
-		return x.Calltype
+		return x.CallType
 	}
 	return ""
 }
@@ -73182,14 +73182,14 @@ const file_header_proto_rawDesc = "" +
 	"\x10thumbnail_height\x181 \x01(\x03R\x0fthumbnailHeight\x12 \n" +
 	"\x04form\x182 \x01(\v2\f.header.FormR\x04form\x12?\n" +
 	"\x0fform_submission\x183 \x01(\v2\x16.header.FormSubmissionR\x0eformSubmission\x12-\n" +
-	"\tzalo_call\x184 \x01(\v2\x10.header.ZaloCallR\bzaloCall\"\xbd\x01\n" +
+	"\tzalo_call\x184 \x01(\v2\x10.header.ZaloCallR\bzaloCall\"\xc5\x01\n" +
 	"\bZaloCall\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\x12\x1a\n" +
-	"\bduration\x18\x04 \x01(\x03R\bduration\x12\x16\n" +
-	"\x06reason\x18\x05 \x01(\tR\x06reason\x12\x1b\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\x12!\n" +
+	"\fduration_sec\x18\x04 \x01(\x03R\vdurationSec\x12\x16\n" +
+	"\x06reason\x18\x05 \x01(\x03R\x06reason\x12\x1b\n" +
 	"\tis_caller\x18\x06 \x01(\x03R\bisCaller\x12,\n" +
-	"\x12is_enable_callback\x18\a \x01(\x03R\x10isEnableCallback\x12\x1a\n" +
-	"\bcalltype\x18\b \x01(\tR\bcalltype\"\xaf\x01\n" +
+	"\x12is_enable_callback\x18\a \x01(\x03R\x10isEnableCallback\x12\x1b\n" +
+	"\tcall_type\x18\b \x01(\tR\bcallType\"\xaf\x01\n" +
 	"\n" +
 	"QuickReply\x12!\n" +
 	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x14\n" +

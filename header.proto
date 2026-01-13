@@ -1742,12 +1742,12 @@ message Attachment {
 }
 
 message ZaloCall {
-	string action = 3; // recommened.misscall
-	int64 duration = 4;
-	string reason = 5;
+	string action = 3; // recommened.misscall, recommened.calltime
+	int64 duration_sec = 4;
+	int64 reason = 5;
 	int64 is_caller = 6;
 	int64 is_enable_callback = 7;
-	string calltype = 8;
+	string call_type = 8;
 }
 
 message QuickReply {
