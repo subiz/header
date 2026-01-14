@@ -1232,6 +1232,7 @@ message StartRequest {
 	bool is_testing = 50;
 
 	Event greeting_message = 51;
+	Event message_sent = 52; // user message
 }
 
 enum ConvoState {
@@ -3367,7 +3368,6 @@ enum ChannelType {
 	instagram = 7;
 	instagram_comment = 8;
 	google_review = 9;
-	google_question = 10;
 	zns = 12;
 	zalo_personal = 13;
 }
@@ -3660,7 +3660,7 @@ message GoogleLocationSetting {
 	string business_location_id = 3;
 
 	GoogleReviewSetting google_review_setting = 5;
-	GoogleQuestionSetting google_question_setting = 6;
+	// GoogleQuestionSetting google_question_setting = 6;
 	// GoogleMessageSetting google_message_setting = 7;
 
 	int64 updated = 9;
@@ -3671,9 +3671,9 @@ message GoogleReviewSetting {
 	map<string, string> repliesM = 5; //rating => reply
 }
 
-message GoogleQuestionSetting {
-	bool enabled = 1;
-}
+//message GoogleQuestionSetting {
+//bool enabled = 1;
+//}
 
 message FbComment {
 	string comment = 2; // read only

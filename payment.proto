@@ -25,11 +25,6 @@ message Comment {
 	optional int64 created = 12;
 }
 
-message DiffSubRequest {
-	optional Subscription old_subscription = 4;
-	optional Subscription new_subscription = 5;
-}
-
 message PurchaseRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -122,25 +117,12 @@ message Bill {
 	optional string bank_account_id = 22;
 	optional string by_agent_id = 23;
 	optional int64 fpv_amount_usd = 24;
-
-	optional int64 fpv_referrer_commission_vnd = 36; // hidden
-	optional string referrer_agent_id = 37;
-	optional int64 fpv_referrer_commission_usd = 38; // hidden
-
-	// optional string promotion_code = 39;
 }
 
 message Bills {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	repeated Bill bills = 3;
-}
-
-message Note {
-	optional common.Context ctx = 1;
-	optional string message = 4;
-	optional string creator = 5;
-	optional int64 created = 6;
 }
 
 message Invoices {
@@ -192,7 +174,7 @@ message Invoice {
 	optional int64 updated = 18;
 
 	// optional int32 year = 19; // optional
-	repeated Note notes = 22;
+	// repeated Note notes = 22;
 	repeated string bills = 23;
 	optional float payment_made = 24;
 	optional Subscription current_sub = 25; // optional
@@ -405,6 +387,7 @@ message InvoiceCreatedEmail {
 	optional int64 created = 6;
 	optional string invoice_created = 8;
 	optional string invoice_link = 9;
+	optional int64 invoice_duedate = 10; // ms
 }
 
 message TrialEndingEmail {
