@@ -9469,6 +9469,7 @@ type ChannelCondition struct {
 	FacebookPostKeywords    []string           `protobuf:"bytes,20,rep,name=facebook_post_keywords,json=facebookPostKeywords,proto3" json:"facebook_post_keywords,omitempty"`            // contains
 	NotFacebookPageKeywords []string           `protobuf:"bytes,21,rep,name=not_facebook_page_keywords,json=notFacebookPageKeywords,proto3" json:"not_facebook_page_keywords,omitempty"` // contains
 	Facebook                *FacebookCondition `protobuf:"bytes,17,opt,name=facebook,proto3" json:"facebook,omitempty"`
+	FormNames               []string           `protobuf:"bytes,22,rep,name=form_names,json=formNames,proto3" json:"form_names,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -9632,6 +9633,13 @@ func (x *ChannelCondition) GetNotFacebookPageKeywords() []string {
 func (x *ChannelCondition) GetFacebook() *FacebookCondition {
 	if x != nil {
 		return x.Facebook
+	}
+	return nil
+}
+
+func (x *ChannelCondition) GetFormNames() []string {
+	if x != nil {
+		return x.FormNames
 	}
 	return nil
 }
@@ -72435,7 +72443,7 @@ const file_header_proto_rawDesc = "" +
 	"daysOfWeek\x12$\n" +
 	"\x0eminute_of_days\x18\x04 \x03(\x05R\fminuteOfDays\x12\x19\n" +
 	"\bend_time\x18\x05 \x01(\x03R\aendTime\x12!\n" +
-	"\fagent_online\x18\x06 \x01(\tR\vagentOnline\"\xbd\x06\n" +
+	"\fagent_online\x18\x06 \x01(\tR\vagentOnline\"\xdc\x06\n" +
 	"\x10ChannelCondition\x12\x1a\n" +
 	"\bchannels\x18\x02 \x03(\tR\bchannels\x12'\n" +
 	"\x0fintegration_ids\x18\x03 \x03(\tR\x0eintegrationIds\x127\n" +
@@ -72459,7 +72467,9 @@ const file_header_proto_rawDesc = "" +
 	"\x0enot_page_names\x18\x13 \x03(\tR\fnotPageNames\x124\n" +
 	"\x16facebook_post_keywords\x18\x14 \x03(\tR\x14facebookPostKeywords\x12;\n" +
 	"\x1anot_facebook_page_keywords\x18\x15 \x03(\tR\x17notFacebookPageKeywords\x125\n" +
-	"\bfacebook\x18\x11 \x01(\v2\x19.header.FacebookConditionR\bfacebook\"\x8d\x01\n" +
+	"\bfacebook\x18\x11 \x01(\v2\x19.header.FacebookConditionR\bfacebook\x12\x1d\n" +
+	"\n" +
+	"form_names\x18\x16 \x03(\tR\tformNames\"\x8d\x01\n" +
 	"\x11LocationCondition\x12\x1b\n" +
 	"\tcity_name\x18\x03 \x01(\tR\bcityName\x12!\n" +
 	"\fcountry_code\x18\x04 \x01(\tR\vcountryCode\x12\x1a\n" +

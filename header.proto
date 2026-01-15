@@ -1114,6 +1114,8 @@ message ChannelCondition {
 	repeated string not_facebook_page_keywords = 21; // contains
 
 	FacebookCondition facebook = 17;
+
+	repeated string form_names = 22;
 }
 
 message LocationCondition {
