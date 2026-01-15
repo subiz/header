@@ -414,6 +414,7 @@ service ConversationMgr {
 	rpc PongMessage(header.Event) returns (header.Event);
 
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
+	rpc ListConversationLogs(Id) returns (Response);
 	rpc EndConversation(Id) returns (header.Conversation);
 	rpc GetConversation(Id) returns (header.Conversation);
 	rpc GetFullConversation(Id) returns (header.Response);
