@@ -5122,6 +5122,7 @@ type ListWorkflowSessionRequest struct {
 	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"` // error
 	Limit         int64                  `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`
 	Anchor        string                 `protobuf:"bytes,8,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	ObjectId      string                 `protobuf:"bytes,9,opt,name=object_id,json=objectId,proto3" json:"object_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5208,6 +5209,13 @@ func (x *ListWorkflowSessionRequest) GetLimit() int64 {
 func (x *ListWorkflowSessionRequest) GetAnchor() string {
 	if x != nil {
 		return x.Anchor
+	}
+	return ""
+}
+
+func (x *ListWorkflowSessionRequest) GetObjectId() string {
+	if x != nil {
+		return x.ObjectId
 	}
 	return ""
 }
@@ -9160,7 +9168,7 @@ const file_request_proto_rawDesc = "" +
 	"is_private\x18\a \x01(\bR\tisPrivate\x12 \n" +
 	"\fby_type_only\x18\b \x01(\bR\n" +
 	"byTypeOnly\x12\x1b\n" +
-	"\tmax_chars\x18\t \x01(\x03R\bmaxChars\"\xfb\x01\n" +
+	"\tmax_chars\x18\t \x01(\x03R\bmaxChars\"\x98\x02\n" +
 	"\x1aListWorkflowSessionRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9171,7 +9179,8 @@ const file_request_proto_rawDesc = "" +
 	"\ato_hour\x18\x05 \x01(\x03R\x06toHour\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\tR\x06status\x12\x14\n" +
 	"\x05limit\x18\a \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06anchor\x18\b \x01(\tR\x06anchor\"\xe1\x01\n" +
+	"\x06anchor\x18\b \x01(\tR\x06anchor\x12\x1b\n" +
+	"\tobject_id\x18\t \x01(\tR\bobjectId\"\xe1\x01\n" +
 	"\fBillsRequest\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x1b\n" +

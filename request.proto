@@ -653,6 +653,7 @@ message ListWorkflowSessionRequest {
 	string status = 6; // error
 	int64 limit = 7;
 	string anchor = 8;
+	string object_id = 9;
 }
 
 message BillsRequest {
