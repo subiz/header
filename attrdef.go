@@ -269,13 +269,6 @@ func ListDefaultDefs() []*AttributeDefinition {
 			IsReadonly: true,
 		},
 		&AttributeDefinition{
-			Label:     "Loại nguồn lead",
-			I18NLabel: &I18NString{Vi_VN: "Loại nguồn lead", En_US: "Lead source type"},
-			Type:      "text",
-			Key:       "lead_source",
-			IsSystem:  true,
-		},
-		&AttributeDefinition{
 			// alway move forward
 			Label:     "Giai đoạn vòng đời",
 			I18NLabel: &I18NString{Vi_VN: "Giai đoạn vòng đời", En_US: "Lifecycle stage"},

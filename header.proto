@@ -1256,9 +1256,10 @@ message ConversationLog {
 	string id = 4;
 	int64 created = 8; // time that event submited (created) to subiz
 	string type = 9; // alway lowercase, custom_* for custom event purchase
-	By by = 10;
-	string data = 11; // json data
-	string text = 12; // english
+	string by = 10;
+	string by_type = 11;
+	map<string, string> data = 12; // json data
+	string text = 13; // english
 }
 
 message Conversation {
@@ -1368,7 +1369,19 @@ message AIAgentAutoFollowUpSetting {
 	int64 enabled = 4; // maximum twice
 	// int64 max_attempts = 5;
 	int64 delay_sec = 8;
-	repeated string instructions = 6;
+	// repeated string instructions = 6;
+
+	/*
+	1. Conversation history:
+		[2025 Aug 21, 09:00:00] user: hello
+		[2025 Aug 21, 09:00:02] assistant: hi, how can I help you with?
+		[2025 Aug 21, 09:00:04] user: I want to make a reservation
+		[2025 Aug 21, 09:00:06] assistant: OK, How many people will be in your party?
+		[2025 Aug 21, 09:00:08] user: Let me think for a little bit
+		[2025 Aug 21, 09:00:10] assistant: OK
+
+		Expect: The assistant is waiting for user reply, the assistant should send a remind after 1-2 min
+	*/
 	repeated string examples = 7;
 }
 
