@@ -8,6 +8,7 @@ import (
 	"hash/crc32"
 	"os"
 	"reflect"
+	"runtime"
 	"runtime/debug"
 	"strconv"
 	"strings"
@@ -31,6 +32,12 @@ import (
 const (
 	CtxKey = "pcontext"
 )
+
+var hostname string
+
+func init() {
+	hostname, _ = os.Hostname()
+}
 
 // WithShardRedirect creates a dial option that learns on "correct_addr" reponse
 // header to send requests to correct shard
@@ -97,7 +104,7 @@ func WithShardRedirect() grpc.DialOption {
 		md, _ := metadata.FromOutgoingContext(ctx)
 		pkey := strings.Join(md["shard_key"], "")
 		if pkey == "" {
-			pkey = GetAccountId(ctx, req)
+			pkey = getAccountId(ctx, req)
 		}
 
 		if len(addrs) == 0 && pkey != "" && IsStagging(pkey) && !isNormalService(cc.Target()) {
@@ -183,13 +190,32 @@ func ToGrpcCtx(pctx *common.Context) context.Context {
 	data, err := proto.Marshal(pctx)
 	if err != nil {
 		// maybe invalid unicode character
-		// panic(fmt.Sprintf("unable to marshal cred, %v ", pctx))
-		return context.Background()
+		panic(fmt.Sprintf("unable to marshal cred, %v ", pctx))
 	}
 	cred64 := base64.StdEncoding.EncodeToString(data)
+
+	// Get caller function name instead of full stack for performance
+	var stackTrace []string
+	for i := 1; i <= 3; i++ { // Get 3 callers: 1, 2, 3
+		pc, _, _, ok := runtime.Caller(i)
+		if !ok {
+			break
+		}
+		if fn := runtime.FuncForPC(pc); fn != nil {
+			stackTrace = append(stackTrace, fn.Name())
+		} else {
+			stackTrace = append(stackTrace, "unknown")
+		}
+	}
+	callerName := strings.Join(stackTrace, " -> ")
+	if callerName == "" {
+		callerName = "unknown"
+	}
+
 	return metadata.NewOutgoingContext(
 		context.Background(),
-		metadata.Pairs(CtxKey, cred64))
+		metadata.Pairs(CtxKey, cred64, log.CallerHostnameKey, hostname, log.CallerStackKey, callerName),
+	)
 }
 
 func FromGrpcCtx(ctx context.Context) *common.Context {
@@ -220,9 +246,9 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 	defer func() {
 		if r := recover(); r != nil {
 			if e, ok := r.(error); ok {
-				err = log.ERetry(e, log.M{"_function_name": info.FullMethod, "__skip_stack": 1}) // wrap error
+				err = log.EServer(ctx, "", e, log.M{"_function_name": info.FullMethod}) // wrap error
 			} else {
-				err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": info.FullMethod, "__skip_stack": 1})
+				err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": info.FullMethod})
 			}
 		}
 	}()
@@ -233,7 +259,7 @@ func WithErrorStack() grpc.DialOption {
 	return grpc.WithChainUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
 		defer func() {
 			if r := recover(); r != nil {
-				err = log.ERetry(err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method, "__skip_stack": "3"})
+				err = log.EServer(ctx, "", err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method})
 			}
 		}()
 
@@ -245,23 +271,23 @@ func WithErrorStack() grpc.DialOption {
 		grpcerr, ok := status.FromError(err)
 		if !ok {
 			// very strange error
-			return log.EServiceUnavailable(err, log.M{"grpc_code": "nono", "_function_name": method, "__skip_stack": "2"}) // report
+			return log.EServiceUnavailable(err, log.M{"grpc_code": "nono", "_function_name": method}) // report
 		}
 
 		ourerr := log.UnmarshalError([]byte(grpcerr.Message()))
 		if ourerr != nil {
-			return log.WrapStack(ourerr, 2)
+			return ourerr
 		}
 
 		switch grpcerr.Code() {
 		case codes.Unavailable:
-			return log.EServiceUnavailable(err, log.M{"grpc_code": grpcerr.Code().String(), "_function_name": method, "__skip_stack": "3"}) // report
+			return log.EServiceUnavailable(err, log.M{"grpc_code": grpcerr.Code().String(), "_function_name": method}) // report
 		default:
 			// good grpc err but not our error
 			// codes.Internal
 			input, _ := json.Marshal(req)
 			cred := FromGrpcCtx(ctx).GetCredential()
-			return log.ERetry(err, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method, "__skip_stack": "3"}) // report
+			return log.EServer(ctx, "", err, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method}) // report
 		}
 	})
 }
@@ -332,9 +358,9 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.ERetry(e, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
+					err = log.EServer(ctx, "", e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
 				} else {
-					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod, "__skip_stack": 1})
+					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod})
 				}
 			}
 		}()
@@ -344,7 +370,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		pkey := strings.Join(md["shard_key"], "")
 
 		if pkey == "" {
-			pkey = GetAccountId(ctx, in)
+			pkey = getAccountId(ctx, in)
 			if pkey == "" {
 				// no sharding parameter, perform the request anyway
 				return handler(ctx, in)
@@ -463,10 +489,10 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.ERetry(e, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
+					err = log.EServer(ctx, "", e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
 				} else {
 					debug.PrintStack() // prints stack trace to know where panic happened
-					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod, "__skip_stack": 1})
+					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod})
 				}
 			}
 		}()
@@ -476,7 +502,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		pkey := strings.Join(md["shard_key"], "")
 
 		if pkey == "" {
-			pkey = GetAccountId(ctx, in)
+			pkey = getAccountId(ctx, in)
 			if pkey == "" {
 				// no sharding parameter, perform the request anyway
 				return handler(ctx, in)
@@ -575,7 +601,7 @@ func getReturnType(server interface{}, fullmethod string) reflect.Type {
 	return nil
 }
 
-func GetAccountId(ctx context.Context, message interface{}) string {
+func getAccountId(ctx context.Context, message interface{}) string {
 	msgrefl := message.(proto.Message).ProtoReflect()
 	accIdDesc := msgrefl.Descriptor().Fields().ByName("account_id")
 	accid := ""
