@@ -9378,7 +9378,6 @@ const (
 	WorkflowMgr_GetWorkflowSession_FullMethodName     = "/header.WorkflowMgr/GetWorkflowSession"
 	WorkflowMgr_UpdateWorkflowSession_FullMethodName  = "/header.WorkflowMgr/UpdateWorkflowSession"
 	WorkflowMgr_ListWorkflowSessions_FullMethodName   = "/header.WorkflowMgr/ListWorkflowSessions"
-	WorkflowMgr_ListRelatedSessions_FullMethodName    = "/header.WorkflowMgr/ListRelatedSessions"
 	WorkflowMgr_ListWorkflowLogs_FullMethodName       = "/header.WorkflowMgr/ListWorkflowLogs"
 	WorkflowMgr_ReportWorkflow_FullMethodName         = "/header.WorkflowMgr/ReportWorkflow"
 	WorkflowMgr_RunWorkflowAction_FullMethodName      = "/header.WorkflowMgr/RunWorkflowAction"
@@ -9434,7 +9433,6 @@ type WorkflowMgrClient interface {
 	GetWorkflowSession(ctx context.Context, in *WorkflowSessionId, opts ...grpc.CallOption) (*Response, error)
 	UpdateWorkflowSession(ctx context.Context, in *UpdateWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
 	ListWorkflowSessions(ctx context.Context, in *ListWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
-	ListRelatedSessions(ctx context.Context, in *ListWorkflowLogRequest, opts ...grpc.CallOption) (*Response, error)
 	ListWorkflowLogs(ctx context.Context, in *ListWorkflowLogRequest, opts ...grpc.CallOption) (*Response, error)
 	ReportWorkflow(ctx context.Context, in *WorkflowReportRequest, opts ...grpc.CallOption) (*Response, error)
 	RunWorkflowAction(ctx context.Context, in *RunWorkflowActionRequest, opts ...grpc.CallOption) (*Response, error)
@@ -9596,16 +9594,6 @@ func (c *workflowMgrClient) ListWorkflowSessions(ctx context.Context, in *ListWo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, WorkflowMgr_ListWorkflowSessions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListRelatedSessions(ctx context.Context, in *ListWorkflowLogRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListRelatedSessions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -9998,7 +9986,6 @@ type WorkflowMgrServer interface {
 	GetWorkflowSession(context.Context, *WorkflowSessionId) (*Response, error)
 	UpdateWorkflowSession(context.Context, *UpdateWorkflowSessionRequest) (*Response, error)
 	ListWorkflowSessions(context.Context, *ListWorkflowSessionRequest) (*Response, error)
-	ListRelatedSessions(context.Context, *ListWorkflowLogRequest) (*Response, error)
 	ListWorkflowLogs(context.Context, *ListWorkflowLogRequest) (*Response, error)
 	ReportWorkflow(context.Context, *WorkflowReportRequest) (*Response, error)
 	RunWorkflowAction(context.Context, *RunWorkflowActionRequest) (*Response, error)
@@ -10081,9 +10068,6 @@ func (UnimplementedWorkflowMgrServer) UpdateWorkflowSession(context.Context, *Up
 }
 func (UnimplementedWorkflowMgrServer) ListWorkflowSessions(context.Context, *ListWorkflowSessionRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWorkflowSessions not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListRelatedSessions(context.Context, *ListWorkflowLogRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListRelatedSessions not implemented")
 }
 func (UnimplementedWorkflowMgrServer) ListWorkflowLogs(context.Context, *ListWorkflowLogRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWorkflowLogs not implemented")
@@ -10429,24 +10413,6 @@ func _WorkflowMgr_ListWorkflowSessions_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).ListWorkflowSessions(ctx, req.(*ListWorkflowSessionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListRelatedSessions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListWorkflowLogRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListRelatedSessions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListRelatedSessions_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListRelatedSessions(ctx, req.(*ListWorkflowLogRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11171,10 +11137,6 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListWorkflowSessions",
 			Handler:    _WorkflowMgr_ListWorkflowSessions_Handler,
-		},
-		{
-			MethodName: "ListRelatedSessions",
-			Handler:    _WorkflowMgr_ListRelatedSessions_Handler,
 		},
 		{
 			MethodName: "ListWorkflowLogs",

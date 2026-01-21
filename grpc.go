@@ -29,8 +29,16 @@ import (
 )
 
 const (
-	CtxKey = "pcontext"
+	CtxKey            = "pcontext"
+	CallerHostnameKey = "caller-hostname"
+	CallerStackKey    = "caller-stack"
 )
+
+var hostname string
+
+func init() {
+	hostname, _ = os.Hostname()
+}
 
 // WithShardRedirect creates a dial option that learns on "correct_addr" reponse
 // header to send requests to correct shard
@@ -97,7 +105,7 @@ func WithShardRedirect() grpc.DialOption {
 		md, _ := metadata.FromOutgoingContext(ctx)
 		pkey := strings.Join(md["shard_key"], "")
 		if pkey == "" {
-			pkey = GetAccountId(ctx, req)
+			pkey = getAccountId(ctx, req)
 		}
 
 		if len(addrs) == 0 && pkey != "" && IsStagging(pkey) && !isNormalService(cc.Target()) {
@@ -189,7 +197,32 @@ func ToGrpcCtx(pctx *common.Context) context.Context {
 	cred64 := base64.StdEncoding.EncodeToString(data)
 	return metadata.NewOutgoingContext(
 		context.Background(),
-		metadata.Pairs(CtxKey, cred64))
+		metadata.Pairs(CtxKey, cred64, CallerHostnameKey, hostname, CallerStackKey, log.Stack()),
+	)
+}
+
+func GetCallerStack(ctx context.Context) string {
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		md, ok = metadata.FromOutgoingContext(ctx)
+		if !ok {
+			return ""
+		}
+	}
+
+	return strings.Join(md[CallerHostnameKey], "")
+}
+
+func GetCallerHostname(ctx context.Context) string {
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		md, ok = metadata.FromOutgoingContext(ctx)
+		if !ok {
+			return ""
+		}
+	}
+
+	return strings.Join(md[CallerHostnameKey], "")
 }
 
 func FromGrpcCtx(ctx context.Context) *common.Context {
@@ -344,7 +377,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		pkey := strings.Join(md["shard_key"], "")
 
 		if pkey == "" {
-			pkey = GetAccountId(ctx, in)
+			pkey = getAccountId(ctx, in)
 			if pkey == "" {
 				// no sharding parameter, perform the request anyway
 				return handler(ctx, in)
@@ -476,7 +509,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		pkey := strings.Join(md["shard_key"], "")
 
 		if pkey == "" {
-			pkey = GetAccountId(ctx, in)
+			pkey = getAccountId(ctx, in)
 			if pkey == "" {
 				// no sharding parameter, perform the request anyway
 				return handler(ctx, in)
@@ -575,7 +608,7 @@ func getReturnType(server interface{}, fullmethod string) reflect.Type {
 	return nil
 }
 
-func GetAccountId(ctx context.Context, message interface{}) string {
+func getAccountId(ctx context.Context, message interface{}) string {
 	msgrefl := message.(proto.Message).ProtoReflect()
 	accIdDesc := msgrefl.Descriptor().Fields().ByName("account_id")
 	accid := ""
