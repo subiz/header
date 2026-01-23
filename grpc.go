@@ -30,7 +30,9 @@ import (
 )
 
 const (
-	CtxKey = "pcontext"
+	CtxKey            = "pcontext"
+	CallerHostnameKey = "caller-hostname"
+	CallerStackKey    = "caller-stack"
 )
 
 var hostname string
@@ -214,7 +216,7 @@ func ToGrpcCtx(pctx *common.Context) context.Context {
 
 	return metadata.NewOutgoingContext(
 		context.Background(),
-		metadata.Pairs(CtxKey, cred64, log.CallerHostnameKey, hostname, log.CallerStackKey, callerName),
+		metadata.Pairs(CtxKey, cred64, CallerHostnameKey, hostname, CallerStackKey, callerName),
 	)
 }
 
@@ -246,7 +248,7 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 	defer func() {
 		if r := recover(); r != nil {
 			if e, ok := r.(error); ok {
-				err = log.EServer(ctx, "", e, log.M{"_function_name": info.FullMethod}) // wrap error
+				err = log.EServer(e, log.M{"_function_name": info.FullMethod}) // wrap error
 			} else {
 				err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": info.FullMethod})
 			}
@@ -259,7 +261,7 @@ func WithErrorStack() grpc.DialOption {
 	return grpc.WithChainUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
 		defer func() {
 			if r := recover(); r != nil {
-				err = log.EServer(ctx, "", err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method})
+				err = log.EServer(err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method})
 			}
 		}()
 
@@ -287,7 +289,7 @@ func WithErrorStack() grpc.DialOption {
 			// codes.Internal
 			input, _ := json.Marshal(req)
 			cred := FromGrpcCtx(ctx).GetCredential()
-			return log.EServer(ctx, "", err, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method}) // report
+			return log.EServer(err, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method}) // report
 		}
 	})
 }
@@ -358,7 +360,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.EServer(ctx, "", e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
+					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
 				} else {
 					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod})
 				}
@@ -489,7 +491,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.EServer(ctx, "", e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
+					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
 				} else {
 					debug.PrintStack() // prints stack trace to know where panic happened
 					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod})
@@ -777,4 +779,28 @@ func isNormalService(target string) bool {
 		strings.Contains(target, "scheduler") ||
 		strings.Contains(target, "speex") ||
 		strings.Contains(target, "tim")
+}
+
+func GetCallerStack(ctx context.Context) string {
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		md, ok = metadata.FromOutgoingContext(ctx)
+		if !ok {
+			return ""
+		}
+	}
+
+	return strings.Join(md[CallerHostnameKey], "")
+}
+
+func GetCallerHostname(ctx context.Context) string {
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		md, ok = metadata.FromOutgoingContext(ctx)
+		if !ok {
+			return ""
+		}
+	}
+
+	return strings.Join(md[CallerHostnameKey], "")
 }
