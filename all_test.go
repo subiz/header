@@ -220,7 +220,7 @@ func TestPack(t *testing.T) {
 	fmt.Println("HEX", hex.EncodeToString(b))
 }
 
-func TestBlockToPlainTextMessages(t *testing.T) {
+func TestBlockToPlainTextMessages1(t *testing.T) {
 	block := &Block{}
 	json.Unmarshal([]byte(`{
   "type": "div",
@@ -300,7 +300,53 @@ func TestBlockToPlainTextMessages(t *testing.T) {
 	messes := BlockToPlainTextMessages(block)
 
 	b, _ := json.Marshal(messes)
-	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"},{"text":"Paragraph 2"},{"text":"* Item 1\n* Item 2"},{"text":"Layout căn hộ 2 phòng ngủ","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"}}]},{"text":"Hình ảnh căn hộ 1","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"}}]},{"text":"Hình ảnh căn hộ 2","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]},{"text":"Para 3"},{"text":"Para4"},{"text":"Para5"}]`  {
+	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"},{"text":"Paragraph 2"},{"text":"* Item 1\n* Item 2"},{"text":"Layout căn hộ 2 phòng ngủ","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"}}]},{"text":"Hình ảnh căn hộ 1","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"}}]},{"text":"Hình ảnh căn hộ 2","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]},{"text":"Para 3"},{"text":"Para4"},{"text":"Para5"}]` {
+		t.Fatalf("should eq, but got %s", string(b))
+	}
+}
+
+func TestBlockToPlainTextMessages2(t *testing.T) {
+	block := &Block{}
+	json.Unmarshal([]byte(`{
+  "type": "div",
+  "content": [
+    {
+          "type": "image",
+          "image": {
+            "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
+          }
+     }
+  ]
+}`), block)
+	messes := BlockToPlainTextMessages(block)
+
+	b, _ := json.Marshal(messes)
+	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"}]` {
+		t.Fatalf("should eq, but got %s", string(b))
+	}
+}
+
+func TestBlockToPlainTextMessages3(t *testing.T) {
+	block := &Block{}
+	json.Unmarshal([]byte(`{
+  "type": "div",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [{"type": "text","text": "Hi Lee Kei,"}]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {"type": "text","text": "Paragraph 1"}
+      ]
+    }
+  ]
+}`), block)
+	messes := BlockToPlainTextMessages(block)
+
+	b, _ := json.Marshal(messes)
+	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"}]` {
 		t.Fatalf("should eq, but got %s", string(b))
 	}
 }

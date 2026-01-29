@@ -1839,6 +1839,22 @@ func CompileBlock(block *Block, data map[string]string) {
 	}
 }
 
+func HasBlockDynamicField(block *Block) bool {
+	if block == nil {
+		return false
+	}
+
+	if block.Type == "dynamic-field" {
+		return true
+	}
+	for _, block := range block.GetContent() {
+		if HasBlockDynamicField(block) {
+			return true
+		}
+	}
+	return false
+}
+
 func BlockToPlainText(block *Block) string {
 	return strings.TrimSpace(blockToPlainText(block))
 }
@@ -1962,7 +1978,7 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 	}
 
 	if block.Type == "image" {
-		return block.AltText, []*Attachment{{Type: "image", File: &File{Url: block.GetImage().GetUrl()}}}
+		return block.AltText, []*Attachment{{Type: "image", File: &File{Type: "image/jpeg", Url: block.GetImage().GetUrl()}}}
 	}
 
 	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
