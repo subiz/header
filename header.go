@@ -1915,6 +1915,108 @@ func blockToPlainText(block *Block) string {
 	return out
 }
 
+func BlockToPlainTextMessages(block *Block) []*Message {
+	messages := []*Message{}
+	flatten := flattenBlock(block)
+	for _, block := range flatten {
+		text, attachments := singleBlockToPlainText2(block)
+		text = strings.TrimSpace(text)
+		if text == "" && len(attachments) == 0 {
+			continue
+		}
+		messages = append(messages, &Message{Text: text, Attachments: attachments})
+	}
+	return messages
+}
+
+func flattenBlock(block *Block) []*Block {
+	out := []*Block{}
+	if len(block.GetContent()) > 0 {
+		for _, sub := range block.Content {
+			if sub.GetType() == "bullet_list" || sub.GetType() == "ordered_list" {
+				out = append(out, sub)
+				continue
+			}
+			out = append(out, flattenBlock(sub)...)
+		}
+	} else {
+		out = append(out, block)
+	}
+	return out
+}
+
+func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
+	if block == nil {
+		return "", nil
+	}
+	out := ""
+	if block.Type == "bullet_list" || block.Type == "ordered_list" {
+		for i, item := range block.GetContent() {
+			prefix := "\n* "
+			if block.Type == "ordered_list" {
+				prefix = strconv.Itoa(i) + "\n. "
+			}
+			out += prefix + strings.TrimSpace(blockToPlainText(item))
+		}
+		return out, nil
+	}
+
+	if block.Type == "image" {
+		return block.AltText, []*Attachment{{Type: "image", File: &File{Url: block.GetImage().GetUrl()}}}
+	}
+
+	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
+		return "\n", nil
+	}
+
+	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
+		link := out + block.Text
+		if strings.TrimSpace(block.Href) != "" {
+			if strings.Contains(block.Href, ")") || strings.Contains(block.Href, "(") {
+				link += " (<" + strings.TrimSpace(block.Href) + ">)"
+			} else {
+				link += " (" + strings.TrimSpace(block.Href) + ")"
+			}
+		}
+		return link, nil
+	}
+
+	if block.Type == "mention-agent" || block.Type == "mention" {
+		var name = ""
+		if attrs := block.GetAttrs(); attrs != nil {
+			name = attrs["name"]
+			if name == "" {
+				name = attrs["id"]
+			}
+		}
+		return out + "@" + name, nil
+	}
+
+	if block.Type == "horizontal_rule" {
+		return out + "\n---\n", nil
+	}
+
+	if block.Type == "emoji" {
+		var code string
+		if len(block.Attrs) > 0 {
+			code = block.Attrs["code"]
+		}
+		if code == "" {
+			code = block.Text
+		}
+
+		if code == "" {
+			return out, nil
+		}
+		return out + EmojiM[":"+code+":"], nil
+	}
+
+	if block.Type == "text" {
+		return block.Text, nil
+	}
+	return "", nil
+}
+
 func BlockToHTML(block *Block) string {
 	return eleToHTML(blockToEle(nil, block))
 }
