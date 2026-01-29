@@ -6,7 +6,7 @@
       "call_campaign": "read",
       "conversation": "create read:own update:own",
       "campaign": "create:own update:own read:own",
-      "form": "create:own update:own read:own",
+      "form": "create:own update:own read",
       "rule": "read",
       "integration": "read",
       "message_template": "read update:own delete:own create",

@@ -8753,7 +8753,7 @@ message WorkflowPulse {
 
 message WorkflowTimeup {
 	string workflow_id = 6;
-	// int64 term = 7;
+	int64 term = 7;
 	string session_id = 8;
 	string action_id = 9;
 	int64 timeup_sec = 10;

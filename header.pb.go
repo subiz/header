@@ -61148,16 +61148,16 @@ func (x *WorkflowPulse) GetWorkflowVersion() int64 {
 }
 
 type WorkflowTimeup struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	WorkflowId string                 `protobuf:"bytes,6,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
-	// int64 term = 7;
-	SessionId       string `protobuf:"bytes,8,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	ActionId        string `protobuf:"bytes,9,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
-	TimeupSec       int64  `protobuf:"varint,10,opt,name=timeup_sec,json=timeupSec,proto3" json:"timeup_sec,omitempty"`
-	ThreadId        string `protobuf:"bytes,11,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
-	TraceId         string `protobuf:"bytes,12,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
-	SpanId          string `protobuf:"bytes,13,opt,name=span_id,json=spanId,proto3" json:"span_id,omitempty"`
-	WorkflowVersion int64  `protobuf:"varint,15,opt,name=workflow_version,json=workflowVersion,proto3" json:"workflow_version,omitempty"`
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	WorkflowId      string                 `protobuf:"bytes,6,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
+	Term            int64                  `protobuf:"varint,7,opt,name=term,proto3" json:"term,omitempty"`
+	SessionId       string                 `protobuf:"bytes,8,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	ActionId        string                 `protobuf:"bytes,9,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
+	TimeupSec       int64                  `protobuf:"varint,10,opt,name=timeup_sec,json=timeupSec,proto3" json:"timeup_sec,omitempty"`
+	ThreadId        string                 `protobuf:"bytes,11,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	TraceId         string                 `protobuf:"bytes,12,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	SpanId          string                 `protobuf:"bytes,13,opt,name=span_id,json=spanId,proto3" json:"span_id,omitempty"`
+	WorkflowVersion int64                  `protobuf:"varint,15,opt,name=workflow_version,json=workflowVersion,proto3" json:"workflow_version,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -61197,6 +61197,13 @@ func (x *WorkflowTimeup) GetWorkflowId() string {
 		return x.WorkflowId
 	}
 	return ""
+}
+
+func (x *WorkflowTimeup) GetTerm() int64 {
+	if x != nil {
+		return x.Term
+	}
+	return 0
 }
 
 func (x *WorkflowTimeup) GetSessionId() string {
@@ -78860,10 +78867,11 @@ const file_header_proto_rawDesc = "" +
 	"\x12workflow_action_id\x18\v \x01(\tR\x10workflowActionId\x12\x19\n" +
 	"\btrace_id\x18\f \x01(\tR\atraceId\x12\x17\n" +
 	"\aspan_id\x18\r \x01(\tR\x06spanId\x12)\n" +
-	"\x10workflow_version\x18\x0f \x01(\x03R\x0fworkflowVersion\"\x88\x02\n" +
+	"\x10workflow_version\x18\x0f \x01(\x03R\x0fworkflowVersion\"\x9c\x02\n" +
 	"\x0eWorkflowTimeup\x12\x1f\n" +
 	"\vworkflow_id\x18\x06 \x01(\tR\n" +
-	"workflowId\x12\x1d\n" +
+	"workflowId\x12\x12\n" +
+	"\x04term\x18\a \x01(\x03R\x04term\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\b \x01(\tR\tsessionId\x12\x1b\n" +
 	"\taction_id\x18\t \x01(\tR\bactionId\x12\x1d\n" +
