@@ -11,6 +11,7 @@ import (
 
 	apb "github.com/subiz/header/account"
 	"github.com/tidwall/gjson"
+	"google.golang.org/protobuf/proto"
 )
 
 const Tolerance = 0.000001
@@ -990,6 +991,48 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 		}
 	}
 	return true
+}
+
+func ReverseCondition(cond *UserViewCondition) *UserViewCondition {
+	cond = proto.Clone(cond).(*UserViewCondition)
+	var all []*UserViewCondition
+	var one []*UserViewCondition
+	if len(cond.All) > 0 {
+		for _, sub := range cond.GetAll() {
+			all = append(all, reverseSingleCondition(sub))
+		}
+	}
+
+	if len(cond.One) > 0 {
+		one := []*UserViewCondition{}
+		for _, sub := range cond.GetAll() {
+			one = append(one, reverseSingleCondition(sub))
+		}
+	}
+
+	cond.All = one
+	cond.One = all
+
+	return reverseSingleCondition(cond)
+}
+
+func reverseSingleCondition(cond *UserViewCondition) *UserViewCondition {
+	if cond == nil {
+		return nil
+	}
+	copyCond := proto.Clone(cond).(*UserViewCondition)
+	if cond.GetType() == "text" {
+		if cond.GetText().GetOp() == "eq" {
+			copyCond.Text.Op = "neq"
+		}
+
+		if cond.GetText().GetOp() == "neq" {
+			copyCond.Text.Op = "eq"
+		}
+		return copyCond
+
+	}
+	return cond
 }
 
 func FindAttr(u *User, key string, typ string) (string, float64, int64, bool, bool) {
