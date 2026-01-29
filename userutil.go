@@ -11,6 +11,7 @@ import (
 
 	apb "github.com/subiz/header/account"
 	"github.com/tidwall/gjson"
+	"google.golang.org/protobuf/proto"
 )
 
 const Tolerance = 0.000001
@@ -990,6 +991,48 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 		}
 	}
 	return true
+}
+
+func ReverseCondition(cond *WorkflowCondition) *WorkflowCondition {
+	cond = proto.Clone(cond).(*WorkflowCondition)
+	var all []*WorkflowCondition
+	var one []*WorkflowCondition
+	if len(cond.All) > 0 {
+		for _, sub := range cond.GetAll() {
+			all = append(all, reverseSingleCondition(sub))
+		}
+	}
+
+	if len(cond.One) > 0 {
+		one := []*WorkflowCondition{}
+		for _, sub := range cond.GetAll() {
+			one = append(one, reverseSingleCondition(sub))
+		}
+	}
+
+	cond.All = one
+	cond.One = all
+
+	return reverseSingleCondition(cond)
+}
+
+func reverseSingleCondition(cond *WorkflowCondition) *WorkflowCondition {
+	if cond == nil {
+		return nil
+	}
+	copyCond := proto.Clone(cond).(*WorkflowCondition)
+	if cond.GetType() == "text" {
+		if cond.GetText().GetOp() == "eq" {
+			copyCond.Text.Op = "neq"
+		}
+
+		if cond.GetText().GetOp() == "neq" {
+			copyCond.Text.Op = "eq"
+		}
+		return copyCond
+
+	}
+	return cond
 }
 
 func FindAttr(u *User, key string, typ string) (string, float64, int64, bool, bool) {
