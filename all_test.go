@@ -300,7 +300,7 @@ func TestBlockToPlainTextMessages1(t *testing.T) {
 	messes := BlockToPlainTextMessages(block)
 
 	b, _ := json.Marshal(messes)
-	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"},{"text":"Paragraph 2"},{"text":"* Item 1\n* Item 2"},{"text":"Layout căn hộ 2 phòng ngủ","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"}}]},{"text":"Hình ảnh căn hộ 1","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"}}]},{"text":"Hình ảnh căn hộ 2","attachments":[{"type":"image","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]},{"text":"Para 3"},{"text":"Para4"},{"text":"Para5"}]` {
+	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"},{"text":"Paragraph 2"},{"text":"* Item 1\n* Item 2"},{"text":"Layout căn hộ 2 phòng ngủ","attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png","file":{"url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"}}]},{"text":"Hình ảnh căn hộ 1","attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"}}]},{"text":"Hình ảnh căn hộ 2","attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]},{"text":"Para 3"},{"text":"Para4"},{"text":"Para5"}]` {
 		t.Fatalf("should eq, but got %s", string(b))
 	}
 }
@@ -309,19 +309,15 @@ func TestBlockToPlainTextMessages2(t *testing.T) {
 	block := &Block{}
 	json.Unmarshal([]byte(`{
   "type": "div",
-  "content": [
-    {
-          "type": "image",
-          "image": {
-            "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
-          }
-     }
-  ]
+  "content": [{
+    "type": "image",
+    "image": {"url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}
+  }]
 }`), block)
 	messes := BlockToPlainTextMessages(block)
 
 	b, _ := json.Marshal(messes)
-	if string(b) != `[{"text":"Hi Lee Kei,"},{"text":"Paragraph 1"}]` {
+	if string(b) != `[{"attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]}]` {
 		t.Fatalf("should eq, but got %s", string(b))
 	}
 }

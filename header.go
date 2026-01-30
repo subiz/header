@@ -1978,7 +1978,7 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 	}
 
 	if block.Type == "image" {
-		return block.AltText, []*Attachment{{Type: "image", File: &File{Type: "image/jpeg", Url: block.GetImage().GetUrl()}}}
+		return block.AltText, []*Attachment{{Type: "file", Mimetype: "image/jpeg", Url: block.GetImage().GetUrl(), File: &File{Url: block.GetImage().GetUrl()}}}
 	}
 
 	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
