@@ -1936,18 +1936,53 @@ func BlockToPlainTextMessages(block *Block) []*Message {
 	flatten := flattenBlock(block)
 	for _, block := range flatten {
 		text, attachments := singleBlockToPlainText2(block)
-		text = strings.TrimSpace(text)
-		if text == "" && len(attachments) == 0 {
-			continue
-		}
 		messages = append(messages, &Message{Text: text, Attachments: attachments})
 	}
+	// compile 2 text
+
+	combined := []*Message{}
+	var lastmsg *Message
+	for _, mes := range messages {
+		if lastmsg == nil {
+			lastmsg = mes
+			combined = append(combined, mes)
+			continue
+		}
+
+		if len(lastmsg.Attachments) > 0 {
+			lastmsg = mes
+			combined = append(combined, mes)
+			continue
+		}
+
+		if len(mes.Attachments) == 0 {
+			lastmsg.Text += mes.Text
+			continue
+		}
+
+		// has more attachments
+		lastmsg = mes
+		combined = append(combined, mes)
+	}
+
+	messages = []*Message{}
+	for _, msg := range combined {
+		msg.Text = strings.TrimSpace(msg.Text)
+		if msg.Text == "" && len(msg.Attachments) == 0 {
+			continue
+		}
+		messages = append(messages, msg)
+	}
+
 	return messages
 }
 
 func flattenBlock(block *Block) []*Block {
 	out := []*Block{}
 	if len(block.GetContent()) > 0 {
+		if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
+			out = append(out, &Block{Type: "text", Text: "\n"})
+		}
 		for _, sub := range block.Content {
 			if sub.GetType() == "bullet_list" || sub.GetType() == "ordered_list" {
 				out = append(out, sub)
@@ -1972,13 +2007,13 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 			if block.Type == "ordered_list" {
 				prefix = strconv.Itoa(i) + "\n. "
 			}
-			out += prefix + strings.TrimSpace(blockToPlainText(item))
+			out += prefix + blockToPlainText(item)
 		}
 		return out, nil
 	}
 
 	if block.Type == "image" {
-		return block.AltText, []*Attachment{{Type: "image", File: &File{Type: "image/jpeg", Url: block.GetImage().GetUrl()}}}
+		return block.AltText, []*Attachment{{Type: "file", Mimetype: "image/jpeg", Url: block.GetImage().GetUrl(), File: &File{Url: block.GetImage().GetUrl()}}}
 	}
 
 	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
