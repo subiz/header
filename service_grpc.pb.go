@@ -31295,11 +31295,18 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	VectorDB_UpsertVector_FullMethodName  = "/header.VectorDB/UpsertVector"
-	VectorDB_DeleteVector_FullMethodName  = "/header.VectorDB/DeleteVector"
-	VectorDB_SearchVectors_FullMethodName = "/header.VectorDB/SearchVectors"
-	VectorDB_GetVector_FullMethodName     = "/header.VectorDB/GetVector"
-	VectorDB_ListVectorIds_FullMethodName = "/header.VectorDB/ListVectorIds"
+	VectorDB_UpsertVector_FullMethodName                 = "/header.VectorDB/UpsertVector"
+	VectorDB_DeleteVector_FullMethodName                 = "/header.VectorDB/DeleteVector"
+	VectorDB_SearchVectors_FullMethodName                = "/header.VectorDB/SearchVectors"
+	VectorDB_GetVector_FullMethodName                    = "/header.VectorDB/GetVector"
+	VectorDB_ListVectorIds_FullMethodName                = "/header.VectorDB/ListVectorIds"
+	VectorDB_UpdateDocumentVersion_FullMethodName        = "/header.VectorDB/UpdateDocumentVersion"
+	VectorDB_IndexDocument_FullMethodName                = "/header.VectorDB/IndexDocument"
+	VectorDB_AddDocumentToCollection_FullMethodName      = "/header.VectorDB/AddDocumentToCollection"
+	VectorDB_RemoveDocumentFromCollection_FullMethodName = "/header.VectorDB/RemoveDocumentFromCollection"
+	VectorDB_UpsertCollectionDocuments_FullMethodName    = "/header.VectorDB/UpsertCollectionDocuments"
+	VectorDB_RemoveDocument_FullMethodName               = "/header.VectorDB/RemoveDocument"
+	VectorDB_Search_FullMethodName                       = "/header.VectorDB/Search"
 )
 
 // VectorDBClient is the client API for VectorDB service.
@@ -31311,6 +31318,14 @@ type VectorDBClient interface {
 	SearchVectors(ctx context.Context, in *VectorSearchReq, opts ...grpc.CallOption) (*VectorMatches, error)
 	GetVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*VectorDoc, error)
 	ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error)
+	// when doc change, call this first followed by multiple index document calls
+	UpdateDocumentVersion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	IndexDocument(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
+	AddDocumentToCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
+	RemoveDocumentFromCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
+	UpsertCollectionDocuments(ctx context.Context, in *DocSearchResponse, opts ...grpc.CallOption) (*Empty, error)
+	RemoveDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	Search(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
 }
 
 type vectorDBClient struct {
@@ -31371,6 +31386,76 @@ func (c *vectorDBClient) ListVectorIds(ctx context.Context, in *ListVectorReques
 	return out, nil
 }
 
+func (c *vectorDBClient) UpdateDocumentVersion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_UpdateDocumentVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) IndexDocument(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_IndexDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) AddDocumentToCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_AddDocumentToCollection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) RemoveDocumentFromCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_RemoveDocumentFromCollection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) UpsertCollectionDocuments(ctx context.Context, in *DocSearchResponse, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_UpsertCollectionDocuments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) RemoveDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_RemoveDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) Search(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DocSearchResponse)
+	err := c.cc.Invoke(ctx, VectorDB_Search_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VectorDBServer is the server API for VectorDB service.
 // All implementations must embed UnimplementedVectorDBServer
 // for forward compatibility.
@@ -31380,6 +31465,14 @@ type VectorDBServer interface {
 	SearchVectors(context.Context, *VectorSearchReq) (*VectorMatches, error)
 	GetVector(context.Context, *VectorDoc) (*VectorDoc, error)
 	ListVectorIds(context.Context, *ListVectorRequest) (*Response, error)
+	// when doc change, call this first followed by multiple index document calls
+	UpdateDocumentVersion(context.Context, *Id) (*Empty, error)
+	IndexDocument(context.Context, *DocIndexRequest) (*Empty, error)
+	AddDocumentToCollection(context.Context, *DocIndexRequest) (*Empty, error)
+	RemoveDocumentFromCollection(context.Context, *DocIndexRequest) (*Empty, error)
+	UpsertCollectionDocuments(context.Context, *DocSearchResponse) (*Empty, error)
+	RemoveDocument(context.Context, *Id) (*Empty, error)
+	Search(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
 	mustEmbedUnimplementedVectorDBServer()
 }
 
@@ -31404,6 +31497,27 @@ func (UnimplementedVectorDBServer) GetVector(context.Context, *VectorDoc) (*Vect
 }
 func (UnimplementedVectorDBServer) ListVectorIds(context.Context, *ListVectorRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListVectorIds not implemented")
+}
+func (UnimplementedVectorDBServer) UpdateDocumentVersion(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDocumentVersion not implemented")
+}
+func (UnimplementedVectorDBServer) IndexDocument(context.Context, *DocIndexRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IndexDocument not implemented")
+}
+func (UnimplementedVectorDBServer) AddDocumentToCollection(context.Context, *DocIndexRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDocumentToCollection not implemented")
+}
+func (UnimplementedVectorDBServer) RemoveDocumentFromCollection(context.Context, *DocIndexRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveDocumentFromCollection not implemented")
+}
+func (UnimplementedVectorDBServer) UpsertCollectionDocuments(context.Context, *DocSearchResponse) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertCollectionDocuments not implemented")
+}
+func (UnimplementedVectorDBServer) RemoveDocument(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveDocument not implemented")
+}
+func (UnimplementedVectorDBServer) Search(context.Context, *DocSearchRequest) (*DocSearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 func (UnimplementedVectorDBServer) mustEmbedUnimplementedVectorDBServer() {}
 func (UnimplementedVectorDBServer) testEmbeddedByValue()                  {}
@@ -31516,6 +31630,132 @@ func _VectorDB_ListVectorIds_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VectorDB_UpdateDocumentVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).UpdateDocumentVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_UpdateDocumentVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).UpdateDocumentVersion(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_IndexDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).IndexDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_IndexDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).IndexDocument(ctx, req.(*DocIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_AddDocumentToCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).AddDocumentToCollection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_AddDocumentToCollection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).AddDocumentToCollection(ctx, req.(*DocIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_RemoveDocumentFromCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).RemoveDocumentFromCollection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_RemoveDocumentFromCollection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).RemoveDocumentFromCollection(ctx, req.(*DocIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_UpsertCollectionDocuments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocSearchResponse)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).UpsertCollectionDocuments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_UpsertCollectionDocuments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).UpsertCollectionDocuments(ctx, req.(*DocSearchResponse))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_RemoveDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).RemoveDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_RemoveDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).RemoveDocument(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).Search(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_Search_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).Search(ctx, req.(*DocSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VectorDB_ServiceDesc is the grpc.ServiceDesc for VectorDB service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -31542,6 +31782,34 @@ var VectorDB_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListVectorIds",
 			Handler:    _VectorDB_ListVectorIds_Handler,
+		},
+		{
+			MethodName: "UpdateDocumentVersion",
+			Handler:    _VectorDB_UpdateDocumentVersion_Handler,
+		},
+		{
+			MethodName: "IndexDocument",
+			Handler:    _VectorDB_IndexDocument_Handler,
+		},
+		{
+			MethodName: "AddDocumentToCollection",
+			Handler:    _VectorDB_AddDocumentToCollection_Handler,
+		},
+		{
+			MethodName: "RemoveDocumentFromCollection",
+			Handler:    _VectorDB_RemoveDocumentFromCollection_Handler,
+		},
+		{
+			MethodName: "UpsertCollectionDocuments",
+			Handler:    _VectorDB_UpsertCollectionDocuments_Handler,
+		},
+		{
+			MethodName: "RemoveDocument",
+			Handler:    _VectorDB_RemoveDocument_Handler,
+		},
+		{
+			MethodName: "Search",
+			Handler:    _VectorDB_Search_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

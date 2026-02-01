@@ -543,9 +543,9 @@ message TasksRequest {
 message DocIndexRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string collection = 3;
-	string document_id = 4;
-	string part = 5;
+	string collection = 3; // agid
+	string document_id = 4; // document_id
+	string part = 5; // chunk_id
 	string content = 6;
 
 	bool is_name = 7; // hint for better name search
@@ -554,15 +554,19 @@ message DocIndexRequest {
 	bool is_phone = 11;
 	bool is_email = 12;
 	repeated string owners = 9;
-	string primary_document_id=13;
+	string primary_document_id = 13;
 	int64 sec = 14; // unix sec for doc, used to order more recent document
 	string locale = 15;
+
+	string version = 20;
+	repeated string index_types = 21; // fulltext, vector
+	repeated float vector = 23;
 }
 
 message DocSearchRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string collection = 3;
+	string collection = 3; // agid
 
 	string query = 5;
 	string anchor = 6;
@@ -577,6 +581,8 @@ message DocSearchRequest {
 	bool is_shorten = 14;
 	int64 from_month = 15;
 	bool keep_secondary = 16; // return secondary, do not transform to primary
+
+	repeated float vector = 17;
 }
 
 message CreateAgentRequest {
@@ -1058,4 +1064,12 @@ message AutoPayRequest {
 	int64 created = 9;
 	int64 fpv_amount = 10; // 3_000_000_000_000 (3 tr)
 	string currency = 17; // VND or USD
+}
+
+
+message CollectionDocumentsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string collection = 3;
+	repeated string document_ids = 4;
 }

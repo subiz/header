@@ -1108,4 +1108,15 @@ service VectorDB {
 	rpc SearchVectors(VectorSearchReq) returns (VectorMatches);
 	rpc GetVector(VectorDoc) returns (VectorDoc);
 	rpc ListVectorIds(ListVectorRequest) returns (Response); // ids
+
+	// when doc change, call this first followed by multiple index document calls
+	rpc UpdateDocumentVersion(Id) returns (Empty);
+	rpc IndexDocument(DocIndexRequest) returns (Empty);
+
+	rpc AddDocumentToCollection(DocIndexRequest) returns (Empty);
+	rpc RemoveDocumentFromCollection(DocIndexRequest) returns (Empty);
+	rpc UpsertCollectionDocuments(DocSearchResponse) returns (Empty);
+
+	rpc RemoveDocument(Id) returns (Empty);
+	rpc Search(DocSearchRequest) returns(DocSearchResponse);
 }

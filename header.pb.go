@@ -39011,8 +39011,8 @@ func (x *AgentGroup) GetAgentRingTimeoutSec() int64 {
 
 type DocHit struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	DocumentId       string                 `protobuf:"bytes,3,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
-	Part             string                 `protobuf:"bytes,4,opt,name=part,proto3" json:"part,omitempty"`
+	DocumentId       string                 `protobuf:"bytes,3,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"` // ai-date-entry
+	Part             string                 `protobuf:"bytes,4,opt,name=part,proto3" json:"part,omitempty"`                               // chunk-id
 	AvatarUrl        string                 `protobuf:"bytes,5,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	Name             string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	Updated          int64                  `protobuf:"varint,7,opt,name=updated,proto3" json:"updated,omitempty"`
@@ -39200,6 +39200,8 @@ func (x *DocHit) GetZaloFriendStatus() string {
 type DocSearchResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Collection    string                 `protobuf:"bytes,3,opt,name=collection,proto3" json:"collection,omitempty"`
 	Hits          []*DocHit              `protobuf:"bytes,4,rep,name=hits,proto3" json:"hits,omitempty"`
 	Anchor        string                 `protobuf:"bytes,5,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	QueryMatch    string                 `protobuf:"bytes,6,opt,name=query_match,json=queryMatch,proto3" json:"query_match,omitempty"`
@@ -39242,6 +39244,20 @@ func (x *DocSearchResponse) GetCtx() *common.Context {
 		return x.Ctx
 	}
 	return nil
+}
+
+func (x *DocSearchResponse) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *DocSearchResponse) GetCollection() string {
+	if x != nil {
+		return x.Collection
+	}
+	return ""
 }
 
 func (x *DocSearchResponse) GetHits() []*DocHit {
@@ -65411,9 +65427,9 @@ type AIDataChunk struct {
 	Model         string                 `protobuf:"bytes,10,opt,name=model,proto3" json:"model,omitempty"`
 	ChunkIndex    int64                  `protobuf:"varint,12,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"` // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	// repeated uint32 named_entities = 12; // iphone, iphone 16
-	IsCover           bool   `protobuf:"varint,13,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
+	// bool is_cover = 13;
 	ChunkOriginalLink string `protobuf:"bytes,14,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"` // source url
-	Title             string `protobuf:"bytes,15,opt,name=title,proto3" json:"title,omitempty"`
+	Title             string `protobuf:"bytes,15,opt,name=title,proto3" json:"title,omitempty"`                                                    // english
 	Created           int64  `protobuf:"varint,19,opt,name=created,proto3" json:"created,omitempty"`
 	// for excerpts
 	Summary       string   `protobuf:"bytes,21,opt,name=summary,proto3" json:"summary,omitempty"`
@@ -65522,13 +65538,6 @@ func (x *AIDataChunk) GetChunkIndex() int64 {
 		return x.ChunkIndex
 	}
 	return 0
-}
-
-func (x *AIDataChunk) GetIsCover() bool {
-	if x != nil {
-		return x.IsCover
-	}
-	return false
 }
 
 func (x *AIDataChunk) GetChunkOriginalLink() string {
@@ -76217,9 +76226,14 @@ const file_header_proto_rawDesc = "" +
 	"\x12zalo_friend_status\x18\x15 \x01(\tR\x10zaloFriendStatus\x1a>\n" +
 	"\x10QueryMatchMEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01\"\x93\x01\n" +
+	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01\"\xd2\x01\n" +
 	"\x11DocSearchResponse\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\"\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1e\n" +
+	"\n" +
+	"collection\x18\x03 \x01(\tR\n" +
+	"collection\x12\"\n" +
 	"\x04hits\x18\x04 \x03(\v2\x0e.header.DocHitR\x04hits\x12\x16\n" +
 	"\x06anchor\x18\x05 \x01(\tR\x06anchor\x12\x1f\n" +
 	"\vquery_match\x18\x06 \x01(\tR\n" +
@@ -79367,7 +79381,7 @@ const file_header_proto_rawDesc = "" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
 	"llmSummary\x12 \n" +
-	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xa8\x04\n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\x8d\x04\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79381,8 +79395,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05model\x18\n" +
 	" \x01(\tR\x05model\x12\x1f\n" +
 	"\vchunk_index\x18\f \x01(\x03R\n" +
-	"chunkIndex\x12\x19\n" +
-	"\bis_cover\x18\r \x01(\bR\aisCover\x12.\n" +
+	"chunkIndex\x12.\n" +
 	"\x13chunk_original_link\x18\x0e \x01(\tR\x11chunkOriginalLink\x12\x14\n" +
 	"\x05title\x18\x0f \x01(\tR\x05title\x12\x18\n" +
 	"\acreated\x18\x13 \x01(\x03R\acreated\x12\x18\n" +

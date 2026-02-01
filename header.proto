@@ -5563,8 +5563,8 @@ message AgentGroup {
 }
 
 message DocHit {
-	string document_id = 3;
-	string part = 4;
+	string document_id = 3; // ai-date-entry
+	string part = 4; // chunk-id
 	string avatar_url = 5;
 	string name = 6;
 
@@ -5589,6 +5589,8 @@ message DocHit {
 
 message DocSearchResponse {
 	common.Context ctx = 1;
+	string account_id = 2;
+	string collection = 3;
 
 	repeated DocHit hits = 4;
 	string anchor = 5;
@@ -9391,9 +9393,9 @@ message AIDataChunk {
 
 	int64 chunk_index = 12; // index in the doc, 0 -> first of the doc, big -> toward the end of the doc
 	// repeated uint32 named_entities = 12; // iphone, iphone 16
-	bool is_cover = 13;
+	// bool is_cover = 13;
 	string chunk_original_link = 14; // source url
-	string title = 15;
+	string title = 15; // english
 
 	int64 created = 19;
 
