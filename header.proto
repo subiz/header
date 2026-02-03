@@ -909,7 +909,6 @@ message RunAiAgentRequest {
 // @deprecated
 message BotRunRequest {
 	common.Context ctx = 1;
-	// require
 	string account_id = 2;
 	string bot_id = 3;
 	string object_id = 5; // conversation_id
@@ -924,16 +923,17 @@ message BotRunRequest {
 	BotAction action = 9;
 
 	// internal use only
-	string bot_run_type = 15;
-	string action_run_type = 16;
+	string bot_run_type = 15; // ontime, onevent, onstart
+	// string action_run_type = 16;
 	int32 index = 18;
 
 	// payload
 	int64 created = 10;
 	Event event = 11;
-	string bot_trigger_type = 12;
+	// string bot_trigger_type = 12;
 	string lang = 17;
-	bool skip_first_message = 19; // internal
+	bool skip_first_message = 19; // internal, just skip one
+	bool skip_all_first_messages = 20;
 }
 
 message BotRunResponse {

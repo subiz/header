@@ -8493,12 +8493,11 @@ func (x *RunAiAgentRequest) GetUserId() string {
 
 // @deprecated
 type BotRunRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Ctx   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	// require
-	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	BotId     string `protobuf:"bytes,3,opt,name=bot_id,json=botId,proto3" json:"bot_id,omitempty"`
-	ObjectId  string `protobuf:"bytes,5,opt,name=object_id,json=objectId,proto3" json:"object_id,omitempty"` // conversation_id
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	BotId     string                 `protobuf:"bytes,3,opt,name=bot_id,json=botId,proto3" json:"bot_id,omitempty"`
+	ObjectId  string                 `protobuf:"bytes,5,opt,name=object_id,json=objectId,proto3" json:"object_id,omitempty"` // conversation_id
 	// user_id is inside this
 	ObjectContexts []*KV `protobuf:"bytes,14,rep,name=object_contexts,json=objectContexts,proto3" json:"object_contexts,omitempty"`
 	// optional
@@ -8507,17 +8506,18 @@ type BotRunRequest struct {
 	ActionId string     `protobuf:"bytes,8,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
 	Action   *BotAction `protobuf:"bytes,9,opt,name=action,proto3" json:"action,omitempty"`
 	// internal use only
-	BotRunType    string `protobuf:"bytes,15,opt,name=bot_run_type,json=botRunType,proto3" json:"bot_run_type,omitempty"`
-	ActionRunType string `protobuf:"bytes,16,opt,name=action_run_type,json=actionRunType,proto3" json:"action_run_type,omitempty"`
-	Index         int32  `protobuf:"varint,18,opt,name=index,proto3" json:"index,omitempty"`
+	BotRunType string `protobuf:"bytes,15,opt,name=bot_run_type,json=botRunType,proto3" json:"bot_run_type,omitempty"` // ontime, onevent, onstart
+	// string action_run_type = 16;
+	Index int32 `protobuf:"varint,18,opt,name=index,proto3" json:"index,omitempty"`
 	// payload
-	Created          int64  `protobuf:"varint,10,opt,name=created,proto3" json:"created,omitempty"`
-	Event            *Event `protobuf:"bytes,11,opt,name=event,proto3" json:"event,omitempty"`
-	BotTriggerType   string `protobuf:"bytes,12,opt,name=bot_trigger_type,json=botTriggerType,proto3" json:"bot_trigger_type,omitempty"`
-	Lang             string `protobuf:"bytes,17,opt,name=lang,proto3" json:"lang,omitempty"`
-	SkipFirstMessage bool   `protobuf:"varint,19,opt,name=skip_first_message,json=skipFirstMessage,proto3" json:"skip_first_message,omitempty"` // internal
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	Created int64  `protobuf:"varint,10,opt,name=created,proto3" json:"created,omitempty"`
+	Event   *Event `protobuf:"bytes,11,opt,name=event,proto3" json:"event,omitempty"`
+	// string bot_trigger_type = 12;
+	Lang                 string `protobuf:"bytes,17,opt,name=lang,proto3" json:"lang,omitempty"`
+	SkipFirstMessage     bool   `protobuf:"varint,19,opt,name=skip_first_message,json=skipFirstMessage,proto3" json:"skip_first_message,omitempty"` // internal, just skip one
+	SkipAllFirstMessages bool   `protobuf:"varint,20,opt,name=skip_all_first_messages,json=skipAllFirstMessages,proto3" json:"skip_all_first_messages,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *BotRunRequest) Reset() {
@@ -8620,13 +8620,6 @@ func (x *BotRunRequest) GetBotRunType() string {
 	return ""
 }
 
-func (x *BotRunRequest) GetActionRunType() string {
-	if x != nil {
-		return x.ActionRunType
-	}
-	return ""
-}
-
 func (x *BotRunRequest) GetIndex() int32 {
 	if x != nil {
 		return x.Index
@@ -8648,13 +8641,6 @@ func (x *BotRunRequest) GetEvent() *Event {
 	return nil
 }
 
-func (x *BotRunRequest) GetBotTriggerType() string {
-	if x != nil {
-		return x.BotTriggerType
-	}
-	return ""
-}
-
 func (x *BotRunRequest) GetLang() string {
 	if x != nil {
 		return x.Lang
@@ -8665,6 +8651,13 @@ func (x *BotRunRequest) GetLang() string {
 func (x *BotRunRequest) GetSkipFirstMessage() bool {
 	if x != nil {
 		return x.SkipFirstMessage
+	}
+	return false
+}
+
+func (x *BotRunRequest) GetSkipAllFirstMessages() bool {
+	if x != nil {
+		return x.SkipAllFirstMessages
 	}
 	return false
 }
@@ -72447,7 +72440,7 @@ const file_header_proto_rawDesc = "" +
 	"\x11last_message_sent\x18\x11 \x01(\v2\r.header.EventR\x0flastMessageSent\x12\x1d\n" +
 	"\n" +
 	"is_testing\x18\x12 \x01(\bR\tisTesting\x12\x17\n" +
-	"\auser_id\x18\x14 \x01(\tR\x06userId\"\xc0\x04\n" +
+	"\auser_id\x18\x14 \x01(\tR\x06userId\"\xa5\x04\n" +
 	"\rBotRunRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72461,15 +72454,14 @@ const file_header_proto_rawDesc = "" +
 	"\taction_id\x18\b \x01(\tR\bactionId\x12)\n" +
 	"\x06action\x18\t \x01(\v2\x11.header.BotActionR\x06action\x12 \n" +
 	"\fbot_run_type\x18\x0f \x01(\tR\n" +
-	"botRunType\x12&\n" +
-	"\x0faction_run_type\x18\x10 \x01(\tR\ractionRunType\x12\x14\n" +
+	"botRunType\x12\x14\n" +
 	"\x05index\x18\x12 \x01(\x05R\x05index\x12\x18\n" +
 	"\acreated\x18\n" +
 	" \x01(\x03R\acreated\x12#\n" +
-	"\x05event\x18\v \x01(\v2\r.header.EventR\x05event\x12(\n" +
-	"\x10bot_trigger_type\x18\f \x01(\tR\x0ebotTriggerType\x12\x12\n" +
+	"\x05event\x18\v \x01(\v2\r.header.EventR\x05event\x12\x12\n" +
 	"\x04lang\x18\x11 \x01(\tR\x04lang\x12,\n" +
-	"\x12skip_first_message\x18\x13 \x01(\bR\x10skipFirstMessage\"\xe9\x01\n" +
+	"\x12skip_first_message\x18\x13 \x01(\bR\x10skipFirstMessage\x125\n" +
+	"\x17skip_all_first_messages\x18\x14 \x01(\bR\x14skipAllFirstMessages\"\xe9\x01\n" +
 	"\x0eBotRunResponse\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x15\n" +
