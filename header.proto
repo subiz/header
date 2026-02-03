@@ -1196,7 +1196,9 @@ message StartRequest {
 	string conversation_id = 14;
 
 	User user = 25;
-	string message = 30;
+	Message user_message = 29;
+	string message = 30; // @deprecatred, use user_message
+
 	repeated ConversationMember members = 31;
 	string group_id = 32;
 
@@ -2226,7 +2228,8 @@ message Bot {
 
 	string template_id = 32; // type=operation
 
-	Message welcome_message = 34;
+	Message welcome_message = 34; // deprecated
+	repeated Message welcome_messages = 35;
 }
 
 message Bots {
