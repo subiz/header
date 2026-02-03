@@ -10557,6 +10557,7 @@ type Conversation struct {
 	HumanHandledBy        string `protobuf:"bytes,89,opt,name=human_handled_by,json=humanHandledBy,proto3" json:"human_handled_by,omitempty"`                        // mark that the conversation have been handled
 	HumanNotifyReasonCode string `protobuf:"bytes,73,opt,name=human_notify_reason_code,json=humanNotifyReasonCode,proto3" json:"human_notify_reason_code,omitempty"` // e.g. "bot_confidence_low", "user_request", "policy"
 	HumanNotifyMessage    string `protobuf:"bytes,74,opt,name=human_notify_message,json=humanNotifyMessage,proto3" json:"human_notify_message,omitempty"`
+	FromLightConvo        bool   `protobuf:"varint,75,opt,name=from_light_convo,json=fromLightConvo,proto3" json:"from_light_convo,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -11002,6 +11003,13 @@ func (x *Conversation) GetHumanNotifyMessage() string {
 		return x.HumanNotifyMessage
 	}
 	return ""
+}
+
+func (x *Conversation) GetFromLightConvo() bool {
+	if x != nil {
+		return x.FromLightConvo
+	}
+	return false
 }
 
 type AIAgentAutoSendThankSetting struct {
@@ -72726,7 +72734,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04text\x18\r \x01(\tR\x04text\x1a7\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc4\x12\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xee\x12\n" +
 	"\fConversation\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -72797,7 +72805,8 @@ const file_header_proto_rawDesc = "" +
 	"\rhuman_handled\x18X \x01(\x03R\fhumanHandled\x12(\n" +
 	"\x10human_handled_by\x18Y \x01(\tR\x0ehumanHandledBy\x127\n" +
 	"\x18human_notify_reason_code\x18I \x01(\tR\x15humanNotifyReasonCode\x120\n" +
-	"\x14human_notify_message\x18J \x01(\tR\x12humanNotifyMessage\"~\n" +
+	"\x14human_notify_message\x18J \x01(\tR\x12humanNotifyMessage\x12(\n" +
+	"\x10from_light_convo\x18K \x01(\bR\x0efromLightConvo\"~\n" +
 	"\x1bAIAgentAutoSendThankSetting\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\x03R\aenabled\x12 \n" +
 	"\vinstruction\x18\x04 \x01(\tR\vinstruction\x12#\n" +

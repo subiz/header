@@ -1354,6 +1354,8 @@ message Conversation {
 	string human_handled_by = 89; // mark that the conversation have been handled
 	string human_notify_reason_code = 73; // e.g. "bot_confidence_low", "user_request", "policy"
 	string human_notify_message = 74;
+
+	bool from_light_convo = 75;
 }
 
 message AIAgentAutoSendThankSetting {
