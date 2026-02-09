@@ -8979,7 +8979,9 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent
+
+	// @deprecated
+	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent, send_message
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -8988,11 +8990,9 @@ message AIAgentOverrideRule {
 	// string hook = 8; // '' = before_reply, after_reply
 	string agent_id = 6; // use when action = assign
 
-
 	AIIntent intent = 13;
 	WorkflowCondition condition = 14;
 	int64 disabled = 15;
-	bool is_agent_default = 16; // default for agent id
 
 	Frequently frequently = 17; // once or always
 	repeated string for_agent_ids = 18; // empty -> all-agent
@@ -9009,6 +9009,31 @@ message AIAgentOverrideRule {
 	AIAgent ai_agent = 23;
 
 	bool run_once = 24;
+
+	repeated AIFunction actions = 27;
+}
+
+message AIAgentBrand {
+	string name = 9;
+	string description = 10;
+	string category = 13; // @readonly generated from brand and brand description
+
+	string website_url = 14;
+	string fanpage = 15;
+	string zalo = 16;
+	string hotline = 17;
+	string address = 19;
+}
+
+// will be translate to override rule
+message UnknownBehaviour {
+	int64 enabled = 5;
+	repeated AIFunction actions = 6;
+}
+
+message OutOfBusinessHourBehaviour {
+	int64 enabled = 5;
+	repeated AIFunction actions = 6;
 }
 
 message AIAgent {
@@ -9030,6 +9055,7 @@ message AIAgent {
 	string source_attribution = 14; // unlikely | empty=neutral | likely
 
 	repeated AIAgentGuardrail guardrails = 8;
+	AIAgentBrand company = 15; // for brand
 
 	int64 created = 17;
 	string created_by = 18;
@@ -9048,14 +9074,15 @@ message AIAgent {
 	string token_limit = 28; // short, balanced, long
 	// int64 temperature = 29; // 50% -> 50
 
-	string first_person_pronoun = 30; // personal pronoun: em
+	string first_person_pronoun = 30;  // personal pronoun: em
 	string second_person_pronoun = 31; // anh/chi
 
 	int64 context_guard = 35;
-	Message context_guard_message = 36;
+	Message context_guard_message = 36; // unknow message @deprecated, use unknown
+
 	repeated AIFunction functions = 37;
 
-	Message unabled_to_answer_message = 38;
+	// Message unabled_to_answer_message = 38;
 	Message error_message = 40;
 
 	int64 modified = 41;
@@ -9096,6 +9123,9 @@ message AIAgent {
 	repeated string locales = 65;
 
 	repeated AIAgentOverrideRule override_rules = 66; // only root
+
+	UnknownBehaviour unknown_behaviour = 67;
+	OutOfBusinessHourBehaviour out_of_business_hour_behaviour = 68;
 
 	// [convert lead (second brain)]
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
@@ -9269,9 +9299,12 @@ message JSONSchema {
 message AIFunction {
 	// return 204 to stop the bot from response
 
-	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update, record_user_preference
+	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update, record_user_preference,
+	// system_assign, system_remind, human_handoff, system_invite_human, end, provide_context, system_update_welcome_message,
+	// system_update_agent, system_send_message
 	string display_name = 17;
 	string description = 5; // prompt
+
 
 	// string additional_prompt = 12;
 	// assign agent
@@ -9306,7 +9339,7 @@ message AIFunction {
 	AutomationFunction workflow = 15;
 	UpdateUserInformation update_information = 16; // deprecated
 	CollectUserInformation collect_user_information = 20;
-	AssignRequest assign_agent = 18;
+	AssignRequest assign_agent = 18; // name=system_assign, human handoff or invite_human
 
 	Form system_schedule_appointment = 19;
 
@@ -9317,6 +9350,23 @@ message AIFunction {
 	// prom
 	string instruction = 22; // dung de tra loi cac cau hoi thuong gap cua subiz
 	repeated AIFunction functions = 23;
+
+	string remind_instruction = 31; // use when action = remind
+	// string hook = 8; // '' = before_reply, after_reply
+	string assign_agent_id = 32; // use when// name=system_assign human handoff or invite_human
+	bool report_assigned_agent_name = 33; // name=system_assign human handoff or invite_human
+
+	// name=system_update_welcome_message
+	Message welcome_message = 34;
+	string welcome_message_prompt = 35;
+	repeated Trigger welcome_message_triggers = 36;
+
+	// name=system_update_agent
+	AIAgent ai_agent = 37;
+
+	// name=system_send_message
+	Message message = 38; // unknown message
+	string message_prompt = 39;
 }
 
 message RecordUserPreference {

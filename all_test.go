@@ -347,6 +347,31 @@ func TestBlockToPlainTextMessages3(t *testing.T) {
 	}
 }
 
+func TestBlockToPlainTextMessages4(t *testing.T) {
+	block := &Block{}
+	json.Unmarshal([]byte(`{
+  "type": "div",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [{"type": "text","text": "Hi Lee Kei,"}]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {"type": "text","text": "Paragraph 1"}
+      ]
+    }
+  ]
+}`), block)
+	messes := BlockToPlainTextMessages(block)
+
+	b, _ := json.Marshal(messes)
+	if string(b) != `[{"text":"Hi Lee Kei,\nParagraph 1"}]` {
+		t.Fatalf("should eq, but got %s", string(b))
+	}
+}
+
 func TestReverseCondition(t *testing.T) {
 	out := ReverseCondition(&WorkflowCondition{
 		All: []*WorkflowCondition{{
