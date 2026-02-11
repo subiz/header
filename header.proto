@@ -9177,6 +9177,7 @@ message AIAgentTestcase {
 	Conversation conversation = 10;
 	User user = 11;
 
+	int64 now = 17; // ms
 	int64 last_score = 12;
 	string last_status = 13; // pass fail pending running
 	int64 last_run_at = 14;

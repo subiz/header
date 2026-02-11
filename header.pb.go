@@ -63940,6 +63940,7 @@ type AIAgentTestcase struct {
 	Messages        []*LLMChatHistoryEntry `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
 	Conversation    *Conversation          `protobuf:"bytes,10,opt,name=conversation,proto3" json:"conversation,omitempty"`
 	User            *User                  `protobuf:"bytes,11,opt,name=user,proto3" json:"user,omitempty"`
+	Now             int64                  `protobuf:"varint,17,opt,name=now,proto3" json:"now,omitempty"` // ms
 	LastScore       int64                  `protobuf:"varint,12,opt,name=last_score,json=lastScore,proto3" json:"last_score,omitempty"`
 	LastStatus      string                 `protobuf:"bytes,13,opt,name=last_status,json=lastStatus,proto3" json:"last_status,omitempty"` // pass fail pending running
 	LastRunAt       int64                  `protobuf:"varint,14,opt,name=last_run_at,json=lastRunAt,proto3" json:"last_run_at,omitempty"`
@@ -64046,6 +64047,13 @@ func (x *AIAgentTestcase) GetUser() *User {
 		return x.User
 	}
 	return nil
+}
+
+func (x *AIAgentTestcase) GetNow() int64 {
+	if x != nil {
+		return x.Now
+	}
+	return 0
 }
 
 func (x *AIAgentTestcase) GetLastScore() int64 {
@@ -79516,7 +79524,7 @@ const file_header_proto_rawDesc = "" +
 	"\x06fields\x18\n" +
 	" \x03(\tR\x06fields\x12\x1f\n" +
 	"\vtimeout_sec\x18\v \x01(\x03R\n" +
-	"timeoutSec\"\xab\x05\n" +
+	"timeoutSec\"\xbd\x05\n" +
 	"\x0fAIAgentTestcase\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79528,7 +79536,8 @@ const file_header_proto_rawDesc = "" +
 	"\bmessages\x18\t \x03(\v2\x1b.header.LLMChatHistoryEntryR\bmessages\x128\n" +
 	"\fconversation\x18\n" +
 	" \x01(\v2\x14.header.ConversationR\fconversation\x12 \n" +
-	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x1d\n" +
+	"\x04user\x18\v \x01(\v2\f.header.UserR\x04user\x12\x10\n" +
+	"\x03now\x18\x11 \x01(\x03R\x03now\x12\x1d\n" +
 	"\n" +
 	"last_score\x18\f \x01(\x03R\tlastScore\x12\x1f\n" +
 	"\vlast_status\x18\r \x01(\tR\n" +
