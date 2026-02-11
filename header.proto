@@ -8995,7 +8995,7 @@ message AIAgentOverrideRule {
 	int64 disabled = 15;
 
 	Frequently frequently = 17; // once or always
-	repeated string for_agent_ids = 18; // empty -> all-agent
+	// repeated string for_agent_ids = 18; // empty -> all-agent
 
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
@@ -9305,7 +9305,6 @@ message AIFunction {
 	string display_name = 17;
 	string description = 5; // prompt
 
-
 	// string additional_prompt = 12;
 	// assign agent
 	/*
@@ -9348,10 +9347,11 @@ message AIFunction {
 	RecordUserPreference record_user_preference = 21;
 
 	// prom
+	// use when action = system_remind , system_provide_context
 	string instruction = 22; // dung de tra loi cac cau hoi thuong gap cua subiz
 	repeated AIFunction functions = 23;
 
-	string remind_instruction = 31; // use when action = remind
+	// string remind_instruction = 31;
 	// string hook = 8; // '' = before_reply, after_reply
 	string assign_agent_id = 32; // use when// name=system_assign human handoff or invite_human
 	bool report_assigned_agent_name = 33; // name=system_assign human handoff or invite_human

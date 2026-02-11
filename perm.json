@@ -105,7 +105,7 @@
       "order": "update read delete export import",
       "product": "update delete",
       "promotion_program": "update delete",
-      "ticket_type": "create update",
+      "ticket_type": "delete create update",
       "user_view": "update delete",
       "segment": "delete update",
       "ticket_template": "update",
@@ -117,12 +117,8 @@
   "account_manage": {
     "scope": "account_setting",
     "perm": {
-      "account": "update",
-      "agent_group": "update",
-      "agent": "update",
       "subscription": "update",
-      "payment_method": "read update",
-      "ticket_type": "delete"
+      "payment_method": "read update"
     }
   },
   "owner": { "scope": "account_manage account_setting" },

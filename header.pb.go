@@ -62900,12 +62900,11 @@ type AIAgentOverrideRule struct {
 	Functions   []*AIFunction `protobuf:"bytes,9,rep,name=functions,proto3" json:"functions,omitempty"`     // use when action = function
 	Instruction string        `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"` // use when action = remind
 	// string hook = 8; // ” = before_reply, after_reply
-	AgentId     string             `protobuf:"bytes,6,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"` // use when action = assign
-	Intent      *AIIntent          `protobuf:"bytes,13,opt,name=intent,proto3" json:"intent,omitempty"`
-	Condition   *WorkflowCondition `protobuf:"bytes,14,opt,name=condition,proto3" json:"condition,omitempty"`
-	Disabled    int64              `protobuf:"varint,15,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	Frequently  *Frequently        `protobuf:"bytes,17,opt,name=frequently,proto3" json:"frequently,omitempty"`                        // once or always
-	ForAgentIds []string           `protobuf:"bytes,18,rep,name=for_agent_ids,json=forAgentIds,proto3" json:"for_agent_ids,omitempty"` // empty -> all-agent
+	AgentId    string             `protobuf:"bytes,6,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"` // use when action = assign
+	Intent     *AIIntent          `protobuf:"bytes,13,opt,name=intent,proto3" json:"intent,omitempty"`
+	Condition  *WorkflowCondition `protobuf:"bytes,14,opt,name=condition,proto3" json:"condition,omitempty"`
+	Disabled   int64              `protobuf:"varint,15,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Frequently *Frequently        `protobuf:"bytes,17,opt,name=frequently,proto3" json:"frequently,omitempty"` // once or always
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
 	AssignTo                *AssignRequest `protobuf:"bytes,19,opt,name=assign_to,json=assignTo,proto3" json:"assign_to,omitempty"`
@@ -63016,13 +63015,6 @@ func (x *AIAgentOverrideRule) GetDisabled() int64 {
 func (x *AIAgentOverrideRule) GetFrequently() *Frequently {
 	if x != nil {
 		return x.Frequently
-	}
-	return nil
-}
-
-func (x *AIAgentOverrideRule) GetForAgentIds() []string {
-	if x != nil {
-		return x.ForAgentIds
 	}
 	return nil
 }
@@ -64895,9 +64887,10 @@ type AIFunction struct {
 	StopAfterCalled           bool                    `protobuf:"varint,30,opt,name=stop_after_called,json=stopAfterCalled,proto3" json:"stop_after_called,omitempty"`
 	RecordUserPreference      *RecordUserPreference   `protobuf:"bytes,21,opt,name=record_user_preference,json=recordUserPreference,proto3" json:"record_user_preference,omitempty"`
 	// prom
-	Instruction       string        `protobuf:"bytes,22,opt,name=instruction,proto3" json:"instruction,omitempty"` // dung de tra loi cac cau hoi thuong gap cua subiz
-	Functions         []*AIFunction `protobuf:"bytes,23,rep,name=functions,proto3" json:"functions,omitempty"`
-	RemindInstruction string        `protobuf:"bytes,31,opt,name=remind_instruction,json=remindInstruction,proto3" json:"remind_instruction,omitempty"` // use when action = remind
+	// use when action = system_remind , system_provide_context
+	Instruction string        `protobuf:"bytes,22,opt,name=instruction,proto3" json:"instruction,omitempty"` // dung de tra loi cac cau hoi thuong gap cua subiz
+	Functions   []*AIFunction `protobuf:"bytes,23,rep,name=functions,proto3" json:"functions,omitempty"`
+	// string remind_instruction = 31;
 	// string hook = 8; // ” = before_reply, after_reply
 	AssignAgentId           string `protobuf:"bytes,32,opt,name=assign_agent_id,json=assignAgentId,proto3" json:"assign_agent_id,omitempty"`                                  // use when// name=system_assign human handoff or invite_human
 	ReportAssignedAgentName bool   `protobuf:"varint,33,opt,name=report_assigned_agent_name,json=reportAssignedAgentName,proto3" json:"report_assigned_agent_name,omitempty"` // name=system_assign human handoff or invite_human
@@ -65082,13 +65075,6 @@ func (x *AIFunction) GetFunctions() []*AIFunction {
 		return x.Functions
 	}
 	return nil
-}
-
-func (x *AIFunction) GetRemindInstruction() string {
-	if x != nil {
-		return x.RemindInstruction
-	}
-	return ""
 }
 
 func (x *AIFunction) GetAssignAgentId() string {
@@ -79407,7 +79393,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12 \n" +
 	"\vinstruction\x18\x06 \x01(\tR\vinstruction\x12\x1c\n" +
 	"\treasoning\x18\a \x01(\bR\treasoning\x12\x16\n" +
-	"\x06action\x18\b \x01(\tR\x06action\"\xb8\x06\n" +
+	"\x06action\x18\b \x01(\tR\x06action\"\x94\x06\n" +
 	"\x13AIAgentOverrideRule\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
@@ -79420,8 +79406,7 @@ const file_header_proto_rawDesc = "" +
 	"\bdisabled\x18\x0f \x01(\x03R\bdisabled\x122\n" +
 	"\n" +
 	"frequently\x18\x11 \x01(\v2\x12.header.FrequentlyR\n" +
-	"frequently\x12\"\n" +
-	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x122\n" +
+	"frequently\x122\n" +
 	"\tassign_to\x18\x13 \x01(\v2\x15.header.AssignRequestR\bassignTo\x12;\n" +
 	"\x1areport_assigned_agent_name\x18\x19 \x01(\bR\x17reportAssignedAgentName\x128\n" +
 	"\x0fwelcome_message\x18\x14 \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x124\n" +
@@ -79640,7 +79625,8 @@ const file_header_proto_rawDesc = "" +
 	"\x04enum\x18\r \x03(\tR\x04enum\x1aQ\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12(\n" +
-	"\x05value\x18\x02 \x01(\v2\x12.header.JSONSchemaR\x05value:\x028\x01\"\x8d\v\n" +
+	"\x05value\x18\x02 \x01(\v2\x12.header.JSONSchemaR\x05value:\x028\x01\"\xde\n" +
+	"\n" +
 	"\n" +
 	"AIFunction\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12!\n" +
@@ -79666,8 +79652,7 @@ const file_header_proto_rawDesc = "" +
 	"\x11stop_after_called\x18\x1e \x01(\bR\x0fstopAfterCalled\x12R\n" +
 	"\x16record_user_preference\x18\x15 \x01(\v2\x1c.header.RecordUserPreferenceR\x14recordUserPreference\x12 \n" +
 	"\vinstruction\x18\x16 \x01(\tR\vinstruction\x120\n" +
-	"\tfunctions\x18\x17 \x03(\v2\x12.header.AIFunctionR\tfunctions\x12-\n" +
-	"\x12remind_instruction\x18\x1f \x01(\tR\x11remindInstruction\x12&\n" +
+	"\tfunctions\x18\x17 \x03(\v2\x12.header.AIFunctionR\tfunctions\x12&\n" +
 	"\x0fassign_agent_id\x18  \x01(\tR\rassignAgentId\x12;\n" +
 	"\x1areport_assigned_agent_name\x18! \x01(\bR\x17reportAssignedAgentName\x128\n" +
 	"\x0fwelcome_message\x18\" \x01(\v2\x0f.header.MessageR\x0ewelcomeMessage\x124\n" +
