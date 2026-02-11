@@ -449,7 +449,7 @@ func EvaluateBoolean(found, boo bool, cond *BooleanCondition) bool {
 	return true
 }
 
-func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *DatetimeCondition) bool {
+func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *DatetimeCondition, nowms int64) bool {
 	t := time.Unix(unixms/1000, 0)
 
 	switch cond.GetOp() {
@@ -470,36 +470,42 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
 
-		nowInLoc := time.Now().In(location)
+		nowInLoc := time.Unix(nowms/1000, 0).In(location)
 		year, month, day := nowInLoc.Date()
 		startoftoday := time.Date(year, month, day, 0, 0, 0, 0, location)
 		endoftoday := time.Date(year, month, day, 23, 59, 59, 0, location)
 
 		return startoftoday.Unix() <= t.Unix() && t.Unix() <= endoftoday.Unix()
 	case "date_last_30mins":
-		now := time.Now().Unix()
+		now := nowms / 1000
 		last30mins := now - 1800
-		return last30mins <= t.Unix() && t.Unix() <= now
+		return last30mins <= t.Unix() && t.Unix() <= now+10 // sai so 10s
+
+	case "date_last_15mins":
+		now := nowms / 1000
+		last15mins := now - 900
+		return last15mins <= t.Unix() && t.Unix() <= now+10 // sai so 10s
+
 	case "date_last_2hours":
-		now := time.Now().Unix()
+		now := nowms / 1000
 		last2hours := now - 7200
-		return last2hours <= t.Unix() && t.Unix() <= now
+		return last2hours <= t.Unix() && t.Unix() <= now+10 // sai so 10s
 	case "date_last_24h":
-		now := time.Now().Unix()
+		now := nowms / 1000
 		last1days := now - 86400
-		return last1days <= t.Unix() && t.Unix() <= now
+		return last1days <= t.Unix() && t.Unix() <= now+10 // sai so 10s
 	case "date_last_7days":
-		now := time.Now().Unix()
+		now := nowms / 1000
 		last7days := now - 7*86400
-		return last7days <= t.Unix() && t.Unix() <= now
+		return last7days <= t.Unix() && t.Unix() <= now+10 // sai so 10s
 	case "date_last_30days":
-		now := time.Now().Unix()
+		now := nowms / 1000
 		last30days := now - 30*86400
-		return last30days <= t.Unix() && t.Unix() <= now
+		return last30days <= t.Unix() && t.Unix() <= now+10 // sai so 10s
 	case "yesterday":
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
-		nowInLoc := time.Now().In(location)
+		nowInLoc := time.Unix(nowms/1000, 0).In(location)
 
 		// Yesterday is the day before today
 		yesterday := nowInLoc.AddDate(0, 0, -1)
@@ -511,7 +517,7 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	case "last_week":
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
-		nowInLoc := time.Now().In(location)
+		nowInLoc := time.Unix(nowms/1000, 0).In(location)
 
 		// Monday of the current week
 		weekday := nowInLoc.Weekday()
@@ -533,7 +539,7 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	case "this_week":
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
-		nowInLoc := time.Now().In(location)
+		nowInLoc := time.Unix(nowms/1000, 0).In(location)
 
 		// Monday of the current week
 		weekday := nowInLoc.Weekday()
@@ -554,7 +560,7 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	case "last_month":
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
-		nowInLoc := time.Now().In(location)
+		nowInLoc := time.Unix(nowms/1000, 0).In(location)
 
 		year, month, _ := nowInLoc.Date()
 		startofthismonth := time.Date(year, month, 1, 0, 0, 0, 0, location)
@@ -568,7 +574,7 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	case "this_month":
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
-		nowInLoc := time.Now().In(location)
+		nowInLoc := time.Unix(nowms/1000, 0).In(location)
 
 		year, month, _ := nowInLoc.Date()
 		startofmonth := time.Date(year, month, 1, 0, 0, 0, 0, location)
@@ -579,11 +585,11 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 
 		return startofmonth.Unix() <= t.Unix() && t.Unix() <= endofmonth.Unix()
 	case "last":
-		a := time.Now().Unix() - cond.GetLast()
-		b := time.Now().Unix()
+		a := nowms/1000 - cond.GetLast()
+		b := nowms / 1000 + 10
 		return a <= t.Unix() && t.Unix() <= b
 	case "before_ago":
-		return t.Unix() < time.Now().Unix()-cond.GetBeforeAgo()
+		return t.Unix() < nowms/1000+10-cond.GetBeforeAgo()
 	case "days_of_week":
 		for _, weekday := range cond.GetDaysOfWeek() {
 			if strings.EqualFold(weekday, t.Weekday().String()) {
@@ -987,7 +993,7 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 			return EvaluateBoolean(found, boo, cond.GetBoolean())
 		}
 		if defType == "datetime" { // consider number in ms
-			return EvaluateDatetime(acc, found, date, cond.Datetime)
+			return EvaluateDatetime(acc, found, date, cond.Datetime, time.Now().UnixMilli())
 		}
 	}
 	return true
