@@ -1204,6 +1204,7 @@ type LeadSetting struct {
 	AssignConversationAsLead *string                `protobuf:"bytes,3,opt,name=assign_conversation_as_lead,json=assignConversationAsLead" json:"assign_conversation_as_lead,omitempty"` // all_assigned, assigned [default], joined, none (do no thing)
 	AutoUpdatePhone          *int64                 `protobuf:"varint,4,opt,name=auto_update_phone,json=autoUpdatePhone" json:"auto_update_phone,omitempty"`
 	AutoUpdateEmail          *int64                 `protobuf:"varint,5,opt,name=auto_update_email,json=autoUpdateEmail" json:"auto_update_email,omitempty"`
+	PinnedLeadFields         []string               `protobuf:"bytes,6,rep,name=pinned_lead_fields,json=pinnedLeadFields" json:"pinned_lead_fields,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1257,6 +1258,13 @@ func (x *LeadSetting) GetAutoUpdateEmail() int64 {
 		return *x.AutoUpdateEmail
 	}
 	return 0
+}
+
+func (x *LeadSetting) GetPinnedLeadFields() []string {
+	if x != nil {
+		return x.PinnedLeadFields
+	}
+	return nil
 }
 
 type InvoiceEmail struct {
@@ -2998,11 +3006,12 @@ const file_account_proto_rawDesc = "" +
 	"\aupdated\x18\x14 \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
 	"updated_by\x18\x15 \x01(\tR\tupdatedBy\x12\x1a\n" +
-	"\bdisabled\x18\x16 \x01(\x03R\bdisabled\"\xa4\x01\n" +
+	"\bdisabled\x18\x16 \x01(\x03R\bdisabled\"\xd2\x01\n" +
 	"\vLeadSetting\x12=\n" +
 	"\x1bassign_conversation_as_lead\x18\x03 \x01(\tR\x18assignConversationAsLead\x12*\n" +
 	"\x11auto_update_phone\x18\x04 \x01(\x03R\x0fautoUpdatePhone\x12*\n" +
-	"\x11auto_update_email\x18\x05 \x01(\x03R\x0fautoUpdateEmail\"\xd1\x01\n" +
+	"\x11auto_update_email\x18\x05 \x01(\x03R\x0fautoUpdateEmail\x12,\n" +
+	"\x12pinned_lead_fields\x18\x06 \x03(\tR\x10pinnedLeadFields\"\xd1\x01\n" +
 	"\fInvoiceEmail\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
