@@ -378,8 +378,8 @@ service WorkflowMgr {
 
 	// rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
 
-	rpc ListAIAgentSpans(LLMSpansRequest) returns (Response);
-	rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
+	// rpc ListAIAgentSpans(LLMSpansRequest) returns (Response);
+	// rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
 
 	rpc ReportAIAgent(ReportAIAgentRequest) returns (AIAgentReportResponse);
 
@@ -1019,7 +1019,7 @@ service CreditMgr {
 	rpc ReportCreditSpend(header.CreditSpendReportRequest) returns (header.CreditSpendReportResponse);
 	rpc ListCreditSpendLog(header.CreditSpendLogRequest) returns (header.CreditSpendEntries);
 
-	rpc GetTotalCreditSpend(header.Id) returns (header.Response);
+	rpc GetTotalCreditSpend(header.CreditSpendReportRequest) returns (header.Response);
 }
 
 service FormMgr {

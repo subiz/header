@@ -9400,8 +9400,6 @@ const (
 	WorkflowMgr_RetrainAIDataEntry_FullMethodName     = "/header.WorkflowMgr/RetrainAIDataEntry"
 	WorkflowMgr_DeleteAIDataEntry_FullMethodName      = "/header.WorkflowMgr/DeleteAIDataEntry"
 	WorkflowMgr_MatchDataEntries_FullMethodName       = "/header.WorkflowMgr/MatchDataEntries"
-	WorkflowMgr_ListAIAgentSpans_FullMethodName       = "/header.WorkflowMgr/ListAIAgentSpans"
-	WorkflowMgr_ListAIAgentTraces_FullMethodName      = "/header.WorkflowMgr/ListAIAgentTraces"
 	WorkflowMgr_ReportAIAgent_FullMethodName          = "/header.WorkflowMgr/ReportAIAgent"
 	WorkflowMgr_TryWorkflowAction_FullMethodName      = "/header.WorkflowMgr/TryWorkflowAction"
 	WorkflowMgr_ListAIAgentMessages_FullMethodName    = "/header.WorkflowMgr/ListAIAgentMessages"
@@ -9455,8 +9453,6 @@ type WorkflowMgrClient interface {
 	RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error)
-	ListAIAgentTraces(ctx context.Context, in *LLMTracesRequest, opts ...grpc.CallOption) (*Response, error)
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
 	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
@@ -9820,26 +9816,6 @@ func (c *workflowMgrClient) MatchDataEntries(ctx context.Context, in *Ids, opts 
 	return out, nil
 }
 
-func (c *workflowMgrClient) ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentSpans_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIAgentTraces(ctx context.Context, in *LLMTracesRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentTraces_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *workflowMgrClient) ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AIAgentReportResponse)
@@ -10008,8 +9984,6 @@ type WorkflowMgrServer interface {
 	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
 	DeleteAIDataEntry(context.Context, *Id) (*Empty, error)
 	MatchDataEntries(context.Context, *Ids) (*Response, error)
-	ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error)
-	ListAIAgentTraces(context.Context, *LLMTracesRequest) (*Response, error)
 	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
 	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
 	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
@@ -10134,12 +10108,6 @@ func (UnimplementedWorkflowMgrServer) DeleteAIDataEntry(context.Context, *Id) (*
 }
 func (UnimplementedWorkflowMgrServer) MatchDataEntries(context.Context, *Ids) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchDataEntries not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAIAgentSpans not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIAgentTraces(context.Context, *LLMTracesRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAIAgentTraces not implemented")
 }
 func (UnimplementedWorkflowMgrServer) ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportAIAgent not implemented")
@@ -10813,42 +10781,6 @@ func _WorkflowMgr_MatchDataEntries_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkflowMgr_ListAIAgentSpans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LLMSpansRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIAgentSpans(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIAgentSpans_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIAgentSpans(ctx, req.(*LLMSpansRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIAgentTraces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LLMTracesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIAgentTraces(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIAgentTraces_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIAgentTraces(ctx, req.(*LLMTracesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _WorkflowMgr_ReportAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReportAIAgentRequest)
 	if err := dec(in); err != nil {
@@ -11225,14 +11157,6 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchDataEntries",
 			Handler:    _WorkflowMgr_MatchDataEntries_Handler,
-		},
-		{
-			MethodName: "ListAIAgentSpans",
-			Handler:    _WorkflowMgr_ListAIAgentSpans_Handler,
-		},
-		{
-			MethodName: "ListAIAgentTraces",
-			Handler:    _WorkflowMgr_ListAIAgentTraces_Handler,
 		},
 		{
 			MethodName: "ReportAIAgent",
@@ -28793,7 +28717,7 @@ type CreditMgrClient interface {
 	TrySpendCredit(ctx context.Context, in *CreditSpendEntry, opts ...grpc.CallOption) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(ctx context.Context, in *CreditSpendReportRequest, opts ...grpc.CallOption) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(ctx context.Context, in *CreditSpendLogRequest, opts ...grpc.CallOption) (*CreditSpendEntries, error)
-	GetTotalCreditSpend(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GetTotalCreditSpend(ctx context.Context, in *CreditSpendReportRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type creditMgrClient struct {
@@ -28834,7 +28758,7 @@ func (c *creditMgrClient) ListCreditSpendLog(ctx context.Context, in *CreditSpen
 	return out, nil
 }
 
-func (c *creditMgrClient) GetTotalCreditSpend(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *creditMgrClient) GetTotalCreditSpend(ctx context.Context, in *CreditSpendReportRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, CreditMgr_GetTotalCreditSpend_FullMethodName, in, out, cOpts...)
@@ -28851,7 +28775,7 @@ type CreditMgrServer interface {
 	TrySpendCredit(context.Context, *CreditSpendEntry) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(context.Context, *CreditSpendReportRequest) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error)
-	GetTotalCreditSpend(context.Context, *Id) (*Response, error)
+	GetTotalCreditSpend(context.Context, *CreditSpendReportRequest) (*Response, error)
 	mustEmbedUnimplementedCreditMgrServer()
 }
 
@@ -28871,7 +28795,7 @@ func (UnimplementedCreditMgrServer) ReportCreditSpend(context.Context, *CreditSp
 func (UnimplementedCreditMgrServer) ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCreditSpendLog not implemented")
 }
-func (UnimplementedCreditMgrServer) GetTotalCreditSpend(context.Context, *Id) (*Response, error) {
+func (UnimplementedCreditMgrServer) GetTotalCreditSpend(context.Context, *CreditSpendReportRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTotalCreditSpend not implemented")
 }
 func (UnimplementedCreditMgrServer) mustEmbedUnimplementedCreditMgrServer() {}
@@ -28950,7 +28874,7 @@ func _CreditMgr_ListCreditSpendLog_Handler(srv interface{}, ctx context.Context,
 }
 
 func _CreditMgr_GetTotalCreditSpend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(CreditSpendReportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -28962,7 +28886,7 @@ func _CreditMgr_GetTotalCreditSpend_Handler(srv interface{}, ctx context.Context
 		FullMethod: CreditMgr_GetTotalCreditSpend_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CreditMgrServer).GetTotalCreditSpend(ctx, req.(*Id))
+		return srv.(CreditMgrServer).GetTotalCreditSpend(ctx, req.(*CreditSpendReportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

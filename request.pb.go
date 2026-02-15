@@ -7286,6 +7286,7 @@ type CreditSpendReportRequest struct {
 	CountOnly     bool                   `protobuf:"varint,10,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"`
 	Filters       []string               `protobuf:"bytes,12,rep,name=filters,proto3" json:"filters,omitempty"`                // "", "source=at123;item=zns"
 	GroupBy       string                 `protobuf:"bytes,13,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "", "item", "source"
+	Currency      string                 `protobuf:"bytes,14,opt,name=currency,proto3" json:"currency,omitempty"`              // "", vnd, usd
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7404,6 +7405,13 @@ func (x *CreditSpendReportRequest) GetGroupBy() string {
 	return ""
 }
 
+func (x *CreditSpendReportRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
 type CreditSpendLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -7416,6 +7424,8 @@ type CreditSpendLogRequest struct {
 	CreditId      string                 `protobuf:"bytes,12,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	Limit         int64                  `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"` // max : 20
 	Anchor        string                 `protobuf:"bytes,11,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	Filters       []string               `protobuf:"bytes,13,rep,name=filters,proto3" json:"filters,omitempty"`   // "", "source=at123;item=zns"
+	Currency      string                 `protobuf:"bytes,14,opt,name=currency,proto3" json:"currency,omitempty"` // vnd, usd
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7520,7 +7530,21 @@ func (x *CreditSpendLogRequest) GetAnchor() string {
 	return ""
 }
 
-type LLMSpansRequest struct {
+func (x *CreditSpendLogRequest) GetFilters() []string {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *CreditSpendLogRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+type LLMSpansRequest2 struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -7532,20 +7556,20 @@ type LLMSpansRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LLMSpansRequest) Reset() {
-	*x = LLMSpansRequest{}
+func (x *LLMSpansRequest2) Reset() {
+	*x = LLMSpansRequest2{}
 	mi := &file_request_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LLMSpansRequest) String() string {
+func (x *LLMSpansRequest2) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LLMSpansRequest) ProtoMessage() {}
+func (*LLMSpansRequest2) ProtoMessage() {}
 
-func (x *LLMSpansRequest) ProtoReflect() protoreflect.Message {
+func (x *LLMSpansRequest2) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7557,47 +7581,47 @@ func (x *LLMSpansRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LLMSpansRequest.ProtoReflect.Descriptor instead.
-func (*LLMSpansRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use LLMSpansRequest2.ProtoReflect.Descriptor instead.
+func (*LLMSpansRequest2) Descriptor() ([]byte, []int) {
 	return file_request_proto_rawDescGZIP(), []int{66}
 }
 
-func (x *LLMSpansRequest) GetCtx() *common.Context {
+func (x *LLMSpansRequest2) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *LLMSpansRequest) GetAccountId() string {
+func (x *LLMSpansRequest2) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *LLMSpansRequest) GetWorkflowId() string {
+func (x *LLMSpansRequest2) GetWorkflowId() string {
 	if x != nil {
 		return x.WorkflowId
 	}
 	return ""
 }
 
-func (x *LLMSpansRequest) GetSessionId() string {
+func (x *LLMSpansRequest2) GetSessionId() string {
 	if x != nil {
 		return x.SessionId
 	}
 	return ""
 }
 
-func (x *LLMSpansRequest) GetTraceId() string {
+func (x *LLMSpansRequest2) GetTraceId() string {
 	if x != nil {
 		return x.TraceId
 	}
 	return ""
 }
 
-func (x *LLMSpansRequest) GetSpanId() string {
+func (x *LLMSpansRequest2) GetSpanId() string {
 	if x != nil {
 		return x.SpanId
 	}
@@ -9524,7 +9548,7 @@ const file_request_proto_rawDesc = "" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x18\n" +
 	"\akeyword\x18\x04 \x01(\tR\akeyword\x12\x14\n" +
 	"\x05limit\x18\a \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06anchor\x18\b \x01(\tR\x06anchor\"\xe0\x02\n" +
+	"\x06anchor\x18\b \x01(\tR\x06anchor\"\xfc\x02\n" +
 	"\x18CreditSpendReportRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9541,7 +9565,8 @@ const file_request_proto_rawDesc = "" +
 	"count_only\x18\n" +
 	" \x01(\bR\tcountOnly\x12\x18\n" +
 	"\afilters\x18\f \x03(\tR\afilters\x12\x19\n" +
-	"\bgroup_by\x18\r \x01(\tR\agroupBy\"\xad\x02\n" +
+	"\bgroup_by\x18\r \x01(\tR\agroupBy\x12\x1a\n" +
+	"\bcurrency\x18\x0e \x01(\tR\bcurrency\"\xe3\x02\n" +
 	"\x15CreditSpendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9555,8 +9580,10 @@ const file_request_proto_rawDesc = "" +
 	"\tcredit_id\x18\f \x01(\tR\bcreditId\x12\x14\n" +
 	"\x05limit\x18\n" +
 	" \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06anchor\x18\v \x01(\tR\x06anchor\"\xc7\x01\n" +
-	"\x0fLLMSpansRequest\x12!\n" +
+	"\x06anchor\x18\v \x01(\tR\x06anchor\x12\x18\n" +
+	"\afilters\x18\r \x03(\tR\afilters\x12\x1a\n" +
+	"\bcurrency\x18\x0e \x01(\tR\bcurrency\"\xc8\x01\n" +
+	"\x10LLMSpansRequest2\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1f\n" +
@@ -9765,7 +9792,7 @@ var file_request_proto_goTypes = []any{
 	(*ListEmailSignatureRequest)(nil),     // 66: header.ListEmailSignatureRequest
 	(*CreditSpendReportRequest)(nil),      // 67: header.CreditSpendReportRequest
 	(*CreditSpendLogRequest)(nil),         // 68: header.CreditSpendLogRequest
-	(*LLMSpansRequest)(nil),               // 69: header.LLMSpansRequest
+	(*LLMSpansRequest2)(nil),              // 69: header.LLMSpansRequest2
 	(*AIAgentTraceRequest)(nil),           // 70: header.AIAgentTraceRequest
 	(*LLMTracesRequest)(nil),              // 71: header.LLMTracesRequest
 	(*SuggestAIDataEntryRequest)(nil),     // 72: header.SuggestAIDataEntryRequest
@@ -9850,7 +9877,7 @@ var file_request_proto_depIdxs = []int32{
 	84, // 63: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
 	84, // 64: header.CreditSpendReportRequest.ctx:type_name -> common.Context
 	84, // 65: header.CreditSpendLogRequest.ctx:type_name -> common.Context
-	84, // 66: header.LLMSpansRequest.ctx:type_name -> common.Context
+	84, // 66: header.LLMSpansRequest2.ctx:type_name -> common.Context
 	84, // 67: header.AIAgentTraceRequest.ctx:type_name -> common.Context
 	84, // 68: header.LLMTracesRequest.ctx:type_name -> common.Context
 	84, // 69: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context

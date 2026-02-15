@@ -921,6 +921,7 @@ message CreditSpendReportRequest {
 
 	repeated string filters = 12; // "", "source=at123;item=zns"
 	string group_by = 13; // "", "item", "source"
+	string currency = 14; // "", vnd, usd
 }
 
 message CreditSpendLogRequest {
@@ -936,9 +937,12 @@ message CreditSpendLogRequest {
 
 	int64 limit = 10; // max : 20
 	string anchor = 11;
+
+	repeated string filters = 13; // "", "source=at123;item=zns"
+	string currency = 14; // vnd, usd
 }
 
-message LLMSpansRequest {
+message LLMSpansRequest2 {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string workflow_id = 3; // agent_id
