@@ -63,7 +63,7 @@ message NotiData {
 	int64 campaign_num_acks = 15;
 	int64 campaign_num_success = 16;
 	string campaign_cancelled_by = 17;
-	string campaign_status = 18; //  active, pause, completed
+	string campaign_status = 18; //	active, pause, completed
 }
 
 // push noti
@@ -323,13 +323,13 @@ message UserAds {
 }
 
 /*
-message UserLifecycleStage {
+	message UserLifecycleStage {
 	string stage = 5; // id
 	int64 duration = 6; // ms
 	string by = 7;
 	string by_type = 8; // agent, bot
 	int64 start_at = 9;
-}
+	}
 */
 
 // lookup contact point to user_id
@@ -405,7 +405,7 @@ message TryUpdateUserResult {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string code = 4;  // ok, duplicated
+	string code = 4;	// ok, duplicated
 	repeated User users = 8;
 	repeated string duplicated_fields = 9;
 	repeated string duplicated_values = 10;
@@ -1376,7 +1376,7 @@ message AIAgentAutoFollowUpSetting {
 	// repeated string instructions = 6;
 
 	/*
-	1. Conversation history:
+		1. Conversation history:
 		[2025 Aug 21, 09:00:00] user: hello
 		[2025 Aug 21, 09:00:02] assistant: hi, how can I help you with?
 		[2025 Aug 21, 09:00:04] user: I want to make a reservation
@@ -1963,7 +1963,7 @@ message Integration {
 	repeated string sip_remote_hosts = 95;
 	string call_outbound_username = 96;
 	string call_outbound_password = 97;
-	string call_allow = 98;  // !all,ulaw,alaw,g722
+	string call_allow = 98; // !all,ulaw,alaw,g722
 	bool call_rtp_symmetrics = 99; // false
 
 	repeated ResourceGroupMember permissions = 100;
@@ -2180,7 +2180,7 @@ message VisitProductSiteRequest {
 	string desktop_screenshoot_url = 14;
 
 	int64 last_crawled = 15;
-}*/
+	}*/
 
 message Bot {
 	common.Context ctx = 1;
@@ -2366,7 +2366,7 @@ message ActionSendHttp {
 }
 
 message ActionSendTyping {
-  Message message = 4; // extra message
+	Message message = 4; // extra message
 	// repeated KV data = 9;
 	// string key = 10;
 }
@@ -2526,7 +2526,7 @@ message AccountWeb {
 	repeated PaymentMethod payment_methods = 24;
 	Location location = 25;
 
-	string device_type = 26;  // mobile desktop tablet
+	string device_type = 26;	// mobile desktop tablet
 
 	bool is_in_business_hour = 28;
 	bool is_online = 29;
@@ -3232,7 +3232,7 @@ message Impression {
 	int64 created = 9;
 
 	string by_trigger = 10;
-	string impression_token = 11;  // for request submit only
+	string impression_token = 11; // for request submit only
 
 	string web_plugin_id = 12;
 }
@@ -4081,14 +4081,14 @@ message OrderItem {
 
 	string note = 15;
 
-	//  equal quantity*product.price - discount
+	//	equal quantity*product.price - discount
 	float total = 16;
 	int64 fpv_total = 17;
 
 	// discount before tax
 	float discount_amount = 20;
 	int64 fpv_discount_amount = 21;
-	int64 discount_percentage = 23;  // 1234 => 12.34% = 0.1234
+	int64 discount_percentage = 23;	// 1234 => 12.34% = 0.1234
 
 	string pos_id = 24;
 	Tax tax = 25;
@@ -4485,7 +4485,7 @@ message PaymentMethod {
 	string id = 3;
 
 	string method = 4; // cash, cod ,credit_card, debit_card, momo, bank_transfer
-	string description = 5; //  "Thanh toán tiền mặt khi nhận hàng"
+	string description = 5; //	"Thanh toán tiền mặt khi nhận hàng"
 
 	string type = 6;
 	enum State {
@@ -4594,7 +4594,7 @@ message Order {
 	string due_date_term = 9; // net30 net7
 
 	// open; closed; canceled
-	//  (see OrderStatusCode)
+	//	(see OrderStatusCode)
 	string status = 10;
 	int64 closed = 14; // close or canceled time
 
@@ -4715,7 +4715,7 @@ message OrderAgent {
 }
 
 enum OrderStatusCode {
-	open = 0;  // đơn mới
+	open = 0; // đơn mới
 
 	canceled = 1; // đơn hàng đã chốt thua
 	closed = 2; // đơn hàng đã chốt thắng accepted, confirm
@@ -5582,7 +5582,7 @@ message DocHit {
 	string email = 11;
 	string user_id = 12; // for convo
 	string origin = 13;
-	User user = 14;        //for primary user
+	User user = 14;				//for primary user
 	DocHit secondary_doc = 15;
 	string user_type = 16;
 	Article article = 17;
@@ -6052,7 +6052,7 @@ message SegmentSync {
 	int64 progress = 18; // should run from 0 -> 100
 
 	string meta_audience_id = 19; // allow to update
-	string meta_ad_account_id = 20;  // act_315986166689190
+	string meta_ad_account_id = 20; // act_315986166689190
 	MetaCustomAudience meta_audience = 23;
 	string last_fb_request_response = 24;
 	int64 last_fb_request_status = 25;
@@ -6153,7 +6153,7 @@ message Campaign {
 	repeated MarketingMessage messages = 15;
 	OutboundCallCampaign outbound_call = 16;
 
-	string state = 18; //  pause (default), active
+	string state = 18; // pause (default), active
 
 	bool is_building_audient = 17; // clear data after the campaign is finished or deleted
 	// bool is_completed = 18;
@@ -6276,8 +6276,8 @@ message ImportOutboundCallEntryRequest {
 	string campaign_id = 3;
 
 	repeated OutboundCallEntry entries = 5;
-	string on_duplicate = 6; //  override, skip
-	string assign_strategy = 13;  // weight
+	string on_duplicate = 6; // override, skip
+	string assign_strategy = 13; // weight
 	map<string, int64> agent_weight = 14; // agduc -> 5 => 24.45%
 }
 
@@ -6748,7 +6748,7 @@ message ActionAskInfo {
 	string required_level = 4; // required, should_have, optional
 
 	string on_collected = 7; // next-action-id
-	string on_uncollected = 8;  // next-action-id
+	string on_uncollected = 8; // next-action-id
 	// 1. xac nhan la khach co dang noi voi component ko?
 	// 2. khach dang noi voi component.
 	// 2.1 khach da cho -> goi on_collected
@@ -6866,7 +6866,7 @@ message ActionWaitBranch {
 	string date_format = 19; // unix rfc3999
 
 	int64 sec = 21; // wait_for=duration
-	string next_action_id = 20; // if condition  match -> call this
+	string next_action_id = 20; // if condition match -> call this
 }
 
 message ActionBranchingBranch {
@@ -7130,7 +7130,7 @@ message ProductCollection {
 	string name = 4;
 	string visiblity = 5; // public || unpublished
 	// string code = 6;
-	repeated string product_ids = 7;  // product ids
+	repeated string product_ids = 7; // product ids
 
 	int64 created = 11;
 	string created_by = 12;
@@ -7268,15 +7268,16 @@ message CreditSpendEntry {
 	string credit_id = 9;
 
 	int64 fpv_unit_price = 10;
-	int64 fpv_regular_unit_price = 11; //
+	int64 fpv_regular_unit_price = 11; // @deprecated
 
-	string service_id = 12; // cp13
+	string service_id = 12; // cp13 @deprecated
 	// string service_type = 13; // campaign, bot, popup
 
 	string item = 14; // type of product used, e.g: zns, call, llm, textembedding
-	string item_id = 15; // product id
-	repeated string tags = 18; // indexing [model.23048234, conversation.2304823904]
+	string item_id = 15; // @deprecated
 	string by_agent_id = 16;
+
+	string source = 17; // required
 }
 
 message CreditEntryDataId {
@@ -7327,6 +7328,30 @@ message CreditEntryData {
 	CreditEntryDataZaloRequestCall zalo_request_call = 7;
 	CreditEntryDataLLMCompletion llm_completion = 8;
 	CreditEntryDataTextEmbedding text_embedding = 9;
+	CreditEntryDataAITraining ai_training = 10;
+	CreditEntryDataAIMessage ai_message = 11;
+}
+
+message CreditEntryDataAITraining {
+	string entry_id = 4;
+	string entry_type = 5;
+	int64 length = 6;
+}
+
+message CreditEntryDataAIMessage {
+	string message_id = 3;
+	int64 started = 6;
+	string user_message_id = 7;
+	string conversation_id = 8;
+	string session_id = 9; // if automation
+
+	string agent_id = 10;
+	int64 agent_version = 11;
+
+	int64 duration = 16; // ms
+
+	string user_query = 17; // top 100
+	string agent_message = 18; // top 100
 }
 
 message CreditEntryDataLLMCompletion {
@@ -7639,7 +7664,7 @@ message Workflow {
 }
 
 message LLMToolCall {
-	string type = 4;    // function_call, message
+	string type = 4;   // function_call, message
 	string status = 5;  // completed
 	// string name = 6;    // transfer_to_history_tutor
 	string id = 7;      // fc_67dcda987f9881919507ee94ff0e62150383ade9cf9a9f3a
@@ -7755,6 +7780,8 @@ message AIAgentTrace {
 	string product_mention = 29;
 
 	string collect_information_strategy = 32;
+
+	string last_prompt = 33; // for debugging
 }
 
 message WorkflowLog {
@@ -9074,7 +9101,7 @@ message AIAgent {
 	string token_limit = 28; // short, balanced, long
 	// int64 temperature = 29; // 50% -> 50
 
-	string first_person_pronoun = 30;  // personal pronoun: em
+	string first_person_pronoun = 30; // personal pronoun: em
 	string second_person_pronoun = 31; // anh/chi
 
 	int64 context_guard = 35;
@@ -9131,7 +9158,7 @@ message AIAgent {
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
 	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
 	string collect_user_information_prompt = 75;
-  Form collect_user_information = 78;
+	Form collect_user_information = 78;
 
 	Message welcome_message = 79;
 	string welcome_message_prompt = 80;
@@ -9146,7 +9173,7 @@ message AIAgent {
 	AIAgentUsageLimit usage_limit = 85;
 
 	RewriteQuerySetting rewrite_query = 86;
-  AIAgentWebhook custom_webhook = 88;
+	AIAgentWebhook custom_webhook = 88;
 	repeated string supervisors = 89;
 	repeated string tags = 90;
 }
@@ -9549,7 +9576,7 @@ message FacebookAdsFlow {
 	string flow_id = 5;
 	string name = 6;
 	Message welcome_message = 7;
-	repeated string eligible_platforms = 8; //  messenger,instagram
+	repeated string eligible_platforms = 8; // messenger,instagram
 	int64 updated = 9;
 
 	// bool is_used_in_ad = 10; // fb
@@ -9642,7 +9669,7 @@ message ZNSTemplateParam {
 
 message ZNSTemplateLayoutComponentItem {
 	string bank_code = 6;
-	string account_name =  7;
+	string account_name = 7;
 	string account_number = 8;
 	string amount = 10;
 	string note = 11;
@@ -10045,7 +10072,7 @@ message ZaloPersonalAccount {
 	string sdob = 13; // date of birth string
 	string status = 14;
 	string phone_number = 15;
-	int64 is_fr =  16;
+	int64 is_fr = 16;
 	int64 is_blocked = 17;
 	int64 last_action_time = 18;
 	int64 last_update_time = 19;

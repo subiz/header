@@ -914,10 +914,13 @@ message CreditSpendReportRequest {
 	int64 from_time = 4; // ms
 	string unit = 5; // hour, day, month
 	string item = 6; // just filter
-	string item_id = 7;
+	string item_id = 7; // @deprecated
 	int64 limit = 8; // default: 24, 30, 24
 	string service_id = 9;
 	bool count_only = 10;
+
+	repeated string filters = 12; // "", "source=at123;item=zns"
+	string group_by = 13; // "", "item", "source"
 }
 
 message CreditSpendLogRequest {
