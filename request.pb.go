@@ -7280,10 +7280,12 @@ type CreditSpendReportRequest struct {
 	FromTime      int64                  `protobuf:"varint,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"` // ms
 	Unit          string                 `protobuf:"bytes,5,opt,name=unit,proto3" json:"unit,omitempty"`                          // hour, day, month
 	Item          string                 `protobuf:"bytes,6,opt,name=item,proto3" json:"item,omitempty"`                          // just filter
-	ItemId        string                 `protobuf:"bytes,7,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	Limit         int64                  `protobuf:"varint,8,opt,name=limit,proto3" json:"limit,omitempty"` // default: 24, 30, 24
+	ItemId        string                 `protobuf:"bytes,7,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`        // @deprecated
+	Limit         int64                  `protobuf:"varint,8,opt,name=limit,proto3" json:"limit,omitempty"`                       // default: 24, 30, 24
 	ServiceId     string                 `protobuf:"bytes,9,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
 	CountOnly     bool                   `protobuf:"varint,10,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"`
+	Filters       []string               `protobuf:"bytes,12,rep,name=filters,proto3" json:"filters,omitempty"`                // "", "source=at123;item=zns"
+	GroupBy       string                 `protobuf:"bytes,13,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "", "item", "source"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7386,6 +7388,20 @@ func (x *CreditSpendReportRequest) GetCountOnly() bool {
 		return x.CountOnly
 	}
 	return false
+}
+
+func (x *CreditSpendReportRequest) GetFilters() []string {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *CreditSpendReportRequest) GetGroupBy() string {
+	if x != nil {
+		return x.GroupBy
+	}
+	return ""
 }
 
 type CreditSpendLogRequest struct {
@@ -9508,7 +9524,7 @@ const file_request_proto_rawDesc = "" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x18\n" +
 	"\akeyword\x18\x04 \x01(\tR\akeyword\x12\x14\n" +
 	"\x05limit\x18\a \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06anchor\x18\b \x01(\tR\x06anchor\"\xab\x02\n" +
+	"\x06anchor\x18\b \x01(\tR\x06anchor\"\xe0\x02\n" +
 	"\x18CreditSpendReportRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9523,7 +9539,9 @@ const file_request_proto_rawDesc = "" +
 	"service_id\x18\t \x01(\tR\tserviceId\x12\x1d\n" +
 	"\n" +
 	"count_only\x18\n" +
-	" \x01(\bR\tcountOnly\"\xad\x02\n" +
+	" \x01(\bR\tcountOnly\x12\x18\n" +
+	"\afilters\x18\f \x03(\tR\afilters\x12\x19\n" +
+	"\bgroup_by\x18\r \x01(\tR\agroupBy\"\xad\x02\n" +
 	"\x15CreditSpendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

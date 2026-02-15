@@ -28793,11 +28793,6 @@ type CreditMgrClient interface {
 	TrySpendCredit(ctx context.Context, in *CreditSpendEntry, opts ...grpc.CallOption) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(ctx context.Context, in *CreditSpendReportRequest, opts ...grpc.CallOption) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(ctx context.Context, in *CreditSpendLogRequest, opts ...grpc.CallOption) (*CreditSpendEntries, error)
-	// rpc ListCredits(header.Id) returns (header.Response); // credit
-	// rpc AddCredit(header.Credit) returns (header.Response); // credit
-	// rpc DeleteCredit(header.Id) returns (header.Response); // empty
-	// rpc UpdateCredit(header.Credit) returns (header.Response); // credit
-	// rpc MatchCredits(Ids) returns (header.Response);
 	GetTotalCreditSpend(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
@@ -28856,11 +28851,6 @@ type CreditMgrServer interface {
 	TrySpendCredit(context.Context, *CreditSpendEntry) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(context.Context, *CreditSpendReportRequest) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error)
-	// rpc ListCredits(header.Id) returns (header.Response); // credit
-	// rpc AddCredit(header.Credit) returns (header.Response); // credit
-	// rpc DeleteCredit(header.Id) returns (header.Response); // empty
-	// rpc UpdateCredit(header.Credit) returns (header.Response); // credit
-	// rpc MatchCredits(Ids) returns (header.Response);
 	GetTotalCreditSpend(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedCreditMgrServer()
 }
