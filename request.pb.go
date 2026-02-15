@@ -7287,6 +7287,7 @@ type CreditSpendReportRequest struct {
 	Filters       []string               `protobuf:"bytes,12,rep,name=filters,proto3" json:"filters,omitempty"`                // "", "source=at123;item=zns"
 	GroupBy       string                 `protobuf:"bytes,13,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "", "item", "source"
 	Currency      string                 `protobuf:"bytes,14,opt,name=currency,proto3" json:"currency,omitempty"`              // "", vnd, usd
+	Filter        string                 `protobuf:"bytes,15,opt,name=filter,proto3" json:"filter,omitempty"`                  // ; delimeter
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7412,6 +7413,13 @@ func (x *CreditSpendReportRequest) GetCurrency() string {
 	return ""
 }
 
+func (x *CreditSpendReportRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
 type CreditSpendLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -7424,6 +7432,7 @@ type CreditSpendLogRequest struct {
 	CreditId      string                 `protobuf:"bytes,12,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	Limit         int64                  `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"` // max : 20
 	Anchor        string                 `protobuf:"bytes,11,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	Filter        string                 `protobuf:"bytes,15,opt,name=filter,proto3" json:"filter,omitempty"`     // ; delimeter
 	Filters       []string               `protobuf:"bytes,13,rep,name=filters,proto3" json:"filters,omitempty"`   // "", "source=at123;item=zns"
 	Currency      string                 `protobuf:"bytes,14,opt,name=currency,proto3" json:"currency,omitempty"` // vnd, usd
 	unknownFields protoimpl.UnknownFields
@@ -7526,6 +7535,13 @@ func (x *CreditSpendLogRequest) GetLimit() int64 {
 func (x *CreditSpendLogRequest) GetAnchor() string {
 	if x != nil {
 		return x.Anchor
+	}
+	return ""
+}
+
+func (x *CreditSpendLogRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
 	}
 	return ""
 }
@@ -9548,7 +9564,7 @@ const file_request_proto_rawDesc = "" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x18\n" +
 	"\akeyword\x18\x04 \x01(\tR\akeyword\x12\x14\n" +
 	"\x05limit\x18\a \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06anchor\x18\b \x01(\tR\x06anchor\"\xfc\x02\n" +
+	"\x06anchor\x18\b \x01(\tR\x06anchor\"\x94\x03\n" +
 	"\x18CreditSpendReportRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9566,7 +9582,8 @@ const file_request_proto_rawDesc = "" +
 	" \x01(\bR\tcountOnly\x12\x18\n" +
 	"\afilters\x18\f \x03(\tR\afilters\x12\x19\n" +
 	"\bgroup_by\x18\r \x01(\tR\agroupBy\x12\x1a\n" +
-	"\bcurrency\x18\x0e \x01(\tR\bcurrency\"\xe3\x02\n" +
+	"\bcurrency\x18\x0e \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06filter\x18\x0f \x01(\tR\x06filter\"\xfb\x02\n" +
 	"\x15CreditSpendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9580,7 +9597,8 @@ const file_request_proto_rawDesc = "" +
 	"\tcredit_id\x18\f \x01(\tR\bcreditId\x12\x14\n" +
 	"\x05limit\x18\n" +
 	" \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06anchor\x18\v \x01(\tR\x06anchor\x12\x18\n" +
+	"\x06anchor\x18\v \x01(\tR\x06anchor\x12\x16\n" +
+	"\x06filter\x18\x0f \x01(\tR\x06filter\x12\x18\n" +
 	"\afilters\x18\r \x03(\tR\afilters\x12\x1a\n" +
 	"\bcurrency\x18\x0e \x01(\tR\bcurrency\"\xc8\x01\n" +
 	"\x10LLMSpansRequest2\x12!\n" +

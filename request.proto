@@ -922,6 +922,7 @@ message CreditSpendReportRequest {
 	repeated string filters = 12; // "", "source=at123;item=zns"
 	string group_by = 13; // "", "item", "source"
 	string currency = 14; // "", vnd, usd
+	string filter = 15; // ; delimeter
 }
 
 message CreditSpendLogRequest {
@@ -938,6 +939,7 @@ message CreditSpendLogRequest {
 	int64 limit = 10; // max : 20
 	string anchor = 11;
 
+	string filter = 15; // ; delimeter
 	repeated string filters = 13; // "", "source=at123;item=zns"
 	string currency = 14; // vnd, usd
 }
