@@ -1055,7 +1055,11 @@ type Limit struct {
 	CallRecordingTtl    int64                  `protobuf:"varint,25,opt,name=call_recording_ttl,json=callRecordingTtl,proto3" json:"call_recording_ttl,omitempty"`   // sec
 	MaxZaloPersonals    int64                  `protobuf:"varint,27,opt,name=max_zalo_personals,json=maxZaloPersonals,proto3" json:"max_zalo_personals,omitempty"`   // plan limit + additional
 	UseZaloPersonals    int64                  `protobuf:"varint,28,opt,name=use_zalo_personals,json=useZaloPersonals,proto3" json:"use_zalo_personals,omitempty"`
+	MaxZaloOas          int64                  `protobuf:"varint,29,opt,name=max_zalo_oas,json=maxZaloOas,proto3" json:"max_zalo_oas,omitempty"`
 	MaxFanpages         int64                  `protobuf:"varint,30,opt,name=max_fanpages,json=maxFanpages,proto3" json:"max_fanpages,omitempty"`
+	MaxTiktoks          int64                  `protobuf:"varint,40,opt,name=max_tiktoks,json=maxTiktoks,proto3" json:"max_tiktoks,omitempty"`
+	MaxInstagrams       int64                  `protobuf:"varint,41,opt,name=max_instagrams,json=maxInstagrams,proto3" json:"max_instagrams,omitempty"`
+	MaxGoogleBusinesses int64                  `protobuf:"varint,42,opt,name=max_google_businesses,json=maxGoogleBusinesses,proto3" json:"max_google_businesses,omitempty"`
 	UnlimitedAiSpending int64                  `protobuf:"varint,31,opt,name=unlimited_ai_spending,json=unlimitedAiSpending,proto3" json:"unlimited_ai_spending,omitempty"` // > 0: active; <= 0 -> disabled
 	UseTicket           int64                  `protobuf:"varint,32,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"`                                 // > 0: active; <= 0 -> disabled
 	MaxAgents           int64                  `protobuf:"varint,33,opt,name=max_agents,json=maxAgents,proto3" json:"max_agents,omitempty"`
@@ -1167,9 +1171,37 @@ func (x *Limit) GetUseZaloPersonals() int64 {
 	return 0
 }
 
+func (x *Limit) GetMaxZaloOas() int64 {
+	if x != nil {
+		return x.MaxZaloOas
+	}
+	return 0
+}
+
 func (x *Limit) GetMaxFanpages() int64 {
 	if x != nil {
 		return x.MaxFanpages
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxTiktoks() int64 {
+	if x != nil {
+		return x.MaxTiktoks
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxInstagrams() int64 {
+	if x != nil {
+		return x.MaxInstagrams
+	}
+	return 0
+}
+
+func (x *Limit) GetMaxGoogleBusinesses() int64 {
+	if x != nil {
+		return x.MaxGoogleBusinesses
 	}
 	return 0
 }
@@ -1343,7 +1375,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\x9f\x05\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xbd\x06\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1356,8 +1388,14 @@ const file_common_proto_rawDesc = "" +
 	"\x13total_call_log_size\x18\x18 \x01(\x03R\x10totalCallLogSize\x12,\n" +
 	"\x12call_recording_ttl\x18\x19 \x01(\x03R\x10callRecordingTtl\x12,\n" +
 	"\x12max_zalo_personals\x18\x1b \x01(\x03R\x10maxZaloPersonals\x12,\n" +
-	"\x12use_zalo_personals\x18\x1c \x01(\x03R\x10useZaloPersonals\x12!\n" +
-	"\fmax_fanpages\x18\x1e \x01(\x03R\vmaxFanpages\x122\n" +
+	"\x12use_zalo_personals\x18\x1c \x01(\x03R\x10useZaloPersonals\x12 \n" +
+	"\fmax_zalo_oas\x18\x1d \x01(\x03R\n" +
+	"maxZaloOas\x12!\n" +
+	"\fmax_fanpages\x18\x1e \x01(\x03R\vmaxFanpages\x12\x1f\n" +
+	"\vmax_tiktoks\x18( \x01(\x03R\n" +
+	"maxTiktoks\x12%\n" +
+	"\x0emax_instagrams\x18) \x01(\x03R\rmaxInstagrams\x122\n" +
+	"\x15max_google_businesses\x18* \x01(\x03R\x13maxGoogleBusinesses\x122\n" +
 	"\x15unlimited_ai_spending\x18\x1f \x01(\x03R\x13unlimitedAiSpending\x12\x1d\n" +
 	"\n" +
 	"use_ticket\x18  \x01(\x03R\tuseTicket\x12\x1d\n" +

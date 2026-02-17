@@ -1134,10 +1134,11 @@ func (MessageButton_ButtonType) EnumDescriptor() ([]byte, []int) {
 type Integration_State int32
 
 const (
-	Integration_activated Integration_State = 0 // activeated and insync
+	Integration_activated Integration_State = 0 // activated and insync
 	Integration_pending   Integration_State = 1
 	Integration_failed    Integration_State = 2 // unlinked, connector khong nhan ket noi
 	Integration_deleted   Integration_State = 3
+	Integration_inactive  Integration_State = 4 // payment problem, agent can re-activate it
 )
 
 // Enum value maps for Integration_State.
@@ -1147,12 +1148,14 @@ var (
 		1: "pending",
 		2: "failed",
 		3: "deleted",
+		4: "inactive",
 	}
 	Integration_State_value = map[string]int32{
 		"activated": 0,
 		"pending":   1,
 		"failed":    2,
 		"deleted":   3,
+		"inactive":  4,
 	}
 )
 
@@ -14039,7 +14042,7 @@ type Integration struct {
 	Created        int64                  `protobuf:"varint,11,opt,name=created,proto3" json:"created,omitempty"`
 	IntegratedBy   string                 `protobuf:"bytes,13,opt,name=integrated_by,json=integratedBy,proto3" json:"integrated_by,omitempty"`
 	// int64 last_failed = 14;
-	Disabled     bool   `protobuf:"varint,15,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Disabled     bool   `protobuf:"varint,15,opt,name=disabled,proto3" json:"disabled,omitempty"` // @deprecated
 	Username     string `protobuf:"bytes,19,opt,name=username,proto3" json:"username,omitempty"`
 	LinkedPageId string `protobuf:"bytes,20,opt,name=linked_page_id,json=linkedPageId,proto3" json:"linked_page_id,omitempty"`
 	// string call_center_driver = 43; // empty => subiz
@@ -14125,7 +14128,6 @@ type Integration struct {
 	WebsiteLastVisitedUrl string `protobuf:"bytes,140,opt,name=website_last_visited_url,json=websiteLastVisitedUrl,proto3" json:"website_last_visited_url,omitempty"`
 	WebsiteLastCrawled    int64  `protobuf:"varint,141,opt,name=website_last_crawled,json=websiteLastCrawled,proto3" json:"website_last_crawled,omitempty"`
 	LastSynced            int64  `protobuf:"varint,142,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`
-	SendingBlocked        int64  `protobuf:"varint,143,opt,name=sending_blocked,json=sendingBlocked,proto3" json:"sending_blocked,omitempty"` //
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -14800,13 +14802,6 @@ func (x *Integration) GetWebsiteLastCrawled() int64 {
 func (x *Integration) GetLastSynced() int64 {
 	if x != nil {
 		return x.LastSynced
-	}
-	return 0
-}
-
-func (x *Integration) GetSendingBlocked() int64 {
-	if x != nil {
-		return x.SendingBlocked
 	}
 	return 0
 }
@@ -73715,7 +73710,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\xe6 \n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xca \n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73816,14 +73811,14 @@ const file_header_proto_rawDesc = "" +
 	"\x18website_last_visited_url\x18\x8c\x01 \x01(\tR\x15websiteLastVisitedUrl\x121\n" +
 	"\x14website_last_crawled\x18\x8d\x01 \x01(\x03R\x12websiteLastCrawled\x12 \n" +
 	"\vlast_synced\x18\x8e\x01 \x01(\x03R\n" +
-	"lastSynced\x12(\n" +
-	"\x0fsending_blocked\x18\x8f\x01 \x01(\x03R\x0esendingBlocked\"<\n" +
+	"lastSynced\"J\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +
 	"\n" +
 	"\x06failed\x10\x02\x12\v\n" +
-	"\adeleted\x10\x03\"\x95\x01\n" +
+	"\adeleted\x10\x03\x12\f\n" +
+	"\binactive\x10\x04\"\x95\x01\n" +
 	"\x11WorkflowSessionId\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

@@ -171,7 +171,11 @@ message Limit {
 	int64 max_zalo_personals = 27; // plan limit + additional
 	int64 use_zalo_personals = 28;
 
+	int64 max_zalo_oas = 29;
 	int64 max_fanpages = 30;
+	int64 max_tiktoks = 40;
+	int64 max_instagrams = 41;
+	int64 max_google_businesses = 42;
 
 	int64 unlimited_ai_spending = 31; // > 0: active; <= 0 -> disabled
 
