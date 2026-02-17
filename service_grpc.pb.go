@@ -11252,6 +11252,7 @@ const (
 	ConversationMgr_ListIntegrations2_FullMethodName        = "/header.ConversationMgr/ListIntegrations2"
 	ConversationMgr_MatchIntegration_FullMethodName         = "/header.ConversationMgr/MatchIntegration"
 	ConversationMgr_Integrate_FullMethodName                = "/header.ConversationMgr/Integrate"
+	ConversationMgr_ActivateIntegration_FullMethodName      = "/header.ConversationMgr/ActivateIntegration"
 	ConversationMgr_UpsertIntegration_FullMethodName        = "/header.ConversationMgr/UpsertIntegration"
 	ConversationMgr_GetIntegration_FullMethodName           = "/header.ConversationMgr/GetIntegration"
 	ConversationMgr_UpdateIntegrationMembers_FullMethodName = "/header.ConversationMgr/UpdateIntegrationMembers"
@@ -11338,6 +11339,7 @@ type ConversationMgrClient interface {
 	ListIntegrations2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchIntegration(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	Integrate(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
+	ActivateIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
 	UpsertIntegration(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
 	GetIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
 	UpdateIntegrationMembers(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
@@ -11747,6 +11749,16 @@ func (c *conversationMgrClient) Integrate(ctx context.Context, in *Integration, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Integration)
 	err := c.cc.Invoke(ctx, ConversationMgr_Integrate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ActivateIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Integration)
+	err := c.cc.Invoke(ctx, ConversationMgr_ActivateIntegration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12215,6 +12227,7 @@ type ConversationMgrServer interface {
 	ListIntegrations2(context.Context, *Id) (*Response, error)
 	MatchIntegration(context.Context, *Ids) (*Response, error)
 	Integrate(context.Context, *Integration) (*Integration, error)
+	ActivateIntegration(context.Context, *Id) (*Integration, error)
 	UpsertIntegration(context.Context, *Integration) (*Integration, error)
 	GetIntegration(context.Context, *Id) (*Integration, error)
 	UpdateIntegrationMembers(context.Context, *Integration) (*Integration, error)
@@ -12377,6 +12390,9 @@ func (UnimplementedConversationMgrServer) MatchIntegration(context.Context, *Ids
 }
 func (UnimplementedConversationMgrServer) Integrate(context.Context, *Integration) (*Integration, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Integrate not implemented")
+}
+func (UnimplementedConversationMgrServer) ActivateIntegration(context.Context, *Id) (*Integration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ActivateIntegration not implemented")
 }
 func (UnimplementedConversationMgrServer) UpsertIntegration(context.Context, *Integration) (*Integration, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertIntegration not implemented")
@@ -13169,6 +13185,24 @@ func _ConversationMgr_Integrate_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).Integrate(ctx, req.(*Integration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ActivateIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ActivateIntegration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ActivateIntegration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ActivateIntegration(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14079,6 +14113,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Integrate",
 			Handler:    _ConversationMgr_Integrate_Handler,
+		},
+		{
+			MethodName: "ActivateIntegration",
+			Handler:    _ConversationMgr_ActivateIntegration_Handler,
 		},
 		{
 			MethodName: "UpsertIntegration",
