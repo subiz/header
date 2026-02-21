@@ -1996,7 +1996,6 @@ message Integration {
 	int64 website_last_crawled = 141;
 
 	int64 last_synced = 142;
-	string last_inactive_by = 143;
 }
 
 message WorkflowSessionId {

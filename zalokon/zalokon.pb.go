@@ -146,11 +146,11 @@ type OfficialAccount struct {
 	Cover       string                 `protobuf:"bytes,6,opt,name=cover,proto3" json:"cover,omitempty"`
 	AccessToken string                 `protobuf:"bytes,7,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	// int64 authorized = 8;
-	AccountId    string `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	StrOaId      string `protobuf:"bytes,10,opt,name=str_oa_id,json=strOaId,proto3" json:"str_oa_id,omitempty"`
-	LastZaloHook int64  `protobuf:"varint,11,opt,name=last_zalo_hook,json=lastZaloHook,proto3" json:"last_zalo_hook,omitempty"`
-	State        string `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"` // activated || deleted || failed
-	// int32 version = 13;
+	AccountId               string          `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	StrOaId                 string          `protobuf:"bytes,10,opt,name=str_oa_id,json=strOaId,proto3" json:"str_oa_id,omitempty"`
+	LastZaloHook            int64           `protobuf:"varint,11,opt,name=last_zalo_hook,json=lastZaloHook,proto3" json:"last_zalo_hook,omitempty"`
+	State                   string          `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"`                                 // activated || deleted || failed
+	TokenStatus             int32           `protobuf:"varint,13,opt,name=token_status,json=tokenStatus,proto3" json:"token_status,omitempty"` // 0 -> ok, -1 dead
 	LastRefreshTokenAt      int64           `protobuf:"varint,14,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
 	RefreshToken            string          `protobuf:"bytes,15,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
 	LastCalled              int64           `protobuf:"varint,17,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
@@ -165,7 +165,6 @@ type OfficialAccount struct {
 	PackageValidThroughDate string          `protobuf:"bytes,26,opt,name=package_valid_through_date,json=packageValidThroughDate,proto3" json:"package_valid_through_date,omitempty"`
 	PackageAutoRenewDate    string          `protobuf:"bytes,27,opt,name=package_auto_renew_date,json=packageAutoRenewDate,proto3" json:"package_auto_renew_date,omitempty"`
 	LinkedZCA               string          `protobuf:"bytes,28,opt,name=linkedZCA,proto3" json:"linkedZCA,omitempty"`
-	IntegrationLinkStatus   string          `protobuf:"bytes,29,opt,name=integration_link_status,json=integrationLinkStatus,proto3" json:"integration_link_status,omitempty"` // active, failed
 	ZnsQuota                *ZaloOAZNSQuota `protobuf:"bytes,130,opt,name=zns_quota,json=znsQuota,proto3" json:"zns_quota,omitempty"`
 	ZnsTemplateTags         []string        `protobuf:"bytes,31,rep,name=zns_template_tags,json=znsTemplateTags,proto3" json:"zns_template_tags,omitempty"`
 	ZnsCurrentQuality       string          `protobuf:"bytes,32,opt,name=zns_current_quality,json=znsCurrentQuality,proto3" json:"zns_current_quality,omitempty"`
@@ -274,6 +273,13 @@ func (x *OfficialAccount) GetState() string {
 	return ""
 }
 
+func (x *OfficialAccount) GetTokenStatus() int32 {
+	if x != nil {
+		return x.TokenStatus
+	}
+	return 0
+}
+
 func (x *OfficialAccount) GetLastRefreshTokenAt() int64 {
 	if x != nil {
 		return x.LastRefreshTokenAt
@@ -368,13 +374,6 @@ func (x *OfficialAccount) GetPackageAutoRenewDate() string {
 func (x *OfficialAccount) GetLinkedZCA() string {
 	if x != nil {
 		return x.LinkedZCA
-	}
-	return ""
-}
-
-func (x *OfficialAccount) GetIntegrationLinkStatus() string {
-	if x != nil {
-		return x.IntegrationLinkStatus
 	}
 	return ""
 }
@@ -2256,7 +2255,7 @@ const file_zalokon_proto_rawDesc = "" +
 	"\x04sdob\x18\r \x01(\tR\x04sdob\x12\x1a\n" +
 	"\bglobalId\x18\x0e \x01(\tR\bglobalId\x12!\n" +
 	"\fdisplay_name\x18\x0f \x01(\tR\vdisplayName\x12\x1b\n" +
-	"\tzalo_name\x18\x10 \x01(\tR\bzaloName\"\xd2\b\n" +
+	"\tzalo_name\x18\x10 \x01(\tR\bzaloName\"\xbd\b\n" +
 	"\x0fOfficialAccount\x12\x13\n" +
 	"\x05oa_id\x18\x02 \x01(\tR\x04oaId\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x12\n" +
@@ -2269,7 +2268,8 @@ const file_zalokon_proto_rawDesc = "" +
 	"\tstr_oa_id\x18\n" +
 	" \x01(\tR\astrOaId\x12$\n" +
 	"\x0elast_zalo_hook\x18\v \x01(\x03R\flastZaloHook\x12\x14\n" +
-	"\x05state\x18\f \x01(\tR\x05state\x121\n" +
+	"\x05state\x18\f \x01(\tR\x05state\x12!\n" +
+	"\ftoken_status\x18\r \x01(\x05R\vtokenStatus\x121\n" +
 	"\x15last_refresh_token_at\x18\x0e \x01(\x03R\x12lastRefreshTokenAt\x12#\n" +
 	"\rrefresh_token\x18\x0f \x01(\tR\frefreshToken\x12\x1f\n" +
 	"\vlast_called\x18\x11 \x01(\x03R\n" +
@@ -2285,8 +2285,7 @@ const file_zalokon_proto_rawDesc = "" +
 	"\fpackage_name\x18\x19 \x01(\tR\vpackageName\x12;\n" +
 	"\x1apackage_valid_through_date\x18\x1a \x01(\tR\x17packageValidThroughDate\x125\n" +
 	"\x17package_auto_renew_date\x18\x1b \x01(\tR\x14packageAutoRenewDate\x12\x1c\n" +
-	"\tlinkedZCA\x18\x1c \x01(\tR\tlinkedZCA\x126\n" +
-	"\x17integration_link_status\x18\x1d \x01(\tR\x15integrationLinkStatus\x125\n" +
+	"\tlinkedZCA\x18\x1c \x01(\tR\tlinkedZCA\x125\n" +
 	"\tzns_quota\x18\x82\x01 \x01(\v2\x17.zalokon.ZaloOAZNSQuotaR\bznsQuota\x12*\n" +
 	"\x11zns_template_tags\x18\x1f \x03(\tR\x0fznsTemplateTags\x12.\n" +
 	"\x13zns_current_quality\x18  \x01(\tR\x11znsCurrentQuality\x12)\n" +

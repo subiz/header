@@ -458,8 +458,8 @@ service ConversationMgr {
 	rpc ListIntegrations2(Id) returns (Response);
 	rpc MatchIntegration(header.Ids) returns (Response);
 
-	rpc Integrate(header.Integration) returns (header.Integration);
-	rpc ActivateIntegration(header.Id) returns (header.Integration);
+	rpc Integrate(header.Integration) returns (header.Integration); // @deprecate
+	rpc ActivateIntegration(header.Id) returns (header.Integration); // connector only
 	rpc UpsertIntegration(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
 

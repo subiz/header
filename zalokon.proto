@@ -31,7 +31,7 @@ message OfficialAccount {
 	int64 last_zalo_hook = 11;
 
 	string state = 12; // activated || deleted || failed
-	// int32 version = 13;
+	int32 token_status = 13; // 0 -> ok, -1 dead
 	int64 last_refresh_token_at = 14;
 	string refresh_token = 15;
 	int64 last_called = 17;
@@ -48,7 +48,7 @@ message OfficialAccount {
 	string package_auto_renew_date = 27;
 	string linkedZCA = 28;
 
-	string integration_link_status = 29; // active, failed
+	// string integration_link_status = 29; // active, failed
 
 	ZaloOAZNSQuota zns_quota = 130;
 	repeated string zns_template_tags = 31;
