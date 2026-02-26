@@ -7,7 +7,7 @@ option go_package = "github.com/subiz/header/fabikon";
 message FacebookDataset {
 	string account_id = 1;
 	string page_id = 3;
-  string id = 4;
+	string id = 4;
 }
 
 message MetaBusiness {
@@ -62,6 +62,45 @@ message FacebookPage {
 
 	MetaBusiness business = 37;
 	int64 last_sync = 38;
+
+}
+
+message WeeklyOperatingHour {
+	string day_of_week = 4; // MONDAY
+	string open_time = 5; // 0900
+	string close_time = 6; // 1700
+}
+
+message CallHours {
+	string timezone_id = 5; // America/Los_Angeles
+	repeated WeeklyOperatingHour weekly_operating_hours = 6;
+}
+
+message CallSetting {
+	CallHours call_hours = 5;
+	bool audio_enabled = 6;
+	bool icon_enabled = 7;
+	string ring_target = 8;//	META , PARTNERS
+	string call_routing = 9; // PARTNERS
+}
+
+message CallMetric {
+	string platform = 4;// "messenger",
+	string call_id = 5; // c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXinCqnTQ
+	string end_call_reason = 6; // "Hangup_Call"
+	string end_call_subreason = 7;// "Conversation was finished"
+	string call_ended_time = 8;//	123456,
+	string first_audio_packet_received_time = 9; // : 12345,
+	/*"audio_stats": {
+		"jitter_sec": 0.01,
+		"packets_lost": 0,
+		"packets_received": 1000,
+		"round_trip_time_sec": 10.5,
+		"jitter_buffer_delay_sec": 4000.5
+		"concealed_samples": 2000,
+		"silent_concealed_samples": 16000,
+		"total_samples_duration_sec": 316.5
+		},*/
 }
 
 message FbWebhookEvent {
@@ -75,6 +114,16 @@ message FbEntry {
 	repeated FbMessaging messaging = 6;
 	repeated FbChange changes = 7;
 	repeated FbMessaging standby = 8;
+	repeated FbCall calls = 9;
+}
+
+message FbCall {
+	string id = 4; // "c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXiTQ"
+	string to = 5;// "106378625516323",
+	string from = 6; // "5275811702471834",
+	string event = 7; //	"connect",
+	int64 timestamp = 8; //	1671644824,
+	string call_direction = 9; //	"[business_initiated|user_initiated]",
 }
 
 message FbChange {
@@ -83,252 +132,252 @@ message FbChange {
 }
 
 message FbFrom {
-	optional string id = 1;
-	optional string from = 2;
-	optional string username = 3;
+	string id = 1;
+	string from = 2;
+	string username = 3;
 }
 
 message FbChangeValue {
-	optional int64 edited_time = 3;
-	optional FbFrom from = 4;
-	optional FbPagePost post = 5;
-	optional bool is_hidden = 6;
-	optional string link = 7;
-	optional string message = 8;
-	optional string photo = 9;
+	int64 edited_time = 3;
+	FbFrom from = 4;
+	FbPagePost post = 5;
+	bool is_hidden = 6;
+	string link = 7;
+	string message = 8;
+	string photo = 9;
 	repeated string photos = 10;
-	optional string post_id = 11;
-	optional string story = 12;
-	optional string title = 13;
-	optional string video = 14;
+	string post_id = 11;
+	string story = 12;
+	string title = 13;
+	string video = 14;
 	// optional string video_flag_reason = 15;
-	optional string action = 16;
-	optional string album_id = 17;
-	optional string comment_id = 18;
-	optional int64 created_time = 19;
-	optional string event_id = 20;
-	optional string item = 21;
-	optional string open_graph_story_id = 22;
-	optional string parent_id = 23;
-	optional string photo_id = 24;
-	optional string reaction_type = 25;
-	optional int32 published = 26;
-	optional string recipient_id = 27;
-	optional string share_id = 28;
-	optional string verb = 29; // remove
-	optional string video_id = 30;
-	optional IgMedia media = 31;
-	optional string id = 32;
-	optional string text = 33;
-	optional string media_id = 34;
-	optional FbChangeUser user = 35; // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
-	optional FbCustomLabel label = 36;
+	string action = 16;
+	string album_id = 17;
+	string comment_id = 18;
+	int64 created_time = 19;
+	string event_id = 20;
+	string item = 21;
+	string open_graph_story_id = 22;
+	string parent_id = 23;
+	string photo_id = 24;
+	string reaction_type = 25;
+	int32 published = 26;
+	string recipient_id = 27;
+	string share_id = 28;
+	string verb = 29; // remove
+	string video_id = 30;
+	IgMedia media = 31;
+	string id = 32;
+	string text = 33;
+	string media_id = 34;
+	FbChangeUser user = 35; // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
+	FbCustomLabel label = 36;
 
 	// leadgen
-	optional string leadgen_id = 40;
-	optional string page_id = 41;
-	optional string form_id = 42;
-	optional string adgroup_id = 43;
-	optional string ad_id = 44;
+	string leadgen_id = 40;
+	string page_id = 41;
+	string form_id = 42;
+	string adgroup_id = 43;
+	string ad_id = 44;
 }
 
 message FbCustomLabel {
-	optional string id = 4;
-	optional string page_label_name = 5;
+	string id = 4;
+	string page_label_name = 5;
 }
 
 message FbChangeUser {
-	optional string id = 4;
+	string id = 4;
 }
 
 message IgMedia {
-	optional string id = 3;
-	optional string media_product_type = 4;
+	string id = 3;
+	string media_product_type = 4;
 }
 
 message FbPagePost {
-	optional string status_type = 2;
-	optional bool is_published = 3;
-	optional string updated_time = 4;
-	optional string permalink_url = 5;
-	optional string promotion_status = 6;
-	optional string id = 7;
+	string status_type = 2;
+	bool is_published = 3;
+	string updated_time = 4;
+	string permalink_url = 5;
+	string promotion_status = 6;
+	string id = 7;
 }
 
 message FbMessaging {
-	optional FbSender sender = 2;
-	optional FbRecipient recipient = 3;
-	optional int64 timestamp = 4;
-	optional FbMessage message = 5;
-	optional FbDelivery delivery = 6;
-	optional string message_type = 7;
-	optional string sender_action = 8; // typing_on, typing_off, mark_seen
-	optional FbRead read = 9;
-	optional FbPostback postback = 10;
-	optional FbReferral referral = 11;
-	optional string tag = 12; // HUMAN_AGENT
-	optional IgReaction reaction = 13;
-	optional FbMessageEdit message_edit = 14;
+	FbSender sender = 2;
+	FbRecipient recipient = 3;
+	int64 timestamp = 4;
+	FbMessage message = 5;
+	FbDelivery delivery = 6;
+	string message_type = 7;
+	string sender_action = 8; // typing_on, typing_off, mark_seen
+	FbRead read = 9;
+	FbPostback postback = 10;
+	FbReferral referral = 11;
+	string tag = 12; // HUMAN_AGENT
+	IgReaction reaction = 13;
+	FbMessageEdit message_edit = 14;
 }
 
 message FbMessageEdit {
-	optional string mid = 4;
-	optional string text = 5;
-	optional int64 num_edit = 6;
+	string mid = 4;
+	string text = 5;
+	int64 num_edit = 6;
 }
 
 message IgReaction {
-	optional string mid = 5;
-	optional string action = 6;
-	optional string reaction = 7;
-	optional string emoji = 8;
+	string mid = 5;
+	string action = 6;
+	string reaction = 7;
+	string emoji = 8;
 }
 
 message FbPostback {
-	optional string payload = 2;
-	optional FbReferral referral = 3;
-	optional string title = 4;
-	optional string mid = 5;
+	string payload = 2;
+	FbReferral referral = 3;
+	string title = 4;
+	string mid = 5;
 }
 
 message AdsContextData {
-	optional string photo_url = 5;
-	optional string post_id = 6;
-	optional string ad_title = 7;
-	optional string video_url = 8;
-	optional string product_id = 9;
+	string photo_url = 5;
+	string post_id = 6;
+	string ad_title = 7;
+	string video_url = 8;
+	string product_id = 9;
 }
 
 message FbReferral {
-	optional string ref = 2;
-	optional string source = 3; // SHORTLINK, ADS
-	optional string type = 4; // OPEN_THREAD
-	optional AdsContextData ads_context_data = 5;
-	optional string ad_id = 6;
-	optional string referer_uri = 7;
-	optional bool is_guest_user = 8;
-	optional FbProduct product = 9;
+	string ref = 2;
+	string source = 3; // SHORTLINK, ADS
+	string type = 4; // OPEN_THREAD
+	AdsContextData ads_context_data = 5;
+	string ad_id = 6;
+	string referer_uri = 7;
+	bool is_guest_user = 8;
+	FbProduct product = 9;
 }
 
 message FbMessage {
-	optional string mid = 2;
-	optional string text = 3;
+	string mid = 2;
+	string text = 3;
 	repeated FbAttachment attachments = 4;
-	optional FbRead read = 5;
-	optional FbAttachment attachment = 6;
-	optional bool is_echo = 7;
-	optional int64 app_id = 8;
-	optional string metadata = 9;
+	FbRead read = 5;
+	FbAttachment attachment = 6;
+	bool is_echo = 7;
+	int64 app_id = 8;
+	string metadata = 9;
 	repeated QuickReply quick_replies = 10;
-	optional QuickReply quick_reply = 11; // response from fb
-	optional string is_supported = 12;
-	optional bool is_deleted = 13;
-	optional ReplyTo reply_to = 14;
+	QuickReply quick_reply = 11; // response from fb
+	string is_supported = 12;
+	bool is_deleted = 13;
+	ReplyTo reply_to = 14;
 
 	// optional FbMessageRef referral = 15;
-	optional FbReferral referral = 16;
+	FbReferral referral = 16;
 }
 
 message ReplyTo {
-	optional string mid = 4;
-	optional FbReplyStory story = 5;
+	string mid = 4;
+	FbReplyStory story = 5;
 }
 
 message FbReplyStory {
-	optional string url = 5;
-	optional string id = 6;
+	string url = 5;
+	string id = 6;
 }
 
 message QuickReply {
-	optional string content_type = 2; // text
-	optional string title = 3;
-	optional string payload = 4;
-	optional string image_url = 5;
+	string content_type = 2; // text
+	string title = 3;
+	string payload = 4;
+	string image_url = 5;
 }
 
 message FbSender {
-	optional string id = 2;
-	optional string user_ref = 3;
+	string id = 2;
+	string user_ref = 3;
 }
 
 message FbRecipient {
-	optional string id = 2;
+	string id = 2;
 
 	// https://developers.facebook.com/docs/messenger-platform/discovery/private-replies
-	optional string post_id = 3;
-	optional string comment_id = 4;
+	string post_id = 3;
+	string comment_id = 4;
 
-	optional string user_ref = 5;
+	string user_ref = 5;
 }
 
 message FbAction {
-	optional string type = 2;
-	optional string url = 3;
+	string type = 2;
+	string url = 3;
 }
 
 message FbAttachment {
-	optional string type = 2; // template, fallback
-	optional FbPayload payload = 3;
-	optional string title = 4;
-	optional string URL = 5;
+	string type = 2; // template, fallback
+	FbPayload payload = 3;
+	string title = 4;
+	string URL = 5;
 }
 
 message Summary {
-	optional float subtotal = 2;
-	optional float shipping_cost = 3;
-	optional float total_tax = 4;
-	optional float total_cost = 5;
+	float subtotal = 2;
+	float shipping_cost = 3;
+	float total_tax = 4;
+	float total_cost = 5;
 }
 
 message Adjustment {
-	optional string name = 2;
-	optional float amount = 3;
+	string name = 2;
+	float amount = 3;
 }
 
 message Address {
-	optional string street_1 = 2;
-	optional string street_2 = 3;
-	optional string city = 4;
-	optional string postal_code = 5;
-	optional string state = 6;
-	optional string country = 7;
+	string street_1 = 2;
+	string street_2 = 3;
+	string city = 4;
+	string postal_code = 5;
+	string state = 6;
+	string country = 7;
 }
 
 message GenericElement {
-	optional string title = 2;
-	optional string item_url = 3;
-	optional string image_url = 4;
-	optional string subtitle = 5;
-	optional Button default_action = 6;
-	optional string id = 7; // fbproduct id
+	string title = 2;
+	string item_url = 3;
+	string image_url = 4;
+	string subtitle = 5;
+	Button default_action = 6;
+	string id = 7; // fbproduct id
 	repeated Button buttons = 8;
-	optional int64 quantity = 9;
-	optional string currency = 10;
-	optional float price = 11;
+	int64 quantity = 9;
+	string currency = 10;
+	float price = 11;
 }
 
 message FbPayload {
-	optional string url = 2;
-	optional bool is_reuseable = 3;
-	optional string template_type = 4;
-	optional bool sharable = 5;
+	string url = 2;
+	bool is_reuseable = 3;
+	string template_type = 4;
+	bool sharable = 5;
 	repeated GenericElement elements = 6;
-	optional string text = 7; // for call btn
+	string text = 7; // for call btn
 	repeated Button buttons = 8;
 
-	optional Address address = 10;
-	optional Summary summary = 11;
+	Address address = 10;
+	Summary summary = 11;
 	repeated Adjustment adjustments = 12;
 
-	optional string recipient_name = 13;
-	optional string order_number = 14;
-	optional string currency = 15;
-	optional string payment_method = 16;
-	optional string order_url = 17;
-  // google.protobuf.Any timestamp = 18; // sometime its a string, sometime its a number https://developers.facebook.com/docs/messenger-platform/reference/templates/receipt
-	optional FbProducts product = 19;
+	string recipient_name = 13;
+	string order_number = 14;
+	string currency = 15;
+	string payment_method = 16;
+	string order_url = 17;
+	// google.protobuf.Any timestamp = 18; // sometime its a string, sometime its a number https://developers.facebook.com/docs/messenger-platform/reference/templates/receipt
+	FbProducts product = 19;
 
-	optional string title = 20;
+	string title = 20;
 	// optional string sticker_id = 21;
 	// optional string reel_video_id = 21;
 }
@@ -338,146 +387,148 @@ message FbProducts {
 }
 
 message FbProduct {
-	optional string id = 3;
-	optional string retailer_id = 4;
-	optional string image_url = 5;
-	optional string title = 6;
-	optional string subtitle = 7;
+	string id = 3;
+	string retailer_id = 4;
+	string image_url = 5;
+	string title = 6;
+	string subtitle = 7;
 }
 
 message Button {
-	optional string type = 2; // web_url, postback
-	optional string title = 3;
-	optional string payload = 4;
+	string type = 2; // web_url, postback, audio_call
+	string title = 3;
+	string payload = 4;
 
-	optional string url = 5;
-	optional string webview_height_ratio = 6; // <compact|tall|full>
-	optional bool messenger_extensions = 7; // <true|false>
-	optional string fallback_url = 8; //<URL_TO_FALLBACK_TO>"
-	optional string webview_share_button = 9;
+	string url = 5;
+	string webview_height_ratio = 6; // <compact|tall|full>
+	bool messenger_extensions = 7; // <true|false>
+	string fallback_url = 8; //<URL_TO_FALLBACK_TO>"
+	string webview_share_button = 9;
+
+	int64 expires_in_days = 10; // 5
 }
 
 message FbRead {
-	optional int64 watermark = 2;
-	optional int32 seq = 3;
+	int64 watermark = 2;
+	int32 seq = 3;
 }
 
 message FbDelivery {
 	repeated string mids = 2;
-	optional int64 watermark = 3;
-  optional int32 seq = 4;
+	int64 watermark = 3;
+	optional int32 seq = 4;
 }
 
 message FbSendResponse {
-	optional string recipient_id = 2;
-	optional string message_id = 3;
+	string recipient_id = 2;
+	string message_id = 3;
 }
 
 message Conversation {
-	optional string account_id = 2;
-	optional string id = 3;
-	optional string page_id = 4;
-	optional int64 created  = 5;
-	optional string fbuserid = 6;
-	optional string sbuserid = 7;
+	string account_id = 2;
+	string id = 3;
+	string page_id = 4;
+	int64 created	= 5;
+	string fbuserid = 6;
+	string sbuserid = 7;
 }
 
 message FbPagePicture {
-	optional FbPagePictureData data = 2;
+	FbPagePictureData data = 2;
 }
 
 message FbPagePictureData {
-	optional string url = 2;
+	string url = 2;
 }
 
 message FbPageEntry {
-	optional string name = 2;
-	optional FbPagePicture picture = 3;
-	optional string id = 5;
-	optional string access_token = 6;
-	optional InstagramUser instagram_business_account = 7;
-	optional MetaBusiness business = 8;
+	string name = 2;
+	FbPagePicture picture = 3;
+	string id = 5;
+	string access_token = 6;
+	InstagramUser instagram_business_account = 7;
+	MetaBusiness business = 8;
 }
 
 message FbCursors {
-	optional string before = 2;
-	optional string after = 3;
+	string before = 2;
+	string after = 3;
 }
 
 message FbPaging {
-	optional FbCursors cursors = 2;
-	optional string next = 3;
+	FbCursors cursors = 2;
+	string next = 3;
 }
 
 message FbPageRet {
 	repeated FbPageEntry data = 2;
-	optional FbPaging paging = 3;
+	FbPaging paging = 3;
 }
 
-message FbProfilePicData  {
-	optional int64 height = 2;
-	optional int64 width = 3;
-	optional bool is_silhouette = 4;
-	optional string url = 5;
+message FbProfilePicData {
+	int64 height = 2;
+	int64 width = 3;
+	bool is_silhouette = 4;
+	string url = 5;
 }
 
 message FbProfilePic {
-	optional FbProfilePicData Data = 2;
+	FbProfilePicData Data = 2;
 }
 
 message FacebookUser {
-	optional string first_name = 2;
-	optional string middle_name = 3;
-	optional string last_name = 4;
-	optional string profile_pic = 5;
-	optional string locale = 6;
-	optional float timezone = 7;
-	optional string gender = 8;
-	optional FbProfilePic picture = 9;
-	optional string email = 10;
-	optional string name = 11;
+	string first_name = 2;
+	string middle_name = 3;
+	string last_name = 4;
+	string profile_pic = 5;
+	string locale = 6;
+	float timezone = 7;
+	string gender = 8;
+	FbProfilePic picture = 9;
+	string email = 10;
+	string name = 11;
 }
 
 message FacebookGuestUser {
-	optional string id = 2;
-	optional string name = 3;
-	optional string picture = 9;
+	string id = 2;
+	string name = 3;
+	string picture = 9;
 }
 
 message InstagramUser {
-	optional string id = 4;
-	optional string username = 5;
-	optional string profile_picture_url = 6;
-	optional string name = 7;
-	optional int64 ig_id = 8;
-	optional int64 followers_count = 9;
-	optional int64 follows_count = 10;
-	optional int64 media_count = 11;
-	optional string website = 12;
+	string id = 4;
+	string username = 5;
+	string profile_picture_url = 6;
+	string name = 7;
+	int64 ig_id = 8;
+	int64 followers_count = 9;
+	int64 follows_count = 10;
+	int64 media_count = 11;
+	string website = 12;
 
-	optional bool is_verified_user = 13;
-	optional bool is_user_follow_business = 14;
-	optional bool is_business_follow_user = 15;
-	optional string profile_pic = 16;
+	bool is_verified_user = 13;
+	bool is_user_follow_business = 14;
+	bool is_business_follow_user = 15;
+	string profile_pic = 16;
 }
 
 message Fb2SbEvent {
-	optional string fbmid = 2;
-	optional string account_id = 3;
-	optional string conversation_id = 4;
-	optional string sbmid = 5;
-	optional string page_id = 6;
-	optional int32 attachment_index = 7; // subiz
+	string fbmid = 2;
+	string account_id = 3;
+	string conversation_id = 4;
+	string sbmid = 5;
+	string page_id = 6;
+	int32 attachment_index = 7; // subiz
 }
 
 message LongLivedAccessToken {
-	optional string access_token = 2;
-	optional string token_type = 3;
-	optional int32 expires_in = 5;
+	string access_token = 2;
+	string token_type = 3;
+	int32 expires_in = 5;
 }
 
 message SubscribeRet {
-	optional bool success = 2;
+	bool success = 2;
 }
 
 message SubscribeAppRequest {
@@ -485,73 +536,73 @@ message SubscribeAppRequest {
 }
 
 message Error {
-	optional int32 code = 3;
-	optional int32 error_subcode = 4;
-	optional string fbtrace_id = 5;
-	optional string message = 6;
-	optional string type = 7;
+	int32 code = 3;
+	int32 error_subcode = 4;
+	string fbtrace_id = 5;
+	string message = 6;
+	string type = 7;
 }
 
 message FbResponse {
-	optional Error error = 2;
+	Error error = 2;
 }
 
 message FbProductItem {
-	optional string id = 3;
-	optional string image_url = 4;
-	optional string name = 5;
-	optional string price = 6;
-	optional string url = 7;
+	string id = 3;
+	string image_url = 4;
+	string name = 5;
+	string price = 6;
+	string url = 7;
 }
 
 message FbPage {
-	optional string id = 3; // pageid
-	optional FbConversations conversations = 4;
+	string id = 3; // pageid
+	FbConversations conversations = 4;
 }
 
 message FbConversations {
-	optional Error error = 1;
+	Error error = 1;
 	repeated FbConversation data = 3;
-	optional FbPaging paging = 4;
+	FbPaging paging = 4;
 }
 
 message FbLeads {
-	optional Error error = 1;
+	Error error = 1;
 	repeated FbLead data = 3;
-	optional FbPaging paging = 4;
+	FbPaging paging = 4;
 }
 
 message FbFieldData {
-	optional string name = 3;
+	string name = 3;
 	repeated string values = 4;
 }
 
 message FbLead {
-	optional string created_time = 10;
-	optional string id = 11;
-	optional string ad_id = 12;
-	optional string form_id = 13;
+	string created_time = 10;
+	string id = 11;
+	string ad_id = 12;
+	string form_id = 13;
 	repeated FbFieldData field_data = 14;
 }
 
 message FbConversation {
-	optional string id = 2;
-	optional string link = 3;
+	string id = 2;
+	string link = 3;
 
-	optional string updated_time = 5;
-	optional int64 message_count = 6;
+	string updated_time = 5;
+	int64 message_count = 6;
 
-	optional FbProfiles participants = 7;
-	optional FbProfiles senders = 8;
+	FbProfiles participants = 7;
+	FbProfiles senders = 8;
 
-	optional bool can_reply  = 9;
-	optional bool is_subscribed = 10;
+	bool can_reply = 9;
+	bool is_subscribed = 10;
 }
 
 message FbProfiles {
-	optional Error error = 1;
+	Error error = 1;
 	repeated FbProfile data = 2;
-	optional FbPaging paging = 4;
+	FbPaging paging = 4;
 }
 
 message FbProfileData {
@@ -559,57 +610,57 @@ message FbProfileData {
 }
 
 message FbProfile {
-	optional string name = 3;
-	optional string email = 4;
-	optional string id = 5;
+	string name = 3;
+	string email = 4;
+	string id = 5;
 }
 
 message FbConversationMessageAttachemnts {
-	optional Error error = 1;
+	Error error = 1;
 	repeated FbConversationMessageAttachment data = 2;
-	optional FbPaging paging = 4;
+	FbPaging paging = 4;
 }
 
 message FbConversationMessageAttachment {
-	optional string id = 3;
-	optional string mime_type = 4;
-	optional string name = 5;
-	optional int64 size = 6;
-	optional string file_url = 7;
-	optional FbImageData image_data = 8;
+	string id = 3;
+	string mime_type = 4;
+	string name = 5;
+	int64 size = 6;
+	string file_url = 7;
+	FbImageData image_data = 8;
 }
 
 message FbImageData {
-	optional int64 width = 2;
-	optional int64 height = 3;
-	optional int64 max_width = 4;
-	optional int64 max_height = 5;
-	optional string url = 6;
-	optional string preview_url = 7;
-	optional int64 image_type = 8;
-	optional bool render_as_sticker = 9;
+	int64 width = 2;
+	int64 height = 3;
+	int64 max_width = 4;
+	int64 max_height = 5;
+	string url = 6;
+	string preview_url = 7;
+	int64 image_type = 8;
+	bool render_as_sticker = 9;
 }
 
 message FbConversationMessages {
-	optional Error error = 1;
+	Error error = 1;
 	repeated FbConversationMessage data = 2;
-	optional FbPaging paging = 4;
+	FbPaging paging = 4;
 }
 
 message FbConversationMessage {
-	optional string created_time = 2;
-	optional FbProfile from = 3;
-	optional string id = 4;
-	optional string message = 5;
-	optional FbProfileData to = 6;
-	optional FbConversationMessageAttachemnts attachments = 7;
+	string created_time = 2;
+	FbProfile from = 3;
+	string id = 4;
+	string message = 5;
+	FbProfileData to = 6;
+	FbConversationMessageAttachemnts attachments = 7;
 }
 
 message FacebookAdsFlow {
-	optional string id = 5;
-	optional string name = 6;
-	optional FbMessage welcome_message = 7;
+	string id = 5;
+	string name = 6;
+	FbMessage welcome_message = 7;
 	repeated string eligible_platforms = 8; //  messenger,instagram
-	optional bool is_used_in_ad = 10; // fb
-	optional string last_update_time = 11; // fb
+	bool is_used_in_ad = 10; // fb
+	string last_update_time = 11; // fb
 }

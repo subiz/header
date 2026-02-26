@@ -425,6 +425,278 @@ func (x *FacebookPage) GetLastSync() int64 {
 	return 0
 }
 
+type WeeklyOperatingHour struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DayOfWeek     string                 `protobuf:"bytes,4,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"` // MONDAY
+	OpenTime      string                 `protobuf:"bytes,5,opt,name=open_time,json=openTime,proto3" json:"open_time,omitempty"`      // 0900
+	CloseTime     string                 `protobuf:"bytes,6,opt,name=close_time,json=closeTime,proto3" json:"close_time,omitempty"`   // 1700
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WeeklyOperatingHour) Reset() {
+	*x = WeeklyOperatingHour{}
+	mi := &file_fabikon_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WeeklyOperatingHour) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WeeklyOperatingHour) ProtoMessage() {}
+
+func (x *WeeklyOperatingHour) ProtoReflect() protoreflect.Message {
+	mi := &file_fabikon_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WeeklyOperatingHour.ProtoReflect.Descriptor instead.
+func (*WeeklyOperatingHour) Descriptor() ([]byte, []int) {
+	return file_fabikon_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *WeeklyOperatingHour) GetDayOfWeek() string {
+	if x != nil {
+		return x.DayOfWeek
+	}
+	return ""
+}
+
+func (x *WeeklyOperatingHour) GetOpenTime() string {
+	if x != nil {
+		return x.OpenTime
+	}
+	return ""
+}
+
+func (x *WeeklyOperatingHour) GetCloseTime() string {
+	if x != nil {
+		return x.CloseTime
+	}
+	return ""
+}
+
+type CallHours struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	TimezoneId           string                 `protobuf:"bytes,5,opt,name=timezone_id,json=timezoneId,proto3" json:"timezone_id,omitempty"` // America/Los_Angeles
+	WeeklyOperatingHours []*WeeklyOperatingHour `protobuf:"bytes,6,rep,name=weekly_operating_hours,json=weeklyOperatingHours,proto3" json:"weekly_operating_hours,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *CallHours) Reset() {
+	*x = CallHours{}
+	mi := &file_fabikon_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CallHours) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallHours) ProtoMessage() {}
+
+func (x *CallHours) ProtoReflect() protoreflect.Message {
+	mi := &file_fabikon_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallHours.ProtoReflect.Descriptor instead.
+func (*CallHours) Descriptor() ([]byte, []int) {
+	return file_fabikon_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CallHours) GetTimezoneId() string {
+	if x != nil {
+		return x.TimezoneId
+	}
+	return ""
+}
+
+func (x *CallHours) GetWeeklyOperatingHours() []*WeeklyOperatingHour {
+	if x != nil {
+		return x.WeeklyOperatingHours
+	}
+	return nil
+}
+
+type CallSetting struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CallHours     *CallHours             `protobuf:"bytes,5,opt,name=call_hours,json=callHours,proto3" json:"call_hours,omitempty"`
+	AudioEnabled  bool                   `protobuf:"varint,6,opt,name=audio_enabled,json=audioEnabled,proto3" json:"audio_enabled,omitempty"`
+	IconEnabled   bool                   `protobuf:"varint,7,opt,name=icon_enabled,json=iconEnabled,proto3" json:"icon_enabled,omitempty"`
+	RingTarget    string                 `protobuf:"bytes,8,opt,name=ring_target,json=ringTarget,proto3" json:"ring_target,omitempty"`    //	META , PARTNERS
+	CallRouting   string                 `protobuf:"bytes,9,opt,name=call_routing,json=callRouting,proto3" json:"call_routing,omitempty"` // PARTNERS
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CallSetting) Reset() {
+	*x = CallSetting{}
+	mi := &file_fabikon_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CallSetting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallSetting) ProtoMessage() {}
+
+func (x *CallSetting) ProtoReflect() protoreflect.Message {
+	mi := &file_fabikon_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallSetting.ProtoReflect.Descriptor instead.
+func (*CallSetting) Descriptor() ([]byte, []int) {
+	return file_fabikon_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CallSetting) GetCallHours() *CallHours {
+	if x != nil {
+		return x.CallHours
+	}
+	return nil
+}
+
+func (x *CallSetting) GetAudioEnabled() bool {
+	if x != nil {
+		return x.AudioEnabled
+	}
+	return false
+}
+
+func (x *CallSetting) GetIconEnabled() bool {
+	if x != nil {
+		return x.IconEnabled
+	}
+	return false
+}
+
+func (x *CallSetting) GetRingTarget() string {
+	if x != nil {
+		return x.RingTarget
+	}
+	return ""
+}
+
+func (x *CallSetting) GetCallRouting() string {
+	if x != nil {
+		return x.CallRouting
+	}
+	return ""
+}
+
+type CallMetric struct {
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	Platform                     string                 `protobuf:"bytes,4,opt,name=platform,proto3" json:"platform,omitempty"`                                                                                   // "messenger",
+	CallId                       string                 `protobuf:"bytes,5,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`                                                                         // c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXinCqnTQ
+	EndCallReason                string                 `protobuf:"bytes,6,opt,name=end_call_reason,json=endCallReason,proto3" json:"end_call_reason,omitempty"`                                                  // "Hangup_Call"
+	EndCallSubreason             string                 `protobuf:"bytes,7,opt,name=end_call_subreason,json=endCallSubreason,proto3" json:"end_call_subreason,omitempty"`                                         // "Conversation was finished"
+	CallEndedTime                string                 `protobuf:"bytes,8,opt,name=call_ended_time,json=callEndedTime,proto3" json:"call_ended_time,omitempty"`                                                  //	123456,
+	FirstAudioPacketReceivedTime string                 `protobuf:"bytes,9,opt,name=first_audio_packet_received_time,json=firstAudioPacketReceivedTime,proto3" json:"first_audio_packet_received_time,omitempty"` // : 12345,
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *CallMetric) Reset() {
+	*x = CallMetric{}
+	mi := &file_fabikon_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CallMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallMetric) ProtoMessage() {}
+
+func (x *CallMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_fabikon_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallMetric.ProtoReflect.Descriptor instead.
+func (*CallMetric) Descriptor() ([]byte, []int) {
+	return file_fabikon_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CallMetric) GetPlatform() string {
+	if x != nil {
+		return x.Platform
+	}
+	return ""
+}
+
+func (x *CallMetric) GetCallId() string {
+	if x != nil {
+		return x.CallId
+	}
+	return ""
+}
+
+func (x *CallMetric) GetEndCallReason() string {
+	if x != nil {
+		return x.EndCallReason
+	}
+	return ""
+}
+
+func (x *CallMetric) GetEndCallSubreason() string {
+	if x != nil {
+		return x.EndCallSubreason
+	}
+	return ""
+}
+
+func (x *CallMetric) GetCallEndedTime() string {
+	if x != nil {
+		return x.CallEndedTime
+	}
+	return ""
+}
+
+func (x *CallMetric) GetFirstAudioPacketReceivedTime() string {
+	if x != nil {
+		return x.FirstAudioPacketReceivedTime
+	}
+	return ""
+}
+
 type FbWebhookEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Object        string                 `protobuf:"bytes,2,opt,name=object,proto3" json:"object,omitempty"` // instagram, page
@@ -435,7 +707,7 @@ type FbWebhookEvent struct {
 
 func (x *FbWebhookEvent) Reset() {
 	*x = FbWebhookEvent{}
-	mi := &file_fabikon_proto_msgTypes[3]
+	mi := &file_fabikon_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -447,7 +719,7 @@ func (x *FbWebhookEvent) String() string {
 func (*FbWebhookEvent) ProtoMessage() {}
 
 func (x *FbWebhookEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[3]
+	mi := &file_fabikon_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -460,7 +732,7 @@ func (x *FbWebhookEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbWebhookEvent.ProtoReflect.Descriptor instead.
 func (*FbWebhookEvent) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{3}
+	return file_fabikon_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *FbWebhookEvent) GetObject() string {
@@ -484,13 +756,14 @@ type FbEntry struct {
 	Messaging     []*FbMessaging         `protobuf:"bytes,6,rep,name=messaging,proto3" json:"messaging,omitempty"`
 	Changes       []*FbChange            `protobuf:"bytes,7,rep,name=changes,proto3" json:"changes,omitempty"`
 	Standby       []*FbMessaging         `protobuf:"bytes,8,rep,name=standby,proto3" json:"standby,omitempty"`
+	Calls         []*FbCall              `protobuf:"bytes,9,rep,name=calls,proto3" json:"calls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbEntry) Reset() {
 	*x = FbEntry{}
-	mi := &file_fabikon_proto_msgTypes[4]
+	mi := &file_fabikon_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -502,7 +775,7 @@ func (x *FbEntry) String() string {
 func (*FbEntry) ProtoMessage() {}
 
 func (x *FbEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[4]
+	mi := &file_fabikon_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -515,7 +788,7 @@ func (x *FbEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbEntry.ProtoReflect.Descriptor instead.
 func (*FbEntry) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{4}
+	return file_fabikon_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *FbEntry) GetId() string {
@@ -553,6 +826,97 @@ func (x *FbEntry) GetStandby() []*FbMessaging {
 	return nil
 }
 
+func (x *FbEntry) GetCalls() []*FbCall {
+	if x != nil {
+		return x.Calls
+	}
+	return nil
+}
+
+type FbCall struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`                                            // "c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXiTQ"
+	To            string                 `protobuf:"bytes,5,opt,name=to,proto3" json:"to,omitempty"`                                            // "106378625516323",
+	From          string                 `protobuf:"bytes,6,opt,name=from,proto3" json:"from,omitempty"`                                        // "5275811702471834",
+	Event         string                 `protobuf:"bytes,7,opt,name=event,proto3" json:"event,omitempty"`                                      //	"connect",
+	Timestamp     int64                  `protobuf:"varint,8,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                             //	1671644824,
+	CallDirection string                 `protobuf:"bytes,9,opt,name=call_direction,json=callDirection,proto3" json:"call_direction,omitempty"` //	"[business_initiated|user_initiated]",
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FbCall) Reset() {
+	*x = FbCall{}
+	mi := &file_fabikon_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FbCall) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FbCall) ProtoMessage() {}
+
+func (x *FbCall) ProtoReflect() protoreflect.Message {
+	mi := &file_fabikon_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FbCall.ProtoReflect.Descriptor instead.
+func (*FbCall) Descriptor() ([]byte, []int) {
+	return file_fabikon_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *FbCall) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *FbCall) GetTo() string {
+	if x != nil {
+		return x.To
+	}
+	return ""
+}
+
+func (x *FbCall) GetFrom() string {
+	if x != nil {
+		return x.From
+	}
+	return ""
+}
+
+func (x *FbCall) GetEvent() string {
+	if x != nil {
+		return x.Event
+	}
+	return ""
+}
+
+func (x *FbCall) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *FbCall) GetCallDirection() string {
+	if x != nil {
+		return x.CallDirection
+	}
+	return ""
+}
+
 type FbChange struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Field         string                 `protobuf:"bytes,2,opt,name=field,proto3" json:"field,omitempty"` // feed, comments
@@ -563,7 +927,7 @@ type FbChange struct {
 
 func (x *FbChange) Reset() {
 	*x = FbChange{}
-	mi := &file_fabikon_proto_msgTypes[5]
+	mi := &file_fabikon_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -575,7 +939,7 @@ func (x *FbChange) String() string {
 func (*FbChange) ProtoMessage() {}
 
 func (x *FbChange) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[5]
+	mi := &file_fabikon_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -588,7 +952,7 @@ func (x *FbChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbChange.ProtoReflect.Descriptor instead.
 func (*FbChange) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{5}
+	return file_fabikon_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *FbChange) GetField() string {
@@ -607,16 +971,16 @@ func (x *FbChange) GetValue() *FbChangeValue {
 
 type FbFrom struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	From          *string                `protobuf:"bytes,2,opt,name=from,proto3,oneof" json:"from,omitempty"`
-	Username      *string                `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	From          string                 `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbFrom) Reset() {
 	*x = FbFrom{}
-	mi := &file_fabikon_proto_msgTypes[6]
+	mi := &file_fabikon_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -628,7 +992,7 @@ func (x *FbFrom) String() string {
 func (*FbFrom) ProtoMessage() {}
 
 func (x *FbFrom) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[6]
+	mi := &file_fabikon_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -641,79 +1005,79 @@ func (x *FbFrom) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbFrom.ProtoReflect.Descriptor instead.
 func (*FbFrom) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{6}
+	return file_fabikon_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *FbFrom) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbFrom) GetFrom() string {
-	if x != nil && x.From != nil {
-		return *x.From
+	if x != nil {
+		return x.From
 	}
 	return ""
 }
 
 func (x *FbFrom) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
+	if x != nil {
+		return x.Username
 	}
 	return ""
 }
 
 type FbChangeValue struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
-	EditedTime *int64                 `protobuf:"varint,3,opt,name=edited_time,json=editedTime,proto3,oneof" json:"edited_time,omitempty"`
-	From       *FbFrom                `protobuf:"bytes,4,opt,name=from,proto3,oneof" json:"from,omitempty"`
-	Post       *FbPagePost            `protobuf:"bytes,5,opt,name=post,proto3,oneof" json:"post,omitempty"`
-	IsHidden   *bool                  `protobuf:"varint,6,opt,name=is_hidden,json=isHidden,proto3,oneof" json:"is_hidden,omitempty"`
-	Link       *string                `protobuf:"bytes,7,opt,name=link,proto3,oneof" json:"link,omitempty"`
-	Message    *string                `protobuf:"bytes,8,opt,name=message,proto3,oneof" json:"message,omitempty"`
-	Photo      *string                `protobuf:"bytes,9,opt,name=photo,proto3,oneof" json:"photo,omitempty"`
+	EditedTime int64                  `protobuf:"varint,3,opt,name=edited_time,json=editedTime,proto3" json:"edited_time,omitempty"`
+	From       *FbFrom                `protobuf:"bytes,4,opt,name=from,proto3" json:"from,omitempty"`
+	Post       *FbPagePost            `protobuf:"bytes,5,opt,name=post,proto3" json:"post,omitempty"`
+	IsHidden   bool                   `protobuf:"varint,6,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	Link       string                 `protobuf:"bytes,7,opt,name=link,proto3" json:"link,omitempty"`
+	Message    string                 `protobuf:"bytes,8,opt,name=message,proto3" json:"message,omitempty"`
+	Photo      string                 `protobuf:"bytes,9,opt,name=photo,proto3" json:"photo,omitempty"`
 	Photos     []string               `protobuf:"bytes,10,rep,name=photos,proto3" json:"photos,omitempty"`
-	PostId     *string                `protobuf:"bytes,11,opt,name=post_id,json=postId,proto3,oneof" json:"post_id,omitempty"`
-	Story      *string                `protobuf:"bytes,12,opt,name=story,proto3,oneof" json:"story,omitempty"`
-	Title      *string                `protobuf:"bytes,13,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Video      *string                `protobuf:"bytes,14,opt,name=video,proto3,oneof" json:"video,omitempty"`
+	PostId     string                 `protobuf:"bytes,11,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	Story      string                 `protobuf:"bytes,12,opt,name=story,proto3" json:"story,omitempty"`
+	Title      string                 `protobuf:"bytes,13,opt,name=title,proto3" json:"title,omitempty"`
+	Video      string                 `protobuf:"bytes,14,opt,name=video,proto3" json:"video,omitempty"`
 	// optional string video_flag_reason = 15;
-	Action           *string        `protobuf:"bytes,16,opt,name=action,proto3,oneof" json:"action,omitempty"`
-	AlbumId          *string        `protobuf:"bytes,17,opt,name=album_id,json=albumId,proto3,oneof" json:"album_id,omitempty"`
-	CommentId        *string        `protobuf:"bytes,18,opt,name=comment_id,json=commentId,proto3,oneof" json:"comment_id,omitempty"`
-	CreatedTime      *int64         `protobuf:"varint,19,opt,name=created_time,json=createdTime,proto3,oneof" json:"created_time,omitempty"`
-	EventId          *string        `protobuf:"bytes,20,opt,name=event_id,json=eventId,proto3,oneof" json:"event_id,omitempty"`
-	Item             *string        `protobuf:"bytes,21,opt,name=item,proto3,oneof" json:"item,omitempty"`
-	OpenGraphStoryId *string        `protobuf:"bytes,22,opt,name=open_graph_story_id,json=openGraphStoryId,proto3,oneof" json:"open_graph_story_id,omitempty"`
-	ParentId         *string        `protobuf:"bytes,23,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
-	PhotoId          *string        `protobuf:"bytes,24,opt,name=photo_id,json=photoId,proto3,oneof" json:"photo_id,omitempty"`
-	ReactionType     *string        `protobuf:"bytes,25,opt,name=reaction_type,json=reactionType,proto3,oneof" json:"reaction_type,omitempty"`
-	Published        *int32         `protobuf:"varint,26,opt,name=published,proto3,oneof" json:"published,omitempty"`
-	RecipientId      *string        `protobuf:"bytes,27,opt,name=recipient_id,json=recipientId,proto3,oneof" json:"recipient_id,omitempty"`
-	ShareId          *string        `protobuf:"bytes,28,opt,name=share_id,json=shareId,proto3,oneof" json:"share_id,omitempty"`
-	Verb             *string        `protobuf:"bytes,29,opt,name=verb,proto3,oneof" json:"verb,omitempty"` // remove
-	VideoId          *string        `protobuf:"bytes,30,opt,name=video_id,json=videoId,proto3,oneof" json:"video_id,omitempty"`
-	Media            *IgMedia       `protobuf:"bytes,31,opt,name=media,proto3,oneof" json:"media,omitempty"`
-	Id               *string        `protobuf:"bytes,32,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Text             *string        `protobuf:"bytes,33,opt,name=text,proto3,oneof" json:"text,omitempty"`
-	MediaId          *string        `protobuf:"bytes,34,opt,name=media_id,json=mediaId,proto3,oneof" json:"media_id,omitempty"`
-	User             *FbChangeUser  `protobuf:"bytes,35,opt,name=user,proto3,oneof" json:"user,omitempty"` // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
-	Label            *FbCustomLabel `protobuf:"bytes,36,opt,name=label,proto3,oneof" json:"label,omitempty"`
+	Action           string         `protobuf:"bytes,16,opt,name=action,proto3" json:"action,omitempty"`
+	AlbumId          string         `protobuf:"bytes,17,opt,name=album_id,json=albumId,proto3" json:"album_id,omitempty"`
+	CommentId        string         `protobuf:"bytes,18,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	CreatedTime      int64          `protobuf:"varint,19,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
+	EventId          string         `protobuf:"bytes,20,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	Item             string         `protobuf:"bytes,21,opt,name=item,proto3" json:"item,omitempty"`
+	OpenGraphStoryId string         `protobuf:"bytes,22,opt,name=open_graph_story_id,json=openGraphStoryId,proto3" json:"open_graph_story_id,omitempty"`
+	ParentId         string         `protobuf:"bytes,23,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	PhotoId          string         `protobuf:"bytes,24,opt,name=photo_id,json=photoId,proto3" json:"photo_id,omitempty"`
+	ReactionType     string         `protobuf:"bytes,25,opt,name=reaction_type,json=reactionType,proto3" json:"reaction_type,omitempty"`
+	Published        int32          `protobuf:"varint,26,opt,name=published,proto3" json:"published,omitempty"`
+	RecipientId      string         `protobuf:"bytes,27,opt,name=recipient_id,json=recipientId,proto3" json:"recipient_id,omitempty"`
+	ShareId          string         `protobuf:"bytes,28,opt,name=share_id,json=shareId,proto3" json:"share_id,omitempty"`
+	Verb             string         `protobuf:"bytes,29,opt,name=verb,proto3" json:"verb,omitempty"` // remove
+	VideoId          string         `protobuf:"bytes,30,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	Media            *IgMedia       `protobuf:"bytes,31,opt,name=media,proto3" json:"media,omitempty"`
+	Id               string         `protobuf:"bytes,32,opt,name=id,proto3" json:"id,omitempty"`
+	Text             string         `protobuf:"bytes,33,opt,name=text,proto3" json:"text,omitempty"`
+	MediaId          string         `protobuf:"bytes,34,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
+	User             *FbChangeUser  `protobuf:"bytes,35,opt,name=user,proto3" json:"user,omitempty"` // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
+	Label            *FbCustomLabel `protobuf:"bytes,36,opt,name=label,proto3" json:"label,omitempty"`
 	// leadgen
-	LeadgenId     *string `protobuf:"bytes,40,opt,name=leadgen_id,json=leadgenId,proto3,oneof" json:"leadgen_id,omitempty"`
-	PageId        *string `protobuf:"bytes,41,opt,name=page_id,json=pageId,proto3,oneof" json:"page_id,omitempty"`
-	FormId        *string `protobuf:"bytes,42,opt,name=form_id,json=formId,proto3,oneof" json:"form_id,omitempty"`
-	AdgroupId     *string `protobuf:"bytes,43,opt,name=adgroup_id,json=adgroupId,proto3,oneof" json:"adgroup_id,omitempty"`
-	AdId          *string `protobuf:"bytes,44,opt,name=ad_id,json=adId,proto3,oneof" json:"ad_id,omitempty"`
+	LeadgenId     string `protobuf:"bytes,40,opt,name=leadgen_id,json=leadgenId,proto3" json:"leadgen_id,omitempty"`
+	PageId        string `protobuf:"bytes,41,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
+	FormId        string `protobuf:"bytes,42,opt,name=form_id,json=formId,proto3" json:"form_id,omitempty"`
+	AdgroupId     string `protobuf:"bytes,43,opt,name=adgroup_id,json=adgroupId,proto3" json:"adgroup_id,omitempty"`
+	AdId          string `protobuf:"bytes,44,opt,name=ad_id,json=adId,proto3" json:"ad_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbChangeValue) Reset() {
 	*x = FbChangeValue{}
-	mi := &file_fabikon_proto_msgTypes[7]
+	mi := &file_fabikon_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -725,7 +1089,7 @@ func (x *FbChangeValue) String() string {
 func (*FbChangeValue) ProtoMessage() {}
 
 func (x *FbChangeValue) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[7]
+	mi := &file_fabikon_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -738,12 +1102,12 @@ func (x *FbChangeValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbChangeValue.ProtoReflect.Descriptor instead.
 func (*FbChangeValue) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{7}
+	return file_fabikon_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *FbChangeValue) GetEditedTime() int64 {
-	if x != nil && x.EditedTime != nil {
-		return *x.EditedTime
+	if x != nil {
+		return x.EditedTime
 	}
 	return 0
 }
@@ -763,29 +1127,29 @@ func (x *FbChangeValue) GetPost() *FbPagePost {
 }
 
 func (x *FbChangeValue) GetIsHidden() bool {
-	if x != nil && x.IsHidden != nil {
-		return *x.IsHidden
+	if x != nil {
+		return x.IsHidden
 	}
 	return false
 }
 
 func (x *FbChangeValue) GetLink() string {
-	if x != nil && x.Link != nil {
-		return *x.Link
+	if x != nil {
+		return x.Link
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetMessage() string {
-	if x != nil && x.Message != nil {
-		return *x.Message
+	if x != nil {
+		return x.Message
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetPhoto() string {
-	if x != nil && x.Photo != nil {
-		return *x.Photo
+	if x != nil {
+		return x.Photo
 	}
 	return ""
 }
@@ -798,134 +1162,134 @@ func (x *FbChangeValue) GetPhotos() []string {
 }
 
 func (x *FbChangeValue) GetPostId() string {
-	if x != nil && x.PostId != nil {
-		return *x.PostId
+	if x != nil {
+		return x.PostId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetStory() string {
-	if x != nil && x.Story != nil {
-		return *x.Story
+	if x != nil {
+		return x.Story
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetVideo() string {
-	if x != nil && x.Video != nil {
-		return *x.Video
+	if x != nil {
+		return x.Video
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetAction() string {
-	if x != nil && x.Action != nil {
-		return *x.Action
+	if x != nil {
+		return x.Action
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetAlbumId() string {
-	if x != nil && x.AlbumId != nil {
-		return *x.AlbumId
+	if x != nil {
+		return x.AlbumId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetCommentId() string {
-	if x != nil && x.CommentId != nil {
-		return *x.CommentId
+	if x != nil {
+		return x.CommentId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetCreatedTime() int64 {
-	if x != nil && x.CreatedTime != nil {
-		return *x.CreatedTime
+	if x != nil {
+		return x.CreatedTime
 	}
 	return 0
 }
 
 func (x *FbChangeValue) GetEventId() string {
-	if x != nil && x.EventId != nil {
-		return *x.EventId
+	if x != nil {
+		return x.EventId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetItem() string {
-	if x != nil && x.Item != nil {
-		return *x.Item
+	if x != nil {
+		return x.Item
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetOpenGraphStoryId() string {
-	if x != nil && x.OpenGraphStoryId != nil {
-		return *x.OpenGraphStoryId
+	if x != nil {
+		return x.OpenGraphStoryId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetParentId() string {
-	if x != nil && x.ParentId != nil {
-		return *x.ParentId
+	if x != nil {
+		return x.ParentId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetPhotoId() string {
-	if x != nil && x.PhotoId != nil {
-		return *x.PhotoId
+	if x != nil {
+		return x.PhotoId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetReactionType() string {
-	if x != nil && x.ReactionType != nil {
-		return *x.ReactionType
+	if x != nil {
+		return x.ReactionType
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetPublished() int32 {
-	if x != nil && x.Published != nil {
-		return *x.Published
+	if x != nil {
+		return x.Published
 	}
 	return 0
 }
 
 func (x *FbChangeValue) GetRecipientId() string {
-	if x != nil && x.RecipientId != nil {
-		return *x.RecipientId
+	if x != nil {
+		return x.RecipientId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetShareId() string {
-	if x != nil && x.ShareId != nil {
-		return *x.ShareId
+	if x != nil {
+		return x.ShareId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetVerb() string {
-	if x != nil && x.Verb != nil {
-		return *x.Verb
+	if x != nil {
+		return x.Verb
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetVideoId() string {
-	if x != nil && x.VideoId != nil {
-		return *x.VideoId
+	if x != nil {
+		return x.VideoId
 	}
 	return ""
 }
@@ -938,22 +1302,22 @@ func (x *FbChangeValue) GetMedia() *IgMedia {
 }
 
 func (x *FbChangeValue) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.Text
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetMediaId() string {
-	if x != nil && x.MediaId != nil {
-		return *x.MediaId
+	if x != nil {
+		return x.MediaId
 	}
 	return ""
 }
@@ -973,51 +1337,51 @@ func (x *FbChangeValue) GetLabel() *FbCustomLabel {
 }
 
 func (x *FbChangeValue) GetLeadgenId() string {
-	if x != nil && x.LeadgenId != nil {
-		return *x.LeadgenId
+	if x != nil {
+		return x.LeadgenId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetPageId() string {
-	if x != nil && x.PageId != nil {
-		return *x.PageId
+	if x != nil {
+		return x.PageId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetFormId() string {
-	if x != nil && x.FormId != nil {
-		return *x.FormId
+	if x != nil {
+		return x.FormId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetAdgroupId() string {
-	if x != nil && x.AdgroupId != nil {
-		return *x.AdgroupId
+	if x != nil {
+		return x.AdgroupId
 	}
 	return ""
 }
 
 func (x *FbChangeValue) GetAdId() string {
-	if x != nil && x.AdId != nil {
-		return *x.AdId
+	if x != nil {
+		return x.AdId
 	}
 	return ""
 }
 
 type FbCustomLabel struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,4,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	PageLabelName *string                `protobuf:"bytes,5,opt,name=page_label_name,json=pageLabelName,proto3,oneof" json:"page_label_name,omitempty"`
+	Id            string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	PageLabelName string                 `protobuf:"bytes,5,opt,name=page_label_name,json=pageLabelName,proto3" json:"page_label_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbCustomLabel) Reset() {
 	*x = FbCustomLabel{}
-	mi := &file_fabikon_proto_msgTypes[8]
+	mi := &file_fabikon_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1029,7 +1393,7 @@ func (x *FbCustomLabel) String() string {
 func (*FbCustomLabel) ProtoMessage() {}
 
 func (x *FbCustomLabel) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[8]
+	mi := &file_fabikon_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1042,33 +1406,33 @@ func (x *FbCustomLabel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbCustomLabel.ProtoReflect.Descriptor instead.
 func (*FbCustomLabel) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{8}
+	return file_fabikon_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *FbCustomLabel) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbCustomLabel) GetPageLabelName() string {
-	if x != nil && x.PageLabelName != nil {
-		return *x.PageLabelName
+	if x != nil {
+		return x.PageLabelName
 	}
 	return ""
 }
 
 type FbChangeUser struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,4,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbChangeUser) Reset() {
 	*x = FbChangeUser{}
-	mi := &file_fabikon_proto_msgTypes[9]
+	mi := &file_fabikon_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1080,7 +1444,7 @@ func (x *FbChangeUser) String() string {
 func (*FbChangeUser) ProtoMessage() {}
 
 func (x *FbChangeUser) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[9]
+	mi := &file_fabikon_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1093,27 +1457,27 @@ func (x *FbChangeUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbChangeUser.ProtoReflect.Descriptor instead.
 func (*FbChangeUser) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{9}
+	return file_fabikon_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *FbChangeUser) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 type IgMedia struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	MediaProductType *string                `protobuf:"bytes,4,opt,name=media_product_type,json=mediaProductType,proto3,oneof" json:"media_product_type,omitempty"`
+	Id               string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	MediaProductType string                 `protobuf:"bytes,4,opt,name=media_product_type,json=mediaProductType,proto3" json:"media_product_type,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *IgMedia) Reset() {
 	*x = IgMedia{}
-	mi := &file_fabikon_proto_msgTypes[10]
+	mi := &file_fabikon_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1125,7 +1489,7 @@ func (x *IgMedia) String() string {
 func (*IgMedia) ProtoMessage() {}
 
 func (x *IgMedia) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[10]
+	mi := &file_fabikon_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1138,38 +1502,38 @@ func (x *IgMedia) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IgMedia.ProtoReflect.Descriptor instead.
 func (*IgMedia) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{10}
+	return file_fabikon_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *IgMedia) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *IgMedia) GetMediaProductType() string {
-	if x != nil && x.MediaProductType != nil {
-		return *x.MediaProductType
+	if x != nil {
+		return x.MediaProductType
 	}
 	return ""
 }
 
 type FbPagePost struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	StatusType      *string                `protobuf:"bytes,2,opt,name=status_type,json=statusType,proto3,oneof" json:"status_type,omitempty"`
-	IsPublished     *bool                  `protobuf:"varint,3,opt,name=is_published,json=isPublished,proto3,oneof" json:"is_published,omitempty"`
-	UpdatedTime     *string                `protobuf:"bytes,4,opt,name=updated_time,json=updatedTime,proto3,oneof" json:"updated_time,omitempty"`
-	PermalinkUrl    *string                `protobuf:"bytes,5,opt,name=permalink_url,json=permalinkUrl,proto3,oneof" json:"permalink_url,omitempty"`
-	PromotionStatus *string                `protobuf:"bytes,6,opt,name=promotion_status,json=promotionStatus,proto3,oneof" json:"promotion_status,omitempty"`
-	Id              *string                `protobuf:"bytes,7,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	StatusType      string                 `protobuf:"bytes,2,opt,name=status_type,json=statusType,proto3" json:"status_type,omitempty"`
+	IsPublished     bool                   `protobuf:"varint,3,opt,name=is_published,json=isPublished,proto3" json:"is_published,omitempty"`
+	UpdatedTime     string                 `protobuf:"bytes,4,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
+	PermalinkUrl    string                 `protobuf:"bytes,5,opt,name=permalink_url,json=permalinkUrl,proto3" json:"permalink_url,omitempty"`
+	PromotionStatus string                 `protobuf:"bytes,6,opt,name=promotion_status,json=promotionStatus,proto3" json:"promotion_status,omitempty"`
+	Id              string                 `protobuf:"bytes,7,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *FbPagePost) Reset() {
 	*x = FbPagePost{}
-	mi := &file_fabikon_proto_msgTypes[11]
+	mi := &file_fabikon_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1181,7 +1545,7 @@ func (x *FbPagePost) String() string {
 func (*FbPagePost) ProtoMessage() {}
 
 func (x *FbPagePost) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[11]
+	mi := &file_fabikon_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1194,73 +1558,73 @@ func (x *FbPagePost) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPagePost.ProtoReflect.Descriptor instead.
 func (*FbPagePost) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{11}
+	return file_fabikon_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *FbPagePost) GetStatusType() string {
-	if x != nil && x.StatusType != nil {
-		return *x.StatusType
+	if x != nil {
+		return x.StatusType
 	}
 	return ""
 }
 
 func (x *FbPagePost) GetIsPublished() bool {
-	if x != nil && x.IsPublished != nil {
-		return *x.IsPublished
+	if x != nil {
+		return x.IsPublished
 	}
 	return false
 }
 
 func (x *FbPagePost) GetUpdatedTime() string {
-	if x != nil && x.UpdatedTime != nil {
-		return *x.UpdatedTime
+	if x != nil {
+		return x.UpdatedTime
 	}
 	return ""
 }
 
 func (x *FbPagePost) GetPermalinkUrl() string {
-	if x != nil && x.PermalinkUrl != nil {
-		return *x.PermalinkUrl
+	if x != nil {
+		return x.PermalinkUrl
 	}
 	return ""
 }
 
 func (x *FbPagePost) GetPromotionStatus() string {
-	if x != nil && x.PromotionStatus != nil {
-		return *x.PromotionStatus
+	if x != nil {
+		return x.PromotionStatus
 	}
 	return ""
 }
 
 func (x *FbPagePost) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 type FbMessaging struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Sender        *FbSender              `protobuf:"bytes,2,opt,name=sender,proto3,oneof" json:"sender,omitempty"`
-	Recipient     *FbRecipient           `protobuf:"bytes,3,opt,name=recipient,proto3,oneof" json:"recipient,omitempty"`
-	Timestamp     *int64                 `protobuf:"varint,4,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
-	Message       *FbMessage             `protobuf:"bytes,5,opt,name=message,proto3,oneof" json:"message,omitempty"`
-	Delivery      *FbDelivery            `protobuf:"bytes,6,opt,name=delivery,proto3,oneof" json:"delivery,omitempty"`
-	MessageType   *string                `protobuf:"bytes,7,opt,name=message_type,json=messageType,proto3,oneof" json:"message_type,omitempty"`
-	SenderAction  *string                `protobuf:"bytes,8,opt,name=sender_action,json=senderAction,proto3,oneof" json:"sender_action,omitempty"` // typing_on, typing_off, mark_seen
-	Read          *FbRead                `protobuf:"bytes,9,opt,name=read,proto3,oneof" json:"read,omitempty"`
-	Postback      *FbPostback            `protobuf:"bytes,10,opt,name=postback,proto3,oneof" json:"postback,omitempty"`
-	Referral      *FbReferral            `protobuf:"bytes,11,opt,name=referral,proto3,oneof" json:"referral,omitempty"`
-	Tag           *string                `protobuf:"bytes,12,opt,name=tag,proto3,oneof" json:"tag,omitempty"` // HUMAN_AGENT
-	Reaction      *IgReaction            `protobuf:"bytes,13,opt,name=reaction,proto3,oneof" json:"reaction,omitempty"`
-	MessageEdit   *FbMessageEdit         `protobuf:"bytes,14,opt,name=message_edit,json=messageEdit,proto3,oneof" json:"message_edit,omitempty"`
+	Sender        *FbSender              `protobuf:"bytes,2,opt,name=sender,proto3" json:"sender,omitempty"`
+	Recipient     *FbRecipient           `protobuf:"bytes,3,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	Timestamp     int64                  `protobuf:"varint,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Message       *FbMessage             `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
+	Delivery      *FbDelivery            `protobuf:"bytes,6,opt,name=delivery,proto3" json:"delivery,omitempty"`
+	MessageType   string                 `protobuf:"bytes,7,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
+	SenderAction  string                 `protobuf:"bytes,8,opt,name=sender_action,json=senderAction,proto3" json:"sender_action,omitempty"` // typing_on, typing_off, mark_seen
+	Read          *FbRead                `protobuf:"bytes,9,opt,name=read,proto3" json:"read,omitempty"`
+	Postback      *FbPostback            `protobuf:"bytes,10,opt,name=postback,proto3" json:"postback,omitempty"`
+	Referral      *FbReferral            `protobuf:"bytes,11,opt,name=referral,proto3" json:"referral,omitempty"`
+	Tag           string                 `protobuf:"bytes,12,opt,name=tag,proto3" json:"tag,omitempty"` // HUMAN_AGENT
+	Reaction      *IgReaction            `protobuf:"bytes,13,opt,name=reaction,proto3" json:"reaction,omitempty"`
+	MessageEdit   *FbMessageEdit         `protobuf:"bytes,14,opt,name=message_edit,json=messageEdit,proto3" json:"message_edit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbMessaging) Reset() {
 	*x = FbMessaging{}
-	mi := &file_fabikon_proto_msgTypes[12]
+	mi := &file_fabikon_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1272,7 +1636,7 @@ func (x *FbMessaging) String() string {
 func (*FbMessaging) ProtoMessage() {}
 
 func (x *FbMessaging) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[12]
+	mi := &file_fabikon_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1285,7 +1649,7 @@ func (x *FbMessaging) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbMessaging.ProtoReflect.Descriptor instead.
 func (*FbMessaging) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{12}
+	return file_fabikon_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *FbMessaging) GetSender() *FbSender {
@@ -1303,8 +1667,8 @@ func (x *FbMessaging) GetRecipient() *FbRecipient {
 }
 
 func (x *FbMessaging) GetTimestamp() int64 {
-	if x != nil && x.Timestamp != nil {
-		return *x.Timestamp
+	if x != nil {
+		return x.Timestamp
 	}
 	return 0
 }
@@ -1324,15 +1688,15 @@ func (x *FbMessaging) GetDelivery() *FbDelivery {
 }
 
 func (x *FbMessaging) GetMessageType() string {
-	if x != nil && x.MessageType != nil {
-		return *x.MessageType
+	if x != nil {
+		return x.MessageType
 	}
 	return ""
 }
 
 func (x *FbMessaging) GetSenderAction() string {
-	if x != nil && x.SenderAction != nil {
-		return *x.SenderAction
+	if x != nil {
+		return x.SenderAction
 	}
 	return ""
 }
@@ -1359,8 +1723,8 @@ func (x *FbMessaging) GetReferral() *FbReferral {
 }
 
 func (x *FbMessaging) GetTag() string {
-	if x != nil && x.Tag != nil {
-		return *x.Tag
+	if x != nil {
+		return x.Tag
 	}
 	return ""
 }
@@ -1381,16 +1745,16 @@ func (x *FbMessaging) GetMessageEdit() *FbMessageEdit {
 
 type FbMessageEdit struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Mid           *string                `protobuf:"bytes,4,opt,name=mid,proto3,oneof" json:"mid,omitempty"`
-	Text          *string                `protobuf:"bytes,5,opt,name=text,proto3,oneof" json:"text,omitempty"`
-	NumEdit       *int64                 `protobuf:"varint,6,opt,name=num_edit,json=numEdit,proto3,oneof" json:"num_edit,omitempty"`
+	Mid           string                 `protobuf:"bytes,4,opt,name=mid,proto3" json:"mid,omitempty"`
+	Text          string                 `protobuf:"bytes,5,opt,name=text,proto3" json:"text,omitempty"`
+	NumEdit       int64                  `protobuf:"varint,6,opt,name=num_edit,json=numEdit,proto3" json:"num_edit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbMessageEdit) Reset() {
 	*x = FbMessageEdit{}
-	mi := &file_fabikon_proto_msgTypes[13]
+	mi := &file_fabikon_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1402,7 +1766,7 @@ func (x *FbMessageEdit) String() string {
 func (*FbMessageEdit) ProtoMessage() {}
 
 func (x *FbMessageEdit) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[13]
+	mi := &file_fabikon_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1415,43 +1779,43 @@ func (x *FbMessageEdit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbMessageEdit.ProtoReflect.Descriptor instead.
 func (*FbMessageEdit) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{13}
+	return file_fabikon_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *FbMessageEdit) GetMid() string {
-	if x != nil && x.Mid != nil {
-		return *x.Mid
+	if x != nil {
+		return x.Mid
 	}
 	return ""
 }
 
 func (x *FbMessageEdit) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.Text
 	}
 	return ""
 }
 
 func (x *FbMessageEdit) GetNumEdit() int64 {
-	if x != nil && x.NumEdit != nil {
-		return *x.NumEdit
+	if x != nil {
+		return x.NumEdit
 	}
 	return 0
 }
 
 type IgReaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Mid           *string                `protobuf:"bytes,5,opt,name=mid,proto3,oneof" json:"mid,omitempty"`
-	Action        *string                `protobuf:"bytes,6,opt,name=action,proto3,oneof" json:"action,omitempty"`
-	Reaction      *string                `protobuf:"bytes,7,opt,name=reaction,proto3,oneof" json:"reaction,omitempty"`
-	Emoji         *string                `protobuf:"bytes,8,opt,name=emoji,proto3,oneof" json:"emoji,omitempty"`
+	Mid           string                 `protobuf:"bytes,5,opt,name=mid,proto3" json:"mid,omitempty"`
+	Action        string                 `protobuf:"bytes,6,opt,name=action,proto3" json:"action,omitempty"`
+	Reaction      string                 `protobuf:"bytes,7,opt,name=reaction,proto3" json:"reaction,omitempty"`
+	Emoji         string                 `protobuf:"bytes,8,opt,name=emoji,proto3" json:"emoji,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IgReaction) Reset() {
 	*x = IgReaction{}
-	mi := &file_fabikon_proto_msgTypes[14]
+	mi := &file_fabikon_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1463,7 +1827,7 @@ func (x *IgReaction) String() string {
 func (*IgReaction) ProtoMessage() {}
 
 func (x *IgReaction) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[14]
+	mi := &file_fabikon_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1476,50 +1840,50 @@ func (x *IgReaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IgReaction.ProtoReflect.Descriptor instead.
 func (*IgReaction) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{14}
+	return file_fabikon_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *IgReaction) GetMid() string {
-	if x != nil && x.Mid != nil {
-		return *x.Mid
+	if x != nil {
+		return x.Mid
 	}
 	return ""
 }
 
 func (x *IgReaction) GetAction() string {
-	if x != nil && x.Action != nil {
-		return *x.Action
+	if x != nil {
+		return x.Action
 	}
 	return ""
 }
 
 func (x *IgReaction) GetReaction() string {
-	if x != nil && x.Reaction != nil {
-		return *x.Reaction
+	if x != nil {
+		return x.Reaction
 	}
 	return ""
 }
 
 func (x *IgReaction) GetEmoji() string {
-	if x != nil && x.Emoji != nil {
-		return *x.Emoji
+	if x != nil {
+		return x.Emoji
 	}
 	return ""
 }
 
 type FbPostback struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Payload       *string                `protobuf:"bytes,2,opt,name=payload,proto3,oneof" json:"payload,omitempty"`
-	Referral      *FbReferral            `protobuf:"bytes,3,opt,name=referral,proto3,oneof" json:"referral,omitempty"`
-	Title         *string                `protobuf:"bytes,4,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Mid           *string                `protobuf:"bytes,5,opt,name=mid,proto3,oneof" json:"mid,omitempty"`
+	Payload       string                 `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
+	Referral      *FbReferral            `protobuf:"bytes,3,opt,name=referral,proto3" json:"referral,omitempty"`
+	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Mid           string                 `protobuf:"bytes,5,opt,name=mid,proto3" json:"mid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPostback) Reset() {
 	*x = FbPostback{}
-	mi := &file_fabikon_proto_msgTypes[15]
+	mi := &file_fabikon_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1531,7 +1895,7 @@ func (x *FbPostback) String() string {
 func (*FbPostback) ProtoMessage() {}
 
 func (x *FbPostback) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[15]
+	mi := &file_fabikon_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1544,12 +1908,12 @@ func (x *FbPostback) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPostback.ProtoReflect.Descriptor instead.
 func (*FbPostback) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{15}
+	return file_fabikon_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *FbPostback) GetPayload() string {
-	if x != nil && x.Payload != nil {
-		return *x.Payload
+	if x != nil {
+		return x.Payload
 	}
 	return ""
 }
@@ -1562,33 +1926,33 @@ func (x *FbPostback) GetReferral() *FbReferral {
 }
 
 func (x *FbPostback) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *FbPostback) GetMid() string {
-	if x != nil && x.Mid != nil {
-		return *x.Mid
+	if x != nil {
+		return x.Mid
 	}
 	return ""
 }
 
 type AdsContextData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PhotoUrl      *string                `protobuf:"bytes,5,opt,name=photo_url,json=photoUrl,proto3,oneof" json:"photo_url,omitempty"`
-	PostId        *string                `protobuf:"bytes,6,opt,name=post_id,json=postId,proto3,oneof" json:"post_id,omitempty"`
-	AdTitle       *string                `protobuf:"bytes,7,opt,name=ad_title,json=adTitle,proto3,oneof" json:"ad_title,omitempty"`
-	VideoUrl      *string                `protobuf:"bytes,8,opt,name=video_url,json=videoUrl,proto3,oneof" json:"video_url,omitempty"`
-	ProductId     *string                `protobuf:"bytes,9,opt,name=product_id,json=productId,proto3,oneof" json:"product_id,omitempty"`
+	PhotoUrl      string                 `protobuf:"bytes,5,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
+	PostId        string                 `protobuf:"bytes,6,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	AdTitle       string                 `protobuf:"bytes,7,opt,name=ad_title,json=adTitle,proto3" json:"ad_title,omitempty"`
+	VideoUrl      string                 `protobuf:"bytes,8,opt,name=video_url,json=videoUrl,proto3" json:"video_url,omitempty"`
+	ProductId     string                 `protobuf:"bytes,9,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AdsContextData) Reset() {
 	*x = AdsContextData{}
-	mi := &file_fabikon_proto_msgTypes[16]
+	mi := &file_fabikon_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1600,7 +1964,7 @@ func (x *AdsContextData) String() string {
 func (*AdsContextData) ProtoMessage() {}
 
 func (x *AdsContextData) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[16]
+	mi := &file_fabikon_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1613,61 +1977,61 @@ func (x *AdsContextData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdsContextData.ProtoReflect.Descriptor instead.
 func (*AdsContextData) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{16}
+	return file_fabikon_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *AdsContextData) GetPhotoUrl() string {
-	if x != nil && x.PhotoUrl != nil {
-		return *x.PhotoUrl
+	if x != nil {
+		return x.PhotoUrl
 	}
 	return ""
 }
 
 func (x *AdsContextData) GetPostId() string {
-	if x != nil && x.PostId != nil {
-		return *x.PostId
+	if x != nil {
+		return x.PostId
 	}
 	return ""
 }
 
 func (x *AdsContextData) GetAdTitle() string {
-	if x != nil && x.AdTitle != nil {
-		return *x.AdTitle
+	if x != nil {
+		return x.AdTitle
 	}
 	return ""
 }
 
 func (x *AdsContextData) GetVideoUrl() string {
-	if x != nil && x.VideoUrl != nil {
-		return *x.VideoUrl
+	if x != nil {
+		return x.VideoUrl
 	}
 	return ""
 }
 
 func (x *AdsContextData) GetProductId() string {
-	if x != nil && x.ProductId != nil {
-		return *x.ProductId
+	if x != nil {
+		return x.ProductId
 	}
 	return ""
 }
 
 type FbReferral struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	Ref            *string                `protobuf:"bytes,2,opt,name=ref,proto3,oneof" json:"ref,omitempty"`
-	Source         *string                `protobuf:"bytes,3,opt,name=source,proto3,oneof" json:"source,omitempty"` // SHORTLINK, ADS
-	Type           *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`     // OPEN_THREAD
-	AdsContextData *AdsContextData        `protobuf:"bytes,5,opt,name=ads_context_data,json=adsContextData,proto3,oneof" json:"ads_context_data,omitempty"`
-	AdId           *string                `protobuf:"bytes,6,opt,name=ad_id,json=adId,proto3,oneof" json:"ad_id,omitempty"`
-	RefererUri     *string                `protobuf:"bytes,7,opt,name=referer_uri,json=refererUri,proto3,oneof" json:"referer_uri,omitempty"`
-	IsGuestUser    *bool                  `protobuf:"varint,8,opt,name=is_guest_user,json=isGuestUser,proto3,oneof" json:"is_guest_user,omitempty"`
-	Product        *FbProduct             `protobuf:"bytes,9,opt,name=product,proto3,oneof" json:"product,omitempty"`
+	Ref            string                 `protobuf:"bytes,2,opt,name=ref,proto3" json:"ref,omitempty"`
+	Source         string                 `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"` // SHORTLINK, ADS
+	Type           string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`     // OPEN_THREAD
+	AdsContextData *AdsContextData        `protobuf:"bytes,5,opt,name=ads_context_data,json=adsContextData,proto3" json:"ads_context_data,omitempty"`
+	AdId           string                 `protobuf:"bytes,6,opt,name=ad_id,json=adId,proto3" json:"ad_id,omitempty"`
+	RefererUri     string                 `protobuf:"bytes,7,opt,name=referer_uri,json=refererUri,proto3" json:"referer_uri,omitempty"`
+	IsGuestUser    bool                   `protobuf:"varint,8,opt,name=is_guest_user,json=isGuestUser,proto3" json:"is_guest_user,omitempty"`
+	Product        *FbProduct             `protobuf:"bytes,9,opt,name=product,proto3" json:"product,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
 func (x *FbReferral) Reset() {
 	*x = FbReferral{}
-	mi := &file_fabikon_proto_msgTypes[17]
+	mi := &file_fabikon_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1679,7 +2043,7 @@ func (x *FbReferral) String() string {
 func (*FbReferral) ProtoMessage() {}
 
 func (x *FbReferral) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[17]
+	mi := &file_fabikon_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1692,26 +2056,26 @@ func (x *FbReferral) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbReferral.ProtoReflect.Descriptor instead.
 func (*FbReferral) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{17}
+	return file_fabikon_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *FbReferral) GetRef() string {
-	if x != nil && x.Ref != nil {
-		return *x.Ref
+	if x != nil {
+		return x.Ref
 	}
 	return ""
 }
 
 func (x *FbReferral) GetSource() string {
-	if x != nil && x.Source != nil {
-		return *x.Source
+	if x != nil {
+		return x.Source
 	}
 	return ""
 }
 
 func (x *FbReferral) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -1724,22 +2088,22 @@ func (x *FbReferral) GetAdsContextData() *AdsContextData {
 }
 
 func (x *FbReferral) GetAdId() string {
-	if x != nil && x.AdId != nil {
-		return *x.AdId
+	if x != nil {
+		return x.AdId
 	}
 	return ""
 }
 
 func (x *FbReferral) GetRefererUri() string {
-	if x != nil && x.RefererUri != nil {
-		return *x.RefererUri
+	if x != nil {
+		return x.RefererUri
 	}
 	return ""
 }
 
 func (x *FbReferral) GetIsGuestUser() bool {
-	if x != nil && x.IsGuestUser != nil {
-		return *x.IsGuestUser
+	if x != nil {
+		return x.IsGuestUser
 	}
 	return false
 }
@@ -1753,28 +2117,28 @@ func (x *FbReferral) GetProduct() *FbProduct {
 
 type FbMessage struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
-	Mid          *string                `protobuf:"bytes,2,opt,name=mid,proto3,oneof" json:"mid,omitempty"`
-	Text         *string                `protobuf:"bytes,3,opt,name=text,proto3,oneof" json:"text,omitempty"`
+	Mid          string                 `protobuf:"bytes,2,opt,name=mid,proto3" json:"mid,omitempty"`
+	Text         string                 `protobuf:"bytes,3,opt,name=text,proto3" json:"text,omitempty"`
 	Attachments  []*FbAttachment        `protobuf:"bytes,4,rep,name=attachments,proto3" json:"attachments,omitempty"`
-	Read         *FbRead                `protobuf:"bytes,5,opt,name=read,proto3,oneof" json:"read,omitempty"`
-	Attachment   *FbAttachment          `protobuf:"bytes,6,opt,name=attachment,proto3,oneof" json:"attachment,omitempty"`
-	IsEcho       *bool                  `protobuf:"varint,7,opt,name=is_echo,json=isEcho,proto3,oneof" json:"is_echo,omitempty"`
-	AppId        *int64                 `protobuf:"varint,8,opt,name=app_id,json=appId,proto3,oneof" json:"app_id,omitempty"`
-	Metadata     *string                `protobuf:"bytes,9,opt,name=metadata,proto3,oneof" json:"metadata,omitempty"`
+	Read         *FbRead                `protobuf:"bytes,5,opt,name=read,proto3" json:"read,omitempty"`
+	Attachment   *FbAttachment          `protobuf:"bytes,6,opt,name=attachment,proto3" json:"attachment,omitempty"`
+	IsEcho       bool                   `protobuf:"varint,7,opt,name=is_echo,json=isEcho,proto3" json:"is_echo,omitempty"`
+	AppId        int64                  `protobuf:"varint,8,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+	Metadata     string                 `protobuf:"bytes,9,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	QuickReplies []*QuickReply          `protobuf:"bytes,10,rep,name=quick_replies,json=quickReplies,proto3" json:"quick_replies,omitempty"`
-	QuickReply   *QuickReply            `protobuf:"bytes,11,opt,name=quick_reply,json=quickReply,proto3,oneof" json:"quick_reply,omitempty"` // response from fb
-	IsSupported  *string                `protobuf:"bytes,12,opt,name=is_supported,json=isSupported,proto3,oneof" json:"is_supported,omitempty"`
-	IsDeleted    *bool                  `protobuf:"varint,13,opt,name=is_deleted,json=isDeleted,proto3,oneof" json:"is_deleted,omitempty"`
-	ReplyTo      *ReplyTo               `protobuf:"bytes,14,opt,name=reply_to,json=replyTo,proto3,oneof" json:"reply_to,omitempty"`
+	QuickReply   *QuickReply            `protobuf:"bytes,11,opt,name=quick_reply,json=quickReply,proto3" json:"quick_reply,omitempty"` // response from fb
+	IsSupported  string                 `protobuf:"bytes,12,opt,name=is_supported,json=isSupported,proto3" json:"is_supported,omitempty"`
+	IsDeleted    bool                   `protobuf:"varint,13,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	ReplyTo      *ReplyTo               `protobuf:"bytes,14,opt,name=reply_to,json=replyTo,proto3" json:"reply_to,omitempty"`
 	// optional FbMessageRef referral = 15;
-	Referral      *FbReferral `protobuf:"bytes,16,opt,name=referral,proto3,oneof" json:"referral,omitempty"`
+	Referral      *FbReferral `protobuf:"bytes,16,opt,name=referral,proto3" json:"referral,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbMessage) Reset() {
 	*x = FbMessage{}
-	mi := &file_fabikon_proto_msgTypes[18]
+	mi := &file_fabikon_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1786,7 +2150,7 @@ func (x *FbMessage) String() string {
 func (*FbMessage) ProtoMessage() {}
 
 func (x *FbMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[18]
+	mi := &file_fabikon_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1799,19 +2163,19 @@ func (x *FbMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbMessage.ProtoReflect.Descriptor instead.
 func (*FbMessage) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{18}
+	return file_fabikon_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *FbMessage) GetMid() string {
-	if x != nil && x.Mid != nil {
-		return *x.Mid
+	if x != nil {
+		return x.Mid
 	}
 	return ""
 }
 
 func (x *FbMessage) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.Text
 	}
 	return ""
 }
@@ -1838,22 +2202,22 @@ func (x *FbMessage) GetAttachment() *FbAttachment {
 }
 
 func (x *FbMessage) GetIsEcho() bool {
-	if x != nil && x.IsEcho != nil {
-		return *x.IsEcho
+	if x != nil {
+		return x.IsEcho
 	}
 	return false
 }
 
 func (x *FbMessage) GetAppId() int64 {
-	if x != nil && x.AppId != nil {
-		return *x.AppId
+	if x != nil {
+		return x.AppId
 	}
 	return 0
 }
 
 func (x *FbMessage) GetMetadata() string {
-	if x != nil && x.Metadata != nil {
-		return *x.Metadata
+	if x != nil {
+		return x.Metadata
 	}
 	return ""
 }
@@ -1873,15 +2237,15 @@ func (x *FbMessage) GetQuickReply() *QuickReply {
 }
 
 func (x *FbMessage) GetIsSupported() string {
-	if x != nil && x.IsSupported != nil {
-		return *x.IsSupported
+	if x != nil {
+		return x.IsSupported
 	}
 	return ""
 }
 
 func (x *FbMessage) GetIsDeleted() bool {
-	if x != nil && x.IsDeleted != nil {
-		return *x.IsDeleted
+	if x != nil {
+		return x.IsDeleted
 	}
 	return false
 }
@@ -1902,15 +2266,15 @@ func (x *FbMessage) GetReferral() *FbReferral {
 
 type ReplyTo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Mid           *string                `protobuf:"bytes,4,opt,name=mid,proto3,oneof" json:"mid,omitempty"`
-	Story         *FbReplyStory          `protobuf:"bytes,5,opt,name=story,proto3,oneof" json:"story,omitempty"`
+	Mid           string                 `protobuf:"bytes,4,opt,name=mid,proto3" json:"mid,omitempty"`
+	Story         *FbReplyStory          `protobuf:"bytes,5,opt,name=story,proto3" json:"story,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ReplyTo) Reset() {
 	*x = ReplyTo{}
-	mi := &file_fabikon_proto_msgTypes[19]
+	mi := &file_fabikon_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1922,7 +2286,7 @@ func (x *ReplyTo) String() string {
 func (*ReplyTo) ProtoMessage() {}
 
 func (x *ReplyTo) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[19]
+	mi := &file_fabikon_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1935,12 +2299,12 @@ func (x *ReplyTo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplyTo.ProtoReflect.Descriptor instead.
 func (*ReplyTo) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{19}
+	return file_fabikon_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ReplyTo) GetMid() string {
-	if x != nil && x.Mid != nil {
-		return *x.Mid
+	if x != nil {
+		return x.Mid
 	}
 	return ""
 }
@@ -1954,15 +2318,15 @@ func (x *ReplyTo) GetStory() *FbReplyStory {
 
 type FbReplyStory struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           *string                `protobuf:"bytes,5,opt,name=url,proto3,oneof" json:"url,omitempty"`
-	Id            *string                `protobuf:"bytes,6,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Url           string                 `protobuf:"bytes,5,opt,name=url,proto3" json:"url,omitempty"`
+	Id            string                 `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbReplyStory) Reset() {
 	*x = FbReplyStory{}
-	mi := &file_fabikon_proto_msgTypes[20]
+	mi := &file_fabikon_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1974,7 +2338,7 @@ func (x *FbReplyStory) String() string {
 func (*FbReplyStory) ProtoMessage() {}
 
 func (x *FbReplyStory) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[20]
+	mi := &file_fabikon_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1987,36 +2351,36 @@ func (x *FbReplyStory) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbReplyStory.ProtoReflect.Descriptor instead.
 func (*FbReplyStory) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{20}
+	return file_fabikon_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *FbReplyStory) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 func (x *FbReplyStory) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 type QuickReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ContentType   *string                `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3,oneof" json:"content_type,omitempty"` // text
-	Title         *string                `protobuf:"bytes,3,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Payload       *string                `protobuf:"bytes,4,opt,name=payload,proto3,oneof" json:"payload,omitempty"`
-	ImageUrl      *string                `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3,oneof" json:"image_url,omitempty"`
+	ContentType   string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"` // text
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Payload       string                 `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *QuickReply) Reset() {
 	*x = QuickReply{}
-	mi := &file_fabikon_proto_msgTypes[21]
+	mi := &file_fabikon_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2028,7 +2392,7 @@ func (x *QuickReply) String() string {
 func (*QuickReply) ProtoMessage() {}
 
 func (x *QuickReply) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[21]
+	mi := &file_fabikon_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2041,48 +2405,48 @@ func (x *QuickReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuickReply.ProtoReflect.Descriptor instead.
 func (*QuickReply) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{21}
+	return file_fabikon_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *QuickReply) GetContentType() string {
-	if x != nil && x.ContentType != nil {
-		return *x.ContentType
+	if x != nil {
+		return x.ContentType
 	}
 	return ""
 }
 
 func (x *QuickReply) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *QuickReply) GetPayload() string {
-	if x != nil && x.Payload != nil {
-		return *x.Payload
+	if x != nil {
+		return x.Payload
 	}
 	return ""
 }
 
 func (x *QuickReply) GetImageUrl() string {
-	if x != nil && x.ImageUrl != nil {
-		return *x.ImageUrl
+	if x != nil {
+		return x.ImageUrl
 	}
 	return ""
 }
 
 type FbSender struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	UserRef       *string                `protobuf:"bytes,3,opt,name=user_ref,json=userRef,proto3,oneof" json:"user_ref,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	UserRef       string                 `protobuf:"bytes,3,opt,name=user_ref,json=userRef,proto3" json:"user_ref,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbSender) Reset() {
 	*x = FbSender{}
-	mi := &file_fabikon_proto_msgTypes[22]
+	mi := &file_fabikon_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2094,7 +2458,7 @@ func (x *FbSender) String() string {
 func (*FbSender) ProtoMessage() {}
 
 func (x *FbSender) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[22]
+	mi := &file_fabikon_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2107,37 +2471,37 @@ func (x *FbSender) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbSender.ProtoReflect.Descriptor instead.
 func (*FbSender) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{22}
+	return file_fabikon_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *FbSender) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbSender) GetUserRef() string {
-	if x != nil && x.UserRef != nil {
-		return *x.UserRef
+	if x != nil {
+		return x.UserRef
 	}
 	return ""
 }
 
 type FbRecipient struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Id    *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Id    string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// https://developers.facebook.com/docs/messenger-platform/discovery/private-replies
-	PostId        *string `protobuf:"bytes,3,opt,name=post_id,json=postId,proto3,oneof" json:"post_id,omitempty"`
-	CommentId     *string `protobuf:"bytes,4,opt,name=comment_id,json=commentId,proto3,oneof" json:"comment_id,omitempty"`
-	UserRef       *string `protobuf:"bytes,5,opt,name=user_ref,json=userRef,proto3,oneof" json:"user_ref,omitempty"`
+	PostId        string `protobuf:"bytes,3,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	CommentId     string `protobuf:"bytes,4,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	UserRef       string `protobuf:"bytes,5,opt,name=user_ref,json=userRef,proto3" json:"user_ref,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbRecipient) Reset() {
 	*x = FbRecipient{}
-	mi := &file_fabikon_proto_msgTypes[23]
+	mi := &file_fabikon_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2149,7 +2513,7 @@ func (x *FbRecipient) String() string {
 func (*FbRecipient) ProtoMessage() {}
 
 func (x *FbRecipient) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[23]
+	mi := &file_fabikon_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2162,48 +2526,48 @@ func (x *FbRecipient) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbRecipient.ProtoReflect.Descriptor instead.
 func (*FbRecipient) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{23}
+	return file_fabikon_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *FbRecipient) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbRecipient) GetPostId() string {
-	if x != nil && x.PostId != nil {
-		return *x.PostId
+	if x != nil {
+		return x.PostId
 	}
 	return ""
 }
 
 func (x *FbRecipient) GetCommentId() string {
-	if x != nil && x.CommentId != nil {
-		return *x.CommentId
+	if x != nil {
+		return x.CommentId
 	}
 	return ""
 }
 
 func (x *FbRecipient) GetUserRef() string {
-	if x != nil && x.UserRef != nil {
-		return *x.UserRef
+	if x != nil {
+		return x.UserRef
 	}
 	return ""
 }
 
 type FbAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	Url           *string                `protobuf:"bytes,3,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Url           string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbAction) Reset() {
 	*x = FbAction{}
-	mi := &file_fabikon_proto_msgTypes[24]
+	mi := &file_fabikon_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2215,7 +2579,7 @@ func (x *FbAction) String() string {
 func (*FbAction) ProtoMessage() {}
 
 func (x *FbAction) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[24]
+	mi := &file_fabikon_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2228,36 +2592,36 @@ func (x *FbAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbAction.ProtoReflect.Descriptor instead.
 func (*FbAction) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{24}
+	return file_fabikon_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *FbAction) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
 
 func (x *FbAction) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 type FbAttachment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"` // template, fallback
-	Payload       *FbPayload             `protobuf:"bytes,3,opt,name=payload,proto3,oneof" json:"payload,omitempty"`
-	Title         *string                `protobuf:"bytes,4,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	URL           *string                `protobuf:"bytes,5,opt,name=URL,proto3,oneof" json:"URL,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // template, fallback
+	Payload       *FbPayload             `protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`
+	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	URL           string                 `protobuf:"bytes,5,opt,name=URL,proto3" json:"URL,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbAttachment) Reset() {
 	*x = FbAttachment{}
-	mi := &file_fabikon_proto_msgTypes[25]
+	mi := &file_fabikon_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2269,7 +2633,7 @@ func (x *FbAttachment) String() string {
 func (*FbAttachment) ProtoMessage() {}
 
 func (x *FbAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[25]
+	mi := &file_fabikon_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2282,12 +2646,12 @@ func (x *FbAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbAttachment.ProtoReflect.Descriptor instead.
 func (*FbAttachment) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{25}
+	return file_fabikon_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *FbAttachment) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -2300,32 +2664,32 @@ func (x *FbAttachment) GetPayload() *FbPayload {
 }
 
 func (x *FbAttachment) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *FbAttachment) GetURL() string {
-	if x != nil && x.URL != nil {
-		return *x.URL
+	if x != nil {
+		return x.URL
 	}
 	return ""
 }
 
 type Summary struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Subtotal      *float32               `protobuf:"fixed32,2,opt,name=subtotal,proto3,oneof" json:"subtotal,omitempty"`
-	ShippingCost  *float32               `protobuf:"fixed32,3,opt,name=shipping_cost,json=shippingCost,proto3,oneof" json:"shipping_cost,omitempty"`
-	TotalTax      *float32               `protobuf:"fixed32,4,opt,name=total_tax,json=totalTax,proto3,oneof" json:"total_tax,omitempty"`
-	TotalCost     *float32               `protobuf:"fixed32,5,opt,name=total_cost,json=totalCost,proto3,oneof" json:"total_cost,omitempty"`
+	Subtotal      float32                `protobuf:"fixed32,2,opt,name=subtotal,proto3" json:"subtotal,omitempty"`
+	ShippingCost  float32                `protobuf:"fixed32,3,opt,name=shipping_cost,json=shippingCost,proto3" json:"shipping_cost,omitempty"`
+	TotalTax      float32                `protobuf:"fixed32,4,opt,name=total_tax,json=totalTax,proto3" json:"total_tax,omitempty"`
+	TotalCost     float32                `protobuf:"fixed32,5,opt,name=total_cost,json=totalCost,proto3" json:"total_cost,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Summary) Reset() {
 	*x = Summary{}
-	mi := &file_fabikon_proto_msgTypes[26]
+	mi := &file_fabikon_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2337,7 +2701,7 @@ func (x *Summary) String() string {
 func (*Summary) ProtoMessage() {}
 
 func (x *Summary) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[26]
+	mi := &file_fabikon_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2350,48 +2714,48 @@ func (x *Summary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Summary.ProtoReflect.Descriptor instead.
 func (*Summary) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{26}
+	return file_fabikon_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Summary) GetSubtotal() float32 {
-	if x != nil && x.Subtotal != nil {
-		return *x.Subtotal
+	if x != nil {
+		return x.Subtotal
 	}
 	return 0
 }
 
 func (x *Summary) GetShippingCost() float32 {
-	if x != nil && x.ShippingCost != nil {
-		return *x.ShippingCost
+	if x != nil {
+		return x.ShippingCost
 	}
 	return 0
 }
 
 func (x *Summary) GetTotalTax() float32 {
-	if x != nil && x.TotalTax != nil {
-		return *x.TotalTax
+	if x != nil {
+		return x.TotalTax
 	}
 	return 0
 }
 
 func (x *Summary) GetTotalCost() float32 {
-	if x != nil && x.TotalCost != nil {
-		return *x.TotalCost
+	if x != nil {
+		return x.TotalCost
 	}
 	return 0
 }
 
 type Adjustment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Amount        *float32               `protobuf:"fixed32,3,opt,name=amount,proto3,oneof" json:"amount,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Amount        float32                `protobuf:"fixed32,3,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Adjustment) Reset() {
 	*x = Adjustment{}
-	mi := &file_fabikon_proto_msgTypes[27]
+	mi := &file_fabikon_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2403,7 +2767,7 @@ func (x *Adjustment) String() string {
 func (*Adjustment) ProtoMessage() {}
 
 func (x *Adjustment) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[27]
+	mi := &file_fabikon_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2416,38 +2780,38 @@ func (x *Adjustment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Adjustment.ProtoReflect.Descriptor instead.
 func (*Adjustment) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{27}
+	return file_fabikon_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Adjustment) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *Adjustment) GetAmount() float32 {
-	if x != nil && x.Amount != nil {
-		return *x.Amount
+	if x != nil {
+		return x.Amount
 	}
 	return 0
 }
 
 type Address struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Street_1      *string                `protobuf:"bytes,2,opt,name=street_1,json=street1,proto3,oneof" json:"street_1,omitempty"`
-	Street_2      *string                `protobuf:"bytes,3,opt,name=street_2,json=street2,proto3,oneof" json:"street_2,omitempty"`
-	City          *string                `protobuf:"bytes,4,opt,name=city,proto3,oneof" json:"city,omitempty"`
-	PostalCode    *string                `protobuf:"bytes,5,opt,name=postal_code,json=postalCode,proto3,oneof" json:"postal_code,omitempty"`
-	State         *string                `protobuf:"bytes,6,opt,name=state,proto3,oneof" json:"state,omitempty"`
-	Country       *string                `protobuf:"bytes,7,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Street_1      string                 `protobuf:"bytes,2,opt,name=street_1,json=street1,proto3" json:"street_1,omitempty"`
+	Street_2      string                 `protobuf:"bytes,3,opt,name=street_2,json=street2,proto3" json:"street_2,omitempty"`
+	City          string                 `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,5,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	State         string                 `protobuf:"bytes,6,opt,name=state,proto3" json:"state,omitempty"`
+	Country       string                 `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Address) Reset() {
 	*x = Address{}
-	mi := &file_fabikon_proto_msgTypes[28]
+	mi := &file_fabikon_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2459,7 +2823,7 @@ func (x *Address) String() string {
 func (*Address) ProtoMessage() {}
 
 func (x *Address) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[28]
+	mi := &file_fabikon_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2472,70 +2836,70 @@ func (x *Address) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Address.ProtoReflect.Descriptor instead.
 func (*Address) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{28}
+	return file_fabikon_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *Address) GetStreet_1() string {
-	if x != nil && x.Street_1 != nil {
-		return *x.Street_1
+	if x != nil {
+		return x.Street_1
 	}
 	return ""
 }
 
 func (x *Address) GetStreet_2() string {
-	if x != nil && x.Street_2 != nil {
-		return *x.Street_2
+	if x != nil {
+		return x.Street_2
 	}
 	return ""
 }
 
 func (x *Address) GetCity() string {
-	if x != nil && x.City != nil {
-		return *x.City
+	if x != nil {
+		return x.City
 	}
 	return ""
 }
 
 func (x *Address) GetPostalCode() string {
-	if x != nil && x.PostalCode != nil {
-		return *x.PostalCode
+	if x != nil {
+		return x.PostalCode
 	}
 	return ""
 }
 
 func (x *Address) GetState() string {
-	if x != nil && x.State != nil {
-		return *x.State
+	if x != nil {
+		return x.State
 	}
 	return ""
 }
 
 func (x *Address) GetCountry() string {
-	if x != nil && x.Country != nil {
-		return *x.Country
+	if x != nil {
+		return x.Country
 	}
 	return ""
 }
 
 type GenericElement struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         *string                `protobuf:"bytes,2,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	ItemUrl       *string                `protobuf:"bytes,3,opt,name=item_url,json=itemUrl,proto3,oneof" json:"item_url,omitempty"`
-	ImageUrl      *string                `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3,oneof" json:"image_url,omitempty"`
-	Subtitle      *string                `protobuf:"bytes,5,opt,name=subtitle,proto3,oneof" json:"subtitle,omitempty"`
-	DefaultAction *Button                `protobuf:"bytes,6,opt,name=default_action,json=defaultAction,proto3,oneof" json:"default_action,omitempty"`
-	Id            *string                `protobuf:"bytes,7,opt,name=id,proto3,oneof" json:"id,omitempty"` // fbproduct id
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	ItemUrl       string                 `protobuf:"bytes,3,opt,name=item_url,json=itemUrl,proto3" json:"item_url,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Subtitle      string                 `protobuf:"bytes,5,opt,name=subtitle,proto3" json:"subtitle,omitempty"`
+	DefaultAction *Button                `protobuf:"bytes,6,opt,name=default_action,json=defaultAction,proto3" json:"default_action,omitempty"`
+	Id            string                 `protobuf:"bytes,7,opt,name=id,proto3" json:"id,omitempty"` // fbproduct id
 	Buttons       []*Button              `protobuf:"bytes,8,rep,name=buttons,proto3" json:"buttons,omitempty"`
-	Quantity      *int64                 `protobuf:"varint,9,opt,name=quantity,proto3,oneof" json:"quantity,omitempty"`
-	Currency      *string                `protobuf:"bytes,10,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Price         *float32               `protobuf:"fixed32,11,opt,name=price,proto3,oneof" json:"price,omitempty"`
+	Quantity      int64                  `protobuf:"varint,9,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Currency      string                 `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`
+	Price         float32                `protobuf:"fixed32,11,opt,name=price,proto3" json:"price,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GenericElement) Reset() {
 	*x = GenericElement{}
-	mi := &file_fabikon_proto_msgTypes[29]
+	mi := &file_fabikon_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2547,7 +2911,7 @@ func (x *GenericElement) String() string {
 func (*GenericElement) ProtoMessage() {}
 
 func (x *GenericElement) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[29]
+	mi := &file_fabikon_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2560,33 +2924,33 @@ func (x *GenericElement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenericElement.ProtoReflect.Descriptor instead.
 func (*GenericElement) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{29}
+	return file_fabikon_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GenericElement) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *GenericElement) GetItemUrl() string {
-	if x != nil && x.ItemUrl != nil {
-		return *x.ItemUrl
+	if x != nil {
+		return x.ItemUrl
 	}
 	return ""
 }
 
 func (x *GenericElement) GetImageUrl() string {
-	if x != nil && x.ImageUrl != nil {
-		return *x.ImageUrl
+	if x != nil {
+		return x.ImageUrl
 	}
 	return ""
 }
 
 func (x *GenericElement) GetSubtitle() string {
-	if x != nil && x.Subtitle != nil {
-		return *x.Subtitle
+	if x != nil {
+		return x.Subtitle
 	}
 	return ""
 }
@@ -2599,8 +2963,8 @@ func (x *GenericElement) GetDefaultAction() *Button {
 }
 
 func (x *GenericElement) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
@@ -2613,53 +2977,53 @@ func (x *GenericElement) GetButtons() []*Button {
 }
 
 func (x *GenericElement) GetQuantity() int64 {
-	if x != nil && x.Quantity != nil {
-		return *x.Quantity
+	if x != nil {
+		return x.Quantity
 	}
 	return 0
 }
 
 func (x *GenericElement) GetCurrency() string {
-	if x != nil && x.Currency != nil {
-		return *x.Currency
+	if x != nil {
+		return x.Currency
 	}
 	return ""
 }
 
 func (x *GenericElement) GetPrice() float32 {
-	if x != nil && x.Price != nil {
-		return *x.Price
+	if x != nil {
+		return x.Price
 	}
 	return 0
 }
 
 type FbPayload struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           *string                `protobuf:"bytes,2,opt,name=url,proto3,oneof" json:"url,omitempty"`
-	IsReuseable   *bool                  `protobuf:"varint,3,opt,name=is_reuseable,json=isReuseable,proto3,oneof" json:"is_reuseable,omitempty"`
-	TemplateType  *string                `protobuf:"bytes,4,opt,name=template_type,json=templateType,proto3,oneof" json:"template_type,omitempty"`
-	Sharable      *bool                  `protobuf:"varint,5,opt,name=sharable,proto3,oneof" json:"sharable,omitempty"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	IsReuseable   bool                   `protobuf:"varint,3,opt,name=is_reuseable,json=isReuseable,proto3" json:"is_reuseable,omitempty"`
+	TemplateType  string                 `protobuf:"bytes,4,opt,name=template_type,json=templateType,proto3" json:"template_type,omitempty"`
+	Sharable      bool                   `protobuf:"varint,5,opt,name=sharable,proto3" json:"sharable,omitempty"`
 	Elements      []*GenericElement      `protobuf:"bytes,6,rep,name=elements,proto3" json:"elements,omitempty"`
-	Text          *string                `protobuf:"bytes,7,opt,name=text,proto3,oneof" json:"text,omitempty"` // for call btn
+	Text          string                 `protobuf:"bytes,7,opt,name=text,proto3" json:"text,omitempty"` // for call btn
 	Buttons       []*Button              `protobuf:"bytes,8,rep,name=buttons,proto3" json:"buttons,omitempty"`
-	Address       *Address               `protobuf:"bytes,10,opt,name=address,proto3,oneof" json:"address,omitempty"`
-	Summary       *Summary               `protobuf:"bytes,11,opt,name=summary,proto3,oneof" json:"summary,omitempty"`
+	Address       *Address               `protobuf:"bytes,10,opt,name=address,proto3" json:"address,omitempty"`
+	Summary       *Summary               `protobuf:"bytes,11,opt,name=summary,proto3" json:"summary,omitempty"`
 	Adjustments   []*Adjustment          `protobuf:"bytes,12,rep,name=adjustments,proto3" json:"adjustments,omitempty"`
-	RecipientName *string                `protobuf:"bytes,13,opt,name=recipient_name,json=recipientName,proto3,oneof" json:"recipient_name,omitempty"`
-	OrderNumber   *string                `protobuf:"bytes,14,opt,name=order_number,json=orderNumber,proto3,oneof" json:"order_number,omitempty"`
-	Currency      *string                `protobuf:"bytes,15,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	PaymentMethod *string                `protobuf:"bytes,16,opt,name=payment_method,json=paymentMethod,proto3,oneof" json:"payment_method,omitempty"`
-	OrderUrl      *string                `protobuf:"bytes,17,opt,name=order_url,json=orderUrl,proto3,oneof" json:"order_url,omitempty"`
+	RecipientName string                 `protobuf:"bytes,13,opt,name=recipient_name,json=recipientName,proto3" json:"recipient_name,omitempty"`
+	OrderNumber   string                 `protobuf:"bytes,14,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	Currency      string                 `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency,omitempty"`
+	PaymentMethod string                 `protobuf:"bytes,16,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	OrderUrl      string                 `protobuf:"bytes,17,opt,name=order_url,json=orderUrl,proto3" json:"order_url,omitempty"`
 	// google.protobuf.Any timestamp = 18; // sometime its a string, sometime its a number https://developers.facebook.com/docs/messenger-platform/reference/templates/receipt
-	Product       *FbProducts `protobuf:"bytes,19,opt,name=product,proto3,oneof" json:"product,omitempty"`
-	Title         *string     `protobuf:"bytes,20,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	Product       *FbProducts `protobuf:"bytes,19,opt,name=product,proto3" json:"product,omitempty"`
+	Title         string      `protobuf:"bytes,20,opt,name=title,proto3" json:"title,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPayload) Reset() {
 	*x = FbPayload{}
-	mi := &file_fabikon_proto_msgTypes[30]
+	mi := &file_fabikon_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2671,7 +3035,7 @@ func (x *FbPayload) String() string {
 func (*FbPayload) ProtoMessage() {}
 
 func (x *FbPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[30]
+	mi := &file_fabikon_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2684,33 +3048,33 @@ func (x *FbPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPayload.ProtoReflect.Descriptor instead.
 func (*FbPayload) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{30}
+	return file_fabikon_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *FbPayload) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 func (x *FbPayload) GetIsReuseable() bool {
-	if x != nil && x.IsReuseable != nil {
-		return *x.IsReuseable
+	if x != nil {
+		return x.IsReuseable
 	}
 	return false
 }
 
 func (x *FbPayload) GetTemplateType() string {
-	if x != nil && x.TemplateType != nil {
-		return *x.TemplateType
+	if x != nil {
+		return x.TemplateType
 	}
 	return ""
 }
 
 func (x *FbPayload) GetSharable() bool {
-	if x != nil && x.Sharable != nil {
-		return *x.Sharable
+	if x != nil {
+		return x.Sharable
 	}
 	return false
 }
@@ -2723,8 +3087,8 @@ func (x *FbPayload) GetElements() []*GenericElement {
 }
 
 func (x *FbPayload) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.Text
 	}
 	return ""
 }
@@ -2758,36 +3122,36 @@ func (x *FbPayload) GetAdjustments() []*Adjustment {
 }
 
 func (x *FbPayload) GetRecipientName() string {
-	if x != nil && x.RecipientName != nil {
-		return *x.RecipientName
+	if x != nil {
+		return x.RecipientName
 	}
 	return ""
 }
 
 func (x *FbPayload) GetOrderNumber() string {
-	if x != nil && x.OrderNumber != nil {
-		return *x.OrderNumber
+	if x != nil {
+		return x.OrderNumber
 	}
 	return ""
 }
 
 func (x *FbPayload) GetCurrency() string {
-	if x != nil && x.Currency != nil {
-		return *x.Currency
+	if x != nil {
+		return x.Currency
 	}
 	return ""
 }
 
 func (x *FbPayload) GetPaymentMethod() string {
-	if x != nil && x.PaymentMethod != nil {
-		return *x.PaymentMethod
+	if x != nil {
+		return x.PaymentMethod
 	}
 	return ""
 }
 
 func (x *FbPayload) GetOrderUrl() string {
-	if x != nil && x.OrderUrl != nil {
-		return *x.OrderUrl
+	if x != nil {
+		return x.OrderUrl
 	}
 	return ""
 }
@@ -2800,8 +3164,8 @@ func (x *FbPayload) GetProduct() *FbProducts {
 }
 
 func (x *FbPayload) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
@@ -2815,7 +3179,7 @@ type FbProducts struct {
 
 func (x *FbProducts) Reset() {
 	*x = FbProducts{}
-	mi := &file_fabikon_proto_msgTypes[31]
+	mi := &file_fabikon_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2827,7 +3191,7 @@ func (x *FbProducts) String() string {
 func (*FbProducts) ProtoMessage() {}
 
 func (x *FbProducts) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[31]
+	mi := &file_fabikon_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2840,7 +3204,7 @@ func (x *FbProducts) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProducts.ProtoReflect.Descriptor instead.
 func (*FbProducts) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{31}
+	return file_fabikon_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *FbProducts) GetElements() []*FbProduct {
@@ -2852,18 +3216,18 @@ func (x *FbProducts) GetElements() []*FbProduct {
 
 type FbProduct struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	RetailerId    *string                `protobuf:"bytes,4,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
-	ImageUrl      *string                `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3,oneof" json:"image_url,omitempty"`
-	Title         *string                `protobuf:"bytes,6,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Subtitle      *string                `protobuf:"bytes,7,opt,name=subtitle,proto3,oneof" json:"subtitle,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	RetailerId    string                 `protobuf:"bytes,4,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Title         string                 `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
+	Subtitle      string                 `protobuf:"bytes,7,opt,name=subtitle,proto3" json:"subtitle,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbProduct) Reset() {
 	*x = FbProduct{}
-	mi := &file_fabikon_proto_msgTypes[32]
+	mi := &file_fabikon_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2875,7 +3239,7 @@ func (x *FbProduct) String() string {
 func (*FbProduct) ProtoMessage() {}
 
 func (x *FbProduct) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[32]
+	mi := &file_fabikon_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2888,61 +3252,62 @@ func (x *FbProduct) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProduct.ProtoReflect.Descriptor instead.
 func (*FbProduct) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{32}
+	return file_fabikon_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *FbProduct) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbProduct) GetRetailerId() string {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+	if x != nil {
+		return x.RetailerId
 	}
 	return ""
 }
 
 func (x *FbProduct) GetImageUrl() string {
-	if x != nil && x.ImageUrl != nil {
-		return *x.ImageUrl
+	if x != nil {
+		return x.ImageUrl
 	}
 	return ""
 }
 
 func (x *FbProduct) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *FbProduct) GetSubtitle() string {
-	if x != nil && x.Subtitle != nil {
-		return *x.Subtitle
+	if x != nil {
+		return x.Subtitle
 	}
 	return ""
 }
 
 type Button struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
-	Type                *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"` // web_url, postback
-	Title               *string                `protobuf:"bytes,3,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Payload             *string                `protobuf:"bytes,4,opt,name=payload,proto3,oneof" json:"payload,omitempty"`
-	Url                 *string                `protobuf:"bytes,5,opt,name=url,proto3,oneof" json:"url,omitempty"`
-	WebviewHeightRatio  *string                `protobuf:"bytes,6,opt,name=webview_height_ratio,json=webviewHeightRatio,proto3,oneof" json:"webview_height_ratio,omitempty"`   // <compact|tall|full>
-	MessengerExtensions *bool                  `protobuf:"varint,7,opt,name=messenger_extensions,json=messengerExtensions,proto3,oneof" json:"messenger_extensions,omitempty"` // <true|false>
-	FallbackUrl         *string                `protobuf:"bytes,8,opt,name=fallback_url,json=fallbackUrl,proto3,oneof" json:"fallback_url,omitempty"`                          //<URL_TO_FALLBACK_TO>"
-	WebviewShareButton  *string                `protobuf:"bytes,9,opt,name=webview_share_button,json=webviewShareButton,proto3,oneof" json:"webview_share_button,omitempty"`
+	Type                string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // web_url, postback, audio_call
+	Title               string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Payload             string                 `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
+	Url                 string                 `protobuf:"bytes,5,opt,name=url,proto3" json:"url,omitempty"`
+	WebviewHeightRatio  string                 `protobuf:"bytes,6,opt,name=webview_height_ratio,json=webviewHeightRatio,proto3" json:"webview_height_ratio,omitempty"`   // <compact|tall|full>
+	MessengerExtensions bool                   `protobuf:"varint,7,opt,name=messenger_extensions,json=messengerExtensions,proto3" json:"messenger_extensions,omitempty"` // <true|false>
+	FallbackUrl         string                 `protobuf:"bytes,8,opt,name=fallback_url,json=fallbackUrl,proto3" json:"fallback_url,omitempty"`                          //<URL_TO_FALLBACK_TO>"
+	WebviewShareButton  string                 `protobuf:"bytes,9,opt,name=webview_share_button,json=webviewShareButton,proto3" json:"webview_share_button,omitempty"`
+	ExpiresInDays       int64                  `protobuf:"varint,10,opt,name=expires_in_days,json=expiresInDays,proto3" json:"expires_in_days,omitempty"` // 5
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Button) Reset() {
 	*x = Button{}
-	mi := &file_fabikon_proto_msgTypes[33]
+	mi := &file_fabikon_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2954,7 +3319,7 @@ func (x *Button) String() string {
 func (*Button) ProtoMessage() {}
 
 func (x *Button) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[33]
+	mi := &file_fabikon_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2967,76 +3332,83 @@ func (x *Button) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Button.ProtoReflect.Descriptor instead.
 func (*Button) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{33}
+	return file_fabikon_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *Button) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
 
 func (x *Button) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
 
 func (x *Button) GetPayload() string {
-	if x != nil && x.Payload != nil {
-		return *x.Payload
+	if x != nil {
+		return x.Payload
 	}
 	return ""
 }
 
 func (x *Button) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 func (x *Button) GetWebviewHeightRatio() string {
-	if x != nil && x.WebviewHeightRatio != nil {
-		return *x.WebviewHeightRatio
+	if x != nil {
+		return x.WebviewHeightRatio
 	}
 	return ""
 }
 
 func (x *Button) GetMessengerExtensions() bool {
-	if x != nil && x.MessengerExtensions != nil {
-		return *x.MessengerExtensions
+	if x != nil {
+		return x.MessengerExtensions
 	}
 	return false
 }
 
 func (x *Button) GetFallbackUrl() string {
-	if x != nil && x.FallbackUrl != nil {
-		return *x.FallbackUrl
+	if x != nil {
+		return x.FallbackUrl
 	}
 	return ""
 }
 
 func (x *Button) GetWebviewShareButton() string {
-	if x != nil && x.WebviewShareButton != nil {
-		return *x.WebviewShareButton
+	if x != nil {
+		return x.WebviewShareButton
 	}
 	return ""
 }
 
+func (x *Button) GetExpiresInDays() int64 {
+	if x != nil {
+		return x.ExpiresInDays
+	}
+	return 0
+}
+
 type FbRead struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Watermark     *int64                 `protobuf:"varint,2,opt,name=watermark,proto3,oneof" json:"watermark,omitempty"`
-	Seq           *int32                 `protobuf:"varint,3,opt,name=seq,proto3,oneof" json:"seq,omitempty"`
+	Watermark     int64                  `protobuf:"varint,2,opt,name=watermark,proto3" json:"watermark,omitempty"`
+	Seq           int32                  `protobuf:"varint,3,opt,name=seq,proto3" json:"seq,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbRead) Reset() {
 	*x = FbRead{}
-	mi := &file_fabikon_proto_msgTypes[34]
+	mi := &file_fabikon_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3048,7 +3420,7 @@ func (x *FbRead) String() string {
 func (*FbRead) ProtoMessage() {}
 
 func (x *FbRead) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[34]
+	mi := &file_fabikon_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3061,19 +3433,19 @@ func (x *FbRead) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbRead.ProtoReflect.Descriptor instead.
 func (*FbRead) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{34}
+	return file_fabikon_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *FbRead) GetWatermark() int64 {
-	if x != nil && x.Watermark != nil {
-		return *x.Watermark
+	if x != nil {
+		return x.Watermark
 	}
 	return 0
 }
 
 func (x *FbRead) GetSeq() int32 {
-	if x != nil && x.Seq != nil {
-		return *x.Seq
+	if x != nil {
+		return x.Seq
 	}
 	return 0
 }
@@ -3081,7 +3453,7 @@ func (x *FbRead) GetSeq() int32 {
 type FbDelivery struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Mids          []string               `protobuf:"bytes,2,rep,name=mids,proto3" json:"mids,omitempty"`
-	Watermark     *int64                 `protobuf:"varint,3,opt,name=watermark,proto3,oneof" json:"watermark,omitempty"`
+	Watermark     int64                  `protobuf:"varint,3,opt,name=watermark,proto3" json:"watermark,omitempty"`
 	Seq           *int32                 `protobuf:"varint,4,opt,name=seq,proto3,oneof" json:"seq,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3089,7 +3461,7 @@ type FbDelivery struct {
 
 func (x *FbDelivery) Reset() {
 	*x = FbDelivery{}
-	mi := &file_fabikon_proto_msgTypes[35]
+	mi := &file_fabikon_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3101,7 +3473,7 @@ func (x *FbDelivery) String() string {
 func (*FbDelivery) ProtoMessage() {}
 
 func (x *FbDelivery) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[35]
+	mi := &file_fabikon_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3114,7 +3486,7 @@ func (x *FbDelivery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbDelivery.ProtoReflect.Descriptor instead.
 func (*FbDelivery) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{35}
+	return file_fabikon_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *FbDelivery) GetMids() []string {
@@ -3125,8 +3497,8 @@ func (x *FbDelivery) GetMids() []string {
 }
 
 func (x *FbDelivery) GetWatermark() int64 {
-	if x != nil && x.Watermark != nil {
-		return *x.Watermark
+	if x != nil {
+		return x.Watermark
 	}
 	return 0
 }
@@ -3140,15 +3512,15 @@ func (x *FbDelivery) GetSeq() int32 {
 
 type FbSendResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RecipientId   *string                `protobuf:"bytes,2,opt,name=recipient_id,json=recipientId,proto3,oneof" json:"recipient_id,omitempty"`
-	MessageId     *string                `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3,oneof" json:"message_id,omitempty"`
+	RecipientId   string                 `protobuf:"bytes,2,opt,name=recipient_id,json=recipientId,proto3" json:"recipient_id,omitempty"`
+	MessageId     string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbSendResponse) Reset() {
 	*x = FbSendResponse{}
-	mi := &file_fabikon_proto_msgTypes[36]
+	mi := &file_fabikon_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3160,7 +3532,7 @@ func (x *FbSendResponse) String() string {
 func (*FbSendResponse) ProtoMessage() {}
 
 func (x *FbSendResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[36]
+	mi := &file_fabikon_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3173,38 +3545,38 @@ func (x *FbSendResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbSendResponse.ProtoReflect.Descriptor instead.
 func (*FbSendResponse) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{36}
+	return file_fabikon_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *FbSendResponse) GetRecipientId() string {
-	if x != nil && x.RecipientId != nil {
-		return *x.RecipientId
+	if x != nil {
+		return x.RecipientId
 	}
 	return ""
 }
 
 func (x *FbSendResponse) GetMessageId() string {
-	if x != nil && x.MessageId != nil {
-		return *x.MessageId
+	if x != nil {
+		return x.MessageId
 	}
 	return ""
 }
 
 type Conversation struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	PageId        *string                `protobuf:"bytes,4,opt,name=page_id,json=pageId,proto3,oneof" json:"page_id,omitempty"`
-	Created       *int64                 `protobuf:"varint,5,opt,name=created,proto3,oneof" json:"created,omitempty"`
-	Fbuserid      *string                `protobuf:"bytes,6,opt,name=fbuserid,proto3,oneof" json:"fbuserid,omitempty"`
-	Sbuserid      *string                `protobuf:"bytes,7,opt,name=sbuserid,proto3,oneof" json:"sbuserid,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	PageId        string                 `protobuf:"bytes,4,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
+	Created       int64                  `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	Fbuserid      string                 `protobuf:"bytes,6,opt,name=fbuserid,proto3" json:"fbuserid,omitempty"`
+	Sbuserid      string                 `protobuf:"bytes,7,opt,name=sbuserid,proto3" json:"sbuserid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Conversation) Reset() {
 	*x = Conversation{}
-	mi := &file_fabikon_proto_msgTypes[37]
+	mi := &file_fabikon_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3216,7 +3588,7 @@ func (x *Conversation) String() string {
 func (*Conversation) ProtoMessage() {}
 
 func (x *Conversation) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[37]
+	mi := &file_fabikon_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3229,61 +3601,61 @@ func (x *Conversation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Conversation.ProtoReflect.Descriptor instead.
 func (*Conversation) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{37}
+	return file_fabikon_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *Conversation) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
 
 func (x *Conversation) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *Conversation) GetPageId() string {
-	if x != nil && x.PageId != nil {
-		return *x.PageId
+	if x != nil {
+		return x.PageId
 	}
 	return ""
 }
 
 func (x *Conversation) GetCreated() int64 {
-	if x != nil && x.Created != nil {
-		return *x.Created
+	if x != nil {
+		return x.Created
 	}
 	return 0
 }
 
 func (x *Conversation) GetFbuserid() string {
-	if x != nil && x.Fbuserid != nil {
-		return *x.Fbuserid
+	if x != nil {
+		return x.Fbuserid
 	}
 	return ""
 }
 
 func (x *Conversation) GetSbuserid() string {
-	if x != nil && x.Sbuserid != nil {
-		return *x.Sbuserid
+	if x != nil {
+		return x.Sbuserid
 	}
 	return ""
 }
 
 type FbPagePicture struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *FbPagePictureData     `protobuf:"bytes,2,opt,name=data,proto3,oneof" json:"data,omitempty"`
+	Data          *FbPagePictureData     `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPagePicture) Reset() {
 	*x = FbPagePicture{}
-	mi := &file_fabikon_proto_msgTypes[38]
+	mi := &file_fabikon_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3295,7 +3667,7 @@ func (x *FbPagePicture) String() string {
 func (*FbPagePicture) ProtoMessage() {}
 
 func (x *FbPagePicture) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[38]
+	mi := &file_fabikon_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3308,7 +3680,7 @@ func (x *FbPagePicture) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPagePicture.ProtoReflect.Descriptor instead.
 func (*FbPagePicture) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{38}
+	return file_fabikon_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *FbPagePicture) GetData() *FbPagePictureData {
@@ -3320,14 +3692,14 @@ func (x *FbPagePicture) GetData() *FbPagePictureData {
 
 type FbPagePictureData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           *string                `protobuf:"bytes,2,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPagePictureData) Reset() {
 	*x = FbPagePictureData{}
-	mi := &file_fabikon_proto_msgTypes[39]
+	mi := &file_fabikon_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3339,7 +3711,7 @@ func (x *FbPagePictureData) String() string {
 func (*FbPagePictureData) ProtoMessage() {}
 
 func (x *FbPagePictureData) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[39]
+	mi := &file_fabikon_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3352,31 +3724,31 @@ func (x *FbPagePictureData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPagePictureData.ProtoReflect.Descriptor instead.
 func (*FbPagePictureData) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{39}
+	return file_fabikon_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *FbPagePictureData) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 type FbPageEntry struct {
 	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Name                     *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Picture                  *FbPagePicture         `protobuf:"bytes,3,opt,name=picture,proto3,oneof" json:"picture,omitempty"`
-	Id                       *string                `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	AccessToken              *string                `protobuf:"bytes,6,opt,name=access_token,json=accessToken,proto3,oneof" json:"access_token,omitempty"`
-	InstagramBusinessAccount *InstagramUser         `protobuf:"bytes,7,opt,name=instagram_business_account,json=instagramBusinessAccount,proto3,oneof" json:"instagram_business_account,omitempty"`
-	Business                 *MetaBusiness          `protobuf:"bytes,8,opt,name=business,proto3,oneof" json:"business,omitempty"`
+	Name                     string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Picture                  *FbPagePicture         `protobuf:"bytes,3,opt,name=picture,proto3" json:"picture,omitempty"`
+	Id                       string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"`
+	AccessToken              string                 `protobuf:"bytes,6,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	InstagramBusinessAccount *InstagramUser         `protobuf:"bytes,7,opt,name=instagram_business_account,json=instagramBusinessAccount,proto3" json:"instagram_business_account,omitempty"`
+	Business                 *MetaBusiness          `protobuf:"bytes,8,opt,name=business,proto3" json:"business,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
 
 func (x *FbPageEntry) Reset() {
 	*x = FbPageEntry{}
-	mi := &file_fabikon_proto_msgTypes[40]
+	mi := &file_fabikon_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3388,7 +3760,7 @@ func (x *FbPageEntry) String() string {
 func (*FbPageEntry) ProtoMessage() {}
 
 func (x *FbPageEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[40]
+	mi := &file_fabikon_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3401,12 +3773,12 @@ func (x *FbPageEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPageEntry.ProtoReflect.Descriptor instead.
 func (*FbPageEntry) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{40}
+	return file_fabikon_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *FbPageEntry) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -3419,15 +3791,15 @@ func (x *FbPageEntry) GetPicture() *FbPagePicture {
 }
 
 func (x *FbPageEntry) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbPageEntry) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
@@ -3448,15 +3820,15 @@ func (x *FbPageEntry) GetBusiness() *MetaBusiness {
 
 type FbCursors struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Before        *string                `protobuf:"bytes,2,opt,name=before,proto3,oneof" json:"before,omitempty"`
-	After         *string                `protobuf:"bytes,3,opt,name=after,proto3,oneof" json:"after,omitempty"`
+	Before        string                 `protobuf:"bytes,2,opt,name=before,proto3" json:"before,omitempty"`
+	After         string                 `protobuf:"bytes,3,opt,name=after,proto3" json:"after,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbCursors) Reset() {
 	*x = FbCursors{}
-	mi := &file_fabikon_proto_msgTypes[41]
+	mi := &file_fabikon_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3468,7 +3840,7 @@ func (x *FbCursors) String() string {
 func (*FbCursors) ProtoMessage() {}
 
 func (x *FbCursors) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[41]
+	mi := &file_fabikon_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3481,34 +3853,34 @@ func (x *FbCursors) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbCursors.ProtoReflect.Descriptor instead.
 func (*FbCursors) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{41}
+	return file_fabikon_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *FbCursors) GetBefore() string {
-	if x != nil && x.Before != nil {
-		return *x.Before
+	if x != nil {
+		return x.Before
 	}
 	return ""
 }
 
 func (x *FbCursors) GetAfter() string {
-	if x != nil && x.After != nil {
-		return *x.After
+	if x != nil {
+		return x.After
 	}
 	return ""
 }
 
 type FbPaging struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Cursors       *FbCursors             `protobuf:"bytes,2,opt,name=cursors,proto3,oneof" json:"cursors,omitempty"`
-	Next          *string                `protobuf:"bytes,3,opt,name=next,proto3,oneof" json:"next,omitempty"`
+	Cursors       *FbCursors             `protobuf:"bytes,2,opt,name=cursors,proto3" json:"cursors,omitempty"`
+	Next          string                 `protobuf:"bytes,3,opt,name=next,proto3" json:"next,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPaging) Reset() {
 	*x = FbPaging{}
-	mi := &file_fabikon_proto_msgTypes[42]
+	mi := &file_fabikon_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3520,7 +3892,7 @@ func (x *FbPaging) String() string {
 func (*FbPaging) ProtoMessage() {}
 
 func (x *FbPaging) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[42]
+	mi := &file_fabikon_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3533,7 +3905,7 @@ func (x *FbPaging) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPaging.ProtoReflect.Descriptor instead.
 func (*FbPaging) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{42}
+	return file_fabikon_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *FbPaging) GetCursors() *FbCursors {
@@ -3544,8 +3916,8 @@ func (x *FbPaging) GetCursors() *FbCursors {
 }
 
 func (x *FbPaging) GetNext() string {
-	if x != nil && x.Next != nil {
-		return *x.Next
+	if x != nil {
+		return x.Next
 	}
 	return ""
 }
@@ -3553,14 +3925,14 @@ func (x *FbPaging) GetNext() string {
 type FbPageRet struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []*FbPageEntry         `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
-	Paging        *FbPaging              `protobuf:"bytes,3,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	Paging        *FbPaging              `protobuf:"bytes,3,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPageRet) Reset() {
 	*x = FbPageRet{}
-	mi := &file_fabikon_proto_msgTypes[43]
+	mi := &file_fabikon_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3572,7 +3944,7 @@ func (x *FbPageRet) String() string {
 func (*FbPageRet) ProtoMessage() {}
 
 func (x *FbPageRet) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[43]
+	mi := &file_fabikon_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3585,7 +3957,7 @@ func (x *FbPageRet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPageRet.ProtoReflect.Descriptor instead.
 func (*FbPageRet) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{43}
+	return file_fabikon_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *FbPageRet) GetData() []*FbPageEntry {
@@ -3604,17 +3976,17 @@ func (x *FbPageRet) GetPaging() *FbPaging {
 
 type FbProfilePicData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Height        *int64                 `protobuf:"varint,2,opt,name=height,proto3,oneof" json:"height,omitempty"`
-	Width         *int64                 `protobuf:"varint,3,opt,name=width,proto3,oneof" json:"width,omitempty"`
-	IsSilhouette  *bool                  `protobuf:"varint,4,opt,name=is_silhouette,json=isSilhouette,proto3,oneof" json:"is_silhouette,omitempty"`
-	Url           *string                `protobuf:"bytes,5,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	Height        int64                  `protobuf:"varint,2,opt,name=height,proto3" json:"height,omitempty"`
+	Width         int64                  `protobuf:"varint,3,opt,name=width,proto3" json:"width,omitempty"`
+	IsSilhouette  bool                   `protobuf:"varint,4,opt,name=is_silhouette,json=isSilhouette,proto3" json:"is_silhouette,omitempty"`
+	Url           string                 `protobuf:"bytes,5,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbProfilePicData) Reset() {
 	*x = FbProfilePicData{}
-	mi := &file_fabikon_proto_msgTypes[44]
+	mi := &file_fabikon_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3626,7 +3998,7 @@ func (x *FbProfilePicData) String() string {
 func (*FbProfilePicData) ProtoMessage() {}
 
 func (x *FbProfilePicData) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[44]
+	mi := &file_fabikon_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3639,47 +4011,47 @@ func (x *FbProfilePicData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProfilePicData.ProtoReflect.Descriptor instead.
 func (*FbProfilePicData) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{44}
+	return file_fabikon_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *FbProfilePicData) GetHeight() int64 {
-	if x != nil && x.Height != nil {
-		return *x.Height
+	if x != nil {
+		return x.Height
 	}
 	return 0
 }
 
 func (x *FbProfilePicData) GetWidth() int64 {
-	if x != nil && x.Width != nil {
-		return *x.Width
+	if x != nil {
+		return x.Width
 	}
 	return 0
 }
 
 func (x *FbProfilePicData) GetIsSilhouette() bool {
-	if x != nil && x.IsSilhouette != nil {
-		return *x.IsSilhouette
+	if x != nil {
+		return x.IsSilhouette
 	}
 	return false
 }
 
 func (x *FbProfilePicData) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 type FbProfilePic struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *FbProfilePicData      `protobuf:"bytes,2,opt,name=Data,proto3,oneof" json:"Data,omitempty"`
+	Data          *FbProfilePicData      `protobuf:"bytes,2,opt,name=Data,proto3" json:"Data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbProfilePic) Reset() {
 	*x = FbProfilePic{}
-	mi := &file_fabikon_proto_msgTypes[45]
+	mi := &file_fabikon_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3691,7 +4063,7 @@ func (x *FbProfilePic) String() string {
 func (*FbProfilePic) ProtoMessage() {}
 
 func (x *FbProfilePic) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[45]
+	mi := &file_fabikon_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3704,7 +4076,7 @@ func (x *FbProfilePic) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProfilePic.ProtoReflect.Descriptor instead.
 func (*FbProfilePic) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{45}
+	return file_fabikon_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *FbProfilePic) GetData() *FbProfilePicData {
@@ -3716,23 +4088,23 @@ func (x *FbProfilePic) GetData() *FbProfilePicData {
 
 type FacebookUser struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FirstName     *string                `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
-	MiddleName    *string                `protobuf:"bytes,3,opt,name=middle_name,json=middleName,proto3,oneof" json:"middle_name,omitempty"`
-	LastName      *string                `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
-	ProfilePic    *string                `protobuf:"bytes,5,opt,name=profile_pic,json=profilePic,proto3,oneof" json:"profile_pic,omitempty"`
-	Locale        *string                `protobuf:"bytes,6,opt,name=locale,proto3,oneof" json:"locale,omitempty"`
-	Timezone      *float32               `protobuf:"fixed32,7,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
-	Gender        *string                `protobuf:"bytes,8,opt,name=gender,proto3,oneof" json:"gender,omitempty"`
-	Picture       *FbProfilePic          `protobuf:"bytes,9,opt,name=picture,proto3,oneof" json:"picture,omitempty"`
-	Email         *string                `protobuf:"bytes,10,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	Name          *string                `protobuf:"bytes,11,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	FirstName     string                 `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	MiddleName    string                 `protobuf:"bytes,3,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
+	LastName      string                 `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	ProfilePic    string                 `protobuf:"bytes,5,opt,name=profile_pic,json=profilePic,proto3" json:"profile_pic,omitempty"`
+	Locale        string                 `protobuf:"bytes,6,opt,name=locale,proto3" json:"locale,omitempty"`
+	Timezone      float32                `protobuf:"fixed32,7,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Gender        string                 `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender,omitempty"`
+	Picture       *FbProfilePic          `protobuf:"bytes,9,opt,name=picture,proto3" json:"picture,omitempty"`
+	Email         string                 `protobuf:"bytes,10,opt,name=email,proto3" json:"email,omitempty"`
+	Name          string                 `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FacebookUser) Reset() {
 	*x = FacebookUser{}
-	mi := &file_fabikon_proto_msgTypes[46]
+	mi := &file_fabikon_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3744,7 +4116,7 @@ func (x *FacebookUser) String() string {
 func (*FacebookUser) ProtoMessage() {}
 
 func (x *FacebookUser) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[46]
+	mi := &file_fabikon_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3757,54 +4129,54 @@ func (x *FacebookUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookUser.ProtoReflect.Descriptor instead.
 func (*FacebookUser) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{46}
+	return file_fabikon_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *FacebookUser) GetFirstName() string {
-	if x != nil && x.FirstName != nil {
-		return *x.FirstName
+	if x != nil {
+		return x.FirstName
 	}
 	return ""
 }
 
 func (x *FacebookUser) GetMiddleName() string {
-	if x != nil && x.MiddleName != nil {
-		return *x.MiddleName
+	if x != nil {
+		return x.MiddleName
 	}
 	return ""
 }
 
 func (x *FacebookUser) GetLastName() string {
-	if x != nil && x.LastName != nil {
-		return *x.LastName
+	if x != nil {
+		return x.LastName
 	}
 	return ""
 }
 
 func (x *FacebookUser) GetProfilePic() string {
-	if x != nil && x.ProfilePic != nil {
-		return *x.ProfilePic
+	if x != nil {
+		return x.ProfilePic
 	}
 	return ""
 }
 
 func (x *FacebookUser) GetLocale() string {
-	if x != nil && x.Locale != nil {
-		return *x.Locale
+	if x != nil {
+		return x.Locale
 	}
 	return ""
 }
 
 func (x *FacebookUser) GetTimezone() float32 {
-	if x != nil && x.Timezone != nil {
-		return *x.Timezone
+	if x != nil {
+		return x.Timezone
 	}
 	return 0
 }
 
 func (x *FacebookUser) GetGender() string {
-	if x != nil && x.Gender != nil {
-		return *x.Gender
+	if x != nil {
+		return x.Gender
 	}
 	return ""
 }
@@ -3817,31 +4189,31 @@ func (x *FacebookUser) GetPicture() *FbProfilePic {
 }
 
 func (x *FacebookUser) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
 
 func (x *FacebookUser) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 type FacebookGuestUser struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Picture       *string                `protobuf:"bytes,9,opt,name=picture,proto3,oneof" json:"picture,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Picture       string                 `protobuf:"bytes,9,opt,name=picture,proto3" json:"picture,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FacebookGuestUser) Reset() {
 	*x = FacebookGuestUser{}
-	mi := &file_fabikon_proto_msgTypes[47]
+	mi := &file_fabikon_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3853,7 +4225,7 @@ func (x *FacebookGuestUser) String() string {
 func (*FacebookGuestUser) ProtoMessage() {}
 
 func (x *FacebookGuestUser) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[47]
+	mi := &file_fabikon_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3866,52 +4238,52 @@ func (x *FacebookGuestUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookGuestUser.ProtoReflect.Descriptor instead.
 func (*FacebookGuestUser) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{47}
+	return file_fabikon_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *FacebookGuestUser) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FacebookGuestUser) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *FacebookGuestUser) GetPicture() string {
-	if x != nil && x.Picture != nil {
-		return *x.Picture
+	if x != nil {
+		return x.Picture
 	}
 	return ""
 }
 
 type InstagramUser struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Id                   *string                `protobuf:"bytes,4,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Username             *string                `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty"`
-	ProfilePictureUrl    *string                `protobuf:"bytes,6,opt,name=profile_picture_url,json=profilePictureUrl,proto3,oneof" json:"profile_picture_url,omitempty"`
-	Name                 *string                `protobuf:"bytes,7,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	IgId                 *int64                 `protobuf:"varint,8,opt,name=ig_id,json=igId,proto3,oneof" json:"ig_id,omitempty"`
-	FollowersCount       *int64                 `protobuf:"varint,9,opt,name=followers_count,json=followersCount,proto3,oneof" json:"followers_count,omitempty"`
-	FollowsCount         *int64                 `protobuf:"varint,10,opt,name=follows_count,json=followsCount,proto3,oneof" json:"follows_count,omitempty"`
-	MediaCount           *int64                 `protobuf:"varint,11,opt,name=media_count,json=mediaCount,proto3,oneof" json:"media_count,omitempty"`
-	Website              *string                `protobuf:"bytes,12,opt,name=website,proto3,oneof" json:"website,omitempty"`
-	IsVerifiedUser       *bool                  `protobuf:"varint,13,opt,name=is_verified_user,json=isVerifiedUser,proto3,oneof" json:"is_verified_user,omitempty"`
-	IsUserFollowBusiness *bool                  `protobuf:"varint,14,opt,name=is_user_follow_business,json=isUserFollowBusiness,proto3,oneof" json:"is_user_follow_business,omitempty"`
-	IsBusinessFollowUser *bool                  `protobuf:"varint,15,opt,name=is_business_follow_user,json=isBusinessFollowUser,proto3,oneof" json:"is_business_follow_user,omitempty"`
-	ProfilePic           *string                `protobuf:"bytes,16,opt,name=profile_pic,json=profilePic,proto3,oneof" json:"profile_pic,omitempty"`
+	Id                   string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	Username             string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	ProfilePictureUrl    string                 `protobuf:"bytes,6,opt,name=profile_picture_url,json=profilePictureUrl,proto3" json:"profile_picture_url,omitempty"`
+	Name                 string                 `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	IgId                 int64                  `protobuf:"varint,8,opt,name=ig_id,json=igId,proto3" json:"ig_id,omitempty"`
+	FollowersCount       int64                  `protobuf:"varint,9,opt,name=followers_count,json=followersCount,proto3" json:"followers_count,omitempty"`
+	FollowsCount         int64                  `protobuf:"varint,10,opt,name=follows_count,json=followsCount,proto3" json:"follows_count,omitempty"`
+	MediaCount           int64                  `protobuf:"varint,11,opt,name=media_count,json=mediaCount,proto3" json:"media_count,omitempty"`
+	Website              string                 `protobuf:"bytes,12,opt,name=website,proto3" json:"website,omitempty"`
+	IsVerifiedUser       bool                   `protobuf:"varint,13,opt,name=is_verified_user,json=isVerifiedUser,proto3" json:"is_verified_user,omitempty"`
+	IsUserFollowBusiness bool                   `protobuf:"varint,14,opt,name=is_user_follow_business,json=isUserFollowBusiness,proto3" json:"is_user_follow_business,omitempty"`
+	IsBusinessFollowUser bool                   `protobuf:"varint,15,opt,name=is_business_follow_user,json=isBusinessFollowUser,proto3" json:"is_business_follow_user,omitempty"`
+	ProfilePic           string                 `protobuf:"bytes,16,opt,name=profile_pic,json=profilePic,proto3" json:"profile_pic,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
 
 func (x *InstagramUser) Reset() {
 	*x = InstagramUser{}
-	mi := &file_fabikon_proto_msgTypes[48]
+	mi := &file_fabikon_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3923,7 +4295,7 @@ func (x *InstagramUser) String() string {
 func (*InstagramUser) ProtoMessage() {}
 
 func (x *InstagramUser) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[48]
+	mi := &file_fabikon_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3936,115 +4308,115 @@ func (x *InstagramUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InstagramUser.ProtoReflect.Descriptor instead.
 func (*InstagramUser) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{48}
+	return file_fabikon_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *InstagramUser) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *InstagramUser) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
+	if x != nil {
+		return x.Username
 	}
 	return ""
 }
 
 func (x *InstagramUser) GetProfilePictureUrl() string {
-	if x != nil && x.ProfilePictureUrl != nil {
-		return *x.ProfilePictureUrl
+	if x != nil {
+		return x.ProfilePictureUrl
 	}
 	return ""
 }
 
 func (x *InstagramUser) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *InstagramUser) GetIgId() int64 {
-	if x != nil && x.IgId != nil {
-		return *x.IgId
+	if x != nil {
+		return x.IgId
 	}
 	return 0
 }
 
 func (x *InstagramUser) GetFollowersCount() int64 {
-	if x != nil && x.FollowersCount != nil {
-		return *x.FollowersCount
+	if x != nil {
+		return x.FollowersCount
 	}
 	return 0
 }
 
 func (x *InstagramUser) GetFollowsCount() int64 {
-	if x != nil && x.FollowsCount != nil {
-		return *x.FollowsCount
+	if x != nil {
+		return x.FollowsCount
 	}
 	return 0
 }
 
 func (x *InstagramUser) GetMediaCount() int64 {
-	if x != nil && x.MediaCount != nil {
-		return *x.MediaCount
+	if x != nil {
+		return x.MediaCount
 	}
 	return 0
 }
 
 func (x *InstagramUser) GetWebsite() string {
-	if x != nil && x.Website != nil {
-		return *x.Website
+	if x != nil {
+		return x.Website
 	}
 	return ""
 }
 
 func (x *InstagramUser) GetIsVerifiedUser() bool {
-	if x != nil && x.IsVerifiedUser != nil {
-		return *x.IsVerifiedUser
+	if x != nil {
+		return x.IsVerifiedUser
 	}
 	return false
 }
 
 func (x *InstagramUser) GetIsUserFollowBusiness() bool {
-	if x != nil && x.IsUserFollowBusiness != nil {
-		return *x.IsUserFollowBusiness
+	if x != nil {
+		return x.IsUserFollowBusiness
 	}
 	return false
 }
 
 func (x *InstagramUser) GetIsBusinessFollowUser() bool {
-	if x != nil && x.IsBusinessFollowUser != nil {
-		return *x.IsBusinessFollowUser
+	if x != nil {
+		return x.IsBusinessFollowUser
 	}
 	return false
 }
 
 func (x *InstagramUser) GetProfilePic() string {
-	if x != nil && x.ProfilePic != nil {
-		return *x.ProfilePic
+	if x != nil {
+		return x.ProfilePic
 	}
 	return ""
 }
 
 type Fb2SbEvent struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Fbmid           *string                `protobuf:"bytes,2,opt,name=fbmid,proto3,oneof" json:"fbmid,omitempty"`
-	AccountId       *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
-	ConversationId  *string                `protobuf:"bytes,4,opt,name=conversation_id,json=conversationId,proto3,oneof" json:"conversation_id,omitempty"`
-	Sbmid           *string                `protobuf:"bytes,5,opt,name=sbmid,proto3,oneof" json:"sbmid,omitempty"`
-	PageId          *string                `protobuf:"bytes,6,opt,name=page_id,json=pageId,proto3,oneof" json:"page_id,omitempty"`
-	AttachmentIndex *int32                 `protobuf:"varint,7,opt,name=attachment_index,json=attachmentIndex,proto3,oneof" json:"attachment_index,omitempty"` // subiz
+	Fbmid           string                 `protobuf:"bytes,2,opt,name=fbmid,proto3" json:"fbmid,omitempty"`
+	AccountId       string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	ConversationId  string                 `protobuf:"bytes,4,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	Sbmid           string                 `protobuf:"bytes,5,opt,name=sbmid,proto3" json:"sbmid,omitempty"`
+	PageId          string                 `protobuf:"bytes,6,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
+	AttachmentIndex int32                  `protobuf:"varint,7,opt,name=attachment_index,json=attachmentIndex,proto3" json:"attachment_index,omitempty"` // subiz
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Fb2SbEvent) Reset() {
 	*x = Fb2SbEvent{}
-	mi := &file_fabikon_proto_msgTypes[49]
+	mi := &file_fabikon_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4056,7 +4428,7 @@ func (x *Fb2SbEvent) String() string {
 func (*Fb2SbEvent) ProtoMessage() {}
 
 func (x *Fb2SbEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[49]
+	mi := &file_fabikon_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4069,63 +4441,63 @@ func (x *Fb2SbEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Fb2SbEvent.ProtoReflect.Descriptor instead.
 func (*Fb2SbEvent) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{49}
+	return file_fabikon_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *Fb2SbEvent) GetFbmid() string {
-	if x != nil && x.Fbmid != nil {
-		return *x.Fbmid
+	if x != nil {
+		return x.Fbmid
 	}
 	return ""
 }
 
 func (x *Fb2SbEvent) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
 
 func (x *Fb2SbEvent) GetConversationId() string {
-	if x != nil && x.ConversationId != nil {
-		return *x.ConversationId
+	if x != nil {
+		return x.ConversationId
 	}
 	return ""
 }
 
 func (x *Fb2SbEvent) GetSbmid() string {
-	if x != nil && x.Sbmid != nil {
-		return *x.Sbmid
+	if x != nil {
+		return x.Sbmid
 	}
 	return ""
 }
 
 func (x *Fb2SbEvent) GetPageId() string {
-	if x != nil && x.PageId != nil {
-		return *x.PageId
+	if x != nil {
+		return x.PageId
 	}
 	return ""
 }
 
 func (x *Fb2SbEvent) GetAttachmentIndex() int32 {
-	if x != nil && x.AttachmentIndex != nil {
-		return *x.AttachmentIndex
+	if x != nil {
+		return x.AttachmentIndex
 	}
 	return 0
 }
 
 type LongLivedAccessToken struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   *string                `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3,oneof" json:"access_token,omitempty"`
-	TokenType     *string                `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3,oneof" json:"token_type,omitempty"`
-	ExpiresIn     *int32                 `protobuf:"varint,5,opt,name=expires_in,json=expiresIn,proto3,oneof" json:"expires_in,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	TokenType     string                 `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
+	ExpiresIn     int32                  `protobuf:"varint,5,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *LongLivedAccessToken) Reset() {
 	*x = LongLivedAccessToken{}
-	mi := &file_fabikon_proto_msgTypes[50]
+	mi := &file_fabikon_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4137,7 +4509,7 @@ func (x *LongLivedAccessToken) String() string {
 func (*LongLivedAccessToken) ProtoMessage() {}
 
 func (x *LongLivedAccessToken) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[50]
+	mi := &file_fabikon_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4150,40 +4522,40 @@ func (x *LongLivedAccessToken) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LongLivedAccessToken.ProtoReflect.Descriptor instead.
 func (*LongLivedAccessToken) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{50}
+	return file_fabikon_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *LongLivedAccessToken) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *LongLivedAccessToken) GetTokenType() string {
-	if x != nil && x.TokenType != nil {
-		return *x.TokenType
+	if x != nil {
+		return x.TokenType
 	}
 	return ""
 }
 
 func (x *LongLivedAccessToken) GetExpiresIn() int32 {
-	if x != nil && x.ExpiresIn != nil {
-		return *x.ExpiresIn
+	if x != nil {
+		return x.ExpiresIn
 	}
 	return 0
 }
 
 type SubscribeRet struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       *bool                  `protobuf:"varint,2,opt,name=success,proto3,oneof" json:"success,omitempty"`
+	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SubscribeRet) Reset() {
 	*x = SubscribeRet{}
-	mi := &file_fabikon_proto_msgTypes[51]
+	mi := &file_fabikon_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4195,7 +4567,7 @@ func (x *SubscribeRet) String() string {
 func (*SubscribeRet) ProtoMessage() {}
 
 func (x *SubscribeRet) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[51]
+	mi := &file_fabikon_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4208,12 +4580,12 @@ func (x *SubscribeRet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeRet.ProtoReflect.Descriptor instead.
 func (*SubscribeRet) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{51}
+	return file_fabikon_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *SubscribeRet) GetSuccess() bool {
-	if x != nil && x.Success != nil {
-		return *x.Success
+	if x != nil {
+		return x.Success
 	}
 	return false
 }
@@ -4227,7 +4599,7 @@ type SubscribeAppRequest struct {
 
 func (x *SubscribeAppRequest) Reset() {
 	*x = SubscribeAppRequest{}
-	mi := &file_fabikon_proto_msgTypes[52]
+	mi := &file_fabikon_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4239,7 +4611,7 @@ func (x *SubscribeAppRequest) String() string {
 func (*SubscribeAppRequest) ProtoMessage() {}
 
 func (x *SubscribeAppRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[52]
+	mi := &file_fabikon_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4252,7 +4624,7 @@ func (x *SubscribeAppRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeAppRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeAppRequest) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{52}
+	return file_fabikon_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *SubscribeAppRequest) GetSubscribedFields() []string {
@@ -4264,18 +4636,18 @@ func (x *SubscribeAppRequest) GetSubscribedFields() []string {
 
 type Error struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *int32                 `protobuf:"varint,3,opt,name=code,proto3,oneof" json:"code,omitempty"`
-	ErrorSubcode  *int32                 `protobuf:"varint,4,opt,name=error_subcode,json=errorSubcode,proto3,oneof" json:"error_subcode,omitempty"`
-	FbtraceId     *string                `protobuf:"bytes,5,opt,name=fbtrace_id,json=fbtraceId,proto3,oneof" json:"fbtrace_id,omitempty"`
-	Message       *string                `protobuf:"bytes,6,opt,name=message,proto3,oneof" json:"message,omitempty"`
-	Type          *string                `protobuf:"bytes,7,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Code          int32                  `protobuf:"varint,3,opt,name=code,proto3" json:"code,omitempty"`
+	ErrorSubcode  int32                  `protobuf:"varint,4,opt,name=error_subcode,json=errorSubcode,proto3" json:"error_subcode,omitempty"`
+	FbtraceId     string                 `protobuf:"bytes,5,opt,name=fbtrace_id,json=fbtraceId,proto3" json:"fbtrace_id,omitempty"`
+	Message       string                 `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	Type          string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Error) Reset() {
 	*x = Error{}
-	mi := &file_fabikon_proto_msgTypes[53]
+	mi := &file_fabikon_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4287,7 +4659,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[53]
+	mi := &file_fabikon_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4300,54 +4672,54 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{53}
+	return file_fabikon_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *Error) GetCode() int32 {
-	if x != nil && x.Code != nil {
-		return *x.Code
+	if x != nil {
+		return x.Code
 	}
 	return 0
 }
 
 func (x *Error) GetErrorSubcode() int32 {
-	if x != nil && x.ErrorSubcode != nil {
-		return *x.ErrorSubcode
+	if x != nil {
+		return x.ErrorSubcode
 	}
 	return 0
 }
 
 func (x *Error) GetFbtraceId() string {
-	if x != nil && x.FbtraceId != nil {
-		return *x.FbtraceId
+	if x != nil {
+		return x.FbtraceId
 	}
 	return ""
 }
 
 func (x *Error) GetMessage() string {
-	if x != nil && x.Message != nil {
-		return *x.Message
+	if x != nil {
+		return x.Message
 	}
 	return ""
 }
 
 func (x *Error) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
 
 type FbResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Error         *Error                 `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Error         *Error                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbResponse) Reset() {
 	*x = FbResponse{}
-	mi := &file_fabikon_proto_msgTypes[54]
+	mi := &file_fabikon_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4359,7 +4731,7 @@ func (x *FbResponse) String() string {
 func (*FbResponse) ProtoMessage() {}
 
 func (x *FbResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[54]
+	mi := &file_fabikon_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4372,7 +4744,7 @@ func (x *FbResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbResponse.ProtoReflect.Descriptor instead.
 func (*FbResponse) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{54}
+	return file_fabikon_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *FbResponse) GetError() *Error {
@@ -4384,18 +4756,18 @@ func (x *FbResponse) GetError() *Error {
 
 type FbProductItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	ImageUrl      *string                `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3,oneof" json:"image_url,omitempty"`
-	Name          *string                `protobuf:"bytes,5,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Price         *string                `protobuf:"bytes,6,opt,name=price,proto3,oneof" json:"price,omitempty"`
-	Url           *string                `protobuf:"bytes,7,opt,name=url,proto3,oneof" json:"url,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Price         string                 `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty"`
+	Url           string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbProductItem) Reset() {
 	*x = FbProductItem{}
-	mi := &file_fabikon_proto_msgTypes[55]
+	mi := &file_fabikon_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4407,7 +4779,7 @@ func (x *FbProductItem) String() string {
 func (*FbProductItem) ProtoMessage() {}
 
 func (x *FbProductItem) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[55]
+	mi := &file_fabikon_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4420,55 +4792,55 @@ func (x *FbProductItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProductItem.ProtoReflect.Descriptor instead.
 func (*FbProductItem) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{55}
+	return file_fabikon_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *FbProductItem) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbProductItem) GetImageUrl() string {
-	if x != nil && x.ImageUrl != nil {
-		return *x.ImageUrl
+	if x != nil {
+		return x.ImageUrl
 	}
 	return ""
 }
 
 func (x *FbProductItem) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *FbProductItem) GetPrice() string {
-	if x != nil && x.Price != nil {
-		return *x.Price
+	if x != nil {
+		return x.Price
 	}
 	return ""
 }
 
 func (x *FbProductItem) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 type FbPage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"` // pageid
-	Conversations *FbConversations       `protobuf:"bytes,4,opt,name=conversations,proto3,oneof" json:"conversations,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"` // pageid
+	Conversations *FbConversations       `protobuf:"bytes,4,opt,name=conversations,proto3" json:"conversations,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbPage) Reset() {
 	*x = FbPage{}
-	mi := &file_fabikon_proto_msgTypes[56]
+	mi := &file_fabikon_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4480,7 +4852,7 @@ func (x *FbPage) String() string {
 func (*FbPage) ProtoMessage() {}
 
 func (x *FbPage) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[56]
+	mi := &file_fabikon_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4493,12 +4865,12 @@ func (x *FbPage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbPage.ProtoReflect.Descriptor instead.
 func (*FbPage) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{56}
+	return file_fabikon_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *FbPage) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
@@ -4512,16 +4884,16 @@ func (x *FbPage) GetConversations() *FbConversations {
 
 type FbConversations struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Error         *Error                 `protobuf:"bytes,1,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Error         *Error                 `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 	Data          []*FbConversation      `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
-	Paging        *FbPaging              `protobuf:"bytes,4,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	Paging        *FbPaging              `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbConversations) Reset() {
 	*x = FbConversations{}
-	mi := &file_fabikon_proto_msgTypes[57]
+	mi := &file_fabikon_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4533,7 +4905,7 @@ func (x *FbConversations) String() string {
 func (*FbConversations) ProtoMessage() {}
 
 func (x *FbConversations) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[57]
+	mi := &file_fabikon_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4546,7 +4918,7 @@ func (x *FbConversations) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbConversations.ProtoReflect.Descriptor instead.
 func (*FbConversations) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{57}
+	return file_fabikon_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *FbConversations) GetError() *Error {
@@ -4572,16 +4944,16 @@ func (x *FbConversations) GetPaging() *FbPaging {
 
 type FbLeads struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Error         *Error                 `protobuf:"bytes,1,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Error         *Error                 `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 	Data          []*FbLead              `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
-	Paging        *FbPaging              `protobuf:"bytes,4,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	Paging        *FbPaging              `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbLeads) Reset() {
 	*x = FbLeads{}
-	mi := &file_fabikon_proto_msgTypes[58]
+	mi := &file_fabikon_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4593,7 +4965,7 @@ func (x *FbLeads) String() string {
 func (*FbLeads) ProtoMessage() {}
 
 func (x *FbLeads) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[58]
+	mi := &file_fabikon_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4606,7 +4978,7 @@ func (x *FbLeads) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbLeads.ProtoReflect.Descriptor instead.
 func (*FbLeads) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{58}
+	return file_fabikon_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *FbLeads) GetError() *Error {
@@ -4632,7 +5004,7 @@ func (x *FbLeads) GetPaging() *FbPaging {
 
 type FbFieldData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Values        []string               `protobuf:"bytes,4,rep,name=values,proto3" json:"values,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4640,7 +5012,7 @@ type FbFieldData struct {
 
 func (x *FbFieldData) Reset() {
 	*x = FbFieldData{}
-	mi := &file_fabikon_proto_msgTypes[59]
+	mi := &file_fabikon_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4652,7 +5024,7 @@ func (x *FbFieldData) String() string {
 func (*FbFieldData) ProtoMessage() {}
 
 func (x *FbFieldData) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[59]
+	mi := &file_fabikon_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4665,12 +5037,12 @@ func (x *FbFieldData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbFieldData.ProtoReflect.Descriptor instead.
 func (*FbFieldData) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{59}
+	return file_fabikon_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *FbFieldData) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -4684,10 +5056,10 @@ func (x *FbFieldData) GetValues() []string {
 
 type FbLead struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CreatedTime   *string                `protobuf:"bytes,10,opt,name=created_time,json=createdTime,proto3,oneof" json:"created_time,omitempty"`
-	Id            *string                `protobuf:"bytes,11,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	AdId          *string                `protobuf:"bytes,12,opt,name=ad_id,json=adId,proto3,oneof" json:"ad_id,omitempty"`
-	FormId        *string                `protobuf:"bytes,13,opt,name=form_id,json=formId,proto3,oneof" json:"form_id,omitempty"`
+	CreatedTime   string                 `protobuf:"bytes,10,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
+	Id            string                 `protobuf:"bytes,11,opt,name=id,proto3" json:"id,omitempty"`
+	AdId          string                 `protobuf:"bytes,12,opt,name=ad_id,json=adId,proto3" json:"ad_id,omitempty"`
+	FormId        string                 `protobuf:"bytes,13,opt,name=form_id,json=formId,proto3" json:"form_id,omitempty"`
 	FieldData     []*FbFieldData         `protobuf:"bytes,14,rep,name=field_data,json=fieldData,proto3" json:"field_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4695,7 +5067,7 @@ type FbLead struct {
 
 func (x *FbLead) Reset() {
 	*x = FbLead{}
-	mi := &file_fabikon_proto_msgTypes[60]
+	mi := &file_fabikon_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4707,7 +5079,7 @@ func (x *FbLead) String() string {
 func (*FbLead) ProtoMessage() {}
 
 func (x *FbLead) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[60]
+	mi := &file_fabikon_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4720,33 +5092,33 @@ func (x *FbLead) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbLead.ProtoReflect.Descriptor instead.
 func (*FbLead) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{60}
+	return file_fabikon_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *FbLead) GetCreatedTime() string {
-	if x != nil && x.CreatedTime != nil {
-		return *x.CreatedTime
+	if x != nil {
+		return x.CreatedTime
 	}
 	return ""
 }
 
 func (x *FbLead) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbLead) GetAdId() string {
-	if x != nil && x.AdId != nil {
-		return *x.AdId
+	if x != nil {
+		return x.AdId
 	}
 	return ""
 }
 
 func (x *FbLead) GetFormId() string {
-	if x != nil && x.FormId != nil {
-		return *x.FormId
+	if x != nil {
+		return x.FormId
 	}
 	return ""
 }
@@ -4760,21 +5132,21 @@ func (x *FbLead) GetFieldData() []*FbFieldData {
 
 type FbConversation struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Link          *string                `protobuf:"bytes,3,opt,name=link,proto3,oneof" json:"link,omitempty"`
-	UpdatedTime   *string                `protobuf:"bytes,5,opt,name=updated_time,json=updatedTime,proto3,oneof" json:"updated_time,omitempty"`
-	MessageCount  *int64                 `protobuf:"varint,6,opt,name=message_count,json=messageCount,proto3,oneof" json:"message_count,omitempty"`
-	Participants  *FbProfiles            `protobuf:"bytes,7,opt,name=participants,proto3,oneof" json:"participants,omitempty"`
-	Senders       *FbProfiles            `protobuf:"bytes,8,opt,name=senders,proto3,oneof" json:"senders,omitempty"`
-	CanReply      *bool                  `protobuf:"varint,9,opt,name=can_reply,json=canReply,proto3,oneof" json:"can_reply,omitempty"`
-	IsSubscribed  *bool                  `protobuf:"varint,10,opt,name=is_subscribed,json=isSubscribed,proto3,oneof" json:"is_subscribed,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Link          string                 `protobuf:"bytes,3,opt,name=link,proto3" json:"link,omitempty"`
+	UpdatedTime   string                 `protobuf:"bytes,5,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
+	MessageCount  int64                  `protobuf:"varint,6,opt,name=message_count,json=messageCount,proto3" json:"message_count,omitempty"`
+	Participants  *FbProfiles            `protobuf:"bytes,7,opt,name=participants,proto3" json:"participants,omitempty"`
+	Senders       *FbProfiles            `protobuf:"bytes,8,opt,name=senders,proto3" json:"senders,omitempty"`
+	CanReply      bool                   `protobuf:"varint,9,opt,name=can_reply,json=canReply,proto3" json:"can_reply,omitempty"`
+	IsSubscribed  bool                   `protobuf:"varint,10,opt,name=is_subscribed,json=isSubscribed,proto3" json:"is_subscribed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbConversation) Reset() {
 	*x = FbConversation{}
-	mi := &file_fabikon_proto_msgTypes[61]
+	mi := &file_fabikon_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4786,7 +5158,7 @@ func (x *FbConversation) String() string {
 func (*FbConversation) ProtoMessage() {}
 
 func (x *FbConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[61]
+	mi := &file_fabikon_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4799,33 +5171,33 @@ func (x *FbConversation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbConversation.ProtoReflect.Descriptor instead.
 func (*FbConversation) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{61}
+	return file_fabikon_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *FbConversation) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbConversation) GetLink() string {
-	if x != nil && x.Link != nil {
-		return *x.Link
+	if x != nil {
+		return x.Link
 	}
 	return ""
 }
 
 func (x *FbConversation) GetUpdatedTime() string {
-	if x != nil && x.UpdatedTime != nil {
-		return *x.UpdatedTime
+	if x != nil {
+		return x.UpdatedTime
 	}
 	return ""
 }
 
 func (x *FbConversation) GetMessageCount() int64 {
-	if x != nil && x.MessageCount != nil {
-		return *x.MessageCount
+	if x != nil {
+		return x.MessageCount
 	}
 	return 0
 }
@@ -4845,31 +5217,31 @@ func (x *FbConversation) GetSenders() *FbProfiles {
 }
 
 func (x *FbConversation) GetCanReply() bool {
-	if x != nil && x.CanReply != nil {
-		return *x.CanReply
+	if x != nil {
+		return x.CanReply
 	}
 	return false
 }
 
 func (x *FbConversation) GetIsSubscribed() bool {
-	if x != nil && x.IsSubscribed != nil {
-		return *x.IsSubscribed
+	if x != nil {
+		return x.IsSubscribed
 	}
 	return false
 }
 
 type FbProfiles struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Error         *Error                 `protobuf:"bytes,1,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Error         *Error                 `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 	Data          []*FbProfile           `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
-	Paging        *FbPaging              `protobuf:"bytes,4,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	Paging        *FbPaging              `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbProfiles) Reset() {
 	*x = FbProfiles{}
-	mi := &file_fabikon_proto_msgTypes[62]
+	mi := &file_fabikon_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4881,7 +5253,7 @@ func (x *FbProfiles) String() string {
 func (*FbProfiles) ProtoMessage() {}
 
 func (x *FbProfiles) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[62]
+	mi := &file_fabikon_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4894,7 +5266,7 @@ func (x *FbProfiles) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProfiles.ProtoReflect.Descriptor instead.
 func (*FbProfiles) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{62}
+	return file_fabikon_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *FbProfiles) GetError() *Error {
@@ -4927,7 +5299,7 @@ type FbProfileData struct {
 
 func (x *FbProfileData) Reset() {
 	*x = FbProfileData{}
-	mi := &file_fabikon_proto_msgTypes[63]
+	mi := &file_fabikon_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4939,7 +5311,7 @@ func (x *FbProfileData) String() string {
 func (*FbProfileData) ProtoMessage() {}
 
 func (x *FbProfileData) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[63]
+	mi := &file_fabikon_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4952,7 +5324,7 @@ func (x *FbProfileData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProfileData.ProtoReflect.Descriptor instead.
 func (*FbProfileData) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{63}
+	return file_fabikon_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *FbProfileData) GetData() []*FbProfile {
@@ -4964,16 +5336,16 @@ func (x *FbProfileData) GetData() []*FbProfile {
 
 type FbProfile struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Email         *string                `protobuf:"bytes,4,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	Id            *string                `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Id            string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbProfile) Reset() {
 	*x = FbProfile{}
-	mi := &file_fabikon_proto_msgTypes[64]
+	mi := &file_fabikon_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4985,7 +5357,7 @@ func (x *FbProfile) String() string {
 func (*FbProfile) ProtoMessage() {}
 
 func (x *FbProfile) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[64]
+	mi := &file_fabikon_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4998,42 +5370,42 @@ func (x *FbProfile) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbProfile.ProtoReflect.Descriptor instead.
 func (*FbProfile) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{64}
+	return file_fabikon_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *FbProfile) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *FbProfile) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
 
 func (x *FbProfile) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 type FbConversationMessageAttachemnts struct {
 	state         protoimpl.MessageState             `protogen:"open.v1"`
-	Error         *Error                             `protobuf:"bytes,1,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Error         *Error                             `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 	Data          []*FbConversationMessageAttachment `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
-	Paging        *FbPaging                          `protobuf:"bytes,4,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	Paging        *FbPaging                          `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbConversationMessageAttachemnts) Reset() {
 	*x = FbConversationMessageAttachemnts{}
-	mi := &file_fabikon_proto_msgTypes[65]
+	mi := &file_fabikon_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5045,7 +5417,7 @@ func (x *FbConversationMessageAttachemnts) String() string {
 func (*FbConversationMessageAttachemnts) ProtoMessage() {}
 
 func (x *FbConversationMessageAttachemnts) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[65]
+	mi := &file_fabikon_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5058,7 +5430,7 @@ func (x *FbConversationMessageAttachemnts) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbConversationMessageAttachemnts.ProtoReflect.Descriptor instead.
 func (*FbConversationMessageAttachemnts) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{65}
+	return file_fabikon_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *FbConversationMessageAttachemnts) GetError() *Error {
@@ -5084,19 +5456,19 @@ func (x *FbConversationMessageAttachemnts) GetPaging() *FbPaging {
 
 type FbConversationMessageAttachment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	MimeType      *string                `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3,oneof" json:"mime_type,omitempty"`
-	Name          *string                `protobuf:"bytes,5,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Size          *int64                 `protobuf:"varint,6,opt,name=size,proto3,oneof" json:"size,omitempty"`
-	FileUrl       *string                `protobuf:"bytes,7,opt,name=file_url,json=fileUrl,proto3,oneof" json:"file_url,omitempty"`
-	ImageData     *FbImageData           `protobuf:"bytes,8,opt,name=image_data,json=imageData,proto3,oneof" json:"image_data,omitempty"`
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	MimeType      string                 `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Size          int64                  `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,7,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	ImageData     *FbImageData           `protobuf:"bytes,8,opt,name=image_data,json=imageData,proto3" json:"image_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbConversationMessageAttachment) Reset() {
 	*x = FbConversationMessageAttachment{}
-	mi := &file_fabikon_proto_msgTypes[66]
+	mi := &file_fabikon_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5108,7 +5480,7 @@ func (x *FbConversationMessageAttachment) String() string {
 func (*FbConversationMessageAttachment) ProtoMessage() {}
 
 func (x *FbConversationMessageAttachment) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[66]
+	mi := &file_fabikon_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5121,40 +5493,40 @@ func (x *FbConversationMessageAttachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbConversationMessageAttachment.ProtoReflect.Descriptor instead.
 func (*FbConversationMessageAttachment) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{66}
+	return file_fabikon_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *FbConversationMessageAttachment) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbConversationMessageAttachment) GetMimeType() string {
-	if x != nil && x.MimeType != nil {
-		return *x.MimeType
+	if x != nil {
+		return x.MimeType
 	}
 	return ""
 }
 
 func (x *FbConversationMessageAttachment) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *FbConversationMessageAttachment) GetSize() int64 {
-	if x != nil && x.Size != nil {
-		return *x.Size
+	if x != nil {
+		return x.Size
 	}
 	return 0
 }
 
 func (x *FbConversationMessageAttachment) GetFileUrl() string {
-	if x != nil && x.FileUrl != nil {
-		return *x.FileUrl
+	if x != nil {
+		return x.FileUrl
 	}
 	return ""
 }
@@ -5168,21 +5540,21 @@ func (x *FbConversationMessageAttachment) GetImageData() *FbImageData {
 
 type FbImageData struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Width           *int64                 `protobuf:"varint,2,opt,name=width,proto3,oneof" json:"width,omitempty"`
-	Height          *int64                 `protobuf:"varint,3,opt,name=height,proto3,oneof" json:"height,omitempty"`
-	MaxWidth        *int64                 `protobuf:"varint,4,opt,name=max_width,json=maxWidth,proto3,oneof" json:"max_width,omitempty"`
-	MaxHeight       *int64                 `protobuf:"varint,5,opt,name=max_height,json=maxHeight,proto3,oneof" json:"max_height,omitempty"`
-	Url             *string                `protobuf:"bytes,6,opt,name=url,proto3,oneof" json:"url,omitempty"`
-	PreviewUrl      *string                `protobuf:"bytes,7,opt,name=preview_url,json=previewUrl,proto3,oneof" json:"preview_url,omitempty"`
-	ImageType       *int64                 `protobuf:"varint,8,opt,name=image_type,json=imageType,proto3,oneof" json:"image_type,omitempty"`
-	RenderAsSticker *bool                  `protobuf:"varint,9,opt,name=render_as_sticker,json=renderAsSticker,proto3,oneof" json:"render_as_sticker,omitempty"`
+	Width           int64                  `protobuf:"varint,2,opt,name=width,proto3" json:"width,omitempty"`
+	Height          int64                  `protobuf:"varint,3,opt,name=height,proto3" json:"height,omitempty"`
+	MaxWidth        int64                  `protobuf:"varint,4,opt,name=max_width,json=maxWidth,proto3" json:"max_width,omitempty"`
+	MaxHeight       int64                  `protobuf:"varint,5,opt,name=max_height,json=maxHeight,proto3" json:"max_height,omitempty"`
+	Url             string                 `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
+	PreviewUrl      string                 `protobuf:"bytes,7,opt,name=preview_url,json=previewUrl,proto3" json:"preview_url,omitempty"`
+	ImageType       int64                  `protobuf:"varint,8,opt,name=image_type,json=imageType,proto3" json:"image_type,omitempty"`
+	RenderAsSticker bool                   `protobuf:"varint,9,opt,name=render_as_sticker,json=renderAsSticker,proto3" json:"render_as_sticker,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *FbImageData) Reset() {
 	*x = FbImageData{}
-	mi := &file_fabikon_proto_msgTypes[67]
+	mi := &file_fabikon_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5194,7 +5566,7 @@ func (x *FbImageData) String() string {
 func (*FbImageData) ProtoMessage() {}
 
 func (x *FbImageData) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[67]
+	mi := &file_fabikon_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5207,77 +5579,77 @@ func (x *FbImageData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbImageData.ProtoReflect.Descriptor instead.
 func (*FbImageData) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{67}
+	return file_fabikon_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *FbImageData) GetWidth() int64 {
-	if x != nil && x.Width != nil {
-		return *x.Width
+	if x != nil {
+		return x.Width
 	}
 	return 0
 }
 
 func (x *FbImageData) GetHeight() int64 {
-	if x != nil && x.Height != nil {
-		return *x.Height
+	if x != nil {
+		return x.Height
 	}
 	return 0
 }
 
 func (x *FbImageData) GetMaxWidth() int64 {
-	if x != nil && x.MaxWidth != nil {
-		return *x.MaxWidth
+	if x != nil {
+		return x.MaxWidth
 	}
 	return 0
 }
 
 func (x *FbImageData) GetMaxHeight() int64 {
-	if x != nil && x.MaxHeight != nil {
-		return *x.MaxHeight
+	if x != nil {
+		return x.MaxHeight
 	}
 	return 0
 }
 
 func (x *FbImageData) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		return x.Url
 	}
 	return ""
 }
 
 func (x *FbImageData) GetPreviewUrl() string {
-	if x != nil && x.PreviewUrl != nil {
-		return *x.PreviewUrl
+	if x != nil {
+		return x.PreviewUrl
 	}
 	return ""
 }
 
 func (x *FbImageData) GetImageType() int64 {
-	if x != nil && x.ImageType != nil {
-		return *x.ImageType
+	if x != nil {
+		return x.ImageType
 	}
 	return 0
 }
 
 func (x *FbImageData) GetRenderAsSticker() bool {
-	if x != nil && x.RenderAsSticker != nil {
-		return *x.RenderAsSticker
+	if x != nil {
+		return x.RenderAsSticker
 	}
 	return false
 }
 
 type FbConversationMessages struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Error         *Error                   `protobuf:"bytes,1,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Error         *Error                   `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 	Data          []*FbConversationMessage `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
-	Paging        *FbPaging                `protobuf:"bytes,4,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	Paging        *FbPaging                `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbConversationMessages) Reset() {
 	*x = FbConversationMessages{}
-	mi := &file_fabikon_proto_msgTypes[68]
+	mi := &file_fabikon_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5289,7 +5661,7 @@ func (x *FbConversationMessages) String() string {
 func (*FbConversationMessages) ProtoMessage() {}
 
 func (x *FbConversationMessages) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[68]
+	mi := &file_fabikon_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5302,7 +5674,7 @@ func (x *FbConversationMessages) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbConversationMessages.ProtoReflect.Descriptor instead.
 func (*FbConversationMessages) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{68}
+	return file_fabikon_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *FbConversationMessages) GetError() *Error {
@@ -5328,19 +5700,19 @@ func (x *FbConversationMessages) GetPaging() *FbPaging {
 
 type FbConversationMessage struct {
 	state         protoimpl.MessageState            `protogen:"open.v1"`
-	CreatedTime   *string                           `protobuf:"bytes,2,opt,name=created_time,json=createdTime,proto3,oneof" json:"created_time,omitempty"`
-	From          *FbProfile                        `protobuf:"bytes,3,opt,name=from,proto3,oneof" json:"from,omitempty"`
-	Id            *string                           `protobuf:"bytes,4,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Message       *string                           `protobuf:"bytes,5,opt,name=message,proto3,oneof" json:"message,omitempty"`
-	To            *FbProfileData                    `protobuf:"bytes,6,opt,name=to,proto3,oneof" json:"to,omitempty"`
-	Attachments   *FbConversationMessageAttachemnts `protobuf:"bytes,7,opt,name=attachments,proto3,oneof" json:"attachments,omitempty"`
+	CreatedTime   string                            `protobuf:"bytes,2,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
+	From          *FbProfile                        `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
+	Id            string                            `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	Message       string                            `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
+	To            *FbProfileData                    `protobuf:"bytes,6,opt,name=to,proto3" json:"to,omitempty"`
+	Attachments   *FbConversationMessageAttachemnts `protobuf:"bytes,7,opt,name=attachments,proto3" json:"attachments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FbConversationMessage) Reset() {
 	*x = FbConversationMessage{}
-	mi := &file_fabikon_proto_msgTypes[69]
+	mi := &file_fabikon_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5352,7 +5724,7 @@ func (x *FbConversationMessage) String() string {
 func (*FbConversationMessage) ProtoMessage() {}
 
 func (x *FbConversationMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[69]
+	mi := &file_fabikon_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5365,12 +5737,12 @@ func (x *FbConversationMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FbConversationMessage.ProtoReflect.Descriptor instead.
 func (*FbConversationMessage) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{69}
+	return file_fabikon_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *FbConversationMessage) GetCreatedTime() string {
-	if x != nil && x.CreatedTime != nil {
-		return *x.CreatedTime
+	if x != nil {
+		return x.CreatedTime
 	}
 	return ""
 }
@@ -5383,15 +5755,15 @@ func (x *FbConversationMessage) GetFrom() *FbProfile {
 }
 
 func (x *FbConversationMessage) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FbConversationMessage) GetMessage() string {
-	if x != nil && x.Message != nil {
-		return *x.Message
+	if x != nil {
+		return x.Message
 	}
 	return ""
 }
@@ -5412,19 +5784,19 @@ func (x *FbConversationMessage) GetAttachments() *FbConversationMessageAttachemn
 
 type FacebookAdsFlow struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                *string                `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name              *string                `protobuf:"bytes,6,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	WelcomeMessage    *FbMessage             `protobuf:"bytes,7,opt,name=welcome_message,json=welcomeMessage,proto3,oneof" json:"welcome_message,omitempty"`
+	Id                string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"`
+	Name              string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	WelcomeMessage    *FbMessage             `protobuf:"bytes,7,opt,name=welcome_message,json=welcomeMessage,proto3" json:"welcome_message,omitempty"`
 	EligiblePlatforms []string               `protobuf:"bytes,8,rep,name=eligible_platforms,json=eligiblePlatforms,proto3" json:"eligible_platforms,omitempty"` //  messenger,instagram
-	IsUsedInAd        *bool                  `protobuf:"varint,10,opt,name=is_used_in_ad,json=isUsedInAd,proto3,oneof" json:"is_used_in_ad,omitempty"`          // fb
-	LastUpdateTime    *string                `protobuf:"bytes,11,opt,name=last_update_time,json=lastUpdateTime,proto3,oneof" json:"last_update_time,omitempty"` // fb
+	IsUsedInAd        bool                   `protobuf:"varint,10,opt,name=is_used_in_ad,json=isUsedInAd,proto3" json:"is_used_in_ad,omitempty"`                // fb
+	LastUpdateTime    string                 `protobuf:"bytes,11,opt,name=last_update_time,json=lastUpdateTime,proto3" json:"last_update_time,omitempty"`       // fb
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
 
 func (x *FacebookAdsFlow) Reset() {
 	*x = FacebookAdsFlow{}
-	mi := &file_fabikon_proto_msgTypes[70]
+	mi := &file_fabikon_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5436,7 +5808,7 @@ func (x *FacebookAdsFlow) String() string {
 func (*FacebookAdsFlow) ProtoMessage() {}
 
 func (x *FacebookAdsFlow) ProtoReflect() protoreflect.Message {
-	mi := &file_fabikon_proto_msgTypes[70]
+	mi := &file_fabikon_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5449,19 +5821,19 @@ func (x *FacebookAdsFlow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookAdsFlow.ProtoReflect.Descriptor instead.
 func (*FacebookAdsFlow) Descriptor() ([]byte, []int) {
-	return file_fabikon_proto_rawDescGZIP(), []int{70}
+	return file_fabikon_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *FacebookAdsFlow) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *FacebookAdsFlow) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -5481,15 +5853,15 @@ func (x *FacebookAdsFlow) GetEligiblePlatforms() []string {
 }
 
 func (x *FacebookAdsFlow) GetIsUsedInAd() bool {
-	if x != nil && x.IsUsedInAd != nil {
-		return *x.IsUsedInAd
+	if x != nil {
+		return x.IsUsedInAd
 	}
 	return false
 }
 
 func (x *FacebookAdsFlow) GetLastUpdateTime() string {
-	if x != nil && x.LastUpdateTime != nil {
-		return *x.LastUpdateTime
+	if x != nil {
+		return x.LastUpdateTime
 	}
 	return ""
 }
@@ -5545,807 +5917,491 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x10comment_disabled\x18# \x01(\x03R\x0fcommentDisabled\x12/\n" +
 	"\x14last_sync_from_convo\x18$ \x01(\x03R\x11lastSyncFromConvo\x121\n" +
 	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\x12\x1b\n" +
-	"\tlast_sync\x18& \x01(\x03R\blastSync\"P\n" +
+	"\tlast_sync\x18& \x01(\x03R\blastSync\"q\n" +
+	"\x13WeeklyOperatingHour\x12\x1e\n" +
+	"\vday_of_week\x18\x04 \x01(\tR\tdayOfWeek\x12\x1b\n" +
+	"\topen_time\x18\x05 \x01(\tR\bopenTime\x12\x1d\n" +
+	"\n" +
+	"close_time\x18\x06 \x01(\tR\tcloseTime\"\x80\x01\n" +
+	"\tCallHours\x12\x1f\n" +
+	"\vtimezone_id\x18\x05 \x01(\tR\n" +
+	"timezoneId\x12R\n" +
+	"\x16weekly_operating_hours\x18\x06 \x03(\v2\x1c.fabikon.WeeklyOperatingHourR\x14weeklyOperatingHours\"\xcc\x01\n" +
+	"\vCallSetting\x121\n" +
+	"\n" +
+	"call_hours\x18\x05 \x01(\v2\x12.fabikon.CallHoursR\tcallHours\x12#\n" +
+	"\raudio_enabled\x18\x06 \x01(\bR\faudioEnabled\x12!\n" +
+	"\ficon_enabled\x18\a \x01(\bR\viconEnabled\x12\x1f\n" +
+	"\vring_target\x18\b \x01(\tR\n" +
+	"ringTarget\x12!\n" +
+	"\fcall_routing\x18\t \x01(\tR\vcallRouting\"\x87\x02\n" +
+	"\n" +
+	"CallMetric\x12\x1a\n" +
+	"\bplatform\x18\x04 \x01(\tR\bplatform\x12\x17\n" +
+	"\acall_id\x18\x05 \x01(\tR\x06callId\x12&\n" +
+	"\x0fend_call_reason\x18\x06 \x01(\tR\rendCallReason\x12,\n" +
+	"\x12end_call_subreason\x18\a \x01(\tR\x10endCallSubreason\x12&\n" +
+	"\x0fcall_ended_time\x18\b \x01(\tR\rcallEndedTime\x12F\n" +
+	" first_audio_packet_received_time\x18\t \x01(\tR\x1cfirstAudioPacketReceivedTime\"P\n" +
 	"\x0eFbWebhookEvent\x12\x16\n" +
 	"\x06object\x18\x02 \x01(\tR\x06object\x12&\n" +
-	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entry\"\xbe\x01\n" +
+	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entry\"\xe5\x01\n" +
 	"\aFbEntry\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04time\x18\x05 \x01(\x03R\x04time\x122\n" +
 	"\tmessaging\x18\x06 \x03(\v2\x14.fabikon.FbMessagingR\tmessaging\x12+\n" +
 	"\achanges\x18\a \x03(\v2\x11.fabikon.FbChangeR\achanges\x12.\n" +
-	"\astandby\x18\b \x03(\v2\x14.fabikon.FbMessagingR\astandby\"N\n" +
+	"\astandby\x18\b \x03(\v2\x14.fabikon.FbMessagingR\astandby\x12%\n" +
+	"\x05calls\x18\t \x03(\v2\x0f.fabikon.FbCallR\x05calls\"\x97\x01\n" +
+	"\x06FbCall\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\x12\x0e\n" +
+	"\x02to\x18\x05 \x01(\tR\x02to\x12\x12\n" +
+	"\x04from\x18\x06 \x01(\tR\x04from\x12\x14\n" +
+	"\x05event\x18\a \x01(\tR\x05event\x12\x1c\n" +
+	"\ttimestamp\x18\b \x01(\x03R\ttimestamp\x12%\n" +
+	"\x0ecall_direction\x18\t \x01(\tR\rcallDirection\"N\n" +
 	"\bFbChange\x12\x14\n" +
 	"\x05field\x18\x02 \x01(\tR\x05field\x12,\n" +
-	"\x05value\x18\x03 \x01(\v2\x16.fabikon.FbChangeValueR\x05value\"t\n" +
-	"\x06FbFrom\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04from\x18\x02 \x01(\tH\x01R\x04from\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x03 \x01(\tH\x02R\busername\x88\x01\x01B\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_fromB\v\n" +
-	"\t_username\"\xd3\r\n" +
-	"\rFbChangeValue\x12$\n" +
-	"\vedited_time\x18\x03 \x01(\x03H\x00R\n" +
-	"editedTime\x88\x01\x01\x12(\n" +
-	"\x04from\x18\x04 \x01(\v2\x0f.fabikon.FbFromH\x01R\x04from\x88\x01\x01\x12,\n" +
-	"\x04post\x18\x05 \x01(\v2\x13.fabikon.FbPagePostH\x02R\x04post\x88\x01\x01\x12 \n" +
-	"\tis_hidden\x18\x06 \x01(\bH\x03R\bisHidden\x88\x01\x01\x12\x17\n" +
-	"\x04link\x18\a \x01(\tH\x04R\x04link\x88\x01\x01\x12\x1d\n" +
-	"\amessage\x18\b \x01(\tH\x05R\amessage\x88\x01\x01\x12\x19\n" +
-	"\x05photo\x18\t \x01(\tH\x06R\x05photo\x88\x01\x01\x12\x16\n" +
+	"\x05value\x18\x03 \x01(\v2\x16.fabikon.FbChangeValueR\x05value\"H\n" +
+	"\x06FbFrom\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04from\x18\x02 \x01(\tR\x04from\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername\"\xd2\b\n" +
+	"\rFbChangeValue\x12\x1f\n" +
+	"\vedited_time\x18\x03 \x01(\x03R\n" +
+	"editedTime\x12#\n" +
+	"\x04from\x18\x04 \x01(\v2\x0f.fabikon.FbFromR\x04from\x12'\n" +
+	"\x04post\x18\x05 \x01(\v2\x13.fabikon.FbPagePostR\x04post\x12\x1b\n" +
+	"\tis_hidden\x18\x06 \x01(\bR\bisHidden\x12\x12\n" +
+	"\x04link\x18\a \x01(\tR\x04link\x12\x18\n" +
+	"\amessage\x18\b \x01(\tR\amessage\x12\x14\n" +
+	"\x05photo\x18\t \x01(\tR\x05photo\x12\x16\n" +
 	"\x06photos\x18\n" +
-	" \x03(\tR\x06photos\x12\x1c\n" +
-	"\apost_id\x18\v \x01(\tH\aR\x06postId\x88\x01\x01\x12\x19\n" +
-	"\x05story\x18\f \x01(\tH\bR\x05story\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\r \x01(\tH\tR\x05title\x88\x01\x01\x12\x19\n" +
-	"\x05video\x18\x0e \x01(\tH\n" +
-	"R\x05video\x88\x01\x01\x12\x1b\n" +
-	"\x06action\x18\x10 \x01(\tH\vR\x06action\x88\x01\x01\x12\x1e\n" +
-	"\balbum_id\x18\x11 \x01(\tH\fR\aalbumId\x88\x01\x01\x12\"\n" +
+	" \x03(\tR\x06photos\x12\x17\n" +
+	"\apost_id\x18\v \x01(\tR\x06postId\x12\x14\n" +
+	"\x05story\x18\f \x01(\tR\x05story\x12\x14\n" +
+	"\x05title\x18\r \x01(\tR\x05title\x12\x14\n" +
+	"\x05video\x18\x0e \x01(\tR\x05video\x12\x16\n" +
+	"\x06action\x18\x10 \x01(\tR\x06action\x12\x19\n" +
+	"\balbum_id\x18\x11 \x01(\tR\aalbumId\x12\x1d\n" +
 	"\n" +
-	"comment_id\x18\x12 \x01(\tH\rR\tcommentId\x88\x01\x01\x12&\n" +
-	"\fcreated_time\x18\x13 \x01(\x03H\x0eR\vcreatedTime\x88\x01\x01\x12\x1e\n" +
-	"\bevent_id\x18\x14 \x01(\tH\x0fR\aeventId\x88\x01\x01\x12\x17\n" +
-	"\x04item\x18\x15 \x01(\tH\x10R\x04item\x88\x01\x01\x122\n" +
-	"\x13open_graph_story_id\x18\x16 \x01(\tH\x11R\x10openGraphStoryId\x88\x01\x01\x12 \n" +
-	"\tparent_id\x18\x17 \x01(\tH\x12R\bparentId\x88\x01\x01\x12\x1e\n" +
-	"\bphoto_id\x18\x18 \x01(\tH\x13R\aphotoId\x88\x01\x01\x12(\n" +
-	"\rreaction_type\x18\x19 \x01(\tH\x14R\freactionType\x88\x01\x01\x12!\n" +
-	"\tpublished\x18\x1a \x01(\x05H\x15R\tpublished\x88\x01\x01\x12&\n" +
-	"\frecipient_id\x18\x1b \x01(\tH\x16R\vrecipientId\x88\x01\x01\x12\x1e\n" +
-	"\bshare_id\x18\x1c \x01(\tH\x17R\ashareId\x88\x01\x01\x12\x17\n" +
-	"\x04verb\x18\x1d \x01(\tH\x18R\x04verb\x88\x01\x01\x12\x1e\n" +
-	"\bvideo_id\x18\x1e \x01(\tH\x19R\avideoId\x88\x01\x01\x12+\n" +
-	"\x05media\x18\x1f \x01(\v2\x10.fabikon.IgMediaH\x1aR\x05media\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18  \x01(\tH\x1bR\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04text\x18! \x01(\tH\x1cR\x04text\x88\x01\x01\x12\x1e\n" +
-	"\bmedia_id\x18\" \x01(\tH\x1dR\amediaId\x88\x01\x01\x12.\n" +
-	"\x04user\x18# \x01(\v2\x15.fabikon.FbChangeUserH\x1eR\x04user\x88\x01\x01\x121\n" +
-	"\x05label\x18$ \x01(\v2\x16.fabikon.FbCustomLabelH\x1fR\x05label\x88\x01\x01\x12\"\n" +
+	"comment_id\x18\x12 \x01(\tR\tcommentId\x12!\n" +
+	"\fcreated_time\x18\x13 \x01(\x03R\vcreatedTime\x12\x19\n" +
+	"\bevent_id\x18\x14 \x01(\tR\aeventId\x12\x12\n" +
+	"\x04item\x18\x15 \x01(\tR\x04item\x12-\n" +
+	"\x13open_graph_story_id\x18\x16 \x01(\tR\x10openGraphStoryId\x12\x1b\n" +
+	"\tparent_id\x18\x17 \x01(\tR\bparentId\x12\x19\n" +
+	"\bphoto_id\x18\x18 \x01(\tR\aphotoId\x12#\n" +
+	"\rreaction_type\x18\x19 \x01(\tR\freactionType\x12\x1c\n" +
+	"\tpublished\x18\x1a \x01(\x05R\tpublished\x12!\n" +
+	"\frecipient_id\x18\x1b \x01(\tR\vrecipientId\x12\x19\n" +
+	"\bshare_id\x18\x1c \x01(\tR\ashareId\x12\x12\n" +
+	"\x04verb\x18\x1d \x01(\tR\x04verb\x12\x19\n" +
+	"\bvideo_id\x18\x1e \x01(\tR\avideoId\x12&\n" +
+	"\x05media\x18\x1f \x01(\v2\x10.fabikon.IgMediaR\x05media\x12\x0e\n" +
+	"\x02id\x18  \x01(\tR\x02id\x12\x12\n" +
+	"\x04text\x18! \x01(\tR\x04text\x12\x19\n" +
+	"\bmedia_id\x18\" \x01(\tR\amediaId\x12)\n" +
+	"\x04user\x18# \x01(\v2\x15.fabikon.FbChangeUserR\x04user\x12,\n" +
+	"\x05label\x18$ \x01(\v2\x16.fabikon.FbCustomLabelR\x05label\x12\x1d\n" +
 	"\n" +
-	"leadgen_id\x18( \x01(\tH R\tleadgenId\x88\x01\x01\x12\x1c\n" +
-	"\apage_id\x18) \x01(\tH!R\x06pageId\x88\x01\x01\x12\x1c\n" +
-	"\aform_id\x18* \x01(\tH\"R\x06formId\x88\x01\x01\x12\"\n" +
+	"leadgen_id\x18( \x01(\tR\tleadgenId\x12\x17\n" +
+	"\apage_id\x18) \x01(\tR\x06pageId\x12\x17\n" +
+	"\aform_id\x18* \x01(\tR\x06formId\x12\x1d\n" +
 	"\n" +
-	"adgroup_id\x18+ \x01(\tH#R\tadgroupId\x88\x01\x01\x12\x18\n" +
-	"\x05ad_id\x18, \x01(\tH$R\x04adId\x88\x01\x01B\x0e\n" +
-	"\f_edited_timeB\a\n" +
-	"\x05_fromB\a\n" +
-	"\x05_postB\f\n" +
+	"adgroup_id\x18+ \x01(\tR\tadgroupId\x12\x13\n" +
+	"\x05ad_id\x18, \x01(\tR\x04adId\"G\n" +
+	"\rFbCustomLabel\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\x12&\n" +
+	"\x0fpage_label_name\x18\x05 \x01(\tR\rpageLabelName\"\x1e\n" +
+	"\fFbChangeUser\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\"G\n" +
+	"\aIgMedia\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12,\n" +
+	"\x12media_product_type\x18\x04 \x01(\tR\x10mediaProductType\"\xd3\x01\n" +
 	"\n" +
-	"_is_hiddenB\a\n" +
-	"\x05_linkB\n" +
-	"\n" +
-	"\b_messageB\b\n" +
-	"\x06_photoB\n" +
-	"\n" +
-	"\b_post_idB\b\n" +
-	"\x06_storyB\b\n" +
-	"\x06_titleB\b\n" +
-	"\x06_videoB\t\n" +
-	"\a_actionB\v\n" +
-	"\t_album_idB\r\n" +
-	"\v_comment_idB\x0f\n" +
-	"\r_created_timeB\v\n" +
-	"\t_event_idB\a\n" +
-	"\x05_itemB\x16\n" +
-	"\x14_open_graph_story_idB\f\n" +
-	"\n" +
-	"_parent_idB\v\n" +
-	"\t_photo_idB\x10\n" +
-	"\x0e_reaction_typeB\f\n" +
-	"\n" +
-	"_publishedB\x0f\n" +
-	"\r_recipient_idB\v\n" +
-	"\t_share_idB\a\n" +
-	"\x05_verbB\v\n" +
-	"\t_video_idB\b\n" +
-	"\x06_mediaB\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_textB\v\n" +
-	"\t_media_idB\a\n" +
-	"\x05_userB\b\n" +
-	"\x06_labelB\r\n" +
-	"\v_leadgen_idB\n" +
-	"\n" +
-	"\b_page_idB\n" +
-	"\n" +
-	"\b_form_idB\r\n" +
-	"\v_adgroup_idB\b\n" +
-	"\x06_ad_id\"l\n" +
-	"\rFbCustomLabel\x12\x13\n" +
-	"\x02id\x18\x04 \x01(\tH\x00R\x02id\x88\x01\x01\x12+\n" +
-	"\x0fpage_label_name\x18\x05 \x01(\tH\x01R\rpageLabelName\x88\x01\x01B\x05\n" +
-	"\x03_idB\x12\n" +
-	"\x10_page_label_name\"*\n" +
-	"\fFbChangeUser\x12\x13\n" +
-	"\x02id\x18\x04 \x01(\tH\x00R\x02id\x88\x01\x01B\x05\n" +
-	"\x03_id\"o\n" +
-	"\aIgMedia\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x121\n" +
-	"\x12media_product_type\x18\x04 \x01(\tH\x01R\x10mediaProductType\x88\x01\x01B\x05\n" +
-	"\x03_idB\x15\n" +
-	"\x13_media_product_type\"\xd1\x02\n" +
-	"\n" +
-	"FbPagePost\x12$\n" +
-	"\vstatus_type\x18\x02 \x01(\tH\x00R\n" +
-	"statusType\x88\x01\x01\x12&\n" +
-	"\fis_published\x18\x03 \x01(\bH\x01R\visPublished\x88\x01\x01\x12&\n" +
-	"\fupdated_time\x18\x04 \x01(\tH\x02R\vupdatedTime\x88\x01\x01\x12(\n" +
-	"\rpermalink_url\x18\x05 \x01(\tH\x03R\fpermalinkUrl\x88\x01\x01\x12.\n" +
-	"\x10promotion_status\x18\x06 \x01(\tH\x04R\x0fpromotionStatus\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\a \x01(\tH\x05R\x02id\x88\x01\x01B\x0e\n" +
-	"\f_status_typeB\x0f\n" +
-	"\r_is_publishedB\x0f\n" +
-	"\r_updated_timeB\x10\n" +
-	"\x0e_permalink_urlB\x13\n" +
-	"\x11_promotion_statusB\x05\n" +
-	"\x03_id\"\xa3\x06\n" +
-	"\vFbMessaging\x12.\n" +
-	"\x06sender\x18\x02 \x01(\v2\x11.fabikon.FbSenderH\x00R\x06sender\x88\x01\x01\x127\n" +
-	"\trecipient\x18\x03 \x01(\v2\x14.fabikon.FbRecipientH\x01R\trecipient\x88\x01\x01\x12!\n" +
-	"\ttimestamp\x18\x04 \x01(\x03H\x02R\ttimestamp\x88\x01\x01\x121\n" +
-	"\amessage\x18\x05 \x01(\v2\x12.fabikon.FbMessageH\x03R\amessage\x88\x01\x01\x124\n" +
-	"\bdelivery\x18\x06 \x01(\v2\x13.fabikon.FbDeliveryH\x04R\bdelivery\x88\x01\x01\x12&\n" +
-	"\fmessage_type\x18\a \x01(\tH\x05R\vmessageType\x88\x01\x01\x12(\n" +
-	"\rsender_action\x18\b \x01(\tH\x06R\fsenderAction\x88\x01\x01\x12(\n" +
-	"\x04read\x18\t \x01(\v2\x0f.fabikon.FbReadH\aR\x04read\x88\x01\x01\x124\n" +
+	"FbPagePost\x12\x1f\n" +
+	"\vstatus_type\x18\x02 \x01(\tR\n" +
+	"statusType\x12!\n" +
+	"\fis_published\x18\x03 \x01(\bR\visPublished\x12!\n" +
+	"\fupdated_time\x18\x04 \x01(\tR\vupdatedTime\x12#\n" +
+	"\rpermalink_url\x18\x05 \x01(\tR\fpermalinkUrl\x12)\n" +
+	"\x10promotion_status\x18\x06 \x01(\tR\x0fpromotionStatus\x12\x0e\n" +
+	"\x02id\x18\a \x01(\tR\x02id\"\xb6\x04\n" +
+	"\vFbMessaging\x12)\n" +
+	"\x06sender\x18\x02 \x01(\v2\x11.fabikon.FbSenderR\x06sender\x122\n" +
+	"\trecipient\x18\x03 \x01(\v2\x14.fabikon.FbRecipientR\trecipient\x12\x1c\n" +
+	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp\x12,\n" +
+	"\amessage\x18\x05 \x01(\v2\x12.fabikon.FbMessageR\amessage\x12/\n" +
+	"\bdelivery\x18\x06 \x01(\v2\x13.fabikon.FbDeliveryR\bdelivery\x12!\n" +
+	"\fmessage_type\x18\a \x01(\tR\vmessageType\x12#\n" +
+	"\rsender_action\x18\b \x01(\tR\fsenderAction\x12#\n" +
+	"\x04read\x18\t \x01(\v2\x0f.fabikon.FbReadR\x04read\x12/\n" +
 	"\bpostback\x18\n" +
-	" \x01(\v2\x13.fabikon.FbPostbackH\bR\bpostback\x88\x01\x01\x124\n" +
-	"\breferral\x18\v \x01(\v2\x13.fabikon.FbReferralH\tR\breferral\x88\x01\x01\x12\x15\n" +
-	"\x03tag\x18\f \x01(\tH\n" +
-	"R\x03tag\x88\x01\x01\x124\n" +
-	"\breaction\x18\r \x01(\v2\x13.fabikon.IgReactionH\vR\breaction\x88\x01\x01\x12>\n" +
-	"\fmessage_edit\x18\x0e \x01(\v2\x16.fabikon.FbMessageEditH\fR\vmessageEdit\x88\x01\x01B\t\n" +
-	"\a_senderB\f\n" +
+	" \x01(\v2\x13.fabikon.FbPostbackR\bpostback\x12/\n" +
+	"\breferral\x18\v \x01(\v2\x13.fabikon.FbReferralR\breferral\x12\x10\n" +
+	"\x03tag\x18\f \x01(\tR\x03tag\x12/\n" +
+	"\breaction\x18\r \x01(\v2\x13.fabikon.IgReactionR\breaction\x129\n" +
+	"\fmessage_edit\x18\x0e \x01(\v2\x16.fabikon.FbMessageEditR\vmessageEdit\"P\n" +
+	"\rFbMessageEdit\x12\x10\n" +
+	"\x03mid\x18\x04 \x01(\tR\x03mid\x12\x12\n" +
+	"\x04text\x18\x05 \x01(\tR\x04text\x12\x19\n" +
+	"\bnum_edit\x18\x06 \x01(\x03R\anumEdit\"h\n" +
 	"\n" +
-	"_recipientB\f\n" +
+	"IgReaction\x12\x10\n" +
+	"\x03mid\x18\x05 \x01(\tR\x03mid\x12\x16\n" +
+	"\x06action\x18\x06 \x01(\tR\x06action\x12\x1a\n" +
+	"\breaction\x18\a \x01(\tR\breaction\x12\x14\n" +
+	"\x05emoji\x18\b \x01(\tR\x05emoji\"\x7f\n" +
 	"\n" +
-	"_timestampB\n" +
+	"FbPostback\x12\x18\n" +
+	"\apayload\x18\x02 \x01(\tR\apayload\x12/\n" +
+	"\breferral\x18\x03 \x01(\v2\x13.fabikon.FbReferralR\breferral\x12\x14\n" +
+	"\x05title\x18\x04 \x01(\tR\x05title\x12\x10\n" +
+	"\x03mid\x18\x05 \x01(\tR\x03mid\"\x9d\x01\n" +
+	"\x0eAdsContextData\x12\x1b\n" +
+	"\tphoto_url\x18\x05 \x01(\tR\bphotoUrl\x12\x17\n" +
+	"\apost_id\x18\x06 \x01(\tR\x06postId\x12\x19\n" +
+	"\bad_title\x18\a \x01(\tR\aadTitle\x12\x1b\n" +
+	"\tvideo_url\x18\b \x01(\tR\bvideoUrl\x12\x1d\n" +
 	"\n" +
-	"\b_messageB\v\n" +
-	"\t_deliveryB\x0f\n" +
-	"\r_message_typeB\x10\n" +
-	"\x0e_sender_actionB\a\n" +
-	"\x05_readB\v\n" +
-	"\t_postbackB\v\n" +
-	"\t_referralB\x06\n" +
-	"\x04_tagB\v\n" +
-	"\t_reactionB\x0f\n" +
-	"\r_message_edit\"}\n" +
-	"\rFbMessageEdit\x12\x15\n" +
-	"\x03mid\x18\x04 \x01(\tH\x00R\x03mid\x88\x01\x01\x12\x17\n" +
-	"\x04text\x18\x05 \x01(\tH\x01R\x04text\x88\x01\x01\x12\x1e\n" +
-	"\bnum_edit\x18\x06 \x01(\x03H\x02R\anumEdit\x88\x01\x01B\x06\n" +
-	"\x04_midB\a\n" +
-	"\x05_textB\v\n" +
-	"\t_num_edit\"\xa6\x01\n" +
+	"product_id\x18\t \x01(\tR\tproductId\"\x95\x02\n" +
 	"\n" +
-	"IgReaction\x12\x15\n" +
-	"\x03mid\x18\x05 \x01(\tH\x00R\x03mid\x88\x01\x01\x12\x1b\n" +
-	"\x06action\x18\x06 \x01(\tH\x01R\x06action\x88\x01\x01\x12\x1f\n" +
-	"\breaction\x18\a \x01(\tH\x02R\breaction\x88\x01\x01\x12\x19\n" +
-	"\x05emoji\x18\b \x01(\tH\x03R\x05emoji\x88\x01\x01B\x06\n" +
-	"\x04_midB\t\n" +
-	"\a_actionB\v\n" +
-	"\t_reactionB\b\n" +
-	"\x06_emoji\"\xbe\x01\n" +
+	"FbReferral\x12\x10\n" +
+	"\x03ref\x18\x02 \x01(\tR\x03ref\x12\x16\n" +
+	"\x06source\x18\x03 \x01(\tR\x06source\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x12A\n" +
+	"\x10ads_context_data\x18\x05 \x01(\v2\x17.fabikon.AdsContextDataR\x0eadsContextData\x12\x13\n" +
+	"\x05ad_id\x18\x06 \x01(\tR\x04adId\x12\x1f\n" +
+	"\vreferer_uri\x18\a \x01(\tR\n" +
+	"refererUri\x12\"\n" +
+	"\ris_guest_user\x18\b \x01(\bR\visGuestUser\x12,\n" +
+	"\aproduct\x18\t \x01(\v2\x12.fabikon.FbProductR\aproduct\"\xa2\x04\n" +
+	"\tFbMessage\x12\x10\n" +
+	"\x03mid\x18\x02 \x01(\tR\x03mid\x12\x12\n" +
+	"\x04text\x18\x03 \x01(\tR\x04text\x127\n" +
+	"\vattachments\x18\x04 \x03(\v2\x15.fabikon.FbAttachmentR\vattachments\x12#\n" +
+	"\x04read\x18\x05 \x01(\v2\x0f.fabikon.FbReadR\x04read\x125\n" +
 	"\n" +
-	"FbPostback\x12\x1d\n" +
-	"\apayload\x18\x02 \x01(\tH\x00R\apayload\x88\x01\x01\x124\n" +
-	"\breferral\x18\x03 \x01(\v2\x13.fabikon.FbReferralH\x01R\breferral\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\x04 \x01(\tH\x02R\x05title\x88\x01\x01\x12\x15\n" +
-	"\x03mid\x18\x05 \x01(\tH\x03R\x03mid\x88\x01\x01B\n" +
-	"\n" +
-	"\b_payloadB\v\n" +
-	"\t_referralB\b\n" +
-	"\x06_titleB\x06\n" +
-	"\x04_mid\"\xfa\x01\n" +
-	"\x0eAdsContextData\x12 \n" +
-	"\tphoto_url\x18\x05 \x01(\tH\x00R\bphotoUrl\x88\x01\x01\x12\x1c\n" +
-	"\apost_id\x18\x06 \x01(\tH\x01R\x06postId\x88\x01\x01\x12\x1e\n" +
-	"\bad_title\x18\a \x01(\tH\x02R\aadTitle\x88\x01\x01\x12 \n" +
-	"\tvideo_url\x18\b \x01(\tH\x03R\bvideoUrl\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"product_id\x18\t \x01(\tH\x04R\tproductId\x88\x01\x01B\f\n" +
-	"\n" +
-	"_photo_urlB\n" +
-	"\n" +
-	"\b_post_idB\v\n" +
-	"\t_ad_titleB\f\n" +
-	"\n" +
-	"_video_urlB\r\n" +
-	"\v_product_id\"\xa6\x03\n" +
-	"\n" +
-	"FbReferral\x12\x15\n" +
-	"\x03ref\x18\x02 \x01(\tH\x00R\x03ref\x88\x01\x01\x12\x1b\n" +
-	"\x06source\x18\x03 \x01(\tH\x01R\x06source\x88\x01\x01\x12\x17\n" +
-	"\x04type\x18\x04 \x01(\tH\x02R\x04type\x88\x01\x01\x12F\n" +
-	"\x10ads_context_data\x18\x05 \x01(\v2\x17.fabikon.AdsContextDataH\x03R\x0eadsContextData\x88\x01\x01\x12\x18\n" +
-	"\x05ad_id\x18\x06 \x01(\tH\x04R\x04adId\x88\x01\x01\x12$\n" +
-	"\vreferer_uri\x18\a \x01(\tH\x05R\n" +
-	"refererUri\x88\x01\x01\x12'\n" +
-	"\ris_guest_user\x18\b \x01(\bH\x06R\visGuestUser\x88\x01\x01\x121\n" +
-	"\aproduct\x18\t \x01(\v2\x12.fabikon.FbProductH\aR\aproduct\x88\x01\x01B\x06\n" +
-	"\x04_refB\t\n" +
-	"\a_sourceB\a\n" +
-	"\x05_typeB\x13\n" +
-	"\x11_ads_context_dataB\b\n" +
-	"\x06_ad_idB\x0e\n" +
-	"\f_referer_uriB\x10\n" +
-	"\x0e_is_guest_userB\n" +
-	"\n" +
-	"\b_product\"\xf5\x05\n" +
-	"\tFbMessage\x12\x15\n" +
-	"\x03mid\x18\x02 \x01(\tH\x00R\x03mid\x88\x01\x01\x12\x17\n" +
-	"\x04text\x18\x03 \x01(\tH\x01R\x04text\x88\x01\x01\x127\n" +
-	"\vattachments\x18\x04 \x03(\v2\x15.fabikon.FbAttachmentR\vattachments\x12(\n" +
-	"\x04read\x18\x05 \x01(\v2\x0f.fabikon.FbReadH\x02R\x04read\x88\x01\x01\x12:\n" +
-	"\n" +
-	"attachment\x18\x06 \x01(\v2\x15.fabikon.FbAttachmentH\x03R\n" +
-	"attachment\x88\x01\x01\x12\x1c\n" +
-	"\ais_echo\x18\a \x01(\bH\x04R\x06isEcho\x88\x01\x01\x12\x1a\n" +
-	"\x06app_id\x18\b \x01(\x03H\x05R\x05appId\x88\x01\x01\x12\x1f\n" +
-	"\bmetadata\x18\t \x01(\tH\x06R\bmetadata\x88\x01\x01\x128\n" +
+	"attachment\x18\x06 \x01(\v2\x15.fabikon.FbAttachmentR\n" +
+	"attachment\x12\x17\n" +
+	"\ais_echo\x18\a \x01(\bR\x06isEcho\x12\x15\n" +
+	"\x06app_id\x18\b \x01(\x03R\x05appId\x12\x1a\n" +
+	"\bmetadata\x18\t \x01(\tR\bmetadata\x128\n" +
 	"\rquick_replies\x18\n" +
-	" \x03(\v2\x13.fabikon.QuickReplyR\fquickReplies\x129\n" +
-	"\vquick_reply\x18\v \x01(\v2\x13.fabikon.QuickReplyH\aR\n" +
-	"quickReply\x88\x01\x01\x12&\n" +
-	"\fis_supported\x18\f \x01(\tH\bR\visSupported\x88\x01\x01\x12\"\n" +
+	" \x03(\v2\x13.fabikon.QuickReplyR\fquickReplies\x124\n" +
+	"\vquick_reply\x18\v \x01(\v2\x13.fabikon.QuickReplyR\n" +
+	"quickReply\x12!\n" +
+	"\fis_supported\x18\f \x01(\tR\visSupported\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\r \x01(\bH\tR\tisDeleted\x88\x01\x01\x120\n" +
-	"\breply_to\x18\x0e \x01(\v2\x10.fabikon.ReplyToH\n" +
-	"R\areplyTo\x88\x01\x01\x124\n" +
-	"\breferral\x18\x10 \x01(\v2\x13.fabikon.FbReferralH\vR\breferral\x88\x01\x01B\x06\n" +
-	"\x04_midB\a\n" +
-	"\x05_textB\a\n" +
-	"\x05_readB\r\n" +
-	"\v_attachmentB\n" +
+	"is_deleted\x18\r \x01(\bR\tisDeleted\x12+\n" +
+	"\breply_to\x18\x0e \x01(\v2\x10.fabikon.ReplyToR\areplyTo\x12/\n" +
+	"\breferral\x18\x10 \x01(\v2\x13.fabikon.FbReferralR\breferral\"H\n" +
+	"\aReplyTo\x12\x10\n" +
+	"\x03mid\x18\x04 \x01(\tR\x03mid\x12+\n" +
+	"\x05story\x18\x05 \x01(\v2\x15.fabikon.FbReplyStoryR\x05story\"0\n" +
+	"\fFbReplyStory\x12\x10\n" +
+	"\x03url\x18\x05 \x01(\tR\x03url\x12\x0e\n" +
+	"\x02id\x18\x06 \x01(\tR\x02id\"|\n" +
 	"\n" +
-	"\b_is_echoB\t\n" +
-	"\a_app_idB\v\n" +
-	"\t_metadataB\x0e\n" +
-	"\f_quick_replyB\x0f\n" +
-	"\r_is_supportedB\r\n" +
-	"\v_is_deletedB\v\n" +
-	"\t_reply_toB\v\n" +
-	"\t_referral\"d\n" +
-	"\aReplyTo\x12\x15\n" +
-	"\x03mid\x18\x04 \x01(\tH\x00R\x03mid\x88\x01\x01\x120\n" +
-	"\x05story\x18\x05 \x01(\v2\x15.fabikon.FbReplyStoryH\x01R\x05story\x88\x01\x01B\x06\n" +
-	"\x04_midB\b\n" +
-	"\x06_story\"I\n" +
-	"\fFbReplyStory\x12\x15\n" +
-	"\x03url\x18\x05 \x01(\tH\x00R\x03url\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x06 \x01(\tH\x01R\x02id\x88\x01\x01B\x06\n" +
-	"\x04_urlB\x05\n" +
-	"\x03_id\"\xc5\x01\n" +
+	"QuickReply\x12!\n" +
+	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x18\n" +
+	"\apayload\x18\x04 \x01(\tR\apayload\x12\x1b\n" +
+	"\timage_url\x18\x05 \x01(\tR\bimageUrl\"5\n" +
+	"\bFbSender\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x19\n" +
+	"\buser_ref\x18\x03 \x01(\tR\auserRef\"p\n" +
+	"\vFbRecipient\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x17\n" +
+	"\apost_id\x18\x03 \x01(\tR\x06postId\x12\x1d\n" +
 	"\n" +
-	"QuickReply\x12&\n" +
-	"\fcontent_type\x18\x02 \x01(\tH\x00R\vcontentType\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\x03 \x01(\tH\x01R\x05title\x88\x01\x01\x12\x1d\n" +
-	"\apayload\x18\x04 \x01(\tH\x02R\apayload\x88\x01\x01\x12 \n" +
-	"\timage_url\x18\x05 \x01(\tH\x03R\bimageUrl\x88\x01\x01B\x0f\n" +
-	"\r_content_typeB\b\n" +
-	"\x06_titleB\n" +
+	"comment_id\x18\x04 \x01(\tR\tcommentId\x12\x19\n" +
+	"\buser_ref\x18\x05 \x01(\tR\auserRef\"0\n" +
+	"\bFbAction\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x10\n" +
+	"\x03url\x18\x03 \x01(\tR\x03url\"x\n" +
+	"\fFbAttachment\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12,\n" +
+	"\apayload\x18\x03 \x01(\v2\x12.fabikon.FbPayloadR\apayload\x12\x14\n" +
+	"\x05title\x18\x04 \x01(\tR\x05title\x12\x10\n" +
+	"\x03URL\x18\x05 \x01(\tR\x03URL\"\x86\x01\n" +
+	"\aSummary\x12\x1a\n" +
+	"\bsubtotal\x18\x02 \x01(\x02R\bsubtotal\x12#\n" +
+	"\rshipping_cost\x18\x03 \x01(\x02R\fshippingCost\x12\x1b\n" +
+	"\ttotal_tax\x18\x04 \x01(\x02R\btotalTax\x12\x1d\n" +
 	"\n" +
-	"\b_payloadB\f\n" +
+	"total_cost\x18\x05 \x01(\x02R\ttotalCost\"8\n" +
 	"\n" +
-	"_image_url\"S\n" +
-	"\bFbSender\x12\x13\n" +
-	"\x02id\x18\x02 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1e\n" +
-	"\buser_ref\x18\x03 \x01(\tH\x01R\auserRef\x88\x01\x01B\x05\n" +
-	"\x03_idB\v\n" +
-	"\t_user_ref\"\xb3\x01\n" +
-	"\vFbRecipient\x12\x13\n" +
-	"\x02id\x18\x02 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1c\n" +
-	"\apost_id\x18\x03 \x01(\tH\x01R\x06postId\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"comment_id\x18\x04 \x01(\tH\x02R\tcommentId\x88\x01\x01\x12\x1e\n" +
-	"\buser_ref\x18\x05 \x01(\tH\x03R\auserRef\x88\x01\x01B\x05\n" +
-	"\x03_idB\n" +
-	"\n" +
-	"\b_post_idB\r\n" +
-	"\v_comment_idB\v\n" +
-	"\t_user_ref\"K\n" +
-	"\bFbAction\x12\x17\n" +
-	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x15\n" +
-	"\x03url\x18\x03 \x01(\tH\x01R\x03url\x88\x01\x01B\a\n" +
-	"\x05_typeB\x06\n" +
-	"\x04_url\"\xb3\x01\n" +
-	"\fFbAttachment\x12\x17\n" +
-	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x121\n" +
-	"\apayload\x18\x03 \x01(\v2\x12.fabikon.FbPayloadH\x01R\apayload\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\x04 \x01(\tH\x02R\x05title\x88\x01\x01\x12\x15\n" +
-	"\x03URL\x18\x05 \x01(\tH\x03R\x03URL\x88\x01\x01B\a\n" +
-	"\x05_typeB\n" +
-	"\n" +
-	"\b_payloadB\b\n" +
-	"\x06_titleB\x06\n" +
-	"\x04_URL\"\xd6\x01\n" +
-	"\aSummary\x12\x1f\n" +
-	"\bsubtotal\x18\x02 \x01(\x02H\x00R\bsubtotal\x88\x01\x01\x12(\n" +
-	"\rshipping_cost\x18\x03 \x01(\x02H\x01R\fshippingCost\x88\x01\x01\x12 \n" +
-	"\ttotal_tax\x18\x04 \x01(\x02H\x02R\btotalTax\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"total_cost\x18\x05 \x01(\x02H\x03R\ttotalCost\x88\x01\x01B\v\n" +
-	"\t_subtotalB\x10\n" +
-	"\x0e_shipping_costB\f\n" +
-	"\n" +
-	"_total_taxB\r\n" +
-	"\v_total_cost\"V\n" +
-	"\n" +
-	"Adjustment\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1b\n" +
-	"\x06amount\x18\x03 \x01(\x02H\x01R\x06amount\x88\x01\x01B\a\n" +
-	"\x05_nameB\t\n" +
-	"\a_amount\"\x8b\x02\n" +
-	"\aAddress\x12\x1e\n" +
-	"\bstreet_1\x18\x02 \x01(\tH\x00R\astreet1\x88\x01\x01\x12\x1e\n" +
-	"\bstreet_2\x18\x03 \x01(\tH\x01R\astreet2\x88\x01\x01\x12\x17\n" +
-	"\x04city\x18\x04 \x01(\tH\x02R\x04city\x88\x01\x01\x12$\n" +
-	"\vpostal_code\x18\x05 \x01(\tH\x03R\n" +
-	"postalCode\x88\x01\x01\x12\x19\n" +
-	"\x05state\x18\x06 \x01(\tH\x04R\x05state\x88\x01\x01\x12\x1d\n" +
-	"\acountry\x18\a \x01(\tH\x05R\acountry\x88\x01\x01B\v\n" +
-	"\t_street_1B\v\n" +
-	"\t_street_2B\a\n" +
-	"\x05_cityB\x0e\n" +
-	"\f_postal_codeB\b\n" +
-	"\x06_stateB\n" +
-	"\n" +
-	"\b_country\"\xd8\x03\n" +
-	"\x0eGenericElement\x12\x19\n" +
-	"\x05title\x18\x02 \x01(\tH\x00R\x05title\x88\x01\x01\x12\x1e\n" +
-	"\bitem_url\x18\x03 \x01(\tH\x01R\aitemUrl\x88\x01\x01\x12 \n" +
-	"\timage_url\x18\x04 \x01(\tH\x02R\bimageUrl\x88\x01\x01\x12\x1f\n" +
-	"\bsubtitle\x18\x05 \x01(\tH\x03R\bsubtitle\x88\x01\x01\x12;\n" +
-	"\x0edefault_action\x18\x06 \x01(\v2\x0f.fabikon.ButtonH\x04R\rdefaultAction\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\a \x01(\tH\x05R\x02id\x88\x01\x01\x12)\n" +
-	"\abuttons\x18\b \x03(\v2\x0f.fabikon.ButtonR\abuttons\x12\x1f\n" +
-	"\bquantity\x18\t \x01(\x03H\x06R\bquantity\x88\x01\x01\x12\x1f\n" +
+	"Adjustment\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\x02R\x06amount\"\xa4\x01\n" +
+	"\aAddress\x12\x19\n" +
+	"\bstreet_1\x18\x02 \x01(\tR\astreet1\x12\x19\n" +
+	"\bstreet_2\x18\x03 \x01(\tR\astreet2\x12\x12\n" +
+	"\x04city\x18\x04 \x01(\tR\x04city\x12\x1f\n" +
+	"\vpostal_code\x18\x05 \x01(\tR\n" +
+	"postalCode\x12\x14\n" +
+	"\x05state\x18\x06 \x01(\tR\x05state\x12\x18\n" +
+	"\acountry\x18\a \x01(\tR\acountry\"\xbb\x02\n" +
+	"\x0eGenericElement\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x19\n" +
+	"\bitem_url\x18\x03 \x01(\tR\aitemUrl\x12\x1b\n" +
+	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x1a\n" +
+	"\bsubtitle\x18\x05 \x01(\tR\bsubtitle\x126\n" +
+	"\x0edefault_action\x18\x06 \x01(\v2\x0f.fabikon.ButtonR\rdefaultAction\x12\x0e\n" +
+	"\x02id\x18\a \x01(\tR\x02id\x12)\n" +
+	"\abuttons\x18\b \x03(\v2\x0f.fabikon.ButtonR\abuttons\x12\x1a\n" +
+	"\bquantity\x18\t \x01(\x03R\bquantity\x12\x1a\n" +
 	"\bcurrency\x18\n" +
-	" \x01(\tH\aR\bcurrency\x88\x01\x01\x12\x19\n" +
-	"\x05price\x18\v \x01(\x02H\bR\x05price\x88\x01\x01B\b\n" +
-	"\x06_titleB\v\n" +
-	"\t_item_urlB\f\n" +
-	"\n" +
-	"_image_urlB\v\n" +
-	"\t_subtitleB\x11\n" +
-	"\x0f_default_actionB\x05\n" +
-	"\x03_idB\v\n" +
-	"\t_quantityB\v\n" +
-	"\t_currencyB\b\n" +
-	"\x06_price\"\xfa\x06\n" +
-	"\tFbPayload\x12\x15\n" +
-	"\x03url\x18\x02 \x01(\tH\x00R\x03url\x88\x01\x01\x12&\n" +
-	"\fis_reuseable\x18\x03 \x01(\bH\x01R\visReuseable\x88\x01\x01\x12(\n" +
-	"\rtemplate_type\x18\x04 \x01(\tH\x02R\ftemplateType\x88\x01\x01\x12\x1f\n" +
-	"\bsharable\x18\x05 \x01(\bH\x03R\bsharable\x88\x01\x01\x123\n" +
-	"\belements\x18\x06 \x03(\v2\x17.fabikon.GenericElementR\belements\x12\x17\n" +
-	"\x04text\x18\a \x01(\tH\x04R\x04text\x88\x01\x01\x12)\n" +
-	"\abuttons\x18\b \x03(\v2\x0f.fabikon.ButtonR\abuttons\x12/\n" +
+	" \x01(\tR\bcurrency\x12\x14\n" +
+	"\x05price\x18\v \x01(\x02R\x05price\"\xf3\x04\n" +
+	"\tFbPayload\x12\x10\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\x12!\n" +
+	"\fis_reuseable\x18\x03 \x01(\bR\visReuseable\x12#\n" +
+	"\rtemplate_type\x18\x04 \x01(\tR\ftemplateType\x12\x1a\n" +
+	"\bsharable\x18\x05 \x01(\bR\bsharable\x123\n" +
+	"\belements\x18\x06 \x03(\v2\x17.fabikon.GenericElementR\belements\x12\x12\n" +
+	"\x04text\x18\a \x01(\tR\x04text\x12)\n" +
+	"\abuttons\x18\b \x03(\v2\x0f.fabikon.ButtonR\abuttons\x12*\n" +
 	"\aaddress\x18\n" +
-	" \x01(\v2\x10.fabikon.AddressH\x05R\aaddress\x88\x01\x01\x12/\n" +
-	"\asummary\x18\v \x01(\v2\x10.fabikon.SummaryH\x06R\asummary\x88\x01\x01\x125\n" +
-	"\vadjustments\x18\f \x03(\v2\x13.fabikon.AdjustmentR\vadjustments\x12*\n" +
-	"\x0erecipient_name\x18\r \x01(\tH\aR\rrecipientName\x88\x01\x01\x12&\n" +
-	"\forder_number\x18\x0e \x01(\tH\bR\vorderNumber\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\x0f \x01(\tH\tR\bcurrency\x88\x01\x01\x12*\n" +
-	"\x0epayment_method\x18\x10 \x01(\tH\n" +
-	"R\rpaymentMethod\x88\x01\x01\x12 \n" +
-	"\torder_url\x18\x11 \x01(\tH\vR\borderUrl\x88\x01\x01\x122\n" +
-	"\aproduct\x18\x13 \x01(\v2\x13.fabikon.FbProductsH\fR\aproduct\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\x14 \x01(\tH\rR\x05title\x88\x01\x01B\x06\n" +
-	"\x04_urlB\x0f\n" +
-	"\r_is_reuseableB\x10\n" +
-	"\x0e_template_typeB\v\n" +
-	"\t_sharableB\a\n" +
-	"\x05_textB\n" +
-	"\n" +
-	"\b_addressB\n" +
-	"\n" +
-	"\b_summaryB\x11\n" +
-	"\x0f_recipient_nameB\x0f\n" +
-	"\r_order_numberB\v\n" +
-	"\t_currencyB\x11\n" +
-	"\x0f_payment_methodB\f\n" +
-	"\n" +
-	"_order_urlB\n" +
-	"\n" +
-	"\b_productB\b\n" +
-	"\x06_title\"<\n" +
+	" \x01(\v2\x10.fabikon.AddressR\aaddress\x12*\n" +
+	"\asummary\x18\v \x01(\v2\x10.fabikon.SummaryR\asummary\x125\n" +
+	"\vadjustments\x18\f \x03(\v2\x13.fabikon.AdjustmentR\vadjustments\x12%\n" +
+	"\x0erecipient_name\x18\r \x01(\tR\rrecipientName\x12!\n" +
+	"\forder_number\x18\x0e \x01(\tR\vorderNumber\x12\x1a\n" +
+	"\bcurrency\x18\x0f \x01(\tR\bcurrency\x12%\n" +
+	"\x0epayment_method\x18\x10 \x01(\tR\rpaymentMethod\x12\x1b\n" +
+	"\torder_url\x18\x11 \x01(\tR\borderUrl\x12-\n" +
+	"\aproduct\x18\x13 \x01(\v2\x13.fabikon.FbProductsR\aproduct\x12\x14\n" +
+	"\x05title\x18\x14 \x01(\tR\x05title\"<\n" +
 	"\n" +
 	"FbProducts\x12.\n" +
-	"\belements\x18\x03 \x03(\v2\x12.fabikon.FbProductR\belements\"\xe0\x01\n" +
-	"\tFbProduct\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x04 \x01(\tH\x01R\n" +
-	"retailerId\x88\x01\x01\x12 \n" +
-	"\timage_url\x18\x05 \x01(\tH\x02R\bimageUrl\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\x06 \x01(\tH\x03R\x05title\x88\x01\x01\x12\x1f\n" +
-	"\bsubtitle\x18\a \x01(\tH\x04R\bsubtitle\x88\x01\x01B\x05\n" +
-	"\x03_idB\x0e\n" +
-	"\f_retailer_idB\f\n" +
-	"\n" +
-	"_image_urlB\b\n" +
-	"\x06_titleB\v\n" +
-	"\t_subtitle\"\xc3\x03\n" +
-	"\x06Button\x12\x17\n" +
-	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x19\n" +
-	"\x05title\x18\x03 \x01(\tH\x01R\x05title\x88\x01\x01\x12\x1d\n" +
-	"\apayload\x18\x04 \x01(\tH\x02R\apayload\x88\x01\x01\x12\x15\n" +
-	"\x03url\x18\x05 \x01(\tH\x03R\x03url\x88\x01\x01\x125\n" +
-	"\x14webview_height_ratio\x18\x06 \x01(\tH\x04R\x12webviewHeightRatio\x88\x01\x01\x126\n" +
-	"\x14messenger_extensions\x18\a \x01(\bH\x05R\x13messengerExtensions\x88\x01\x01\x12&\n" +
-	"\ffallback_url\x18\b \x01(\tH\x06R\vfallbackUrl\x88\x01\x01\x125\n" +
-	"\x14webview_share_button\x18\t \x01(\tH\aR\x12webviewShareButton\x88\x01\x01B\a\n" +
-	"\x05_typeB\b\n" +
-	"\x06_titleB\n" +
-	"\n" +
-	"\b_payloadB\x06\n" +
-	"\x04_urlB\x17\n" +
-	"\x15_webview_height_ratioB\x17\n" +
-	"\x15_messenger_extensionsB\x0f\n" +
-	"\r_fallback_urlB\x17\n" +
-	"\x15_webview_share_button\"X\n" +
-	"\x06FbRead\x12!\n" +
-	"\twatermark\x18\x02 \x01(\x03H\x00R\twatermark\x88\x01\x01\x12\x15\n" +
-	"\x03seq\x18\x03 \x01(\x05H\x01R\x03seq\x88\x01\x01B\f\n" +
-	"\n" +
-	"_watermarkB\x06\n" +
-	"\x04_seq\"p\n" +
+	"\belements\x18\x03 \x03(\v2\x12.fabikon.FbProductR\belements\"\x8b\x01\n" +
+	"\tFbProduct\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1f\n" +
+	"\vretailer_id\x18\x04 \x01(\tR\n" +
+	"retailerId\x12\x1b\n" +
+	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12\x14\n" +
+	"\x05title\x18\x06 \x01(\tR\x05title\x12\x1a\n" +
+	"\bsubtitle\x18\a \x01(\tR\bsubtitle\"\xc0\x02\n" +
+	"\x06Button\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x18\n" +
+	"\apayload\x18\x04 \x01(\tR\apayload\x12\x10\n" +
+	"\x03url\x18\x05 \x01(\tR\x03url\x120\n" +
+	"\x14webview_height_ratio\x18\x06 \x01(\tR\x12webviewHeightRatio\x121\n" +
+	"\x14messenger_extensions\x18\a \x01(\bR\x13messengerExtensions\x12!\n" +
+	"\ffallback_url\x18\b \x01(\tR\vfallbackUrl\x120\n" +
+	"\x14webview_share_button\x18\t \x01(\tR\x12webviewShareButton\x12&\n" +
+	"\x0fexpires_in_days\x18\n" +
+	" \x01(\x03R\rexpiresInDays\"8\n" +
+	"\x06FbRead\x12\x1c\n" +
+	"\twatermark\x18\x02 \x01(\x03R\twatermark\x12\x10\n" +
+	"\x03seq\x18\x03 \x01(\x05R\x03seq\"]\n" +
 	"\n" +
 	"FbDelivery\x12\x12\n" +
-	"\x04mids\x18\x02 \x03(\tR\x04mids\x12!\n" +
-	"\twatermark\x18\x03 \x01(\x03H\x00R\twatermark\x88\x01\x01\x12\x15\n" +
-	"\x03seq\x18\x04 \x01(\x05H\x01R\x03seq\x88\x01\x01B\f\n" +
+	"\x04mids\x18\x02 \x03(\tR\x04mids\x12\x1c\n" +
+	"\twatermark\x18\x03 \x01(\x03R\twatermark\x12\x15\n" +
+	"\x03seq\x18\x04 \x01(\x05H\x00R\x03seq\x88\x01\x01B\x06\n" +
+	"\x04_seq\"R\n" +
+	"\x0eFbSendResponse\x12!\n" +
+	"\frecipient_id\x18\x02 \x01(\tR\vrecipientId\x12\x1d\n" +
 	"\n" +
-	"_watermarkB\x06\n" +
-	"\x04_seq\"|\n" +
-	"\x0eFbSendResponse\x12&\n" +
-	"\frecipient_id\x18\x02 \x01(\tH\x00R\vrecipientId\x88\x01\x01\x12\"\n" +
+	"message_id\x18\x03 \x01(\tR\tmessageId\"\xa8\x01\n" +
+	"\fConversation\x12\x1d\n" +
 	"\n" +
-	"message_id\x18\x03 \x01(\tH\x01R\tmessageId\x88\x01\x01B\x0f\n" +
-	"\r_recipient_idB\r\n" +
-	"\v_message_id\"\x8e\x02\n" +
-	"\fConversation\x12\"\n" +
-	"\n" +
-	"account_id\x18\x02 \x01(\tH\x00R\taccountId\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x01R\x02id\x88\x01\x01\x12\x1c\n" +
-	"\apage_id\x18\x04 \x01(\tH\x02R\x06pageId\x88\x01\x01\x12\x1d\n" +
-	"\acreated\x18\x05 \x01(\x03H\x03R\acreated\x88\x01\x01\x12\x1f\n" +
-	"\bfbuserid\x18\x06 \x01(\tH\x04R\bfbuserid\x88\x01\x01\x12\x1f\n" +
-	"\bsbuserid\x18\a \x01(\tH\x05R\bsbuserid\x88\x01\x01B\r\n" +
-	"\v_account_idB\x05\n" +
-	"\x03_idB\n" +
-	"\n" +
-	"\b_page_idB\n" +
-	"\n" +
-	"\b_createdB\v\n" +
-	"\t_fbuseridB\v\n" +
-	"\t_sbuserid\"M\n" +
-	"\rFbPagePicture\x123\n" +
-	"\x04data\x18\x02 \x01(\v2\x1a.fabikon.FbPagePictureDataH\x00R\x04data\x88\x01\x01B\a\n" +
-	"\x05_data\"2\n" +
-	"\x11FbPagePictureData\x12\x15\n" +
-	"\x03url\x18\x02 \x01(\tH\x00R\x03url\x88\x01\x01B\x06\n" +
-	"\x04_url\"\x86\x03\n" +
-	"\vFbPageEntry\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x125\n" +
-	"\apicture\x18\x03 \x01(\v2\x16.fabikon.FbPagePictureH\x01R\apicture\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x05 \x01(\tH\x02R\x02id\x88\x01\x01\x12&\n" +
-	"\faccess_token\x18\x06 \x01(\tH\x03R\vaccessToken\x88\x01\x01\x12Y\n" +
-	"\x1ainstagram_business_account\x18\a \x01(\v2\x16.fabikon.InstagramUserH\x04R\x18instagramBusinessAccount\x88\x01\x01\x126\n" +
-	"\bbusiness\x18\b \x01(\v2\x15.fabikon.MetaBusinessH\x05R\bbusiness\x88\x01\x01B\a\n" +
-	"\x05_nameB\n" +
-	"\n" +
-	"\b_pictureB\x05\n" +
-	"\x03_idB\x0f\n" +
-	"\r_access_tokenB\x1d\n" +
-	"\x1b_instagram_business_accountB\v\n" +
-	"\t_business\"X\n" +
-	"\tFbCursors\x12\x1b\n" +
-	"\x06before\x18\x02 \x01(\tH\x00R\x06before\x88\x01\x01\x12\x19\n" +
-	"\x05after\x18\x03 \x01(\tH\x01R\x05after\x88\x01\x01B\t\n" +
-	"\a_beforeB\b\n" +
-	"\x06_after\"k\n" +
-	"\bFbPaging\x121\n" +
-	"\acursors\x18\x02 \x01(\v2\x12.fabikon.FbCursorsH\x00R\acursors\x88\x01\x01\x12\x17\n" +
-	"\x04next\x18\x03 \x01(\tH\x01R\x04next\x88\x01\x01B\n" +
-	"\n" +
-	"\b_cursorsB\a\n" +
-	"\x05_next\"p\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x17\n" +
+	"\apage_id\x18\x04 \x01(\tR\x06pageId\x12\x18\n" +
+	"\acreated\x18\x05 \x01(\x03R\acreated\x12\x1a\n" +
+	"\bfbuserid\x18\x06 \x01(\tR\bfbuserid\x12\x1a\n" +
+	"\bsbuserid\x18\a \x01(\tR\bsbuserid\"?\n" +
+	"\rFbPagePicture\x12.\n" +
+	"\x04data\x18\x02 \x01(\v2\x1a.fabikon.FbPagePictureDataR\x04data\"%\n" +
+	"\x11FbPagePictureData\x12\x10\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"\x8f\x02\n" +
+	"\vFbPageEntry\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x120\n" +
+	"\apicture\x18\x03 \x01(\v2\x16.fabikon.FbPagePictureR\apicture\x12\x0e\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12!\n" +
+	"\faccess_token\x18\x06 \x01(\tR\vaccessToken\x12T\n" +
+	"\x1ainstagram_business_account\x18\a \x01(\v2\x16.fabikon.InstagramUserR\x18instagramBusinessAccount\x121\n" +
+	"\bbusiness\x18\b \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\"9\n" +
+	"\tFbCursors\x12\x16\n" +
+	"\x06before\x18\x02 \x01(\tR\x06before\x12\x14\n" +
+	"\x05after\x18\x03 \x01(\tR\x05after\"L\n" +
+	"\bFbPaging\x12,\n" +
+	"\acursors\x18\x02 \x01(\v2\x12.fabikon.FbCursorsR\acursors\x12\x12\n" +
+	"\x04next\x18\x03 \x01(\tR\x04next\"`\n" +
 	"\tFbPageRet\x12(\n" +
-	"\x04data\x18\x02 \x03(\v2\x14.fabikon.FbPageEntryR\x04data\x12.\n" +
-	"\x06paging\x18\x03 \x01(\v2\x11.fabikon.FbPagingH\x00R\x06paging\x88\x01\x01B\t\n" +
-	"\a_paging\"\xba\x01\n" +
-	"\x10FbProfilePicData\x12\x1b\n" +
-	"\x06height\x18\x02 \x01(\x03H\x00R\x06height\x88\x01\x01\x12\x19\n" +
-	"\x05width\x18\x03 \x01(\x03H\x01R\x05width\x88\x01\x01\x12(\n" +
-	"\ris_silhouette\x18\x04 \x01(\bH\x02R\fisSilhouette\x88\x01\x01\x12\x15\n" +
-	"\x03url\x18\x05 \x01(\tH\x03R\x03url\x88\x01\x01B\t\n" +
-	"\a_heightB\b\n" +
-	"\x06_widthB\x10\n" +
-	"\x0e_is_silhouetteB\x06\n" +
-	"\x04_url\"K\n" +
-	"\fFbProfilePic\x122\n" +
-	"\x04Data\x18\x02 \x01(\v2\x19.fabikon.FbProfilePicDataH\x00R\x04Data\x88\x01\x01B\a\n" +
-	"\x05_Data\"\xe4\x03\n" +
-	"\fFacebookUser\x12\"\n" +
+	"\x04data\x18\x02 \x03(\v2\x14.fabikon.FbPageEntryR\x04data\x12)\n" +
+	"\x06paging\x18\x03 \x01(\v2\x11.fabikon.FbPagingR\x06paging\"w\n" +
+	"\x10FbProfilePicData\x12\x16\n" +
+	"\x06height\x18\x02 \x01(\x03R\x06height\x12\x14\n" +
+	"\x05width\x18\x03 \x01(\x03R\x05width\x12#\n" +
+	"\ris_silhouette\x18\x04 \x01(\bR\fisSilhouette\x12\x10\n" +
+	"\x03url\x18\x05 \x01(\tR\x03url\"=\n" +
+	"\fFbProfilePic\x12-\n" +
+	"\x04Data\x18\x02 \x01(\v2\x19.fabikon.FbProfilePicDataR\x04Data\"\xb3\x02\n" +
+	"\fFacebookUser\x12\x1d\n" +
 	"\n" +
-	"first_name\x18\x02 \x01(\tH\x00R\tfirstName\x88\x01\x01\x12$\n" +
-	"\vmiddle_name\x18\x03 \x01(\tH\x01R\n" +
-	"middleName\x88\x01\x01\x12 \n" +
-	"\tlast_name\x18\x04 \x01(\tH\x02R\blastName\x88\x01\x01\x12$\n" +
-	"\vprofile_pic\x18\x05 \x01(\tH\x03R\n" +
-	"profilePic\x88\x01\x01\x12\x1b\n" +
-	"\x06locale\x18\x06 \x01(\tH\x04R\x06locale\x88\x01\x01\x12\x1f\n" +
-	"\btimezone\x18\a \x01(\x02H\x05R\btimezone\x88\x01\x01\x12\x1b\n" +
-	"\x06gender\x18\b \x01(\tH\x06R\x06gender\x88\x01\x01\x124\n" +
-	"\apicture\x18\t \x01(\v2\x15.fabikon.FbProfilePicH\aR\apicture\x88\x01\x01\x12\x19\n" +
+	"first_name\x18\x02 \x01(\tR\tfirstName\x12\x1f\n" +
+	"\vmiddle_name\x18\x03 \x01(\tR\n" +
+	"middleName\x12\x1b\n" +
+	"\tlast_name\x18\x04 \x01(\tR\blastName\x12\x1f\n" +
+	"\vprofile_pic\x18\x05 \x01(\tR\n" +
+	"profilePic\x12\x16\n" +
+	"\x06locale\x18\x06 \x01(\tR\x06locale\x12\x1a\n" +
+	"\btimezone\x18\a \x01(\x02R\btimezone\x12\x16\n" +
+	"\x06gender\x18\b \x01(\tR\x06gender\x12/\n" +
+	"\apicture\x18\t \x01(\v2\x15.fabikon.FbProfilePicR\apicture\x12\x14\n" +
 	"\x05email\x18\n" +
-	" \x01(\tH\bR\x05email\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\v \x01(\tH\tR\x04name\x88\x01\x01B\r\n" +
-	"\v_first_nameB\x0e\n" +
-	"\f_middle_nameB\f\n" +
-	"\n" +
-	"_last_nameB\x0e\n" +
-	"\f_profile_picB\t\n" +
-	"\a_localeB\v\n" +
-	"\t_timezoneB\t\n" +
-	"\a_genderB\n" +
-	"\n" +
-	"\b_pictureB\b\n" +
-	"\x06_emailB\a\n" +
-	"\x05_name\"|\n" +
-	"\x11FacebookGuestUser\x12\x13\n" +
-	"\x02id\x18\x02 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x1d\n" +
-	"\apicture\x18\t \x01(\tH\x02R\apicture\x88\x01\x01B\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_nameB\n" +
-	"\n" +
-	"\b_picture\"\xf5\x05\n" +
-	"\rInstagramUser\x12\x13\n" +
-	"\x02id\x18\x04 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x05 \x01(\tH\x01R\busername\x88\x01\x01\x123\n" +
-	"\x13profile_picture_url\x18\x06 \x01(\tH\x02R\x11profilePictureUrl\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\a \x01(\tH\x03R\x04name\x88\x01\x01\x12\x18\n" +
-	"\x05ig_id\x18\b \x01(\x03H\x04R\x04igId\x88\x01\x01\x12,\n" +
-	"\x0ffollowers_count\x18\t \x01(\x03H\x05R\x0efollowersCount\x88\x01\x01\x12(\n" +
+	" \x01(\tR\x05email\x12\x12\n" +
+	"\x04name\x18\v \x01(\tR\x04name\"Q\n" +
+	"\x11FacebookGuestUser\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
+	"\apicture\x18\t \x01(\tR\apicture\"\xd6\x03\n" +
+	"\rInstagramUser\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1a\n" +
+	"\busername\x18\x05 \x01(\tR\busername\x12.\n" +
+	"\x13profile_picture_url\x18\x06 \x01(\tR\x11profilePictureUrl\x12\x12\n" +
+	"\x04name\x18\a \x01(\tR\x04name\x12\x13\n" +
+	"\x05ig_id\x18\b \x01(\x03R\x04igId\x12'\n" +
+	"\x0ffollowers_count\x18\t \x01(\x03R\x0efollowersCount\x12#\n" +
 	"\rfollows_count\x18\n" +
-	" \x01(\x03H\x06R\ffollowsCount\x88\x01\x01\x12$\n" +
-	"\vmedia_count\x18\v \x01(\x03H\aR\n" +
-	"mediaCount\x88\x01\x01\x12\x1d\n" +
-	"\awebsite\x18\f \x01(\tH\bR\awebsite\x88\x01\x01\x12-\n" +
-	"\x10is_verified_user\x18\r \x01(\bH\tR\x0eisVerifiedUser\x88\x01\x01\x12:\n" +
-	"\x17is_user_follow_business\x18\x0e \x01(\bH\n" +
-	"R\x14isUserFollowBusiness\x88\x01\x01\x12:\n" +
-	"\x17is_business_follow_user\x18\x0f \x01(\bH\vR\x14isBusinessFollowUser\x88\x01\x01\x12$\n" +
-	"\vprofile_pic\x18\x10 \x01(\tH\fR\n" +
-	"profilePic\x88\x01\x01B\x05\n" +
-	"\x03_idB\v\n" +
-	"\t_usernameB\x16\n" +
-	"\x14_profile_picture_urlB\a\n" +
-	"\x05_nameB\b\n" +
-	"\x06_ig_idB\x12\n" +
-	"\x10_followers_countB\x10\n" +
-	"\x0e_follows_countB\x0e\n" +
-	"\f_media_countB\n" +
+	" \x01(\x03R\ffollowsCount\x12\x1f\n" +
+	"\vmedia_count\x18\v \x01(\x03R\n" +
+	"mediaCount\x12\x18\n" +
+	"\awebsite\x18\f \x01(\tR\awebsite\x12(\n" +
+	"\x10is_verified_user\x18\r \x01(\bR\x0eisVerifiedUser\x125\n" +
+	"\x17is_user_follow_business\x18\x0e \x01(\bR\x14isUserFollowBusiness\x125\n" +
+	"\x17is_business_follow_user\x18\x0f \x01(\bR\x14isBusinessFollowUser\x12\x1f\n" +
+	"\vprofile_pic\x18\x10 \x01(\tR\n" +
+	"profilePic\"\xc4\x01\n" +
 	"\n" +
-	"\b_websiteB\x13\n" +
-	"\x11_is_verified_userB\x1a\n" +
-	"\x18_is_user_follow_businessB\x1a\n" +
-	"\x18_is_business_follow_userB\x0e\n" +
-	"\f_profile_pic\"\xba\x02\n" +
+	"Fb2SbEvent\x12\x14\n" +
+	"\x05fbmid\x18\x02 \x01(\tR\x05fbmid\x12\x1d\n" +
 	"\n" +
-	"Fb2SbEvent\x12\x19\n" +
-	"\x05fbmid\x18\x02 \x01(\tH\x00R\x05fbmid\x88\x01\x01\x12\"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12'\n" +
+	"\x0fconversation_id\x18\x04 \x01(\tR\x0econversationId\x12\x14\n" +
+	"\x05sbmid\x18\x05 \x01(\tR\x05sbmid\x12\x17\n" +
+	"\apage_id\x18\x06 \x01(\tR\x06pageId\x12)\n" +
+	"\x10attachment_index\x18\a \x01(\x05R\x0fattachmentIndex\"w\n" +
+	"\x14LongLivedAccessToken\x12!\n" +
+	"\faccess_token\x18\x02 \x01(\tR\vaccessToken\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x03 \x01(\tH\x01R\taccountId\x88\x01\x01\x12,\n" +
-	"\x0fconversation_id\x18\x04 \x01(\tH\x02R\x0econversationId\x88\x01\x01\x12\x19\n" +
-	"\x05sbmid\x18\x05 \x01(\tH\x03R\x05sbmid\x88\x01\x01\x12\x1c\n" +
-	"\apage_id\x18\x06 \x01(\tH\x04R\x06pageId\x88\x01\x01\x12.\n" +
-	"\x10attachment_index\x18\a \x01(\x05H\x05R\x0fattachmentIndex\x88\x01\x01B\b\n" +
-	"\x06_fbmidB\r\n" +
-	"\v_account_idB\x12\n" +
-	"\x10_conversation_idB\b\n" +
-	"\x06_sbmidB\n" +
+	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
 	"\n" +
-	"\b_page_idB\x13\n" +
-	"\x11_attachment_index\"\xb5\x01\n" +
-	"\x14LongLivedAccessToken\x12&\n" +
-	"\faccess_token\x18\x02 \x01(\tH\x00R\vaccessToken\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"token_type\x18\x03 \x01(\tH\x01R\ttokenType\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"expires_in\x18\x05 \x01(\x05H\x02R\texpiresIn\x88\x01\x01B\x0f\n" +
-	"\r_access_tokenB\r\n" +
-	"\v_token_typeB\r\n" +
-	"\v_expires_in\"9\n" +
-	"\fSubscribeRet\x12\x1d\n" +
-	"\asuccess\x18\x02 \x01(\bH\x00R\asuccess\x88\x01\x01B\n" +
-	"\n" +
-	"\b_success\"B\n" +
+	"expires_in\x18\x05 \x01(\x05R\texpiresIn\"(\n" +
+	"\fSubscribeRet\x12\x18\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\"B\n" +
 	"\x13SubscribeAppRequest\x12+\n" +
-	"\x11subscribed_fields\x18\x02 \x03(\tR\x10subscribedFields\"\xe5\x01\n" +
-	"\x05Error\x12\x17\n" +
-	"\x04code\x18\x03 \x01(\x05H\x00R\x04code\x88\x01\x01\x12(\n" +
-	"\rerror_subcode\x18\x04 \x01(\x05H\x01R\ferrorSubcode\x88\x01\x01\x12\"\n" +
+	"\x11subscribed_fields\x18\x02 \x03(\tR\x10subscribedFields\"\x8d\x01\n" +
+	"\x05Error\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\x05R\x04code\x12#\n" +
+	"\rerror_subcode\x18\x04 \x01(\x05R\ferrorSubcode\x12\x1d\n" +
 	"\n" +
-	"fbtrace_id\x18\x05 \x01(\tH\x02R\tfbtraceId\x88\x01\x01\x12\x1d\n" +
-	"\amessage\x18\x06 \x01(\tH\x03R\amessage\x88\x01\x01\x12\x17\n" +
-	"\x04type\x18\a \x01(\tH\x04R\x04type\x88\x01\x01B\a\n" +
-	"\x05_codeB\x10\n" +
-	"\x0e_error_subcodeB\r\n" +
-	"\v_fbtrace_idB\n" +
+	"fbtrace_id\x18\x05 \x01(\tR\tfbtraceId\x12\x18\n" +
+	"\amessage\x18\x06 \x01(\tR\amessage\x12\x12\n" +
+	"\x04type\x18\a \x01(\tR\x04type\"2\n" +
 	"\n" +
-	"\b_messageB\a\n" +
-	"\x05_type\"A\n" +
-	"\n" +
-	"FbResponse\x12)\n" +
-	"\x05error\x18\x02 \x01(\v2\x0e.fabikon.ErrorH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error\"\xc1\x01\n" +
-	"\rFbProductItem\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12 \n" +
-	"\timage_url\x18\x04 \x01(\tH\x01R\bimageUrl\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x05 \x01(\tH\x02R\x04name\x88\x01\x01\x12\x19\n" +
-	"\x05price\x18\x06 \x01(\tH\x03R\x05price\x88\x01\x01\x12\x15\n" +
-	"\x03url\x18\a \x01(\tH\x04R\x03url\x88\x01\x01B\x05\n" +
-	"\x03_idB\f\n" +
-	"\n" +
-	"_image_urlB\a\n" +
-	"\x05_nameB\b\n" +
-	"\x06_priceB\x06\n" +
-	"\x04_url\"{\n" +
-	"\x06FbPage\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12C\n" +
-	"\rconversations\x18\x04 \x01(\v2\x18.fabikon.FbConversationsH\x01R\rconversations\x88\x01\x01B\x05\n" +
-	"\x03_idB\x10\n" +
-	"\x0e_conversations\"\xae\x01\n" +
-	"\x0fFbConversations\x12)\n" +
-	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorH\x00R\x05error\x88\x01\x01\x12+\n" +
-	"\x04data\x18\x03 \x03(\v2\x17.fabikon.FbConversationR\x04data\x12.\n" +
-	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingH\x01R\x06paging\x88\x01\x01B\b\n" +
-	"\x06_errorB\t\n" +
-	"\a_paging\"\x9e\x01\n" +
-	"\aFbLeads\x12)\n" +
-	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorH\x00R\x05error\x88\x01\x01\x12#\n" +
-	"\x04data\x18\x03 \x03(\v2\x0f.fabikon.FbLeadR\x04data\x12.\n" +
-	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingH\x01R\x06paging\x88\x01\x01B\b\n" +
-	"\x06_errorB\t\n" +
-	"\a_paging\"G\n" +
-	"\vFbFieldData\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x16\n" +
-	"\x06values\x18\x04 \x03(\tR\x06valuesB\a\n" +
-	"\x05_name\"\xe0\x01\n" +
-	"\x06FbLead\x12&\n" +
+	"FbResponse\x12$\n" +
+	"\x05error\x18\x02 \x01(\v2\x0e.fabikon.ErrorR\x05error\"x\n" +
+	"\rFbProductItem\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1b\n" +
+	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12\x14\n" +
+	"\x05price\x18\x06 \x01(\tR\x05price\x12\x10\n" +
+	"\x03url\x18\a \x01(\tR\x03url\"X\n" +
+	"\x06FbPage\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12>\n" +
+	"\rconversations\x18\x04 \x01(\v2\x18.fabikon.FbConversationsR\rconversations\"\x8f\x01\n" +
+	"\x0fFbConversations\x12$\n" +
+	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorR\x05error\x12+\n" +
+	"\x04data\x18\x03 \x03(\v2\x17.fabikon.FbConversationR\x04data\x12)\n" +
+	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingR\x06paging\"\x7f\n" +
+	"\aFbLeads\x12$\n" +
+	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorR\x05error\x12#\n" +
+	"\x04data\x18\x03 \x03(\v2\x0f.fabikon.FbLeadR\x04data\x12)\n" +
+	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingR\x06paging\"9\n" +
+	"\vFbFieldData\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x16\n" +
+	"\x06values\x18\x04 \x03(\tR\x06values\"\x9e\x01\n" +
+	"\x06FbLead\x12!\n" +
 	"\fcreated_time\x18\n" +
-	" \x01(\tH\x00R\vcreatedTime\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\v \x01(\tH\x01R\x02id\x88\x01\x01\x12\x18\n" +
-	"\x05ad_id\x18\f \x01(\tH\x02R\x04adId\x88\x01\x01\x12\x1c\n" +
-	"\aform_id\x18\r \x01(\tH\x03R\x06formId\x88\x01\x01\x123\n" +
+	" \x01(\tR\vcreatedTime\x12\x0e\n" +
+	"\x02id\x18\v \x01(\tR\x02id\x12\x13\n" +
+	"\x05ad_id\x18\f \x01(\tR\x04adId\x12\x17\n" +
+	"\aform_id\x18\r \x01(\tR\x06formId\x123\n" +
 	"\n" +
-	"field_data\x18\x0e \x03(\v2\x14.fabikon.FbFieldDataR\tfieldDataB\x0f\n" +
-	"\r_created_timeB\x05\n" +
-	"\x03_idB\b\n" +
-	"\x06_ad_idB\n" +
-	"\n" +
-	"\b_form_id\"\xbe\x03\n" +
-	"\x0eFbConversation\x12\x13\n" +
-	"\x02id\x18\x02 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04link\x18\x03 \x01(\tH\x01R\x04link\x88\x01\x01\x12&\n" +
-	"\fupdated_time\x18\x05 \x01(\tH\x02R\vupdatedTime\x88\x01\x01\x12(\n" +
-	"\rmessage_count\x18\x06 \x01(\x03H\x03R\fmessageCount\x88\x01\x01\x12<\n" +
-	"\fparticipants\x18\a \x01(\v2\x13.fabikon.FbProfilesH\x04R\fparticipants\x88\x01\x01\x122\n" +
-	"\asenders\x18\b \x01(\v2\x13.fabikon.FbProfilesH\x05R\asenders\x88\x01\x01\x12 \n" +
-	"\tcan_reply\x18\t \x01(\bH\x06R\bcanReply\x88\x01\x01\x12(\n" +
+	"field_data\x18\x0e \x03(\v2\x14.fabikon.FbFieldDataR\tfieldData\"\xa6\x02\n" +
+	"\x0eFbConversation\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\x12!\n" +
+	"\fupdated_time\x18\x05 \x01(\tR\vupdatedTime\x12#\n" +
+	"\rmessage_count\x18\x06 \x01(\x03R\fmessageCount\x127\n" +
+	"\fparticipants\x18\a \x01(\v2\x13.fabikon.FbProfilesR\fparticipants\x12-\n" +
+	"\asenders\x18\b \x01(\v2\x13.fabikon.FbProfilesR\asenders\x12\x1b\n" +
+	"\tcan_reply\x18\t \x01(\bR\bcanReply\x12#\n" +
 	"\ris_subscribed\x18\n" +
-	" \x01(\bH\aR\fisSubscribed\x88\x01\x01B\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_linkB\x0f\n" +
-	"\r_updated_timeB\x10\n" +
-	"\x0e_message_countB\x0f\n" +
-	"\r_participantsB\n" +
+	" \x01(\bR\fisSubscribed\"\x85\x01\n" +
 	"\n" +
-	"\b_sendersB\f\n" +
-	"\n" +
-	"_can_replyB\x10\n" +
-	"\x0e_is_subscribed\"\xa4\x01\n" +
-	"\n" +
-	"FbProfiles\x12)\n" +
-	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorH\x00R\x05error\x88\x01\x01\x12&\n" +
-	"\x04data\x18\x02 \x03(\v2\x12.fabikon.FbProfileR\x04data\x12.\n" +
-	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingH\x01R\x06paging\x88\x01\x01B\b\n" +
-	"\x06_errorB\t\n" +
-	"\a_paging\"7\n" +
+	"FbProfiles\x12$\n" +
+	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorR\x05error\x12&\n" +
+	"\x04data\x18\x02 \x03(\v2\x12.fabikon.FbProfileR\x04data\x12)\n" +
+	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingR\x06paging\"7\n" +
 	"\rFbProfileData\x12&\n" +
-	"\x04data\x18\x03 \x03(\v2\x12.fabikon.FbProfileR\x04data\"n\n" +
-	"\tFbProfile\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x19\n" +
-	"\x05email\x18\x04 \x01(\tH\x01R\x05email\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x05 \x01(\tH\x02R\x02id\x88\x01\x01B\a\n" +
-	"\x05_nameB\b\n" +
-	"\x06_emailB\x05\n" +
-	"\x03_id\"\xd0\x01\n" +
-	" FbConversationMessageAttachemnts\x12)\n" +
-	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorH\x00R\x05error\x88\x01\x01\x12<\n" +
-	"\x04data\x18\x02 \x03(\v2(.fabikon.FbConversationMessageAttachmentR\x04data\x12.\n" +
-	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingH\x01R\x06paging\x88\x01\x01B\b\n" +
-	"\x06_errorB\t\n" +
-	"\a_paging\"\xa7\x02\n" +
-	"\x1fFbConversationMessageAttachment\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12 \n" +
-	"\tmime_type\x18\x04 \x01(\tH\x01R\bmimeType\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x05 \x01(\tH\x02R\x04name\x88\x01\x01\x12\x17\n" +
-	"\x04size\x18\x06 \x01(\x03H\x03R\x04size\x88\x01\x01\x12\x1e\n" +
-	"\bfile_url\x18\a \x01(\tH\x04R\afileUrl\x88\x01\x01\x128\n" +
+	"\x04data\x18\x03 \x03(\v2\x12.fabikon.FbProfileR\x04data\"E\n" +
+	"\tFbProfile\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
+	"\x05email\x18\x04 \x01(\tR\x05email\x12\x0e\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\"\xb1\x01\n" +
+	" FbConversationMessageAttachemnts\x12$\n" +
+	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorR\x05error\x12<\n" +
+	"\x04data\x18\x02 \x03(\v2(.fabikon.FbConversationMessageAttachmentR\x04data\x12)\n" +
+	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingR\x06paging\"\xc6\x01\n" +
+	"\x1fFbConversationMessageAttachment\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1b\n" +
+	"\tmime_type\x18\x04 \x01(\tR\bmimeType\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12\x12\n" +
+	"\x04size\x18\x06 \x01(\x03R\x04size\x12\x19\n" +
+	"\bfile_url\x18\a \x01(\tR\afileUrl\x123\n" +
 	"\n" +
-	"image_data\x18\b \x01(\v2\x14.fabikon.FbImageDataH\x05R\timageData\x88\x01\x01B\x05\n" +
-	"\x03_idB\f\n" +
+	"image_data\x18\b \x01(\v2\x14.fabikon.FbImageDataR\timageData\"\xf5\x01\n" +
+	"\vFbImageData\x12\x14\n" +
+	"\x05width\x18\x02 \x01(\x03R\x05width\x12\x16\n" +
+	"\x06height\x18\x03 \x01(\x03R\x06height\x12\x1b\n" +
+	"\tmax_width\x18\x04 \x01(\x03R\bmaxWidth\x12\x1d\n" +
 	"\n" +
-	"_mime_typeB\a\n" +
-	"\x05_nameB\a\n" +
-	"\x05_sizeB\v\n" +
-	"\t_file_urlB\r\n" +
-	"\v_image_data\"\x8c\x03\n" +
-	"\vFbImageData\x12\x19\n" +
-	"\x05width\x18\x02 \x01(\x03H\x00R\x05width\x88\x01\x01\x12\x1b\n" +
-	"\x06height\x18\x03 \x01(\x03H\x01R\x06height\x88\x01\x01\x12 \n" +
-	"\tmax_width\x18\x04 \x01(\x03H\x02R\bmaxWidth\x88\x01\x01\x12\"\n" +
+	"max_height\x18\x05 \x01(\x03R\tmaxHeight\x12\x10\n" +
+	"\x03url\x18\x06 \x01(\tR\x03url\x12\x1f\n" +
+	"\vpreview_url\x18\a \x01(\tR\n" +
+	"previewUrl\x12\x1d\n" +
 	"\n" +
-	"max_height\x18\x05 \x01(\x03H\x03R\tmaxHeight\x88\x01\x01\x12\x15\n" +
-	"\x03url\x18\x06 \x01(\tH\x04R\x03url\x88\x01\x01\x12$\n" +
-	"\vpreview_url\x18\a \x01(\tH\x05R\n" +
-	"previewUrl\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"image_type\x18\b \x01(\x03H\x06R\timageType\x88\x01\x01\x12/\n" +
-	"\x11render_as_sticker\x18\t \x01(\bH\aR\x0frenderAsSticker\x88\x01\x01B\b\n" +
-	"\x06_widthB\t\n" +
-	"\a_heightB\f\n" +
-	"\n" +
-	"_max_widthB\r\n" +
-	"\v_max_heightB\x06\n" +
-	"\x04_urlB\x0e\n" +
-	"\f_preview_urlB\r\n" +
-	"\v_image_typeB\x14\n" +
-	"\x12_render_as_sticker\"\xbc\x01\n" +
-	"\x16FbConversationMessages\x12)\n" +
-	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorH\x00R\x05error\x88\x01\x01\x122\n" +
-	"\x04data\x18\x02 \x03(\v2\x1e.fabikon.FbConversationMessageR\x04data\x12.\n" +
-	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingH\x01R\x06paging\x88\x01\x01B\b\n" +
-	"\x06_errorB\t\n" +
-	"\a_paging\"\xe3\x02\n" +
-	"\x15FbConversationMessage\x12&\n" +
-	"\fcreated_time\x18\x02 \x01(\tH\x00R\vcreatedTime\x88\x01\x01\x12+\n" +
-	"\x04from\x18\x03 \x01(\v2\x12.fabikon.FbProfileH\x01R\x04from\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x04 \x01(\tH\x02R\x02id\x88\x01\x01\x12\x1d\n" +
-	"\amessage\x18\x05 \x01(\tH\x03R\amessage\x88\x01\x01\x12+\n" +
-	"\x02to\x18\x06 \x01(\v2\x16.fabikon.FbProfileDataH\x04R\x02to\x88\x01\x01\x12P\n" +
-	"\vattachments\x18\a \x01(\v2).fabikon.FbConversationMessageAttachemntsH\x05R\vattachments\x88\x01\x01B\x0f\n" +
-	"\r_created_timeB\a\n" +
-	"\x05_fromB\x05\n" +
-	"\x03_idB\n" +
-	"\n" +
-	"\b_messageB\x05\n" +
-	"\x03_toB\x0e\n" +
-	"\f_attachments\"\xd2\x02\n" +
-	"\x0fFacebookAdsFlow\x12\x13\n" +
-	"\x02id\x18\x05 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x06 \x01(\tH\x01R\x04name\x88\x01\x01\x12@\n" +
-	"\x0fwelcome_message\x18\a \x01(\v2\x12.fabikon.FbMessageH\x02R\x0ewelcomeMessage\x88\x01\x01\x12-\n" +
-	"\x12eligible_platforms\x18\b \x03(\tR\x11eligiblePlatforms\x12&\n" +
+	"image_type\x18\b \x01(\x03R\timageType\x12*\n" +
+	"\x11render_as_sticker\x18\t \x01(\bR\x0frenderAsSticker\"\x9d\x01\n" +
+	"\x16FbConversationMessages\x12$\n" +
+	"\x05error\x18\x01 \x01(\v2\x0e.fabikon.ErrorR\x05error\x122\n" +
+	"\x04data\x18\x02 \x03(\v2\x1e.fabikon.FbConversationMessageR\x04data\x12)\n" +
+	"\x06paging\x18\x04 \x01(\v2\x11.fabikon.FbPagingR\x06paging\"\x81\x02\n" +
+	"\x15FbConversationMessage\x12!\n" +
+	"\fcreated_time\x18\x02 \x01(\tR\vcreatedTime\x12&\n" +
+	"\x04from\x18\x03 \x01(\v2\x12.fabikon.FbProfileR\x04from\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\x12\x18\n" +
+	"\amessage\x18\x05 \x01(\tR\amessage\x12&\n" +
+	"\x02to\x18\x06 \x01(\v2\x16.fabikon.FbProfileDataR\x02to\x12K\n" +
+	"\vattachments\x18\a \x01(\v2).fabikon.FbConversationMessageAttachemntsR\vattachments\"\xee\x01\n" +
+	"\x0fFacebookAdsFlow\x12\x0e\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\x12;\n" +
+	"\x0fwelcome_message\x18\a \x01(\v2\x12.fabikon.FbMessageR\x0ewelcomeMessage\x12-\n" +
+	"\x12eligible_platforms\x18\b \x03(\tR\x11eligiblePlatforms\x12!\n" +
 	"\ris_used_in_ad\x18\n" +
-	" \x01(\bH\x03R\n" +
-	"isUsedInAd\x88\x01\x01\x12-\n" +
-	"\x10last_update_time\x18\v \x01(\tH\x04R\x0elastUpdateTime\x88\x01\x01B\x05\n" +
-	"\x03_idB\a\n" +
-	"\x05_nameB\x12\n" +
-	"\x10_welcome_messageB\x10\n" +
-	"\x0e_is_used_in_adB\x13\n" +
-	"\x11_last_update_timeB!Z\x1fgithub.com/subiz/header/fabikonb\x06proto3"
+	" \x01(\bR\n" +
+	"isUsedInAd\x12(\n" +
+	"\x10last_update_time\x18\v \x01(\tR\x0elastUpdateTimeB!Z\x1fgithub.com/subiz/header/fabikonb\x06proto3"
 
 var (
 	file_fabikon_proto_rawDescOnce sync.Once
@@ -6359,163 +6415,171 @@ func file_fabikon_proto_rawDescGZIP() []byte {
 	return file_fabikon_proto_rawDescData
 }
 
-var file_fabikon_proto_msgTypes = make([]protoimpl.MessageInfo, 71)
+var file_fabikon_proto_msgTypes = make([]protoimpl.MessageInfo, 76)
 var file_fabikon_proto_goTypes = []any{
 	(*FacebookDataset)(nil),                  // 0: fabikon.FacebookDataset
 	(*MetaBusiness)(nil),                     // 1: fabikon.MetaBusiness
 	(*FacebookPage)(nil),                     // 2: fabikon.FacebookPage
-	(*FbWebhookEvent)(nil),                   // 3: fabikon.FbWebhookEvent
-	(*FbEntry)(nil),                          // 4: fabikon.FbEntry
-	(*FbChange)(nil),                         // 5: fabikon.FbChange
-	(*FbFrom)(nil),                           // 6: fabikon.FbFrom
-	(*FbChangeValue)(nil),                    // 7: fabikon.FbChangeValue
-	(*FbCustomLabel)(nil),                    // 8: fabikon.FbCustomLabel
-	(*FbChangeUser)(nil),                     // 9: fabikon.FbChangeUser
-	(*IgMedia)(nil),                          // 10: fabikon.IgMedia
-	(*FbPagePost)(nil),                       // 11: fabikon.FbPagePost
-	(*FbMessaging)(nil),                      // 12: fabikon.FbMessaging
-	(*FbMessageEdit)(nil),                    // 13: fabikon.FbMessageEdit
-	(*IgReaction)(nil),                       // 14: fabikon.IgReaction
-	(*FbPostback)(nil),                       // 15: fabikon.FbPostback
-	(*AdsContextData)(nil),                   // 16: fabikon.AdsContextData
-	(*FbReferral)(nil),                       // 17: fabikon.FbReferral
-	(*FbMessage)(nil),                        // 18: fabikon.FbMessage
-	(*ReplyTo)(nil),                          // 19: fabikon.ReplyTo
-	(*FbReplyStory)(nil),                     // 20: fabikon.FbReplyStory
-	(*QuickReply)(nil),                       // 21: fabikon.QuickReply
-	(*FbSender)(nil),                         // 22: fabikon.FbSender
-	(*FbRecipient)(nil),                      // 23: fabikon.FbRecipient
-	(*FbAction)(nil),                         // 24: fabikon.FbAction
-	(*FbAttachment)(nil),                     // 25: fabikon.FbAttachment
-	(*Summary)(nil),                          // 26: fabikon.Summary
-	(*Adjustment)(nil),                       // 27: fabikon.Adjustment
-	(*Address)(nil),                          // 28: fabikon.Address
-	(*GenericElement)(nil),                   // 29: fabikon.GenericElement
-	(*FbPayload)(nil),                        // 30: fabikon.FbPayload
-	(*FbProducts)(nil),                       // 31: fabikon.FbProducts
-	(*FbProduct)(nil),                        // 32: fabikon.FbProduct
-	(*Button)(nil),                           // 33: fabikon.Button
-	(*FbRead)(nil),                           // 34: fabikon.FbRead
-	(*FbDelivery)(nil),                       // 35: fabikon.FbDelivery
-	(*FbSendResponse)(nil),                   // 36: fabikon.FbSendResponse
-	(*Conversation)(nil),                     // 37: fabikon.Conversation
-	(*FbPagePicture)(nil),                    // 38: fabikon.FbPagePicture
-	(*FbPagePictureData)(nil),                // 39: fabikon.FbPagePictureData
-	(*FbPageEntry)(nil),                      // 40: fabikon.FbPageEntry
-	(*FbCursors)(nil),                        // 41: fabikon.FbCursors
-	(*FbPaging)(nil),                         // 42: fabikon.FbPaging
-	(*FbPageRet)(nil),                        // 43: fabikon.FbPageRet
-	(*FbProfilePicData)(nil),                 // 44: fabikon.FbProfilePicData
-	(*FbProfilePic)(nil),                     // 45: fabikon.FbProfilePic
-	(*FacebookUser)(nil),                     // 46: fabikon.FacebookUser
-	(*FacebookGuestUser)(nil),                // 47: fabikon.FacebookGuestUser
-	(*InstagramUser)(nil),                    // 48: fabikon.InstagramUser
-	(*Fb2SbEvent)(nil),                       // 49: fabikon.Fb2SbEvent
-	(*LongLivedAccessToken)(nil),             // 50: fabikon.LongLivedAccessToken
-	(*SubscribeRet)(nil),                     // 51: fabikon.SubscribeRet
-	(*SubscribeAppRequest)(nil),              // 52: fabikon.SubscribeAppRequest
-	(*Error)(nil),                            // 53: fabikon.Error
-	(*FbResponse)(nil),                       // 54: fabikon.FbResponse
-	(*FbProductItem)(nil),                    // 55: fabikon.FbProductItem
-	(*FbPage)(nil),                           // 56: fabikon.FbPage
-	(*FbConversations)(nil),                  // 57: fabikon.FbConversations
-	(*FbLeads)(nil),                          // 58: fabikon.FbLeads
-	(*FbFieldData)(nil),                      // 59: fabikon.FbFieldData
-	(*FbLead)(nil),                           // 60: fabikon.FbLead
-	(*FbConversation)(nil),                   // 61: fabikon.FbConversation
-	(*FbProfiles)(nil),                       // 62: fabikon.FbProfiles
-	(*FbProfileData)(nil),                    // 63: fabikon.FbProfileData
-	(*FbProfile)(nil),                        // 64: fabikon.FbProfile
-	(*FbConversationMessageAttachemnts)(nil), // 65: fabikon.FbConversationMessageAttachemnts
-	(*FbConversationMessageAttachment)(nil),  // 66: fabikon.FbConversationMessageAttachment
-	(*FbImageData)(nil),                      // 67: fabikon.FbImageData
-	(*FbConversationMessages)(nil),           // 68: fabikon.FbConversationMessages
-	(*FbConversationMessage)(nil),            // 69: fabikon.FbConversationMessage
-	(*FacebookAdsFlow)(nil),                  // 70: fabikon.FacebookAdsFlow
+	(*WeeklyOperatingHour)(nil),              // 3: fabikon.WeeklyOperatingHour
+	(*CallHours)(nil),                        // 4: fabikon.CallHours
+	(*CallSetting)(nil),                      // 5: fabikon.CallSetting
+	(*CallMetric)(nil),                       // 6: fabikon.CallMetric
+	(*FbWebhookEvent)(nil),                   // 7: fabikon.FbWebhookEvent
+	(*FbEntry)(nil),                          // 8: fabikon.FbEntry
+	(*FbCall)(nil),                           // 9: fabikon.FbCall
+	(*FbChange)(nil),                         // 10: fabikon.FbChange
+	(*FbFrom)(nil),                           // 11: fabikon.FbFrom
+	(*FbChangeValue)(nil),                    // 12: fabikon.FbChangeValue
+	(*FbCustomLabel)(nil),                    // 13: fabikon.FbCustomLabel
+	(*FbChangeUser)(nil),                     // 14: fabikon.FbChangeUser
+	(*IgMedia)(nil),                          // 15: fabikon.IgMedia
+	(*FbPagePost)(nil),                       // 16: fabikon.FbPagePost
+	(*FbMessaging)(nil),                      // 17: fabikon.FbMessaging
+	(*FbMessageEdit)(nil),                    // 18: fabikon.FbMessageEdit
+	(*IgReaction)(nil),                       // 19: fabikon.IgReaction
+	(*FbPostback)(nil),                       // 20: fabikon.FbPostback
+	(*AdsContextData)(nil),                   // 21: fabikon.AdsContextData
+	(*FbReferral)(nil),                       // 22: fabikon.FbReferral
+	(*FbMessage)(nil),                        // 23: fabikon.FbMessage
+	(*ReplyTo)(nil),                          // 24: fabikon.ReplyTo
+	(*FbReplyStory)(nil),                     // 25: fabikon.FbReplyStory
+	(*QuickReply)(nil),                       // 26: fabikon.QuickReply
+	(*FbSender)(nil),                         // 27: fabikon.FbSender
+	(*FbRecipient)(nil),                      // 28: fabikon.FbRecipient
+	(*FbAction)(nil),                         // 29: fabikon.FbAction
+	(*FbAttachment)(nil),                     // 30: fabikon.FbAttachment
+	(*Summary)(nil),                          // 31: fabikon.Summary
+	(*Adjustment)(nil),                       // 32: fabikon.Adjustment
+	(*Address)(nil),                          // 33: fabikon.Address
+	(*GenericElement)(nil),                   // 34: fabikon.GenericElement
+	(*FbPayload)(nil),                        // 35: fabikon.FbPayload
+	(*FbProducts)(nil),                       // 36: fabikon.FbProducts
+	(*FbProduct)(nil),                        // 37: fabikon.FbProduct
+	(*Button)(nil),                           // 38: fabikon.Button
+	(*FbRead)(nil),                           // 39: fabikon.FbRead
+	(*FbDelivery)(nil),                       // 40: fabikon.FbDelivery
+	(*FbSendResponse)(nil),                   // 41: fabikon.FbSendResponse
+	(*Conversation)(nil),                     // 42: fabikon.Conversation
+	(*FbPagePicture)(nil),                    // 43: fabikon.FbPagePicture
+	(*FbPagePictureData)(nil),                // 44: fabikon.FbPagePictureData
+	(*FbPageEntry)(nil),                      // 45: fabikon.FbPageEntry
+	(*FbCursors)(nil),                        // 46: fabikon.FbCursors
+	(*FbPaging)(nil),                         // 47: fabikon.FbPaging
+	(*FbPageRet)(nil),                        // 48: fabikon.FbPageRet
+	(*FbProfilePicData)(nil),                 // 49: fabikon.FbProfilePicData
+	(*FbProfilePic)(nil),                     // 50: fabikon.FbProfilePic
+	(*FacebookUser)(nil),                     // 51: fabikon.FacebookUser
+	(*FacebookGuestUser)(nil),                // 52: fabikon.FacebookGuestUser
+	(*InstagramUser)(nil),                    // 53: fabikon.InstagramUser
+	(*Fb2SbEvent)(nil),                       // 54: fabikon.Fb2SbEvent
+	(*LongLivedAccessToken)(nil),             // 55: fabikon.LongLivedAccessToken
+	(*SubscribeRet)(nil),                     // 56: fabikon.SubscribeRet
+	(*SubscribeAppRequest)(nil),              // 57: fabikon.SubscribeAppRequest
+	(*Error)(nil),                            // 58: fabikon.Error
+	(*FbResponse)(nil),                       // 59: fabikon.FbResponse
+	(*FbProductItem)(nil),                    // 60: fabikon.FbProductItem
+	(*FbPage)(nil),                           // 61: fabikon.FbPage
+	(*FbConversations)(nil),                  // 62: fabikon.FbConversations
+	(*FbLeads)(nil),                          // 63: fabikon.FbLeads
+	(*FbFieldData)(nil),                      // 64: fabikon.FbFieldData
+	(*FbLead)(nil),                           // 65: fabikon.FbLead
+	(*FbConversation)(nil),                   // 66: fabikon.FbConversation
+	(*FbProfiles)(nil),                       // 67: fabikon.FbProfiles
+	(*FbProfileData)(nil),                    // 68: fabikon.FbProfileData
+	(*FbProfile)(nil),                        // 69: fabikon.FbProfile
+	(*FbConversationMessageAttachemnts)(nil), // 70: fabikon.FbConversationMessageAttachemnts
+	(*FbConversationMessageAttachment)(nil),  // 71: fabikon.FbConversationMessageAttachment
+	(*FbImageData)(nil),                      // 72: fabikon.FbImageData
+	(*FbConversationMessages)(nil),           // 73: fabikon.FbConversationMessages
+	(*FbConversationMessage)(nil),            // 74: fabikon.FbConversationMessage
+	(*FacebookAdsFlow)(nil),                  // 75: fabikon.FacebookAdsFlow
 }
 var file_fabikon_proto_depIdxs = []int32{
-	48, // 0: fabikon.FacebookPage.instagram_account:type_name -> fabikon.InstagramUser
+	53, // 0: fabikon.FacebookPage.instagram_account:type_name -> fabikon.InstagramUser
 	1,  // 1: fabikon.FacebookPage.business:type_name -> fabikon.MetaBusiness
-	4,  // 2: fabikon.FbWebhookEvent.entry:type_name -> fabikon.FbEntry
-	12, // 3: fabikon.FbEntry.messaging:type_name -> fabikon.FbMessaging
-	5,  // 4: fabikon.FbEntry.changes:type_name -> fabikon.FbChange
-	12, // 5: fabikon.FbEntry.standby:type_name -> fabikon.FbMessaging
-	7,  // 6: fabikon.FbChange.value:type_name -> fabikon.FbChangeValue
-	6,  // 7: fabikon.FbChangeValue.from:type_name -> fabikon.FbFrom
-	11, // 8: fabikon.FbChangeValue.post:type_name -> fabikon.FbPagePost
-	10, // 9: fabikon.FbChangeValue.media:type_name -> fabikon.IgMedia
-	9,  // 10: fabikon.FbChangeValue.user:type_name -> fabikon.FbChangeUser
-	8,  // 11: fabikon.FbChangeValue.label:type_name -> fabikon.FbCustomLabel
-	22, // 12: fabikon.FbMessaging.sender:type_name -> fabikon.FbSender
-	23, // 13: fabikon.FbMessaging.recipient:type_name -> fabikon.FbRecipient
-	18, // 14: fabikon.FbMessaging.message:type_name -> fabikon.FbMessage
-	35, // 15: fabikon.FbMessaging.delivery:type_name -> fabikon.FbDelivery
-	34, // 16: fabikon.FbMessaging.read:type_name -> fabikon.FbRead
-	15, // 17: fabikon.FbMessaging.postback:type_name -> fabikon.FbPostback
-	17, // 18: fabikon.FbMessaging.referral:type_name -> fabikon.FbReferral
-	14, // 19: fabikon.FbMessaging.reaction:type_name -> fabikon.IgReaction
-	13, // 20: fabikon.FbMessaging.message_edit:type_name -> fabikon.FbMessageEdit
-	17, // 21: fabikon.FbPostback.referral:type_name -> fabikon.FbReferral
-	16, // 22: fabikon.FbReferral.ads_context_data:type_name -> fabikon.AdsContextData
-	32, // 23: fabikon.FbReferral.product:type_name -> fabikon.FbProduct
-	25, // 24: fabikon.FbMessage.attachments:type_name -> fabikon.FbAttachment
-	34, // 25: fabikon.FbMessage.read:type_name -> fabikon.FbRead
-	25, // 26: fabikon.FbMessage.attachment:type_name -> fabikon.FbAttachment
-	21, // 27: fabikon.FbMessage.quick_replies:type_name -> fabikon.QuickReply
-	21, // 28: fabikon.FbMessage.quick_reply:type_name -> fabikon.QuickReply
-	19, // 29: fabikon.FbMessage.reply_to:type_name -> fabikon.ReplyTo
-	17, // 30: fabikon.FbMessage.referral:type_name -> fabikon.FbReferral
-	20, // 31: fabikon.ReplyTo.story:type_name -> fabikon.FbReplyStory
-	30, // 32: fabikon.FbAttachment.payload:type_name -> fabikon.FbPayload
-	33, // 33: fabikon.GenericElement.default_action:type_name -> fabikon.Button
-	33, // 34: fabikon.GenericElement.buttons:type_name -> fabikon.Button
-	29, // 35: fabikon.FbPayload.elements:type_name -> fabikon.GenericElement
-	33, // 36: fabikon.FbPayload.buttons:type_name -> fabikon.Button
-	28, // 37: fabikon.FbPayload.address:type_name -> fabikon.Address
-	26, // 38: fabikon.FbPayload.summary:type_name -> fabikon.Summary
-	27, // 39: fabikon.FbPayload.adjustments:type_name -> fabikon.Adjustment
-	31, // 40: fabikon.FbPayload.product:type_name -> fabikon.FbProducts
-	32, // 41: fabikon.FbProducts.elements:type_name -> fabikon.FbProduct
-	39, // 42: fabikon.FbPagePicture.data:type_name -> fabikon.FbPagePictureData
-	38, // 43: fabikon.FbPageEntry.picture:type_name -> fabikon.FbPagePicture
-	48, // 44: fabikon.FbPageEntry.instagram_business_account:type_name -> fabikon.InstagramUser
-	1,  // 45: fabikon.FbPageEntry.business:type_name -> fabikon.MetaBusiness
-	41, // 46: fabikon.FbPaging.cursors:type_name -> fabikon.FbCursors
-	40, // 47: fabikon.FbPageRet.data:type_name -> fabikon.FbPageEntry
-	42, // 48: fabikon.FbPageRet.paging:type_name -> fabikon.FbPaging
-	44, // 49: fabikon.FbProfilePic.Data:type_name -> fabikon.FbProfilePicData
-	45, // 50: fabikon.FacebookUser.picture:type_name -> fabikon.FbProfilePic
-	53, // 51: fabikon.FbResponse.error:type_name -> fabikon.Error
-	57, // 52: fabikon.FbPage.conversations:type_name -> fabikon.FbConversations
-	53, // 53: fabikon.FbConversations.error:type_name -> fabikon.Error
-	61, // 54: fabikon.FbConversations.data:type_name -> fabikon.FbConversation
-	42, // 55: fabikon.FbConversations.paging:type_name -> fabikon.FbPaging
-	53, // 56: fabikon.FbLeads.error:type_name -> fabikon.Error
-	60, // 57: fabikon.FbLeads.data:type_name -> fabikon.FbLead
-	42, // 58: fabikon.FbLeads.paging:type_name -> fabikon.FbPaging
-	59, // 59: fabikon.FbLead.field_data:type_name -> fabikon.FbFieldData
-	62, // 60: fabikon.FbConversation.participants:type_name -> fabikon.FbProfiles
-	62, // 61: fabikon.FbConversation.senders:type_name -> fabikon.FbProfiles
-	53, // 62: fabikon.FbProfiles.error:type_name -> fabikon.Error
-	64, // 63: fabikon.FbProfiles.data:type_name -> fabikon.FbProfile
-	42, // 64: fabikon.FbProfiles.paging:type_name -> fabikon.FbPaging
-	64, // 65: fabikon.FbProfileData.data:type_name -> fabikon.FbProfile
-	53, // 66: fabikon.FbConversationMessageAttachemnts.error:type_name -> fabikon.Error
-	66, // 67: fabikon.FbConversationMessageAttachemnts.data:type_name -> fabikon.FbConversationMessageAttachment
-	42, // 68: fabikon.FbConversationMessageAttachemnts.paging:type_name -> fabikon.FbPaging
-	67, // 69: fabikon.FbConversationMessageAttachment.image_data:type_name -> fabikon.FbImageData
-	53, // 70: fabikon.FbConversationMessages.error:type_name -> fabikon.Error
-	69, // 71: fabikon.FbConversationMessages.data:type_name -> fabikon.FbConversationMessage
-	42, // 72: fabikon.FbConversationMessages.paging:type_name -> fabikon.FbPaging
-	64, // 73: fabikon.FbConversationMessage.from:type_name -> fabikon.FbProfile
-	63, // 74: fabikon.FbConversationMessage.to:type_name -> fabikon.FbProfileData
-	65, // 75: fabikon.FbConversationMessage.attachments:type_name -> fabikon.FbConversationMessageAttachemnts
-	18, // 76: fabikon.FacebookAdsFlow.welcome_message:type_name -> fabikon.FbMessage
-	77, // [77:77] is the sub-list for method output_type
-	77, // [77:77] is the sub-list for method input_type
-	77, // [77:77] is the sub-list for extension type_name
-	77, // [77:77] is the sub-list for extension extendee
-	0,  // [0:77] is the sub-list for field type_name
+	3,  // 2: fabikon.CallHours.weekly_operating_hours:type_name -> fabikon.WeeklyOperatingHour
+	4,  // 3: fabikon.CallSetting.call_hours:type_name -> fabikon.CallHours
+	8,  // 4: fabikon.FbWebhookEvent.entry:type_name -> fabikon.FbEntry
+	17, // 5: fabikon.FbEntry.messaging:type_name -> fabikon.FbMessaging
+	10, // 6: fabikon.FbEntry.changes:type_name -> fabikon.FbChange
+	17, // 7: fabikon.FbEntry.standby:type_name -> fabikon.FbMessaging
+	9,  // 8: fabikon.FbEntry.calls:type_name -> fabikon.FbCall
+	12, // 9: fabikon.FbChange.value:type_name -> fabikon.FbChangeValue
+	11, // 10: fabikon.FbChangeValue.from:type_name -> fabikon.FbFrom
+	16, // 11: fabikon.FbChangeValue.post:type_name -> fabikon.FbPagePost
+	15, // 12: fabikon.FbChangeValue.media:type_name -> fabikon.IgMedia
+	14, // 13: fabikon.FbChangeValue.user:type_name -> fabikon.FbChangeUser
+	13, // 14: fabikon.FbChangeValue.label:type_name -> fabikon.FbCustomLabel
+	27, // 15: fabikon.FbMessaging.sender:type_name -> fabikon.FbSender
+	28, // 16: fabikon.FbMessaging.recipient:type_name -> fabikon.FbRecipient
+	23, // 17: fabikon.FbMessaging.message:type_name -> fabikon.FbMessage
+	40, // 18: fabikon.FbMessaging.delivery:type_name -> fabikon.FbDelivery
+	39, // 19: fabikon.FbMessaging.read:type_name -> fabikon.FbRead
+	20, // 20: fabikon.FbMessaging.postback:type_name -> fabikon.FbPostback
+	22, // 21: fabikon.FbMessaging.referral:type_name -> fabikon.FbReferral
+	19, // 22: fabikon.FbMessaging.reaction:type_name -> fabikon.IgReaction
+	18, // 23: fabikon.FbMessaging.message_edit:type_name -> fabikon.FbMessageEdit
+	22, // 24: fabikon.FbPostback.referral:type_name -> fabikon.FbReferral
+	21, // 25: fabikon.FbReferral.ads_context_data:type_name -> fabikon.AdsContextData
+	37, // 26: fabikon.FbReferral.product:type_name -> fabikon.FbProduct
+	30, // 27: fabikon.FbMessage.attachments:type_name -> fabikon.FbAttachment
+	39, // 28: fabikon.FbMessage.read:type_name -> fabikon.FbRead
+	30, // 29: fabikon.FbMessage.attachment:type_name -> fabikon.FbAttachment
+	26, // 30: fabikon.FbMessage.quick_replies:type_name -> fabikon.QuickReply
+	26, // 31: fabikon.FbMessage.quick_reply:type_name -> fabikon.QuickReply
+	24, // 32: fabikon.FbMessage.reply_to:type_name -> fabikon.ReplyTo
+	22, // 33: fabikon.FbMessage.referral:type_name -> fabikon.FbReferral
+	25, // 34: fabikon.ReplyTo.story:type_name -> fabikon.FbReplyStory
+	35, // 35: fabikon.FbAttachment.payload:type_name -> fabikon.FbPayload
+	38, // 36: fabikon.GenericElement.default_action:type_name -> fabikon.Button
+	38, // 37: fabikon.GenericElement.buttons:type_name -> fabikon.Button
+	34, // 38: fabikon.FbPayload.elements:type_name -> fabikon.GenericElement
+	38, // 39: fabikon.FbPayload.buttons:type_name -> fabikon.Button
+	33, // 40: fabikon.FbPayload.address:type_name -> fabikon.Address
+	31, // 41: fabikon.FbPayload.summary:type_name -> fabikon.Summary
+	32, // 42: fabikon.FbPayload.adjustments:type_name -> fabikon.Adjustment
+	36, // 43: fabikon.FbPayload.product:type_name -> fabikon.FbProducts
+	37, // 44: fabikon.FbProducts.elements:type_name -> fabikon.FbProduct
+	44, // 45: fabikon.FbPagePicture.data:type_name -> fabikon.FbPagePictureData
+	43, // 46: fabikon.FbPageEntry.picture:type_name -> fabikon.FbPagePicture
+	53, // 47: fabikon.FbPageEntry.instagram_business_account:type_name -> fabikon.InstagramUser
+	1,  // 48: fabikon.FbPageEntry.business:type_name -> fabikon.MetaBusiness
+	46, // 49: fabikon.FbPaging.cursors:type_name -> fabikon.FbCursors
+	45, // 50: fabikon.FbPageRet.data:type_name -> fabikon.FbPageEntry
+	47, // 51: fabikon.FbPageRet.paging:type_name -> fabikon.FbPaging
+	49, // 52: fabikon.FbProfilePic.Data:type_name -> fabikon.FbProfilePicData
+	50, // 53: fabikon.FacebookUser.picture:type_name -> fabikon.FbProfilePic
+	58, // 54: fabikon.FbResponse.error:type_name -> fabikon.Error
+	62, // 55: fabikon.FbPage.conversations:type_name -> fabikon.FbConversations
+	58, // 56: fabikon.FbConversations.error:type_name -> fabikon.Error
+	66, // 57: fabikon.FbConversations.data:type_name -> fabikon.FbConversation
+	47, // 58: fabikon.FbConversations.paging:type_name -> fabikon.FbPaging
+	58, // 59: fabikon.FbLeads.error:type_name -> fabikon.Error
+	65, // 60: fabikon.FbLeads.data:type_name -> fabikon.FbLead
+	47, // 61: fabikon.FbLeads.paging:type_name -> fabikon.FbPaging
+	64, // 62: fabikon.FbLead.field_data:type_name -> fabikon.FbFieldData
+	67, // 63: fabikon.FbConversation.participants:type_name -> fabikon.FbProfiles
+	67, // 64: fabikon.FbConversation.senders:type_name -> fabikon.FbProfiles
+	58, // 65: fabikon.FbProfiles.error:type_name -> fabikon.Error
+	69, // 66: fabikon.FbProfiles.data:type_name -> fabikon.FbProfile
+	47, // 67: fabikon.FbProfiles.paging:type_name -> fabikon.FbPaging
+	69, // 68: fabikon.FbProfileData.data:type_name -> fabikon.FbProfile
+	58, // 69: fabikon.FbConversationMessageAttachemnts.error:type_name -> fabikon.Error
+	71, // 70: fabikon.FbConversationMessageAttachemnts.data:type_name -> fabikon.FbConversationMessageAttachment
+	47, // 71: fabikon.FbConversationMessageAttachemnts.paging:type_name -> fabikon.FbPaging
+	72, // 72: fabikon.FbConversationMessageAttachment.image_data:type_name -> fabikon.FbImageData
+	58, // 73: fabikon.FbConversationMessages.error:type_name -> fabikon.Error
+	74, // 74: fabikon.FbConversationMessages.data:type_name -> fabikon.FbConversationMessage
+	47, // 75: fabikon.FbConversationMessages.paging:type_name -> fabikon.FbPaging
+	69, // 76: fabikon.FbConversationMessage.from:type_name -> fabikon.FbProfile
+	68, // 77: fabikon.FbConversationMessage.to:type_name -> fabikon.FbProfileData
+	70, // 78: fabikon.FbConversationMessage.attachments:type_name -> fabikon.FbConversationMessageAttachemnts
+	23, // 79: fabikon.FacebookAdsFlow.welcome_message:type_name -> fabikon.FbMessage
+	80, // [80:80] is the sub-list for method output_type
+	80, // [80:80] is the sub-list for method input_type
+	80, // [80:80] is the sub-list for extension type_name
+	80, // [80:80] is the sub-list for extension extendee
+	0,  // [0:80] is the sub-list for field type_name
 }
 
 func init() { file_fabikon_proto_init() }
@@ -6523,75 +6587,14 @@ func file_fabikon_proto_init() {
 	if File_fabikon_proto != nil {
 		return
 	}
-	file_fabikon_proto_msgTypes[6].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[7].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[8].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[9].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[10].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[11].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[12].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[13].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[14].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[15].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[16].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[17].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[18].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[19].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[20].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[21].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[22].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[23].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[24].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[25].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[26].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[27].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[28].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[29].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[30].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[32].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[33].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[34].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[35].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[36].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[37].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[38].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[39].OneofWrappers = []any{}
 	file_fabikon_proto_msgTypes[40].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[41].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[42].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[43].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[44].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[45].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[46].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[47].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[48].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[49].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[50].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[51].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[53].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[54].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[55].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[56].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[57].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[58].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[59].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[60].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[61].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[62].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[64].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[65].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[66].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[67].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[68].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[69].OneofWrappers = []any{}
-	file_fabikon_proto_msgTypes[70].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fabikon_proto_rawDesc), len(file_fabikon_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   71,
+			NumMessages:   76,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

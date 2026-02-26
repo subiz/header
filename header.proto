@@ -1862,14 +1862,14 @@ message BotPostback {
 message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string connector_id = 3;
+	string connector_id = 3; // @deprecated
 	string logo_url = 4; // emoji for phone
 	string name = 5;
 
 	string alias = 9; // just name
 	string connector_type = 12; // see facebook, call, website
 	int64 integrated = 6; // first integrated
-	int64 last_integrated = 7;
+	// int64 last_integrated = 7;
 
 	string state = 8; // more like status
 	enum State {
@@ -1944,18 +1944,18 @@ message Integration {
 	string google_review_description = 74;
 	string google_review_maps_uri = 75;
 
-	string sending_status = 17; // ok, failed
+	// string sending_status = 17; // ok, failed
 	// string receiving_status = 18; // ok, failed
 	int64 last_hook_received = 80;
 	int64 last_request_sent = 81;
-	string token_status = 83; // (ok | '') || 'expired' || warning (missing permission)
-	int64 token_status_updated = 84;
+	// string token_status = 83; // (ok | '') || 'expired' || warning (missing permission)
+	// int64 token_status_updated = 84;
 
 	int64 comment_disabled = 85;
 	int64 modified = 86;
 
 	int64 status_changed_at = 87;
-	string error_code = 88;
+	string error_code = 88; // out_of_credit, expired_token
 
 	bool sip_sends_auth = 90;
 	bool sip_sends_registrations = 91;
