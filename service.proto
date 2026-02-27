@@ -458,7 +458,7 @@ service ConversationMgr {
 	rpc ListIntegrations2(Id) returns (Response);
 	rpc MatchIntegration(header.Ids) returns (Response);
 
-	rpc Integrate(header.Integration) returns (header.Integration); // @deprecate
+	// rpc Integrate(header.Integration) returns (header.Integration); // @deprecate, use UpsertIntegration instead
 	rpc ActivateIntegration(header.Id) returns (header.Integration); // connector only
 	rpc UpsertIntegration(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
@@ -1110,9 +1110,8 @@ service VectorDB {
 	rpc UpdateDocumentVersion(Id) returns (Empty);
 	rpc IndexDocument(DocIndexRequest) returns (Empty);
 
-	rpc AddDocumentToCollection(DocIndexRequest) returns (Empty);
-	rpc RemoveDocumentFromCollection(DocIndexRequest) returns (Empty);
-	rpc UpsertCollectionDocuments(DocSearchResponse) returns (Empty);
+	rpc UpsertDocumentTags(DocumentTagsRequest) returns (Empty);
+	rpc RemoveTag(Id) returns (Empty);
 
 	rpc RemoveDocument(Id) returns (Empty);
 	rpc Search(DocSearchRequest) returns(DocSearchResponse);

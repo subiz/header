@@ -583,6 +583,7 @@ message DocSearchRequest {
 	bool keep_secondary = 16; // return secondary, do not transform to primary
 
 	repeated float vector = 17;
+	repeated string tags = 18;
 }
 
 message CreateAgentRequest {

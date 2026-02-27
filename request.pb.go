@@ -4561,6 +4561,7 @@ type DocSearchRequest struct {
 	FromMonth     int64                  `protobuf:"varint,15,opt,name=from_month,json=fromMonth,proto3" json:"from_month,omitempty"`
 	KeepSecondary bool                   `protobuf:"varint,16,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
 	Vector        []float32              `protobuf:"fixed32,17,rep,packed,name=vector,proto3" json:"vector,omitempty"`
+	Tags          []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4703,6 +4704,13 @@ func (x *DocSearchRequest) GetKeepSecondary() bool {
 func (x *DocSearchRequest) GetVector() []float32 {
 	if x != nil {
 		return x.Vector
+	}
+	return nil
+}
+
+func (x *DocSearchRequest) GetTags() []string {
+	if x != nil {
+		return x.Tags
 	}
 	return nil
 }
@@ -9253,7 +9261,7 @@ const file_request_proto_rawDesc = "" +
 	"\aversion\x18\x14 \x01(\tR\aversion\x12\x1f\n" +
 	"\vindex_types\x18\x15 \x03(\tR\n" +
 	"indexTypes\x12\x16\n" +
-	"\x06vector\x18\x17 \x03(\x02R\x06vector\"\xf9\x03\n" +
+	"\x06vector\x18\x17 \x03(\x02R\x06vector\"\x8d\x04\n" +
 	"\x10DocSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9278,7 +9286,8 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"from_month\x18\x0f \x01(\x03R\tfromMonth\x12%\n" +
 	"\x0ekeep_secondary\x18\x10 \x01(\bR\rkeepSecondary\x12\x16\n" +
-	"\x06vector\x18\x11 \x03(\x02R\x06vector\"\x8a\x03\n" +
+	"\x06vector\x18\x11 \x03(\x02R\x06vector\x12\x12\n" +
+	"\x04tags\x18\x12 \x03(\tR\x04tags\"\x8a\x03\n" +
 	"\x12CreateAgentRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

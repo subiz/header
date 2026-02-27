@@ -11251,7 +11251,6 @@ const (
 	ConversationMgr_Deintegrate_FullMethodName              = "/header.ConversationMgr/Deintegrate"
 	ConversationMgr_ListIntegrations2_FullMethodName        = "/header.ConversationMgr/ListIntegrations2"
 	ConversationMgr_MatchIntegration_FullMethodName         = "/header.ConversationMgr/MatchIntegration"
-	ConversationMgr_Integrate_FullMethodName                = "/header.ConversationMgr/Integrate"
 	ConversationMgr_ActivateIntegration_FullMethodName      = "/header.ConversationMgr/ActivateIntegration"
 	ConversationMgr_UpsertIntegration_FullMethodName        = "/header.ConversationMgr/UpsertIntegration"
 	ConversationMgr_GetIntegration_FullMethodName           = "/header.ConversationMgr/GetIntegration"
@@ -11338,7 +11337,7 @@ type ConversationMgrClient interface {
 	Deintegrate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListIntegrations2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchIntegration(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	Integrate(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
+	// rpc Integrate(header.Integration) returns (header.Integration); // @deprecate, use UpsertIntegration instead
 	ActivateIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
 	UpsertIntegration(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
 	GetIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
@@ -11739,16 +11738,6 @@ func (c *conversationMgrClient) MatchIntegration(ctx context.Context, in *Ids, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_MatchIntegration_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *conversationMgrClient) Integrate(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Integration)
-	err := c.cc.Invoke(ctx, ConversationMgr_Integrate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12226,7 +12215,7 @@ type ConversationMgrServer interface {
 	Deintegrate(context.Context, *Id) (*Empty, error)
 	ListIntegrations2(context.Context, *Id) (*Response, error)
 	MatchIntegration(context.Context, *Ids) (*Response, error)
-	Integrate(context.Context, *Integration) (*Integration, error)
+	// rpc Integrate(header.Integration) returns (header.Integration); // @deprecate, use UpsertIntegration instead
 	ActivateIntegration(context.Context, *Id) (*Integration, error)
 	UpsertIntegration(context.Context, *Integration) (*Integration, error)
 	GetIntegration(context.Context, *Id) (*Integration, error)
@@ -12387,9 +12376,6 @@ func (UnimplementedConversationMgrServer) ListIntegrations2(context.Context, *Id
 }
 func (UnimplementedConversationMgrServer) MatchIntegration(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method MatchIntegration not implemented")
-}
-func (UnimplementedConversationMgrServer) Integrate(context.Context, *Integration) (*Integration, error) {
-	return nil, status.Error(codes.Unimplemented, "method Integrate not implemented")
 }
 func (UnimplementedConversationMgrServer) ActivateIntegration(context.Context, *Id) (*Integration, error) {
 	return nil, status.Error(codes.Unimplemented, "method ActivateIntegration not implemented")
@@ -13167,24 +13153,6 @@ func _ConversationMgr_MatchIntegration_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).MatchIntegration(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ConversationMgr_Integrate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Integration)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ConversationMgrServer).Integrate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ConversationMgr_Integrate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).Integrate(ctx, req.(*Integration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14109,10 +14077,6 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchIntegration",
 			Handler:    _ConversationMgr_MatchIntegration_Handler,
-		},
-		{
-			MethodName: "Integrate",
-			Handler:    _ConversationMgr_Integrate_Handler,
 		},
 		{
 			MethodName: "ActivateIntegration",
@@ -31285,18 +31249,17 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	VectorDB_UpsertVector_FullMethodName                 = "/header.VectorDB/UpsertVector"
-	VectorDB_DeleteVector_FullMethodName                 = "/header.VectorDB/DeleteVector"
-	VectorDB_SearchVectors_FullMethodName                = "/header.VectorDB/SearchVectors"
-	VectorDB_GetVector_FullMethodName                    = "/header.VectorDB/GetVector"
-	VectorDB_ListVectorIds_FullMethodName                = "/header.VectorDB/ListVectorIds"
-	VectorDB_UpdateDocumentVersion_FullMethodName        = "/header.VectorDB/UpdateDocumentVersion"
-	VectorDB_IndexDocument_FullMethodName                = "/header.VectorDB/IndexDocument"
-	VectorDB_AddDocumentToCollection_FullMethodName      = "/header.VectorDB/AddDocumentToCollection"
-	VectorDB_RemoveDocumentFromCollection_FullMethodName = "/header.VectorDB/RemoveDocumentFromCollection"
-	VectorDB_UpsertCollectionDocuments_FullMethodName    = "/header.VectorDB/UpsertCollectionDocuments"
-	VectorDB_RemoveDocument_FullMethodName               = "/header.VectorDB/RemoveDocument"
-	VectorDB_Search_FullMethodName                       = "/header.VectorDB/Search"
+	VectorDB_UpsertVector_FullMethodName          = "/header.VectorDB/UpsertVector"
+	VectorDB_DeleteVector_FullMethodName          = "/header.VectorDB/DeleteVector"
+	VectorDB_SearchVectors_FullMethodName         = "/header.VectorDB/SearchVectors"
+	VectorDB_GetVector_FullMethodName             = "/header.VectorDB/GetVector"
+	VectorDB_ListVectorIds_FullMethodName         = "/header.VectorDB/ListVectorIds"
+	VectorDB_UpdateDocumentVersion_FullMethodName = "/header.VectorDB/UpdateDocumentVersion"
+	VectorDB_IndexDocument_FullMethodName         = "/header.VectorDB/IndexDocument"
+	VectorDB_UpsertDocumentTags_FullMethodName    = "/header.VectorDB/UpsertDocumentTags"
+	VectorDB_RemoveTag_FullMethodName             = "/header.VectorDB/RemoveTag"
+	VectorDB_RemoveDocument_FullMethodName        = "/header.VectorDB/RemoveDocument"
+	VectorDB_Search_FullMethodName                = "/header.VectorDB/Search"
 )
 
 // VectorDBClient is the client API for VectorDB service.
@@ -31311,9 +31274,8 @@ type VectorDBClient interface {
 	// when doc change, call this first followed by multiple index document calls
 	UpdateDocumentVersion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	IndexDocument(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
-	AddDocumentToCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
-	RemoveDocumentFromCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
-	UpsertCollectionDocuments(ctx context.Context, in *DocSearchResponse, opts ...grpc.CallOption) (*Empty, error)
+	UpsertDocumentTags(ctx context.Context, in *DocumentTagsRequest, opts ...grpc.CallOption) (*Empty, error)
+	RemoveTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	RemoveDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	Search(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
 }
@@ -31396,30 +31358,20 @@ func (c *vectorDBClient) IndexDocument(ctx context.Context, in *DocIndexRequest,
 	return out, nil
 }
 
-func (c *vectorDBClient) AddDocumentToCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *vectorDBClient) UpsertDocumentTags(ctx context.Context, in *DocumentTagsRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_AddDocumentToCollection_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, VectorDB_UpsertDocumentTags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *vectorDBClient) RemoveDocumentFromCollection(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *vectorDBClient) RemoveTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_RemoveDocumentFromCollection_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *vectorDBClient) UpsertCollectionDocuments(ctx context.Context, in *DocSearchResponse, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_UpsertCollectionDocuments_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, VectorDB_RemoveTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -31458,9 +31410,8 @@ type VectorDBServer interface {
 	// when doc change, call this first followed by multiple index document calls
 	UpdateDocumentVersion(context.Context, *Id) (*Empty, error)
 	IndexDocument(context.Context, *DocIndexRequest) (*Empty, error)
-	AddDocumentToCollection(context.Context, *DocIndexRequest) (*Empty, error)
-	RemoveDocumentFromCollection(context.Context, *DocIndexRequest) (*Empty, error)
-	UpsertCollectionDocuments(context.Context, *DocSearchResponse) (*Empty, error)
+	UpsertDocumentTags(context.Context, *DocumentTagsRequest) (*Empty, error)
+	RemoveTag(context.Context, *Id) (*Empty, error)
 	RemoveDocument(context.Context, *Id) (*Empty, error)
 	Search(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
 	mustEmbedUnimplementedVectorDBServer()
@@ -31494,14 +31445,11 @@ func (UnimplementedVectorDBServer) UpdateDocumentVersion(context.Context, *Id) (
 func (UnimplementedVectorDBServer) IndexDocument(context.Context, *DocIndexRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method IndexDocument not implemented")
 }
-func (UnimplementedVectorDBServer) AddDocumentToCollection(context.Context, *DocIndexRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddDocumentToCollection not implemented")
+func (UnimplementedVectorDBServer) UpsertDocumentTags(context.Context, *DocumentTagsRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpsertDocumentTags not implemented")
 }
-func (UnimplementedVectorDBServer) RemoveDocumentFromCollection(context.Context, *DocIndexRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoveDocumentFromCollection not implemented")
-}
-func (UnimplementedVectorDBServer) UpsertCollectionDocuments(context.Context, *DocSearchResponse) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpsertCollectionDocuments not implemented")
+func (UnimplementedVectorDBServer) RemoveTag(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveTag not implemented")
 }
 func (UnimplementedVectorDBServer) RemoveDocument(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveDocument not implemented")
@@ -31656,56 +31604,38 @@ func _VectorDB_IndexDocument_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VectorDB_AddDocumentToCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocIndexRequest)
+func _VectorDB_UpsertDocumentTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocumentTagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VectorDBServer).AddDocumentToCollection(ctx, in)
+		return srv.(VectorDBServer).UpsertDocumentTags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VectorDB_AddDocumentToCollection_FullMethodName,
+		FullMethod: VectorDB_UpsertDocumentTags_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).AddDocumentToCollection(ctx, req.(*DocIndexRequest))
+		return srv.(VectorDBServer).UpsertDocumentTags(ctx, req.(*DocumentTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VectorDB_RemoveDocumentFromCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocIndexRequest)
+func _VectorDB_RemoveTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VectorDBServer).RemoveDocumentFromCollection(ctx, in)
+		return srv.(VectorDBServer).RemoveTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VectorDB_RemoveDocumentFromCollection_FullMethodName,
+		FullMethod: VectorDB_RemoveTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).RemoveDocumentFromCollection(ctx, req.(*DocIndexRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _VectorDB_UpsertCollectionDocuments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocSearchResponse)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VectorDBServer).UpsertCollectionDocuments(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VectorDB_UpsertCollectionDocuments_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).UpsertCollectionDocuments(ctx, req.(*DocSearchResponse))
+		return srv.(VectorDBServer).RemoveTag(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -31782,16 +31712,12 @@ var VectorDB_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _VectorDB_IndexDocument_Handler,
 		},
 		{
-			MethodName: "AddDocumentToCollection",
-			Handler:    _VectorDB_AddDocumentToCollection_Handler,
+			MethodName: "UpsertDocumentTags",
+			Handler:    _VectorDB_UpsertDocumentTags_Handler,
 		},
 		{
-			MethodName: "RemoveDocumentFromCollection",
-			Handler:    _VectorDB_RemoveDocumentFromCollection_Handler,
-		},
-		{
-			MethodName: "UpsertCollectionDocuments",
-			Handler:    _VectorDB_UpsertCollectionDocuments_Handler,
+			MethodName: "RemoveTag",
+			Handler:    _VectorDB_RemoveTag_Handler,
 		},
 		{
 			MethodName: "RemoveDocument",

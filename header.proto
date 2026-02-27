@@ -5593,6 +5593,13 @@ message DocHit {
 	string zalo_friend_status = 21;
 }
 
+message DocumentTagsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string document_id = 4;
+	repeated string tags = 5;
+}
+
 message DocSearchResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -9399,6 +9406,13 @@ message AIFunction {
 	// name=system_send_message
 	Message message = 38; // unknown message
 	string message_prompt = 39;
+
+	UnlockKnowledge unlock_knowledge = 40;
+}
+
+message UnlockKnowledge {
+	repeated string entry_tags = 4;
+	repeated string dynamic_entry_tags = 5; // sdt${user.attributes#.text}
 }
 
 message RecordUserPreference {
@@ -9496,7 +9510,7 @@ message AIDataChunk {
 message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
+	string id = 3; // url://https://glkasdfadf
 	// string group_id = 4;
 
 	string type = 5; // qa, file, website, product, text (for testing), instruction, discount
@@ -9534,8 +9548,8 @@ message AIDataEntry {
 	// key=platforms value=["web", "api"]
 	repeated KV metadata = 27;
 
-	repeated string tags = 28;
-	repeated string related_articles = 29;
+	repeated string tags = 28; // for searching [sdt_0345098345]
+	// repeated string related_articles = 29;
 
 	// int64 deleted = 32;
 	int64 modified = 34;
