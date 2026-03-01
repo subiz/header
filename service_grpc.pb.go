@@ -31249,17 +31249,18 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	VectorDB_UpsertVector_FullMethodName          = "/header.VectorDB/UpsertVector"
-	VectorDB_DeleteVector_FullMethodName          = "/header.VectorDB/DeleteVector"
-	VectorDB_SearchVectors_FullMethodName         = "/header.VectorDB/SearchVectors"
-	VectorDB_GetVector_FullMethodName             = "/header.VectorDB/GetVector"
-	VectorDB_ListVectorIds_FullMethodName         = "/header.VectorDB/ListVectorIds"
-	VectorDB_UpdateDocumentVersion_FullMethodName = "/header.VectorDB/UpdateDocumentVersion"
-	VectorDB_IndexDocument_FullMethodName         = "/header.VectorDB/IndexDocument"
-	VectorDB_UpsertDocumentTags_FullMethodName    = "/header.VectorDB/UpsertDocumentTags"
-	VectorDB_RemoveTag_FullMethodName             = "/header.VectorDB/RemoveTag"
-	VectorDB_RemoveDocument_FullMethodName        = "/header.VectorDB/RemoveDocument"
-	VectorDB_Search_FullMethodName                = "/header.VectorDB/Search"
+	VectorDB_UpsertVector_FullMethodName        = "/header.VectorDB/UpsertVector"
+	VectorDB_DeleteVector_FullMethodName        = "/header.VectorDB/DeleteVector"
+	VectorDB_SearchVectors_FullMethodName       = "/header.VectorDB/SearchVectors"
+	VectorDB_ListVectorIds_FullMethodName       = "/header.VectorDB/ListVectorIds"
+	VectorDB_CleanDocumentChunks_FullMethodName = "/header.VectorDB/CleanDocumentChunks"
+	VectorDB_ListDocumentsByTag_FullMethodName  = "/header.VectorDB/ListDocumentsByTag"
+	VectorDB_ListDocumentChunks_FullMethodName  = "/header.VectorDB/ListDocumentChunks"
+	VectorDB_IndexDocumentChunk_FullMethodName  = "/header.VectorDB/IndexDocumentChunk"
+	VectorDB_UpsertDocumentTags_FullMethodName  = "/header.VectorDB/UpsertDocumentTags"
+	VectorDB_RemoveTag_FullMethodName           = "/header.VectorDB/RemoveTag"
+	VectorDB_RemoveDocument_FullMethodName      = "/header.VectorDB/RemoveDocument"
+	VectorDB_Search_FullMethodName              = "/header.VectorDB/Search"
 )
 
 // VectorDBClient is the client API for VectorDB service.
@@ -31269,11 +31270,12 @@ type VectorDBClient interface {
 	UpsertVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error)
 	DeleteVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error)
 	SearchVectors(ctx context.Context, in *VectorSearchReq, opts ...grpc.CallOption) (*VectorMatches, error)
-	GetVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*VectorDoc, error)
 	ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error)
 	// when doc change, call this first followed by multiple index document calls
-	UpdateDocumentVersion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	IndexDocument(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
+	CleanDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	ListDocumentsByTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	IndexDocumentChunk(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
 	UpsertDocumentTags(ctx context.Context, in *DocumentTagsRequest, opts ...grpc.CallOption) (*Empty, error)
 	RemoveTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	RemoveDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -31318,16 +31320,6 @@ func (c *vectorDBClient) SearchVectors(ctx context.Context, in *VectorSearchReq,
 	return out, nil
 }
 
-func (c *vectorDBClient) GetVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*VectorDoc, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(VectorDoc)
-	err := c.cc.Invoke(ctx, VectorDB_GetVector_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *vectorDBClient) ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -31338,20 +31330,40 @@ func (c *vectorDBClient) ListVectorIds(ctx context.Context, in *ListVectorReques
 	return out, nil
 }
 
-func (c *vectorDBClient) UpdateDocumentVersion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *vectorDBClient) CleanDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_UpdateDocumentVersion_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, VectorDB_CleanDocumentChunks_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *vectorDBClient) IndexDocument(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *vectorDBClient) ListDocumentsByTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, VectorDB_ListDocumentsByTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) ListDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, VectorDB_ListDocumentChunks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vectorDBClient) IndexDocumentChunk(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_IndexDocument_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, VectorDB_IndexDocumentChunk_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -31405,11 +31417,12 @@ type VectorDBServer interface {
 	UpsertVector(context.Context, *VectorDoc) (*Empty, error)
 	DeleteVector(context.Context, *VectorDoc) (*Empty, error)
 	SearchVectors(context.Context, *VectorSearchReq) (*VectorMatches, error)
-	GetVector(context.Context, *VectorDoc) (*VectorDoc, error)
 	ListVectorIds(context.Context, *ListVectorRequest) (*Response, error)
 	// when doc change, call this first followed by multiple index document calls
-	UpdateDocumentVersion(context.Context, *Id) (*Empty, error)
-	IndexDocument(context.Context, *DocIndexRequest) (*Empty, error)
+	CleanDocumentChunks(context.Context, *Id) (*Empty, error)
+	ListDocumentsByTag(context.Context, *Id) (*Response, error)
+	ListDocumentChunks(context.Context, *Id) (*Response, error)
+	IndexDocumentChunk(context.Context, *DocIndexRequest) (*Empty, error)
 	UpsertDocumentTags(context.Context, *DocumentTagsRequest) (*Empty, error)
 	RemoveTag(context.Context, *Id) (*Empty, error)
 	RemoveDocument(context.Context, *Id) (*Empty, error)
@@ -31433,17 +31446,20 @@ func (UnimplementedVectorDBServer) DeleteVector(context.Context, *VectorDoc) (*E
 func (UnimplementedVectorDBServer) SearchVectors(context.Context, *VectorSearchReq) (*VectorMatches, error) {
 	return nil, status.Error(codes.Unimplemented, "method SearchVectors not implemented")
 }
-func (UnimplementedVectorDBServer) GetVector(context.Context, *VectorDoc) (*VectorDoc, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetVector not implemented")
-}
 func (UnimplementedVectorDBServer) ListVectorIds(context.Context, *ListVectorRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListVectorIds not implemented")
 }
-func (UnimplementedVectorDBServer) UpdateDocumentVersion(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateDocumentVersion not implemented")
+func (UnimplementedVectorDBServer) CleanDocumentChunks(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CleanDocumentChunks not implemented")
 }
-func (UnimplementedVectorDBServer) IndexDocument(context.Context, *DocIndexRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method IndexDocument not implemented")
+func (UnimplementedVectorDBServer) ListDocumentsByTag(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDocumentsByTag not implemented")
+}
+func (UnimplementedVectorDBServer) ListDocumentChunks(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDocumentChunks not implemented")
+}
+func (UnimplementedVectorDBServer) IndexDocumentChunk(context.Context, *DocIndexRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method IndexDocumentChunk not implemented")
 }
 func (UnimplementedVectorDBServer) UpsertDocumentTags(context.Context, *DocumentTagsRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpsertDocumentTags not implemented")
@@ -31532,24 +31548,6 @@ func _VectorDB_SearchVectors_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VectorDB_GetVector_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VectorDoc)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VectorDBServer).GetVector(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VectorDB_GetVector_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).GetVector(ctx, req.(*VectorDoc))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _VectorDB_ListVectorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListVectorRequest)
 	if err := dec(in); err != nil {
@@ -31568,38 +31566,74 @@ func _VectorDB_ListVectorIds_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VectorDB_UpdateDocumentVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _VectorDB_CleanDocumentChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VectorDBServer).UpdateDocumentVersion(ctx, in)
+		return srv.(VectorDBServer).CleanDocumentChunks(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VectorDB_UpdateDocumentVersion_FullMethodName,
+		FullMethod: VectorDB_CleanDocumentChunks_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).UpdateDocumentVersion(ctx, req.(*Id))
+		return srv.(VectorDBServer).CleanDocumentChunks(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VectorDB_IndexDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _VectorDB_ListDocumentsByTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).ListDocumentsByTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_ListDocumentsByTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).ListDocumentsByTag(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_ListDocumentChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).ListDocumentChunks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_ListDocumentChunks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).ListDocumentChunks(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VectorDB_IndexDocumentChunk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DocIndexRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VectorDBServer).IndexDocument(ctx, in)
+		return srv.(VectorDBServer).IndexDocumentChunk(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VectorDB_IndexDocument_FullMethodName,
+		FullMethod: VectorDB_IndexDocumentChunk_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).IndexDocument(ctx, req.(*DocIndexRequest))
+		return srv.(VectorDBServer).IndexDocumentChunk(ctx, req.(*DocIndexRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -31696,20 +31730,24 @@ var VectorDB_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _VectorDB_SearchVectors_Handler,
 		},
 		{
-			MethodName: "GetVector",
-			Handler:    _VectorDB_GetVector_Handler,
-		},
-		{
 			MethodName: "ListVectorIds",
 			Handler:    _VectorDB_ListVectorIds_Handler,
 		},
 		{
-			MethodName: "UpdateDocumentVersion",
-			Handler:    _VectorDB_UpdateDocumentVersion_Handler,
+			MethodName: "CleanDocumentChunks",
+			Handler:    _VectorDB_CleanDocumentChunks_Handler,
 		},
 		{
-			MethodName: "IndexDocument",
-			Handler:    _VectorDB_IndexDocument_Handler,
+			MethodName: "ListDocumentsByTag",
+			Handler:    _VectorDB_ListDocumentsByTag_Handler,
+		},
+		{
+			MethodName: "ListDocumentChunks",
+			Handler:    _VectorDB_ListDocumentChunks_Handler,
+		},
+		{
+			MethodName: "IndexDocumentChunk",
+			Handler:    _VectorDB_IndexDocumentChunk_Handler,
 		},
 		{
 			MethodName: "UpsertDocumentTags",

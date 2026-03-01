@@ -4380,11 +4380,11 @@ type DocIndexRequest struct {
 	PrimaryDocumentId string                 `protobuf:"bytes,13,opt,name=primary_document_id,json=primaryDocumentId,proto3" json:"primary_document_id,omitempty"`
 	Sec               int64                  `protobuf:"varint,14,opt,name=sec,proto3" json:"sec,omitempty"` // unix sec for doc, used to order more recent document
 	Locale            string                 `protobuf:"bytes,15,opt,name=locale,proto3" json:"locale,omitempty"`
-	Version           string                 `protobuf:"bytes,20,opt,name=version,proto3" json:"version,omitempty"`
-	IndexTypes        []string               `protobuf:"bytes,21,rep,name=index_types,json=indexTypes,proto3" json:"index_types,omitempty"` // fulltext, vector
-	Vector            []float32              `protobuf:"fixed32,23,rep,packed,name=vector,proto3" json:"vector,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// string version = 20;
+	IndexTypes    []string  `protobuf:"bytes,21,rep,name=index_types,json=indexTypes,proto3" json:"index_types,omitempty"` // fulltext, vector
+	Vector        []float32 `protobuf:"fixed32,23,rep,packed,name=vector,proto3" json:"vector,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DocIndexRequest) Reset() {
@@ -4518,13 +4518,6 @@ func (x *DocIndexRequest) GetSec() int64 {
 func (x *DocIndexRequest) GetLocale() string {
 	if x != nil {
 		return x.Locale
-	}
-	return ""
-}
-
-func (x *DocIndexRequest) GetVersion() string {
-	if x != nil {
-		return x.Version
 	}
 	return ""
 }
@@ -9236,7 +9229,7 @@ const file_request_proto_rawDesc = "" +
 	"\tassignees\x18\x1a \x03(\tR\tassignees\x12\x1b\n" +
 	"\tis_pinned\x18\x1c \x01(\tR\bisPinned\x12\x18\n" +
 	"\awatcher\x18\x1d \x01(\tR\awatcher\x12\x18\n" +
-	"\ashorten\x18\x1f \x01(\bR\ashorten\"\xfd\x03\n" +
+	"\ashorten\x18\x1f \x01(\bR\ashorten\"\xe3\x03\n" +
 	"\x0fDocIndexRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9257,8 +9250,7 @@ const file_request_proto_rawDesc = "" +
 	"\x06owners\x18\t \x03(\tR\x06owners\x12.\n" +
 	"\x13primary_document_id\x18\r \x01(\tR\x11primaryDocumentId\x12\x10\n" +
 	"\x03sec\x18\x0e \x01(\x03R\x03sec\x12\x16\n" +
-	"\x06locale\x18\x0f \x01(\tR\x06locale\x12\x18\n" +
-	"\aversion\x18\x14 \x01(\tR\aversion\x12\x1f\n" +
+	"\x06locale\x18\x0f \x01(\tR\x06locale\x12\x1f\n" +
 	"\vindex_types\x18\x15 \x03(\tR\n" +
 	"indexTypes\x12\x16\n" +
 	"\x06vector\x18\x17 \x03(\x02R\x06vector\"\x8d\x04\n" +

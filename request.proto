@@ -558,7 +558,7 @@ message DocIndexRequest {
 	int64 sec = 14; // unix sec for doc, used to order more recent document
 	string locale = 15;
 
-	string version = 20;
+	// string version = 20;
 	repeated string index_types = 21; // fulltext, vector
 	repeated float vector = 23;
 }
