@@ -7341,6 +7341,7 @@ message CreditEntryData {
 	CreditEntryDataTextEmbedding text_embedding = 9;
 	CreditEntryDataAITraining ai_training = 10;
 	CreditEntryDataAIMessage ai_message = 11;
+	CreditEntryDataAIMessage ai_background_message = 12;
 }
 
 message CreditEntryDataAITraining {
@@ -9520,6 +9521,8 @@ message AIDataEntry {
 	bool javascript_enabled = 9;
 
 	File file = 10;
+	bool is_public_url = 11; // bot can show url source
+
 	Product product = 18;
 	Discount discount = 55;
 
@@ -9527,11 +9530,11 @@ message AIDataEntry {
 
 	// url only
 	int64 last_crawled = 12;
-	string crawling_status = 13; // crawling, done
-	string crawling_error = 25; // crawling, done
+	string crawling_status = 13; // crawling, done, error
+	string chunking_error = 25; // out_of_credit
 	int64 crawl_status_code = 14;
 
-	string status = 17; // pending, crawling, training, ready, unlinked, token-limit
+	string status = 17; // pending, crawling, training, ready,  error
 	int64 created = 19;
 	string created_by = 20;
 
