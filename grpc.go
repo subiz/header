@@ -248,7 +248,7 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 	defer func() {
 		if r := recover(); r != nil {
 			if e, ok := r.(error); ok {
-				err = log.EServer(e, log.M{"_function_name": info.FullMethod}) // wrap error
+				err = log.EServer(e, log.M{"_function_name": info.FullMethod})
 			} else {
 				err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": info.FullMethod})
 			}
@@ -360,7 +360,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
+					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod})
 				} else {
 					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod})
 				}
@@ -444,6 +444,9 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 	}
 
 	hosts := make([]string, 0)
+	if shards == 0 {
+		shards = 1
+	}
 	for i := 0; i < shards; i++ {
 		// convo-${i}.convo:{port}
 		hosts = append(hosts, sp[0]+"-"+strconv.Itoa(i)+"."+sp[0]+":"+strconv.Itoa(grpcport))
@@ -474,6 +477,9 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		// local environment
 		ordinal_num = 0
 		hosts = Unique(hosts)
+		if len(hosts) == 1 {
+			hosts = append(hosts, hosts[0])
+		}
 	}
 
 	// in order to proxy (forward) the request to another grpc host,
@@ -488,10 +494,11 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 	conn := make(map[string]*grpc.ClientConn)
 
 	return func(ctx context.Context, in interface{}, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out interface{}, err error) {
+		var host string
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod}) // wrap error
+					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod, "hosts": strings.Join(hosts, ","), "host": host})
 				} else {
 					debug.PrintStack() // prints stack trace to know where panic happened
 					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod})
@@ -530,7 +537,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		// 5 secs and then proxy one more time. Hoping that the consistent will be resolved
 		justRedirect := len(strings.Join(md["shard_redirected"], "")) > 0
 		extraHeader := metadata.New(nil)
-		host := hosts[parindex]
+		host = hosts[parindex]
 
 		if justRedirect {
 			// mark the the request have been proxied twice
