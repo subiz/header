@@ -31249,18 +31249,19 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	VectorDB_UpsertVector_FullMethodName        = "/header.VectorDB/UpsertVector"
-	VectorDB_DeleteVector_FullMethodName        = "/header.VectorDB/DeleteVector"
-	VectorDB_SearchVectors_FullMethodName       = "/header.VectorDB/SearchVectors"
-	VectorDB_ListVectorIds_FullMethodName       = "/header.VectorDB/ListVectorIds"
-	VectorDB_CleanDocumentChunks_FullMethodName = "/header.VectorDB/CleanDocumentChunks"
-	VectorDB_ListDocumentsByTag_FullMethodName  = "/header.VectorDB/ListDocumentsByTag"
-	VectorDB_ListDocumentChunks_FullMethodName  = "/header.VectorDB/ListDocumentChunks"
-	VectorDB_IndexDocumentChunk_FullMethodName  = "/header.VectorDB/IndexDocumentChunk"
-	VectorDB_UpsertDocumentTags_FullMethodName  = "/header.VectorDB/UpsertDocumentTags"
-	VectorDB_RemoveTag_FullMethodName           = "/header.VectorDB/RemoveTag"
-	VectorDB_RemoveDocument_FullMethodName      = "/header.VectorDB/RemoveDocument"
-	VectorDB_Search_FullMethodName              = "/header.VectorDB/Search"
+	VectorDB_UpsertVector_FullMethodName         = "/header.VectorDB/UpsertVector"
+	VectorDB_DeleteVector_FullMethodName         = "/header.VectorDB/DeleteVector"
+	VectorDB_SearchVectors_FullMethodName        = "/header.VectorDB/SearchVectors"
+	VectorDB_ListVectorIds_FullMethodName        = "/header.VectorDB/ListVectorIds"
+	VectorDB_CleanDocumentChunks_FullMethodName  = "/header.VectorDB/CleanDocumentChunks"
+	VectorDB_ListDocumentsByTag_FullMethodName   = "/header.VectorDB/ListDocumentsByTag"
+	VectorDB_ListDocumentChunks_FullMethodName   = "/header.VectorDB/ListDocumentChunks"
+	VectorDB_IndexDocumentChunk_FullMethodName   = "/header.VectorDB/IndexDocumentChunk"
+	VectorDB_UpsertDocumentTags_FullMethodName   = "/header.VectorDB/UpsertDocumentTags"
+	VectorDB_UpsertDocumentChunks_FullMethodName = "/header.VectorDB/UpsertDocumentChunks"
+	VectorDB_RemoveTag_FullMethodName            = "/header.VectorDB/RemoveTag"
+	VectorDB_RemoveDocument_FullMethodName       = "/header.VectorDB/RemoveDocument"
+	VectorDB_Search_FullMethodName               = "/header.VectorDB/Search"
 )
 
 // VectorDBClient is the client API for VectorDB service.
@@ -31277,6 +31278,7 @@ type VectorDBClient interface {
 	ListDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	IndexDocumentChunk(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
 	UpsertDocumentTags(ctx context.Context, in *DocumentTagsRequest, opts ...grpc.CallOption) (*Empty, error)
+	UpsertDocumentChunks(ctx context.Context, in *DocumentChunksRequest, opts ...grpc.CallOption) (*Empty, error)
 	RemoveTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	RemoveDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	Search(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
@@ -31380,6 +31382,16 @@ func (c *vectorDBClient) UpsertDocumentTags(ctx context.Context, in *DocumentTag
 	return out, nil
 }
 
+func (c *vectorDBClient) UpsertDocumentChunks(ctx context.Context, in *DocumentChunksRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, VectorDB_UpsertDocumentChunks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *vectorDBClient) RemoveTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
@@ -31424,6 +31436,7 @@ type VectorDBServer interface {
 	ListDocumentChunks(context.Context, *Id) (*Response, error)
 	IndexDocumentChunk(context.Context, *DocIndexRequest) (*Empty, error)
 	UpsertDocumentTags(context.Context, *DocumentTagsRequest) (*Empty, error)
+	UpsertDocumentChunks(context.Context, *DocumentChunksRequest) (*Empty, error)
 	RemoveTag(context.Context, *Id) (*Empty, error)
 	RemoveDocument(context.Context, *Id) (*Empty, error)
 	Search(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
@@ -31463,6 +31476,9 @@ func (UnimplementedVectorDBServer) IndexDocumentChunk(context.Context, *DocIndex
 }
 func (UnimplementedVectorDBServer) UpsertDocumentTags(context.Context, *DocumentTagsRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpsertDocumentTags not implemented")
+}
+func (UnimplementedVectorDBServer) UpsertDocumentChunks(context.Context, *DocumentChunksRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpsertDocumentChunks not implemented")
 }
 func (UnimplementedVectorDBServer) RemoveTag(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveTag not implemented")
@@ -31656,6 +31672,24 @@ func _VectorDB_UpsertDocumentTags_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VectorDB_UpsertDocumentChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocumentChunksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VectorDBServer).UpsertDocumentChunks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VectorDB_UpsertDocumentChunks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VectorDBServer).UpsertDocumentChunks(ctx, req.(*DocumentChunksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _VectorDB_RemoveTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -31752,6 +31786,10 @@ var VectorDB_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpsertDocumentTags",
 			Handler:    _VectorDB_UpsertDocumentTags_Handler,
+		},
+		{
+			MethodName: "UpsertDocumentChunks",
+			Handler:    _VectorDB_UpsertDocumentChunks_Handler,
 		},
 		{
 			MethodName: "RemoveTag",

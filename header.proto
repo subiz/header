@@ -5600,6 +5600,13 @@ message DocumentTagsRequest {
 	repeated string tags = 5;
 }
 
+message DocumentChunksRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string document_id = 4;
+	repeated string chunk_ids = 5;
+}
+
 message DocSearchResponse {
 	common.Context ctx = 1;
 	string account_id = 2;

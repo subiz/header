@@ -1111,6 +1111,7 @@ service VectorDB {
 	rpc ListDocumentChunks(Id) returns (Response);
 	rpc IndexDocumentChunk(DocIndexRequest) returns (Empty);
 	rpc UpsertDocumentTags(DocumentTagsRequest) returns (Empty);
+	rpc UpsertDocumentChunks(DocumentChunksRequest) returns (Empty);
 	rpc RemoveTag(Id) returns (Empty);
 	rpc RemoveDocument(Id) returns (Empty);
 	rpc Search(DocSearchRequest) returns(DocSearchResponse);
