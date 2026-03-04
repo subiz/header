@@ -1,0 +1,331 @@
+[
+  {
+    "name": "1",
+    "input": {
+      "type": "div",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Hi Lee Kei," }]
+        },
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Paragraph 1" }]
+        },
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Paragraph 2", "bold": true }]
+        },
+        {
+          "type": "bullet_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [{ "type": "text", "text": "Item 1" }]
+            },
+            {
+              "type": "list_item",
+              "content": [{ "type": "text", "text": "Item 2" }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "image",
+              "alt_text": "Layout căn hộ 2 phòng ngủ",
+              "image": {
+                "url": "https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"
+              }
+            },
+            { "type": "text", "text": "\n" },
+            {
+k              "type": "image",
+              "alt_text": "Hình ảnh căn hộ 1",
+              "image": {
+                "url": "https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"
+              }
+            },
+            { "type": "text", "text": "\n" },
+            {
+              "type": "image",
+              "alt_text": "Hình ảnh căn hộ 2",
+              "image": {
+                "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
+              }
+            },
+            { "type": "text", "text": "\n" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            { "type": "text", "text": "Para 3", "bold": true },
+            { "type": "text", "text": "\n" },
+            { "type": "text", "text": "\nPara4" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Para5" }]
+        }
+      ]
+    },
+    "output": [
+      { "text": "Hi Lee Kei,\nParagraph 1\nParagraph 2\n* Item 1\n* Item 2" },
+      {
+        "text": "Layout căn hộ 2 phòng ngủ",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"
+            }
+          }
+        ]
+      },
+      {
+        "text": "Hình ảnh căn hộ 1",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"
+            }
+          }
+        ]
+      },
+      {
+        "text": "Hình ảnh căn hộ 2",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
+            }
+          }
+        ]
+      },
+      { "text": "Para 3\n\nPara4\nPara5" }
+    ]
+  },
+  {
+    "name": "2",
+    "input": {
+      "type": "div",
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
+          }
+        }
+      ]
+    },
+    "output": [
+      {
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "3",
+    "input": {
+      "type": "div",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Hi Lee Kei," }]
+        },
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Paragraph 1" }]
+        }
+      ]
+    },
+    "output": [{ "text": "Hi Lee Kei,\nParagraph 1" }]
+  },
+  {
+    "name": "4",
+    "input": {
+      "type": "div",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Hi Lee Kei," }]
+        },
+        {
+          "type": "paragraph",
+          "content": [{ "type": "text", "text": "Paragraph 1" }]
+        }
+      ]
+    },
+    "output": [{ "text": "Hi Lee Kei,\nParagraph 1" }]
+  },
+  {
+    "name": "5",
+    "input": {
+      "type": "div",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Chào anh Hiếu,"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Về căn hộ 3 phòng ngủ tại Regal Complex Đà Nẵng, em xin chia sẻ thông tin như sau:"
+            }
+          ]
+        },
+        {
+          "type": "ordered_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Giá bán: Từ 6.71 tỷ đến 7.41 tỷ đồng, tùy diện tích từ 96m² đến 121m²."
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Chiết khấu và ưu đãi: Giá trên chưa bao gồm chiết khấu theo từng thời điểm. Nếu anh quyết định mua trong giai đoạn này, sẽ có các chính sách chiết khấu và thanh toán hỗ trợ tối ưu giá mua thực tế."
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Đầu tư cho thuê: Căn hộ 3 phòng ngủ rất phù hợp để đầu tư cho thuê nhờ vị trí đắc địa, tiện ích đầy đủ như hồ bơi vô cực, gym, cùng chất lượng xây dựng vượt trội, giúp thu hút khách thuê và tăng lợi nhuận ổn định."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Anh có thể tham khảo hình ảnh tiện ích dự án bên dưới để có cái nhìn rõ hơn:"
+            }
+          ]
+        },
+        {
+          "type": "bullet_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "image",
+                  "image": {
+                    "url": "https://vcdn.subiz-cdn.com/file/fisngquaqykaectslhdg_acsnacgjwhgvoxzijjhi/4_ly_do_de_an_cu.png"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "image",
+                  "image": {
+                    "url": "https://vcdn.subiz-cdn.com/file/fisngquebkeualcfzupy_acsnacgjwhgvoxzijjhi/tien_ich_noi_khu.png"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "image",
+                  "image": {
+                    "url": "https://vcdn.subiz-cdn.com/file/fisngquierxjjirdlhnt_acsnacgjwhgvoxzijjhi/tien_ich_ngoai_khu.jpg"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Anh có muốn em gửi thông tin chi tiết về các chính sách thanh toán hoặc bảng giá cập nhật hiện tại không ạ? Hay anh quan tâm thêm về pháp lý và báo cáo sinh lợi đầu tư dài hạn của căn hộ này?"
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "Chào anh Hiếu,\nVề căn hộ 3 phòng ngủ tại Regal Complex Đà Nẵng, em xin chia sẻ thông tin như sau:0\n. Giá bán: Từ 6.71 tỷ đến 7.41 tỷ đồng, tùy diện tích từ 96m² đến 121m².1\n. Chiết khấu và ưu đãi: Giá trên chưa bao gồm chiết khấu theo từng thời điểm. Nếu anh quyết định mua trong giai đoạn này, sẽ có các chính sách chiết khấu và thanh toán hỗ trợ tối ưu giá mua thực tế.2\n. Đầu tư cho thuê: Căn hộ 3 phòng ngủ rất phù hợp để đầu tư cho thuê nhờ vị trí đắc địa, tiện ích đầy đủ như hồ bơi vô cực, gym, cùng chất lượng xây dựng vượt trội, giúp thu hút khách thuê và tăng lợi nhuận ổn định.\nAnh có thể tham khảo hình ảnh tiện ích dự án bên dưới để có cái nhìn rõ hơn:"
+      },
+      {
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisngquaqykaectslhdg_acsnacgjwhgvoxzijjhi/4_ly_do_de_an_cu.png",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisngquaqykaectslhdg_acsnacgjwhgvoxzijjhi/4_ly_do_de_an_cu.png"
+            }
+          },
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisngquebkeualcfzupy_acsnacgjwhgvoxzijjhi/tien_ich_noi_khu.png",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisngquebkeualcfzupy_acsnacgjwhgvoxzijjhi/tien_ich_noi_khu.png"
+            }
+          },
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://vcdn.subiz-cdn.com/file/fisngquierxjjirdlhnt_acsnacgjwhgvoxzijjhi/tien_ich_ngoai_khu.jpg",
+            "file": {
+              "url": "https://vcdn.subiz-cdn.com/file/fisngquierxjjirdlhnt_acsnacgjwhgvoxzijjhi/tien_ich_ngoai_khu.jpg"
+            }
+          }
+        ]
+      },
+      {
+        "text": "Anh có muốn em gửi thông tin chi tiết về các chính sách thanh toán hoặc bảng giá cập nhật hiện tại không ạ? Hay anh quan tâm thêm về pháp lý và báo cáo sinh lợi đầu tư dài hạn của căn hộ này?"
+      }
+    ]
+  }
+]

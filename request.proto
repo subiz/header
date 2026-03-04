@@ -561,6 +561,7 @@ message DocIndexRequest {
 	// string version = 20;
 	repeated string index_types = 21; // fulltext, vector
 	repeated float vector = 23;
+	repeated float title_vector = 24;
 }
 
 message DocSearchRequest {

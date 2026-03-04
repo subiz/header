@@ -54182,10 +54182,10 @@ type AIDataEntryUsed struct {
 	ChunkId     string                 `protobuf:"bytes,4,opt,name=chunk_id,json=chunkId,proto3" json:"chunk_id,omitempty"`
 	DataEntryId string                 `protobuf:"bytes,5,opt,name=data_entry_id,json=dataEntryId,proto3" json:"data_entry_id,omitempty"`
 	// string chunk = 6; // chunk that is being used
-	Score             int64  `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"` // max 10000 => 100%
-	OriginChunk       string `protobuf:"bytes,11,opt,name=origin_chunk,json=originChunk,proto3" json:"origin_chunk,omitempty"`
-	IsVectorSearch    bool   `protobuf:"varint,12,opt,name=is_vector_search,json=isVectorSearch,proto3" json:"is_vector_search,omitempty"`
-	IsFullTextSearch  bool   `protobuf:"varint,13,opt,name=is_full_text_search,json=isFullTextSearch,proto3" json:"is_full_text_search,omitempty"`
+	Score       int64  `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"` // max 10000 => 100%
+	OriginChunk string `protobuf:"bytes,11,opt,name=origin_chunk,json=originChunk,proto3" json:"origin_chunk,omitempty"`
+	// bool is_vector_search = 12;
+	// bool is_full_text_search = 13;
 	ChunkIndex        int64  `protobuf:"varint,14,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"`
 	IsCover           bool   `protobuf:"varint,15,opt,name=is_cover,json=isCover,proto3" json:"is_cover,omitempty"`
 	ChunkOriginalLink string `protobuf:"bytes,16,opt,name=chunk_original_link,json=chunkOriginalLink,proto3" json:"chunk_original_link,omitempty"`
@@ -54250,20 +54250,6 @@ func (x *AIDataEntryUsed) GetOriginChunk() string {
 		return x.OriginChunk
 	}
 	return ""
-}
-
-func (x *AIDataEntryUsed) GetIsVectorSearch() bool {
-	if x != nil {
-		return x.IsVectorSearch
-	}
-	return false
-}
-
-func (x *AIDataEntryUsed) GetIsFullTextSearch() bool {
-	if x != nil {
-		return x.IsFullTextSearch
-	}
-	return false
 }
 
 func (x *AIDataEntryUsed) GetChunkIndex() int64 {
@@ -66116,6 +66102,7 @@ type AIDataChunk struct {
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	DataEntryId   string                 `protobuf:"bytes,3,opt,name=data_entry_id,json=dataEntryId,proto3" json:"data_entry_id,omitempty"`
 	Id            string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"` // md5 of embedded_chunk
+	TitleVector   []float32              `protobuf:"fixed32,6,rep,packed,name=title_vector,json=titleVector,proto3" json:"title_vector,omitempty"`
 	Vector        []float32              `protobuf:"fixed32,11,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	OriginalChunk string                 `protobuf:"bytes,7,opt,name=original_chunk,json=originalChunk,proto3" json:"original_chunk,omitempty"`
 	EmbeddedChunk string                 `protobuf:"bytes,8,opt,name=embedded_chunk,json=embeddedChunk,proto3" json:"embedded_chunk,omitempty"`
@@ -66192,6 +66179,13 @@ func (x *AIDataChunk) GetId() string {
 		return x.Id
 	}
 	return ""
+}
+
+func (x *AIDataChunk) GetTitleVector() []float32 {
+	if x != nil {
+		return x.TitleVector
+	}
+	return nil
 }
 
 func (x *AIDataChunk) GetVector() []float32 {
@@ -78643,14 +78637,12 @@ const file_header_proto_rawDesc = "" +
 	"\x05trace\x18\x13 \x01(\v2\x14.header.AIAgentTraceR\x05trace\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xef\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x02\n" +
 	"\x0fAIDataEntryUsed\x12\x19\n" +
 	"\bchunk_id\x18\x04 \x01(\tR\achunkId\x12\"\n" +
 	"\rdata_entry_id\x18\x05 \x01(\tR\vdataEntryId\x12\x14\n" +
 	"\x05score\x18\a \x01(\x03R\x05score\x12!\n" +
-	"\forigin_chunk\x18\v \x01(\tR\voriginChunk\x12(\n" +
-	"\x10is_vector_search\x18\f \x01(\bR\x0eisVectorSearch\x12-\n" +
-	"\x13is_full_text_search\x18\r \x01(\bR\x10isFullTextSearch\x12\x1f\n" +
+	"\forigin_chunk\x18\v \x01(\tR\voriginChunk\x12\x1f\n" +
 	"\vchunk_index\x18\x0e \x01(\x03R\n" +
 	"chunkIndex\x12\x19\n" +
 	"\bis_cover\x18\x0f \x01(\bR\aisCover\x12.\n" +
@@ -80151,13 +80143,14 @@ const file_header_proto_rawDesc = "" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
 	"llmSummary\x12 \n" +
-	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\x8d\x04\n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xb0\x04\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\"\n" +
 	"\rdata_entry_id\x18\x03 \x01(\tR\vdataEntryId\x12\x0e\n" +
-	"\x02id\x18\x05 \x01(\tR\x02id\x12\x16\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12!\n" +
+	"\ftitle_vector\x18\x06 \x03(\x02R\vtitleVector\x12\x16\n" +
 	"\x06vector\x18\v \x03(\x02R\x06vector\x12%\n" +
 	"\x0eoriginal_chunk\x18\a \x01(\tR\roriginalChunk\x12%\n" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +

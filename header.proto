@@ -7755,8 +7755,8 @@ message AIDataEntryUsed {
 	// string chunk = 6; // chunk that is being used
 	int64 score = 7; // max 10000 => 100%
 	string origin_chunk = 11;
-	bool is_vector_search = 12;
-	bool is_full_text_search = 13;
+	// bool is_vector_search = 12;
+	// bool is_full_text_search = 13;
 	int64 chunk_index = 14;
 	bool is_cover = 15;
 	string chunk_original_link = 16;
@@ -9494,6 +9494,7 @@ message AIDataChunk {
 
 	string data_entry_id = 3;
 	string id = 5; // md5 of embedded_chunk
+	repeated float title_vector = 6;
 	repeated float vector = 11;
 	string original_chunk = 7;
 	string embedded_chunk = 8;

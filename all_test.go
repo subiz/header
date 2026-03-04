@@ -220,155 +220,31 @@ func TestPack(t *testing.T) {
 	fmt.Println("HEX", hex.EncodeToString(b))
 }
 
-func TestBlockToPlainTextMessages1(t *testing.T) {
-	block := &Block{}
-	json.Unmarshal([]byte(`{
-  "type": "div",
-  "content": [
-    {
-      "type": "paragraph",
-      "content": [{"type": "text","text": "Hi Lee Kei,"}]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {"type": "text","text": "Paragraph 1"}
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {"type": "text","text": "Paragraph 2","bold": true}
-      ]
-    },
-    {
-      "type": "bullet_list",
-      "content": [
-        {
-          "type": "list_item",
-          "content": [{"type": "text","text": "Item 1"}]
-        },
-        {
-          "type": "list_item",
-          "content": [{"type": "text","text": "Item 2"}]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "image",
-          "alt_text": "Layout căn hộ 2 phòng ngủ",
-          "image": {
-            "url": "https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"
-          }
-        },
-        {"type": "text","text": "\n"},
-        {
-          "type": "image",
-          "alt_text": "Hình ảnh căn hộ 1",
-          "image": {
-            "url": "https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"
-          }
-        },
-        {"type": "text","text": "\n"},
-        {
-          "type": "image",
-          "alt_text": "Hình ảnh căn hộ 2",
-          "image": {
-            "url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"
-          }
-        },
-        {"type": "text","text": "\n"}
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {"type": "text","text": "Para 3","bold": true},
-        {"type": "text","text": "\n"},
-        {"type": "text","text": "\nPara4"}
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [{"type": "text","text": "Para5"}]
-    }
-  ]
-}`), block)
-	messes := BlockToPlainTextMessages(block)
-
-	b, _ := json.Marshal(messes)
-	if string(b) != `[{"text":"Hi Lee Kei,\nParagraph 1\nParagraph 2\n* Item 1\n* Item 2"},{"text":"Layout căn hộ 2 phòng ngủ","attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png","file":{"url":"https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"}}]},{"text":"Hình ảnh căn hộ 1","attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"}}]},{"text":"Hình ảnh căn hộ 2","attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]},{"text":"Para 3\n\nPara4\nPara5"}]` {
-		t.Fatalf("should eq, but got %s", string(b))
-	}
+type ConvertBlockTestcase struct {
+	Name   string
+	Input  *Block
+	Output []*Message
 }
 
-func TestBlockToPlainTextMessages2(t *testing.T) {
-	block := &Block{}
-	json.Unmarshal([]byte(`{
-  "type": "div",
-  "content": [{
-    "type": "image",
-    "image": {"url": "https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}
-  }]
-}`), block)
-	messes := BlockToPlainTextMessages(block)
-
-	b, _ := json.Marshal(messes)
-	if string(b) != `[{"attachments":[{"type":"file","mimetype":"image/jpeg","url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg","file":{"url":"https://vcdn.subiz-cdn.com/file/fisnhkiiqsmzpxyamezx_acsnacgjwhgvoxzijjhi/hinh_can_ho_2.jpg"}}]}]` {
-		t.Fatalf("should eq, but got %s", string(b))
+func TestBlockToPlainTextMessages(t *testing.T) {
+	jsonb, err := os.ReadFile("./convertblocktestcase.json")
+	if err != nil {
+		t.Fatal(err)
 	}
-}
-
-func TestBlockToPlainTextMessages3(t *testing.T) {
-	block := &Block{}
-	json.Unmarshal([]byte(`{
-  "type": "div",
-  "content": [
-    {
-      "type": "paragraph",
-      "content": [{"type": "text","text": "Hi Lee Kei,"}]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {"type": "text","text": "Paragraph 1"}
-      ]
-    }
-  ]
-}`), block)
-	messes := BlockToPlainTextMessages(block)
-
-	b, _ := json.Marshal(messes)
-	if string(b) != `[{"text":"Hi Lee Kei,\nParagraph 1"}]` {
-		t.Fatalf("should eq, but got %s", string(b))
+	testcases := []*ConvertBlockTestcase{}
+	if err := json.Unmarshal(jsonb, &testcases); err != nil {
+		t.Fatal(err)
 	}
-}
 
-func TestBlockToPlainTextMessages4(t *testing.T) {
-	block := &Block{}
-	json.Unmarshal([]byte(`{
-  "type": "div",
-  "content": [
-    {
-      "type": "paragraph",
-      "content": [{"type": "text","text": "Hi Lee Kei,"}]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {"type": "text","text": "Paragraph 1"}
-      ]
-    }
-  ]
-}`), block)
-	messes := BlockToPlainTextMessages(block)
-
-	b, _ := json.Marshal(messes)
-	if string(b) != `[{"text":"Hi Lee Kei,\nParagraph 1"}]` {
-		t.Fatalf("should eq, but got %s", string(b))
+	for _, tc := range testcases {
+		t.Run(tc.Name, func(t *testing.T) {
+			out := BlockToPlainTextMessages(tc.Input)
+			outb, _ := json.Marshal(out)
+			expb, _ := json.Marshal(tc.Output)
+			if string(outb) != string(expb) {
+				t.Errorf("expect\n%s\n--got--\n%s", string(expb), string(outb))
+			}
+		})
 	}
 }
 

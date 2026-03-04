@@ -1938,8 +1938,8 @@ func BlockToPlainTextMessages(block *Block) []*Message {
 		text, attachments := singleBlockToPlainText2(block)
 		messages = append(messages, &Message{Text: text, Attachments: attachments})
 	}
-	// compile 2 text
 
+	// compile 2 text
 	combined := []*Message{}
 	var lastmsg *Message
 	for _, mes := range messages {
@@ -2002,16 +2002,33 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 	}
 	out := ""
 	if block.Type == "bullet_list" || block.Type == "ordered_list" {
+		outatts := []*Attachment{}
 		for i, item := range block.GetContent() {
 			prefix := "\n* "
 			if block.Type == "ordered_list" {
 				prefix = strconv.Itoa(i) + "\n. "
 			}
-			out += prefix + blockToPlainText(item)
+			item, atts := singleBlockToPlainText2(item)
+			outatts = append(outatts, atts...)
+			item = strings.TrimSpace(item)
+			if item != "" {
+				out += prefix + item
+			}
 		}
-		return out, nil
+		return out, outatts
 	}
 
+	if block.Type == "list_item" {
+		flatten := flattenBlock(block)
+		var outtext string
+		var outatts []*Attachment
+		for _, block := range flatten {
+			text, atts := singleBlockToPlainText2(block)
+			outtext += text
+			outatts = append(outatts, atts...)
+		}
+		return outtext, outatts
+	}
 	if block.Type == "image" {
 		return block.AltText, []*Attachment{{Type: "file", Mimetype: "image/jpeg", Url: block.GetImage().GetUrl(), File: &File{Url: block.GetImage().GetUrl()}}}
 	}
