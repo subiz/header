@@ -262,6 +262,16 @@ message UserLeadOwner {
 	repeated LeadOwner lead_owners = 6;
 }
 
+message UserContentView {
+	common.Context ctx = 1;
+	string id = 3;
+	string account_id = 4;
+	int64 modified = 5;
+	Event latest_content_view = 55; // readonly @deprecated
+	Event start_content_view = 56; // readonly latest content view that change the source @deprecated
+	Event first_content_view = 57; // readonly first content view @deprecated
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -7130,6 +7140,9 @@ message Response {
 
 	repeated WebPlugin plugins = 260;
 	repeated ConversationLog conversation_logs = 261;
+
+	UserContentView content_view = 265;
+	repeated UserContentView content_views = 266;
 }
 
 message ReportCount {

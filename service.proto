@@ -246,6 +246,7 @@ service UserMgr {
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
 	rpc ListUsersByContactProfile(UserIds) returns (header.Response); // for better sync
 	rpc MatchUsers(Ids) returns (header.Users); // ok
+	rpc MatchUserContentViews(Ids) returns (Response);
 
 	rpc BanUser(Id) returns (header.User); // ok
 	rpc UnbanUser(Id) returns (header.User); // ok
