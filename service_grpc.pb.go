@@ -6291,6 +6291,7 @@ const (
 	UserMgr_ReadOrCreateUserByContactProfile_FullMethodName = "/header.UserMgr/ReadOrCreateUserByContactProfile"
 	UserMgr_ListUsersByContactProfile_FullMethodName        = "/header.UserMgr/ListUsersByContactProfile"
 	UserMgr_MatchUsers_FullMethodName                       = "/header.UserMgr/MatchUsers"
+	UserMgr_MatchUserContentViews_FullMethodName            = "/header.UserMgr/MatchUserContentViews"
 	UserMgr_BanUser_FullMethodName                          = "/header.UserMgr/BanUser"
 	UserMgr_UnbanUser_FullMethodName                        = "/header.UserMgr/UnbanUser"
 	UserMgr_LookupByPhone_FullMethodName                    = "/header.UserMgr/LookupByPhone"
@@ -6368,6 +6369,7 @@ type UserMgrClient interface {
 	ReadOrCreateUserByContactProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	ListUsersByContactProfile(ctx context.Context, in *UserIds, opts ...grpc.CallOption) (*Response, error)
 	MatchUsers(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Users, error)
+	MatchUserContentViews(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	BanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	UnbanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	LookupByPhone(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Users, error)
@@ -6539,6 +6541,16 @@ func (c *userMgrClient) MatchUsers(ctx context.Context, in *Ids, opts ...grpc.Ca
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Users)
 	err := c.cc.Invoke(ctx, UserMgr_MatchUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) MatchUserContentViews(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, UserMgr_MatchUserContentViews_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7133,6 +7145,7 @@ type UserMgrServer interface {
 	ReadOrCreateUserByContactProfile(context.Context, *Id) (*User, error)
 	ListUsersByContactProfile(context.Context, *UserIds) (*Response, error)
 	MatchUsers(context.Context, *Ids) (*Users, error)
+	MatchUserContentViews(context.Context, *Ids) (*Response, error)
 	BanUser(context.Context, *Id) (*User, error)
 	UnbanUser(context.Context, *Id) (*User, error)
 	LookupByPhone(context.Context, *Id) (*Users, error)
@@ -7232,6 +7245,9 @@ func (UnimplementedUserMgrServer) ListUsersByContactProfile(context.Context, *Us
 }
 func (UnimplementedUserMgrServer) MatchUsers(context.Context, *Ids) (*Users, error) {
 	return nil, status.Error(codes.Unimplemented, "method MatchUsers not implemented")
+}
+func (UnimplementedUserMgrServer) MatchUserContentViews(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchUserContentViews not implemented")
 }
 func (UnimplementedUserMgrServer) BanUser(context.Context, *Id) (*User, error) {
 	return nil, status.Error(codes.Unimplemented, "method BanUser not implemented")
@@ -7619,6 +7635,24 @@ func _UserMgr_MatchUsers_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).MatchUsers(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_MatchUserContentViews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MatchUserContentViews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_MatchUserContentViews_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MatchUserContentViews(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8699,6 +8733,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchUsers",
 			Handler:    _UserMgr_MatchUsers_Handler,
+		},
+		{
+			MethodName: "MatchUserContentViews",
+			Handler:    _UserMgr_MatchUserContentViews_Handler,
 		},
 		{
 			MethodName: "BanUser",

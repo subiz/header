@@ -262,6 +262,17 @@ message UserLeadOwner {
 	repeated LeadOwner lead_owners = 6;
 }
 
+message UserContentView {
+	common.Context ctx = 1;
+	string id = 3;
+	string account_id = 4;
+	int64 modified = 5;
+	Event latest = 55;
+	Event start = 56;
+	Event first = 57;
+	Error error = 79;
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -7130,6 +7141,9 @@ message Response {
 
 	repeated WebPlugin plugins = 260;
 	repeated ConversationLog conversation_logs = 261;
+
+	UserContentView content_view = 265;
+	repeated UserContentView content_views = 266;
 }
 
 message ReportCount {
