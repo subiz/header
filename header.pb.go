@@ -66051,6 +66051,7 @@ type CrawlResponse struct {
 	NumDiscoveredLinks int64                  `protobuf:"varint,18,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
 	LlmSummary         string                 `protobuf:"bytes,19,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
 	Screenshoot        string                 `protobuf:"bytes,20,opt,name=screenshoot,proto3" json:"screenshoot,omitempty"` // base64
+	FpvCostUsd         int64                  `protobuf:"varint,21,opt,name=fpv_cost_usd,json=fpvCostUsd,proto3" json:"fpv_cost_usd,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -66209,6 +66210,13 @@ func (x *CrawlResponse) GetScreenshoot() string {
 		return x.Screenshoot
 	}
 	return ""
+}
+
+func (x *CrawlResponse) GetFpvCostUsd() int64 {
+	if x != nil {
+		return x.FpvCostUsd
+	}
+	return 0
 }
 
 // chunk and excerpt
@@ -80248,7 +80256,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\xe3\x04\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x85\x05\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -80271,7 +80279,9 @@ const file_header_proto_rawDesc = "" +
 	"\x14num_discovered_links\x18\x12 \x01(\x03R\x12numDiscoveredLinks\x12\x1f\n" +
 	"\vllm_summary\x18\x13 \x01(\tR\n" +
 	"llmSummary\x12 \n" +
-	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\"\xb0\x04\n" +
+	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\x12 \n" +
+	"\ffpv_cost_usd\x18\x15 \x01(\x03R\n" +
+	"fpvCostUsd\"\xb0\x04\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

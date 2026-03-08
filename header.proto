@@ -9499,6 +9499,7 @@ message CrawlResponse {
 
 	string llm_summary = 19;
 	string screenshoot = 20; // base64
+	int64 fpv_cost_usd = 21;
 }
 
 // chunk and excerpt
