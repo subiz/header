@@ -9544,7 +9544,10 @@ message AIDataEntry {
 	bool javascript_enabled = 9;
 
 	File file = 10;
-	bool is_public_url = 11; // bot can show url source
+	// bool is_public_url = 11; // @deprecated
+	// bot can show url source
+	// default -> hide google or notion links
+	string source_visibility = 15; // "", default, private, public
 
 	Product product = 18;
 	Discount discount = 55;

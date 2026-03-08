@@ -66414,10 +66414,13 @@ type AIDataEntry struct {
 	Url               string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"` // https://subiz.com.vn
 	JavascriptEnabled bool                   `protobuf:"varint,9,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
 	File              *File                  `protobuf:"bytes,10,opt,name=file,proto3" json:"file,omitempty"`
-	IsPublicUrl       bool                   `protobuf:"varint,11,opt,name=is_public_url,json=isPublicUrl,proto3" json:"is_public_url,omitempty"` // bot can show url source
-	Product           *Product               `protobuf:"bytes,18,opt,name=product,proto3" json:"product,omitempty"`
-	Discount          *Discount              `protobuf:"bytes,55,opt,name=discount,proto3" json:"discount,omitempty"`
-	DataStore         *AIDataStore           `protobuf:"bytes,43,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"` // read-only, for product only when search information about a specific product
+	// bool is_public_url = 11; // @deprecated
+	// bot can show url source
+	// default -> hide google or notion links
+	SourceVisibility string       `protobuf:"bytes,15,opt,name=source_visibility,json=sourceVisibility,proto3" json:"source_visibility,omitempty"` // "", default, private, public
+	Product          *Product     `protobuf:"bytes,18,opt,name=product,proto3" json:"product,omitempty"`
+	Discount         *Discount    `protobuf:"bytes,55,opt,name=discount,proto3" json:"discount,omitempty"`
+	DataStore        *AIDataStore `protobuf:"bytes,43,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"` // read-only, for product only when search information about a specific product
 	// url only
 	LastCrawled     int64    `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
 	CrawlingStatus  string   `protobuf:"bytes,13,opt,name=crawling_status,json=crawlingStatus,proto3" json:"crawling_status,omitempty"` // crawling, done, error
@@ -66561,11 +66564,11 @@ func (x *AIDataEntry) GetFile() *File {
 	return nil
 }
 
-func (x *AIDataEntry) GetIsPublicUrl() bool {
+func (x *AIDataEntry) GetSourceVisibility() string {
 	if x != nil {
-		return x.IsPublicUrl
+		return x.SourceVisibility
 	}
-	return false
+	return ""
 }
 
 func (x *AIDataEntry) GetProduct() *Product {
@@ -80303,7 +80306,7 @@ const file_header_proto_rawDesc = "" +
 	"\asummary\x18\x15 \x01(\tR\asummary\x12\x1a\n" +
 	"\bkeywords\x18\x16 \x03(\tR\bkeywords\x12\x1a\n" +
 	"\bcategory\x18\x17 \x01(\tR\bcategory\x12\x12\n" +
-	"\x04type\x18\x18 \x01(\tR\x04type\"\x94\x0e\n" +
+	"\x04type\x18\x18 \x01(\tR\x04type\"\x9d\x0e\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -80315,8 +80318,8 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\b \x01(\tR\x03url\x12-\n" +
 	"\x12javascript_enabled\x18\t \x01(\bR\x11javascriptEnabled\x12 \n" +
 	"\x04file\x18\n" +
-	" \x01(\v2\f.header.FileR\x04file\x12\"\n" +
-	"\ris_public_url\x18\v \x01(\bR\visPublicUrl\x12)\n" +
+	" \x01(\v2\f.header.FileR\x04file\x12+\n" +
+	"\x11source_visibility\x18\x0f \x01(\tR\x10sourceVisibility\x12)\n" +
 	"\aproduct\x18\x12 \x01(\v2\x0f.header.ProductR\aproduct\x12,\n" +
 	"\bdiscount\x187 \x01(\v2\x10.header.DiscountR\bdiscount\x122\n" +
 	"\n" +
