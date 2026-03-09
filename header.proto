@@ -6700,8 +6700,9 @@ message WorkflowAction {
 
 message ActionSendFacebookConversion {
 	string type = 3; // lead, purchase
-
 	Bill bill = 4;
+	repeated string page_ids = 5;
+	repeated string dataset_ids = 6;
 }
 
 message ActionTerminateBot {
@@ -7359,10 +7360,10 @@ message CreditEntryData {
 	CreditEntryDataId file = 6;
 	CreditEntryDataZaloRequestCall zalo_request_call = 7;
 	CreditEntryDataLLMCompletion llm_completion = 8;
-	CreditEntryDataTextEmbedding text_embedding = 9;
+	CreditEntryDataTextEmbedding text_embedding = 9; // @depreacted
 	CreditEntryDataAITraining ai_training = 10;
 	CreditEntryDataAIMessage ai_message = 11;
-	CreditEntryDataAIMessage ai_background_message = 12;
+	CreditEntryDataAIMessage ai_follow_message = 12;
 }
 
 message CreditEntryDataAITraining {

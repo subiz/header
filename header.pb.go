@@ -46706,6 +46706,8 @@ type ActionSendFacebookConversion struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // lead, purchase
 	Bill          *Bill                  `protobuf:"bytes,4,opt,name=bill,proto3" json:"bill,omitempty"`
+	PageIds       []string               `protobuf:"bytes,5,rep,name=page_ids,json=pageIds,proto3" json:"page_ids,omitempty"`
+	DatasetIds    []string               `protobuf:"bytes,6,rep,name=dataset_ids,json=datasetIds,proto3" json:"dataset_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -46750,6 +46752,20 @@ func (x *ActionSendFacebookConversion) GetType() string {
 func (x *ActionSendFacebookConversion) GetBill() *Bill {
 	if x != nil {
 		return x.Bill
+	}
+	return nil
+}
+
+func (x *ActionSendFacebookConversion) GetPageIds() []string {
+	if x != nil {
+		return x.PageIds
+	}
+	return nil
+}
+
+func (x *ActionSendFacebookConversion) GetDatasetIds() []string {
+	if x != nil {
+		return x.DatasetIds
 	}
 	return nil
 }
@@ -51316,20 +51332,20 @@ func (x *CreditEntryDataZaloActiveMessage) GetZaloUserId() string {
 }
 
 type CreditEntryData struct {
-	state               protoimpl.MessageState            `protogen:"open.v1"`
-	Agent               *CreditEntryDataAgent             `protobuf:"bytes,2,opt,name=agent,proto3" json:"agent,omitempty"`
-	ZaloZns             *CreditEntryDataZaloZNS           `protobuf:"bytes,3,opt,name=zalo_zns,json=zaloZns,proto3" json:"zalo_zns,omitempty"`
-	ZaloActiveMessage   *CreditEntryDataZaloActiveMessage `protobuf:"bytes,4,opt,name=zalo_active_message,json=zaloActiveMessage,proto3" json:"zalo_active_message,omitempty"`
-	Email               *CreditEntryDataEmail             `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
-	File                *CreditEntryDataId                `protobuf:"bytes,6,opt,name=file,proto3" json:"file,omitempty"`
-	ZaloRequestCall     *CreditEntryDataZaloRequestCall   `protobuf:"bytes,7,opt,name=zalo_request_call,json=zaloRequestCall,proto3" json:"zalo_request_call,omitempty"`
-	LlmCompletion       *CreditEntryDataLLMCompletion     `protobuf:"bytes,8,opt,name=llm_completion,json=llmCompletion,proto3" json:"llm_completion,omitempty"`
-	TextEmbedding       *CreditEntryDataTextEmbedding     `protobuf:"bytes,9,opt,name=text_embedding,json=textEmbedding,proto3" json:"text_embedding,omitempty"`
-	AiTraining          *CreditEntryDataAITraining        `protobuf:"bytes,10,opt,name=ai_training,json=aiTraining,proto3" json:"ai_training,omitempty"`
-	AiMessage           *CreditEntryDataAIMessage         `protobuf:"bytes,11,opt,name=ai_message,json=aiMessage,proto3" json:"ai_message,omitempty"`
-	AiBackgroundMessage *CreditEntryDataAIMessage         `protobuf:"bytes,12,opt,name=ai_background_message,json=aiBackgroundMessage,proto3" json:"ai_background_message,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state             protoimpl.MessageState            `protogen:"open.v1"`
+	Agent             *CreditEntryDataAgent             `protobuf:"bytes,2,opt,name=agent,proto3" json:"agent,omitempty"`
+	ZaloZns           *CreditEntryDataZaloZNS           `protobuf:"bytes,3,opt,name=zalo_zns,json=zaloZns,proto3" json:"zalo_zns,omitempty"`
+	ZaloActiveMessage *CreditEntryDataZaloActiveMessage `protobuf:"bytes,4,opt,name=zalo_active_message,json=zaloActiveMessage,proto3" json:"zalo_active_message,omitempty"`
+	Email             *CreditEntryDataEmail             `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
+	File              *CreditEntryDataId                `protobuf:"bytes,6,opt,name=file,proto3" json:"file,omitempty"`
+	ZaloRequestCall   *CreditEntryDataZaloRequestCall   `protobuf:"bytes,7,opt,name=zalo_request_call,json=zaloRequestCall,proto3" json:"zalo_request_call,omitempty"`
+	LlmCompletion     *CreditEntryDataLLMCompletion     `protobuf:"bytes,8,opt,name=llm_completion,json=llmCompletion,proto3" json:"llm_completion,omitempty"`
+	TextEmbedding     *CreditEntryDataTextEmbedding     `protobuf:"bytes,9,opt,name=text_embedding,json=textEmbedding,proto3" json:"text_embedding,omitempty"` // @depreacted
+	AiTraining        *CreditEntryDataAITraining        `protobuf:"bytes,10,opt,name=ai_training,json=aiTraining,proto3" json:"ai_training,omitempty"`
+	AiMessage         *CreditEntryDataAIMessage         `protobuf:"bytes,11,opt,name=ai_message,json=aiMessage,proto3" json:"ai_message,omitempty"`
+	AiFollowMessage   *CreditEntryDataAIMessage         `protobuf:"bytes,12,opt,name=ai_follow_message,json=aiFollowMessage,proto3" json:"ai_follow_message,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreditEntryData) Reset() {
@@ -51432,9 +51448,9 @@ func (x *CreditEntryData) GetAiMessage() *CreditEntryDataAIMessage {
 	return nil
 }
 
-func (x *CreditEntryData) GetAiBackgroundMessage() *CreditEntryDataAIMessage {
+func (x *CreditEntryData) GetAiFollowMessage() *CreditEntryDataAIMessage {
 	if x != nil {
-		return x.AiBackgroundMessage
+		return x.AiFollowMessage
 	}
 	return nil
 }
@@ -77957,10 +77973,13 @@ const file_header_proto_rawDesc = "" +
 	"\x15output_error_variable\x18j \x01(\tR\x13outputErrorVariable\x12?\n" +
 	"\rterminate_bot\x18n \x01(\v2\x1a.header.ActionTerminateBotR\fterminateBot\x12^\n" +
 	"\x18send_facebook_conversion\x18p \x01(\v2$.header.ActionSendFacebookConversionR\x16sendFacebookConversion\x12?\n" +
-	"\rrotate_agents\x18q \x01(\v2\x1a.header.ActionRotateAgentsR\frotateAgents\"T\n" +
+	"\rrotate_agents\x18q \x01(\v2\x1a.header.ActionRotateAgentsR\frotateAgents\"\x90\x01\n" +
 	"\x1cActionSendFacebookConversion\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12 \n" +
-	"\x04bill\x18\x04 \x01(\v2\f.header.BillR\x04bill\"u\n" +
+	"\x04bill\x18\x04 \x01(\v2\f.header.BillR\x04bill\x12\x19\n" +
+	"\bpage_ids\x18\x05 \x03(\tR\apageIds\x12\x1f\n" +
+	"\vdataset_ids\x18\x06 \x03(\tR\n" +
+	"datasetIds\"u\n" +
 	"\x12ActionTerminateBot\x12\x15\n" +
 	"\x06bot_id\x18\x03 \x01(\tR\x05botId\x12\x1d\n" +
 	"\n" +
@@ -78453,7 +78472,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0fconversation_id\x18\x05 \x01(\tR\x0econversationId\x12\x19\n" +
 	"\bevent_id\x18\x06 \x01(\tR\aeventId\x12 \n" +
 	"\fzalo_user_id\x18\a \x01(\tR\n" +
-	"zaloUserId\"\x86\x06\n" +
+	"zaloUserId\"\xfe\x05\n" +
 	"\x0fCreditEntryData\x122\n" +
 	"\x05agent\x18\x02 \x01(\v2\x1c.header.CreditEntryDataAgentR\x05agent\x129\n" +
 	"\bzalo_zns\x18\x03 \x01(\v2\x1e.header.CreditEntryDataZaloZNSR\azaloZns\x12X\n" +
@@ -78467,8 +78486,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\v2!.header.CreditEntryDataAITrainingR\n" +
 	"aiTraining\x12?\n" +
 	"\n" +
-	"ai_message\x18\v \x01(\v2 .header.CreditEntryDataAIMessageR\taiMessage\x12T\n" +
-	"\x15ai_background_message\x18\f \x01(\v2 .header.CreditEntryDataAIMessageR\x13aiBackgroundMessage\"m\n" +
+	"ai_message\x18\v \x01(\v2 .header.CreditEntryDataAIMessageR\taiMessage\x12L\n" +
+	"\x11ai_follow_message\x18\f \x01(\v2 .header.CreditEntryDataAIMessageR\x0faiFollowMessage\"m\n" +
 	"\x19CreditEntryDataAITraining\x12\x19\n" +
 	"\bentry_id\x18\x04 \x01(\tR\aentryId\x12\x1d\n" +
 	"\n" +
@@ -82800,7 +82819,7 @@ var file_header_proto_depIdxs = []int32{
 	448,  // 1006: header.CreditEntryData.text_embedding:type_name -> header.CreditEntryDataTextEmbedding
 	445,  // 1007: header.CreditEntryData.ai_training:type_name -> header.CreditEntryDataAITraining
 	446,  // 1008: header.CreditEntryData.ai_message:type_name -> header.CreditEntryDataAIMessage
-	446,  // 1009: header.CreditEntryData.ai_background_message:type_name -> header.CreditEntryDataAIMessage
+	446,  // 1009: header.CreditEntryData.ai_follow_message:type_name -> header.CreditEntryDataAIMessage
 	677,  // 1010: header.CreditSpendEntries.ctx:type_name -> common.Context
 	437,  // 1011: header.CreditSpendEntries.entries:type_name -> header.CreditSpendEntry
 	677,  // 1012: header.TrySpendCreditResponse.ctx:type_name -> common.Context
