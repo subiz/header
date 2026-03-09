@@ -149,3 +149,24 @@ func CompileString(templ string, data map[string]string) string {
 
 	return buf.String()
 }
+
+// CleanString removes any non-pritable chatacters, returns a valid, readable utf8 string
+// for example `echo "W+KAi10K" | base64 -d`
+func CleanString(s string) string {
+	s = strings.Join(strings.Split(s, "\000"), "")
+	buf := make([]rune, 0, len(s))
+	for len(s) > 0 {
+		r, size := utf8.DecodeRuneInString(s)
+		if r == utf8.RuneError && size == 1 {
+			// skip invalid UTF-8
+			s = s[size:]
+			continue
+		}
+		// skip unreadable/invisible runes
+		if unicode.IsPrint(r) {
+			buf = append(buf, r)
+		}
+		s = s[size:]
+	}
+	return string(buf)
+}

@@ -2589,11 +2589,6 @@ func FromErr(baseerr error) *Error {
 	}
 }
 
-// return valid utf8 string
-func CleanString(str string) string {
-	str = strings.Join(strings.Split(str, "\000"), "")
-	return strings.ToValidUTF8(str, "")
-}
 
 var skipuserfields = map[string]bool{
 	"owner":           true,
