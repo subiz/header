@@ -1101,11 +1101,6 @@ service Crawler {
 }
 
 service VectorDB {
-	rpc UpsertVector(VectorDoc) returns (Empty); // @deprecated, use IndexDocument
-	rpc DeleteVector(VectorDoc) returns (Empty); // @deprecated, increase the doc version then reindex
-	rpc SearchVectors(VectorSearchReq) returns (VectorMatches); // @deprecated
-	rpc ListVectorIds(ListVectorRequest) returns (Response); // @deprecated
-
 	// when doc change, call this first followed by multiple index document calls
 	rpc CleanDocumentChunks(Id) returns (Empty); // when update document -> have to reindex the whole document
 	rpc ListDocumentsByTag(Id) returns (Response);

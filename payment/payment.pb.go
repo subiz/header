@@ -553,6 +553,12 @@ type Subscription struct {
 	Note                   *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
 	FpvPricePerDayUsd      *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
 	AutoRenewDisabled      *int64  `protobuf:"varint,62,opt,name=auto_renew_disabled,json=autoRenewDisabled" json:"auto_renew_disabled,omitempty"`
+	FpvNovatBudgetUsd      *int64  `protobuf:"varint,65,opt,name=fpv_novat_budget_usd,json=fpvNovatBudgetUsd" json:"fpv_novat_budget_usd,omitempty"`             // 15
+	NovatLastPayment       *int64  `protobuf:"varint,66,opt,name=novat_last_payment,json=novatLastPayment" json:"novat_last_payment,omitempty"`                  //
+	NovatLastDeclined      *int64  `protobuf:"varint,67,opt,name=novat_last_declined,json=novatLastDeclined" json:"novat_last_declined,omitempty"`               //
+	FpvMarketingBudgetVnd  *int64  `protobuf:"varint,68,opt,name=fpv_marketing_budget_vnd,json=fpvMarketingBudgetVnd" json:"fpv_marketing_budget_vnd,omitempty"` //
+	MarketingLastPayment   *int64  `protobuf:"varint,69,opt,name=marketing_last_payment,json=marketingLastPayment" json:"marketing_last_payment,omitempty"`      //
+	MarketingLastDeclined  *int64  `protobuf:"varint,70,opt,name=marketing_last_declined,json=marketingLastDeclined" json:"marketing_last_declined,omitempty"`   //
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -716,6 +722,48 @@ func (x *Subscription) GetFpvPricePerDayUsd() int64 {
 func (x *Subscription) GetAutoRenewDisabled() int64 {
 	if x != nil && x.AutoRenewDisabled != nil {
 		return *x.AutoRenewDisabled
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvNovatBudgetUsd() int64 {
+	if x != nil && x.FpvNovatBudgetUsd != nil {
+		return *x.FpvNovatBudgetUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetNovatLastPayment() int64 {
+	if x != nil && x.NovatLastPayment != nil {
+		return *x.NovatLastPayment
+	}
+	return 0
+}
+
+func (x *Subscription) GetNovatLastDeclined() int64 {
+	if x != nil && x.NovatLastDeclined != nil {
+		return *x.NovatLastDeclined
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvMarketingBudgetVnd() int64 {
+	if x != nil && x.FpvMarketingBudgetVnd != nil {
+		return *x.FpvMarketingBudgetVnd
+	}
+	return 0
+}
+
+func (x *Subscription) GetMarketingLastPayment() int64 {
+	if x != nil && x.MarketingLastPayment != nil {
+		return *x.MarketingLastPayment
+	}
+	return 0
+}
+
+func (x *Subscription) GetMarketingLastDeclined() int64 {
+	if x != nil && x.MarketingLastDeclined != nil {
+		return *x.MarketingLastDeclined
 	}
 	return 0
 }
@@ -3072,7 +3120,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
 	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\xc4\x05\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xfa\a\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3094,7 +3142,13 @@ const file_payment_proto_rawDesc = "" +
 	"\x19fpv_marketing_balance_vnd\x18; \x01(\x03R\x16fpvMarketingBalanceVnd\x12\x12\n" +
 	"\x04note\x188 \x01(\tR\x04note\x120\n" +
 	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\x12.\n" +
-	"\x13auto_renew_disabled\x18> \x01(\x03R\x11autoRenewDisabled\"\x98\x04\n" +
+	"\x13auto_renew_disabled\x18> \x01(\x03R\x11autoRenewDisabled\x12/\n" +
+	"\x14fpv_novat_budget_usd\x18A \x01(\x03R\x11fpvNovatBudgetUsd\x12,\n" +
+	"\x12novat_last_payment\x18B \x01(\x03R\x10novatLastPayment\x12.\n" +
+	"\x13novat_last_declined\x18C \x01(\x03R\x11novatLastDeclined\x127\n" +
+	"\x18fpv_marketing_budget_vnd\x18D \x01(\x03R\x15fpvMarketingBudgetVnd\x124\n" +
+	"\x16marketing_last_payment\x18E \x01(\x03R\x14marketingLastPayment\x126\n" +
+	"\x17marketing_last_declined\x18F \x01(\x03R\x15marketingLastDeclined\"\x98\x04\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +

@@ -153,6 +153,7 @@ message Account {
 	optional string agent_state = 51;
 
 	optional string primary_payment_method = 52; // bank_transfer
+	optional int64 ai_requested = 53;
 }
 
 message InvoiceInfo {

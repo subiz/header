@@ -31287,10 +31287,6 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	VectorDB_UpsertVector_FullMethodName         = "/header.VectorDB/UpsertVector"
-	VectorDB_DeleteVector_FullMethodName         = "/header.VectorDB/DeleteVector"
-	VectorDB_SearchVectors_FullMethodName        = "/header.VectorDB/SearchVectors"
-	VectorDB_ListVectorIds_FullMethodName        = "/header.VectorDB/ListVectorIds"
 	VectorDB_CleanDocumentChunks_FullMethodName  = "/header.VectorDB/CleanDocumentChunks"
 	VectorDB_ListDocumentsByTag_FullMethodName   = "/header.VectorDB/ListDocumentsByTag"
 	VectorDB_ListDocumentChunks_FullMethodName   = "/header.VectorDB/ListDocumentChunks"
@@ -31306,10 +31302,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VectorDBClient interface {
-	UpsertVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error)
-	DeleteVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error)
-	SearchVectors(ctx context.Context, in *VectorSearchReq, opts ...grpc.CallOption) (*VectorMatches, error)
-	ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error)
 	// when doc change, call this first followed by multiple index document calls
 	CleanDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListDocumentsByTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -31328,46 +31320,6 @@ type vectorDBClient struct {
 
 func NewVectorDBClient(cc grpc.ClientConnInterface) VectorDBClient {
 	return &vectorDBClient{cc}
-}
-
-func (c *vectorDBClient) UpsertVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_UpsertVector_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *vectorDBClient) DeleteVector(ctx context.Context, in *VectorDoc, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, VectorDB_DeleteVector_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *vectorDBClient) SearchVectors(ctx context.Context, in *VectorSearchReq, opts ...grpc.CallOption) (*VectorMatches, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(VectorMatches)
-	err := c.cc.Invoke(ctx, VectorDB_SearchVectors_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *vectorDBClient) ListVectorIds(ctx context.Context, in *ListVectorRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, VectorDB_ListVectorIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *vectorDBClient) CleanDocumentChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
@@ -31464,10 +31416,6 @@ func (c *vectorDBClient) Search(ctx context.Context, in *DocSearchRequest, opts 
 // All implementations must embed UnimplementedVectorDBServer
 // for forward compatibility.
 type VectorDBServer interface {
-	UpsertVector(context.Context, *VectorDoc) (*Empty, error)
-	DeleteVector(context.Context, *VectorDoc) (*Empty, error)
-	SearchVectors(context.Context, *VectorSearchReq) (*VectorMatches, error)
-	ListVectorIds(context.Context, *ListVectorRequest) (*Response, error)
 	// when doc change, call this first followed by multiple index document calls
 	CleanDocumentChunks(context.Context, *Id) (*Empty, error)
 	ListDocumentsByTag(context.Context, *Id) (*Response, error)
@@ -31488,18 +31436,6 @@ type VectorDBServer interface {
 // pointer dereference when methods are called.
 type UnimplementedVectorDBServer struct{}
 
-func (UnimplementedVectorDBServer) UpsertVector(context.Context, *VectorDoc) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpsertVector not implemented")
-}
-func (UnimplementedVectorDBServer) DeleteVector(context.Context, *VectorDoc) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteVector not implemented")
-}
-func (UnimplementedVectorDBServer) SearchVectors(context.Context, *VectorSearchReq) (*VectorMatches, error) {
-	return nil, status.Error(codes.Unimplemented, "method SearchVectors not implemented")
-}
-func (UnimplementedVectorDBServer) ListVectorIds(context.Context, *ListVectorRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListVectorIds not implemented")
-}
 func (UnimplementedVectorDBServer) CleanDocumentChunks(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method CleanDocumentChunks not implemented")
 }
@@ -31546,78 +31482,6 @@ func RegisterVectorDBServer(s grpc.ServiceRegistrar, srv VectorDBServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&VectorDB_ServiceDesc, srv)
-}
-
-func _VectorDB_UpsertVector_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VectorDoc)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VectorDBServer).UpsertVector(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VectorDB_UpsertVector_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).UpsertVector(ctx, req.(*VectorDoc))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _VectorDB_DeleteVector_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VectorDoc)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VectorDBServer).DeleteVector(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VectorDB_DeleteVector_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).DeleteVector(ctx, req.(*VectorDoc))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _VectorDB_SearchVectors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VectorSearchReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VectorDBServer).SearchVectors(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VectorDB_SearchVectors_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).SearchVectors(ctx, req.(*VectorSearchReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _VectorDB_ListVectorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListVectorRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VectorDBServer).ListVectorIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VectorDB_ListVectorIds_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VectorDBServer).ListVectorIds(ctx, req.(*ListVectorRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _VectorDB_CleanDocumentChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -31789,22 +31653,6 @@ var VectorDB_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.VectorDB",
 	HandlerType: (*VectorDBServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "UpsertVector",
-			Handler:    _VectorDB_UpsertVector_Handler,
-		},
-		{
-			MethodName: "DeleteVector",
-			Handler:    _VectorDB_DeleteVector_Handler,
-		},
-		{
-			MethodName: "SearchVectors",
-			Handler:    _VectorDB_SearchVectors_Handler,
-		},
-		{
-			MethodName: "ListVectorIds",
-			Handler:    _VectorDB_ListVectorIds_Handler,
-		},
 		{
 			MethodName: "CleanDocumentChunks",
 			Handler:    _VectorDB_CleanDocumentChunks_Handler,

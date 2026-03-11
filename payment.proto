@@ -90,6 +90,13 @@ message Subscription {
 	optional int64 fpv_price_per_day_usd = 57; // read only after upgrade
 
 	optional int64 auto_renew_disabled = 62;
+
+	optional int64 fpv_novat_budget_usd = 65; // 15
+	optional int64 novat_last_payment = 66; //
+	optional int64 novat_last_declined = 67; //
+	optional int64 fpv_marketing_budget_vnd = 68; //
+	optional int64 marketing_last_payment = 69; //
+	optional int64 marketing_last_declined = 70; //
 }
 
 message Bill {

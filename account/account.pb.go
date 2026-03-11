@@ -781,6 +781,7 @@ type Account struct {
 	NumUnreads           *int64         `protobuf:"varint,50,opt,name=num_unreads,json=numUnreads" json:"num_unreads,omitempty"`
 	AgentState           *string        `protobuf:"bytes,51,opt,name=agent_state,json=agentState" json:"agent_state,omitempty"`
 	PrimaryPaymentMethod *string        `protobuf:"bytes,52,opt,name=primary_payment_method,json=primaryPaymentMethod" json:"primary_payment_method,omitempty"` // bank_transfer
+	AiRequested          *int64         `protobuf:"varint,53,opt,name=ai_requested,json=aiRequested" json:"ai_requested,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1065,6 +1066,13 @@ func (x *Account) GetPrimaryPaymentMethod() string {
 		return *x.PrimaryPaymentMethod
 	}
 	return ""
+}
+
+func (x *Account) GetAiRequested() int64 {
+	if x != nil && x.AiRequested != nil {
+		return *x.AiRequested
+	}
+	return 0
 }
 
 type InvoiceInfo struct {
@@ -2942,7 +2950,7 @@ const file_account_proto_rawDesc = "" +
 	"\n" +
 	"\x06active\x10\x01\x12\f\n" +
 	"\binactive\x10\x02\x12\v\n" +
-	"\adeleted\x10\x03\"\xb4\t\n" +
+	"\adeleted\x10\x03\"\xd7\t\n" +
 	"\aAccount\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
@@ -2986,7 +2994,8 @@ const file_account_proto_rawDesc = "" +
 	"numUnreads\x12\x1f\n" +
 	"\vagent_state\x183 \x01(\tR\n" +
 	"agentState\x124\n" +
-	"\x16primary_payment_method\x184 \x01(\tR\x14primaryPaymentMethod\"1\n" +
+	"\x16primary_payment_method\x184 \x01(\tR\x14primaryPaymentMethod\x12!\n" +
+	"\fai_requested\x185 \x01(\x03R\vaiRequested\"1\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x01\x12\v\n" +
 	"\adeleted\x10\x03\x12\f\n" +

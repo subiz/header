@@ -7183,7 +7183,7 @@ message SendEmailRequest {
 	int64 ttl_sec = 5;
 	string from = 6;
 
-	string template = 7; // transcript
+	string template = 7; // transcript, credit_budget_reached_20, out_of_credit
 	bytes data = 8;
 
 	string subject = 10;
@@ -8556,35 +8556,6 @@ message ResetPasswordEmail {
 	string agent_name = 8;
 }
 
-message OTPEmail {
-	common.Context ctx = 1;
-	string from = 2;
-	string to = 3;
-	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	int64 expired_in = 4;
-	string otp = 5;
-
-	string agent_id = 7;
-	string agent_name = 8;
-}
-
-message InviteEmail {
-	common.Context ctx = 1;
-	string to = 2;
-	string account_id = 3;
-	string sender_id = 4;
-	int64 expired_in = 5;
-	// string token = 6; // deprecated
-
-	string fullname = 9;
-	string sender_name = 10;
-	string account_name = 11;
-	string account_logo_url = 12;
-	string from = 14;
-
-	string link = 15; // new
-}
-
 message LoginRequest {
 	string username = 4;
 	string password = 5;
@@ -9561,14 +9532,15 @@ message AIDataEntry {
 	string chunking_error = 25; // out_of_credit
 	int64 crawl_status_code = 14;
 
-	string status = 17; // pending, crawling, training, ready,  error
+	string status = 17; // pending (prepraing tobe trained), crawling, training, ready,  error
 	int64 created = 19;
 	string created_by = 20;
 
 	int64 updated = 21;
 	string updated_by = 22;
 	string md5 = 23;
-	string chunked_md5 = 24;
+	string chunked_md5 = 24; // empty -> pending, 0
+
 	repeated string aliases = 33; // for the question
 	string category = 26; // howto | feature | troubleshooting | product | policy
 
