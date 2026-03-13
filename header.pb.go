@@ -47324,6 +47324,7 @@ type ActionLLM struct {
 	SystemInstructionBlock    *Block                       `protobuf:"bytes,6,opt,name=system_instruction_block,json=systemInstructionBlock,proto3" json:"system_instruction_block,omitempty"` // dynamic prompt
 	Temperature               int64                        `protobuf:"varint,7,opt,name=temperature,proto3" json:"temperature,omitempty"`                                                      // 10000 * 10000
 	TopP                      int64                        `protobuf:"varint,15,opt,name=top_p,json=topP,proto3" json:"top_p,omitempty"`                                                       // *100000
+	ReasoningEffort           string                       `protobuf:"bytes,16,opt,name=reasoning_effort,json=reasoningEffort,proto3" json:"reasoning_effort,omitempty"`
 	MaxToken                  int64                        `protobuf:"varint,8,opt,name=max_token,json=maxToken,proto3" json:"max_token,omitempty"`
 	UseUserAttribute          bool                         `protobuf:"varint,24,opt,name=use_user_attribute,json=useUserAttribute,proto3" json:"use_user_attribute,omitempty"`
 	PackedHistory             bool                         `protobuf:"varint,22,opt,name=packed_history,json=packedHistory,proto3" json:"packed_history,omitempty"`
@@ -47406,6 +47407,13 @@ func (x *ActionLLM) GetTopP() int64 {
 		return x.TopP
 	}
 	return 0
+}
+
+func (x *ActionLLM) GetReasoningEffort() string {
+	if x != nil {
+		return x.ReasoningEffort
+	}
+	return ""
 }
 
 func (x *ActionLLM) GetMaxToken() int64 {
@@ -77382,13 +77390,14 @@ const file_header_proto_rawDesc = "" +
 	"\x0erequired_level\x18\x04 \x01(\tR\rrequiredLevel\x12!\n" +
 	"\fon_collected\x18\a \x01(\tR\vonCollected\x12%\n" +
 	"\x0eon_uncollected\x18\b \x01(\tR\ronUncollected\x12!\n" +
-	"\fon_unhandled\x18\t \x01(\tR\vonUnhandled\"\x9a\a\n" +
+	"\fon_unhandled\x18\t \x01(\tR\vonUnhandled\"\xc5\a\n" +
 	"\tActionLLM\x12-\n" +
 	"\x12system_instruction\x18\x04 \x01(\tR\x11systemInstruction\x12\x14\n" +
 	"\x05model\x18\x05 \x01(\tR\x05model\x12G\n" +
 	"\x18system_instruction_block\x18\x06 \x01(\v2\r.header.BlockR\x16systemInstructionBlock\x12 \n" +
 	"\vtemperature\x18\a \x01(\x03R\vtemperature\x12\x13\n" +
-	"\x05top_p\x18\x0f \x01(\x03R\x04topP\x12\x1b\n" +
+	"\x05top_p\x18\x0f \x01(\x03R\x04topP\x12)\n" +
+	"\x10reasoning_effort\x18\x10 \x01(\tR\x0freasoningEffort\x12\x1b\n" +
 	"\tmax_token\x18\b \x01(\x03R\bmaxToken\x12,\n" +
 	"\x12use_user_attribute\x18\x18 \x01(\bR\x10useUserAttribute\x12%\n" +
 	"\x0epacked_history\x18\x16 \x01(\bR\rpackedHistory\x12.\n" +

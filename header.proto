@@ -6791,6 +6791,7 @@ message ActionLLM {
 	Block system_instruction_block = 6; // dynamic prompt
 	int64 temperature = 7; // 10000 * 10000
 	int64 top_p = 15; // *100000
+	string reasoning_effort = 16;
 	int64 max_token = 8;
 
 	bool use_user_attribute = 24;
