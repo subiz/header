@@ -9335,7 +9335,9 @@ message AIFunction {
 
 	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update, record_user_preference,
 	// system_assign, system_remind, human_handoff, system_invite_human, end, provide_context, system_update_welcome_message,
-	// system_update_agent, system_send_message
+	// system_update_agent, system_send_message, system_search_products, system_get_a_product_information, system_search_discounts
+	//
+
 	string display_name = 17;
 	string description = 5; // prompt
 
@@ -9352,8 +9354,11 @@ message AIFunction {
 	string url = 6;
 	string method = 7; // GET, POST, DELETE
 	repeated KV headers = 8;
+	repeated KV dynamic_headers = 9; // x-phone: user.phone (STATIC=abc)
+
 	JSONSchema parameters = 10;
 	int64 disabled = 11;
+
 	/*
 		JSON schema
 		{
@@ -9366,6 +9371,13 @@ message AIFunction {
 		}
 	*/
 
+	// to override system_search_products
+	// function.override_system = 1
+	// function.name = system_search_products
+	// function.url = https://my-endpoint.com
+
+	int64 override_system = 21; // like boolean
+
 	string type = 12; // empty=remote, system, workflow, remember_user_info, procedure
 	string run_mode = 13; // sync, async, throttle, debounce
 	CreateTicketFunction system_create_ticket = 14;
@@ -9377,8 +9389,6 @@ message AIFunction {
 	Form system_schedule_appointment = 19;
 
 	bool stop_after_called = 30;
-
-	RecordUserPreference record_user_preference = 21;
 
 	// prom
 	// use when action = system_remind , system_provide_context
@@ -9408,11 +9418,6 @@ message AIFunction {
 message UnlockKnowledge {
 	repeated string entry_tags = 4;
 	repeated string dynamic_entry_tags = 5; // sdt${user.attributes#.text}
-}
-
-message RecordUserPreference {
-	string name = 5;
-	string description = 6;
 }
 
 message CollectInfomationAttribute {
