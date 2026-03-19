@@ -7299,7 +7299,7 @@ message CreditSpendEntry {
 	string credit_id = 9;
 
 	int64 fpv_unit_price = 10; // @deprecated
-	int64 fpv_regular_unit_price = 11; // @deprecated
+	// int64 fpv_regular_unit_price = 11; // @deprecated
 
 	string service_id = 12; // cp13 @deprecated
 	// string service_type = 13; // campaign, bot, popup

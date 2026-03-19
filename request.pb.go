@@ -7433,7 +7433,7 @@ type CreditSpendLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	CreatedFrom   int64                  `protobuf:"varint,4,opt,name=created_from,json=createdFrom,proto3" json:"created_from,omitempty"` // ms
+	FromTime      int64                  `protobuf:"varint,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"` // ms
 	Keyword       string                 `protobuf:"bytes,5,opt,name=keyword,proto3" json:"keyword,omitempty"`
 	ServiceId     string                 `protobuf:"bytes,6,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"` // just filter
 	Item          string                 `protobuf:"bytes,7,opt,name=item,proto3" json:"item,omitempty"`                            // just filter
@@ -7492,9 +7492,9 @@ func (x *CreditSpendLogRequest) GetAccountId() string {
 	return ""
 }
 
-func (x *CreditSpendLogRequest) GetCreatedFrom() int64 {
+func (x *CreditSpendLogRequest) GetFromTime() int64 {
 	if x != nil {
-		return x.CreatedFrom
+		return x.FromTime
 	}
 	return 0
 }
@@ -9593,12 +9593,12 @@ const file_request_proto_rawDesc = "" +
 	"\afilters\x18\f \x03(\tR\afilters\x12\x19\n" +
 	"\bgroup_by\x18\r \x01(\tR\agroupBy\x12\x1a\n" +
 	"\bcurrency\x18\x0e \x01(\tR\bcurrency\x12\x16\n" +
-	"\x06filter\x18\x0f \x01(\tR\x06filter\"\xfb\x02\n" +
+	"\x06filter\x18\x0f \x01(\tR\x06filter\"\xf5\x02\n" +
 	"\x15CreditSpendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tR\taccountId\x12!\n" +
-	"\fcreated_from\x18\x04 \x01(\x03R\vcreatedFrom\x12\x18\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1b\n" +
+	"\tfrom_time\x18\x04 \x01(\x03R\bfromTime\x12\x18\n" +
 	"\akeyword\x18\x05 \x01(\tR\akeyword\x12\x1d\n" +
 	"\n" +
 	"service_id\x18\x06 \x01(\tR\tserviceId\x12\x12\n" +

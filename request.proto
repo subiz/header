@@ -585,6 +585,7 @@ message DocSearchRequest {
 
 	repeated float vector = 17;
 	repeated string tags = 18;
+
 }
 
 message CreateAgentRequest {
@@ -930,7 +931,7 @@ message CreditSpendReportRequest {
 message CreditSpendLogRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	int64 created_from = 4; // ms
+	int64 from_time = 4; // ms
 	string keyword = 5;
 	string service_id = 6; // just filter
 	string item = 7; // just filter
