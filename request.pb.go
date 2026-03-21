@@ -5826,10 +5826,15 @@ type CounterReportRequest struct {
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	TimeSeries    string                 `protobuf:"bytes,3,opt,name=time_series,json=timeSeries,proto3" json:"time_series,omitempty"`
-	FromSec       int64                  `protobuf:"varint,5,opt,name=from_sec,json=fromSec,proto3" json:"from_sec,omitempty"`
-	Range         string                 `protobuf:"bytes,6,opt,name=range,proto3" json:"range,omitempty"` // min, hour, day
-	Tz            string                 `protobuf:"bytes,7,opt,name=tz,proto3" json:"tz,omitempty"`       // +00:07
+	FromSec       int64                  `protobuf:"varint,5,opt,name=from_sec,json=fromSec,proto3" json:"from_sec,omitempty"` // @deprecated, use from_time
+	Range         string                 `protobuf:"bytes,6,opt,name=range,proto3" json:"range,omitempty"`                     // min, hour, day
+	Tz            string                 `protobuf:"bytes,7,opt,name=tz,proto3" json:"tz,omitempty"`                           // +00:07
 	Limit         int64                  `protobuf:"varint,8,opt,name=limit,proto3" json:"limit,omitempty"`
+	FromTime      int64                  `protobuf:"varint,11,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"` // ms
+	CountOnly     bool                   `protobuf:"varint,10,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"`
+	Filters       []string               `protobuf:"bytes,12,rep,name=filters,proto3" json:"filters,omitempty"`                // "", "source=at123;item=zns"
+	GroupBy       string                 `protobuf:"bytes,13,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "", "item", "source"
+	Filter        string                 `protobuf:"bytes,15,opt,name=filter,proto3" json:"filter,omitempty"`                  // ; delimeter
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5911,6 +5916,41 @@ func (x *CounterReportRequest) GetLimit() int64 {
 		return x.Limit
 	}
 	return 0
+}
+
+func (x *CounterReportRequest) GetFromTime() int64 {
+	if x != nil {
+		return x.FromTime
+	}
+	return 0
+}
+
+func (x *CounterReportRequest) GetCountOnly() bool {
+	if x != nil {
+		return x.CountOnly
+	}
+	return false
+}
+
+func (x *CounterReportRequest) GetFilters() []string {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *CounterReportRequest) GetGroupBy() string {
+	if x != nil {
+		return x.GroupBy
+	}
+	return ""
+}
+
+func (x *CounterReportRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
 }
 
 type ListKnowledgeBaseEventRequest struct {
@@ -9408,7 +9448,7 @@ const file_request_proto_rawDesc = "" +
 	"\ato_hour\x18\a \x01(\x03R\x06toHour\x12\x1f\n" +
 	"\vevent_types\x18\b \x03(\tR\n" +
 	"eventTypes\x12\x12\n" +
-	"\x04unit\x18\t \x01(\tR\x04unit\"\xd0\x01\n" +
+	"\x04unit\x18\t \x01(\tR\x04unit\"\xd9\x02\n" +
 	"\x14CounterReportRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9418,7 +9458,14 @@ const file_request_proto_rawDesc = "" +
 	"\bfrom_sec\x18\x05 \x01(\x03R\afromSec\x12\x14\n" +
 	"\x05range\x18\x06 \x01(\tR\x05range\x12\x0e\n" +
 	"\x02tz\x18\a \x01(\tR\x02tz\x12\x14\n" +
-	"\x05limit\x18\b \x01(\x03R\x05limit\"\xf3\x01\n" +
+	"\x05limit\x18\b \x01(\x03R\x05limit\x12\x1b\n" +
+	"\tfrom_time\x18\v \x01(\x03R\bfromTime\x12\x1d\n" +
+	"\n" +
+	"count_only\x18\n" +
+	" \x01(\bR\tcountOnly\x12\x18\n" +
+	"\afilters\x18\f \x03(\tR\afilters\x12\x19\n" +
+	"\bgroup_by\x18\r \x01(\tR\agroupBy\x12\x16\n" +
+	"\x06filter\x18\x0f \x01(\tR\x06filter\"\xf3\x01\n" +
 	"\x1dListKnowledgeBaseEventRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
