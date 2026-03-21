@@ -62721,6 +62721,7 @@ type CounterReportResponse struct {
 	TimeSeries    string                       `protobuf:"bytes,3,opt,name=time_series,json=timeSeries,proto3" json:"time_series,omitempty"`
 	Counts        []int64                      `protobuf:"varint,5,rep,packed,name=counts,proto3" json:"counts,omitempty"`
 	Datas         []*CounterReportResponseData `protobuf:"bytes,6,rep,name=datas,proto3" json:"datas,omitempty"`
+	Total         int64                        `protobuf:"varint,7,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -62781,6 +62782,13 @@ func (x *CounterReportResponse) GetDatas() []*CounterReportResponseData {
 		return x.Datas
 	}
 	return nil
+}
+
+func (x *CounterReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 type CounterDataPoints struct {
@@ -79375,13 +79383,14 @@ const file_header_proto_rawDesc = "" +
 	"\aentries\x18\x05 \x03(\v2\x1c.header.ReportUserEventEntryR\aentries\"E\n" +
 	"\x19CounterReportResponseData\x12\x14\n" +
 	"\x05label\x18\x05 \x01(\tR\x05label\x12\x12\n" +
-	"\x04data\x18\x04 \x03(\x03R\x04data\"\xac\x01\n" +
+	"\x04data\x18\x04 \x03(\x03R\x04data\"\xc2\x01\n" +
 	"\x15CounterReportResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1f\n" +
 	"\vtime_series\x18\x03 \x01(\tR\n" +
 	"timeSeries\x12\x16\n" +
 	"\x06counts\x18\x05 \x03(\x03R\x06counts\x127\n" +
-	"\x05datas\x18\x06 \x03(\v2!.header.CounterReportResponseDataR\x05datas\"\xb1\x01\n" +
+	"\x05datas\x18\x06 \x03(\v2!.header.CounterReportResponseDataR\x05datas\x12\x14\n" +
+	"\x05total\x18\a \x01(\x03R\x05total\"\xb1\x01\n" +
 	"\x11CounterDataPoints\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

@@ -743,6 +743,7 @@ message CounterReportRequest {
 	repeated string filters = 12; // "", "source=at123;item=zns"
 	string group_by = 13; // "", "item", "source"
 	string filter = 15; // ; delimeter
+	string anchor = 16;
 }
 
 message ListKnowledgeBaseEventRequest {

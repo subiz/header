@@ -1089,9 +1089,9 @@ service AndroidNotificationMgr {
 	rpc PingAndroidDevice(AndroidNotificationRequest) returns (Response);
 }
 
+// internal
 service Counter {
 	rpc Report(CounterReportRequest) returns (CounterReportResponse);
-	rpc Count(CounterReportRequest) returns (CounterReportResponse);
 	rpc ListLogs(CounterReportRequest) returns (CounterDataPoints);
 }
 

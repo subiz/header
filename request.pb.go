@@ -5835,6 +5835,7 @@ type CounterReportRequest struct {
 	Filters       []string               `protobuf:"bytes,12,rep,name=filters,proto3" json:"filters,omitempty"`                // "", "source=at123;item=zns"
 	GroupBy       string                 `protobuf:"bytes,13,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "", "item", "source"
 	Filter        string                 `protobuf:"bytes,15,opt,name=filter,proto3" json:"filter,omitempty"`                  // ; delimeter
+	Anchor        string                 `protobuf:"bytes,16,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5949,6 +5950,13 @@ func (x *CounterReportRequest) GetGroupBy() string {
 func (x *CounterReportRequest) GetFilter() string {
 	if x != nil {
 		return x.Filter
+	}
+	return ""
+}
+
+func (x *CounterReportRequest) GetAnchor() string {
+	if x != nil {
+		return x.Anchor
 	}
 	return ""
 }
@@ -9448,7 +9456,7 @@ const file_request_proto_rawDesc = "" +
 	"\ato_hour\x18\a \x01(\x03R\x06toHour\x12\x1f\n" +
 	"\vevent_types\x18\b \x03(\tR\n" +
 	"eventTypes\x12\x12\n" +
-	"\x04unit\x18\t \x01(\tR\x04unit\"\xd9\x02\n" +
+	"\x04unit\x18\t \x01(\tR\x04unit\"\xf1\x02\n" +
 	"\x14CounterReportRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9465,7 +9473,8 @@ const file_request_proto_rawDesc = "" +
 	" \x01(\bR\tcountOnly\x12\x18\n" +
 	"\afilters\x18\f \x03(\tR\afilters\x12\x19\n" +
 	"\bgroup_by\x18\r \x01(\tR\agroupBy\x12\x16\n" +
-	"\x06filter\x18\x0f \x01(\tR\x06filter\"\xf3\x01\n" +
+	"\x06filter\x18\x0f \x01(\tR\x06filter\x12\x16\n" +
+	"\x06anchor\x18\x10 \x01(\tR\x06anchor\"\xf3\x01\n" +
 	"\x1dListKnowledgeBaseEventRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

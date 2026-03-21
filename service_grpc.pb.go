@@ -31004,16 +31004,16 @@ var AndroidNotificationMgr_ServiceDesc = grpc.ServiceDesc{
 
 const (
 	Counter_Report_FullMethodName   = "/header.Counter/Report"
-	Counter_Count_FullMethodName    = "/header.Counter/Count"
 	Counter_ListLogs_FullMethodName = "/header.Counter/ListLogs"
 )
 
 // CounterClient is the client API for Counter service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// internal
 type CounterClient interface {
 	Report(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
-	Count(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
 	ListLogs(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterDataPoints, error)
 }
 
@@ -31035,16 +31035,6 @@ func (c *counterClient) Report(ctx context.Context, in *CounterReportRequest, op
 	return out, nil
 }
 
-func (c *counterClient) Count(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CounterReportResponse)
-	err := c.cc.Invoke(ctx, Counter_Count_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *counterClient) ListLogs(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterDataPoints, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CounterDataPoints)
@@ -31058,9 +31048,10 @@ func (c *counterClient) ListLogs(ctx context.Context, in *CounterReportRequest, 
 // CounterServer is the server API for Counter service.
 // All implementations must embed UnimplementedCounterServer
 // for forward compatibility.
+//
+// internal
 type CounterServer interface {
 	Report(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
-	Count(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
 	ListLogs(context.Context, *CounterReportRequest) (*CounterDataPoints, error)
 	mustEmbedUnimplementedCounterServer()
 }
@@ -31074,9 +31065,6 @@ type UnimplementedCounterServer struct{}
 
 func (UnimplementedCounterServer) Report(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Report not implemented")
-}
-func (UnimplementedCounterServer) Count(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Count not implemented")
 }
 func (UnimplementedCounterServer) ListLogs(context.Context, *CounterReportRequest) (*CounterDataPoints, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListLogs not implemented")
@@ -31120,24 +31108,6 @@ func _Counter_Report_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Counter_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CounterReportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CounterServer).Count(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Counter_Count_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CounterServer).Count(ctx, req.(*CounterReportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Counter_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CounterReportRequest)
 	if err := dec(in); err != nil {
@@ -31166,10 +31136,6 @@ var Counter_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Report",
 			Handler:    _Counter_Report_Handler,
-		},
-		{
-			MethodName: "Count",
-			Handler:    _Counter_Count_Handler,
 		},
 		{
 			MethodName: "ListLogs",
