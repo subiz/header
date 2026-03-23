@@ -38,6 +38,7 @@
       "ticket_template": "create read update:own",
       "sla_policy": "read",
       "live": "read",
+      "workflow": "read",
       "zns_template": "read"
     }
   },
