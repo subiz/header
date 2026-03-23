@@ -9542,6 +9542,7 @@ message AIDataEntry {
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
 	bool javascript_enabled = 9;
+	int64 auto_retrain = 70; // for website
 
 	File file = 10;
 	// bool is_public_url = 11; // @deprecated

@@ -66342,6 +66342,7 @@ type AIDataEntry struct {
 	Question          string                 `protobuf:"bytes,7,opt,name=question,proto3" json:"question,omitempty"`
 	Url               string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"` // https://subiz.com.vn
 	JavascriptEnabled bool                   `protobuf:"varint,9,opt,name=javascript_enabled,json=javascriptEnabled,proto3" json:"javascript_enabled,omitempty"`
+	AutoRetrain       int64                  `protobuf:"varint,70,opt,name=auto_retrain,json=autoRetrain,proto3" json:"auto_retrain,omitempty"` // for website
 	File              *File                  `protobuf:"bytes,10,opt,name=file,proto3" json:"file,omitempty"`
 	// bool is_public_url = 11; // @deprecated
 	// bot can show url source
@@ -66484,6 +66485,13 @@ func (x *AIDataEntry) GetJavascriptEnabled() bool {
 		return x.JavascriptEnabled
 	}
 	return false
+}
+
+func (x *AIDataEntry) GetAutoRetrain() int64 {
+	if x != nil {
+		return x.AutoRetrain
+	}
+	return 0
 }
 
 func (x *AIDataEntry) GetFile() *File {
@@ -79806,7 +79814,7 @@ const file_header_proto_rawDesc = "" +
 	"\asummary\x18\x15 \x01(\tR\asummary\x12\x1a\n" +
 	"\bkeywords\x18\x16 \x03(\tR\bkeywords\x12\x1a\n" +
 	"\bcategory\x18\x17 \x01(\tR\bcategory\x12\x12\n" +
-	"\x04type\x18\x18 \x01(\tR\x04type\"\x9d\x0e\n" +
+	"\x04type\x18\x18 \x01(\tR\x04type\"\xc0\x0e\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79816,7 +79824,8 @@ const file_header_proto_rawDesc = "" +
 	"\x06answer\x18\x06 \x01(\v2\x0f.header.MessageR\x06answer\x12\x1a\n" +
 	"\bquestion\x18\a \x01(\tR\bquestion\x12\x10\n" +
 	"\x03url\x18\b \x01(\tR\x03url\x12-\n" +
-	"\x12javascript_enabled\x18\t \x01(\bR\x11javascriptEnabled\x12 \n" +
+	"\x12javascript_enabled\x18\t \x01(\bR\x11javascriptEnabled\x12!\n" +
+	"\fauto_retrain\x18F \x01(\x03R\vautoRetrain\x12 \n" +
 	"\x04file\x18\n" +
 	" \x01(\v2\f.header.FileR\x04file\x12+\n" +
 	"\x11source_visibility\x18\x0f \x01(\tR\x10sourceVisibility\x12)\n" +
