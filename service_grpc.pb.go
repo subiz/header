@@ -9451,6 +9451,7 @@ const (
 	WorkflowMgr_UpdateAIAgentTestcase_FullMethodName  = "/header.WorkflowMgr/UpdateAIAgentTestcase"
 	WorkflowMgr_DeleteAIAgentTestcase_FullMethodName  = "/header.WorkflowMgr/DeleteAIAgentTestcase"
 	WorkflowMgr_ListAIAgentTestcases_FullMethodName   = "/header.WorkflowMgr/ListAIAgentTestcases"
+	WorkflowMgr_ListLLMLogs_FullMethodName            = "/header.WorkflowMgr/ListLLMLogs"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9504,6 +9505,7 @@ type WorkflowMgrClient interface {
 	UpdateAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error)
 	ListAIAgentTestcases(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListLLMLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type workflowMgrClient struct {
@@ -9984,6 +9986,16 @@ func (c *workflowMgrClient) ListAIAgentTestcases(ctx context.Context, in *Id, op
 	return out, nil
 }
 
+func (c *workflowMgrClient) ListLLMLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_ListLLMLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowMgrServer is the server API for WorkflowMgr service.
 // All implementations must embed UnimplementedWorkflowMgrServer
 // for forward compatibility.
@@ -10035,6 +10047,7 @@ type WorkflowMgrServer interface {
 	UpdateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
 	DeleteAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
 	ListAIAgentTestcases(context.Context, *Id) (*Response, error)
+	ListLLMLogs(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -10185,6 +10198,9 @@ func (UnimplementedWorkflowMgrServer) DeleteAIAgentTestcase(context.Context, *AI
 }
 func (UnimplementedWorkflowMgrServer) ListAIAgentTestcases(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAIAgentTestcases not implemented")
+}
+func (UnimplementedWorkflowMgrServer) ListLLMLogs(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLLMLogs not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -11053,6 +11069,24 @@ func _WorkflowMgr_ListAIAgentTestcases_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_ListLLMLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).ListLLMLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_ListLLMLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).ListLLMLogs(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowMgr_ServiceDesc is the grpc.ServiceDesc for WorkflowMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -11247,6 +11281,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAIAgentTestcases",
 			Handler:    _WorkflowMgr_ListAIAgentTestcases_Handler,
+		},
+		{
+			MethodName: "ListLLMLogs",
+			Handler:    _WorkflowMgr_ListLLMLogs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
