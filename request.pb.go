@@ -4548,7 +4548,8 @@ type DocSearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Collection    string                 `protobuf:"bytes,3,opt,name=collection,proto3" json:"collection,omitempty"` // agid
+	Collection    string                 `protobuf:"bytes,3,opt,name=collection,proto3" json:"collection,omitempty"`                   // agid
+	QueryTerms    []string               `protobuf:"bytes,4,rep,name=query_terms,json=queryTerms,proto3" json:"query_terms,omitempty"` // for term search
 	Query         string                 `protobuf:"bytes,5,opt,name=query,proto3" json:"query,omitempty"`
 	Anchor        string                 `protobuf:"bytes,6,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	Limit         int64                  `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -4563,6 +4564,7 @@ type DocSearchRequest struct {
 	KeepSecondary bool                   `protobuf:"varint,16,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
 	Vector        []float32              `protobuf:"fixed32,17,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	Tags          []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`
+	Type          string                 `protobuf:"bytes,20,opt,name=type,proto3" json:"type,omitempty"` // vector, term, hybrid
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4616,6 +4618,13 @@ func (x *DocSearchRequest) GetCollection() string {
 		return x.Collection
 	}
 	return ""
+}
+
+func (x *DocSearchRequest) GetQueryTerms() []string {
+	if x != nil {
+		return x.QueryTerms
+	}
+	return nil
 }
 
 func (x *DocSearchRequest) GetQuery() string {
@@ -4714,6 +4723,13 @@ func (x *DocSearchRequest) GetTags() []string {
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *DocSearchRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
 }
 
 type CreateAgentRequest struct {
@@ -9310,14 +9326,16 @@ const file_request_proto_rawDesc = "" +
 	"\vindex_types\x18\x15 \x03(\tR\n" +
 	"indexTypes\x12\x16\n" +
 	"\x06vector\x18\x17 \x03(\x02R\x06vector\x12!\n" +
-	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\"\x8d\x04\n" +
+	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\"\xc2\x04\n" +
 	"\x10DocSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1e\n" +
 	"\n" +
 	"collection\x18\x03 \x01(\tR\n" +
-	"collection\x12\x14\n" +
+	"collection\x12\x1f\n" +
+	"\vquery_terms\x18\x04 \x03(\tR\n" +
+	"queryTerms\x12\x14\n" +
 	"\x05query\x18\x05 \x01(\tR\x05query\x12\x16\n" +
 	"\x06anchor\x18\x06 \x01(\tR\x06anchor\x12\x14\n" +
 	"\x05limit\x18\a \x01(\x03R\x05limit\x12#\n" +
@@ -9336,7 +9354,8 @@ const file_request_proto_rawDesc = "" +
 	"from_month\x18\x0f \x01(\x03R\tfromMonth\x12%\n" +
 	"\x0ekeep_secondary\x18\x10 \x01(\bR\rkeepSecondary\x12\x16\n" +
 	"\x06vector\x18\x11 \x03(\x02R\x06vector\x12\x12\n" +
-	"\x04tags\x18\x12 \x03(\tR\x04tags\"\x8a\x03\n" +
+	"\x04tags\x18\x12 \x03(\tR\x04tags\x12\x12\n" +
+	"\x04type\x18\x14 \x01(\tR\x04type\"\x8a\x03\n" +
 	"\x12CreateAgentRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

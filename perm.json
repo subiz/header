@@ -5,7 +5,7 @@
       "agent_group": "read",
       "call_campaign": "read",
       "conversation": "create read:own update:own",
-      "campaign": "create:own update:own read:own",
+      "campaign": "create:own update:own read",
       "form": "create:own update:own read",
       "rule": "read",
       "integration": "read",

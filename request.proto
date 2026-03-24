@@ -569,6 +569,7 @@ message DocSearchRequest {
 	string account_id = 2;
 	string collection = 3; // agid
 
+	repeated string query_terms = 4; // for term search
 	string query = 5;
 	string anchor = 6;
 
@@ -585,7 +586,7 @@ message DocSearchRequest {
 
 	repeated float vector = 17;
 	repeated string tags = 18;
-
+	string type = 20; // vector, term, hybrid
 }
 
 message CreateAgentRequest {
