@@ -9537,7 +9537,7 @@ message AIDataEntry {
 	string id = 3; // url://https://glkasdfadf
 	// string group_id = 4;
 
-	string type = 5; // qa, file, website, product, text (for testing), instruction, discount
+	string type = 5; // qa, file, document, website, product, text (for testing), instruction, discount
 	Message answer = 6; // solution
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
@@ -9545,6 +9545,7 @@ message AIDataEntry {
 	int64 auto_retrain = 70; // for website
 
 	File file = 10;
+	Block document = 11;
 	// bool is_public_url = 11; // @deprecated
 	// bot can show url source
 	// default -> hide google or notion links
