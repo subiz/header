@@ -9434,6 +9434,7 @@ const (
 	WorkflowMgr_ListAIDataEntry_FullMethodName        = "/header.WorkflowMgr/ListAIDataEntry"
 	WorkflowMgr_GetAIDataEntry_FullMethodName         = "/header.WorkflowMgr/GetAIDataEntry"
 	WorkflowMgr_UpdateAIDataEntry_FullMethodName      = "/header.WorkflowMgr/UpdateAIDataEntry"
+	WorkflowMgr_EstimateTrainingCost_FullMethodName   = "/header.WorkflowMgr/EstimateTrainingCost"
 	WorkflowMgr_ListAIDataEntryChunks_FullMethodName  = "/header.WorkflowMgr/ListAIDataEntryChunks"
 	WorkflowMgr_GetAIDataEntryDocument_FullMethodName = "/header.WorkflowMgr/GetAIDataEntryDocument"
 	WorkflowMgr_RetrainAIDataEntry_FullMethodName     = "/header.WorkflowMgr/RetrainAIDataEntry"
@@ -9489,6 +9490,7 @@ type WorkflowMgrClient interface {
 	ListAIDataEntry(ctx context.Context, in *ListAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	GetAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error)
+	EstimateTrainingCost(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*CreditSpendEntry, error)
 	ListAIDataEntryChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	GetAIDataEntryDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -9818,6 +9820,16 @@ func (c *workflowMgrClient) UpdateAIDataEntry(ctx context.Context, in *AIDataEnt
 	return out, nil
 }
 
+func (c *workflowMgrClient) EstimateTrainingCost(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*CreditSpendEntry, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreditSpendEntry)
+	err := c.cc.Invoke(ctx, WorkflowMgr_EstimateTrainingCost_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *workflowMgrClient) ListAIDataEntryChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -10042,6 +10054,7 @@ type WorkflowMgrServer interface {
 	ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error)
 	GetAIDataEntry(context.Context, *Id) (*Response, error)
 	UpdateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
+	EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error)
 	ListAIDataEntryChunks(context.Context, *Id) (*Response, error)
 	GetAIDataEntryDocument(context.Context, *Id) (*Response, error)
 	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
@@ -10160,6 +10173,9 @@ func (UnimplementedWorkflowMgrServer) GetAIDataEntry(context.Context, *Id) (*Res
 }
 func (UnimplementedWorkflowMgrServer) UpdateAIDataEntry(context.Context, *AIDataEntry) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAIDataEntry not implemented")
+}
+func (UnimplementedWorkflowMgrServer) EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error) {
+	return nil, status.Error(codes.Unimplemented, "method EstimateTrainingCost not implemented")
 }
 func (UnimplementedWorkflowMgrServer) ListAIDataEntryChunks(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAIDataEntryChunks not implemented")
@@ -10779,6 +10795,24 @@ func _WorkflowMgr_UpdateAIDataEntry_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_EstimateTrainingCost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataEntry)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).EstimateTrainingCost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_EstimateTrainingCost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).EstimateTrainingCost(ctx, req.(*AIDataEntry))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _WorkflowMgr_ListAIDataEntryChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -11247,6 +11281,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAIDataEntry",
 			Handler:    _WorkflowMgr_UpdateAIDataEntry_Handler,
+		},
+		{
+			MethodName: "EstimateTrainingCost",
+			Handler:    _WorkflowMgr_EstimateTrainingCost_Handler,
 		},
 		{
 			MethodName: "ListAIDataEntryChunks",

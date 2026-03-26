@@ -7147,6 +7147,8 @@ message Response {
 
 	UserContentView content_view = 265;
 	repeated UserContentView content_views = 266;
+
+	CreditSpendEntry credit_spend_entry = 267;
 }
 
 message ReportCount {
@@ -7388,6 +7390,10 @@ message CreditEntryDataAIMessage {
 
 	string user_query = 17; // top 100
 	string agent_message = 18; // top 100
+
+	string testcase_id = 22;
+	string test_result_id = 24;
+	bool is_background_msg = 25;
 }
 
 message CreditEntryDataLLMCompletion {
@@ -9039,7 +9045,6 @@ message AIAgentOverrideRule {
 	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent, send_message
 
 	repeated AIFunction functions = 9; // use when action = function
-
 	string instruction = 7; // use when action = remind
 
 	// string hook = 8; // '' = before_reply, after_reply
@@ -9054,8 +9059,8 @@ message AIAgentOverrideRule {
 
 	// human handoff or invite_human
 	// repeated Rule rules = 12;
-	AssignRequest assign_to = 19;
-	bool report_assigned_agent_name = 25;
+	// AssignRequest assign_to = 19; // @deprecated
+	// bool report_assigned_agent_name = 25;
 
 	Message welcome_message = 20;
 	string welcome_message_prompt = 21;

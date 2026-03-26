@@ -371,6 +371,7 @@ service WorkflowMgr {
 	rpc ListAIDataEntry(ListAIDataEntryRequest) returns (Response);
 	rpc GetAIDataEntry(Id) returns (Response);
 	rpc UpdateAIDataEntry(AIDataEntry) returns (Response);
+	rpc EstimateTrainingCost(AIDataEntry) returns (CreditSpendEntry);
 	rpc ListAIDataEntryChunks(Id) returns (Response);
 
 	rpc GetAIDataEntryDocument(Id) returns (Response);
