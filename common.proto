@@ -18,7 +18,6 @@ message Context {
 
 	string trace_id = 25;
 	string span_id = 26;
-
 }
 
 message Uint128 {

@@ -9559,7 +9559,7 @@ message AIDataEntry {
 	Product product = 18;
 	Discount discount = 55;
 
-	AIDataStore data_store = 43; // read-only, for product only when search information about a specific product
+	// AIDataStore data_store = 43; // read-only, for product only when search information about a specific product
 
 	// url only
 	int64 last_crawled = 12;
@@ -9591,7 +9591,7 @@ message AIDataEntry {
 	// int64 deleted = 32;
 	int64 modified = 34;
 	int64 last_success_chunked = 35; // successfully saved to vector store
-	int64 last_failed_chunked = 39;
+	// int64 last_failed_chunked = 39;
 	int64 chunk_attempted = 40;
 	int64 last_chunk_duration = 41; // ms
 
@@ -9621,6 +9621,8 @@ message AIDataEntry {
 	// int64 flagged = 64;
 	int64 read_at = 65;
 	string read_by = 66;
+
+	int64 num_training = 68;
 }
 
 message FacebookAdsFlow {
