@@ -819,6 +819,8 @@ message Data {
 
 	SegmentSync segment_sync = 144;
 	Discount discount = 145;
+
+	AIAgentTestcase ai_agent_testcase = 146;
 }
 
 message ConversationMeta {

@@ -276,6 +276,8 @@ const (
 	RealtimeType_workflow_thread_heartbeat        RealtimeType = 355 // manually trigger workflow waiting thread
 	RealtimeType_workflow_action_created          RealtimeType = 356 // pulse
 	RealtimeType_user_content_view_updated        RealtimeType = 358
+	RealtimeType_ai_agent_testcase_updated        RealtimeType = 400
+	RealtimeType_ai_agent_testcase_deleted        RealtimeType = 401
 )
 
 // Enum value maps for RealtimeType.
@@ -530,6 +532,8 @@ var (
 		355: "workflow_thread_heartbeat",
 		356: "workflow_action_created",
 		358: "user_content_view_updated",
+		400: "ai_agent_testcase_updated",
+		401: "ai_agent_testcase_deleted",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -781,6 +785,8 @@ var (
 		"workflow_thread_heartbeat":          355,
 		"workflow_action_created":            356,
 		"user_content_view_updated":          358,
+		"ai_agent_testcase_updated":          400,
+		"ai_agent_testcase_deleted":          401,
 	}
 )
 
@@ -1775,7 +1781,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xf6/\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xb60\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -2027,7 +2033,9 @@ const file_type_proto_rawDesc = "" +
 	"\rhuman_handled\x10\xe2\x02\x12\x1e\n" +
 	"\x19workflow_thread_heartbeat\x10\xe3\x02\x12\x1c\n" +
 	"\x17workflow_action_created\x10\xe4\x02\x12\x1e\n" +
-	"\x19user_content_view_updated\x10\xe6\x02B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\x19user_content_view_updated\x10\xe6\x02\x12\x1e\n" +
+	"\x19ai_agent_testcase_updated\x10\x90\x03\x12\x1e\n" +
+	"\x19ai_agent_testcase_deleted\x10\x91\x03B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once

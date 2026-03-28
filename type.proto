@@ -358,6 +358,9 @@ enum RealtimeType {
 	workflow_action_created = 356; // pulse
 
 	user_content_view_updated = 358;
+
+	ai_agent_testcase_updated = 400;
+	ai_agent_testcase_deleted = 401;
 }
 
 message TextTransform {
