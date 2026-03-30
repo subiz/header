@@ -5,11 +5,13 @@ import (
 	hexa "encoding/hex"
 	"encoding/json"
 	"html"
+	"maps"
 	"math"
 	"net/mail"
 	"net/url"
 	"reflect"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -603,14 +605,12 @@ func expandScope(permfile map[string]*PermStruct, scope string) {
 	if ScopeM[scope] == nil {
 		ScopeM[scope] = map[string]bool{}
 	}
-	for _, subScope := range strings.Split(permStruct.Scope, " ") {
+	for subScope := range strings.SplitSeq(permStruct.Scope, " ") {
 		if subScope == "" {
 			continue
 		}
 		expandScope(permfile, subScope)
-		for k, v := range ScopeM[subScope] {
-			ScopeM[scope][k] = v
-		}
+		maps.Copy(ScopeM[scope], ScopeM[subScope])
 	}
 }
 
@@ -625,7 +625,7 @@ func init() {
 			ScopeM[scope] = map[string]bool{}
 		}
 		for obj, str := range p.Perm {
-			for _, k := range strings.Split(str, " ") {
+			for k := range strings.SplitSeq(str, " ") {
 				if k == "" {
 					continue
 				}
@@ -854,7 +854,7 @@ type taxitem struct {
 }
 
 // 3 unmarshal and 2 marshal, very inefficient but its work
-func AssignJSONByte(dst interface{}, body []byte) error {
+func AssignJSONByte(dst any, body []byte) error {
 	input := map[string]any{}
 	if err := json.Unmarshal(body, &input); err != nil {
 		return err
@@ -869,9 +869,7 @@ func AssignJSONByte(dst interface{}, body []byte) error {
 		return err
 	}
 
-	for k, v := range input {
-		dstmap[k] = v
-	}
+	maps.Copy(dstmap, input)
 
 	dstbyte, err = json.Marshal(dstmap)
 	if err != nil {
@@ -894,7 +892,7 @@ func Assign(dst, src proto.Message, fields, skipfields []string) proto.Message {
 	dst = proto.Clone(dst)
 	var srcValueOf reflect.Value
 	var srcTypeOf reflect.Type
-	if reflect.TypeOf(src).Kind() == reflect.Ptr {
+	if reflect.TypeOf(src).Kind() == reflect.Pointer {
 		srcValueOf, srcTypeOf = reflect.ValueOf(src).Elem(), reflect.TypeOf(src).Elem()
 	} else {
 		srcValueOf, srcTypeOf = reflect.ValueOf(src), reflect.TypeOf(src)
@@ -902,7 +900,7 @@ func Assign(dst, src proto.Message, fields, skipfields []string) proto.Message {
 
 	var dstValueOf reflect.Value
 	var dstTypeOf reflect.Type
-	if reflect.TypeOf(dst).Kind() == reflect.Ptr {
+	if reflect.TypeOf(dst).Kind() == reflect.Pointer {
 		dstValueOf, dstTypeOf = reflect.ValueOf(dst).Elem(), reflect.TypeOf(dst).Elem()
 	} else {
 		dstValueOf, dstTypeOf = reflect.ValueOf(dst), reflect.TypeOf(dst)
@@ -923,12 +921,12 @@ func Assign(dst, src proto.Message, fields, skipfields []string) proto.Message {
 		}
 
 		// skip if not field that user interested in
-		if ContainString(skipfields, jsonname) {
+		if slices.Contains(skipfields, jsonname) {
 			continue
 		}
 
 		if len(fields) > 0 {
-			if !ContainString(fields, jsonname) {
+			if !slices.Contains(fields, jsonname) {
 				continue
 			}
 		}
@@ -1198,39 +1196,6 @@ func PhoneNumber(phone string) string {
 		phone = "84" + phone[1:]
 	}
 	return phone
-}
-
-func ContainString(ss []string, s string) bool {
-	if len(ss) == 0 {
-		return false
-	}
-
-	if len(ss) == 1 {
-		return ss[0] == s
-	}
-
-	if len(ss) == 2 {
-		return ss[0] == s || ss[1] == s
-	}
-
-	if len(ss) == 3 {
-		return ss[0] == s || ss[1] == s || ss[2] == s
-	}
-
-	if len(ss) == 4 {
-		return ss[0] == s || ss[1] == s || ss[2] == s || ss[3] == s
-	}
-
-	if len(ss) == 5 {
-		return ss[0] == s || ss[1] == s || ss[2] == s || ss[3] == s || ss[4] == s
-	}
-
-	for _, i := range ss {
-		if s == i {
-			return true
-		}
-	}
-	return false
 }
 
 func GetUserDisplayName(u *User) string {
@@ -1847,12 +1812,7 @@ func HasBlockDynamicField(block *Block) bool {
 	if block.Type == "dynamic-field" {
 		return true
 	}
-	for _, block := range block.GetContent() {
-		if HasBlockDynamicField(block) {
-			return true
-		}
-	}
-	return false
+	return slices.ContainsFunc(block.GetContent(), HasBlockDynamicField)
 }
 
 func BlockToPlainText(block *Block) string {
@@ -2000,7 +1960,7 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 	if block == nil {
 		return "", nil
 	}
-	out := ""
+	var out strings.Builder
 	if block.Type == "bullet_list" || block.Type == "ordered_list" {
 		outatts := []*Attachment{}
 		for i, item := range block.GetContent() {
@@ -2012,10 +1972,10 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 			outatts = append(outatts, atts...)
 			item = strings.TrimSpace(item)
 			if item != "" {
-				out += prefix + item
+				out.WriteString(prefix + item)
 			}
 		}
-		return out, outatts
+		return out.String(), outatts
 	}
 
 	if block.Type == "list_item" {
@@ -2038,7 +1998,7 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 	}
 
 	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
-		link := out + block.Text
+		link := out.String() + block.Text
 		if strings.TrimSpace(block.Href) != "" {
 			if strings.Contains(block.Href, ")") || strings.Contains(block.Href, "(") {
 				link += " (<" + strings.TrimSpace(block.Href) + ">)"
@@ -2057,11 +2017,11 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 				name = attrs["id"]
 			}
 		}
-		return out + "@" + name, nil
+		return out.String() + "@" + name, nil
 	}
 
 	if block.Type == "horizontal_rule" {
-		return out + "\n---\n", nil
+		return out.String() + "\n---\n", nil
 	}
 
 	if block.Type == "emoji" {
@@ -2074,9 +2034,9 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 		}
 
 		if code == "" {
-			return out, nil
+			return out.String(), nil
 		}
-		return out + EmojiM[":"+code+":"], nil
+		return out.String() + EmojiM[":"+code+":"], nil
 	}
 
 	if block.Type == "text" {
@@ -2588,7 +2548,6 @@ func FromErr(baseerr error) *Error {
 		TraceId:      err.TraceId,
 	}
 }
-
 
 var skipuserfields = map[string]bool{
 	"owner":           true,

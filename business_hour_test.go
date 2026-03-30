@@ -126,7 +126,7 @@ func PI32(i int) *int32 {
 	return &i32
 }
 
-func S(s interface{}) *string {
+func S(s any) *string {
 	if s == nil {
 		return S("")
 	}

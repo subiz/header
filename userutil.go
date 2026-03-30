@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"math"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -586,7 +587,7 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 		return startofmonth.Unix() <= t.Unix() && t.Unix() <= endofmonth.Unix()
 	case "last":
 		a := nowms/1000 - cond.GetLast()
-		b := nowms / 1000 + 10
+		b := nowms/1000 + 10
 		return a <= t.Unix() && t.Unix() <= b
 	case "before_ago":
 		return t.Unix() < nowms/1000+10-cond.GetBeforeAgo()
@@ -621,21 +622,11 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 
 func HasDeletedCond(cond *UserViewCondition) bool {
 	if len(cond.GetOne()) > 0 {
-		for _, c := range cond.GetOne() {
-			if HasDeletedCond(c) {
-				return true
-			}
-		}
-		return false
+		return slices.ContainsFunc(cond.GetOne(), HasDeletedCond)
 	}
 
 	if len(cond.GetAll()) > 0 {
-		for _, c := range cond.GetAll() {
-			if HasDeletedCond(c) {
-				return true
-			}
-		}
-		return false
+		return slices.ContainsFunc(cond.GetAll(), HasDeletedCond)
 	}
 	return cond.GetKey() == "deleted" && cond.GetBoolean().GetOp() == "true"
 }
@@ -1002,16 +993,15 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 func ReverseCondition(cond *WorkflowCondition) *WorkflowCondition {
 	cond = proto.Clone(cond).(*WorkflowCondition)
 	var all []*WorkflowCondition
-	var one []*WorkflowCondition
 	if len(cond.All) > 0 {
 		for _, sub := range cond.GetAll() {
 			all = append(all, reverseSingleCondition(sub))
 		}
 	}
 
+	var one []*WorkflowCondition
 	if len(cond.One) > 0 {
-		one := []*WorkflowCondition{}
-		for _, sub := range cond.GetAll() {
+		for _, sub := range cond.GetOne() {
 			one = append(one, reverseSingleCondition(sub))
 		}
 	}
@@ -1086,7 +1076,7 @@ func GetTimeAttr(u *User, key string) (time.Time, bool) {
 	return time.Unix(0, 0), has
 }
 
-func GetAttr(u *User, key string, typ string) interface{} {
+func GetAttr(u *User, key string, typ string) any {
 	key = strings.ToLower(strings.TrimSpace(key))
 	for _, a := range u.GetAttributes() {
 		if key != a.GetKey() {
@@ -1113,7 +1103,7 @@ func GetAttr(u *User, key string, typ string) interface{} {
 	return nil
 }
 
-func SetAttr(u *User, key string, typ string, val interface{}) {
+func SetAttr(u *User, key string, typ string, val any) {
 	key = strings.ToLower(strings.TrimSpace(key))
 	if u == nil || val == nil || key == "" || typ == "" {
 		return

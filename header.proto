@@ -9365,7 +9365,7 @@ message AIFunction {
 	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update, record_user_preference,
 	// system_assign, system_remind, human_handoff, system_invite_human, end, provide_context, system_update_welcome_message,
 	// system_update_agent, system_send_message, system_search_products, system_get_a_product_information, system_search_discounts
-	//
+	// system_mark_conversation_as_spam
 
 	string display_name = 17;
 	string description = 5; // prompt

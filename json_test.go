@@ -61,7 +61,6 @@ func TestUnmarshal(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		tc := tc // capture range variable
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 			err := Unmarshal(tc.input, tc.output)

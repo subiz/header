@@ -19,7 +19,7 @@ var _shards [shardCount]map[string]*refCountedMutex
 
 // init initializes the shards.
 func init() {
-	for i := 0; i < shardCount; i++ {
+	for i := range shardCount {
 		_shards[i] = map[string]*refCountedMutex{}
 		_locks[i] = &sync.Mutex{}
 	}
@@ -28,7 +28,7 @@ func init() {
 		for {
 			time.Sleep(30 * time.Minute)
 			// shrink map memory
-			for i := 0; i < shardCount; i++ {
+			for i := range shardCount {
 				_locks[i].Lock()
 				newm := map[string]*refCountedMutex{}
 				for k, v := range _shards[i] {

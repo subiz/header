@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/crc32"
+	"maps"
 	"os"
 	"reflect"
 	"runtime"
@@ -67,9 +68,7 @@ func WithShardRedirect() grpc.DialOption {
 		}
 
 		newMem := map[string]string{}
-		for k, v := range memoryM {
-			newMem[k] = v
-		}
+		maps.Copy(newMem, memoryM)
 		newMem[pkey] = correctHost
 		memoryM = newMem
 
@@ -101,7 +100,7 @@ func WithShardRedirect() grpc.DialOption {
 		}
 	}
 
-	f := func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+	f := func(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 		// looking for shard key in header or account_id field in parameter
 		md, _ := metadata.FromOutgoingContext(ctx)
 		pkey := strings.Join(md["shard_key"], "")
@@ -118,9 +117,7 @@ func WithShardRedirect() grpc.DialOption {
 					co = DialGrpc(host)
 					// copy on write
 					copyConn := make(map[string]*grpc.ClientConn)
-					for k, v := range conn {
-						copyConn[k] = v
-					}
+					maps.Copy(copyConn, conn)
 					copyConn[host] = co
 					conn = copyConn
 				}
@@ -148,9 +145,7 @@ func WithShardRedirect() grpc.DialOption {
 					co = DialGrpc(host)
 					// copy on write
 					copyConn := make(map[string]*grpc.ClientConn)
-					for k, v := range conn {
-						copyConn[k] = v
-					}
+					maps.Copy(copyConn, conn)
 					copyConn[host] = co
 					conn = copyConn
 				}
@@ -244,7 +239,7 @@ func FromGrpcCtx(ctx context.Context) *common.Context {
 	return pctx
 }
 
-func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (ret interface{}, err error) {
+func RecoverInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (ret any, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			if e, ok := r.(error); ok {
@@ -258,7 +253,7 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 }
 
 func WithErrorStack() grpc.DialOption {
-	return grpc.WithChainUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
+	return grpc.WithChainUnaryInterceptor(func(ctx context.Context, method string, req any, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
 		defer func() {
 			if r := recover(); r != nil {
 				err = log.EServer(err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method})
@@ -303,7 +298,7 @@ func WithErrorStack() grpc.DialOption {
 //	in: value of input (in request) parameter
 //
 // this method returns output just like a normal GRPC call
-func forward(cc *grpc.ClientConn, method string, returnedType reflect.Type, ctx context.Context, in interface{}, extraHeader metadata.MD) (interface{}, error) {
+func forward(cc *grpc.ClientConn, method string, returnedType reflect.Type, ctx context.Context, in any, extraHeader metadata.MD) (any, error) {
 	md, _ := metadata.FromIncomingContext(ctx)
 	extraHeader = metadata.Join(extraHeader, md)
 	outctx := metadata.NewOutgoingContext(context.Background(), extraHeader)
@@ -330,7 +325,7 @@ func newStatefulSetShardInterceptor(grpcport, shards int) grpc.UnaryServerInterc
 	ordinal_num := int(pari64)
 
 	hosts := make([]string, 0)
-	for i := 0; i < shards; i++ {
+	for i := range shards {
 		// convo-${i}.convo:{port}
 		hosts = append(hosts, sp[0]+"-"+strconv.Itoa(i)+"."+sp[0]+":"+strconv.Itoa(grpcport))
 	}
@@ -356,7 +351,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 	lock := &sync.Mutex{}
 	conn := make(map[string]*grpc.ClientConn)
 
-	return func(ctx context.Context, in interface{}, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out interface{}, err error) {
+	return func(ctx context.Context, in any, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out any, err error) {
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
@@ -489,7 +484,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 	lock := &sync.Mutex{}
 	conn := make(map[string]*grpc.ClientConn)
 
-	return func(ctx context.Context, in interface{}, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out interface{}, err error) {
+	return func(ctx context.Context, in any, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out any, err error) {
 		var host string
 		defer func() {
 			if r := recover(); r != nil {
@@ -577,7 +572,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 //	(s *server) func Goodbye() string {}
 //	(s *server) func Ping(_ context.Context, _ *pb.Ping) (*pb.Pong, error) {}
 //	(s *server) func Hello(_ context.Context, _ *pb.Empty) (*pb.String, error) {}
-func getReturnType(server interface{}, fullmethod string) reflect.Type {
+func getReturnType(server any, fullmethod string) reflect.Type {
 	t := reflect.TypeOf(server)
 	for i := 0; i < t.NumMethod(); i++ {
 		methodType := t.Method(i).Type
@@ -591,12 +586,12 @@ func getReturnType(server interface{}, fullmethod string) reflect.Type {
 		}
 
 		// the first parameter should context and the second one should be a pointer
-		if methodType.In(1).Name() != "Context" || methodType.In(2).Kind() != reflect.Ptr {
+		if methodType.In(1).Name() != "Context" || methodType.In(2).Kind() != reflect.Pointer {
 			continue
 		}
 
 		// the first output should be a pointer and the second one should be an error
-		if methodType.Out(0).Kind() != reflect.Ptr || methodType.Out(1).Name() != "error" {
+		if methodType.Out(0).Kind() != reflect.Pointer || methodType.Out(1).Name() != "error" {
 			continue
 		}
 
@@ -606,7 +601,7 @@ func getReturnType(server interface{}, fullmethod string) reflect.Type {
 	return nil
 }
 
-func getAccountId(ctx context.Context, message interface{}) string {
+func getAccountId(ctx context.Context, message any) string {
 	msgrefl := message.(proto.Message).ProtoReflect()
 	accIdDesc := msgrefl.Descriptor().Fields().ByName("account_id")
 	accid := ""

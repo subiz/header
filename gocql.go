@@ -71,7 +71,7 @@ func ConnectDB(seeds []string, keyspace string) *gocql.Session {
 	cluster.ConnectTimeout = 30 * time.Second
 	cluster.Keyspace = keyspace
 	var err error
-	for i := 0; i < 10; i++ {
+	for range 10 {
 		if session, err = cluster.CreateSession(); err == nil {
 			return session
 		}

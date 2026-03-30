@@ -22,7 +22,6 @@ import (
 // var b boolean
 // header.Unmarshal([]byte("true"), &s) -> s = true
 // header.Unmarshal([]byte(""true""), &s) -> s = true
-//
 func Unmarshal(data []byte, v any) error {
 	err := json.Unmarshal(data, v)
 	if err == nil {
@@ -32,7 +31,7 @@ func Unmarshal(data []byte, v any) error {
 	// json.Unmarshal failed. Let's try to be more tolerant.
 
 	rv := reflect.ValueOf(v)
-	if rv.Kind() != reflect.Ptr || rv.IsNil() {
+	if rv.Kind() != reflect.Pointer || rv.IsNil() {
 		return &json.InvalidUnmarshalError{Type: reflect.TypeOf(v)}
 	}
 
@@ -92,7 +91,6 @@ func Unmarshal(data []byte, v any) error {
 	return err
 }
 
-
 // Log, print values to stdout
 // for primitive values like string, int, boolean, float, ... just print normally
 // for arrya, map or struct value, json marshal then print the output
@@ -111,7 +109,7 @@ func Log(args ...any) {
 
 		val := reflect.ValueOf(arg)
 		kind := val.Kind()
-		if kind == reflect.Ptr {
+		if kind == reflect.Pointer {
 			if val.IsNil() {
 				fmt.Print("null")
 				continue
