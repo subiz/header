@@ -1980,14 +1980,14 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 
 	if block.Type == "list_item" {
 		flatten := flattenBlock(block)
-		var outtext string
+		var outtext strings.Builder
 		var outatts []*Attachment
 		for _, block := range flatten {
 			text, atts := singleBlockToPlainText2(block)
-			outtext += text
+			outtext.WriteString(text)
 			outatts = append(outatts, atts...)
 		}
-		return outtext, outatts
+		return outtext.String(), outatts
 	}
 	if block.Type == "image" {
 		return block.AltText, []*Attachment{{Type: "file", Mimetype: "image/jpeg", Url: block.GetImage().GetUrl(), File: &File{Url: block.GetImage().GetUrl()}}}

@@ -7751,6 +7751,7 @@ message LLMChatHistoryEntry {
 	int64 created = 2; // ms
 	string role = 3; // user | agent
 	string content = 4;
+
 	repeated OpenAIMessageContent contents = 11;
 	string name = 12;
 	LLMToolCall tool = 5;
@@ -7772,6 +7773,8 @@ message LLMChatHistoryEntry {
 	int64 score = 17;
 	string score_explain = 18;
 	AIAgentTrace trace = 19;
+
+	Block block = 20;
 }
 
 message AIDataEntryUsed {
