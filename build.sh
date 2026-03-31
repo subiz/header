@@ -1,3 +1,3 @@
-# docker build -t live360vn/protobuild:3.1 .
+# docker build -t live360vn/protobuild:3.3 .
 # docker build -t asia-southeast1-docker.pkg.dev/subiz-version-4/subiz/test:1 .
-docker run -it --rm -v `pwd`:/src live360vn/protobuild:3.2
+docker run -it --rm -v `pwd`:/src live360vn/protobuild:3.3

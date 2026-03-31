@@ -574,10 +574,10 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 //	(s *server) func Hello(_ context.Context, _ *pb.Empty) (*pb.String, error) {}
 func getReturnType(server any, fullmethod string) reflect.Type {
 	t := reflect.TypeOf(server)
-	for i := 0; i < t.NumMethod(); i++ {
-		methodType := t.Method(i).Type
+	for method := range t.Methods() {
+		methodType := method.Type
 
-		if !strings.HasSuffix(fullmethod, "/"+t.Method(i).Name) {
+		if !strings.HasSuffix(fullmethod, "/"+method.Name) {
 			continue
 		}
 

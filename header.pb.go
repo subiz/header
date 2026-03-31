@@ -54483,7 +54483,6 @@ type AIAgentTrace struct {
 	HumanTransfered            bool                   `protobuf:"varint,12,opt,name=human_transfered,json=humanTransfered,proto3" json:"human_transfered,omitempty"`
 	TransferToAgents           []string               `protobuf:"bytes,13,rep,name=transfer_to_agents,json=transferToAgents,proto3" json:"transfer_to_agents,omitempty"`
 	Model                      string                 `protobuf:"bytes,14,opt,name=model,proto3" json:"model,omitempty"`
-	ContextGuard               bool                   `protobuf:"varint,15,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`
 	Duration                   int64                  `protobuf:"varint,16,opt,name=duration,proto3" json:"duration,omitempty"` // ms
 	RewrittenQueries           []string               `protobuf:"bytes,17,rep,name=rewritten_queries,json=rewrittenQueries,proto3" json:"rewritten_queries,omitempty"`
 	ContextDocuments           []*AIDataEntryUsed     `protobuf:"bytes,18,rep,name=context_documents,json=contextDocuments,proto3" json:"context_documents,omitempty"`
@@ -54499,7 +54498,8 @@ type AIAgentTrace struct {
 	ContextProducts            []*Product             `protobuf:"bytes,28,rep,name=context_products,json=contextProducts,proto3" json:"context_products,omitempty"` // used
 	ProductMention             string                 `protobuf:"bytes,29,opt,name=product_mention,json=productMention,proto3" json:"product_mention,omitempty"`
 	CollectInformationStrategy string                 `protobuf:"bytes,32,opt,name=collect_information_strategy,json=collectInformationStrategy,proto3" json:"collect_information_strategy,omitempty"`
-	LastPrompt                 string                 `protobuf:"bytes,33,opt,name=last_prompt,json=lastPrompt,proto3" json:"last_prompt,omitempty"` // for debugging
+	LastPrompt                 string                 `protobuf:"bytes,33,opt,name=last_prompt,json=lastPrompt,proto3" json:"last_prompt,omitempty"`                   // for debugging
+	CompletionOutput           string                 `protobuf:"bytes,34,opt,name=completion_output,json=completionOutput,proto3" json:"completion_output,omitempty"` // for debuging
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -54625,13 +54625,6 @@ func (x *AIAgentTrace) GetModel() string {
 	return ""
 }
 
-func (x *AIAgentTrace) GetContextGuard() bool {
-	if x != nil {
-		return x.ContextGuard
-	}
-	return false
-}
-
 func (x *AIAgentTrace) GetDuration() int64 {
 	if x != nil {
 		return x.Duration
@@ -54740,6 +54733,13 @@ func (x *AIAgentTrace) GetCollectInformationStrategy() string {
 func (x *AIAgentTrace) GetLastPrompt() string {
 	if x != nil {
 		return x.LastPrompt
+	}
+	return ""
+}
+
+func (x *AIAgentTrace) GetCompletionOutput() string {
+	if x != nil {
+		return x.CompletionOutput
 	}
 	return ""
 }
@@ -78354,7 +78354,7 @@ const file_header_proto_rawDesc = "" +
 	"\bis_cover\x18\x0f \x01(\bR\aisCover\x12.\n" +
 	"\x13chunk_original_link\x18\x10 \x01(\tR\x11chunkOriginalLink\x12\x1f\n" +
 	"\vchunk_title\x18\x11 \x01(\tR\n" +
-	"chunkTitle\"\xd5\t\n" +
+	"chunkTitle\"\xdd\t\n" +
 	"\fAIAgentTrace\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -78372,8 +78372,7 @@ const file_header_proto_rawDesc = "" +
 	"\ragent_version\x18\v \x01(\x03R\fagentVersion\x12)\n" +
 	"\x10human_transfered\x18\f \x01(\bR\x0fhumanTransfered\x12,\n" +
 	"\x12transfer_to_agents\x18\r \x03(\tR\x10transferToAgents\x12\x14\n" +
-	"\x05model\x18\x0e \x01(\tR\x05model\x12#\n" +
-	"\rcontext_guard\x18\x0f \x01(\bR\fcontextGuard\x12\x1a\n" +
+	"\x05model\x18\x0e \x01(\tR\x05model\x12\x1a\n" +
 	"\bduration\x18\x10 \x01(\x03R\bduration\x12+\n" +
 	"\x11rewritten_queries\x18\x11 \x03(\tR\x10rewrittenQueries\x12D\n" +
 	"\x11context_documents\x18\x12 \x03(\v2\x17.header.AIDataEntryUsedR\x10contextDocuments\x121\n" +
@@ -78393,7 +78392,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fproduct_mention\x18\x1d \x01(\tR\x0eproductMention\x12@\n" +
 	"\x1ccollect_information_strategy\x18  \x01(\tR\x1acollectInformationStrategy\x12\x1f\n" +
 	"\vlast_prompt\x18! \x01(\tR\n" +
-	"lastPrompt\"\xc0\x06\n" +
+	"lastPrompt\x12+\n" +
+	"\x11completion_output\x18\" \x01(\tR\x10completionOutput\"\xc0\x06\n" +
 	"\vWorkflowLog\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x13\n" +
 	"\x05wf_id\x18\x02 \x01(\tR\x04wfId\x12\x1d\n" +

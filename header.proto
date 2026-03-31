@@ -7810,7 +7810,7 @@ message AIAgentTrace {
 	repeated string transfer_to_agents = 13;
 	string model = 14;
 
-	bool context_guard = 15;
+	// bool context_guard = 15;
 
 	int64 duration = 16; // ms
 	repeated string rewritten_queries = 17;
@@ -7830,6 +7830,7 @@ message AIAgentTrace {
 	string collect_information_strategy = 32;
 
 	string last_prompt = 33; // for debugging
+	string completion_output = 34; // for debuging
 }
 
 message WorkflowLog {
