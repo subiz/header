@@ -1186,6 +1186,28 @@ func TestNormString(t *testing.T) {
 	}
 }
 
+func TestCleanString(t *testing.T) {
+	tests := []struct {
+		name   string
+		input  string
+		expect string
+	}{
+		{"trim spaces", "   hello world   ", "hello world"},
+		{"trim tabs", "\t\thello\t", "hello"},
+		{"trim new line", "\t\thello\nworld\t", "hello\nworld"},
+		{"only invalid chars", "\u0001\u0007\u0008", ""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := CleanString(tt.input)
+			if got != tt.expect {
+				t.Errorf("CleanString(%q) = %q; want %q", tt.input, got, tt.expect)
+			}
+		})
+	}
+}
+
 func TestRsCondition(t *testing.T) {
 	users := []*User{{
 		Id: "usskpnvcidvsyttyubipl",
