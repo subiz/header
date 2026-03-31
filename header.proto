@@ -7376,6 +7376,7 @@ message CreditEntryDataAITraining {
 	string entry_id = 4;
 	string entry_type = 5;
 	int64 length = 6;
+	string trace_id = 7;
 }
 
 message CreditEntryDataAIMessage {
@@ -9556,9 +9557,6 @@ message AIDataEntry {
 
 	File file = 10;
 	Block document = 11;
-	// bool is_public_url = 11; // @deprecated
-	// bot can show url source
-	// default -> hide google or notion links
 	string source_visibility = 15; // "", default, private, public
 
 	Product product = 18;
@@ -9628,6 +9626,7 @@ message AIDataEntry {
 	string read_by = 66;
 
 	int64 num_training = 68;
+	string llm_trace = 69; // for debug
 }
 
 message FacebookAdsFlow {

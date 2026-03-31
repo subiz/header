@@ -51476,6 +51476,7 @@ type CreditEntryDataAITraining struct {
 	EntryId       string                 `protobuf:"bytes,4,opt,name=entry_id,json=entryId,proto3" json:"entry_id,omitempty"`
 	EntryType     string                 `protobuf:"bytes,5,opt,name=entry_type,json=entryType,proto3" json:"entry_type,omitempty"`
 	Length        int64                  `protobuf:"varint,6,opt,name=length,proto3" json:"length,omitempty"`
+	TraceId       string                 `protobuf:"bytes,7,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -51529,6 +51530,13 @@ func (x *CreditEntryDataAITraining) GetLength() int64 {
 		return x.Length
 	}
 	return 0
+}
+
+func (x *CreditEntryDataAITraining) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
 }
 
 type CreditEntryDataAIMessage struct {
@@ -66375,12 +66383,9 @@ type AIDataEntry struct {
 	AutoRetrain       int64                  `protobuf:"varint,70,opt,name=auto_retrain,json=autoRetrain,proto3" json:"auto_retrain,omitempty"` // for website
 	File              *File                  `protobuf:"bytes,10,opt,name=file,proto3" json:"file,omitempty"`
 	Document          *Block                 `protobuf:"bytes,11,opt,name=document,proto3" json:"document,omitempty"`
-	// bool is_public_url = 11; // @deprecated
-	// bot can show url source
-	// default -> hide google or notion links
-	SourceVisibility string    `protobuf:"bytes,15,opt,name=source_visibility,json=sourceVisibility,proto3" json:"source_visibility,omitempty"` // "", default, private, public
-	Product          *Product  `protobuf:"bytes,18,opt,name=product,proto3" json:"product,omitempty"`
-	Discount         *Discount `protobuf:"bytes,55,opt,name=discount,proto3" json:"discount,omitempty"`
+	SourceVisibility  string                 `protobuf:"bytes,15,opt,name=source_visibility,json=sourceVisibility,proto3" json:"source_visibility,omitempty"` // "", default, private, public
+	Product           *Product               `protobuf:"bytes,18,opt,name=product,proto3" json:"product,omitempty"`
+	Discount          *Discount              `protobuf:"bytes,55,opt,name=discount,proto3" json:"discount,omitempty"`
 	// url only
 	LastCrawled     int64    `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
 	CrawlingStatus  string   `protobuf:"bytes,13,opt,name=crawling_status,json=crawlingStatus,proto3" json:"crawling_status,omitempty"` // crawling, done, error
@@ -66428,6 +66433,7 @@ type AIDataEntry struct {
 	ReadAt        int64  `protobuf:"varint,65,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
 	ReadBy        string `protobuf:"bytes,66,opt,name=read_by,json=readBy,proto3" json:"read_by,omitempty"`
 	NumTraining   int64  `protobuf:"varint,68,opt,name=num_training,json=numTraining,proto3" json:"num_training,omitempty"`
+	LlmTrace      string `protobuf:"bytes,69,opt,name=llm_trace,json=llmTrace,proto3" json:"llm_trace,omitempty"` // for debug
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -66824,6 +66830,13 @@ func (x *AIDataEntry) GetNumTraining() int64 {
 		return x.NumTraining
 	}
 	return 0
+}
+
+func (x *AIDataEntry) GetLlmTrace() string {
+	if x != nil {
+		return x.LlmTrace
+	}
+	return ""
 }
 
 type FacebookAdsFlow struct {
@@ -78016,12 +78029,13 @@ const file_header_proto_rawDesc = "" +
 	"aiTraining\x12?\n" +
 	"\n" +
 	"ai_message\x18\v \x01(\v2 .header.CreditEntryDataAIMessageR\taiMessage\x12L\n" +
-	"\x11ai_follow_message\x18\f \x01(\v2 .header.CreditEntryDataAIMessageR\x0faiFollowMessage\"m\n" +
+	"\x11ai_follow_message\x18\f \x01(\v2 .header.CreditEntryDataAIMessageR\x0faiFollowMessage\"\x88\x01\n" +
 	"\x19CreditEntryDataAITraining\x12\x19\n" +
 	"\bentry_id\x18\x04 \x01(\tR\aentryId\x12\x1d\n" +
 	"\n" +
 	"entry_type\x18\x05 \x01(\tR\tentryType\x12\x16\n" +
-	"\x06length\x18\x06 \x01(\x03R\x06length\"\xd6\x03\n" +
+	"\x06length\x18\x06 \x01(\x03R\x06length\x12\x19\n" +
+	"\btrace_id\x18\a \x01(\tR\atraceId\"\xd6\x03\n" +
 	"\x18CreditEntryDataAIMessage\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\x12\x18\n" +
@@ -79850,7 +79864,7 @@ const file_header_proto_rawDesc = "" +
 	"\asummary\x18\x15 \x01(\tR\asummary\x12\x1a\n" +
 	"\bkeywords\x18\x16 \x03(\tR\bkeywords\x12\x1a\n" +
 	"\bcategory\x18\x17 \x01(\tR\bcategory\x12\x12\n" +
-	"\x04type\x18\x18 \x01(\tR\x04type\"\xaa\x0e\n" +
+	"\x04type\x18\x18 \x01(\tR\x04type\"\xc7\x0e\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79912,7 +79926,8 @@ const file_header_proto_rawDesc = "" +
 	"\x12extracted_entities\x18C \x01(\tR\x11extractedEntities\x12\x17\n" +
 	"\aread_at\x18A \x01(\x03R\x06readAt\x12\x17\n" +
 	"\aread_by\x18B \x01(\tR\x06readBy\x12!\n" +
-	"\fnum_training\x18D \x01(\x03R\vnumTraining\"\xb3\x02\n" +
+	"\fnum_training\x18D \x01(\x03R\vnumTraining\x12\x1b\n" +
+	"\tllm_trace\x18E \x01(\tR\bllmTrace\"\xb3\x02\n" +
 	"\x0fFacebookAdsFlow\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
