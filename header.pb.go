@@ -65999,28 +65999,30 @@ func (x *AIIntent) GetEditedBy() int64 {
 }
 
 type CrawlResponse struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Url                string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
-	StatusCode         int64                  `protobuf:"varint,4,opt,name=status_code,json=statusCode,proto3" json:"status_code,omitempty"`
-	Body               []byte                 `protobuf:"bytes,5,opt,name=body,proto3" json:"body,omitempty"`
-	Created            int64                  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
-	Links              []string               `protobuf:"bytes,7,rep,name=links,proto3" json:"links,omitempty"`
-	Md5Sum             string                 `protobuf:"bytes,8,opt,name=md5sum,proto3" json:"md5sum,omitempty"`
-	ContentType        string                 `protobuf:"bytes,9,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	Title              string                 `protobuf:"bytes,10,opt,name=title,proto3" json:"title,omitempty"`
-	NumCharacters      int64                  `protobuf:"varint,11,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
-	Product            *Product               `protobuf:"bytes,12,opt,name=product,proto3" json:"product,omitempty"`
-	Products           []*Product             `protobuf:"bytes,13,rep,name=products,proto3" json:"products,omitempty"`
-	BodyLength         int64                  `protobuf:"varint,14,opt,name=body_length,json=bodyLength,proto3" json:"body_length,omitempty"`
-	Anchor             string                 `protobuf:"bytes,15,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	NumVisitedLinks    int64                  `protobuf:"varint,16,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
-	NumHasProductLinks int64                  `protobuf:"varint,17,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
-	NumDiscoveredLinks int64                  `protobuf:"varint,18,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
-	LlmSummary         string                 `protobuf:"bytes,19,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
-	Screenshoot        string                 `protobuf:"bytes,20,opt,name=screenshoot,proto3" json:"screenshoot,omitempty"` // base64
-	FpvCostUsd         int64                  `protobuf:"varint,21,opt,name=fpv_cost_usd,json=fpvCostUsd,proto3" json:"fpv_cost_usd,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	Url                         string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	StatusCode                  int64                  `protobuf:"varint,4,opt,name=status_code,json=statusCode,proto3" json:"status_code,omitempty"`
+	Body                        []byte                 `protobuf:"bytes,5,opt,name=body,proto3" json:"body,omitempty"`
+	Created                     int64                  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
+	Links                       []string               `protobuf:"bytes,7,rep,name=links,proto3" json:"links,omitempty"`
+	Md5Sum                      string                 `protobuf:"bytes,8,opt,name=md5sum,proto3" json:"md5sum,omitempty"`
+	ContentType                 string                 `protobuf:"bytes,9,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	Title                       string                 `protobuf:"bytes,10,opt,name=title,proto3" json:"title,omitempty"`
+	NumCharacters               int64                  `protobuf:"varint,11,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
+	Product                     *Product               `protobuf:"bytes,12,opt,name=product,proto3" json:"product,omitempty"`
+	Products                    []*Product             `protobuf:"bytes,13,rep,name=products,proto3" json:"products,omitempty"`
+	BodyLength                  int64                  `protobuf:"varint,14,opt,name=body_length,json=bodyLength,proto3" json:"body_length,omitempty"`
+	Anchor                      string                 `protobuf:"bytes,15,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	NumVisitedLinks             int64                  `protobuf:"varint,16,opt,name=num_visited_links,json=numVisitedLinks,proto3" json:"num_visited_links,omitempty"`
+	NumHasProductLinks          int64                  `protobuf:"varint,17,opt,name=num_has_product_links,json=numHasProductLinks,proto3" json:"num_has_product_links,omitempty"`
+	NumDiscoveredLinks          int64                  `protobuf:"varint,18,opt,name=num_discovered_links,json=numDiscoveredLinks,proto3" json:"num_discovered_links,omitempty"`
+	LlmSummary                  string                 `protobuf:"bytes,19,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`
+	Screenshoot                 string                 `protobuf:"bytes,20,opt,name=screenshoot,proto3" json:"screenshoot,omitempty"` // base64
+	FpvCostUsd                  int64                  `protobuf:"varint,21,opt,name=fpv_cost_usd,json=fpvCostUsd,proto3" json:"fpv_cost_usd,omitempty"`
+	FpvEstimatedChunkingCostVnd int64                  `protobuf:"varint,25,opt,name=fpv_estimated_chunking_cost_vnd,json=fpvEstimatedChunkingCostVnd,proto3" json:"fpv_estimated_chunking_cost_vnd,omitempty"`
+	FpvEstimatedChunkingCostUsd int64                  `protobuf:"varint,26,opt,name=fpv_estimated_chunking_cost_usd,json=fpvEstimatedChunkingCostUsd,proto3" json:"fpv_estimated_chunking_cost_usd,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *CrawlResponse) Reset() {
@@ -66182,6 +66184,20 @@ func (x *CrawlResponse) GetScreenshoot() string {
 func (x *CrawlResponse) GetFpvCostUsd() int64 {
 	if x != nil {
 		return x.FpvCostUsd
+	}
+	return 0
+}
+
+func (x *CrawlResponse) GetFpvEstimatedChunkingCostVnd() int64 {
+	if x != nil {
+		return x.FpvEstimatedChunkingCostVnd
+	}
+	return 0
+}
+
+func (x *CrawlResponse) GetFpvEstimatedChunkingCostUsd() int64 {
+	if x != nil {
+		return x.FpvEstimatedChunkingCostUsd
 	}
 	return 0
 }
@@ -79817,7 +79833,7 @@ const file_header_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bexamples\x18\x05 \x03(\tR\bexamples\x12\x16\n" +
 	"\x06edited\x18\x06 \x01(\x03R\x06edited\x12\x1b\n" +
-	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x85\x05\n" +
+	"\tedited_by\x18\a \x01(\x03R\beditedBy\"\x91\x06\n" +
 	"\rCrawlResponse\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x03R\n" +
@@ -79842,7 +79858,9 @@ const file_header_proto_rawDesc = "" +
 	"llmSummary\x12 \n" +
 	"\vscreenshoot\x18\x14 \x01(\tR\vscreenshoot\x12 \n" +
 	"\ffpv_cost_usd\x18\x15 \x01(\x03R\n" +
-	"fpvCostUsd\"\xb0\x04\n" +
+	"fpvCostUsd\x12D\n" +
+	"\x1ffpv_estimated_chunking_cost_vnd\x18\x19 \x01(\x03R\x1bfpvEstimatedChunkingCostVnd\x12D\n" +
+	"\x1ffpv_estimated_chunking_cost_usd\x18\x1a \x01(\x03R\x1bfpvEstimatedChunkingCostUsd\"\xb0\x04\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

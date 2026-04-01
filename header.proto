@@ -9512,6 +9512,8 @@ message CrawlResponse {
 	string llm_summary = 19;
 	string screenshoot = 20; // base64
 	int64 fpv_cost_usd = 21;
+	int64 fpv_estimated_chunking_cost_vnd = 25;
+	int64 fpv_estimated_chunking_cost_usd = 26;
 }
 
 // chunk and excerpt
