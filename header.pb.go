@@ -531,10 +531,7 @@ const (
 	E_invalid_holiday                                E = 64
 	E_endchat_bot_setting_after_any_message_too_low  E = 94
 	E_endchat_bot_setting_after_any_message_too_high E = 95
-	E_template_message_not_is_creator                E = 97
-	E_invalid_url                                    E = 103
 	E_invalid_css                                    E = 116
-	E_invalid_report_range                           E = 117
 	E_user_is_not_in_the_conversation                E = 120
 	E_invalid_message_type                           E = 122
 	E_remover_is_not_agent                           E = 127
@@ -542,10 +539,6 @@ const (
 	// conversation_ended = 129;
 	E_leaver_is_the_last_one_in_conversation E = 130
 	E_caller_is_not_leaver                   E = 132
-	E_too_many_fields                        E = 134
-	E_too_many_attachments                   E = 135
-	E_invalid_field_size                     E = 137
-	E_order_readonly                         E = 142
 	E_invalid_order_status                   E = 146
 	E_invalid_conversation_modal_secret      E = 170
 	E_invalid_conversation_modal_url         E = 172
@@ -553,7 +546,6 @@ const (
 	E_invalid_call_state                     E = 190
 	E_number_is_registered                   E = 193
 	E_number_is_not_bounded                  E = 194
-	E_invalid_sip_provider                   E = 198 // fpt, itel
 	E_duplicated_extension                   E = 200
 	E_cannot_edit_system_segment             E = 244
 )
@@ -574,20 +566,13 @@ var (
 		64:  "invalid_holiday",
 		94:  "endchat_bot_setting_after_any_message_too_low",
 		95:  "endchat_bot_setting_after_any_message_too_high",
-		97:  "template_message_not_is_creator",
-		103: "invalid_url",
 		116: "invalid_css",
-		117: "invalid_report_range",
 		120: "user_is_not_in_the_conversation",
 		122: "invalid_message_type",
 		127: "remover_is_not_agent",
 		128: "user_is_the_last_one_in_conversation",
 		130: "leaver_is_the_last_one_in_conversation",
 		132: "caller_is_not_leaver",
-		134: "too_many_fields",
-		135: "too_many_attachments",
-		137: "invalid_field_size",
-		142: "order_readonly",
 		146: "invalid_order_status",
 		170: "invalid_conversation_modal_secret",
 		172: "invalid_conversation_modal_url",
@@ -595,7 +580,6 @@ var (
 		190: "invalid_call_state",
 		193: "number_is_registered",
 		194: "number_is_not_bounded",
-		198: "invalid_sip_provider",
 		200: "duplicated_extension",
 		244: "cannot_edit_system_segment",
 	}
@@ -613,20 +597,13 @@ var (
 		"invalid_holiday":                                64,
 		"endchat_bot_setting_after_any_message_too_low":  94,
 		"endchat_bot_setting_after_any_message_too_high": 95,
-		"template_message_not_is_creator":                97,
-		"invalid_url":                                    103,
 		"invalid_css":                                    116,
-		"invalid_report_range":                           117,
 		"user_is_not_in_the_conversation":                120,
 		"invalid_message_type":                           122,
 		"remover_is_not_agent":                           127,
 		"user_is_the_last_one_in_conversation":           128,
 		"leaver_is_the_last_one_in_conversation":         130,
 		"caller_is_not_leaver":                           132,
-		"too_many_fields":                                134,
-		"too_many_attachments":                           135,
-		"invalid_field_size":                             137,
-		"order_readonly":                                 142,
 		"invalid_order_status":                           146,
 		"invalid_conversation_modal_secret":              170,
 		"invalid_conversation_modal_url":                 172,
@@ -634,7 +611,6 @@ var (
 		"invalid_call_state":                             190,
 		"number_is_registered":                           193,
 		"number_is_not_bounded":                          194,
-		"invalid_sip_provider":                           198,
 		"duplicated_extension":                           200,
 		"cannot_edit_system_segment":                     244,
 	}
@@ -6826,7 +6802,6 @@ type Event struct {
 	Data          *Data                  `protobuf:"bytes,20,opt,name=data,proto3" json:"data,omitempty"`
 	Old           *Data                  `protobuf:"bytes,53,opt,name=old,proto3" json:"old,omitempty"`
 	Ref           *Data                  `protobuf:"bytes,54,opt,name=ref,proto3" json:"ref,omitempty"`
-	// repeated EventField metadata = 55;
 	WebhookId     string                 `protobuf:"bytes,56,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`               // webhook id listen this event
 	SourceEventId string                 `protobuf:"bytes,57,opt,name=source_event_id,json=sourceEventId,proto3" json:"source_event_id,omitempty"` // for sync event, can be used like idempotency key
 	CustomData    map[string]*EventField `protobuf:"bytes,58,rep,name=custom_data,json=customData,proto3" json:"custom_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -25044,9 +25019,7 @@ type File struct {
 	GcsUrl          string `protobuf:"bytes,29,opt,name=gcs_url,json=gcsUrl,proto3" json:"gcs_url,omitempty"` // example: acrtvsvgrvecksycsble/802b2cd6014f0546c36e3fa198ef27dadbc8b174573a267eca6d352dd8982067
 	Status          string `protobuf:"bytes,30,opt,name=status,proto3" json:"status,omitempty"`               // uploading
 	ErrorCode       string `protobuf:"bytes,31,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
-	Image_1024      string `protobuf:"bytes,32,opt,name=image_1024,json=image1024,proto3" json:"image_1024,omitempty"`
-	Image_512       string `protobuf:"bytes,33,opt,name=image_512,json=image512,proto3" json:"image_512,omitempty"`
-	Image_128       string `protobuf:"bytes,34,opt,name=image_128,json=image128,proto3" json:"image_128,omitempty"`
+	Image_1024      string `protobuf:"bytes,32,opt,name=image_1024,json=image1024,proto3" json:"image_1024,omitempty"` // @deprecated
 	TextUrl         string `protobuf:"bytes,35,opt,name=text_url,json=textUrl,proto3" json:"text_url,omitempty"`
 	NumCharacters   int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Visibility      string `protobuf:"bytes,38,opt,name=visibility,proto3" json:"visibility,omitempty"`                    // public(default), private
@@ -25271,20 +25244,6 @@ func (x *File) GetErrorCode() string {
 func (x *File) GetImage_1024() string {
 	if x != nil {
 		return x.Image_1024
-	}
-	return ""
-}
-
-func (x *File) GetImage_512() string {
-	if x != nil {
-		return x.Image_512
-	}
-	return ""
-}
-
-func (x *File) GetImage_128() string {
-	if x != nil {
-		return x.Image_128
 	}
 	return ""
 }
@@ -28946,8 +28905,10 @@ type OrderItem struct {
 	DiscountType       string  `protobuf:"bytes,26,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"` // percentage || amount
 	TotalTax           float32 `protobuf:"fixed32,30,opt,name=total_tax,json=totalTax,proto3" json:"total_tax,omitempty"`           // computed, override value
 	FpvTotalTax        int64   `protobuf:"varint,31,opt,name=fpv_total_tax,json=fpvTotalTax,proto3" json:"fpv_total_tax,omitempty"` // computed, override value
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// not using product
+	Name          string `protobuf:"bytes,33,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OrderItem) Reset() {
@@ -29083,6 +29044,13 @@ func (x *OrderItem) GetFpvTotalTax() int64 {
 		return x.FpvTotalTax
 	}
 	return 0
+}
+
+func (x *OrderItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
 }
 
 type GHNAddress struct {
@@ -74923,7 +74891,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x0e\n" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xdc\a\n" +
+	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xa2\a\n" +
 	"\x04File\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74955,9 +74923,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"error_code\x18\x1f \x01(\tR\terrorCode\x12\x1d\n" +
 	"\n" +
-	"image_1024\x18  \x01(\tR\timage1024\x12\x1b\n" +
-	"\timage_512\x18! \x01(\tR\bimage512\x12\x1b\n" +
-	"\timage_128\x18\" \x01(\tR\bimage128\x12\x19\n" +
+	"image_1024\x18  \x01(\tR\timage1024\x12\x19\n" +
 	"\btext_url\x18# \x01(\tR\atextUrl\x12%\n" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1e\n" +
 	"\n" +
@@ -75340,7 +75306,7 @@ const file_header_proto_rawDesc = "" +
 	"\aupdated\x18\x04 \x01(\x03R\aupdated\x12\x12\n" +
 	"\x04rate\x18\x05 \x01(\x02R\x04rate\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\xea\x03\n" +
+	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\xfe\x03\n" +
 	"\tOrderItem\x12\x19\n" +
 	"\border_id\x18\x03 \x01(\tR\aorderId\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1a\n" +
@@ -75357,7 +75323,8 @@ const file_header_proto_rawDesc = "" +
 	"\x03tax\x18\x19 \x01(\v2\v.header.TaxR\x03tax\x12#\n" +
 	"\rdiscount_type\x18\x1a \x01(\tR\fdiscountType\x12\x1b\n" +
 	"\ttotal_tax\x18\x1e \x01(\x02R\btotalTax\x12\"\n" +
-	"\rfpv_total_tax\x18\x1f \x01(\x03R\vfpvTotalTax\"\xe0\x01\n" +
+	"\rfpv_total_tax\x18\x1f \x01(\x03R\vfpvTotalTax\x12\x12\n" +
+	"\x04name\x18! \x01(\tR\x04name\"\xe0\x01\n" +
 	"\n" +
 	"GHNAddress\x12\x1e\n" +
 	"\n" +
@@ -80570,7 +80537,7 @@ const file_header_proto_rawDesc = "" +
 	"\x11delivery_received\x10\x1b\x12\x15\n" +
 	"\x11delivery_shipping\x10\x1c\x12\x10\n" +
 	"\fbuyer_pickup\x10\x1d\x12\x10\n" +
-	"\fnot_required\x10\x1e*\xb8\b\n" +
+	"\fnot_required\x10\x1e*\xee\x06\n" +
 	"\x01E\x12\a\n" +
 	"\x03Sub\x10\x00\x12\x18\n" +
 	"\x14invalid_message_size\x10\x15\x12\x18\n" +
@@ -80584,21 +80551,14 @@ const file_header_proto_rawDesc = "" +
 	"\x13invalid_working_day\x10?\x12\x13\n" +
 	"\x0finvalid_holiday\x10@\x121\n" +
 	"-endchat_bot_setting_after_any_message_too_low\x10^\x122\n" +
-	".endchat_bot_setting_after_any_message_too_high\x10_\x12#\n" +
-	"\x1ftemplate_message_not_is_creator\x10a\x12\x0f\n" +
-	"\vinvalid_url\x10g\x12\x0f\n" +
-	"\vinvalid_css\x10t\x12\x18\n" +
-	"\x14invalid_report_range\x10u\x12#\n" +
+	".endchat_bot_setting_after_any_message_too_high\x10_\x12\x0f\n" +
+	"\vinvalid_css\x10t\x12#\n" +
 	"\x1fuser_is_not_in_the_conversation\x10x\x12\x18\n" +
 	"\x14invalid_message_type\x10z\x12\x18\n" +
 	"\x14remover_is_not_agent\x10\x7f\x12)\n" +
 	"$user_is_the_last_one_in_conversation\x10\x80\x01\x12+\n" +
 	"&leaver_is_the_last_one_in_conversation\x10\x82\x01\x12\x19\n" +
-	"\x14caller_is_not_leaver\x10\x84\x01\x12\x14\n" +
-	"\x0ftoo_many_fields\x10\x86\x01\x12\x19\n" +
-	"\x14too_many_attachments\x10\x87\x01\x12\x17\n" +
-	"\x12invalid_field_size\x10\x89\x01\x12\x13\n" +
-	"\x0eorder_readonly\x10\x8e\x01\x12\x19\n" +
+	"\x14caller_is_not_leaver\x10\x84\x01\x12\x19\n" +
 	"\x14invalid_order_status\x10\x92\x01\x12&\n" +
 	"!invalid_conversation_modal_secret\x10\xaa\x01\x12#\n" +
 	"\x1einvalid_conversation_modal_url\x10\xac\x01\x12#\n" +
@@ -80606,7 +80566,6 @@ const file_header_proto_rawDesc = "" +
 	"\x12invalid_call_state\x10\xbe\x01\x12\x19\n" +
 	"\x14number_is_registered\x10\xc1\x01\x12\x1a\n" +
 	"\x15number_is_not_bounded\x10\xc2\x01\x12\x19\n" +
-	"\x14invalid_sip_provider\x10\xc6\x01\x12\x19\n" +
 	"\x14duplicated_extension\x10\xc8\x01\x12\x1f\n" +
 	"\x1acannot_edit_system_segment\x10\xf4\x01B\x19Z\x17github.com/subiz/headerb\x06proto3"
 

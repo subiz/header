@@ -2671,3 +2671,12 @@ func IsEmptyMessage(channel string, msg *Message) bool {
 	}
 	return strings.TrimSpace(msg.GetText()) == "" && msg.GetBlock() == nil && len(msg.GetAttachments()) == 0
 }
+
+func IsBanUser(user *User) bool {
+	for _, attr := range user.GetAttributes() {
+		if attr.Key == "is_ban" {
+			return attr.Boolean
+		}
+	}
+	return false
+}

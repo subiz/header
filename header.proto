@@ -682,7 +682,6 @@ message Event {
 	Data data = 20;
 	Data old = 53;
 	Data ref = 54;
-	// repeated EventField metadata = 55;
 	string webhook_id = 56; // webhook id listen this event
 	string source_event_id = 57; // for sync event, can be used like idempotency key
 	map<string, EventField> custom_data = 58;
@@ -3597,9 +3596,9 @@ message File {
 	string status = 30; // uploading
 	string error_code = 31;
 
-	string image_1024 = 32;
-	string image_512 = 33;
-	string image_128 = 34;
+	string image_1024 = 32; // @deprecated
+	// string image_512 = 33; // @deprecated
+	// string image_128 = 34; // @deprecated
 
 	string text_url = 35;
 	int64 num_characters = 36;
@@ -3716,10 +3715,6 @@ message GoogleReviewSetting {
 	bool enabled = 1;
 	map<string, string> repliesM = 5; //rating => reply
 }
-
-//message GoogleQuestionSetting {
-//bool enabled = 1;
-//}
 
 message FbComment {
 	string comment = 2; // read only
@@ -4112,6 +4107,9 @@ message OrderItem {
 
 	float total_tax = 30; // computed, override value
 	int64 fpv_total_tax = 31; // computed, override value
+
+	// not using product
+	string name = 33;
 }
 
 message GHNAddress {
@@ -6612,12 +6610,8 @@ enum E {
 
 	endchat_bot_setting_after_any_message_too_low = 94;
 	endchat_bot_setting_after_any_message_too_high = 95;
-	template_message_not_is_creator = 97;
-
-	invalid_url = 103;
 
 	invalid_css = 116;
-	invalid_report_range = 117;
 	user_is_not_in_the_conversation = 120;
 	invalid_message_type = 122;
 	remover_is_not_agent = 127;
@@ -6625,11 +6619,6 @@ enum E {
 	// conversation_ended = 129;
 	leaver_is_the_last_one_in_conversation = 130;
 	caller_is_not_leaver = 132;
-
-	too_many_fields = 134;
-	too_many_attachments = 135;
-	invalid_field_size = 137;
-	order_readonly = 142;
 
 	invalid_order_status = 146;
 
@@ -6642,7 +6631,6 @@ enum E {
 	number_is_registered = 193;
 	number_is_not_bounded = 194;
 
-	invalid_sip_provider = 198; // fpt, itel
 	duplicated_extension = 200;
 	cannot_edit_system_segment = 244;
 }
