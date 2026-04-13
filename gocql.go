@@ -44,9 +44,10 @@ type queryObserver struct{}
 
 func (qo *queryObserver) ObserveQuery(ctx context.Context, q gocql.ObservedQuery) {
 	typ := "select"
-	if strings.HasPrefix(q.Statement, "INSERT") || strings.HasPrefix(q.Statement, "insert") {
+	statement := strings.ToLower(Norm(q.Statement, 500))
+	if strings.HasPrefix(statement, "insert") {
 		typ = "insert"
-	} else if strings.HasPrefix(q.Statement, "DELETE") || strings.HasPrefix(q.Statement, "delete") {
+	} else if strings.HasPrefix(statement, "delete") {
 		typ = "delete"
 	}
 

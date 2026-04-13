@@ -588,16 +588,16 @@ func (x *Device) GetUtm() *SessionCampaign {
 }
 
 type PackedDevice struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	IPv4             uint32                 `protobuf:"varint,3,opt,name=IPv4,proto3" json:"IPv4,omitempty"`
-	IPv6Lo           uint64                 `protobuf:"varint,4,opt,name=IPv6_lo,json=IPv6Lo,proto3" json:"IPv6_lo,omitempty"`
-	IPv6Hi           uint64                 `protobuf:"varint,5,opt,name=IPv6_hi,json=IPv6Hi,proto3" json:"IPv6_hi,omitempty"`
-	UserAgent        int64                  `protobuf:"varint,6,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"` // hash
-	ScreenResolution int64                  `protobuf:"varint,7,opt,name=screen_resolution,json=screenResolution,proto3" json:"screen_resolution,omitempty"`
-	Timezone         int64                  `protobuf:"varint,8,opt,name=timezone,proto3" json:"timezone,omitempty"` // hash
-	Language         int64                  `protobuf:"varint,9,opt,name=language,proto3" json:"language,omitempty"`
-	Referrer         int64                  `protobuf:"varint,10,opt,name=referrer,proto3" json:"referrer,omitempty"` // hash, referer of api.subiz.com.vn (the current page that user is viewing)
-	Type             int32                  `protobuf:"varint,11,opt,name=type,proto3" json:"type,omitempty"`         // 0 - 1 - 2 -3
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	IPv4   uint32                 `protobuf:"varint,3,opt,name=IPv4,proto3" json:"IPv4,omitempty"`
+	IPv6Lo uint64                 `protobuf:"varint,4,opt,name=IPv6_lo,json=IPv6Lo,proto3" json:"IPv6_lo,omitempty"`
+	IPv6Hi uint64                 `protobuf:"varint,5,opt,name=IPv6_hi,json=IPv6Hi,proto3" json:"IPv6_hi,omitempty"`
+	// int64 user_agent = 6; // hash
+	// int64 screen_resolution = 7;
+	// int64 timezone = 8; // hash
+	// int64 language = 9;
+	Referrer int64 `protobuf:"varint,10,opt,name=referrer,proto3" json:"referrer,omitempty"` // hash, referer of api.subiz.com.vn (the current page that user is viewing)
+	Type     int32 `protobuf:"varint,11,opt,name=type,proto3" json:"type,omitempty"`         // 0 - 1 - 2 -3
 	// referrer of referrer
 	// for example: user go to google.com then click a link to company.com, a request
 	// will be sent to api.subiz.com.vn
@@ -660,34 +660,6 @@ func (x *PackedDevice) GetIPv6Lo() uint64 {
 func (x *PackedDevice) GetIPv6Hi() uint64 {
 	if x != nil {
 		return x.IPv6Hi
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetUserAgent() int64 {
-	if x != nil {
-		return x.UserAgent
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetScreenResolution() int64 {
-	if x != nil {
-		return x.ScreenResolution
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetTimezone() int64 {
-	if x != nil {
-		return x.Timezone
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetLanguage() int64 {
-	if x != nil {
-		return x.Language
 	}
 	return 0
 }
@@ -1323,16 +1295,11 @@ const file_common_proto_rawDesc = "" +
 	"\aorganic\x10\x02\x12\n" +
 	"\n" +
 	"\x06social\x10\x03\x12\x0f\n" +
-	"\vadvertising\x10\x04\"\xd5\x03\n" +
+	"\vadvertising\x10\x04\"\xd1\x02\n" +
 	"\fPackedDevice\x12\x12\n" +
 	"\x04IPv4\x18\x03 \x01(\rR\x04IPv4\x12\x17\n" +
 	"\aIPv6_lo\x18\x04 \x01(\x04R\x06IPv6Lo\x12\x17\n" +
-	"\aIPv6_hi\x18\x05 \x01(\x04R\x06IPv6Hi\x12\x1d\n" +
-	"\n" +
-	"user_agent\x18\x06 \x01(\x03R\tuserAgent\x12+\n" +
-	"\x11screen_resolution\x18\a \x01(\x03R\x10screenResolution\x12\x1a\n" +
-	"\btimezone\x18\b \x01(\x03R\btimezone\x12\x1a\n" +
-	"\blanguage\x18\t \x01(\x03R\blanguage\x12\x1a\n" +
+	"\aIPv6_hi\x18\x05 \x01(\x04R\x06IPv6Hi\x12\x1a\n" +
 	"\breferrer\x18\n" +
 	" \x01(\x03R\breferrer\x12\x12\n" +
 	"\x04type\x18\v \x01(\x05R\x04type\x12'\n" +

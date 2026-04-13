@@ -84,10 +84,10 @@ message PackedDevice {
 	uint64 IPv6_lo = 4;
 	uint64 IPv6_hi = 5;
 
-	int64 user_agent = 6; // hash
-	int64 screen_resolution = 7;
-	int64 timezone = 8; // hash
-	int64 language = 9;
+	// int64 user_agent = 6; // hash
+	// int64 screen_resolution = 7;
+	// int64 timezone = 8; // hash
+	// int64 language = 9;
 	int64 referrer = 10; // hash, referer of api.subiz.com.vn (the current page that user is viewing)
 	int32 type = 11; // 0 - 1 - 2 -3
 
