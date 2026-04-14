@@ -24748,6 +24748,7 @@ type File struct {
 	Status          string `protobuf:"bytes,30,opt,name=status,proto3" json:"status,omitempty"`               // uploading
 	ErrorCode       string `protobuf:"bytes,31,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
 	Image_1024      string `protobuf:"bytes,32,opt,name=image_1024,json=image1024,proto3" json:"image_1024,omitempty"` // @deprecated
+	Image_512       string `protobuf:"bytes,33,opt,name=image_512,json=image512,proto3" json:"image_512,omitempty"`    // @deprecated
 	TextUrl         string `protobuf:"bytes,35,opt,name=text_url,json=textUrl,proto3" json:"text_url,omitempty"`
 	NumCharacters   int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	Visibility      string `protobuf:"bytes,38,opt,name=visibility,proto3" json:"visibility,omitempty"`                    // public(default), private
@@ -24972,6 +24973,13 @@ func (x *File) GetErrorCode() string {
 func (x *File) GetImage_1024() string {
 	if x != nil {
 		return x.Image_1024
+	}
+	return ""
+}
+
+func (x *File) GetImage_512() string {
+	if x != nil {
+		return x.Image_512
 	}
 	return ""
 }
@@ -74499,7 +74507,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x0e\n" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xa2\a\n" +
+	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xbf\a\n" +
 	"\x04File\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74531,7 +74539,8 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"error_code\x18\x1f \x01(\tR\terrorCode\x12\x1d\n" +
 	"\n" +
-	"image_1024\x18  \x01(\tR\timage1024\x12\x19\n" +
+	"image_1024\x18  \x01(\tR\timage1024\x12\x1b\n" +
+	"\timage_512\x18! \x01(\tR\bimage512\x12\x19\n" +
 	"\btext_url\x18# \x01(\tR\atextUrl\x12%\n" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1e\n" +
 	"\n" +

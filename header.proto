@@ -284,7 +284,6 @@ message User {
 	int64 updated = 60;
 
 	repeated User secondaries = 67; // read-only // deprecated
-	// repeated UserAds ads = 70; // read-only
 
 	int64 deleted = 72;
 	string deleted_by = 73;
@@ -2128,29 +2127,6 @@ message VisitProductSiteRequest {
 	int64 created = 6;
 }
 
-/*message Site {
-	common.Context ctx = 1;
-	string account_id = 2; // web, messenger, zalo
-	string id = 3; // web:abc.com, web:xyz.com, facebook:423084234234, zalo:3903002404
-
-	bool user_verified = 4;
-	string image_url = 5;
-	string image_hash = 12; // MD5 sum of image (internal)
-
-	bool agent_confirmed = 6;
-
-	int64 created = 7;
-
-	string title = 9;
-	int64 last_user_verified = 10;
-	string last_user_verify_uri = 11;
-
-	string mobile_screenshoot_url = 13;
-	string desktop_screenshoot_url = 14;
-
-	int64 last_crawled = 15;
-	}*/
-
 message Bot {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -3552,7 +3528,7 @@ message File {
 	string error_code = 31;
 
 	string image_1024 = 32; // @deprecated
-	// string image_512 = 33; // @deprecated
+	string image_512 = 33; // @deprecated
 	// string image_128 = 34; // @deprecated
 
 	string text_url = 35;
