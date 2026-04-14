@@ -2165,7 +2165,7 @@ type AccountMgrClient interface {
 	NewID(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	LockLogin(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	UnlockLogin(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
-	ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Bills, error)
+	ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	// promotion code
 	ListPromotionPrograms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListPromotionCodesOfProgram(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -2988,9 +2988,9 @@ func (c *accountMgrClient) UnlockLogin(ctx context.Context, in *Id, opts ...grpc
 	return out, nil
 }
 
-func (c *accountMgrClient) ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Bills, error) {
+func (c *accountMgrClient) ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(payment.Bills)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, AccountMgr_ListBills_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -3292,7 +3292,7 @@ type AccountMgrServer interface {
 	NewID(context.Context, *Id) (*Id, error)
 	LockLogin(context.Context, *Id) (*Id, error)
 	UnlockLogin(context.Context, *Id) (*Id, error)
-	ListBills(context.Context, *Id) (*payment.Bills, error)
+	ListBills(context.Context, *Id) (*Response, error)
 	// promotion code
 	ListPromotionPrograms(context.Context, *Id) (*Response, error)
 	ListPromotionCodesOfProgram(context.Context, *Id) (*Response, error)
@@ -3562,7 +3562,7 @@ func (UnimplementedAccountMgrServer) LockLogin(context.Context, *Id) (*Id, error
 func (UnimplementedAccountMgrServer) UnlockLogin(context.Context, *Id) (*Id, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnlockLogin not implemented")
 }
-func (UnimplementedAccountMgrServer) ListBills(context.Context, *Id) (*payment.Bills, error) {
+func (UnimplementedAccountMgrServer) ListBills(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBills not implemented")
 }
 func (UnimplementedAccountMgrServer) ListPromotionPrograms(context.Context, *Id) (*Response, error) {
@@ -6349,6 +6349,7 @@ const (
 	UserMgr_Presences_FullMethodName                        = "/header.UserMgr/Presences"
 	UserMgr_UpdateSegmentMember_FullMethodName              = "/header.UserMgr/UpdateSegmentMember"
 	UserMgr_RemoveSegmentMember_FullMethodName              = "/header.UserMgr/RemoveSegmentMember"
+	UserMgr_TriggerSyncUserTag_FullMethodName               = "/header.UserMgr/TriggerSyncUserTag"
 )
 
 // UserMgrClient is the client API for UserMgr service.
@@ -6427,6 +6428,7 @@ type UserMgrClient interface {
 	Presences(ctx context.Context, in *PresencesRequest, opts ...grpc.CallOption) (*PresencesResponse, error)
 	UpdateSegmentMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error)
 	RemoveSegmentMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error)
+	TriggerSyncUserTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type userMgrClient struct {
@@ -7127,6 +7129,16 @@ func (c *userMgrClient) RemoveSegmentMember(ctx context.Context, in *ResourceGro
 	return out, nil
 }
 
+func (c *userMgrClient) TriggerSyncUserTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserMgr_TriggerSyncUserTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserMgrServer is the server API for UserMgr service.
 // All implementations must embed UnimplementedUserMgrServer
 // for forward compatibility.
@@ -7203,6 +7215,7 @@ type UserMgrServer interface {
 	Presences(context.Context, *PresencesRequest) (*PresencesResponse, error)
 	UpdateSegmentMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error)
 	RemoveSegmentMember(context.Context, *ResourceGroupMember) (*Empty, error)
+	TriggerSyncUserTag(context.Context, *Id) (*Empty, error)
 	mustEmbedUnimplementedUserMgrServer()
 }
 
@@ -7419,6 +7432,9 @@ func (UnimplementedUserMgrServer) UpdateSegmentMember(context.Context, *Resource
 }
 func (UnimplementedUserMgrServer) RemoveSegmentMember(context.Context, *ResourceGroupMember) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveSegmentMember not implemented")
+}
+func (UnimplementedUserMgrServer) TriggerSyncUserTag(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method TriggerSyncUserTag not implemented")
 }
 func (UnimplementedUserMgrServer) mustEmbedUnimplementedUserMgrServer() {}
 func (UnimplementedUserMgrServer) testEmbeddedByValue()                 {}
@@ -8683,6 +8699,24 @@ func _UserMgr_RemoveSegmentMember_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserMgr_TriggerSyncUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).TriggerSyncUserTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_TriggerSyncUserTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).TriggerSyncUserTag(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserMgr_ServiceDesc is the grpc.ServiceDesc for UserMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -8965,6 +8999,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveSegmentMember",
 			Handler:    _UserMgr_RemoveSegmentMember_Handler,
+		},
+		{
+			MethodName: "TriggerSyncUserTag",
+			Handler:    _UserMgr_TriggerSyncUserTag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -11446,6 +11484,7 @@ const (
 	ConversationMgr_VerifyWebsiteByVisit_FullMethodName     = "/header.ConversationMgr/VerifyWebsiteByVisit"
 	ConversationMgr_VerifyWebsiteByDNS_FullMethodName       = "/header.ConversationMgr/VerifyWebsiteByDNS"
 	ConversationMgr_ForceVerifyWebsite_FullMethodName       = "/header.ConversationMgr/ForceVerifyWebsite"
+	ConversationMgr_ListUserTags_FullMethodName             = "/header.ConversationMgr/ListUserTags"
 )
 
 // ConversationMgrClient is the client API for ConversationMgr service.
@@ -11536,6 +11575,7 @@ type ConversationMgrClient interface {
 	VerifyWebsiteByVisit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ForceVerifyWebsite(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListUserTags(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conversationMgrClient struct {
@@ -12326,6 +12366,16 @@ func (c *conversationMgrClient) ForceVerifyWebsite(ctx context.Context, in *Id, 
 	return out, nil
 }
 
+func (c *conversationMgrClient) ListUserTags(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_ListUserTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationMgrServer is the server API for ConversationMgr service.
 // All implementations must embed UnimplementedConversationMgrServer
 // for forward compatibility.
@@ -12414,6 +12464,7 @@ type ConversationMgrServer interface {
 	VerifyWebsiteByVisit(context.Context, *Id) (*Response, error)
 	VerifyWebsiteByDNS(context.Context, *Id) (*Response, error)
 	ForceVerifyWebsite(context.Context, *Id) (*Response, error)
+	ListUserTags(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -12657,6 +12708,9 @@ func (UnimplementedConversationMgrServer) VerifyWebsiteByDNS(context.Context, *I
 }
 func (UnimplementedConversationMgrServer) ForceVerifyWebsite(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ForceVerifyWebsite not implemented")
+}
+func (UnimplementedConversationMgrServer) ListUserTags(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserTags not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
 func (UnimplementedConversationMgrServer) testEmbeddedByValue()                         {}
@@ -14083,6 +14137,24 @@ func _ConversationMgr_ForceVerifyWebsite_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_ListUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ListUserTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ListUserTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ListUserTags(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConversationMgr_ServiceDesc is the grpc.ServiceDesc for ConversationMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -14401,6 +14473,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ForceVerifyWebsite",
 			Handler:    _ConversationMgr_ForceVerifyWebsite_Handler,
+		},
+		{
+			MethodName: "ListUserTags",
+			Handler:    _ConversationMgr_ListUserTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

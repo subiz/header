@@ -184,7 +184,7 @@ service AccountMgr {
 	rpc LockLogin(header.Id) returns (header.Id); // accid
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
-	rpc ListBills(header.Id) returns (payment.Bills);
+	rpc ListBills(header.Id) returns (header.Response);
 
 	// promotion code
 	rpc ListPromotionPrograms(header.Id) returns (header.Response); // allow search by code
@@ -234,10 +234,10 @@ service UserMgr {
 	rpc MergeUser(header.Users) returns (header.User);
 	rpc DetachUser(header.Id) returns (header.Empty);
 
-	rpc CreateUser2(header.User) returns (header.User); // ok
-	rpc UpdateUser(header.User) returns (header.User);  // ok
+	rpc CreateUser2(header.User) returns (header.User);
+	rpc UpdateUser(header.User) returns (header.User);
 	// rpc UpdateUsers(header.Users) returns (header.Response);
-	rpc TryUpdateUser(header.User) returns (header.TryUpdateUserResult); // ok
+	rpc TryUpdateUser(header.User) returns (header.TryUpdateUserResult);
 
 	rpc RemoveUser(header.Id) returns (header.Empty); // ok
 	rpc RestoreUser(header.Id) returns (header.Empty); // ok
@@ -319,6 +319,7 @@ service UserMgr {
 
 	rpc UpdateSegmentMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveSegmentMember(ResourceGroupMember) returns (header.Empty);
+	rpc TriggerSyncUserTag(header.Id) returns (header.Empty);
 }
 
 service NoteMgr {
@@ -523,6 +524,8 @@ service ConversationMgr {
 	rpc VerifyWebsiteByVisit(header.Id) returns (Response);
 	rpc VerifyWebsiteByDNS(header.Id) returns (Response);
 	rpc ForceVerifyWebsite(header.Id) returns (Response);
+
+	rpc ListUserTags(header.Id) returns (Response);
 }
 
 service TicketMgr {
