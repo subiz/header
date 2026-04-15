@@ -88,18 +88,15 @@ enum RealtimeType {
 	site_user_verified = 100;
 	site_updated = 101;
 
-	site_up = 102;
-	site_down = 103;
-
 	language_updated = 104;
 
 	user_note_updated = 105;
 	user_note_deleted = 106;
 
-	user_lead_owner_updated = 107;
-	user_lead_owner_deleted = 108;
+	lead_assigned = 107;
+	lead_unassigned = 108;
 
-	user_label_updated = 109;
+	user_label_added = 109;
 	user_label_deleted = 110;
 
 	label_updated = 112;

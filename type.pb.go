@@ -86,14 +86,12 @@ const (
 	RealtimeType_user_alias_created                 RealtimeType = 99
 	RealtimeType_site_user_verified                 RealtimeType = 100
 	RealtimeType_site_updated                       RealtimeType = 101
-	RealtimeType_site_up                            RealtimeType = 102
-	RealtimeType_site_down                          RealtimeType = 103
 	RealtimeType_language_updated                   RealtimeType = 104
 	RealtimeType_user_note_updated                  RealtimeType = 105
 	RealtimeType_user_note_deleted                  RealtimeType = 106
-	RealtimeType_user_lead_owner_updated            RealtimeType = 107
-	RealtimeType_user_lead_owner_deleted            RealtimeType = 108
-	RealtimeType_user_label_updated                 RealtimeType = 109
+	RealtimeType_lead_assigned                      RealtimeType = 107
+	RealtimeType_lead_unassigned                    RealtimeType = 108
+	RealtimeType_user_label_added                   RealtimeType = 109
 	RealtimeType_user_label_deleted                 RealtimeType = 110
 	RealtimeType_label_updated                      RealtimeType = 112
 	RealtimeType_label_deleted                      RealtimeType = 113
@@ -343,14 +341,12 @@ var (
 		99:  "user_alias_created",
 		100: "site_user_verified",
 		101: "site_updated",
-		102: "site_up",
-		103: "site_down",
 		104: "language_updated",
 		105: "user_note_updated",
 		106: "user_note_deleted",
-		107: "user_lead_owner_updated",
-		108: "user_lead_owner_deleted",
-		109: "user_label_updated",
+		107: "lead_assigned",
+		108: "lead_unassigned",
+		109: "user_label_added",
 		110: "user_label_deleted",
 		112: "label_updated",
 		113: "label_deleted",
@@ -596,14 +592,12 @@ var (
 		"user_alias_created":                 99,
 		"site_user_verified":                 100,
 		"site_updated":                       101,
-		"site_up":                            102,
-		"site_down":                          103,
 		"language_updated":                   104,
 		"user_note_updated":                  105,
 		"user_note_deleted":                  106,
-		"user_lead_owner_updated":            107,
-		"user_lead_owner_deleted":            108,
-		"user_label_updated":                 109,
+		"lead_assigned":                      107,
+		"lead_unassigned":                    108,
+		"user_label_added":                   109,
 		"user_label_deleted":                 110,
 		"label_updated":                      112,
 		"label_deleted":                      113,
@@ -1781,7 +1775,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xb60\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\x860\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1843,15 +1837,13 @@ const file_type_proto_rawDesc = "" +
 	"\x0ebot_terminated\x10b\x12\x16\n" +
 	"\x12user_alias_created\x10c\x12\x16\n" +
 	"\x12site_user_verified\x10d\x12\x10\n" +
-	"\fsite_updated\x10e\x12\v\n" +
-	"\asite_up\x10f\x12\r\n" +
-	"\tsite_down\x10g\x12\x14\n" +
+	"\fsite_updated\x10e\x12\x14\n" +
 	"\x10language_updated\x10h\x12\x15\n" +
 	"\x11user_note_updated\x10i\x12\x15\n" +
-	"\x11user_note_deleted\x10j\x12\x1b\n" +
-	"\x17user_lead_owner_updated\x10k\x12\x1b\n" +
-	"\x17user_lead_owner_deleted\x10l\x12\x16\n" +
-	"\x12user_label_updated\x10m\x12\x16\n" +
+	"\x11user_note_deleted\x10j\x12\x11\n" +
+	"\rlead_assigned\x10k\x12\x13\n" +
+	"\x0flead_unassigned\x10l\x12\x14\n" +
+	"\x10user_label_added\x10m\x12\x16\n" +
 	"\x12user_label_deleted\x10n\x12\x11\n" +
 	"\rlabel_updated\x10p\x12\x11\n" +
 	"\rlabel_deleted\x10q\x12\x18\n" +

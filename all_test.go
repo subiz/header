@@ -207,7 +207,7 @@ func TestEvaluateTexts(t *testing.T) {
 }
 
 func TestPartition(t *testing.T) {
-	fmt.Println("PAR", Fnv32("usrqhgvjafsyegefuvruv")%50) // 21
+	fmt.Println("PAR", Fnv32("ussojlkxllpaqycjzzezg")%50) // 21
 	shardNumber := int(crc32.ChecksumIEEE([]byte("acriviayfmabzskstrpq"))) % 4
 	fmt.Println(shardNumber)
 }
