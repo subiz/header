@@ -2680,3 +2680,12 @@ func IsBanUser(user *User) bool {
 	}
 	return false
 }
+
+func ToBy(gctx *cpb.Context) *By {
+	by := &By{}
+	cred := gctx.GetCredential()
+	by.ClientId = cred.GetClientId()
+	by.Id = cred.GetIssuer()
+	by.Type = cred.GetType().String()
+	return by
+}

@@ -91,8 +91,6 @@ const (
 	RealtimeType_user_note_deleted                  RealtimeType = 106
 	RealtimeType_lead_assigned                      RealtimeType = 107
 	RealtimeType_lead_unassigned                    RealtimeType = 108
-	RealtimeType_user_label_added                   RealtimeType = 109
-	RealtimeType_user_label_deleted                 RealtimeType = 110
 	RealtimeType_label_updated                      RealtimeType = 112
 	RealtimeType_label_deleted                      RealtimeType = 113
 	RealtimeType_contact_info_updated               RealtimeType = 116
@@ -346,8 +344,6 @@ var (
 		106: "user_note_deleted",
 		107: "lead_assigned",
 		108: "lead_unassigned",
-		109: "user_label_added",
-		110: "user_label_deleted",
 		112: "label_updated",
 		113: "label_deleted",
 		116: "contact_info_updated",
@@ -597,8 +593,6 @@ var (
 		"user_note_deleted":                  106,
 		"lead_assigned":                      107,
 		"lead_unassigned":                    108,
-		"user_label_added":                   109,
-		"user_label_deleted":                 110,
 		"label_updated":                      112,
 		"label_deleted":                      113,
 		"contact_info_updated":               116,
@@ -1775,7 +1769,7 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\x860\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat*\xd8/\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1842,9 +1836,7 @@ const file_type_proto_rawDesc = "" +
 	"\x11user_note_updated\x10i\x12\x15\n" +
 	"\x11user_note_deleted\x10j\x12\x11\n" +
 	"\rlead_assigned\x10k\x12\x13\n" +
-	"\x0flead_unassigned\x10l\x12\x14\n" +
-	"\x10user_label_added\x10m\x12\x16\n" +
-	"\x12user_label_deleted\x10n\x12\x11\n" +
+	"\x0flead_unassigned\x10l\x12\x11\n" +
 	"\rlabel_updated\x10p\x12\x11\n" +
 	"\rlabel_deleted\x10q\x12\x18\n" +
 	"\x14contact_info_updated\x10t\x12!\n" +

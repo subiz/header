@@ -96,9 +96,6 @@ enum RealtimeType {
 	lead_assigned = 107;
 	lead_unassigned = 108;
 
-	user_label_added = 109;
-	user_label_deleted = 110;
-
 	label_updated = 112;
 	label_deleted = 113;
 
