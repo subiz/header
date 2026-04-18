@@ -45979,7 +45979,7 @@ type WorkflowAction struct {
 	OnError            string                    `protobuf:"bytes,10,opt,name=on_error,json=onError,proto3" json:"on_error,omitempty"` // action id or: "continue", "empty" -> end
 	Scope              string                    `protobuf:"bytes,7,opt,name=scope,proto3" json:"scope,omitempty"`                     // computed
 	IsAsync            bool                      `protobuf:"varint,8,opt,name=is_async,json=isAsync,proto3" json:"is_async,omitempty"` // just go, dont care about revalid for ation wait
-	Type               string                    `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`                       // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope, terminate_bot
+	Type               string                    `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`                       // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope, terminate_bot, update_user_segments
 	Jump               *ActionJump               `protobuf:"bytes,15,opt,name=jump,proto3" json:"jump,omitempty"`
 	SendHttp           *ActionSendHttp           `protobuf:"bytes,17,opt,name=send_http,json=sendHttp,proto3" json:"send_http,omitempty"`
 	AskQuestion        *ActionAskQuestion        `protobuf:"bytes,18,opt,name=ask_question,json=askQuestion,proto3" json:"ask_question,omitempty"`
@@ -62529,18 +62529,16 @@ func (x *CounterDataPoints) GetNextAnchor() string {
 
 // needed for kafka
 type CounterDataPoint struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	TimeSeries    []string               `protobuf:"bytes,2,rep,name=time_series,json=timeSeries,proto3" json:"time_series,omitempty"`
-	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Created       int64                  `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`                      // ms
-	Count         int64                  `protobuf:"varint,5,opt,name=count,proto3" json:"count,omitempty"`                          // @deprecated
-	IdCreated     int64                  `protobuf:"varint,6,opt,name=id_created,json=idCreated,proto3" json:"id_created,omitempty"` // ms @depreacted
-	Counts        []int64                `protobuf:"varint,7,rep,packed,name=counts,proto3" json:"counts,omitempty"`                 // @depreacted
-	Version       int64                  `protobuf:"varint,8,opt,name=version,proto3" json:"version,omitempty"`                      // 2
-	AccountId     string                 `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Labels        []string               `protobuf:"bytes,10,rep,name=labels,proto3" json:"labels,omitempty"`
-	Payload       []byte                 `protobuf:"bytes,11,opt,name=payload,proto3" json:"payload,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Ctx   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	// repeated string time_series = 2;
+	Id            string   `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Created       int64    `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"` // ms
+	Count         int64    `protobuf:"varint,5,opt,name=count,proto3" json:"count,omitempty"`     // @deprecated
+	Version       int64    `protobuf:"varint,8,opt,name=version,proto3" json:"version,omitempty"` // 2
+	AccountId     string   `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Labels        []string `protobuf:"bytes,10,rep,name=labels,proto3" json:"labels,omitempty"`
+	Payload       []byte   `protobuf:"bytes,11,opt,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -62582,13 +62580,6 @@ func (x *CounterDataPoint) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *CounterDataPoint) GetTimeSeries() []string {
-	if x != nil {
-		return x.TimeSeries
-	}
-	return nil
-}
-
 func (x *CounterDataPoint) GetId() string {
 	if x != nil {
 		return x.Id
@@ -62608,20 +62599,6 @@ func (x *CounterDataPoint) GetCount() int64 {
 		return x.Count
 	}
 	return 0
-}
-
-func (x *CounterDataPoint) GetIdCreated() int64 {
-	if x != nil {
-		return x.IdCreated
-	}
-	return 0
-}
-
-func (x *CounterDataPoint) GetCounts() []int64 {
-	if x != nil {
-		return x.Counts
-	}
-	return nil
 }
 
 func (x *CounterDataPoint) GetVersion() int64 {
@@ -79049,17 +79026,12 @@ const file_header_proto_rawDesc = "" +
 	"\vdata_points\x18\x04 \x03(\v2\x18.header.CounterDataPointR\n" +
 	"dataPoints\x12\x1f\n" +
 	"\vnext_anchor\x18\x05 \x01(\tR\n" +
-	"nextAnchor\"\xb8\x02\n" +
+	"nextAnchor\"\xe0\x01\n" +
 	"\x10CounterDataPoint\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1f\n" +
-	"\vtime_series\x18\x02 \x03(\tR\n" +
-	"timeSeries\x12\x0e\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x18\n" +
 	"\acreated\x18\x04 \x01(\x03R\acreated\x12\x14\n" +
-	"\x05count\x18\x05 \x01(\x03R\x05count\x12\x1d\n" +
-	"\n" +
-	"id_created\x18\x06 \x01(\x03R\tidCreated\x12\x16\n" +
-	"\x06counts\x18\a \x03(\x03R\x06counts\x12\x18\n" +
+	"\x05count\x18\x05 \x01(\x03R\x05count\x12\x18\n" +
 	"\aversion\x18\b \x01(\x03R\aversion\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\t \x01(\tR\taccountId\x12\x16\n" +
