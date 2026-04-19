@@ -79,35 +79,65 @@ func Ascii(text string) string {
 }
 
 // Norm trims spaces, removes invalid Unicode runes, and safely truncates
-// the string to at most `max` runes (without splitting UTF-8 characters).
+// the string to at most `maxChar` runes (without splitting UTF-8 characters).
 func Norm(s string, maxChar int) string {
-	out := make([]rune, 0, len(s))
-	for _, r := range s {
-		if !isInvalidRune(r) {
-			out = append(out, r)
-		}
-	}
-	s = strings.TrimSpace(string(out))
+	// 1. Fast exit for empty strings
 	if s == "" {
 		return ""
 	}
 
-	if maxChar <= 0 {
-		maxChar = len(s)
+	// 2. Treat maxChar <= 0 as "no limit" (infinite)
+	hasLimit := maxChar > 0
+
+	var b strings.Builder
+
+	// 3. Smart pre-allocation
+	// If there's a limit, we allocate at most maxChar * 4 bytes (worst-case UTF-8).
+	// We cap the allocation at len(s) to avoid over-allocating if maxChar is huge.
+	if hasLimit {
+		alloc := maxChar * 4
+		if alloc > len(s) {
+			alloc = len(s)
+		}
+		b.Grow(alloc)
+	} else {
+		b.Grow(len(s))
 	}
 
-	runeCount := utf8.RuneCountInString(s)
-	if maxChar >= runeCount {
-		return strings.TrimSpace(s)
-	}
-	i := 0
-	for j := range s {
-		if i == maxChar {
-			return strings.TrimSpace(s[:j])
+	runeCount := 0
+	trimmingLeading := true
+
+	// 4. Single-pass evaluation
+	for _, r := range s {
+		if isInvalidRune(r) {
+			continue
 		}
-		i++
+
+		// Handle leading spaces dynamically
+		if trimmingLeading {
+			if unicode.IsSpace(r) {
+				continue
+			}
+			trimmingLeading = false // We hit the first valid, non-space character
+		}
+
+		// 5. Early Exit: Stop processing immediately if limit is reached!
+		if hasLimit && runeCount == maxChar {
+			break
+		}
+
+		b.WriteRune(r)
+		runeCount++
 	}
-	return strings.TrimSpace(s)
+
+	// 6. Fast path if the resulting string is completely empty
+	if b.Len() == 0 {
+		return ""
+	}
+
+	// 7. Clean up newly exposed trailing spaces safely
+	// TrimRightFunc returns a sub-slice of the string, meaning 0 new allocations.
+	return strings.TrimRightFunc(b.String(), unicode.IsSpace)
 }
 
 // isInvalidRune reports whether a rune is invalid or unwanted for text display.
