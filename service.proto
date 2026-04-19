@@ -184,7 +184,7 @@ service AccountMgr {
 	rpc LockLogin(header.Id) returns (header.Id); // accid
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
-	rpc ListBills(header.Id) returns (header.Response);
+	rpc ListBills(header.Id) returns (payment.Bills);
 
 	// promotion code
 	rpc ListPromotionPrograms(header.Id) returns (header.Response); // allow search by code

@@ -2165,7 +2165,7 @@ type AccountMgrClient interface {
 	NewID(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	LockLogin(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	UnlockLogin(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
-	ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Bills, error)
 	// promotion code
 	ListPromotionPrograms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListPromotionCodesOfProgram(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -2988,9 +2988,9 @@ func (c *accountMgrClient) UnlockLogin(ctx context.Context, in *Id, opts ...grpc
 	return out, nil
 }
 
-func (c *accountMgrClient) ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *accountMgrClient) ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Bills, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
+	out := new(payment.Bills)
 	err := c.cc.Invoke(ctx, AccountMgr_ListBills_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -3292,7 +3292,7 @@ type AccountMgrServer interface {
 	NewID(context.Context, *Id) (*Id, error)
 	LockLogin(context.Context, *Id) (*Id, error)
 	UnlockLogin(context.Context, *Id) (*Id, error)
-	ListBills(context.Context, *Id) (*Response, error)
+	ListBills(context.Context, *Id) (*payment.Bills, error)
 	// promotion code
 	ListPromotionPrograms(context.Context, *Id) (*Response, error)
 	ListPromotionCodesOfProgram(context.Context, *Id) (*Response, error)
@@ -3562,7 +3562,7 @@ func (UnimplementedAccountMgrServer) LockLogin(context.Context, *Id) (*Id, error
 func (UnimplementedAccountMgrServer) UnlockLogin(context.Context, *Id) (*Id, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnlockLogin not implemented")
 }
-func (UnimplementedAccountMgrServer) ListBills(context.Context, *Id) (*Response, error) {
+func (UnimplementedAccountMgrServer) ListBills(context.Context, *Id) (*payment.Bills, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBills not implemented")
 }
 func (UnimplementedAccountMgrServer) ListPromotionPrograms(context.Context, *Id) (*Response, error) {
