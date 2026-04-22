@@ -15,6 +15,7 @@ import (
 	pb "github.com/subiz/header/account"
 	cpb "github.com/subiz/header/common"
 	ppb "github.com/subiz/header/payment"
+	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -1231,4 +1232,40 @@ func TestRsCondition(t *testing.T) {
 		Text: &TextCondition{Op: "is_empty"},
 	}, false)
 	fmt.Println("OUT", out)
+}
+
+func TestEvent(t *testing.T) {
+	// 1. Raw JSON containing a totally random, deeply nested structure
+	rawJSON := []byte(`{
+    "user_id": "us123",
+		"payload": {
+			"user_agent": "Mozilla/5.0",
+			"dynamic_metrics": [1, 2.5, "three", {"nested": true}],
+			"configuration": {
+				"theme": "dark",
+				"retries": 5,
+				"flags": null
+			}
+		}
+	}`)
+
+	// 2. Initialize your proto message
+	event := &Event{}
+
+	// 3. Unmarshal using protojson (NOT standard encoding/json)
+	// protojson natively understands how to map arbitrary JSON objects
+	// into a structpb.Struct safely.
+	err := protojson.Unmarshal(rawJSON, event)
+	if err != nil {
+		fmt.Println("Failed to unmarshal JSON", err)
+	}
+
+	fmt.Println("Successfully parsed dynamic JSON!")
+	fmt.Printf("Event ID: %s\n", event.UserId)
+
+	// Print a specific nested value to prove it works
+	metrics := event.Payload.Fields["dynamic_metrics"].GetListValue()
+	fmt.Printf("Metrics Array Length: %d\n", len(metrics.Values))
+	b, _ := protojson.Marshal(event)
+	fmt.Println("HHHH", string(b))
 }

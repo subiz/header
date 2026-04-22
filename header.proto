@@ -4,6 +4,7 @@ package header;
 
 option go_package = "github.com/subiz/header";
 
+import "google/protobuf/struct.proto";
 import "common.proto";
 import "account.proto";
 import "payment.proto";
@@ -638,26 +639,11 @@ message Event {
 	Data ref = 54;
 	string webhook_id = 56; // webhook id listen this event
 	string source_event_id = 57; // for sync event, can be used like idempotency key
-	map<string, EventField> custom_data = 58;
+	// map<string, EventField> custom_data = 58; // @deprecated
+
+	google.protobuf.Struct payload = 150;
 }
 
-message EventField {
-	string key = 2;
-	string type = 3; // string, number, integer, object, array, boolean, null, url, timestamp
-
-	string string = 4;
-	int64 integer = 5;
-	double number = 6;
-	bool boolean = 7;
-	string url = 8;
-	string label = 9;
-	string timestamp = 10; // rfc3999
-	string object = 11;
-
-	string value = 12; // read-only, jsonified
-
-	repeated EventField array = 20;
-}
 
 message Data {
 	common.Context ctx = 1;
