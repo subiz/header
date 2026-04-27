@@ -2022,7 +2022,7 @@ message Trigger {
 	int64 after_pageview_sec = 9; // 50s
 	bool disabled = 10;
 
-	repeated EventConditionFilter event_attributes = 11;
+	repeated EventConditionFilter event_attributes = 11; // ?
 }
 
 message BotCondition {
@@ -3899,7 +3899,7 @@ message UserViewCondition {
 	BooleanCondition boolean = 8;
 	NumberCondition number = 9;
 	DatetimeCondition datetime = 10;
-	EventCondition event = 11;
+	// EventCondition event = 11;
 
 	repeated UserViewCondition all = 12; // preferred
 	repeated UserViewCondition one = 13;
@@ -7500,7 +7500,7 @@ message WorkflowCondition {
 	BooleanCondition boolean = 8;
 	NumberCondition number = 9;
 	DatetimeCondition datetime = 10;
-	EventCondition event = 11;
+	// EventCondition event = 11;
 	TextCondition text = 12;
 	WorkflowTimming timming = 13;
 	LLMCondition llm = 14;
@@ -10084,4 +10084,54 @@ message Plan {
 	optional int64 fpv_price_vnd = 12; // vnd // permonth
 
 	optional int64 is_unlimited_ai_spending = 13; // @deprecated
+}
+
+message EventAggregate {
+	string function = 3; // count, avg
+	string field = 4;
+	string operator = 5;
+	string value = 6; // json.stringified
+}
+
+// Node là thực thể cốt lõi của cây truy vấn
+message SegmentCondition {
+	enum NodeType {
+		NODE_TYPE_ATTRIUBTE = 0;
+		NODE_TYPE_EVENT       = 2;
+		NODE_TYPE_ALL         = 3; // AND
+		NODE_TYPE_ANY         = 4; // OR
+		NODE_TYPE_SEQUENCE    = 5;
+	}
+  NodeType type = 1;
+
+  // --- Fields dành cho type: ATTRIBUTE ---
+  // Đường dẫn trường dữ liệu (VD: user.email, event.price)
+  string key = 2;
+  // Toán tử (eq, gt, gte, lt, lte, con, in, between)
+  string operator = 3;
+  // Giá trị so sánh (json.stringified value hoặc JSON string cho mảng)
+  string value = 4;
+
+  // --- Fields dành cho type: EVENT ---
+  // Tên sự kiện (VD: purchase, login)
+  string event = 5;
+  SegmentCondition filter = 6; // Nút lọc thuộc tính đi kèm của sự kiện
+  EventAggregate aggregate = 7; // Nút tính toán thống kê (count, sum, avg)
+
+  // --- Fields dành cho type: ALL / ANY ---
+  // Mảng chứa các nút con cho logic AND/OR
+  repeated SegmentCondition all = 8;
+  repeated SegmentCondition any = 9;
+
+  // --- Fields dành cho type: SEQUENCE ---
+  // Mảng các nút hành vi theo thứ tự thời gian
+  repeated SegmentCondition sequence = 10;
+
+  // --- Metadata / Context fields ---
+  // Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
+  string correlate_by = 11;
+  // Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
+  string group_by = 12;
+  // Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
+  string time_gap = 13;
 }

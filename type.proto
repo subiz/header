@@ -401,6 +401,7 @@ message TextCondition {
 	repeated string contain_all_varr = 58;
 }
 
+// @deprecated
 message EventConditionFilter {
 	string id = 3;
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
@@ -410,19 +411,6 @@ message EventConditionFilter {
 	BooleanCondition boolean = 8;
 	NumberCondition number = 9;
 	DatetimeCondition datetime = 10;
-}
-
-message EventCondition {
-	string type = 2; // attribute_updated, form_submitted, page_viewed
-	string ui_type = 4; // form, page, purchase, email
-
-	// created
-	bool inverse = 5; // have not been performed
-	int32 at_least = 6; // have been performanced at_least [___] times
-	DatetimeCondition created = 7;
-
-	repeated EventConditionFilter filters = 8;
-	// field: price, operator eq, value 5
 }
 
 message BooleanCondition {

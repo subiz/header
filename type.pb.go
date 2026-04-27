@@ -1121,6 +1121,7 @@ func (x *TextCondition) GetContainAllVarr() []string {
 	return nil
 }
 
+// @deprecated
 type EventConditionFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
@@ -1213,91 +1214,6 @@ func (x *EventConditionFilter) GetDatetime() *DatetimeCondition {
 	return nil
 }
 
-type EventCondition struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	Type   string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`                   // attribute_updated, form_submitted, page_viewed
-	UiType string                 `protobuf:"bytes,4,opt,name=ui_type,json=uiType,proto3" json:"ui_type,omitempty"` // form, page, purchase, email
-	// created
-	Inverse       bool                    `protobuf:"varint,5,opt,name=inverse,proto3" json:"inverse,omitempty"`                // have not been performed
-	AtLeast       int32                   `protobuf:"varint,6,opt,name=at_least,json=atLeast,proto3" json:"at_least,omitempty"` // have been performanced at_least [___] times
-	Created       *DatetimeCondition      `protobuf:"bytes,7,opt,name=created,proto3" json:"created,omitempty"`
-	Filters       []*EventConditionFilter `protobuf:"bytes,8,rep,name=filters,proto3" json:"filters,omitempty"` // field: price, operator eq, value 5
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EventCondition) Reset() {
-	*x = EventCondition{}
-	mi := &file_type_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EventCondition) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EventCondition) ProtoMessage() {}
-
-func (x *EventCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_type_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EventCondition.ProtoReflect.Descriptor instead.
-func (*EventCondition) Descriptor() ([]byte, []int) {
-	return file_type_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *EventCondition) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *EventCondition) GetUiType() string {
-	if x != nil {
-		return x.UiType
-	}
-	return ""
-}
-
-func (x *EventCondition) GetInverse() bool {
-	if x != nil {
-		return x.Inverse
-	}
-	return false
-}
-
-func (x *EventCondition) GetAtLeast() int32 {
-	if x != nil {
-		return x.AtLeast
-	}
-	return 0
-}
-
-func (x *EventCondition) GetCreated() *DatetimeCondition {
-	if x != nil {
-		return x.Created
-	}
-	return nil
-}
-
-func (x *EventCondition) GetFilters() []*EventConditionFilter {
-	if x != nil {
-		return x.Filters
-	}
-	return nil
-}
-
 type BooleanCondition struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Op            string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // has_value, true, false, any
@@ -1307,7 +1223,7 @@ type BooleanCondition struct {
 
 func (x *BooleanCondition) Reset() {
 	*x = BooleanCondition{}
-	mi := &file_type_proto_msgTypes[5]
+	mi := &file_type_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1319,7 +1235,7 @@ func (x *BooleanCondition) String() string {
 func (*BooleanCondition) ProtoMessage() {}
 
 func (x *BooleanCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_type_proto_msgTypes[5]
+	mi := &file_type_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1332,7 +1248,7 @@ func (x *BooleanCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BooleanCondition.ProtoReflect.Descriptor instead.
 func (*BooleanCondition) Descriptor() ([]byte, []int) {
-	return file_type_proto_rawDescGZIP(), []int{5}
+	return file_type_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BooleanCondition) GetOp() string {
@@ -1367,7 +1283,7 @@ type NumberCondition struct {
 
 func (x *NumberCondition) Reset() {
 	*x = NumberCondition{}
-	mi := &file_type_proto_msgTypes[6]
+	mi := &file_type_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1379,7 +1295,7 @@ func (x *NumberCondition) String() string {
 func (*NumberCondition) ProtoMessage() {}
 
 func (x *NumberCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_type_proto_msgTypes[6]
+	mi := &file_type_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1392,7 +1308,7 @@ func (x *NumberCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NumberCondition.ProtoReflect.Descriptor instead.
 func (*NumberCondition) Descriptor() ([]byte, []int) {
-	return file_type_proto_rawDescGZIP(), []int{6}
+	return file_type_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *NumberCondition) GetOp() string {
@@ -1533,7 +1449,7 @@ type DatetimeCondition struct {
 
 func (x *DatetimeCondition) Reset() {
 	*x = DatetimeCondition{}
-	mi := &file_type_proto_msgTypes[7]
+	mi := &file_type_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1545,7 +1461,7 @@ func (x *DatetimeCondition) String() string {
 func (*DatetimeCondition) ProtoMessage() {}
 
 func (x *DatetimeCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_type_proto_msgTypes[7]
+	mi := &file_type_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1558,7 +1474,7 @@ func (x *DatetimeCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatetimeCondition.ProtoReflect.Descriptor instead.
 func (*DatetimeCondition) Descriptor() ([]byte, []int) {
-	return file_type_proto_rawDescGZIP(), []int{7}
+	return file_type_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DatetimeCondition) GetOp() string {
@@ -1718,14 +1634,7 @@ const file_type_proto_rawDesc = "" +
 	"\aboolean\x18\b \x01(\v2\x18.header.BooleanConditionR\aboolean\x12/\n" +
 	"\x06number\x18\t \x01(\v2\x17.header.NumberConditionR\x06number\x125\n" +
 	"\bdatetime\x18\n" +
-	" \x01(\v2\x19.header.DatetimeConditionR\bdatetime\"\xdf\x01\n" +
-	"\x0eEventCondition\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12\x17\n" +
-	"\aui_type\x18\x04 \x01(\tR\x06uiType\x12\x18\n" +
-	"\ainverse\x18\x05 \x01(\bR\ainverse\x12\x19\n" +
-	"\bat_least\x18\x06 \x01(\x05R\aatLeast\x123\n" +
-	"\acreated\x18\a \x01(\v2\x19.header.DatetimeConditionR\acreated\x126\n" +
-	"\afilters\x18\b \x03(\v2\x1c.header.EventConditionFilterR\afilters\"\"\n" +
+	" \x01(\v2\x19.header.DatetimeConditionR\bdatetime\"\"\n" +
 	"\x10BooleanCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\"\x8d\x03\n" +
 	"\x0fNumberCondition\x12\x0e\n" +
@@ -2034,32 +1943,29 @@ func file_type_proto_rawDescGZIP() []byte {
 }
 
 var file_type_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_type_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_type_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_type_proto_goTypes = []any{
 	(RealtimeType)(0),            // 0: header.RealtimeType
 	(*TextTransform)(nil),        // 1: header.TextTransform
 	(*NumberTransform)(nil),      // 2: header.NumberTransform
 	(*TextCondition)(nil),        // 3: header.TextCondition
 	(*EventConditionFilter)(nil), // 4: header.EventConditionFilter
-	(*EventCondition)(nil),       // 5: header.EventCondition
-	(*BooleanCondition)(nil),     // 6: header.BooleanCondition
-	(*NumberCondition)(nil),      // 7: header.NumberCondition
-	(*DatetimeCondition)(nil),    // 8: header.DatetimeCondition
+	(*BooleanCondition)(nil),     // 5: header.BooleanCondition
+	(*NumberCondition)(nil),      // 6: header.NumberCondition
+	(*DatetimeCondition)(nil),    // 7: header.DatetimeCondition
 }
 var file_type_proto_depIdxs = []int32{
 	1, // 0: header.TextCondition.transforms:type_name -> header.TextTransform
 	3, // 1: header.EventConditionFilter.text:type_name -> header.TextCondition
-	6, // 2: header.EventConditionFilter.boolean:type_name -> header.BooleanCondition
-	7, // 3: header.EventConditionFilter.number:type_name -> header.NumberCondition
-	8, // 4: header.EventConditionFilter.datetime:type_name -> header.DatetimeCondition
-	8, // 5: header.EventCondition.created:type_name -> header.DatetimeCondition
-	4, // 6: header.EventCondition.filters:type_name -> header.EventConditionFilter
-	2, // 7: header.NumberCondition.transforms:type_name -> header.NumberTransform
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	5, // 2: header.EventConditionFilter.boolean:type_name -> header.BooleanCondition
+	6, // 3: header.EventConditionFilter.number:type_name -> header.NumberCondition
+	7, // 4: header.EventConditionFilter.datetime:type_name -> header.DatetimeCondition
+	2, // 5: header.NumberCondition.transforms:type_name -> header.NumberTransform
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_type_proto_init() }
@@ -2073,7 +1979,7 @@ func file_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_type_proto_rawDesc), len(file_type_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
