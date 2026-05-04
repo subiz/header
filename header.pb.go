@@ -70944,36 +70944,29 @@ func (x *EventAggregate) GetValue() string {
 	return ""
 }
 
-// Node là thực thể cốt lõi của cây truy vấn
 type SegmentCondition struct {
-	state protoimpl.MessageState    `protogen:"open.v1"`
-	Type  SegmentCondition_NodeType `protobuf:"varint,1,opt,name=type,proto3,enum=header.SegmentCondition_NodeType" json:"type,omitempty"`
-	// --- Fields dành cho type: ATTRIBUTE ---
-	// Đường dẫn trường dữ liệu (VD: user.email, event.price)
-	Key string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
-	// Toán tử (eq, gt, gte, lt, lte, con, in, between)
-	Operator string `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"`
-	// Giá trị so sánh (json.stringified value hoặc JSON string cho mảng)
-	Value string `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`
+	state    protoimpl.MessageState    `protogen:"open.v1"`
+	Type     SegmentCondition_NodeType `protobuf:"varint,1,opt,name=type,proto3,enum=header.SegmentCondition_NodeType" json:"type,omitempty"`
+	Key      string                    `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`           // Đường dẫn trường dữ liệu (VD: user.email, event.price)
+	Operator string                    `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"` // Toán tử (eq, gt, gte, lt, lte, con, in, between)
+	Value    string                    `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`       // Giá trị so sánh (json.stringified value hoặc JSON string cho mảng)
 	// --- Fields dành cho type: EVENT ---
 	// Tên sự kiện (VD: purchase, login)
 	Event     string            `protobuf:"bytes,5,opt,name=event,proto3" json:"event,omitempty"`
 	Filter    *SegmentCondition `protobuf:"bytes,6,opt,name=filter,proto3" json:"filter,omitempty"`       // Nút lọc thuộc tính đi kèm của sự kiện
 	Aggregate *EventAggregate   `protobuf:"bytes,7,opt,name=aggregate,proto3" json:"aggregate,omitempty"` // Nút tính toán thống kê (count, sum, avg)
+	Within    string            `protobuf:"bytes,8,opt,name=within,proto3" json:"within,omitempty"`       // Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
+	Missing   bool              `protobuf:"varint,9,opt,name=missing,proto3" json:"missing,omitempty"`
 	// --- Fields dành cho type: ALL / ANY ---
 	// Mảng chứa các nút con cho logic AND/OR
-	All []*SegmentCondition `protobuf:"bytes,8,rep,name=all,proto3" json:"all,omitempty"`
-	Any []*SegmentCondition `protobuf:"bytes,9,rep,name=any,proto3" json:"any,omitempty"`
+	All []*SegmentCondition `protobuf:"bytes,20,rep,name=all,proto3" json:"all,omitempty"`
+	Any []*SegmentCondition `protobuf:"bytes,21,rep,name=any,proto3" json:"any,omitempty"`
 	// --- Fields dành cho type: SEQUENCE ---
 	// Mảng các nút hành vi theo thứ tự thời gian
-	Sequence []*SegmentCondition `protobuf:"bytes,10,rep,name=sequence,proto3" json:"sequence,omitempty"`
+	Sequence []*SegmentCondition `protobuf:"bytes,22,rep,name=sequence,proto3" json:"sequence,omitempty"`
 	// --- Metadata / Context fields ---
-	// Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
-	CorrelateBy string `protobuf:"bytes,11,opt,name=correlate_by,json=correlateBy,proto3" json:"correlate_by,omitempty"`
-	// Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
-	GroupBy string `protobuf:"bytes,12,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
-	// Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
-	TimeGap       string `protobuf:"bytes,13,opt,name=time_gap,json=timeGap,proto3" json:"time_gap,omitempty"`
+	CorrelateBy   string `protobuf:"bytes,23,opt,name=correlate_by,json=correlateBy,proto3" json:"correlate_by,omitempty"` // Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
+	GroupBy       string `protobuf:"bytes,24,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`             // Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71057,6 +71050,20 @@ func (x *SegmentCondition) GetAggregate() *EventAggregate {
 	return nil
 }
 
+func (x *SegmentCondition) GetWithin() string {
+	if x != nil {
+		return x.Within
+	}
+	return ""
+}
+
+func (x *SegmentCondition) GetMissing() bool {
+	if x != nil {
+		return x.Missing
+	}
+	return false
+}
+
 func (x *SegmentCondition) GetAll() []*SegmentCondition {
 	if x != nil {
 		return x.All
@@ -71088,13 +71095,6 @@ func (x *SegmentCondition) GetCorrelateBy() string {
 func (x *SegmentCondition) GetGroupBy() string {
 	if x != nil {
 		return x.GroupBy
-	}
-	return ""
-}
-
-func (x *SegmentCondition) GetTimeGap() string {
-	if x != nil {
-		return x.TimeGap
 	}
 	return ""
 }
@@ -80130,7 +80130,7 @@ const file_header_proto_rawDesc = "" +
 	"\bfunction\x18\x03 \x01(\tR\bfunction\x12\x14\n" +
 	"\x05field\x18\x04 \x01(\tR\x05field\x12\x1a\n" +
 	"\boperator\x18\x05 \x01(\tR\boperator\x12\x14\n" +
-	"\x05value\x18\x06 \x01(\tR\x05value\"\xea\x04\n" +
+	"\x05value\x18\x06 \x01(\tR\x05value\"\x81\x05\n" +
 	"\x10SegmentCondition\x125\n" +
 	"\x04type\x18\x01 \x01(\x0e2!.header.SegmentCondition.NodeTypeR\x04type\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x1a\n" +
@@ -80138,14 +80138,14 @@ const file_header_proto_rawDesc = "" +
 	"\x05value\x18\x04 \x01(\tR\x05value\x12\x14\n" +
 	"\x05event\x18\x05 \x01(\tR\x05event\x120\n" +
 	"\x06filter\x18\x06 \x01(\v2\x18.header.SegmentConditionR\x06filter\x124\n" +
-	"\taggregate\x18\a \x01(\v2\x16.header.EventAggregateR\taggregate\x12*\n" +
-	"\x03all\x18\b \x03(\v2\x18.header.SegmentConditionR\x03all\x12*\n" +
-	"\x03any\x18\t \x03(\v2\x18.header.SegmentConditionR\x03any\x124\n" +
-	"\bsequence\x18\n" +
-	" \x03(\v2\x18.header.SegmentConditionR\bsequence\x12!\n" +
-	"\fcorrelate_by\x18\v \x01(\tR\vcorrelateBy\x12\x19\n" +
-	"\bgroup_by\x18\f \x01(\tR\agroupBy\x12\x19\n" +
-	"\btime_gap\x18\r \x01(\tR\atimeGap\"v\n" +
+	"\taggregate\x18\a \x01(\v2\x16.header.EventAggregateR\taggregate\x12\x16\n" +
+	"\x06within\x18\b \x01(\tR\x06within\x12\x18\n" +
+	"\amissing\x18\t \x01(\bR\amissing\x12*\n" +
+	"\x03all\x18\x14 \x03(\v2\x18.header.SegmentConditionR\x03all\x12*\n" +
+	"\x03any\x18\x15 \x03(\v2\x18.header.SegmentConditionR\x03any\x124\n" +
+	"\bsequence\x18\x16 \x03(\v2\x18.header.SegmentConditionR\bsequence\x12!\n" +
+	"\fcorrelate_by\x18\x17 \x01(\tR\vcorrelateBy\x12\x19\n" +
+	"\bgroup_by\x18\x18 \x01(\tR\agroupBy\"v\n" +
 	"\bNodeType\x12\x17\n" +
 	"\x13NODE_TYPE_ATTRIUBTE\x10\x00\x12\x13\n" +
 	"\x0fNODE_TYPE_EVENT\x10\x02\x12\x11\n" +

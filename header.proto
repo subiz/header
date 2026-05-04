@@ -10093,7 +10093,6 @@ message EventAggregate {
 	string value = 6; // json.stringified
 }
 
-// Node là thực thể cốt lõi của cây truy vấn
 message SegmentCondition {
 	enum NodeType {
 		NODE_TYPE_ATTRIUBTE = 0;
@@ -10102,36 +10101,31 @@ message SegmentCondition {
 		NODE_TYPE_ANY         = 4; // OR
 		NODE_TYPE_SEQUENCE    = 5;
 	}
-  NodeType type = 1;
+	NodeType type = 1;
 
-  // --- Fields dành cho type: ATTRIBUTE ---
-  // Đường dẫn trường dữ liệu (VD: user.email, event.price)
-  string key = 2;
-  // Toán tử (eq, gt, gte, lt, lte, con, in, between)
-  string operator = 3;
-  // Giá trị so sánh (json.stringified value hoặc JSON string cho mảng)
-  string value = 4;
+	string key = 2; // Đường dẫn trường dữ liệu (VD: user.email, event.price)
+	string operator = 3; // Toán tử (eq, gt, gte, lt, lte, con, in, between)
+	string value = 4; // Giá trị so sánh (json.stringified value hoặc JSON string cho mảng)
 
-  // --- Fields dành cho type: EVENT ---
-  // Tên sự kiện (VD: purchase, login)
-  string event = 5;
-  SegmentCondition filter = 6; // Nút lọc thuộc tính đi kèm của sự kiện
-  EventAggregate aggregate = 7; // Nút tính toán thống kê (count, sum, avg)
+	// --- Fields dành cho type: EVENT ---
+	// Tên sự kiện (VD: purchase, login)
+	string event = 5;
+	SegmentCondition filter = 6; // Nút lọc thuộc tính đi kèm của sự kiện
+	EventAggregate aggregate = 7; // Nút tính toán thống kê (count, sum, avg)
+	string within = 8; 	// Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
+	bool missing = 9;
 
-  // --- Fields dành cho type: ALL / ANY ---
-  // Mảng chứa các nút con cho logic AND/OR
-  repeated SegmentCondition all = 8;
-  repeated SegmentCondition any = 9;
+	// --- Fields dành cho type: ALL / ANY ---
+	// Mảng chứa các nút con cho logic AND/OR
+	repeated SegmentCondition all = 20;
+	repeated SegmentCondition any = 21;
 
-  // --- Fields dành cho type: SEQUENCE ---
-  // Mảng các nút hành vi theo thứ tự thời gian
-  repeated SegmentCondition sequence = 10;
+	// --- Fields dành cho type: SEQUENCE ---
+	// Mảng các nút hành vi theo thứ tự thời gian
+	repeated SegmentCondition sequence = 22;
 
-  // --- Metadata / Context fields ---
-  // Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
-  string correlate_by = 11;
-  // Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
-  string group_by = 12;
-  // Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
-  string time_gap = 13;
+	// --- Metadata / Context fields ---
+	string correlate_by = 23; // Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
+
+	string group_by = 24; // Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
 }
