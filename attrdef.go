@@ -114,7 +114,7 @@ func ListDefaultDefs() []*AttributeDefinition {
 		&AttributeDefinition{
 			Name:      "Ngày sinh",
 			Label:     "Ngày sinh",
-			Key:       "lead_assigned_at",
+			Key:       "birthdate",
 			I18NLabel: &I18NString{Vi_VN: "Ngày sinh", En_US: "Date of birth"},
 			Type:      "datetime",
 			IsSystem:  true,

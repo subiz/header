@@ -261,7 +261,7 @@ func TestReverseCondition(t *testing.T) {
 }
 
 func TestUnpack(t *testing.T) {
-	str := "0x1212616770786b677963776363737472667074781a14616370786b67756d6966756f6f666f6f73626c652206486f612054612a0f686f61746140737562697a2e636f6d6a4b424968747470733a2f2f7663646e2e737562697a2d63646e2e636f6d2f66696c652f666972706b616d617063696d66756b746167726d5f616370786b67756d6966756f6f666f6f73626c65720276698201062b30373a3030a001fec4e1b1942ca8019fc1cfe3a432b20106616374697665b801c3a3cef08b31c801d5b3f8c69532d0018ca8cf9d9532b202b5011a14616370786b67756d6966756f6f666f6f73626c652212616770786b6779637763637374726670747828809396fd94323a0f3131332e3139302e3233332e313137426f4d6f7a696c6c612f352e30202857696e646f7773204e542031302e303b2057696e36343b2078363429204170706c655765624b69742f3533372e333620284b48544d4c2c206c696b65204765636b6f29204368726f6d652f3132372e302e302e30205361666172692f3533372e33365200"
+	str := "0x1204757332311a0f6576313737343035353732333438342214616370786b67756d6966756f6f666f6f73626c654098a3d8efd0334a09707572636861736564a20118e203151a076f726439303531cd0108aa0c4aa20203564e44"
 	str = strings.TrimPrefix(str, "0x")
 
 	bs, err := hex.DecodeString(str)
@@ -269,7 +269,7 @@ func TestUnpack(t *testing.T) {
 		panic(err)
 	}
 
-	ev := &pb.Agent{}
+	ev := &Event{}
 	if err := proto.Unmarshal(bs, ev); err != nil {
 		fmt.Println("ERR", err)
 	}
@@ -312,79 +312,7 @@ func TestAllLang(t *testing.T) {
 	fmt.Println(a)
 }
 
-func TestUserViewCondition(t *testing.T) {
-	// submit ít nhất 2 form dang-ky trong vòng 5 ngày (trường company-size trong form phải > 20 người)
-	// không chạy với cus id là 243
-	// với những khách trong khoảng 23/4/2022 12:00 UTC+7 tới 21/4/2023 12:00 UTC+7
-	// không xem trang google.com (tieu de Google) ít nhất 2 lần trong 2 ngày gần đây
-	// co conversation tag la xyz, ghy
-	condition := &UserViewCondition{
-		All: []*UserViewCondition{{
-			Id:  "1",
-			Key: "event:form_submitted",
-			Event: &EventCondition{
-				UiType:  "form_submitted",
-				Inverse: false,
-				AtLeast: 2,
-				Created: &DatetimeCondition{
-					Last: 432000, // 5 days
-				},
-			},
-			All: []*UserViewCondition{{
-				Key:  "data.form.name",
-				Text: &TextCondition{Eq: []string{"dang-ky"}},
-			}, {
-				Key:    "data.form.fields#(key=\"company-size\"]).first",
-				Number: &NumberCondition{Gt: 20},
-			}},
-		}, {
-			Id:   "2",
-			Key:  "attr:cus_id",
-			Text: &TextCondition{Neq: []string{"243"}},
-		}, {
-			Id:       "3",
-			Key:      "attr:created",
-			Datetime: &DatetimeCondition{Between: []int64{429423, 43434}},
-		}, {
-			Id:  "4",
-			Key: "event:content_viewed",
-			Event: &EventCondition{
-				UiType:  "page",
-				Inverse: true, // khong xem trang
-				AtLeast: 2,
-				Created: &DatetimeCondition{
-					Last: 172800, // 2 days in secs
-				},
-			},
-			All: []*UserViewCondition{{
-				Key:  "data.product.title",
-				Text: &TextCondition{Eq: []string{"Google"}},
-			}, {
-				Key:  "data.product.url",
-				Text: &TextCondition{Contain: []string{"google.com"}, CaseSensitive: false},
-			}},
-		}, {
-			Id:  "5",
-			Key: "conversation_tag",
-			Text: &TextCondition{
-				Contain: []string{"234234", "3222234"},
-			},
-		}, {
-			Id:  "6",
-			Key: "order",
-			Text: &TextCondition{
-				Contain: []string{"234234", "3222234"},
-			},
-		}, {
-			Id:   "7",
-			Key:  "segment",
-			Text: &TextCondition{Neq: []string{"243"}},
-		}},
-	}
 
-	b, _ := json.Marshal(condition)
-	fmt.Println("OUT", string(b))
-}
 
 var DEFS = map[string]*AttributeDefinition{
 	"fullname": &AttributeDefinition{Name: "Fullname", Key: "fullname", Type: "text", IsSystem: true},

@@ -442,6 +442,7 @@ message NumberCondition {
 message DatetimeCondition {
 	// relative: is_empty, in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
 	// absolute: before, after, between, outside
+	// month_eq, weekday_eq
 	string op = 2;
 
 	// bool has_value = 5;
@@ -468,4 +469,10 @@ message DatetimeCondition {
 	int64 before_relative_sec = 25;
 
 	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
+
+	repeated int64 month_eq = 29;
+	string month_eq_var = 30;
+
+	repeated int64 weekday_eq = 31; // 0 -> sunday, 1 -> monday, ... 6 -> saturday
+	string weekday_eq_var = 32;
 }

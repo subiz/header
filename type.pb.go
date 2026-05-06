@@ -1427,6 +1427,7 @@ type DatetimeCondition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// relative: is_empty, in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
 	// absolute: before, after, between, outside
+	// month_eq, weekday_eq
 	Op         string   `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"`
 	DaysOfWeek []string `protobuf:"bytes,10,rep,name=days_of_week,json=daysOfWeek,proto3" json:"days_of_week,omitempty"` // monday
 	After      int64    `protobuf:"varint,11,opt,name=after,proto3" json:"after,omitempty"`
@@ -1434,15 +1435,19 @@ type DatetimeCondition struct {
 	Between    []int64  `protobuf:"varint,13,rep,packed,name=between,proto3" json:"between,omitempty"`
 	Outside    []int64  `protobuf:"varint,14,rep,packed,name=outside,proto3" json:"outside,omitempty"`
 	// relative, minute
-	Last              int64  `protobuf:"varint,17,opt,name=last,proto3" json:"last,omitempty"`                            // 1440 => last 24h sec
-	BeforeAgo         int64  `protobuf:"varint,18,opt,name=before_ago,json=beforeAgo,proto3" json:"before_ago,omitempty"` // 365*86400 sec
-	AfterVar          string `protobuf:"bytes,19,opt,name=after_var,json=afterVar,proto3" json:"after_var,omitempty"`     // user.attr[key=birthday]
-	BeforeVar         string `protobuf:"bytes,20,opt,name=before_var,json=beforeVar,proto3" json:"before_var,omitempty"`
-	AfterVarSec       int64  `protobuf:"varint,21,opt,name=after_var_sec,json=afterVarSec,proto3" json:"after_var_sec,omitempty"` // 86400
-	BeforeVarSec      int64  `protobuf:"varint,22,opt,name=before_var_sec,json=beforeVarSec,proto3" json:"before_var_sec,omitempty"`
-	AfterRelativeSec  int64  `protobuf:"varint,24,opt,name=after_relative_sec,json=afterRelativeSec,proto3" json:"after_relative_sec,omitempty"`
-	BeforeRelativeSec int64  `protobuf:"varint,25,opt,name=before_relative_sec,json=beforeRelativeSec,proto3" json:"before_relative_sec,omitempty"`
-	VarFormat         string `protobuf:"bytes,28,opt,name=var_format,json=varFormat,proto3" json:"var_format,omitempty"` // default unix_sec, 2006-01-02T15:04:05Z07:00
+	Last              int64   `protobuf:"varint,17,opt,name=last,proto3" json:"last,omitempty"`                            // 1440 => last 24h sec
+	BeforeAgo         int64   `protobuf:"varint,18,opt,name=before_ago,json=beforeAgo,proto3" json:"before_ago,omitempty"` // 365*86400 sec
+	AfterVar          string  `protobuf:"bytes,19,opt,name=after_var,json=afterVar,proto3" json:"after_var,omitempty"`     // user.attr[key=birthday]
+	BeforeVar         string  `protobuf:"bytes,20,opt,name=before_var,json=beforeVar,proto3" json:"before_var,omitempty"`
+	AfterVarSec       int64   `protobuf:"varint,21,opt,name=after_var_sec,json=afterVarSec,proto3" json:"after_var_sec,omitempty"` // 86400
+	BeforeVarSec      int64   `protobuf:"varint,22,opt,name=before_var_sec,json=beforeVarSec,proto3" json:"before_var_sec,omitempty"`
+	AfterRelativeSec  int64   `protobuf:"varint,24,opt,name=after_relative_sec,json=afterRelativeSec,proto3" json:"after_relative_sec,omitempty"`
+	BeforeRelativeSec int64   `protobuf:"varint,25,opt,name=before_relative_sec,json=beforeRelativeSec,proto3" json:"before_relative_sec,omitempty"`
+	VarFormat         string  `protobuf:"bytes,28,opt,name=var_format,json=varFormat,proto3" json:"var_format,omitempty"` // default unix_sec, 2006-01-02T15:04:05Z07:00
+	MonthEq           []int64 `protobuf:"varint,29,rep,packed,name=month_eq,json=monthEq,proto3" json:"month_eq,omitempty"`
+	MonthEqVar        string  `protobuf:"bytes,30,opt,name=month_eq_var,json=monthEqVar,proto3" json:"month_eq_var,omitempty"`
+	WeekdayEq         []int64 `protobuf:"varint,31,rep,packed,name=weekday_eq,json=weekdayEq,proto3" json:"weekday_eq,omitempty"` // 0 -> sunday, 1 -> monday, ... 6 -> saturday
+	WeekdayEqVar      string  `protobuf:"bytes,32,opt,name=weekday_eq_var,json=weekdayEqVar,proto3" json:"weekday_eq_var,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1582,6 +1587,34 @@ func (x *DatetimeCondition) GetVarFormat() string {
 	return ""
 }
 
+func (x *DatetimeCondition) GetMonthEq() []int64 {
+	if x != nil {
+		return x.MonthEq
+	}
+	return nil
+}
+
+func (x *DatetimeCondition) GetMonthEqVar() string {
+	if x != nil {
+		return x.MonthEqVar
+	}
+	return ""
+}
+
+func (x *DatetimeCondition) GetWeekdayEq() []int64 {
+	if x != nil {
+		return x.WeekdayEq
+	}
+	return nil
+}
+
+func (x *DatetimeCondition) GetWeekdayEqVar() string {
+	if x != nil {
+		return x.WeekdayEqVar
+	}
+	return ""
+}
+
 var File_type_proto protoreflect.FileDescriptor
 
 const file_type_proto_rawDesc = "" +
@@ -1657,7 +1690,7 @@ const file_type_proto_rawDesc = "" +
 	"\x06gt_var\x18\x11 \x01(\tR\x05gtVar\x12\x17\n" +
 	"\agte_var\x18\x12 \x01(\tR\x06gteVar\x12\x15\n" +
 	"\x06lt_var\x18\x13 \x01(\tR\x05ltVar\x12\x17\n" +
-	"\alte_var\x18\x14 \x01(\tR\x06lteVar\"\xdd\x03\n" +
+	"\alte_var\x18\x14 \x01(\tR\x06lteVar\"\xdf\x04\n" +
 	"\x11DatetimeCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\x12 \n" +
 	"\fdays_of_week\x18\n" +
@@ -1678,7 +1711,13 @@ const file_type_proto_rawDesc = "" +
 	"\x12after_relative_sec\x18\x18 \x01(\x03R\x10afterRelativeSec\x12.\n" +
 	"\x13before_relative_sec\x18\x19 \x01(\x03R\x11beforeRelativeSec\x12\x1d\n" +
 	"\n" +
-	"var_format\x18\x1c \x01(\tR\tvarFormat*\xd8/\n" +
+	"var_format\x18\x1c \x01(\tR\tvarFormat\x12\x19\n" +
+	"\bmonth_eq\x18\x1d \x03(\x03R\amonthEq\x12 \n" +
+	"\fmonth_eq_var\x18\x1e \x01(\tR\n" +
+	"monthEqVar\x12\x1d\n" +
+	"\n" +
+	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xd8/\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +

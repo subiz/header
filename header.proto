@@ -1666,7 +1666,7 @@ enum AttachmentType {
 }
 
 message Attachment {
-	string type = 12; // form, form_submission, quick_replies, zalo_call
+	string type = 12; // form, form_submission, quick_replies, zalo_call, location, zalo_contact
 	int64 index = 7;
 	// file
 	string mimetype = 2;
@@ -1722,6 +1722,16 @@ message Attachment {
 	FormSubmission form_submission = 51;
 
 	ZaloCall zalo_call = 52;
+	Location location = 54;
+	ZaloContact zalo_contact = 55;
+}
+
+message ZaloContact {
+	string name = 4;
+	string qr_code_url = 5;
+	string g_uid = 6;
+	string thumb = 7; // https://s160-25-ava-talk.zadn.vn/9/e37904a45226bc1d55b2af9cb50ff39a.jpg?key=hYFVv9_voKTK6EvW7ahWUg&time=1772271577
+	string params = 8; // 6114606049426813909
 }
 
 message ZaloCall {
