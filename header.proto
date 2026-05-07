@@ -1732,6 +1732,7 @@ message ZaloContact {
 	string g_uid = 6;
 	string thumb = 7; // https://s160-25-ava-talk.zadn.vn/9/e37904a45226bc1d55b2af9cb50ff39a.jpg?key=hYFVv9_voKTK6EvW7ahWUg&time=1772271577
 	string params = 8; // 6114606049426813909
+	string phone = 9; // optional
 }
 
 message ZaloCall {

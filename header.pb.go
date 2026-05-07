@@ -13030,6 +13030,7 @@ type ZaloContact struct {
 	GUid          string                 `protobuf:"bytes,6,opt,name=g_uid,json=gUid,proto3" json:"g_uid,omitempty"`
 	Thumb         string                 `protobuf:"bytes,7,opt,name=thumb,proto3" json:"thumb,omitempty"`   // https://s160-25-ava-talk.zadn.vn/9/e37904a45226bc1d55b2af9cb50ff39a.jpg?key=hYFVv9_voKTK6EvW7ahWUg&time=1772271577
 	Params        string                 `protobuf:"bytes,8,opt,name=params,proto3" json:"params,omitempty"` // 6114606049426813909
+	Phone         string                 `protobuf:"bytes,9,opt,name=phone,proto3" json:"phone,omitempty"`   // optional
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -13095,6 +13096,13 @@ func (x *ZaloContact) GetThumb() string {
 func (x *ZaloContact) GetParams() string {
 	if x != nil {
 		return x.Params
+	}
+	return ""
+}
+
+func (x *ZaloContact) GetPhone() string {
+	if x != nil {
+		return x.Phone
 	}
 	return ""
 }
@@ -73277,13 +73285,14 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_submission\x183 \x01(\v2\x16.header.FormSubmissionR\x0eformSubmission\x12-\n" +
 	"\tzalo_call\x184 \x01(\v2\x10.header.ZaloCallR\bzaloCall\x12,\n" +
 	"\blocation\x186 \x01(\v2\x10.header.LocationR\blocation\x126\n" +
-	"\fzalo_contact\x187 \x01(\v2\x13.header.ZaloContactR\vzaloContact\"\x84\x01\n" +
+	"\fzalo_contact\x187 \x01(\v2\x13.header.ZaloContactR\vzaloContact\"\x9a\x01\n" +
 	"\vZaloContact\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1e\n" +
 	"\vqr_code_url\x18\x05 \x01(\tR\tqrCodeUrl\x12\x13\n" +
 	"\x05g_uid\x18\x06 \x01(\tR\x04gUid\x12\x14\n" +
 	"\x05thumb\x18\a \x01(\tR\x05thumb\x12\x16\n" +
-	"\x06params\x18\b \x01(\tR\x06params\"\xc5\x01\n" +
+	"\x06params\x18\b \x01(\tR\x06params\x12\x14\n" +
+	"\x05phone\x18\t \x01(\tR\x05phone\"\xc5\x01\n" +
 	"\bZaloCall\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\x12!\n" +
 	"\fduration_sec\x18\x04 \x01(\x03R\vdurationSec\x12\x16\n" +
