@@ -3534,6 +3534,8 @@ message File {
 	string visibility = 38; // public(default), private
 	int64 r2_uploaded = 39; // ms
 	string r2_path = 40;
+
+	string r2_url = 41;
 }
 
 message BotTerminated {

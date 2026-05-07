@@ -24778,6 +24778,7 @@ type File struct {
 	Visibility      string `protobuf:"bytes,38,opt,name=visibility,proto3" json:"visibility,omitempty"`                    // public(default), private
 	R2Uploaded      int64  `protobuf:"varint,39,opt,name=r2_uploaded,json=r2Uploaded,proto3" json:"r2_uploaded,omitempty"` // ms
 	R2Path          string `protobuf:"bytes,40,opt,name=r2_path,json=r2Path,proto3" json:"r2_path,omitempty"`
+	R2Url           string `protobuf:"bytes,41,opt,name=r2_url,json=r2Url,proto3" json:"r2_url,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -25039,6 +25040,13 @@ func (x *File) GetR2Uploaded() int64 {
 func (x *File) GetR2Path() string {
 	if x != nil {
 		return x.R2Path
+	}
+	return ""
+}
+
+func (x *File) GetR2Url() string {
+	if x != nil {
+		return x.R2Url
 	}
 	return ""
 }
@@ -74707,7 +74715,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x0e\n" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xbf\a\n" +
+	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xd6\a\n" +
 	"\x04File\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74748,7 +74756,8 @@ const file_header_proto_rawDesc = "" +
 	"visibility\x12\x1f\n" +
 	"\vr2_uploaded\x18' \x01(\x03R\n" +
 	"r2Uploaded\x12\x17\n" +
-	"\ar2_path\x18( \x01(\tR\x06r2Path\"\xdf\x02\n" +
+	"\ar2_path\x18( \x01(\tR\x06r2Path\x12\x15\n" +
+	"\x06r2_url\x18) \x01(\tR\x05r2Url\"\xdf\x02\n" +
 	"\rBotTerminated\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
