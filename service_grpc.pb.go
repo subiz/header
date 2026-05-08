@@ -6350,6 +6350,7 @@ const (
 	UserMgr_UpdateSegmentMember_FullMethodName              = "/header.UserMgr/UpdateSegmentMember"
 	UserMgr_RemoveSegmentMember_FullMethodName              = "/header.UserMgr/RemoveSegmentMember"
 	UserMgr_TriggerSyncUserTag_FullMethodName               = "/header.UserMgr/TriggerSyncUserTag"
+	UserMgr_MigrateUsers_FullMethodName                     = "/header.UserMgr/MigrateUsers"
 )
 
 // UserMgrClient is the client API for UserMgr service.
@@ -6429,6 +6430,7 @@ type UserMgrClient interface {
 	UpdateSegmentMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error)
 	RemoveSegmentMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error)
 	TriggerSyncUserTag(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MigrateUsers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type userMgrClient struct {
@@ -7139,6 +7141,16 @@ func (c *userMgrClient) TriggerSyncUserTag(ctx context.Context, in *Id, opts ...
 	return out, nil
 }
 
+func (c *userMgrClient) MigrateUsers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserMgr_MigrateUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserMgrServer is the server API for UserMgr service.
 // All implementations must embed UnimplementedUserMgrServer
 // for forward compatibility.
@@ -7216,6 +7228,7 @@ type UserMgrServer interface {
 	UpdateSegmentMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error)
 	RemoveSegmentMember(context.Context, *ResourceGroupMember) (*Empty, error)
 	TriggerSyncUserTag(context.Context, *Id) (*Empty, error)
+	MigrateUsers(context.Context, *Id) (*Empty, error)
 	mustEmbedUnimplementedUserMgrServer()
 }
 
@@ -7435,6 +7448,9 @@ func (UnimplementedUserMgrServer) RemoveSegmentMember(context.Context, *Resource
 }
 func (UnimplementedUserMgrServer) TriggerSyncUserTag(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method TriggerSyncUserTag not implemented")
+}
+func (UnimplementedUserMgrServer) MigrateUsers(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MigrateUsers not implemented")
 }
 func (UnimplementedUserMgrServer) mustEmbedUnimplementedUserMgrServer() {}
 func (UnimplementedUserMgrServer) testEmbeddedByValue()                 {}
@@ -8717,6 +8733,24 @@ func _UserMgr_TriggerSyncUserTag_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserMgr_MigrateUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MigrateUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_MigrateUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MigrateUsers(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserMgr_ServiceDesc is the grpc.ServiceDesc for UserMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -9003,6 +9037,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TriggerSyncUserTag",
 			Handler:    _UserMgr_TriggerSyncUserTag_Handler,
+		},
+		{
+			MethodName: "MigrateUsers",
+			Handler:    _UserMgr_MigrateUsers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

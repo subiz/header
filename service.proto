@@ -320,6 +320,8 @@ service UserMgr {
 	rpc UpdateSegmentMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveSegmentMember(ResourceGroupMember) returns (header.Empty);
 	rpc TriggerSyncUserTag(header.Id) returns (header.Empty);
+
+	rpc MigrateUsers(Id) returns (header.Empty); // @deprecated
 }
 
 service NoteMgr {
