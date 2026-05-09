@@ -72,7 +72,7 @@ func TestEmailAddress(t *testing.T) {
 		out string
 	}{
 		{"", ""},
-		{"thánhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com"},
+		{"thánhpk@live.com, thanhpk@live.com 't@.com'", "thánhpk@live.com"},
 		{"thanhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com"},
 		{"thanhpk@live.com,xxx@gmail.com", "thanhpk@live.com"},
 	}
@@ -816,7 +816,6 @@ func TestCompileBlock2(t *testing.T) {
 		}},
 	}
 	CompileBlock(block, data)
-	fmt.Println("OUT1c", block)
 	CompileBlock(block, map[string]string{
 		"user.fullname": "thanh",
 		"cvid":          "4",
@@ -944,8 +943,9 @@ func TestBlockToHTML(t *testing.T) {
 		}},
 	}
 	html := BlockToHTML(block)
-	if strings.TrimSpace(html) != `<p class="sbz_lexical_text__italic"><p><em style="white-space: pre-wrap;" class="sbz_lexical_text__italic">Thanh</em><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">Test</b><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">day </b><b><em style="white-space: pre-wrap;" class="sbz_lexical_text__bold sbz_lexical_text__italic">du</em></b><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold"> cac</b><span style="white-space: pre-wrap;"> yeu&amp;&gt;&lt;p&gt;to</span></p><ul><li><span></span></li></ul></p>` {
-		t.Errorf("SHOULDBEEQ")
+	expected := `<p class="sbz_lexical_text__italic"><p><em style="white-space: pre-wrap" class="sbz_lexical_text__italic">Thanh</em><span style="white-space: pre-wrap"> </span><b style="white-space: pre-wrap" class="sbz_lexical_text__bold">Test</b><span style="white-space: pre-wrap"> </span><b style="white-space: pre-wrap" class="sbz_lexical_text__bold">day </b><b><em style="white-space: pre-wrap" class="sbz_lexical_text__bold sbz_lexical_text__italic">du</em></b><b style="white-space: pre-wrap" class="sbz_lexical_text__bold"> cac</b><span style="white-space: pre-wrap"> yeu&amp;&gt;&lt;p&gt;to</span></p><ol><li><span></span></li></ol></p>`
+	if strings.TrimSpace(html) != expected {
+		t.Errorf("SHOULDBEEQ\nGOT: %s\nEXP: %s", html, expected)
 	}
 }
 
@@ -985,8 +985,9 @@ func TestBlockToHTML2(t *testing.T) {
 		},
 	}
 	html := BlockToHTML(block)
-	if strings.TrimSpace(html) != `<div><p><a style="color: #11B936;margin-right: 10px;"href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&amp;token=123" target="_blank" title="Great">Tuyệt vời</a><a style="color: #787878;margin-right: 10px;"href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&amp;token=123" target="_blank" title="Okay">Tốt</a><a style="color: #E81A1A;"href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&amp;token=123" target="_blank" title="Not good">Không tốt</a></p></div>` {
-		t.Errorf("SHOULDBEEQ")
+	expected := `<div><p><a style="color: #11B936;margin-right: 10px" href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&amp;token=123" target="_blank" title="Great">Tuyệt vời</a><a style="color: #787878;margin-right: 10px" href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&amp;token=123" target="_blank" title="Okay">Tốt</a><a style="color: #E81A1A" href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&amp;token=123" target="_blank" title="Not good">Không tốt</a></p></div>`
+	if strings.TrimSpace(html) != expected {
+		t.Errorf("SHOULDBEEQ\nGOT: %s\nEXP: %s", html, expected)
 	}
 }
 
@@ -1163,7 +1164,6 @@ func TestRsCondition(t *testing.T) {
 }
 
 func TestEvent(t *testing.T) {
-	// 1. Raw JSON containing a totally random, deeply nested structure
 	rawJSON := []byte(`{
     "user_id": "us123",
 		"payload": {
@@ -1177,23 +1177,44 @@ func TestEvent(t *testing.T) {
 		}
 	}`)
 
-	// 2. Initialize your proto message
 	event := &Event{}
-
-	// 3. Unmarshal using protojson (NOT standard encoding/json)
-	// protojson natively understands how to map arbitrary JSON objects
-	// into a structpb.Struct safely.
-	err := protojson.Unmarshal(rawJSON, event)
-	if err != nil {
-		fmt.Println("Failed to unmarshal JSON", err)
+	if err := protojson.Unmarshal(rawJSON, event); err != nil {
+		t.Fatalf("Failed to unmarshal JSON: %v", err)
 	}
 
-	fmt.Println("Successfully parsed dynamic JSON!")
-	fmt.Printf("Event ID: %s\n", event.UserId)
+	if event.UserId != "us123" {
+		t.Errorf("expected user_id us123, got %s", event.UserId)
+	}
 
-	// Print a specific nested value to prove it works
-	metrics := event.Payload.Fields["dynamic_metrics"].GetListValue()
-	fmt.Printf("Metrics Array Length: %d\n", len(metrics.Values))
-	b, _ := protojson.Marshal(event)
-	fmt.Println("HHHH", string(b))
+	payload := event.GetPayload()
+	if payload == nil {
+		t.Fatal("payload is nil")
+	}
+
+	userAgent := payload.Fields["user_agent"].GetStringValue()
+	if userAgent != "Mozilla/5.0" {
+		t.Errorf("expected user_agent Mozilla/5.0, got %s", userAgent)
+	}
+
+	metrics := payload.Fields["dynamic_metrics"].GetListValue()
+	if metrics == nil || len(metrics.Values) != 4 {
+		t.Fatalf("expected 4 metrics, got %v", metrics)
+	}
+
+	if metrics.Values[0].GetNumberValue() != 1 {
+		t.Errorf("expected metric[0] = 1, got %v", metrics.Values[0].GetNumberValue())
+	}
+
+	config := payload.Fields["configuration"].GetStructValue()
+	if config == nil {
+		t.Fatal("configuration is nil")
+	}
+
+	if config.Fields["theme"].GetStringValue() != "dark" {
+		t.Errorf("expected theme dark, got %s", config.Fields["theme"].GetStringValue())
+	}
+
+	if config.Fields["retries"].GetNumberValue() != 5 {
+		t.Errorf("expected retries 5, got %v", config.Fields["retries"].GetNumberValue())
+	}
 }

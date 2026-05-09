@@ -41,7 +41,7 @@
             },
             { "type": "text", "text": "\n" },
             {
-k              "type": "image",
+              "type": "image",
               "alt_text": "Hình ảnh căn hộ 1",
               "image": {
                 "url": "https://vcdn.subiz-cdn.com/file/fisnhkihmsgffykeboei_acsnacgjwhgvoxzijjhi/hinh_can_ho_7.jpg"

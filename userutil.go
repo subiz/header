@@ -616,6 +616,28 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 		a := cond.GetOutside()[0] / 1000
 		b := cond.GetOutside()[1] / 1000
 		return t.Unix() <= a || b <= t.Unix()
+	case "month_eq":
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		tInLoc := t.In(location)
+		month := int64(tInLoc.Month())
+		for _, m := range cond.GetMonthEq() {
+			if m == month {
+				return true
+			}
+		}
+		return false
+	case "weekday_eq":
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		location := time.FixedZone("account_tz", h*3600+m*60)
+		tInLoc := t.In(location)
+		weekday := int64(tInLoc.Weekday())
+		for _, w := range cond.GetWeekdayEq() {
+			if w == weekday {
+				return true
+			}
+		}
+		return false
 	}
 	return true
 }
@@ -988,6 +1010,43 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 		}
 	}
 	return true
+}
+
+func ToWorkflowCondition(cond *UserViewCondition) *WorkflowCondition {
+	if cond == nil {
+		return nil
+	}
+
+	res := &WorkflowCondition{
+		Id:      cond.Id,
+		Key:     cond.Key,
+		Type:    cond.Type,
+		UiType:  cond.UiType,
+		Deleted: cond.Deleted,
+	}
+
+	if cond.Text != nil {
+		res.Text = proto.Clone(cond.Text).(*TextCondition)
+	}
+	if cond.Boolean != nil {
+		res.Boolean = proto.Clone(cond.Boolean).(*BooleanCondition)
+	}
+	if cond.Number != nil {
+		res.Number = proto.Clone(cond.Number).(*NumberCondition)
+	}
+	if cond.Datetime != nil {
+		res.Datetime = proto.Clone(cond.Datetime).(*DatetimeCondition)
+	}
+
+	for _, c := range cond.All {
+		res.All = append(res.All, ToWorkflowCondition(c))
+	}
+
+	for _, c := range cond.One {
+		res.One = append(res.One, ToWorkflowCondition(c))
+	}
+
+	return res
 }
 
 func ReverseCondition(cond *WorkflowCondition) *WorkflowCondition {
