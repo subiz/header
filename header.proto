@@ -3900,6 +3900,7 @@ message SuggestLeadFieldResponse {
 	repeated int64 points = 14;
 }
 
+// @deprecated, use WorkflowCondition
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7518,8 +7519,25 @@ message WorkflowCondition {
 	WorkflowTimming timming = 13;
 	LLMCondition llm = 14;
 
+	string event = 26; // must use node=event
+	WorkflowCondition filter = 27; // Nút lọc thuộc tính đi kèm của sự kiện
+	EventAggregate aggregate = 28; // Nút tính toán thống kê (count, sum, avg)
+	string within = 29; 	// Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
+	bool missing = 30;
+
+	// --- Fields dành cho type: SEQUENCE ---
+	// Mảng các nút hành vi theo thứ tự thời gian
+
 	repeated WorkflowCondition all = 19; // preferred
 	repeated WorkflowCondition one = 20;
+	repeated WorkflowCondition sequence = 21;
+
+	string ui_type = 15;
+	bool deleted = 16;
+
+	// --- Metadata / Context fields ---
+	string correlate_by = 23; // Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
+	string group_by = 24; // Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
 }
 
 message LLMCondition {
@@ -10106,6 +10124,7 @@ message EventAggregate {
 	string value = 6; // json.stringified
 }
 
+// @deprecated, use workflow condition
 message SegmentCondition {
 	enum NodeType {
 		NODE_TYPE_ATTRIUBTE = 0;
@@ -10125,7 +10144,7 @@ message SegmentCondition {
 	string event = 5;
 	SegmentCondition filter = 6; // Nút lọc thuộc tính đi kèm của sự kiện
 	EventAggregate aggregate = 7; // Nút tính toán thống kê (count, sum, avg)
-	string within = 8; 	// Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
+	string within = 8; // Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
 	bool missing = 9;
 
 	// --- Fields dành cho type: ALL / ANY ---
