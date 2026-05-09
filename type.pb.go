@@ -1434,8 +1434,8 @@ type DatetimeCondition struct {
 	Before     int64    `protobuf:"varint,12,opt,name=before,proto3" json:"before,omitempty"`
 	Between    []int64  `protobuf:"varint,13,rep,packed,name=between,proto3" json:"between,omitempty"`
 	Outside    []int64  `protobuf:"varint,14,rep,packed,name=outside,proto3" json:"outside,omitempty"`
-	// relative, minute
-	Last              int64   `protobuf:"varint,17,opt,name=last,proto3" json:"last,omitempty"`                            // 1440 => last 24h sec
+	// relative, in second
+	Last              int64   `protobuf:"varint,17,opt,name=last,proto3" json:"last,omitempty"`                            //  86400  => last 24h
 	BeforeAgo         int64   `protobuf:"varint,18,opt,name=before_ago,json=beforeAgo,proto3" json:"before_ago,omitempty"` // 365*86400 sec
 	AfterVar          string  `protobuf:"bytes,19,opt,name=after_var,json=afterVar,proto3" json:"after_var,omitempty"`     // user.attr[key=birthday]
 	BeforeVar         string  `protobuf:"bytes,20,opt,name=before_var,json=beforeVar,proto3" json:"before_var,omitempty"`

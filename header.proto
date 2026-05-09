@@ -3874,6 +3874,8 @@ message UserView {
 	string attribute = 30;
 
 	bool keep_secondary = 31; // return secondary, do not transform to primary
+
+	WorkflowCondition filter = 32;
 }
 
 message CountTouchpointResponse {
@@ -10120,44 +10122,6 @@ message Plan {
 message EventAggregate {
 	string function = 3; // count, avg
 	string field = 4;
-	string operator = 5;
+	string op = 5;
 	string value = 6; // json.stringified
-}
-
-// @deprecated, use workflow condition
-message SegmentCondition {
-	enum NodeType {
-		NODE_TYPE_ATTRIUBTE = 0;
-		NODE_TYPE_EVENT       = 2;
-		NODE_TYPE_ALL         = 3; // AND
-		NODE_TYPE_ANY         = 4; // OR
-		NODE_TYPE_SEQUENCE    = 5;
-	}
-	NodeType type = 1;
-
-	string key = 2; // Đường dẫn trường dữ liệu (VD: user.email, event.price)
-	string operator = 3; // Toán tử (eq, gt, gte, lt, lte, con, in, between)
-	string value = 4; // Giá trị so sánh (json.stringified value hoặc JSON string cho mảng)
-
-	// --- Fields dành cho type: EVENT ---
-	// Tên sự kiện (VD: purchase, login)
-	string event = 5;
-	SegmentCondition filter = 6; // Nút lọc thuộc tính đi kèm của sự kiện
-	EventAggregate aggregate = 7; // Nút tính toán thống kê (count, sum, avg)
-	string within = 8; // Khoảng trễ tối đa giữa các bước trong sequence (VD: 2d, 1h)
-	bool missing = 9;
-
-	// --- Fields dành cho type: ALL / ANY ---
-	// Mảng chứa các nút con cho logic AND/OR
-	repeated SegmentCondition all = 20;
-	repeated SegmentCondition any = 21;
-
-	// --- Fields dành cho type: SEQUENCE ---
-	// Mảng các nút hành vi theo thứ tự thời gian
-	repeated SegmentCondition sequence = 22;
-
-	// --- Metadata / Context fields ---
-	string correlate_by = 23; // Dùng trong sequence để định danh sự kiện liên quan (VD: cùng order_id)
-
-	string group_by = 24; // Dùng trong aggregate để nhóm dữ liệu (VD: theo product_id)
 }

@@ -455,8 +455,8 @@ message DatetimeCondition {
 	repeated int64 between = 13;
 	repeated int64 outside = 14;
 
-	// relative, minute
-	int64 last = 17; // 1440 => last 24h sec
+	// relative, in second
+	int64 last = 17; //  86400  => last 24h
 	int64 before_ago = 18; // 365*86400 sec
 
 	string after_var = 19; // user.attr[key=birthday]
