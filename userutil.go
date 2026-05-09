@@ -112,7 +112,8 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 			return false
 		}
 
-		regexp.MatchString(cond.GetRegex(), str)
+		b, _ := regexp.MatchString(cond.GetRegex(), str)
+		return b
 	case "start_with":
 		if !has {
 			return false
@@ -153,7 +154,13 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 			return false
 		}
 		for _, cs := range cond.GetContain() {
-			if strings.Contains(str, cs) {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = Ascii(cs)
+			}
+			if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
 				return true
 			}
 		}
@@ -196,7 +203,7 @@ func EvaluateText(has bool, str string, cond *TextCondition) bool {
 		if !has {
 			return false
 		}
-		for _, cs := range cond.GetEndWith() {
+		for _, cs := range cond.GetNotEndWith() {
 			if !cond.GetCaseSensitive() {
 				cs = strings.ToLower(cs)
 			}
