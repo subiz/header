@@ -27448,7 +27448,7 @@ type UserView struct {
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Condition     *UserViewCondition     `protobuf:"bytes,4,opt,name=condition,proto3" json:"condition,omitempty"`
+	OldCondition  *UserViewCondition     `protobuf:"bytes,4,opt,name=old_condition,json=oldCondition,proto3" json:"old_condition,omitempty"`
 	CreatedBy     string                 `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	Created       int64                  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
 	UpdatedBy     string                 `protobuf:"bytes,7,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
@@ -27466,7 +27466,7 @@ type UserView struct {
 	// for listing
 	Attribute     string             `protobuf:"bytes,30,opt,name=attribute,proto3" json:"attribute,omitempty"`
 	KeepSecondary bool               `protobuf:"varint,31,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
-	Filter        *WorkflowCondition `protobuf:"bytes,32,opt,name=filter,proto3" json:"filter,omitempty"`
+	Condition     *WorkflowCondition `protobuf:"bytes,32,opt,name=condition,proto3" json:"condition,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -27522,9 +27522,9 @@ func (x *UserView) GetId() string {
 	return ""
 }
 
-func (x *UserView) GetCondition() *UserViewCondition {
+func (x *UserView) GetOldCondition() *UserViewCondition {
 	if x != nil {
-		return x.Condition
+		return x.OldCondition
 	}
 	return nil
 }
@@ -27641,9 +27641,9 @@ func (x *UserView) GetKeepSecondary() bool {
 	return false
 }
 
-func (x *UserView) GetFilter() *WorkflowCondition {
+func (x *UserView) GetCondition() *WorkflowCondition {
 	if x != nil {
-		return x.Filter
+		return x.Condition
 	}
 	return nil
 }
@@ -28621,6 +28621,7 @@ type OrderItem struct {
 	FpvTotalTax        int64   `protobuf:"varint,31,opt,name=fpv_total_tax,json=fpvTotalTax,proto3" json:"fpv_total_tax,omitempty"` // computed, override value
 	// not using product
 	Name          string `protobuf:"bytes,33,opt,name=name,proto3" json:"name,omitempty"`
+	Sku           string `protobuf:"bytes,34,opt,name=sku,proto3" json:"sku,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -28763,6 +28764,13 @@ func (x *OrderItem) GetFpvTotalTax() int64 {
 func (x *OrderItem) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *OrderItem) GetSku() string {
+	if x != nil {
+		return x.Sku
 	}
 	return ""
 }
@@ -41867,8 +41875,8 @@ type Segment struct {
 	Id                 string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name               string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	Description        string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Condition          *UserViewCondition     `protobuf:"bytes,6,opt,name=condition,proto3" json:"condition,omitempty"` // use filter instead
-	Filter             *WorkflowCondition     `protobuf:"bytes,12,opt,name=filter,proto3" json:"filter,omitempty"`
+	OldCondition       *UserViewCondition     `protobuf:"bytes,6,opt,name=old_condition,json=oldCondition,proto3" json:"old_condition,omitempty"` // use filter instead
+	Condition          *WorkflowCondition     `protobuf:"bytes,12,opt,name=condition,proto3" json:"condition,omitempty"`
 	Type               string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`                                                  // manual vs auto
 	FetchingProgress   int64                  `protobuf:"varint,8,opt,name=fetching_progress,json=fetchingProgress,proto3" json:"fetching_progress,omitempty"` // 0 -> 100
 	LastFetched        int64                  `protobuf:"varint,9,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
@@ -41958,16 +41966,16 @@ func (x *Segment) GetDescription() string {
 	return ""
 }
 
-func (x *Segment) GetCondition() *UserViewCondition {
+func (x *Segment) GetOldCondition() *UserViewCondition {
 	if x != nil {
-		return x.Condition
+		return x.OldCondition
 	}
 	return nil
 }
 
-func (x *Segment) GetFilter() *WorkflowCondition {
+func (x *Segment) GetCondition() *WorkflowCondition {
 	if x != nil {
-		return x.Filter
+		return x.Condition
 	}
 	return nil
 }
@@ -52218,7 +52226,7 @@ type ConvoReportRequest struct {
 	ToHour                 int64                  `protobuf:"varint,4,opt,name=to_hour,json=toHour,proto3" json:"to_hour,omitempty"`
 	Metrics                []string               `protobuf:"bytes,5,rep,name=metrics,proto3" json:"metrics,omitempty"`
 	GroupBys               []string               `protobuf:"bytes,6,rep,name=group_bys,json=groupBys,proto3" json:"group_bys,omitempty"`
-	Conditions             []*UserViewCondition   `protobuf:"bytes,7,rep,name=conditions,proto3" json:"conditions,omitempty"`
+	Conditions             []*WorkflowCondition   `protobuf:"bytes,7,rep,name=conditions,proto3" json:"conditions,omitempty"`
 	Account                *account.Account       `protobuf:"bytes,8,opt,name=account,proto3" json:"account,omitempty"`
 	Anchor                 string                 `protobuf:"bytes,9,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	Limit                  int32                  `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -52300,7 +52308,7 @@ func (x *ConvoReportRequest) GetGroupBys() []string {
 	return nil
 }
 
-func (x *ConvoReportRequest) GetConditions() []*UserViewCondition {
+func (x *ConvoReportRequest) GetConditions() []*WorkflowCondition {
 	if x != nil {
 		return x.Conditions
 	}
@@ -56678,8 +56686,8 @@ type LiveUserView struct {
 	AccountId     string                     `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AgentId       string                     `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 	Id            string                     `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	Condition     *UserViewCondition         `protobuf:"bytes,5,opt,name=condition,proto3" json:"condition,omitempty"`
-	Filter        *WorkflowCondition         `protobuf:"bytes,13,opt,name=filter,proto3" json:"filter,omitempty"`
+	OldCondition  *UserViewCondition         `protobuf:"bytes,5,opt,name=old_condition,json=oldCondition,proto3" json:"old_condition,omitempty"`
+	Condition     *WorkflowCondition         `protobuf:"bytes,13,opt,name=condition,proto3" json:"condition,omitempty"`
 	Limit         int64                      `protobuf:"varint,6,opt,name=limit,proto3" json:"limit,omitempty"`
 	OrderBy       string                     `protobuf:"bytes,8,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	Total         int64                      `protobuf:"varint,10,opt,name=total,proto3" json:"total,omitempty"`
@@ -56750,16 +56758,16 @@ func (x *LiveUserView) GetId() string {
 	return ""
 }
 
-func (x *LiveUserView) GetCondition() *UserViewCondition {
+func (x *LiveUserView) GetOldCondition() *UserViewCondition {
 	if x != nil {
-		return x.Condition
+		return x.OldCondition
 	}
 	return nil
 }
 
-func (x *LiveUserView) GetFilter() *WorkflowCondition {
+func (x *LiveUserView) GetCondition() *WorkflowCondition {
 	if x != nil {
-		return x.Filter
+		return x.Condition
 	}
 	return nil
 }
@@ -61844,7 +61852,8 @@ type SuggestLeadFieldRequest struct {
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Condition     *UserViewCondition     `protobuf:"bytes,4,opt,name=condition,proto3" json:"condition,omitempty"`
+	OldCondition  *UserViewCondition     `protobuf:"bytes,4,opt,name=old_condition,json=oldCondition,proto3" json:"old_condition,omitempty"`
+	Condition     *WorkflowCondition     `protobuf:"bytes,6,opt,name=condition,proto3" json:"condition,omitempty"`
 	Key           string                 `protobuf:"bytes,5,opt,name=key,proto3" json:"key,omitempty"` // id, keyword, lead_owner attr.fullname
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -61901,7 +61910,14 @@ func (x *SuggestLeadFieldRequest) GetId() string {
 	return ""
 }
 
-func (x *SuggestLeadFieldRequest) GetCondition() *UserViewCondition {
+func (x *SuggestLeadFieldRequest) GetOldCondition() *UserViewCondition {
+	if x != nil {
+		return x.OldCondition
+	}
+	return nil
+}
+
+func (x *SuggestLeadFieldRequest) GetCondition() *WorkflowCondition {
 	if x != nil {
 		return x.Condition
 	}
@@ -61919,7 +61935,7 @@ type UsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Condition     *UserViewCondition     `protobuf:"bytes,3,opt,name=condition,proto3" json:"condition,omitempty"`
+	Condition     *WorkflowCondition     `protobuf:"bytes,7,opt,name=condition,proto3" json:"condition,omitempty"`
 	IgnoreUids    []string               `protobuf:"bytes,4,rep,name=ignore_uids,json=ignoreUids,proto3" json:"ignore_uids,omitempty"`
 	UserIds       []string               `protobuf:"bytes,5,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	KeepSecondary bool                   `protobuf:"varint,6,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
@@ -61971,7 +61987,7 @@ func (x *UsersRequest) GetAccountId() string {
 	return ""
 }
 
-func (x *UsersRequest) GetCondition() *UserViewCondition {
+func (x *UsersRequest) GetCondition() *WorkflowCondition {
 	if x != nil {
 		return x.Condition
 	}
@@ -74897,13 +74913,13 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12&\n" +
-	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\x89\x05\n" +
+	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\x96\x05\n" +
 	"\bUserView\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x127\n" +
-	"\tcondition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\tcondition\x12\x1d\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12>\n" +
+	"\rold_condition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\foldCondition\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\x05 \x01(\tR\tcreatedBy\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\x03R\acreated\x12\x1d\n" +
@@ -74922,8 +74938,8 @@ const file_header_proto_rawDesc = "" +
 	"\aviewers\x18\x1b \x03(\tR\aviewers\x12\x18\n" +
 	"\aignores\x18\x1c \x03(\tR\aignores\x12\x1c\n" +
 	"\tattribute\x18\x1e \x01(\tR\tattribute\x12%\n" +
-	"\x0ekeep_secondary\x18\x1f \x01(\bR\rkeepSecondary\x121\n" +
-	"\x06filter\x18  \x01(\v2\x19.header.WorkflowConditionR\x06filter\"\xff\x01\n" +
+	"\x0ekeep_secondary\x18\x1f \x01(\bR\rkeepSecondary\x127\n" +
+	"\tcondition\x18  \x01(\v2\x19.header.WorkflowConditionR\tcondition\"\xff\x01\n" +
 	"\x17CountTouchpointResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75028,7 +75044,7 @@ const file_header_proto_rawDesc = "" +
 	"\aupdated\x18\x04 \x01(\x03R\aupdated\x12\x12\n" +
 	"\x04rate\x18\x05 \x01(\x02R\x04rate\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\xfe\x03\n" +
+	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\x90\x04\n" +
 	"\tOrderItem\x12\x19\n" +
 	"\border_id\x18\x03 \x01(\tR\aorderId\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1a\n" +
@@ -75046,7 +75062,8 @@ const file_header_proto_rawDesc = "" +
 	"\rdiscount_type\x18\x1a \x01(\tR\fdiscountType\x12\x1b\n" +
 	"\ttotal_tax\x18\x1e \x01(\x02R\btotalTax\x12\"\n" +
 	"\rfpv_total_tax\x18\x1f \x01(\x03R\vfpvTotalTax\x12\x12\n" +
-	"\x04name\x18! \x01(\tR\x04name\"\xe0\x01\n" +
+	"\x04name\x18! \x01(\tR\x04name\x12\x10\n" +
+	"\x03sku\x18\" \x01(\tR\x03sku\"\xe0\x01\n" +
 	"\n" +
 	"GHNAddress\x12\x1e\n" +
 	"\n" +
@@ -76643,16 +76660,16 @@ const file_header_proto_rawDesc = "" +
 	"\barchived\x18  \x01(\x03R\barchived\x12\x1a\n" +
 	"\bpriority\x18! \x01(\x03R\bpriority\x12\x1a\n" +
 	"\breporter\x18\" \x01(\tR\breporter\x12\x1a\n" +
-	"\bassignee\x18# \x01(\tR\bassignee\"\xb1\a\n" +
+	"\bassignee\x18# \x01(\tR\bassignee\"\xbe\a\n" +
 	"\aSegment\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x127\n" +
-	"\tcondition\x18\x06 \x01(\v2\x19.header.UserViewConditionR\tcondition\x121\n" +
-	"\x06filter\x18\f \x01(\v2\x19.header.WorkflowConditionR\x06filter\x12\x12\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12>\n" +
+	"\rold_condition\x18\x06 \x01(\v2\x19.header.UserViewConditionR\foldCondition\x127\n" +
+	"\tcondition\x18\f \x01(\v2\x19.header.WorkflowConditionR\tcondition\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12+\n" +
 	"\x11fetching_progress\x18\b \x01(\x03R\x10fetchingProgress\x12!\n" +
 	"\flast_fetched\x18\t \x01(\x03R\vlastFetched\x12(\n" +
@@ -77851,7 +77868,7 @@ const file_header_proto_rawDesc = "" +
 	"\ametrics\x18\x05 \x03(\tR\ametrics\x12\x1b\n" +
 	"\tgroup_bys\x18\x06 \x03(\tR\bgroupBys\x129\n" +
 	"\n" +
-	"conditions\x18\a \x03(\v2\x19.header.UserViewConditionR\n" +
+	"conditions\x18\a \x03(\v2\x19.header.WorkflowConditionR\n" +
 	"conditions\x12*\n" +
 	"\aaccount\x18\b \x01(\v2\x10.account.AccountR\aaccount\x12\x16\n" +
 	"\x06anchor\x18\t \x01(\tR\x06anchor\x12\x14\n" +
@@ -78397,15 +78414,15 @@ const file_header_proto_rawDesc = "" +
 	"\x04city\x18\x05 \x01(\tR\x04city\x12\x19\n" +
 	"\bpage_url\x18\x06 \x01(\tR\apageUrl\x12\x1d\n" +
 	"\n" +
-	"page_title\x18\a \x01(\tR\tpageTitle\"\xba\x04\n" +
+	"page_title\x18\a \x01(\tR\tpageTitle\"\xc7\x04\n" +
 	"\fLiveUserView\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x19\n" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x0e\n" +
-	"\x02id\x18\x04 \x01(\tR\x02id\x127\n" +
-	"\tcondition\x18\x05 \x01(\v2\x19.header.UserViewConditionR\tcondition\x121\n" +
-	"\x06filter\x18\r \x01(\v2\x19.header.WorkflowConditionR\x06filter\x12\x14\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\x12>\n" +
+	"\rold_condition\x18\x05 \x01(\v2\x19.header.UserViewConditionR\foldCondition\x127\n" +
+	"\tcondition\x18\r \x01(\v2\x19.header.WorkflowConditionR\tcondition\x12\x14\n" +
 	"\x05limit\x18\x06 \x01(\x03R\x05limit\x12\x19\n" +
 	"\border_by\x18\b \x01(\tR\aorderBy\x12\x14\n" +
 	"\x05total\x18\n" +
@@ -79085,19 +79102,20 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"datapoints\x18\b \x03(\x03R\n" +
 	"datapoints\x12\x16\n" +
-	"\x06labels\x18\t \x03(\tR\x06labels\"\xb6\x01\n" +
+	"\x06labels\x18\t \x03(\tR\x06labels\"\xf6\x01\n" +
 	"\x17SuggestLeadFieldRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x127\n" +
-	"\tcondition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\tcondition\x12\x10\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12>\n" +
+	"\rold_condition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\foldCondition\x127\n" +
+	"\tcondition\x18\x06 \x01(\v2\x19.header.WorkflowConditionR\tcondition\x12\x10\n" +
 	"\x03key\x18\x05 \x01(\tR\x03key\"\xec\x01\n" +
 	"\fUsersRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x127\n" +
-	"\tcondition\x18\x03 \x01(\v2\x19.header.UserViewConditionR\tcondition\x12\x1f\n" +
+	"\tcondition\x18\a \x01(\v2\x19.header.WorkflowConditionR\tcondition\x12\x1f\n" +
 	"\vignore_uids\x18\x04 \x03(\tR\n" +
 	"ignoreUids\x12\x19\n" +
 	"\buser_ids\x18\x05 \x03(\tR\auserIds\x12%\n" +
@@ -81522,8 +81540,8 @@ var file_header_proto_depIdxs = []int32{
 	666,  // 525: header.UserViews.ctx:type_name -> common.Context
 	251,  // 526: header.UserViews.views:type_name -> header.UserView
 	666,  // 527: header.UserView.ctx:type_name -> common.Context
-	254,  // 528: header.UserView.condition:type_name -> header.UserViewCondition
-	460,  // 529: header.UserView.filter:type_name -> header.WorkflowCondition
+	254,  // 528: header.UserView.old_condition:type_name -> header.UserViewCondition
+	460,  // 529: header.UserView.condition:type_name -> header.WorkflowCondition
 	666,  // 530: header.CountTouchpointResponse.ctx:type_name -> common.Context
 	625,  // 531: header.CountTouchpointResponse.counts:type_name -> header.CountTouchpointResponse.TouchpointCount
 	666,  // 532: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
@@ -81734,8 +81752,8 @@ var file_header_proto_depIdxs = []int32{
 	46,   // 737: header.EventType.first_user:type_name -> header.User
 	46,   // 738: header.EventType.last_user:type_name -> header.User
 	666,  // 739: header.Segment.ctx:type_name -> common.Context
-	254,  // 740: header.Segment.condition:type_name -> header.UserViewCondition
-	460,  // 741: header.Segment.filter:type_name -> header.WorkflowCondition
+	254,  // 740: header.Segment.old_condition:type_name -> header.UserViewCondition
+	460,  // 741: header.Segment.condition:type_name -> header.WorkflowCondition
 	314,  // 742: header.Segment.fetch_error:type_name -> header.Error
 	487,  // 743: header.Segment.permissions:type_name -> header.ResourceGroupMember
 	666,  // 744: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
@@ -82016,7 +82034,7 @@ var file_header_proto_depIdxs = []int32{
 	666,  // 1019: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
 	395,  // 1020: header.OutboundCallUpdateEvent.agents:type_name -> header.OutboundCallAgentReport
 	666,  // 1021: header.ConvoReportRequest.ctx:type_name -> common.Context
-	254,  // 1022: header.ConvoReportRequest.conditions:type_name -> header.UserViewCondition
+	460,  // 1022: header.ConvoReportRequest.conditions:type_name -> header.WorkflowCondition
 	673,  // 1023: header.ConvoReportRequest.account:type_name -> account.Account
 	666,  // 1024: header.ConvoReportResponse.ctx:type_name -> common.Context
 	456,  // 1025: header.ConvoReportResponse.metrics:type_name -> header.ConvoReportEntry
@@ -82116,8 +82134,8 @@ var file_header_proto_depIdxs = []int32{
 	666,  // 1119: header.TicketViewMember.ctx:type_name -> common.Context
 	73,   // 1120: header.TicketViewMember.last_event:type_name -> header.Event
 	666,  // 1121: header.LiveUserView.ctx:type_name -> common.Context
-	254,  // 1122: header.LiveUserView.condition:type_name -> header.UserViewCondition
-	460,  // 1123: header.LiveUserView.filter:type_name -> header.WorkflowCondition
+	254,  // 1122: header.LiveUserView.old_condition:type_name -> header.UserViewCondition
+	460,  // 1123: header.LiveUserView.condition:type_name -> header.WorkflowCondition
 	646,  // 1124: header.LiveUserView.metrics:type_name -> header.LiveUserView.MetricsEntry
 	666,  // 1125: header.BotTemplate.ctx:type_name -> common.Context
 	666,  // 1126: header.ResourceGroupMember.ctx:type_name -> common.Context
@@ -82195,192 +82213,193 @@ var file_header_proto_depIdxs = []int32{
 	520,  // 1198: header.AndroidNotificationRequest.android_device:type_name -> header.AndroidDevice
 	666,  // 1199: header.BankAccount.ctx:type_name -> common.Context
 	666,  // 1200: header.SuggestLeadFieldRequest.ctx:type_name -> common.Context
-	254,  // 1201: header.SuggestLeadFieldRequest.condition:type_name -> header.UserViewCondition
-	666,  // 1202: header.UsersRequest.ctx:type_name -> common.Context
-	254,  // 1203: header.UsersRequest.condition:type_name -> header.UserViewCondition
-	666,  // 1204: header.BankTransferRequest.ctx:type_name -> common.Context
-	47,   // 1205: header.BankTransferRequest.touchpoint:type_name -> header.Touchpoint
-	666,  // 1206: header.ReportUserEventRequest.ctx:type_name -> common.Context
-	666,  // 1207: header.ReportUserEventResponse.ctx:type_name -> common.Context
-	526,  // 1208: header.ReportUserEventResponse.entries:type_name -> header.ReportUserEventEntry
-	666,  // 1209: header.CounterReportResponse.ctx:type_name -> common.Context
-	529,  // 1210: header.CounterReportResponse.datas:type_name -> header.CounterReportResponseData
-	666,  // 1211: header.CounterDataPoints.ctx:type_name -> common.Context
-	532,  // 1212: header.CounterDataPoints.data_points:type_name -> header.CounterDataPoint
-	666,  // 1213: header.CounterDataPoint.ctx:type_name -> common.Context
-	666,  // 1214: header.SetupFeatureStatus.ctx:type_name -> common.Context
-	666,  // 1215: header.ArticleNode.ctx:type_name -> common.Context
-	662,  // 1216: header.ArticleNode.i18n_title:type_name -> header.ArticleNode.I18nTitleEntry
-	534,  // 1217: header.ArticleNode.children:type_name -> header.ArticleNode
-	550,  // 1218: header.AIAgentOverrideRule.functions:type_name -> header.AIFunction
-	557,  // 1219: header.AIAgentOverrideRule.intent:type_name -> header.AIIntent
-	460,  // 1220: header.AIAgentOverrideRule.condition:type_name -> header.WorkflowCondition
-	149,  // 1221: header.AIAgentOverrideRule.frequently:type_name -> header.Frequently
-	102,  // 1222: header.AIAgentOverrideRule.welcome_message:type_name -> header.Message
-	124,  // 1223: header.AIAgentOverrideRule.welcome_message_triggers:type_name -> header.Trigger
-	540,  // 1224: header.AIAgentOverrideRule.ai_agent:type_name -> header.AIAgent
-	550,  // 1225: header.AIAgentOverrideRule.actions:type_name -> header.AIFunction
-	550,  // 1226: header.UnknownBehaviour.actions:type_name -> header.AIFunction
-	550,  // 1227: header.OutOfBusinessHourBehaviour.actions:type_name -> header.AIFunction
-	666,  // 1228: header.AIAgent.ctx:type_name -> common.Context
-	219,  // 1229: header.AIAgent.avatar:type_name -> header.File
-	535,  // 1230: header.AIAgent.guardrails:type_name -> header.AIAgentGuardrail
-	537,  // 1231: header.AIAgent.company:type_name -> header.AIAgentBrand
-	102,  // 1232: header.AIAgent.context_guard_message:type_name -> header.Message
-	550,  // 1233: header.AIAgent.functions:type_name -> header.AIFunction
-	102,  // 1234: header.AIAgent.error_message:type_name -> header.Message
-	548,  // 1235: header.AIAgent.data_store:type_name -> header.AIDataStore
-	547,  // 1236: header.AIAgent.init_flow:type_name -> header.InitFlow
-	536,  // 1237: header.AIAgent.override_rules:type_name -> header.AIAgentOverrideRule
-	538,  // 1238: header.AIAgent.unknown_behaviour:type_name -> header.UnknownBehaviour
-	539,  // 1239: header.AIAgent.out_of_business_hour_behaviour:type_name -> header.OutOfBusinessHourBehaviour
-	181,  // 1240: header.AIAgent.collect_user_information:type_name -> header.Form
-	102,  // 1241: header.AIAgent.welcome_message:type_name -> header.Message
-	124,  // 1242: header.AIAgent.welcome_message_triggers:type_name -> header.Trigger
-	93,   // 1243: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
-	94,   // 1244: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
-	95,   // 1245: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
-	546,  // 1246: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
-	545,  // 1247: header.AIAgent.rewrite_query:type_name -> header.RewriteQuerySetting
-	541,  // 1248: header.AIAgent.custom_webhook:type_name -> header.AIAgentWebhook
-	307,  // 1249: header.AIAgentWebhook.headers:type_name -> header.KV
-	666,  // 1250: header.AIAgentTestcase.ctx:type_name -> common.Context
-	468,  // 1251: header.AIAgentTestcase.messages:type_name -> header.LLMChatHistoryEntry
-	92,   // 1252: header.AIAgentTestcase.conversation:type_name -> header.Conversation
-	46,   // 1253: header.AIAgentTestcase.user:type_name -> header.User
-	666,  // 1254: header.AIAgentTestResult.ctx:type_name -> common.Context
-	468,  // 1255: header.AIAgentTestResult.messages:type_name -> header.LLMChatHistoryEntry
-	92,   // 1256: header.AIAgentTestResult.conversation:type_name -> header.Conversation
-	46,   // 1257: header.AIAgentTestResult.user:type_name -> header.User
-	468,  // 1258: header.RewriteQueryExample.messages:type_name -> header.LLMChatHistoryEntry
-	544,  // 1259: header.RewriteQuerySetting.examples:type_name -> header.RewriteQueryExample
-	102,  // 1260: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
-	131,  // 1261: header.InitFlow.action:type_name -> header.BotAction
-	124,  // 1262: header.InitFlow.triggers:type_name -> header.Trigger
-	149,  // 1263: header.InitFlow.initiative_frequency:type_name -> header.Frequently
-	125,  // 1264: header.InitFlow.conditions:type_name -> header.BotCondition
-	82,   // 1265: header.InitFlow.rule:type_name -> header.Rule
-	663,  // 1266: header.JSONSchema.properties:type_name -> header.JSONSchema.PropertiesEntry
-	549,  // 1267: header.JSONSchema.items:type_name -> header.JSONSchema
-	307,  // 1268: header.AIFunction.headers:type_name -> header.KV
-	307,  // 1269: header.AIFunction.dynamic_headers:type_name -> header.KV
-	549,  // 1270: header.AIFunction.parameters:type_name -> header.JSONSchema
-	556,  // 1271: header.AIFunction.system_create_ticket:type_name -> header.CreateTicketFunction
-	555,  // 1272: header.AIFunction.workflow:type_name -> header.AutomationFunction
-	554,  // 1273: header.AIFunction.update_information:type_name -> header.UpdateUserInformation
-	553,  // 1274: header.AIFunction.collect_user_information:type_name -> header.CollectUserInformation
-	121,  // 1275: header.AIFunction.assign_agent:type_name -> header.AssignRequest
-	181,  // 1276: header.AIFunction.system_schedule_appointment:type_name -> header.Form
-	550,  // 1277: header.AIFunction.functions:type_name -> header.AIFunction
-	102,  // 1278: header.AIFunction.welcome_message:type_name -> header.Message
-	124,  // 1279: header.AIFunction.welcome_message_triggers:type_name -> header.Trigger
-	540,  // 1280: header.AIFunction.ai_agent:type_name -> header.AIAgent
-	102,  // 1281: header.AIFunction.message:type_name -> header.Message
-	551,  // 1282: header.AIFunction.unlock_knowledge:type_name -> header.UnlockKnowledge
-	552,  // 1283: header.CollectUserInformation.attributes:type_name -> header.CollectInfomationAttribute
-	460,  // 1284: header.AutomationFunction.condition:type_name -> header.WorkflowCondition
-	664,  // 1285: header.AutomationFunction.actions:type_name -> header.AutomationFunction.ActionsEntry
-	295,  // 1286: header.CrawlResponse.product:type_name -> header.Product
-	295,  // 1287: header.CrawlResponse.products:type_name -> header.Product
-	666,  // 1288: header.AIDataChunk.ctx:type_name -> common.Context
-	666,  // 1289: header.AIDataEntry.ctx:type_name -> common.Context
-	102,  // 1290: header.AIDataEntry.answer:type_name -> header.Message
-	219,  // 1291: header.AIDataEntry.file:type_name -> header.File
-	500,  // 1292: header.AIDataEntry.document:type_name -> header.Block
-	295,  // 1293: header.AIDataEntry.product:type_name -> header.Product
-	292,  // 1294: header.AIDataEntry.discount:type_name -> header.Discount
-	307,  // 1295: header.AIDataEntry.metadata:type_name -> header.KV
-	550,  // 1296: header.AIDataEntry.functions:type_name -> header.AIFunction
-	557,  // 1297: header.AIDataEntry.intent:type_name -> header.AIIntent
-	460,  // 1298: header.AIDataEntry.condition:type_name -> header.WorkflowCondition
-	666,  // 1299: header.FacebookAdsFlow.ctx:type_name -> common.Context
-	102,  // 1300: header.FacebookAdsFlow.welcome_message:type_name -> header.Message
-	666,  // 1301: header.RuleOrder.ctx:type_name -> common.Context
-	666,  // 1302: header.NotiSetting.ctx:type_name -> common.Context
-	563,  // 1303: header.NotiSetting.web:type_name -> header.NotiSubscription
-	563,  // 1304: header.NotiSetting.mobile:type_name -> header.NotiSubscription
-	563,  // 1305: header.NotiSetting.email:type_name -> header.NotiSubscription
-	563,  // 1306: header.NotiSetting.instant:type_name -> header.NotiSubscription
-	564,  // 1307: header.NotiSetting.ticket_types:type_name -> header.TicketTypeSubscription
-	566,  // 1308: header.NotiSetting.do_not_disturb:type_name -> header.DoNotDisturb
-	666,  // 1309: header.PushToken.ctx:type_name -> common.Context
-	570,  // 1310: header.ZNSTemplateLayoutComponentButtons.items:type_name -> header.ZNSTemplateLayoutComponentButton
-	572,  // 1311: header.ZNSTemplateLayoutComponentTable.rows:type_name -> header.ZNSTemplateLayoutComponentTableRow
-	574,  // 1312: header.ZNSTemplateLayoutComponentImages.items:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	574,  // 1313: header.ZNSTemplateLayoutComponentLogo.light:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	574,  // 1314: header.ZNSTemplateLayoutComponentLogo.dark:type_name -> header.ZNSTemplateLayoutComponentImageItem
-	575,  // 1315: header.ZNSTemplateLayoutComponent.IMAGES:type_name -> header.ZNSTemplateLayoutComponentImages
-	576,  // 1316: header.ZNSTemplateLayoutComponent.LOGO:type_name -> header.ZNSTemplateLayoutComponentLogo
-	569,  // 1317: header.ZNSTemplateLayoutComponent.TITLE:type_name -> header.ZNSTemplateLayoutComponentItem
-	569,  // 1318: header.ZNSTemplateLayoutComponent.PARAGRAPH:type_name -> header.ZNSTemplateLayoutComponentItem
-	569,  // 1319: header.ZNSTemplateLayoutComponent.OTP:type_name -> header.ZNSTemplateLayoutComponentItem
-	569,  // 1320: header.ZNSTemplateLayoutComponent.VOUCHER:type_name -> header.ZNSTemplateLayoutComponentItem
-	569,  // 1321: header.ZNSTemplateLayoutComponent.PAYMENT:type_name -> header.ZNSTemplateLayoutComponentItem
-	571,  // 1322: header.ZNSTemplateLayoutComponent.BUTTONS:type_name -> header.ZNSTemplateLayoutComponentButtons
-	573,  // 1323: header.ZNSTemplateLayoutComponent.TABLE:type_name -> header.ZNSTemplateLayoutComponentTable
-	577,  // 1324: header.ZNSTemplateComponents.components:type_name -> header.ZNSTemplateLayoutComponent
-	578,  // 1325: header.ZNSTemplateLayout.header:type_name -> header.ZNSTemplateComponents
-	578,  // 1326: header.ZNSTemplateLayout.body:type_name -> header.ZNSTemplateComponents
-	578,  // 1327: header.ZNSTemplateLayout.footer:type_name -> header.ZNSTemplateComponents
-	579,  // 1328: header.ZNSTemplateRequest.layout:type_name -> header.ZNSTemplateLayout
-	568,  // 1329: header.ZNSTemplateRequest.params:type_name -> header.ZNSTemplateParam
-	666,  // 1330: header.ZNSTemplate.ctx:type_name -> common.Context
-	580,  // 1331: header.ZNSTemplate.request:type_name -> header.ZNSTemplateRequest
-	583,  // 1332: header.ZNSTemplate.template:type_name -> header.ZnsTemplate
-	585,  // 1333: header.ZnsTemplate.listParams:type_name -> header.ZNSParamDefinition
-	584,  // 1334: header.ZnsTemplate.listButtons:type_name -> header.ZNSButton
-	666,  // 1335: header.ZNSMedia.ctx:type_name -> common.Context
-	219,  // 1336: header.ZNSMedia.file:type_name -> header.File
-	666,  // 1337: header.EmailSignature.ctx:type_name -> common.Context
-	500,  // 1338: header.EmailSignature.block:type_name -> header.Block
-	666,  // 1339: header.TestMessageRequest.ctx:type_name -> common.Context
-	381,  // 1340: header.TestMessageRequest.message:type_name -> header.MarketingMessage
-	666,  // 1341: header.CreditUsage.ctx:type_name -> common.Context
-	568,  // 1342: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
-	666,  // 1343: header.MetaAdAccount.ctx:type_name -> common.Context
-	592,  // 1344: header.MetaAdAccount.business:type_name -> header.MetaBusiness
-	666,  // 1345: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
-	281,  // 1346: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
-	666,  // 1347: header.ListDiscountRequest.ctx:type_name -> common.Context
-	666,  // 1348: header.ZaloFriendRequest.ctx:type_name -> common.Context
-	666,  // 1349: header.ZaloGroup.ctx:type_name -> common.Context
-	219,  // 1350: header.ZaloGroup.avatar:type_name -> header.File
-	219,  // 1351: header.ZaloGroup.full_avatar:type_name -> header.File
-	597,  // 1352: header.ZaloGroup.setting:type_name -> header.ZaloGroupSetting
-	666,  // 1353: header.ZaloPhoneLookupRequest.ctx:type_name -> common.Context
-	601,  // 1354: header.ZaloPersonalAccount.fReqInfo:type_name -> header.ZaloFriendRequestInfo
-	599,  // 1355: header.ZaloPersonalAccount.biz_pkg:type_name -> header.ZaloBusinessPackage
-	600,  // 1356: header.ZaloPersonalAccount.recomm_info:type_name -> header.ZaloRecommendInformation
-	665,  // 1357: header.ZaloPersonalAccount.last_queue_action_ids:type_name -> header.ZaloPersonalAccount.LastQueueActionIdsEntry
-	666,  // 1358: header.ZaloLoginStatus.ctx:type_name -> common.Context
-	666,  // 1359: header.Link.ctx:type_name -> common.Context
-	683,  // 1360: header.Plan.limit:type_name -> common.Limit
-	500,  // 1361: header.Message.I18nBlockEntry.value:type_name -> header.Block
-	500,  // 1362: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
-	500,  // 1363: header.I18nBlock.I18nEntry.value:type_name -> header.Block
-	500,  // 1364: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
-	174,  // 1365: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
-	173,  // 1366: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
-	175,  // 1367: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
-	176,  // 1368: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
-	177,  // 1369: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
-	667,  // 1370: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
-	500,  // 1371: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
-	549,  // 1372: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
-	313,  // 1373: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
-	313,  // 1374: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
-	398,  // 1375: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
-	398,  // 1376: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
-	89,   // 1377: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
-	484,  // 1378: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
-	500,  // 1379: header.Article.I18nContentEntry.value:type_name -> header.Block
-	549,  // 1380: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
-	398,  // 1381: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
-	1382, // [1382:1382] is the sub-list for method output_type
-	1382, // [1382:1382] is the sub-list for method input_type
-	1382, // [1382:1382] is the sub-list for extension type_name
-	1382, // [1382:1382] is the sub-list for extension extendee
-	0,    // [0:1382] is the sub-list for field type_name
+	254,  // 1201: header.SuggestLeadFieldRequest.old_condition:type_name -> header.UserViewCondition
+	460,  // 1202: header.SuggestLeadFieldRequest.condition:type_name -> header.WorkflowCondition
+	666,  // 1203: header.UsersRequest.ctx:type_name -> common.Context
+	460,  // 1204: header.UsersRequest.condition:type_name -> header.WorkflowCondition
+	666,  // 1205: header.BankTransferRequest.ctx:type_name -> common.Context
+	47,   // 1206: header.BankTransferRequest.touchpoint:type_name -> header.Touchpoint
+	666,  // 1207: header.ReportUserEventRequest.ctx:type_name -> common.Context
+	666,  // 1208: header.ReportUserEventResponse.ctx:type_name -> common.Context
+	526,  // 1209: header.ReportUserEventResponse.entries:type_name -> header.ReportUserEventEntry
+	666,  // 1210: header.CounterReportResponse.ctx:type_name -> common.Context
+	529,  // 1211: header.CounterReportResponse.datas:type_name -> header.CounterReportResponseData
+	666,  // 1212: header.CounterDataPoints.ctx:type_name -> common.Context
+	532,  // 1213: header.CounterDataPoints.data_points:type_name -> header.CounterDataPoint
+	666,  // 1214: header.CounterDataPoint.ctx:type_name -> common.Context
+	666,  // 1215: header.SetupFeatureStatus.ctx:type_name -> common.Context
+	666,  // 1216: header.ArticleNode.ctx:type_name -> common.Context
+	662,  // 1217: header.ArticleNode.i18n_title:type_name -> header.ArticleNode.I18nTitleEntry
+	534,  // 1218: header.ArticleNode.children:type_name -> header.ArticleNode
+	550,  // 1219: header.AIAgentOverrideRule.functions:type_name -> header.AIFunction
+	557,  // 1220: header.AIAgentOverrideRule.intent:type_name -> header.AIIntent
+	460,  // 1221: header.AIAgentOverrideRule.condition:type_name -> header.WorkflowCondition
+	149,  // 1222: header.AIAgentOverrideRule.frequently:type_name -> header.Frequently
+	102,  // 1223: header.AIAgentOverrideRule.welcome_message:type_name -> header.Message
+	124,  // 1224: header.AIAgentOverrideRule.welcome_message_triggers:type_name -> header.Trigger
+	540,  // 1225: header.AIAgentOverrideRule.ai_agent:type_name -> header.AIAgent
+	550,  // 1226: header.AIAgentOverrideRule.actions:type_name -> header.AIFunction
+	550,  // 1227: header.UnknownBehaviour.actions:type_name -> header.AIFunction
+	550,  // 1228: header.OutOfBusinessHourBehaviour.actions:type_name -> header.AIFunction
+	666,  // 1229: header.AIAgent.ctx:type_name -> common.Context
+	219,  // 1230: header.AIAgent.avatar:type_name -> header.File
+	535,  // 1231: header.AIAgent.guardrails:type_name -> header.AIAgentGuardrail
+	537,  // 1232: header.AIAgent.company:type_name -> header.AIAgentBrand
+	102,  // 1233: header.AIAgent.context_guard_message:type_name -> header.Message
+	550,  // 1234: header.AIAgent.functions:type_name -> header.AIFunction
+	102,  // 1235: header.AIAgent.error_message:type_name -> header.Message
+	548,  // 1236: header.AIAgent.data_store:type_name -> header.AIDataStore
+	547,  // 1237: header.AIAgent.init_flow:type_name -> header.InitFlow
+	536,  // 1238: header.AIAgent.override_rules:type_name -> header.AIAgentOverrideRule
+	538,  // 1239: header.AIAgent.unknown_behaviour:type_name -> header.UnknownBehaviour
+	539,  // 1240: header.AIAgent.out_of_business_hour_behaviour:type_name -> header.OutOfBusinessHourBehaviour
+	181,  // 1241: header.AIAgent.collect_user_information:type_name -> header.Form
+	102,  // 1242: header.AIAgent.welcome_message:type_name -> header.Message
+	124,  // 1243: header.AIAgent.welcome_message_triggers:type_name -> header.Trigger
+	93,   // 1244: header.AIAgent.background_send_thank:type_name -> header.AIAgentAutoSendThankSetting
+	94,   // 1245: header.AIAgent.auto_takeover:type_name -> header.AIAgentAutoTakeoverSetting
+	95,   // 1246: header.AIAgent.background_follow_up:type_name -> header.AIAgentAutoFollowUpSetting
+	546,  // 1247: header.AIAgent.usage_limit:type_name -> header.AIAgentUsageLimit
+	545,  // 1248: header.AIAgent.rewrite_query:type_name -> header.RewriteQuerySetting
+	541,  // 1249: header.AIAgent.custom_webhook:type_name -> header.AIAgentWebhook
+	307,  // 1250: header.AIAgentWebhook.headers:type_name -> header.KV
+	666,  // 1251: header.AIAgentTestcase.ctx:type_name -> common.Context
+	468,  // 1252: header.AIAgentTestcase.messages:type_name -> header.LLMChatHistoryEntry
+	92,   // 1253: header.AIAgentTestcase.conversation:type_name -> header.Conversation
+	46,   // 1254: header.AIAgentTestcase.user:type_name -> header.User
+	666,  // 1255: header.AIAgentTestResult.ctx:type_name -> common.Context
+	468,  // 1256: header.AIAgentTestResult.messages:type_name -> header.LLMChatHistoryEntry
+	92,   // 1257: header.AIAgentTestResult.conversation:type_name -> header.Conversation
+	46,   // 1258: header.AIAgentTestResult.user:type_name -> header.User
+	468,  // 1259: header.RewriteQueryExample.messages:type_name -> header.LLMChatHistoryEntry
+	544,  // 1260: header.RewriteQuerySetting.examples:type_name -> header.RewriteQueryExample
+	102,  // 1261: header.AIAgentUsageLimit.warning_message:type_name -> header.Message
+	131,  // 1262: header.InitFlow.action:type_name -> header.BotAction
+	124,  // 1263: header.InitFlow.triggers:type_name -> header.Trigger
+	149,  // 1264: header.InitFlow.initiative_frequency:type_name -> header.Frequently
+	125,  // 1265: header.InitFlow.conditions:type_name -> header.BotCondition
+	82,   // 1266: header.InitFlow.rule:type_name -> header.Rule
+	663,  // 1267: header.JSONSchema.properties:type_name -> header.JSONSchema.PropertiesEntry
+	549,  // 1268: header.JSONSchema.items:type_name -> header.JSONSchema
+	307,  // 1269: header.AIFunction.headers:type_name -> header.KV
+	307,  // 1270: header.AIFunction.dynamic_headers:type_name -> header.KV
+	549,  // 1271: header.AIFunction.parameters:type_name -> header.JSONSchema
+	556,  // 1272: header.AIFunction.system_create_ticket:type_name -> header.CreateTicketFunction
+	555,  // 1273: header.AIFunction.workflow:type_name -> header.AutomationFunction
+	554,  // 1274: header.AIFunction.update_information:type_name -> header.UpdateUserInformation
+	553,  // 1275: header.AIFunction.collect_user_information:type_name -> header.CollectUserInformation
+	121,  // 1276: header.AIFunction.assign_agent:type_name -> header.AssignRequest
+	181,  // 1277: header.AIFunction.system_schedule_appointment:type_name -> header.Form
+	550,  // 1278: header.AIFunction.functions:type_name -> header.AIFunction
+	102,  // 1279: header.AIFunction.welcome_message:type_name -> header.Message
+	124,  // 1280: header.AIFunction.welcome_message_triggers:type_name -> header.Trigger
+	540,  // 1281: header.AIFunction.ai_agent:type_name -> header.AIAgent
+	102,  // 1282: header.AIFunction.message:type_name -> header.Message
+	551,  // 1283: header.AIFunction.unlock_knowledge:type_name -> header.UnlockKnowledge
+	552,  // 1284: header.CollectUserInformation.attributes:type_name -> header.CollectInfomationAttribute
+	460,  // 1285: header.AutomationFunction.condition:type_name -> header.WorkflowCondition
+	664,  // 1286: header.AutomationFunction.actions:type_name -> header.AutomationFunction.ActionsEntry
+	295,  // 1287: header.CrawlResponse.product:type_name -> header.Product
+	295,  // 1288: header.CrawlResponse.products:type_name -> header.Product
+	666,  // 1289: header.AIDataChunk.ctx:type_name -> common.Context
+	666,  // 1290: header.AIDataEntry.ctx:type_name -> common.Context
+	102,  // 1291: header.AIDataEntry.answer:type_name -> header.Message
+	219,  // 1292: header.AIDataEntry.file:type_name -> header.File
+	500,  // 1293: header.AIDataEntry.document:type_name -> header.Block
+	295,  // 1294: header.AIDataEntry.product:type_name -> header.Product
+	292,  // 1295: header.AIDataEntry.discount:type_name -> header.Discount
+	307,  // 1296: header.AIDataEntry.metadata:type_name -> header.KV
+	550,  // 1297: header.AIDataEntry.functions:type_name -> header.AIFunction
+	557,  // 1298: header.AIDataEntry.intent:type_name -> header.AIIntent
+	460,  // 1299: header.AIDataEntry.condition:type_name -> header.WorkflowCondition
+	666,  // 1300: header.FacebookAdsFlow.ctx:type_name -> common.Context
+	102,  // 1301: header.FacebookAdsFlow.welcome_message:type_name -> header.Message
+	666,  // 1302: header.RuleOrder.ctx:type_name -> common.Context
+	666,  // 1303: header.NotiSetting.ctx:type_name -> common.Context
+	563,  // 1304: header.NotiSetting.web:type_name -> header.NotiSubscription
+	563,  // 1305: header.NotiSetting.mobile:type_name -> header.NotiSubscription
+	563,  // 1306: header.NotiSetting.email:type_name -> header.NotiSubscription
+	563,  // 1307: header.NotiSetting.instant:type_name -> header.NotiSubscription
+	564,  // 1308: header.NotiSetting.ticket_types:type_name -> header.TicketTypeSubscription
+	566,  // 1309: header.NotiSetting.do_not_disturb:type_name -> header.DoNotDisturb
+	666,  // 1310: header.PushToken.ctx:type_name -> common.Context
+	570,  // 1311: header.ZNSTemplateLayoutComponentButtons.items:type_name -> header.ZNSTemplateLayoutComponentButton
+	572,  // 1312: header.ZNSTemplateLayoutComponentTable.rows:type_name -> header.ZNSTemplateLayoutComponentTableRow
+	574,  // 1313: header.ZNSTemplateLayoutComponentImages.items:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	574,  // 1314: header.ZNSTemplateLayoutComponentLogo.light:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	574,  // 1315: header.ZNSTemplateLayoutComponentLogo.dark:type_name -> header.ZNSTemplateLayoutComponentImageItem
+	575,  // 1316: header.ZNSTemplateLayoutComponent.IMAGES:type_name -> header.ZNSTemplateLayoutComponentImages
+	576,  // 1317: header.ZNSTemplateLayoutComponent.LOGO:type_name -> header.ZNSTemplateLayoutComponentLogo
+	569,  // 1318: header.ZNSTemplateLayoutComponent.TITLE:type_name -> header.ZNSTemplateLayoutComponentItem
+	569,  // 1319: header.ZNSTemplateLayoutComponent.PARAGRAPH:type_name -> header.ZNSTemplateLayoutComponentItem
+	569,  // 1320: header.ZNSTemplateLayoutComponent.OTP:type_name -> header.ZNSTemplateLayoutComponentItem
+	569,  // 1321: header.ZNSTemplateLayoutComponent.VOUCHER:type_name -> header.ZNSTemplateLayoutComponentItem
+	569,  // 1322: header.ZNSTemplateLayoutComponent.PAYMENT:type_name -> header.ZNSTemplateLayoutComponentItem
+	571,  // 1323: header.ZNSTemplateLayoutComponent.BUTTONS:type_name -> header.ZNSTemplateLayoutComponentButtons
+	573,  // 1324: header.ZNSTemplateLayoutComponent.TABLE:type_name -> header.ZNSTemplateLayoutComponentTable
+	577,  // 1325: header.ZNSTemplateComponents.components:type_name -> header.ZNSTemplateLayoutComponent
+	578,  // 1326: header.ZNSTemplateLayout.header:type_name -> header.ZNSTemplateComponents
+	578,  // 1327: header.ZNSTemplateLayout.body:type_name -> header.ZNSTemplateComponents
+	578,  // 1328: header.ZNSTemplateLayout.footer:type_name -> header.ZNSTemplateComponents
+	579,  // 1329: header.ZNSTemplateRequest.layout:type_name -> header.ZNSTemplateLayout
+	568,  // 1330: header.ZNSTemplateRequest.params:type_name -> header.ZNSTemplateParam
+	666,  // 1331: header.ZNSTemplate.ctx:type_name -> common.Context
+	580,  // 1332: header.ZNSTemplate.request:type_name -> header.ZNSTemplateRequest
+	583,  // 1333: header.ZNSTemplate.template:type_name -> header.ZnsTemplate
+	585,  // 1334: header.ZnsTemplate.listParams:type_name -> header.ZNSParamDefinition
+	584,  // 1335: header.ZnsTemplate.listButtons:type_name -> header.ZNSButton
+	666,  // 1336: header.ZNSMedia.ctx:type_name -> common.Context
+	219,  // 1337: header.ZNSMedia.file:type_name -> header.File
+	666,  // 1338: header.EmailSignature.ctx:type_name -> common.Context
+	500,  // 1339: header.EmailSignature.block:type_name -> header.Block
+	666,  // 1340: header.TestMessageRequest.ctx:type_name -> common.Context
+	381,  // 1341: header.TestMessageRequest.message:type_name -> header.MarketingMessage
+	666,  // 1342: header.CreditUsage.ctx:type_name -> common.Context
+	568,  // 1343: header.SendSubizZNSTestRequest.params:type_name -> header.ZNSTemplateParam
+	666,  // 1344: header.MetaAdAccount.ctx:type_name -> common.Context
+	592,  // 1345: header.MetaAdAccount.business:type_name -> header.MetaBusiness
+	666,  // 1346: header.ListAvaiableDiscountsRequest.ctx:type_name -> common.Context
+	281,  // 1347: header.ListAvaiableDiscountsRequest.order:type_name -> header.Order
+	666,  // 1348: header.ListDiscountRequest.ctx:type_name -> common.Context
+	666,  // 1349: header.ZaloFriendRequest.ctx:type_name -> common.Context
+	666,  // 1350: header.ZaloGroup.ctx:type_name -> common.Context
+	219,  // 1351: header.ZaloGroup.avatar:type_name -> header.File
+	219,  // 1352: header.ZaloGroup.full_avatar:type_name -> header.File
+	597,  // 1353: header.ZaloGroup.setting:type_name -> header.ZaloGroupSetting
+	666,  // 1354: header.ZaloPhoneLookupRequest.ctx:type_name -> common.Context
+	601,  // 1355: header.ZaloPersonalAccount.fReqInfo:type_name -> header.ZaloFriendRequestInfo
+	599,  // 1356: header.ZaloPersonalAccount.biz_pkg:type_name -> header.ZaloBusinessPackage
+	600,  // 1357: header.ZaloPersonalAccount.recomm_info:type_name -> header.ZaloRecommendInformation
+	665,  // 1358: header.ZaloPersonalAccount.last_queue_action_ids:type_name -> header.ZaloPersonalAccount.LastQueueActionIdsEntry
+	666,  // 1359: header.ZaloLoginStatus.ctx:type_name -> common.Context
+	666,  // 1360: header.Link.ctx:type_name -> common.Context
+	683,  // 1361: header.Plan.limit:type_name -> common.Limit
+	500,  // 1362: header.Message.I18nBlockEntry.value:type_name -> header.Block
+	500,  // 1363: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
+	500,  // 1364: header.I18nBlock.I18nEntry.value:type_name -> header.Block
+	500,  // 1365: header.Notif.I18nTitleBlockEntry.value:type_name -> header.Block
+	174,  // 1366: header.ContactComponent.ContactButton.zalo:type_name -> header.ZaloContactComponent
+	173,  // 1367: header.ContactComponent.ContactButton.facebook:type_name -> header.FacebookContactComponent
+	175,  // 1368: header.ContactComponent.ContactButton.call:type_name -> header.CallContactComponent
+	176,  // 1369: header.ContactComponent.ContactButton.chat:type_name -> header.ChatContactComponent
+	177,  // 1370: header.ContactComponent.ContactButton.map:type_name -> header.MapContactComponent
+	667,  // 1371: header.FormField.FormFieldOption.i18n_label:type_name -> header.I18nString
+	500,  // 1372: header.Product.I18nDescriptionBlockEntry.value:type_name -> header.Block
+	549,  // 1373: header.ProductCategory.AttributesEntry.value:type_name -> header.JSONSchema
+	313,  // 1374: header.Error.AttrsEntry.value:type_name -> header.ErrorAttribute
+	313,  // 1375: header.Error.HiddenAttrsEntry.value:type_name -> header.ErrorAttribute
+	398,  // 1376: header.Workflow.ActionsEntry.value:type_name -> header.WorkflowAction
+	398,  // 1377: header.Workflow.ComputedActionsEntry.value:type_name -> header.WorkflowAction
+	89,   // 1378: header.Ticket.MemberMEntry.value:type_name -> header.ConversationMember
+	484,  // 1379: header.LiveUserView.MetricsEntry.value:type_name -> header.LiveViewMetric
+	500,  // 1380: header.Article.I18nContentEntry.value:type_name -> header.Block
+	549,  // 1381: header.JSONSchema.PropertiesEntry.value:type_name -> header.JSONSchema
+	398,  // 1382: header.AutomationFunction.ActionsEntry.value:type_name -> header.WorkflowAction
+	1383, // [1383:1383] is the sub-list for method output_type
+	1383, // [1383:1383] is the sub-list for method input_type
+	1383, // [1383:1383] is the sub-list for extension type_name
+	1383, // [1383:1383] is the sub-list for extension extendee
+	0,    // [0:1383] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }

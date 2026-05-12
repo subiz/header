@@ -3846,7 +3846,7 @@ message UserView {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	UserViewCondition condition = 4;
+	UserViewCondition old_condition = 4;
 
 	string created_by = 5;
 	int64 created = 6;
@@ -3875,7 +3875,7 @@ message UserView {
 
 	bool keep_secondary = 31; // return secondary, do not transform to primary
 
-	WorkflowCondition filter = 32;
+	WorkflowCondition condition = 32;
 }
 
 message CountTouchpointResponse {
@@ -4024,7 +4024,7 @@ message OrderItem {
 
 	string note = 15;
 
-	//	equal quantity*product.price - discount
+	// equal quantity*product.price - discount
 	float total = 16;
 	int64 fpv_total = 17;
 
@@ -4043,6 +4043,7 @@ message OrderItem {
 
 	// not using product
 	string name = 33;
+	string sku = 34;
 }
 
 message GHNAddress {
@@ -5926,8 +5927,8 @@ message Segment {
 	string name = 4;
 	string description = 5;
 
-	UserViewCondition condition = 6; // use filter instead
-	WorkflowCondition filter = 12;
+	UserViewCondition old_condition = 6; // use filter instead
+	WorkflowCondition condition = 12;
 
 	string type = 7; // manual vs auto
 	int64 fetching_progress = 8; // 0 -> 100
@@ -7427,7 +7428,7 @@ message ConvoReportRequest {
 	int64 to_hour = 4;
 	repeated string metrics = 5;
 	repeated string group_bys = 6;
-	repeated UserViewCondition conditions = 7;
+	repeated WorkflowCondition conditions = 7;
 	account.Account account = 8;
 	string anchor = 9;
 	int32 limit = 10;
@@ -8093,8 +8094,8 @@ message LiveUserView {
 	string account_id = 2;
 	string agent_id = 3;
 	string id = 4;
-	UserViewCondition condition = 5;
-	WorkflowCondition filter = 13;
+	UserViewCondition old_condition = 5;
+	WorkflowCondition condition = 13;
 	int64 limit = 6;
 	string order_by = 8;
 
@@ -8830,7 +8831,8 @@ message SuggestLeadFieldRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	UserViewCondition condition = 4;
+	UserViewCondition old_condition = 4;
+	WorkflowCondition condition = 6;
 
 	string key = 5; // id, keyword, lead_owner attr.fullname
 }
@@ -8839,7 +8841,7 @@ message UsersRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	UserViewCondition condition = 3;
+	WorkflowCondition condition = 7;
 	repeated string ignore_uids = 4;
 
 	repeated string user_ids = 5;

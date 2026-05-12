@@ -649,7 +649,7 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	return true
 }
 
-func HasDeletedCond(cond *UserViewCondition) bool {
+func HasDeletedCond(cond *WorkflowCondition) bool {
 	if len(cond.GetOne()) > 0 {
 		return slices.ContainsFunc(cond.GetOne(), HasDeletedCond)
 	}
@@ -661,7 +661,7 @@ func HasDeletedCond(cond *UserViewCondition) bool {
 }
 
 // must pass in primary user and its secondaries
-func RsCheck(acc *apb.Account, users []*User, cond *UserViewCondition, deleted bool) bool {
+func RsCheck(acc *apb.Account, users []*User, cond *WorkflowCondition, deleted bool) bool {
 	if len(users) == 0 {
 		return true
 	}
@@ -715,7 +715,7 @@ func RsCheck(acc *apb.Account, users []*User, cond *UserViewCondition, deleted b
 	return true
 }
 
-func IsPrimaryCond(cond *UserViewCondition) bool {
+func IsPrimaryCond(cond *WorkflowCondition) bool {
 	key := cond.GetKey()
 	if strings.HasPrefix(key, "attr:") || strings.HasPrefix(key, "attr.") {
 		key = key[5:]
@@ -724,7 +724,7 @@ func IsPrimaryCond(cond *UserViewCondition) bool {
 	return key == "lifecycle_stage" || key == "owner"
 }
 
-func IsPositiveCond(cond *UserViewCondition) bool {
+func IsPositiveCond(cond *WorkflowCondition) bool {
 	switch cond.GetType() {
 	case "number":
 		switch cond.GetNumber().GetOp() {
@@ -757,7 +757,7 @@ func IsPositiveCond(cond *UserViewCondition) bool {
 	return true
 }
 
-func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
+func evaluateSingleCond(acc *apb.Account, u *User, cond *WorkflowCondition, deleted bool) bool {
 	if deleted && u.Deleted == 0 {
 		return false
 	}
@@ -1224,7 +1224,7 @@ func GetTextAttr(u *User, key string) string {
 	return ""
 }
 
-func NormalizeCond(cond *UserViewCondition) {
+func NormalizeCond(cond *WorkflowCondition) {
 	if len(cond.GetOne()) > 0 {
 		for _, c := range cond.GetOne() {
 			NormalizeCond(c)
