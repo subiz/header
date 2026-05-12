@@ -27448,7 +27448,7 @@ type UserView struct {
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Condition     *UserViewCondition     `protobuf:"bytes,4,opt,name=condition,proto3" json:"condition,omitempty"`
+	OldCondition  *UserViewCondition     `protobuf:"bytes,4,opt,name=old_condition,json=oldCondition,proto3" json:"old_condition,omitempty"`
 	CreatedBy     string                 `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	Created       int64                  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
 	UpdatedBy     string                 `protobuf:"bytes,7,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
@@ -27466,7 +27466,7 @@ type UserView struct {
 	// for listing
 	Attribute     string             `protobuf:"bytes,30,opt,name=attribute,proto3" json:"attribute,omitempty"`
 	KeepSecondary bool               `protobuf:"varint,31,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
-	Filter        *WorkflowCondition `protobuf:"bytes,32,opt,name=filter,proto3" json:"filter,omitempty"`
+	Condition     *WorkflowCondition `protobuf:"bytes,32,opt,name=condition,proto3" json:"condition,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -27522,9 +27522,9 @@ func (x *UserView) GetId() string {
 	return ""
 }
 
-func (x *UserView) GetCondition() *UserViewCondition {
+func (x *UserView) GetOldCondition() *UserViewCondition {
 	if x != nil {
-		return x.Condition
+		return x.OldCondition
 	}
 	return nil
 }
@@ -27641,9 +27641,9 @@ func (x *UserView) GetKeepSecondary() bool {
 	return false
 }
 
-func (x *UserView) GetFilter() *WorkflowCondition {
+func (x *UserView) GetCondition() *WorkflowCondition {
 	if x != nil {
-		return x.Filter
+		return x.Condition
 	}
 	return nil
 }
@@ -28621,6 +28621,7 @@ type OrderItem struct {
 	FpvTotalTax        int64   `protobuf:"varint,31,opt,name=fpv_total_tax,json=fpvTotalTax,proto3" json:"fpv_total_tax,omitempty"` // computed, override value
 	// not using product
 	Name          string `protobuf:"bytes,33,opt,name=name,proto3" json:"name,omitempty"`
+	Sku           string `protobuf:"bytes,34,opt,name=sku,proto3" json:"sku,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -28763,6 +28764,13 @@ func (x *OrderItem) GetFpvTotalTax() int64 {
 func (x *OrderItem) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *OrderItem) GetSku() string {
+	if x != nil {
+		return x.Sku
 	}
 	return ""
 }
@@ -41867,8 +41875,8 @@ type Segment struct {
 	Id                 string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name               string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	Description        string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Condition          *UserViewCondition     `protobuf:"bytes,6,opt,name=condition,proto3" json:"condition,omitempty"` // use filter instead
-	Filter             *WorkflowCondition     `protobuf:"bytes,12,opt,name=filter,proto3" json:"filter,omitempty"`
+	OldCondition       *UserViewCondition     `protobuf:"bytes,6,opt,name=old_condition,json=oldCondition,proto3" json:"old_condition,omitempty"` // use filter instead
+	Condition          *WorkflowCondition     `protobuf:"bytes,12,opt,name=condition,proto3" json:"condition,omitempty"`
 	Type               string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`                                                  // manual vs auto
 	FetchingProgress   int64                  `protobuf:"varint,8,opt,name=fetching_progress,json=fetchingProgress,proto3" json:"fetching_progress,omitempty"` // 0 -> 100
 	LastFetched        int64                  `protobuf:"varint,9,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
@@ -41958,16 +41966,16 @@ func (x *Segment) GetDescription() string {
 	return ""
 }
 
-func (x *Segment) GetCondition() *UserViewCondition {
+func (x *Segment) GetOldCondition() *UserViewCondition {
 	if x != nil {
-		return x.Condition
+		return x.OldCondition
 	}
 	return nil
 }
 
-func (x *Segment) GetFilter() *WorkflowCondition {
+func (x *Segment) GetCondition() *WorkflowCondition {
 	if x != nil {
-		return x.Filter
+		return x.Condition
 	}
 	return nil
 }
@@ -74897,13 +74905,13 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12&\n" +
-	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\x89\x05\n" +
+	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\x96\x05\n" +
 	"\bUserView\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id\x127\n" +
-	"\tcondition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\tcondition\x12\x1d\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12>\n" +
+	"\rold_condition\x18\x04 \x01(\v2\x19.header.UserViewConditionR\foldCondition\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\x05 \x01(\tR\tcreatedBy\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\x03R\acreated\x12\x1d\n" +
@@ -74922,8 +74930,8 @@ const file_header_proto_rawDesc = "" +
 	"\aviewers\x18\x1b \x03(\tR\aviewers\x12\x18\n" +
 	"\aignores\x18\x1c \x03(\tR\aignores\x12\x1c\n" +
 	"\tattribute\x18\x1e \x01(\tR\tattribute\x12%\n" +
-	"\x0ekeep_secondary\x18\x1f \x01(\bR\rkeepSecondary\x121\n" +
-	"\x06filter\x18  \x01(\v2\x19.header.WorkflowConditionR\x06filter\"\xff\x01\n" +
+	"\x0ekeep_secondary\x18\x1f \x01(\bR\rkeepSecondary\x127\n" +
+	"\tcondition\x18  \x01(\v2\x19.header.WorkflowConditionR\tcondition\"\xff\x01\n" +
 	"\x17CountTouchpointResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75028,7 +75036,7 @@ const file_header_proto_rawDesc = "" +
 	"\aupdated\x18\x04 \x01(\x03R\aupdated\x12\x12\n" +
 	"\x04rate\x18\x05 \x01(\x02R\x04rate\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\xfe\x03\n" +
+	"updated_by\x18\x06 \x01(\tR\tupdatedBy\"\x90\x04\n" +
 	"\tOrderItem\x12\x19\n" +
 	"\border_id\x18\x03 \x01(\tR\aorderId\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1a\n" +
@@ -75046,7 +75054,8 @@ const file_header_proto_rawDesc = "" +
 	"\rdiscount_type\x18\x1a \x01(\tR\fdiscountType\x12\x1b\n" +
 	"\ttotal_tax\x18\x1e \x01(\x02R\btotalTax\x12\"\n" +
 	"\rfpv_total_tax\x18\x1f \x01(\x03R\vfpvTotalTax\x12\x12\n" +
-	"\x04name\x18! \x01(\tR\x04name\"\xe0\x01\n" +
+	"\x04name\x18! \x01(\tR\x04name\x12\x10\n" +
+	"\x03sku\x18\" \x01(\tR\x03sku\"\xe0\x01\n" +
 	"\n" +
 	"GHNAddress\x12\x1e\n" +
 	"\n" +
@@ -76643,16 +76652,16 @@ const file_header_proto_rawDesc = "" +
 	"\barchived\x18  \x01(\x03R\barchived\x12\x1a\n" +
 	"\bpriority\x18! \x01(\x03R\bpriority\x12\x1a\n" +
 	"\breporter\x18\" \x01(\tR\breporter\x12\x1a\n" +
-	"\bassignee\x18# \x01(\tR\bassignee\"\xb1\a\n" +
+	"\bassignee\x18# \x01(\tR\bassignee\"\xbe\a\n" +
 	"\aSegment\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x127\n" +
-	"\tcondition\x18\x06 \x01(\v2\x19.header.UserViewConditionR\tcondition\x121\n" +
-	"\x06filter\x18\f \x01(\v2\x19.header.WorkflowConditionR\x06filter\x12\x12\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12>\n" +
+	"\rold_condition\x18\x06 \x01(\v2\x19.header.UserViewConditionR\foldCondition\x127\n" +
+	"\tcondition\x18\f \x01(\v2\x19.header.WorkflowConditionR\tcondition\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12+\n" +
 	"\x11fetching_progress\x18\b \x01(\x03R\x10fetchingProgress\x12!\n" +
 	"\flast_fetched\x18\t \x01(\x03R\vlastFetched\x12(\n" +
@@ -81522,8 +81531,8 @@ var file_header_proto_depIdxs = []int32{
 	666,  // 525: header.UserViews.ctx:type_name -> common.Context
 	251,  // 526: header.UserViews.views:type_name -> header.UserView
 	666,  // 527: header.UserView.ctx:type_name -> common.Context
-	254,  // 528: header.UserView.condition:type_name -> header.UserViewCondition
-	460,  // 529: header.UserView.filter:type_name -> header.WorkflowCondition
+	254,  // 528: header.UserView.old_condition:type_name -> header.UserViewCondition
+	460,  // 529: header.UserView.condition:type_name -> header.WorkflowCondition
 	666,  // 530: header.CountTouchpointResponse.ctx:type_name -> common.Context
 	625,  // 531: header.CountTouchpointResponse.counts:type_name -> header.CountTouchpointResponse.TouchpointCount
 	666,  // 532: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
@@ -81734,8 +81743,8 @@ var file_header_proto_depIdxs = []int32{
 	46,   // 737: header.EventType.first_user:type_name -> header.User
 	46,   // 738: header.EventType.last_user:type_name -> header.User
 	666,  // 739: header.Segment.ctx:type_name -> common.Context
-	254,  // 740: header.Segment.condition:type_name -> header.UserViewCondition
-	460,  // 741: header.Segment.filter:type_name -> header.WorkflowCondition
+	254,  // 740: header.Segment.old_condition:type_name -> header.UserViewCondition
+	460,  // 741: header.Segment.condition:type_name -> header.WorkflowCondition
 	314,  // 742: header.Segment.fetch_error:type_name -> header.Error
 	487,  // 743: header.Segment.permissions:type_name -> header.ResourceGroupMember
 	666,  // 744: header.SegmentSyncUserStatus.ctx:type_name -> common.Context
