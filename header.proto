@@ -3846,7 +3846,6 @@ message UserView {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	UserViewCondition old_condition = 4;
 
 	string created_by = 5;
 	int64 created = 6;
@@ -3900,28 +3899,6 @@ message SuggestLeadFieldResponse {
 	repeated bool booleans = 12;
 	repeated string datetimes = 13;
 	repeated int64 points = 14;
-}
-
-// @deprecated, use WorkflowCondition
-message UserViewCondition {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-
-	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
-	string type = 5;
-
-	TextCondition text = 6;
-	BooleanCondition boolean = 8;
-	NumberCondition number = 9;
-	DatetimeCondition datetime = 10;
-	// EventCondition event = 11;
-
-	repeated UserViewCondition all = 12; // preferred
-	repeated UserViewCondition one = 13;
-
-	bool deleted = 14;
-	string ui_type = 15;
 }
 
 message ReportResponse {
@@ -5927,7 +5904,6 @@ message Segment {
 	string name = 4;
 	string description = 5;
 
-	UserViewCondition old_condition = 6; // use filter instead
 	WorkflowCondition condition = 12;
 
 	string type = 7; // manual vs auto
@@ -6126,7 +6102,8 @@ message Campaign {
 	int64 scheduled_start_time = 32;
 
 	repeated string trigger_event_types = 33; // scheduled, user_info_updated
-	UserViewCondition trigger_condition = 37;
+	// UserViewCondition trigger_condition = 37;
+	WorkflowCondition trigger_condition = 34;
 
 	UsersRequest audient_request = 39; // write only when create
 
@@ -8049,7 +8026,6 @@ message TicketView {
 
 	string type = 6;
 
-	UserViewCondition old_condition = 7;
 	WorkflowCondition condition = 17;
 
 	repeated string fields = 8; // column // thu tu sap xep, danh sach cot
@@ -8095,7 +8071,6 @@ message LiveUserView {
 	string account_id = 2;
 	string agent_id = 3;
 	string id = 4;
-	UserViewCondition old_condition = 5;
 	WorkflowCondition condition = 13;
 	int64 limit = 6;
 	string order_by = 8;
@@ -8832,7 +8807,6 @@ message SuggestLeadFieldRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	UserViewCondition old_condition = 4;
 	WorkflowCondition condition = 6;
 
 	string key = 5; // id, keyword, lead_owner attr.fullname

@@ -1155,7 +1155,7 @@ func TestRsCondition(t *testing.T) {
 		Id: "usskpnvcidvsyttyubipl",
 	}}
 
-	out := RsCheck(nil, users, &UserViewCondition{
+	out := RsCheck(nil, users, &WorkflowCondition{
 		Key:  "attr:owner",
 		Type: "text",
 		Text: &TextCondition{Op: "is_empty"},

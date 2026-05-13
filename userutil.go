@@ -1019,43 +1019,6 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *WorkflowCondition, dele
 	return true
 }
 
-func ToWorkflowCondition(cond *UserViewCondition) *WorkflowCondition {
-	if cond == nil {
-		return nil
-	}
-
-	res := &WorkflowCondition{
-		Id:      cond.Id,
-		Key:     cond.Key,
-		Type:    cond.Type,
-		UiType:  cond.UiType,
-		Deleted: cond.Deleted,
-	}
-
-	if cond.Text != nil {
-		res.Text = proto.Clone(cond.Text).(*TextCondition)
-	}
-	if cond.Boolean != nil {
-		res.Boolean = proto.Clone(cond.Boolean).(*BooleanCondition)
-	}
-	if cond.Number != nil {
-		res.Number = proto.Clone(cond.Number).(*NumberCondition)
-	}
-	if cond.Datetime != nil {
-		res.Datetime = proto.Clone(cond.Datetime).(*DatetimeCondition)
-	}
-
-	for _, c := range cond.All {
-		res.All = append(res.All, ToWorkflowCondition(c))
-	}
-
-	for _, c := range cond.One {
-		res.One = append(res.One, ToWorkflowCondition(c))
-	}
-
-	return res
-}
-
 func ReverseCondition(cond *WorkflowCondition) *WorkflowCondition {
 	cond = proto.Clone(cond).(*WorkflowCondition)
 	var all []*WorkflowCondition
