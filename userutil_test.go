@@ -6,12 +6,8 @@ import (
 	apb "github.com/subiz/header/account"
 )
 
-func strPtr(s string) *string {
-	return &s
-}
-
 func TestEvaluateDatetime(t *testing.T) {
-	acc := &apb.Account{Timezone: strPtr("+07:00")}
+	acc := &apb.Account{Timezone: new("+07:00")}
 	// 2024-05-10 10:00:00 +07:00
 	// UTC: 2024-05-10 03:00:00
 	// Unix: 1715310000

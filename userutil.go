@@ -628,23 +628,13 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 		location := time.FixedZone("account_tz", h*3600+m*60)
 		tInLoc := t.In(location)
 		month := int64(tInLoc.Month())
-		for _, m := range cond.GetMonthEq() {
-			if m == month {
-				return true
-			}
-		}
-		return false
+		return slices.Contains(cond.GetMonthEq(), month)
 	case "weekday_eq":
 		h, m, _ := SplitTzOffset(acc.GetTimezone())
 		location := time.FixedZone("account_tz", h*3600+m*60)
 		tInLoc := t.In(location)
 		weekday := int64(tInLoc.Weekday())
-		for _, w := range cond.GetWeekdayEq() {
-			if w == weekday {
-				return true
-			}
-		}
-		return false
+		return slices.Contains(cond.GetWeekdayEq(), weekday)
 	}
 	return true
 }

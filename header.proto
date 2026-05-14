@@ -631,7 +631,7 @@ message Event {
 	int64 updated = 10;
 	int64 event_time = 11; // actual time that event created, empty -> fallback to created
 	string type = 9; // alway lowercase, custom_* for custom event purchase
-	string session_id = 12; // extra id for many purpose (idempotency key)
+	// string session_id = 12; // extra id for many purpose (idempotency key)
 	By by = 50;
 	Touchpoint touchpoint = 52;
 	Data data = 20;
@@ -643,7 +643,6 @@ message Event {
 
 	google.protobuf.Struct payload = 150;
 }
-
 
 message Data {
 	common.Context ctx = 1;
@@ -9354,6 +9353,8 @@ message AIFunction {
 	string message_prompt = 39;
 
 	UnlockKnowledge unlock_knowledge = 40;
+	string parameter_enforcement = 41; // "enforce" (slower but more correct parameter)
+	string additional_description = 42; // used on when parameter_enforcement=enforce
 }
 
 message UnlockKnowledge {

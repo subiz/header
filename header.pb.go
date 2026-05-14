@@ -6525,15 +6525,15 @@ type Event struct {
 	Updated       int64                  `protobuf:"varint,10,opt,name=updated,proto3" json:"updated,omitempty"`
 	EventTime     int64                  `protobuf:"varint,11,opt,name=event_time,json=eventTime,proto3" json:"event_time,omitempty"` // actual time that event created, empty -> fallback to created
 	Type          string                 `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`                              // alway lowercase, custom_* for custom event purchase
-	SessionId     string                 `protobuf:"bytes,12,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`  // extra id for many purpose (idempotency key)
-	By            *By                    `protobuf:"bytes,50,opt,name=by,proto3" json:"by,omitempty"`
-	Touchpoint    *Touchpoint            `protobuf:"bytes,52,opt,name=touchpoint,proto3" json:"touchpoint,omitempty"`
-	Data          *Data                  `protobuf:"bytes,20,opt,name=data,proto3" json:"data,omitempty"`
-	Old           *Data                  `protobuf:"bytes,53,opt,name=old,proto3" json:"old,omitempty"`
-	Ref           *Data                  `protobuf:"bytes,54,opt,name=ref,proto3" json:"ref,omitempty"`
-	WebhookId     string                 `protobuf:"bytes,56,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`               // webhook id listen this event
-	SourceEventId string                 `protobuf:"bytes,57,opt,name=source_event_id,json=sourceEventId,proto3" json:"source_event_id,omitempty"` // for sync event, can be used like idempotency key
-	Payload       *structpb.Struct       `protobuf:"bytes,150,opt,name=payload,proto3" json:"payload,omitempty"`
+	// string session_id = 12; // extra id for many purpose (idempotency key)
+	By            *By              `protobuf:"bytes,50,opt,name=by,proto3" json:"by,omitempty"`
+	Touchpoint    *Touchpoint      `protobuf:"bytes,52,opt,name=touchpoint,proto3" json:"touchpoint,omitempty"`
+	Data          *Data            `protobuf:"bytes,20,opt,name=data,proto3" json:"data,omitempty"`
+	Old           *Data            `protobuf:"bytes,53,opt,name=old,proto3" json:"old,omitempty"`
+	Ref           *Data            `protobuf:"bytes,54,opt,name=ref,proto3" json:"ref,omitempty"`
+	WebhookId     string           `protobuf:"bytes,56,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`               // webhook id listen this event
+	SourceEventId string           `protobuf:"bytes,57,opt,name=source_event_id,json=sourceEventId,proto3" json:"source_event_id,omitempty"` // for sync event, can be used like idempotency key
+	Payload       *structpb.Struct `protobuf:"bytes,150,opt,name=payload,proto3" json:"payload,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6627,13 +6627,6 @@ func (x *Event) GetEventTime() int64 {
 func (x *Event) GetType() string {
 	if x != nil {
 		return x.Type
-	}
-	return ""
-}
-
-func (x *Event) GetSessionId() string {
-	if x != nil {
-		return x.SessionId
 	}
 	return ""
 }
@@ -64848,11 +64841,13 @@ type AIFunction struct {
 	// name=system_update_agent
 	AiAgent *AIAgent `protobuf:"bytes,37,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
 	// name=system_send_message
-	Message         *Message         `protobuf:"bytes,38,opt,name=message,proto3" json:"message,omitempty"` // unknown message
-	MessagePrompt   string           `protobuf:"bytes,39,opt,name=message_prompt,json=messagePrompt,proto3" json:"message_prompt,omitempty"`
-	UnlockKnowledge *UnlockKnowledge `protobuf:"bytes,40,opt,name=unlock_knowledge,json=unlockKnowledge,proto3" json:"unlock_knowledge,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	Message               *Message         `protobuf:"bytes,38,opt,name=message,proto3" json:"message,omitempty"` // unknown message
+	MessagePrompt         string           `protobuf:"bytes,39,opt,name=message_prompt,json=messagePrompt,proto3" json:"message_prompt,omitempty"`
+	UnlockKnowledge       *UnlockKnowledge `protobuf:"bytes,40,opt,name=unlock_knowledge,json=unlockKnowledge,proto3" json:"unlock_knowledge,omitempty"`
+	ParameterEnforcement  string           `protobuf:"bytes,41,opt,name=parameter_enforcement,json=parameterEnforcement,proto3" json:"parameter_enforcement,omitempty"`    // "enforce" (slower but more correct parameter)
+	AdditionalDescription string           `protobuf:"bytes,42,opt,name=additional_description,json=additionalDescription,proto3" json:"additional_description,omitempty"` // used on when parameter_enforcement=enforce
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *AIFunction) Reset() {
@@ -65093,6 +65088,20 @@ func (x *AIFunction) GetUnlockKnowledge() *UnlockKnowledge {
 		return x.UnlockKnowledge
 	}
 	return nil
+}
+
+func (x *AIFunction) GetParameterEnforcement() string {
+	if x != nil {
+		return x.ParameterEnforcement
+	}
+	return ""
+}
+
+func (x *AIFunction) GetAdditionalDescription() string {
+	if x != nil {
+		return x.AdditionalDescription
+	}
+	return ""
 }
 
 type UnlockKnowledge struct {
@@ -72138,7 +72147,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x06 \x01(\tR\x04type\x12\x1d\n" +
 	"\n" +
 	"display_id\x18\a \x01(\tR\tdisplayId\x12!\n" +
-	"\fdisplay_type\x18\b \x01(\tR\vdisplayType\"\xcd\x04\n" +
+	"\fdisplay_type\x18\b \x01(\tR\vdisplayType\"\xae\x04\n" +
 	"\x05Event\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x0e\n" +
@@ -72151,9 +72160,7 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
 	"event_time\x18\v \x01(\x03R\teventTime\x12\x12\n" +
-	"\x04type\x18\t \x01(\tR\x04type\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\f \x01(\tR\tsessionId\x12\x1a\n" +
+	"\x04type\x18\t \x01(\tR\x04type\x12\x1a\n" +
 	"\x02by\x182 \x01(\v2\n" +
 	".header.ByR\x02by\x122\n" +
 	"\n" +
@@ -79276,7 +79283,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04enum\x18\r \x03(\tR\x04enum\x1aQ\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12(\n" +
-	"\x05value\x18\x02 \x01(\v2\x12.header.JSONSchemaR\x05value:\x028\x01\"\xac\v\n" +
+	"\x05value\x18\x02 \x01(\v2\x12.header.JSONSchemaR\x05value:\x028\x01\"\x98\f\n" +
 	"\n" +
 	"AIFunction\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12!\n" +
@@ -79313,7 +79320,9 @@ const file_header_proto_rawDesc = "" +
 	"\bai_agent\x18% \x01(\v2\x0f.header.AIAgentR\aaiAgent\x12)\n" +
 	"\amessage\x18& \x01(\v2\x0f.header.MessageR\amessage\x12%\n" +
 	"\x0emessage_prompt\x18' \x01(\tR\rmessagePrompt\x12B\n" +
-	"\x10unlock_knowledge\x18( \x01(\v2\x17.header.UnlockKnowledgeR\x0funlockKnowledge\"^\n" +
+	"\x10unlock_knowledge\x18( \x01(\v2\x17.header.UnlockKnowledgeR\x0funlockKnowledge\x123\n" +
+	"\x15parameter_enforcement\x18) \x01(\tR\x14parameterEnforcement\x125\n" +
+	"\x16additional_description\x18* \x01(\tR\x15additionalDescription\"^\n" +
 	"\x0fUnlockKnowledge\x12\x1d\n" +
 	"\n" +
 	"entry_tags\x18\x04 \x03(\tR\tentryTags\x12,\n" +

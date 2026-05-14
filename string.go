@@ -95,10 +95,7 @@ func Norm(s string, maxChar int) string {
 	// If there's a limit, we allocate at most maxChar * 4 bytes (worst-case UTF-8).
 	// We cap the allocation at len(s) to avoid over-allocating if maxChar is huge.
 	if hasLimit {
-		alloc := maxChar * 4
-		if alloc > len(s) {
-			alloc = len(s)
-		}
+		alloc := min(maxChar*4, len(s))
 		b.Grow(alloc)
 	} else {
 		b.Grow(len(s))
