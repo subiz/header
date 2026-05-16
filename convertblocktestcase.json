@@ -293,7 +293,7 @@
     },
     "output": [
       {
-        "text": "Chào anh Hiếu,\nVề căn hộ 3 phòng ngủ tại Regal Complex Đà Nẵng, em xin chia sẻ thông tin như sau:0\n. Giá bán: Từ 6.71 tỷ đến 7.41 tỷ đồng, tùy diện tích từ 96m² đến 121m².1\n. Chiết khấu và ưu đãi: Giá trên chưa bao gồm chiết khấu theo từng thời điểm. Nếu anh quyết định mua trong giai đoạn này, sẽ có các chính sách chiết khấu và thanh toán hỗ trợ tối ưu giá mua thực tế.2\n. Đầu tư cho thuê: Căn hộ 3 phòng ngủ rất phù hợp để đầu tư cho thuê nhờ vị trí đắc địa, tiện ích đầy đủ như hồ bơi vô cực, gym, cùng chất lượng xây dựng vượt trội, giúp thu hút khách thuê và tăng lợi nhuận ổn định.\nAnh có thể tham khảo hình ảnh tiện ích dự án bên dưới để có cái nhìn rõ hơn:"
+        "text": "Chào anh Hiếu,\nVề căn hộ 3 phòng ngủ tại Regal Complex Đà Nẵng, em xin chia sẻ thông tin như sau:\n1. Giá bán: Từ 6.71 tỷ đến 7.41 tỷ đồng, tùy diện tích từ 96m² đến 121m².\n2. Chiết khấu và ưu đãi: Giá trên chưa bao gồm chiết khấu theo từng thời điểm. Nếu anh quyết định mua trong giai đoạn này, sẽ có các chính sách chiết khấu và thanh toán hỗ trợ tối ưu giá mua thực tế.\n3. Đầu tư cho thuê: Căn hộ 3 phòng ngủ rất phù hợp để đầu tư cho thuê nhờ vị trí đắc địa, tiện ích đầy đủ như hồ bơi vô cực, gym, cùng chất lượng xây dựng vượt trội, giúp thu hút khách thuê và tăng lợi nhuận ổn định.\nAnh có thể tham khảo hình ảnh tiện ích dự án bên dưới để có cái nhìn rõ hơn:"
       },
       {
         "attachments": [
@@ -325,6 +325,279 @@
       },
       {
         "text": "Anh có muốn em gửi thông tin chi tiết về các chính sách thanh toán hoặc bảng giá cập nhật hiện tại không ạ? Hay anh quan tâm thêm về pháp lý và báo cáo sinh lợi đầu tư dài hạn của căn hộ này?"
+      }
+    ]
+  },
+  {
+    "name": "6",
+    "input": {
+      "type": "div",
+      "content": [
+        {
+          "type": "ordered_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    { "type": "text", "text": "Unix PKB101", "bold": true },
+                    { "type": "text", "text": " – " },
+                    { "type": "text", "text": "549.000đ", "bold": true },
+                    { "type": "text", "text": " | Phố Phan Kế Bính, Ba Đình" },
+                    { "type": "text", "text": "\n" },
+                    {
+                      "type": "image",
+                      "alt_text": "Unix PKB101",
+                      "image": {
+                        "url": "https://r2.dayladau-cdn.com/file/1e5697edabe0595be7684d51d9739aa63de5fd1d62f2376600c019fd2e948afd"
+                      }
+                    },
+                    { "type": "text", "text": "\n" },
+                    { "type": "text", "text": "\nLink: " },
+                    {
+                      "type": "link",
+                      "text": "https://dayladau.com/listings/lsgbgy6s7g",
+                      "href": "https://dayladau.com/listings/lsgbgy6s7g"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    { "type": "text", "text": "Chiru TL 301", "bold": true },
+                    { "type": "text", "text": " – " },
+                    { "type": "text", "text": "599.000đ", "bold": true },
+                    { "type": "text", "text": " | Phố Trung Liệt, Đống Đa" },
+                    { "type": "text", "text": "\n" },
+                    {
+                      "type": "image",
+                      "alt_text": "Chiru TL 301",
+                      "image": {
+                        "url": "https://r2.dayladau-cdn.com/file/85aad6348f35473f2cb70a4a27dabf6bae964183f423dd9581baa40746fa5f6e"
+                      }
+                    },
+                    { "type": "text", "text": "\n" },
+                    { "type": "text", "text": "\nLink: " },
+                    {
+                      "type": "link",
+                      "text": "https://dayladau.com/listings/lsokeg4t8y",
+                      "href": "https://dayladau.com/listings/lsokeg4t8y"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    { "type": "text", "text": "Citisnug 302", "bold": true },
+                    { "type": "text", "text": " – " },
+                    { "type": "text", "text": "599.000đ", "bold": true },
+                    {
+                      "type": "text",
+                      "text": " | Ngõ 211 Phố Khương Trung, Thanh Xuân"
+                    },
+                    { "type": "text", "text": "\n" },
+                    {
+                      "type": "image",
+                      "alt_text": "Citisnug 302",
+                      "image": {
+                        "url": "https://r2.dayladau-cdn.com/file/a58d0972147233a76efe5d6bedc71a728385d1f14822090ecaa1dcd2665c88c1"
+                      }
+                    },
+                    { "type": "text", "text": "\n" },
+                    { "type": "text", "text": "\nLink: " },
+                    {
+                      "type": "link",
+                      "text": "https://dayladau.com/listings/lsndrktgmr",
+                      "href": "https://dayladau.com/listings/lsndrktgmr"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    { "type": "text", "text": "Myslay 301", "bold": true },
+                    { "type": "text", "text": " – " },
+                    { "type": "text", "text": "649.000đ", "bold": true },
+                    {
+                      "type": "text",
+                      "text": " | Ngõ 387 Phố Vũ Tông Phan, Thanh Xuân"
+                    },
+                    { "type": "text", "text": "\n" },
+                    {
+                      "type": "image",
+                      "alt_text": "Myslay 301",
+                      "image": {
+                        "url": "https://r2.dayladau-cdn.com/file/7dd697c741e58180c95f050a9b78037f9b65b705de3f96477869e47f51a06723"
+                      }
+                    },
+                    { "type": "text", "text": "\n" },
+                    { "type": "text", "text": "\nLink: " },
+                    {
+                      "type": "link",
+                      "text": "https://dayladau.com/listings/ls8uwjksnm",
+                      "href": "https://dayladau.com/listings/ls8uwjksnm"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    { "type": "text", "text": "UnixstayNTG 501", "bold": true },
+                    { "type": "text", "text": " – " },
+                    { "type": "text", "text": "749.000đ", "bold": true },
+                    {
+                      "type": "text",
+                      "text": " | Phố Nguyễn Tư Giản, Hoàn Kiếm"
+                    },
+                    { "type": "text", "text": "\n" },
+                    {
+                      "type": "image",
+                      "alt_text": "UnixstayNTG 501",
+                      "image": {
+                        "url": "https://r2.dayladau-cdn.com/file/4d510b132f76079853c771308ac61e6ca0cf6d85ed27505daccb52ed22d50886"
+                      }
+                    },
+                    { "type": "text", "text": "\n" },
+                    { "type": "text", "text": "\nLink: " },
+                    {
+                      "type": "link",
+                      "text": "https://dayladau.com/listings/ls38wtisxi",
+                      "href": "https://dayladau.com/listings/ls38wtisxi"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "1. Unix PKB101 – 549.000đ | Phố Phan Kế Bính, Ba Đình\nUnix PKB101\n\nLink: https://dayladau.com/listings/lsgbgy6s7g\n2. Chiru TL 301 – 599.000đ | Phố Trung Liệt, Đống Đa\nChiru TL 301\n\nLink: https://dayladau.com/listings/lsokeg4t8y\n3. Citisnug 302 – 599.000đ | Ngõ 211 Phố Khương Trung, Thanh Xuân\nCitisnug 302\n\nLink: https://dayladau.com/listings/lsndrktgmr\n4. Myslay 301 – 649.000đ | Ngõ 387 Phố Vũ Tông Phan, Thanh Xuân\nMyslay 301\n\nLink: https://dayladau.com/listings/ls8uwjksnm\n5. UnixstayNTG 501 – 749.000đ | Phố Nguyễn Tư Giản, Hoàn Kiếm\nUnixstayNTG 501\n\nLink: https://dayladau.com/listings/ls38wtisxi",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://r2.dayladau-cdn.com/file/1e5697edabe0595be7684d51d9739aa63de5fd1d62f2376600c019fd2e948afd",
+            "file": {
+              "url": "https://r2.dayladau-cdn.com/file/1e5697edabe0595be7684d51d9739aa63de5fd1d62f2376600c019fd2e948afd"
+            }
+          },
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://r2.dayladau-cdn.com/file/85aad6348f35473f2cb70a4a27dabf6bae964183f423dd9581baa40746fa5f6e",
+            "file": {
+              "url": "https://r2.dayladau-cdn.com/file/85aad6348f35473f2cb70a4a27dabf6bae964183f423dd9581baa40746fa5f6e"
+            }
+          },
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://r2.dayladau-cdn.com/file/a58d0972147233a76efe5d6bedc71a728385d1f14822090ecaa1dcd2665c88c1",
+            "file": {
+              "url": "https://r2.dayladau-cdn.com/file/a58d0972147233a76efe5d6bedc71a728385d1f14822090ecaa1dcd2665c88c1"
+            }
+          },
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://r2.dayladau-cdn.com/file/7dd697c741e58180c95f050a9b78037f9b65b705de3f96477869e47f51a06723",
+            "file": {
+              "url": "https://r2.dayladau-cdn.com/file/7dd697c741e58180c95f050a9b78037f9b65b705de3f96477869e47f51a06723"
+            }
+          },
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://r2.dayladau-cdn.com/file/4d510b132f76079853c771308ac61e6ca0cf6d85ed27505daccb52ed22d50886",
+            "file": {
+              "url": "https://r2.dayladau-cdn.com/file/4d510b132f76079853c771308ac61e6ca0cf6d85ed27505daccb52ed22d50886"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "7",
+    "input": {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "link",
+          "text": "https://dayladau.com/listings/ls38wtisxi",
+          "href": "https://dayladau.com/listings/ls38wtisxi"
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "https://dayladau.com/listings/ls38wtisxi"
+      }
+    ]
+  },
+  {
+    "name": "8",
+    "input": {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Hi "
+        },
+        {
+          "type": "mention-agent",
+          "text": "@thanh"
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "Hi @thanh"
+      }
+    ]
+  },
+  {
+    "name": "9",
+    "input": {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "emoji",
+          "text": ":custom:",
+          "attrs": {
+            "code": "custom"
+          }
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": ":custom:"
       }
     ]
   }

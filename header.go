@@ -1078,6 +1078,7 @@ func VNPhone(str string) []string {
 		}
 		continue
 	}
+	sort.Strings(validPhone)
 	return validPhone
 }
 
@@ -1753,7 +1754,7 @@ func DeltaToBlock(delta string) *Block {
 		return blocks[0]
 	}
 
-	return &Block{Type: "div", Content: blocks}
+	return &Block{Type: "paragraph", Content: blocks}
 }
 
 func CompileBlock(block *Block, data map[string]string) {
@@ -1815,11 +1816,11 @@ func HasBlockDynamicField(block *Block) bool {
 	return slices.ContainsFunc(block.GetContent(), HasBlockDynamicField)
 }
 
-func BlockToPlainText(block *Block) string {
-	return strings.TrimSpace(blockToPlainText(block))
+func BlockToText(block *Block) string {
+	return strings.TrimSpace(blockToText(block))
 }
 
-func blockToPlainText(block *Block) string {
+func blockToText(block *Block) string {
 	if block == nil {
 		return ""
 	}
@@ -1828,9 +1829,9 @@ func blockToPlainText(block *Block) string {
 		for i, item := range block.GetContent() {
 			prefix := "\n* "
 			if block.Type == "ordered_list" {
-				prefix = strconv.Itoa(i) + "\n. "
+				prefix = "\n" + strconv.Itoa(i+1) + ". "
 			}
-			out += prefix + strings.TrimSpace(blockToPlainText(item))
+			out += prefix + strings.TrimSpace(blockToText(item))
 		}
 		return out
 	}
@@ -1844,26 +1845,11 @@ func blockToPlainText(block *Block) string {
 	}
 
 	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
-		link := out + block.Text
-		if strings.TrimSpace(block.Href) != "" {
-			if strings.Contains(block.Href, ")") || strings.Contains(block.Href, "(") {
-				link += " (<" + strings.TrimSpace(block.Href) + ">)"
-			} else {
-				link += " (" + strings.TrimSpace(block.Href) + ")"
-			}
-		}
-		return link
+		return out + blockTextWithHref(block)
 	}
 
 	if block.Type == "mention-agent" || block.Type == "mention" {
-		var name = ""
-		if attrs := block.GetAttrs(); attrs != nil {
-			name = attrs["name"]
-			if name == "" {
-				name = attrs["id"]
-			}
-		}
-		return out + "@" + name
+		return out + mentionBlockText(block)
 	}
 
 	if block.Type == "horizontal_rule" {
@@ -1882,20 +1868,20 @@ func blockToPlainText(block *Block) string {
 		if code == "" {
 			return out
 		}
-		return out + EmojiM[":"+code+":"]
+		return out + emojiBlockText(block, code)
 	}
 
 	for _, block := range block.GetContent() {
-		out += blockToPlainText(block)
+		out += blockToText(block)
 	}
 	return out
 }
 
-func BlockToPlainTextMessages(block *Block) []*Message {
+func BlockToTextMessages(block *Block) []*Message {
 	messages := []*Message{}
 	flatten := flattenBlock(block)
 	for _, block := range flatten {
-		text, attachments := singleBlockToPlainText2(block)
+		text, attachments := singleBlockToText(block)
 		messages = append(messages, &Message{Text: text, Attachments: attachments})
 	}
 
@@ -1956,7 +1942,7 @@ func flattenBlock(block *Block) []*Block {
 	return out
 }
 
-func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
+func singleBlockToText(block *Block) (string, []*Attachment) {
 	if block == nil {
 		return "", nil
 	}
@@ -1966,9 +1952,9 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 		for i, item := range block.GetContent() {
 			prefix := "\n* "
 			if block.Type == "ordered_list" {
-				prefix = strconv.Itoa(i) + "\n. "
+				prefix = "\n" + strconv.Itoa(i+1) + ". "
 			}
-			item, atts := singleBlockToPlainText2(item)
+			item, atts := singleBlockToText(item)
 			outatts = append(outatts, atts...)
 			item = strings.TrimSpace(item)
 			if item != "" {
@@ -1983,7 +1969,7 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 		var outtext strings.Builder
 		var outatts []*Attachment
 		for _, block := range flatten {
-			text, atts := singleBlockToPlainText2(block)
+			text, atts := singleBlockToText(block)
 			outtext.WriteString(text)
 			outatts = append(outatts, atts...)
 		}
@@ -1998,26 +1984,11 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 	}
 
 	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
-		link := out.String() + block.Text
-		if strings.TrimSpace(block.Href) != "" {
-			if strings.Contains(block.Href, ")") || strings.Contains(block.Href, "(") {
-				link += " (<" + strings.TrimSpace(block.Href) + ">)"
-			} else {
-				link += " (" + strings.TrimSpace(block.Href) + ")"
-			}
-		}
-		return link, nil
+		return out.String() + blockTextWithHref(block), nil
 	}
 
 	if block.Type == "mention-agent" || block.Type == "mention" {
-		var name = ""
-		if attrs := block.GetAttrs(); attrs != nil {
-			name = attrs["name"]
-			if name == "" {
-				name = attrs["id"]
-			}
-		}
-		return out.String() + "@" + name, nil
+		return out.String() + mentionBlockText(block), nil
 	}
 
 	if block.Type == "horizontal_rule" {
@@ -2036,13 +2007,57 @@ func singleBlockToPlainText2(block *Block) (string, []*Attachment) {
 		if code == "" {
 			return out.String(), nil
 		}
-		return out.String() + EmojiM[":"+code+":"], nil
-	}
-
-	if block.Type == "text" {
-		return block.Text, nil
+		return out.String() + emojiBlockText(block, code), nil
 	}
 	return "", nil
+}
+
+func blockTextWithHref(block *Block) string {
+	if block == nil {
+		return ""
+	}
+
+	text := block.Text
+	href := strings.TrimSpace(block.Href)
+	if href == "" || href == strings.TrimSpace(text) {
+		return text
+	}
+
+	if strings.Contains(href, ")") || strings.Contains(href, "(") {
+		return text + " (<" + href + ">)"
+	}
+	return text + " (" + href + ")"
+}
+
+func mentionBlockText(block *Block) string {
+	if block == nil {
+		return ""
+	}
+
+	var name string
+	if attrs := block.GetAttrs(); attrs != nil {
+		name = attrs["name"]
+		if name == "" {
+			name = attrs["id"]
+		}
+	}
+	if name == "" {
+		return block.Text
+	}
+	if strings.HasPrefix(name, "@") {
+		return name
+	}
+	return "@" + name
+}
+
+func emojiBlockText(block *Block, code string) string {
+	if emoji := EmojiM[":"+code+":"]; emoji != "" {
+		return emoji
+	}
+	if block != nil && block.Text != "" {
+		return block.Text
+	}
+	return ":" + code + ":"
 }
 
 func BlockToHTML(block *Block) string {

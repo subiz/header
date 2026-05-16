@@ -7,6 +7,7 @@ import (
 	"hash/crc32"
 	"math"
 	"os"
+	"reflect"
 	"sort"
 	"strings"
 	"testing"
@@ -104,8 +105,9 @@ func TestVNPhone(t *testing.T) {
 	}
 
 	for i, tc := range testcases {
-		if tc.out != strings.Join(VNPhone(tc.in), ";") {
-			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, strings.Join(VNPhone(tc.in), ";"))
+		got := strings.Join(VNPhone(tc.in), ";")
+		if tc.out != got {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, got)
 		}
 	}
 }
@@ -239,7 +241,10 @@ func TestBlockToPlainTextMessages(t *testing.T) {
 
 	for _, tc := range testcases {
 		t.Run(tc.Name, func(t *testing.T) {
-			out := BlockToPlainTextMessages(tc.Input)
+			if tc.Name != "5" {
+				//  return
+			}
+			out := BlockToTextMessages(tc.Input)
 			outb, _ := json.Marshal(out)
 			expb, _ := json.Marshal(tc.Output)
 			if string(outb) != string(expb) {
@@ -257,7 +262,18 @@ func TestReverseCondition(t *testing.T) {
 			Text: &TextCondition{Op: "eq", Eq: []string{"user"}},
 		}},
 	})
-	Log(out)
+	expect := &WorkflowCondition{
+		One: []*WorkflowCondition{{
+			Type: "text",
+			Key:  "$event.by.type",
+			Text: &TextCondition{Op: "neq", Eq: []string{"user"}},
+		}},
+	}
+	if !proto.Equal(out, expect) {
+		outb, _ := json.Marshal(out)
+		expectb, _ := json.Marshal(expect)
+		t.Fatalf("expect %s, got %s", string(expectb), string(outb))
+	}
 }
 
 func TestUnpack(t *testing.T) {
@@ -308,11 +324,12 @@ func TestAllLang(t *testing.T) {
 		Ja_JP: "tieng nhat",
 	}
 
-	a := GetAllI18ns(str)
-	fmt.Println(a)
+	out := GetAllI18ns(str)
+	expect := []string{"tieng anh", "tieng nhat", "tieng viet"}
+	if !reflect.DeepEqual(out, expect) {
+		t.Fatalf("expect %v, got %v", expect, out)
+	}
 }
-
-
 
 var DEFS = map[string]*AttributeDefinition{
 	"fullname": &AttributeDefinition{Name: "Fullname", Key: "fullname", Type: "text", IsSystem: true},
@@ -775,109 +792,122 @@ func TestDeltaToBlock(t *testing.T) {
 }
 
 func TestCompileBlock(t *testing.T) {
-	data := map[string]string{
-		"conversation_id": "234",
-		"account_id":      "acpxkgumifuoofoosble",
-		"user.fullname":   "Bick Ngok",
-	}
-	block := DeltaToBlock(`{"ops":[{"insert":{"dynamicField":{"key":"user.fullname"}}},{"insert":" ơi mình thấy bạn có hỏi cụ thể như vậy chắc bạn cũng đang có dự định đặt phòng rồi.\nVậy nếu thông tin phòng mình gửi chưa hợp với bạn thì có thể chia sẻ thêm thông tin với mình để mình có thể giúp đỡ bạn được tốt hơn ko ạ?\nBạn còn đang băn khoăn về giá hay decor thế ạ? 😉"}]}`)
-	b, _ := json.Marshal(block)
-	fmt.Println("BLOCK", string(b))
-	CompileBlock(block, data)
-	out := BlockToPlainText(block)
-	fmt.Println("OUT", out, data)
-}
-
-func TestCompileBlock2(t *testing.T) {
-	data := map[string]string{
-		"conversation_id": "234",
-		"account_id":      "acpxkgumifuoofoosble",
-		"user.fullname":   "Bick Ngok",
-	}
-	block := &Block{
-		Type: "paragraph",
-		Content: []*Block{{
-			Type:  "dynamic-field",
-			Attrs: map[string]string{"key": "conversation_id"},
-		}, {
-			Type:  "dynamic-field",
-			Attrs: map[string]string{"key": "user.fullname"},
-		}, {
-			Type:  "dynamic-field",
-			Attrs: map[string]string{"key": "cvid"},
-		}, {
-			Type:  "dynamic-field",
-			Attrs: map[string]string{"key": "huh"},
-		}, {
-			Type: "image",
-			Image: &File{
-				Url: "https://subiz.com.vn/logo.png",
-			},
-		}},
-	}
-	CompileBlock(block, data)
-	CompileBlock(block, map[string]string{
-		"user.fullname": "thanh",
-		"cvid":          "4",
-	})
-	out := BlockToPlainText(block)
-	fmt.Println("OUT", out)
-}
-
-func TestCompileBlock3(t *testing.T) {
-	block := &Block{
-		Type: "div",
-		Content: []*Block{
-			{
+	testcases := []struct {
+		name   string
+		block  *Block
+		data   []map[string]string
+		expect string
+	}{
+		{
+			name:  "dynamic field from delta",
+			block: DeltaToBlock(`{"ops":[{"insert":{"dynamicField":{"key":"user.fullname"}}},{"insert":" ơi mình thấy bạn có hỏi cụ thể như vậy chắc bạn cũng đang có dự định đặt phòng rồi.\nVậy nếu thông tin phòng mình gửi chưa hợp với bạn thì có thể chia sẻ thêm thông tin với mình để mình có thể giúp đỡ bạn được tốt hơn ko ạ?\nBạn còn đang băn khoăn về giá hay decor thế ạ? 😉"}]}`),
+			data: []map[string]string{{
+				"conversation_id": "234",
+				"account_id":      "acpxkgumifuoofoosble",
+				"user.fullname":   "Bick Ngok",
+			}},
+			expect: "Bick Ngok ơi mình thấy bạn có hỏi cụ thể như vậy chắc bạn cũng đang có dự định đặt phòng rồi.\nVậy nếu thông tin phòng mình gửi chưa hợp với bạn thì có thể chia sẻ thêm thông tin với mình để mình có thể giúp đỡ bạn được tốt hơn ko ạ?\nBạn còn đang băn khoăn về giá hay decor thế ạ? 😉",
+		},
+		{
+			name: "multiple dynamic fields",
+			block: &Block{
 				Type: "paragraph",
 				Content: []*Block{{
-					Type: "text",
-					Text: "Subiz",
+					Type:  "dynamic-field",
+					Attrs: map[string]string{"key": "conversation_id"},
+				}, {
+					Type:  "dynamic-field",
+					Attrs: map[string]string{"key": "user.fullname"},
+				}, {
+					Type:  "dynamic-field",
+					Attrs: map[string]string{"key": "cvid"},
+				}, {
+					Type:  "dynamic-field",
+					Attrs: map[string]string{"key": "huh"},
+				}, {
+					Type: "image",
+					Image: &File{
+						Url: "https://subiz.com.vn/logo.png",
+					},
 				}},
 			},
-			{
-				Type: "paragraph",
-				Content: []*Block{{
-					Type: "text",
-					Text: "sau:",
-				}},
-			},
-			{
-				Type: "bullet_list",
+			data: []map[string]string{{
+				"conversation_id": "234",
+				"account_id":      "acpxkgumifuoofoosble",
+				"user.fullname":   "Bick Ngok",
+			}, {
+				"user.fullname": "thanh",
+				"cvid":          "4",
+			}},
+			expect: "234thanh4\nhttps://subiz.com.vn/logo.png",
+		},
+		{
+			name: "links in list",
+			block: &Block{
+				Type: "div",
 				Content: []*Block{
 					{
-						Type: "list_item",
+						Type: "paragraph",
 						Content: []*Block{{
-							Type: "link",
-							Text: "Quản lý nhiều website",
-							Href: "https://subiz.com.vn/docs/158663500-quan-ly-nhieu-website",
+							Type: "text",
+							Text: "Subiz",
 						}},
 					},
 					{
-						Type: "list_item",
+						Type: "paragraph",
 						Content: []*Block{{
-							Type: "link",
-							Text: "Làm quen với Subiz",
-							Href: "https://subiz.com.vn/docs/220677403-lam-quen-voi-subiz&",
+							Type: "text",
+							Text: "sau:",
 						}},
+					},
+					{
+						Type: "bullet_list",
+						Content: []*Block{
+							{
+								Type: "list_item",
+								Content: []*Block{{
+									Type: "link",
+									Text: "Quản lý nhiều website",
+									Href: "https://subiz.com.vn/docs/158663500-quan-ly-nhieu-website",
+								}},
+							},
+							{
+								Type: "list_item",
+								Content: []*Block{{
+									Type: "link",
+									Text: "Làm quen với Subiz",
+									Href: "https://subiz.com.vn/docs/220677403-lam-quen-voi-subiz&",
+								}},
+							},
+						},
 					},
 				},
 			},
-		},
-	}
-	CompileBlock(block, nil)
-	fmt.Println("OUT1c", block)
-	CompileBlock(block, map[string]string{
-		"user.fullname": "thanh",
-		"cvid":          "4",
-	})
-	out := BlockToPlainText(block)
-	expect := `Subiz
+			data: []map[string]string{
+				nil,
+				{
+					"user.fullname": "thanh",
+					"cvid":          "4",
+				},
+			},
+			expect: `Subiz
 sau:
 * Quản lý nhiều website (https://subiz.com.vn/docs/158663500-quan-ly-nhieu-website)
-* Làm quen với Subiz (https://subiz.com.vn/docs/220677403-lam-quen-voi-subiz&)`
-	if out != expect {
-		t.Error("should eq")
+* Làm quen với Subiz (https://subiz.com.vn/docs/220677403-lam-quen-voi-subiz&)`,
+		},
+	}
+
+	for _, tc := range testcases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			for _, data := range tc.data {
+				CompileBlock(tc.block, data)
+			}
+			out := BlockToText(tc.block)
+			if out != tc.expect {
+				t.Fatalf("expect %q, got %q", tc.expect, out)
+			}
+		})
 	}
 }
 
@@ -1160,7 +1190,9 @@ func TestRsCondition(t *testing.T) {
 		Type: "text",
 		Text: &TextCondition{Op: "is_empty"},
 	}, false)
-	fmt.Println("OUT", out)
+	if out != false {
+		t.Error("should be false")
+	}
 }
 
 func TestEvent(t *testing.T) {
