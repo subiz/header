@@ -1132,11 +1132,11 @@ message ConversationMember {
 	string workflow_session_id = 40;
 	int64 bot_version = 41;
 
-	int64 bot_takeover_disabled = 43;
-	int64 bot_takeover_at = 44; // ms agent must reply or bot take over
-	int64 bot_follow_up_disabled = 45;
+	// int64 bot_takeover_disabled = 43;
+	// int64 bot_takeover_at = 44; // ms agent must reply or bot take over
+	// int64 bot_follow_up_disabled = 45;
 
-	Message bot_takeover_message = 46;
+	// Message bot_takeover_message = 46;
 }
 
 message StartRequest {
@@ -1307,37 +1307,6 @@ message Conversation {
 	string human_notify_message = 74;
 
 	bool from_light_convo = 75;
-}
-
-message AIAgentAutoSendThankSetting {
-	int64 enabled = 3;
-	string instruction = 4;
-	int64 agent_timeout = 5; // ms agent must reply or bot take over
-}
-
-message AIAgentAutoTakeoverSetting {
-	int64 enabled = 3;
-	int64 agent_timeout = 4; // ms agent must reply or bot take over
-}
-
-message AIAgentAutoFollowUpSetting {
-	int64 enabled = 4; // maximum twice
-	// int64 max_attempts = 5;
-	int64 delay_sec = 8;
-	// repeated string instructions = 6;
-
-	/*
-		1. Conversation history:
-		[2025 Aug 21, 09:00:00] user: hello
-		[2025 Aug 21, 09:00:02] assistant: hi, how can I help you with?
-		[2025 Aug 21, 09:00:04] user: I want to make a reservation
-		[2025 Aug 21, 09:00:06] assistant: OK, How many people will be in your party?
-		[2025 Aug 21, 09:00:08] user: Let me think for a little bit
-		[2025 Aug 21, 09:00:10] assistant: OK
-
-		Expect: The assistant is waiting for user reply, the assistant should send a remind after 1-2 min
-	*/
-	repeated string examples = 7;
 }
 
 message GoogleReview {
@@ -9095,7 +9064,8 @@ message AIAgent {
 	string locale = 64; // can be auto
 	repeated string locales = 65;
 
-	repeated AIAgentOverrideRule override_rules = 66; // only root
+	repeated AIAgentOverrideRule override_rules = 66; // only root, quy trinh
+	repeated AIAgentOverrideRule follow_up_rules = 69;
 
 	UnknownBehaviour unknown_behaviour = 67;
 	OutOfBusinessHourBehaviour out_of_business_hour_behaviour = 68;
@@ -9111,11 +9081,11 @@ message AIAgent {
 	repeated Trigger welcome_message_triggers = 87;
 
 	// async behaviour
-	AIAgentAutoSendThankSetting background_send_thank = 81;
-	AIAgentAutoTakeoverSetting auto_takeover = 82;
-	AIAgentAutoFollowUpSetting background_follow_up = 83;
+	// AIAgentAutoSendThankSetting background_send_thank = 81;
+	// AIAgentAutoTakeoverSetting auto_takeover = 82;
+	// AIAgentAutoFollowUpSetting background_follow_up = 83;
 
-	string operation_mode = 84; // foreground, background
+	// string operation_mode = 84; // foreground, background
 	AIAgentUsageLimit usage_limit = 85;
 
 	RewriteQuerySetting rewrite_query = 86;
