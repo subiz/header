@@ -1315,9 +1315,14 @@ func GetUserType(u *User) string {
 		typ = "lead"
 	}
 
+	foundmsgsent := false
 	for _, attr := range u.GetAttributes() {
 		if attr.Key == "zalo_friend_status" && attr.Text == "friend" {
 			return "contact"
+		}
+
+		if attr.Key == "last_message_sent" && attr.Datetime != "" {
+			foundmsgsent = true
 		}
 
 		if attr.Key == "lifecycle_stage" {
@@ -1337,6 +1342,11 @@ func GetUserType(u *User) string {
 		if attr.Key == "record_id" && attr.Text != "" {
 			return "contact"
 		}
+	}
+
+	if foundmsgsent &&
+		(u.Channel == "facebook" || u.Channel == "zalo" || u.Channel == "instagram" || u.Channel == "zalo_personal") {
+		return "lead"
 	}
 
 	if u.PrimaryId != "" && u.PrimaryId != u.Id {
