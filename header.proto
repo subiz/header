@@ -5133,20 +5133,15 @@ message ErrorAttribute {
 }
 
 message Error {
-	// int64 id = 4; // unused
 	string id = 5;
 	string code = 7; // should be general database_error, access_deny
 	// string sub_code = 8;
 	string number = 12; // unique, or hash of stack 4930543478 for grouping error
-	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
-	// map<string, string> fields = 15; // deprecated
-	// map<string, string> _hidden = 16; // deprecated
 
 	map<string, string> message = 18;
 	map<string, ErrorAttribute> attrs = 19;
 	map<string, ErrorAttribute> _hidden_attrs = 20;
 
-	// string _stack = 21;
 	string trace_id = 22;
 	string span_id = 23;
 }
@@ -7578,7 +7573,7 @@ message Workflow {
 	string format = 33; // empty, chatbot
 
 	bool is_system = 34; // auto assign tag, auto end chat
-	int64 exit_when_not_match_trigger = 35;
+	// int64 exit_when_not_match_trigger = 35;
 
 	int64 total_credit_spend_fpv = 37;
 }
@@ -8927,10 +8922,10 @@ message AIAgentOverrideRule {
 	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent, send_message
 
 	repeated AIFunction functions = 9; // use when action = function
-	string instruction = 7; // use when action = remind
+	string instruction = 7; // @deprecated use when action = remind
 
 	// string hook = 8; // '' = before_reply, after_reply
-	string agent_id = 6; // use when action = assign
+	// string agent_id = 6; // use when action = assign
 
 	AIIntent intent = 13;
 	WorkflowCondition condition = 14;
@@ -8965,17 +8960,6 @@ message AIAgentBrand {
 	string zalo = 16;
 	string hotline = 17;
 	string address = 19;
-}
-
-// will be translate to override rule
-message UnknownBehaviour {
-	int64 enabled = 5;
-	repeated AIFunction actions = 6;
-}
-
-message OutOfBusinessHourBehaviour {
-	int64 enabled = 5;
-	repeated AIFunction actions = 6;
 }
 
 message AIAgent {
@@ -9067,8 +9051,8 @@ message AIAgent {
 	repeated AIAgentOverrideRule override_rules = 66; // only root, quy trinh
 	repeated AIAgentOverrideRule follow_up_rules = 69;
 
-	UnknownBehaviour unknown_behaviour = 67;
-	OutOfBusinessHourBehaviour out_of_business_hour_behaviour = 68;
+	// UnknownBehaviour unknown_behaviour = 67;
+	// OutOfBusinessHourBehaviour out_of_business_hour_behaviour = 68;
 
 	// [convert lead (second brain)]
 	string collect_user_information_on = 76; // none | chat_started | interest_detected
