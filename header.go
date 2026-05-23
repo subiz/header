@@ -1056,7 +1056,7 @@ func VNPhone(str string) []string {
 		}
 
 		// 364348593 => 0364348593
-		if len(phone) == 9 && phone[0] != 0 {
+		if len(phone) == 9 && phone[0] != '0' {
 			phone = "0" + phone
 		}
 
@@ -1236,8 +1236,12 @@ func GetUserDisplayName(u *User) string {
 }
 
 func GetUserTextAttr(u *User, key string) string {
+	key = strings.ToLower(strings.TrimSpace(key))
+	if u == nil || key == "" {
+		return ""
+	}
 	for _, attr := range u.GetAttributes() {
-		if attr.GetKey() == "trace_country_name" {
+		if attr.GetKey() == key {
 			return attr.GetText()
 		}
 	}
@@ -1306,7 +1310,8 @@ func GetUserType(u *User) string {
 	}
 
 	typ := u.GetType()
-	if u.Channel == "account" || u.Channel == "import" || u.Channel == "call" || u.Channel == "email" || u.Channel == "facebook" || u.Channel == "zalo" || u.Channel == "instagram" {
+	if u.Channel == "account" || u.Channel == "import" || u.Channel == "call" ||
+		u.Channel == "email" {
 		typ = "lead"
 	}
 
@@ -1411,6 +1416,7 @@ func ReportExtractor(user *User, firstContentView *Event) map[string]bool {
 }
 
 func RefineRefDomain(refdomain string) string {
+	refdomain = strings.ToLower(strings.TrimSpace(refdomain))
 	if refdomain == "" {
 		return ""
 	}
@@ -1456,7 +1462,7 @@ func RefineRefDomain(refdomain string) string {
 		refdomain = "googlesyndication.com"
 	}
 
-	if strings.HasPrefix(refdomain, ".ampproject.net.") {
+	if refdomain == "ampproject.net" || strings.HasSuffix(refdomain, ".ampproject.net") {
 		// d-1700324721198241007.ampproject.net
 		return "ampproject.net"
 	}
@@ -2068,6 +2074,9 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 	if root == nil {
 		return ""
 	}
+	if root.Tag == "" {
+		root.Tag = "span"
+	}
 	out := "<" + root.Tag
 
 	if root.Id != "" {
@@ -2086,6 +2095,9 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 
 	attrs := []string{}
 	for k, v := range root.Attrs {
+		if !isSafeHTMLAttrName(k) {
+			continue
+		}
 		attrs = append(attrs, k+"=\""+v+"\"")
 	}
 
@@ -2114,6 +2126,28 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 }
 
 var selftClosingTag = map[string]bool{"br": true, "img": true, "hr": true}
+
+func isSafeHTMLAttrName(name string) bool {
+	if name == "" {
+		return false
+	}
+	for _, r := range name {
+		if r >= 'a' && r <= 'z' {
+			continue
+		}
+		if r >= 'A' && r <= 'Z' {
+			continue
+		}
+		if r >= '0' && r <= '9' {
+			continue
+		}
+		if r == '-' || r == '_' || r == ':' {
+			continue
+		}
+		return false
+	}
+	return true
+}
 
 type sanitiziedHTMLElement struct {
 	Id       string
@@ -2155,7 +2189,10 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 	ele.Id = html.EscapeString(block.Id)
 	ele.Class = html.EscapeString(block.Class)
 	for k, v := range block.Attrs {
-		ele.Attrs[html.EscapeString(k)] = html.EscapeString(v)
+		if !isSafeHTMLAttrName(k) {
+			continue
+		}
+		ele.Attrs[k] = html.EscapeString(v)
 	}
 	if block.Type == "bullet_list" || block.Type == "ordered_list" {
 		if block.Type == "bullet_list" {
@@ -2190,7 +2227,7 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 
 	if block.Type == "image" {
 		ele.Tag = "img"
-		ele.Attrs["src"] = block.GetImage().GetUrl()
+		ele.Attrs["src"] = html.EscapeString(block.GetImage().GetUrl())
 
 		if block.GetImage().GetWidth() > 0 {
 			ele.Attrs["width"] = strconv.Itoa(int(block.GetImage().GetWidth()))
@@ -2201,7 +2238,7 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 		}
 
 		if block.GetAltText() != "" {
-			ele.Attrs["alt"] = strings.TrimSpace(block.GetAltText())
+			ele.Attrs["alt"] = html.EscapeString(strings.TrimSpace(block.GetAltText()))
 		}
 	}
 
@@ -2245,6 +2282,7 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 	}
 
 	if block.Type == "emoji" {
+		ele.Tag = "span"
 		var code string
 		if len(block.Attrs) > 0 {
 			code = block.Attrs["code"]
@@ -2268,7 +2306,7 @@ func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 
 	if block.Type == "table_cell" {
 		ele.Tag = "td"
-		if parent.GetLevel() >= 1 {
+		if parent != nil && parent.GetLevel() >= 1 {
 			ele.Tag = "th"
 		}
 	}

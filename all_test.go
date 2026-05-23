@@ -102,10 +102,29 @@ func TestVNPhone(t *testing.T) {
 		{"0966645643", "84966645643"},
 		{"966645643", "84966645643"},
 		{"966645643;", "84966645643"},
+		{"364348593", "84364348593"},
 	}
 
 	for i, tc := range testcases {
 		got := strings.Join(VNPhone(tc.in), ";")
+		if tc.out != got {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, got)
+		}
+	}
+}
+
+func TestRefineRefDomain(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"d-1700324721198241007.ampproject.net", "ampproject.net"},
+		{"WWW.Google.com.vn", "google.com"},
+		{"m.facebook.com", "facebook.com"},
+	}
+
+	for i, tc := range testcases {
+		got := RefineRefDomain(tc.in)
 		if tc.out != got {
 			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, got)
 		}
@@ -210,7 +229,7 @@ func TestEvaluateTexts(t *testing.T) {
 }
 
 func TestPartition(t *testing.T) {
-	fmt.Println("PAR", Fnv32("ussojlkxllpaqycjzzezg")%50) // 21
+	fmt.Println("PAR", Fnv32("usspqquushcqfbpuumwof")%50) // 21
 	shardNumber := int(crc32.ChecksumIEEE([]byte("acriviayfmabzskstrpq"))) % 4
 	fmt.Println(shardNumber)
 }
@@ -1018,6 +1037,28 @@ func TestBlockToHTML2(t *testing.T) {
 	expected := `<div><p><a style="color: #11B936;margin-right: 10px" href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&amp;token=123" target="_blank" title="Great">Tuyệt vời</a><a style="color: #787878;margin-right: 10px" href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&amp;token=123" target="_blank" title="Okay">Tốt</a><a style="color: #E81A1A" href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&amp;token=123" target="_blank" title="Not good">Không tốt</a></p></div>`
 	if strings.TrimSpace(html) != expected {
 		t.Errorf("SHOULDBEEQ\nGOT: %s\nEXP: %s", html, expected)
+	}
+}
+
+func TestBlockToHTMLSanitizesImageAttrsAndTableCell(t *testing.T) {
+	html := BlockToHTML(&Block{
+		Type: "image",
+		Image: &File{
+			Url: `https://example.com/a" onerror="alert(1)&x=<y>`,
+		},
+		AltText: `bad" alt=<script>`,
+		Attrs: map[string]string{
+			`bad" onclick="x`: "ignored",
+		},
+	})
+	expected := `<img alt="bad&#34; alt=&lt;script&gt;" src="https://example.com/a&#34; onerror=&#34;alert(1)&amp;x=&lt;y&gt;"/>`
+	if html != expected {
+		t.Errorf("SHOULDBEEQ\nGOT: %s\nEXP: %s", html, expected)
+	}
+
+	html = BlockToHTML(&Block{Type: "table_cell"})
+	if html != "<td></td>" {
+		t.Errorf("SHOULDBEEQ\nGOT: %s\nEXP: %s", html, "<td></td>")
 	}
 }
 
