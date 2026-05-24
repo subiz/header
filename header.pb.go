@@ -33708,7 +33708,7 @@ type Product struct {
 	FpvLastEnrichedCost      int64                  `protobuf:"varint,96,opt,name=fpv_last_enriched_cost,json=fpvLastEnrichedCost,proto3" json:"fpv_last_enriched_cost,omitempty"`    // vnd
 	FromUrl                  string                 `protobuf:"bytes,97,opt,name=from_url,json=fromUrl,proto3" json:"from_url,omitempty"`                                             // read only, crawled from this url
 	Modified                 int64                  `protobuf:"varint,99,opt,name=modified,proto3" json:"modified,omitempty"`
-	Error                    *Error                 `protobuf:"bytes,100,opt,name=error,proto3" json:"error,omitempty"`
+	Error                    *Error                 `protobuf:"bytes,100,opt,name=error,proto3" json:"error,omitempty"` // TODO: product QA
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -35644,20 +35644,22 @@ func (x *ProductCategoryBuildQueryExample) GetOutput() string {
 }
 
 type ProductCategory struct {
-	state                  protoimpl.MessageState              `protogen:"open.v1"`
-	Id                     string                              `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	Name                   string                              `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"` // english name
-	I18NName               map[string]string                   `protobuf:"bytes,6,rep,name=i18n_name,json=i18nName,proto3" json:"i18n_name,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Description            string                              `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	Attributes             map[string]*JSONSchema              `protobuf:"bytes,8,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XAttrRefs              []string                            `protobuf:"bytes,10,rep,name=_attr_refs,json=AttrRefs,proto3" json:"_attr_refs,omitempty"`                                 // internal use only
-	XBuildQueryExamples    []*ProductCategoryBuildQueryExample `protobuf:"bytes,11,rep,name=_build_query_examples,json=BuildQueryExamples,proto3" json:"_build_query_examples,omitempty"` // internal use only
-	LookingForKeywords     []string                            `protobuf:"bytes,12,rep,name=looking_for_keywords,json=lookingForKeywords,proto3" json:"looking_for_keywords,omitempty"`
-	Industry               string                              `protobuf:"bytes,13,opt,name=industry,proto3" json:"industry,omitempty"`
-	Terms                  []string                            `protobuf:"bytes,14,rep,name=terms,proto3" json:"terms,omitempty"`
-	KeywordExtractExamples []*ProductCategoryExtractExample    `protobuf:"bytes,15,rep,name=keyword_extract_examples,json=keywordExtractExamples,proto3" json:"keyword_extract_examples,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                   protoimpl.MessageState              `protogen:"open.v1"`
+	Id                      string                              `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	Name                    string                              `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"` // english name
+	I18NName                map[string]string                   `protobuf:"bytes,6,rep,name=i18n_name,json=i18nName,proto3" json:"i18n_name,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Description             string                              `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Attributes              map[string]*JSONSchema              `protobuf:"bytes,8,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XAttrRefs               []string                            `protobuf:"bytes,10,rep,name=_attr_refs,json=AttrRefs,proto3" json:"_attr_refs,omitempty"`                                 // internal use only
+	XBuildQueryExamples     []*ProductCategoryBuildQueryExample `protobuf:"bytes,11,rep,name=_build_query_examples,json=BuildQueryExamples,proto3" json:"_build_query_examples,omitempty"` // internal use only
+	LookingForKeywords      []string                            `protobuf:"bytes,12,rep,name=looking_for_keywords,json=lookingForKeywords,proto3" json:"looking_for_keywords,omitempty"`
+	Industry                string                              `protobuf:"bytes,13,opt,name=industry,proto3" json:"industry,omitempty"`
+	Terms                   []string                            `protobuf:"bytes,14,rep,name=terms,proto3" json:"terms,omitempty"`
+	KeywordExtractExamples  []*ProductCategoryExtractExample    `protobuf:"bytes,15,rep,name=keyword_extract_examples,json=keywordExtractExamples,proto3" json:"keyword_extract_examples,omitempty"`
+	TrainingQuestions       []string                            `protobuf:"bytes,16,rep,name=training_questions,json=trainingQuestions,proto3" json:"training_questions,omitempty"`
+	CustomTrainingQuestions []string                            `protobuf:"bytes,17,rep,name=custom_training_questions,json=customTrainingQuestions,proto3" json:"custom_training_questions,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ProductCategory) Reset() {
@@ -35763,6 +35765,20 @@ func (x *ProductCategory) GetTerms() []string {
 func (x *ProductCategory) GetKeywordExtractExamples() []*ProductCategoryExtractExample {
 	if x != nil {
 		return x.KeywordExtractExamples
+	}
+	return nil
+}
+
+func (x *ProductCategory) GetTrainingQuestions() []string {
+	if x != nil {
+		return x.TrainingQuestions
+	}
+	return nil
+}
+
+func (x *ProductCategory) GetCustomTrainingQuestions() []string {
+	if x != nil {
+		return x.CustomTrainingQuestions
 	}
 	return nil
 }
@@ -75390,7 +75406,7 @@ const file_header_proto_rawDesc = "" +
 	"modifiedBy\"q\n" +
 	" ProductCategoryBuildQueryExample\x125\n" +
 	"\ahistory\x18\x04 \x03(\v2\x1b.header.LLMChatHistoryEntryR\ahistory\x12\x16\n" +
-	"\x06output\x18\x05 \x01(\tR\x06output\"\xb4\x05\n" +
+	"\x06output\x18\x05 \x01(\tR\x06output\"\x9f\x06\n" +
 	"\x0fProductCategory\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12B\n" +
@@ -75406,7 +75422,9 @@ const file_header_proto_rawDesc = "" +
 	"\x14looking_for_keywords\x18\f \x03(\tR\x12lookingForKeywords\x12\x1a\n" +
 	"\bindustry\x18\r \x01(\tR\bindustry\x12\x14\n" +
 	"\x05terms\x18\x0e \x03(\tR\x05terms\x12_\n" +
-	"\x18keyword_extract_examples\x18\x0f \x03(\v2%.header.ProductCategoryExtractExampleR\x16keywordExtractExamples\x1a;\n" +
+	"\x18keyword_extract_examples\x18\x0f \x03(\v2%.header.ProductCategoryExtractExampleR\x16keywordExtractExamples\x12-\n" +
+	"\x12training_questions\x18\x10 \x03(\tR\x11trainingQuestions\x12:\n" +
+	"\x19custom_training_questions\x18\x11 \x03(\tR\x17customTrainingQuestions\x1a;\n" +
 	"\rI18nNameEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aQ\n" +

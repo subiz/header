@@ -4874,6 +4874,7 @@ message Product {
 
 	int64 modified = 99;
 	Error error = 100;
+	// TODO: product QA
 }
 
 message ProductEnrichSource {
@@ -5087,6 +5088,9 @@ message ProductCategory {
 	string industry = 13;
 	repeated string terms = 14;
 	repeated ProductCategoryExtractExample keyword_extract_examples = 15;
+	repeated string training_questions = 16;
+
+	repeated string custom_training_questions = 17;
 }
 
 message ProductCategoryExtractExample {
