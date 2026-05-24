@@ -4562,6 +4562,7 @@ type DocSearchRequest struct {
 	IsShorten     bool                   `protobuf:"varint,14,opt,name=is_shorten,json=isShorten,proto3" json:"is_shorten,omitempty"`
 	FromMonth     int64                  `protobuf:"varint,15,opt,name=from_month,json=fromMonth,proto3" json:"from_month,omitempty"`
 	KeepSecondary bool                   `protobuf:"varint,16,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
+	DocIds        []string               `protobuf:"bytes,21,rep,name=doc_ids,json=docIds,proto3" json:"doc_ids,omitempty"`
 	Vector        []float32              `protobuf:"fixed32,17,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	Tags          []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`
 	Type          string                 `protobuf:"bytes,20,opt,name=type,proto3" json:"type,omitempty"` // vector, term, hybrid
@@ -4709,6 +4710,13 @@ func (x *DocSearchRequest) GetKeepSecondary() bool {
 		return x.KeepSecondary
 	}
 	return false
+}
+
+func (x *DocSearchRequest) GetDocIds() []string {
+	if x != nil {
+		return x.DocIds
+	}
+	return nil
 }
 
 func (x *DocSearchRequest) GetVector() []float32 {
@@ -9326,7 +9334,7 @@ const file_request_proto_rawDesc = "" +
 	"\vindex_types\x18\x15 \x03(\tR\n" +
 	"indexTypes\x12\x16\n" +
 	"\x06vector\x18\x17 \x03(\x02R\x06vector\x12!\n" +
-	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\"\xc2\x04\n" +
+	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\"\xdb\x04\n" +
 	"\x10DocSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9352,7 +9360,8 @@ const file_request_proto_rawDesc = "" +
 	"is_shorten\x18\x0e \x01(\bR\tisShorten\x12\x1d\n" +
 	"\n" +
 	"from_month\x18\x0f \x01(\x03R\tfromMonth\x12%\n" +
-	"\x0ekeep_secondary\x18\x10 \x01(\bR\rkeepSecondary\x12\x16\n" +
+	"\x0ekeep_secondary\x18\x10 \x01(\bR\rkeepSecondary\x12\x17\n" +
+	"\adoc_ids\x18\x15 \x03(\tR\x06docIds\x12\x16\n" +
 	"\x06vector\x18\x11 \x03(\x02R\x06vector\x12\x12\n" +
 	"\x04tags\x18\x12 \x03(\tR\x04tags\x12\x12\n" +
 	"\x04type\x18\x14 \x01(\tR\x04type\"\x8a\x03\n" +
