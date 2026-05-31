@@ -18770,6 +18770,7 @@ const (
 	FabikonService_DeleteAdsAudienceUsers_FullMethodName = "/header.FabikonService/DeleteAdsAudienceUsers"
 	FabikonService_ListAdAccounts_FullMethodName         = "/header.FabikonService/ListAdAccounts"
 	FabikonService_ListFbFanpageSettings2_FullMethodName = "/header.FabikonService/ListFbFanpageSettings2"
+	FabikonService_SendMetaConversion_FullMethodName     = "/header.FabikonService/SendMetaConversion"
 )
 
 // FabikonServiceClient is the client API for FabikonService service.
@@ -18793,6 +18794,7 @@ type FabikonServiceClient interface {
 	DeleteAdsAudienceUsers(ctx context.Context, in *CustomAudienceBatchRequest, opts ...grpc.CallOption) (*CustomAudienceBatchResponse, error)
 	ListAdAccounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListFbFanpageSettings2(ctx context.Context, in *ListPageSettingRequest, opts ...grpc.CallOption) (*Response, error)
+	SendMetaConversion(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
 }
 
 type fabikonServiceClient struct {
@@ -18963,6 +18965,16 @@ func (c *fabikonServiceClient) ListFbFanpageSettings2(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *fabikonServiceClient) SendMetaConversion(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_SendMetaConversion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FabikonServiceServer is the server API for FabikonService service.
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
@@ -18984,6 +18996,7 @@ type FabikonServiceServer interface {
 	DeleteAdsAudienceUsers(context.Context, *CustomAudienceBatchRequest) (*CustomAudienceBatchResponse, error)
 	ListAdAccounts(context.Context, *Id) (*Response, error)
 	ListFbFanpageSettings2(context.Context, *ListPageSettingRequest) (*Response, error)
+	SendMetaConversion(context.Context, *Event) (*Response, error)
 	mustEmbedUnimplementedFabikonServiceServer()
 }
 
@@ -19041,6 +19054,9 @@ func (UnimplementedFabikonServiceServer) ListAdAccounts(context.Context, *Id) (*
 }
 func (UnimplementedFabikonServiceServer) ListFbFanpageSettings2(context.Context, *ListPageSettingRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListFbFanpageSettings2 not implemented")
+}
+func (UnimplementedFabikonServiceServer) SendMetaConversion(context.Context, *Event) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendMetaConversion not implemented")
 }
 func (UnimplementedFabikonServiceServer) mustEmbedUnimplementedFabikonServiceServer() {}
 func (UnimplementedFabikonServiceServer) testEmbeddedByValue()                        {}
@@ -19351,6 +19367,24 @@ func _FabikonService_ListFbFanpageSettings2_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FabikonService_SendMetaConversion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).SendMetaConversion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_SendMetaConversion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).SendMetaConversion(ctx, req.(*Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FabikonService_ServiceDesc is the grpc.ServiceDesc for FabikonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -19421,6 +19455,10 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFbFanpageSettings2",
 			Handler:    _FabikonService_ListFbFanpageSettings2_Handler,
+		},
+		{
+			MethodName: "SendMetaConversion",
+			Handler:    _FabikonService_SendMetaConversion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -21728,7 +21766,7 @@ const (
 type WidgetServiceClient interface {
 	ReadAccountSetting2(ctx context.Context, in *WidgetSettingRequest, opts ...grpc.CallOption) (*AccountWeb, error)
 	SubmitImpression(ctx context.Context, in *Impression, opts ...grpc.CallOption) (*Impression, error)
-	SubmitConversion(ctx context.Context, in *Conversion, opts ...grpc.CallOption) (*Conversion, error)
+	SubmitConversion(ctx context.Context, in *PopupConversion, opts ...grpc.CallOption) (*PopupConversion, error)
 	SubmitUserCampaignStatus(ctx context.Context, in *UserCampaignStatus, opts ...grpc.CallOption) (*UserCampaignStatus, error)
 	ReportCampaign(ctx context.Context, in *ReportCampaignRequest, opts ...grpc.CallOption) (*ReportCampaignResponse, error)
 	ListConversions(ctx context.Context, in *ConversionRequest, opts ...grpc.CallOption) (*Conversions, error)
@@ -21778,9 +21816,9 @@ func (c *widgetServiceClient) SubmitImpression(ctx context.Context, in *Impressi
 	return out, nil
 }
 
-func (c *widgetServiceClient) SubmitConversion(ctx context.Context, in *Conversion, opts ...grpc.CallOption) (*Conversion, error) {
+func (c *widgetServiceClient) SubmitConversion(ctx context.Context, in *PopupConversion, opts ...grpc.CallOption) (*PopupConversion, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Conversion)
+	out := new(PopupConversion)
 	err := c.cc.Invoke(ctx, WidgetService_SubmitConversion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -21984,7 +22022,7 @@ func (c *widgetServiceClient) ListNotifBackgrounds(ctx context.Context, in *Id, 
 type WidgetServiceServer interface {
 	ReadAccountSetting2(context.Context, *WidgetSettingRequest) (*AccountWeb, error)
 	SubmitImpression(context.Context, *Impression) (*Impression, error)
-	SubmitConversion(context.Context, *Conversion) (*Conversion, error)
+	SubmitConversion(context.Context, *PopupConversion) (*PopupConversion, error)
 	SubmitUserCampaignStatus(context.Context, *UserCampaignStatus) (*UserCampaignStatus, error)
 	ReportCampaign(context.Context, *ReportCampaignRequest) (*ReportCampaignResponse, error)
 	ListConversions(context.Context, *ConversionRequest) (*Conversions, error)
@@ -22020,7 +22058,7 @@ func (UnimplementedWidgetServiceServer) ReadAccountSetting2(context.Context, *Wi
 func (UnimplementedWidgetServiceServer) SubmitImpression(context.Context, *Impression) (*Impression, error) {
 	return nil, status.Error(codes.Unimplemented, "method SubmitImpression not implemented")
 }
-func (UnimplementedWidgetServiceServer) SubmitConversion(context.Context, *Conversion) (*Conversion, error) {
+func (UnimplementedWidgetServiceServer) SubmitConversion(context.Context, *PopupConversion) (*PopupConversion, error) {
 	return nil, status.Error(codes.Unimplemented, "method SubmitConversion not implemented")
 }
 func (UnimplementedWidgetServiceServer) SubmitUserCampaignStatus(context.Context, *UserCampaignStatus) (*UserCampaignStatus, error) {
@@ -22138,7 +22176,7 @@ func _WidgetService_SubmitImpression_Handler(srv interface{}, ctx context.Contex
 }
 
 func _WidgetService_SubmitConversion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Conversion)
+	in := new(PopupConversion)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -22150,7 +22188,7 @@ func _WidgetService_SubmitConversion_Handler(srv interface{}, ctx context.Contex
 		FullMethod: WidgetService_SubmitConversion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WidgetServiceServer).SubmitConversion(ctx, req.(*Conversion))
+		return srv.(WidgetServiceServer).SubmitConversion(ctx, req.(*PopupConversion))
 	}
 	return interceptor(ctx, in, info, handler)
 }

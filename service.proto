@@ -698,6 +698,8 @@ service FabikonService {
 
 	rpc ListAdAccounts(header.Id) returns (header.Response);
 	rpc ListFbFanpageSettings2(ListPageSettingRequest) returns (header.Response);
+
+	rpc SendMetaConversion(header.Event) returns (header.Response);
 }
 
 service ChannelConnector {
@@ -780,7 +782,7 @@ service WidgetService {
 	rpc ReadAccountSetting2(WidgetSettingRequest) returns (header.AccountWeb);
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
-	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
+	rpc SubmitConversion(header.PopupConversion) returns (header.PopupConversion);
 	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus); // replace
 
 	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse); // remove

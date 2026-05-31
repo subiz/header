@@ -311,6 +311,8 @@ message Touchpoint {
 	string linked_page_id = 24; // instagram
 	string source = 23; // page id, zaloa id
 	string post_id = 25; // for facebook or instagram
+
+	string action_source = 26; // for facebook conversion api only
 }
 
 message ShippingAddresses {
@@ -670,7 +672,7 @@ message Data {
 	BotTerminated bot_terminated = 43;
 	Webhook webhook = 44;
 	// UserAlias user_alias = 45;
-	Conversion conversion = 47;
+	PopupConversion conversion = 47;
 	// Site site = 52;
 	// WebpageCheck webpage_check = 53;
 	LangMessage language_message = 54;
@@ -3149,11 +3151,11 @@ message Impression {
 
 message Conversions {
 	common.Context ctx = 1;
-	repeated Conversion conversions = 2;
+	repeated PopupConversion conversions = 2;
 	string anchor = 4;
 }
 
-message Conversion {
+message PopupConversion {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string campaign_id = 3;
@@ -6563,6 +6565,9 @@ message ActionSendFacebookConversion {
 	Bill bill = 4;
 	repeated string page_ids = 5;
 	repeated string dataset_ids = 6;
+
+	// https://developers.facebook.com/documentation/ads-commerce/conversions-api/parameters/server-event#action-source
+	string action_source = 7; // email, website, app, phone_call, physical_store, system_generated, business_messaging, other
 }
 
 message ActionTerminateBot {

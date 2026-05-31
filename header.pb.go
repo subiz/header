@@ -4026,6 +4026,7 @@ type Touchpoint struct {
 	LinkedPageId  string                 `protobuf:"bytes,24,opt,name=linked_page_id,json=linkedPageId,proto3" json:"linked_page_id,omitempty"` // instagram
 	Source        string                 `protobuf:"bytes,23,opt,name=source,proto3" json:"source,omitempty"`                                   // page id, zaloa id
 	PostId        string                 `protobuf:"bytes,25,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`                     // for facebook or instagram
+	ActionSource  string                 `protobuf:"bytes,26,opt,name=action_source,json=actionSource,proto3" json:"action_source,omitempty"`   // for facebook conversion api only
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4112,6 +4113,13 @@ func (x *Touchpoint) GetSource() string {
 func (x *Touchpoint) GetPostId() string {
 	if x != nil {
 		return x.PostId
+	}
+	return ""
+}
+
+func (x *Touchpoint) GetActionSource() string {
+	if x != nil {
+		return x.ActionSource
 	}
 	return ""
 }
@@ -6714,7 +6722,7 @@ type Data struct {
 	BotTerminated  *BotTerminated  `protobuf:"bytes,43,opt,name=bot_terminated,json=botTerminated,proto3" json:"bot_terminated,omitempty"`
 	Webhook        *Webhook        `protobuf:"bytes,44,opt,name=webhook,proto3" json:"webhook,omitempty"`
 	// UserAlias user_alias = 45;
-	Conversion *Conversion `protobuf:"bytes,47,opt,name=conversion,proto3" json:"conversion,omitempty"`
+	Conversion *PopupConversion `protobuf:"bytes,47,opt,name=conversion,proto3" json:"conversion,omitempty"`
 	// Site site = 52;
 	// WebpageCheck webpage_check = 53;
 	LanguageMessage       *LangMessage           `protobuf:"bytes,54,opt,name=language_message,json=languageMessage,proto3" json:"language_message,omitempty"`
@@ -6988,7 +6996,7 @@ func (x *Data) GetWebhook() *Webhook {
 	return nil
 }
 
-func (x *Data) GetConversion() *Conversion {
+func (x *Data) GetConversion() *PopupConversion {
 	if x != nil {
 		return x.Conversion
 	}
@@ -22137,7 +22145,7 @@ func (x *Impression) GetWebPluginId() string {
 type Conversions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Conversions   []*Conversion          `protobuf:"bytes,2,rep,name=conversions,proto3" json:"conversions,omitempty"`
+	Conversions   []*PopupConversion     `protobuf:"bytes,2,rep,name=conversions,proto3" json:"conversions,omitempty"`
 	Anchor        string                 `protobuf:"bytes,4,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -22180,7 +22188,7 @@ func (x *Conversions) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *Conversions) GetConversions() []*Conversion {
+func (x *Conversions) GetConversions() []*PopupConversion {
 	if x != nil {
 		return x.Conversions
 	}
@@ -22194,7 +22202,7 @@ func (x *Conversions) GetAnchor() string {
 	return ""
 }
 
-type Conversion struct {
+type PopupConversion struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Ctx             *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -22214,20 +22222,20 @@ type Conversion struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *Conversion) Reset() {
-	*x = Conversion{}
+func (x *PopupConversion) Reset() {
+	*x = PopupConversion{}
 	mi := &file_header_proto_msgTypes[157]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Conversion) String() string {
+func (x *PopupConversion) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Conversion) ProtoMessage() {}
+func (*PopupConversion) ProtoMessage() {}
 
-func (x *Conversion) ProtoReflect() protoreflect.Message {
+func (x *PopupConversion) ProtoReflect() protoreflect.Message {
 	mi := &file_header_proto_msgTypes[157]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -22239,103 +22247,103 @@ func (x *Conversion) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Conversion.ProtoReflect.Descriptor instead.
-func (*Conversion) Descriptor() ([]byte, []int) {
+// Deprecated: Use PopupConversion.ProtoReflect.Descriptor instead.
+func (*PopupConversion) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{157}
 }
 
-func (x *Conversion) GetCtx() *common.Context {
+func (x *PopupConversion) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *Conversion) GetAccountId() string {
+func (x *PopupConversion) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *Conversion) GetCampaignId() string {
+func (x *PopupConversion) GetCampaignId() string {
 	if x != nil {
 		return x.CampaignId
 	}
 	return ""
 }
 
-func (x *Conversion) GetImpressionId() string {
+func (x *PopupConversion) GetImpressionId() string {
 	if x != nil {
 		return x.ImpressionId
 	}
 	return ""
 }
 
-func (x *Conversion) GetUserId() string {
+func (x *PopupConversion) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *Conversion) GetUrl() string {
+func (x *PopupConversion) GetUrl() string {
 	if x != nil {
 		return x.Url
 	}
 	return ""
 }
 
-func (x *Conversion) GetDevice() *common.Device {
+func (x *PopupConversion) GetDevice() *common.Device {
 	if x != nil {
 		return x.Device
 	}
 	return nil
 }
 
-func (x *Conversion) GetByTrigger() string {
+func (x *PopupConversion) GetByTrigger() string {
 	if x != nil {
 		return x.ByTrigger
 	}
 	return ""
 }
 
-func (x *Conversion) GetSubmission() *CampaignSubmission {
+func (x *PopupConversion) GetSubmission() *CampaignSubmission {
 	if x != nil {
 		return x.Submission
 	}
 	return nil
 }
 
-func (x *Conversion) GetCreated() int64 {
+func (x *PopupConversion) GetCreated() int64 {
 	if x != nil {
 		return x.Created
 	}
 	return 0
 }
 
-func (x *Conversion) GetWeek() int64 {
+func (x *PopupConversion) GetWeek() int64 {
 	if x != nil {
 		return x.Week
 	}
 	return 0
 }
 
-func (x *Conversion) GetImpressionToken() string {
+func (x *PopupConversion) GetImpressionToken() string {
 	if x != nil {
 		return x.ImpressionToken
 	}
 	return ""
 }
 
-func (x *Conversion) GetWebPluginId() string {
+func (x *PopupConversion) GetWebPluginId() string {
 	if x != nil {
 		return x.WebPluginId
 	}
 	return ""
 }
 
-func (x *Conversion) GetUser() *User {
+func (x *PopupConversion) GetUser() *User {
 	if x != nil {
 		return x.User
 	}
@@ -45954,11 +45962,13 @@ func (x *WorkflowAction) GetRotateAgents() *ActionRotateAgents {
 }
 
 type ActionSendFacebookConversion struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // lead, purchase
-	Bill          *Bill                  `protobuf:"bytes,4,opt,name=bill,proto3" json:"bill,omitempty"`
-	PageIds       []string               `protobuf:"bytes,5,rep,name=page_ids,json=pageIds,proto3" json:"page_ids,omitempty"`
-	DatasetIds    []string               `protobuf:"bytes,6,rep,name=dataset_ids,json=datasetIds,proto3" json:"dataset_ids,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Type       string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // lead, purchase
+	Bill       *Bill                  `protobuf:"bytes,4,opt,name=bill,proto3" json:"bill,omitempty"`
+	PageIds    []string               `protobuf:"bytes,5,rep,name=page_ids,json=pageIds,proto3" json:"page_ids,omitempty"`
+	DatasetIds []string               `protobuf:"bytes,6,rep,name=dataset_ids,json=datasetIds,proto3" json:"dataset_ids,omitempty"`
+	// https://developers.facebook.com/documentation/ads-commerce/conversions-api/parameters/server-event#action-source
+	ActionSource  string `protobuf:"bytes,7,opt,name=action_source,json=actionSource,proto3" json:"action_source,omitempty"` // email, website, app, phone_call, physical_store, system_generated, business_messaging, other
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -46019,6 +46029,13 @@ func (x *ActionSendFacebookConversion) GetDatasetIds() []string {
 		return x.DatasetIds
 	}
 	return nil
+}
+
+func (x *ActionSendFacebookConversion) GetActionSource() string {
+	if x != nil {
+		return x.ActionSource
+	}
+	return ""
 }
 
 type ActionTerminateBot struct {
@@ -71386,7 +71403,7 @@ const file_header_proto_rawDesc = "" +
 	"\tmerged_by\x18L \x01(\tR\bmergedBy\x12\x16\n" +
 	"\x06merged\x18M \x01(\x03R\x06merged\x12#\n" +
 	"\rmerged_reason\x18N \x01(\tR\fmergedReason\x12#\n" +
-	"\x05error\x18O \x01(\v2\r.header.ErrorR\x05error\"\xf3\x01\n" +
+	"\x05error\x18O \x01(\v2\r.header.ErrorR\x05error\"\x98\x02\n" +
 	"\n" +
 	"Touchpoint\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -71398,7 +71415,8 @@ const file_header_proto_rawDesc = "" +
 	".header.KVR\x06fields\x12$\n" +
 	"\x0elinked_page_id\x18\x18 \x01(\tR\flinkedPageId\x12\x16\n" +
 	"\x06source\x18\x17 \x01(\tR\x06source\x12\x17\n" +
-	"\apost_id\x18\x19 \x01(\tR\x06postId\"\xae\x01\n" +
+	"\apost_id\x18\x19 \x01(\tR\x06postId\x12#\n" +
+	"\raction_source\x18\x1a \x01(\tR\factionSource\"\xae\x01\n" +
 	"\x11ShippingAddresses\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71688,7 +71706,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"webhook_id\x188 \x01(\tR\twebhookId\x12&\n" +
 	"\x0fsource_event_id\x189 \x01(\tR\rsourceEventId\x122\n" +
-	"\apayload\x18\x96\x01 \x01(\v2\x17.google.protobuf.StructR\apayload\"\x97)\n" +
+	"\apayload\x18\x96\x01 \x01(\v2\x17.google.protobuf.StructR\apayload\"\x9c)\n" +
 	"\x04Data\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12$\n" +
 	"\x05agent\x18\x02 \x01(\v2\x0e.account.AgentR\x05agent\x12)\n" +
@@ -71714,9 +71732,9 @@ const file_header_proto_rawDesc = "" +
 	"\x10bot_run_response\x18) \x01(\v2\x16.header.BotRunResponseR\x0ebotRunResponse\x125\n" +
 	"\vintegration\x18* \x01(\v2\x13.header.IntegrationR\vintegration\x12<\n" +
 	"\x0ebot_terminated\x18+ \x01(\v2\x15.header.BotTerminatedR\rbotTerminated\x12)\n" +
-	"\awebhook\x18, \x01(\v2\x0f.header.WebhookR\awebhook\x122\n" +
+	"\awebhook\x18, \x01(\v2\x0f.header.WebhookR\awebhook\x127\n" +
 	"\n" +
-	"conversion\x18/ \x01(\v2\x12.header.ConversionR\n" +
+	"conversion\x18/ \x01(\v2\x17.header.PopupConversionR\n" +
 	"conversion\x12>\n" +
 	"\x10language_message\x186 \x01(\v2\x13.header.LangMessageR\x0flanguageMessage\x12#\n" +
 	"\x05label\x187 \x01(\v2\r.header.LabelR\x05label\x12-\n" +
@@ -73692,13 +73710,12 @@ const file_header_proto_rawDesc = "" +
 	"by_trigger\x18\n" +
 	" \x01(\tR\tbyTrigger\x12)\n" +
 	"\x10impression_token\x18\v \x01(\tR\x0fimpressionToken\x12\"\n" +
-	"\rweb_plugin_id\x18\f \x01(\tR\vwebPluginId\"~\n" +
+	"\rweb_plugin_id\x18\f \x01(\tR\vwebPluginId\"\x83\x01\n" +
 	"\vConversions\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x124\n" +
-	"\vconversions\x18\x02 \x03(\v2\x12.header.ConversionR\vconversions\x12\x16\n" +
-	"\x06anchor\x18\x04 \x01(\tR\x06anchor\"\xe1\x03\n" +
-	"\n" +
-	"Conversion\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x129\n" +
+	"\vconversions\x18\x02 \x03(\v2\x17.header.PopupConversionR\vconversions\x12\x16\n" +
+	"\x06anchor\x18\x04 \x01(\tR\x06anchor\"\xe6\x03\n" +
+	"\x0fPopupConversion\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1f\n" +
@@ -76548,13 +76565,14 @@ const file_header_proto_rawDesc = "" +
 	"\x15output_error_variable\x18j \x01(\tR\x13outputErrorVariable\x12?\n" +
 	"\rterminate_bot\x18n \x01(\v2\x1a.header.ActionTerminateBotR\fterminateBot\x12^\n" +
 	"\x18send_facebook_conversion\x18p \x01(\v2$.header.ActionSendFacebookConversionR\x16sendFacebookConversion\x12?\n" +
-	"\rrotate_agents\x18q \x01(\v2\x1a.header.ActionRotateAgentsR\frotateAgents\"\x90\x01\n" +
+	"\rrotate_agents\x18q \x01(\v2\x1a.header.ActionRotateAgentsR\frotateAgents\"\xb5\x01\n" +
 	"\x1cActionSendFacebookConversion\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12 \n" +
 	"\x04bill\x18\x04 \x01(\v2\f.header.BillR\x04bill\x12\x19\n" +
 	"\bpage_ids\x18\x05 \x03(\tR\apageIds\x12\x1f\n" +
 	"\vdataset_ids\x18\x06 \x03(\tR\n" +
-	"datasetIds\"u\n" +
+	"datasetIds\x12#\n" +
+	"\raction_source\x18\a \x01(\tR\factionSource\"u\n" +
 	"\x12ActionTerminateBot\x12\x15\n" +
 	"\x06bot_id\x18\x03 \x01(\tR\x05botId\x12\x1d\n" +
 	"\n" +
@@ -79816,7 +79834,7 @@ var file_header_proto_goTypes = []any{
 	(*PopupPage)(nil),                               // 188: header.PopupPage
 	(*Impression)(nil),                              // 189: header.Impression
 	(*Conversions)(nil),                             // 190: header.Conversions
-	(*Conversion)(nil),                              // 191: header.Conversion
+	(*PopupConversion)(nil),                         // 191: header.PopupConversion
 	(*UserCampaignStatus)(nil),                      // 192: header.UserCampaignStatus
 	(*CampaignSubmission)(nil),                      // 193: header.CampaignSubmission
 	(*PopupButtonAction)(nil),                       // 194: header.PopupButtonAction
@@ -80395,7 +80413,7 @@ var file_header_proto_depIdxs = []int32{
 	116,  // 89: header.Data.integration:type_name -> header.Integration
 	217,  // 90: header.Data.bot_terminated:type_name -> header.BotTerminated
 	210,  // 91: header.Data.webhook:type_name -> header.Webhook
-	191,  // 92: header.Data.conversion:type_name -> header.Conversion
+	191,  // 92: header.Data.conversion:type_name -> header.PopupConversion
 	243,  // 93: header.Data.language_message:type_name -> header.LangMessage
 	50,   // 94: header.Data.label:type_name -> header.Label
 	248,  // 95: header.Data.user_view:type_name -> header.UserView
@@ -80749,11 +80767,11 @@ var file_header_proto_depIdxs = []int32{
 	658,  // 443: header.Impression.ctx:type_name -> common.Context
 	660,  // 444: header.Impression.device:type_name -> common.Device
 	658,  // 445: header.Conversions.ctx:type_name -> common.Context
-	191,  // 446: header.Conversions.conversions:type_name -> header.Conversion
-	658,  // 447: header.Conversion.ctx:type_name -> common.Context
-	660,  // 448: header.Conversion.device:type_name -> common.Device
-	193,  // 449: header.Conversion.submission:type_name -> header.CampaignSubmission
-	46,   // 450: header.Conversion.user:type_name -> header.User
+	191,  // 446: header.Conversions.conversions:type_name -> header.PopupConversion
+	658,  // 447: header.PopupConversion.ctx:type_name -> common.Context
+	660,  // 448: header.PopupConversion.device:type_name -> common.Device
+	193,  // 449: header.PopupConversion.submission:type_name -> header.CampaignSubmission
+	46,   // 450: header.PopupConversion.user:type_name -> header.User
 	658,  // 451: header.UserCampaignStatus.ctx:type_name -> common.Context
 	658,  // 452: header.CampaignSubmission.ctx:type_name -> common.Context
 	155,  // 453: header.CampaignSubmission.fields:type_name -> header.WidgetField
