@@ -3527,6 +3527,7 @@ message BotTerminated {
 
 	int64 ai_agent_version = 7;
 	string session_id = 8;
+	string message = 9;
 }
 
 message BlacklistIP {
@@ -7705,11 +7706,6 @@ message AIAgentTrace {
 	repeated Discount context_discounts = 27;
 	repeated Product context_products = 28; // used
 	string product_mention = 29;
-
-	string collect_information_strategy = 32;
-
-	string last_prompt = 33; // for debugging
-	string completion_output = 34; // for debuging
 }
 
 message WorkflowLog {
@@ -8922,12 +8918,7 @@ message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
 
-	// @deprecated
-	string action = 5; // '' == assign, remind, function, human_handoff, invite_human, end, provide_context, update_welcome_message, update_agent, send_message
-
 	repeated AIFunction functions = 9; // use when action = function
-	string instruction = 7; // @deprecated use when action = remind
-
 	// string hook = 8; // '' = before_reply, after_reply
 	// string agent_id = 6; // use when action = assign
 
@@ -8948,9 +8939,7 @@ message AIAgentOverrideRule {
 	repeated Trigger welcome_message_triggers = 22;
 
 	AIAgent ai_agent = 23;
-
 	bool run_once = 24;
-
 	repeated AIFunction actions = 27;
 }
 

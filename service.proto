@@ -699,7 +699,7 @@ service FabikonService {
 	rpc ListAdAccounts(header.Id) returns (header.Response);
 	rpc ListFbFanpageSettings2(ListPageSettingRequest) returns (header.Response);
 
-	rpc SendMetaConversion(header.Event) returns (header.Response);
+	rpc SendMetaConversion(header.Event) returns (header.Response); // offline
 }
 
 service ChannelConnector {

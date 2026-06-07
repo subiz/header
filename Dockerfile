@@ -1,10 +1,10 @@
-FROM golang:1.26.1
+FROM golang:1.26.3
 WORKDIR /tmp
 RUN apt update && apt install -y unzip curl
 
 # install node
-ENV NODE_VERSION=24.13.1
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.40.4/install.sh | bash
+ENV NODE_VERSION=24.16.0
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.40.5/install.sh | bash
 ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
@@ -12,12 +12,12 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # install protobuf
-RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v33.5/protoc-33.5-linux-x86_64.zip -O protoc.zip
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v35.0/protoc-35.0-linux-x86_64.zip -O protoc.zip
 RUN unzip protoc.zip
 
 # install protoc gengo
 RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
-RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.1
+RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.2
 
 ENV PROTOC=/tmp/bin/protoc
 
