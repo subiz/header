@@ -8478,6 +8478,27 @@ message AgentProfile {
 	int64 first_logged_in = 26;
 	account.Presence last_seen = 38;
 	string referrer_by = 39;
+
+	repeated AgentAccount accounts = 40;
+}
+
+message AgentAccount {
+	common.Context ctx = 1;
+	string account_id = 2; // accid
+	string name = 3;
+	string logo_url = 5;
+	string logo_url_128 = 4; // png 128x128
+
+	string owner_id = 6;
+	string state = 7; // activated, deleted, inactive
+	int64 created = 8;
+
+	int64 login_locked = 43;
+	string locked_code = 44; // policy, payment
+
+	string plan = 49; // readonly
+	int64 num_unreads = 50;
+	string agent_state = 51;
 }
 
 message InvitationLink {
@@ -10034,3 +10055,26 @@ message EventAggregate {
 	string op = 5;
 	string value = 6; // json.stringified
 }
+
+/*
+message CompletionInput {
+	string prompt_cache_key = 3;
+	string prompt_cache_retention = 4;
+	string verbosity = 5;
+	repeated string stop = 6;
+	string model = 7;
+	bool no_log = 8;
+	string instruct = 9;
+	repeated LLMChatHistoryEntry messages = 10;
+	int64 max_completion_tokens = 11;
+	LLMResponseJSONSchemaFormat response_format = 12;
+	string ToolChoice           string                        `json:"tool_choice,omitempty"`
+	// Reasoning            *CompletionReasoning          `json:"reasoning,omitempty"`
+	string reasoning_effort = 14;
+	float temperature          float32                       `json:"temperature,omitempty"`
+	float top_p                 float32                       `json:"top_p,omitempty"`
+	tools                []OpenAITool                  `json:"tools,omitempty"`
+	string service_tier
+	bool stop_after_tool_called
+}
+*/
