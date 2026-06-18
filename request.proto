@@ -740,6 +740,7 @@ message CounterReportRequest {
 	int64 limit = 8;
 
 	int64 from_time = 11; // ms
+	int64 to_time = 18; // ms, replacement for limit
 	bool count_only = 10;
 
 	repeated string filters = 12; // "", "source=at123;item=zns"

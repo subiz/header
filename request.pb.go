@@ -5855,6 +5855,7 @@ type CounterReportRequest struct {
 	Tz            string   `protobuf:"bytes,7,opt,name=tz,proto3" json:"tz,omitempty"`       // +00:07
 	Limit         int64    `protobuf:"varint,8,opt,name=limit,proto3" json:"limit,omitempty"`
 	FromTime      int64    `protobuf:"varint,11,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"` // ms
+	ToTime        int64    `protobuf:"varint,18,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`       // ms, replacement for limit
 	CountOnly     bool     `protobuf:"varint,10,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"`
 	Filters       []string `protobuf:"bytes,12,rep,name=filters,proto3" json:"filters,omitempty"`                // "", "source=at123;item=zns"
 	GroupBy       string   `protobuf:"bytes,13,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "", "item", "source"
@@ -5939,6 +5940,13 @@ func (x *CounterReportRequest) GetLimit() int64 {
 func (x *CounterReportRequest) GetFromTime() int64 {
 	if x != nil {
 		return x.FromTime
+	}
+	return 0
+}
+
+func (x *CounterReportRequest) GetToTime() int64 {
+	if x != nil {
+		return x.ToTime
 	}
 	return 0
 }
@@ -9485,7 +9493,7 @@ const file_request_proto_rawDesc = "" +
 	"\ato_hour\x18\a \x01(\x03R\x06toHour\x12\x1f\n" +
 	"\vevent_types\x18\b \x03(\tR\n" +
 	"eventTypes\x12\x12\n" +
-	"\x04unit\x18\t \x01(\tR\x04unit\"\xd6\x02\n" +
+	"\x04unit\x18\t \x01(\tR\x04unit\"\xef\x02\n" +
 	"\x14CounterReportRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9495,7 +9503,8 @@ const file_request_proto_rawDesc = "" +
 	"\x05range\x18\x06 \x01(\tR\x05range\x12\x0e\n" +
 	"\x02tz\x18\a \x01(\tR\x02tz\x12\x14\n" +
 	"\x05limit\x18\b \x01(\x03R\x05limit\x12\x1b\n" +
-	"\tfrom_time\x18\v \x01(\x03R\bfromTime\x12\x1d\n" +
+	"\tfrom_time\x18\v \x01(\x03R\bfromTime\x12\x17\n" +
+	"\ato_time\x18\x12 \x01(\x03R\x06toTime\x12\x1d\n" +
 	"\n" +
 	"count_only\x18\n" +
 	" \x01(\bR\tcountOnly\x12\x18\n" +
