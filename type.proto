@@ -355,6 +355,9 @@ enum RealtimeType {
 
 	ai_agent_testcase_updated = 400;
 	ai_agent_testcase_deleted = 401;
+
+	convo_filter_matched = 402;
+	convo_filter_unmatched = 403; // convo_filter_unmatched.accid.acc5.unix_hour.key
 }
 
 message TextTransform {
