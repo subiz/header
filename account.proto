@@ -51,6 +51,36 @@ message DashboardAgent {
 	optional string default_email_signature_id = 48;
 
 	optional string default_zalo_personal_account = 50;
+
+	repeated ConvoFilter convo_filters = 52; //
+}
+
+message ConvoFilter {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string key = 3; // for realtime use
+	optional string order_by = 4; // -created, +created, +actived, -actived, +unreplied_at
+	repeated ConvoFilterCondition conditions = 5;
+	optional string anchor = 6;
+	optional int64 limit = 7;
+	optional string agent_id = 8;
+}
+
+message ConvoFilterCondition {
+	optional string key = 3; // tags, touchpoint, state, is_unreplied, is_unread, created, is_muted, is_spam, from_ads, fb_post_ids
+	optional string op = 4; // contain_one (default), contain_all, not_contain_all
+	repeated string tags = 5;
+	optional string touchpoint_channel = 6;
+	repeated string touchpoint_sources = 7;
+	optional string state = 8; // active, ended
+	optional bool is_unreplied = 10;
+	optional bool is_unread = 11;
+	optional int64 created_from_ms = 12; //
+	optional int64 created_to_ms = 13; //
+	optional bool is_muted = 14;
+	optional bool is_spam = 15;
+	optional bool from_ads = 16;
+	repeated string fb_post_ids = 17;
 }
 
 message Agent {

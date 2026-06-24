@@ -462,7 +462,7 @@ const file_service_proto_rawDesc = "" +
 	"\x14ListAIAgentTestcases\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12+\n" +
 	"\vListLLMLogs\x12\n" +
-	".header.Id\x1a\x10.header.Response2\x82#\n" +
+	".header.Id\x1a\x10.header.Response2\x83#\n" +
 	"\x0fConversationMgr\x128\n" +
 	"\n" +
 	"AssignRule\x12\x15.header.AssignRequest\x1a\x13.header.RouteResult\x127\n" +
@@ -479,8 +479,8 @@ const file_service_proto_rawDesc = "" +
 	"\x13GetFullConversation\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12L\n" +
 	"\x11ListConversations\x12 .header.ListConversationsRequest\x1a\x15.header.Conversations\x12H\n" +
-	"\x12ListConversations2\x12 .header.ListConversationsRequest\x1a\x10.header.Response\x12;\n" +
-	"\x12ListConversations3\x12\x13.header.ConvoFilter\x1a\x10.header.Response\x128\n" +
+	"\x12ListConversations2\x12 .header.ListConversationsRequest\x1a\x10.header.Response\x12<\n" +
+	"\x12ListConversations3\x12\x14.account.ConvoFilter\x1a\x10.header.Response\x128\n" +
 	"\x12MatchConversations\x12\v.header.Ids\x1a\x15.header.Conversations\x124\n" +
 	"\x0fTagConversation\x12\x12.header.TagRequest\x1a\r.header.Empty\x126\n" +
 	"\x11UntagConversation\x12\x12.header.TagRequest\x1a\r.header.Empty\x12=\n" +
@@ -1286,7 +1286,7 @@ var file_service_proto_goTypes = []any{
 	(*AssignRequest)(nil),                     // 95: header.AssignRequest
 	(*StartRequest)(nil),                      // 96: header.StartRequest
 	(*ListConversationsRequest)(nil),          // 97: header.ListConversationsRequest
-	(*ConvoFilter)(nil),                       // 98: header.ConvoFilter
+	(*account.ConvoFilter)(nil),               // 98: account.ConvoFilter
 	(*TagRequest)(nil),                        // 99: header.TagRequest
 	(*ConversationMember)(nil),                // 100: header.ConversationMember
 	(*Conversation)(nil),                      // 101: header.Conversation
@@ -1815,7 +1815,7 @@ var file_service_proto_depIdxs = []int32{
 	1,   // 287: header.ConversationMgr.GetFullConversation:input_type -> header.Id
 	97,  // 288: header.ConversationMgr.ListConversations:input_type -> header.ListConversationsRequest
 	97,  // 289: header.ConversationMgr.ListConversations2:input_type -> header.ListConversationsRequest
-	98,  // 290: header.ConversationMgr.ListConversations3:input_type -> header.ConvoFilter
+	98,  // 290: header.ConversationMgr.ListConversations3:input_type -> account.ConvoFilter
 	14,  // 291: header.ConversationMgr.MatchConversations:input_type -> header.Ids
 	99,  // 292: header.ConversationMgr.TagConversation:input_type -> header.TagRequest
 	99,  // 293: header.ConversationMgr.UntagConversation:input_type -> header.TagRequest

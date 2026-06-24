@@ -274,6 +274,8 @@ const (
 	RealtimeType_user_content_view_updated        RealtimeType = 358
 	RealtimeType_ai_agent_testcase_updated        RealtimeType = 400
 	RealtimeType_ai_agent_testcase_deleted        RealtimeType = 401
+	RealtimeType_convo_filter_matched             RealtimeType = 402
+	RealtimeType_convo_filter_unmatched           RealtimeType = 403 // convo_filter_unmatched.accid.acc5.unix_hour.key
 )
 
 // Enum value maps for RealtimeType.
@@ -526,6 +528,8 @@ var (
 		358: "user_content_view_updated",
 		400: "ai_agent_testcase_updated",
 		401: "ai_agent_testcase_deleted",
+		402: "convo_filter_matched",
+		403: "convo_filter_unmatched",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -775,6 +779,8 @@ var (
 		"user_content_view_updated":          358,
 		"ai_agent_testcase_updated":          400,
 		"ai_agent_testcase_deleted":          401,
+		"convo_filter_matched":               402,
+		"convo_filter_unmatched":             403,
 	}
 )
 
@@ -1717,7 +1723,7 @@ const file_type_proto_rawDesc = "" +
 	"monthEqVar\x12\x1d\n" +
 	"\n" +
 	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
-	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xd8/\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\x900\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1967,7 +1973,9 @@ const file_type_proto_rawDesc = "" +
 	"\x17workflow_action_created\x10\xe4\x02\x12\x1e\n" +
 	"\x19user_content_view_updated\x10\xe6\x02\x12\x1e\n" +
 	"\x19ai_agent_testcase_updated\x10\x90\x03\x12\x1e\n" +
-	"\x19ai_agent_testcase_deleted\x10\x91\x03B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\x19ai_agent_testcase_deleted\x10\x91\x03\x12\x19\n" +
+	"\x14convo_filter_matched\x10\x92\x03\x12\x1b\n" +
+	"\x16convo_filter_unmatched\x10\x93\x03B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once
