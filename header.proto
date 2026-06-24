@@ -1139,6 +1139,37 @@ message ConversationMember {
 	// int64 bot_follow_up_disabled = 45;
 
 	// Message bot_takeover_message = 46;
+
+	// Unix timestamp of the first user message in the latest unreplied user turn
+	int64 unreplied_at = 47;
+}
+
+message ConvoFilter {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string key = 3; // for realtime use
+	string order_by = 4; // -created, +created, +actived, -actived, +unreplied_at
+	repeated ConvoFilterCondition conditions = 5;
+	string anchor = 6;
+	int64 limit = 7;
+	string agent_id = 8;
+}
+
+message ConvoFilterCondition {
+	string key = 3; // tags, touchpoint, state, is_unreplied, is_unread, created, is_muted, is_spam, from_ads, fb_post_ids
+	string op = 4; // contain_one (default), contain_all, not_contain_all
+	repeated string tags = 5;
+	string touchpoint_channel = 6;
+	repeated string touchpoint_sources = 7;
+	string state = 8; // active, ended
+	bool is_unreplied = 10;
+	bool is_unread = 11;
+	int64 created_from_ms = 12; //
+	int64 created_to_ms = 13; //
+	bool is_muted = 14;
+	bool is_spam = 15;
+	bool from_ads = 16;
+	repeated string fb_post_ids = 17;
 }
 
 message StartRequest {
@@ -1309,6 +1340,7 @@ message Conversation {
 	string human_notify_message = 74;
 
 	bool from_light_convo = 75;
+	int64 unreplied_at = 90;
 }
 
 message GoogleReview {

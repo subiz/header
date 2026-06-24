@@ -422,6 +422,7 @@ service ConversationMgr {
 	rpc GetFullConversation(Id) returns (header.Response);
 	rpc ListConversations(header.ListConversationsRequest) returns (header.Conversations);
 	rpc ListConversations2(header.ListConversationsRequest) returns (Response);
+	rpc ListConversations3(header.ConvoFilter) returns (Response);
 	rpc MatchConversations(Ids) returns (header.Conversations);
 
 	rpc TagConversation(header.TagRequest) returns (Empty);
