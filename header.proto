@@ -7021,6 +7021,7 @@ message Response {
 	repeated UserContentView content_views = 266;
 
 	CreditSpendEntry credit_spend_entry = 267;
+	repeated DocHit doc_hits = 268;
 }
 
 message ReportCount {

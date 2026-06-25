@@ -238,6 +238,146 @@ var GooglekonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	Find_FindDocs_FullMethodName = "/header.Find/FindDocs"
+	Find_IndexDoc_FullMethodName = "/header.Find/IndexDoc"
+)
+
+// FindClient is the client API for Find service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FindClient interface {
+	FindDocs(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*Response, error)
+	IndexDoc(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
+}
+
+type findClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFindClient(cc grpc.ClientConnInterface) FindClient {
+	return &findClient{cc}
+}
+
+func (c *findClient) FindDocs(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Find_FindDocs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *findClient) IndexDoc(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Find_IndexDoc_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FindServer is the server API for Find service.
+// All implementations must embed UnimplementedFindServer
+// for forward compatibility.
+type FindServer interface {
+	FindDocs(context.Context, *DocSearchRequest) (*Response, error)
+	IndexDoc(context.Context, *DocIndexRequest) (*Empty, error)
+	mustEmbedUnimplementedFindServer()
+}
+
+// UnimplementedFindServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedFindServer struct{}
+
+func (UnimplementedFindServer) FindDocs(context.Context, *DocSearchRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method FindDocs not implemented")
+}
+func (UnimplementedFindServer) IndexDoc(context.Context, *DocIndexRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method IndexDoc not implemented")
+}
+func (UnimplementedFindServer) mustEmbedUnimplementedFindServer() {}
+func (UnimplementedFindServer) testEmbeddedByValue()              {}
+
+// UnsafeFindServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FindServer will
+// result in compilation errors.
+type UnsafeFindServer interface {
+	mustEmbedUnimplementedFindServer()
+}
+
+func RegisterFindServer(s grpc.ServiceRegistrar, srv FindServer) {
+	// If the following call panics, it indicates UnimplementedFindServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Find_ServiceDesc, srv)
+}
+
+func _Find_FindDocs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FindServer).FindDocs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Find_FindDocs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FindServer).FindDocs(ctx, req.(*DocSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Find_IndexDoc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DocIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FindServer).IndexDoc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Find_IndexDoc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FindServer).IndexDoc(ctx, req.(*DocIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Find_ServiceDesc is the grpc.ServiceDesc for Find service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Find_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Find",
+	HandlerType: (*FindServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FindDocs",
+			Handler:    _Find_FindDocs_Handler,
+		},
+		{
+			MethodName: "IndexDoc",
+			Handler:    _Find_IndexDoc_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	DocSearch_IndexConvo_FullMethodName          = "/header.DocSearch/IndexConvo"
 	DocSearch_SearchConvos_FullMethodName        = "/header.DocSearch/SearchConvos"
 	DocSearch_Index_FullMethodName               = "/header.DocSearch/Index"
@@ -250,14 +390,13 @@ const (
 	DocSearch_ReportCall_FullMethodName          = "/header.DocSearch/ReportCall"
 	DocSearch_ListCallIds_FullMethodName         = "/header.DocSearch/ListCallIds"
 	DocSearch_ReportAgent_FullMethodName         = "/header.DocSearch/ReportAgent"
-	DocSearch_HealthCheckReport_FullMethodName   = "/header.DocSearch/HealthCheckReport"
-	DocSearch_HealthCheckIndex_FullMethodName    = "/header.DocSearch/HealthCheckIndex"
 )
 
 // DocSearchClient is the client API for DocSearch service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DocSearchClient interface {
+	// @deprecated, use Find
 	IndexConvo(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
 	SearchConvos(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
 	Index(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -270,9 +409,6 @@ type DocSearchClient interface {
 	ReportCall(ctx context.Context, in *CallMetricsRequest, opts ...grpc.CallOption) (*CallMetrics, error)
 	ListCallIds(ctx context.Context, in *CallMetricsRequest, opts ...grpc.CallOption) (*Conversations, error)
 	ReportAgent(ctx context.Context, in *AgentMetricsRequest, opts ...grpc.CallOption) (*AgentMetrics, error)
-	// healthcheck
-	HealthCheckReport(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
-	HealthCheckIndex(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type docSearchClient struct {
@@ -403,30 +539,11 @@ func (c *docSearchClient) ReportAgent(ctx context.Context, in *AgentMetricsReque
 	return out, nil
 }
 
-func (c *docSearchClient) HealthCheckReport(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, DocSearch_HealthCheckReport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *docSearchClient) HealthCheckIndex(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, DocSearch_HealthCheckIndex_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // DocSearchServer is the server API for DocSearch service.
 // All implementations must embed UnimplementedDocSearchServer
 // for forward compatibility.
 type DocSearchServer interface {
+	// @deprecated, use Find
 	IndexConvo(context.Context, *DocIndexRequest) (*Empty, error)
 	SearchConvos(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
 	Index(context.Context, *DocIndexRequest) (*Empty, error)
@@ -439,9 +556,6 @@ type DocSearchServer interface {
 	ReportCall(context.Context, *CallMetricsRequest) (*CallMetrics, error)
 	ListCallIds(context.Context, *CallMetricsRequest) (*Conversations, error)
 	ReportAgent(context.Context, *AgentMetricsRequest) (*AgentMetrics, error)
-	// healthcheck
-	HealthCheckReport(context.Context, *Empty) (*Empty, error)
-	HealthCheckIndex(context.Context, *Empty) (*Empty, error)
 	mustEmbedUnimplementedDocSearchServer()
 }
 
@@ -487,12 +601,6 @@ func (UnimplementedDocSearchServer) ListCallIds(context.Context, *CallMetricsReq
 }
 func (UnimplementedDocSearchServer) ReportAgent(context.Context, *AgentMetricsRequest) (*AgentMetrics, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReportAgent not implemented")
-}
-func (UnimplementedDocSearchServer) HealthCheckReport(context.Context, *Empty) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method HealthCheckReport not implemented")
-}
-func (UnimplementedDocSearchServer) HealthCheckIndex(context.Context, *Empty) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method HealthCheckIndex not implemented")
 }
 func (UnimplementedDocSearchServer) mustEmbedUnimplementedDocSearchServer() {}
 func (UnimplementedDocSearchServer) testEmbeddedByValue()                   {}
@@ -731,42 +839,6 @@ func _DocSearch_ReportAgent_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DocSearch_HealthCheckReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).HealthCheckReport(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_HealthCheckReport_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).HealthCheckReport(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DocSearch_HealthCheckIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).HealthCheckIndex(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_HealthCheckIndex_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).HealthCheckIndex(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // DocSearch_ServiceDesc is the grpc.ServiceDesc for DocSearch service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -821,14 +893,6 @@ var DocSearch_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportAgent",
 			Handler:    _DocSearch_ReportAgent_Handler,
-		},
-		{
-			MethodName: "HealthCheckReport",
-			Handler:    _DocSearch_HealthCheckReport_Handler,
-		},
-		{
-			MethodName: "HealthCheckIndex",
-			Handler:    _DocSearch_HealthCheckIndex_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

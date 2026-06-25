@@ -4371,9 +4371,9 @@ type DocIndexRequest struct {
 	DocumentId        string                 `protobuf:"bytes,4,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"` // document_id
 	Part              string                 `protobuf:"bytes,5,opt,name=part,proto3" json:"part,omitempty"`                               // chunk_id
 	Content           string                 `protobuf:"bytes,6,opt,name=content,proto3" json:"content,omitempty"`
-	IsName            bool                   `protobuf:"varint,7,opt,name=is_name,json=isName,proto3" json:"is_name,omitempty"` // hint for better name search
-	IsId              bool                   `protobuf:"varint,10,opt,name=is_id,json=isId,proto3" json:"is_id,omitempty"`      // hint for not indexing using tokenize
-	Day               int64                  `protobuf:"varint,8,opt,name=day,proto3" json:"day,omitempty"`                     // unix day for doc, used to order more recent document
+	IsName            bool                   `protobuf:"varint,7,opt,name=is_name,json=isName,proto3" json:"is_name,omitempty"`          // hint for better name search
+	IsId              bool                   `protobuf:"varint,10,opt,name=is_id,json=isId,proto3" json:"is_id,omitempty"`               // hint for not indexing using tokenize
+	ActiveSec         int64                  `protobuf:"varint,8,opt,name=active_sec,json=activeSec,proto3" json:"active_sec,omitempty"` // unix sec for doc, used to order by recent document
 	IsPhone           bool                   `protobuf:"varint,11,opt,name=is_phone,json=isPhone,proto3" json:"is_phone,omitempty"`
 	IsEmail           bool                   `protobuf:"varint,12,opt,name=is_email,json=isEmail,proto3" json:"is_email,omitempty"`
 	Owners            []string               `protobuf:"bytes,9,rep,name=owners,proto3" json:"owners,omitempty"`
@@ -4384,6 +4384,7 @@ type DocIndexRequest struct {
 	IndexTypes    []string  `protobuf:"bytes,21,rep,name=index_types,json=indexTypes,proto3" json:"index_types,omitempty"` // fulltext, vector
 	Vector        []float32 `protobuf:"fixed32,23,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	TitleVector   []float32 `protobuf:"fixed32,24,rep,packed,name=title_vector,json=titleVector,proto3" json:"title_vector,omitempty"`
+	CleanOldTerms bool      `protobuf:"varint,25,opt,name=clean_old_terms,json=cleanOldTerms,proto3" json:"clean_old_terms,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4474,9 +4475,9 @@ func (x *DocIndexRequest) GetIsId() bool {
 	return false
 }
 
-func (x *DocIndexRequest) GetDay() int64 {
+func (x *DocIndexRequest) GetActiveSec() int64 {
 	if x != nil {
-		return x.Day
+		return x.ActiveSec
 	}
 	return 0
 }
@@ -4542,6 +4543,13 @@ func (x *DocIndexRequest) GetTitleVector() []float32 {
 		return x.TitleVector
 	}
 	return nil
+}
+
+func (x *DocIndexRequest) GetCleanOldTerms() bool {
+	if x != nil {
+		return x.CleanOldTerms
+	}
+	return false
 }
 
 type DocSearchRequest struct {
@@ -9318,7 +9326,7 @@ const file_request_proto_rawDesc = "" +
 	"\tassignees\x18\x1a \x03(\tR\tassignees\x12\x1b\n" +
 	"\tis_pinned\x18\x1c \x01(\tR\bisPinned\x12\x18\n" +
 	"\awatcher\x18\x1d \x01(\tR\awatcher\x12\x18\n" +
-	"\ashorten\x18\x1f \x01(\bR\ashorten\"\x86\x04\n" +
+	"\ashorten\x18\x1f \x01(\bR\ashorten\"\xbb\x04\n" +
 	"\x0fDocIndexRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9332,8 +9340,9 @@ const file_request_proto_rawDesc = "" +
 	"\acontent\x18\x06 \x01(\tR\acontent\x12\x17\n" +
 	"\ais_name\x18\a \x01(\bR\x06isName\x12\x13\n" +
 	"\x05is_id\x18\n" +
-	" \x01(\bR\x04isId\x12\x10\n" +
-	"\x03day\x18\b \x01(\x03R\x03day\x12\x19\n" +
+	" \x01(\bR\x04isId\x12\x1d\n" +
+	"\n" +
+	"active_sec\x18\b \x01(\x03R\tactiveSec\x12\x19\n" +
 	"\bis_phone\x18\v \x01(\bR\aisPhone\x12\x19\n" +
 	"\bis_email\x18\f \x01(\bR\aisEmail\x12\x16\n" +
 	"\x06owners\x18\t \x03(\tR\x06owners\x12.\n" +
@@ -9343,7 +9352,8 @@ const file_request_proto_rawDesc = "" +
 	"\vindex_types\x18\x15 \x03(\tR\n" +
 	"indexTypes\x12\x16\n" +
 	"\x06vector\x18\x17 \x03(\x02R\x06vector\x12!\n" +
-	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\"\xdb\x04\n" +
+	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\x12&\n" +
+	"\x0fclean_old_terms\x18\x19 \x01(\bR\rcleanOldTerms\"\xdb\x04\n" +
 	"\x10DocSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
