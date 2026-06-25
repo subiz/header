@@ -523,6 +523,7 @@ type ConvoFilter struct {
 	Anchor        *string                 `protobuf:"bytes,6,opt,name=anchor" json:"anchor,omitempty"`
 	Limit         *int64                  `protobuf:"varint,7,opt,name=limit" json:"limit,omitempty"`
 	AgentId       *string                 `protobuf:"bytes,8,opt,name=agent_id,json=agentId" json:"agent_id,omitempty"`
+	Name          *string                 `protobuf:"bytes,9,opt,name=name" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -609,6 +610,13 @@ func (x *ConvoFilter) GetLimit() int64 {
 func (x *ConvoFilter) GetAgentId() string {
 	if x != nil && x.AgentId != nil {
 		return *x.AgentId
+	}
+	return ""
+}
+
+func (x *ConvoFilter) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
@@ -3165,7 +3173,7 @@ const file_account_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aH\n" +
 	"\x1aSegmentUserViewsOrderEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x02\n" +
 	"\vConvoFilter\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3177,7 +3185,8 @@ const file_account_proto_rawDesc = "" +
 	"conditions\x12\x16\n" +
 	"\x06anchor\x18\x06 \x01(\tR\x06anchor\x12\x14\n" +
 	"\x05limit\x18\a \x01(\x03R\x05limit\x12\x19\n" +
-	"\bagent_id\x18\b \x01(\tR\aagentId\"\xbb\x03\n" +
+	"\bagent_id\x18\b \x01(\tR\aagentId\x12\x12\n" +
+	"\x04name\x18\t \x01(\tR\x04name\"\xbb\x03\n" +
 	"\x14ConvoFilterCondition\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x12\x0e\n" +
 	"\x02op\x18\x04 \x01(\tR\x02op\x12\x12\n" +
