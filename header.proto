@@ -8963,9 +8963,9 @@ message AIAgentOverrideRule {
 	// AssignRequest assign_to = 19; // @deprecated
 	// bool report_assigned_agent_name = 25;
 
-	Message welcome_message = 20;
-	string welcome_message_prompt = 21;
-	repeated Trigger welcome_message_triggers = 22;
+	// Message welcome_message = 20; // @deprecated
+	// string welcome_message_prompt = 21;
+	// repeated Trigger welcome_message_triggers = 22;
 
 	AIAgent ai_agent = 23;
 	bool run_once = 24;
