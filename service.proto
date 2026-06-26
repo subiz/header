@@ -422,9 +422,14 @@ service ConversationMgr {
 	rpc EndConversation(Id) returns (header.Conversation);
 	rpc GetConversation(Id) returns (header.Conversation);
 	rpc GetFullConversation(Id) returns (header.Response);
+
+	// @deprecated
 	rpc ListConversations(header.ListConversationsRequest) returns (header.Conversations);
 	rpc ListConversations2(header.ListConversationsRequest) returns (Response);
+
 	rpc ListConversations3(account.ConvoFilter) returns (Response);
+	rpc RemoveConvoFilter(Id) returns (Empty);
+
 	rpc MatchConversations(Ids) returns (header.Conversations);
 
 	rpc TagConversation(header.TagRequest) returns (Empty);
