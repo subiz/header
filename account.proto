@@ -65,6 +65,7 @@ message ConvoFilter {
 	optional int64 limit = 7;
 	optional string agent_id = 8;
 	optional string name = 9;
+	optional string id = 10; // ??
 }
 
 message ConvoFilterCondition {

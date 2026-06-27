@@ -11511,6 +11511,7 @@ const (
 	ConversationMgr_AssignRule_FullMethodName               = "/header.ConversationMgr/AssignRule"
 	ConversationMgr_ReassignConversation_FullMethodName     = "/header.ConversationMgr/ReassignConversation"
 	ConversationMgr_PongMessage_FullMethodName              = "/header.ConversationMgr/PongMessage"
+	ConversationMgr_IndexConvo_FullMethodName               = "/header.ConversationMgr/IndexConvo"
 	ConversationMgr_StartConversation_FullMethodName        = "/header.ConversationMgr/StartConversation"
 	ConversationMgr_ListConversationLogs_FullMethodName     = "/header.ConversationMgr/ListConversationLogs"
 	ConversationMgr_EndConversation_FullMethodName          = "/header.ConversationMgr/EndConversation"
@@ -11598,6 +11599,7 @@ type ConversationMgrClient interface {
 	AssignRule(ctx context.Context, in *AssignRequest, opts ...grpc.CallOption) (*RouteResult, error)
 	ReassignConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*RouteResult, error)
 	PongMessage(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
+	IndexConvo(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	StartConversation(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*Conversation, error)
 	ListConversationLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	EndConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Conversation, error)
@@ -11717,6 +11719,16 @@ func (c *conversationMgrClient) PongMessage(ctx context.Context, in *Event, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Event)
 	err := c.cc.Invoke(ctx, ConversationMgr_PongMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) IndexConvo(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_IndexConvo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12510,6 +12522,7 @@ type ConversationMgrServer interface {
 	AssignRule(context.Context, *AssignRequest) (*RouteResult, error)
 	ReassignConversation(context.Context, *Id) (*RouteResult, error)
 	PongMessage(context.Context, *Event) (*Event, error)
+	IndexConvo(context.Context, *Id) (*Response, error)
 	StartConversation(context.Context, *StartRequest) (*Conversation, error)
 	ListConversationLogs(context.Context, *Id) (*Response, error)
 	EndConversation(context.Context, *Id) (*Conversation, error)
@@ -12613,6 +12626,9 @@ func (UnimplementedConversationMgrServer) ReassignConversation(context.Context, 
 }
 func (UnimplementedConversationMgrServer) PongMessage(context.Context, *Event) (*Event, error) {
 	return nil, status.Error(codes.Unimplemented, "method PongMessage not implemented")
+}
+func (UnimplementedConversationMgrServer) IndexConvo(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method IndexConvo not implemented")
 }
 func (UnimplementedConversationMgrServer) StartConversation(context.Context, *StartRequest) (*Conversation, error) {
 	return nil, status.Error(codes.Unimplemented, "method StartConversation not implemented")
@@ -12919,6 +12935,24 @@ func _ConversationMgr_PongMessage_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).PongMessage(ctx, req.(*Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_IndexConvo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).IndexConvo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_IndexConvo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).IndexConvo(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14345,6 +14379,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PongMessage",
 			Handler:    _ConversationMgr_PongMessage_Handler,
+		},
+		{
+			MethodName: "IndexConvo",
+			Handler:    _ConversationMgr_IndexConvo_Handler,
 		},
 		{
 			MethodName: "StartConversation",
