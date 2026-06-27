@@ -33693,23 +33693,23 @@ type Product struct {
 	Id             string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`                                                 // generated
 	OtherVariants  []*Product             `protobuf:"bytes,4,rep,name=other_variants,json=otherVariants,proto3" json:"other_variants,omitempty"`      // [2] [3]
 	ProductGroupId string                 `protobuf:"bytes,5,opt,name=product_group_id,json=productGroupId,proto3" json:"product_group_id,omitempty"` // iphone-6-plus // parent id
-	Url            string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`                                               // (shared)
-	Handle         string                 `protobuf:"bytes,8,opt,name=handle,proto3" json:"handle,omitempty"`                                         // (shared) iphone-6-plus-128G
+	Url            string                 `protobuf:"bytes,7,opt,name=url,proto3" json:"url,omitempty"`
+	Handle         string                 `protobuf:"bytes,8,opt,name=handle,proto3" json:"handle,omitempty"` // iphone-6-plus-128G
 	Name           string                 `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
-	Description    string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"` // (shared)
+	Description    string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
 	Props          []*KV                  `protobuf:"bytes,14,rep,name=props,proto3" json:"props,omitempty"`
 	// accessory.watch
-	Category  string           `protobuf:"bytes,16,opt,name=category,proto3" json:"category,omitempty"` // (shared)
+	Category  string           `protobuf:"bytes,16,opt,name=category,proto3" json:"category,omitempty"` // travel_tour
 	Brand     string           `protobuf:"bytes,18,opt,name=brand,proto3" json:"brand,omitempty"`       // (shared) brand name: apple, luis vuiton
-	Options   []*ProductOption `protobuf:"bytes,19,rep,name=options,proto3" json:"options,omitempty"`   // (shared)
+	Options   []*ProductOption `protobuf:"bytes,19,rep,name=options,proto3" json:"options,omitempty"`   //
 	Created   int64            `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
 	Updated   int64            `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
 	CreatedBy string           `protobuf:"bytes,22,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	UpdatedBy string           `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	Image     string           `protobuf:"bytes,30,opt,name=image,proto3" json:"image,omitempty"`
-	Images    []string         `protobuf:"bytes,31,rep,name=images,proto3" json:"images,omitempty"` // (shared)
-	Videos    []string         `protobuf:"bytes,33,rep,name=videos,proto3" json:"videos,omitempty"` // (shared)
-	Note      string           `protobuf:"bytes,35,opt,name=note,proto3" json:"note,omitempty"`     // (shared)
+	Images    []string         `protobuf:"bytes,31,rep,name=images,proto3" json:"images,omitempty"`
+	Videos    []string         `protobuf:"bytes,33,rep,name=videos,proto3" json:"videos,omitempty"`
+	Note      string           `protobuf:"bytes,35,opt,name=note,proto3" json:"note,omitempty"`
 	// shipping
 	// bool requires_shipping = 36;
 	// int64 days_to_ship = 37;
@@ -33720,14 +33720,13 @@ type Product struct {
 	WeightUnit      string  `protobuf:"bytes,42,opt,name=weight_unit,json=weightUnit,proto3" json:"weight_unit,omitempty"` // g, kg
 	Grams           float32 `protobuf:"fixed32,43,opt,name=grams,proto3" json:"grams,omitempty"`
 	AllowPreorder   bool    `protobuf:"varint,44,opt,name=allow_preorder,json=allowPreorder,proto3" json:"allow_preorder,omitempty"`
-	Condition       string  `protobuf:"bytes,47,opt,name=condition,proto3" json:"condition,omitempty"`   // (shared) new, refurbished, damaged, used
-	Visibility      string  `protobuf:"bytes,48,opt,name=visibility,proto3" json:"visibility,omitempty"` // (shared) published, staging, hidden, deleted
+	Condition       string  `protobuf:"bytes,47,opt,name=condition,proto3" json:"condition,omitempty"`   // new, refurbished, damaged, used
+	Visibility      string  `protobuf:"bytes,48,opt,name=visibility,proto3" json:"visibility,omitempty"` // published, staging, hidden, deleted
 	Sku             string  `protobuf:"bytes,49,opt,name=sku,proto3" json:"sku,omitempty"`
 	Barcode         string  `protobuf:"bytes,50,opt,name=barcode,proto3" json:"barcode,omitempty"`
 	MarketPrice     float32 `protobuf:"fixed32,45,opt,name=market_price,json=marketPrice,proto3" json:"market_price,omitempty"`
-	Price           float32 `protobuf:"fixed32,51,opt,name=price,proto3" json:"price,omitempty"` // int64 fpv_price = 52; // (readonly from client)
-	// repeated PriceRule price_rules = 54; // (shared)
-	Stock int64 `protobuf:"varint,60,opt,name=stock,proto3" json:"stock,omitempty"` //
+	Price           float32 `protobuf:"fixed32,51,opt,name=price,proto3" json:"price,omitempty"`
+	Stock           int64   `protobuf:"varint,60,opt,name=stock,proto3" json:"stock,omitempty"` //
 	// pos_id based stock
 	Stocks               []*ProductStock   `protobuf:"bytes,63,rep,name=stocks,proto3" json:"stocks,omitempty"`
 	SourceId             string            `protobuf:"bytes,61,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
@@ -33755,7 +33754,7 @@ type Product struct {
 	FpvLastEnrichedCost      int64                  `protobuf:"varint,96,opt,name=fpv_last_enriched_cost,json=fpvLastEnrichedCost,proto3" json:"fpv_last_enriched_cost,omitempty"`    // vnd
 	FromUrl                  string                 `protobuf:"bytes,97,opt,name=from_url,json=fromUrl,proto3" json:"from_url,omitempty"`                                             // read only, crawled from this url
 	Modified                 int64                  `protobuf:"varint,99,opt,name=modified,proto3" json:"modified,omitempty"`
-	Error                    *Error                 `protobuf:"bytes,100,opt,name=error,proto3" json:"error,omitempty"` // TODO: product QA
+	Error                    *Error                 `protobuf:"bytes,100,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -35705,6 +35704,7 @@ type ProductCategory struct {
 	KeywordExtractExamples  []*ProductCategoryExtractExample    `protobuf:"bytes,15,rep,name=keyword_extract_examples,json=keywordExtractExamples,proto3" json:"keyword_extract_examples,omitempty"`
 	TrainingQuestions       []string                            `protobuf:"bytes,16,rep,name=training_questions,json=trainingQuestions,proto3" json:"training_questions,omitempty"`
 	CustomTrainingQuestions []string                            `protobuf:"bytes,17,rep,name=custom_training_questions,json=customTrainingQuestions,proto3" json:"custom_training_questions,omitempty"`
+	SummaryBuilderPrompt    string                              `protobuf:"bytes,18,opt,name=summary_builder_prompt,json=summaryBuilderPrompt,proto3" json:"summary_builder_prompt,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -35828,6 +35828,13 @@ func (x *ProductCategory) GetCustomTrainingQuestions() []string {
 		return x.CustomTrainingQuestions
 	}
 	return nil
+}
+
+func (x *ProductCategory) GetSummaryBuilderPrompt() string {
+	if x != nil {
+		return x.SummaryBuilderPrompt
+	}
+	return ""
 }
 
 type ProductCategoryExtractExample struct {
@@ -65596,13 +65603,13 @@ type AIDataEntry struct {
 	Metadata []*KV    `protobuf:"bytes,27,rep,name=metadata,proto3" json:"metadata,omitempty"`
 	Tags     []string `protobuf:"bytes,28,rep,name=tags,proto3" json:"tags,omitempty"` // for searching [sdt_0345098345]
 	// int64 deleted = 32;
-	Modified           int64 `protobuf:"varint,34,opt,name=modified,proto3" json:"modified,omitempty"`
-	LastSuccessChunked int64 `protobuf:"varint,35,opt,name=last_success_chunked,json=lastSuccessChunked,proto3" json:"last_success_chunked,omitempty"` // successfully saved to vector store
-	// int64 last_failed_chunked = 39;
+	Modified            int64              `protobuf:"varint,34,opt,name=modified,proto3" json:"modified,omitempty"`
+	LastSuccessChunked  int64              `protobuf:"varint,35,opt,name=last_success_chunked,json=lastSuccessChunked,proto3" json:"last_success_chunked,omitempty"` // successfully saved to vector store
 	ChunkAttempted      int64              `protobuf:"varint,40,opt,name=chunk_attempted,json=chunkAttempted,proto3" json:"chunk_attempted,omitempty"`
 	LastChunkDuration   int64              `protobuf:"varint,41,opt,name=last_chunk_duration,json=lastChunkDuration,proto3" json:"last_chunk_duration,omitempty"` // ms
 	Title               string             `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"`                                                     // title for url, file name for file
 	LlmSummary          string             `protobuf:"bytes,42,opt,name=llm_summary,json=llmSummary,proto3" json:"llm_summary,omitempty"`                         // read-only
+	LlmSummaryAt        int64              `protobuf:"varint,43,opt,name=llm_summary_at,json=llmSummaryAt,proto3" json:"llm_summary_at,omitempty"`
 	NumCharacters       int64              `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	NumChunks           int64              `protobuf:"varint,37,opt,name=num_chunks,json=numChunks,proto3" json:"num_chunks,omitempty"`
 	FpvLastChunkingCost int64              `protobuf:"varint,47,opt,name=fpv_last_chunking_cost,json=fpvLastChunkingCost,proto3" json:"fpv_last_chunking_cost,omitempty"`
@@ -65900,6 +65907,13 @@ func (x *AIDataEntry) GetLlmSummary() string {
 		return x.LlmSummary
 	}
 	return ""
+}
+
+func (x *AIDataEntry) GetLlmSummaryAt() int64 {
+	if x != nil {
+		return x.LlmSummaryAt
+	}
+	return 0
 }
 
 func (x *AIDataEntry) GetNumCharacters() int64 {
@@ -75430,7 +75444,7 @@ const file_header_proto_rawDesc = "" +
 	"modifiedBy\"q\n" +
 	" ProductCategoryBuildQueryExample\x125\n" +
 	"\ahistory\x18\x04 \x03(\v2\x1b.header.LLMChatHistoryEntryR\ahistory\x12\x16\n" +
-	"\x06output\x18\x05 \x01(\tR\x06output\"\x9f\x06\n" +
+	"\x06output\x18\x05 \x01(\tR\x06output\"\xd5\x06\n" +
 	"\x0fProductCategory\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12B\n" +
@@ -75448,7 +75462,8 @@ const file_header_proto_rawDesc = "" +
 	"\x05terms\x18\x0e \x03(\tR\x05terms\x12_\n" +
 	"\x18keyword_extract_examples\x18\x0f \x03(\v2%.header.ProductCategoryExtractExampleR\x16keywordExtractExamples\x12-\n" +
 	"\x12training_questions\x18\x10 \x03(\tR\x11trainingQuestions\x12:\n" +
-	"\x19custom_training_questions\x18\x11 \x03(\tR\x17customTrainingQuestions\x1a;\n" +
+	"\x19custom_training_questions\x18\x11 \x03(\tR\x17customTrainingQuestions\x124\n" +
+	"\x16summary_builder_prompt\x18\x12 \x01(\tR\x14summaryBuilderPrompt\x1a;\n" +
 	"\rI18nNameEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aQ\n" +
@@ -79051,7 +79066,7 @@ const file_header_proto_rawDesc = "" +
 	"\asummary\x18\x15 \x01(\tR\asummary\x12\x1a\n" +
 	"\bkeywords\x18\x16 \x03(\tR\bkeywords\x12\x1a\n" +
 	"\bcategory\x18\x17 \x01(\tR\bcategory\x12\x12\n" +
-	"\x04type\x18\x18 \x01(\tR\x04type\"\xc7\x0e\n" +
+	"\x04type\x18\x18 \x01(\tR\x04type\"\xed\x0e\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79094,7 +79109,8 @@ const file_header_proto_rawDesc = "" +
 	"\x13last_chunk_duration\x18) \x01(\x03R\x11lastChunkDuration\x12\x14\n" +
 	"\x05title\x18& \x01(\tR\x05title\x12\x1f\n" +
 	"\vllm_summary\x18* \x01(\tR\n" +
-	"llmSummary\x12%\n" +
+	"llmSummary\x12$\n" +
+	"\x0ellm_summary_at\x18+ \x01(\x03R\fllmSummaryAt\x12%\n" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1d\n" +
 	"\n" +
 	"num_chunks\x18% \x01(\x03R\tnumChunks\x123\n" +

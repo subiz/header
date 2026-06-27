@@ -4795,22 +4795,18 @@ message Product {
 	string id = 3; // generated
 	repeated Product other_variants = 4; // [2] [3]
 	string product_group_id = 5; // iphone-6-plus // parent id
-	string url = 7; // (shared)
-	string handle = 8; // (shared) iphone-6-plus-128G
-	string name = 9;
 
-	string description = 11; // (shared)
-	// string long_description = 15; // (shared)
+	string url = 7;
+	string handle = 8; // iphone-6-plus-128G
+	string name = 9;
+	string description = 11;
 
 	repeated KV props = 14;
 
 	// accessory.watch
-	string category = 16; // (shared)
-	// repeated Product related_products = 21; // releated content ids
-
+	string category = 16; // travel_tour
 	string brand = 18; // (shared) brand name: apple, luis vuiton
-
-	repeated ProductOption options = 19; // (shared)
+	repeated ProductOption options = 19; //
 
 	int64 created = 20;
 	int64 updated = 21;
@@ -4818,9 +4814,9 @@ message Product {
 	string updated_by = 23;
 
 	string image = 30;
-	repeated string images = 31; // (shared)
-	repeated string videos = 33; // (shared)
-	string note = 35; // (shared)
+	repeated string images = 31;
+	repeated string videos = 33;
+	string note = 35;
 
 	// shipping
 	// bool requires_shipping = 36;
@@ -4834,20 +4830,16 @@ message Product {
 	float grams = 43;
 	bool allow_preorder = 44;
 
-	string condition = 47; // (shared) new, refurbished, damaged, used
-	string visibility = 48; // (shared) published, staging, hidden, deleted
+	string condition = 47; // new, refurbished, damaged, used
+	string visibility = 48; // published, staging, hidden, deleted
 
 	string sku = 49;
 	string barcode = 50;
 
 	float market_price = 45;
-
 	float price = 51;
-	// int64 fpv_price = 52; // (readonly from client)
 
-	// repeated PriceRule price_rules = 54; // (shared)
 	int64 stock = 60; //
-
 	// pos_id based stock
 	repeated ProductStock stocks = 63;
 
@@ -4884,7 +4876,6 @@ message Product {
 
 	int64 modified = 99;
 	Error error = 100;
-	// TODO: product QA
 }
 
 message ProductEnrichSource {
@@ -5099,8 +5090,8 @@ message ProductCategory {
 	repeated string terms = 14;
 	repeated ProductCategoryExtractExample keyword_extract_examples = 15;
 	repeated string training_questions = 16;
-
 	repeated string custom_training_questions = 17;
+	string summary_builder_prompt = 18;
 }
 
 message ProductCategoryExtractExample {
@@ -9463,12 +9454,12 @@ message AIDataEntry {
 	// int64 deleted = 32;
 	int64 modified = 34;
 	int64 last_success_chunked = 35; // successfully saved to vector store
-	// int64 last_failed_chunked = 39;
 	int64 chunk_attempted = 40;
 	int64 last_chunk_duration = 41; // ms
 
 	string title = 38; // title for url, file name for file
 	string llm_summary = 42; // read-only
+	int64 llm_summary_at = 43;
 
 	int64 num_characters = 36;
 	int64 num_chunks = 37;
