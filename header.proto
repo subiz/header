@@ -7645,6 +7645,7 @@ message LLMChatHistoryEntry {
 	// for testing
 	int64 timeout = 8; // ms
 	repeated Attachment attachments = 9;
+	int64 delay_sec = 10; // second waited before sending
 
 	string refusal = 15;
 
@@ -9126,6 +9127,11 @@ message AIAgentTestcase {
 	int64 fpv_total_cost_vnd = 24;
 
 	string referrer_website = 25;
+
+	string expected_message = 30;
+	repeated string success_message_examples = 31;
+	repeated string failed__message_examples = 32;
+	string expected_timming = 33;
 }
 
 message AIAgentTestResult {
@@ -9142,6 +9148,7 @@ message AIAgentTestResult {
 	User user = 11;
 
 	// output
+	string score_explain = 12;
 	int64 score = 13;
 	int64 created = 14;
 	string status = 15; // pending, pass, fail
@@ -9153,6 +9160,8 @@ message AIAgentTestResult {
 
 	string error_log = 19;
 	int64 fpv_cost_vnd = 20;
+
+	AIAgentTrace trace = 33;
 }
 
 message AIAgentUsageLimit {
