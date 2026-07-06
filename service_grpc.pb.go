@@ -11608,7 +11608,7 @@ type ConversationMgrClient interface {
 	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*Conversations, error)
 	ListConversations2(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*Response, error)
 	ListConversations3(ctx context.Context, in *account.ConvoFilter, opts ...grpc.CallOption) (*Response, error)
-	CountConvoFilters(ctx context.Context, in *account.ConvoFilter, opts ...grpc.CallOption) (*Response, error)
+	CountConvoFilters(ctx context.Context, in *account.ConvoFilters, opts ...grpc.CallOption) (*Response, error)
 	RemoveConvoFilter(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchConversations(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Conversations, error)
 	TagConversation(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -11813,7 +11813,7 @@ func (c *conversationMgrClient) ListConversations3(ctx context.Context, in *acco
 	return out, nil
 }
 
-func (c *conversationMgrClient) CountConvoFilters(ctx context.Context, in *account.ConvoFilter, opts ...grpc.CallOption) (*Response, error) {
+func (c *conversationMgrClient) CountConvoFilters(ctx context.Context, in *account.ConvoFilters, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_CountConvoFilters_FullMethodName, in, out, cOpts...)
@@ -12520,7 +12520,7 @@ type ConversationMgrServer interface {
 	ListConversations(context.Context, *ListConversationsRequest) (*Conversations, error)
 	ListConversations2(context.Context, *ListConversationsRequest) (*Response, error)
 	ListConversations3(context.Context, *account.ConvoFilter) (*Response, error)
-	CountConvoFilters(context.Context, *account.ConvoFilter) (*Response, error)
+	CountConvoFilters(context.Context, *account.ConvoFilters) (*Response, error)
 	RemoveConvoFilter(context.Context, *Id) (*Empty, error)
 	MatchConversations(context.Context, *Ids) (*Conversations, error)
 	TagConversation(context.Context, *TagRequest) (*Empty, error)
@@ -12641,7 +12641,7 @@ func (UnimplementedConversationMgrServer) ListConversations2(context.Context, *L
 func (UnimplementedConversationMgrServer) ListConversations3(context.Context, *account.ConvoFilter) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListConversations3 not implemented")
 }
-func (UnimplementedConversationMgrServer) CountConvoFilters(context.Context, *account.ConvoFilter) (*Response, error) {
+func (UnimplementedConversationMgrServer) CountConvoFilters(context.Context, *account.ConvoFilters) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method CountConvoFilters not implemented")
 }
 func (UnimplementedConversationMgrServer) RemoveConvoFilter(context.Context, *Id) (*Empty, error) {
@@ -13086,7 +13086,7 @@ func _ConversationMgr_ListConversations3_Handler(srv interface{}, ctx context.Co
 }
 
 func _ConversationMgr_CountConvoFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(account.ConvoFilter)
+	in := new(account.ConvoFilters)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -13098,7 +13098,7 @@ func _ConversationMgr_CountConvoFilters_Handler(srv interface{}, ctx context.Con
 		FullMethod: ConversationMgr_CountConvoFilters_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).CountConvoFilters(ctx, req.(*account.ConvoFilter))
+		return srv.(ConversationMgrServer).CountConvoFilters(ctx, req.(*account.ConvoFilters))
 	}
 	return interceptor(ctx, in, info, handler)
 }

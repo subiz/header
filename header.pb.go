@@ -7518,18 +7518,18 @@ type ConversationMeta struct {
 	Tags                    string                 `protobuf:"bytes,9,opt,name=tags,proto3" json:"tags,omitempty"`
 	Touchpoint              *Touchpoint            `protobuf:"bytes,10,opt,name=touchpoint,proto3" json:"touchpoint,omitempty"`
 	AssociatedConversations []string               `protobuf:"bytes,11,rep,name=associated_conversations,json=associatedConversations,proto3" json:"associated_conversations,omitempty"`
-	// bool is_hidden = 12;
-	Event         *Event   `protobuf:"bytes,13,opt,name=event,proto3" json:"event,omitempty"`
-	ExtraData     string   `protobuf:"bytes,15,opt,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty"`
-	TicketId      string   `protobuf:"bytes,17,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	IsDismissed   bool     `protobuf:"varint,19,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
-	HumanNotified int64    `protobuf:"varint,20,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"`
-	IsMuted       int64    `protobuf:"varint,21,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
-	FilterKeys    []string `protobuf:"bytes,22,rep,name=filter_keys,json=filterKeys,proto3" json:"filter_keys,omitempty"`
-	UnrepliedAt   int64    `protobuf:"varint,23,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
-	IsSpam        bool     `protobuf:"varint,24,opt,name=is_spam,json=isSpam,proto3" json:"is_spam,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	IsHidden                bool                   `protobuf:"varint,12,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	Event                   *Event                 `protobuf:"bytes,13,opt,name=event,proto3" json:"event,omitempty"`
+	ExtraData               string                 `protobuf:"bytes,15,opt,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty"`
+	TicketId                string                 `protobuf:"bytes,17,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	IsDismissed             bool                   `protobuf:"varint,19,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
+	HumanNotified           int64                  `protobuf:"varint,20,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"`
+	IsMuted                 int64                  `protobuf:"varint,21,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
+	FilterKeys              []string               `protobuf:"bytes,22,rep,name=filter_keys,json=filterKeys,proto3" json:"filter_keys,omitempty"`
+	UnrepliedAt             int64                  `protobuf:"varint,23,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
+	IsSpam                  bool                   `protobuf:"varint,24,opt,name=is_spam,json=isSpam,proto3" json:"is_spam,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ConversationMeta) Reset() {
@@ -7623,6 +7623,13 @@ func (x *ConversationMeta) GetAssociatedConversations() []string {
 		return x.AssociatedConversations
 	}
 	return nil
+}
+
+func (x *ConversationMeta) GetIsHidden() bool {
+	if x != nil {
+		return x.IsHidden
+	}
+	return false
 }
 
 func (x *ConversationMeta) GetEvent() *Event {
@@ -72043,7 +72050,7 @@ const file_header_proto_rawDesc = "" +
 	"\x12event_destinations\x18\x8d\x01 \x03(\v2\x18.header.EventDestinationR\x11eventDestinations\x127\n" +
 	"\fsegment_sync\x18\x90\x01 \x01(\v2\x13.header.SegmentSyncR\vsegmentSync\x12-\n" +
 	"\bdiscount\x18\x91\x01 \x01(\v2\x10.header.DiscountR\bdiscount\x12D\n" +
-	"\x11ai_agent_testcase\x18\x92\x01 \x01(\v2\x17.header.AIAgentTestcaseR\x0faiAgentTestcase\"\xc9\x04\n" +
+	"\x11ai_agent_testcase\x18\x92\x01 \x01(\v2\x17.header.AIAgentTestcaseR\x0faiAgentTestcase\"\xe6\x04\n" +
 	"\x10ConversationMeta\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x18\n" +
 	"\aactived\x18\x04 \x01(\x03R\aactived\x12\x1d\n" +
@@ -72057,7 +72064,8 @@ const file_header_proto_rawDesc = "" +
 	"touchpoint\x18\n" +
 	" \x01(\v2\x12.header.TouchpointR\n" +
 	"touchpoint\x129\n" +
-	"\x18associated_conversations\x18\v \x03(\tR\x17associatedConversations\x12#\n" +
+	"\x18associated_conversations\x18\v \x03(\tR\x17associatedConversations\x12\x1b\n" +
+	"\tis_hidden\x18\f \x01(\bR\bisHidden\x12#\n" +
 	"\x05event\x18\r \x01(\v2\r.header.EventR\x05event\x12\x1d\n" +
 	"\n" +
 	"extra_data\x18\x0f \x01(\tR\textraData\x12\x1b\n" +

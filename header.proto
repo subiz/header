@@ -773,7 +773,7 @@ message ConversationMeta {
 	string tags = 9;
 	Touchpoint touchpoint = 10;
 	repeated string associated_conversations = 11;
-	// bool is_hidden = 12;
+	bool is_hidden = 12;
 	Event event = 13;
 
 	string extra_data = 15;
