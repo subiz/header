@@ -781,6 +781,7 @@ message ConversationMeta {
 
 	bool is_dismissed = 19;
 	int64 human_notified = 20;
+	int64 is_muted = 21;
 
 	repeated string filter_keys = 22;
 
@@ -1129,6 +1130,7 @@ message ConversationMember {
 
 	int64 hidden = 29; // ms
 	int64 last_mentioned = 30; // ms
+	int64 dismissed = 31;
 
 	string invite_reason = 34;
 	int64 total_messages = 35;
@@ -5465,11 +5467,11 @@ message DocHit {
 	string user_id = 12; // for convo
 	string origin = 13;
 	User user = 14;				//for primary user
-	DocHit secondary_doc = 15;
+	// DocHit secondary_doc = 15;
 	string user_type = 16;
 	Article article = 17;
 	Block description_block = 18;
-	map<string,bool> query_matchM = 19; // part_query
+	// map<string,bool> query_matchM = 19; // part_query
 	int64 score = 20;
 	string zalo_friend_status = 21;
 }
@@ -7013,6 +7015,8 @@ message Response {
 
 	CreditSpendEntry credit_spend_entry = 267;
 	repeated DocHit doc_hits = 268;
+
+	repeated account.Account convo_filters = 270;
 }
 
 message ReportCount {
