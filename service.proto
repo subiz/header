@@ -429,6 +429,7 @@ service ConversationMgr {
 	rpc ListConversations2(header.ListConversationsRequest) returns (Response);
 
 	rpc ListConversations3(account.ConvoFilter) returns (Response);
+	rpc CountConvoFilters(account.ConvoFilter) returns (Response);
 	rpc RemoveConvoFilter(Id) returns (Empty);
 
 	rpc MatchConversations(Ids) returns (header.Conversations);
@@ -445,8 +446,6 @@ service ConversationMgr {
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UpdateConversationMember(header.ConversationMember) returns (Response);
-	rpc UnwatchConversation(header.Conversation) returns (Empty);
-	rpc UnhiddenConversation(header.Conversation) returns (Empty);
 
 	rpc UnsentMessage(header.Event) returns (header.Event);
 

@@ -11520,6 +11520,7 @@ const (
 	ConversationMgr_ListConversations_FullMethodName        = "/header.ConversationMgr/ListConversations"
 	ConversationMgr_ListConversations2_FullMethodName       = "/header.ConversationMgr/ListConversations2"
 	ConversationMgr_ListConversations3_FullMethodName       = "/header.ConversationMgr/ListConversations3"
+	ConversationMgr_CountConvoFilters_FullMethodName        = "/header.ConversationMgr/CountConvoFilters"
 	ConversationMgr_RemoveConvoFilter_FullMethodName        = "/header.ConversationMgr/RemoveConvoFilter"
 	ConversationMgr_MatchConversations_FullMethodName       = "/header.ConversationMgr/MatchConversations"
 	ConversationMgr_TagConversation_FullMethodName          = "/header.ConversationMgr/TagConversation"
@@ -11530,8 +11531,6 @@ const (
 	ConversationMgr_UpdateConversationInfo_FullMethodName   = "/header.ConversationMgr/UpdateConversationInfo"
 	ConversationMgr_UpdateMuteConversation_FullMethodName   = "/header.ConversationMgr/UpdateMuteConversation"
 	ConversationMgr_UpdateConversationMember_FullMethodName = "/header.ConversationMgr/UpdateConversationMember"
-	ConversationMgr_UnwatchConversation_FullMethodName      = "/header.ConversationMgr/UnwatchConversation"
-	ConversationMgr_UnhiddenConversation_FullMethodName     = "/header.ConversationMgr/UnhiddenConversation"
 	ConversationMgr_UnsentMessage_FullMethodName            = "/header.ConversationMgr/UnsentMessage"
 	ConversationMgr_DismissConversation_FullMethodName      = "/header.ConversationMgr/DismissConversation"
 	ConversationMgr_ReconsiderConversation_FullMethodName   = "/header.ConversationMgr/ReconsiderConversation"
@@ -11609,6 +11608,7 @@ type ConversationMgrClient interface {
 	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*Conversations, error)
 	ListConversations2(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*Response, error)
 	ListConversations3(ctx context.Context, in *account.ConvoFilter, opts ...grpc.CallOption) (*Response, error)
+	CountConvoFilters(ctx context.Context, in *account.ConvoFilter, opts ...grpc.CallOption) (*Response, error)
 	RemoveConvoFilter(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchConversations(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Conversations, error)
 	TagConversation(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -11619,8 +11619,6 @@ type ConversationMgrClient interface {
 	UpdateConversationInfo(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Conversation, error)
 	UpdateMuteConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
 	UpdateConversationMember(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Response, error)
-	UnwatchConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
-	UnhiddenConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
 	UnsentMessage(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	DismissConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
 	ReconsiderConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
@@ -11815,6 +11813,16 @@ func (c *conversationMgrClient) ListConversations3(ctx context.Context, in *acco
 	return out, nil
 }
 
+func (c *conversationMgrClient) CountConvoFilters(ctx context.Context, in *account.ConvoFilter, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_CountConvoFilters_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *conversationMgrClient) RemoveConvoFilter(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
@@ -11909,26 +11917,6 @@ func (c *conversationMgrClient) UpdateConversationMember(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_UpdateConversationMember_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *conversationMgrClient) UnwatchConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, ConversationMgr_UnwatchConversation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *conversationMgrClient) UnhiddenConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, ConversationMgr_UnhiddenConversation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12532,6 +12520,7 @@ type ConversationMgrServer interface {
 	ListConversations(context.Context, *ListConversationsRequest) (*Conversations, error)
 	ListConversations2(context.Context, *ListConversationsRequest) (*Response, error)
 	ListConversations3(context.Context, *account.ConvoFilter) (*Response, error)
+	CountConvoFilters(context.Context, *account.ConvoFilter) (*Response, error)
 	RemoveConvoFilter(context.Context, *Id) (*Empty, error)
 	MatchConversations(context.Context, *Ids) (*Conversations, error)
 	TagConversation(context.Context, *TagRequest) (*Empty, error)
@@ -12542,8 +12531,6 @@ type ConversationMgrServer interface {
 	UpdateConversationInfo(context.Context, *Conversation) (*Conversation, error)
 	UpdateMuteConversation(context.Context, *Conversation) (*Empty, error)
 	UpdateConversationMember(context.Context, *ConversationMember) (*Response, error)
-	UnwatchConversation(context.Context, *Conversation) (*Empty, error)
-	UnhiddenConversation(context.Context, *Conversation) (*Empty, error)
 	UnsentMessage(context.Context, *Event) (*Event, error)
 	DismissConversation(context.Context, *Conversation) (*Empty, error)
 	ReconsiderConversation(context.Context, *Conversation) (*Empty, error)
@@ -12654,6 +12641,9 @@ func (UnimplementedConversationMgrServer) ListConversations2(context.Context, *L
 func (UnimplementedConversationMgrServer) ListConversations3(context.Context, *account.ConvoFilter) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListConversations3 not implemented")
 }
+func (UnimplementedConversationMgrServer) CountConvoFilters(context.Context, *account.ConvoFilter) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CountConvoFilters not implemented")
+}
 func (UnimplementedConversationMgrServer) RemoveConvoFilter(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveConvoFilter not implemented")
 }
@@ -12683,12 +12673,6 @@ func (UnimplementedConversationMgrServer) UpdateMuteConversation(context.Context
 }
 func (UnimplementedConversationMgrServer) UpdateConversationMember(context.Context, *ConversationMember) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateConversationMember not implemented")
-}
-func (UnimplementedConversationMgrServer) UnwatchConversation(context.Context, *Conversation) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnwatchConversation not implemented")
-}
-func (UnimplementedConversationMgrServer) UnhiddenConversation(context.Context, *Conversation) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnhiddenConversation not implemented")
 }
 func (UnimplementedConversationMgrServer) UnsentMessage(context.Context, *Event) (*Event, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnsentMessage not implemented")
@@ -13101,6 +13085,24 @@ func _ConversationMgr_ListConversations3_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_CountConvoFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ConvoFilter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).CountConvoFilters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_CountConvoFilters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).CountConvoFilters(ctx, req.(*account.ConvoFilter))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ConversationMgr_RemoveConvoFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -13277,42 +13279,6 @@ func _ConversationMgr_UpdateConversationMember_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).UpdateConversationMember(ctx, req.(*ConversationMember))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ConversationMgr_UnwatchConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Conversation)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ConversationMgrServer).UnwatchConversation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ConversationMgr_UnwatchConversation_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).UnwatchConversation(ctx, req.(*Conversation))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ConversationMgr_UnhiddenConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Conversation)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ConversationMgrServer).UnhiddenConversation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ConversationMgr_UnhiddenConversation_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).UnhiddenConversation(ctx, req.(*Conversation))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14417,6 +14383,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ConversationMgr_ListConversations3_Handler,
 		},
 		{
+			MethodName: "CountConvoFilters",
+			Handler:    _ConversationMgr_CountConvoFilters_Handler,
+		},
+		{
 			MethodName: "RemoveConvoFilter",
 			Handler:    _ConversationMgr_RemoveConvoFilter_Handler,
 		},
@@ -14455,14 +14425,6 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateConversationMember",
 			Handler:    _ConversationMgr_UpdateConversationMember_Handler,
-		},
-		{
-			MethodName: "UnwatchConversation",
-			Handler:    _ConversationMgr_UnwatchConversation_Handler,
-		},
-		{
-			MethodName: "UnhiddenConversation",
-			Handler:    _ConversationMgr_UnhiddenConversation_Handler,
 		},
 		{
 			MethodName: "UnsentMessage",
