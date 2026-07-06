@@ -2639,13 +2639,11 @@ type Noti struct {
 	Id        string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`         // same as topic
 	Action    string                 `protobuf:"bytes,7,opt,name=action,proto3" json:"action,omitempty"` // use only when send ('', 'update')
 	Meta      *NotiData              `protobuf:"bytes,9,opt,name=meta,proto3" json:"meta,omitempty"`
-	Topic     string                 `protobuf:"bytes,10,opt,name=topic,proto3" json:"topic,omitempty"`     // for grouping
-	Type      string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`        // type
-	Data      string                 `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`        // @depreacted, use meta
-	Created   int64                  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"` // ms
-	ReadAt    int64                  `protobuf:"varint,19,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
-	IsInstant bool                   `protobuf:"varint,12,opt,name=is_instant,json=isInstant,proto3" json:"is_instant,omitempty"` // @deprecated just display and disappear, no persit
-	Category  string                 `protobuf:"bytes,14,opt,name=category,proto3" json:"category,omitempty"`                     // @depreacted user, order, broadcast
+	Topic     string                 `protobuf:"bytes,10,opt,name=topic,proto3" json:"topic,omitempty"` // for grouping
+	Type      string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`    // type
+	// string data = 8; // @depreacted, use meta
+	Created int64 `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"` // ms
+	ReadAt  int64 `protobuf:"varint,19,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
 	// extra info
 	RequestId          string   `protobuf:"bytes,21,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	CallerNumber       string   `protobuf:"bytes,22,opt,name=caller_number,json=callerNumber,proto3" json:"caller_number,omitempty"`
@@ -2758,13 +2756,6 @@ func (x *Noti) GetType() string {
 	return ""
 }
 
-func (x *Noti) GetData() string {
-	if x != nil {
-		return x.Data
-	}
-	return ""
-}
-
 func (x *Noti) GetCreated() int64 {
 	if x != nil {
 		return x.Created
@@ -2777,20 +2768,6 @@ func (x *Noti) GetReadAt() int64 {
 		return x.ReadAt
 	}
 	return 0
-}
-
-func (x *Noti) GetIsInstant() bool {
-	if x != nil {
-		return x.IsInstant
-	}
-	return false
-}
-
-func (x *Noti) GetCategory() string {
-	if x != nil {
-		return x.Category
-	}
-	return ""
 }
 
 func (x *Noti) GetRequestId() string {
@@ -71462,7 +71439,7 @@ const file_header_proto_rawDesc = "" +
 	"\x11campaign_num_acks\x18\x0f \x01(\x03R\x0fcampaignNumAcks\x120\n" +
 	"\x14campaign_num_success\x18\x10 \x01(\x03R\x12campaignNumSuccess\x122\n" +
 	"\x15campaign_cancelled_by\x18\x11 \x01(\tR\x13campaignCancelledBy\x12'\n" +
-	"\x0fcampaign_status\x18\x12 \x01(\tR\x0ecampaignStatus\"\xec\a\n" +
+	"\x0fcampaign_status\x18\x12 \x01(\tR\x0ecampaignStatus\"\x9d\a\n" +
 	"\x04Noti\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71473,13 +71450,9 @@ const file_header_proto_rawDesc = "" +
 	"\x04meta\x18\t \x01(\v2\x10.header.NotiDataR\x04meta\x12\x14\n" +
 	"\x05topic\x18\n" +
 	" \x01(\tR\x05topic\x12\x12\n" +
-	"\x04type\x18\x05 \x01(\tR\x04type\x12\x12\n" +
-	"\x04data\x18\b \x01(\tR\x04data\x12\x18\n" +
+	"\x04type\x18\x05 \x01(\tR\x04type\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\x03R\acreated\x12\x17\n" +
 	"\aread_at\x18\x13 \x01(\x03R\x06readAt\x12\x1d\n" +
-	"\n" +
-	"is_instant\x18\f \x01(\bR\tisInstant\x12\x1a\n" +
-	"\bcategory\x18\x0e \x01(\tR\bcategory\x12\x1d\n" +
 	"\n" +
 	"request_id\x18\x15 \x01(\tR\trequestId\x12#\n" +
 	"\rcaller_number\x18\x16 \x01(\tR\fcallerNumber\x12\x1f\n" +

@@ -79,12 +79,12 @@ message Noti {
 	NotiData meta = 9;
 	string topic = 10; // for grouping
 	string type = 5; // type
-	string data = 8; // @depreacted, use meta
+	// string data = 8; // @depreacted, use meta
 	int64 created = 6; // ms
 	int64 read_at = 19;
 
-	bool is_instant = 12; // @deprecated just display and disappear, no persit
-	string category = 14; // @depreacted user, order, broadcast
+	// bool is_instant = 12; // @deprecated just display and disappear, no persist
+	// string category = 14; // @depreacted user, order, broadcast
 
 	// extra info
 	string request_id = 21;
