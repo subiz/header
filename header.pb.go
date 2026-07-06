@@ -7518,18 +7518,18 @@ type ConversationMeta struct {
 	Tags                    string                 `protobuf:"bytes,9,opt,name=tags,proto3" json:"tags,omitempty"`
 	Touchpoint              *Touchpoint            `protobuf:"bytes,10,opt,name=touchpoint,proto3" json:"touchpoint,omitempty"`
 	AssociatedConversations []string               `protobuf:"bytes,11,rep,name=associated_conversations,json=associatedConversations,proto3" json:"associated_conversations,omitempty"`
-	// bool is_hidden = 12;
-	Event         *Event   `protobuf:"bytes,13,opt,name=event,proto3" json:"event,omitempty"`
-	ExtraData     string   `protobuf:"bytes,15,opt,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty"`
-	TicketId      string   `protobuf:"bytes,17,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	IsDismissed   bool     `protobuf:"varint,19,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
-	HumanNotified int64    `protobuf:"varint,20,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"`
-	IsMuted       int64    `protobuf:"varint,21,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
-	FilterKeys    []string `protobuf:"bytes,22,rep,name=filter_keys,json=filterKeys,proto3" json:"filter_keys,omitempty"`
-	UnrepliedAt   int64    `protobuf:"varint,23,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
-	IsSpam        bool     `protobuf:"varint,24,opt,name=is_spam,json=isSpam,proto3" json:"is_spam,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	IsHidden                bool                   `protobuf:"varint,12,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
+	Event                   *Event                 `protobuf:"bytes,13,opt,name=event,proto3" json:"event,omitempty"`
+	ExtraData               string                 `protobuf:"bytes,15,opt,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty"`
+	TicketId                string                 `protobuf:"bytes,17,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	IsDismissed             bool                   `protobuf:"varint,19,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
+	HumanNotified           int64                  `protobuf:"varint,20,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"`
+	IsMuted                 int64                  `protobuf:"varint,21,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
+	FilterKeys              []string               `protobuf:"bytes,22,rep,name=filter_keys,json=filterKeys,proto3" json:"filter_keys,omitempty"`
+	UnrepliedAt             int64                  `protobuf:"varint,23,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
+	IsSpam                  bool                   `protobuf:"varint,24,opt,name=is_spam,json=isSpam,proto3" json:"is_spam,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ConversationMeta) Reset() {
@@ -7623,6 +7623,13 @@ func (x *ConversationMeta) GetAssociatedConversations() []string {
 		return x.AssociatedConversations
 	}
 	return nil
+}
+
+func (x *ConversationMeta) GetIsHidden() bool {
+	if x != nil {
+		return x.IsHidden
+	}
+	return false
 }
 
 func (x *ConversationMeta) GetEvent() *Event {
@@ -47903,7 +47910,7 @@ type Response struct {
 	ContentViews          []*UserContentView     `protobuf:"bytes,266,rep,name=content_views,json=contentViews,proto3" json:"content_views,omitempty"`
 	CreditSpendEntry      *CreditSpendEntry      `protobuf:"bytes,267,opt,name=credit_spend_entry,json=creditSpendEntry,proto3" json:"credit_spend_entry,omitempty"`
 	DocHits               []*DocHit              `protobuf:"bytes,268,rep,name=doc_hits,json=docHits,proto3" json:"doc_hits,omitempty"`
-	ConvoFilters          []*account.Account     `protobuf:"bytes,270,rep,name=convo_filters,json=convoFilters,proto3" json:"convo_filters,omitempty"`
+	ConvoFilters          []*account.ConvoFilter `protobuf:"bytes,270,rep,name=convo_filters,json=convoFilters,proto3" json:"convo_filters,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -48995,7 +49002,7 @@ func (x *Response) GetDocHits() []*DocHit {
 	return nil
 }
 
-func (x *Response) GetConvoFilters() []*account.Account {
+func (x *Response) GetConvoFilters() []*account.ConvoFilter {
 	if x != nil {
 		return x.ConvoFilters
 	}
@@ -72043,7 +72050,7 @@ const file_header_proto_rawDesc = "" +
 	"\x12event_destinations\x18\x8d\x01 \x03(\v2\x18.header.EventDestinationR\x11eventDestinations\x127\n" +
 	"\fsegment_sync\x18\x90\x01 \x01(\v2\x13.header.SegmentSyncR\vsegmentSync\x12-\n" +
 	"\bdiscount\x18\x91\x01 \x01(\v2\x10.header.DiscountR\bdiscount\x12D\n" +
-	"\x11ai_agent_testcase\x18\x92\x01 \x01(\v2\x17.header.AIAgentTestcaseR\x0faiAgentTestcase\"\xc9\x04\n" +
+	"\x11ai_agent_testcase\x18\x92\x01 \x01(\v2\x17.header.AIAgentTestcaseR\x0faiAgentTestcase\"\xe6\x04\n" +
 	"\x10ConversationMeta\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x18\n" +
 	"\aactived\x18\x04 \x01(\x03R\aactived\x12\x1d\n" +
@@ -72057,7 +72064,8 @@ const file_header_proto_rawDesc = "" +
 	"touchpoint\x18\n" +
 	" \x01(\v2\x12.header.TouchpointR\n" +
 	"touchpoint\x129\n" +
-	"\x18associated_conversations\x18\v \x03(\tR\x17associatedConversations\x12#\n" +
+	"\x18associated_conversations\x18\v \x03(\tR\x17associatedConversations\x12\x1b\n" +
+	"\tis_hidden\x18\f \x01(\bR\bisHidden\x12#\n" +
 	"\x05event\x18\r \x01(\v2\r.header.EventR\x05event\x12\x1d\n" +
 	"\n" +
 	"extra_data\x18\x0f \x01(\tR\textraData\x12\x1b\n" +
@@ -76960,7 +76968,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xe5A\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xe9A\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77123,8 +77131,8 @@ const file_header_proto_rawDesc = "" +
 	"\fcontent_view\x18\x89\x02 \x01(\v2\x17.header.UserContentViewR\vcontentView\x12=\n" +
 	"\rcontent_views\x18\x8a\x02 \x03(\v2\x17.header.UserContentViewR\fcontentViews\x12G\n" +
 	"\x12credit_spend_entry\x18\x8b\x02 \x01(\v2\x18.header.CreditSpendEntryR\x10creditSpendEntry\x12*\n" +
-	"\bdoc_hits\x18\x8c\x02 \x03(\v2\x0e.header.DocHitR\adocHits\x126\n" +
-	"\rconvo_filters\x18\x8e\x02 \x03(\v2\x10.account.AccountR\fconvoFilters\"Y\n" +
+	"\bdoc_hits\x18\x8c\x02 \x03(\v2\x0e.header.DocHitR\adocHits\x12:\n" +
+	"\rconvo_filters\x18\x8e\x02 \x03(\v2\x14.account.ConvoFilterR\fconvoFilters\"Y\n" +
 	"\vReportCount\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12\x1e\n" +
 	"\n" +
@@ -80568,13 +80576,14 @@ var file_header_proto_goTypes = []any{
 	(*payment.Bill)(nil),           // 666: payment.Bill
 	(*common.SessionCampaign)(nil), // 667: common.SessionCampaign
 	(*EventConditionFilter)(nil),   // 668: header.EventConditionFilter
-	(*payment.Subscription)(nil),   // 669: payment.Subscription
-	(*BooleanCondition)(nil),       // 670: header.BooleanCondition
-	(*NumberCondition)(nil),        // 671: header.NumberCondition
-	(*DatetimeCondition)(nil),      // 672: header.DatetimeCondition
-	(*TextCondition)(nil),          // 673: header.TextCondition
-	(*payment.Invoice)(nil),        // 674: payment.Invoice
-	(*common.Limit)(nil),           // 675: common.Limit
+	(*account.ConvoFilter)(nil),    // 669: account.ConvoFilter
+	(*payment.Subscription)(nil),   // 670: payment.Subscription
+	(*BooleanCondition)(nil),       // 671: header.BooleanCondition
+	(*NumberCondition)(nil),        // 672: header.NumberCondition
+	(*DatetimeCondition)(nil),      // 673: header.DatetimeCondition
+	(*TextCondition)(nil),          // 674: header.TextCondition
+	(*payment.Invoice)(nil),        // 675: payment.Invoice
+	(*common.Limit)(nil),           // 676: common.Limit
 }
 var file_header_proto_depIdxs = []int32{
 	658,  // 0: header.Empty.ctx:type_name -> common.Context
@@ -81549,7 +81558,7 @@ var file_header_proto_depIdxs = []int32{
 	45,   // 969: header.Response.content_views:type_name -> header.UserContentView
 	429,  // 970: header.Response.credit_spend_entry:type_name -> header.CreditSpendEntry
 	330,  // 971: header.Response.doc_hits:type_name -> header.DocHit
-	665,  // 972: header.Response.convo_filters:type_name -> account.Account
+	669,  // 972: header.Response.convo_filters:type_name -> account.ConvoFilter
 	658,  // 973: header.ProductCollection.ctx:type_name -> common.Context
 	659,  // 974: header.ZaloCallConsent.message:type_name -> header.I18nString
 	658,  // 975: header.SendEmailRequest.ctx:type_name -> common.Context
@@ -81583,7 +81592,7 @@ var file_header_proto_depIdxs = []int32{
 	443,  // 1003: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
 	658,  // 1004: header.AccSub.ctx:type_name -> common.Context
 	665,  // 1005: header.AccSub.account:type_name -> account.Account
-	669,  // 1006: header.AccSub.subscription:type_name -> payment.Subscription
+	670,  // 1006: header.AccSub.subscription:type_name -> payment.Subscription
 	658,  // 1007: header.AccSubs.ctx:type_name -> common.Context
 	445,  // 1008: header.AccSubs.accsub:type_name -> header.AccSub
 	658,  // 1009: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
@@ -81596,10 +81605,10 @@ var file_header_proto_depIdxs = []int32{
 	456,  // 1016: header.WorkflowGoal.condition:type_name -> header.WorkflowCondition
 	456,  // 1017: header.WorkflowTrigger.condition:type_name -> header.WorkflowCondition
 	86,   // 1018: header.WorkflowCondition.channel:type_name -> header.ChannelCondition
-	670,  // 1019: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
-	671,  // 1020: header.WorkflowCondition.number:type_name -> header.NumberCondition
-	672,  // 1021: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
-	673,  // 1022: header.WorkflowCondition.text:type_name -> header.TextCondition
+	671,  // 1019: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
+	672,  // 1020: header.WorkflowCondition.number:type_name -> header.NumberCondition
+	673,  // 1021: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
+	674,  // 1022: header.WorkflowCondition.text:type_name -> header.TextCondition
 	455,  // 1023: header.WorkflowCondition.timming:type_name -> header.WorkflowTimming
 	457,  // 1024: header.WorkflowCondition.llm:type_name -> header.LLMCondition
 	456,  // 1025: header.WorkflowCondition.filter:type_name -> header.WorkflowCondition
@@ -81761,7 +81770,7 @@ var file_header_proto_depIdxs = []int32{
 	658,  // 1181: header.PromotionCode.ctx:type_name -> common.Context
 	658,  // 1182: header.SubizPromotionProgram.ctx:type_name -> common.Context
 	658,  // 1183: header.PromotionCodeUsage.ctx:type_name -> common.Context
-	674,  // 1184: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
+	675,  // 1184: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
 	666,  // 1185: header.PromotionCodeUsage.bills:type_name -> payment.Bill
 	658,  // 1186: header.SubizPaymentMethod.ctx:type_name -> common.Context
 	658,  // 1187: header.AndroidNotificationRequest.ctx:type_name -> common.Context
@@ -81919,7 +81928,7 @@ var file_header_proto_depIdxs = []int32{
 	657,  // 1339: header.ZaloPersonalAccount.last_queue_action_ids:type_name -> header.ZaloPersonalAccount.LastQueueActionIdsEntry
 	658,  // 1340: header.ZaloLoginStatus.ctx:type_name -> common.Context
 	658,  // 1341: header.Link.ctx:type_name -> common.Context
-	675,  // 1342: header.Plan.limit:type_name -> common.Limit
+	676,  // 1342: header.Plan.limit:type_name -> common.Limit
 	496,  // 1343: header.Message.I18nBlockEntry.value:type_name -> header.Block
 	496,  // 1344: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
 	496,  // 1345: header.I18nBlock.I18nEntry.value:type_name -> header.Block

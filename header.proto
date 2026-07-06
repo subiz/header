@@ -773,7 +773,7 @@ message ConversationMeta {
 	string tags = 9;
 	Touchpoint touchpoint = 10;
 	repeated string associated_conversations = 11;
-	// bool is_hidden = 12;
+	bool is_hidden = 12;
 	Event event = 13;
 
 	string extra_data = 15;
@@ -7016,7 +7016,7 @@ message Response {
 	CreditSpendEntry credit_spend_entry = 267;
 	repeated DocHit doc_hits = 268;
 
-	repeated account.Account convo_filters = 270;
+	repeated account.ConvoFilter convo_filters = 270;
 }
 
 message ReportCount {

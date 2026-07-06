@@ -74,6 +74,7 @@ message ConvoFilter {
 	optional string name = 9;
 	optional string id = 10;
 	optional int64 total = 11;
+	optional int64 num_unreads = 12;
 }
 
 message ConvoFilterCondition {

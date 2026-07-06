@@ -594,6 +594,7 @@ type ConvoFilter struct {
 	Name          *string                 `protobuf:"bytes,9,opt,name=name" json:"name,omitempty"`
 	Id            *string                 `protobuf:"bytes,10,opt,name=id" json:"id,omitempty"`
 	Total         *int64                  `protobuf:"varint,11,opt,name=total" json:"total,omitempty"`
+	NumUnreads    *int64                  `protobuf:"varint,12,opt,name=num_unreads,json=numUnreads" json:"num_unreads,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -701,6 +702,13 @@ func (x *ConvoFilter) GetId() string {
 func (x *ConvoFilter) GetTotal() int64 {
 	if x != nil && x.Total != nil {
 		return *x.Total
+	}
+	return 0
+}
+
+func (x *ConvoFilter) GetNumUnreads() int64 {
+	if x != nil && x.NumUnreads != nil {
+		return *x.NumUnreads
 	}
 	return 0
 }
@@ -3271,7 +3279,7 @@ const file_account_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12.\n" +
-	"\afilters\x18\x03 \x03(\v2\x14.account.ConvoFilterR\afilters\"\xbe\x02\n" +
+	"\afilters\x18\x03 \x03(\v2\x14.account.ConvoFilterR\afilters\"\xdf\x02\n" +
 	"\vConvoFilter\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3287,7 +3295,9 @@ const file_account_proto_rawDesc = "" +
 	"\x04name\x18\t \x01(\tR\x04name\x12\x0e\n" +
 	"\x02id\x18\n" +
 	" \x01(\tR\x02id\x12\x14\n" +
-	"\x05total\x18\v \x01(\x03R\x05total\"\xde\x03\n" +
+	"\x05total\x18\v \x01(\x03R\x05total\x12\x1f\n" +
+	"\vnum_unreads\x18\f \x01(\x03R\n" +
+	"numUnreads\"\xde\x03\n" +
 	"\x14ConvoFilterCondition\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x12\x0e\n" +
 	"\x02op\x18\x04 \x01(\tR\x02op\x12\x12\n" +
