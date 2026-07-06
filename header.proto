@@ -761,6 +761,7 @@ message Data {
 	Discount discount = 145;
 
 	AIAgentTestcase ai_agent_testcase = 146;
+	account.ConvoFilter convo_filter = 147;
 }
 
 message ConversationMeta {
