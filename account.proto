@@ -53,6 +53,13 @@ message DashboardAgent {
 	optional string default_zalo_personal_account = 50;
 
 	repeated ConvoFilter convo_filters = 52; //
+	repeated string pinned_convo_filters = 53;
+}
+
+message ConvoFilters {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	repeated ConvoFilter filters = 3;
 }
 
 message ConvoFilter {
@@ -65,7 +72,8 @@ message ConvoFilter {
 	optional int64 limit = 7;
 	optional string agent_id = 8;
 	optional string name = 9;
-	optional string id = 10; // ??
+	optional string id = 10;
+	optional int64 total = 11;
 }
 
 message ConvoFilterCondition {
@@ -83,6 +91,7 @@ message ConvoFilterCondition {
 	optional bool is_spam = 15;
 	optional bool from_ads = 16;
 	repeated string fb_post_ids = 17;
+	optional bool is_dismissed = 18;
 }
 
 message Agent {
