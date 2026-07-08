@@ -1127,7 +1127,7 @@ message ConversationMember {
 	int64 call_rang = 25;
 
 	bool is_muted = 27;
-	bool off_notification = 28;
+	// bool off_notification = 28;
 
 	// int64 hidden = 29; // ms
 	int64 last_mentioned = 30; // ms
@@ -1136,7 +1136,7 @@ message ConversationMember {
 	string invite_reason = 34;
 	int64 total_messages = 35;
 	int64 last_action_at = 37;
-	string is_subscribed = 38; // "", off, on
+	string is_subscribed = 38; // "", off, on // for ticketonly
 
 	string workflow_session_id = 40;
 	int64 bot_version = 41;
@@ -2011,7 +2011,7 @@ message Trigger {
 	float scrolling_percentage = 6; // 0.55
 	int64 inactivity_sec = 8; // 50s
 	int64 after_pageview_sec = 9; // 50s
-	bool disabled = 10;
+	bool disabled = 10; // true -> once per user
 
 	repeated EventConditionFilter event_attributes = 11; // ?
 }
@@ -9082,6 +9082,7 @@ message AIAgent {
 	Message welcome_message = 79;
 	string welcome_message_prompt = 80;
 	repeated Trigger welcome_message_triggers = 87;
+	Frequently welcome_message_initiative_frequency = 84;
 
 	AIAgentUsageLimit usage_limit = 85;
 
@@ -9312,6 +9313,7 @@ message AIFunction {
 	Message welcome_message = 34;
 	string welcome_message_prompt = 35;
 	repeated Trigger welcome_message_triggers = 36;
+	Frequently welcome_message_initiative_frequency = 44;
 
 	// name=system_update_agent
 	AIAgent ai_agent = 37;
