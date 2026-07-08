@@ -273,6 +273,19 @@ func WithErrorStack() grpc.DialOption {
 
 		ourerr := log.UnmarshalError([]byte(grpcerr.Message()))
 		if ourerr != nil {
+			// The stack inside ourerr was frozen on the server. Append this
+			// caller's stack so the trace spans both processes: the interceptor
+			// runs synchronously on the calling goroutine, so log.Stack() here
+			// reaches up through the generated client stub to the call site.
+			clientStack := log.Stack()
+			if ourerr.XHiddenAttrs == nil {
+				ourerr.XHiddenAttrs = map[string]*log.ErrorAttribute{}
+			}
+			if s := ourerr.XHiddenAttrs["stack"]; s != nil && s.Value != "" {
+				s.Value = s.Value + " | " + clientStack
+			} else {
+				ourerr.XHiddenAttrs["stack"] = &log.ErrorAttribute{Value: clientStack, Type: "string"}
+			}
 			return ourerr
 		}
 
