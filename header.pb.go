@@ -9526,15 +9526,14 @@ type ConversationMember struct {
 	LastSentEventTime int64                  `protobuf:"varint,39,opt,name=last_sent_event_time,json=lastSentEventTime,proto3" json:"last_sent_event_time,omitempty"` // true time sent timestamp
 	CallAnswered      int64                  `protobuf:"varint,24,opt,name=call_answered,json=callAnswered,proto3" json:"call_answered,omitempty"`
 	CallRang          int64                  `protobuf:"varint,25,opt,name=call_rang,json=callRang,proto3" json:"call_rang,omitempty"`
-	IsMuted           bool                   `protobuf:"varint,27,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
-	OffNotification   bool                   `protobuf:"varint,28,opt,name=off_notification,json=offNotification,proto3" json:"off_notification,omitempty"`
+	IsMuted           bool                   `protobuf:"varint,27,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"` // bool off_notification = 28;
 	// int64 hidden = 29; // ms
 	LastMentioned     int64  `protobuf:"varint,30,opt,name=last_mentioned,json=lastMentioned,proto3" json:"last_mentioned,omitempty"` // ms
 	Dismissed         int64  `protobuf:"varint,31,opt,name=dismissed,proto3" json:"dismissed,omitempty"`
 	InviteReason      string `protobuf:"bytes,34,opt,name=invite_reason,json=inviteReason,proto3" json:"invite_reason,omitempty"`
 	TotalMessages     int64  `protobuf:"varint,35,opt,name=total_messages,json=totalMessages,proto3" json:"total_messages,omitempty"`
 	LastActionAt      int64  `protobuf:"varint,37,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
-	IsSubscribed      string `protobuf:"bytes,38,opt,name=is_subscribed,json=isSubscribed,proto3" json:"is_subscribed,omitempty"` // "", off, on
+	IsSubscribed      string `protobuf:"bytes,38,opt,name=is_subscribed,json=isSubscribed,proto3" json:"is_subscribed,omitempty"` // "", off, on // for ticketonly
 	WorkflowSessionId string `protobuf:"bytes,40,opt,name=workflow_session_id,json=workflowSessionId,proto3" json:"workflow_session_id,omitempty"`
 	BotVersion        int64  `protobuf:"varint,41,opt,name=bot_version,json=botVersion,proto3" json:"bot_version,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -9693,13 +9692,6 @@ func (x *ConversationMember) GetCallRang() int64 {
 func (x *ConversationMember) GetIsMuted() bool {
 	if x != nil {
 		return x.IsMuted
-	}
-	return false
-}
-
-func (x *ConversationMember) GetOffNotification() bool {
-	if x != nil {
-		return x.OffNotification
 	}
 	return false
 }
@@ -14785,16 +14777,20 @@ func (x *EndchatSetting) GetSendTranscriptTos() []string {
 }
 
 type Trigger struct {
-	state                  protoimpl.MessageState  `protogen:"open.v1"`
-	Type                   string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`                                                                       // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
-	AreaClickedCssSelector string                  `protobuf:"bytes,4,opt,name=area_clicked_css_selector,json=areaClickedCssSelector,proto3" json:"area_clicked_css_selector,omitempty"` // .user_name #user
-	ScrollingPercentage    float32                 `protobuf:"fixed32,6,opt,name=scrolling_percentage,json=scrollingPercentage,proto3" json:"scrolling_percentage,omitempty"`            // 0.55
-	InactivitySec          int64                   `protobuf:"varint,8,opt,name=inactivity_sec,json=inactivitySec,proto3" json:"inactivity_sec,omitempty"`                               // 50s
-	AfterPageviewSec       int64                   `protobuf:"varint,9,opt,name=after_pageview_sec,json=afterPageviewSec,proto3" json:"after_pageview_sec,omitempty"`                    // 50s
-	Disabled               bool                    `protobuf:"varint,10,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	EventAttributes        []*EventConditionFilter `protobuf:"bytes,11,rep,name=event_attributes,json=eventAttributes,proto3" json:"event_attributes,omitempty"` // ?
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Type                   string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`                                                                       // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
+	AreaClickedCssSelector string                 `protobuf:"bytes,4,opt,name=area_clicked_css_selector,json=areaClickedCssSelector,proto3" json:"area_clicked_css_selector,omitempty"` // .user_name #user
+	ScrollingPercentage    float32                `protobuf:"fixed32,6,opt,name=scrolling_percentage,json=scrollingPercentage,proto3" json:"scrolling_percentage,omitempty"`            // 0.55
+	InactivitySec          int64                  `protobuf:"varint,8,opt,name=inactivity_sec,json=inactivitySec,proto3" json:"inactivity_sec,omitempty"`                               // 50s
+	AfterPageviewSec       int64                  `protobuf:"varint,9,opt,name=after_pageview_sec,json=afterPageviewSec,proto3" json:"after_pageview_sec,omitempty"`                    // 50s
+	Disabled               bool                   `protobuf:"varint,10,opt,name=disabled,proto3" json:"disabled,omitempty"`                                                             // true -> once per user
+	// backward compatible with old bot
+	OncePerUser     bool                    `protobuf:"varint,12,opt,name=once_per_user,json=oncePerUser,proto3" json:"once_per_user,omitempty"`
+	OncePerSession  bool                    `protobuf:"varint,13,opt,name=once_per_session,json=oncePerSession,proto3" json:"once_per_session,omitempty"`
+	IntervalSec     int64                   `protobuf:"varint,14,opt,name=interval_sec,json=intervalSec,proto3" json:"interval_sec,omitempty"`            // dont do twice between those seconds
+	EventAttributes []*EventConditionFilter `protobuf:"bytes,11,rep,name=event_attributes,json=eventAttributes,proto3" json:"event_attributes,omitempty"` // ?
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Trigger) Reset() {
@@ -14867,6 +14863,27 @@ func (x *Trigger) GetDisabled() bool {
 		return x.Disabled
 	}
 	return false
+}
+
+func (x *Trigger) GetOncePerUser() bool {
+	if x != nil {
+		return x.OncePerUser
+	}
+	return false
+}
+
+func (x *Trigger) GetOncePerSession() bool {
+	if x != nil {
+		return x.OncePerSession
+	}
+	return false
+}
+
+func (x *Trigger) GetIntervalSec() int64 {
+	if x != nil {
+		return x.IntervalSec
+	}
+	return 0
 }
 
 func (x *Trigger) GetEventAttributes() []*EventConditionFilter {
@@ -72302,7 +72319,7 @@ const file_header_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1f\n" +
 	"\vassigned_to\x18\v \x01(\tR\n" +
-	"assignedTo\"\xe5\a\n" +
+	"assignedTo\"\xba\a\n" +
 	"\x12ConversationMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72327,8 +72344,7 @@ const file_header_proto_rawDesc = "" +
 	"\x14last_sent_event_time\x18' \x01(\x03R\x11lastSentEventTime\x12#\n" +
 	"\rcall_answered\x18\x18 \x01(\x03R\fcallAnswered\x12\x1b\n" +
 	"\tcall_rang\x18\x19 \x01(\x03R\bcallRang\x12\x19\n" +
-	"\bis_muted\x18\x1b \x01(\bR\aisMuted\x12)\n" +
-	"\x10off_notification\x18\x1c \x01(\bR\x0foffNotification\x12%\n" +
+	"\bis_muted\x18\x1b \x01(\bR\aisMuted\x12%\n" +
 	"\x0elast_mentioned\x18\x1e \x01(\x03R\rlastMentioned\x12\x1c\n" +
 	"\tdismissed\x18\x1f \x01(\x03R\tdismissed\x12#\n" +
 	"\rinvite_reason\x18\" \x01(\tR\finviteReason\x12%\n" +
@@ -73020,7 +73036,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eglobal_setting\x18\x04 \x01(\v2\x1f.header.EndchatConnectorSettingR\rglobalSetting\x12\x18\n" +
 	"\aupdated\x18\x05 \x01(\x03R\aupdated\x12'\n" +
 	"\x0fsend_transcript\x18\a \x01(\bR\x0esendTranscript\x12.\n" +
-	"\x13send_transcript_tos\x18\b \x03(\tR\x11sendTranscriptTos\"\xc5\x02\n" +
+	"\x13send_transcript_tos\x18\b \x03(\tR\x11sendTranscriptTos\"\xb6\x03\n" +
 	"\aTrigger\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x129\n" +
 	"\x19area_clicked_css_selector\x18\x04 \x01(\tR\x16areaClickedCssSelector\x121\n" +
@@ -73028,7 +73044,10 @@ const file_header_proto_rawDesc = "" +
 	"\x0einactivity_sec\x18\b \x01(\x03R\rinactivitySec\x12,\n" +
 	"\x12after_pageview_sec\x18\t \x01(\x03R\x10afterPageviewSec\x12\x1a\n" +
 	"\bdisabled\x18\n" +
-	" \x01(\bR\bdisabled\x12G\n" +
+	" \x01(\bR\bdisabled\x12\"\n" +
+	"\ronce_per_user\x18\f \x01(\bR\voncePerUser\x12(\n" +
+	"\x10once_per_session\x18\r \x01(\bR\x0eoncePerSession\x12!\n" +
+	"\finterval_sec\x18\x0e \x01(\x03R\vintervalSec\x12G\n" +
 	"\x10event_attributes\x18\v \x03(\v2\x1c.header.EventConditionFilterR\x0feventAttributes\"\xa4\n" +
 	"\n" +
 	"\fBotCondition\x12\x10\n" +
