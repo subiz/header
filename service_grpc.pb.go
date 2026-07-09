@@ -24602,6 +24602,7 @@ var NotiMgr_ServiceDesc = grpc.ServiceDesc{
 const (
 	Proder_ReadProduct_FullMethodName                = "/header.Proder/ReadProduct"
 	Proder_CreateProduct_FullMethodName              = "/header.Proder/CreateProduct"
+	Proder_CrawlProduct_FullMethodName               = "/header.Proder/CrawlProduct"
 	Proder_UpdateProduct_FullMethodName              = "/header.Proder/UpdateProduct"
 	Proder_DeleteProduct_FullMethodName              = "/header.Proder/DeleteProduct"
 	Proder_ListProducts2_FullMethodName              = "/header.Proder/ListProducts2"
@@ -24691,6 +24692,7 @@ const (
 type ProderClient interface {
 	ReadProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	CreateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
+	CrawlProduct(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	DeleteProduct(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProducts2(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
@@ -24797,6 +24799,16 @@ func (c *proderClient) CreateProduct(ctx context.Context, in *Product, opts ...g
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Product)
 	err := c.cc.Invoke(ctx, Proder_CreateProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) CrawlProduct(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_CrawlProduct_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -25619,6 +25631,7 @@ func (c *proderClient) MoveOrderToPrimary(ctx context.Context, in *Ids, opts ...
 type ProderServer interface {
 	ReadProduct(context.Context, *Product) (*Product, error)
 	CreateProduct(context.Context, *Product) (*Product, error)
+	CrawlProduct(context.Context, *Id) (*Response, error)
 	UpdateProduct(context.Context, *Product) (*Product, error)
 	DeleteProduct(context.Context, *Id) (*Empty, error)
 	ListProducts2(context.Context, *ProductsRequest) (*Response, error)
@@ -25716,6 +25729,9 @@ func (UnimplementedProderServer) ReadProduct(context.Context, *Product) (*Produc
 }
 func (UnimplementedProderServer) CreateProduct(context.Context, *Product) (*Product, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateProduct not implemented")
+}
+func (UnimplementedProderServer) CrawlProduct(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CrawlProduct not implemented")
 }
 func (UnimplementedProderServer) UpdateProduct(context.Context, *Product) (*Product, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateProduct not implemented")
@@ -26013,6 +26029,24 @@ func _Proder_CreateProduct_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).CreateProduct(ctx, req.(*Product))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_CrawlProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).CrawlProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_CrawlProduct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).CrawlProduct(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -27489,6 +27523,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateProduct",
 			Handler:    _Proder_CreateProduct_Handler,
+		},
+		{
+			MethodName: "CrawlProduct",
+			Handler:    _Proder_CrawlProduct_Handler,
 		},
 		{
 			MethodName: "UpdateProduct",

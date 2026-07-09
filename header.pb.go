@@ -33731,6 +33731,8 @@ type Product struct {
 	FpvTotalEnrichedCost     int64                  `protobuf:"varint,95,opt,name=fpv_total_enriched_cost,json=fpvTotalEnrichedCost,proto3" json:"fpv_total_enriched_cost,omitempty"` // vnd
 	FpvLastEnrichedCost      int64                  `protobuf:"varint,96,opt,name=fpv_last_enriched_cost,json=fpvLastEnrichedCost,proto3" json:"fpv_last_enriched_cost,omitempty"`    // vnd
 	FromUrl                  string                 `protobuf:"bytes,97,opt,name=from_url,json=fromUrl,proto3" json:"from_url,omitempty"`                                             // read only, crawled from this url
+	Crawled                  int64                  `protobuf:"varint,101,opt,name=crawled,proto3" json:"crawled,omitempty"`
+	LastCrawlStatus          int64                  `protobuf:"varint,102,opt,name=last_crawl_status,json=lastCrawlStatus,proto3" json:"last_crawl_status,omitempty"`
 	Modified                 int64                  `protobuf:"varint,99,opt,name=modified,proto3" json:"modified,omitempty"`
 	Error                    *Error                 `protobuf:"bytes,100,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -34178,6 +34180,20 @@ func (x *Product) GetFromUrl() string {
 		return x.FromUrl
 	}
 	return ""
+}
+
+func (x *Product) GetCrawled() int64 {
+	if x != nil {
+		return x.Crawled
+	}
+	return 0
+}
+
+func (x *Product) GetLastCrawlStatus() int64 {
+	if x != nil {
+		return x.LastCrawlStatus
+	}
+	return 0
 }
 
 func (x *Product) GetModified() int64 {
@@ -75286,7 +75302,7 @@ const file_header_proto_rawDesc = "" +
 	"\runique_values\x18\a \x01(\x03R\funiqueValues\"M\n" +
 	"\x10ProductPropValue\x12\x14\n" +
 	"\x05value\x18\x06 \x01(\tR\x05value\x12#\n" +
-	"\rproduct_count\x18\b \x01(\x03R\fproductCount\"\xa4\x12\n" +
+	"\rproduct_count\x18\b \x01(\x03R\fproductCount\"\xea\x12\n" +
 	"\aProduct\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75355,7 +75371,9 @@ const file_header_proto_rawDesc = "" +
 	"\x0eenrich_sources\x18^ \x03(\v2\x1b.header.ProductEnrichSourceR\renrichSources\x125\n" +
 	"\x17fpv_total_enriched_cost\x18_ \x01(\x03R\x14fpvTotalEnrichedCost\x123\n" +
 	"\x16fpv_last_enriched_cost\x18` \x01(\x03R\x13fpvLastEnrichedCost\x12\x19\n" +
-	"\bfrom_url\x18a \x01(\tR\afromUrl\x12\x1a\n" +
+	"\bfrom_url\x18a \x01(\tR\afromUrl\x12\x18\n" +
+	"\acrawled\x18e \x01(\x03R\acrawled\x12*\n" +
+	"\x11last_crawl_status\x18f \x01(\x03R\x0flastCrawlStatus\x12\x1a\n" +
 	"\bmodified\x18c \x01(\x03R\bmodified\x12#\n" +
 	"\x05error\x18d \x01(\v2\r.header.ErrorR\x05error\x1aV\n" +
 	"\x19I18nDescriptionBlockEntry\x12\x10\n" +
