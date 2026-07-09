@@ -644,6 +644,15 @@ func init() {
 	}
 }
 
+// otelStatsDisabled reports whether the OpenTelemetry gRPC stats handler
+// (tracing + otel metrics) should be turned off for this process. Set the
+// standard OTEL_SDK_DISABLED=true to opt out — useful for high-throughput
+// services where the per-RPC span/attribute allocation is not worth it.
+// Defaults to enabled so other services keep their stats handlers unchanged.
+func otelStatsDisabled() bool {
+	return strings.EqualFold(os.Getenv("OTEL_SDK_DISABLED"), "true")
+}
+
 func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 	opts = append([]grpc.DialOption{}, opts...)
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -656,7 +665,9 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 		Timeout: time.Duration(20) * time.Second,
 	}))
 	opts = append(opts, grpc.WithChainUnaryInterceptor(prommetrics.UnaryClientInterceptor()))
-	opts = append(opts, grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+	if !otelStatsDisabled() {
+		opts = append(opts, grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+	}
 
 	for {
 		conn, err := grpc.NewClient(service, opts...)
@@ -670,37 +681,47 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 }
 
 func NewUnstgShardServer(port, shards int) *grpc.Server {
-	return grpc.NewServer(
+	opts := []grpc.ServerOption{
 		grpc.KeepaliveParams(
 			keepalive.ServerParameters{
 				MaxConnectionAge: time.Duration(20) * time.Second,
 			}),
-		grpc.StatsHandler(otelgrpc.NewServerHandler()),
 		grpc.ChainUnaryInterceptor(newStatefulSetShardInterceptor(port, shards)),
-	)
+	}
+	if !otelStatsDisabled() {
+		opts = append(opts, grpc.StatsHandler(otelgrpc.NewServerHandler()))
+	}
+	return grpc.NewServer(opts...)
 }
 
 func NewShardServer2(port, shards int) *grpc.Server {
-	return grpc.NewServer(
+	opts := []grpc.ServerOption{
 		grpc.KeepaliveParams(
 			keepalive.ServerParameters{
 				MaxConnectionAge: time.Duration(20) * time.Second,
 			},
 		),
-		grpc.StatsHandler(otelgrpc.NewServerHandler()),
-		grpc.ChainUnaryInterceptor(NewServerShardInterceptor2(shards, port)))
+		grpc.ChainUnaryInterceptor(NewServerShardInterceptor2(shards, port)),
+	}
+	if !otelStatsDisabled() {
+		opts = append(opts, grpc.StatsHandler(otelgrpc.NewServerHandler()))
+	}
+	return grpc.NewServer(opts...)
 }
 
 func NewServer() *grpc.Server {
-	return grpc.NewServer(
+	opts := []grpc.ServerOption{
 		grpc.UnaryInterceptor(RecoverInterceptor),
 		grpc.KeepaliveParams(
 			keepalive.ServerParameters{
 				MaxConnectionAge: time.Duration(20) * time.Second,
 			},
 		),
-		grpc.StatsHandler(otelgrpc.NewServerHandler()),
-	)
+	}
+	if !otelStatsDisabled() {
+		opts = append(opts, grpc.StatsHandler(otelgrpc.NewServerHandler()))
+	}
+	return grpc.NewServer(opts...)
 }
 
 type ServiceConfiguration struct {
