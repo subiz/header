@@ -708,6 +708,8 @@ service FabikonService {
 	rpc ListFbFanpageSettings2(ListPageSettingRequest) returns (header.Response);
 
 	rpc SendMetaConversion(header.Event) returns (header.Response); // offline
+	rpc ListFacebookDatasets(header.Id) returns (header.Response); // is -> business id
+	rpc ListFacebookBusinesses(header.Id) returns (header.Response);
 }
 
 service ChannelConnector {

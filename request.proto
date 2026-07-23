@@ -815,6 +815,7 @@ message CrawlUrlRequest {
 	string screenshoot = 20; // true || 1366x768
 
 	string render_text = 21; // markdown -> do not return body
+	bool product_only = 22;
 }
 
 message ListAIDataEntryRequest {

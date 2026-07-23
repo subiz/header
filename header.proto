@@ -633,7 +633,6 @@ message Event {
 	int64 updated = 10;
 	int64 event_time = 11; // actual time that event created, empty -> fallback to created
 	string type = 9; // alway lowercase, custom_* for custom event purchase
-	// string session_id = 12; // extra id for many purpose (idempotency key)
 	By by = 50;
 	Touchpoint touchpoint = 52;
 	Data data = 20;
@@ -641,7 +640,6 @@ message Event {
 	Data ref = 54;
 	string webhook_id = 56; // webhook id listen this event
 	string source_event_id = 57; // for sync event, can be used like idempotency key
-	// map<string, EventField> custom_data = 58; // @deprecated
 
 	google.protobuf.Struct payload = 150;
 }
@@ -1940,6 +1938,47 @@ message Integration {
 	int64 website_last_crawled = 141;
 
 	int64 last_synced = 142;
+}
+
+message FacebookBusiness {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 4; // business_id
+	string name = 5;
+	string created_time = 6; // ISO8601, e.g. 2023-03-03T04:00:43+0000
+	string updated_time = 7;
+	string profile_picture_uri = 8;
+	int64 timezone_id = 9;
+	bool is_hidden = 10;
+	string link = 11;
+	FacebookAdmin created_by = 12;
+	FacebookAdmin updated_by = 13;
+	string extended_updated_time = 14;
+
+	int64 last_fetched = 16;
+}
+
+message FacebookAdmin {
+	string id = 1;
+	string name = 2;
+}
+
+message FacebookDataset {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string client_business_id = 3;
+	string id = 4; // dataset_id
+	string name = 5;
+	string creation_time = 6; // ISO8601, e.g. 2025-04-01T07:34:28+0000
+	string last_upload_app = 7; // NO_UPLOAD
+	FacebookAdmin creator = 10;
+	string data_use_setting = 11; // advertising_and_analytics
+	bool is_created_by_business = 12;
+	bool is_crm = 13;
+	bool is_restricted_use = 14;
+
+	string ownership = 20; // owned, shared
+	int64 last_fetched = 21;
 }
 
 message WorkflowSessionId {
@@ -7020,6 +7059,9 @@ message Response {
 	repeated DocHit doc_hits = 268;
 
 	repeated account.ConvoFilter convo_filters = 270;
+
+	repeated FacebookDataset facebook_datasets = 280;
+	repeated FacebookBusiness facebook_businesses = 281;
 }
 
 message ReportCount {

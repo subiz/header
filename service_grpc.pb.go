@@ -18913,6 +18913,8 @@ const (
 	FabikonService_ListAdAccounts_FullMethodName         = "/header.FabikonService/ListAdAccounts"
 	FabikonService_ListFbFanpageSettings2_FullMethodName = "/header.FabikonService/ListFbFanpageSettings2"
 	FabikonService_SendMetaConversion_FullMethodName     = "/header.FabikonService/SendMetaConversion"
+	FabikonService_ListFacebookDatasets_FullMethodName   = "/header.FabikonService/ListFacebookDatasets"
+	FabikonService_ListFacebookBusinesses_FullMethodName = "/header.FabikonService/ListFacebookBusinesses"
 )
 
 // FabikonServiceClient is the client API for FabikonService service.
@@ -18937,6 +18939,8 @@ type FabikonServiceClient interface {
 	ListAdAccounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListFbFanpageSettings2(ctx context.Context, in *ListPageSettingRequest, opts ...grpc.CallOption) (*Response, error)
 	SendMetaConversion(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
+	ListFacebookDatasets(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListFacebookBusinesses(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type fabikonServiceClient struct {
@@ -19117,6 +19121,26 @@ func (c *fabikonServiceClient) SendMetaConversion(ctx context.Context, in *Event
 	return out, nil
 }
 
+func (c *fabikonServiceClient) ListFacebookDatasets(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_ListFacebookDatasets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) ListFacebookBusinesses(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_ListFacebookBusinesses_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FabikonServiceServer is the server API for FabikonService service.
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
@@ -19139,6 +19163,8 @@ type FabikonServiceServer interface {
 	ListAdAccounts(context.Context, *Id) (*Response, error)
 	ListFbFanpageSettings2(context.Context, *ListPageSettingRequest) (*Response, error)
 	SendMetaConversion(context.Context, *Event) (*Response, error)
+	ListFacebookDatasets(context.Context, *Id) (*Response, error)
+	ListFacebookBusinesses(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedFabikonServiceServer()
 }
 
@@ -19199,6 +19225,12 @@ func (UnimplementedFabikonServiceServer) ListFbFanpageSettings2(context.Context,
 }
 func (UnimplementedFabikonServiceServer) SendMetaConversion(context.Context, *Event) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendMetaConversion not implemented")
+}
+func (UnimplementedFabikonServiceServer) ListFacebookDatasets(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFacebookDatasets not implemented")
+}
+func (UnimplementedFabikonServiceServer) ListFacebookBusinesses(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFacebookBusinesses not implemented")
 }
 func (UnimplementedFabikonServiceServer) mustEmbedUnimplementedFabikonServiceServer() {}
 func (UnimplementedFabikonServiceServer) testEmbeddedByValue()                        {}
@@ -19527,6 +19559,42 @@ func _FabikonService_SendMetaConversion_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FabikonService_ListFacebookDatasets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).ListFacebookDatasets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_ListFacebookDatasets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).ListFacebookDatasets(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_ListFacebookBusinesses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).ListFacebookBusinesses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_ListFacebookBusinesses_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).ListFacebookBusinesses(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FabikonService_ServiceDesc is the grpc.ServiceDesc for FabikonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -19601,6 +19669,14 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendMetaConversion",
 			Handler:    _FabikonService_SendMetaConversion_Handler,
+		},
+		{
+			MethodName: "ListFacebookDatasets",
+			Handler:    _FabikonService_ListFacebookDatasets_Handler,
+		},
+		{
+			MethodName: "ListFacebookBusinesses",
+			Handler:    _FabikonService_ListFacebookBusinesses_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
