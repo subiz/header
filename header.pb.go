@@ -14366,6 +14366,8 @@ type FacebookBusiness struct {
 	UpdatedBy           *FacebookAdmin         `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	ExtendedUpdatedTime string                 `protobuf:"bytes,14,opt,name=extended_updated_time,json=extendedUpdatedTime,proto3" json:"extended_updated_time,omitempty"`
 	LastFetched         int64                  `protobuf:"varint,16,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
+	AccessToken         string                 `protobuf:"bytes,17,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	Status              string                 `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"` // active, inactive, expired
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -14498,6 +14500,20 @@ func (x *FacebookBusiness) GetLastFetched() int64 {
 	return 0
 }
 
+func (x *FacebookBusiness) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *FacebookBusiness) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 type FacebookAdmin struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -14566,6 +14582,8 @@ type FacebookDataset struct {
 	IsRestrictedUse     bool                   `protobuf:"varint,14,opt,name=is_restricted_use,json=isRestrictedUse,proto3" json:"is_restricted_use,omitempty"`
 	Ownership           string                 `protobuf:"bytes,20,opt,name=ownership,proto3" json:"ownership,omitempty"` // owned, shared
 	LastFetched         int64                  `protobuf:"varint,21,opt,name=last_fetched,json=lastFetched,proto3" json:"last_fetched,omitempty"`
+	LastEventSent       int64                  `protobuf:"varint,22,opt,name=last_event_sent,json=lastEventSent,proto3" json:"last_event_sent,omitempty"`
+	Status              string                 `protobuf:"bytes,23,opt,name=status,proto3" json:"status,omitempty"` // active, expired
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -14696,6 +14714,20 @@ func (x *FacebookDataset) GetLastFetched() int64 {
 		return x.LastFetched
 	}
 	return 0
+}
+
+func (x *FacebookDataset) GetLastEventSent() int64 {
+	if x != nil {
+		return x.LastEventSent
+	}
+	return 0
+}
+
+func (x *FacebookDataset) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
 }
 
 type WorkflowSessionId struct {
@@ -73357,7 +73389,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"\x06failed\x10\x02\x12\v\n" +
 	"\adeleted\x10\x03\x12\f\n" +
-	"\binactive\x10\x04\"\x83\x04\n" +
+	"\binactive\x10\x04\"\xbe\x04\n" +
 	"\x10FacebookBusiness\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73377,10 +73409,12 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\r \x01(\v2\x15.header.FacebookAdminR\tupdatedBy\x122\n" +
 	"\x15extended_updated_time\x18\x0e \x01(\tR\x13extendedUpdatedTime\x12!\n" +
-	"\flast_fetched\x18\x10 \x01(\x03R\vlastFetched\"3\n" +
+	"\flast_fetched\x18\x10 \x01(\x03R\vlastFetched\x12!\n" +
+	"\faccess_token\x18\x11 \x01(\tR\vaccessToken\x12\x16\n" +
+	"\x06status\x18\x12 \x01(\tR\x06status\"3\n" +
 	"\rFacebookAdmin\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"\x86\x04\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\xc6\x04\n" +
 	"\x0fFacebookDataset\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73397,7 +73431,9 @@ const file_header_proto_rawDesc = "" +
 	"\x06is_crm\x18\r \x01(\bR\x05isCrm\x12*\n" +
 	"\x11is_restricted_use\x18\x0e \x01(\bR\x0fisRestrictedUse\x12\x1c\n" +
 	"\townership\x18\x14 \x01(\tR\townership\x12!\n" +
-	"\flast_fetched\x18\x15 \x01(\x03R\vlastFetched\"\x95\x01\n" +
+	"\flast_fetched\x18\x15 \x01(\x03R\vlastFetched\x12&\n" +
+	"\x0flast_event_sent\x18\x16 \x01(\x03R\rlastEventSent\x12\x16\n" +
+	"\x06status\x18\x17 \x01(\tR\x06status\"\x95\x01\n" +
 	"\x11WorkflowSessionId\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

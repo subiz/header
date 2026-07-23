@@ -1956,6 +1956,8 @@ message FacebookBusiness {
 	string extended_updated_time = 14;
 
 	int64 last_fetched = 16;
+	string access_token = 17;
+	string status = 18; // active, inactive, expired
 }
 
 message FacebookAdmin {
@@ -1979,6 +1981,8 @@ message FacebookDataset {
 
 	string ownership = 20; // owned, shared
 	int64 last_fetched = 21;
+	int64 last_event_sent = 22;
+	string status = 23; // active, expired
 }
 
 message WorkflowSessionId {
