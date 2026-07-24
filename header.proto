@@ -6610,14 +6610,16 @@ message WorkflowAction {
 message ActionSendFacebookConversion {
 	string type = 3; // lead, purchase
 	Bill bill = 4;
-	repeated string page_ids = 5;
-	repeated string dataset_ids = 6;
+	// repeated string page_ids = 5;
+	// repeated string dataset_ids = 6;
 
 	// https://developers.facebook.com/documentation/ads-commerce/conversions-api/parameters/server-event#action-source
 	string action_source = 7; // '', email, website, app, phone_call, chat, physical_store, system_generated, business_messaging, other
 
 	string dataset_id = 8;
 	string event_name = 9; // standard event name https://developers.facebook.com/documentation/meta-pixel/reference#standard-events
+	string business_id = 10;
+	string page_id = 12; // force page
 }
 
 message ActionTerminateBot {
