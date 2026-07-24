@@ -46373,7 +46373,9 @@ type ActionSendFacebookConversion struct {
 	PageIds    []string               `protobuf:"bytes,5,rep,name=page_ids,json=pageIds,proto3" json:"page_ids,omitempty"`
 	DatasetIds []string               `protobuf:"bytes,6,rep,name=dataset_ids,json=datasetIds,proto3" json:"dataset_ids,omitempty"`
 	// https://developers.facebook.com/documentation/ads-commerce/conversions-api/parameters/server-event#action-source
-	ActionSource  string `protobuf:"bytes,7,opt,name=action_source,json=actionSource,proto3" json:"action_source,omitempty"` // email, website, app, phone_call, physical_store, system_generated, business_messaging, other
+	ActionSource  string `protobuf:"bytes,7,opt,name=action_source,json=actionSource,proto3" json:"action_source,omitempty"` // '', email, website, app, phone_call, chat, physical_store, system_generated, business_messaging, other
+	DatasetId     string `protobuf:"bytes,8,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
+	EventName     string `protobuf:"bytes,9,opt,name=event_name,json=eventName,proto3" json:"event_name,omitempty"` // standard event name https://developers.facebook.com/documentation/meta-pixel/reference#standard-events
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -46439,6 +46441,20 @@ func (x *ActionSendFacebookConversion) GetDatasetIds() []string {
 func (x *ActionSendFacebookConversion) GetActionSource() string {
 	if x != nil {
 		return x.ActionSource
+	}
+	return ""
+}
+
+func (x *ActionSendFacebookConversion) GetDatasetId() string {
+	if x != nil {
+		return x.DatasetId
+	}
+	return ""
+}
+
+func (x *ActionSendFacebookConversion) GetEventName() string {
+	if x != nil {
+		return x.EventName
 	}
 	return ""
 }
@@ -77248,14 +77264,18 @@ const file_header_proto_rawDesc = "" +
 	"\x15output_error_variable\x18j \x01(\tR\x13outputErrorVariable\x12?\n" +
 	"\rterminate_bot\x18n \x01(\v2\x1a.header.ActionTerminateBotR\fterminateBot\x12^\n" +
 	"\x18send_facebook_conversion\x18p \x01(\v2$.header.ActionSendFacebookConversionR\x16sendFacebookConversion\x12?\n" +
-	"\rrotate_agents\x18q \x01(\v2\x1a.header.ActionRotateAgentsR\frotateAgents\"\xb5\x01\n" +
+	"\rrotate_agents\x18q \x01(\v2\x1a.header.ActionRotateAgentsR\frotateAgents\"\xf3\x01\n" +
 	"\x1cActionSendFacebookConversion\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12 \n" +
 	"\x04bill\x18\x04 \x01(\v2\f.header.BillR\x04bill\x12\x19\n" +
 	"\bpage_ids\x18\x05 \x03(\tR\apageIds\x12\x1f\n" +
 	"\vdataset_ids\x18\x06 \x03(\tR\n" +
 	"datasetIds\x12#\n" +
-	"\raction_source\x18\a \x01(\tR\factionSource\"u\n" +
+	"\raction_source\x18\a \x01(\tR\factionSource\x12\x1d\n" +
+	"\n" +
+	"dataset_id\x18\b \x01(\tR\tdatasetId\x12\x1d\n" +
+	"\n" +
+	"event_name\x18\t \x01(\tR\teventName\"u\n" +
 	"\x12ActionTerminateBot\x12\x15\n" +
 	"\x06bot_id\x18\x03 \x01(\tR\x05botId\x12\x1d\n" +
 	"\n" +
