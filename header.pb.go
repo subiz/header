@@ -7504,16 +7504,16 @@ type ConversationMeta struct {
 	AssociatedConversations []string               `protobuf:"bytes,11,rep,name=associated_conversations,json=associatedConversations,proto3" json:"associated_conversations,omitempty"`
 	IsHidden                bool                   `protobuf:"varint,12,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	Event                   *Event                 `protobuf:"bytes,13,opt,name=event,proto3" json:"event,omitempty"`
-	ExtraData               string                 `protobuf:"bytes,15,opt,name=extra_data,json=extraData,proto3" json:"extra_data,omitempty"`
-	TicketId                string                 `protobuf:"bytes,17,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	IsDismissed             bool                   `protobuf:"varint,19,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
-	HumanNotified           int64                  `protobuf:"varint,20,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"`
-	IsMuted                 int64                  `protobuf:"varint,21,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
-	FilterKeys              []string               `protobuf:"bytes,22,rep,name=filter_keys,json=filterKeys,proto3" json:"filter_keys,omitempty"`
-	UnrepliedAt             int64                  `protobuf:"varint,23,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
-	IsSpam                  bool                   `protobuf:"varint,24,opt,name=is_spam,json=isSpam,proto3" json:"is_spam,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// string extra_data = 15;
+	TicketId      string   `protobuf:"bytes,17,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	IsDismissed   bool     `protobuf:"varint,19,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
+	HumanNotified int64    `protobuf:"varint,20,opt,name=human_notified,json=humanNotified,proto3" json:"human_notified,omitempty"`
+	IsMuted       int64    `protobuf:"varint,21,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
+	FilterKeys    []string `protobuf:"bytes,22,rep,name=filter_keys,json=filterKeys,proto3" json:"filter_keys,omitempty"`
+	// int64 unreplied_at = 23;
+	IsSpam        bool `protobuf:"varint,24,opt,name=is_spam,json=isSpam,proto3" json:"is_spam,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ConversationMeta) Reset() {
@@ -7623,13 +7623,6 @@ func (x *ConversationMeta) GetEvent() *Event {
 	return nil
 }
 
-func (x *ConversationMeta) GetExtraData() string {
-	if x != nil {
-		return x.ExtraData
-	}
-	return ""
-}
-
 func (x *ConversationMeta) GetTicketId() string {
 	if x != nil {
 		return x.TicketId
@@ -7663,13 +7656,6 @@ func (x *ConversationMeta) GetFilterKeys() []string {
 		return x.FilterKeys
 	}
 	return nil
-}
-
-func (x *ConversationMeta) GetUnrepliedAt() int64 {
-	if x != nil {
-		return x.UnrepliedAt
-	}
-	return 0
 }
 
 func (x *ConversationMeta) GetIsSpam() bool {
@@ -10226,9 +10212,12 @@ type Conversation struct {
 	HumanNotifyMessage    string `protobuf:"bytes,74,opt,name=human_notify_message,json=humanNotifyMessage,proto3" json:"human_notify_message,omitempty"`
 	FromLightConvo        bool   `protobuf:"varint,75,opt,name=from_light_convo,json=fromLightConvo,proto3" json:"from_light_convo,omitempty"`
 	UnrepliedAt           int64  `protobuf:"varint,90,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
-	HumanUnrepliedAt      int64  `protobuf:"varint,91,opt,name=human_unreplied_at,json=humanUnrepliedAt,proto3" json:"human_unreplied_at,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// int64 human_unreplied_at = 91;
+	TotalUserMessages  int64 `protobuf:"varint,92,opt,name=total_user_messages,json=totalUserMessages,proto3" json:"total_user_messages,omitempty"`
+	TotalMessages      int64 `protobuf:"varint,93,opt,name=total_messages,json=totalMessages,proto3" json:"total_messages,omitempty"`
+	TotalHumanMessages int64 `protobuf:"varint,94,opt,name=total_human_messages,json=totalHumanMessages,proto3" json:"total_human_messages,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Conversation) Reset() {
@@ -10681,9 +10670,23 @@ func (x *Conversation) GetUnrepliedAt() int64 {
 	return 0
 }
 
-func (x *Conversation) GetHumanUnrepliedAt() int64 {
+func (x *Conversation) GetTotalUserMessages() int64 {
 	if x != nil {
-		return x.HumanUnrepliedAt
+		return x.TotalUserMessages
+	}
+	return 0
+}
+
+func (x *Conversation) GetTotalMessages() int64 {
+	if x != nil {
+		return x.TotalMessages
+	}
+	return 0
+}
+
+func (x *Conversation) GetTotalHumanMessages() int64 {
+	if x != nil {
+		return x.TotalHumanMessages
 	}
 	return 0
 }
@@ -72483,7 +72486,7 @@ const file_header_proto_rawDesc = "" +
 	"\fsegment_sync\x18\x90\x01 \x01(\v2\x13.header.SegmentSyncR\vsegmentSync\x12-\n" +
 	"\bdiscount\x18\x91\x01 \x01(\v2\x10.header.DiscountR\bdiscount\x12D\n" +
 	"\x11ai_agent_testcase\x18\x92\x01 \x01(\v2\x17.header.AIAgentTestcaseR\x0faiAgentTestcase\x128\n" +
-	"\fconvo_filter\x18\x93\x01 \x01(\v2\x14.account.ConvoFilterR\vconvoFilter\"\xe6\x04\n" +
+	"\fconvo_filter\x18\x93\x01 \x01(\v2\x14.account.ConvoFilterR\vconvoFilter\"\xa4\x04\n" +
 	"\x10ConversationMeta\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x18\n" +
 	"\aactived\x18\x04 \x01(\x03R\aactived\x12\x1d\n" +
@@ -72499,16 +72502,13 @@ const file_header_proto_rawDesc = "" +
 	"touchpoint\x129\n" +
 	"\x18associated_conversations\x18\v \x03(\tR\x17associatedConversations\x12\x1b\n" +
 	"\tis_hidden\x18\f \x01(\bR\bisHidden\x12#\n" +
-	"\x05event\x18\r \x01(\v2\r.header.EventR\x05event\x12\x1d\n" +
-	"\n" +
-	"extra_data\x18\x0f \x01(\tR\textraData\x12\x1b\n" +
+	"\x05event\x18\r \x01(\v2\r.header.EventR\x05event\x12\x1b\n" +
 	"\tticket_id\x18\x11 \x01(\tR\bticketId\x12!\n" +
 	"\fis_dismissed\x18\x13 \x01(\bR\visDismissed\x12%\n" +
 	"\x0ehuman_notified\x18\x14 \x01(\x03R\rhumanNotified\x12\x19\n" +
 	"\bis_muted\x18\x15 \x01(\x03R\aisMuted\x12\x1f\n" +
 	"\vfilter_keys\x18\x16 \x03(\tR\n" +
-	"filterKeys\x12!\n" +
-	"\funreplied_at\x18\x17 \x01(\x03R\vunrepliedAt\x12\x17\n" +
+	"filterKeys\x12\x17\n" +
 	"\ais_spam\x18\x18 \x01(\bR\x06isSpam\"\xcb\x01\n" +
 	"\rWebRTCMessage\x12%\n" +
 	"\x0enegotiation_id\x18\x02 \x01(\tR\rnegotiationId\x12\x14\n" +
@@ -72849,7 +72849,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04text\x18\r \x01(\tR\x04text\x1a7\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa7\x13\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x82\x14\n" +
 	"\fConversation\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -72921,8 +72921,10 @@ const file_header_proto_rawDesc = "" +
 	"\x18human_notify_reason_code\x18I \x01(\tR\x15humanNotifyReasonCode\x120\n" +
 	"\x14human_notify_message\x18J \x01(\tR\x12humanNotifyMessage\x12(\n" +
 	"\x10from_light_convo\x18K \x01(\bR\x0efromLightConvo\x12!\n" +
-	"\funreplied_at\x18Z \x01(\x03R\vunrepliedAt\x12,\n" +
-	"\x12human_unreplied_at\x18[ \x01(\x03R\x10humanUnrepliedAt\"\xb9\x02\n" +
+	"\funreplied_at\x18Z \x01(\x03R\vunrepliedAt\x12.\n" +
+	"\x13total_user_messages\x18\\ \x01(\x03R\x11totalUserMessages\x12%\n" +
+	"\x0etotal_messages\x18] \x01(\x03R\rtotalMessages\x120\n" +
+	"\x14total_human_messages\x18^ \x01(\x03R\x12totalHumanMessages\"\xb9\x02\n" +
 	"\fGoogleReview\x12\x1b\n" +
 	"\treview_id\x18\x01 \x01(\tR\breviewId\x12#\n" +
 	"\rrating_string\x18\x02 \x01(\tR\fratingString\x12\x16\n" +

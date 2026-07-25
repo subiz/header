@@ -775,7 +775,7 @@ message ConversationMeta {
 	bool is_hidden = 12;
 	Event event = 13;
 
-	string extra_data = 15;
+	// string extra_data = 15;
 	string ticket_id = 17;
 
 	bool is_dismissed = 19;
@@ -784,7 +784,7 @@ message ConversationMeta {
 
 	repeated string filter_keys = 22;
 
-	int64 unreplied_at = 23;
+	// int64 unreplied_at = 23;
 	bool is_spam = 24;
 }
 
@@ -1310,7 +1310,10 @@ message Conversation {
 
 	bool from_light_convo = 75;
 	int64 unreplied_at = 90;
-	int64 human_unreplied_at = 91;
+	// int64 human_unreplied_at = 91;
+	int64 total_user_messages = 92;
+	int64 total_messages = 93;
+	int64 total_human_messages = 94;
 }
 
 message GoogleReview {
