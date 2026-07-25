@@ -930,6 +930,83 @@ sau:
 	}
 }
 
+// BlockToText and BlockToTextF share renderBlockToText; with a nil callback the
+// two must produce identical text. This locks that invariant across the shared
+// sample blocks plus hand-built cases (nested lists, ordered_list) that the
+// samples don't cover.
+func TestBlockToTextEqualsBlockToTextF(t *testing.T) {
+	cases := []struct {
+		name  string
+		block *Block
+	}{}
+
+	for _, name := range []string{"./block_sample.json", "./block_sample2.json"} {
+		jsonb, err := os.ReadFile(name)
+		if err != nil {
+			t.Fatalf("read %s: %v", name, err)
+		}
+		block := &Block{}
+		if err := json.Unmarshal(jsonb, block); err != nil {
+			t.Fatalf("unmarshal %s: %v", name, err)
+		}
+		cases = append(cases, struct {
+			name  string
+			block *Block
+		}{name, block})
+	}
+
+	// ordered_list with a link item.
+	cases = append(cases, struct {
+		name  string
+		block *Block
+	}{"ordered_list", &Block{
+		Type: "ordered_list",
+		Content: []*Block{
+			{Type: "list_item", Content: []*Block{{Type: "text", Text: "first"}}},
+			{Type: "list_item", Content: []*Block{{
+				Type: "link", Text: "second", Href: "https://subiz.com/x",
+			}}},
+			{Type: "list_item", Content: []*Block{{Type: "text", Text: "third"}}},
+		},
+	}})
+
+	// bullet_list containing a nested ordered_list inside a list_item.
+	cases = append(cases, struct {
+		name  string
+		block *Block
+	}{"nested_list", &Block{
+		Type: "div",
+		Content: []*Block{
+			{Type: "paragraph", Content: []*Block{{Type: "text", Text: "intro"}}},
+			{Type: "bullet_list", Content: []*Block{
+				{Type: "list_item", Content: []*Block{{Type: "text", Text: "outer a"}}},
+				{Type: "list_item", Content: []*Block{
+					{Type: "paragraph", Content: []*Block{{Type: "text", Text: "outer b"}}},
+					{Type: "ordered_list", Content: []*Block{
+						{Type: "list_item", Content: []*Block{{Type: "text", Text: "inner 1"}}},
+						{Type: "list_item", Content: []*Block{{
+							Type: "emoji", Attrs: map[string]string{"code": "smile"},
+						}}},
+					}},
+				}},
+			}},
+		},
+	}})
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			plain := BlockToText(tc.block)
+			withF, spans := BlockToTextF(tc.block, nil)
+			if plain != withF {
+				t.Errorf("BlockToText != BlockToTextF\n--BlockToText--\n%q\n--BlockToTextF--\n%q", plain, withF)
+			}
+			if len(spans) != 0 {
+				t.Errorf("nil callback should yield no spans, got %d", len(spans))
+			}
+		})
+	}
+}
+
 func TestBlockToHTML(t *testing.T) {
 	block := &Block{
 		Type:  "paragraph",

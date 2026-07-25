@@ -1833,64 +1833,7 @@ func HasBlockDynamicField(block *Block) bool {
 }
 
 func BlockToText(block *Block) string {
-	return strings.TrimSpace(blockToText(block))
-}
-
-func blockToText(block *Block) string {
-	if block == nil {
-		return ""
-	}
-	out := ""
-	if block.Type == "bullet_list" || block.Type == "ordered_list" {
-		for i, item := range block.GetContent() {
-			prefix := "\n* "
-			if block.Type == "ordered_list" {
-				prefix = "\n" + strconv.Itoa(i+1) + ". "
-			}
-			out += prefix + strings.TrimSpace(blockToText(item))
-		}
-		return out
-	}
-
-	if block.Type == "image" {
-		out += "\n" + block.GetImage().GetUrl()
-	}
-
-	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
-		out += "\n"
-	}
-
-	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
-		return out + blockTextWithHref(block)
-	}
-
-	if block.Type == "mention-agent" || block.Type == "mention" {
-		return out + mentionBlockText(block)
-	}
-
-	if block.Type == "horizontal_rule" {
-		return out + "\n---\n"
-	}
-
-	if block.Type == "emoji" {
-		var code string
-		if len(block.Attrs) > 0 {
-			code = block.Attrs["code"]
-		}
-		if code == "" {
-			code = block.Text
-		}
-
-		if code == "" {
-			return out
-		}
-		return out + emojiBlockText(block, code)
-	}
-
-	for _, block := range block.GetContent() {
-		out += blockToText(block)
-	}
-	return out
+	return trimRendered(renderBlockToText(block, nil)).text
 }
 
 func BlockToTextMessages(block *Block) []*Message {
@@ -2032,14 +1975,12 @@ func blockTextWithHref(block *Block) string {
 	if block == nil {
 		return ""
 	}
-
-	text := block.Text
-	href := strings.TrimSpace(block.Href)
+	text := block.GetText()
+	href := strings.TrimSpace(block.GetHref())
 	if href == "" || href == strings.TrimSpace(text) {
 		return text
 	}
-
-	if strings.Contains(href, ")") || strings.Contains(href, "(") {
+	if strings.ContainsAny(href, "()") {
 		return text + " (<" + href + ">)"
 	}
 	return text + " (" + href + ")"
@@ -2058,7 +1999,7 @@ func mentionBlockText(block *Block) string {
 		}
 	}
 	if name == "" {
-		return block.Text
+		return block.GetText()
 	}
 	if strings.HasPrefix(name, "@") {
 		return name
@@ -2070,8 +2011,8 @@ func emojiBlockText(block *Block, code string) string {
 	if emoji := EmojiM[":"+code+":"]; emoji != "" {
 		return emoji
 	}
-	if block != nil && block.Text != "" {
-		return block.Text
+	if block.GetText() != "" {
+		return block.GetText()
 	}
 	return ":" + code + ":"
 }
@@ -2751,4 +2692,118 @@ func ToBy(gctx *cpb.Context) *By {
 	by.Id = cred.GetIssuer()
 	by.Type = cred.GetType().String()
 	return by
+}
+
+// BlockToTextF is equivalent to header.BlockToText, with an override callback.
+// Returning ok=true replaces that block with text. The returned spans point to
+// overridden blocks in the final text, using UTF-8 byte offsets.
+//
+// This function can move to the header package by changing *header.Block to
+// *Block and reusing header's existing private text helper functions below.
+func BlockToTextF(block *Block, f func(*Block) (text string, ok bool)) (string, []BlockTextSpan) {
+	out := trimRendered(renderBlockToText(block, f))
+	return out.text, out.spans
+}
+
+func renderBlockToText(block *Block, f func(*Block) (string, bool)) renderedBlock {
+	if block == nil {
+		return renderedBlock{}
+	}
+	if f != nil {
+		if text, ok := f(block); ok {
+			return renderedBlock{
+				text:  text,
+				spans: []BlockTextSpan{{Block: block, End: len(text)}},
+			}
+		}
+	}
+
+	out := renderedBlock{}
+	typ := block.GetType()
+	if typ == "bullet_list" || typ == "ordered_list" {
+		for i, item := range block.GetContent() {
+			prefix := "\n* "
+			if typ == "ordered_list" {
+				prefix = "\n" + strconv.Itoa(i+1) + ". "
+			}
+			out = appendRendered(out, renderedBlock{text: prefix})
+			out = appendRendered(out, trimRendered(renderBlockToText(item, f)))
+		}
+		return out
+	}
+
+	if typ == "image" {
+		out.text += "\n" + block.GetImage().GetUrl()
+	}
+	if typ == "heading" || typ == "paragraph" || typ == "div" {
+		out.text += "\n"
+	}
+
+	switch typ {
+	case "", "text", "link", "dynamic-field":
+		out.text += blockTextWithHref(block)
+		return out
+	case "mention", "mention-agent":
+		out.text += mentionBlockText(block)
+		return out
+	case "horizontal_rule":
+		out.text += "\n---\n"
+		return out
+	case "emoji":
+		code := block.GetAttrs()["code"]
+		if code == "" {
+			code = block.GetText()
+		}
+		if code != "" {
+			out.text += emojiBlockText(block, code)
+		}
+		return out
+	}
+
+	for _, child := range block.GetContent() {
+		out = appendRendered(out, renderBlockToText(child, f))
+	}
+	return out
+}
+
+// BlockTextSpan identifies the final UTF-8 byte range produced for a block
+// overridden by BlockToTextF.
+type BlockTextSpan struct {
+	Block *Block
+	Start int
+	End   int
+}
+
+type renderedBlock struct {
+	text  string
+	spans []BlockTextSpan
+}
+
+func appendRendered(out renderedBlock, next renderedBlock) renderedBlock {
+	offset := len(out.text)
+	out.text += next.text
+	for _, span := range next.spans {
+		span.Start += offset
+		span.End += offset
+		out.spans = append(out.spans, span)
+	}
+	return out
+}
+
+func trimRendered(in renderedBlock) renderedBlock {
+	trimmed := strings.TrimSpace(in.text)
+	if trimmed == "" {
+		return renderedBlock{}
+	}
+	start := strings.Index(in.text, trimmed)
+	end := start + len(trimmed)
+	out := renderedBlock{text: trimmed}
+	for _, span := range in.spans {
+		span.Start -= start
+		span.End -= start
+		if span.Start >= 0 && span.End <= end-start {
+			out.spans = append(out.spans, span)
+		}
+	}
+	return out
 }
