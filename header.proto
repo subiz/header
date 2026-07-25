@@ -1120,6 +1120,7 @@ message ConversationMember {
 	int64 seen_at = 20;
 	int64 received_at = 21;
 	int64 last_sent = 23; // timestamp
+	int64 last_user_reacted = 29; // last time reacted to the latest user message
 	int64 last_sent_event_time = 39; // true time sent timestamp
 	int64 call_answered = 24;
 	int64 call_rang = 25;
@@ -1198,7 +1199,7 @@ enum ConvoState {
 	ended = 8; // convo
 	pending = 9; // waiting for user
 
-	waiting_for_reply = 15; // waiting for reply
+	waiting_for_reply = 15; // waiting for agent to reply
 	dialing = 16;
 	congestion = 17;
 }

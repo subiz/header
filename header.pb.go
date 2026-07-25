@@ -33,7 +33,7 @@ const (
 	ConvoState_active            ConvoState = 6  // convo
 	ConvoState_ended             ConvoState = 8  // convo
 	ConvoState_pending           ConvoState = 9  // waiting for user
-	ConvoState_waiting_for_reply ConvoState = 15 // waiting for reply
+	ConvoState_waiting_for_reply ConvoState = 15 // waiting for agent to reply
 	ConvoState_dialing           ConvoState = 16
 	ConvoState_congestion        ConvoState = 17
 )
@@ -9522,6 +9522,7 @@ type ConversationMember struct {
 	SeenAt            int64                  `protobuf:"varint,20,opt,name=seen_at,json=seenAt,proto3" json:"seen_at,omitempty"`
 	ReceivedAt        int64                  `protobuf:"varint,21,opt,name=received_at,json=receivedAt,proto3" json:"received_at,omitempty"`
 	LastSent          int64                  `protobuf:"varint,23,opt,name=last_sent,json=lastSent,proto3" json:"last_sent,omitempty"`                                // timestamp
+	LastUserReacted   int64                  `protobuf:"varint,29,opt,name=last_user_reacted,json=lastUserReacted,proto3" json:"last_user_reacted,omitempty"`         // last time reacted to the latest user message
 	LastSentEventTime int64                  `protobuf:"varint,39,opt,name=last_sent_event_time,json=lastSentEventTime,proto3" json:"last_sent_event_time,omitempty"` // true time sent timestamp
 	CallAnswered      int64                  `protobuf:"varint,24,opt,name=call_answered,json=callAnswered,proto3" json:"call_answered,omitempty"`
 	CallRang          int64                  `protobuf:"varint,25,opt,name=call_rang,json=callRang,proto3" json:"call_rang,omitempty"`
@@ -9663,6 +9664,13 @@ func (x *ConversationMember) GetReceivedAt() int64 {
 func (x *ConversationMember) GetLastSent() int64 {
 	if x != nil {
 		return x.LastSent
+	}
+	return 0
+}
+
+func (x *ConversationMember) GetLastUserReacted() int64 {
+	if x != nil {
+		return x.LastUserReacted
 	}
 	return 0
 }
@@ -72745,7 +72753,7 @@ const file_header_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1f\n" +
 	"\vassigned_to\x18\v \x01(\tR\n" +
-	"assignedTo\"\xba\a\n" +
+	"assignedTo\"\xe6\a\n" +
 	"\x12ConversationMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72766,7 +72774,8 @@ const file_header_proto_rawDesc = "" +
 	"\aseen_at\x18\x14 \x01(\x03R\x06seenAt\x12\x1f\n" +
 	"\vreceived_at\x18\x15 \x01(\x03R\n" +
 	"receivedAt\x12\x1b\n" +
-	"\tlast_sent\x18\x17 \x01(\x03R\blastSent\x12/\n" +
+	"\tlast_sent\x18\x17 \x01(\x03R\blastSent\x12*\n" +
+	"\x11last_user_reacted\x18\x1d \x01(\x03R\x0flastUserReacted\x12/\n" +
 	"\x14last_sent_event_time\x18' \x01(\x03R\x11lastSentEventTime\x12#\n" +
 	"\rcall_answered\x18\x18 \x01(\x03R\fcallAnswered\x12\x1b\n" +
 	"\tcall_rang\x18\x19 \x01(\x03R\bcallRang\x12\x19\n" +
