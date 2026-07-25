@@ -10218,6 +10218,7 @@ type Conversation struct {
 	HumanNotifyMessage    string `protobuf:"bytes,74,opt,name=human_notify_message,json=humanNotifyMessage,proto3" json:"human_notify_message,omitempty"`
 	FromLightConvo        bool   `protobuf:"varint,75,opt,name=from_light_convo,json=fromLightConvo,proto3" json:"from_light_convo,omitempty"`
 	UnrepliedAt           int64  `protobuf:"varint,90,opt,name=unreplied_at,json=unrepliedAt,proto3" json:"unreplied_at,omitempty"`
+	HumanUnrepliedAt      int64  `protobuf:"varint,91,opt,name=human_unreplied_at,json=humanUnrepliedAt,proto3" json:"human_unreplied_at,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -10668,6 +10669,13 @@ func (x *Conversation) GetFromLightConvo() bool {
 func (x *Conversation) GetUnrepliedAt() int64 {
 	if x != nil {
 		return x.UnrepliedAt
+	}
+	return 0
+}
+
+func (x *Conversation) GetHumanUnrepliedAt() int64 {
+	if x != nil {
+		return x.HumanUnrepliedAt
 	}
 	return 0
 }
@@ -72832,7 +72840,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04text\x18\r \x01(\tR\x04text\x1a7\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf9\x12\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa7\x13\n" +
 	"\fConversation\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -72904,7 +72912,8 @@ const file_header_proto_rawDesc = "" +
 	"\x18human_notify_reason_code\x18I \x01(\tR\x15humanNotifyReasonCode\x120\n" +
 	"\x14human_notify_message\x18J \x01(\tR\x12humanNotifyMessage\x12(\n" +
 	"\x10from_light_convo\x18K \x01(\bR\x0efromLightConvo\x12!\n" +
-	"\funreplied_at\x18Z \x01(\x03R\vunrepliedAt\"\xb9\x02\n" +
+	"\funreplied_at\x18Z \x01(\x03R\vunrepliedAt\x12,\n" +
+	"\x12human_unreplied_at\x18[ \x01(\x03R\x10humanUnrepliedAt\"\xb9\x02\n" +
 	"\fGoogleReview\x12\x1b\n" +
 	"\treview_id\x18\x01 \x01(\tR\breviewId\x12#\n" +
 	"\rrating_string\x18\x02 \x01(\tR\fratingString\x12\x16\n" +
