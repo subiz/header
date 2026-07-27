@@ -358,6 +358,7 @@ enum RealtimeType {
 
 	convo_filter_matched = 402;
 	convo_filter_unmatched = 403; // convo_filter_unmatched.accid.acc5.unix_hour.key
+	conversation_replied = 404;
 }
 
 message TextTransform {

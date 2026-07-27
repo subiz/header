@@ -25546,8 +25546,7 @@ type LoginSession struct {
 	// use on realtime event only
 	State         string `protobuf:"bytes,18,opt,name=state,proto3" json:"state,omitempty"` // ended, created, updated
 	Type          string `protobuf:"bytes,19,opt,name=type,proto3" json:"type,omitempty"`   // session, apikey, admin(inspect), profile
-	ClientVersion string `protobuf:"bytes,20,opt,name=client_version,json=clientVersion,proto3" json:"client_version,omitempty"`
-	Ttls          int64  `protobuf:"varint,21,opt,name=ttls,proto3" json:"ttls,omitempty"` // seconds, apikey only
+	Ttls          int64  `protobuf:"varint,21,opt,name=ttls,proto3" json:"ttls,omitempty"`  // seconds, apikey only
 	Note          string `protobuf:"bytes,23,opt,name=note,proto3" json:"note,omitempty"`
 	Inspect       bool   `protobuf:"varint,24,opt,name=inspect,proto3" json:"inspect,omitempty"`
 	CreatedBy     string `protobuf:"bytes,25,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
@@ -25686,13 +25685,6 @@ func (x *LoginSession) GetState() string {
 func (x *LoginSession) GetType() string {
 	if x != nil {
 		return x.Type
-	}
-	return ""
-}
-
-func (x *LoginSession) GetClientVersion() string {
-	if x != nil {
-		return x.ClientVersion
 	}
 	return ""
 }
@@ -74785,7 +74777,7 @@ const file_header_proto_rawDesc = "" +
 	"\x02by\x18\x06 \x01(\tR\x02by\"d\n" +
 	"\rLoginSessions\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x120\n" +
-	"\bsessions\x18\x02 \x03(\v2\x14.header.LoginSessionR\bsessions\"\xcb\x04\n" +
+	"\bsessions\x18\x02 \x03(\v2\x14.header.LoginSessionR\bsessions\"\xa4\x04\n" +
 	"\fLoginSession\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74803,8 +74795,7 @@ const file_header_proto_rawDesc = "" +
 	"\tlast_used\x18\f \x01(\x03R\blastUsed\x12,\n" +
 	"\blocation\x18\x11 \x01(\v2\x10.header.LocationR\blocation\x12\x14\n" +
 	"\x05state\x18\x12 \x01(\tR\x05state\x12\x12\n" +
-	"\x04type\x18\x13 \x01(\tR\x04type\x12%\n" +
-	"\x0eclient_version\x18\x14 \x01(\tR\rclientVersion\x12\x12\n" +
+	"\x04type\x18\x13 \x01(\tR\x04type\x12\x12\n" +
 	"\x04ttls\x18\x15 \x01(\x03R\x04ttls\x12\x12\n" +
 	"\x04note\x18\x17 \x01(\tR\x04note\x12\x18\n" +
 	"\ainspect\x18\x18 \x01(\bR\ainspect\x12\x1d\n" +

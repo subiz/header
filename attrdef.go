@@ -45,6 +45,13 @@ func ListDefaultDefs() []*AttributeDefinition {
 			Key: "zalo_friend_status",
 		},
 		&AttributeDefinition{
+			Label:     "SĐT Zalo",
+			I18NLabel: &I18NString{Vi_VN: "SĐT Zalo", En_US: "Zalo phone number"},
+			Key:       "zalo_phone",
+			Type:      "text",
+			IsSystem:  true,
+		},
+		&AttributeDefinition{
 			Name:        "Đã theo dõi",
 			Label:       "Đã theo dõi",
 			Description: "Người dùng đã theo dõi Zalo OA hoặc Instagram",
