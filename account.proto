@@ -93,6 +93,8 @@ message ConvoFilterCondition {
 	optional bool from_ads = 16;
 	repeated string fb_post_ids = 17;
 	optional bool is_dismissed = 18;
+	optional bool is_missed = 19;
+	optional string direction = 20; // inbound, outbound
 }
 
 message Agent {

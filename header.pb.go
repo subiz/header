@@ -13692,13 +13692,13 @@ type Integration struct {
 	SipSendsAuth              bool                   `protobuf:"varint,90,opt,name=sip_sends_auth,json=sipSendsAuth,proto3" json:"sip_sends_auth,omitempty"`
 	SipSendsRegistrations     bool                   `protobuf:"varint,91,opt,name=sip_sends_registrations,json=sipSendsRegistrations,proto3" json:"sip_sends_registrations,omitempty"`
 	SipAcceptsAuth            bool                   `protobuf:"varint,92,opt,name=sip_accepts_auth,json=sipAcceptsAuth,proto3" json:"sip_accepts_auth,omitempty"`
-	SipAccpetsRegistrations   bool                   `protobuf:"varint,93,opt,name=sip_accpets_registrations,json=sipAccpetsRegistrations,proto3" json:"sip_accpets_registrations,omitempty"`
+	SipAcceptsRegistrations   bool                   `protobuf:"varint,93,opt,name=sip_accepts_registrations,json=sipAcceptsRegistrations,proto3" json:"sip_accepts_registrations,omitempty"`
 	CallTransport             string                 `protobuf:"bytes,94,opt,name=call_transport,json=callTransport,proto3" json:"call_transport,omitempty"` // udp
 	SipRemoteHosts            []string               `protobuf:"bytes,95,rep,name=sip_remote_hosts,json=sipRemoteHosts,proto3" json:"sip_remote_hosts,omitempty"`
 	CallOutboundUsername      string                 `protobuf:"bytes,96,opt,name=call_outbound_username,json=callOutboundUsername,proto3" json:"call_outbound_username,omitempty"`
 	CallOutboundPassword      string                 `protobuf:"bytes,97,opt,name=call_outbound_password,json=callOutboundPassword,proto3" json:"call_outbound_password,omitempty"`
-	CallAllow                 string                 `protobuf:"bytes,98,opt,name=call_allow,json=callAllow,proto3" json:"call_allow,omitempty"`                            // !all,ulaw,alaw,g722
-	CallRtpSymmetrics         bool                   `protobuf:"varint,99,opt,name=call_rtp_symmetrics,json=callRtpSymmetrics,proto3" json:"call_rtp_symmetrics,omitempty"` // false
+	CallAllow                 string                 `protobuf:"bytes,98,opt,name=call_allow,json=callAllow,proto3" json:"call_allow,omitempty"`                         // !all,ulaw,alaw,g722
+	CallRtpSymmetric          bool                   `protobuf:"varint,99,opt,name=call_rtp_symmetric,json=callRtpSymmetric,proto3" json:"call_rtp_symmetric,omitempty"` // false
 	Permissions               []*ResourceGroupMember `protobuf:"bytes,100,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	LeadAgentGroup            string                 `protobuf:"bytes,103,opt,name=lead_agent_group,json=leadAgentGroup,proto3" json:"lead_agent_group,omitempty"`
 	WoocommerceBaseUrl        string                 `protobuf:"bytes,104,opt,name=woocommerce_base_url,json=woocommerceBaseUrl,proto3" json:"woocommerce_base_url,omitempty"` // https://demo.subiz.net/wp-json/wc/v3
@@ -14187,9 +14187,9 @@ func (x *Integration) GetSipAcceptsAuth() bool {
 	return false
 }
 
-func (x *Integration) GetSipAccpetsRegistrations() bool {
+func (x *Integration) GetSipAcceptsRegistrations() bool {
 	if x != nil {
-		return x.SipAccpetsRegistrations
+		return x.SipAcceptsRegistrations
 	}
 	return false
 }
@@ -14229,9 +14229,9 @@ func (x *Integration) GetCallAllow() string {
 	return ""
 }
 
-func (x *Integration) GetCallRtpSymmetrics() bool {
+func (x *Integration) GetCallRtpSymmetric() bool {
 	if x != nil {
-		return x.CallRtpSymmetrics
+		return x.CallRtpSymmetric
 	}
 	return false
 }
@@ -73313,7 +73313,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\xa5\x1f\n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xa3\x1f\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73382,14 +73382,14 @@ const file_header_proto_rawDesc = "" +
 	"\x0esip_sends_auth\x18Z \x01(\bR\fsipSendsAuth\x126\n" +
 	"\x17sip_sends_registrations\x18[ \x01(\bR\x15sipSendsRegistrations\x12(\n" +
 	"\x10sip_accepts_auth\x18\\ \x01(\bR\x0esipAcceptsAuth\x12:\n" +
-	"\x19sip_accpets_registrations\x18] \x01(\bR\x17sipAccpetsRegistrations\x12%\n" +
+	"\x19sip_accepts_registrations\x18] \x01(\bR\x17sipAcceptsRegistrations\x12%\n" +
 	"\x0ecall_transport\x18^ \x01(\tR\rcallTransport\x12(\n" +
 	"\x10sip_remote_hosts\x18_ \x03(\tR\x0esipRemoteHosts\x124\n" +
 	"\x16call_outbound_username\x18` \x01(\tR\x14callOutboundUsername\x124\n" +
 	"\x16call_outbound_password\x18a \x01(\tR\x14callOutboundPassword\x12\x1d\n" +
 	"\n" +
-	"call_allow\x18b \x01(\tR\tcallAllow\x12.\n" +
-	"\x13call_rtp_symmetrics\x18c \x01(\bR\x11callRtpSymmetrics\x12=\n" +
+	"call_allow\x18b \x01(\tR\tcallAllow\x12,\n" +
+	"\x12call_rtp_symmetric\x18c \x01(\bR\x10callRtpSymmetric\x12=\n" +
 	"\vpermissions\x18d \x03(\v2\x1b.header.ResourceGroupMemberR\vpermissions\x12(\n" +
 	"\x10lead_agent_group\x18g \x01(\tR\x0eleadAgentGroup\x120\n" +
 	"\x14woocommerce_base_url\x18h \x01(\tR\x12woocommerceBaseUrl\x12>\n" +

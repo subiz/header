@@ -730,6 +730,8 @@ type ConvoFilterCondition struct {
 	FromAds           *bool                  `protobuf:"varint,16,opt,name=from_ads,json=fromAds" json:"from_ads,omitempty"`
 	FbPostIds         []string               `protobuf:"bytes,17,rep,name=fb_post_ids,json=fbPostIds" json:"fb_post_ids,omitempty"`
 	IsDismissed       *bool                  `protobuf:"varint,18,opt,name=is_dismissed,json=isDismissed" json:"is_dismissed,omitempty"`
+	IsMissed          *bool                  `protobuf:"varint,19,opt,name=is_missed,json=isMissed" json:"is_missed,omitempty"`
+	Direction         *string                `protobuf:"bytes,20,opt,name=direction" json:"direction,omitempty"` // inbound, outbound
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -867,6 +869,20 @@ func (x *ConvoFilterCondition) GetIsDismissed() bool {
 		return *x.IsDismissed
 	}
 	return false
+}
+
+func (x *ConvoFilterCondition) GetIsMissed() bool {
+	if x != nil && x.IsMissed != nil {
+		return *x.IsMissed
+	}
+	return false
+}
+
+func (x *ConvoFilterCondition) GetDirection() string {
+	if x != nil && x.Direction != nil {
+		return *x.Direction
+	}
+	return ""
 }
 
 type Agent struct {
@@ -3297,7 +3313,7 @@ const file_account_proto_rawDesc = "" +
 	" \x01(\tR\x02id\x12\x14\n" +
 	"\x05total\x18\v \x01(\x03R\x05total\x12\x1f\n" +
 	"\vnum_unreads\x18\f \x01(\x03R\n" +
-	"numUnreads\"\xde\x03\n" +
+	"numUnreads\"\x99\x04\n" +
 	"\x14ConvoFilterCondition\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x12\x0e\n" +
 	"\x02op\x18\x04 \x01(\tR\x02op\x12\x12\n" +
@@ -3314,7 +3330,9 @@ const file_account_proto_rawDesc = "" +
 	"\ais_spam\x18\x0f \x01(\bR\x06isSpam\x12\x19\n" +
 	"\bfrom_ads\x18\x10 \x01(\bR\afromAds\x12\x1e\n" +
 	"\vfb_post_ids\x18\x11 \x03(\tR\tfbPostIds\x12!\n" +
-	"\fis_dismissed\x18\x12 \x01(\bR\visDismissed\"\xfe\x06\n" +
+	"\fis_dismissed\x18\x12 \x01(\bR\visDismissed\x12\x1b\n" +
+	"\tis_missed\x18\x13 \x01(\bR\bisMissed\x12\x1c\n" +
+	"\tdirection\x18\x14 \x01(\tR\tdirection\"\xfe\x06\n" +
 	"\x05Agent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
