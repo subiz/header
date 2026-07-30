@@ -760,6 +760,7 @@ message Data {
 
 	AIAgentTestcase ai_agent_testcase = 146;
 	account.ConvoFilter convo_filter = 147;
+	FacebookCall facebook_call = 148;
 }
 
 message ConversationMeta {
@@ -10201,8 +10202,10 @@ message FacebookCall {
 	//"end_time" : 1671644944,
 	//"duration" : 120
 	//}
-	string id = 3; // Unique ID for the call. Use this in your accept, reject, or terminate API calls.
-	string to = 4; // Callee of the call (Page ID)
+	string page_id = 3;
+
+	string id = 4; // Unique ID for the call. Use this in your accept, reject, or terminate API calls.
+	string to = 5; // Callee of the call (Page ID)
 	string from = 6;
 	string event = 8; // connect | call_status | terminate
 	int64 timestamp = 9; // Start time of the call from the caller’s perspective
