@@ -62,7 +62,7 @@ message FacebookPage {
 
 	MetaBusiness business = 37;
 	int64 last_sync = 38;
-
+	string messenger_api_calling = 40;
 }
 
 message WeeklyOperatingHour {

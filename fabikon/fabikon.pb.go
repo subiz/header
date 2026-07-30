@@ -167,6 +167,7 @@ type FacebookPage struct {
 	LastSyncFromConvo        int64                  `protobuf:"varint,36,opt,name=last_sync_from_convo,json=lastSyncFromConvo,proto3" json:"last_sync_from_convo,omitempty"`
 	Business                 *MetaBusiness          `protobuf:"bytes,37,opt,name=business,proto3" json:"business,omitempty"`
 	LastSync                 int64                  `protobuf:"varint,38,opt,name=last_sync,json=lastSync,proto3" json:"last_sync,omitempty"`
+	MessengerApiCalling      string                 `protobuf:"bytes,40,opt,name=messenger_api_calling,json=messengerApiCalling,proto3" json:"messenger_api_calling,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -423,6 +424,13 @@ func (x *FacebookPage) GetLastSync() int64 {
 		return x.LastSync
 	}
 	return 0
+}
+
+func (x *FacebookPage) GetMessengerApiCalling() string {
+	if x != nil {
+		return x.MessengerApiCalling
+	}
+	return ""
 }
 
 type WeeklyOperatingHour struct {
@@ -5878,7 +5886,7 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x02id\x18\x04 \x01(\tR\x02id\"2\n" +
 	"\fMetaBusiness\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\xae\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\xe2\n" +
 	"\n" +
 	"\fFacebookPage\x12\x1d\n" +
 	"\n" +
@@ -5917,7 +5925,8 @@ const file_fabikon_proto_rawDesc = "" +
 	"\x10comment_disabled\x18# \x01(\x03R\x0fcommentDisabled\x12/\n" +
 	"\x14last_sync_from_convo\x18$ \x01(\x03R\x11lastSyncFromConvo\x121\n" +
 	"\bbusiness\x18% \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\x12\x1b\n" +
-	"\tlast_sync\x18& \x01(\x03R\blastSync\"q\n" +
+	"\tlast_sync\x18& \x01(\x03R\blastSync\x122\n" +
+	"\x15messenger_api_calling\x18( \x01(\tR\x13messengerApiCalling\"q\n" +
 	"\x13WeeklyOperatingHour\x12\x1e\n" +
 	"\vday_of_week\x18\x04 \x01(\tR\tdayOfWeek\x12\x1b\n" +
 	"\topen_time\x18\x05 \x01(\tR\bopenTime\x12\x1d\n" +
