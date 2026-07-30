@@ -1190,6 +1190,8 @@ message StartRequest {
 
 	Event greeting_message = 51;
 	Event message_sent = 52; // user message
+
+	string from_sip_ip = 53;
 }
 
 enum ConvoState {
@@ -1900,7 +1902,8 @@ message Integration {
 	bool sip_accepts_auth = 92;
 	bool sip_accepts_registrations = 93;
 	string call_transport = 94; // udp
-	repeated string sip_remote_hosts = 95;
+	repeated string sip_remote_in_hosts = 95;
+	repeated string sip_remote_out_hosts = 89;
 	string call_outbound_username = 96;
 	string call_outbound_password = 97;
 	string call_allow = 98; // !all,ulaw,alaw,g722
@@ -1921,6 +1924,7 @@ message Integration {
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
 	string meta_scope = 123;
+	string messenger_api_calling = 143; // enabled, disabled
 
 	string pos_id = 124;
 	// int64 pos_id_updated = 125;
@@ -5735,6 +5739,11 @@ message CallDriverRequest {
 	string by_agent_id = 29;
 
 	Integration integration = 30;
+
+	repeated string to_sip_provider_hosts = 31; // for sip
+	string endpoint_contact_user = 32; // for sip
+	string endpoint_from_domain = 33; // for sip
+	string sip_transport = 34; // udp
 }
 
 message CallDriverResponse {
@@ -7068,6 +7077,8 @@ message Response {
 
 	repeated FacebookDataset facebook_datasets = 280;
 	repeated FacebookBusiness facebook_businesses = 281;
+	FacebookCallSession facebook_call_session = 283;
+	FacebookCallPermissionReply facebook_call_permission = 284;
 }
 
 message ReportCount {
@@ -10149,3 +10160,95 @@ message CompletionInput {
 	bool stop_after_tool_called
 }
 */
+
+message FacebookCall {
+	//{
+	// "id": "c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXiTQ",
+	//"to": "106378625516323",
+	//"from": "5275811702471834",
+	//"event": "connect",
+	//"timestamp": 1671644824,
+	//"call_direction": "[business_initiated|user_initiated]"
+	//}
+
+	// {
+	// "id": "c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXiTQ",
+	//"event": "call_status",
+	//"timestamp": 1671644824,
+	//"recipient_id": "{psid}",
+	//"call_status": "[ringing | accepted]"
+	//}
+
+	//{
+	//"id": "c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXiTQ",
+	//	"event": "media_update",
+	//	"timestamp": 1671644824,
+	//	"session": {
+	//          "version": 1,
+	//          "sdp_renegotiation": {
+	//              "sdp_type": "offer",
+	//              "sdp": "<<RFC 4566 SDP>>"
+	//          }
+	//      }
+	//    }
+
+	//{
+	//"id": "c_M5YPhGE5jm0L_PMQdScLlYJlR7tU_f0rgXiTQ",
+	//"event": "terminate",
+	//	"timestamp": 1671644824,
+	//	"status" : "[Failed | Completed]",
+	//"start_time" : 1671644824,
+	//"end_time" : 1671644944,
+	//"duration" : 120
+	//}
+	string id = 3; // Unique ID for the call. Use this in your accept, reject, or terminate API calls.
+	string to = 4; // Callee of the call (Page ID)
+	string from = 6;
+	string event = 8; // connect | call_status | terminate
+	int64 timestamp = 9; // Start time of the call from the caller’s perspective
+	string call_direction = 10; // business_initiated | user_initiated
+	string recipient_id = 11; // psid
+	string call_status = 12; // ringing | accepted
+	FacebookCallSession session = 13;
+	string status = 15; // Failed | Completed
+	int64 start_time = 17; // When the call started
+	int64 end_time = 18; // When the call ended
+	int64 duration = 19; // Call duration in seconds, counted from when the business connects. Empty if the business did not successfully connect.
+}
+
+message FacebookSdp {
+	string sdp_type = 4;
+	string sdp = 5;
+}
+
+message FacebookCallSession {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string page_id = 3;
+	string call_id = 4;
+	int64 version = 5; // Incremented each time Meta provides new SDP. If you receive multiple media_update webhooks, apply the one with the highest version number.
+
+	// JSON. Contains the SDP offer from Meta. Generate an answer from this offer and apply it to your local peer connection.
+	// sdp: SDP data compliant with RFC 4566⁠
+	// sdp_type: offer
+	FacebookSdp sdp_renegotiation = 8;
+	FacebookSdp sdp_response = 9;
+	string sdp = 10;
+}
+
+message FacebookCallPermissionReply {
+	string response = 4; // approve | reject
+	int64 expiration_timestamp = 5; // unix timestamp
+}
+
+message FacebookCallRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string page_id = 3;
+	string psid = 4;
+	string sdp = 5;
+
+	string call_id = 6;
+}

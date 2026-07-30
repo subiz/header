@@ -374,5 +374,15 @@ func ListDefaultDefs() []*AttributeDefinition {
 			Key:         "total_payment_made",
 			IsSystem:    true,
 		},
+
+		&AttributeDefinition{
+			Label:       "Cho phép gọi trên messenger",
+			Description: "Cho phép gọi trên messenger",
+			I18NLabel:   &I18NString{Vi_VN: "Cho phép gọi trên messenger", En_US: "Call permission on messenger"},
+			Type:        "string",
+			Key:         "messenger_call_permission", // approve | reject | waiting
+			IsSystem:    true,
+			IsReadonly:  true,
+		},
 	}
 }

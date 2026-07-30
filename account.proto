@@ -95,6 +95,7 @@ message ConvoFilterCondition {
 	optional bool is_dismissed = 18;
 	optional bool is_missed = 19;
 	optional string direction = 20; // inbound, outbound
+
 }
 
 message Agent {

@@ -710,6 +710,12 @@ service FabikonService {
 	rpc SendMetaConversion(header.Event) returns (header.Response); // offline
 	rpc ListFacebookDatasets(header.Id) returns (header.Response); // is -> business id
 	rpc ListFacebookBusinesses(header.Id) returns (header.Response);
+
+	rpc TerminateCall(FacebookCallRequest) returns (header.Response); //
+	rpc AcceptCall(FacebookCallSession) returns (header.Response); // FacebookCallSession
+	rpc InitCall(FacebookCallRequest) returns (header.Response);
+	rpc RequestCallPermission(FacebookCallRequest) returns (header.Response);
+	rpc CheckCallPermission(FacebookCallRequest) returns (header.Response);
 }
 
 service ChannelConnector {

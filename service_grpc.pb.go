@@ -18915,6 +18915,11 @@ const (
 	FabikonService_SendMetaConversion_FullMethodName     = "/header.FabikonService/SendMetaConversion"
 	FabikonService_ListFacebookDatasets_FullMethodName   = "/header.FabikonService/ListFacebookDatasets"
 	FabikonService_ListFacebookBusinesses_FullMethodName = "/header.FabikonService/ListFacebookBusinesses"
+	FabikonService_TerminateCall_FullMethodName          = "/header.FabikonService/TerminateCall"
+	FabikonService_AcceptCall_FullMethodName             = "/header.FabikonService/AcceptCall"
+	FabikonService_InitCall_FullMethodName               = "/header.FabikonService/InitCall"
+	FabikonService_RequestCallPermission_FullMethodName  = "/header.FabikonService/RequestCallPermission"
+	FabikonService_CheckCallPermission_FullMethodName    = "/header.FabikonService/CheckCallPermission"
 )
 
 // FabikonServiceClient is the client API for FabikonService service.
@@ -18941,6 +18946,11 @@ type FabikonServiceClient interface {
 	SendMetaConversion(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
 	ListFacebookDatasets(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListFacebookBusinesses(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	TerminateCall(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
+	AcceptCall(ctx context.Context, in *FacebookCallSession, opts ...grpc.CallOption) (*Response, error)
+	InitCall(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
+	RequestCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
+	CheckCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type fabikonServiceClient struct {
@@ -19141,6 +19151,56 @@ func (c *fabikonServiceClient) ListFacebookBusinesses(ctx context.Context, in *I
 	return out, nil
 }
 
+func (c *fabikonServiceClient) TerminateCall(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_TerminateCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) AcceptCall(ctx context.Context, in *FacebookCallSession, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_AcceptCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) InitCall(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_InitCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) RequestCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_RequestCallPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) CheckCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_CheckCallPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FabikonServiceServer is the server API for FabikonService service.
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
@@ -19165,6 +19225,11 @@ type FabikonServiceServer interface {
 	SendMetaConversion(context.Context, *Event) (*Response, error)
 	ListFacebookDatasets(context.Context, *Id) (*Response, error)
 	ListFacebookBusinesses(context.Context, *Id) (*Response, error)
+	TerminateCall(context.Context, *FacebookCallRequest) (*Response, error)
+	AcceptCall(context.Context, *FacebookCallSession) (*Response, error)
+	InitCall(context.Context, *FacebookCallRequest) (*Response, error)
+	RequestCallPermission(context.Context, *FacebookCallRequest) (*Response, error)
+	CheckCallPermission(context.Context, *FacebookCallRequest) (*Response, error)
 	mustEmbedUnimplementedFabikonServiceServer()
 }
 
@@ -19231,6 +19296,21 @@ func (UnimplementedFabikonServiceServer) ListFacebookDatasets(context.Context, *
 }
 func (UnimplementedFabikonServiceServer) ListFacebookBusinesses(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListFacebookBusinesses not implemented")
+}
+func (UnimplementedFabikonServiceServer) TerminateCall(context.Context, *FacebookCallRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method TerminateCall not implemented")
+}
+func (UnimplementedFabikonServiceServer) AcceptCall(context.Context, *FacebookCallSession) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AcceptCall not implemented")
+}
+func (UnimplementedFabikonServiceServer) InitCall(context.Context, *FacebookCallRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method InitCall not implemented")
+}
+func (UnimplementedFabikonServiceServer) RequestCallPermission(context.Context, *FacebookCallRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestCallPermission not implemented")
+}
+func (UnimplementedFabikonServiceServer) CheckCallPermission(context.Context, *FacebookCallRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckCallPermission not implemented")
 }
 func (UnimplementedFabikonServiceServer) mustEmbedUnimplementedFabikonServiceServer() {}
 func (UnimplementedFabikonServiceServer) testEmbeddedByValue()                        {}
@@ -19595,6 +19675,96 @@ func _FabikonService_ListFacebookBusinesses_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FabikonService_TerminateCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).TerminateCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_TerminateCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).TerminateCall(ctx, req.(*FacebookCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_AcceptCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookCallSession)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).AcceptCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_AcceptCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).AcceptCall(ctx, req.(*FacebookCallSession))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_InitCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).InitCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_InitCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).InitCall(ctx, req.(*FacebookCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_RequestCallPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).RequestCallPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_RequestCallPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).RequestCallPermission(ctx, req.(*FacebookCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_CheckCallPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).CheckCallPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_CheckCallPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).CheckCallPermission(ctx, req.(*FacebookCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FabikonService_ServiceDesc is the grpc.ServiceDesc for FabikonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -19677,6 +19847,26 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFacebookBusinesses",
 			Handler:    _FabikonService_ListFacebookBusinesses_Handler,
+		},
+		{
+			MethodName: "TerminateCall",
+			Handler:    _FabikonService_TerminateCall_Handler,
+		},
+		{
+			MethodName: "AcceptCall",
+			Handler:    _FabikonService_AcceptCall_Handler,
+		},
+		{
+			MethodName: "InitCall",
+			Handler:    _FabikonService_InitCall_Handler,
+		},
+		{
+			MethodName: "RequestCallPermission",
+			Handler:    _FabikonService_RequestCallPermission_Handler,
+		},
+		{
+			MethodName: "CheckCallPermission",
+			Handler:    _FabikonService_CheckCallPermission_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
