@@ -124,6 +124,24 @@ message FbCall {
 	string event = 7; //	"connect",
 	int64 timestamp = 8; //	1671644824,
 	string call_direction = 9; //	"[business_initiated|user_initiated]",
+	string call_status = 11;
+	string recipent_id = 12;
+	FbCallSession session = 13;
+
+	string status = 15;
+	int64 start_time = 16;
+	int64 end_time = 17;
+	int64 duration = 18;
+}
+
+message FbCallSession {
+	int64 version = 4;
+	FbCallSDP sdp_renegotiation = 6;
+}
+
+message FbCallSDP {
+	string sdp_type = 6; // offer
+	string sdp = 10; // <<RFC 4566 SDP>>
 }
 
 message FbChange {
