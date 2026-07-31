@@ -18896,30 +18896,31 @@ var RealtimePublisher_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FabikonService_ReadFbFanpageSetting_FullMethodName   = "/header.FabikonService/ReadFbFanpageSetting"
-	FabikonService_UpdateFbFanpageSetting_FullMethodName = "/header.FabikonService/UpdateFbFanpageSetting"
-	FabikonService_ListFbFanpageSettings_FullMethodName  = "/header.FabikonService/ListFbFanpageSettings"
-	FabikonService_ListFacebookPosts_FullMethodName      = "/header.FabikonService/ListFacebookPosts"
-	FabikonService_MatchFacebookPosts_FullMethodName     = "/header.FabikonService/MatchFacebookPosts"
-	FabikonService_ResyncFacebookPost_FullMethodName     = "/header.FabikonService/ResyncFacebookPost"
-	FabikonService_RemoveFbUserLabel_FullMethodName      = "/header.FabikonService/RemoveFbUserLabel"
-	FabikonService_AddFbUserLabel_FullMethodName         = "/header.FabikonService/AddFbUserLabel"
-	FabikonService_GenerateRefLink_FullMethodName        = "/header.FabikonService/GenerateRefLink"
-	FabikonService_SyncAdsFlow_FullMethodName            = "/header.FabikonService/SyncAdsFlow"
-	FabikonService_GetAdsAudience_FullMethodName         = "/header.FabikonService/GetAdsAudience"
-	FabikonService_CreateAdsAudience_FullMethodName      = "/header.FabikonService/CreateAdsAudience"
-	FabikonService_UploadAdsAudienceUsers_FullMethodName = "/header.FabikonService/UploadAdsAudienceUsers"
-	FabikonService_DeleteAdsAudienceUsers_FullMethodName = "/header.FabikonService/DeleteAdsAudienceUsers"
-	FabikonService_ListAdAccounts_FullMethodName         = "/header.FabikonService/ListAdAccounts"
-	FabikonService_ListFbFanpageSettings2_FullMethodName = "/header.FabikonService/ListFbFanpageSettings2"
-	FabikonService_SendMetaConversion_FullMethodName     = "/header.FabikonService/SendMetaConversion"
-	FabikonService_ListFacebookDatasets_FullMethodName   = "/header.FabikonService/ListFacebookDatasets"
-	FabikonService_ListFacebookBusinesses_FullMethodName = "/header.FabikonService/ListFacebookBusinesses"
-	FabikonService_TerminateCall_FullMethodName          = "/header.FabikonService/TerminateCall"
-	FabikonService_AcceptCall_FullMethodName             = "/header.FabikonService/AcceptCall"
-	FabikonService_InitCall_FullMethodName               = "/header.FabikonService/InitCall"
-	FabikonService_RequestCallPermission_FullMethodName  = "/header.FabikonService/RequestCallPermission"
-	FabikonService_CheckCallPermission_FullMethodName    = "/header.FabikonService/CheckCallPermission"
+	FabikonService_ReadFbFanpageSetting_FullMethodName    = "/header.FabikonService/ReadFbFanpageSetting"
+	FabikonService_UpdateFbFanpageSetting_FullMethodName  = "/header.FabikonService/UpdateFbFanpageSetting"
+	FabikonService_ListFbFanpageSettings_FullMethodName   = "/header.FabikonService/ListFbFanpageSettings"
+	FabikonService_ListFacebookPosts_FullMethodName       = "/header.FabikonService/ListFacebookPosts"
+	FabikonService_MatchFacebookPosts_FullMethodName      = "/header.FabikonService/MatchFacebookPosts"
+	FabikonService_ResyncFacebookPost_FullMethodName      = "/header.FabikonService/ResyncFacebookPost"
+	FabikonService_RemoveFbUserLabel_FullMethodName       = "/header.FabikonService/RemoveFbUserLabel"
+	FabikonService_AddFbUserLabel_FullMethodName          = "/header.FabikonService/AddFbUserLabel"
+	FabikonService_GenerateRefLink_FullMethodName         = "/header.FabikonService/GenerateRefLink"
+	FabikonService_SyncAdsFlow_FullMethodName             = "/header.FabikonService/SyncAdsFlow"
+	FabikonService_GetAdsAudience_FullMethodName          = "/header.FabikonService/GetAdsAudience"
+	FabikonService_CreateAdsAudience_FullMethodName       = "/header.FabikonService/CreateAdsAudience"
+	FabikonService_UploadAdsAudienceUsers_FullMethodName  = "/header.FabikonService/UploadAdsAudienceUsers"
+	FabikonService_DeleteAdsAudienceUsers_FullMethodName  = "/header.FabikonService/DeleteAdsAudienceUsers"
+	FabikonService_ListAdAccounts_FullMethodName          = "/header.FabikonService/ListAdAccounts"
+	FabikonService_ListFbFanpageSettings2_FullMethodName  = "/header.FabikonService/ListFbFanpageSettings2"
+	FabikonService_SendMetaConversion_FullMethodName      = "/header.FabikonService/SendMetaConversion"
+	FabikonService_ListFacebookDatasets_FullMethodName    = "/header.FabikonService/ListFacebookDatasets"
+	FabikonService_ListFacebookBusinesses_FullMethodName  = "/header.FabikonService/ListFacebookBusinesses"
+	FabikonService_TerminateCall_FullMethodName           = "/header.FabikonService/TerminateCall"
+	FabikonService_AcceptCall_FullMethodName              = "/header.FabikonService/AcceptCall"
+	FabikonService_InitCall_FullMethodName                = "/header.FabikonService/InitCall"
+	FabikonService_RequestCallPermission_FullMethodName   = "/header.FabikonService/RequestCallPermission"
+	FabikonService_CheckCallPermission_FullMethodName     = "/header.FabikonService/CheckCallPermission"
+	FabikonService_SetMessengerCallRouting_FullMethodName = "/header.FabikonService/SetMessengerCallRouting"
 )
 
 // FabikonServiceClient is the client API for FabikonService service.
@@ -18951,6 +18952,7 @@ type FabikonServiceClient interface {
 	InitCall(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
 	RequestCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
 	CheckCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
+	SetMessengerCallRouting(ctx context.Context, in *SetMessengerCallRoutingRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type fabikonServiceClient struct {
@@ -19201,6 +19203,16 @@ func (c *fabikonServiceClient) CheckCallPermission(ctx context.Context, in *Face
 	return out, nil
 }
 
+func (c *fabikonServiceClient) SetMessengerCallRouting(ctx context.Context, in *SetMessengerCallRoutingRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_SetMessengerCallRouting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FabikonServiceServer is the server API for FabikonService service.
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
@@ -19230,6 +19242,7 @@ type FabikonServiceServer interface {
 	InitCall(context.Context, *FacebookCallRequest) (*Response, error)
 	RequestCallPermission(context.Context, *FacebookCallRequest) (*Response, error)
 	CheckCallPermission(context.Context, *FacebookCallRequest) (*Response, error)
+	SetMessengerCallRouting(context.Context, *SetMessengerCallRoutingRequest) (*Response, error)
 	mustEmbedUnimplementedFabikonServiceServer()
 }
 
@@ -19311,6 +19324,9 @@ func (UnimplementedFabikonServiceServer) RequestCallPermission(context.Context, 
 }
 func (UnimplementedFabikonServiceServer) CheckCallPermission(context.Context, *FacebookCallRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckCallPermission not implemented")
+}
+func (UnimplementedFabikonServiceServer) SetMessengerCallRouting(context.Context, *SetMessengerCallRoutingRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetMessengerCallRouting not implemented")
 }
 func (UnimplementedFabikonServiceServer) mustEmbedUnimplementedFabikonServiceServer() {}
 func (UnimplementedFabikonServiceServer) testEmbeddedByValue()                        {}
@@ -19765,6 +19781,24 @@ func _FabikonService_CheckCallPermission_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FabikonService_SetMessengerCallRouting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetMessengerCallRoutingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).SetMessengerCallRouting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_SetMessengerCallRouting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).SetMessengerCallRouting(ctx, req.(*SetMessengerCallRoutingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FabikonService_ServiceDesc is the grpc.ServiceDesc for FabikonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -19867,6 +19901,10 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckCallPermission",
 			Handler:    _FabikonService_CheckCallPermission_Handler,
+		},
+		{
+			MethodName: "SetMessengerCallRouting",
+			Handler:    _FabikonService_SetMessengerCallRouting_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

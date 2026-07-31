@@ -1940,6 +1940,17 @@ message Integration {
 	int64 website_last_crawled = 141;
 
 	int64 last_synced = 142;
+
+	// replicated meta field
+	string phone = 151;
+	int64 followers_count = 144;
+	string temporary_status = 145;
+	bool is_calling_eligible = 146;
+	string verification_status = 147;
+	bool is_published = 148; // hidden page
+	bool is_permanently_closed = 149;
+	string about = 150;
+	string messneger_call_routing = 160; // META | PARTNERS
 }
 
 message FacebookBusiness {
@@ -10254,4 +10265,12 @@ message FacebookCallRequest {
 	string sdp = 5;
 
 	string call_id = 6;
+}
+
+message SetMessengerCallRoutingRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string page_id = 3;
+	string ring_target = 4;
 }

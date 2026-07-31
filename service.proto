@@ -716,6 +716,7 @@ service FabikonService {
 	rpc InitCall(FacebookCallRequest) returns (header.Response);
 	rpc RequestCallPermission(FacebookCallRequest) returns (header.Response);
 	rpc CheckCallPermission(FacebookCallRequest) returns (header.Response);
+	rpc SetMessengerCallRouting(SetMessengerCallRoutingRequest) returns (header.Response); // integration
 }
 
 service ChannelConnector {

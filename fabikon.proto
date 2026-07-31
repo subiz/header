@@ -63,6 +63,30 @@ message FacebookPage {
 	MetaBusiness business = 37;
 	int64 last_sync = 38;
 	string messenger_api_calling = 40;
+
+	string about = 41;
+	string phone = 42;
+	string username = 43;
+	int64 followers_count = 44;
+	string temporary_status = 45;
+	bool is_calling_eligible = 46;
+	string verification_status = 47;
+	bool is_published = 48; // hidden page
+	bool is_permanently_closed = 49;
+
+
+	MessengerCallSetting call_setting = 50;
+}
+
+message MessengerCallSetting {
+	string audio_enabled = 4;
+	string icon_enabled = 5;
+	string video_enabled = 6;
+	MessengerCallRouting call_routing = 8;
+}
+
+message MessengerCallRouting {
+	string ring_target = 4; // META | PARTNERS
 }
 
 message WeeklyOperatingHour {
