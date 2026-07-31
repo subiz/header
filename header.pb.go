@@ -13728,7 +13728,7 @@ type Integration struct {
 	MetaDatasetId             string                 `protobuf:"bytes,121,opt,name=meta_dataset_id,json=metaDatasetId,proto3" json:"meta_dataset_id,omitempty"`
 	SyncConversionDisabled    int64                  `protobuf:"varint,122,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3" json:"sync_conversion_disabled,omitempty"` // meta
 	MetaScope                 string                 `protobuf:"bytes,123,opt,name=meta_scope,json=metaScope,proto3" json:"meta_scope,omitempty"`
-	MessengerApiCalling       string                 `protobuf:"bytes,143,opt,name=messenger_api_calling,json=messengerApiCalling,proto3" json:"messenger_api_calling,omitempty"` // enabled, disabled
+	MessengerApiCalling       string                 `protobuf:"bytes,143,opt,name=messenger_api_calling,json=messengerApiCalling,proto3" json:"messenger_api_calling,omitempty"` // enabled, disabled, replicated from page.messenger_api_calling
 	PosId                     string                 `protobuf:"bytes,124,opt,name=pos_id,json=posId,proto3" json:"pos_id,omitempty"`
 	// website
 	WebsiteLastVisited    int64  `protobuf:"varint,136,opt,name=website_last_visited,json=websiteLastVisited,proto3" json:"website_last_visited,omitempty"`           // just for reading, no logic depend on this
@@ -13746,7 +13746,7 @@ type Integration struct {
 	IsPublished          bool   `protobuf:"varint,148,opt,name=is_published,json=isPublished,proto3" json:"is_published,omitempty"` // hidden page
 	IsPermanentlyClosed  bool   `protobuf:"varint,149,opt,name=is_permanently_closed,json=isPermanentlyClosed,proto3" json:"is_permanently_closed,omitempty"`
 	About                string `protobuf:"bytes,150,opt,name=about,proto3" json:"about,omitempty"`
-	MessnegerCallRouting string `protobuf:"bytes,160,opt,name=messneger_call_routing,json=messnegerCallRouting,proto3" json:"messneger_call_routing,omitempty"` // META | PARTNERS
+	MessengerCallRouting string `protobuf:"bytes,160,opt,name=messenger_call_routing,json=messengerCallRouting,proto3" json:"messenger_call_routing,omitempty"` // META | PARTNERS, replicated from page.call_setting.call_routing.ring_target
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -14467,9 +14467,9 @@ func (x *Integration) GetAbout() string {
 	return ""
 }
 
-func (x *Integration) GetMessnegerCallRouting() string {
+func (x *Integration) GetMessengerCallRouting() string {
 	if x != nil {
-		return x.MessnegerCallRouting
+		return x.MessengerCallRouting
 	}
 	return ""
 }
@@ -74094,7 +74094,7 @@ const file_header_proto_rawDesc = "" +
 	"\fis_published\x18\x94\x01 \x01(\bR\visPublished\x123\n" +
 	"\x15is_permanently_closed\x18\x95\x01 \x01(\bR\x13isPermanentlyClosed\x12\x15\n" +
 	"\x05about\x18\x96\x01 \x01(\tR\x05about\x125\n" +
-	"\x16messneger_call_routing\x18\xa0\x01 \x01(\tR\x14messnegerCallRouting\"J\n" +
+	"\x16messenger_call_routing\x18\xa0\x01 \x01(\tR\x14messengerCallRouting\"J\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +

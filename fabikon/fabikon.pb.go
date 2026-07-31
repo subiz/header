@@ -167,7 +167,7 @@ type FacebookPage struct {
 	LastSyncFromConvo        int64                  `protobuf:"varint,36,opt,name=last_sync_from_convo,json=lastSyncFromConvo,proto3" json:"last_sync_from_convo,omitempty"`
 	Business                 *MetaBusiness          `protobuf:"bytes,37,opt,name=business,proto3" json:"business,omitempty"`
 	LastSync                 int64                  `protobuf:"varint,38,opt,name=last_sync,json=lastSync,proto3" json:"last_sync,omitempty"`
-	MessengerApiCalling      string                 `protobuf:"bytes,40,opt,name=messenger_api_calling,json=messengerApiCalling,proto3" json:"messenger_api_calling,omitempty"`
+	MessengerApiCalling      string                 `protobuf:"bytes,40,opt,name=messenger_api_calling,json=messengerApiCalling,proto3" json:"messenger_api_calling,omitempty"` // enabled | disabled
 	About                    string                 `protobuf:"bytes,41,opt,name=about,proto3" json:"about,omitempty"`
 	Phone                    string                 `protobuf:"bytes,42,opt,name=phone,proto3" json:"phone,omitempty"`
 	Username                 string                 `protobuf:"bytes,43,opt,name=username,proto3" json:"username,omitempty"`

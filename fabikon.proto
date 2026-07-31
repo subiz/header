@@ -62,7 +62,7 @@ message FacebookPage {
 
 	MetaBusiness business = 37;
 	int64 last_sync = 38;
-	string messenger_api_calling = 40;
+	string messenger_api_calling = 40; // enabled | disabled
 
 	string about = 41;
 	string phone = 42;
@@ -73,8 +73,6 @@ message FacebookPage {
 	string verification_status = 47;
 	bool is_published = 48; // hidden page
 	bool is_permanently_closed = 49;
-
-
 	MessengerCallSetting call_setting = 50;
 }
 

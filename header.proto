@@ -1925,7 +1925,7 @@ message Integration {
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
 	string meta_scope = 123;
-	string messenger_api_calling = 143; // enabled, disabled
+	string messenger_api_calling = 143; // enabled, disabled, replicated from page.messenger_api_calling
 
 	string pos_id = 124;
 	// int64 pos_id_updated = 125;
@@ -1950,7 +1950,7 @@ message Integration {
 	bool is_published = 148; // hidden page
 	bool is_permanently_closed = 149;
 	string about = 150;
-	string messneger_call_routing = 160; // META | PARTNERS
+	string messenger_call_routing = 160; // META | PARTNERS, replicated from page.call_setting.call_routing.ring_target
 }
 
 message FacebookBusiness {
