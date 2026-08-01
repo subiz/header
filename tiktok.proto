@@ -190,3 +190,41 @@ message Tt2SbEvent {
 	string sb_conversation_id = 6;
 	string sbmid = 7;
 }
+
+// ============================================================================
+// Account Webhook envelope (webhook-schema-version 1.0) — dùng cho comment
+// (và có thể cả messaging). Field `content` là CHUỖI JSON serialized:
+// parse envelope trước, rồi json.Unmarshal([]byte(content), &Content|CommentContent{}).
+// event: comment.update | im_receive_msg | ...
+// ============================================================================
+message WebhookEvent {
+	string client_key = 2;   // = app_id
+	string event = 3;        // tên event, vd "comment.update"
+	int64 create_time = 4;   // epoch giây
+	string user_openid = 5;  // = business_id (open_id)
+	string content = 6;      // chuỗi JSON -> parse tiếp
+}
+
+// content của event comment.update (sau khi unmarshal chuỗi content).
+message CommentContent {
+	int64 comment_id = 2;
+	int64 video_id = 3;
+	int64 parent_comment_id = 4;   // chỉ có khi là reply
+	string comment_type = 5;       // comment | reply
+	string comment_action = 6;     // insert | delete | set_to_hidden | set_to_friends_only | set_to_public
+	int64 timestamp = 7;           // epoch ms
+	string unique_identifier = 8;  // định danh người bình luận
+	string text = 9;               // nội dung comment
+}
+
+// Ánh xạ comment TikTok <-> Subiz (bảng comment_events).
+message Comment2SbEvent {
+	string comment_id = 2;
+	string account_id = 3;
+	string business_id = 4;
+	string video_id = 5;
+	string root_comment_id = 6;
+	string sb_conversation_id = 7;
+	string sbmid = 8;
+	string last_action = 9;
+}

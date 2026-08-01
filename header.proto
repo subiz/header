@@ -3385,6 +3385,7 @@ enum ChannelType {
 	zalo_personal = 13;
 	account = 14; // subiz internal
 	tiktok = 15;
+	tiktok_comment = 16;
 }
 
 message WebhookSecret {

@@ -1761,6 +1761,290 @@ func (x *Tt2SbEvent) GetSbmid() string {
 	return ""
 }
 
+// ============================================================================
+// Account Webhook envelope (webhook-schema-version 1.0) — dùng cho comment
+// (và có thể cả messaging). Field `content` là CHUỖI JSON serialized:
+// parse envelope trước, rồi json.Unmarshal([]byte(content), &Content|CommentContent{}).
+// event: comment.update | im_receive_msg | ...
+// ============================================================================
+type WebhookEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientKey     string                 `protobuf:"bytes,2,opt,name=client_key,json=clientKey,proto3" json:"client_key,omitempty"`     // = app_id
+	Event         string                 `protobuf:"bytes,3,opt,name=event,proto3" json:"event,omitempty"`                              // tên event, vd "comment.update"
+	CreateTime    int64                  `protobuf:"varint,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"` // epoch giây
+	UserOpenid    string                 `protobuf:"bytes,5,opt,name=user_openid,json=userOpenid,proto3" json:"user_openid,omitempty"`  // = business_id (open_id)
+	Content       string                 `protobuf:"bytes,6,opt,name=content,proto3" json:"content,omitempty"`                          // chuỗi JSON -> parse tiếp
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WebhookEvent) Reset() {
+	*x = WebhookEvent{}
+	mi := &file_tiktok_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WebhookEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WebhookEvent) ProtoMessage() {}
+
+func (x *WebhookEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WebhookEvent.ProtoReflect.Descriptor instead.
+func (*WebhookEvent) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *WebhookEvent) GetClientKey() string {
+	if x != nil {
+		return x.ClientKey
+	}
+	return ""
+}
+
+func (x *WebhookEvent) GetEvent() string {
+	if x != nil {
+		return x.Event
+	}
+	return ""
+}
+
+func (x *WebhookEvent) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *WebhookEvent) GetUserOpenid() string {
+	if x != nil {
+		return x.UserOpenid
+	}
+	return ""
+}
+
+func (x *WebhookEvent) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+// content của event comment.update (sau khi unmarshal chuỗi content).
+type CommentContent struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CommentId        int64                  `protobuf:"varint,2,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	VideoId          int64                  `protobuf:"varint,3,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	ParentCommentId  int64                  `protobuf:"varint,4,opt,name=parent_comment_id,json=parentCommentId,proto3" json:"parent_comment_id,omitempty"` // chỉ có khi là reply
+	CommentType      string                 `protobuf:"bytes,5,opt,name=comment_type,json=commentType,proto3" json:"comment_type,omitempty"`                // comment | reply
+	CommentAction    string                 `protobuf:"bytes,6,opt,name=comment_action,json=commentAction,proto3" json:"comment_action,omitempty"`          // insert | delete | set_to_hidden | set_to_friends_only | set_to_public
+	Timestamp        int64                  `protobuf:"varint,7,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                                      // epoch ms
+	UniqueIdentifier string                 `protobuf:"bytes,8,opt,name=unique_identifier,json=uniqueIdentifier,proto3" json:"unique_identifier,omitempty"` // định danh người bình luận
+	Text             string                 `protobuf:"bytes,9,opt,name=text,proto3" json:"text,omitempty"`                                                 // nội dung comment
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CommentContent) Reset() {
+	*x = CommentContent{}
+	mi := &file_tiktok_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CommentContent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommentContent) ProtoMessage() {}
+
+func (x *CommentContent) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommentContent.ProtoReflect.Descriptor instead.
+func (*CommentContent) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *CommentContent) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+func (x *CommentContent) GetVideoId() int64 {
+	if x != nil {
+		return x.VideoId
+	}
+	return 0
+}
+
+func (x *CommentContent) GetParentCommentId() int64 {
+	if x != nil {
+		return x.ParentCommentId
+	}
+	return 0
+}
+
+func (x *CommentContent) GetCommentType() string {
+	if x != nil {
+		return x.CommentType
+	}
+	return ""
+}
+
+func (x *CommentContent) GetCommentAction() string {
+	if x != nil {
+		return x.CommentAction
+	}
+	return ""
+}
+
+func (x *CommentContent) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *CommentContent) GetUniqueIdentifier() string {
+	if x != nil {
+		return x.UniqueIdentifier
+	}
+	return ""
+}
+
+func (x *CommentContent) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+// Ánh xạ comment TikTok <-> Subiz (bảng comment_events).
+type Comment2SbEvent struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CommentId        string                 `protobuf:"bytes,2,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	AccountId        string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	BusinessId       string                 `protobuf:"bytes,4,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`
+	VideoId          string                 `protobuf:"bytes,5,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	RootCommentId    string                 `protobuf:"bytes,6,opt,name=root_comment_id,json=rootCommentId,proto3" json:"root_comment_id,omitempty"`
+	SbConversationId string                 `protobuf:"bytes,7,opt,name=sb_conversation_id,json=sbConversationId,proto3" json:"sb_conversation_id,omitempty"`
+	Sbmid            string                 `protobuf:"bytes,8,opt,name=sbmid,proto3" json:"sbmid,omitempty"`
+	LastAction       string                 `protobuf:"bytes,9,opt,name=last_action,json=lastAction,proto3" json:"last_action,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *Comment2SbEvent) Reset() {
+	*x = Comment2SbEvent{}
+	mi := &file_tiktok_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Comment2SbEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Comment2SbEvent) ProtoMessage() {}
+
+func (x *Comment2SbEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Comment2SbEvent.ProtoReflect.Descriptor instead.
+func (*Comment2SbEvent) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *Comment2SbEvent) GetCommentId() string {
+	if x != nil {
+		return x.CommentId
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetBusinessId() string {
+	if x != nil {
+		return x.BusinessId
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetVideoId() string {
+	if x != nil {
+		return x.VideoId
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetRootCommentId() string {
+	if x != nil {
+		return x.RootCommentId
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetSbConversationId() string {
+	if x != nil {
+		return x.SbConversationId
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetSbmid() string {
+	if x != nil {
+		return x.Sbmid
+	}
+	return ""
+}
+
+func (x *Comment2SbEvent) GetLastAction() string {
+	if x != nil {
+		return x.LastAction
+	}
+	return ""
+}
+
 var File_tiktok_proto protoreflect.FileDescriptor
 
 const file_tiktok_proto_rawDesc = "" +
@@ -1930,7 +2214,39 @@ const file_tiktok_proto_rawDesc = "" +
 	"businessId\x12,\n" +
 	"\x12tt_conversation_id\x18\x05 \x01(\tR\x10ttConversationId\x12,\n" +
 	"\x12sb_conversation_id\x18\x06 \x01(\tR\x10sbConversationId\x12\x14\n" +
-	"\x05sbmid\x18\a \x01(\tR\x05sbmidB\"Z github.com/subiz/header/tiktokonb\x06proto3"
+	"\x05sbmid\x18\a \x01(\tR\x05sbmid\"\x9f\x01\n" +
+	"\fWebhookEvent\x12\x1d\n" +
+	"\n" +
+	"client_key\x18\x02 \x01(\tR\tclientKey\x12\x14\n" +
+	"\x05event\x18\x03 \x01(\tR\x05event\x12\x1f\n" +
+	"\vcreate_time\x18\x04 \x01(\x03R\n" +
+	"createTime\x12\x1f\n" +
+	"\vuser_openid\x18\x05 \x01(\tR\n" +
+	"userOpenid\x12\x18\n" +
+	"\acontent\x18\x06 \x01(\tR\acontent\"\x9f\x02\n" +
+	"\x0eCommentContent\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x02 \x01(\x03R\tcommentId\x12\x19\n" +
+	"\bvideo_id\x18\x03 \x01(\x03R\avideoId\x12*\n" +
+	"\x11parent_comment_id\x18\x04 \x01(\x03R\x0fparentCommentId\x12!\n" +
+	"\fcomment_type\x18\x05 \x01(\tR\vcommentType\x12%\n" +
+	"\x0ecomment_action\x18\x06 \x01(\tR\rcommentAction\x12\x1c\n" +
+	"\ttimestamp\x18\a \x01(\x03R\ttimestamp\x12+\n" +
+	"\x11unique_identifier\x18\b \x01(\tR\x10uniqueIdentifier\x12\x12\n" +
+	"\x04text\x18\t \x01(\tR\x04text\"\x98\x02\n" +
+	"\x0fComment2SbEvent\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x02 \x01(\tR\tcommentId\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1f\n" +
+	"\vbusiness_id\x18\x04 \x01(\tR\n" +
+	"businessId\x12\x19\n" +
+	"\bvideo_id\x18\x05 \x01(\tR\avideoId\x12&\n" +
+	"\x0froot_comment_id\x18\x06 \x01(\tR\rrootCommentId\x12,\n" +
+	"\x12sb_conversation_id\x18\a \x01(\tR\x10sbConversationId\x12\x14\n" +
+	"\x05sbmid\x18\b \x01(\tR\x05sbmid\x12\x1f\n" +
+	"\vlast_action\x18\t \x01(\tR\n" +
+	"lastActionB\"Z github.com/subiz/header/tiktokonb\x06proto3"
 
 var (
 	file_tiktok_proto_rawDescOnce sync.Once
@@ -1944,7 +2260,7 @@ func file_tiktok_proto_rawDescGZIP() []byte {
 	return file_tiktok_proto_rawDescData
 }
 
-var file_tiktok_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_tiktok_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_tiktok_proto_goTypes = []any{
 	(*BusinessAccount)(nil),          // 0: tiktokon.BusinessAccount
 	(*AccessTokenResponse)(nil),      // 1: tiktokon.AccessTokenResponse
@@ -1969,6 +2285,9 @@ var file_tiktok_proto_goTypes = []any{
 	(*ReferencedMessage)(nil),        // 20: tiktokon.ReferencedMessage
 	(*Reaction)(nil),                 // 21: tiktokon.Reaction
 	(*Tt2SbEvent)(nil),               // 22: tiktokon.Tt2SbEvent
+	(*WebhookEvent)(nil),             // 23: tiktokon.WebhookEvent
+	(*CommentContent)(nil),           // 24: tiktokon.CommentContent
+	(*Comment2SbEvent)(nil),          // 25: tiktokon.Comment2SbEvent
 }
 var file_tiktok_proto_depIdxs = []int32{
 	2,  // 0: tiktokon.AccessTokenResponse.data:type_name -> tiktokon.AccessTokenResponseData
@@ -2007,7 +2326,7 @@ func file_tiktok_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tiktok_proto_rawDesc), len(file_tiktok_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -302,6 +302,7 @@ const (
 	ChannelType_zalo_personal     ChannelType = 13
 	ChannelType_account           ChannelType = 14 // subiz internal
 	ChannelType_tiktok            ChannelType = 15
+	ChannelType_tiktok_comment    ChannelType = 16
 )
 
 // Enum value maps for ChannelType.
@@ -321,6 +322,7 @@ var (
 		13: "zalo_personal",
 		14: "account",
 		15: "tiktok",
+		16: "tiktok_comment",
 	}
 	ChannelType_value = map[string]int32{
 		"subiz":             0,
@@ -337,6 +339,7 @@ var (
 		"zalo_personal":     13,
 		"account":           14,
 		"tiktok":            15,
+		"tiktok_comment":    16,
 	}
 )
 
@@ -81074,7 +81077,7 @@ const file_header_proto_rawDesc = "" +
 	"view_order\x10\x16\x12\x11\n" +
 	"\rconfirm_order\x10\x17\x12\x0f\n" +
 	"\vcreate_task\x10\x18\x12\x18\n" +
-	"\x14update_user_segments\x10\x19*\xd4\x01\n" +
+	"\x14update_user_segments\x10\x19*\xe8\x01\n" +
 	"\vChannelType\x12\t\n" +
 	"\x05subiz\x10\x00\x12\t\n" +
 	"\x05email\x10\x01\x12\f\n" +
@@ -81090,7 +81093,8 @@ const file_header_proto_rawDesc = "" +
 	"\rzalo_personal\x10\r\x12\v\n" +
 	"\aaccount\x10\x0e\x12\n" +
 	"\n" +
-	"\x06tiktok\x10\x0f*\xd6\x01\n" +
+	"\x06tiktok\x10\x0f\x12\x12\n" +
+	"\x0etiktok_comment\x10\x10*\xd6\x01\n" +
 	"\x10ShippingProvider\x12\n" +
 	"\n" +
 	"\x06direct\x10\x00\x12\v\n" +
