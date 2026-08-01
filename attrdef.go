@@ -379,10 +379,42 @@ func ListDefaultDefs() []*AttributeDefinition {
 			Label:       "Cho phép gọi trên messenger",
 			Description: "Cho phép gọi trên messenger",
 			I18NLabel:   &I18NString{Vi_VN: "Cho phép gọi trên messenger", En_US: "Call permission on messenger"},
-			Type:        "string",
+			Type:        "text",
 			Key:         "messenger_call_permission", // approve | reject | waiting
+			Select:      "dropdown",
+			Items: []*AttributeDefinitionListItem{
+				{Value: "approve", I18NLabel: &I18NString{En_US: "Approved", Vi_VN: "Cho phép"}, Label: "Cho phép"},
+				{Value: "reject", I18NLabel: &I18NString{En_US: "Rejected", Vi_VN: "Từ chối"}, Label: "Từ chối"},
+				{Value: "waiting", I18NLabel: &I18NString{En_US: "Waiting", Vi_VN: "Đợi đồng ý"}, Label: "Đợi đồng ý"},
+			},
+
+			IsSystem:   true,
+			IsReadonly: true,
+		},
+
+		&AttributeDefinition{
+			Label:       "Tiktok",
+			Description: "Tiktok",
+			I18NLabel:   &I18NString{Vi_VN: "Tiktok username", En_US: "Tiktok username"},
+			Type:        "text", // thanhcoolngau2
+			Key:         "tiktok",
 			IsSystem:    true,
 			IsReadonly:  true,
+		},
+
+		&AttributeDefinition{
+			Label:       "Tiktok Account Type",
+			Description: "Tiktok Account Type",
+			I18NLabel:   &I18NString{Vi_VN: "Loại account tiktok", En_US: "Tiktok Account Type"},
+			Type:        "text",
+			Key:         "tiktok_account_type",
+			IsSystem:    true,
+			IsReadonly:  true,
+			Select:      "dropdown",
+			Items: []*AttributeDefinitionListItem{
+				{Value: "personal", I18NLabel: &I18NString{En_US: "Personal", Vi_VN: "Cá nhân"}, Label: "Cá nhân"},
+				{Value: "business", I18NLabel: &I18NString{En_US: "Business", Vi_VN: "Doanh nghiệp"}, Label: "Doanh nghiệp"},
+			},
 		},
 	}
 }
