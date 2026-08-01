@@ -5,36 +5,188 @@ package tiktokon;
 option go_package = "github.com/subiz/header/tiktokon";
 
 message BusinessAccount {
-	string ba_id = 2;
-	string description = 3;
-	string name = 4;
-	string avatar = 5;
-	string cover = 6;
-	string access_token = 7;
-	int64 authorized = 8;
-	string account_id = 9;
-	string str_oa_id = 10;
-	int64 last_tiktok_hook = 11;
+	string business_id = 2; // = open_id trả về từ token endpoint (khoá chính)
+	string account_id = 9;  // account Subiz sở hữu kết nối này
+	string state = 12;      // activated || deleted || failed
 
-	string state = 12; // activated || deleted || failed
-	int32 version = 13;
-	int64 last_refresh_token_at = 14;
+	string username = 3;            // vd "la_flama_blanca"
+	string display_name = 4;        // tên hiển thị
+	string avatar = 5;              // profile_image (đã tải & up lên CDN Subiz)
+	string bio_description = 6;
+	string profile_deep_link = 20;  // https://www.tiktok.com/@<username>
+	bool is_verified = 21;
+	bool is_business_account = 22;
+	int64 followers_count = 23;
+	int64 following_count = 24;
+	int64 likes_count = 25;
+	int64 video_views = 26;
+
+	string access_token = 7;
 	string refresh_token = 15;
-	int64 last_called = 17;
+	int64 access_token_expired_at = 19;   // epoch ms (now + expires_in*1000)
+	int64 refresh_token_expired_at = 27;  // epoch ms (now + refresh_token_expires_in*1000)
+	string scope = 28;
+	int32 token_status = 13;              // 0 -> ok, -1 -> chết (cần cấp quyền lại)
+	int64 last_refresh_token_at = 14;
 	int64 last_refresh_token_error_at = 18;
-	int64 access_token_expired_at = 19;
+
+	int64 last_called = 17;
+	int64 last_tiktok_hook = 11; // lần cuối nhận webhook
+	int64 last_synced = 29;      // lần cuối đồng bộ profile (cron 1 ngày/lần)
+	int64 updated = 30;
 }
+
 
 message AccessTokenResponse {
 	int64 code = 3;
 	string message = 4;
 	string request_id = 5;
-
 	AccessTokenResponseData data = 6;
 }
 
 message AccessTokenResponseData {
 	string access_token = 2;
-	repeated int64 advertiser_ids = 3;
-	repeated int64 scope = 4;
+	int64 expires_in = 3;               // giây, 86400 = 24h
+	string open_id = 4;                 // == business_id
+	string refresh_token = 5;
+	int64 refresh_token_expires_in = 6; // giây, 31536000 = 365 ngày
+	string scope = 7;
+}
+
+message BusinessProfileResponse {
+	int64 code = 2;
+	string message = 3;
+	string request_id = 4;
+	BusinessProfile data = 5;
+}
+
+message BusinessProfile {
+	string profile_image = 2;
+	string username = 3;
+	string display_name = 4;
+	int64 followers_count = 5;
+	int64 following_count = 6;
+	int64 likes_count = 7;
+	int64 video_views = 8;
+	string bio_description = 9;
+	string profile_deep_link = 10;
+	bool is_verified = 11;
+	bool is_business_account = 12;
+}
+
+message SendMessageRequest {
+	string business_id = 2;
+	string recipient_type = 3; // hiện chỉ "CONVERSATION"
+	string recipient = 4;      // = conversation_id
+	string message_type = 5;   // TEXT | IMAGE | SHARE_POST | SENDER_ACTION
+	Text text = 6;             // khi message_type=TEXT
+	Image image = 7;           // khi message_type=IMAGE
+	SharePost share_post = 8;  // khi message_type=SHARE_POST
+}
+
+message SendMessageResponse {
+	int64 code = 2;
+	string message = 3;
+	string request_id = 4;
+	SendMessageResponseData data = 5;
+}
+
+message SendMessageResponseData {
+	MessageRef message = 2; // data.message.message_id
+}
+
+message MessageRef {
+	string message_id = 2;
+}
+
+message UploadImageResponse {
+	int64 code = 2;
+	string message = 3;
+	string request_id = 4;
+	UploadImageData data = 5;
+}
+
+message UploadImageData {
+	string media_id = 2;
+}
+
+message ConversationListResponse {
+	int64 code = 2;
+	string message = 3;
+	string request_id = 4;
+	ConversationListData data = 5;
+}
+
+message ConversationListData {
+	repeated Conversation conversations = 2;
+	int64 cursor = 3;
+	bool has_more = 4;
+}
+
+message Conversation {
+	string conversation_id = 2;
+	int64 update_time = 3; // epoch ms
+}
+
+message Request {
+	string event = 2;
+	Content content = 3;
+}
+
+message Content {
+	string from = 2;              // TikTok username người gửi
+	string to = 3;                // TikTok username người nhận
+	string unique_identifier = 4; // định danh TikTok user trong hội thoại (khoá user)
+	User from_user = 5;
+	User to_user = 6;
+	string conversation_id = 7;   // dùng giá trị này để gửi tin trả lời
+	string message_id = 8;
+	string type = 9;              // text | image | share_post
+	Text text = 10;
+	Image image = 11;
+	SharePost share_post = 12;
+	ReferencedMessage referenced_message_info = 13;
+	repeated Reaction reaction = 14;
+	int64 timestamp = 15;         // epoch ms
+}
+
+message User {
+	string role = 2; // business_account | personal_account
+	string id = 3;   // personal_account -> = unique_identifier; business_account -> = business_id
+}
+
+message Text {
+	string body = 2; // ≤ 6000 ký tự
+}
+
+message Image {
+	string media_id = 2; // tải về qua /business/message/media/download/
+}
+
+message SharePost {
+	string item_id = 2;   // dùng khi GỬI đi (SHARE_POST)
+	string embed_url = 3; // có khi NHẬN về
+	string video_id = 4;  // có khi NHẬN về
+}
+
+message ReferencedMessage {
+	string referenced_message_id = 2;
+	string type = 3;
+}
+
+message Reaction {
+	string operation = 2;      // ADD | REMOVE
+	string type = 3;           // EMOJI | AI_EMOJI
+	string emoji = 4;
+	string original_msg_id = 5;
+	int64 timestamp = 6;
+}
+
+message Tt2SbEvent {
+	string tt_message_id = 2;
+	string account_id = 3;
+	string business_id = 4;
+	string tt_conversation_id = 5;
+	string sb_conversation_id = 6;
+	string sbmid = 7;
 }

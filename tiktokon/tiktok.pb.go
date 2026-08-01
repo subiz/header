@@ -23,23 +23,32 @@ const (
 
 type BusinessAccount struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
-	BaId                    string                 `protobuf:"bytes,2,opt,name=ba_id,json=baId,proto3" json:"ba_id,omitempty"`
-	Description             string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Name                    string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Avatar                  string                 `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Cover                   string                 `protobuf:"bytes,6,opt,name=cover,proto3" json:"cover,omitempty"`
+	BusinessId              string                 `protobuf:"bytes,2,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`    // = open_id trả về từ token endpoint (khoá chính)
+	AccountId               string                 `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`       // account Subiz sở hữu kết nối này
+	State                   string                 `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"`                               // activated || deleted || failed
+	Username                string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`                          // vd "la_flama_blanca"
+	DisplayName             string                 `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"` // tên hiển thị
+	Avatar                  string                 `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`                              // profile_image (đã tải & up lên CDN Subiz)
+	BioDescription          string                 `protobuf:"bytes,6,opt,name=bio_description,json=bioDescription,proto3" json:"bio_description,omitempty"`
+	ProfileDeepLink         string                 `protobuf:"bytes,20,opt,name=profile_deep_link,json=profileDeepLink,proto3" json:"profile_deep_link,omitempty"` // https://www.tiktok.com/@<username>
+	IsVerified              bool                   `protobuf:"varint,21,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
+	IsBusinessAccount       bool                   `protobuf:"varint,22,opt,name=is_business_account,json=isBusinessAccount,proto3" json:"is_business_account,omitempty"`
+	FollowersCount          int64                  `protobuf:"varint,23,opt,name=followers_count,json=followersCount,proto3" json:"followers_count,omitempty"`
+	FollowingCount          int64                  `protobuf:"varint,24,opt,name=following_count,json=followingCount,proto3" json:"following_count,omitempty"`
+	LikesCount              int64                  `protobuf:"varint,25,opt,name=likes_count,json=likesCount,proto3" json:"likes_count,omitempty"`
+	VideoViews              int64                  `protobuf:"varint,26,opt,name=video_views,json=videoViews,proto3" json:"video_views,omitempty"`
 	AccessToken             string                 `protobuf:"bytes,7,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	Authorized              int64                  `protobuf:"varint,8,opt,name=authorized,proto3" json:"authorized,omitempty"`
-	AccountId               string                 `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	StrOaId                 string                 `protobuf:"bytes,10,opt,name=str_oa_id,json=strOaId,proto3" json:"str_oa_id,omitempty"`
-	LastTiktokHook          int64                  `protobuf:"varint,11,opt,name=last_tiktok_hook,json=lastTiktokHook,proto3" json:"last_tiktok_hook,omitempty"`
-	State                   string                 `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"` // activated || deleted || failed
-	Version                 int32                  `protobuf:"varint,13,opt,name=version,proto3" json:"version,omitempty"`
-	LastRefreshTokenAt      int64                  `protobuf:"varint,14,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
 	RefreshToken            string                 `protobuf:"bytes,15,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	LastCalled              int64                  `protobuf:"varint,17,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
+	AccessTokenExpiredAt    int64                  `protobuf:"varint,19,opt,name=access_token_expired_at,json=accessTokenExpiredAt,proto3" json:"access_token_expired_at,omitempty"`    // epoch ms (now + expires_in*1000)
+	RefreshTokenExpiredAt   int64                  `protobuf:"varint,27,opt,name=refresh_token_expired_at,json=refreshTokenExpiredAt,proto3" json:"refresh_token_expired_at,omitempty"` // epoch ms (now + refresh_token_expires_in*1000)
+	Scope                   string                 `protobuf:"bytes,28,opt,name=scope,proto3" json:"scope,omitempty"`
+	TokenStatus             int32                  `protobuf:"varint,13,opt,name=token_status,json=tokenStatus,proto3" json:"token_status,omitempty"` // 0 -> ok, -1 -> chết (cần cấp quyền lại)
+	LastRefreshTokenAt      int64                  `protobuf:"varint,14,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
 	LastRefreshTokenErrorAt int64                  `protobuf:"varint,18,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt,proto3" json:"last_refresh_token_error_at,omitempty"`
-	AccessTokenExpiredAt    int64                  `protobuf:"varint,19,opt,name=access_token_expired_at,json=accessTokenExpiredAt,proto3" json:"access_token_expired_at,omitempty"`
+	LastCalled              int64                  `protobuf:"varint,17,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
+	LastTiktokHook          int64                  `protobuf:"varint,11,opt,name=last_tiktok_hook,json=lastTiktokHook,proto3" json:"last_tiktok_hook,omitempty"` // lần cuối nhận webhook
+	LastSynced              int64                  `protobuf:"varint,29,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`               // lần cuối đồng bộ profile (cron 1 ngày/lần)
+	Updated                 int64                  `protobuf:"varint,30,opt,name=updated,proto3" json:"updated,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -74,23 +83,37 @@ func (*BusinessAccount) Descriptor() ([]byte, []int) {
 	return file_tiktok_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *BusinessAccount) GetBaId() string {
+func (x *BusinessAccount) GetBusinessId() string {
 	if x != nil {
-		return x.BaId
+		return x.BusinessId
 	}
 	return ""
 }
 
-func (x *BusinessAccount) GetDescription() string {
+func (x *BusinessAccount) GetAccountId() string {
 	if x != nil {
-		return x.Description
+		return x.AccountId
 	}
 	return ""
 }
 
-func (x *BusinessAccount) GetName() string {
+func (x *BusinessAccount) GetState() string {
 	if x != nil {
-		return x.Name
+		return x.State
+	}
+	return ""
+}
+
+func (x *BusinessAccount) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *BusinessAccount) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
 	}
 	return ""
 }
@@ -102,11 +125,60 @@ func (x *BusinessAccount) GetAvatar() string {
 	return ""
 }
 
-func (x *BusinessAccount) GetCover() string {
+func (x *BusinessAccount) GetBioDescription() string {
 	if x != nil {
-		return x.Cover
+		return x.BioDescription
 	}
 	return ""
+}
+
+func (x *BusinessAccount) GetProfileDeepLink() string {
+	if x != nil {
+		return x.ProfileDeepLink
+	}
+	return ""
+}
+
+func (x *BusinessAccount) GetIsVerified() bool {
+	if x != nil {
+		return x.IsVerified
+	}
+	return false
+}
+
+func (x *BusinessAccount) GetIsBusinessAccount() bool {
+	if x != nil {
+		return x.IsBusinessAccount
+	}
+	return false
+}
+
+func (x *BusinessAccount) GetFollowersCount() int64 {
+	if x != nil {
+		return x.FollowersCount
+	}
+	return 0
+}
+
+func (x *BusinessAccount) GetFollowingCount() int64 {
+	if x != nil {
+		return x.FollowingCount
+	}
+	return 0
+}
+
+func (x *BusinessAccount) GetLikesCount() int64 {
+	if x != nil {
+		return x.LikesCount
+	}
+	return 0
+}
+
+func (x *BusinessAccount) GetVideoViews() int64 {
+	if x != nil {
+		return x.VideoViews
+	}
+	return 0
 }
 
 func (x *BusinessAccount) GetAccessToken() string {
@@ -116,44 +188,37 @@ func (x *BusinessAccount) GetAccessToken() string {
 	return ""
 }
 
-func (x *BusinessAccount) GetAuthorized() int64 {
+func (x *BusinessAccount) GetRefreshToken() string {
 	if x != nil {
-		return x.Authorized
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *BusinessAccount) GetAccessTokenExpiredAt() int64 {
+	if x != nil {
+		return x.AccessTokenExpiredAt
 	}
 	return 0
 }
 
-func (x *BusinessAccount) GetAccountId() string {
+func (x *BusinessAccount) GetRefreshTokenExpiredAt() int64 {
 	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *BusinessAccount) GetStrOaId() string {
-	if x != nil {
-		return x.StrOaId
-	}
-	return ""
-}
-
-func (x *BusinessAccount) GetLastTiktokHook() int64 {
-	if x != nil {
-		return x.LastTiktokHook
+		return x.RefreshTokenExpiredAt
 	}
 	return 0
 }
 
-func (x *BusinessAccount) GetState() string {
+func (x *BusinessAccount) GetScope() string {
 	if x != nil {
-		return x.State
+		return x.Scope
 	}
 	return ""
 }
 
-func (x *BusinessAccount) GetVersion() int32 {
+func (x *BusinessAccount) GetTokenStatus() int32 {
 	if x != nil {
-		return x.Version
+		return x.TokenStatus
 	}
 	return 0
 }
@@ -165,11 +230,11 @@ func (x *BusinessAccount) GetLastRefreshTokenAt() int64 {
 	return 0
 }
 
-func (x *BusinessAccount) GetRefreshToken() string {
+func (x *BusinessAccount) GetLastRefreshTokenErrorAt() int64 {
 	if x != nil {
-		return x.RefreshToken
+		return x.LastRefreshTokenErrorAt
 	}
-	return ""
+	return 0
 }
 
 func (x *BusinessAccount) GetLastCalled() int64 {
@@ -179,16 +244,23 @@ func (x *BusinessAccount) GetLastCalled() int64 {
 	return 0
 }
 
-func (x *BusinessAccount) GetLastRefreshTokenErrorAt() int64 {
+func (x *BusinessAccount) GetLastTiktokHook() int64 {
 	if x != nil {
-		return x.LastRefreshTokenErrorAt
+		return x.LastTiktokHook
 	}
 	return 0
 }
 
-func (x *BusinessAccount) GetAccessTokenExpiredAt() int64 {
+func (x *BusinessAccount) GetLastSynced() int64 {
 	if x != nil {
-		return x.AccessTokenExpiredAt
+		return x.LastSynced
+	}
+	return 0
+}
+
+func (x *BusinessAccount) GetUpdated() int64 {
+	if x != nil {
+		return x.Updated
 	}
 	return 0
 }
@@ -262,12 +334,15 @@ func (x *AccessTokenResponse) GetData() *AccessTokenResponseData {
 }
 
 type AccessTokenResponseData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	AdvertiserIds []int64                `protobuf:"varint,3,rep,packed,name=advertiser_ids,json=advertiserIds,proto3" json:"advertiser_ids,omitempty"`
-	Scope         []int64                `protobuf:"varint,4,rep,packed,name=scope,proto3" json:"scope,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken           string                 `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	ExpiresIn             int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"` // giây, 86400 = 24h
+	OpenId                string                 `protobuf:"bytes,4,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`           // == business_id
+	RefreshToken          string                 `protobuf:"bytes,5,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	RefreshTokenExpiresIn int64                  `protobuf:"varint,6,opt,name=refresh_token_expires_in,json=refreshTokenExpiresIn,proto3" json:"refresh_token_expires_in,omitempty"` // giây, 31536000 = 365 ngày
+	Scope                 string                 `protobuf:"bytes,7,opt,name=scope,proto3" json:"scope,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *AccessTokenResponseData) Reset() {
@@ -307,58 +382,1555 @@ func (x *AccessTokenResponseData) GetAccessToken() string {
 	return ""
 }
 
-func (x *AccessTokenResponseData) GetAdvertiserIds() []int64 {
+func (x *AccessTokenResponseData) GetExpiresIn() int64 {
 	if x != nil {
-		return x.AdvertiserIds
+		return x.ExpiresIn
+	}
+	return 0
+}
+
+func (x *AccessTokenResponseData) GetOpenId() string {
+	if x != nil {
+		return x.OpenId
+	}
+	return ""
+}
+
+func (x *AccessTokenResponseData) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *AccessTokenResponseData) GetRefreshTokenExpiresIn() int64 {
+	if x != nil {
+		return x.RefreshTokenExpiresIn
+	}
+	return 0
+}
+
+func (x *AccessTokenResponseData) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+type BusinessProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int64                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	RequestId     string                 `protobuf:"bytes,4,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Data          *BusinessProfile       `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BusinessProfileResponse) Reset() {
+	*x = BusinessProfileResponse{}
+	mi := &file_tiktok_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BusinessProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BusinessProfileResponse) ProtoMessage() {}
+
+func (x *BusinessProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BusinessProfileResponse.ProtoReflect.Descriptor instead.
+func (*BusinessProfileResponse) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *BusinessProfileResponse) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *BusinessProfileResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *BusinessProfileResponse) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *BusinessProfileResponse) GetData() *BusinessProfile {
+	if x != nil {
+		return x.Data
 	}
 	return nil
 }
 
-func (x *AccessTokenResponseData) GetScope() []int64 {
+type BusinessProfile struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ProfileImage      string                 `protobuf:"bytes,2,opt,name=profile_image,json=profileImage,proto3" json:"profile_image,omitempty"`
+	Username          string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	DisplayName       string                 `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	FollowersCount    int64                  `protobuf:"varint,5,opt,name=followers_count,json=followersCount,proto3" json:"followers_count,omitempty"`
+	FollowingCount    int64                  `protobuf:"varint,6,opt,name=following_count,json=followingCount,proto3" json:"following_count,omitempty"`
+	LikesCount        int64                  `protobuf:"varint,7,opt,name=likes_count,json=likesCount,proto3" json:"likes_count,omitempty"`
+	VideoViews        int64                  `protobuf:"varint,8,opt,name=video_views,json=videoViews,proto3" json:"video_views,omitempty"`
+	BioDescription    string                 `protobuf:"bytes,9,opt,name=bio_description,json=bioDescription,proto3" json:"bio_description,omitempty"`
+	ProfileDeepLink   string                 `protobuf:"bytes,10,opt,name=profile_deep_link,json=profileDeepLink,proto3" json:"profile_deep_link,omitempty"`
+	IsVerified        bool                   `protobuf:"varint,11,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
+	IsBusinessAccount bool                   `protobuf:"varint,12,opt,name=is_business_account,json=isBusinessAccount,proto3" json:"is_business_account,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *BusinessProfile) Reset() {
+	*x = BusinessProfile{}
+	mi := &file_tiktok_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BusinessProfile) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BusinessProfile) ProtoMessage() {}
+
+func (x *BusinessProfile) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[4]
 	if x != nil {
-		return x.Scope
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BusinessProfile.ProtoReflect.Descriptor instead.
+func (*BusinessProfile) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BusinessProfile) GetProfileImage() string {
+	if x != nil {
+		return x.ProfileImage
+	}
+	return ""
+}
+
+func (x *BusinessProfile) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *BusinessProfile) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *BusinessProfile) GetFollowersCount() int64 {
+	if x != nil {
+		return x.FollowersCount
+	}
+	return 0
+}
+
+func (x *BusinessProfile) GetFollowingCount() int64 {
+	if x != nil {
+		return x.FollowingCount
+	}
+	return 0
+}
+
+func (x *BusinessProfile) GetLikesCount() int64 {
+	if x != nil {
+		return x.LikesCount
+	}
+	return 0
+}
+
+func (x *BusinessProfile) GetVideoViews() int64 {
+	if x != nil {
+		return x.VideoViews
+	}
+	return 0
+}
+
+func (x *BusinessProfile) GetBioDescription() string {
+	if x != nil {
+		return x.BioDescription
+	}
+	return ""
+}
+
+func (x *BusinessProfile) GetProfileDeepLink() string {
+	if x != nil {
+		return x.ProfileDeepLink
+	}
+	return ""
+}
+
+func (x *BusinessProfile) GetIsVerified() bool {
+	if x != nil {
+		return x.IsVerified
+	}
+	return false
+}
+
+func (x *BusinessProfile) GetIsBusinessAccount() bool {
+	if x != nil {
+		return x.IsBusinessAccount
+	}
+	return false
+}
+
+type SendMessageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BusinessId    string                 `protobuf:"bytes,2,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`
+	RecipientType string                 `protobuf:"bytes,3,opt,name=recipient_type,json=recipientType,proto3" json:"recipient_type,omitempty"` // hiện chỉ "CONVERSATION"
+	Recipient     string                 `protobuf:"bytes,4,opt,name=recipient,proto3" json:"recipient,omitempty"`                              // = conversation_id
+	MessageType   string                 `protobuf:"bytes,5,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`       // TEXT | IMAGE | SHARE_POST | SENDER_ACTION
+	Text          *Text                  `protobuf:"bytes,6,opt,name=text,proto3" json:"text,omitempty"`                                        // khi message_type=TEXT
+	Image         *Image                 `protobuf:"bytes,7,opt,name=image,proto3" json:"image,omitempty"`                                      // khi message_type=IMAGE
+	SharePost     *SharePost             `protobuf:"bytes,8,opt,name=share_post,json=sharePost,proto3" json:"share_post,omitempty"`             // khi message_type=SHARE_POST
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendMessageRequest) Reset() {
+	*x = SendMessageRequest{}
+	mi := &file_tiktok_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMessageRequest) ProtoMessage() {}
+
+func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendMessageRequest.ProtoReflect.Descriptor instead.
+func (*SendMessageRequest) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SendMessageRequest) GetBusinessId() string {
+	if x != nil {
+		return x.BusinessId
+	}
+	return ""
+}
+
+func (x *SendMessageRequest) GetRecipientType() string {
+	if x != nil {
+		return x.RecipientType
+	}
+	return ""
+}
+
+func (x *SendMessageRequest) GetRecipient() string {
+	if x != nil {
+		return x.Recipient
+	}
+	return ""
+}
+
+func (x *SendMessageRequest) GetMessageType() string {
+	if x != nil {
+		return x.MessageType
+	}
+	return ""
+}
+
+func (x *SendMessageRequest) GetText() *Text {
+	if x != nil {
+		return x.Text
 	}
 	return nil
+}
+
+func (x *SendMessageRequest) GetImage() *Image {
+	if x != nil {
+		return x.Image
+	}
+	return nil
+}
+
+func (x *SendMessageRequest) GetSharePost() *SharePost {
+	if x != nil {
+		return x.SharePost
+	}
+	return nil
+}
+
+type SendMessageResponse struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Code          int64                    `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                   `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	RequestId     string                   `protobuf:"bytes,4,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Data          *SendMessageResponseData `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendMessageResponse) Reset() {
+	*x = SendMessageResponse{}
+	mi := &file_tiktok_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMessageResponse) ProtoMessage() {}
+
+func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendMessageResponse.ProtoReflect.Descriptor instead.
+func (*SendMessageResponse) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SendMessageResponse) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *SendMessageResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *SendMessageResponse) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *SendMessageResponse) GetData() *SendMessageResponseData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type SendMessageResponseData struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       *MessageRef            `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // data.message.message_id
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendMessageResponseData) Reset() {
+	*x = SendMessageResponseData{}
+	mi := &file_tiktok_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendMessageResponseData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMessageResponseData) ProtoMessage() {}
+
+func (x *SendMessageResponseData) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendMessageResponseData.ProtoReflect.Descriptor instead.
+func (*SendMessageResponseData) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SendMessageResponseData) GetMessage() *MessageRef {
+	if x != nil {
+		return x.Message
+	}
+	return nil
+}
+
+type MessageRef struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MessageId     string                 `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MessageRef) Reset() {
+	*x = MessageRef{}
+	mi := &file_tiktok_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MessageRef) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MessageRef) ProtoMessage() {}
+
+func (x *MessageRef) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MessageRef.ProtoReflect.Descriptor instead.
+func (*MessageRef) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *MessageRef) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+type UploadImageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int64                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	RequestId     string                 `protobuf:"bytes,4,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Data          *UploadImageData       `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadImageResponse) Reset() {
+	*x = UploadImageResponse{}
+	mi := &file_tiktok_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadImageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadImageResponse) ProtoMessage() {}
+
+func (x *UploadImageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadImageResponse.ProtoReflect.Descriptor instead.
+func (*UploadImageResponse) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UploadImageResponse) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UploadImageResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UploadImageResponse) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *UploadImageResponse) GetData() *UploadImageData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type UploadImageData struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MediaId       string                 `protobuf:"bytes,2,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadImageData) Reset() {
+	*x = UploadImageData{}
+	mi := &file_tiktok_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadImageData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadImageData) ProtoMessage() {}
+
+func (x *UploadImageData) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadImageData.ProtoReflect.Descriptor instead.
+func (*UploadImageData) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UploadImageData) GetMediaId() string {
+	if x != nil {
+		return x.MediaId
+	}
+	return ""
+}
+
+type ConversationListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int64                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	RequestId     string                 `protobuf:"bytes,4,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Data          *ConversationListData  `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConversationListResponse) Reset() {
+	*x = ConversationListResponse{}
+	mi := &file_tiktok_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConversationListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConversationListResponse) ProtoMessage() {}
+
+func (x *ConversationListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConversationListResponse.ProtoReflect.Descriptor instead.
+func (*ConversationListResponse) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ConversationListResponse) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ConversationListResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ConversationListResponse) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *ConversationListResponse) GetData() *ConversationListData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ConversationListData struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Conversations []*Conversation        `protobuf:"bytes,2,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	Cursor        int64                  `protobuf:"varint,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
+	HasMore       bool                   `protobuf:"varint,4,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConversationListData) Reset() {
+	*x = ConversationListData{}
+	mi := &file_tiktok_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConversationListData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConversationListData) ProtoMessage() {}
+
+func (x *ConversationListData) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConversationListData.ProtoReflect.Descriptor instead.
+func (*ConversationListData) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ConversationListData) GetConversations() []*Conversation {
+	if x != nil {
+		return x.Conversations
+	}
+	return nil
+}
+
+func (x *ConversationListData) GetCursor() int64 {
+	if x != nil {
+		return x.Cursor
+	}
+	return 0
+}
+
+func (x *ConversationListData) GetHasMore() bool {
+	if x != nil {
+		return x.HasMore
+	}
+	return false
+}
+
+type Conversation struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ConversationId string                 `protobuf:"bytes,2,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	UpdateTime     int64                  `protobuf:"varint,3,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"` // epoch ms
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Conversation) Reset() {
+	*x = Conversation{}
+	mi := &file_tiktok_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Conversation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Conversation) ProtoMessage() {}
+
+func (x *Conversation) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Conversation.ProtoReflect.Descriptor instead.
+func (*Conversation) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *Conversation) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *Conversation) GetUpdateTime() int64 {
+	if x != nil {
+		return x.UpdateTime
+	}
+	return 0
+}
+
+type Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Event         string                 `protobuf:"bytes,2,opt,name=event,proto3" json:"event,omitempty"`
+	Content       *Content               `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Request) Reset() {
+	*x = Request{}
+	mi := &file_tiktok_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request) ProtoMessage() {}
+
+func (x *Request) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Request.ProtoReflect.Descriptor instead.
+func (*Request) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *Request) GetEvent() string {
+	if x != nil {
+		return x.Event
+	}
+	return ""
+}
+
+func (x *Request) GetContent() *Content {
+	if x != nil {
+		return x.Content
+	}
+	return nil
+}
+
+type Content struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	From                  string                 `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`                                                 // TikTok username người gửi
+	To                    string                 `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`                                                     // TikTok username người nhận
+	UniqueIdentifier      string                 `protobuf:"bytes,4,opt,name=unique_identifier,json=uniqueIdentifier,proto3" json:"unique_identifier,omitempty"` // định danh TikTok user trong hội thoại (khoá user)
+	FromUser              *User                  `protobuf:"bytes,5,opt,name=from_user,json=fromUser,proto3" json:"from_user,omitempty"`
+	ToUser                *User                  `protobuf:"bytes,6,opt,name=to_user,json=toUser,proto3" json:"to_user,omitempty"`
+	ConversationId        string                 `protobuf:"bytes,7,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"` // dùng giá trị này để gửi tin trả lời
+	MessageId             string                 `protobuf:"bytes,8,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	Type                  string                 `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"` // text | image | share_post
+	Text                  *Text                  `protobuf:"bytes,10,opt,name=text,proto3" json:"text,omitempty"`
+	Image                 *Image                 `protobuf:"bytes,11,opt,name=image,proto3" json:"image,omitempty"`
+	SharePost             *SharePost             `protobuf:"bytes,12,opt,name=share_post,json=sharePost,proto3" json:"share_post,omitempty"`
+	ReferencedMessageInfo *ReferencedMessage     `protobuf:"bytes,13,opt,name=referenced_message_info,json=referencedMessageInfo,proto3" json:"referenced_message_info,omitempty"`
+	Reaction              []*Reaction            `protobuf:"bytes,14,rep,name=reaction,proto3" json:"reaction,omitempty"`
+	Timestamp             int64                  `protobuf:"varint,15,opt,name=timestamp,proto3" json:"timestamp,omitempty"` // epoch ms
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *Content) Reset() {
+	*x = Content{}
+	mi := &file_tiktok_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Content) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Content) ProtoMessage() {}
+
+func (x *Content) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Content.ProtoReflect.Descriptor instead.
+func (*Content) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *Content) GetFrom() string {
+	if x != nil {
+		return x.From
+	}
+	return ""
+}
+
+func (x *Content) GetTo() string {
+	if x != nil {
+		return x.To
+	}
+	return ""
+}
+
+func (x *Content) GetUniqueIdentifier() string {
+	if x != nil {
+		return x.UniqueIdentifier
+	}
+	return ""
+}
+
+func (x *Content) GetFromUser() *User {
+	if x != nil {
+		return x.FromUser
+	}
+	return nil
+}
+
+func (x *Content) GetToUser() *User {
+	if x != nil {
+		return x.ToUser
+	}
+	return nil
+}
+
+func (x *Content) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *Content) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+func (x *Content) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *Content) GetText() *Text {
+	if x != nil {
+		return x.Text
+	}
+	return nil
+}
+
+func (x *Content) GetImage() *Image {
+	if x != nil {
+		return x.Image
+	}
+	return nil
+}
+
+func (x *Content) GetSharePost() *SharePost {
+	if x != nil {
+		return x.SharePost
+	}
+	return nil
+}
+
+func (x *Content) GetReferencedMessageInfo() *ReferencedMessage {
+	if x != nil {
+		return x.ReferencedMessageInfo
+	}
+	return nil
+}
+
+func (x *Content) GetReaction() []*Reaction {
+	if x != nil {
+		return x.Reaction
+	}
+	return nil
+}
+
+func (x *Content) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Role          string                 `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"` // business_account | personal_account
+	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`     // personal_account -> = unique_identifier; business_account -> = business_id
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_tiktok_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *User) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *User) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type Text struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Body          string                 `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"` // ≤ 6000 ký tự
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Text) Reset() {
+	*x = Text{}
+	mi := &file_tiktok_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Text) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Text) ProtoMessage() {}
+
+func (x *Text) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Text.ProtoReflect.Descriptor instead.
+func (*Text) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *Text) GetBody() string {
+	if x != nil {
+		return x.Body
+	}
+	return ""
+}
+
+type Image struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MediaId       string                 `protobuf:"bytes,2,opt,name=media_id,json=mediaId,proto3" json:"media_id,omitempty"` // tải về qua /business/message/media/download/
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Image) Reset() {
+	*x = Image{}
+	mi := &file_tiktok_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Image) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Image) ProtoMessage() {}
+
+func (x *Image) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Image.ProtoReflect.Descriptor instead.
+func (*Image) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *Image) GetMediaId() string {
+	if x != nil {
+		return x.MediaId
+	}
+	return ""
+}
+
+type SharePost struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ItemId        string                 `protobuf:"bytes,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`       // dùng khi GỬI đi (SHARE_POST)
+	EmbedUrl      string                 `protobuf:"bytes,3,opt,name=embed_url,json=embedUrl,proto3" json:"embed_url,omitempty"` // có khi NHẬN về
+	VideoId       string                 `protobuf:"bytes,4,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`    // có khi NHẬN về
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SharePost) Reset() {
+	*x = SharePost{}
+	mi := &file_tiktok_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SharePost) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SharePost) ProtoMessage() {}
+
+func (x *SharePost) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SharePost.ProtoReflect.Descriptor instead.
+func (*SharePost) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *SharePost) GetItemId() string {
+	if x != nil {
+		return x.ItemId
+	}
+	return ""
+}
+
+func (x *SharePost) GetEmbedUrl() string {
+	if x != nil {
+		return x.EmbedUrl
+	}
+	return ""
+}
+
+func (x *SharePost) GetVideoId() string {
+	if x != nil {
+		return x.VideoId
+	}
+	return ""
+}
+
+type ReferencedMessage struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	ReferencedMessageId string                 `protobuf:"bytes,2,opt,name=referenced_message_id,json=referencedMessageId,proto3" json:"referenced_message_id,omitempty"`
+	Type                string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ReferencedMessage) Reset() {
+	*x = ReferencedMessage{}
+	mi := &file_tiktok_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReferencedMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReferencedMessage) ProtoMessage() {}
+
+func (x *ReferencedMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReferencedMessage.ProtoReflect.Descriptor instead.
+func (*ReferencedMessage) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ReferencedMessage) GetReferencedMessageId() string {
+	if x != nil {
+		return x.ReferencedMessageId
+	}
+	return ""
+}
+
+func (x *ReferencedMessage) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+type Reaction struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Operation     string                 `protobuf:"bytes,2,opt,name=operation,proto3" json:"operation,omitempty"` // ADD | REMOVE
+	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`           // EMOJI | AI_EMOJI
+	Emoji         string                 `protobuf:"bytes,4,opt,name=emoji,proto3" json:"emoji,omitempty"`
+	OriginalMsgId string                 `protobuf:"bytes,5,opt,name=original_msg_id,json=originalMsgId,proto3" json:"original_msg_id,omitempty"`
+	Timestamp     int64                  `protobuf:"varint,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Reaction) Reset() {
+	*x = Reaction{}
+	mi := &file_tiktok_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Reaction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Reaction) ProtoMessage() {}
+
+func (x *Reaction) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Reaction.ProtoReflect.Descriptor instead.
+func (*Reaction) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *Reaction) GetOperation() string {
+	if x != nil {
+		return x.Operation
+	}
+	return ""
+}
+
+func (x *Reaction) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *Reaction) GetEmoji() string {
+	if x != nil {
+		return x.Emoji
+	}
+	return ""
+}
+
+func (x *Reaction) GetOriginalMsgId() string {
+	if x != nil {
+		return x.OriginalMsgId
+	}
+	return ""
+}
+
+func (x *Reaction) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+type Tt2SbEvent struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TtMessageId      string                 `protobuf:"bytes,2,opt,name=tt_message_id,json=ttMessageId,proto3" json:"tt_message_id,omitempty"`
+	AccountId        string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	BusinessId       string                 `protobuf:"bytes,4,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`
+	TtConversationId string                 `protobuf:"bytes,5,opt,name=tt_conversation_id,json=ttConversationId,proto3" json:"tt_conversation_id,omitempty"`
+	SbConversationId string                 `protobuf:"bytes,6,opt,name=sb_conversation_id,json=sbConversationId,proto3" json:"sb_conversation_id,omitempty"`
+	Sbmid            string                 `protobuf:"bytes,7,opt,name=sbmid,proto3" json:"sbmid,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *Tt2SbEvent) Reset() {
+	*x = Tt2SbEvent{}
+	mi := &file_tiktok_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Tt2SbEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Tt2SbEvent) ProtoMessage() {}
+
+func (x *Tt2SbEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_tiktok_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Tt2SbEvent.ProtoReflect.Descriptor instead.
+func (*Tt2SbEvent) Descriptor() ([]byte, []int) {
+	return file_tiktok_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *Tt2SbEvent) GetTtMessageId() string {
+	if x != nil {
+		return x.TtMessageId
+	}
+	return ""
+}
+
+func (x *Tt2SbEvent) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *Tt2SbEvent) GetBusinessId() string {
+	if x != nil {
+		return x.BusinessId
+	}
+	return ""
+}
+
+func (x *Tt2SbEvent) GetTtConversationId() string {
+	if x != nil {
+		return x.TtConversationId
+	}
+	return ""
+}
+
+func (x *Tt2SbEvent) GetSbConversationId() string {
+	if x != nil {
+		return x.SbConversationId
+	}
+	return ""
+}
+
+func (x *Tt2SbEvent) GetSbmid() string {
+	if x != nil {
+		return x.Sbmid
+	}
+	return ""
 }
 
 var File_tiktok_proto protoreflect.FileDescriptor
 
 const file_tiktok_proto_rawDesc = "" +
 	"\n" +
-	"\ftiktok.proto\x12\btiktokon\"\xd0\x04\n" +
-	"\x0fBusinessAccount\x12\x13\n" +
-	"\x05ba_id\x18\x02 \x01(\tR\x04baId\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12\x16\n" +
-	"\x06avatar\x18\x05 \x01(\tR\x06avatar\x12\x14\n" +
-	"\x05cover\x18\x06 \x01(\tR\x05cover\x12!\n" +
-	"\faccess_token\x18\a \x01(\tR\vaccessToken\x12\x1e\n" +
+	"\ftiktok.proto\x12\btiktokon\"\xe0\a\n" +
+	"\x0fBusinessAccount\x12\x1f\n" +
+	"\vbusiness_id\x18\x02 \x01(\tR\n" +
+	"businessId\x12\x1d\n" +
 	"\n" +
-	"authorized\x18\b \x01(\x03R\n" +
-	"authorized\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\t \x01(\tR\taccountId\x12\x1a\n" +
-	"\tstr_oa_id\x18\n" +
-	" \x01(\tR\astrOaId\x12(\n" +
-	"\x10last_tiktok_hook\x18\v \x01(\x03R\x0elastTiktokHook\x12\x14\n" +
-	"\x05state\x18\f \x01(\tR\x05state\x12\x18\n" +
-	"\aversion\x18\r \x01(\x05R\aversion\x121\n" +
-	"\x15last_refresh_token_at\x18\x0e \x01(\x03R\x12lastRefreshTokenAt\x12#\n" +
-	"\rrefresh_token\x18\x0f \x01(\tR\frefreshToken\x12\x1f\n" +
+	"account_id\x18\t \x01(\tR\taccountId\x12\x14\n" +
+	"\x05state\x18\f \x01(\tR\x05state\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12!\n" +
+	"\fdisplay_name\x18\x04 \x01(\tR\vdisplayName\x12\x16\n" +
+	"\x06avatar\x18\x05 \x01(\tR\x06avatar\x12'\n" +
+	"\x0fbio_description\x18\x06 \x01(\tR\x0ebioDescription\x12*\n" +
+	"\x11profile_deep_link\x18\x14 \x01(\tR\x0fprofileDeepLink\x12\x1f\n" +
+	"\vis_verified\x18\x15 \x01(\bR\n" +
+	"isVerified\x12.\n" +
+	"\x13is_business_account\x18\x16 \x01(\bR\x11isBusinessAccount\x12'\n" +
+	"\x0ffollowers_count\x18\x17 \x01(\x03R\x0efollowersCount\x12'\n" +
+	"\x0ffollowing_count\x18\x18 \x01(\x03R\x0efollowingCount\x12\x1f\n" +
+	"\vlikes_count\x18\x19 \x01(\x03R\n" +
+	"likesCount\x12\x1f\n" +
+	"\vvideo_views\x18\x1a \x01(\x03R\n" +
+	"videoViews\x12!\n" +
+	"\faccess_token\x18\a \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x0f \x01(\tR\frefreshToken\x125\n" +
+	"\x17access_token_expired_at\x18\x13 \x01(\x03R\x14accessTokenExpiredAt\x127\n" +
+	"\x18refresh_token_expired_at\x18\x1b \x01(\x03R\x15refreshTokenExpiredAt\x12\x14\n" +
+	"\x05scope\x18\x1c \x01(\tR\x05scope\x12!\n" +
+	"\ftoken_status\x18\r \x01(\x05R\vtokenStatus\x121\n" +
+	"\x15last_refresh_token_at\x18\x0e \x01(\x03R\x12lastRefreshTokenAt\x12<\n" +
+	"\x1blast_refresh_token_error_at\x18\x12 \x01(\x03R\x17lastRefreshTokenErrorAt\x12\x1f\n" +
 	"\vlast_called\x18\x11 \x01(\x03R\n" +
-	"lastCalled\x12<\n" +
-	"\x1blast_refresh_token_error_at\x18\x12 \x01(\x03R\x17lastRefreshTokenErrorAt\x125\n" +
-	"\x17access_token_expired_at\x18\x13 \x01(\x03R\x14accessTokenExpiredAt\"\x99\x01\n" +
+	"lastCalled\x12(\n" +
+	"\x10last_tiktok_hook\x18\v \x01(\x03R\x0elastTiktokHook\x12\x1f\n" +
+	"\vlast_synced\x18\x1d \x01(\x03R\n" +
+	"lastSynced\x12\x18\n" +
+	"\aupdated\x18\x1e \x01(\x03R\aupdated\"\x99\x01\n" +
 	"\x13AccessTokenResponse\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x03R\x04code\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
 	"request_id\x18\x05 \x01(\tR\trequestId\x125\n" +
-	"\x04data\x18\x06 \x01(\v2!.tiktokon.AccessTokenResponseDataR\x04data\"y\n" +
+	"\x04data\x18\x06 \x01(\v2!.tiktokon.AccessTokenResponseDataR\x04data\"\xe8\x01\n" +
 	"\x17AccessTokenResponseData\x12!\n" +
-	"\faccess_token\x18\x02 \x01(\tR\vaccessToken\x12%\n" +
-	"\x0eadvertiser_ids\x18\x03 \x03(\x03R\radvertiserIds\x12\x14\n" +
-	"\x05scope\x18\x04 \x03(\x03R\x05scopeB\"Z github.com/subiz/header/tiktokonb\x06proto3"
+	"\faccess_token\x18\x02 \x01(\tR\vaccessToken\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12\x17\n" +
+	"\aopen_id\x18\x04 \x01(\tR\x06openId\x12#\n" +
+	"\rrefresh_token\x18\x05 \x01(\tR\frefreshToken\x127\n" +
+	"\x18refresh_token_expires_in\x18\x06 \x01(\x03R\x15refreshTokenExpiresIn\x12\x14\n" +
+	"\x05scope\x18\a \x01(\tR\x05scope\"\x95\x01\n" +
+	"\x17BusinessProfileResponse\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x03R\x04code\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x04 \x01(\tR\trequestId\x12-\n" +
+	"\x04data\x18\x05 \x01(\v2\x19.tiktokon.BusinessProfileR\x04data\"\xaf\x03\n" +
+	"\x0fBusinessProfile\x12#\n" +
+	"\rprofile_image\x18\x02 \x01(\tR\fprofileImage\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12!\n" +
+	"\fdisplay_name\x18\x04 \x01(\tR\vdisplayName\x12'\n" +
+	"\x0ffollowers_count\x18\x05 \x01(\x03R\x0efollowersCount\x12'\n" +
+	"\x0ffollowing_count\x18\x06 \x01(\x03R\x0efollowingCount\x12\x1f\n" +
+	"\vlikes_count\x18\a \x01(\x03R\n" +
+	"likesCount\x12\x1f\n" +
+	"\vvideo_views\x18\b \x01(\x03R\n" +
+	"videoViews\x12'\n" +
+	"\x0fbio_description\x18\t \x01(\tR\x0ebioDescription\x12*\n" +
+	"\x11profile_deep_link\x18\n" +
+	" \x01(\tR\x0fprofileDeepLink\x12\x1f\n" +
+	"\vis_verified\x18\v \x01(\bR\n" +
+	"isVerified\x12.\n" +
+	"\x13is_business_account\x18\f \x01(\bR\x11isBusinessAccount\"\x9c\x02\n" +
+	"\x12SendMessageRequest\x12\x1f\n" +
+	"\vbusiness_id\x18\x02 \x01(\tR\n" +
+	"businessId\x12%\n" +
+	"\x0erecipient_type\x18\x03 \x01(\tR\rrecipientType\x12\x1c\n" +
+	"\trecipient\x18\x04 \x01(\tR\trecipient\x12!\n" +
+	"\fmessage_type\x18\x05 \x01(\tR\vmessageType\x12\"\n" +
+	"\x04text\x18\x06 \x01(\v2\x0e.tiktokon.TextR\x04text\x12%\n" +
+	"\x05image\x18\a \x01(\v2\x0f.tiktokon.ImageR\x05image\x122\n" +
+	"\n" +
+	"share_post\x18\b \x01(\v2\x13.tiktokon.SharePostR\tsharePost\"\x99\x01\n" +
+	"\x13SendMessageResponse\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x03R\x04code\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x04 \x01(\tR\trequestId\x125\n" +
+	"\x04data\x18\x05 \x01(\v2!.tiktokon.SendMessageResponseDataR\x04data\"I\n" +
+	"\x17SendMessageResponseData\x12.\n" +
+	"\amessage\x18\x02 \x01(\v2\x14.tiktokon.MessageRefR\amessage\"+\n" +
+	"\n" +
+	"MessageRef\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x02 \x01(\tR\tmessageId\"\x91\x01\n" +
+	"\x13UploadImageResponse\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x03R\x04code\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x04 \x01(\tR\trequestId\x12-\n" +
+	"\x04data\x18\x05 \x01(\v2\x19.tiktokon.UploadImageDataR\x04data\",\n" +
+	"\x0fUploadImageData\x12\x19\n" +
+	"\bmedia_id\x18\x02 \x01(\tR\amediaId\"\x9b\x01\n" +
+	"\x18ConversationListResponse\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x03R\x04code\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x04 \x01(\tR\trequestId\x122\n" +
+	"\x04data\x18\x05 \x01(\v2\x1e.tiktokon.ConversationListDataR\x04data\"\x87\x01\n" +
+	"\x14ConversationListData\x12<\n" +
+	"\rconversations\x18\x02 \x03(\v2\x16.tiktokon.ConversationR\rconversations\x12\x16\n" +
+	"\x06cursor\x18\x03 \x01(\x03R\x06cursor\x12\x19\n" +
+	"\bhas_more\x18\x04 \x01(\bR\ahasMore\"X\n" +
+	"\fConversation\x12'\n" +
+	"\x0fconversation_id\x18\x02 \x01(\tR\x0econversationId\x12\x1f\n" +
+	"\vupdate_time\x18\x03 \x01(\x03R\n" +
+	"updateTime\"L\n" +
+	"\aRequest\x12\x14\n" +
+	"\x05event\x18\x02 \x01(\tR\x05event\x12+\n" +
+	"\acontent\x18\x03 \x01(\v2\x11.tiktokon.ContentR\acontent\"\xae\x04\n" +
+	"\aContent\x12\x12\n" +
+	"\x04from\x18\x02 \x01(\tR\x04from\x12\x0e\n" +
+	"\x02to\x18\x03 \x01(\tR\x02to\x12+\n" +
+	"\x11unique_identifier\x18\x04 \x01(\tR\x10uniqueIdentifier\x12+\n" +
+	"\tfrom_user\x18\x05 \x01(\v2\x0e.tiktokon.UserR\bfromUser\x12'\n" +
+	"\ato_user\x18\x06 \x01(\v2\x0e.tiktokon.UserR\x06toUser\x12'\n" +
+	"\x0fconversation_id\x18\a \x01(\tR\x0econversationId\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\b \x01(\tR\tmessageId\x12\x12\n" +
+	"\x04type\x18\t \x01(\tR\x04type\x12\"\n" +
+	"\x04text\x18\n" +
+	" \x01(\v2\x0e.tiktokon.TextR\x04text\x12%\n" +
+	"\x05image\x18\v \x01(\v2\x0f.tiktokon.ImageR\x05image\x122\n" +
+	"\n" +
+	"share_post\x18\f \x01(\v2\x13.tiktokon.SharePostR\tsharePost\x12S\n" +
+	"\x17referenced_message_info\x18\r \x01(\v2\x1b.tiktokon.ReferencedMessageR\x15referencedMessageInfo\x12.\n" +
+	"\breaction\x18\x0e \x03(\v2\x12.tiktokon.ReactionR\breaction\x12\x1c\n" +
+	"\ttimestamp\x18\x0f \x01(\x03R\ttimestamp\"*\n" +
+	"\x04User\x12\x12\n" +
+	"\x04role\x18\x02 \x01(\tR\x04role\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\"\x1a\n" +
+	"\x04Text\x12\x12\n" +
+	"\x04body\x18\x02 \x01(\tR\x04body\"\"\n" +
+	"\x05Image\x12\x19\n" +
+	"\bmedia_id\x18\x02 \x01(\tR\amediaId\"\\\n" +
+	"\tSharePost\x12\x17\n" +
+	"\aitem_id\x18\x02 \x01(\tR\x06itemId\x12\x1b\n" +
+	"\tembed_url\x18\x03 \x01(\tR\bembedUrl\x12\x19\n" +
+	"\bvideo_id\x18\x04 \x01(\tR\avideoId\"[\n" +
+	"\x11ReferencedMessage\x122\n" +
+	"\x15referenced_message_id\x18\x02 \x01(\tR\x13referencedMessageId\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\"\x98\x01\n" +
+	"\bReaction\x12\x1c\n" +
+	"\toperation\x18\x02 \x01(\tR\toperation\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x14\n" +
+	"\x05emoji\x18\x04 \x01(\tR\x05emoji\x12&\n" +
+	"\x0foriginal_msg_id\x18\x05 \x01(\tR\roriginalMsgId\x12\x1c\n" +
+	"\ttimestamp\x18\x06 \x01(\x03R\ttimestamp\"\xe2\x01\n" +
+	"\n" +
+	"Tt2SbEvent\x12\"\n" +
+	"\rtt_message_id\x18\x02 \x01(\tR\vttMessageId\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1f\n" +
+	"\vbusiness_id\x18\x04 \x01(\tR\n" +
+	"businessId\x12,\n" +
+	"\x12tt_conversation_id\x18\x05 \x01(\tR\x10ttConversationId\x12,\n" +
+	"\x12sb_conversation_id\x18\x06 \x01(\tR\x10sbConversationId\x12\x14\n" +
+	"\x05sbmid\x18\a \x01(\tR\x05sbmidB\"Z github.com/subiz/header/tiktokonb\x06proto3"
 
 var (
 	file_tiktok_proto_rawDescOnce sync.Once
@@ -372,19 +1944,56 @@ func file_tiktok_proto_rawDescGZIP() []byte {
 	return file_tiktok_proto_rawDescData
 }
 
-var file_tiktok_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_tiktok_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_tiktok_proto_goTypes = []any{
-	(*BusinessAccount)(nil),         // 0: tiktokon.BusinessAccount
-	(*AccessTokenResponse)(nil),     // 1: tiktokon.AccessTokenResponse
-	(*AccessTokenResponseData)(nil), // 2: tiktokon.AccessTokenResponseData
+	(*BusinessAccount)(nil),          // 0: tiktokon.BusinessAccount
+	(*AccessTokenResponse)(nil),      // 1: tiktokon.AccessTokenResponse
+	(*AccessTokenResponseData)(nil),  // 2: tiktokon.AccessTokenResponseData
+	(*BusinessProfileResponse)(nil),  // 3: tiktokon.BusinessProfileResponse
+	(*BusinessProfile)(nil),          // 4: tiktokon.BusinessProfile
+	(*SendMessageRequest)(nil),       // 5: tiktokon.SendMessageRequest
+	(*SendMessageResponse)(nil),      // 6: tiktokon.SendMessageResponse
+	(*SendMessageResponseData)(nil),  // 7: tiktokon.SendMessageResponseData
+	(*MessageRef)(nil),               // 8: tiktokon.MessageRef
+	(*UploadImageResponse)(nil),      // 9: tiktokon.UploadImageResponse
+	(*UploadImageData)(nil),          // 10: tiktokon.UploadImageData
+	(*ConversationListResponse)(nil), // 11: tiktokon.ConversationListResponse
+	(*ConversationListData)(nil),     // 12: tiktokon.ConversationListData
+	(*Conversation)(nil),             // 13: tiktokon.Conversation
+	(*Request)(nil),                  // 14: tiktokon.Request
+	(*Content)(nil),                  // 15: tiktokon.Content
+	(*User)(nil),                     // 16: tiktokon.User
+	(*Text)(nil),                     // 17: tiktokon.Text
+	(*Image)(nil),                    // 18: tiktokon.Image
+	(*SharePost)(nil),                // 19: tiktokon.SharePost
+	(*ReferencedMessage)(nil),        // 20: tiktokon.ReferencedMessage
+	(*Reaction)(nil),                 // 21: tiktokon.Reaction
+	(*Tt2SbEvent)(nil),               // 22: tiktokon.Tt2SbEvent
 }
 var file_tiktok_proto_depIdxs = []int32{
-	2, // 0: tiktokon.AccessTokenResponse.data:type_name -> tiktokon.AccessTokenResponseData
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2,  // 0: tiktokon.AccessTokenResponse.data:type_name -> tiktokon.AccessTokenResponseData
+	4,  // 1: tiktokon.BusinessProfileResponse.data:type_name -> tiktokon.BusinessProfile
+	17, // 2: tiktokon.SendMessageRequest.text:type_name -> tiktokon.Text
+	18, // 3: tiktokon.SendMessageRequest.image:type_name -> tiktokon.Image
+	19, // 4: tiktokon.SendMessageRequest.share_post:type_name -> tiktokon.SharePost
+	7,  // 5: tiktokon.SendMessageResponse.data:type_name -> tiktokon.SendMessageResponseData
+	8,  // 6: tiktokon.SendMessageResponseData.message:type_name -> tiktokon.MessageRef
+	10, // 7: tiktokon.UploadImageResponse.data:type_name -> tiktokon.UploadImageData
+	12, // 8: tiktokon.ConversationListResponse.data:type_name -> tiktokon.ConversationListData
+	13, // 9: tiktokon.ConversationListData.conversations:type_name -> tiktokon.Conversation
+	15, // 10: tiktokon.Request.content:type_name -> tiktokon.Content
+	16, // 11: tiktokon.Content.from_user:type_name -> tiktokon.User
+	16, // 12: tiktokon.Content.to_user:type_name -> tiktokon.User
+	17, // 13: tiktokon.Content.text:type_name -> tiktokon.Text
+	18, // 14: tiktokon.Content.image:type_name -> tiktokon.Image
+	19, // 15: tiktokon.Content.share_post:type_name -> tiktokon.SharePost
+	20, // 16: tiktokon.Content.referenced_message_info:type_name -> tiktokon.ReferencedMessage
+	21, // 17: tiktokon.Content.reaction:type_name -> tiktokon.Reaction
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_tiktok_proto_init() }
@@ -398,7 +2007,7 @@ func file_tiktok_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tiktok_proto_rawDesc), len(file_tiktok_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

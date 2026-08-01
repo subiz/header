@@ -300,6 +300,8 @@ const (
 	ChannelType_google_review     ChannelType = 9
 	ChannelType_zns               ChannelType = 12
 	ChannelType_zalo_personal     ChannelType = 13
+	ChannelType_account           ChannelType = 14 // subiz internal
+	ChannelType_tiktok            ChannelType = 15
 )
 
 // Enum value maps for ChannelType.
@@ -317,6 +319,8 @@ var (
 		9:  "google_review",
 		12: "zns",
 		13: "zalo_personal",
+		14: "account",
+		15: "tiktok",
 	}
 	ChannelType_value = map[string]int32{
 		"subiz":             0,
@@ -331,6 +335,8 @@ var (
 		"google_review":     9,
 		"zns":               12,
 		"zalo_personal":     13,
+		"account":           14,
+		"tiktok":            15,
 	}
 )
 
@@ -13676,7 +13682,7 @@ type Integration struct {
 	ConvertMissedCallToTicket   bool            `protobuf:"varint,59,opt,name=convert_missed_call_to_ticket,json=convertMissedCallToTicket,proto3" json:"convert_missed_call_to_ticket,omitempty"`
 	TicketTypeId                string          `protobuf:"bytes,101,opt,name=ticket_type_id,json=ticketTypeId,proto3" json:"ticket_type_id,omitempty"`
 	ZaloType                    int64           `protobuf:"varint,60,opt,name=zalo_type,json=zaloType,proto3" json:"zalo_type,omitempty"`
-	ZaloIsVerified              bool            `protobuf:"varint,61,opt,name=zalo_is_verified,json=zaloIsVerified,proto3" json:"zalo_is_verified,omitempty"`
+	IsVerified                  bool            `protobuf:"varint,61,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
 	ZaloOaAlias                 string          `protobuf:"bytes,62,opt,name=zalo_oa_alias,json=zaloOaAlias,proto3" json:"zalo_oa_alias,omitempty"`
 	ZaloCateName                string          `protobuf:"bytes,63,opt,name=zalo_cate_name,json=zaloCateName,proto3" json:"zalo_cate_name,omitempty"`
 	ZaloNumFollowers            int64           `protobuf:"varint,64,opt,name=zalo_num_followers,json=zaloNumFollowers,proto3" json:"zalo_num_followers,omitempty"`
@@ -13724,7 +13730,7 @@ type Integration struct {
 	WoocommerceProduct        string                 `protobuf:"bytes,108,opt,name=woocommerce_product,json=woocommerceProduct,proto3" json:"woocommerce_product,omitempty"`    // fetch, sync, none
 	WoocommerceOrder          string                 `protobuf:"bytes,109,opt,name=woocommerce_order,json=woocommerceOrder,proto3" json:"woocommerce_order,omitempty"`          // fetch, sync, none
 	WoocommerceCustomer       string                 `protobuf:"bytes,110,opt,name=woocommerce_customer,json=woocommerceCustomer,proto3" json:"woocommerce_customer,omitempty"` // fetch, none
-	MetaIsBusiness            bool                   `protobuf:"varint,120,opt,name=meta_is_business,json=metaIsBusiness,proto3" json:"meta_is_business,omitempty"`             // meta, sync from facebook
+	IsBusiness                bool                   `protobuf:"varint,120,opt,name=is_business,json=isBusiness,proto3" json:"is_business,omitempty"`                           // meta, sync from facebook, tiktok.is_business_account
 	MetaDatasetId             string                 `protobuf:"bytes,121,opt,name=meta_dataset_id,json=metaDatasetId,proto3" json:"meta_dataset_id,omitempty"`
 	SyncConversionDisabled    int64                  `protobuf:"varint,122,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3" json:"sync_conversion_disabled,omitempty"` // meta
 	MetaScope                 string                 `protobuf:"bytes,123,opt,name=meta_scope,json=metaScope,proto3" json:"meta_scope,omitempty"`
@@ -13745,8 +13751,11 @@ type Integration struct {
 	VerificationStatus   string `protobuf:"bytes,147,opt,name=verification_status,json=verificationStatus,proto3" json:"verification_status,omitempty"`
 	IsPublished          bool   `protobuf:"varint,148,opt,name=is_published,json=isPublished,proto3" json:"is_published,omitempty"` // hidden page
 	IsPermanentlyClosed  bool   `protobuf:"varint,149,opt,name=is_permanently_closed,json=isPermanentlyClosed,proto3" json:"is_permanently_closed,omitempty"`
-	About                string `protobuf:"bytes,150,opt,name=about,proto3" json:"about,omitempty"`
+	About                string `protobuf:"bytes,150,opt,name=about,proto3" json:"about,omitempty"`                                                             // facebook.about, tiktok.bio_description
 	MessengerCallRouting string `protobuf:"bytes,160,opt,name=messenger_call_routing,json=messengerCallRouting,proto3" json:"messenger_call_routing,omitempty"` // META | PARTNERS, replicated from page.call_setting.call_routing.ring_target
+	FollowingCount       int64  `protobuf:"varint,152,opt,name=following_count,json=followingCount,proto3" json:"following_count,omitempty"`
+	LikesCount           int64  `protobuf:"varint,153,opt,name=likes_count,json=likesCount,proto3" json:"likes_count,omitempty"`
+	VideoViews           int64  `protobuf:"varint,154,opt,name=video_views,json=videoViews,proto3" json:"video_views,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -14012,9 +14021,9 @@ func (x *Integration) GetZaloType() int64 {
 	return 0
 }
 
-func (x *Integration) GetZaloIsVerified() bool {
+func (x *Integration) GetIsVerified() bool {
 	if x != nil {
-		return x.ZaloIsVerified
+		return x.IsVerified
 	}
 	return false
 }
@@ -14327,9 +14336,9 @@ func (x *Integration) GetWoocommerceCustomer() string {
 	return ""
 }
 
-func (x *Integration) GetMetaIsBusiness() bool {
+func (x *Integration) GetIsBusiness() bool {
 	if x != nil {
-		return x.MetaIsBusiness
+		return x.IsBusiness
 	}
 	return false
 }
@@ -14472,6 +14481,27 @@ func (x *Integration) GetMessengerCallRouting() string {
 		return x.MessengerCallRouting
 	}
 	return ""
+}
+
+func (x *Integration) GetFollowingCount() int64 {
+	if x != nil {
+		return x.FollowingCount
+	}
+	return 0
+}
+
+func (x *Integration) GetLikesCount() int64 {
+	if x != nil {
+		return x.LikesCount
+	}
+	return 0
+}
+
+func (x *Integration) GetVideoViews() int64 {
+	if x != nil {
+		return x.VideoViews
+	}
+	return 0
 }
 
 type FacebookBusiness struct {
@@ -73986,7 +74016,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"product_id\x18\n" +
 	" \x01(\tR\tproductId\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\"\x85#\n" +
+	"\x06status\x18\r \x01(\tR\x06status\"\xe1#\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74024,8 +74054,9 @@ const file_header_proto_rawDesc = "" +
 	"\x15email_sender_nickname\x18: \x01(\tR\x13emailSenderNickname\x12@\n" +
 	"\x1dconvert_missed_call_to_ticket\x18; \x01(\bR\x19convertMissedCallToTicket\x12$\n" +
 	"\x0eticket_type_id\x18e \x01(\tR\fticketTypeId\x12\x1b\n" +
-	"\tzalo_type\x18< \x01(\x03R\bzaloType\x12(\n" +
-	"\x10zalo_is_verified\x18= \x01(\bR\x0ezaloIsVerified\x12\"\n" +
+	"\tzalo_type\x18< \x01(\x03R\bzaloType\x12\x1f\n" +
+	"\vis_verified\x18= \x01(\bR\n" +
+	"isVerified\x12\"\n" +
 	"\rzalo_oa_alias\x18> \x01(\tR\vzaloOaAlias\x12$\n" +
 	"\x0ezalo_cate_name\x18? \x01(\tR\fzaloCateName\x12,\n" +
 	"\x12zalo_num_followers\x18@ \x01(\x03R\x10zaloNumFollowers\x12*\n" +
@@ -74071,8 +74102,9 @@ const file_header_proto_rawDesc = "" +
 	"\x18woocommerce_consumer_key\x18k \x01(\tR\x16woocommerceConsumerKey\x12/\n" +
 	"\x13woocommerce_product\x18l \x01(\tR\x12woocommerceProduct\x12+\n" +
 	"\x11woocommerce_order\x18m \x01(\tR\x10woocommerceOrder\x121\n" +
-	"\x14woocommerce_customer\x18n \x01(\tR\x13woocommerceCustomer\x12(\n" +
-	"\x10meta_is_business\x18x \x01(\bR\x0emetaIsBusiness\x12&\n" +
+	"\x14woocommerce_customer\x18n \x01(\tR\x13woocommerceCustomer\x12\x1f\n" +
+	"\vis_business\x18x \x01(\bR\n" +
+	"isBusiness\x12&\n" +
 	"\x0fmeta_dataset_id\x18y \x01(\tR\rmetaDatasetId\x128\n" +
 	"\x18sync_conversion_disabled\x18z \x01(\x03R\x16syncConversionDisabled\x12\x1d\n" +
 	"\n" +
@@ -74094,7 +74126,12 @@ const file_header_proto_rawDesc = "" +
 	"\fis_published\x18\x94\x01 \x01(\bR\visPublished\x123\n" +
 	"\x15is_permanently_closed\x18\x95\x01 \x01(\bR\x13isPermanentlyClosed\x12\x15\n" +
 	"\x05about\x18\x96\x01 \x01(\tR\x05about\x125\n" +
-	"\x16messenger_call_routing\x18\xa0\x01 \x01(\tR\x14messengerCallRouting\"J\n" +
+	"\x16messenger_call_routing\x18\xa0\x01 \x01(\tR\x14messengerCallRouting\x12(\n" +
+	"\x0ffollowing_count\x18\x98\x01 \x01(\x03R\x0efollowingCount\x12 \n" +
+	"\vlikes_count\x18\x99\x01 \x01(\x03R\n" +
+	"likesCount\x12 \n" +
+	"\vvideo_views\x18\x9a\x01 \x01(\x03R\n" +
+	"videoViews\"J\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +
@@ -81037,7 +81074,7 @@ const file_header_proto_rawDesc = "" +
 	"view_order\x10\x16\x12\x11\n" +
 	"\rconfirm_order\x10\x17\x12\x0f\n" +
 	"\vcreate_task\x10\x18\x12\x18\n" +
-	"\x14update_user_segments\x10\x19*\xbb\x01\n" +
+	"\x14update_user_segments\x10\x19*\xd4\x01\n" +
 	"\vChannelType\x12\t\n" +
 	"\x05subiz\x10\x00\x12\t\n" +
 	"\x05email\x10\x01\x12\f\n" +
@@ -81050,7 +81087,10 @@ const file_header_proto_rawDesc = "" +
 	"\x11instagram_comment\x10\b\x12\x11\n" +
 	"\rgoogle_review\x10\t\x12\a\n" +
 	"\x03zns\x10\f\x12\x11\n" +
-	"\rzalo_personal\x10\r*\xd6\x01\n" +
+	"\rzalo_personal\x10\r\x12\v\n" +
+	"\aaccount\x10\x0e\x12\n" +
+	"\n" +
+	"\x06tiktok\x10\x0f*\xd6\x01\n" +
 	"\x10ShippingProvider\x12\n" +
 	"\n" +
 	"\x06direct\x10\x00\x12\v\n" +

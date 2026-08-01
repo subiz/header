@@ -1861,7 +1861,7 @@ message Integration {
 	string ticket_type_id = 101;
 
 	int64 zalo_type = 60;
-	bool zalo_is_verified = 61;
+	bool is_verified = 61;
 	string zalo_oa_alias = 62;
 	string zalo_cate_name = 63;
 	int64 zalo_num_followers = 64;
@@ -1921,7 +1921,7 @@ message Integration {
 	string woocommerce_order = 109; // fetch, sync, none
 	string woocommerce_customer = 110; // fetch, none
 
-	bool meta_is_business = 120; // meta, sync from facebook
+	bool is_business = 120; // meta, sync from facebook, tiktok.is_business_account
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
 	string meta_scope = 123;
@@ -1949,8 +1949,12 @@ message Integration {
 	string verification_status = 147;
 	bool is_published = 148; // hidden page
 	bool is_permanently_closed = 149;
-	string about = 150;
+	string about = 150; // facebook.about, tiktok.bio_description
 	string messenger_call_routing = 160; // META | PARTNERS, replicated from page.call_setting.call_routing.ring_target
+
+	int64 following_count = 152;
+	int64 likes_count = 153;
+	int64 video_views = 154;
 }
 
 message FacebookBusiness {
@@ -3379,6 +3383,8 @@ enum ChannelType {
 	google_review = 9;
 	zns = 12;
 	zalo_personal = 13;
+	account = 14; // subiz internal
+	tiktok = 15;
 }
 
 message WebhookSecret {
