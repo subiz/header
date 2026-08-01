@@ -23,19 +23,19 @@ const (
 
 type BusinessAccount struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
-	BusinessId              string                 `protobuf:"bytes,2,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`    // = open_id trả về từ token endpoint (khoá chính)
-	AccountId               string                 `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`       // account Subiz sở hữu kết nối này
-	State                   string                 `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"`                               // activated || deleted || failed
-	Username                string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`                          // vd "la_flama_blanca"
-	DisplayName             string                 `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"` // tên hiển thị
-	Avatar                  string                 `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`                              // profile_image (đã tải & up lên CDN Subiz)
+	BusinessId              string                 `protobuf:"bytes,2,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`       // = open_id trả về từ token endpoint (khoá chính)
+	AccountId               string                 `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`          // account Subiz sở hữu kết nối này
+	State                   string                 `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"`                                  // activated || deleted || failed
+	Username                string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`                             // vd "la_flama_blanca"
+	DisplayName             string                 `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`    // tên hiển thị
+	ProfileImage            string                 `protobuf:"bytes,5,opt,name=profile_image,json=profileImage,proto3" json:"profile_image,omitempty"` // profile_image (đã tải & up lên CDN Subiz)
 	BioDescription          string                 `protobuf:"bytes,6,opt,name=bio_description,json=bioDescription,proto3" json:"bio_description,omitempty"`
 	ProfileDeepLink         string                 `protobuf:"bytes,20,opt,name=profile_deep_link,json=profileDeepLink,proto3" json:"profile_deep_link,omitempty"` // https://www.tiktok.com/@<username>
 	IsVerified              bool                   `protobuf:"varint,21,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
 	IsBusinessAccount       bool                   `protobuf:"varint,22,opt,name=is_business_account,json=isBusinessAccount,proto3" json:"is_business_account,omitempty"`
 	FollowersCount          int64                  `protobuf:"varint,23,opt,name=followers_count,json=followersCount,proto3" json:"followers_count,omitempty"`
 	FollowingCount          int64                  `protobuf:"varint,24,opt,name=following_count,json=followingCount,proto3" json:"following_count,omitempty"`
-	LikesCount              int64                  `protobuf:"varint,25,opt,name=likes_count,json=likesCount,proto3" json:"likes_count,omitempty"`
+	TotalLikes              int64                  `protobuf:"varint,25,opt,name=total_likes,json=totalLikes,proto3" json:"total_likes,omitempty"`
 	VideoViews              int64                  `protobuf:"varint,26,opt,name=video_views,json=videoViews,proto3" json:"video_views,omitempty"`
 	AccessToken             string                 `protobuf:"bytes,7,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken            string                 `protobuf:"bytes,15,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
@@ -118,9 +118,9 @@ func (x *BusinessAccount) GetDisplayName() string {
 	return ""
 }
 
-func (x *BusinessAccount) GetAvatar() string {
+func (x *BusinessAccount) GetProfileImage() string {
 	if x != nil {
-		return x.Avatar
+		return x.ProfileImage
 	}
 	return ""
 }
@@ -167,9 +167,9 @@ func (x *BusinessAccount) GetFollowingCount() int64 {
 	return 0
 }
 
-func (x *BusinessAccount) GetLikesCount() int64 {
+func (x *BusinessAccount) GetTotalLikes() int64 {
 	if x != nil {
-		return x.LikesCount
+		return x.TotalLikes
 	}
 	return 0
 }
@@ -2049,7 +2049,7 @@ var File_tiktok_proto protoreflect.FileDescriptor
 
 const file_tiktok_proto_rawDesc = "" +
 	"\n" +
-	"\ftiktok.proto\x12\btiktokon\"\xe0\a\n" +
+	"\ftiktok.proto\x12\btiktokon\"\xed\a\n" +
 	"\x0fBusinessAccount\x12\x1f\n" +
 	"\vbusiness_id\x18\x02 \x01(\tR\n" +
 	"businessId\x12\x1d\n" +
@@ -2057,8 +2057,8 @@ const file_tiktok_proto_rawDesc = "" +
 	"account_id\x18\t \x01(\tR\taccountId\x12\x14\n" +
 	"\x05state\x18\f \x01(\tR\x05state\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12!\n" +
-	"\fdisplay_name\x18\x04 \x01(\tR\vdisplayName\x12\x16\n" +
-	"\x06avatar\x18\x05 \x01(\tR\x06avatar\x12'\n" +
+	"\fdisplay_name\x18\x04 \x01(\tR\vdisplayName\x12#\n" +
+	"\rprofile_image\x18\x05 \x01(\tR\fprofileImage\x12'\n" +
 	"\x0fbio_description\x18\x06 \x01(\tR\x0ebioDescription\x12*\n" +
 	"\x11profile_deep_link\x18\x14 \x01(\tR\x0fprofileDeepLink\x12\x1f\n" +
 	"\vis_verified\x18\x15 \x01(\bR\n" +
@@ -2066,8 +2066,8 @@ const file_tiktok_proto_rawDesc = "" +
 	"\x13is_business_account\x18\x16 \x01(\bR\x11isBusinessAccount\x12'\n" +
 	"\x0ffollowers_count\x18\x17 \x01(\x03R\x0efollowersCount\x12'\n" +
 	"\x0ffollowing_count\x18\x18 \x01(\x03R\x0efollowingCount\x12\x1f\n" +
-	"\vlikes_count\x18\x19 \x01(\x03R\n" +
-	"likesCount\x12\x1f\n" +
+	"\vtotal_likes\x18\x19 \x01(\x03R\n" +
+	"totalLikes\x12\x1f\n" +
 	"\vvideo_views\x18\x1a \x01(\x03R\n" +
 	"videoViews\x12!\n" +
 	"\faccess_token\x18\a \x01(\tR\vaccessToken\x12#\n" +

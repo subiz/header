@@ -11,14 +11,14 @@ message BusinessAccount {
 
 	string username = 3;            // vd "la_flama_blanca"
 	string display_name = 4;        // tên hiển thị
-	string avatar = 5;              // profile_image (đã tải & up lên CDN Subiz)
+	string profile_image = 5;              // profile_image (đã tải & up lên CDN Subiz)
 	string bio_description = 6;
 	string profile_deep_link = 20;  // https://www.tiktok.com/@<username>
 	bool is_verified = 21;
 	bool is_business_account = 22;
 	int64 followers_count = 23;
 	int64 following_count = 24;
-	int64 likes_count = 25;
+	int64 total_likes = 25;
 	int64 video_views = 26;
 
 	string access_token = 7;
