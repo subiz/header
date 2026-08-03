@@ -18896,6 +18896,146 @@ var RealtimePublisher_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	TiktokService_ListTiktokVideos_FullMethodName  = "/header.TiktokService/ListTiktokVideos"
+	TiktokService_MatchTiktokVideos_FullMethodName = "/header.TiktokService/MatchTiktokVideos"
+)
+
+// TiktokServiceClient is the client API for TiktokService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TiktokServiceClient interface {
+	ListTiktokVideos(ctx context.Context, in *TiktokVideoRequest, opts ...grpc.CallOption) (*Response, error)
+	MatchTiktokVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+}
+
+type tiktokServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTiktokServiceClient(cc grpc.ClientConnInterface) TiktokServiceClient {
+	return &tiktokServiceClient{cc}
+}
+
+func (c *tiktokServiceClient) ListTiktokVideos(ctx context.Context, in *TiktokVideoRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, TiktokService_ListTiktokVideos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tiktokServiceClient) MatchTiktokVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, TiktokService_MatchTiktokVideos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TiktokServiceServer is the server API for TiktokService service.
+// All implementations must embed UnimplementedTiktokServiceServer
+// for forward compatibility.
+type TiktokServiceServer interface {
+	ListTiktokVideos(context.Context, *TiktokVideoRequest) (*Response, error)
+	MatchTiktokVideos(context.Context, *Ids) (*Response, error)
+	mustEmbedUnimplementedTiktokServiceServer()
+}
+
+// UnimplementedTiktokServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedTiktokServiceServer struct{}
+
+func (UnimplementedTiktokServiceServer) ListTiktokVideos(context.Context, *TiktokVideoRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListTiktokVideos not implemented")
+}
+func (UnimplementedTiktokServiceServer) MatchTiktokVideos(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchTiktokVideos not implemented")
+}
+func (UnimplementedTiktokServiceServer) mustEmbedUnimplementedTiktokServiceServer() {}
+func (UnimplementedTiktokServiceServer) testEmbeddedByValue()                       {}
+
+// UnsafeTiktokServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TiktokServiceServer will
+// result in compilation errors.
+type UnsafeTiktokServiceServer interface {
+	mustEmbedUnimplementedTiktokServiceServer()
+}
+
+func RegisterTiktokServiceServer(s grpc.ServiceRegistrar, srv TiktokServiceServer) {
+	// If the following call panics, it indicates UnimplementedTiktokServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&TiktokService_ServiceDesc, srv)
+}
+
+func _TiktokService_ListTiktokVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TiktokVideoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TiktokServiceServer).ListTiktokVideos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TiktokService_ListTiktokVideos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TiktokServiceServer).ListTiktokVideos(ctx, req.(*TiktokVideoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TiktokService_MatchTiktokVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TiktokServiceServer).MatchTiktokVideos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TiktokService_MatchTiktokVideos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TiktokServiceServer).MatchTiktokVideos(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TiktokService_ServiceDesc is the grpc.ServiceDesc for TiktokService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TiktokService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TiktokService",
+	HandlerType: (*TiktokServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListTiktokVideos",
+			Handler:    _TiktokService_ListTiktokVideos_Handler,
+		},
+		{
+			MethodName: "MatchTiktokVideos",
+			Handler:    _TiktokService_MatchTiktokVideos_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	FabikonService_ReadFbFanpageSetting_FullMethodName    = "/header.FabikonService/ReadFbFanpageSetting"
 	FabikonService_UpdateFbFanpageSetting_FullMethodName  = "/header.FabikonService/UpdateFbFanpageSetting"
 	FabikonService_ListFbFanpageSettings_FullMethodName   = "/header.FabikonService/ListFbFanpageSettings"

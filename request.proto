@@ -889,6 +889,18 @@ message FacebookPostRequest {
 	// string channel = 10; // facebook, instagram
 }
 
+message TiktokVideoRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string business_id = 3; // "," delimiter
+	string query = 4;
+	bool is_hidden = 8;
+	bool is_published = 9;
+
+	int64 limit = 10;
+	string anchor = 11;
+}
+
 message ListRuleRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -1093,7 +1105,6 @@ message AutoPayRequest {
 	int64 fpv_amount = 10; // 3_000_000_000_000 (3 tr)
 	string currency = 17; // VND or USD
 }
-
 
 message CollectionDocumentsRequest {
 	common.Context ctx = 1;
