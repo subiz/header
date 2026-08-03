@@ -684,6 +684,11 @@ service RealtimePublisher {
 	rpc Subscribe(RealtimeSubscription) returns (Empty);
 }
 
+service TiktokService {
+	rpc ListTiktokVideos(TiktokVideoRequest) returns (Response);
+	rpc MatchTiktokVideos(Ids) returns (Response);
+}
+
 service FabikonService {
 	rpc ReadFbFanpageSetting(Id) returns (header.FbFanpageSetting);
 	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);

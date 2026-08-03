@@ -1007,6 +1007,16 @@ message FacebookCondition {
 	repeated string not_facebook_page_keywords = 13; // contains
 }
 
+message TiktokCondition {
+	bool enabled = 4;
+	bool from_ads = 5;
+	repeated string ads_ids = 6;
+	repeated string video_ids = 7;
+
+	repeated string not_ads_ids = 8;
+	repeated string not_video_ids = 9;
+}
+
 message RingingSetting {
 	GreetingAudio greeting_message = 4;
 	GreetingAudio missed_message = 5;
@@ -1074,6 +1084,7 @@ message ChannelCondition {
 	FacebookCondition facebook = 17;
 
 	repeated string form_names = 22;
+	TiktokCondition tiktok = 23;
 }
 
 message LocationCondition {
@@ -1288,6 +1299,7 @@ message Conversation {
 	int64 marked_as_spam = 68;
 	int64 sentiment_score = 69; //
 	GoogleReview google_review = 70;
+	TiktokVideo tiktok_video = 100;
 
 	repeated string associated_tickets = 76;
 	repeated string associated_conversations = 77;
@@ -1440,6 +1452,7 @@ message Message {
 	repeated Attachment attachments = 4;
 	Block block = 7;
 	repeated KV fields = 10;
+	repeated KV convo_fields = 12;
 
 	string user_id = 19;
 	string to_conversation_id = 26;
@@ -1909,6 +1922,7 @@ message Integration {
 	string call_outbound_password = 97;
 	string call_allow = 98; // !all,ulaw,alaw,g722
 	bool call_rtp_symmetric = 99; // false
+	string call_server = 102; // vnpt0, viettel0
 
 	repeated ResourceGroupMember permissions = 100;
 	string lead_agent_group = 103;
@@ -10280,4 +10294,37 @@ message SetMessengerCallRoutingRequest {
 
 	string page_id = 3;
 	string ring_target = 4;
+}
+
+message TiktokVideo {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string business_id = 3;
+
+	string item_id = 5; // video id
+	string media_type = 6; // VIDEO | PHOTO
+	bool is_ad = 8; // bool
+	string thumbnail_url = 9;
+	string share_url = 10;
+	string embed_url = 11;
+	string caption = 12;
+	float video_duration = 13;
+	int64 likes = 14;
+	int64 comments = 15;
+	int64 shares = 16;
+	int64 favorites = 17;
+	string create_time = 18; // 1628461703, Unix/epoch date-time when the post was posted, in UTC time-zone.
+	int64 reach = 19;
+	int64 video_views = 20;
+	float total_time_watched = 21; // 587.024
+	float average_time_watched = 22;
+	float full_video_watched_rate = 23;
+	int64 new_followers = 24;
+	int64 profile_views = 25;
+	int64 website_clicks = 26;
+	int64 phone_number_clicks = 27;
+	int64 lead_submissions = 28;
+	int64 app_download_clicks = 29;
+	int64 email_clicks = 30;
+	int64 address_clicks = 31;
 }
