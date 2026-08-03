@@ -72030,6 +72030,7 @@ type TiktokVideo struct {
 	AppDownloadClicks    int64                  `protobuf:"varint,29,opt,name=app_download_clicks,json=appDownloadClicks,proto3" json:"app_download_clicks,omitempty"`
 	EmailClicks          int64                  `protobuf:"varint,30,opt,name=email_clicks,json=emailClicks,proto3" json:"email_clicks,omitempty"`
 	AddressClicks        int64                  `protobuf:"varint,31,opt,name=address_clicks,json=addressClicks,proto3" json:"address_clicks,omitempty"`
+	Modified             int64                  `protobuf:"varint,50,opt,name=modified,proto3" json:"modified,omitempty"` // subiz only
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -72263,6 +72264,13 @@ func (x *TiktokVideo) GetEmailClicks() int64 {
 func (x *TiktokVideo) GetAddressClicks() int64 {
 	if x != nil {
 		return x.AddressClicks
+	}
+	return 0
+}
+
+func (x *TiktokVideo) GetModified() int64 {
+	if x != nil {
+		return x.Modified
 	}
 	return 0
 }
@@ -81443,7 +81451,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x17\n" +
 	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x1f\n" +
 	"\vring_target\x18\x04 \x01(\tR\n" +
-	"ringTarget\"\xfa\a\n" +
+	"ringTarget\"\x96\b\n" +
 	"\vTiktokVideo\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -81479,7 +81487,8 @@ const file_header_proto_rawDesc = "" +
 	"\x10lead_submissions\x18\x1c \x01(\x03R\x0fleadSubmissions\x12.\n" +
 	"\x13app_download_clicks\x18\x1d \x01(\x03R\x11appDownloadClicks\x12!\n" +
 	"\femail_clicks\x18\x1e \x01(\x03R\vemailClicks\x12%\n" +
-	"\x0eaddress_clicks\x18\x1f \x01(\x03R\raddressClicks*t\n" +
+	"\x0eaddress_clicks\x18\x1f \x01(\x03R\raddressClicks\x12\x1a\n" +
+	"\bmodified\x182 \x01(\x03R\bmodified*t\n" +
 	"\n" +
 	"ConvoState\x12\x0e\n" +
 	"\n" +

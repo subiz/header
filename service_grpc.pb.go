@@ -18896,8 +18896,9 @@ var RealtimePublisher_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	TiktokService_ListTiktokVideos_FullMethodName  = "/header.TiktokService/ListTiktokVideos"
-	TiktokService_MatchTiktokVideos_FullMethodName = "/header.TiktokService/MatchTiktokVideos"
+	TiktokService_ListTiktokVideos_FullMethodName   = "/header.TiktokService/ListTiktokVideos"
+	TiktokService_MatchTiktokVideos_FullMethodName  = "/header.TiktokService/MatchTiktokVideos"
+	TiktokService_ResyncTiktokVideos_FullMethodName = "/header.TiktokService/ResyncTiktokVideos"
 )
 
 // TiktokServiceClient is the client API for TiktokService service.
@@ -18906,6 +18907,7 @@ const (
 type TiktokServiceClient interface {
 	ListTiktokVideos(ctx context.Context, in *TiktokVideoRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchTiktokVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type tiktokServiceClient struct {
@@ -18936,12 +18938,23 @@ func (c *tiktokServiceClient) MatchTiktokVideos(ctx context.Context, in *Ids, op
 	return out, nil
 }
 
+func (c *tiktokServiceClient) ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, TiktokService_ResyncTiktokVideos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TiktokServiceServer is the server API for TiktokService service.
 // All implementations must embed UnimplementedTiktokServiceServer
 // for forward compatibility.
 type TiktokServiceServer interface {
 	ListTiktokVideos(context.Context, *TiktokVideoRequest) (*Response, error)
 	MatchTiktokVideos(context.Context, *Ids) (*Response, error)
+	ResyncTiktokVideos(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedTiktokServiceServer()
 }
 
@@ -18957,6 +18970,9 @@ func (UnimplementedTiktokServiceServer) ListTiktokVideos(context.Context, *Tikto
 }
 func (UnimplementedTiktokServiceServer) MatchTiktokVideos(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method MatchTiktokVideos not implemented")
+}
+func (UnimplementedTiktokServiceServer) ResyncTiktokVideos(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResyncTiktokVideos not implemented")
 }
 func (UnimplementedTiktokServiceServer) mustEmbedUnimplementedTiktokServiceServer() {}
 func (UnimplementedTiktokServiceServer) testEmbeddedByValue()                       {}
@@ -19015,6 +19031,24 @@ func _TiktokService_MatchTiktokVideos_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TiktokService_ResyncTiktokVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TiktokServiceServer).ResyncTiktokVideos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TiktokService_ResyncTiktokVideos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TiktokServiceServer).ResyncTiktokVideos(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TiktokService_ServiceDesc is the grpc.ServiceDesc for TiktokService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -19029,6 +19063,10 @@ var TiktokService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchTiktokVideos",
 			Handler:    _TiktokService_MatchTiktokVideos_Handler,
+		},
+		{
+			MethodName: "ResyncTiktokVideos",
+			Handler:    _TiktokService_ResyncTiktokVideos_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

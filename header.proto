@@ -10331,4 +10331,6 @@ message TiktokVideo {
 	int64 app_download_clicks = 29;
 	int64 email_clicks = 30;
 	int64 address_clicks = 31;
+
+	int64 modified = 50; // subiz only
 }
