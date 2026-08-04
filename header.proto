@@ -2372,16 +2372,18 @@ message ActionSendTyping {
 message ActionSendMessage {
 	string channel = 3;
 	string channel_source = 4;
-	repeated Message messages = 5;
+	repeated Message messages = 5; // sequence
 	string touchpoint_id = 6; // template
 	repeated string tos = 7; // template
 	bool typing = 8; // send typing before each messages
-
+	bool switch_inbox_channel = 11; // to switch from facebook_comment to facebook, tiktok_comment to tiktok
 	string from_variable = 10;
-	repeated KV extra_fields = 11;
+	repeated KV extra_fields = 12;
 
 	bool use_llm = 14;
 	ActionLLM llm = 15;
+
+	repeated Message alternative_messages = 20;
 }
 
 message ActionAskQuestion {
