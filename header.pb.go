@@ -13841,7 +13841,7 @@ type Integration struct {
 	CallOutboundPassword      string                 `protobuf:"bytes,97,opt,name=call_outbound_password,json=callOutboundPassword,proto3" json:"call_outbound_password,omitempty"`
 	CallAllow                 string                 `protobuf:"bytes,98,opt,name=call_allow,json=callAllow,proto3" json:"call_allow,omitempty"`                         // !all,ulaw,alaw,g722
 	CallRtpSymmetric          bool                   `protobuf:"varint,99,opt,name=call_rtp_symmetric,json=callRtpSymmetric,proto3" json:"call_rtp_symmetric,omitempty"` // false
-	CallServer                string                 `protobuf:"bytes,102,opt,name=call_server,json=callServer,proto3" json:"call_server,omitempty"`                     // vnpt0, viettel0
+	CallServer                string                 `protobuf:"bytes,102,opt,name=call_server,json=callServer,proto3" json:"call_server,omitempty"`                     // 113-190-233-117.subiz.com.vn, ...
 	Permissions               []*ResourceGroupMember `protobuf:"bytes,100,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	LeadAgentGroup            string                 `protobuf:"bytes,103,opt,name=lead_agent_group,json=leadAgentGroup,proto3" json:"lead_agent_group,omitempty"`
 	WoocommerceBaseUrl        string                 `protobuf:"bytes,104,opt,name=woocommerce_base_url,json=woocommerceBaseUrl,proto3" json:"woocommerce_base_url,omitempty"` // https://demo.subiz.net/wp-json/wc/v3
@@ -40738,6 +40738,7 @@ type CallDriverRequest struct {
 	EndpointContactUser        string       `protobuf:"bytes,32,opt,name=endpoint_contact_user,json=endpointContactUser,proto3" json:"endpoint_contact_user,omitempty"` // for sip
 	EndpointFromDomain         string       `protobuf:"bytes,33,opt,name=endpoint_from_domain,json=endpointFromDomain,proto3" json:"endpoint_from_domain,omitempty"`    // for sip
 	SipTransport               string       `protobuf:"bytes,34,opt,name=sip_transport,json=sipTransport,proto3" json:"sip_transport,omitempty"`                        // udp
+	CallServer                 string       `protobuf:"bytes,35,opt,name=call_server,json=callServer,proto3" json:"call_server,omitempty"`                              // 113-190-233-117.subiz.com.vn, ...
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -40985,6 +40986,13 @@ func (x *CallDriverRequest) GetEndpointFromDomain() string {
 func (x *CallDriverRequest) GetSipTransport() string {
 	if x != nil {
 		return x.SipTransport
+	}
+	return ""
+}
+
+func (x *CallDriverRequest) GetCallServer() string {
+	if x != nil {
+		return x.CallServer
 	}
 	return ""
 }
@@ -71520,10 +71528,11 @@ type FacebookCall struct {
 	RecipientId   string               `protobuf:"bytes,11,opt,name=recipient_id,json=recipientId,proto3" json:"recipient_id,omitempty"`       // psid
 	CallStatus    string               `protobuf:"bytes,12,opt,name=call_status,json=callStatus,proto3" json:"call_status,omitempty"`          // ringing | accepted
 	Session       *FacebookCallSession `protobuf:"bytes,13,opt,name=session,proto3" json:"session,omitempty"`
-	Status        string               `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`                         // Failed | Completed
-	StartTime     int64                `protobuf:"varint,17,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"` // When the call started
-	EndTime       int64                `protobuf:"varint,18,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`       // When the call ended
-	Duration      int64                `protobuf:"varint,19,opt,name=duration,proto3" json:"duration,omitempty"`                    // Call duration in seconds, counted from when the business connects. Empty if the business did not successfully connect.
+	Status        string               `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`                           // Failed | Completed
+	StartTime     int64                `protobuf:"varint,17,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`   // When the call started
+	EndTime       int64                `protobuf:"varint,18,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`         // When the call ended
+	Duration      int64                `protobuf:"varint,19,opt,name=duration,proto3" json:"duration,omitempty"`                      // Call duration in seconds, counted from when the business connects. Empty if the business did not successfully connect.
+	CallServer    string               `protobuf:"bytes,50,opt,name=call_server,json=callServer,proto3" json:"call_server,omitempty"` // 113-190-233-117.subiz.com.vn, subiz only to identify which server the call should route to
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71654,6 +71663,13 @@ func (x *FacebookCall) GetDuration() int64 {
 		return x.Duration
 	}
 	return 0
+}
+
+func (x *FacebookCall) GetCallServer() string {
+	if x != nil {
+		return x.CallServer
+	}
+	return ""
 }
 
 type FacebookSdp struct {
@@ -77701,7 +77717,7 @@ const file_header_proto_rawDesc = "" +
 	"\x17is_user_follow_business\x18\x0e \x01(\bR\x14isUserFollowBusiness\x125\n" +
 	"\x17is_business_follow_user\x18\x0f \x01(\bR\x14isBusinessFollowUser\x12\x1f\n" +
 	"\vprofile_pic\x18\x10 \x01(\tR\n" +
-	"profilePic\"\xd2\t\n" +
+	"profilePic\"\xf3\t\n" +
 	"\x11CallDriverRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -77740,7 +77756,9 @@ const file_header_proto_rawDesc = "" +
 	"\x15to_sip_provider_hosts\x18\x1f \x03(\tR\x12toSipProviderHosts\x122\n" +
 	"\x15endpoint_contact_user\x18  \x01(\tR\x13endpointContactUser\x120\n" +
 	"\x14endpoint_from_domain\x18! \x01(\tR\x12endpointFromDomain\x12#\n" +
-	"\rsip_transport\x18\" \x01(\tR\fsipTransport\"\x91\x01\n" +
+	"\rsip_transport\x18\" \x01(\tR\fsipTransport\x12\x1f\n" +
+	"\vcall_server\x18# \x01(\tR\n" +
+	"callServer\"\x91\x01\n" +
 	"\x12CallDriverResponse\x12\x1d\n" +
 	"\n" +
 	"request_id\x18\x06 \x01(\tR\trequestId\x126\n" +
@@ -81419,7 +81437,7 @@ const file_header_proto_rawDesc = "" +
 	"\bfunction\x18\x03 \x01(\tR\bfunction\x12\x14\n" +
 	"\x05field\x18\x04 \x01(\tR\x05field\x12\x0e\n" +
 	"\x02op\x18\x05 \x01(\tR\x02op\x12\x14\n" +
-	"\x05value\x18\x06 \x01(\tR\x05value\"\x9f\x03\n" +
+	"\x05value\x18\x06 \x01(\tR\x05value\"\xc0\x03\n" +
 	"\fFacebookCall\x12\x17\n" +
 	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x0e\n" +
@@ -81437,7 +81455,9 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x11 \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\x12 \x01(\x03R\aendTime\x12\x1a\n" +
-	"\bduration\x18\x13 \x01(\x03R\bduration\":\n" +
+	"\bduration\x18\x13 \x01(\x03R\bduration\x12\x1f\n" +
+	"\vcall_server\x182 \x01(\tR\n" +
+	"callServer\":\n" +
 	"\vFacebookSdp\x12\x19\n" +
 	"\bsdp_type\x18\x04 \x01(\tR\asdpType\x12\x10\n" +
 	"\x03sdp\x18\x05 \x01(\tR\x03sdp\"\xaf\x02\n" +

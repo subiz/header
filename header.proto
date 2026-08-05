@@ -1924,7 +1924,7 @@ message Integration {
 	string call_outbound_password = 97;
 	string call_allow = 98; // !all,ulaw,alaw,g722
 	bool call_rtp_symmetric = 99; // false
-	string call_server = 102; // vnpt0, viettel0
+	string call_server = 102; // 113-190-233-117.subiz.com.vn, ...
 
 	repeated ResourceGroupMember permissions = 100;
 	string lead_agent_group = 103;
@@ -5781,6 +5781,8 @@ message CallDriverRequest {
 	string endpoint_contact_user = 32; // for sip
 	string endpoint_from_domain = 33; // for sip
 	string sip_transport = 34; // udp
+
+	string call_server = 35; // 113-190-233-117.subiz.com.vn, ...
 }
 
 message CallDriverResponse {
@@ -10255,6 +10257,8 @@ message FacebookCall {
 	int64 start_time = 17; // When the call started
 	int64 end_time = 18; // When the call ended
 	int64 duration = 19; // Call duration in seconds, counted from when the business connects. Empty if the business did not successfully connect.
+
+	string call_server = 50; // 113-190-233-117.subiz.com.vn, subiz only to identify which server the call should route to
 }
 
 message FacebookSdp {
