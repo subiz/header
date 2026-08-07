@@ -692,11 +692,6 @@ service TiktokService {
 }
 
 service WhatsappService {
-	// --- Kết nối & quản lý số -------------------------------------------------
-	// Hoàn tất Embedded Signup: đổi code -> business token, subscribed_apps,
-	// register số, ActivateIntegration. Trả về Response.integrations.
-	rpc CompleteEmbeddedSignup(whatsapp.SignupRequest) returns (Response);
-
 	// Liệt kê số đã kết nối của 1 account (kể cả số state=pending mới phát hiện).
 	rpc ListWhatsappNumbers(Id) returns (Response); // -> integrations
 

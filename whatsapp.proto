@@ -635,7 +635,11 @@ message Value {
 	string phone_number = 40;
 	BanInfo ban_info = 41;
 	RestrictionInfo restriction_info = 42;
-	string waba_info = 43; // đôi khi là object -> kiểm chứng bằng payload thật
+	// Payload thật (PARTNER_APP_INSTALLED, MM_LITE_TERMS_SIGNED...):
+	// "waba_info": {"waba_id":"...","owner_business_id":"...","partner_app_id":"..."}
+	// Lưu ý: với các event này entry.id là BUSINESS PORTFOLIO id chứ không phải waba_id
+	// -> phải đọc waba_id từ đây.
+	WabaInfo waba_info = 43;
 
 	// field = account_review_update
 	// `decision` dùng lại ở trên
@@ -701,8 +705,8 @@ message Order {
 
 message ProductItem {
 	string product_retailer_id = 2;
-	string quantity = 3;
-	string item_price = 4;
+	int64 quantity = 3;    // Meta gửi dạng SỐ
+	double item_price = 4; // Meta gửi dạng SỐ
 	string currency = 5;
 }
 
@@ -717,7 +721,7 @@ message System {
 
 message Identity {
 	bool acknowledged = 2;
-	string created_timestamp = 3;
+	int64 created_timestamp = 3; // Meta gửi dạng SỐ (epoch ms)
 	string hash = 4;
 }
 
@@ -777,7 +781,7 @@ message Error {
 	string type = 5;
 	string href = 6;
 	string fbtrace_id = 7;
-	string error_subcode = 8;
+	int64 error_subcode = 8; // Meta gửi dạng SỐ
 	ErrorData error_data = 9;
 }
 
@@ -789,6 +793,13 @@ message ErrorData {
 message BanInfo {
 	string waba_ban_state = 2; // SCHEDULE_FOR_DISABLE | DISABLE | REINSTATE
 	string waba_ban_date = 3;
+}
+
+// WabaInfo — trong webhook account_update (PARTNER_APP_INSTALLED, MM_LITE_TERMS_SIGNED...).
+message WabaInfo {
+	string waba_id = 2;
+	string owner_business_id = 3;
+	string partner_app_id = 4;
 }
 
 message RestrictionInfo {
@@ -816,9 +827,9 @@ message History {
 }
 
 message HistoryMetadata {
-	string phase = 2; // vd "0" | "1"
+	string phase = 2;      // vd "0" | "1"
 	int64 chunk_order = 3;
-	string progress = 4;
+	int64 progress = 4;    // % đã đồng bộ — Meta gửi dạng SỐ
 }
 
 message HistoryThread {

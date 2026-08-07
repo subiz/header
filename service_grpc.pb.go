@@ -19075,7 +19075,6 @@ var TiktokService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	WhatsappService_CompleteEmbeddedSignup_FullMethodName        = "/header.WhatsappService/CompleteEmbeddedSignup"
 	WhatsappService_ListWhatsappNumbers_FullMethodName           = "/header.WhatsappService/ListWhatsappNumbers"
 	WhatsappService_ActivateWhatsappNumber_FullMethodName        = "/header.WhatsappService/ActivateWhatsappNumber"
 	WhatsappService_DisconnectWhatsappNumber_FullMethodName      = "/header.WhatsappService/DisconnectWhatsappNumber"
@@ -19096,10 +19095,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WhatsappServiceClient interface {
-	// --- Kết nối & quản lý số -------------------------------------------------
-	// Hoàn tất Embedded Signup: đổi code -> business token, subscribed_apps,
-	// register số, ActivateIntegration. Trả về Response.integrations.
-	CompleteEmbeddedSignup(ctx context.Context, in *whatsapp.SignupRequest, opts ...grpc.CallOption) (*Response, error)
 	// Liệt kê số đã kết nối của 1 account (kể cả số state=pending mới phát hiện).
 	ListWhatsappNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	// Kích hoạt 1 số mới xuất hiện trong WABA (khách bấm "kích hoạt số này").
@@ -19139,16 +19134,6 @@ type whatsappServiceClient struct {
 
 func NewWhatsappServiceClient(cc grpc.ClientConnInterface) WhatsappServiceClient {
 	return &whatsappServiceClient{cc}
-}
-
-func (c *whatsappServiceClient) CompleteEmbeddedSignup(ctx context.Context, in *whatsapp.SignupRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WhatsappService_CompleteEmbeddedSignup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *whatsappServiceClient) ListWhatsappNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
@@ -19295,10 +19280,6 @@ func (c *whatsappServiceClient) UpdateWhatsappSetting(ctx context.Context, in *w
 // All implementations must embed UnimplementedWhatsappServiceServer
 // for forward compatibility.
 type WhatsappServiceServer interface {
-	// --- Kết nối & quản lý số -------------------------------------------------
-	// Hoàn tất Embedded Signup: đổi code -> business token, subscribed_apps,
-	// register số, ActivateIntegration. Trả về Response.integrations.
-	CompleteEmbeddedSignup(context.Context, *whatsapp.SignupRequest) (*Response, error)
 	// Liệt kê số đã kết nối của 1 account (kể cả số state=pending mới phát hiện).
 	ListWhatsappNumbers(context.Context, *Id) (*Response, error)
 	// Kích hoạt 1 số mới xuất hiện trong WABA (khách bấm "kích hoạt số này").
@@ -19340,9 +19321,6 @@ type WhatsappServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWhatsappServiceServer struct{}
 
-func (UnimplementedWhatsappServiceServer) CompleteEmbeddedSignup(context.Context, *whatsapp.SignupRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CompleteEmbeddedSignup not implemented")
-}
 func (UnimplementedWhatsappServiceServer) ListWhatsappNumbers(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListWhatsappNumbers not implemented")
 }
@@ -19404,24 +19382,6 @@ func RegisterWhatsappServiceServer(s grpc.ServiceRegistrar, srv WhatsappServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&WhatsappService_ServiceDesc, srv)
-}
-
-func _WhatsappService_CompleteEmbeddedSignup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(whatsapp.SignupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WhatsappServiceServer).CompleteEmbeddedSignup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WhatsappService_CompleteEmbeddedSignup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WhatsappServiceServer).CompleteEmbeddedSignup(ctx, req.(*whatsapp.SignupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _WhatsappService_ListWhatsappNumbers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -19683,10 +19643,6 @@ var WhatsappService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.WhatsappService",
 	HandlerType: (*WhatsappServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CompleteEmbeddedSignup",
-			Handler:    _WhatsappService_CompleteEmbeddedSignup_Handler,
-		},
 		{
 			MethodName: "ListWhatsappNumbers",
 			Handler:    _WhatsappService_ListWhatsappNumbers_Handler,
