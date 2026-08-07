@@ -8,6 +8,7 @@ import "account.proto";
 import "header.proto";
 import "request.proto";
 import "common.proto";
+import "whatsapp.proto";
 
 service GooglekonService {
 	rpc SendEventToGoogle(header.Events) returns (header.Empty);
@@ -688,6 +689,55 @@ service TiktokService {
 	rpc ListTiktokVideos(TiktokVideoRequest) returns (Response);
 	rpc MatchTiktokVideos(Ids) returns (Response);
 	rpc ResyncTiktokVideos(Id) returns (Response);
+}
+
+service WhatsappService {
+	// --- Kết nối & quản lý số -------------------------------------------------
+	// Hoàn tất Embedded Signup: đổi code -> business token, subscribed_apps,
+	// register số, ActivateIntegration. Trả về Response.integrations.
+	rpc CompleteEmbeddedSignup(whatsapp.SignupRequest) returns (Response);
+
+	// Liệt kê số đã kết nối của 1 account (kể cả số state=pending mới phát hiện).
+	rpc ListWhatsappNumbers(Id) returns (Response); // -> integrations
+
+	// Kích hoạt 1 số mới xuất hiện trong WABA (khách bấm "kích hoạt số này").
+	// Truyền `pin` nếu số đã có 2FA PIN do khách tự đặt.
+	rpc ActivateWhatsappNumber(whatsapp.NumberRequest) returns (Response); // -> integration
+	// Ngắt kết nối 1 số: state=deleted, giữ lịch sử tin nhắn.
+	rpc DisconnectWhatsappNumber(whatsapp.NumberRequest) returns (Empty);
+	// Ép đồng bộ ngay từ Meta: hồ sơ, quality_rating, messaging tier, danh sách số.
+	rpc SyncWhatsappNumber(whatsapp.NumberRequest) returns (Response); // -> integration
+	// Cập nhật hồ sơ doanh nghiệp hiển thị trên WhatsApp (about, website, ảnh...).
+	rpc UpdateWhatsappBusinessProfile(whatsapp.BusinessProfileRequest) returns (Response);
+
+	// --- Template -------------------------------------------------------------
+	// Liệt kê template (mặc định status=APPROVED) để agent chọn khi nhắn ngoài 24h.
+	rpc ListWhatsappTemplates(whatsapp.TemplateRequest) returns (whatsapp.Templates);
+	// Ép đồng bộ lại template từ Meta (thường tự chạy qua webhook + cron ngày).
+	rpc SyncWhatsappTemplates(whatsapp.NumberRequest) returns (whatsapp.Templates);
+	// Gửi template — đồng bộ, để agent thấy kết quả/lỗi ngay (TÍNH TIỀN).
+	// Adapter validate tham số trước khi gọi Meta. Trả về Event chứa tin đã tạo.
+	rpc SendWhatsappTemplate(whatsapp.SendTemplateRequest) returns (header.Event);
+
+	// --- Hội thoại ------------------------------------------------------------
+	// Trạng thái cửa sổ 24h của 1 khách (đồng hồ đếm ngược trên UI agent).
+	rpc GetWhatsappWindow(whatsapp.NumberRequest) returns (whatsapp.Window);
+	// Ép làm mới thông tin 1 khách WhatsApp.
+	rpc MakeSureWhatsappUser(whatsapp.NumberRequest) returns (Empty);
+	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
+	rpc MarkWhatsappRead(whatsapp.NumberRequest) returns (Empty);
+
+	// --- Outbound (song song với Kafka, giống SendEventToZalo) -----------------
+	rpc SendEventToWhatsapp(header.Events) returns (Empty);
+
+	// --- Cấu hình -------------------------------------------------------------
+	rpc ReadWhatsappSetting(Id) returns (whatsapp.Setting);
+	rpc UpdateWhatsappSetting(whatsapp.Setting) returns (whatsapp.Setting);
+
+	// v2 (chưa làm ở v1 — khách tự tạo template trong Meta Business Manager):
+	// rpc CreateWhatsappTemplate(whatsapp.Template) returns (whatsapp.Template);
+	// rpc UpdateWhatsappTemplate(whatsapp.Template) returns (whatsapp.Template);
+	// rpc DeleteWhatsappTemplate(whatsapp.TemplateRequest) returns (Empty);
 }
 
 service FabikonService {

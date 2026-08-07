@@ -79,12 +79,8 @@ message Noti {
 	NotiData meta = 9;
 	string topic = 10; // for grouping
 	string type = 5; // type
-	// string data = 8; // @depreacted, use meta
 	int64 created = 6; // ms
 	int64 read_at = 19;
-
-	// bool is_instant = 12; // @deprecated just display and disappear, no persist
-	// string category = 14; // @depreacted user, order, broadcast
 
 	// extra info
 	string request_id = 21;
@@ -303,13 +299,13 @@ message User {
 message Touchpoint {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3; // psid, igsid, zalo id or comment id
+	string id = 3; // psid, igsid, zalo id, comment id or wa_id (whatsapp)
 
-	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms, zalo
+	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms, zalo, tiktok, whatsapp
 	repeated KV fields = 8;
 
 	string linked_page_id = 24; // instagram
-	string source = 23; // page id, zaloa id
+	string source = 23; // page id, zaloa id, tiktok business id, whatsapp phone_number_id
 	string post_id = 25; // for facebook or instagram
 
 	string action_source = 26; // for facebook conversion api only
@@ -1517,6 +1513,8 @@ message MessageReferral {
 	string ref_link = 11;
 	string ref_conversation_id = 12;
 	string ref_page_id = 13;
+
+	string ctwa_clid = 14; // whatsapp: click id của quảng cáo Click-to-WhatsApp
 }
 
 message AdsContextData {
@@ -1971,6 +1969,31 @@ message Integration {
 	int64 following_count = 152;
 	int64 likes_count = 153;
 	int64 video_views = 154;
+
+	// whatsapp: MỘT INTEGRATION = MỘT SỐ WhatsApp (phone number).
+	// id = <account_id>.<phone_number_id>.whatsapp
+	// Các field dùng chung đã có ở trên: name/alias = verified_name, logo_url = ảnh hồ sơ,
+	// phone = display_phone_number, about = profile.about, state, error_code (expired_token),
+	// last_hook_received, last_request_sent, last_synced.
+	string whatsapp_waba_id = 170;          // WhatsApp Business Account chứa số này
+	string whatsapp_phone_number_id = 171;  // định danh gửi tin của Cloud API
+	string whatsapp_business_id = 172;      // business portfolio id của khách
+	string whatsapp_display_phone_number = 173; // "+84 91 234 5678"
+	string whatsapp_verified_name = 174;    // tên hiển thị đã được Meta duyệt
+	string whatsapp_name_status = 175;      // APPROVED | AVAILABLE_WITHOUT_REVIEW | DECLINED | PENDING_REVIEW
+	string whatsapp_quality_rating = 176;   // GREEN | YELLOW | RED
+	string whatsapp_messaging_limit_tier = 177; // TIER_250 | TIER_1K | TIER_10K | TIER_100K | TIER_UNLIMITED
+	string whatsapp_throughput_level = 178; // STANDARD | HIGH
+	string whatsapp_platform_type = 179;    // CLOUD_API | ON_PREMISE | NOT_APPLICABLE
+	string whatsapp_code_verification_status = 180; // VERIFIED | NOT_VERIFIED | EXPIRED
+	bool whatsapp_is_official_business_account = 181; // tick xanh
+	bool whatsapp_registered = 182;         // đã POST /{phone_number_id}/register chưa
+	bool whatsapp_coexistence = 183;        // khách vẫn dùng app WhatsApp Business trên điện thoại
+	string whatsapp_account_review_status = 184; // APPROVED | PENDING | REJECTED (cấp WABA)
+	string whatsapp_ban_state = 185;        // SCHEDULE_FOR_DISABLE | DISABLE | REINSTATE (cấp WABA)
+	int64 whatsapp_history_synced_at = 186; // mốc đồng bộ xong 6 tháng lịch sử (Coexistence)
+	string whatsapp_currency = 187;         // cấp WABA
+	string whatsapp_timezone_id = 188;      // cấp WABA
 }
 
 message FacebookBusiness {
@@ -3404,6 +3427,7 @@ enum ChannelType {
 	account = 14; // subiz internal
 	tiktok = 15;
 	tiktok_comment = 16;
+	whatsapp = 17; // WhatsApp Business Platform (Cloud API)
 }
 
 message WebhookSecret {

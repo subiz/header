@@ -403,6 +403,16 @@ func ListDefaultDefs() []*AttributeDefinition {
 		},
 
 		&AttributeDefinition{
+			Label:       "Whatsapp",
+			Description: "Whatsapp",
+			I18NLabel:   &I18NString{Vi_VN: "Whatsapp", En_US: "Whatsapp"},
+			Type:        "text", // thanhcoolngau2
+			Key:         "whatsapp",
+			IsSystem:    true,
+			IsReadonly:  true,
+		},
+
+		&AttributeDefinition{
 			Label:       "Tiktok Account Type",
 			Description: "Tiktok Account Type",
 			I18NLabel:   &I18NString{Vi_VN: "Loại account tiktok", En_US: "Tiktok Account Type"},

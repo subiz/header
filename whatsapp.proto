@@ -1,0 +1,976 @@
+syntax = "proto3";
+
+package whatsapp;
+
+option go_package = "github.com/subiz/header/whatsapp";
+
+import "common.proto";
+
+// ============================================================================
+// WhatsApp Business Platform (Cloud API) — schema cho adapter `whatsapp`.
+// Tương đương tiktok.proto của tiktokon.
+//
+// Base URL : https://graph.facebook.com/v25.0/
+// Auth     : Authorization: Bearer <business token của từng khách>
+// Mô hình  : Subiz = Tech Provider, khách uỷ quyền qua Embedded Signup.
+//
+// Quy ước: tên field khớp CHÍNH XÁC tên JSON của Meta để dùng thẳng
+// encoding/json (protoc-gen-go sinh tag json:"<tên proto>,omitempty").
+// Meta trả `timestamp` dưới dạng CHUỖI (vd "1771000000") -> khai báo string.
+// ============================================================================
+
+// ============================================================================
+// 1. LƯU TRỮ (Cassandra keyspace `whatsapp`)
+// ============================================================================
+
+// Waba — 1 WhatsApp Business Account của khách. Token nằm ở đây (cấp WABA).
+message Waba {
+	string waba_id = 2;     // khoá chính
+	string account_id = 3;  // account Subiz sở hữu
+	string business_id = 4; // business portfolio id của khách (từ Embedded Signup)
+	string state = 5;       // activated | deleted | failed
+
+	string name = 6;
+	string currency = 7;
+	string timezone_id = 8;
+	string message_template_namespace = 9;
+
+	// Business token đổi từ `code` của Embedded Signup (dài hạn, không cần refresh
+	// như TikTok, nhưng có thể bị revoke -> lỗi 190 -> token_status = -1).
+	string access_token = 10;
+	string scope = 11;
+	int32 token_status = 12; // 0 = ok, -1 = chết (cần khách cấp quyền lại)
+	int64 token_checked_at = 13;
+	int64 token_error_at = 14;
+	string token_error = 15;
+
+	// Trạng thái review/ban của WABA (webhook account_update, account_review_update)
+	string account_review_status = 16; // APPROVED | PENDING | REJECTED
+	string ban_state = 17;             // SCHEDULE_FOR_DISABLE | DISABLE | REINSTATE
+	int64 ban_date = 18;
+
+	bool is_coexistence = 20; // khách vẫn dùng app WhatsApp Business trên điện thoại
+	int64 history_synced_at = 21;
+	string history_phase = 22; // trạng thái đồng bộ 6 tháng lịch sử
+
+	int64 last_hook = 25;   // lần cuối nhận webhook
+	int64 last_synced = 26; // lần cuối cron đồng bộ
+	int64 created = 27;
+	int64 updated = 28;
+}
+
+// PhoneNumber — 1 SỐ = 1 integration Subiz (id: <account_id>.<phone_number_id>.whatsapp).
+// Bảng trung tâm, được cache RAM, tra theo phone_number_id khi nhận webhook / gửi tin.
+message PhoneNumber {
+	string phone_number_id = 2; // khoá chính — định danh gửi tin của Cloud API
+	string waba_id = 3;
+	string account_id = 4;
+	string state = 5; // activated | deleted | failed
+
+	string display_phone_number = 6; // vd "+84 91 234 5678"
+	string verified_name = 7;        // tên hiển thị đã được Meta duyệt
+	string name_status = 8;          // APPROVED | AVAILABLE_WITHOUT_REVIEW | DECLINED | ...
+	string code_verification_status = 9;
+	string platform_type = 10;   // CLOUD_API | ON_PREMISE | NOT_APPLICABLE
+	string quality_rating = 11;  // GREEN | YELLOW | RED
+	string messaging_limit_tier = 12; // TIER_250 | TIER_1K | TIER_10K | TIER_100K | TIER_UNLIMITED
+	string throughput_level = 13;     // STANDARD | HIGH
+	bool is_official_business_account = 14;
+
+	// Đăng ký số vào Cloud API (POST /{phone_number_id}/register)
+	bool registered = 15;
+	string pin = 16; // 6 số 2FA — Subiz tự sinh, LƯU MÃ HOÁ
+	int64 registered_at = 17;
+	string register_error = 18;
+
+	// Hồ sơ doanh nghiệp (GET /{phone_number_id}/whatsapp_business_profile)
+	string about = 20;
+	string address = 21;
+	string description = 22;
+	string email = 23;
+	string vertical = 24;
+	repeated string websites = 25;
+	string profile_picture_url = 26; // đã tải & up lên CDN Subiz
+
+	// Denormalize token của WABA để gửi tin không phải join
+	string access_token = 30;
+	int32 token_status = 31;
+
+	int64 last_hook = 35;
+	int64 last_synced = 36;
+	int64 created = 37;
+	int64 updated = 38;
+}
+
+// Setting — cấu hình theo (account_id, phone_number_id). Lưu blob proto.
+message Setting {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string phone_number_id = 3;
+
+	bool auto_mark_read = 5;      // tự đánh dấu đã đọc khi tin vào Subiz
+	bool send_typing_indicator = 6;
+	bool mirror_smb_echoes = 7;   // mirror tin agent gửi từ app điện thoại (Coexistence)
+	bool sync_history = 8;        // đồng bộ 6 tháng lịch sử khi onboard
+
+	int64 updated = 20;
+}
+
+// WaUser — thông tin & mốc cửa sổ 24h của mỗi khách WhatsApp.
+message WaUser {
+	string phone_number_id = 2;
+	string wa_id = 3; // = số điện thoại khách (E.164, không dấu +)
+	string sb_user_id = 4;
+	string profile_name = 5;
+
+	int64 last_user_message_at = 6; // mốc mở cửa sổ 24h (dùng để hiện cảnh báo UI)
+	string last_entry_point = 7;    // "" | ad | page | ...  (referral) -> có thể 72h
+	bool marketing_opt_out = 8;     // webhook user_preferences: khách gửi STOP
+	int64 marketing_opt_out_at = 9;
+
+	int64 updated = 20;
+}
+
+// Wa2SbEvent — ánh xạ wamid -> Subiz (dedup tin đến + tra reply/quote).
+message Wa2SbEvent {
+	string phone_number_id = 2;
+	string wamid = 3;
+	string account_id = 4;
+	string wa_id = 5;
+	string sb_conversation_id = 6;
+	string sbmid = 7;
+	int64 created = 8;
+}
+
+// Sb2WaEvent — ánh xạ ngược sbmid -> wamid (dùng cho quote/reply và cập nhật status).
+message Sb2WaEvent {
+	string account_id = 2;
+	string sbmid = 3;
+	string phone_number_id = 4;
+	string wamid = 5;
+	string wa_id = 6;
+	string sb_conversation_id = 7;
+	string status = 8; // sent | delivered | read | failed
+	int64 created = 9;
+}
+
+// MessageCost — lưu thô `pricing` từ webhook statuses[] (Q46: báo cáo chi phí làm sau).
+message MessageCost {
+	string phone_number_id = 2;
+	string wamid = 3;
+	string account_id = 4;
+	string conversation_id = 5;
+	string category = 6;      // marketing | utility | authentication | service
+	string pricing_model = 7; // PMP (per-message pricing)
+	string pricing_type = 8;  // regular | free_customer_service | free_entry_point
+	bool billable = 9;
+	int64 created = 10;
+}
+
+// ============================================================================
+// 2. EMBEDDED SIGNUP / TOKEN
+// ============================================================================
+
+// POST /v25.0/oauth/access_token?client_id&client_secret&code=<ES code, TTL 30s>
+message AccessTokenResponse {
+	string access_token = 2;
+	string token_type = 3;
+	int64 expires_in = 4; // 0 = không hết hạn (business integration token)
+	Error error = 5;
+}
+
+// GET /v25.0/debug_token?input_token=...
+message DebugTokenResponse {
+	DebugTokenData data = 2;
+}
+
+message DebugTokenData {
+	string app_id = 2;
+	string type = 3;
+	string application = 4;
+	int64 data_access_expires_at = 5;
+	int64 expires_at = 6;
+	bool is_valid = 7;
+	repeated string scopes = 8;
+	repeated GranularScope granular_scopes = 9;
+	string user_id = 10;
+}
+
+message GranularScope {
+	string scope = 2;
+	repeated string target_ids = 3;
+}
+
+// GET /v25.0/{waba_id}?fields=id,name,currency,timezone_id,...
+message WabaResponse {
+	string id = 2;
+	string name = 3;
+	string currency = 4;
+	string timezone_id = 5;
+	string message_template_namespace = 6;
+	string account_review_status = 7;
+	string business_verification_status = 8;
+	repeated string owner_business_info = 9;
+	Error error = 10;
+}
+
+// GET /v25.0/{waba_id}/phone_numbers
+message PhoneNumberListResponse {
+	repeated PhoneNumberInfo data = 2;
+	Paging paging = 3;
+	Error error = 4;
+}
+
+message PhoneNumberInfo {
+	string id = 2;
+	string display_phone_number = 3;
+	string verified_name = 4;
+	string name_status = 5;
+	string code_verification_status = 6;
+	string quality_rating = 7;
+	string platform_type = 8;
+	string throughput_level = 9; // thực tế nằm trong object `throughput`
+	Throughput throughput = 10;
+	bool is_official_business_account = 11;
+	string status = 12; // CONNECTED | PENDING | ...
+	string messaging_limit_tier = 13;
+}
+
+message Throughput {
+	string level = 2; // STANDARD | HIGH
+}
+
+message Paging {
+	Cursors cursors = 2;
+	string next = 3;
+	string previous = 4;
+}
+
+message Cursors {
+	string before = 2;
+	string after = 3;
+}
+
+// POST /v25.0/{phone_number_id}/register  {messaging_product, pin}
+// POST /v25.0/{waba_id}/subscribed_apps
+message SuccessResponse {
+	bool success = 2;
+	Error error = 3;
+}
+
+// GET /v25.0/{phone_number_id}/whatsapp_business_profile
+message BusinessProfileResponse {
+	repeated BusinessProfile data = 2;
+	Error error = 3;
+}
+
+message BusinessProfile {
+	string messaging_product = 2;
+	string about = 3;
+	string address = 4;
+	string description = 5;
+	string email = 6;
+	string vertical = 7;
+	repeated string websites = 8;
+	string profile_picture_url = 9;
+}
+
+// ============================================================================
+// 3. GỬI TIN — POST /v25.0/{phone_number_id}/messages
+// ============================================================================
+
+message SendRequest {
+	string messaging_product = 2; // luôn "whatsapp"
+	string recipient_type = 3;    // "individual"
+	string to = 4;                // wa_id (E.164 không dấu +)
+	string type = 5;              // text|image|video|audio|document|sticker|location|contacts|interactive|template|reaction
+	Context context = 6;          // trả lời/quote 1 tin: {message_id}
+
+	Text text = 10;
+	Media image = 11;
+	Media video = 12;
+	Media audio = 13;
+	Media document = 14;
+	Media sticker = 15;
+	Location location = 16;
+	repeated ContactCard contacts = 17;
+	Interactive interactive = 18;
+	TemplateMessage template = 19;
+	Reaction reaction = 20;
+
+	// Đánh dấu đã đọc + typing (cùng endpoint, KHÔNG có `to`/`type`):
+	// {messaging_product, status:"read", message_id, typing_indicator:{type:"text"}}
+	string status = 30;
+	string message_id = 31;
+	TypingIndicator typing_indicator = 32;
+}
+
+message TypingIndicator {
+	string type = 2; // "text"
+}
+
+message SendResponse {
+	string messaging_product = 2;
+	repeated SentContact contacts = 3;
+	repeated MessageRef messages = 4;
+	Error error = 5;
+}
+
+message SentContact {
+	string input = 2;
+	string wa_id = 3;
+}
+
+message MessageRef {
+	string id = 2; // wamid.xxx
+	string message_status = 3;
+}
+
+message Text {
+	string body = 2; // ≤ 4096 ký tự
+	bool preview_url = 3;
+}
+
+// Dùng chung cho image/video/audio/document/sticker — cả khi GỬI và khi NHẬN.
+message Media {
+	// gửi: `id` (đã upload) HOẶC `link` (URL công khai)
+	string id = 2;
+	string link = 3;
+	string caption = 4;  // image | video | document
+	string filename = 5; // document
+
+	// nhận:
+	string mime_type = 6;
+	string sha256 = 7;
+	bool voice = 8;    // audio ghi âm
+	bool animated = 9; // sticker động
+	int64 file_size = 10;
+}
+
+message Location {
+	double latitude = 2;
+	double longitude = 3;
+	string name = 4;
+	string address = 5;
+	string url = 6;
+}
+
+message ContactCard {
+	ContactName name = 2;
+	repeated ContactPhone phones = 3;
+	repeated ContactEmail emails = 4;
+	repeated ContactAddress addresses = 5;
+	repeated ContactUrl urls = 6;
+	ContactOrg org = 7;
+	string birthday = 8;
+}
+
+message ContactName {
+	string formatted_name = 2;
+	string first_name = 3;
+	string last_name = 4;
+	string middle_name = 5;
+	string suffix = 6;
+	string prefix = 7;
+}
+
+message ContactPhone {
+	string phone = 2;
+	string type = 3; // HOME | WORK | CELL
+	string wa_id = 4;
+}
+
+message ContactEmail {
+	string email = 2;
+	string type = 3;
+}
+
+message ContactAddress {
+	string street = 2;
+	string city = 3;
+	string state = 4;
+	string zip = 5;
+	string country = 6;
+	string country_code = 7;
+	string type = 8;
+}
+
+message ContactUrl {
+	string url = 2;
+	string type = 3;
+}
+
+message ContactOrg {
+	string company = 2;
+	string department = 3;
+	string title = 4;
+}
+
+message Context {
+	string message_id = 2; // khi GỬI (quote)
+	// khi NHẬN:
+	string from = 3;
+	string id = 4;
+	bool forwarded = 5;
+	bool frequently_forwarded = 6;
+	ReferredProduct referred_product = 7;
+}
+
+message ReferredProduct {
+	string catalog_id = 2;
+	string product_retailer_id = 3;
+}
+
+message Reaction {
+	string message_id = 2;
+	string emoji = 3; // rỗng = gỡ reaction
+}
+
+// --- Interactive (chỉ gửi được trong cửa sổ 24h) -----------------------------
+
+message Interactive {
+	string type = 2; // button | list | cta_url | product | product_list | location_request_message | flow
+	InteractiveHeader header = 3;
+	InteractiveBody body = 4;
+	InteractiveFooter footer = 5;
+	InteractiveAction action = 6;
+
+	// khi NHẬN (khách bấm nút):
+	ButtonReply button_reply = 10;
+	ListReply list_reply = 11;
+	NfmReply nfm_reply = 12;
+}
+
+message InteractiveHeader {
+	string type = 2; // text | image | video | document
+	string text = 3;
+	Media image = 4;
+	Media video = 5;
+	Media document = 6;
+}
+
+message InteractiveBody {
+	string text = 2; // ≤ 1024 ký tự
+}
+
+message InteractiveFooter {
+	string text = 2; // ≤ 60 ký tự
+}
+
+message InteractiveAction {
+	string button = 2; // nhãn mở list (type=list)
+	repeated InteractiveButton buttons = 3; // type=button, tối đa 3
+	repeated InteractiveSection sections = 4; // type=list, tối đa 10 dòng tổng
+	string name = 5; // cta_url | flow
+	InteractiveParameters parameters = 6;
+}
+
+message InteractiveButton {
+	string type = 2; // "reply"
+	ButtonReply reply = 3;
+}
+
+message ButtonReply {
+	string id = 2;    // ≤ 256 ký tự — dùng làm postback payload của Subiz
+	string title = 3; // ≤ 20 ký tự
+}
+
+message InteractiveSection {
+	string title = 2;
+	repeated ListRow rows = 3;
+}
+
+message ListRow {
+	string id = 2;
+	string title = 3;       // ≤ 24 ký tự
+	string description = 4; // ≤ 72 ký tự
+}
+
+message ListReply {
+	string id = 2;
+	string title = 3;
+	string description = 4;
+}
+
+message InteractiveParameters {
+	string display_text = 2; // cta_url
+	string url = 3;          // cta_url
+	string flow_message_version = 4;
+	string flow_token = 5;
+	string flow_id = 6;
+	string flow_cta = 7;
+	string flow_action = 8;
+}
+
+message NfmReply {
+	string name = 2;
+	string body = 3;
+	string response_json = 4;
+}
+
+// --- Template (cách DUY NHẤT gửi ngoài cửa sổ 24h — TÍNH TIỀN) --------------
+
+message TemplateMessage {
+	string name = 2;
+	Language language = 3;
+	repeated TemplateComponentParam components = 4;
+}
+
+message Language {
+	string code = 2; // vd "vi", "en_US"
+	string policy = 3;
+}
+
+message TemplateComponentParam {
+	string type = 2;     // header | body | button
+	string sub_type = 3; // quick_reply | url  (khi type=button)
+	string index = 4;    // "0".."9" (khi type=button)
+	repeated TemplateParam parameters = 5;
+}
+
+message TemplateParam {
+	string type = 2; // text | currency | date_time | image | video | document | payload
+	string parameter_name = 3; // template dùng tham số đặt tên
+	string text = 4;
+	Media image = 5;
+	Media video = 6;
+	Media document = 7;
+	Currency currency = 8;
+	DateTime date_time = 9;
+	string payload = 10; // button quick_reply
+}
+
+message Currency {
+	string fallback_value = 2;
+	string code = 3;
+	int64 amount_1000 = 4;
+}
+
+message DateTime {
+	string fallback_value = 2;
+}
+
+// ============================================================================
+// 4. MEDIA
+// ============================================================================
+
+// POST /v25.0/{phone_number_id}/media (multipart: messaging_product, file, type)
+message MediaUploadResponse {
+	string id = 2;
+	Error error = 3;
+}
+
+// GET /v25.0/{media_id} -> url sống ~5 phút, tải phải kèm Authorization: Bearer
+message MediaUrlResponse {
+	string messaging_product = 2;
+	string url = 3;
+	string mime_type = 4;
+	string sha256 = 5;
+	int64 file_size = 6;
+	string id = 7;
+	Error error = 8;
+}
+
+// ============================================================================
+// 5. WEBHOOK — POST /whatsapp-events
+// Verify: X-Hub-Signature-256 = "sha256=" + HMAC-SHA256(raw_body, APP_SECRET)
+// ============================================================================
+
+message WebhookEvent {
+	string object = 2; // "whatsapp_business_account"
+	repeated Entry entry = 3;
+}
+
+message Entry {
+	string id = 2; // = waba_id
+	int64 time = 3;
+	repeated Change changes = 4;
+}
+
+message Change {
+	string field = 2; // messages | smb_message_echoes | history | message_template_status_update |
+	                  // template_category_update | phone_number_quality_update | phone_number_name_update |
+	                  // account_update | account_review_update | user_preferences | business_capability_update
+	Value value = 3;
+}
+
+// Value gộp mọi loại webhook — Meta dùng chung key `value` cho tất cả field.
+message Value {
+	string messaging_product = 2;
+	Metadata metadata = 3;
+
+	// field = messages
+	repeated Contact contacts = 4;
+	repeated Message messages = 5;
+	repeated Status statuses = 6;
+	repeated Error errors = 7;
+
+	// field = smb_message_echoes (Coexistence — agent trả lời trên app điện thoại)
+	repeated Message message_echoes = 10;
+
+	// field = history (Coexistence — backfill 6 tháng)
+	repeated History history = 11;
+
+	// field = message_template_status_update / template_category_update
+	string message_template_id = 20;
+	string message_template_name = 21;
+	string message_template_language = 22;
+	string event = 23;  // APPROVED | REJECTED | PAUSED | PENDING_DELETION | FLAGGED
+	string reason = 24;
+	string previous_category = 25;
+	string new_category = 26;
+	TemplateDisableInfo disable_info = 27;
+
+	// field = phone_number_quality_update
+	string display_phone_number = 30;
+	string current_limit = 31; // TIER_1K | ...
+	// `event` dùng lại ở trên: ONBOARDING | UPGRADE | DOWNGRADE | FLAGGED | UNFLAGGED
+
+	// field = phone_number_name_update
+	string decision = 35; // APPROVED | REJECTED
+	string requested_verified_name = 36;
+	string rejection_reason = 37;
+
+	// field = account_update
+	string phone_number = 40;
+	BanInfo ban_info = 41;
+	RestrictionInfo restriction_info = 42;
+	string waba_info = 43; // đôi khi là object -> kiểm chứng bằng payload thật
+
+	// field = account_review_update
+	// `decision` dùng lại ở trên
+
+	// field = user_preferences (opt-out marketing)
+	repeated UserPreference user_preferences = 50;
+}
+
+message Metadata {
+	string display_phone_number = 2;
+	string phone_number_id = 3;
+}
+
+message Contact {
+	string wa_id = 2; // = số điện thoại khách
+	Profile profile = 3;
+	string user_id = 4;
+}
+
+message Profile {
+	string name = 2;
+}
+
+// Message — tin đến (messages[]) và tin echo (message_echoes[]).
+message Message {
+	string from = 2; // wa_id khách (echo: số của DN)
+	string to = 3;   // chỉ có ở message_echoes
+	string id = 4;   // wamid.xxx
+	string timestamp = 5; // CHUỖI epoch giây
+	string type = 6;      // text|image|video|audio|document|sticker|location|contacts|
+	                      // interactive|button|order|system|reaction|request_welcome|unsupported
+
+	Text text = 10;
+	Media image = 11;
+	Media video = 12;
+	Media audio = 13;
+	Media document = 14;
+	Media sticker = 15;
+	Location location = 16;
+	repeated ContactCard contacts = 17;
+	Interactive interactive = 18;
+	Button button = 19;     // nút của template quick_reply
+	Order order = 20;
+	System system = 21;
+	Reaction reaction = 22;
+
+	Context context = 25;   // trả lời tin nào
+	Referral referral = 26; // Click-to-WhatsApp ads
+	Identity identity = 27;
+	repeated Error errors = 28; // type=unsupported
+}
+
+message Button {
+	string text = 2;
+	string payload = 3;
+}
+
+message Order {
+	string catalog_id = 2;
+	string text = 3;
+	repeated ProductItem product_items = 4;
+}
+
+message ProductItem {
+	string product_retailer_id = 2;
+	string quantity = 3;
+	string item_price = 4;
+	string currency = 5;
+}
+
+message System {
+	string body = 2;
+	string identity = 3;
+	string new_wa_id = 4;
+	string wa_id = 5;
+	string type = 6; // customer_changed_number | customer_identity_changed
+	string customer = 7;
+}
+
+message Identity {
+	bool acknowledged = 2;
+	string created_timestamp = 3;
+	string hash = 4;
+}
+
+// Referral — khách vào từ quảng cáo Click-to-WhatsApp / nút CTA trên Page.
+// Map sang header.MessageReferral + phát event message_referral (giống fabikon).
+message Referral {
+	string source_url = 2;
+	string source_type = 3; // ad | post
+	string source_id = 4;   // ad_id hoặc post_id
+	string headline = 5;
+	string body = 6;
+	string media_type = 7; // image | video
+	string image_url = 8;
+	string video_url = 9;
+	string thumbnail_url = 10;
+	string ctwa_clid = 11; // click id — dùng cho conversion attribution
+	WelcomeMessage welcome_message = 12;
+}
+
+message WelcomeMessage {
+	string text = 2;
+}
+
+// Status — trạng thái tin DN gửi đi.
+message Status {
+	string id = 2; // wamid
+	string status = 3; // sent | delivered | read | failed
+	string timestamp = 4;
+	string recipient_id = 5; // wa_id
+	StatusConversation conversation = 6;
+	Pricing pricing = 7;
+	repeated Error errors = 8;
+	string biz_opaque_callback_data = 9;
+}
+
+message StatusConversation {
+	string id = 2;
+	string expiration_timestamp = 3;
+	ConversationOrigin origin = 4;
+}
+
+message ConversationOrigin {
+	string type = 2; // marketing | utility | authentication | service | referral_conversion
+}
+
+message Pricing {
+	bool billable = 2;
+	string pricing_model = 3; // PMP
+	string category = 4;      // marketing | utility | authentication | service
+	string type = 5;          // regular | free_customer_service | free_entry_point
+}
+
+message Error {
+	int64 code = 2;
+	string title = 3;
+	string message = 4;
+	string type = 5;
+	string href = 6;
+	string fbtrace_id = 7;
+	string error_subcode = 8;
+	ErrorData error_data = 9;
+}
+
+message ErrorData {
+	string details = 2;
+	string messaging_product = 3;
+}
+
+message BanInfo {
+	string waba_ban_state = 2; // SCHEDULE_FOR_DISABLE | DISABLE | REINSTATE
+	string waba_ban_date = 3;
+}
+
+message RestrictionInfo {
+	string restriction_type = 2;
+	string expiration = 3;
+}
+
+message TemplateDisableInfo {
+	string disable_date = 2;
+}
+
+message UserPreference {
+	string wa_id = 2;
+	string detail = 3;
+	string category = 4;  // marketing_messages
+	string value = 5;     // stop | resume
+	string timestamp = 6;
+}
+
+// History — Coexistence: backfill tối đa 6 tháng lịch sử chat khi onboard.
+// Đẩy vào Subiz bằng ConversationMgr.SaveMessage (im lặng, giữ EventTime gốc).
+message History {
+	HistoryMetadata metadata = 2;
+	repeated HistoryThread threads = 3;
+}
+
+message HistoryMetadata {
+	string phase = 2; // vd "0" | "1"
+	int64 chunk_order = 3;
+	string progress = 4;
+}
+
+message HistoryThread {
+	string id = 2; // wa_id
+	repeated Message messages = 3;
+}
+
+// ============================================================================
+// 6. TEMPLATE — GET/POST /v25.0/{waba_id}/message_templates
+// ============================================================================
+
+message TemplateListResponse {
+	repeated Template data = 2;
+	Paging paging = 3;
+	Error error = 4;
+}
+
+// Template — cache trong DB, cập nhật qua webhook message_template_status_update.
+message Template {
+	common.Context ctx = 1;
+	string id = 2;
+	string name = 3;
+	string language = 4;
+	string status = 5;   // APPROVED | PENDING | REJECTED | PAUSED | DISABLED
+	string category = 6; // MARKETING | UTILITY | AUTHENTICATION
+	string sub_category = 7;
+	repeated TemplateComponent components = 8;
+	string quality_score = 9;
+	string rejected_reason = 10;
+	string previous_category = 11;
+	string parameter_format = 12; // POSITIONAL | NAMED
+
+	// cột phụ khi lưu DB
+	string waba_id = 20;
+	string account_id = 21;
+	int64 updated = 22;
+}
+
+message TemplateComponent {
+	string type = 2;   // HEADER | BODY | FOOTER | BUTTONS | CAROUSEL
+	string format = 3; // TEXT | IMAGE | VIDEO | DOCUMENT | LOCATION
+	string text = 4;
+	TemplateExample example = 5;
+	repeated TemplateButtonDef buttons = 6;
+	bool add_security_recommendation = 7;
+	int64 code_expiration_minutes = 8;
+}
+
+message TemplateExample {
+	repeated string header_text = 2;
+	repeated string header_handle = 3;
+	repeated StringList body_text = 4;
+	repeated NamedParamExample body_text_named_params = 5;
+	repeated NamedParamExample header_text_named_params = 6;
+}
+
+message StringList {
+	repeated string values = 2;
+}
+
+message NamedParamExample {
+	string param_name = 2;
+	string example = 3;
+}
+
+message TemplateButtonDef {
+	string type = 2; // QUICK_REPLY | URL | PHONE_NUMBER | COPY_CODE | FLOW
+	string text = 3;
+	string url = 4;
+	string phone_number = 5;
+	repeated string example = 6;
+	string flow_id = 7;
+}
+
+// ============================================================================
+// 7. REQUEST / RESPONSE cho gRPC `header.WhatsappService` (service.proto)
+// Frontend Subiz gọi qua Subiz core, core gọi adapter bằng gRPC.
+// LƯU Ý: KHÔNG trả `Waba`/`PhoneNumber` ra ngoài (chứa access_token, pin).
+// Danh sách số trả về dưới dạng header.Integration (đã có đủ field whatsapp_*).
+// ============================================================================
+
+// CompleteEmbeddedSignup — hoàn tất uỷ quyền. `code` chỉ sống 30 giây.
+message SignupRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string code = 3;
+	string waba_id = 4;
+	string business_id = 5;
+	string phone_number_id = 6;
+	repeated string phone_number_ids = 7; // khách chọn kích hoạt nhiều số cùng lúc
+}
+
+// NumberRequest — request chung cho các thao tác trên 1 số (và tuỳ chọn 1 khách).
+message NumberRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string phone_number_id = 3;
+	string waba_id = 4;
+
+	string wa_id = 5;      // khách — GetWindow / MakeSureUser / MarkRead
+	string pin = 6;        // ActivateNumber khi khách đã tự đặt 2FA PIN
+	string message_id = 7; // MarkRead: wamid cần đánh dấu đã đọc
+	bool typing = 8;       // MarkRead: gửi kèm typing indicator
+	bool force = 9;        // SyncNumber: bỏ qua throttle
+}
+
+message BusinessProfileRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string phone_number_id = 3;
+	BusinessProfile profile = 4;
+}
+
+message TemplateRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string waba_id = 3;
+	string phone_number_id = 4;
+	string status = 5;   // mặc định APPROVED
+	string category = 6; // MARKETING | UTILITY | AUTHENTICATION
+	string language = 7;
+	string name = 8;
+	int32 limit = 9;
+	string anchor = 10;
+}
+
+message Templates {
+	common.Context ctx = 1;
+	repeated Template templates = 2;
+	string anchor = 3;
+}
+
+// SendTemplateRequest — gửi template (cách duy nhất nhắn ngoài cửa sổ 24h, TÍNH TIỀN).
+// Gọi đồng bộ để agent thấy kết quả/lỗi ngay, khác tin thường (đi qua Kafka).
+message SendTemplateRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string phone_number_id = 3;
+	string wa_id = 4;
+	string conversation_id = 5; // hội thoại Subiz để gắn tin gửi đi
+	string by = 6;              // agent id
+	TemplateMessage template = 7;
+}
+
+// Window — trạng thái cửa sổ 24h của 1 khách (cho đồng hồ đếm ngược trên UI).
+message Window {
+	common.Context ctx = 1;
+	string phone_number_id = 2;
+	string wa_id = 3;
+	int64 last_user_message_at = 4; // epoch ms
+	int64 expires_at = 5;           // + 24h (hoặc 72h nếu vào từ quảng cáo CTWA)
+	bool open = 6;
+	string entry_point = 7;         // ad | page | ""
+	bool marketing_opt_out = 8;     // webhook user_preferences
+}

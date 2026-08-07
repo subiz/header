@@ -11,6 +11,7 @@ import (
 	account "github.com/subiz/header/account"
 	common "github.com/subiz/header/common"
 	payment "github.com/subiz/header/payment"
+	whatsapp "github.com/subiz/header/whatsapp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19067,6 +19068,680 @@ var TiktokService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResyncTiktokVideos",
 			Handler:    _TiktokService_ResyncTiktokVideos_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
+	WhatsappService_CompleteEmbeddedSignup_FullMethodName        = "/header.WhatsappService/CompleteEmbeddedSignup"
+	WhatsappService_ListWhatsappNumbers_FullMethodName           = "/header.WhatsappService/ListWhatsappNumbers"
+	WhatsappService_ActivateWhatsappNumber_FullMethodName        = "/header.WhatsappService/ActivateWhatsappNumber"
+	WhatsappService_DisconnectWhatsappNumber_FullMethodName      = "/header.WhatsappService/DisconnectWhatsappNumber"
+	WhatsappService_SyncWhatsappNumber_FullMethodName            = "/header.WhatsappService/SyncWhatsappNumber"
+	WhatsappService_UpdateWhatsappBusinessProfile_FullMethodName = "/header.WhatsappService/UpdateWhatsappBusinessProfile"
+	WhatsappService_ListWhatsappTemplates_FullMethodName         = "/header.WhatsappService/ListWhatsappTemplates"
+	WhatsappService_SyncWhatsappTemplates_FullMethodName         = "/header.WhatsappService/SyncWhatsappTemplates"
+	WhatsappService_SendWhatsappTemplate_FullMethodName          = "/header.WhatsappService/SendWhatsappTemplate"
+	WhatsappService_GetWhatsappWindow_FullMethodName             = "/header.WhatsappService/GetWhatsappWindow"
+	WhatsappService_MakeSureWhatsappUser_FullMethodName          = "/header.WhatsappService/MakeSureWhatsappUser"
+	WhatsappService_MarkWhatsappRead_FullMethodName              = "/header.WhatsappService/MarkWhatsappRead"
+	WhatsappService_SendEventToWhatsapp_FullMethodName           = "/header.WhatsappService/SendEventToWhatsapp"
+	WhatsappService_ReadWhatsappSetting_FullMethodName           = "/header.WhatsappService/ReadWhatsappSetting"
+	WhatsappService_UpdateWhatsappSetting_FullMethodName         = "/header.WhatsappService/UpdateWhatsappSetting"
+)
+
+// WhatsappServiceClient is the client API for WhatsappService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type WhatsappServiceClient interface {
+	// --- Kết nối & quản lý số -------------------------------------------------
+	// Hoàn tất Embedded Signup: đổi code -> business token, subscribed_apps,
+	// register số, ActivateIntegration. Trả về Response.integrations.
+	CompleteEmbeddedSignup(ctx context.Context, in *whatsapp.SignupRequest, opts ...grpc.CallOption) (*Response, error)
+	// Liệt kê số đã kết nối của 1 account (kể cả số state=pending mới phát hiện).
+	ListWhatsappNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// Kích hoạt 1 số mới xuất hiện trong WABA (khách bấm "kích hoạt số này").
+	// Truyền `pin` nếu số đã có 2FA PIN do khách tự đặt.
+	ActivateWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Response, error)
+	// Ngắt kết nối 1 số: state=deleted, giữ lịch sử tin nhắn.
+	DisconnectWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error)
+	// Ép đồng bộ ngay từ Meta: hồ sơ, quality_rating, messaging tier, danh sách số.
+	SyncWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Response, error)
+	// Cập nhật hồ sơ doanh nghiệp hiển thị trên WhatsApp (about, website, ảnh...).
+	UpdateWhatsappBusinessProfile(ctx context.Context, in *whatsapp.BusinessProfileRequest, opts ...grpc.CallOption) (*Response, error)
+	// --- Template -------------------------------------------------------------
+	// Liệt kê template (mặc định status=APPROVED) để agent chọn khi nhắn ngoài 24h.
+	ListWhatsappTemplates(ctx context.Context, in *whatsapp.TemplateRequest, opts ...grpc.CallOption) (*whatsapp.Templates, error)
+	// Ép đồng bộ lại template từ Meta (thường tự chạy qua webhook + cron ngày).
+	SyncWhatsappTemplates(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*whatsapp.Templates, error)
+	// Gửi template — đồng bộ, để agent thấy kết quả/lỗi ngay (TÍNH TIỀN).
+	// Adapter validate tham số trước khi gọi Meta. Trả về Event chứa tin đã tạo.
+	SendWhatsappTemplate(ctx context.Context, in *whatsapp.SendTemplateRequest, opts ...grpc.CallOption) (*Event, error)
+	// --- Hội thoại ------------------------------------------------------------
+	// Trạng thái cửa sổ 24h của 1 khách (đồng hồ đếm ngược trên UI agent).
+	GetWhatsappWindow(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*whatsapp.Window, error)
+	// Ép làm mới thông tin 1 khách WhatsApp.
+	MakeSureWhatsappUser(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error)
+	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
+	MarkWhatsappRead(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error)
+	// --- Outbound (song song với Kafka, giống SendEventToZalo) -----------------
+	SendEventToWhatsapp(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
+	// --- Cấu hình -------------------------------------------------------------
+	ReadWhatsappSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*whatsapp.Setting, error)
+	UpdateWhatsappSetting(ctx context.Context, in *whatsapp.Setting, opts ...grpc.CallOption) (*whatsapp.Setting, error)
+}
+
+type whatsappServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewWhatsappServiceClient(cc grpc.ClientConnInterface) WhatsappServiceClient {
+	return &whatsappServiceClient{cc}
+}
+
+func (c *whatsappServiceClient) CompleteEmbeddedSignup(ctx context.Context, in *whatsapp.SignupRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WhatsappService_CompleteEmbeddedSignup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) ListWhatsappNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WhatsappService_ListWhatsappNumbers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) ActivateWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WhatsappService_ActivateWhatsappNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) DisconnectWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WhatsappService_DisconnectWhatsappNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) SyncWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WhatsappService_SyncWhatsappNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) UpdateWhatsappBusinessProfile(ctx context.Context, in *whatsapp.BusinessProfileRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WhatsappService_UpdateWhatsappBusinessProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) ListWhatsappTemplates(ctx context.Context, in *whatsapp.TemplateRequest, opts ...grpc.CallOption) (*whatsapp.Templates, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(whatsapp.Templates)
+	err := c.cc.Invoke(ctx, WhatsappService_ListWhatsappTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) SyncWhatsappTemplates(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*whatsapp.Templates, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(whatsapp.Templates)
+	err := c.cc.Invoke(ctx, WhatsappService_SyncWhatsappTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) SendWhatsappTemplate(ctx context.Context, in *whatsapp.SendTemplateRequest, opts ...grpc.CallOption) (*Event, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Event)
+	err := c.cc.Invoke(ctx, WhatsappService_SendWhatsappTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) GetWhatsappWindow(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*whatsapp.Window, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(whatsapp.Window)
+	err := c.cc.Invoke(ctx, WhatsappService_GetWhatsappWindow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) MakeSureWhatsappUser(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WhatsappService_MakeSureWhatsappUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) MarkWhatsappRead(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WhatsappService_MarkWhatsappRead_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) SendEventToWhatsapp(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WhatsappService_SendEventToWhatsapp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) ReadWhatsappSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*whatsapp.Setting, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(whatsapp.Setting)
+	err := c.cc.Invoke(ctx, WhatsappService_ReadWhatsappSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *whatsappServiceClient) UpdateWhatsappSetting(ctx context.Context, in *whatsapp.Setting, opts ...grpc.CallOption) (*whatsapp.Setting, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(whatsapp.Setting)
+	err := c.cc.Invoke(ctx, WhatsappService_UpdateWhatsappSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WhatsappServiceServer is the server API for WhatsappService service.
+// All implementations must embed UnimplementedWhatsappServiceServer
+// for forward compatibility.
+type WhatsappServiceServer interface {
+	// --- Kết nối & quản lý số -------------------------------------------------
+	// Hoàn tất Embedded Signup: đổi code -> business token, subscribed_apps,
+	// register số, ActivateIntegration. Trả về Response.integrations.
+	CompleteEmbeddedSignup(context.Context, *whatsapp.SignupRequest) (*Response, error)
+	// Liệt kê số đã kết nối của 1 account (kể cả số state=pending mới phát hiện).
+	ListWhatsappNumbers(context.Context, *Id) (*Response, error)
+	// Kích hoạt 1 số mới xuất hiện trong WABA (khách bấm "kích hoạt số này").
+	// Truyền `pin` nếu số đã có 2FA PIN do khách tự đặt.
+	ActivateWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Response, error)
+	// Ngắt kết nối 1 số: state=deleted, giữ lịch sử tin nhắn.
+	DisconnectWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Empty, error)
+	// Ép đồng bộ ngay từ Meta: hồ sơ, quality_rating, messaging tier, danh sách số.
+	SyncWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Response, error)
+	// Cập nhật hồ sơ doanh nghiệp hiển thị trên WhatsApp (about, website, ảnh...).
+	UpdateWhatsappBusinessProfile(context.Context, *whatsapp.BusinessProfileRequest) (*Response, error)
+	// --- Template -------------------------------------------------------------
+	// Liệt kê template (mặc định status=APPROVED) để agent chọn khi nhắn ngoài 24h.
+	ListWhatsappTemplates(context.Context, *whatsapp.TemplateRequest) (*whatsapp.Templates, error)
+	// Ép đồng bộ lại template từ Meta (thường tự chạy qua webhook + cron ngày).
+	SyncWhatsappTemplates(context.Context, *whatsapp.NumberRequest) (*whatsapp.Templates, error)
+	// Gửi template — đồng bộ, để agent thấy kết quả/lỗi ngay (TÍNH TIỀN).
+	// Adapter validate tham số trước khi gọi Meta. Trả về Event chứa tin đã tạo.
+	SendWhatsappTemplate(context.Context, *whatsapp.SendTemplateRequest) (*Event, error)
+	// --- Hội thoại ------------------------------------------------------------
+	// Trạng thái cửa sổ 24h của 1 khách (đồng hồ đếm ngược trên UI agent).
+	GetWhatsappWindow(context.Context, *whatsapp.NumberRequest) (*whatsapp.Window, error)
+	// Ép làm mới thông tin 1 khách WhatsApp.
+	MakeSureWhatsappUser(context.Context, *whatsapp.NumberRequest) (*Empty, error)
+	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
+	MarkWhatsappRead(context.Context, *whatsapp.NumberRequest) (*Empty, error)
+	// --- Outbound (song song với Kafka, giống SendEventToZalo) -----------------
+	SendEventToWhatsapp(context.Context, *Events) (*Empty, error)
+	// --- Cấu hình -------------------------------------------------------------
+	ReadWhatsappSetting(context.Context, *Id) (*whatsapp.Setting, error)
+	UpdateWhatsappSetting(context.Context, *whatsapp.Setting) (*whatsapp.Setting, error)
+	mustEmbedUnimplementedWhatsappServiceServer()
+}
+
+// UnimplementedWhatsappServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedWhatsappServiceServer struct{}
+
+func (UnimplementedWhatsappServiceServer) CompleteEmbeddedSignup(context.Context, *whatsapp.SignupRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CompleteEmbeddedSignup not implemented")
+}
+func (UnimplementedWhatsappServiceServer) ListWhatsappNumbers(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListWhatsappNumbers not implemented")
+}
+func (UnimplementedWhatsappServiceServer) ActivateWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ActivateWhatsappNumber not implemented")
+}
+func (UnimplementedWhatsappServiceServer) DisconnectWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DisconnectWhatsappNumber not implemented")
+}
+func (UnimplementedWhatsappServiceServer) SyncWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SyncWhatsappNumber not implemented")
+}
+func (UnimplementedWhatsappServiceServer) UpdateWhatsappBusinessProfile(context.Context, *whatsapp.BusinessProfileRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateWhatsappBusinessProfile not implemented")
+}
+func (UnimplementedWhatsappServiceServer) ListWhatsappTemplates(context.Context, *whatsapp.TemplateRequest) (*whatsapp.Templates, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListWhatsappTemplates not implemented")
+}
+func (UnimplementedWhatsappServiceServer) SyncWhatsappTemplates(context.Context, *whatsapp.NumberRequest) (*whatsapp.Templates, error) {
+	return nil, status.Error(codes.Unimplemented, "method SyncWhatsappTemplates not implemented")
+}
+func (UnimplementedWhatsappServiceServer) SendWhatsappTemplate(context.Context, *whatsapp.SendTemplateRequest) (*Event, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendWhatsappTemplate not implemented")
+}
+func (UnimplementedWhatsappServiceServer) GetWhatsappWindow(context.Context, *whatsapp.NumberRequest) (*whatsapp.Window, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWhatsappWindow not implemented")
+}
+func (UnimplementedWhatsappServiceServer) MakeSureWhatsappUser(context.Context, *whatsapp.NumberRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MakeSureWhatsappUser not implemented")
+}
+func (UnimplementedWhatsappServiceServer) MarkWhatsappRead(context.Context, *whatsapp.NumberRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MarkWhatsappRead not implemented")
+}
+func (UnimplementedWhatsappServiceServer) SendEventToWhatsapp(context.Context, *Events) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendEventToWhatsapp not implemented")
+}
+func (UnimplementedWhatsappServiceServer) ReadWhatsappSetting(context.Context, *Id) (*whatsapp.Setting, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadWhatsappSetting not implemented")
+}
+func (UnimplementedWhatsappServiceServer) UpdateWhatsappSetting(context.Context, *whatsapp.Setting) (*whatsapp.Setting, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateWhatsappSetting not implemented")
+}
+func (UnimplementedWhatsappServiceServer) mustEmbedUnimplementedWhatsappServiceServer() {}
+func (UnimplementedWhatsappServiceServer) testEmbeddedByValue()                         {}
+
+// UnsafeWhatsappServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to WhatsappServiceServer will
+// result in compilation errors.
+type UnsafeWhatsappServiceServer interface {
+	mustEmbedUnimplementedWhatsappServiceServer()
+}
+
+func RegisterWhatsappServiceServer(s grpc.ServiceRegistrar, srv WhatsappServiceServer) {
+	// If the following call panics, it indicates UnimplementedWhatsappServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&WhatsappService_ServiceDesc, srv)
+}
+
+func _WhatsappService_CompleteEmbeddedSignup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.SignupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).CompleteEmbeddedSignup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_CompleteEmbeddedSignup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).CompleteEmbeddedSignup(ctx, req.(*whatsapp.SignupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_ListWhatsappNumbers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).ListWhatsappNumbers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_ListWhatsappNumbers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).ListWhatsappNumbers(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_ActivateWhatsappNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).ActivateWhatsappNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_ActivateWhatsappNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).ActivateWhatsappNumber(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_DisconnectWhatsappNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).DisconnectWhatsappNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_DisconnectWhatsappNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).DisconnectWhatsappNumber(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_SyncWhatsappNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).SyncWhatsappNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_SyncWhatsappNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).SyncWhatsappNumber(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_UpdateWhatsappBusinessProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.BusinessProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).UpdateWhatsappBusinessProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_UpdateWhatsappBusinessProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).UpdateWhatsappBusinessProfile(ctx, req.(*whatsapp.BusinessProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_ListWhatsappTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.TemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).ListWhatsappTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_ListWhatsappTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).ListWhatsappTemplates(ctx, req.(*whatsapp.TemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_SyncWhatsappTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).SyncWhatsappTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_SyncWhatsappTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).SyncWhatsappTemplates(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_SendWhatsappTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.SendTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).SendWhatsappTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_SendWhatsappTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).SendWhatsappTemplate(ctx, req.(*whatsapp.SendTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_GetWhatsappWindow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).GetWhatsappWindow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_GetWhatsappWindow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).GetWhatsappWindow(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_MakeSureWhatsappUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).MakeSureWhatsappUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_MakeSureWhatsappUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).MakeSureWhatsappUser(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_MarkWhatsappRead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).MarkWhatsappRead(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_MarkWhatsappRead_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).MarkWhatsappRead(ctx, req.(*whatsapp.NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_SendEventToWhatsapp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Events)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).SendEventToWhatsapp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_SendEventToWhatsapp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).SendEventToWhatsapp(ctx, req.(*Events))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_ReadWhatsappSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).ReadWhatsappSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_ReadWhatsappSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).ReadWhatsappSetting(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WhatsappService_UpdateWhatsappSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(whatsapp.Setting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WhatsappServiceServer).UpdateWhatsappSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WhatsappService_UpdateWhatsappSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WhatsappServiceServer).UpdateWhatsappSetting(ctx, req.(*whatsapp.Setting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// WhatsappService_ServiceDesc is the grpc.ServiceDesc for WhatsappService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var WhatsappService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.WhatsappService",
+	HandlerType: (*WhatsappServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CompleteEmbeddedSignup",
+			Handler:    _WhatsappService_CompleteEmbeddedSignup_Handler,
+		},
+		{
+			MethodName: "ListWhatsappNumbers",
+			Handler:    _WhatsappService_ListWhatsappNumbers_Handler,
+		},
+		{
+			MethodName: "ActivateWhatsappNumber",
+			Handler:    _WhatsappService_ActivateWhatsappNumber_Handler,
+		},
+		{
+			MethodName: "DisconnectWhatsappNumber",
+			Handler:    _WhatsappService_DisconnectWhatsappNumber_Handler,
+		},
+		{
+			MethodName: "SyncWhatsappNumber",
+			Handler:    _WhatsappService_SyncWhatsappNumber_Handler,
+		},
+		{
+			MethodName: "UpdateWhatsappBusinessProfile",
+			Handler:    _WhatsappService_UpdateWhatsappBusinessProfile_Handler,
+		},
+		{
+			MethodName: "ListWhatsappTemplates",
+			Handler:    _WhatsappService_ListWhatsappTemplates_Handler,
+		},
+		{
+			MethodName: "SyncWhatsappTemplates",
+			Handler:    _WhatsappService_SyncWhatsappTemplates_Handler,
+		},
+		{
+			MethodName: "SendWhatsappTemplate",
+			Handler:    _WhatsappService_SendWhatsappTemplate_Handler,
+		},
+		{
+			MethodName: "GetWhatsappWindow",
+			Handler:    _WhatsappService_GetWhatsappWindow_Handler,
+		},
+		{
+			MethodName: "MakeSureWhatsappUser",
+			Handler:    _WhatsappService_MakeSureWhatsappUser_Handler,
+		},
+		{
+			MethodName: "MarkWhatsappRead",
+			Handler:    _WhatsappService_MarkWhatsappRead_Handler,
+		},
+		{
+			MethodName: "SendEventToWhatsapp",
+			Handler:    _WhatsappService_SendEventToWhatsapp_Handler,
+		},
+		{
+			MethodName: "ReadWhatsappSetting",
+			Handler:    _WhatsappService_ReadWhatsappSetting_Handler,
+		},
+		{
+			MethodName: "UpdateWhatsappSetting",
+			Handler:    _WhatsappService_UpdateWhatsappSetting_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
