@@ -857,7 +857,8 @@ message Template {
 	string category = 6; // MARKETING | UTILITY | AUTHENTICATION
 	string sub_category = 7;
 	repeated TemplateComponent components = 8;
-	string quality_score = 9;
+	// Payload thật: "quality_score":{"score":"UNKNOWN","date":1786110637} — là OBJECT.
+	QualityScore quality_score = 9;
 	string rejected_reason = 10;
 	string previous_category = 11;
 	string parameter_format = 12; // POSITIONAL | NAMED
@@ -876,6 +877,16 @@ message TemplateComponent {
 	repeated TemplateButtonDef buttons = 6;
 	bool add_security_recommendation = 7;
 	int64 code_expiration_minutes = 8;
+	repeated TemplateCard cards = 9; // type=CAROUSEL (payload thật có, từng bị bỏ qua)
+}
+
+message QualityScore {
+	string score = 2; // GREEN | YELLOW | RED | UNKNOWN
+	int64 date = 3;
+}
+
+message TemplateCard {
+	repeated TemplateComponent components = 2;
 }
 
 message TemplateExample {
@@ -920,6 +931,11 @@ message SignupRequest {
 	string business_id = 5;
 	string phone_number_id = 6;
 	repeated string phone_number_ids = 7; // khách chọn kích hoạt nhiều số cùng lúc
+
+	// Luồng NỘI BỘ (portfolio sở hữu app, Meta chặn đi qua ES): FB.login cổ điển
+	// trả access token thay vì code (code của JS SDK bị buộc redirect_uri nội bộ,
+	// lỗi 36008 khi đổi server-side). Backend đổi sang long-lived rồi tự dò WABA.
+	string access_token = 8;
 }
 
 // NumberRequest — request chung cho các thao tác trên 1 số (và tuỳ chọn 1 khách).
