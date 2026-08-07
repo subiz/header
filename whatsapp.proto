@@ -701,8 +701,8 @@ message Order {
 
 message ProductItem {
 	string product_retailer_id = 2;
-	string quantity = 3;
-	string item_price = 4;
+	int64 quantity = 3;    // Meta gửi dạng SỐ
+	double item_price = 4; // Meta gửi dạng SỐ
 	string currency = 5;
 }
 
@@ -717,7 +717,7 @@ message System {
 
 message Identity {
 	bool acknowledged = 2;
-	string created_timestamp = 3;
+	int64 created_timestamp = 3; // Meta gửi dạng SỐ (epoch ms)
 	string hash = 4;
 }
 
@@ -777,7 +777,7 @@ message Error {
 	string type = 5;
 	string href = 6;
 	string fbtrace_id = 7;
-	string error_subcode = 8;
+	int64 error_subcode = 8; // Meta gửi dạng SỐ
 	ErrorData error_data = 9;
 }
 
@@ -816,9 +816,9 @@ message History {
 }
 
 message HistoryMetadata {
-	string phase = 2; // vd "0" | "1"
+	string phase = 2;      // vd "0" | "1"
 	int64 chunk_order = 3;
-	string progress = 4;
+	int64 progress = 4;    // % đã đồng bộ — Meta gửi dạng SỐ
 }
 
 message HistoryThread {

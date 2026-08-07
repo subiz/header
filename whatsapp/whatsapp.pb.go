@@ -5523,8 +5523,8 @@ func (x *Order) GetProductItems() []*ProductItem {
 type ProductItem struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	ProductRetailerId string                 `protobuf:"bytes,2,opt,name=product_retailer_id,json=productRetailerId,proto3" json:"product_retailer_id,omitempty"`
-	Quantity          string                 `protobuf:"bytes,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	ItemPrice         string                 `protobuf:"bytes,4,opt,name=item_price,json=itemPrice,proto3" json:"item_price,omitempty"`
+	Quantity          int64                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`                     // Meta gửi dạng SỐ
+	ItemPrice         float64                `protobuf:"fixed64,4,opt,name=item_price,json=itemPrice,proto3" json:"item_price,omitempty"` // Meta gửi dạng SỐ
 	Currency          string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -5567,18 +5567,18 @@ func (x *ProductItem) GetProductRetailerId() string {
 	return ""
 }
 
-func (x *ProductItem) GetQuantity() string {
+func (x *ProductItem) GetQuantity() int64 {
 	if x != nil {
 		return x.Quantity
 	}
-	return ""
+	return 0
 }
 
-func (x *ProductItem) GetItemPrice() string {
+func (x *ProductItem) GetItemPrice() float64 {
 	if x != nil {
 		return x.ItemPrice
 	}
-	return ""
+	return 0
 }
 
 func (x *ProductItem) GetCurrency() string {
@@ -5675,7 +5675,7 @@ func (x *System) GetCustomer() string {
 type Identity struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Acknowledged     bool                   `protobuf:"varint,2,opt,name=acknowledged,proto3" json:"acknowledged,omitempty"`
-	CreatedTimestamp string                 `protobuf:"bytes,3,opt,name=created_timestamp,json=createdTimestamp,proto3" json:"created_timestamp,omitempty"`
+	CreatedTimestamp int64                  `protobuf:"varint,3,opt,name=created_timestamp,json=createdTimestamp,proto3" json:"created_timestamp,omitempty"` // Meta gửi dạng SỐ (epoch ms)
 	Hash             string                 `protobuf:"bytes,4,opt,name=hash,proto3" json:"hash,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -5718,11 +5718,11 @@ func (x *Identity) GetAcknowledged() bool {
 	return false
 }
 
-func (x *Identity) GetCreatedTimestamp() string {
+func (x *Identity) GetCreatedTimestamp() int64 {
 	if x != nil {
 		return x.CreatedTimestamp
 	}
-	return ""
+	return 0
 }
 
 func (x *Identity) GetHash() string {
@@ -6183,7 +6183,7 @@ type Error struct {
 	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
 	Href          string                 `protobuf:"bytes,6,opt,name=href,proto3" json:"href,omitempty"`
 	FbtraceId     string                 `protobuf:"bytes,7,opt,name=fbtrace_id,json=fbtraceId,proto3" json:"fbtrace_id,omitempty"`
-	ErrorSubcode  string                 `protobuf:"bytes,8,opt,name=error_subcode,json=errorSubcode,proto3" json:"error_subcode,omitempty"`
+	ErrorSubcode  int64                  `protobuf:"varint,8,opt,name=error_subcode,json=errorSubcode,proto3" json:"error_subcode,omitempty"` // Meta gửi dạng SỐ
 	ErrorData     *ErrorData             `protobuf:"bytes,9,opt,name=error_data,json=errorData,proto3" json:"error_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6261,11 +6261,11 @@ func (x *Error) GetFbtraceId() string {
 	return ""
 }
 
-func (x *Error) GetErrorSubcode() string {
+func (x *Error) GetErrorSubcode() int64 {
 	if x != nil {
 		return x.ErrorSubcode
 	}
-	return ""
+	return 0
 }
 
 func (x *Error) GetErrorData() *ErrorData {
@@ -6609,7 +6609,7 @@ type HistoryMetadata struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Phase         string                 `protobuf:"bytes,2,opt,name=phase,proto3" json:"phase,omitempty"` // vd "0" | "1"
 	ChunkOrder    int64                  `protobuf:"varint,3,opt,name=chunk_order,json=chunkOrder,proto3" json:"chunk_order,omitempty"`
-	Progress      string                 `protobuf:"bytes,4,opt,name=progress,proto3" json:"progress,omitempty"`
+	Progress      int64                  `protobuf:"varint,4,opt,name=progress,proto3" json:"progress,omitempty"` // % đã đồng bộ — Meta gửi dạng SỐ
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6658,11 +6658,11 @@ func (x *HistoryMetadata) GetChunkOrder() int64 {
 	return 0
 }
 
-func (x *HistoryMetadata) GetProgress() string {
+func (x *HistoryMetadata) GetProgress() int64 {
 	if x != nil {
 		return x.Progress
 	}
-	return ""
+	return 0
 }
 
 type HistoryThread struct {
@@ -8436,9 +8436,9 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\rproduct_items\x18\x04 \x03(\v2\x15.whatsapp.ProductItemR\fproductItems\"\x94\x01\n" +
 	"\vProductItem\x12.\n" +
 	"\x13product_retailer_id\x18\x02 \x01(\tR\x11productRetailerId\x12\x1a\n" +
-	"\bquantity\x18\x03 \x01(\tR\bquantity\x12\x1d\n" +
+	"\bquantity\x18\x03 \x01(\x03R\bquantity\x12\x1d\n" +
 	"\n" +
-	"item_price\x18\x04 \x01(\tR\titemPrice\x12\x1a\n" +
+	"item_price\x18\x04 \x01(\x01R\titemPrice\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\"\x99\x01\n" +
 	"\x06System\x12\x12\n" +
 	"\x04body\x18\x02 \x01(\tR\x04body\x12\x1a\n" +
@@ -8449,7 +8449,7 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\bcustomer\x18\a \x01(\tR\bcustomer\"o\n" +
 	"\bIdentity\x12\"\n" +
 	"\facknowledged\x18\x02 \x01(\bR\facknowledged\x12+\n" +
-	"\x11created_timestamp\x18\x03 \x01(\tR\x10createdTimestamp\x12\x12\n" +
+	"\x11created_timestamp\x18\x03 \x01(\x03R\x10createdTimestamp\x12\x12\n" +
 	"\x04hash\x18\x04 \x01(\tR\x04hash\"\xf5\x02\n" +
 	"\bReferral\x12\x1d\n" +
 	"\n" +
@@ -8497,7 +8497,7 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\x04href\x18\x06 \x01(\tR\x04href\x12\x1d\n" +
 	"\n" +
 	"fbtrace_id\x18\a \x01(\tR\tfbtraceId\x12#\n" +
-	"\rerror_subcode\x18\b \x01(\tR\ferrorSubcode\x122\n" +
+	"\rerror_subcode\x18\b \x01(\x03R\ferrorSubcode\x122\n" +
 	"\n" +
 	"error_data\x18\t \x01(\v2\x13.whatsapp.ErrorDataR\terrorData\"R\n" +
 	"\tErrorData\x12\x18\n" +
@@ -8526,7 +8526,7 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\x05phase\x18\x02 \x01(\tR\x05phase\x12\x1f\n" +
 	"\vchunk_order\x18\x03 \x01(\x03R\n" +
 	"chunkOrder\x12\x1a\n" +
-	"\bprogress\x18\x04 \x01(\tR\bprogress\"N\n" +
+	"\bprogress\x18\x04 \x01(\x03R\bprogress\"N\n" +
 	"\rHistoryThread\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12-\n" +
 	"\bmessages\x18\x03 \x03(\v2\x11.whatsapp.MessageR\bmessages\"\x8f\x01\n" +
