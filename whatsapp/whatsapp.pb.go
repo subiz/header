@@ -7358,8 +7358,12 @@ type SignupRequest struct {
 	BusinessId     string                 `protobuf:"bytes,5,opt,name=business_id,json=businessId,proto3" json:"business_id,omitempty"`
 	PhoneNumberId  string                 `protobuf:"bytes,6,opt,name=phone_number_id,json=phoneNumberId,proto3" json:"phone_number_id,omitempty"`
 	PhoneNumberIds []string               `protobuf:"bytes,7,rep,name=phone_number_ids,json=phoneNumberIds,proto3" json:"phone_number_ids,omitempty"` // khách chọn kích hoạt nhiều số cùng lúc
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Luồng NỘI BỘ (portfolio sở hữu app, Meta chặn đi qua ES): FB.login cổ điển
+	// trả access token thay vì code (code của JS SDK bị buộc redirect_uri nội bộ,
+	// lỗi 36008 khi đổi server-side). Backend đổi sang long-lived rồi tự dò WABA.
+	AccessToken   string `protobuf:"bytes,8,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SignupRequest) Reset() {
@@ -7439,6 +7443,13 @@ func (x *SignupRequest) GetPhoneNumberIds() []string {
 		return x.PhoneNumberIds
 	}
 	return nil
+}
+
+func (x *SignupRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
 }
 
 // NumberRequest — request chung cho các thao tác trên 1 số (và tuỳ chọn 1 khách).
@@ -8651,7 +8662,7 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12!\n" +
 	"\fphone_number\x18\x05 \x01(\tR\vphoneNumber\x12\x18\n" +
 	"\aexample\x18\x06 \x03(\tR\aexample\x12\x17\n" +
-	"\aflow_id\x18\a \x01(\tR\x06flowId\"\xf1\x01\n" +
+	"\aflow_id\x18\a \x01(\tR\x06flowId\"\x94\x02\n" +
 	"\rSignupRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -8661,7 +8672,8 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\vbusiness_id\x18\x05 \x01(\tR\n" +
 	"businessId\x12&\n" +
 	"\x0fphone_number_id\x18\x06 \x01(\tR\rphoneNumberId\x12(\n" +
-	"\x10phone_number_ids\x18\a \x03(\tR\x0ephoneNumberIds\"\x86\x02\n" +
+	"\x10phone_number_ids\x18\a \x03(\tR\x0ephoneNumberIds\x12!\n" +
+	"\faccess_token\x18\b \x01(\tR\vaccessToken\"\x86\x02\n" +
 	"\rNumberRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

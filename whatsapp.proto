@@ -920,6 +920,11 @@ message SignupRequest {
 	string business_id = 5;
 	string phone_number_id = 6;
 	repeated string phone_number_ids = 7; // khách chọn kích hoạt nhiều số cùng lúc
+
+	// Luồng NỘI BỘ (portfolio sở hữu app, Meta chặn đi qua ES): FB.login cổ điển
+	// trả access token thay vì code (code của JS SDK bị buộc redirect_uri nội bộ,
+	// lỗi 36008 khi đổi server-side). Backend đổi sang long-lived rồi tự dò WABA.
+	string access_token = 8;
 }
 
 // NumberRequest — request chung cho các thao tác trên 1 số (và tuỳ chọn 1 khách).
