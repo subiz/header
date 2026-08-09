@@ -11063,9 +11063,10 @@ type CallInfo struct {
 	// time start to anster
 	Answered             int64  `protobuf:"varint,6,opt,name=answered,proto3" json:"answered,omitempty"`
 	Ended                int64  `protobuf:"varint,7,opt,name=ended,proto3" json:"ended,omitempty"`
-	ToNumber             string `protobuf:"bytes,8,opt,name=to_number,json=toNumber,proto3" json:"to_number,omitempty"`       // derived from touchpoint
-	FromNumber           string `protobuf:"bytes,9,opt,name=from_number,json=fromNumber,proto3" json:"from_number,omitempty"` // derived from touchpoint
-	Direction            string `protobuf:"bytes,10,opt,name=direction,proto3" json:"direction,omitempty"`                    // inbound, outbound
+	ToNumber             string `protobuf:"bytes,8,opt,name=to_number,json=toNumber,proto3" json:"to_number,omitempty"`        // derived from touchpoint
+	FromNumber           string `protobuf:"bytes,9,opt,name=from_number,json=fromNumber,proto3" json:"from_number,omitempty"`  // derived from touchpoint
+	CallerName           string `protobuf:"bytes,32,opt,name=caller_name,json=callerName,proto3" json:"caller_name,omitempty"` // display name enriched by call driver / contact
+	Direction            string `protobuf:"bytes,10,opt,name=direction,proto3" json:"direction,omitempty"`                     // inbound, outbound
 	InitialByPhoneDevice string `protobuf:"bytes,11,opt,name=initial_by_phone_device,json=initialByPhoneDevice,proto3" json:"initial_by_phone_device,omitempty"`
 	InitialByAgent       string `protobuf:"bytes,13,opt,name=initial_by_agent,json=initialByAgent,proto3" json:"initial_by_agent,omitempty"` // used when use webcall
 	IsMissed             bool   `protobuf:"varint,12,opt,name=is_missed,json=isMissed,proto3" json:"is_missed,omitempty"`
@@ -11172,6 +11173,13 @@ func (x *CallInfo) GetToNumber() string {
 func (x *CallInfo) GetFromNumber() string {
 	if x != nil {
 		return x.FromNumber
+	}
+	return ""
+}
+
+func (x *CallInfo) GetCallerName() string {
+	if x != nil {
+		return x.CallerName
 	}
 	return ""
 }
@@ -74268,7 +74276,7 @@ const file_header_proto_rawDesc = "" +
 	"\vReviewReply\x12\x18\n" +
 	"\acomment\x18\x01 \x01(\tR\acomment\x12\x18\n" +
 	"\aupdated\x18\x02 \x01(\x03R\aupdated\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\x82\b\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\xa3\b\n" +
 	"\bCallInfo\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12'\n" +
@@ -74278,7 +74286,9 @@ const file_header_proto_rawDesc = "" +
 	"\x05ended\x18\a \x01(\x03R\x05ended\x12\x1b\n" +
 	"\tto_number\x18\b \x01(\tR\btoNumber\x12\x1f\n" +
 	"\vfrom_number\x18\t \x01(\tR\n" +
-	"fromNumber\x12\x1c\n" +
+	"fromNumber\x12\x1f\n" +
+	"\vcaller_name\x18  \x01(\tR\n" +
+	"callerName\x12\x1c\n" +
 	"\tdirection\x18\n" +
 	" \x01(\tR\tdirection\x125\n" +
 	"\x17initial_by_phone_device\x18\v \x01(\tR\x14initialByPhoneDevice\x12(\n" +

@@ -1365,6 +1365,7 @@ message CallInfo {
 
 	string to_number = 8; // derived from touchpoint
 	string from_number = 9; // derived from touchpoint
+	string caller_name = 32; // display name enriched by call driver / contact
 	string direction = 10; // inbound, outbound
 
 	string initial_by_phone_device = 11;
