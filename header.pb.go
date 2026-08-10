@@ -3176,7 +3176,6 @@ type PhoneDevice struct {
 	Description           string   `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
 	Status                string   `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"` // unknown, notinuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
 	LastStatusUpdated     int64    `protobuf:"varint,15,opt,name=last_status_updated,json=lastStatusUpdated,proto3" json:"last_status_updated,omitempty"`
-	Driver                string   `protobuf:"bytes,16,opt,name=driver,proto3" json:"driver,omitempty"` // subiz stringee
 	Disabled              int64    `protobuf:"varint,17,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	TransportProtocol     string   `protobuf:"bytes,18,opt,name=transport_protocol,json=transportProtocol,proto3" json:"transport_protocol,omitempty"` // default=udp, tcp
 	Updated               int64    `protobuf:"varint,30,opt,name=updated,proto3" json:"updated,omitempty"`
@@ -3184,17 +3183,24 @@ type PhoneDevice struct {
 	Created               int64    `protobuf:"varint,32,opt,name=created,proto3" json:"created,omitempty"`
 	CreatedBy             string   `protobuf:"bytes,33,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	DefaultOutboundNumber string   `protobuf:"bytes,34,opt,name=default_outbound_number,json=defaultOutboundNumber,proto3" json:"default_outbound_number,omitempty"`
-	DeviceId              string   `protobuf:"bytes,35,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"` //
-	DeviceBuildId         string   `protobuf:"bytes,36,opt,name=device_build_id,json=deviceBuildId,proto3" json:"device_build_id,omitempty"`
-	DeviceOs              string   `protobuf:"bytes,37,opt,name=device_os,json=deviceOs,proto3" json:"device_os,omitempty"`
-	DeviceName            string   `protobuf:"bytes,38,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
+	DeviceId              string   `protobuf:"bytes,35,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"` // uuid of the device, instance-id, Contact param "+sip.instance" (RFC 5626), đã bóc ngoặc kép và <>:
+	// string device_build_id = 36;
+	// string device_os = 37;
+	// string device_name = 38;
 	LastConnected         int64    `protobuf:"varint,40,opt,name=last_connected,json=lastConnected,proto3" json:"last_connected,omitempty"`
 	PrivateHost           string   `protobuf:"bytes,42,opt,name=private_host,json=privateHost,proto3" json:"private_host,omitempty"`
 	UserAgent             string   `protobuf:"bytes,43,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	OutboundNumbersPicker string   `protobuf:"bytes,46,opt,name=outbound_numbers_picker,json=outboundNumbersPicker,proto3" json:"outbound_numbers_picker,omitempty"` // ''=last samenet random
 	OutboundNumbers       []string `protobuf:"bytes,47,rep,name=outbound_numbers,json=outboundNumbers,proto3" json:"outbound_numbers,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Header Allow của REGISTER, nguyên văn: "INVITE, ACK, BYE, OPTIONS, ...".
+	SipAllow string `protobuf:"bytes,49,opt,name=sip_allow,json=sipAllow,proto3" json:"sip_allow,omitempty"`
+	// Header Supported của REGISTER: "replaces, outbound, gruu, path, timer".
+	// replaces = làm được attended transfer (/refer).
+	SipSupported     string `protobuf:"bytes,50,opt,name=sip_supported,json=sipSupported,proto3" json:"sip_supported,omitempty"`
+	RequestedExpires int64  `protobuf:"varint,51,opt,name=requested_expires,json=requestedExpires,proto3" json:"requested_expires,omitempty"` // Số giây device XIN trong Expires của REGISTER
+	LastLatencyMs    int64  `protobuf:"varint,52,opt,name=last_latency_ms,json=lastLatencyMs,proto3" json:"last_latency_ms,omitempty"`        // Thời gian đi-về của OPTIONS qualify gần nhất (ms). 0 = chưa đo được.
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *PhoneDevice) Reset() {
@@ -3318,13 +3324,6 @@ func (x *PhoneDevice) GetLastStatusUpdated() int64 {
 	return 0
 }
 
-func (x *PhoneDevice) GetDriver() string {
-	if x != nil {
-		return x.Driver
-	}
-	return ""
-}
-
 func (x *PhoneDevice) GetDisabled() int64 {
 	if x != nil {
 		return x.Disabled
@@ -3381,27 +3380,6 @@ func (x *PhoneDevice) GetDeviceId() string {
 	return ""
 }
 
-func (x *PhoneDevice) GetDeviceBuildId() string {
-	if x != nil {
-		return x.DeviceBuildId
-	}
-	return ""
-}
-
-func (x *PhoneDevice) GetDeviceOs() string {
-	if x != nil {
-		return x.DeviceOs
-	}
-	return ""
-}
-
-func (x *PhoneDevice) GetDeviceName() string {
-	if x != nil {
-		return x.DeviceName
-	}
-	return ""
-}
-
 func (x *PhoneDevice) GetLastConnected() int64 {
 	if x != nil {
 		return x.LastConnected
@@ -3435,6 +3413,34 @@ func (x *PhoneDevice) GetOutboundNumbers() []string {
 		return x.OutboundNumbers
 	}
 	return nil
+}
+
+func (x *PhoneDevice) GetSipAllow() string {
+	if x != nil {
+		return x.SipAllow
+	}
+	return ""
+}
+
+func (x *PhoneDevice) GetSipSupported() string {
+	if x != nil {
+		return x.SipSupported
+	}
+	return ""
+}
+
+func (x *PhoneDevice) GetRequestedExpires() int64 {
+	if x != nil {
+		return x.RequestedExpires
+	}
+	return 0
+}
+
+func (x *PhoneDevice) GetLastLatencyMs() int64 {
+	if x != nil {
+		return x.LastLatencyMs
+	}
+	return 0
 }
 
 type CallSettings struct {
@@ -11070,9 +11076,8 @@ type CallInfo struct {
 	InitialByPhoneDevice string `protobuf:"bytes,11,opt,name=initial_by_phone_device,json=initialByPhoneDevice,proto3" json:"initial_by_phone_device,omitempty"`
 	InitialByAgent       string `protobuf:"bytes,13,opt,name=initial_by_agent,json=initialByAgent,proto3" json:"initial_by_agent,omitempty"` // used when use webcall
 	IsMissed             bool   `protobuf:"varint,12,opt,name=is_missed,json=isMissed,proto3" json:"is_missed,omitempty"`
-	EnableRecording      bool   `protobuf:"varint,14,opt,name=enable_recording,json=enableRecording,proto3" json:"enable_recording,omitempty"`
-	Driver               string `protobuf:"bytes,15,opt,name=driver,proto3" json:"driver,omitempty"`                               // derived from integration.call_center_driver
-	DurationSec          int64  `protobuf:"varint,16,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"` // ms
+	EnableRecording      bool   `protobuf:"varint,14,opt,name=enable_recording,json=enableRecording,proto3" json:"enable_recording,omitempty"` // string driver = 15; //
+	DurationSec          int64  `protobuf:"varint,16,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`             // ms
 	HangupCode           string `protobuf:"bytes,17,opt,name=hangup_code,json=hangupCode,proto3" json:"hangup_code,omitempty"`
 	// string call_status = 18; // waiting_for_key
 	ProcessId string `protobuf:"bytes,19,opt,name=process_id,json=processId,proto3" json:"process_id,omitempty"` // check outdated
@@ -11085,7 +11090,7 @@ type CallInfo struct {
 	DeviceId        string `protobuf:"bytes,23,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	MemberId        string `protobuf:"bytes,24,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`       // rang agent or answer agent
 	MemberType      string `protobuf:"bytes,25,opt,name=member_type,json=memberType,proto3" json:"member_type,omitempty"` // agent, user
-	CallId          string `protobuf:"bytes,26,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`
+	CallId          string `protobuf:"bytes,26,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`             // sip-call-id
 	DiversionNumber string `protobuf:"bytes,27,opt,name=diversion_number,json=diversionNumber,proto3" json:"diversion_number,omitempty"`
 	TransferTo      string `protobuf:"bytes,28,opt,name=transfer_to,json=transferTo,proto3" json:"transfer_to,omitempty"`
 	// debug
@@ -11217,13 +11222,6 @@ func (x *CallInfo) GetEnableRecording() bool {
 		return x.EnableRecording
 	}
 	return false
-}
-
-func (x *CallInfo) GetDriver() string {
-	if x != nil {
-		return x.Driver
-	}
-	return ""
 }
 
 func (x *CallInfo) GetDurationSec() int64 {
@@ -73287,7 +73285,7 @@ const file_header_proto_rawDesc = "" +
 	"\fRelatedValue\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06reason\x18\x05 \x01(\tR\x06reason\x12\x14\n" +
-	"\x05value\x18\x06 \x01(\tR\x05value\"\xd8\a\n" +
+	"\x05value\x18\x06 \x01(\tR\x05value\"\xf1\a\n" +
 	"\vPhoneDevice\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73304,8 +73302,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04name\x18\f \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\r \x01(\tR\vdescription\x12\x16\n" +
 	"\x06status\x18\x0e \x01(\tR\x06status\x12.\n" +
-	"\x13last_status_updated\x18\x0f \x01(\x03R\x11lastStatusUpdated\x12\x16\n" +
-	"\x06driver\x18\x10 \x01(\tR\x06driver\x12\x1a\n" +
+	"\x13last_status_updated\x18\x0f \x01(\x03R\x11lastStatusUpdated\x12\x1a\n" +
 	"\bdisabled\x18\x11 \x01(\x03R\bdisabled\x12-\n" +
 	"\x12transport_protocol\x18\x12 \x01(\tR\x11transportProtocol\x12\x18\n" +
 	"\aupdated\x18\x1e \x01(\x03R\aupdated\x12\x1d\n" +
@@ -73315,17 +73312,17 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"created_by\x18! \x01(\tR\tcreatedBy\x126\n" +
 	"\x17default_outbound_number\x18\" \x01(\tR\x15defaultOutboundNumber\x12\x1b\n" +
-	"\tdevice_id\x18# \x01(\tR\bdeviceId\x12&\n" +
-	"\x0fdevice_build_id\x18$ \x01(\tR\rdeviceBuildId\x12\x1b\n" +
-	"\tdevice_os\x18% \x01(\tR\bdeviceOs\x12\x1f\n" +
-	"\vdevice_name\x18& \x01(\tR\n" +
-	"deviceName\x12%\n" +
+	"\tdevice_id\x18# \x01(\tR\bdeviceId\x12%\n" +
 	"\x0elast_connected\x18( \x01(\x03R\rlastConnected\x12!\n" +
 	"\fprivate_host\x18* \x01(\tR\vprivateHost\x12\x1d\n" +
 	"\n" +
 	"user_agent\x18+ \x01(\tR\tuserAgent\x126\n" +
 	"\x17outbound_numbers_picker\x18. \x01(\tR\x15outboundNumbersPicker\x12)\n" +
-	"\x10outbound_numbers\x18/ \x03(\tR\x0foutboundNumbers\"\x8a\x01\n" +
+	"\x10outbound_numbers\x18/ \x03(\tR\x0foutboundNumbers\x12\x1b\n" +
+	"\tsip_allow\x181 \x01(\tR\bsipAllow\x12#\n" +
+	"\rsip_supported\x182 \x01(\tR\fsipSupported\x12+\n" +
+	"\x11requested_expires\x183 \x01(\x03R\x10requestedExpires\x12&\n" +
+	"\x0flast_latency_ms\x184 \x01(\x03R\rlastLatencyMs\"\x8a\x01\n" +
 	"\fCallSettings\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74276,7 +74273,7 @@ const file_header_proto_rawDesc = "" +
 	"\vReviewReply\x12\x18\n" +
 	"\acomment\x18\x01 \x01(\tR\acomment\x12\x18\n" +
 	"\aupdated\x18\x02 \x01(\x03R\aupdated\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\xa3\b\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\x8b\b\n" +
 	"\bCallInfo\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12'\n" +
@@ -74294,8 +74291,7 @@ const file_header_proto_rawDesc = "" +
 	"\x17initial_by_phone_device\x18\v \x01(\tR\x14initialByPhoneDevice\x12(\n" +
 	"\x10initial_by_agent\x18\r \x01(\tR\x0einitialByAgent\x12\x1b\n" +
 	"\tis_missed\x18\f \x01(\bR\bisMissed\x12)\n" +
-	"\x10enable_recording\x18\x0e \x01(\bR\x0fenableRecording\x12\x16\n" +
-	"\x06driver\x18\x0f \x01(\tR\x06driver\x12!\n" +
+	"\x10enable_recording\x18\x0e \x01(\bR\x0fenableRecording\x12!\n" +
 	"\fduration_sec\x18\x10 \x01(\x03R\vdurationSec\x12\x1f\n" +
 	"\vhangup_code\x18\x11 \x01(\tR\n" +
 	"hangupCode\x12\x1d\n" +

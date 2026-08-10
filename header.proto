@@ -176,7 +176,7 @@ message PhoneDevice {
 	string status = 14; // unknown, notinuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
 	int64 last_status_updated = 15;
 
-	string driver = 16; // subiz stringee
+	// string driver = 16; // subiz stringee
 
 	int64 disabled = 17;
 	string transport_protocol = 18; // default=udp, tcp
@@ -190,11 +190,10 @@ message PhoneDevice {
 
 	string default_outbound_number = 34;
 
-	string device_id = 35; //
-	string device_build_id = 36;
-	string device_os = 37;
-	string device_name = 38;
-
+	string device_id = 35; // uuid of the device, instance-id, Contact param "+sip.instance" (RFC 5626), đã bóc ngoặc kép và <>:
+	// string device_build_id = 36;
+	// string device_os = 37;
+	// string device_name = 38;
 	int64 last_connected = 40;
 
 	string private_host = 42;
@@ -202,6 +201,16 @@ message PhoneDevice {
 
 	string outbound_numbers_picker = 46; // ''=last samenet random
 	repeated string outbound_numbers = 47;
+
+	// Header Allow của REGISTER, nguyên văn: "INVITE, ACK, BYE, OPTIONS, ...".
+	string sip_allow = 49;
+
+	// Header Supported của REGISTER: "replaces, outbound, gruu, path, timer".
+	// replaces = làm được attended transfer (/refer).
+	string sip_supported = 50;
+
+	int64 requested_expires = 51; // Số giây device XIN trong Expires của REGISTER
+	int64 last_latency_ms = 52; // Thời gian đi-về của OPTIONS qualify gần nhất (ms). 0 = chưa đo được.
 }
 
 message CallSettings {
@@ -1373,7 +1382,7 @@ message CallInfo {
 	bool is_missed = 12;
 
 	bool enable_recording = 14;
-	string driver = 15; // derived from integration.call_center_driver
+	// string driver = 15; //
 
 	int64 duration_sec = 16; // ms
 	string hangup_code = 17;
@@ -1391,7 +1400,7 @@ message CallInfo {
 	string member_id = 24; // rang agent or answer agent
 	string member_type = 25; // agent, user
 
-	string call_id = 26;
+	string call_id = 26; // sip-call-id
 	string diversion_number = 27;
 	string transfer_to = 28;
 
