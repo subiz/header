@@ -1382,7 +1382,7 @@ message CallInfo {
 	bool is_missed = 12;
 
 	bool enable_recording = 14;
-	// string driver = 15; //
+	string on_integration = 15; // integration id for facebook, zalo and whatsapp call
 
 	int64 duration_sec = 16; // ms
 	string hangup_code = 17;
@@ -1411,6 +1411,8 @@ message CallInfo {
 	string isp_call_id = 33;
 
 	string webcall_id = 34;
+
+	int64 syncseq = 35;
 }
 
 message Rating {

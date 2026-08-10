@@ -11076,8 +11076,9 @@ type CallInfo struct {
 	InitialByPhoneDevice string `protobuf:"bytes,11,opt,name=initial_by_phone_device,json=initialByPhoneDevice,proto3" json:"initial_by_phone_device,omitempty"`
 	InitialByAgent       string `protobuf:"bytes,13,opt,name=initial_by_agent,json=initialByAgent,proto3" json:"initial_by_agent,omitempty"` // used when use webcall
 	IsMissed             bool   `protobuf:"varint,12,opt,name=is_missed,json=isMissed,proto3" json:"is_missed,omitempty"`
-	EnableRecording      bool   `protobuf:"varint,14,opt,name=enable_recording,json=enableRecording,proto3" json:"enable_recording,omitempty"` // string driver = 15; //
-	DurationSec          int64  `protobuf:"varint,16,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`             // ms
+	EnableRecording      bool   `protobuf:"varint,14,opt,name=enable_recording,json=enableRecording,proto3" json:"enable_recording,omitempty"`
+	OnIntegration        string `protobuf:"bytes,15,opt,name=on_integration,json=onIntegration,proto3" json:"on_integration,omitempty"` // integration id for facebook, zalo and whatsapp call
+	DurationSec          int64  `protobuf:"varint,16,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"`      // ms
 	HangupCode           string `protobuf:"bytes,17,opt,name=hangup_code,json=hangupCode,proto3" json:"hangup_code,omitempty"`
 	// string call_status = 18; // waiting_for_key
 	ProcessId string `protobuf:"bytes,19,opt,name=process_id,json=processId,proto3" json:"process_id,omitempty"` // check outdated
@@ -11099,6 +11100,7 @@ type CallInfo struct {
 	IspHangupReason string `protobuf:"bytes,31,opt,name=isp_hangup_reason,json=ispHangupReason,proto3" json:"isp_hangup_reason,omitempty"`
 	IspCallId       string `protobuf:"bytes,33,opt,name=isp_call_id,json=ispCallId,proto3" json:"isp_call_id,omitempty"`
 	WebcallId       string `protobuf:"bytes,34,opt,name=webcall_id,json=webcallId,proto3" json:"webcall_id,omitempty"`
+	Syncseq         int64  `protobuf:"varint,35,opt,name=syncseq,proto3" json:"syncseq,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -11224,6 +11226,13 @@ func (x *CallInfo) GetEnableRecording() bool {
 	return false
 }
 
+func (x *CallInfo) GetOnIntegration() string {
+	if x != nil {
+		return x.OnIntegration
+	}
+	return ""
+}
+
 func (x *CallInfo) GetDurationSec() int64 {
 	if x != nil {
 		return x.DurationSec
@@ -11341,6 +11350,13 @@ func (x *CallInfo) GetWebcallId() string {
 		return x.WebcallId
 	}
 	return ""
+}
+
+func (x *CallInfo) GetSyncseq() int64 {
+	if x != nil {
+		return x.Syncseq
+	}
+	return 0
 }
 
 type Rating struct {
@@ -74273,7 +74289,7 @@ const file_header_proto_rawDesc = "" +
 	"\vReviewReply\x12\x18\n" +
 	"\acomment\x18\x01 \x01(\tR\acomment\x12\x18\n" +
 	"\aupdated\x18\x02 \x01(\x03R\aupdated\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\x8b\b\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\xcc\b\n" +
 	"\bCallInfo\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12'\n" +
@@ -74291,7 +74307,8 @@ const file_header_proto_rawDesc = "" +
 	"\x17initial_by_phone_device\x18\v \x01(\tR\x14initialByPhoneDevice\x12(\n" +
 	"\x10initial_by_agent\x18\r \x01(\tR\x0einitialByAgent\x12\x1b\n" +
 	"\tis_missed\x18\f \x01(\bR\bisMissed\x12)\n" +
-	"\x10enable_recording\x18\x0e \x01(\bR\x0fenableRecording\x12!\n" +
+	"\x10enable_recording\x18\x0e \x01(\bR\x0fenableRecording\x12%\n" +
+	"\x0eon_integration\x18\x0f \x01(\tR\ronIntegration\x12!\n" +
 	"\fduration_sec\x18\x10 \x01(\x03R\vdurationSec\x12\x1f\n" +
 	"\vhangup_code\x18\x11 \x01(\tR\n" +
 	"hangupCode\x12\x1d\n" +
@@ -74313,7 +74330,8 @@ const file_header_proto_rawDesc = "" +
 	"\x11isp_hangup_reason\x18\x1f \x01(\tR\x0fispHangupReason\x12\x1e\n" +
 	"\visp_call_id\x18! \x01(\tR\tispCallId\x12\x1d\n" +
 	"\n" +
-	"webcall_id\x18\" \x01(\tR\twebcallId\"\xa8\x04\n" +
+	"webcall_id\x18\" \x01(\tR\twebcallId\x12\x18\n" +
+	"\asyncseq\x18# \x01(\x03R\asyncseq\"\xa8\x04\n" +
 	"\x06Rating\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
