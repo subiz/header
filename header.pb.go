@@ -24702,8 +24702,7 @@ type Webhook struct {
 	Modified                          int64                  `protobuf:"varint,19,opt,name=modified,proto3" json:"modified,omitempty"` // update when url, events or secret updated
 	Created                           int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
 	Creator                           string                 `protobuf:"bytes,21,opt,name=creator,proto3" json:"creator,omitempty"`
-	IsEnabled                         bool                   `protobuf:"varint,22,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"` // deprecated
-	AvatarUrl                         string                 `protobuf:"bytes,27,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`  // favicon for the domain
+	AvatarUrl                         string                 `protobuf:"bytes,27,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"` // favicon for the domain
 	TotalDeliveriesInLast_7Days       int64                  `protobuf:"varint,30,opt,name=total_deliveries_in_last_7_days,json=totalDeliveriesInLast7Days,proto3" json:"total_deliveries_in_last_7_days,omitempty"`
 	TotalFailedDeliveriesInLast_7Days int64                  `protobuf:"varint,31,opt,name=total_failed_deliveries_in_last_7_days,json=totalFailedDeliveriesInLast7Days,proto3" json:"total_failed_deliveries_in_last_7_days,omitempty"`
 	IsDisabled                        bool                   `protobuf:"varint,33,opt,name=is_disabled,json=isDisabled,proto3" json:"is_disabled,omitempty"`
@@ -24820,13 +24819,6 @@ func (x *Webhook) GetCreator() string {
 		return x.Creator
 	}
 	return ""
-}
-
-func (x *Webhook) GetIsEnabled() bool {
-	if x != nil {
-		return x.IsEnabled
-	}
-	return false
 }
 
 func (x *Webhook) GetAvatarUrl() string {
@@ -71518,17 +71510,15 @@ func (x *Link) GetCreated() int64 {
 }
 
 type Plan struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Name  *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Limit *common.Limit          `protobuf:"bytes,3,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
-	// optional bool is_unlimited_agent = 5; // @deprecated
-	Renewable                *bool  `protobuf:"varint,6,opt,name=renewable,proto3,oneof" json:"renewable,omitempty"`
-	InactiveDaysAfterChurned *int64 `protobuf:"varint,7,opt,name=inactive_days_after_churned,json=inactiveDaysAfterChurned,proto3,oneof" json:"inactive_days_after_churned,omitempty"`
-	LongBillingCycleDiscount *bool  `protobuf:"varint,9,opt,name=long_billing_cycle_discount,json=longBillingCycleDiscount,proto3,oneof" json:"long_billing_cycle_discount,omitempty"`
-	MininumBillingCycleMonth *int64 `protobuf:"varint,10,opt,name=mininum_billing_cycle_month,json=mininumBillingCycleMonth,proto3,oneof" json:"mininum_billing_cycle_month,omitempty"`
-	FpvPriceUsd              *int64 `protobuf:"varint,11,opt,name=fpv_price_usd,json=fpvPriceUsd,proto3,oneof" json:"fpv_price_usd,omitempty"`                                 // usd // permonth
-	FpvPriceVnd              *int64 `protobuf:"varint,12,opt,name=fpv_price_vnd,json=fpvPriceVnd,proto3,oneof" json:"fpv_price_vnd,omitempty"`                                 // vnd // permonth
-	IsUnlimitedAiSpending    *int64 `protobuf:"varint,13,opt,name=is_unlimited_ai_spending,json=isUnlimitedAiSpending,proto3,oneof" json:"is_unlimited_ai_spending,omitempty"` // @deprecated
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Name                     *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Limit                    *common.Limit          `protobuf:"bytes,3,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	Renewable                *bool                  `protobuf:"varint,6,opt,name=renewable,proto3,oneof" json:"renewable,omitempty"`
+	InactiveDaysAfterChurned *int64                 `protobuf:"varint,7,opt,name=inactive_days_after_churned,json=inactiveDaysAfterChurned,proto3,oneof" json:"inactive_days_after_churned,omitempty"`
+	LongBillingCycleDiscount *bool                  `protobuf:"varint,9,opt,name=long_billing_cycle_discount,json=longBillingCycleDiscount,proto3,oneof" json:"long_billing_cycle_discount,omitempty"`
+	MininumBillingCycleMonth *int64                 `protobuf:"varint,10,opt,name=mininum_billing_cycle_month,json=mininumBillingCycleMonth,proto3,oneof" json:"mininum_billing_cycle_month,omitempty"`
+	FpvPriceUsd              *int64                 `protobuf:"varint,11,opt,name=fpv_price_usd,json=fpvPriceUsd,proto3,oneof" json:"fpv_price_usd,omitempty"` // usd // permonth
+	FpvPriceVnd              *int64                 `protobuf:"varint,12,opt,name=fpv_price_vnd,json=fpvPriceVnd,proto3,oneof" json:"fpv_price_vnd,omitempty"` // vnd // permonth
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -71615,13 +71605,6 @@ func (x *Plan) GetFpvPriceUsd() int64 {
 func (x *Plan) GetFpvPriceVnd() int64 {
 	if x != nil && x.FpvPriceVnd != nil {
 		return *x.FpvPriceVnd
-	}
-	return 0
-}
-
-func (x *Plan) GetIsUnlimitedAiSpending() int64 {
-	if x != nil && x.IsUnlimitedAiSpending != nil {
-		return *x.IsUnlimitedAiSpending
 	}
 	return 0
 }
@@ -76005,7 +75988,7 @@ const file_header_proto_rawDesc = "" +
 	"event_name\x18\x06 \x01(\tR\teventName\x12\x1d\n" +
 	"\n" +
 	"event_time\x18\a \x01(\x03R\teventTime\x12\x19\n" +
-	"\bevent_id\x18\b \x01(\tR\aeventId\"\x89\x06\n" +
+	"\bevent_id\x18\b \x01(\tR\aeventId\"\xea\x05\n" +
 	"\aWebhook\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76020,8 +76003,6 @@ const file_header_proto_rawDesc = "" +
 	"\bmodified\x18\x13 \x01(\x03R\bmodified\x12\x18\n" +
 	"\acreated\x18\x14 \x01(\x03R\acreated\x12\x18\n" +
 	"\acreator\x18\x15 \x01(\tR\acreator\x12\x1d\n" +
-	"\n" +
-	"is_enabled\x18\x16 \x01(\bR\tisEnabled\x12\x1d\n" +
 	"\n" +
 	"avatar_url\x18\x1b \x01(\tR\tavatarUrl\x12C\n" +
 	"\x1ftotal_deliveries_in_last_7_days\x18\x1e \x01(\x03R\x1atotalDeliveriesInLast7Days\x12P\n" +
@@ -81614,7 +81595,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x18\n" +
-	"\acreated\x18\x05 \x01(\x03R\acreated\"\x81\x06\n" +
+	"\acreated\x18\x05 \x01(\x03R\acreated\"\xa6\x05\n" +
 	"\x04Plan\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12(\n" +
 	"\x05limit\x18\x03 \x01(\v2\r.common.LimitH\x01R\x05limit\x88\x01\x01\x12!\n" +
@@ -81624,8 +81605,7 @@ const file_header_proto_rawDesc = "" +
 	"\x1bmininum_billing_cycle_month\x18\n" +
 	" \x01(\x03H\x05R\x18mininumBillingCycleMonth\x88\x01\x01\x12'\n" +
 	"\rfpv_price_usd\x18\v \x01(\x03H\x06R\vfpvPriceUsd\x88\x01\x01\x12'\n" +
-	"\rfpv_price_vnd\x18\f \x01(\x03H\aR\vfpvPriceVnd\x88\x01\x01\x12<\n" +
-	"\x18is_unlimited_ai_spending\x18\r \x01(\x03H\bR\x15isUnlimitedAiSpending\x88\x01\x01\"u\n" +
+	"\rfpv_price_vnd\x18\f \x01(\x03H\aR\vfpvPriceVnd\x88\x01\x01\"u\n" +
 	"\x04Type\x12\t\n" +
 	"\x05trial\x10\x00\x12\f\n" +
 	"\bstandard\x10\x02\x12\f\n" +
@@ -81642,8 +81622,7 @@ const file_header_proto_rawDesc = "" +
 	"\x1c_long_billing_cycle_discountB\x1e\n" +
 	"\x1c_mininum_billing_cycle_monthB\x10\n" +
 	"\x0e_fpv_price_usdB\x10\n" +
-	"\x0e_fpv_price_vndB\x1b\n" +
-	"\x19_is_unlimited_ai_spending\"h\n" +
+	"\x0e_fpv_price_vnd\"h\n" +
 	"\x0eEventAggregate\x12\x1a\n" +
 	"\bfunction\x18\x03 \x01(\tR\bfunction\x12\x14\n" +
 	"\x05field\x18\x04 \x01(\tR\x05field\x12\x0e\n" +

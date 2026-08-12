@@ -22,34 +22,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var EmojiM = map[string]string{
-	":like:":                "👍",
-	":unlike:":              "👎",
-	":wink:":                "😉",
-	":tongue-out:":          "😛",
-	":tired:":               "😫",
-	":surprised:":           "😲",
-	":smiling:":             "😊",
-	":sleepy:":              "😴 ",
-	":sad:":                 "😔",
-	":neutral:":             "😐",
-	":heart-eyes:":          "😍",
-	":grinning:":            "😀",
-	":crying:":              "😭",
-	":confused:":            "😕",
-	":angry:":               "😠",
-	":emoji--disappointed:": "😞",
-	":smile:":               "😊",
-	":open_mouth:":          "😮",
-	":tired_face:":          "😫",
-	":stuck_out_tongue:":    "😛",
-	":moyai:":               "🗿",
-	":thumbsdown:":          "👎",
-	":dislike:":             "👎",
-	":thumbsup:":            "👍",
-}
-
-var emojiReplacer *strings.Replacer
+var EmojiReplacer *strings.Replacer
 
 //go:embed perm.json
 var permJSON string
@@ -650,7 +623,7 @@ func init() {
 		arr = append(arr, v)
 	}
 
-	emojiReplacer = strings.NewReplacer(arr...)
+	EmojiReplacer = strings.NewReplacer(arr...)
 
 	permfile := map[string]*PermStruct{}
 	if err := json.Unmarshal([]byte(permJSON), &permfile); err != nil {
