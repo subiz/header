@@ -14668,8 +14668,9 @@ const (
 	TicketMgr_CreateTicketType_FullMethodName          = "/header.TicketMgr/CreateTicketType"
 	TicketMgr_UpdateTicketType_FullMethodName          = "/header.TicketMgr/UpdateTicketType"
 	TicketMgr_ListTicketTypes_FullMethodName           = "/header.TicketMgr/ListTicketTypes"
-	TicketMgr_GetTicketType_FullMethodName             = "/header.TicketMgr/GetTicketType"
+	TicketMgr_GetRecodType_FullMethodName              = "/header.TicketMgr/GetRecodType"
 	TicketMgr_DeleteTicketType_FullMethodName          = "/header.TicketMgr/DeleteTicketType"
+	TicketMgr_MatchRecordType_FullMethodName           = "/header.TicketMgr/MatchRecordType"
 	TicketMgr_CreateTicket_FullMethodName              = "/header.TicketMgr/CreateTicket"
 	TicketMgr_UpdateTicket_FullMethodName              = "/header.TicketMgr/UpdateTicket"
 	TicketMgr_DeleteTicket_FullMethodName              = "/header.TicketMgr/DeleteTicket"
@@ -14727,11 +14728,12 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TicketMgrClient interface {
 	// ticket type
-	CreateTicketType(ctx context.Context, in *TicketType, opts ...grpc.CallOption) (*TicketType, error)
-	UpdateTicketType(ctx context.Context, in *TicketType, opts ...grpc.CallOption) (*TicketType, error)
+	CreateTicketType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error)
+	UpdateTicketType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error)
 	ListTicketTypes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	GetTicketType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketType, error)
+	GetRecodType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	DeleteTicketType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchRecordType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateTicket(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	UpdateTicket(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	DeleteTicket(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -14793,9 +14795,9 @@ func NewTicketMgrClient(cc grpc.ClientConnInterface) TicketMgrClient {
 	return &ticketMgrClient{cc}
 }
 
-func (c *ticketMgrClient) CreateTicketType(ctx context.Context, in *TicketType, opts ...grpc.CallOption) (*TicketType, error) {
+func (c *ticketMgrClient) CreateTicketType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TicketType)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, TicketMgr_CreateTicketType_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -14803,9 +14805,9 @@ func (c *ticketMgrClient) CreateTicketType(ctx context.Context, in *TicketType, 
 	return out, nil
 }
 
-func (c *ticketMgrClient) UpdateTicketType(ctx context.Context, in *TicketType, opts ...grpc.CallOption) (*TicketType, error) {
+func (c *ticketMgrClient) UpdateTicketType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TicketType)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, TicketMgr_UpdateTicketType_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -14823,10 +14825,10 @@ func (c *ticketMgrClient) ListTicketTypes(ctx context.Context, in *Id, opts ...g
 	return out, nil
 }
 
-func (c *ticketMgrClient) GetTicketType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketType, error) {
+func (c *ticketMgrClient) GetRecodType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TicketType)
-	err := c.cc.Invoke(ctx, TicketMgr_GetTicketType_FullMethodName, in, out, cOpts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, TicketMgr_GetRecodType_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -14837,6 +14839,16 @@ func (c *ticketMgrClient) DeleteTicketType(ctx context.Context, in *Id, opts ...
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, TicketMgr_DeleteTicketType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) MatchRecordType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, TicketMgr_MatchRecordType_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -15348,11 +15360,12 @@ func (c *ticketMgrClient) GetTicketIdsByConvoId(ctx context.Context, in *Id, opt
 // for forward compatibility.
 type TicketMgrServer interface {
 	// ticket type
-	CreateTicketType(context.Context, *TicketType) (*TicketType, error)
-	UpdateTicketType(context.Context, *TicketType) (*TicketType, error)
+	CreateTicketType(context.Context, *RecordType) (*Response, error)
+	UpdateTicketType(context.Context, *RecordType) (*Response, error)
 	ListTicketTypes(context.Context, *Id) (*Response, error)
-	GetTicketType(context.Context, *Id) (*TicketType, error)
+	GetRecodType(context.Context, *Id) (*Response, error)
 	DeleteTicketType(context.Context, *Id) (*Empty, error)
+	MatchRecordType(context.Context, *Id) (*Response, error)
 	CreateTicket(context.Context, *Ticket) (*Ticket, error)
 	UpdateTicket(context.Context, *Ticket) (*Ticket, error)
 	DeleteTicket(context.Context, *Id) (*Empty, error)
@@ -15414,20 +15427,23 @@ type TicketMgrServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTicketMgrServer struct{}
 
-func (UnimplementedTicketMgrServer) CreateTicketType(context.Context, *TicketType) (*TicketType, error) {
+func (UnimplementedTicketMgrServer) CreateTicketType(context.Context, *RecordType) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateTicketType not implemented")
 }
-func (UnimplementedTicketMgrServer) UpdateTicketType(context.Context, *TicketType) (*TicketType, error) {
+func (UnimplementedTicketMgrServer) UpdateTicketType(context.Context, *RecordType) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateTicketType not implemented")
 }
 func (UnimplementedTicketMgrServer) ListTicketTypes(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListTicketTypes not implemented")
 }
-func (UnimplementedTicketMgrServer) GetTicketType(context.Context, *Id) (*TicketType, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTicketType not implemented")
+func (UnimplementedTicketMgrServer) GetRecodType(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRecodType not implemented")
 }
 func (UnimplementedTicketMgrServer) DeleteTicketType(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteTicketType not implemented")
+}
+func (UnimplementedTicketMgrServer) MatchRecordType(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchRecordType not implemented")
 }
 func (UnimplementedTicketMgrServer) CreateTicket(context.Context, *Ticket) (*Ticket, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateTicket not implemented")
@@ -15601,7 +15617,7 @@ func RegisterTicketMgrServer(s grpc.ServiceRegistrar, srv TicketMgrServer) {
 }
 
 func _TicketMgr_CreateTicketType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TicketType)
+	in := new(RecordType)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -15613,13 +15629,13 @@ func _TicketMgr_CreateTicketType_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: TicketMgr_CreateTicketType_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).CreateTicketType(ctx, req.(*TicketType))
+		return srv.(TicketMgrServer).CreateTicketType(ctx, req.(*RecordType))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _TicketMgr_UpdateTicketType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TicketType)
+	in := new(RecordType)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -15631,7 +15647,7 @@ func _TicketMgr_UpdateTicketType_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: TicketMgr_UpdateTicketType_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).UpdateTicketType(ctx, req.(*TicketType))
+		return srv.(TicketMgrServer).UpdateTicketType(ctx, req.(*RecordType))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -15654,20 +15670,20 @@ func _TicketMgr_ListTicketTypes_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TicketMgr_GetTicketType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TicketMgr_GetRecodType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TicketMgrServer).GetTicketType(ctx, in)
+		return srv.(TicketMgrServer).GetRecodType(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TicketMgr_GetTicketType_FullMethodName,
+		FullMethod: TicketMgr_GetRecodType_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).GetTicketType(ctx, req.(*Id))
+		return srv.(TicketMgrServer).GetRecodType(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -15686,6 +15702,24 @@ func _TicketMgr_DeleteTicketType_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TicketMgrServer).DeleteTicketType(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_MatchRecordType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).MatchRecordType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TicketMgr_MatchRecordType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).MatchRecordType(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -16610,12 +16644,16 @@ var TicketMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TicketMgr_ListTicketTypes_Handler,
 		},
 		{
-			MethodName: "GetTicketType",
-			Handler:    _TicketMgr_GetTicketType_Handler,
+			MethodName: "GetRecodType",
+			Handler:    _TicketMgr_GetRecodType_Handler,
 		},
 		{
 			MethodName: "DeleteTicketType",
 			Handler:    _TicketMgr_DeleteTicketType_Handler,
+		},
+		{
+			MethodName: "MatchRecordType",
+			Handler:    _TicketMgr_MatchRecordType_Handler,
 		},
 		{
 			MethodName: "CreateTicket",

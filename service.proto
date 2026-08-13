@@ -541,11 +541,12 @@ service ConversationMgr {
 
 service TicketMgr {
 	// ticket type
-	rpc CreateTicketType(TicketType) returns (TicketType);
-	rpc UpdateTicketType(TicketType) returns (TicketType);
+	rpc CreateTicketType(RecordType) returns (Response);
+	rpc UpdateTicketType(RecordType) returns (Response);
 	rpc ListTicketTypes(Id) returns (Response);
-	rpc GetTicketType(Id) returns (TicketType);
+	rpc GetRecodType(Id) returns (Response);
 	rpc DeleteTicketType(Id) returns (Empty);
+	rpc MatchRecordType(Id) returns (Response);
 
 	rpc CreateTicket(header.Ticket) returns (header.Ticket);
 	rpc UpdateTicket(header.Ticket) returns (header.Ticket);

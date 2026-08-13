@@ -730,7 +730,8 @@ message Data {
 	Noti desktop_notification = 113;
 
 	Ticket ticket = 114;
-	TicketType ticket_type = 115;
+	RecordType ticket_type = 115;
+	RecordType record_type = 112;
 	TicketHistoryEntry ticket_history_entry = 116;
 	LiveUserView live_user_view = 117;
 	TicketView ticket_view = 118;
@@ -6952,7 +6953,8 @@ message Response {
 	repeated WorkflowSession workflow_sessions = 24;
 	WorkflowSession workflow_session = 26;
 	repeated Ticket tickets = 25;
-	repeated TicketType ticket_types = 27;
+	repeated RecordType ticket_types = 27;
+	repeated RecordType record_types = 28;
 	repeated TicketView ticket_views = 29;
 	repeated BotTemplate bot_templates = 30;
 	repeated TicketTemplate ticket_templates = 31;
@@ -7875,7 +7877,7 @@ message WorkflowLog {
 	string span_type = 35;
 }
 
-message TicketType {
+message RecordType {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -7903,7 +7905,10 @@ message TicketType {
 
 	TicketAutoReply auto_reply = 22;
 	TicketSatisfaction satisfaction = 23;
-	// repeated string email_channels = 24;
+
+	string kind = 24; // default = ticket | purchase | quote | booking | registration | service | subscription | other
+
+	repeated RecordStatus statuses = 25; // keep the order
 }
 
 message TicketSatisfaction {
@@ -7930,6 +7935,26 @@ message TicketAutoReply {
 	Block title = 7;
 }
 
+message RecordStatus {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string record_type = 3;
+	string key = 4;
+
+	string category = 5; // backlog | planed | started | completed | canceled
+	string for_type = 7;
+	string name = 8;
+	string description = 9;
+	string color = 10; // rgba
+
+	string created_by = 11;
+	int64 created = 12;
+	string updated_by = 13;
+	string updated = 14;
+	int64 deleted = 15;
+	string deleted_by = 16;
+}
+
 message TicketTemplate {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7951,15 +7976,16 @@ message TicketTemplate {
 	Error error = 15;
 }
 
+// Record
 message Ticket {
 	common.Context ctx = 1;
 	string account_id = 2;
 
 	string id = 3;
-	string number = 27; //SUB-1,SUB-2,...
+	string number = 27; // SUB-1, SUB-2,...
 	string title = 4;
 	string category = 5; // readonly from type: customer, back-office, tracker
-	string type_id = 6;
+	string type_id = 6; // empty -> ticket
 	string prefix = 7; // max 3 character, lowercase: sbz, tec, ret
 
 	repeated ConversationMember members = 8;
@@ -7969,7 +7995,7 @@ message Ticket {
 	string priority = 11; // low, medium, high, urgent
 	repeated Tag tags = 12;
 	int64 closed = 13;
-	string state = 14; // unassigned, open, hold, closed
+	string state = 14; // unassigned, open, hold, closed -> template.status
 	repeated User users = 15; //only save primary user
 	string reporter = 16;
 	string reporter_type = 17; // agent
@@ -8055,6 +8081,13 @@ message Ticket {
 	string every_response_sla_state = 110;
 	string resolution_sla_state = 111;
 	string periodic_update_sla_state = 112;
+
+	repeated Product products = 113;
+	repeated File attachments = 116;
+
+	Ticket parent = 119;
+	repeated Ticket children = 120;
+	repeated Ticket associations = 121;
 }
 
 message ReceiptMember {
@@ -8127,7 +8160,7 @@ message TicketView {
 	string title = 4;
 	repeated TicketViewMember members = 5;
 
-	string type = 6;
+	string type = 6; // required
 
 	WorkflowCondition condition = 17;
 
@@ -8404,7 +8437,7 @@ message KnowledgeBase {
 
 	File favikon = 12;
 
-	TicketType ticket_type = 13;
+	// TicketType ticket_type = 13;
 	int64 disabled_related_articles = 14;
 	repeated ResourceGroupMember permissions = 15;
 
