@@ -539,6 +539,49 @@ service ConversationMgr {
 	rpc ListUserTags(header.Id) returns (Response);
 }
 
+service RecordMgr {
+	rpc CreateRecordType(RecordType) returns (Response);
+	rpc UpdateRecordType(RecordType) returns (Response);
+	rpc ListRecordTypes(Id) returns (Response);
+	rpc GetRecordType(Id) returns (Response);
+	rpc DeleteRecordType(Id) returns (Empty);
+	rpc MatchRecordTypes(Ids) returns (Response);
+
+	rpc CreateRecord(Record) returns (Response);
+	rpc UpdateRecord(Record) returns (Response);
+	rpc DeleteRecord(Id) returns (Empty);
+	rpc RecoverRecord(Id) returns (Empty);
+	rpc GetRecord(Id) returns (Response);
+	rpc ListRecords(ListRecordRequest) returns (Response);
+	rpc MatchRecords(Ids) returns (Response);
+
+	rpc PongRecordEvent(header.Event) returns (header.Event);
+
+	rpc TagRecord(header.TagRequest) returns (Empty);
+	rpc UntagRecord(header.TagRequest) returns (Empty);
+
+	rpc JoinRecord(header.ConversationMember) returns (Empty);
+	rpc LeftRecord(header.ConversationMember) returns (Empty);
+
+	rpc MarkReadRecords(Ids) returns (Empty);
+	rpc MarkUnreadRecords(Ids) returns (Empty);
+
+	rpc SendRecordEvent(header.Event) returns (header.Event);
+
+	rpc ListRecordEvents(header.ListConversationEventsRequest) returns (Response);
+
+	rpc UpdateRecordTypeMember(ResourceGroupMember) returns (ResourceGroupMember);
+	rpc RemoveRecordTypeMember(ResourceGroupMember) returns (header.Empty);
+
+	rpc ReadPipeline(header.Id) returns (header.Pipeline);
+	rpc CreatePipeline(header.Pipeline) returns (Response);
+	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
+	rpc DeletePipeline(Id) returns (Empty);
+	rpc ListPipelines(Ids) returns (header.Pipelines);
+	rpc DeletePipelineStage(header.PipelineStage) returns (Empty);
+	rpc PreselectPipeline(Id) returns (header.Pipeline);
+}
+
 service TicketMgr {
 	// ticket type
 	rpc CreateTicketType(TicketType) returns (TicketType);

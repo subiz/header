@@ -277,6 +277,27 @@ const (
 	RealtimeType_convo_filter_matched             RealtimeType = 402
 	RealtimeType_convo_filter_unmatched           RealtimeType = 403 // convo_filter_unmatched.accid.acc5.unix_hour.key
 	RealtimeType_conversation_replied             RealtimeType = 404
+	RealtimeType_record_created                   RealtimeType = 500
+	RealtimeType_record_updated                   RealtimeType = 501
+	RealtimeType_record_deleted                   RealtimeType = 502
+	RealtimeType_record_tagged                    RealtimeType = 503
+	RealtimeType_record_untagged                  RealtimeType = 504
+	RealtimeType_record_rated                     RealtimeType = 505
+	RealtimeType_record_priority_updated          RealtimeType = 506
+	RealtimeType_record_state_updated             RealtimeType = 507
+	RealtimeType_record_comment_added             RealtimeType = 508 // data.message
+	RealtimeType_record_comment_deleted           RealtimeType = 509 // data.message
+	RealtimeType_record_comment_updated           RealtimeType = 510 // data.message
+	RealtimeType_record_joined                    RealtimeType = 511 // event.data.conversation.memebers.0
+	RealtimeType_record_left                      RealtimeType = 512
+	RealtimeType_record_typing                    RealtimeType = 513
+	RealtimeType_record_unassigned                RealtimeType = 514
+	RealtimeType_record_assigned                  RealtimeType = 515
+	RealtimeType_record_reassigned                RealtimeType = 516
+	RealtimeType_record_pong                      RealtimeType = 517
+	RealtimeType_record_history_updated           RealtimeType = 518
+	RealtimeType_record_type_created              RealtimeType = 519
+	RealtimeType_record_type_updated              RealtimeType = 520
 )
 
 // Enum value maps for RealtimeType.
@@ -532,6 +553,27 @@ var (
 		402: "convo_filter_matched",
 		403: "convo_filter_unmatched",
 		404: "conversation_replied",
+		500: "record_created",
+		501: "record_updated",
+		502: "record_deleted",
+		503: "record_tagged",
+		504: "record_untagged",
+		505: "record_rated",
+		506: "record_priority_updated",
+		507: "record_state_updated",
+		508: "record_comment_added",
+		509: "record_comment_deleted",
+		510: "record_comment_updated",
+		511: "record_joined",
+		512: "record_left",
+		513: "record_typing",
+		514: "record_unassigned",
+		515: "record_assigned",
+		516: "record_reassigned",
+		517: "record_pong",
+		518: "record_history_updated",
+		519: "record_type_created",
+		520: "record_type_updated",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -784,6 +826,27 @@ var (
 		"convo_filter_matched":               402,
 		"convo_filter_unmatched":             403,
 		"conversation_replied":               404,
+		"record_created":                     500,
+		"record_updated":                     501,
+		"record_deleted":                     502,
+		"record_tagged":                      503,
+		"record_untagged":                    504,
+		"record_rated":                       505,
+		"record_priority_updated":            506,
+		"record_state_updated":               507,
+		"record_comment_added":               508,
+		"record_comment_deleted":             509,
+		"record_comment_updated":             510,
+		"record_joined":                      511,
+		"record_left":                        512,
+		"record_typing":                      513,
+		"record_unassigned":                  514,
+		"record_assigned":                    515,
+		"record_reassigned":                  516,
+		"record_pong":                        517,
+		"record_history_updated":             518,
+		"record_type_created":                519,
+		"record_type_updated":                520,
 	}
 )
 
@@ -1726,7 +1789,7 @@ const file_type_proto_rawDesc = "" +
 	"monthEqVar\x12\x1d\n" +
 	"\n" +
 	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
-	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xab0\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\x984\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1979,7 +2042,28 @@ const file_type_proto_rawDesc = "" +
 	"\x19ai_agent_testcase_deleted\x10\x91\x03\x12\x19\n" +
 	"\x14convo_filter_matched\x10\x92\x03\x12\x1b\n" +
 	"\x16convo_filter_unmatched\x10\x93\x03\x12\x19\n" +
-	"\x14conversation_replied\x10\x94\x03B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\x14conversation_replied\x10\x94\x03\x12\x13\n" +
+	"\x0erecord_created\x10\xf4\x03\x12\x13\n" +
+	"\x0erecord_updated\x10\xf5\x03\x12\x13\n" +
+	"\x0erecord_deleted\x10\xf6\x03\x12\x12\n" +
+	"\rrecord_tagged\x10\xf7\x03\x12\x14\n" +
+	"\x0frecord_untagged\x10\xf8\x03\x12\x11\n" +
+	"\frecord_rated\x10\xf9\x03\x12\x1c\n" +
+	"\x17record_priority_updated\x10\xfa\x03\x12\x19\n" +
+	"\x14record_state_updated\x10\xfb\x03\x12\x19\n" +
+	"\x14record_comment_added\x10\xfc\x03\x12\x1b\n" +
+	"\x16record_comment_deleted\x10\xfd\x03\x12\x1b\n" +
+	"\x16record_comment_updated\x10\xfe\x03\x12\x12\n" +
+	"\rrecord_joined\x10\xff\x03\x12\x10\n" +
+	"\vrecord_left\x10\x80\x04\x12\x12\n" +
+	"\rrecord_typing\x10\x81\x04\x12\x16\n" +
+	"\x11record_unassigned\x10\x82\x04\x12\x14\n" +
+	"\x0frecord_assigned\x10\x83\x04\x12\x16\n" +
+	"\x11record_reassigned\x10\x84\x04\x12\x10\n" +
+	"\vrecord_pong\x10\x85\x04\x12\x1b\n" +
+	"\x16record_history_updated\x10\x86\x04\x12\x18\n" +
+	"\x13record_type_created\x10\x87\x04\x12\x18\n" +
+	"\x13record_type_updated\x10\x88\x04B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once

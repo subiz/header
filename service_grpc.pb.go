@@ -14665,6 +14665,1248 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	RecordMgr_CreateRecordType_FullMethodName       = "/header.RecordMgr/CreateRecordType"
+	RecordMgr_UpdateRecordType_FullMethodName       = "/header.RecordMgr/UpdateRecordType"
+	RecordMgr_ListRecordTypes_FullMethodName        = "/header.RecordMgr/ListRecordTypes"
+	RecordMgr_GetRecordType_FullMethodName          = "/header.RecordMgr/GetRecordType"
+	RecordMgr_DeleteRecordType_FullMethodName       = "/header.RecordMgr/DeleteRecordType"
+	RecordMgr_MatchRecordTypes_FullMethodName       = "/header.RecordMgr/MatchRecordTypes"
+	RecordMgr_CreateRecord_FullMethodName           = "/header.RecordMgr/CreateRecord"
+	RecordMgr_UpdateRecord_FullMethodName           = "/header.RecordMgr/UpdateRecord"
+	RecordMgr_DeleteRecord_FullMethodName           = "/header.RecordMgr/DeleteRecord"
+	RecordMgr_RecoverRecord_FullMethodName          = "/header.RecordMgr/RecoverRecord"
+	RecordMgr_GetRecord_FullMethodName              = "/header.RecordMgr/GetRecord"
+	RecordMgr_ListRecords_FullMethodName            = "/header.RecordMgr/ListRecords"
+	RecordMgr_MatchRecords_FullMethodName           = "/header.RecordMgr/MatchRecords"
+	RecordMgr_PongRecordEvent_FullMethodName        = "/header.RecordMgr/PongRecordEvent"
+	RecordMgr_TagRecord_FullMethodName              = "/header.RecordMgr/TagRecord"
+	RecordMgr_UntagRecord_FullMethodName            = "/header.RecordMgr/UntagRecord"
+	RecordMgr_JoinRecord_FullMethodName             = "/header.RecordMgr/JoinRecord"
+	RecordMgr_LeftRecord_FullMethodName             = "/header.RecordMgr/LeftRecord"
+	RecordMgr_MarkReadRecords_FullMethodName        = "/header.RecordMgr/MarkReadRecords"
+	RecordMgr_MarkUnreadRecords_FullMethodName      = "/header.RecordMgr/MarkUnreadRecords"
+	RecordMgr_SendRecordEvent_FullMethodName        = "/header.RecordMgr/SendRecordEvent"
+	RecordMgr_ListRecordEvents_FullMethodName       = "/header.RecordMgr/ListRecordEvents"
+	RecordMgr_UpdateRecordTypeMember_FullMethodName = "/header.RecordMgr/UpdateRecordTypeMember"
+	RecordMgr_RemoveRecordTypeMember_FullMethodName = "/header.RecordMgr/RemoveRecordTypeMember"
+	RecordMgr_ReadPipeline_FullMethodName           = "/header.RecordMgr/ReadPipeline"
+	RecordMgr_CreatePipeline_FullMethodName         = "/header.RecordMgr/CreatePipeline"
+	RecordMgr_UpdatePipeline_FullMethodName         = "/header.RecordMgr/UpdatePipeline"
+	RecordMgr_DeletePipeline_FullMethodName         = "/header.RecordMgr/DeletePipeline"
+	RecordMgr_ListPipelines_FullMethodName          = "/header.RecordMgr/ListPipelines"
+	RecordMgr_DeletePipelineStage_FullMethodName    = "/header.RecordMgr/DeletePipelineStage"
+	RecordMgr_PreselectPipeline_FullMethodName      = "/header.RecordMgr/PreselectPipeline"
+)
+
+// RecordMgrClient is the client API for RecordMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RecordMgrClient interface {
+	CreateRecordType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error)
+	UpdateRecordType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error)
+	ListRecordTypes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GetRecordType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	DeleteRecordType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchRecordTypes(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	CreateRecord(ctx context.Context, in *Record, opts ...grpc.CallOption) (*Response, error)
+	UpdateRecord(ctx context.Context, in *Record, opts ...grpc.CallOption) (*Response, error)
+	DeleteRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	RecoverRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	GetRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListRecords(ctx context.Context, in *ListRecordRequest, opts ...grpc.CallOption) (*Response, error)
+	MatchRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	PongRecordEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
+	TagRecord(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
+	UntagRecord(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
+	JoinRecord(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
+	LeftRecord(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
+	MarkReadRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
+	MarkUnreadRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
+	SendRecordEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
+	ListRecordEvents(ctx context.Context, in *ListConversationEventsRequest, opts ...grpc.CallOption) (*Response, error)
+	UpdateRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error)
+	RemoveRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error)
+	ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error)
+	CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error)
+	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
+	DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Pipelines, error)
+	DeletePipelineStage(ctx context.Context, in *PipelineStage, opts ...grpc.CallOption) (*Empty, error)
+	PreselectPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error)
+}
+
+type recordMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRecordMgrClient(cc grpc.ClientConnInterface) RecordMgrClient {
+	return &recordMgrClient{cc}
+}
+
+func (c *recordMgrClient) CreateRecordType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_CreateRecordType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) UpdateRecordType(ctx context.Context, in *RecordType, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_UpdateRecordType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ListRecordTypes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_ListRecordTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) GetRecordType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_GetRecordType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) DeleteRecordType(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_DeleteRecordType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) MatchRecordTypes(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_MatchRecordTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) CreateRecord(ctx context.Context, in *Record, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_CreateRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) UpdateRecord(ctx context.Context, in *Record, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_UpdateRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) DeleteRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_DeleteRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) RecoverRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_RecoverRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) GetRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_GetRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ListRecords(ctx context.Context, in *ListRecordRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_ListRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) MatchRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_MatchRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) PongRecordEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Event)
+	err := c.cc.Invoke(ctx, RecordMgr_PongRecordEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) TagRecord(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_TagRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) UntagRecord(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_UntagRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) JoinRecord(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_JoinRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) LeftRecord(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_LeftRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) MarkReadRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_MarkReadRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) MarkUnreadRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_MarkUnreadRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) SendRecordEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Event)
+	err := c.cc.Invoke(ctx, RecordMgr_SendRecordEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ListRecordEvents(ctx context.Context, in *ListConversationEventsRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_ListRecordEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) UpdateRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResourceGroupMember)
+	err := c.cc.Invoke(ctx, RecordMgr_UpdateRecordTypeMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) RemoveRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_RemoveRecordTypeMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, RecordMgr_ReadPipeline_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_CreatePipeline_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, RecordMgr_UpdatePipeline_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_DeletePipeline_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Pipelines, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Pipelines)
+	err := c.cc.Invoke(ctx, RecordMgr_ListPipelines_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) DeletePipelineStage(ctx context.Context, in *PipelineStage, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_DeletePipelineStage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) PreselectPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, RecordMgr_PreselectPipeline_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RecordMgrServer is the server API for RecordMgr service.
+// All implementations must embed UnimplementedRecordMgrServer
+// for forward compatibility.
+type RecordMgrServer interface {
+	CreateRecordType(context.Context, *RecordType) (*Response, error)
+	UpdateRecordType(context.Context, *RecordType) (*Response, error)
+	ListRecordTypes(context.Context, *Id) (*Response, error)
+	GetRecordType(context.Context, *Id) (*Response, error)
+	DeleteRecordType(context.Context, *Id) (*Empty, error)
+	MatchRecordTypes(context.Context, *Ids) (*Response, error)
+	CreateRecord(context.Context, *Record) (*Response, error)
+	UpdateRecord(context.Context, *Record) (*Response, error)
+	DeleteRecord(context.Context, *Id) (*Empty, error)
+	RecoverRecord(context.Context, *Id) (*Empty, error)
+	GetRecord(context.Context, *Id) (*Response, error)
+	ListRecords(context.Context, *ListRecordRequest) (*Response, error)
+	MatchRecords(context.Context, *Ids) (*Response, error)
+	PongRecordEvent(context.Context, *Event) (*Event, error)
+	TagRecord(context.Context, *TagRequest) (*Empty, error)
+	UntagRecord(context.Context, *TagRequest) (*Empty, error)
+	JoinRecord(context.Context, *ConversationMember) (*Empty, error)
+	LeftRecord(context.Context, *ConversationMember) (*Empty, error)
+	MarkReadRecords(context.Context, *Ids) (*Empty, error)
+	MarkUnreadRecords(context.Context, *Ids) (*Empty, error)
+	SendRecordEvent(context.Context, *Event) (*Event, error)
+	ListRecordEvents(context.Context, *ListConversationEventsRequest) (*Response, error)
+	UpdateRecordTypeMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error)
+	RemoveRecordTypeMember(context.Context, *ResourceGroupMember) (*Empty, error)
+	ReadPipeline(context.Context, *Id) (*Pipeline, error)
+	CreatePipeline(context.Context, *Pipeline) (*Response, error)
+	UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error)
+	DeletePipeline(context.Context, *Id) (*Empty, error)
+	ListPipelines(context.Context, *Ids) (*Pipelines, error)
+	DeletePipelineStage(context.Context, *PipelineStage) (*Empty, error)
+	PreselectPipeline(context.Context, *Id) (*Pipeline, error)
+	mustEmbedUnimplementedRecordMgrServer()
+}
+
+// UnimplementedRecordMgrServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedRecordMgrServer struct{}
+
+func (UnimplementedRecordMgrServer) CreateRecordType(context.Context, *RecordType) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateRecordType not implemented")
+}
+func (UnimplementedRecordMgrServer) UpdateRecordType(context.Context, *RecordType) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateRecordType not implemented")
+}
+func (UnimplementedRecordMgrServer) ListRecordTypes(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRecordTypes not implemented")
+}
+func (UnimplementedRecordMgrServer) GetRecordType(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRecordType not implemented")
+}
+func (UnimplementedRecordMgrServer) DeleteRecordType(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteRecordType not implemented")
+}
+func (UnimplementedRecordMgrServer) MatchRecordTypes(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchRecordTypes not implemented")
+}
+func (UnimplementedRecordMgrServer) CreateRecord(context.Context, *Record) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) UpdateRecord(context.Context, *Record) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) DeleteRecord(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) RecoverRecord(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RecoverRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) GetRecord(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) ListRecords(context.Context, *ListRecordRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRecords not implemented")
+}
+func (UnimplementedRecordMgrServer) MatchRecords(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchRecords not implemented")
+}
+func (UnimplementedRecordMgrServer) PongRecordEvent(context.Context, *Event) (*Event, error) {
+	return nil, status.Error(codes.Unimplemented, "method PongRecordEvent not implemented")
+}
+func (UnimplementedRecordMgrServer) TagRecord(context.Context, *TagRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method TagRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) UntagRecord(context.Context, *TagRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UntagRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) JoinRecord(context.Context, *ConversationMember) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method JoinRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) LeftRecord(context.Context, *ConversationMember) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method LeftRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) MarkReadRecords(context.Context, *Ids) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MarkReadRecords not implemented")
+}
+func (UnimplementedRecordMgrServer) MarkUnreadRecords(context.Context, *Ids) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MarkUnreadRecords not implemented")
+}
+func (UnimplementedRecordMgrServer) SendRecordEvent(context.Context, *Event) (*Event, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendRecordEvent not implemented")
+}
+func (UnimplementedRecordMgrServer) ListRecordEvents(context.Context, *ListConversationEventsRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRecordEvents not implemented")
+}
+func (UnimplementedRecordMgrServer) UpdateRecordTypeMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateRecordTypeMember not implemented")
+}
+func (UnimplementedRecordMgrServer) RemoveRecordTypeMember(context.Context, *ResourceGroupMember) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveRecordTypeMember not implemented")
+}
+func (UnimplementedRecordMgrServer) ReadPipeline(context.Context, *Id) (*Pipeline, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadPipeline not implemented")
+}
+func (UnimplementedRecordMgrServer) CreatePipeline(context.Context, *Pipeline) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePipeline not implemented")
+}
+func (UnimplementedRecordMgrServer) UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdatePipeline not implemented")
+}
+func (UnimplementedRecordMgrServer) DeletePipeline(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeletePipeline not implemented")
+}
+func (UnimplementedRecordMgrServer) ListPipelines(context.Context, *Ids) (*Pipelines, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPipelines not implemented")
+}
+func (UnimplementedRecordMgrServer) DeletePipelineStage(context.Context, *PipelineStage) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeletePipelineStage not implemented")
+}
+func (UnimplementedRecordMgrServer) PreselectPipeline(context.Context, *Id) (*Pipeline, error) {
+	return nil, status.Error(codes.Unimplemented, "method PreselectPipeline not implemented")
+}
+func (UnimplementedRecordMgrServer) mustEmbedUnimplementedRecordMgrServer() {}
+func (UnimplementedRecordMgrServer) testEmbeddedByValue()                   {}
+
+// UnsafeRecordMgrServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RecordMgrServer will
+// result in compilation errors.
+type UnsafeRecordMgrServer interface {
+	mustEmbedUnimplementedRecordMgrServer()
+}
+
+func RegisterRecordMgrServer(s grpc.ServiceRegistrar, srv RecordMgrServer) {
+	// If the following call panics, it indicates UnimplementedRecordMgrServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&RecordMgr_ServiceDesc, srv)
+}
+
+func _RecordMgr_CreateRecordType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordType)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).CreateRecordType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_CreateRecordType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).CreateRecordType(ctx, req.(*RecordType))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_UpdateRecordType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordType)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).UpdateRecordType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_UpdateRecordType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).UpdateRecordType(ctx, req.(*RecordType))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_ListRecordTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ListRecordTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ListRecordTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ListRecordTypes(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_GetRecordType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).GetRecordType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_GetRecordType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).GetRecordType(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_DeleteRecordType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).DeleteRecordType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_DeleteRecordType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).DeleteRecordType(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_MatchRecordTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).MatchRecordTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_MatchRecordTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).MatchRecordTypes(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_CreateRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Record)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).CreateRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_CreateRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).CreateRecord(ctx, req.(*Record))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_UpdateRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Record)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).UpdateRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_UpdateRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).UpdateRecord(ctx, req.(*Record))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_DeleteRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).DeleteRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_DeleteRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).DeleteRecord(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_RecoverRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).RecoverRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_RecoverRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).RecoverRecord(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_GetRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).GetRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_GetRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).GetRecord(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_ListRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ListRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ListRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ListRecords(ctx, req.(*ListRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_MatchRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).MatchRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_MatchRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).MatchRecords(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_PongRecordEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).PongRecordEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_PongRecordEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).PongRecordEvent(ctx, req.(*Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_TagRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).TagRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_TagRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).TagRecord(ctx, req.(*TagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_UntagRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).UntagRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_UntagRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).UntagRecord(ctx, req.(*TagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_JoinRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConversationMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).JoinRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_JoinRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).JoinRecord(ctx, req.(*ConversationMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_LeftRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConversationMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).LeftRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_LeftRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).LeftRecord(ctx, req.(*ConversationMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_MarkReadRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).MarkReadRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_MarkReadRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).MarkReadRecords(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_MarkUnreadRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).MarkUnreadRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_MarkUnreadRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).MarkUnreadRecords(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_SendRecordEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).SendRecordEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_SendRecordEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).SendRecordEvent(ctx, req.(*Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_ListRecordEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListConversationEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ListRecordEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ListRecordEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ListRecordEvents(ctx, req.(*ListConversationEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_UpdateRecordTypeMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResourceGroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).UpdateRecordTypeMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_UpdateRecordTypeMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).UpdateRecordTypeMember(ctx, req.(*ResourceGroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_RemoveRecordTypeMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResourceGroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).RemoveRecordTypeMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_RemoveRecordTypeMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).RemoveRecordTypeMember(ctx, req.(*ResourceGroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_ReadPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ReadPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ReadPipeline_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ReadPipeline(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_CreatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).CreatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_CreatePipeline_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).CreatePipeline(ctx, req.(*Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_UpdatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).UpdatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_UpdatePipeline_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).UpdatePipeline(ctx, req.(*Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_DeletePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).DeletePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_DeletePipeline_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).DeletePipeline(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ListPipelines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ListPipelines_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ListPipelines(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_DeletePipelineStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PipelineStage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).DeletePipelineStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_DeletePipelineStage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).DeletePipelineStage(ctx, req.(*PipelineStage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_PreselectPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).PreselectPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_PreselectPipeline_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).PreselectPipeline(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// RecordMgr_ServiceDesc is the grpc.ServiceDesc for RecordMgr service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RecordMgr_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.RecordMgr",
+	HandlerType: (*RecordMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateRecordType",
+			Handler:    _RecordMgr_CreateRecordType_Handler,
+		},
+		{
+			MethodName: "UpdateRecordType",
+			Handler:    _RecordMgr_UpdateRecordType_Handler,
+		},
+		{
+			MethodName: "ListRecordTypes",
+			Handler:    _RecordMgr_ListRecordTypes_Handler,
+		},
+		{
+			MethodName: "GetRecordType",
+			Handler:    _RecordMgr_GetRecordType_Handler,
+		},
+		{
+			MethodName: "DeleteRecordType",
+			Handler:    _RecordMgr_DeleteRecordType_Handler,
+		},
+		{
+			MethodName: "MatchRecordTypes",
+			Handler:    _RecordMgr_MatchRecordTypes_Handler,
+		},
+		{
+			MethodName: "CreateRecord",
+			Handler:    _RecordMgr_CreateRecord_Handler,
+		},
+		{
+			MethodName: "UpdateRecord",
+			Handler:    _RecordMgr_UpdateRecord_Handler,
+		},
+		{
+			MethodName: "DeleteRecord",
+			Handler:    _RecordMgr_DeleteRecord_Handler,
+		},
+		{
+			MethodName: "RecoverRecord",
+			Handler:    _RecordMgr_RecoverRecord_Handler,
+		},
+		{
+			MethodName: "GetRecord",
+			Handler:    _RecordMgr_GetRecord_Handler,
+		},
+		{
+			MethodName: "ListRecords",
+			Handler:    _RecordMgr_ListRecords_Handler,
+		},
+		{
+			MethodName: "MatchRecords",
+			Handler:    _RecordMgr_MatchRecords_Handler,
+		},
+		{
+			MethodName: "PongRecordEvent",
+			Handler:    _RecordMgr_PongRecordEvent_Handler,
+		},
+		{
+			MethodName: "TagRecord",
+			Handler:    _RecordMgr_TagRecord_Handler,
+		},
+		{
+			MethodName: "UntagRecord",
+			Handler:    _RecordMgr_UntagRecord_Handler,
+		},
+		{
+			MethodName: "JoinRecord",
+			Handler:    _RecordMgr_JoinRecord_Handler,
+		},
+		{
+			MethodName: "LeftRecord",
+			Handler:    _RecordMgr_LeftRecord_Handler,
+		},
+		{
+			MethodName: "MarkReadRecords",
+			Handler:    _RecordMgr_MarkReadRecords_Handler,
+		},
+		{
+			MethodName: "MarkUnreadRecords",
+			Handler:    _RecordMgr_MarkUnreadRecords_Handler,
+		},
+		{
+			MethodName: "SendRecordEvent",
+			Handler:    _RecordMgr_SendRecordEvent_Handler,
+		},
+		{
+			MethodName: "ListRecordEvents",
+			Handler:    _RecordMgr_ListRecordEvents_Handler,
+		},
+		{
+			MethodName: "UpdateRecordTypeMember",
+			Handler:    _RecordMgr_UpdateRecordTypeMember_Handler,
+		},
+		{
+			MethodName: "RemoveRecordTypeMember",
+			Handler:    _RecordMgr_RemoveRecordTypeMember_Handler,
+		},
+		{
+			MethodName: "ReadPipeline",
+			Handler:    _RecordMgr_ReadPipeline_Handler,
+		},
+		{
+			MethodName: "CreatePipeline",
+			Handler:    _RecordMgr_CreatePipeline_Handler,
+		},
+		{
+			MethodName: "UpdatePipeline",
+			Handler:    _RecordMgr_UpdatePipeline_Handler,
+		},
+		{
+			MethodName: "DeletePipeline",
+			Handler:    _RecordMgr_DeletePipeline_Handler,
+		},
+		{
+			MethodName: "ListPipelines",
+			Handler:    _RecordMgr_ListPipelines_Handler,
+		},
+		{
+			MethodName: "DeletePipelineStage",
+			Handler:    _RecordMgr_DeletePipelineStage_Handler,
+		},
+		{
+			MethodName: "PreselectPipeline",
+			Handler:    _RecordMgr_PreselectPipeline_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	TicketMgr_CreateTicketType_FullMethodName          = "/header.TicketMgr/CreateTicketType"
 	TicketMgr_UpdateTicketType_FullMethodName          = "/header.TicketMgr/UpdateTicketType"
 	TicketMgr_ListTicketTypes_FullMethodName           = "/header.TicketMgr/ListTicketTypes"

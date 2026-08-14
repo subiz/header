@@ -359,6 +359,32 @@ enum RealtimeType {
 	convo_filter_matched = 402;
 	convo_filter_unmatched = 403; // convo_filter_unmatched.accid.acc5.unix_hour.key
 	conversation_replied = 404;
+
+
+	record_created = 500;
+	record_updated = 501;
+	record_deleted = 502;
+	record_tagged = 503;
+	record_untagged = 504;
+	record_rated = 505;
+	record_priority_updated = 506;
+	record_state_updated = 507;
+
+	record_comment_added = 508; // data.message
+	record_comment_deleted = 509; // data.message
+	record_comment_updated = 510; // data.message
+	record_joined = 511; // event.data.conversation.memebers.0
+	record_left = 512;
+	record_typing = 513;
+	record_unassigned = 514;
+	record_assigned = 515;
+	record_reassigned = 516;
+	record_pong = 517;
+
+	record_history_updated = 518;
+
+	record_type_created = 519;
+	record_type_updated = 520;
 }
 
 message TextTransform {

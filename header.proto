@@ -768,6 +768,8 @@ message Data {
 	FacebookCall facebook_call = 148;
 
 	TiktokVideo tiktok_video = 149;
+	Record record = 150;
+	RecordType record_type = 151;
 }
 
 message ConversationMeta {
@@ -1947,6 +1949,7 @@ message Integration {
 	string woocommerce_order = 109; // fetch, sync, none
 	string woocommerce_customer = 110; // fetch, none
 
+	bool is_ads = 119; // tiktok ads
 	bool is_business = 120; // meta, sync from facebook, tiktok.is_business_account
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
@@ -7148,6 +7151,14 @@ message Response {
 	FacebookCallPermissionReply facebook_call_permission = 284;
 	TiktokVideo tiktok_video = 286;
 	repeated TiktokVideo tiktok_videos = 287;
+
+	RecordType record_type = 290;
+	repeated RecordType record_types = 291;
+	Record record = 292;
+	repeated Record records = 293;
+
+	Pipeline pipeline = 294;
+	repeated Pipeline pipelines = 295;
 }
 
 message ReportCount {
@@ -7951,6 +7962,145 @@ message TicketTemplate {
 	Error error = 15;
 }
 
+message RecordType {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
+	string category = 5; // customer, back-office, tracker
+	string name = 6;
+	string description = 7;
+	string group_id = 8;
+
+	string icon = 9; // emoji
+	repeated AttributeDefinition defs = 10;
+	int64 archived = 11;
+
+	string created_by = 12;
+	int64 created = 13;
+
+	string updated_by = 14;
+	int64 updated = 15;
+
+	repeated ResourceGroupMember permissions = 16;
+	string template_id = 18;
+	string visibility = 19; // public, internal, limited
+
+	Error error = 20;
+}
+
+message Record {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string id = 3;
+	string number = 27; //SUB-1,SUB-2,...
+	string title = 4;
+	string category = 5; // readonly from type: customer, back-office, tracker
+	string type_id = 6;
+
+	repeated ConversationMember members = 8;
+	repeated Attribute attrs = 9;
+	Block description = 10;
+
+	string priority = 11; // low, medium, high, urgent
+	repeated Tag tags = 12;
+	int64 closed = 13;
+	string state = 14; // unassigned, open, hold, closed
+	repeated User users = 15; //only save primary user
+	string reporter = 16;
+	string reporter_type = 17; // agent
+
+	string assignee = 18; // The id representing the admin assigned to the ticket.
+	string is_public = 19; // Whether or not the ticket is shared with the customer.
+
+	Touchpoint touchpoint = 20; // read-only copy from conversation touchpoint
+	string conversation_id = 21; // main conversation
+	repeated string associated_conversations = 22;
+
+	Event last_internal_message_sent = 23;
+	string initial_by = 24; // agent_id || popup || user || bot
+
+	int64 response_sec = 25;
+	string duplicate_of = 26;
+
+	RouteResult assigned_to = 30;
+	RouteResult reassigned_to = 31;
+
+	repeated KV fields = 33;
+	repeated Rating ratings = 35;
+
+	string source = 36; // indicate where does the conversation happended (url)
+
+	Event matched_event = 45; // for search only
+
+	int64 first_replied_duration = 48;
+
+	string marked_as_spam_by = 67;
+	int64 marked_as_spam = 68;
+
+	int64 average_rating = 73;
+
+	// string user = 73;
+	int64 due_at = 74;
+
+	string sla_policy = 75;
+
+	int64 first_response_due = 76; // 0 -> dont use // sec
+	int64 every_response_due = 77; // sec 20'
+	int64 resolution_due = 78; // sec 1 ngay
+	int64 periodic_update_due = 79;
+
+	// int64 first_response_sla_violated = 88;
+	// int64 num_every_response_sla_violated = 89;
+	// int64 resolution_sla_violated = 90;
+	// int64 num_periodic_update_sla_violated = 95;
+
+	// repeated string tags = 79;
+	int64 created = 80;
+	int64 updated = 81;
+	bool archived = 82;
+	Event last_event = 83; // meanful event
+	string updated_by = 84;
+	int64 deleted = 85;
+	int64 total_messages = 86;
+
+	Error error = 87; // access_deny, not_found
+	string created_by = 91;
+
+	int64 agent_first_response_at = 92;
+	int64 agent_last_response_at = 93;
+	int64 agent_second_last_response_at = 103;
+
+	string source_id = 94; // zoho.203948.123098123
+	int64 hold_at = 96;
+	int64 total_past_hold_sec = 97;
+
+	int64 user_first_response_at = 98;
+	int64 user_last_response_at = 99;
+	map<string,ConversationMember> memberM = 100; //just for compacted ticket
+	// string periodic_update_enable = 101; // on/off
+	// string every_response_enable = 102; // on/off
+	repeated ReceiptMember read_receipts = 104;
+
+	int64 last_high_risk_first_response_due = 105;
+	int64 last_high_risk_every_response_due = 106;
+	int64 last_high_risk_resolution_due = 107;
+	int64 last_high_risk_periodic_update_due = 108;
+
+	string first_response_sla_state = 109; // violated, done, not_apply, in_process, wait
+	string every_response_sla_state = 110;
+	string resolution_sla_state = 111;
+	string periodic_update_sla_state = 112;
+
+	repeated Product products = 113;
+	repeated File attachments = 116;
+
+	Record parent = 119;
+	repeated Record children = 120;
+	repeated Record associations = 121;
+}
+
 message Ticket {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8097,6 +8247,29 @@ message TicketHistoryEntry {
 }
 
 message ListTicketRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string type = 5; // quick
+	string assignee = 6; // quick
+
+	WorkflowCondition condition = 7;
+	bool is_shorten = 8;
+	string order_by = 9; // updated, state, priority, created, due_date
+	string next_cursor = 11;
+	int64 limit = 12;
+
+	string query = 13;
+	bool header_only = 14;
+
+	Touchpoint touchpoint = 15;
+	bool is_deleted = 16;
+	string view_id = 17; // quick
+	bool is_count_only = 18;
+	bool is_full_search = 19;
+}
+
+message ListRecordRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 
