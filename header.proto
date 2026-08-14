@@ -92,6 +92,7 @@ message Noti {
 	string task_id = 27;
 	string sound_name = 28;
 	string ticket_id = 29;
+	string record_id = 25;
 
 	bool is_first_user_message = 30;
 
@@ -1125,6 +1126,7 @@ message ConversationMember {
 	string type = 3; // type
 	string id = 4;
 	string ticket_id = 6;
+	string record_id = 7;
 	string conversation_id = 13;
 	string membership = 12;
 	enum State {
@@ -1454,6 +1456,7 @@ message Message {
 	string order_id = 6;
 	string conversation_id = 14;
 	string ticket_id = 15;
+	string record_id = 16;
 
 	string task_id = 27;
 	string id = 11; // event id or event_source id

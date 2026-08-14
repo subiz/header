@@ -2664,6 +2664,7 @@ type Noti struct {
 	TaskId             string   `protobuf:"bytes,27,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	SoundName          string   `protobuf:"bytes,28,opt,name=sound_name,json=soundName,proto3" json:"sound_name,omitempty"`
 	TicketId           string   `protobuf:"bytes,29,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	RecordId           string   `protobuf:"bytes,25,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
 	IsFirstUserMessage bool     `protobuf:"varint,30,opt,name=is_first_user_message,json=isFirstUserMessage,proto3" json:"is_first_user_message,omitempty"`
 	UserId             string   `protobuf:"bytes,31,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`       // to user
 	DeviceId           string   `protobuf:"bytes,32,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"` // to device id
@@ -2833,6 +2834,13 @@ func (x *Noti) GetSoundName() string {
 func (x *Noti) GetTicketId() string {
 	if x != nil {
 		return x.TicketId
+	}
+	return ""
+}
+
+func (x *Noti) GetRecordId() string {
+	if x != nil {
+		return x.RecordId
 	}
 	return ""
 }
@@ -9640,6 +9648,7 @@ type ConversationMember struct {
 	Type              string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // type
 	Id                string                 `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	TicketId          string                 `protobuf:"bytes,6,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	RecordId          string                 `protobuf:"bytes,7,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
 	ConversationId    string                 `protobuf:"bytes,13,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
 	Membership        string                 `protobuf:"bytes,12,opt,name=membership,proto3" json:"membership,omitempty"`
 	InvitedBy         *By                    `protobuf:"bytes,16,opt,name=invited_by,json=invitedBy,proto3" json:"invited_by,omitempty"`
@@ -9728,6 +9737,13 @@ func (x *ConversationMember) GetId() string {
 func (x *ConversationMember) GetTicketId() string {
 	if x != nil {
 		return x.TicketId
+	}
+	return ""
+}
+
+func (x *ConversationMember) GetRecordId() string {
+	if x != nil {
+		return x.RecordId
 	}
 	return ""
 }
@@ -11630,6 +11646,7 @@ type Message struct {
 	OrderId          string                 `protobuf:"bytes,6,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	ConversationId   string                 `protobuf:"bytes,14,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
 	TicketId         string                 `protobuf:"bytes,15,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	RecordId         string                 `protobuf:"bytes,16,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
 	TaskId           string                 `protobuf:"bytes,27,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	Id               string                 `protobuf:"bytes,11,opt,name=id,proto3" json:"id,omitempty"`    // event id or event_source id
 	Text             string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"` // plaintext or template
@@ -11734,6 +11751,13 @@ func (x *Message) GetConversationId() string {
 func (x *Message) GetTicketId() string {
 	if x != nil {
 		return x.TicketId
+	}
+	return ""
+}
+
+func (x *Message) GetRecordId() string {
+	if x != nil {
+		return x.RecordId
 	}
 	return ""
 }
@@ -74265,7 +74289,7 @@ const file_header_proto_rawDesc = "" +
 	"\x11campaign_num_acks\x18\x0f \x01(\x03R\x0fcampaignNumAcks\x120\n" +
 	"\x14campaign_num_success\x18\x10 \x01(\x03R\x12campaignNumSuccess\x122\n" +
 	"\x15campaign_cancelled_by\x18\x11 \x01(\tR\x13campaignCancelledBy\x12'\n" +
-	"\x0fcampaign_status\x18\x12 \x01(\tR\x0ecampaignStatus\"\x9d\a\n" +
+	"\x0fcampaign_status\x18\x12 \x01(\tR\x0ecampaignStatus\"\xba\a\n" +
 	"\x04Noti\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74289,7 +74313,8 @@ const file_header_proto_rawDesc = "" +
 	"\atask_id\x18\x1b \x01(\tR\x06taskId\x12\x1d\n" +
 	"\n" +
 	"sound_name\x18\x1c \x01(\tR\tsoundName\x12\x1b\n" +
-	"\tticket_id\x18\x1d \x01(\tR\bticketId\x121\n" +
+	"\tticket_id\x18\x1d \x01(\tR\bticketId\x12\x1b\n" +
+	"\trecord_id\x18\x19 \x01(\tR\brecordId\x121\n" +
 	"\x15is_first_user_message\x18\x1e \x01(\bR\x12isFirstUserMessage\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\tR\x06userId\x12\x1b\n" +
 	"\tdevice_id\x18  \x01(\tR\bdeviceId\x12\x1a\n" +
@@ -75137,14 +75162,15 @@ const file_header_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1f\n" +
 	"\vassigned_to\x18\v \x01(\tR\n" +
-	"assignedTo\"\xe6\a\n" +
+	"assignedTo\"\x83\b\n" +
 	"\x12ConversationMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x12\x1b\n" +
-	"\tticket_id\x18\x06 \x01(\tR\bticketId\x12'\n" +
+	"\tticket_id\x18\x06 \x01(\tR\bticketId\x12\x1b\n" +
+	"\trecord_id\x18\a \x01(\tR\brecordId\x12'\n" +
 	"\x0fconversation_id\x18\r \x01(\tR\x0econversationId\x12\x1e\n" +
 	"\n" +
 	"membership\x18\f \x01(\tR\n" +
@@ -75398,14 +75424,15 @@ const file_header_proto_rawDesc = "" +
 	"\x06anchor\x18\x04 \x01(\tR\x06anchor\x12\x19\n" +
 	"\buser_ids\x18\x05 \x03(\tR\auserIds\x12%\n" +
 	"\x06errors\x18\x06 \x03(\v2\r.header.ErrorR\x06errors\x12#\n" +
-	"\rlast_modified\x18\a \x01(\x03R\flastModified\"\xf7\x0e\n" +
+	"\rlast_modified\x18\a \x01(\x03R\flastModified\"\x94\x0f\n" +
 	"\aMessage\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x05 \x01(\tR\taccountId\x12\x19\n" +
 	"\border_id\x18\x06 \x01(\tR\aorderId\x12'\n" +
 	"\x0fconversation_id\x18\x0e \x01(\tR\x0econversationId\x12\x1b\n" +
-	"\tticket_id\x18\x0f \x01(\tR\bticketId\x12\x17\n" +
+	"\tticket_id\x18\x0f \x01(\tR\bticketId\x12\x1b\n" +
+	"\trecord_id\x18\x10 \x01(\tR\brecordId\x12\x17\n" +
 	"\atask_id\x18\x1b \x01(\tR\x06taskId\x12\x0e\n" +
 	"\x02id\x18\v \x01(\tR\x02id\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x12\x1f\n" +
