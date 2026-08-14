@@ -567,19 +567,17 @@ service RecordMgr {
 	rpc MarkUnreadRecords(Ids) returns (Empty);
 
 	rpc SendRecordEvent(header.Event) returns (header.Event);
-
 	rpc ListRecordEvents(header.ListConversationEventsRequest) returns (Response);
 
 	rpc UpdateRecordTypeMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveRecordTypeMember(ResourceGroupMember) returns (header.Empty);
 
-	rpc ReadPipeline(header.Id) returns (header.Pipeline);
+	rpc ReadPipeline(header.Id) returns (Response);
 	rpc CreatePipeline(header.Pipeline) returns (Response);
-	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
+	rpc UpdatePipeline(header.Pipeline) returns (Response);
 	rpc DeletePipeline(Id) returns (Empty);
-	rpc ListPipelines(Ids) returns (header.Pipelines);
-	rpc DeletePipelineStage(header.PipelineStage) returns (Empty);
-	rpc PreselectPipeline(Id) returns (header.Pipeline);
+	rpc MatchPipelines(Ids) returns (Response);
+	rpc ListPipelines(Ids) returns (Response);
 }
 
 service TicketMgr {

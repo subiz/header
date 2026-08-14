@@ -7969,11 +7969,10 @@ message RecordType {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
+	// string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
 	string category = 5; // customer, back-office, tracker
 	string name = 6;
 	string description = 7;
-	string group_id = 8;
 
 	string icon = 9; // emoji
 	repeated AttributeDefinition defs = 10;
@@ -7984,6 +7983,7 @@ message RecordType {
 
 	string updated_by = 14;
 	int64 updated = 15;
+	string pipeline = 22;
 
 	repeated ResourceGroupMember permissions = 16;
 	string template_id = 18;
@@ -7992,37 +7992,50 @@ message RecordType {
 	Error error = 20;
 }
 
+message RecordPipeline {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string id = 3; // 56
+	string pipeline = 5;
+	string pipeline_stage = 6;
+
+	int64 first_entered = 7;
+
+	int64 entered = 8;
+	int64 last_exited = 9;
+	string entered_by = 10;
+	string exited_by = 11;
+}
+
 message Record {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string id = 3;
-	string number = 27; //SUB-1,SUB-2,...
+	string id = 3; // 56
 	string title = 4;
-	string category = 5; // readonly from type: customer, back-office, tracker
-	string type_id = 6;
+	string pipeline = 5;
+	string pipeline_stage = 6;
+	string type_id = 7;
 
-	repeated ConversationMember members = 8;
-	repeated Attribute attrs = 9;
+	bool is_draft = 8;
+
+	repeated ConversationMember members = 9;
 	Block description = 10;
+	repeated RecordPipeline stages = 11; // computed pipeline
 
-	string priority = 11; // low, medium, high, urgent
-	repeated Tag tags = 12;
-	int64 closed = 13;
-	string state = 14; // unassigned, open, hold, closed
-	repeated User users = 15; //only save primary user
-	string reporter = 16;
-	string reporter_type = 17; // agent
+	string priority = 12; // low, medium, high, urgent
+	repeated Tag tags = 13;
+	int64 closed = 14;
+	string status = 15; // unassigned, open, hold, closed
+	repeated User users = 16; // only save primary user
+	string reporter = 17;
 
-	string assignee = 18; // The id representing the admin assigned to the ticket.
-	string is_public = 19; // Whether or not the ticket is shared with the customer.
+	string assignee = 19; // The id representing the admin assigned to the ticket.
+	string is_public = 20; // Whether or not the record is shared with the customer.
 
-	Touchpoint touchpoint = 20; // read-only copy from conversation touchpoint
-	string conversation_id = 21; // main conversation
-	repeated string associated_conversations = 22;
-
-	Event last_internal_message_sent = 23;
-	string initial_by = 24; // agent_id || popup || user || bot
+	Touchpoint touchpoint = 21; // read-only copy from conversation touchpoint
+	repeated string associated_conversations = 23;
 
 	int64 response_sec = 25;
 	string duplicate_of = 26;
@@ -8062,7 +8075,7 @@ message Record {
 	// repeated string tags = 79;
 	int64 created = 80;
 	int64 updated = 81;
-	bool archived = 82;
+	int64 archived = 82;
 	Event last_event = 83; // meanful event
 	string updated_by = 84;
 	int64 deleted = 85;
@@ -8291,8 +8304,9 @@ message ListRecordRequest {
 	Touchpoint touchpoint = 15;
 	bool is_deleted = 16;
 	string view_id = 17; // quick
-	bool is_count_only = 18;
-	bool is_full_search = 19;
+
+	string pipeline = 20;
+	string pipeline_stage = 21;
 }
 
 message TicketView {

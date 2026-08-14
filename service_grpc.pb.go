@@ -14693,9 +14693,8 @@ const (
 	RecordMgr_CreatePipeline_FullMethodName         = "/header.RecordMgr/CreatePipeline"
 	RecordMgr_UpdatePipeline_FullMethodName         = "/header.RecordMgr/UpdatePipeline"
 	RecordMgr_DeletePipeline_FullMethodName         = "/header.RecordMgr/DeletePipeline"
+	RecordMgr_MatchPipelines_FullMethodName         = "/header.RecordMgr/MatchPipelines"
 	RecordMgr_ListPipelines_FullMethodName          = "/header.RecordMgr/ListPipelines"
-	RecordMgr_DeletePipelineStage_FullMethodName    = "/header.RecordMgr/DeletePipelineStage"
-	RecordMgr_PreselectPipeline_FullMethodName      = "/header.RecordMgr/PreselectPipeline"
 )
 
 // RecordMgrClient is the client API for RecordMgr service.
@@ -14726,13 +14725,12 @@ type RecordMgrClient interface {
 	ListRecordEvents(ctx context.Context, in *ListConversationEventsRequest, opts ...grpc.CallOption) (*Response, error)
 	UpdateRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error)
 	RemoveRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error)
-	ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error)
+	ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error)
-	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
+	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error)
 	DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Pipelines, error)
-	DeletePipelineStage(ctx context.Context, in *PipelineStage, opts ...grpc.CallOption) (*Empty, error)
-	PreselectPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error)
+	MatchPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 }
 
 type recordMgrClient struct {
@@ -14983,9 +14981,9 @@ func (c *recordMgrClient) RemoveRecordTypeMember(ctx context.Context, in *Resour
 	return out, nil
 }
 
-func (c *recordMgrClient) ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error) {
+func (c *recordMgrClient) ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Pipeline)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, RecordMgr_ReadPipeline_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -15003,9 +15001,9 @@ func (c *recordMgrClient) CreatePipeline(ctx context.Context, in *Pipeline, opts
 	return out, nil
 }
 
-func (c *recordMgrClient) UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
+func (c *recordMgrClient) UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Pipeline)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, RecordMgr_UpdatePipeline_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -15023,30 +15021,20 @@ func (c *recordMgrClient) DeletePipeline(ctx context.Context, in *Id, opts ...gr
 	return out, nil
 }
 
-func (c *recordMgrClient) ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Pipelines, error) {
+func (c *recordMgrClient) MatchPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Pipelines)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_MatchPipelines_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, RecordMgr_ListPipelines_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recordMgrClient) DeletePipelineStage(ctx context.Context, in *PipelineStage, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, RecordMgr_DeletePipelineStage_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recordMgrClient) PreselectPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Pipeline)
-	err := c.cc.Invoke(ctx, RecordMgr_PreselectPipeline_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -15081,13 +15069,12 @@ type RecordMgrServer interface {
 	ListRecordEvents(context.Context, *ListConversationEventsRequest) (*Response, error)
 	UpdateRecordTypeMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error)
 	RemoveRecordTypeMember(context.Context, *ResourceGroupMember) (*Empty, error)
-	ReadPipeline(context.Context, *Id) (*Pipeline, error)
+	ReadPipeline(context.Context, *Id) (*Response, error)
 	CreatePipeline(context.Context, *Pipeline) (*Response, error)
-	UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error)
+	UpdatePipeline(context.Context, *Pipeline) (*Response, error)
 	DeletePipeline(context.Context, *Id) (*Empty, error)
-	ListPipelines(context.Context, *Ids) (*Pipelines, error)
-	DeletePipelineStage(context.Context, *PipelineStage) (*Empty, error)
-	PreselectPipeline(context.Context, *Id) (*Pipeline, error)
+	MatchPipelines(context.Context, *Ids) (*Response, error)
+	ListPipelines(context.Context, *Ids) (*Response, error)
 	mustEmbedUnimplementedRecordMgrServer()
 }
 
@@ -15170,26 +15157,23 @@ func (UnimplementedRecordMgrServer) UpdateRecordTypeMember(context.Context, *Res
 func (UnimplementedRecordMgrServer) RemoveRecordTypeMember(context.Context, *ResourceGroupMember) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveRecordTypeMember not implemented")
 }
-func (UnimplementedRecordMgrServer) ReadPipeline(context.Context, *Id) (*Pipeline, error) {
+func (UnimplementedRecordMgrServer) ReadPipeline(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReadPipeline not implemented")
 }
 func (UnimplementedRecordMgrServer) CreatePipeline(context.Context, *Pipeline) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePipeline not implemented")
 }
-func (UnimplementedRecordMgrServer) UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error) {
+func (UnimplementedRecordMgrServer) UpdatePipeline(context.Context, *Pipeline) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdatePipeline not implemented")
 }
 func (UnimplementedRecordMgrServer) DeletePipeline(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeletePipeline not implemented")
 }
-func (UnimplementedRecordMgrServer) ListPipelines(context.Context, *Ids) (*Pipelines, error) {
+func (UnimplementedRecordMgrServer) MatchPipelines(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchPipelines not implemented")
+}
+func (UnimplementedRecordMgrServer) ListPipelines(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListPipelines not implemented")
-}
-func (UnimplementedRecordMgrServer) DeletePipelineStage(context.Context, *PipelineStage) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeletePipelineStage not implemented")
-}
-func (UnimplementedRecordMgrServer) PreselectPipeline(context.Context, *Id) (*Pipeline, error) {
-	return nil, status.Error(codes.Unimplemented, "method PreselectPipeline not implemented")
 }
 func (UnimplementedRecordMgrServer) mustEmbedUnimplementedRecordMgrServer() {}
 func (UnimplementedRecordMgrServer) testEmbeddedByValue()                   {}
@@ -15716,6 +15700,24 @@ func _RecordMgr_DeletePipeline_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RecordMgr_MatchPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).MatchPipelines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_MatchPipelines_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).MatchPipelines(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RecordMgr_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ids)
 	if err := dec(in); err != nil {
@@ -15730,42 +15732,6 @@ func _RecordMgr_ListPipelines_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RecordMgrServer).ListPipelines(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecordMgr_DeletePipelineStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PipelineStage)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecordMgrServer).DeletePipelineStage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecordMgr_DeletePipelineStage_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecordMgrServer).DeletePipelineStage(ctx, req.(*PipelineStage))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecordMgr_PreselectPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecordMgrServer).PreselectPipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecordMgr_PreselectPipeline_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecordMgrServer).PreselectPipeline(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -15890,16 +15856,12 @@ var RecordMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RecordMgr_DeletePipeline_Handler,
 		},
 		{
+			MethodName: "MatchPipelines",
+			Handler:    _RecordMgr_MatchPipelines_Handler,
+		},
+		{
 			MethodName: "ListPipelines",
 			Handler:    _RecordMgr_ListPipelines_Handler,
-		},
-		{
-			MethodName: "DeletePipelineStage",
-			Handler:    _RecordMgr_DeletePipelineStage_Handler,
-		},
-		{
-			MethodName: "PreselectPipeline",
-			Handler:    _RecordMgr_PreselectPipeline_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
