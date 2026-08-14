@@ -31,9 +31,11 @@
       "phone_device": "update:own read:own",
       "call_setting": "read",
       "ticket": "invite:own update:own read:own",
+      "record": "invite:own update:own read:own",
       "product": "create update:own read",
       "promotion_program": "create update:own read",
       "ticket_type": "read",
+      "record_type": "read",
       "segment": "update:own create read",
       "ticket_template": "create read update:own",
       "sla_policy": "read",
@@ -53,7 +55,8 @@
       "conversation": "read",
       "user": "read",
       "order": "read",
-      "ticket": "read"
+      "ticket": "read",
+      "record": "read"
     }
   },
   "supervisor": {
@@ -63,6 +66,7 @@
       "user": "read",
       "order": "read",
       "ticket": "read",
+      "record": "read",
       "report": "read"
     }
   },
@@ -82,6 +86,7 @@
       "report": "read",
       "article": "create delete update",
       "ticket": "read update delete invite",
+      "record": "read update delete invite",
       "user": "read update delete export",
       "live": "read",
       "bank_account": "create update delete",
@@ -107,6 +112,7 @@
       "product": "update delete",
       "promotion_program": "update delete",
       "ticket_type": "delete create update",
+      "record_type": "delete create update",
       "user_view": "update delete",
       "segment": "delete update",
       "ticket_template": "update",
@@ -132,9 +138,19 @@
       "ticket": "create read update invite"
     }
   },
+  "record_type_member": {
+    "perm": {
+      "record": "create read update invite"
+    }
+  },
   "ticket_type_manager": {
     "scope": "ticket_type_member",
     "perm": { "ticket_type": "update" }
+  },
+
+  "record_type_manager": {
+    "scope": "record_type_member",
+    "perm": { "record_type": "update" }
   },
   "segment_member": {
     "perm": { "user": "read update invite" }

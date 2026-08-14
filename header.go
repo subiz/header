@@ -704,6 +704,8 @@ type ObjectType string
 
 const TICKET ObjectType = "ticket"
 const TICKET_TYPE ObjectType = "ticket_type"
+const RECORD_TYPE ObjectType = "record_type"
+const RECORD_TYPE ObjectType = "record"
 const TICKET_TEMPLATE ObjectType = "ticket_template"
 const ACCOUNT ObjectType = "account"
 const CONVERSATION ObjectType = "conversation"
