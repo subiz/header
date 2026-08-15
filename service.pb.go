@@ -587,7 +587,7 @@ const file_service_proto_rawDesc = "" +
 	"\x12ForceVerifyWebsite\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12,\n" +
 	"\fListUserTags\x12\n" +
-	".header.Id\x1a\x10.header.Response2\xb7\f\n" +
+	".header.Id\x1a\x10.header.Response2\xb2\f\n" +
 	"\tRecordMgr\x128\n" +
 	"\x10CreateRecordType\x12\x12.header.RecordType\x1a\x10.header.Response\x128\n" +
 	"\x10UpdateRecordType\x12\x12.header.RecordType\x1a\x10.header.Response\x12/\n" +
@@ -605,8 +605,8 @@ const file_service_proto_rawDesc = "" +
 	"\rRecoverRecord\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12)\n" +
 	"\tGetRecord\x12\n" +
-	".header.Id\x1a\x10.header.Response\x12:\n" +
-	"\vListRecords\x12\x19.header.ListRecordRequest\x1a\x10.header.Response\x12-\n" +
+	".header.Id\x1a\x10.header.Response\x125\n" +
+	"\vListRecords\x12\x14.header.RecordFilter\x1a\x10.header.Response\x12-\n" +
 	"\fMatchRecords\x12\v.header.Ids\x1a\x10.header.Response\x12/\n" +
 	"\x0fPongRecordEvent\x12\r.header.Event\x1a\r.header.Event\x12.\n" +
 	"\tTagRecord\x12\x12.header.TagRequest\x1a\r.header.Empty\x120\n" +
@@ -1390,7 +1390,7 @@ var file_service_proto_goTypes = []any{
 	(*ReportConvoMessageRequest)(nil),         // 117: header.ReportConvoMessageRequest
 	(*RecordType)(nil),                        // 118: header.RecordType
 	(*Record)(nil),                            // 119: header.Record
-	(*ListRecordRequest)(nil),                 // 120: header.ListRecordRequest
+	(*RecordFilter)(nil),                      // 120: header.RecordFilter
 	(*Pipeline)(nil),                          // 121: header.Pipeline
 	(*TicketType)(nil),                        // 122: header.TicketType
 	(*Ticket)(nil),                            // 123: header.Ticket
@@ -1994,7 +1994,7 @@ var file_service_proto_depIdxs = []int32{
 	1,   // 369: header.RecordMgr.DeleteRecord:input_type -> header.Id
 	1,   // 370: header.RecordMgr.RecoverRecord:input_type -> header.Id
 	1,   // 371: header.RecordMgr.GetRecord:input_type -> header.Id
-	120, // 372: header.RecordMgr.ListRecords:input_type -> header.ListRecordRequest
+	120, // 372: header.RecordMgr.ListRecords:input_type -> header.RecordFilter
 	13,  // 373: header.RecordMgr.MatchRecords:input_type -> header.Ids
 	61,  // 374: header.RecordMgr.PongRecordEvent:input_type -> header.Event
 	100, // 375: header.RecordMgr.TagRecord:input_type -> header.TagRequest

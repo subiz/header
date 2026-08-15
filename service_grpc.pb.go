@@ -14712,7 +14712,7 @@ type RecordMgrClient interface {
 	DeleteRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	RecoverRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	GetRecord(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	ListRecords(ctx context.Context, in *ListRecordRequest, opts ...grpc.CallOption) (*Response, error)
+	ListRecords(ctx context.Context, in *RecordFilter, opts ...grpc.CallOption) (*Response, error)
 	MatchRecords(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	PongRecordEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	TagRecord(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -14851,7 +14851,7 @@ func (c *recordMgrClient) GetRecord(ctx context.Context, in *Id, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *recordMgrClient) ListRecords(ctx context.Context, in *ListRecordRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *recordMgrClient) ListRecords(ctx context.Context, in *RecordFilter, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, RecordMgr_ListRecords_FullMethodName, in, out, cOpts...)
@@ -15056,7 +15056,7 @@ type RecordMgrServer interface {
 	DeleteRecord(context.Context, *Id) (*Empty, error)
 	RecoverRecord(context.Context, *Id) (*Empty, error)
 	GetRecord(context.Context, *Id) (*Response, error)
-	ListRecords(context.Context, *ListRecordRequest) (*Response, error)
+	ListRecords(context.Context, *RecordFilter) (*Response, error)
 	MatchRecords(context.Context, *Ids) (*Response, error)
 	PongRecordEvent(context.Context, *Event) (*Event, error)
 	TagRecord(context.Context, *TagRequest) (*Empty, error)
@@ -15118,7 +15118,7 @@ func (UnimplementedRecordMgrServer) RecoverRecord(context.Context, *Id) (*Empty,
 func (UnimplementedRecordMgrServer) GetRecord(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetRecord not implemented")
 }
-func (UnimplementedRecordMgrServer) ListRecords(context.Context, *ListRecordRequest) (*Response, error) {
+func (UnimplementedRecordMgrServer) ListRecords(context.Context, *RecordFilter) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRecords not implemented")
 }
 func (UnimplementedRecordMgrServer) MatchRecords(context.Context, *Ids) (*Response, error) {
@@ -15395,7 +15395,7 @@ func _RecordMgr_GetRecord_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _RecordMgr_ListRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRecordRequest)
+	in := new(RecordFilter)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -15407,7 +15407,7 @@ func _RecordMgr_ListRecords_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: RecordMgr_ListRecords_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecordMgrServer).ListRecords(ctx, req.(*ListRecordRequest))
+		return srv.(RecordMgrServer).ListRecords(ctx, req.(*RecordFilter))
 	}
 	return interceptor(ctx, in, info, handler)
 }

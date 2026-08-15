@@ -8285,30 +8285,6 @@ message ListTicketRequest {
 	bool is_full_search = 19;
 }
 
-message ListRecordRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	string type = 5; // quick
-	string assignee = 6; // quick
-
-	WorkflowCondition condition = 7;
-	bool is_shorten = 8;
-	string order_by = 9; // updated, state, priority, created, due_date
-	string next_cursor = 11;
-	int64 limit = 12;
-
-	string query = 13;
-	bool header_only = 14;
-
-	Touchpoint touchpoint = 15;
-	bool is_deleted = 16;
-	string view_id = 17; // quick
-
-	string pipeline = 20;
-	string pipeline_stage = 21;
-}
-
 message TicketView {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -10555,4 +10531,49 @@ message TiktokVideo {
 	int64 address_clicks = 31;
 
 	int64 modified = 50; // subiz only
+}
+
+message RecordFilter {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string key = 3; // for realtime use
+	string order_by = 4; // -created, +created, +actived, -actived, +unreplied_at
+	repeated RecordFilterCondition conditions = 5;
+	string anchor = 6;
+	int64 limit = 7;
+	string agent_id = 8;
+	string name = 9;
+	string id = 10;
+	int64 total = 11;
+	int64 num_unreads = 12;
+}
+
+message RecordFilterCondition {
+	string key = 3; // type, assignee, pipeline_stage, is_deleted, is_draft, user_id
+	string op = 4; // contain_one (default), contain_all, not_contain_all
+	repeated string tags = 5;
+	string touchpoint_channel = 6;
+	repeated string touchpoint_sources = 7;
+	string state = 8; //
+	bool is_unreplied = 10;
+	bool is_unread = 11;
+	int64 created_from_ms = 12; //
+	int64 created_to_ms = 13; //
+	bool is_muted = 14;
+	bool is_spam = 15;
+	bool from_ads = 16;
+	repeated string fb_post_ids = 17;
+	repeated string user_ids = 18;
+
+	bool is_deleted = 20;
+	bool is_draft = 21;
+
+	string type = 22; // quick
+	string assignee = 23; //
+
+	string query = 33;
+	bool header_only = 34;
+
+	Touchpoint touchpoint = 35;
+	string pipeline_stage = 38;
 }

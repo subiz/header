@@ -552,7 +552,7 @@ service RecordMgr {
 	rpc DeleteRecord(Id) returns (Empty);
 	rpc RecoverRecord(Id) returns (Empty);
 	rpc GetRecord(Id) returns (Response);
-	rpc ListRecords(ListRecordRequest) returns (Response);
+	rpc ListRecords(RecordFilter) returns (Response);
 	rpc MatchRecords(Ids) returns (Response);
 
 	rpc PongRecordEvent(header.Event) returns (header.Event);
