@@ -5348,6 +5348,8 @@ message PipelineStage {
 	repeated Task tasks = 18;
 
 	int64 auto_confirm_order = 19; // temporary
+
+	string category = 21; // unstarted | open | completed | canceled
 }
 
 message PipelineRule {
@@ -7969,6 +7971,7 @@ message TicketTemplate {
 }
 
 message RecordType {
+	// new done
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -8035,14 +8038,14 @@ message Record {
 	repeated Tag tags = 13;
 	int64 closed = 14;
 	string status = 15; // unassigned, open, hold, closed
-	repeated User users = 16; // only save primary user
+	repeated string user_ids  = 16; // only save primary user
 	string reporter = 17;
 
 	string assignee = 19; // The id representing the admin assigned to the ticket.
 	string is_public = 20; // Whether or not the record is shared with the customer.
 
 	Touchpoint touchpoint = 21; // read-only copy from conversation touchpoint
-	repeated string associated_conversations = 23;
+	repeated string conversations = 23;
 
 	int64 response_sec = 25;
 	string duplicate_of = 26;
@@ -8101,10 +8104,8 @@ message Record {
 
 	int64 user_first_response_at = 98;
 	int64 user_last_response_at = 99;
-	map<string,ConversationMember> memberM = 100; //just for compacted ticket
 	// string periodic_update_enable = 101; // on/off
 	// string every_response_enable = 102; // on/off
-	repeated ReceiptMember read_receipts = 104;
 
 	int64 last_high_risk_first_response_due = 105;
 	int64 last_high_risk_every_response_due = 106;
@@ -8119,9 +8120,10 @@ message Record {
 	repeated Product products = 113;
 	repeated File attachments = 116;
 
-	Record parent = 119;
-	repeated Record children = 120;
-	repeated Record associations = 121;
+	string parent = 119;
+	repeated string children = 120;
+	repeated string associations = 121;
+
 }
 
 message Ticket {
