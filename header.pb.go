@@ -37653,7 +37653,8 @@ type PipelineStage struct {
 	Routes           []*PipelineRule `protobuf:"bytes,17,rep,name=routes,proto3" json:"routes,omitempty"`
 	Tasks            []*Task         `protobuf:"bytes,18,rep,name=tasks,proto3" json:"tasks,omitempty"`
 	AutoConfirmOrder int64           `protobuf:"varint,19,opt,name=auto_confirm_order,json=autoConfirmOrder,proto3" json:"auto_confirm_order,omitempty"` // temporary
-	Category         string          `protobuf:"bytes,21,opt,name=category,proto3" json:"category,omitempty"`                                            // unstarted | open | completed | canceled
+	Deleted          int64           `protobuf:"varint,22,opt,name=deleted,proto3" json:"deleted,omitempty"`
+	Category         string          `protobuf:"bytes,21,opt,name=category,proto3" json:"category,omitempty"` // unstarted | open | completed | canceled
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -37796,6 +37797,13 @@ func (x *PipelineStage) GetTasks() []*Task {
 func (x *PipelineStage) GetAutoConfirmOrder() int64 {
 	if x != nil {
 		return x.AutoConfirmOrder
+	}
+	return 0
+}
+
+func (x *PipelineStage) GetDeleted() int64 {
+	if x != nil {
+		return x.Deleted
 	}
 	return 0
 }
@@ -78904,7 +78912,7 @@ const file_header_proto_rawDesc = "" +
 	"\x12matched_substrings\x18\a \x03(\v2\x16.header.SubstringIndexR\x11matchedSubstrings\"@\n" +
 	"\x0eSubstringIndex\x12\x16\n" +
 	"\x06offset\x18\x03 \x01(\x05R\x06offset\x12\x16\n" +
-	"\x06length\x18\x04 \x01(\x05R\x06length\"\xa3\x04\n" +
+	"\x06length\x18\x04 \x01(\x05R\x06length\"\xbd\x04\n" +
 	"\rPipelineStage\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1a\n" +
@@ -78926,7 +78934,8 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x12,\n" +
 	"\x06routes\x18\x11 \x03(\v2\x14.header.PipelineRuleR\x06routes\x12\"\n" +
 	"\x05tasks\x18\x12 \x03(\v2\f.header.TaskR\x05tasks\x12,\n" +
-	"\x12auto_confirm_order\x18\x13 \x01(\x03R\x10autoConfirmOrder\x12\x1a\n" +
+	"\x12auto_confirm_order\x18\x13 \x01(\x03R\x10autoConfirmOrder\x12\x18\n" +
+	"\adeleted\x18\x16 \x01(\x03R\adeleted\x12\x1a\n" +
 	"\bcategory\x18\x15 \x01(\tR\bcategory\"\xff\x02\n" +
 	"\fPipelineRule\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +

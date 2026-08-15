@@ -5349,6 +5349,7 @@ message PipelineStage {
 
 	int64 auto_confirm_order = 19; // temporary
 
+	int64 deleted = 22;
 	string category = 21; // unstarted | open | completed | canceled
 }
 
