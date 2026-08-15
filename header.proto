@@ -5396,6 +5396,9 @@ message Pipeline {
 	int64 updated = 8;
 	string updated_by = 9;
 	int64 preselected = 10;
+
+	int64 archived = 12;
+	string archived_by = 13;
 }
 
 message Tasks {
@@ -7970,13 +7973,15 @@ message RecordType {
 	string account_id = 2;
 	string id = 3;
 	// string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
-	string category = 5; // customer, back-office, tracker
+	string category = 5; // purchase_request | quote_request | booking_request | registration_request | service_request | subscription_request
+
 	string name = 6;
 	string description = 7;
 
+	string color = 8; // #ffaaff
 	string icon = 9; // emoji
 	repeated AttributeDefinition defs = 10;
-	int64 archived = 11;
+	int64 archived = 11; // make the record type read-only
 
 	string created_by = 12;
 	int64 created = 13;
@@ -7988,6 +7993,8 @@ message RecordType {
 	repeated ResourceGroupMember permissions = 16;
 	string template_id = 18;
 	string visibility = 19; // public, internal, limited
+
+	int64 total_records = 24;
 
 	Error error = 20;
 }

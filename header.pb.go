@@ -38004,6 +38004,8 @@ type Pipeline struct {
 	Updated       int64                  `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
 	UpdatedBy     string                 `protobuf:"bytes,9,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	Preselected   int64                  `protobuf:"varint,10,opt,name=preselected,proto3" json:"preselected,omitempty"`
+	Archived      int64                  `protobuf:"varint,12,opt,name=archived,proto3" json:"archived,omitempty"`
+	ArchivedBy    string                 `protobuf:"bytes,13,opt,name=archived_by,json=archivedBy,proto3" json:"archived_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -38106,6 +38108,20 @@ func (x *Pipeline) GetPreselected() int64 {
 		return x.Preselected
 	}
 	return 0
+}
+
+func (x *Pipeline) GetArchived() int64 {
+	if x != nil {
+		return x.Archived
+	}
+	return 0
+}
+
+func (x *Pipeline) GetArchivedBy() string {
+	if x != nil {
+		return x.ArchivedBy
+	}
+	return ""
 }
 
 type Tasks struct {
@@ -55949,12 +55965,13 @@ type RecordType struct {
 	AccountId string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id        string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	// string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
-	Category      string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"` // customer, back-office, tracker
+	Category      string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"` // purchase_request | quote_request | booking_request | registration_request | service_request | subscription_request
 	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	Icon          string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"` // emoji
+	Color         string                 `protobuf:"bytes,8,opt,name=color,proto3" json:"color,omitempty"` // #ffaaff
+	Icon          string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`   // emoji
 	Defs          []*AttributeDefinition `protobuf:"bytes,10,rep,name=defs,proto3" json:"defs,omitempty"`
-	Archived      int64                  `protobuf:"varint,11,opt,name=archived,proto3" json:"archived,omitempty"`
+	Archived      int64                  `protobuf:"varint,11,opt,name=archived,proto3" json:"archived,omitempty"` // make the record type read-only
 	CreatedBy     string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	Created       int64                  `protobuf:"varint,13,opt,name=created,proto3" json:"created,omitempty"`
 	UpdatedBy     string                 `protobuf:"bytes,14,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
@@ -55963,6 +55980,7 @@ type RecordType struct {
 	Permissions   []*ResourceGroupMember `protobuf:"bytes,16,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	TemplateId    string                 `protobuf:"bytes,18,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
 	Visibility    string                 `protobuf:"bytes,19,opt,name=visibility,proto3" json:"visibility,omitempty"` // public, internal, limited
+	TotalRecords  int64                  `protobuf:"varint,24,opt,name=total_records,json=totalRecords,proto3" json:"total_records,omitempty"`
 	Error         *Error                 `protobuf:"bytes,20,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -56036,6 +56054,13 @@ func (x *RecordType) GetName() string {
 func (x *RecordType) GetDescription() string {
 	if x != nil {
 		return x.Description
+	}
+	return ""
+}
+
+func (x *RecordType) GetColor() string {
+	if x != nil {
+		return x.Color
 	}
 	return ""
 }
@@ -56115,6 +56140,13 @@ func (x *RecordType) GetVisibility() string {
 		return x.Visibility
 	}
 	return ""
+}
+
+func (x *RecordType) GetTotalRecords() int64 {
+	if x != nil {
+		return x.TotalRecords
+	}
+	return 0
 }
 
 func (x *RecordType) GetError() *Error {
@@ -78936,7 +78968,7 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12.\n" +
 	"\tpipelines\x18\x03 \x03(\v2\x10.header.PipelineR\tpipelines\x12\x16\n" +
 	"\x06anchor\x18\x04 \x01(\tR\x06anchor\x12\x14\n" +
-	"\x05total\x18\x05 \x01(\x03R\x05total\"\xb3\x02\n" +
+	"\x05total\x18\x05 \x01(\x03R\x05total\"\xf0\x02\n" +
 	"\bPipeline\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -78951,7 +78983,10 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\t \x01(\tR\tupdatedBy\x12 \n" +
 	"\vpreselected\x18\n" +
-	" \x01(\x03R\vpreselected\"\x9b\x01\n" +
+	" \x01(\x03R\vpreselected\x12\x1a\n" +
+	"\barchived\x18\f \x01(\x03R\barchived\x12\x1f\n" +
+	"\varchived_by\x18\r \x01(\tR\n" +
+	"archivedBy\"\x9b\x01\n" +
 	"\x05Tasks\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -81033,7 +81068,7 @@ const file_header_proto_rawDesc = "" +
 	"\bassignee\x18\f \x01(\tR\bassignee\x12\x1f\n" +
 	"\x04tags\x18\r \x03(\v2\v.header.TagR\x04tags\x12'\n" +
 	"\x05attrs\x18\x0e \x03(\v2\x11.header.AttributeR\x05attrs\x12#\n" +
-	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\"\xc4\x04\n" +
+	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\"\xff\x04\n" +
 	"\n" +
 	"RecordType\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -81042,7 +81077,8 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1a\n" +
 	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x12\n" +
 	"\x04name\x18\x06 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\x12\x12\n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x14\n" +
+	"\x05color\x18\b \x01(\tR\x05color\x12\x12\n" +
 	"\x04icon\x18\t \x01(\tR\x04icon\x12/\n" +
 	"\x04defs\x18\n" +
 	" \x03(\v2\x1b.header.AttributeDefinitionR\x04defs\x12\x1a\n" +
@@ -81060,6 +81096,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"visibility\x18\x13 \x01(\tR\n" +
 	"visibility\x12#\n" +
+	"\rtotal_records\x18\x18 \x01(\x03R\ftotalRecords\x12#\n" +
 	"\x05error\x18\x14 \x01(\v2\r.header.ErrorR\x05error\"\xc1\x02\n" +
 	"\x0eRecordPipeline\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
