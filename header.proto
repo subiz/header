@@ -3441,6 +3441,9 @@ enum ChannelType {
 	tiktok = 15;
 	tiktok_comment = 16;
 	whatsapp = 17; // WhatsApp Business Platform (Cloud API)
+	zalo_call = 18; // zcc
+	facebook_call = 19;
+	whatsapp_call = 20;
 }
 
 message WebhookSecret {

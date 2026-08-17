@@ -304,6 +304,9 @@ const (
 	ChannelType_tiktok            ChannelType = 15
 	ChannelType_tiktok_comment    ChannelType = 16
 	ChannelType_whatsapp          ChannelType = 17 // WhatsApp Business Platform (Cloud API)
+	ChannelType_zalo_call         ChannelType = 18 // zcc
+	ChannelType_facebook_call     ChannelType = 19
+	ChannelType_whatsapp_call     ChannelType = 20
 )
 
 // Enum value maps for ChannelType.
@@ -325,6 +328,9 @@ var (
 		15: "tiktok",
 		16: "tiktok_comment",
 		17: "whatsapp",
+		18: "zalo_call",
+		19: "facebook_call",
+		20: "whatsapp_call",
 	}
 	ChannelType_value = map[string]int32{
 		"subiz":             0,
@@ -343,6 +349,9 @@ var (
 		"tiktok":            15,
 		"tiktok_comment":    16,
 		"whatsapp":          17,
+		"zalo_call":         18,
+		"facebook_call":     19,
+		"whatsapp_call":     20,
 	}
 )
 
@@ -83348,7 +83357,7 @@ const file_header_proto_rawDesc = "" +
 	"view_order\x10\x16\x12\x11\n" +
 	"\rconfirm_order\x10\x17\x12\x0f\n" +
 	"\vcreate_task\x10\x18\x12\x18\n" +
-	"\x14update_user_segments\x10\x19*\xf6\x01\n" +
+	"\x14update_user_segments\x10\x19*\xab\x02\n" +
 	"\vChannelType\x12\t\n" +
 	"\x05subiz\x10\x00\x12\t\n" +
 	"\x05email\x10\x01\x12\f\n" +
@@ -83366,7 +83375,10 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"\x06tiktok\x10\x0f\x12\x12\n" +
 	"\x0etiktok_comment\x10\x10\x12\f\n" +
-	"\bwhatsapp\x10\x11*\xd6\x01\n" +
+	"\bwhatsapp\x10\x11\x12\r\n" +
+	"\tzalo_call\x10\x12\x12\x11\n" +
+	"\rfacebook_call\x10\x13\x12\x11\n" +
+	"\rwhatsapp_call\x10\x14*\xd6\x01\n" +
 	"\x10ShippingProvider\x12\n" +
 	"\n" +
 	"\x06direct\x10\x00\x12\v\n" +
