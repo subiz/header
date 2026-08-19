@@ -1941,6 +1941,12 @@ message Integration {
 	bool call_rtp_symmetric = 99; // false
 	string call_server = 102; // 113-190-233-117.subiz.com.vn, ...
 
+	// "", 0, remove 84, use 0
+	// 84, use 84
+	// trimprefix: remove 0 or 84
+	// zcc: zcc standard
+	string number_format = 105; // "" = 0, 84, zcc
+
 	repeated ResourceGroupMember permissions = 100;
 	string lead_agent_group = 103;
 
@@ -5337,7 +5343,9 @@ message PipelineStage {
 	int64 created = 5;
 	string created_by = 6;
 	string name = 7;
-	string description = 8;
+	// string description = 8;
+	Block description = 12;
+
 	bool is_closed = 9; // order auto confirmed when move to this stage
 	int64 probability = 10; // * 100 100 => won 0 => lost
 
@@ -8127,7 +8135,6 @@ message Record {
 	string parent = 119;
 	repeated string children = 120;
 	repeated string associations = 121;
-
 }
 
 message Ticket {
