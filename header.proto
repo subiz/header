@@ -5837,6 +5837,7 @@ message CallDriverRequest {
 	string sip_transport = 34; // udp
 
 	string call_server = 35; // 113-190-233-117.subiz.com.vn, ...
+	string number_format = 36;
 }
 
 message CallDriverResponse {
@@ -5844,7 +5845,7 @@ message CallDriverResponse {
 	// string device = 7; // for dial action
 	// string key = 8; // for wait_for_key action
 
-	PhoneDevice phone_device = 12;
+	// PhoneDevice phone_device = 12;
 	CallInfo call = 11; // for get-call-status
 }
 
