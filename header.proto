@@ -8017,6 +8017,7 @@ message RecordType {
 
 	int64 total_records = 24;
 	int64 num_unreads = 25;
+	int64 num_updates = 26; // non-important
 	Error error = 20;
 }
 
@@ -10569,7 +10570,7 @@ message RecordFilter {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string key = 3; // for realtime use
-	string order_by = 4; // -created, +created, +actived, -actived, +unreplied_at
+	string order_by = 4; // -created, +created, +actived, -actived, +unreplied_at, -unread
 	repeated RecordFilterCondition conditions = 5;
 	string anchor = 6;
 	int64 limit = 7;
@@ -10578,6 +10579,8 @@ message RecordFilter {
 	string id = 10;
 	int64 total = 11;
 	int64 num_unreads = 12;
+
+	bool count_only = 13; // only for requesting
 }
 
 message RecordFilterCondition {
@@ -10587,6 +10590,7 @@ message RecordFilterCondition {
 	string touchpoint_channel = 6;
 	repeated string touchpoint_sources = 7;
 	string state = 8; //
+
 	bool is_unreplied = 10;
 	bool is_unread = 11;
 	int64 created_from_ms = 12; //

@@ -56045,6 +56045,7 @@ type RecordType struct {
 	TemplateId    string                 `protobuf:"bytes,18,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
 	TotalRecords  int64                  `protobuf:"varint,24,opt,name=total_records,json=totalRecords,proto3" json:"total_records,omitempty"`
 	NumUnreads    int64                  `protobuf:"varint,25,opt,name=num_unreads,json=numUnreads,proto3" json:"num_unreads,omitempty"`
+	NumUpdates    int64                  `protobuf:"varint,26,opt,name=num_updates,json=numUpdates,proto3" json:"num_updates,omitempty"` // non-important
 	Error         *Error                 `protobuf:"bytes,20,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -56209,6 +56210,13 @@ func (x *RecordType) GetTotalRecords() int64 {
 func (x *RecordType) GetNumUnreads() int64 {
 	if x != nil {
 		return x.NumUnreads
+	}
+	return 0
+}
+
+func (x *RecordType) GetNumUpdates() int64 {
+	if x != nil {
+		return x.NumUpdates
 	}
 	return 0
 }
@@ -73571,7 +73579,7 @@ type RecordFilter struct {
 	Ctx           *common.Context          `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                   `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Key           string                   `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`                        // for realtime use
-	OrderBy       string                   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"` // -created, +created, +actived, -actived, +unreplied_at
+	OrderBy       string                   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"` // -created, +created, +actived, -actived, +unreplied_at, -unread
 	Conditions    []*RecordFilterCondition `protobuf:"bytes,5,rep,name=conditions,proto3" json:"conditions,omitempty"`
 	Anchor        string                   `protobuf:"bytes,6,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	Limit         int64                    `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -73580,6 +73588,7 @@ type RecordFilter struct {
 	Id            string                   `protobuf:"bytes,10,opt,name=id,proto3" json:"id,omitempty"`
 	Total         int64                    `protobuf:"varint,11,opt,name=total,proto3" json:"total,omitempty"`
 	NumUnreads    int64                    `protobuf:"varint,12,opt,name=num_unreads,json=numUnreads,proto3" json:"num_unreads,omitempty"`
+	CountOnly     bool                     `protobuf:"varint,13,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"` // only for requesting
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -73696,6 +73705,13 @@ func (x *RecordFilter) GetNumUnreads() int64 {
 		return x.NumUnreads
 	}
 	return 0
+}
+
+func (x *RecordFilter) GetCountOnly() bool {
+	if x != nil {
+		return x.CountOnly
+	}
+	return false
 }
 
 type RecordFilterCondition struct {
@@ -81130,7 +81146,7 @@ const file_header_proto_rawDesc = "" +
 	"\bassignee\x18\f \x01(\tR\bassignee\x12\x1f\n" +
 	"\x04tags\x18\r \x03(\v2\v.header.TagR\x04tags\x12'\n" +
 	"\x05attrs\x18\x0e \x03(\v2\x11.header.AttributeR\x05attrs\x12#\n" +
-	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\"\x80\x05\n" +
+	"\x05error\x18\x0f \x01(\v2\r.header.ErrorR\x05error\"\xa1\x05\n" +
 	"\n" +
 	"RecordType\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -81157,7 +81173,9 @@ const file_header_proto_rawDesc = "" +
 	"templateId\x12#\n" +
 	"\rtotal_records\x18\x18 \x01(\x03R\ftotalRecords\x12\x1f\n" +
 	"\vnum_unreads\x18\x19 \x01(\x03R\n" +
-	"numUnreads\x12#\n" +
+	"numUnreads\x12\x1f\n" +
+	"\vnum_updates\x18\x1a \x01(\x03R\n" +
+	"numUpdates\x12#\n" +
 	"\x05error\x18\x14 \x01(\v2\r.header.ErrorR\x05error\"\xc1\x02\n" +
 	"\x0eRecordPipeline\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -83304,7 +83322,7 @@ const file_header_proto_rawDesc = "" +
 	"\x13app_download_clicks\x18\x1d \x01(\x03R\x11appDownloadClicks\x12!\n" +
 	"\femail_clicks\x18\x1e \x01(\x03R\vemailClicks\x12%\n" +
 	"\x0eaddress_clicks\x18\x1f \x01(\x03R\raddressClicks\x12\x1a\n" +
-	"\bmodified\x182 \x01(\x03R\bmodified\"\xe0\x02\n" +
+	"\bmodified\x182 \x01(\x03R\bmodified\"\xff\x02\n" +
 	"\fRecordFilter\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -83322,7 +83340,9 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\x02id\x12\x14\n" +
 	"\x05total\x18\v \x01(\x03R\x05total\x12\x1f\n" +
 	"\vnum_unreads\x18\f \x01(\x03R\n" +
-	"numUnreads\"\xd3\x05\n" +
+	"numUnreads\x12\x1d\n" +
+	"\n" +
+	"count_only\x18\r \x01(\bR\tcountOnly\"\xd3\x05\n" +
 	"\x15RecordFilterCondition\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x12\x0e\n" +
 	"\x02op\x18\x04 \x01(\tR\x02op\x12\x12\n" +
