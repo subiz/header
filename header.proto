@@ -1162,6 +1162,9 @@ message ConversationMember {
 
 	string workflow_session_id = 40;
 	int64 bot_version = 41;
+
+	string last_unread_event_id = 42;
+	int64 last_unread_at = 43;
 }
 
 message StartRequest {
@@ -6963,6 +6966,7 @@ message Response {
 	BouncedEmail bounced_email = 12;
 	repeated BouncedEmail bounced_emails = 13;
 	ZaloCallConsent zalo_call_consent = 14;
+	int64 num_unreads = 15;
 	// Credit credit = 15;
 	// repeated Credit credits = 16;
 	account.Account account = 17;
@@ -7179,6 +7183,8 @@ message Response {
 
 	Pipeline pipeline = 294;
 	repeated Pipeline pipelines = 295;
+
+
 }
 
 message ReportCount {
@@ -8007,10 +8013,9 @@ message RecordType {
 
 	repeated ResourceGroupMember permissions = 16;
 	string template_id = 18;
-	string visibility = 19; // public, internal, limited
 
 	int64 total_records = 24;
-
+	int64 num_unreads = 25;
 	Error error = 20;
 }
 
@@ -8054,7 +8059,7 @@ message Record {
 	string reporter = 17;
 
 	string assignee = 19; // The id representing the admin assigned to the ticket.
-	string is_public = 20; // Whether or not the record is shared with the customer.
+	// string is_public = 20; // Whether or not the record is shared with the customer.
 
 	Touchpoint touchpoint = 21; // read-only copy from conversation touchpoint
 	repeated string conversations = 23;
@@ -8062,8 +8067,8 @@ message Record {
 	int64 response_sec = 25;
 	string duplicate_of = 26;
 
-	RouteResult assigned_to = 30;
-	RouteResult reassigned_to = 31;
+	// RouteResult assigned_to = 30;
+	// RouteResult reassigned_to = 31;
 
 	repeated KV fields = 33;
 	repeated Rating ratings = 35;
@@ -8104,7 +8109,7 @@ message Record {
 	int64 total_messages = 86;
 
 	Error error = 87; // access_deny, not_found
-	string created_by = 91;
+	string created_by = 91; // can change
 
 	int64 agent_first_response_at = 92;
 	int64 agent_last_response_at = 93;
@@ -8135,6 +8140,12 @@ message Record {
 	string parent = 119;
 	repeated string children = 120;
 	repeated string associations = 121;
+
+	int64 modified = 90;
+
+	Event unread_event = 122;
+	string unread_kind = 123; // important | mention
+	int64 num_comments = 124;
 }
 
 message Ticket {

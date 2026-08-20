@@ -2043,6 +2043,7 @@ var RefererMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	AccountMgr_ReloadAgent_FullMethodName                     = "/header.AccountMgr/ReloadAgent"
 	AccountMgr_InviteEmails_FullMethodName                    = "/header.AccountMgr/InviteEmails"
 	AccountMgr_GetInviteLink_FullMethodName                   = "/header.AccountMgr/GetInviteLink"
 	AccountMgr_RegenerateInviteLink_FullMethodName            = "/header.AccountMgr/RegenerateInviteLink"
@@ -2150,6 +2151,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountMgrClient interface {
+	ReloadAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	InviteEmails(ctx context.Context, in *InviteRequest, opts ...grpc.CallOption) (*Empty, error)
 	GetInviteLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	RegenerateInviteLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
@@ -2261,6 +2263,16 @@ type accountMgrClient struct {
 
 func NewAccountMgrClient(cc grpc.ClientConnInterface) AccountMgrClient {
 	return &accountMgrClient{cc}
+}
+
+func (c *accountMgrClient) ReloadAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AccountMgr_ReloadAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *accountMgrClient) InviteEmails(ctx context.Context, in *InviteRequest, opts ...grpc.CallOption) (*Empty, error) {
@@ -3277,6 +3289,7 @@ func (c *accountMgrClient) ListActiveAccountIds(ctx context.Context, in *Id, opt
 // All implementations must embed UnimplementedAccountMgrServer
 // for forward compatibility.
 type AccountMgrServer interface {
+	ReloadAgent(context.Context, *Id) (*Empty, error)
 	InviteEmails(context.Context, *InviteRequest) (*Empty, error)
 	GetInviteLink(context.Context, *Id) (*Id, error)
 	RegenerateInviteLink(context.Context, *Id) (*Id, error)
@@ -3390,6 +3403,9 @@ type AccountMgrServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAccountMgrServer struct{}
 
+func (UnimplementedAccountMgrServer) ReloadAgent(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReloadAgent not implemented")
+}
 func (UnimplementedAccountMgrServer) InviteEmails(context.Context, *InviteRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method InviteEmails not implemented")
 }
@@ -3712,6 +3728,24 @@ func RegisterAccountMgrServer(s grpc.ServiceRegistrar, srv AccountMgrServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&AccountMgr_ServiceDesc, srv)
+}
+
+func _AccountMgr_ReloadAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ReloadAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_ReloadAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ReloadAgent(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _AccountMgr_InviteEmails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -5539,6 +5573,10 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.AccountMgr",
 	HandlerType: (*AccountMgrServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReloadAgent",
+			Handler:    _AccountMgr_ReloadAgent_Handler,
+		},
 		{
 			MethodName: "InviteEmails",
 			Handler:    _AccountMgr_InviteEmails_Handler,

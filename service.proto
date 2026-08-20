@@ -79,6 +79,7 @@ service RefererMgr {
 }
 
 service AccountMgr {
+	rpc ReloadAgent(header.Id) returns (header.Empty);
 	rpc InviteEmails(header.InviteRequest) returns (header.Empty);
 	rpc GetInviteLink(header.Id) returns (header.Id);
 	rpc RegenerateInviteLink(header.Id) returns (header.Id);
