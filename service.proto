@@ -133,7 +133,7 @@ service AccountMgr {
 
 	rpc GetShopSetting(header.Id) returns (header.ShopSetting);
 	rpc UpdateShopSetting(header.ShopSetting) returns (header.ShopSetting);
-	rpc RefetchShopAddress(header.Id) returns (header.Response);
+	// rpc RefetchShopAddress(header.Id) returns (header.Response);
 	rpc ReadCurrency(header.Id) returns (header.Currency);
 
 	// internal
@@ -148,12 +148,6 @@ service AccountMgr {
 	rpc CreateTax(header.Tax) returns (header.Tax);
 	rpc UpdateTax(header.Tax) returns (header.Tax);
 	rpc DeleteTax(Id) returns (Empty);
-
-	// rpc CheckShippingPolicy(header.Order) returns (header.ShippingPolicies);
-	// rpc ListShippingPolicies(Id) returns (header.ShippingPolicies);
-	// rpc CreateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
-	// rpc UpdateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
-	// rpc DeleteShippingPolicy(Id) returns (Empty);
 
 	rpc CreateCancellationCode(header.CancellationCode) returns (header.CancellationCode);
 	rpc ListCancellationCodes(Id) returns (header.CancellationCodes);

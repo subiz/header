@@ -39376,6 +39376,7 @@ type DocHit struct {
 	// map<string,bool> query_matchM = 19; // part_query
 	Score            int64  `protobuf:"varint,20,opt,name=score,proto3" json:"score,omitempty"`
 	ZaloFriendStatus string `protobuf:"bytes,21,opt,name=zalo_friend_status,json=zaloFriendStatus,proto3" json:"zalo_friend_status,omitempty"`
+	PrimaryId        string `protobuf:"bytes,22,opt,name=primary_id,json=primaryId,proto3" json:"primary_id,omitempty"` //
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -39525,6 +39526,13 @@ func (x *DocHit) GetScore() int64 {
 func (x *DocHit) GetZaloFriendStatus() string {
 	if x != nil {
 		return x.ZaloFriendStatus
+	}
+	return ""
+}
+
+func (x *DocHit) GetPrimaryId() string {
+	if x != nil {
+		return x.PrimaryId
 	}
 	return ""
 }
@@ -79198,7 +79206,7 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x11 \x01(\tR\tupdatedBy\x12\x19\n" +
 	"\blogo_url\x18\x12 \x01(\tR\alogoUrl\x12 \n" +
 	"\vsupervisors\x18\x13 \x03(\tR\vsupervisors\x123\n" +
-	"\x16agent_ring_timeout_sec\x18\x14 \x01(\x03R\x13agentRingTimeoutSec\"\x9a\x04\n" +
+	"\x16agent_ring_timeout_sec\x18\x14 \x01(\x03R\x13agentRingTimeoutSec\"\xb9\x04\n" +
 	"\x06DocHit\x12\x1f\n" +
 	"\vdocument_id\x18\x03 \x01(\tR\n" +
 	"documentId\x12\x12\n" +
@@ -79219,7 +79227,9 @@ const file_header_proto_rawDesc = "" +
 	"\aarticle\x18\x11 \x01(\v2\x0f.header.ArticleR\aarticle\x12:\n" +
 	"\x11description_block\x18\x12 \x01(\v2\r.header.BlockR\x10descriptionBlock\x12\x14\n" +
 	"\x05score\x18\x14 \x01(\x03R\x05score\x12,\n" +
-	"\x12zalo_friend_status\x18\x15 \x01(\tR\x10zaloFriendStatus\"\x8c\x01\n" +
+	"\x12zalo_friend_status\x18\x15 \x01(\tR\x10zaloFriendStatus\x12\x1d\n" +
+	"\n" +
+	"primary_id\x18\x16 \x01(\tR\tprimaryId\"\x8c\x01\n" +
 	"\x13DocumentTagsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

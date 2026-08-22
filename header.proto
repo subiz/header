@@ -5612,6 +5612,7 @@ message DocHit {
 	// map<string,bool> query_matchM = 19; // part_query
 	int64 score = 20;
 	string zalo_friend_status = 21;
+	string primary_id = 22; //
 }
 
 message DocumentTagsRequest {
