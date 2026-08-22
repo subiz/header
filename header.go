@@ -2819,3 +2819,30 @@ func trimRendered(in renderedBlock) renderedBlock {
 	}
 	return out
 }
+
+func IsOTTChannel(channel string) bool {
+	switch channel {
+	case "website",
+		ChannelType_subiz.String(),
+		ChannelType_facebook.String(),
+		ChannelType_viber.String(),
+		ChannelType_zalo.String(),
+		ChannelType_instagram.String(),
+		ChannelType_zalo_personal.String(),
+		ChannelType_tiktok.String(),
+		ChannelType_whatsapp.String():
+		return true
+	}
+	return false
+}
+
+func IsCommentChannel(channel string) bool {
+	switch channel {
+	case ChannelType_facebook_comment.String(),
+		ChannelType_instagram_comment.String(),
+		ChannelType_tiktok_comment.String():
+		return true
+	}
+	return false
+}
+

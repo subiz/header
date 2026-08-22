@@ -3433,6 +3433,7 @@ message UploadedImages {
 	repeated UploadedImage images = 2;
 }
 
+// Note: must keep IsOTTChannel and IsCommentChannel in-sync with this list
 enum ChannelType {
 	subiz = 0;
 	email = 1;
@@ -3449,7 +3450,7 @@ enum ChannelType {
 	account = 14; // subiz internal
 	tiktok = 15;
 	tiktok_comment = 16;
-	whatsapp = 17; // WhatsApp Business Platform (Cloud API)
+	whatsapp = 17;
 	zalo_call = 18; // zcc
 	facebook_call = 19;
 	whatsapp_call = 20;
@@ -9363,12 +9364,6 @@ message AIAgent {
 	int64 modified = 41;
 	int64 version = 42;
 
-	// string transfer_prompt = 43;
-	// string generated_description = 44; // read-only
-	// string generated_goal = 49;
-	// repeated string generated_topics = 39;
-	// AIIntent generated_intent = 56;
-	// string generated_hash = 48; // skip regenerate intent
 	string generated_refuse_message = 46;
 	int64 active_version = 45; // only root
 

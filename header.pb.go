@@ -285,6 +285,7 @@ func (BotActionType) EnumDescriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{2}
 }
 
+// Note: must keep IsOTTChannel and IsCommentChannel in-sync with this list
 type ChannelType int32
 
 const (
@@ -303,7 +304,7 @@ const (
 	ChannelType_account           ChannelType = 14 // subiz internal
 	ChannelType_tiktok            ChannelType = 15
 	ChannelType_tiktok_comment    ChannelType = 16
-	ChannelType_whatsapp          ChannelType = 17 // WhatsApp Business Platform (Cloud API)
+	ChannelType_whatsapp          ChannelType = 17
 	ChannelType_zalo_call         ChannelType = 18 // zcc
 	ChannelType_facebook_call     ChannelType = 19
 	ChannelType_whatsapp_call     ChannelType = 20
@@ -65128,15 +65129,9 @@ type AIAgent struct {
 	ContextGuardMessage *Message      `protobuf:"bytes,36,opt,name=context_guard_message,json=contextGuardMessage,proto3" json:"context_guard_message,omitempty"` // unknow message @deprecated, use unknown
 	Functions           []*AIFunction `protobuf:"bytes,37,rep,name=functions,proto3" json:"functions,omitempty"`
 	// Message unabled_to_answer_message = 38;
-	ErrorMessage *Message `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	Modified     int64    `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
-	Version      int64    `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
-	// string transfer_prompt = 43;
-	// string generated_description = 44; // read-only
-	// string generated_goal = 49;
-	// repeated string generated_topics = 39;
-	// AIIntent generated_intent = 56;
-	// string generated_hash = 48; // skip regenerate intent
+	ErrorMessage           *Message     `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	Modified               int64        `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
+	Version                int64        `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
 	GeneratedRefuseMessage string       `protobuf:"bytes,46,opt,name=generated_refuse_message,json=generatedRefuseMessage,proto3" json:"generated_refuse_message,omitempty"`
 	ActiveVersion          int64        `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"` // only root
 	DataStore              *AIDataStore `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
