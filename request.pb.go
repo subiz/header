@@ -4553,7 +4553,6 @@ type DocSearchRequest struct {
 	QueryTerms    []string               `protobuf:"bytes,4,rep,name=query_terms,json=queryTerms,proto3" json:"query_terms,omitempty"` // for term search
 	Query         string                 `protobuf:"bytes,5,opt,name=query,proto3" json:"query,omitempty"`
 	Anchor        string                 `protobuf:"bytes,6,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	Limit         int64                  `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`
 	IncludeParts  []string               `protobuf:"bytes,8,rep,name=include_parts,json=includeParts,proto3" json:"include_parts,omitempty"` // only include those parts
 	DocDistinct   bool                   `protobuf:"varint,9,opt,name=doc_distinct,json=docDistinct,proto3" json:"doc_distinct,omitempty"`   // distinct document
 	IncludeOwners []string               `protobuf:"bytes,10,rep,name=include_owners,json=includeOwners,proto3" json:"include_owners,omitempty"`
@@ -4641,13 +4640,6 @@ func (x *DocSearchRequest) GetAnchor() string {
 		return x.Anchor
 	}
 	return ""
-}
-
-func (x *DocSearchRequest) GetLimit() int64 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
 }
 
 func (x *DocSearchRequest) GetIncludeParts() []string {
@@ -9453,7 +9445,7 @@ const file_request_proto_rawDesc = "" +
 	"indexTypes\x12\x16\n" +
 	"\x06vector\x18\x17 \x03(\x02R\x06vector\x12!\n" +
 	"\ftitle_vector\x18\x18 \x03(\x02R\vtitleVector\x12&\n" +
-	"\x0fclean_old_terms\x18\x19 \x01(\bR\rcleanOldTerms\"\xdb\x04\n" +
+	"\x0fclean_old_terms\x18\x19 \x01(\bR\rcleanOldTerms\"\xc5\x04\n" +
 	"\x10DocSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9464,8 +9456,7 @@ const file_request_proto_rawDesc = "" +
 	"\vquery_terms\x18\x04 \x03(\tR\n" +
 	"queryTerms\x12\x14\n" +
 	"\x05query\x18\x05 \x01(\tR\x05query\x12\x16\n" +
-	"\x06anchor\x18\x06 \x01(\tR\x06anchor\x12\x14\n" +
-	"\x05limit\x18\a \x01(\x03R\x05limit\x12#\n" +
+	"\x06anchor\x18\x06 \x01(\tR\x06anchor\x12#\n" +
 	"\rinclude_parts\x18\b \x03(\tR\fincludeParts\x12!\n" +
 	"\fdoc_distinct\x18\t \x01(\bR\vdocDistinct\x12%\n" +
 	"\x0einclude_owners\x18\n" +

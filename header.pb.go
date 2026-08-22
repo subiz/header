@@ -73583,20 +73583,20 @@ func (x *TiktokVideo) GetModified() int64 {
 }
 
 type RecordFilter struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Ctx           *common.Context          `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                   `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Key           string                   `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`                        // for realtime use
-	OrderBy       string                   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"` // -created, +created, +actived, -actived, +unreplied_at, -unread
-	Conditions    []*RecordFilterCondition `protobuf:"bytes,5,rep,name=conditions,proto3" json:"conditions,omitempty"`
-	Anchor        string                   `protobuf:"bytes,6,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	Limit         int64                    `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`
-	AgentId       string                   `protobuf:"bytes,8,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	Name          string                   `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
-	Id            string                   `protobuf:"bytes,10,opt,name=id,proto3" json:"id,omitempty"`
-	Total         int64                    `protobuf:"varint,11,opt,name=total,proto3" json:"total,omitempty"`
-	NumUnreads    int64                    `protobuf:"varint,12,opt,name=num_unreads,json=numUnreads,proto3" json:"num_unreads,omitempty"`
-	CountOnly     bool                     `protobuf:"varint,13,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"` // only for requesting
+	state      protoimpl.MessageState   `protogen:"open.v1"`
+	Ctx        *common.Context          `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId  string                   `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Key        string                   `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`                        // for realtime use
+	OrderBy    string                   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"` // -created, +created, +actived, -actived, +unreplied_at, -unread
+	Conditions []*RecordFilterCondition `protobuf:"bytes,5,rep,name=conditions,proto3" json:"conditions,omitempty"`
+	Anchor     string                   `protobuf:"bytes,6,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	// int64 limit = 7; use anchor, stop when you want
+	AgentId       string `protobuf:"bytes,8,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Name          string `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	Id            string `protobuf:"bytes,10,opt,name=id,proto3" json:"id,omitempty"`
+	Total         int64  `protobuf:"varint,11,opt,name=total,proto3" json:"total,omitempty"`
+	NumUnreads    int64  `protobuf:"varint,12,opt,name=num_unreads,json=numUnreads,proto3" json:"num_unreads,omitempty"`
+	CountOnly     bool   `protobuf:"varint,13,opt,name=count_only,json=countOnly,proto3" json:"count_only,omitempty"` // only for requesting
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -73671,13 +73671,6 @@ func (x *RecordFilter) GetAnchor() string {
 		return x.Anchor
 	}
 	return ""
-}
-
-func (x *RecordFilter) GetLimit() int64 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
 }
 
 func (x *RecordFilter) GetAgentId() string {
@@ -83332,7 +83325,7 @@ const file_header_proto_rawDesc = "" +
 	"\x13app_download_clicks\x18\x1d \x01(\x03R\x11appDownloadClicks\x12!\n" +
 	"\femail_clicks\x18\x1e \x01(\x03R\vemailClicks\x12%\n" +
 	"\x0eaddress_clicks\x18\x1f \x01(\x03R\raddressClicks\x12\x1a\n" +
-	"\bmodified\x182 \x01(\x03R\bmodified\"\xff\x02\n" +
+	"\bmodified\x182 \x01(\x03R\bmodified\"\xe9\x02\n" +
 	"\fRecordFilter\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -83342,8 +83335,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"conditions\x18\x05 \x03(\v2\x1d.header.RecordFilterConditionR\n" +
 	"conditions\x12\x16\n" +
-	"\x06anchor\x18\x06 \x01(\tR\x06anchor\x12\x14\n" +
-	"\x05limit\x18\a \x01(\x03R\x05limit\x12\x19\n" +
+	"\x06anchor\x18\x06 \x01(\tR\x06anchor\x12\x19\n" +
 	"\bagent_id\x18\b \x01(\tR\aagentId\x12\x12\n" +
 	"\x04name\x18\t \x01(\tR\x04name\x12\x0e\n" +
 	"\x02id\x18\n" +

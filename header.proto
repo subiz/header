@@ -10574,7 +10574,7 @@ message RecordFilter {
 	string order_by = 4; // -created, +created, +actived, -actived, +unreplied_at, -unread
 	repeated RecordFilterCondition conditions = 5;
 	string anchor = 6;
-	int64 limit = 7;
+	// int64 limit = 7; use anchor, stop when you want
 	string agent_id = 8;
 	string name = 9;
 	string id = 10;

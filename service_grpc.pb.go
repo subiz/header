@@ -379,11 +379,6 @@ var Find_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	DocSearch_IndexConvo_FullMethodName          = "/header.DocSearch/IndexConvo"
-	DocSearch_SearchConvos_FullMethodName        = "/header.DocSearch/SearchConvos"
-	DocSearch_Index_FullMethodName               = "/header.DocSearch/Index"
-	DocSearch_Search_FullMethodName              = "/header.DocSearch/Search"
-	DocSearch_SearchIds_FullMethodName           = "/header.DocSearch/SearchIds"
 	DocSearch_ReportConversation_FullMethodName  = "/header.DocSearch/ReportConversation"
 	DocSearch_Report_FullMethodName              = "/header.DocSearch/Report"
 	DocSearch_ListIds_FullMethodName             = "/header.DocSearch/ListIds"
@@ -397,12 +392,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DocSearchClient interface {
-	// @deprecated, use Find
-	IndexConvo(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
-	SearchConvos(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
-	Index(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error)
-	Search(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
-	SearchIds(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
 	ReportConversation(ctx context.Context, in *ConversationMetricsRequest, opts ...grpc.CallOption) (*ConversationMetrics, error)
 	Report(ctx context.Context, in *ConvoReportRequest, opts ...grpc.CallOption) (*ConvoReportResponse, error)
 	ListIds(ctx context.Context, in *ConvoReportRequest, opts ...grpc.CallOption) (*Conversations, error)
@@ -418,56 +407,6 @@ type docSearchClient struct {
 
 func NewDocSearchClient(cc grpc.ClientConnInterface) DocSearchClient {
 	return &docSearchClient{cc}
-}
-
-func (c *docSearchClient) IndexConvo(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, DocSearch_IndexConvo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *docSearchClient) SearchConvos(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DocSearchResponse)
-	err := c.cc.Invoke(ctx, DocSearch_SearchConvos_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *docSearchClient) Index(ctx context.Context, in *DocIndexRequest, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, DocSearch_Index_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *docSearchClient) Search(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DocSearchResponse)
-	err := c.cc.Invoke(ctx, DocSearch_Search_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *docSearchClient) SearchIds(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DocSearchResponse)
-	err := c.cc.Invoke(ctx, DocSearch_SearchIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *docSearchClient) ReportConversation(ctx context.Context, in *ConversationMetricsRequest, opts ...grpc.CallOption) (*ConversationMetrics, error) {
@@ -544,12 +483,6 @@ func (c *docSearchClient) ReportAgent(ctx context.Context, in *AgentMetricsReque
 // All implementations must embed UnimplementedDocSearchServer
 // for forward compatibility.
 type DocSearchServer interface {
-	// @deprecated, use Find
-	IndexConvo(context.Context, *DocIndexRequest) (*Empty, error)
-	SearchConvos(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
-	Index(context.Context, *DocIndexRequest) (*Empty, error)
-	Search(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
-	SearchIds(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
 	ReportConversation(context.Context, *ConversationMetricsRequest) (*ConversationMetrics, error)
 	Report(context.Context, *ConvoReportRequest) (*ConvoReportResponse, error)
 	ListIds(context.Context, *ConvoReportRequest) (*Conversations, error)
@@ -567,21 +500,6 @@ type DocSearchServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDocSearchServer struct{}
 
-func (UnimplementedDocSearchServer) IndexConvo(context.Context, *DocIndexRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method IndexConvo not implemented")
-}
-func (UnimplementedDocSearchServer) SearchConvos(context.Context, *DocSearchRequest) (*DocSearchResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SearchConvos not implemented")
-}
-func (UnimplementedDocSearchServer) Index(context.Context, *DocIndexRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method Index not implemented")
-}
-func (UnimplementedDocSearchServer) Search(context.Context, *DocSearchRequest) (*DocSearchResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Search not implemented")
-}
-func (UnimplementedDocSearchServer) SearchIds(context.Context, *DocSearchRequest) (*DocSearchResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SearchIds not implemented")
-}
 func (UnimplementedDocSearchServer) ReportConversation(context.Context, *ConversationMetricsRequest) (*ConversationMetrics, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReportConversation not implemented")
 }
@@ -622,96 +540,6 @@ func RegisterDocSearchServer(s grpc.ServiceRegistrar, srv DocSearchServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&DocSearch_ServiceDesc, srv)
-}
-
-func _DocSearch_IndexConvo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocIndexRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).IndexConvo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_IndexConvo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).IndexConvo(ctx, req.(*DocIndexRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DocSearch_SearchConvos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocSearchRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).SearchConvos(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_SearchConvos_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).SearchConvos(ctx, req.(*DocSearchRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DocSearch_Index_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocIndexRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).Index(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_Index_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).Index(ctx, req.(*DocIndexRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DocSearch_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocSearchRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).Search(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_Search_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).Search(ctx, req.(*DocSearchRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DocSearch_SearchIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DocSearchRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DocSearchServer).SearchIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DocSearch_SearchIds_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocSearchServer).SearchIds(ctx, req.(*DocSearchRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _DocSearch_ReportConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -847,26 +675,6 @@ var DocSearch_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.DocSearch",
 	HandlerType: (*DocSearchServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "IndexConvo",
-			Handler:    _DocSearch_IndexConvo_Handler,
-		},
-		{
-			MethodName: "SearchConvos",
-			Handler:    _DocSearch_SearchConvos_Handler,
-		},
-		{
-			MethodName: "Index",
-			Handler:    _DocSearch_Index_Handler,
-		},
-		{
-			MethodName: "Search",
-			Handler:    _DocSearch_Search_Handler,
-		},
-		{
-			MethodName: "SearchIds",
-			Handler:    _DocSearch_SearchIds_Handler,
-		},
 		{
 			MethodName: "ReportConversation",
 			Handler:    _DocSearch_ReportConversation_Handler,

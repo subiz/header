@@ -575,7 +575,8 @@ message DocSearchRequest {
 	string query = 5;
 	string anchor = 6;
 
-	int64 limit = 7;
+	// int64 limit = 7; do not support, use anchor and stop when you want
+
 	repeated string include_parts = 8; // only include those parts
 	bool doc_distinct = 9; // distinct document
 	repeated string include_owners = 10;
