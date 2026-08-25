@@ -192,9 +192,6 @@ message PhoneDevice {
 	string default_outbound_number = 34;
 
 	string device_id = 35; // uuid of the device, instance-id, Contact param "+sip.instance" (RFC 5626), đã bóc ngoặc kép và <>:
-	// string device_build_id = 36;
-	// string device_os = 37;
-	// string device_name = 38;
 	int64 last_connected = 40;
 
 	string private_host = 42;

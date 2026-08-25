@@ -85,7 +85,6 @@ service AccountMgr {
 	rpc GetAgentProfile(Id) returns (header.Response);
 	rpc ListAgentProfileAccounts(Id) returns (header.Response);
 	rpc Login(LoginRequest) returns (header.Response);
-	rpc OldLogin(LoginRequest) returns (header.Response);
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc GetGroup(Id) returns (header.AgentGroup);
@@ -203,17 +202,6 @@ service AccountMgr {
 	rpc GetSetupFeatureStatus(header.Id) returns (SetupFeatureStatus);
 	rpc UpdateSetupFeatureStatus(SetupFeatureStatus) returns (SetupFeatureStatus);
 	rpc ListActiveAccountIds(header.Id) returns (Response);
-}
-
-service UserCache {
-	// rpc ListLeadIds(header.UserView) returns (Response);
-	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
-	rpc ListLeads(header.UserView) returns (Response);
-	rpc CountLeads(header.UserView) returns (Response);
-
-	rpc UpdateUser(User) returns (Response);
-	rpc AddUsersToSegment(header.SegmentUsersRequest) returns (Response);
-	rpc RemoveUsersFromSegment(header.SegmentUsersRequest) returns (Response);
 }
 
 service Crash {
@@ -428,8 +416,6 @@ service ConversationMgr {
 
 	rpc JoinConversation(header.ConversationMember) returns (Empty);
 	rpc LeftConversation(header.ConversationMember) returns (Empty);
-
-	rpc MarkReadTopic(header.Id) returns (Empty);
 
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
@@ -734,7 +720,6 @@ service WhatsappService {
 	// Cập nhật hồ sơ doanh nghiệp hiển thị trên WhatsApp (about, website, ảnh...).
 	rpc UpdateWhatsappBusinessProfile(whatsapp.BusinessProfileRequest) returns (Response);
 
-	// --- Template -------------------------------------------------------------
 	// Liệt kê template (mặc định status=APPROVED) để agent chọn khi nhắn ngoài 24h.
 	rpc ListWhatsappTemplates(whatsapp.TemplateRequest) returns (whatsapp.Templates);
 	// Ép đồng bộ lại template từ Meta (thường tự chạy qua webhook + cron ngày).
@@ -743,7 +728,6 @@ service WhatsappService {
 	// Adapter validate tham số trước khi gọi Meta. Trả về Event chứa tin đã tạo.
 	rpc SendWhatsappTemplate(whatsapp.SendTemplateRequest) returns (header.Event);
 
-	// --- Hội thoại ------------------------------------------------------------
 	// Trạng thái cửa sổ 24h của 1 khách (đồng hồ đếm ngược trên UI agent).
 	rpc GetWhatsappWindow(whatsapp.NumberRequest) returns (whatsapp.Window);
 	// Ép làm mới thông tin 1 khách WhatsApp.
@@ -751,10 +735,8 @@ service WhatsappService {
 	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
 	rpc MarkWhatsappRead(whatsapp.NumberRequest) returns (Empty);
 
-	// --- Outbound (song song với Kafka, giống SendEventToZalo) -----------------
 	rpc SendEventToWhatsapp(header.Events) returns (Empty);
 
-	// --- Cấu hình -------------------------------------------------------------
 	rpc ReadWhatsappSetting(Id) returns (whatsapp.Setting);
 	rpc UpdateWhatsappSetting(whatsapp.Setting) returns (whatsapp.Setting);
 

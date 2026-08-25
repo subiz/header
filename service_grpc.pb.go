@@ -1864,7 +1864,6 @@ const (
 	AccountMgr_GetAgentProfile_FullMethodName                 = "/header.AccountMgr/GetAgentProfile"
 	AccountMgr_ListAgentProfileAccounts_FullMethodName        = "/header.AccountMgr/ListAgentProfileAccounts"
 	AccountMgr_Login_FullMethodName                           = "/header.AccountMgr/Login"
-	AccountMgr_OldLogin_FullMethodName                        = "/header.AccountMgr/OldLogin"
 	AccountMgr_CreateGroup_FullMethodName                     = "/header.AccountMgr/CreateGroup"
 	AccountMgr_UpdateGroup_FullMethodName                     = "/header.AccountMgr/UpdateGroup"
 	AccountMgr_GetGroup_FullMethodName                        = "/header.AccountMgr/GetGroup"
@@ -1971,7 +1970,6 @@ type AccountMgrClient interface {
 	GetAgentProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListAgentProfileAccounts(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*Response, error)
-	OldLogin(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateGroup(ctx context.Context, in *AgentGroup, opts ...grpc.CallOption) (*AgentGroup, error)
 	UpdateGroup(ctx context.Context, in *AgentGroup, opts ...grpc.CallOption) (*AgentGroup, error)
 	GetGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AgentGroup, error)
@@ -2196,16 +2194,6 @@ func (c *accountMgrClient) Login(ctx context.Context, in *LoginRequest, opts ...
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, AccountMgr_Login_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) OldLogin(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, AccountMgr_OldLogin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3099,7 +3087,6 @@ type AccountMgrServer interface {
 	GetAgentProfile(context.Context, *Id) (*Response, error)
 	ListAgentProfileAccounts(context.Context, *Id) (*Response, error)
 	Login(context.Context, *LoginRequest) (*Response, error)
-	OldLogin(context.Context, *LoginRequest) (*Response, error)
 	CreateGroup(context.Context, *AgentGroup) (*AgentGroup, error)
 	UpdateGroup(context.Context, *AgentGroup) (*AgentGroup, error)
 	GetGroup(context.Context, *Id) (*AgentGroup, error)
@@ -3238,9 +3225,6 @@ func (UnimplementedAccountMgrServer) ListAgentProfileAccounts(context.Context, *
 }
 func (UnimplementedAccountMgrServer) Login(context.Context, *LoginRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method Login not implemented")
-}
-func (UnimplementedAccountMgrServer) OldLogin(context.Context, *LoginRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method OldLogin not implemented")
 }
 func (UnimplementedAccountMgrServer) CreateGroup(context.Context, *AgentGroup) (*AgentGroup, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateGroup not implemented")
@@ -3754,24 +3738,6 @@ func _AccountMgr_Login_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountMgrServer).Login(ctx, req.(*LoginRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_OldLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).OldLogin(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_OldLogin_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).OldLogin(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5402,10 +5368,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AccountMgr_Login_Handler,
 		},
 		{
-			MethodName: "OldLogin",
-			Handler:    _AccountMgr_OldLogin_Handler,
-		},
-		{
 			MethodName: "CreateGroup",
 			Handler:    _AccountMgr_CreateGroup_Handler,
 		},
@@ -5752,300 +5714,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListActiveAccountIds",
 			Handler:    _AccountMgr_ListActiveAccountIds_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "service.proto",
-}
-
-const (
-	UserCache_SuggestLeadField_FullMethodName       = "/header.UserCache/SuggestLeadField"
-	UserCache_ListLeads_FullMethodName              = "/header.UserCache/ListLeads"
-	UserCache_CountLeads_FullMethodName             = "/header.UserCache/CountLeads"
-	UserCache_UpdateUser_FullMethodName             = "/header.UserCache/UpdateUser"
-	UserCache_AddUsersToSegment_FullMethodName      = "/header.UserCache/AddUsersToSegment"
-	UserCache_RemoveUsersFromSegment_FullMethodName = "/header.UserCache/RemoveUsersFromSegment"
-)
-
-// UserCacheClient is the client API for UserCache service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserCacheClient interface {
-	// rpc ListLeadIds(header.UserView) returns (Response);
-	SuggestLeadField(ctx context.Context, in *SuggestLeadFieldRequest, opts ...grpc.CallOption) (*SuggestLeadFieldResponse, error)
-	ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
-	CountLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
-	UpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
-	AddUsersToSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error)
-	RemoveUsersFromSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error)
-}
-
-type userCacheClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewUserCacheClient(cc grpc.ClientConnInterface) UserCacheClient {
-	return &userCacheClient{cc}
-}
-
-func (c *userCacheClient) SuggestLeadField(ctx context.Context, in *SuggestLeadFieldRequest, opts ...grpc.CallOption) (*SuggestLeadFieldResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SuggestLeadFieldResponse)
-	err := c.cc.Invoke(ctx, UserCache_SuggestLeadField_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_ListLeads_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) CountLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_CountLeads_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) UpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_UpdateUser_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) AddUsersToSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_AddUsersToSegment_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) RemoveUsersFromSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_RemoveUsersFromSegment_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// UserCacheServer is the server API for UserCache service.
-// All implementations must embed UnimplementedUserCacheServer
-// for forward compatibility.
-type UserCacheServer interface {
-	// rpc ListLeadIds(header.UserView) returns (Response);
-	SuggestLeadField(context.Context, *SuggestLeadFieldRequest) (*SuggestLeadFieldResponse, error)
-	ListLeads(context.Context, *UserView) (*Response, error)
-	CountLeads(context.Context, *UserView) (*Response, error)
-	UpdateUser(context.Context, *User) (*Response, error)
-	AddUsersToSegment(context.Context, *SegmentUsersRequest) (*Response, error)
-	RemoveUsersFromSegment(context.Context, *SegmentUsersRequest) (*Response, error)
-	mustEmbedUnimplementedUserCacheServer()
-}
-
-// UnimplementedUserCacheServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedUserCacheServer struct{}
-
-func (UnimplementedUserCacheServer) SuggestLeadField(context.Context, *SuggestLeadFieldRequest) (*SuggestLeadFieldResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SuggestLeadField not implemented")
-}
-func (UnimplementedUserCacheServer) ListLeads(context.Context, *UserView) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListLeads not implemented")
-}
-func (UnimplementedUserCacheServer) CountLeads(context.Context, *UserView) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CountLeads not implemented")
-}
-func (UnimplementedUserCacheServer) UpdateUser(context.Context, *User) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateUser not implemented")
-}
-func (UnimplementedUserCacheServer) AddUsersToSegment(context.Context, *SegmentUsersRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddUsersToSegment not implemented")
-}
-func (UnimplementedUserCacheServer) RemoveUsersFromSegment(context.Context, *SegmentUsersRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoveUsersFromSegment not implemented")
-}
-func (UnimplementedUserCacheServer) mustEmbedUnimplementedUserCacheServer() {}
-func (UnimplementedUserCacheServer) testEmbeddedByValue()                   {}
-
-// UnsafeUserCacheServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserCacheServer will
-// result in compilation errors.
-type UnsafeUserCacheServer interface {
-	mustEmbedUnimplementedUserCacheServer()
-}
-
-func RegisterUserCacheServer(s grpc.ServiceRegistrar, srv UserCacheServer) {
-	// If the following call panics, it indicates UnimplementedUserCacheServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&UserCache_ServiceDesc, srv)
-}
-
-func _UserCache_SuggestLeadField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SuggestLeadFieldRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).SuggestLeadField(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_SuggestLeadField_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).SuggestLeadField(ctx, req.(*SuggestLeadFieldRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_ListLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserView)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).ListLeads(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_ListLeads_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).ListLeads(ctx, req.(*UserView))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_CountLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserView)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).CountLeads(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_CountLeads_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).CountLeads(ctx, req.(*UserView))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).UpdateUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_UpdateUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).UpdateUser(ctx, req.(*User))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_AddUsersToSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SegmentUsersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).AddUsersToSegment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_AddUsersToSegment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).AddUsersToSegment(ctx, req.(*SegmentUsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_RemoveUsersFromSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SegmentUsersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).RemoveUsersFromSegment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_RemoveUsersFromSegment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).RemoveUsersFromSegment(ctx, req.(*SegmentUsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// UserCache_ServiceDesc is the grpc.ServiceDesc for UserCache service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var UserCache_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "header.UserCache",
-	HandlerType: (*UserCacheServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SuggestLeadField",
-			Handler:    _UserCache_SuggestLeadField_Handler,
-		},
-		{
-			MethodName: "ListLeads",
-			Handler:    _UserCache_ListLeads_Handler,
-		},
-		{
-			MethodName: "CountLeads",
-			Handler:    _UserCache_CountLeads_Handler,
-		},
-		{
-			MethodName: "UpdateUser",
-			Handler:    _UserCache_UpdateUser_Handler,
-		},
-		{
-			MethodName: "AddUsersToSegment",
-			Handler:    _UserCache_AddUsersToSegment_Handler,
-		},
-		{
-			MethodName: "RemoveUsersFromSegment",
-			Handler:    _UserCache_RemoveUsersFromSegment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -11338,7 +11006,6 @@ const (
 	ConversationMgr_UntagConversation_FullMethodName        = "/header.ConversationMgr/UntagConversation"
 	ConversationMgr_JoinConversation_FullMethodName         = "/header.ConversationMgr/JoinConversation"
 	ConversationMgr_LeftConversation_FullMethodName         = "/header.ConversationMgr/LeftConversation"
-	ConversationMgr_MarkReadTopic_FullMethodName            = "/header.ConversationMgr/MarkReadTopic"
 	ConversationMgr_UpdateConversationInfo_FullMethodName   = "/header.ConversationMgr/UpdateConversationInfo"
 	ConversationMgr_UpdateMuteConversation_FullMethodName   = "/header.ConversationMgr/UpdateMuteConversation"
 	ConversationMgr_UpdateConversationMember_FullMethodName = "/header.ConversationMgr/UpdateConversationMember"
@@ -11426,7 +11093,6 @@ type ConversationMgrClient interface {
 	UntagConversation(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
 	JoinConversation(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
 	LeftConversation(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
-	MarkReadTopic(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	UpdateConversationInfo(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Conversation, error)
 	UpdateMuteConversation(ctx context.Context, in *Conversation, opts ...grpc.CallOption) (*Empty, error)
 	UpdateConversationMember(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Response, error)
@@ -11688,16 +11354,6 @@ func (c *conversationMgrClient) LeftConversation(ctx context.Context, in *Conver
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, ConversationMgr_LeftConversation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *conversationMgrClient) MarkReadTopic(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, ConversationMgr_MarkReadTopic_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12338,7 +11994,6 @@ type ConversationMgrServer interface {
 	UntagConversation(context.Context, *TagRequest) (*Empty, error)
 	JoinConversation(context.Context, *ConversationMember) (*Empty, error)
 	LeftConversation(context.Context, *ConversationMember) (*Empty, error)
-	MarkReadTopic(context.Context, *Id) (*Empty, error)
 	UpdateConversationInfo(context.Context, *Conversation) (*Conversation, error)
 	UpdateMuteConversation(context.Context, *Conversation) (*Empty, error)
 	UpdateConversationMember(context.Context, *ConversationMember) (*Response, error)
@@ -12472,9 +12127,6 @@ func (UnimplementedConversationMgrServer) JoinConversation(context.Context, *Con
 }
 func (UnimplementedConversationMgrServer) LeftConversation(context.Context, *ConversationMember) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method LeftConversation not implemented")
-}
-func (UnimplementedConversationMgrServer) MarkReadTopic(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method MarkReadTopic not implemented")
 }
 func (UnimplementedConversationMgrServer) UpdateConversationInfo(context.Context, *Conversation) (*Conversation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateConversationInfo not implemented")
@@ -13018,24 +12670,6 @@ func _ConversationMgr_LeftConversation_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).LeftConversation(ctx, req.(*ConversationMember))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ConversationMgr_MarkReadTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ConversationMgrServer).MarkReadTopic(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ConversationMgr_MarkReadTopic_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).MarkReadTopic(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14220,10 +13854,6 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LeftConversation",
 			Handler:    _ConversationMgr_LeftConversation_Handler,
-		},
-		{
-			MethodName: "MarkReadTopic",
-			Handler:    _ConversationMgr_MarkReadTopic_Handler,
 		},
 		{
 			MethodName: "UpdateConversationInfo",
@@ -20120,7 +19750,6 @@ type WhatsappServiceClient interface {
 	SyncWhatsappNumber(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Response, error)
 	// Cập nhật hồ sơ doanh nghiệp hiển thị trên WhatsApp (about, website, ảnh...).
 	UpdateWhatsappBusinessProfile(ctx context.Context, in *whatsapp.BusinessProfileRequest, opts ...grpc.CallOption) (*Response, error)
-	// --- Template -------------------------------------------------------------
 	// Liệt kê template (mặc định status=APPROVED) để agent chọn khi nhắn ngoài 24h.
 	ListWhatsappTemplates(ctx context.Context, in *whatsapp.TemplateRequest, opts ...grpc.CallOption) (*whatsapp.Templates, error)
 	// Ép đồng bộ lại template từ Meta (thường tự chạy qua webhook + cron ngày).
@@ -20128,16 +19757,13 @@ type WhatsappServiceClient interface {
 	// Gửi template — đồng bộ, để agent thấy kết quả/lỗi ngay (TÍNH TIỀN).
 	// Adapter validate tham số trước khi gọi Meta. Trả về Event chứa tin đã tạo.
 	SendWhatsappTemplate(ctx context.Context, in *whatsapp.SendTemplateRequest, opts ...grpc.CallOption) (*Event, error)
-	// --- Hội thoại ------------------------------------------------------------
 	// Trạng thái cửa sổ 24h của 1 khách (đồng hồ đếm ngược trên UI agent).
 	GetWhatsappWindow(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*whatsapp.Window, error)
 	// Ép làm mới thông tin 1 khách WhatsApp.
 	MakeSureWhatsappUser(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error)
 	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
 	MarkWhatsappRead(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error)
-	// --- Outbound (song song với Kafka, giống SendEventToZalo) -----------------
 	SendEventToWhatsapp(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
-	// --- Cấu hình -------------------------------------------------------------
 	ReadWhatsappSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*whatsapp.Setting, error)
 	UpdateWhatsappSetting(ctx context.Context, in *whatsapp.Setting, opts ...grpc.CallOption) (*whatsapp.Setting, error)
 }
@@ -20305,7 +19931,6 @@ type WhatsappServiceServer interface {
 	SyncWhatsappNumber(context.Context, *whatsapp.NumberRequest) (*Response, error)
 	// Cập nhật hồ sơ doanh nghiệp hiển thị trên WhatsApp (about, website, ảnh...).
 	UpdateWhatsappBusinessProfile(context.Context, *whatsapp.BusinessProfileRequest) (*Response, error)
-	// --- Template -------------------------------------------------------------
 	// Liệt kê template (mặc định status=APPROVED) để agent chọn khi nhắn ngoài 24h.
 	ListWhatsappTemplates(context.Context, *whatsapp.TemplateRequest) (*whatsapp.Templates, error)
 	// Ép đồng bộ lại template từ Meta (thường tự chạy qua webhook + cron ngày).
@@ -20313,16 +19938,13 @@ type WhatsappServiceServer interface {
 	// Gửi template — đồng bộ, để agent thấy kết quả/lỗi ngay (TÍNH TIỀN).
 	// Adapter validate tham số trước khi gọi Meta. Trả về Event chứa tin đã tạo.
 	SendWhatsappTemplate(context.Context, *whatsapp.SendTemplateRequest) (*Event, error)
-	// --- Hội thoại ------------------------------------------------------------
 	// Trạng thái cửa sổ 24h của 1 khách (đồng hồ đếm ngược trên UI agent).
 	GetWhatsappWindow(context.Context, *whatsapp.NumberRequest) (*whatsapp.Window, error)
 	// Ép làm mới thông tin 1 khách WhatsApp.
 	MakeSureWhatsappUser(context.Context, *whatsapp.NumberRequest) (*Empty, error)
 	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
 	MarkWhatsappRead(context.Context, *whatsapp.NumberRequest) (*Empty, error)
-	// --- Outbound (song song với Kafka, giống SendEventToZalo) -----------------
 	SendEventToWhatsapp(context.Context, *Events) (*Empty, error)
-	// --- Cấu hình -------------------------------------------------------------
 	ReadWhatsappSetting(context.Context, *Id) (*whatsapp.Setting, error)
 	UpdateWhatsappSetting(context.Context, *whatsapp.Setting) (*whatsapp.Setting, error)
 	mustEmbedUnimplementedWhatsappServiceServer()

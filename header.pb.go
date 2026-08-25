@@ -3202,9 +3202,6 @@ type PhoneDevice struct {
 	CreatedBy             string   `protobuf:"bytes,33,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	DefaultOutboundNumber string   `protobuf:"bytes,34,opt,name=default_outbound_number,json=defaultOutboundNumber,proto3" json:"default_outbound_number,omitempty"`
 	DeviceId              string   `protobuf:"bytes,35,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"` // uuid of the device, instance-id, Contact param "+sip.instance" (RFC 5626), đã bóc ngoặc kép và <>:
-	// string device_build_id = 36;
-	// string device_os = 37;
-	// string device_name = 38;
 	LastConnected         int64    `protobuf:"varint,40,opt,name=last_connected,json=lastConnected,proto3" json:"last_connected,omitempty"`
 	PrivateHost           string   `protobuf:"bytes,42,opt,name=private_host,json=privateHost,proto3" json:"private_host,omitempty"`
 	UserAgent             string   `protobuf:"bytes,43,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
