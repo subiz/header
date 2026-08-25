@@ -255,6 +255,7 @@ func ListDefaultDefs() []*AttributeDefinition {
 			IsSystem:   true,
 			IsReadonly: true,
 		},
+
 		&AttributeDefinition{
 			Name:  "Last order created at",
 			Label: "Last Order Created At",
@@ -425,6 +426,18 @@ func ListDefaultDefs() []*AttributeDefinition {
 				{Value: "personal", I18NLabel: &I18NString{En_US: "Personal", Vi_VN: "Cá nhân"}, Label: "Cá nhân"},
 				{Value: "business", I18NLabel: &I18NString{En_US: "Business", Vi_VN: "Doanh nghiệp"}, Label: "Doanh nghiệp"},
 			},
+		},
+
+		&AttributeDefinition{
+			Label: "Agent liên hệ cuối lúc",
+			I18NLabel: &I18NString{
+				Vi_VN: "Agent liên hệ cuối lúc",
+				En_US: "Last agent contact at",
+			},
+			Key:        "last_agent_contact_at",
+			Type:       "datetime",
+			IsSystem:   true,
+			IsReadonly: true,
 		},
 	}
 }

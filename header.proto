@@ -9860,8 +9860,9 @@ message RuleOrder {
 
 message NotiSubscription {
 	bool new_message = 3;
-	bool user_created = 6;
-	bool user_returned = 7;
+	bool user_visited_website = 5;
+	// bool user_created = 6;
+	// bool user_returned = 7;
 	bool campaign_user_converted = 8;
 	bool user_opened_email = 9;
 	int32 delay = 10;

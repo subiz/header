@@ -68370,23 +68370,24 @@ func (x *RuleOrder) GetCallRules() []string {
 }
 
 type NotiSubscription struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	NewMessage                bool                   `protobuf:"varint,3,opt,name=new_message,json=newMessage,proto3" json:"new_message,omitempty"`
-	UserCreated               bool                   `protobuf:"varint,6,opt,name=user_created,json=userCreated,proto3" json:"user_created,omitempty"`
-	UserReturned              bool                   `protobuf:"varint,7,opt,name=user_returned,json=userReturned,proto3" json:"user_returned,omitempty"`
-	CampaignUserConverted     bool                   `protobuf:"varint,8,opt,name=campaign_user_converted,json=campaignUserConverted,proto3" json:"campaign_user_converted,omitempty"`
-	UserOpenedEmail           bool                   `protobuf:"varint,9,opt,name=user_opened_email,json=userOpenedEmail,proto3" json:"user_opened_email,omitempty"`
-	Delay                     int32                  `protobuf:"varint,10,opt,name=delay,proto3" json:"delay,omitempty"`
-	PrivateMessage            bool                   `protobuf:"varint,11,opt,name=private_message,json=privateMessage,proto3" json:"private_message,omitempty"`
-	ZaloOaFollowed            bool                   `protobuf:"varint,12,opt,name=zalo_oa_followed,json=zaloOaFollowed,proto3" json:"zalo_oa_followed,omitempty"`
-	LeadCreated               bool                   `protobuf:"varint,13,opt,name=lead_created,json=leadCreated,proto3" json:"lead_created,omitempty"`
-	TaskUpdated               int64                  `protobuf:"varint,14,opt,name=task_updated,json=taskUpdated,proto3" json:"task_updated,omitempty"`
-	NewAssignedOrder          int64                  `protobuf:"varint,15,opt,name=new_assigned_order,json=newAssignedOrder,proto3" json:"new_assigned_order,omitempty"`
-	LeadAssigned              int64                  `protobuf:"varint,16,opt,name=lead_assigned,json=leadAssigned,proto3" json:"lead_assigned,omitempty"`
-	SegmentJoined             int64                  `protobuf:"varint,17,opt,name=segment_joined,json=segmentJoined,proto3" json:"segment_joined,omitempty"`
-	TicketUpdated             int64                  `protobuf:"varint,18,opt,name=ticket_updated,json=ticketUpdated,proto3" json:"ticket_updated,omitempty"`
-	TicketUpdates             []string               `protobuf:"bytes,19,rep,name=ticket_updates,json=ticketUpdates,proto3" json:"ticket_updates,omitempty"` // member, reporter, mentions, assignee
-	WeeklyReportEmailDisabled int64                  `protobuf:"varint,20,opt,name=weekly_report_email_disabled,json=weeklyReportEmailDisabled,proto3" json:"weekly_report_email_disabled,omitempty"`
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	NewMessage         bool                   `protobuf:"varint,3,opt,name=new_message,json=newMessage,proto3" json:"new_message,omitempty"`
+	UserVisitedWebsite bool                   `protobuf:"varint,5,opt,name=user_visited_website,json=userVisitedWebsite,proto3" json:"user_visited_website,omitempty"`
+	// bool user_created = 6;
+	// bool user_returned = 7;
+	CampaignUserConverted     bool     `protobuf:"varint,8,opt,name=campaign_user_converted,json=campaignUserConverted,proto3" json:"campaign_user_converted,omitempty"`
+	UserOpenedEmail           bool     `protobuf:"varint,9,opt,name=user_opened_email,json=userOpenedEmail,proto3" json:"user_opened_email,omitempty"`
+	Delay                     int32    `protobuf:"varint,10,opt,name=delay,proto3" json:"delay,omitempty"`
+	PrivateMessage            bool     `protobuf:"varint,11,opt,name=private_message,json=privateMessage,proto3" json:"private_message,omitempty"`
+	ZaloOaFollowed            bool     `protobuf:"varint,12,opt,name=zalo_oa_followed,json=zaloOaFollowed,proto3" json:"zalo_oa_followed,omitempty"`
+	LeadCreated               bool     `protobuf:"varint,13,opt,name=lead_created,json=leadCreated,proto3" json:"lead_created,omitempty"`
+	TaskUpdated               int64    `protobuf:"varint,14,opt,name=task_updated,json=taskUpdated,proto3" json:"task_updated,omitempty"`
+	NewAssignedOrder          int64    `protobuf:"varint,15,opt,name=new_assigned_order,json=newAssignedOrder,proto3" json:"new_assigned_order,omitempty"`
+	LeadAssigned              int64    `protobuf:"varint,16,opt,name=lead_assigned,json=leadAssigned,proto3" json:"lead_assigned,omitempty"`
+	SegmentJoined             int64    `protobuf:"varint,17,opt,name=segment_joined,json=segmentJoined,proto3" json:"segment_joined,omitempty"`
+	TicketUpdated             int64    `protobuf:"varint,18,opt,name=ticket_updated,json=ticketUpdated,proto3" json:"ticket_updated,omitempty"`
+	TicketUpdates             []string `protobuf:"bytes,19,rep,name=ticket_updates,json=ticketUpdates,proto3" json:"ticket_updates,omitempty"` // member, reporter, mentions, assignee
+	WeeklyReportEmailDisabled int64    `protobuf:"varint,20,opt,name=weekly_report_email_disabled,json=weeklyReportEmailDisabled,proto3" json:"weekly_report_email_disabled,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -68428,16 +68429,9 @@ func (x *NotiSubscription) GetNewMessage() bool {
 	return false
 }
 
-func (x *NotiSubscription) GetUserCreated() bool {
+func (x *NotiSubscription) GetUserVisitedWebsite() bool {
 	if x != nil {
-		return x.UserCreated
-	}
-	return false
-}
-
-func (x *NotiSubscription) GetUserReturned() bool {
-	if x != nil {
-		return x.UserReturned
+		return x.UserVisitedWebsite
 	}
 	return false
 }
@@ -82724,12 +82718,11 @@ const file_header_proto_rawDesc = "" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x14\n" +
 	"\x05rules\x18\x03 \x03(\tR\x05rules\x12\x1d\n" +
 	"\n" +
-	"call_rules\x18\x04 \x03(\tR\tcallRules\"\x97\x05\n" +
+	"call_rules\x18\x04 \x03(\tR\tcallRules\"\x81\x05\n" +
 	"\x10NotiSubscription\x12\x1f\n" +
 	"\vnew_message\x18\x03 \x01(\bR\n" +
-	"newMessage\x12!\n" +
-	"\fuser_created\x18\x06 \x01(\bR\vuserCreated\x12#\n" +
-	"\ruser_returned\x18\a \x01(\bR\fuserReturned\x126\n" +
+	"newMessage\x120\n" +
+	"\x14user_visited_website\x18\x05 \x01(\bR\x12userVisitedWebsite\x126\n" +
 	"\x17campaign_user_converted\x18\b \x01(\bR\x15campaignUserConverted\x12*\n" +
 	"\x11user_opened_email\x18\t \x01(\bR\x0fuserOpenedEmail\x12\x14\n" +
 	"\x05delay\x18\n" +
