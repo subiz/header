@@ -14129,6 +14129,8 @@ const (
 	RecordMgr_ListRecordEvents_FullMethodName       = "/header.RecordMgr/ListRecordEvents"
 	RecordMgr_UpdateRecordTypeMember_FullMethodName = "/header.RecordMgr/UpdateRecordTypeMember"
 	RecordMgr_RemoveRecordTypeMember_FullMethodName = "/header.RecordMgr/RemoveRecordTypeMember"
+	RecordMgr_AssociateRecord_FullMethodName        = "/header.RecordMgr/AssociateRecord"
+	RecordMgr_DissociationRecord_FullMethodName     = "/header.RecordMgr/DissociationRecord"
 	RecordMgr_ReadPipeline_FullMethodName           = "/header.RecordMgr/ReadPipeline"
 	RecordMgr_CreatePipeline_FullMethodName         = "/header.RecordMgr/CreatePipeline"
 	RecordMgr_UpdatePipeline_FullMethodName         = "/header.RecordMgr/UpdatePipeline"
@@ -14165,6 +14167,8 @@ type RecordMgrClient interface {
 	ListRecordEvents(ctx context.Context, in *ListConversationEventsRequest, opts ...grpc.CallOption) (*Response, error)
 	UpdateRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*ResourceGroupMember, error)
 	RemoveRecordTypeMember(ctx context.Context, in *ResourceGroupMember, opts ...grpc.CallOption) (*Empty, error)
+	AssociateRecord(ctx context.Context, in *RecordAssociation, opts ...grpc.CallOption) (*Response, error)
+	DissociationRecord(ctx context.Context, in *RecordAssociation, opts ...grpc.CallOption) (*Response, error)
 	ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error)
 	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Response, error)
@@ -14421,6 +14425,26 @@ func (c *recordMgrClient) RemoveRecordTypeMember(ctx context.Context, in *Resour
 	return out, nil
 }
 
+func (c *recordMgrClient) AssociateRecord(ctx context.Context, in *RecordAssociation, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_AssociateRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) DissociationRecord(ctx context.Context, in *RecordAssociation, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_DissociationRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *recordMgrClient) ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -14509,6 +14533,8 @@ type RecordMgrServer interface {
 	ListRecordEvents(context.Context, *ListConversationEventsRequest) (*Response, error)
 	UpdateRecordTypeMember(context.Context, *ResourceGroupMember) (*ResourceGroupMember, error)
 	RemoveRecordTypeMember(context.Context, *ResourceGroupMember) (*Empty, error)
+	AssociateRecord(context.Context, *RecordAssociation) (*Response, error)
+	DissociationRecord(context.Context, *RecordAssociation) (*Response, error)
 	ReadPipeline(context.Context, *Id) (*Response, error)
 	CreatePipeline(context.Context, *Pipeline) (*Response, error)
 	UpdatePipeline(context.Context, *Pipeline) (*Response, error)
@@ -14596,6 +14622,12 @@ func (UnimplementedRecordMgrServer) UpdateRecordTypeMember(context.Context, *Res
 }
 func (UnimplementedRecordMgrServer) RemoveRecordTypeMember(context.Context, *ResourceGroupMember) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveRecordTypeMember not implemented")
+}
+func (UnimplementedRecordMgrServer) AssociateRecord(context.Context, *RecordAssociation) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AssociateRecord not implemented")
+}
+func (UnimplementedRecordMgrServer) DissociationRecord(context.Context, *RecordAssociation) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DissociationRecord not implemented")
 }
 func (UnimplementedRecordMgrServer) ReadPipeline(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReadPipeline not implemented")
@@ -15068,6 +15100,42 @@ func _RecordMgr_RemoveRecordTypeMember_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RecordMgr_AssociateRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordAssociation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).AssociateRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_AssociateRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).AssociateRecord(ctx, req.(*RecordAssociation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_DissociationRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordAssociation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).DissociationRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_DissociationRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).DissociationRecord(ctx, req.(*RecordAssociation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RecordMgr_ReadPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -15278,6 +15346,14 @@ var RecordMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveRecordTypeMember",
 			Handler:    _RecordMgr_RemoveRecordTypeMember_Handler,
+		},
+		{
+			MethodName: "AssociateRecord",
+			Handler:    _RecordMgr_AssociateRecord_Handler,
+		},
+		{
+			MethodName: "DissociationRecord",
+			Handler:    _RecordMgr_DissociationRecord_Handler,
 		},
 		{
 			MethodName: "ReadPipeline",

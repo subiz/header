@@ -546,6 +546,9 @@ service RecordMgr {
 	rpc UpdateRecordTypeMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveRecordTypeMember(ResourceGroupMember) returns (header.Empty);
 
+	rpc AssociateRecord(RecordAssociation) returns (header.Response); // record
+	rpc DissociationRecord(RecordAssociation) returns (header.Response); // record
+
 	rpc ReadPipeline(header.Id) returns (Response);
 	rpc CreatePipeline(header.Pipeline) returns (Response);
 	rpc UpdatePipeline(header.Pipeline) returns (Response);

@@ -8037,8 +8037,11 @@ message RecordPipeline {
 }
 
 message RecordAssociation {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string record_id = 3;
 	string type = 4; // user, ticket, conversation
-	string id = 5; // us 123
+	string to_id = 5; // us 123
 	string relationship = 6; // contact, parent, children, manager
 	string by = 7;
 }
