@@ -7184,7 +7184,7 @@ message Response {
 	Pipeline pipeline = 294;
 	repeated Pipeline pipelines = 295;
 
-
+	int64 total_amount_fpv = 296; // for deal
 }
 
 message ReportCount {
@@ -8036,6 +8036,13 @@ message RecordPipeline {
 	string exited_by = 11;
 }
 
+message RecordAssociation {
+	string type = 4; // user, ticket, conversation
+	string id = 5; // us 123
+	string relationship = 6; // contact, parent, children, manager
+	string by = 7;
+}
+
 message Record {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8057,13 +8064,12 @@ message Record {
 	int64 closed = 14;
 	string status = 15; // unassigned, open, hold, closed
 	repeated string user_ids  = 16; // only save primary user
-	string reporter = 17;
+	int64 amount_fpv = 17;
 
 	string assignee = 19; // The id representing the admin assigned to the ticket.
 	// string is_public = 20; // Whether or not the record is shared with the customer.
 
 	Touchpoint touchpoint = 21; // read-only copy from conversation touchpoint
-	repeated string conversations = 23;
 
 	int64 response_sec = 25;
 	string duplicate_of = 26;
@@ -8095,53 +8101,22 @@ message Record {
 	int64 resolution_due = 78; // sec 1 ngay
 	int64 periodic_update_due = 79;
 
-	// int64 first_response_sla_violated = 88;
-	// int64 num_every_response_sla_violated = 89;
-	// int64 resolution_sla_violated = 90;
-	// int64 num_periodic_update_sla_violated = 95;
-
-	// repeated string tags = 79;
 	int64 created = 80;
 	int64 updated = 81;
 	int64 archived = 82;
-	Event last_event = 83; // meanful event
+	Event last_event = 83; // meanful event (last active)
 	string updated_by = 84;
 	int64 deleted = 85;
-	int64 total_messages = 86;
 
 	Error error = 87; // access_deny, not_found
 	string created_by = 91; // can change
 
-	int64 agent_first_response_at = 92;
-	int64 agent_last_response_at = 93;
-	int64 agent_second_last_response_at = 103;
-
 	string source_id = 94; // zoho.203948.123098123
-	int64 hold_at = 96;
-	int64 total_past_hold_sec = 97;
-
-	int64 user_first_response_at = 98;
-	int64 user_last_response_at = 99;
-	// string periodic_update_enable = 101; // on/off
-	// string every_response_enable = 102; // on/off
-
-	int64 last_high_risk_first_response_due = 105;
-	int64 last_high_risk_every_response_due = 106;
-	int64 last_high_risk_resolution_due = 107;
-	int64 last_high_risk_periodic_update_due = 108;
-
-	string first_response_sla_state = 109; // violated, done, not_apply, in_process, wait
-	string every_response_sla_state = 110;
-	string resolution_sla_state = 111;
-	string periodic_update_sla_state = 112;
 
 	repeated Product products = 113;
 	repeated File attachments = 116;
 
-	string parent = 119;
-	repeated string children = 120;
-	repeated string associations = 121;
-
+	repeated RecordAssociation associations = 121;
 	int64 modified = 90;
 
 	Event unread_event = 122;
