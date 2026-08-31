@@ -385,6 +385,10 @@ enum RealtimeType {
 
 	record_type_created = 519;
 	record_type_updated = 520;
+
+	sen_agent_created = 522;
+	sen_agent_updated = 523;
+	sen_agent_deleted = 524;
 }
 
 message TextTransform {

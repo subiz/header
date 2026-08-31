@@ -768,6 +768,8 @@ message Data {
 	TiktokVideo tiktok_video = 149;
 	Record record = 150;
 	RecordType record_type = 151;
+
+	SenAgent sen_agent = 152;
 }
 
 message ConversationMeta {
@@ -7185,6 +7187,17 @@ message Response {
 	repeated Pipeline pipelines = 295;
 
 	int64 total_amount_fpv = 296; // for deal
+
+	SenAgent sen_agent = 297;
+	repeated SenAgent sen_agents = 298;
+
+	SenAgentSession sen_session = 299;
+	SenAction sen_action = 300;
+	repeated SenAction sen_actions = 301;
+	SenMcpServer sen_mcp_server = 302;
+	repeated SenMcpServer sen_mcp_servers = 303;
+
+	repeated SenActivity sen_activities = 304;
 }
 
 message ReportCount {
@@ -8066,7 +8079,7 @@ message Record {
 	repeated Tag tags = 13;
 	int64 closed = 14;
 	string status = 15; // unassigned, open, hold, closed
-	repeated string user_ids  = 16; // only save primary user
+	// repeated string user_ids  = 16; // only save primary user
 	int64 amount_fpv = 17;
 
 	string assignee = 19; // The id representing the admin assigned to the ticket.
@@ -9273,6 +9286,274 @@ message AIAgentOverrideRule {
 	AIAgent ai_agent = 23;
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
+}
+
+message SenAgentLogRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string user_id = 4;
+
+	string anchor = 6;
+}
+
+message SenActivityHttpResponse {
+	int32 status_code = 1;
+	string content_type = 2;
+	string body_preview = 3; // first 200 Unicode characters after redacting sensitive data
+	bool body_truncated = 4;
+}
+
+// SenActivity is an immutable audit event. A state transition appends a new
+// event with a new id while retaining the same action_id.
+message SenActivity {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4; // unique audit-event id
+	string user_id = 6; // customer associated with this activity
+	string activity_class = 7; // observation, decision, action
+
+	string signal_id = 8; // signal that triggered the agent run
+	string agent_run_id = 9; // agent run that produced the action
+	string action_id = 10; // logical action id shared by its state-transition events
+	string action_type = 11; // send_message, update_user, linear.create_issue, ...
+	string target_type = 12; // user, ticket, message, linear_issue, ...
+
+	// Sanitized, resolved arguments actually passed to the executor. This is the
+	// single input representation for builtin, workflow, webhook and MCP actions.
+	google.protobuf.Struct input = 13;
+	// Generic action output. Do not duplicate sent_messages or an HTTP body here.
+	google.protobuf.Value result = 14;
+	string reason = 15; // short user-safe explanation; never store chain-of-thought
+
+	int64 occurred_at = 16; // event occurrence time in Unix milliseconds
+	string status = 17; // proposed, pending_approval, approved, executing, succeeded, rejected, failed, skipped, cancelled, timed_out
+
+	// Messages actually emitted by a send-message action, after rendering/generation.
+	// Their content must not be duplicated in result.
+	repeated Message sent_messages = 19;
+	// Normalized failure. It may coexist with http_response transport diagnostics.
+	Error error = 20;
+	// HTTP transport metadata. body_preview is capped at 200 Unicode characters.
+	SenActivityHttpResponse http_response = 21;
+
+	string target_id = 22; // empty when the target has not been created or resolved
+	string idempotency_key = 23; // stable across retries of the same logical action
+	int32 attempt = 24; // 0 before execution; otherwise one-based attempt number
+	string trace_id = 25;
+	string span_id = 26;
+}
+
+// ActionPolicy quy định approval mode cho một action type.
+message SenActionPolicy {
+	string action_type = 4; // ví dụ "send_email"
+	string approval = 6; // auto, required
+	// RejectCooldownMs: loop guard — action mới trùng (type, target) với action
+	// đã bị reject trong khoảng này sẽ bị chặn hoặc ép về pending_approval.
+	// 0 = dùng mặc định của hệ thống (7 ngày).
+	int64 reject_cooldown_ms = 7;
+}
+
+// Subscription khai báo một loại signal agent quan tâm và coalesce window riêng.
+message SenSubscription {
+	string signal = 5;
+	// CoalesceMs = 0 nghĩa là wake ngay; nhiều signal trong cùng window
+	// chỉ tạo một wake-up (README 4.3).
+	int64 coalesce_ms = 6;
+}
+
+message SenMemoryItem {
+	string content = 4; // "Nam có xu hướng đổi destination khi giá > 20m"
+	int64 created = 5;
+	string source_run_id = 6;
+}
+
+message SenPlanItem {
+	string target = 6; // ví dụ "opportunity.101", rỗng nếu là việc chung
+	string note = 7; // "Need departure date and exact budget"
+}
+
+message SenTimer {
+	string id = 4;
+	int64 fire_at = 5; // ms
+	string note = 6; // "follow-up #202"
+	bytes payload = 7;
+	string dedupe_key = 8;
+}
+
+message SenAgentSession {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string user_id = 4;
+	string entity_id = 5;
+
+	// checkpoint
+	string last_signal_id = 6;
+	string last_signal_at = 7; // ms
+
+	// state
+	repeated SenMemoryItem memory = 8;
+	repeated string beliefs = 9;
+	repeated SenPlanItem plan = 10;
+
+	repeated string pending_action_ids = 11;
+	repeated SenTimer timers = 12;
+
+	string status = 13; // enabled, disabled, error
+
+	int64 updated = 16;
+	int64 created = 17;
+
+	int64 next_scheduled_wake_at = 18;
+	string next_scheduled_explain = 19;
+	SenActivity last_activity = 20;
+	string manual_override_rule = 21;
+}
+
+message SenAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	int64 version = 5;
+	string goal = 6;
+	string instruction = 7;
+	repeated string policies = 8;
+
+	repeated SenSubscription subscriptions = 9;
+	repeated string allowed_entity_types = 10;
+	repeated string tools = 11;
+	repeated SenActionPolicy action_policies = 12;
+
+	string model = 13;
+	int64 max_tokens = 14;
+
+	int64 enabled = 15; // 0 -> disabled
+
+	int64 created = 16;
+	string created_by = 17;
+
+	int64 updated = 18;
+	string updated_by = 19;
+
+	int64 modified = 20;
+
+	// report
+	int64 credit_spend_last_7days_fpv = 50;
+	int64 total_credit_spend_fpv = 51;
+
+	int64 goal_reached_last_7days = 54;
+	int64 total_goal_reacheds = 55;
+}
+
+// SenAction — một action trong catalog mà agent có thể được cấp
+message SenAction {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3; // duy nhất trong account, ví dụ "create_voucher"
+	string description = 4; // mô tả cho LLM hiểu action làm gì, khi nào dùng
+	JSONSchema parameters = 5; // schema tham số LLM phải sinh
+
+	string risk_level = 6; // low | medium | high
+	string default_approval = 7; // auto | required
+
+	// custom action: params do LLM sinh được POST dưới dạng JSON body
+	// tới webhook của doanh nghiệp
+	string webhook_url = 8;
+	string webhook_method = 9; // mặc định POST
+	repeated KV webhook_headers = 10; // ví dụ Authorization
+
+	// Tương thích chuẩn MCP (Model Context Protocol):
+	// name/description/parameters ánh xạ 1:1 với MCP tool name/description/inputSchema.
+	string source = 11; // builtin | webhook | mcp
+	string mcp_server_id = 12; // khi source=mcp: SenMcpServer chứa tool này
+	string mcp_tool_name = 13; // tên tool gốc trên MCP server (name trong catalog được prefix "<server>.")
+
+	int64 created = 15;
+	string created_by = 16;
+	int64 updated = 17;
+	string updated_by = 18;
+}
+
+// SenMcpServer — kết nối một MCP server (Model Context Protocol) của doanh
+// nghiệp, ví dụ Linear (https://mcp.linear.app/mcp). Sen import tools của
+// server thành SenAction (source=mcp) qua tools/list, và thực thi
+// action bằng tools/call (JSON-RPC 2.0, Streamable HTTP).
+message SenMcpServer {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4; // prefix cho tool import, ví dụ "linear" -> "linear.create_issue"
+	string url = 5;
+	repeated KV headers = 6; // ví dụ Authorization: Bearer <token>
+	int64 enabled = 7;
+	int64 last_synced = 8;
+	string last_sync_error = 9;
+
+	int64 created = 15;
+	string created_by = 16;
+	int64 updated = 17;
+	string updated_by = 18;
+}
+
+message SenEvidence {
+	string type = 4; // message | entity | memory | signal
+	string ref = 5; // id của đối tượng nguồn
+	string excerpt = 6; // trích dẫn ngắn, không lưu raw chain-of-thought
+}
+
+// SenSessionAction — việc AI MUỐN làm, không phải việc đã làm. State machine:
+// proposed → (auto | pending_approval → approved/rejected) → executing → succeeded/failed
+// Agent chỉ propose; Runtime + Policy quyết định action tự chạy hay chờ duyệt.
+//
+// Phần thực thi tái dùng WorkflowAction (type + config) để dùng chung executor
+// với automation: send_message (channel zns), send_email, tag, create_task...
+// Sen chỉ bọc thêm envelope trạng thái + audit.
+message SenSessionAction {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string agent_id = 4;
+	string user_id = 5;
+	string agent_run_id = 6; // run nào sinh ra action này
+
+	WorkflowAction action = 7; // type + config, thực thi bằng executor của automation
+
+	string risk_level = 8; // low | medium | high
+	string approval_policy = 9; // auto | required — resolve từ policy tại thời điểm tạo, lưu lại để audit
+
+	string status = 10; // proposed, pending_approval, approved, executing, succeeded, rejected, failed
+	string reason = 11; // vì sao agent muốn làm điều này
+	repeated SenEvidence evidence = 12;
+	google.protobuf.Value result = 13; // arbitrary JSON result: object, array, scalar or null
+
+	string idempotency_key = 14; // retry không tạo trùng
+
+	int64 created = 15;
+	int64 updated = 16;
+
+	google.protobuf.Struct params = 17; // structured params from LLM for custom webhook/MCP actions
+}
+
+// SenApprovalRequest — quyết định human cần đưa ra cho một action đang chờ.
+// Phân biệt: SenSessionAction = việc AI muốn làm; SenApprovalRequest = quyết định
+// của human; Task = công việc nghiệp vụ của con người (khái niệm khác).
+message SenApprovalRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string action_id = 4;
+
+	string assignee = 5;
+	string status = 6; // open | approved | rejected
+	int64 requested_at = 7;
+	int64 reviewed_at = 8;
+	string reviewer = 9;
+	string comment = 10; // feedback cho agent khi reject, đưa vào context run sau
+	WorkflowAction edited_action = 11; // nếu human sửa draft trước khi duyệt, bản này được execute
 }
 
 message AIAgentBrand {
