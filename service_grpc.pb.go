@@ -10987,6 +10987,336 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	SenAgentMgr_ListSenAgents_FullMethodName   = "/header.SenAgentMgr/ListSenAgents"
+	SenAgentMgr_CreateSenAgent_FullMethodName  = "/header.SenAgentMgr/CreateSenAgent"
+	SenAgentMgr_UpdateSenAgent_FullMethodName  = "/header.SenAgentMgr/UpdateSenAgent"
+	SenAgentMgr_GetSenAgent_FullMethodName     = "/header.SenAgentMgr/GetSenAgent"
+	SenAgentMgr_MatchSenAgent_FullMethodName   = "/header.SenAgentMgr/MatchSenAgent"
+	SenAgentMgr_DeleteSenAgent_FullMethodName  = "/header.SenAgentMgr/DeleteSenAgent"
+	SenAgentMgr_GetAgentSession_FullMethodName = "/header.SenAgentMgr/GetAgentSession"
+)
+
+// SenAgentMgrClient is the client API for SenAgentMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type SenAgentMgrClient interface {
+	ListSenAgents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateSenAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
+	UpdateSenAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
+	GetSenAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	MatchSenAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	DeleteSenAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GetAgentSession(ctx context.Context, in *SenAgentSession, opts ...grpc.CallOption) (*Response, error)
+}
+
+type senAgentMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSenAgentMgrClient(cc grpc.ClientConnInterface) SenAgentMgrClient {
+	return &senAgentMgrClient{cc}
+}
+
+func (c *senAgentMgrClient) ListSenAgents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_ListSenAgents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) CreateSenAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_CreateSenAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) UpdateSenAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_UpdateSenAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) GetSenAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_GetSenAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) MatchSenAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_MatchSenAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) DeleteSenAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_DeleteSenAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) GetAgentSession(ctx context.Context, in *SenAgentSession, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_GetAgentSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SenAgentMgrServer is the server API for SenAgentMgr service.
+// All implementations must embed UnimplementedSenAgentMgrServer
+// for forward compatibility.
+type SenAgentMgrServer interface {
+	ListSenAgents(context.Context, *Id) (*Response, error)
+	CreateSenAgent(context.Context, *AIAgent) (*Response, error)
+	UpdateSenAgent(context.Context, *AIAgent) (*Response, error)
+	GetSenAgent(context.Context, *Id) (*Response, error)
+	MatchSenAgent(context.Context, *Ids) (*Response, error)
+	DeleteSenAgent(context.Context, *Id) (*Response, error)
+	GetAgentSession(context.Context, *SenAgentSession) (*Response, error)
+	mustEmbedUnimplementedSenAgentMgrServer()
+}
+
+// UnimplementedSenAgentMgrServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedSenAgentMgrServer struct{}
+
+func (UnimplementedSenAgentMgrServer) ListSenAgents(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSenAgents not implemented")
+}
+func (UnimplementedSenAgentMgrServer) CreateSenAgent(context.Context, *AIAgent) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSenAgent not implemented")
+}
+func (UnimplementedSenAgentMgrServer) UpdateSenAgent(context.Context, *AIAgent) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateSenAgent not implemented")
+}
+func (UnimplementedSenAgentMgrServer) GetSenAgent(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSenAgent not implemented")
+}
+func (UnimplementedSenAgentMgrServer) MatchSenAgent(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchSenAgent not implemented")
+}
+func (UnimplementedSenAgentMgrServer) DeleteSenAgent(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteSenAgent not implemented")
+}
+func (UnimplementedSenAgentMgrServer) GetAgentSession(context.Context, *SenAgentSession) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgentSession not implemented")
+}
+func (UnimplementedSenAgentMgrServer) mustEmbedUnimplementedSenAgentMgrServer() {}
+func (UnimplementedSenAgentMgrServer) testEmbeddedByValue()                     {}
+
+// UnsafeSenAgentMgrServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SenAgentMgrServer will
+// result in compilation errors.
+type UnsafeSenAgentMgrServer interface {
+	mustEmbedUnimplementedSenAgentMgrServer()
+}
+
+func RegisterSenAgentMgrServer(s grpc.ServiceRegistrar, srv SenAgentMgrServer) {
+	// If the following call panics, it indicates UnimplementedSenAgentMgrServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&SenAgentMgr_ServiceDesc, srv)
+}
+
+func _SenAgentMgr_ListSenAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).ListSenAgents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_ListSenAgents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).ListSenAgents(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_CreateSenAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).CreateSenAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_CreateSenAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).CreateSenAgent(ctx, req.(*AIAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_UpdateSenAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).UpdateSenAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_UpdateSenAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).UpdateSenAgent(ctx, req.(*AIAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_GetSenAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).GetSenAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_GetSenAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).GetSenAgent(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_MatchSenAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).MatchSenAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_MatchSenAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).MatchSenAgent(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_DeleteSenAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).DeleteSenAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_DeleteSenAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).DeleteSenAgent(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_GetAgentSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SenAgentSession)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).GetAgentSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_GetAgentSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).GetAgentSession(ctx, req.(*SenAgentSession))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// SenAgentMgr_ServiceDesc is the grpc.ServiceDesc for SenAgentMgr service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var SenAgentMgr_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.SenAgentMgr",
+	HandlerType: (*SenAgentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListSenAgents",
+			Handler:    _SenAgentMgr_ListSenAgents_Handler,
+		},
+		{
+			MethodName: "CreateSenAgent",
+			Handler:    _SenAgentMgr_CreateSenAgent_Handler,
+		},
+		{
+			MethodName: "UpdateSenAgent",
+			Handler:    _SenAgentMgr_UpdateSenAgent_Handler,
+		},
+		{
+			MethodName: "GetSenAgent",
+			Handler:    _SenAgentMgr_GetSenAgent_Handler,
+		},
+		{
+			MethodName: "MatchSenAgent",
+			Handler:    _SenAgentMgr_MatchSenAgent_Handler,
+		},
+		{
+			MethodName: "DeleteSenAgent",
+			Handler:    _SenAgentMgr_DeleteSenAgent_Handler,
+		},
+		{
+			MethodName: "GetAgentSession",
+			Handler:    _SenAgentMgr_GetAgentSession_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	ConversationMgr_AssignRule_FullMethodName               = "/header.ConversationMgr/AssignRule"
 	ConversationMgr_ReassignConversation_FullMethodName     = "/header.ConversationMgr/ReassignConversation"
 	ConversationMgr_PongMessage_FullMethodName              = "/header.ConversationMgr/PongMessage"

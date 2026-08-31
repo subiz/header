@@ -7185,6 +7185,11 @@ message Response {
 	repeated Pipeline pipelines = 295;
 
 	int64 total_amount_fpv = 296; // for deal
+
+	SenAgent sen_agent = 297;
+	repeated SenAgent sen_agents = 298;
+
+	SenAgentSession sen_agent_session = 299;
 }
 
 message ReportCount {
@@ -8066,7 +8071,7 @@ message Record {
 	repeated Tag tags = 13;
 	int64 closed = 14;
 	string status = 15; // unassigned, open, hold, closed
-	repeated string user_ids  = 16; // only save primary user
+	// repeated string user_ids  = 16; // only save primary user
 	int64 amount_fpv = 17;
 
 	string assignee = 19; // The id representing the admin assigned to the ticket.
@@ -9273,6 +9278,106 @@ message AIAgentOverrideRule {
 	AIAgent ai_agent = 23;
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
+}
+
+// ActionPolicy quy định approval mode cho một action type.
+message SenActionPolicy {
+	string action_type = 4; // ví dụ "send_email"
+	string approval = 6; // auto, required
+	// RejectCooldownMs: loop guard — action mới trùng (type, target) với action
+	// đã bị reject trong khoảng này sẽ bị chặn hoặc ép về pending_approval.
+	// 0 = dùng mặc định của hệ thống (7 ngày).
+	int64 reject_cooldown_ms = 7;
+}
+
+// Subscription khai báo một loại signal agent quan tâm và coalesce window riêng.
+message SenSubscription {
+	string signal = 5;
+	// CoalesceMs = 0 nghĩa là wake ngay; nhiều signal trong cùng window
+	// chỉ tạo một wake-up (README 4.3).
+	int64 coalesce_ms = 6;
+}
+
+message SenMemoryItem {
+	string content = 4; // "Nam có xu hướng đổi destination khi giá > 20m"
+	int64 created = 5;
+	string source_run_id = 6;
+}
+
+message SenPlanItem {
+	string target = 6; // ví dụ "opportunity.101", rỗng nếu là việc chung
+	string note = 7; // "Need departure date and exact budget"
+}
+
+message SenTimer {
+	string id = 4;
+	int64 fire_at = 5; // ms
+	string note = 6; // "follow-up #202"
+	bytes payload = 7;
+}
+
+message SenAgentSession {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string user_id = 4;
+	string entity_id = 5;
+
+	// checkpoint
+	string last_signal_id = 6;
+	string last_signal_at = 7; // ms
+
+	// state
+	repeated SenMemoryItem memory = 8;
+	repeated string beliefs = 9;
+	repeated SenPlanItem plan = 10;
+
+	repeated string pending_action_ids = 11;
+	repeated SenTimer timers = 12;
+
+	string status = 13; // enabled, disabled, error
+
+	int64 updated = 16;
+	int64 created = 17;
+}
+
+message SenAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	int64 version = 5;
+	string goal = 6;
+	string instruction = 7;
+	repeated string policies = 8;
+
+	repeated SenSubscription subscriptions = 9;
+	repeated string allowed_entity_types = 10;
+	repeated string tools = 11;
+	repeated SenActionPolicy action_policies = 12;
+
+	string model = 13;
+	int64 max_tokens = 14;
+
+	int64 enabled = 15; // 0 -> disabled
+
+	int64 created = 16;
+	string created_by = 17;
+
+	int64 updated = 18;
+	string updated_by = 19;
+
+	int64 modified = 20;
+
+	// report
+	int64 credit_spend_last_7days_fpv = 50;
+	int64 total_credit_spend_fpv = 51;
+
+	int64 conversation_last_7days = 52;
+	int64 total_conversations = 53;
+
+	int64 goal_reached_last_7days = 54;
+	int64 total_goal_reacheds = 55;
 }
 
 message AIAgentBrand {
