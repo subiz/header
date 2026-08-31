@@ -389,6 +389,19 @@ service WorkflowMgr {
 	rpc ListLLMLogs(Id) returns (Response); // AIAgentTrace
 }
 
+service SenAgentMgr {
+	rpc ListSenAgents(Id) returns (Response);
+	rpc CreateSenAgent(SenAgent) returns (Response);
+	rpc UpdateSenAgent(SenAgent) returns (Response);
+	rpc GetSenAgent(Id) returns (Response);
+	rpc MatchSenAgent(Ids) returns (Response);
+	rpc DeleteSenAgent(Id) returns (Response);
+	// rpc StartAiAgent(RunAiAgentRequest) returns (Empty);
+	// rpc StopAIAgent(RunAiAgentRequest) returns (Empty);
+
+	rpc GetAgentSession(SenAgentSession) returns (Response);
+}
+
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc ReassignConversation(header.Id) returns (header.RouteResult);
