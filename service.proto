@@ -389,6 +389,33 @@ service WorkflowMgr {
 	rpc ListLLMLogs(Id) returns (Response); // AIAgentTrace
 }
 
+service SenAgentMgr {
+	rpc ListSenAgents(Id) returns (Response);
+	rpc CreateSenAgent(SenAgent) returns (Response);
+	rpc UpdateSenAgent(SenAgent) returns (Response);
+	rpc GetSenAgent(Id) returns (Response);
+	rpc MatchSenAgents(Ids) returns (Response);
+	rpc DeleteSenAgent(Id) returns (Response);
+	// rpc StartAiAgent(RunAiAgentRequest) returns (Empty);
+	// rpc StopAIAgent(RunAiAgentRequest) returns (Empty);
+
+	rpc GetAgentSession(SenAgentSession) returns (Response);
+
+	// catalog action: builtin + custom của doanh nghiệp (SenAction)
+	rpc ListSenActions(Id) returns (Response);
+	rpc CreateSenAction(SenAction) returns (Response);
+	rpc UpdateSenAction(SenAction) returns (Response);
+	rpc DeleteSenAction(Id) returns (Response); // Id.id = name
+	rpc MatchSenActions(Ids) returns (Response);
+
+	// kết nối MCP server: import tools thành SenAction (source=mcp)
+	rpc ListSenMcpServers(Id) returns (Response);
+	rpc CreateSenMcpServer(SenMcpServer) returns (Response);
+	rpc UpdateSenMcpServer(SenMcpServer) returns (Response);
+	rpc DeleteSenMcpServer(Id) returns (Response);
+	rpc SyncSenMcpServer(Id) returns (Response); // gọi tools/list rồi cập nhật catalog
+}
+
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc ReassignConversation(header.Id) returns (header.RouteResult);
