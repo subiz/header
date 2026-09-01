@@ -11005,6 +11005,8 @@ const (
 	SenAgentMgr_UpdateSenMcpServer_FullMethodName          = "/header.SenAgentMgr/UpdateSenMcpServer"
 	SenAgentMgr_DeleteSenMcpServer_FullMethodName          = "/header.SenAgentMgr/DeleteSenMcpServer"
 	SenAgentMgr_SyncSenMcpServer_FullMethodName            = "/header.SenAgentMgr/SyncSenMcpServer"
+	SenAgentMgr_ListPendingSenActions_FullMethodName       = "/header.SenAgentMgr/ListPendingSenActions"
+	SenAgentMgr_ReviewSenAction_FullMethodName             = "/header.SenAgentMgr/ReviewSenAction"
 	SenAgentMgr_ListSenSessionRunActivities_FullMethodName = "/header.SenAgentMgr/ListSenSessionRunActivities"
 	SenAgentMgr_ListSenSessionRuns_FullMethodName          = "/header.SenAgentMgr/ListSenSessionRuns"
 	SenAgentMgr_ListSenAgentSessions_FullMethodName        = "/header.SenAgentMgr/ListSenAgentSessions"
@@ -11034,6 +11036,8 @@ type SenAgentMgrClient interface {
 	UpdateSenMcpServer(ctx context.Context, in *SenMcpServer, opts ...grpc.CallOption) (*Response, error)
 	DeleteSenMcpServer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	SyncSenMcpServer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListPendingSenActions(ctx context.Context, in *SenPendingActionListRequest, opts ...grpc.CallOption) (*Response, error)
+	ReviewSenAction(ctx context.Context, in *SenActionReviewRequest, opts ...grpc.CallOption) (*Response, error)
 	ListSenSessionRunActivities(ctx context.Context, in *SenActivityListRequest, opts ...grpc.CallOption) (*Response, error)
 	ListSenSessionRuns(ctx context.Context, in *SenAgentRunListRequest, opts ...grpc.CallOption) (*Response, error)
 	ListSenAgentSessions(ctx context.Context, in *SenAgentSessionListRequest, opts ...grpc.CallOption) (*Response, error)
@@ -11227,6 +11231,26 @@ func (c *senAgentMgrClient) SyncSenMcpServer(ctx context.Context, in *Id, opts .
 	return out, nil
 }
 
+func (c *senAgentMgrClient) ListPendingSenActions(ctx context.Context, in *SenPendingActionListRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_ListPendingSenActions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *senAgentMgrClient) ReviewSenAction(ctx context.Context, in *SenActionReviewRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, SenAgentMgr_ReviewSenAction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *senAgentMgrClient) ListSenSessionRunActivities(ctx context.Context, in *SenActivityListRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -11281,6 +11305,8 @@ type SenAgentMgrServer interface {
 	UpdateSenMcpServer(context.Context, *SenMcpServer) (*Response, error)
 	DeleteSenMcpServer(context.Context, *Id) (*Response, error)
 	SyncSenMcpServer(context.Context, *Id) (*Response, error)
+	ListPendingSenActions(context.Context, *SenPendingActionListRequest) (*Response, error)
+	ReviewSenAction(context.Context, *SenActionReviewRequest) (*Response, error)
 	ListSenSessionRunActivities(context.Context, *SenActivityListRequest) (*Response, error)
 	ListSenSessionRuns(context.Context, *SenAgentRunListRequest) (*Response, error)
 	ListSenAgentSessions(context.Context, *SenAgentSessionListRequest) (*Response, error)
@@ -11347,6 +11373,12 @@ func (UnimplementedSenAgentMgrServer) DeleteSenMcpServer(context.Context, *Id) (
 }
 func (UnimplementedSenAgentMgrServer) SyncSenMcpServer(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SyncSenMcpServer not implemented")
+}
+func (UnimplementedSenAgentMgrServer) ListPendingSenActions(context.Context, *SenPendingActionListRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPendingSenActions not implemented")
+}
+func (UnimplementedSenAgentMgrServer) ReviewSenAction(context.Context, *SenActionReviewRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReviewSenAction not implemented")
 }
 func (UnimplementedSenAgentMgrServer) ListSenSessionRunActivities(context.Context, *SenActivityListRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListSenSessionRunActivities not implemented")
@@ -11702,6 +11734,42 @@ func _SenAgentMgr_SyncSenMcpServer_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SenAgentMgr_ListPendingSenActions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SenPendingActionListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).ListPendingSenActions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_ListPendingSenActions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).ListPendingSenActions(ctx, req.(*SenPendingActionListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SenAgentMgr_ReviewSenAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SenActionReviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SenAgentMgrServer).ReviewSenAction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SenAgentMgr_ReviewSenAction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SenAgentMgrServer).ReviewSenAction(ctx, req.(*SenActionReviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SenAgentMgr_ListSenSessionRunActivities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SenActivityListRequest)
 	if err := dec(in); err != nil {
@@ -11834,6 +11902,14 @@ var SenAgentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SyncSenMcpServer",
 			Handler:    _SenAgentMgr_SyncSenMcpServer_Handler,
+		},
+		{
+			MethodName: "ListPendingSenActions",
+			Handler:    _SenAgentMgr_ListPendingSenActions_Handler,
+		},
+		{
+			MethodName: "ReviewSenAction",
+			Handler:    _SenAgentMgr_ReviewSenAction_Handler,
 		},
 		{
 			MethodName: "ListSenSessionRunActivities",

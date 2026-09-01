@@ -7200,6 +7200,8 @@ message Response {
 	SenMcpServer sen_mcp_server = 305;
 	repeated SenMcpServer sen_mcp_servers = 306;
 	repeated SenActivity sen_activities = 307;
+	SenSessionAction sen_session_action = 308;
+	repeated SenSessionAction sen_session_actions = 309;
 }
 
 message ReportCount {
@@ -9306,6 +9308,34 @@ message SenAgentRunListRequest {
 	string anchor = 6;
 }
 
+// SenPendingActionListRequest — Approval Inbox: list các action đang chờ duyệt
+// (status=pending_approval) của account, mới nhất trước.
+message SenPendingActionListRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string sen_agent_id = 3; // optional: chỉ của một agent
+	string assignee = 4; // optional: chỉ được giao cho người này
+	// int64 limit = 5;
+	string anchor = 6;
+}
+
+// SenActionReviewRequest — human quyết định một action đang pending_approval.
+// Mọi đường ra đều bắn signal action_resume về agent session để agent revise
+// plan/memory theo kết quả review.
+message SenActionReviewRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string action_id = 3;
+
+	string decision = 4; // approve | reject
+	google.protobuf.Struct edited_params = 5; // approve có sửa: bản này được execute, params gốc giữ để audit
+	string comment = 6; // bắt buộc khi reject — feedback cho agent
+
+	// approve & always allow: từ nay action type này của agent này chuyển auto
+	// (ghi vào SenAgent.action_policies). Không áp dụng cho risk_level=high.
+	bool always_allow = 7;
+}
+
 message SenActivityListRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -9496,6 +9526,13 @@ message SenAgent {
 
 	int64 modified = 20;
 
+	// autonomy level — trust bật dần theo từng agent (không phải toàn account):
+	//   supervised: mọi act action đều pending_approval, bỏ qua action_policies
+	//   semi_auto (mặc định, kể cả rỗng): theo action_policies + default_approval
+	//   autonomous: mọi act action auto — TRỪ risk_level=high, luôn phải duyệt
+	// Audit trail không bao giờ tắt ở mọi level.
+	string autonomy = 21; // supervised | semi_auto | autonomous
+
 	// report
 	int64 credit_spend_last_7days_fpv = 50;
 	int64 total_credit_spend_fpv = 51;
@@ -9601,7 +9638,7 @@ message SenSessionAction {
 	string risk_level = 8; // low | medium | high
 	string approval_policy = 9; // auto | required — resolve từ policy tại thời điểm tạo, lưu lại để audit
 
-	string status = 10; // proposed, pending_approval, approved, executing, succeeded, rejected, failed
+	string status = 10; // proposed, pending_approval, approved, executing, succeeded, rejected, failed, expired
 	string reason = 11; // vì sao agent muốn làm điều này
 	repeated SenEvidence evidence = 12;
 	google.protobuf.Value result = 13; // arbitrary JSON result: object, array, scalar or null
@@ -9612,6 +9649,18 @@ message SenSessionAction {
 	int64 updated = 16;
 
 	google.protobuf.Struct params = 17; // structured params from LLM for custom webhook/MCP actions
+
+	// human-in-the-loop (Approval Inbox):
+	// pending action không sống mãi — quá hạn chuyển expired + bắn signal
+	// action_resume để agent biết ý định đã chết và tính đường khác.
+	int64 expires_at = 18; // ms, 0 = dùng mặc định theo action type
+	string assignee = 19; // ai được giao duyệt; rỗng = mọi người có quyền
+
+	// kết quả review — set khi human approve/reject:
+	string reviewed_by = 20;
+	int64 reviewed_at = 21;
+	string review_comment = 22; // feedback cho agent (bắt buộc khi reject), đưa vào signal action_resume
+	google.protobuf.Struct edited_params = 23; // approve có sửa: bản này được execute; params gốc giữ nguyên để audit
 }
 
 // SenApprovalRequest — quyết định human cần đưa ra cho một action đang chờ.

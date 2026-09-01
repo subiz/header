@@ -416,6 +416,9 @@ service SenAgentMgr {
 	rpc DeleteSenMcpServer(Id) returns (Response);
 	rpc SyncSenMcpServer(Id) returns (Response); // gọi tools/list rồi cập nhật catalog
 
+	rpc ListPendingSenActions(SenPendingActionListRequest) returns (Response);
+	rpc ReviewSenAction(SenActionReviewRequest) returns (Response);
+
 	rpc ListSenSessionRunActivities(SenActivityListRequest) returns (Response);
 	rpc ListSenSessionRuns(SenAgentRunListRequest) returns (Response);
 	rpc ListSenAgentSessions(SenAgentSessionListRequest) returns (Response);
