@@ -7202,6 +7202,7 @@ message Response {
 	repeated SenActivity sen_activities = 307;
 	SenSessionAction sen_session_action = 308;
 	repeated SenSessionAction sen_session_actions = 309;
+	SenAgentFeasibility sen_agent_feasibility = 310;
 }
 
 message ReportCount {
@@ -9533,6 +9534,11 @@ message SenAgent {
 	// Audit trail không bao giờ tắt ở mọi level.
 	string autonomy = 21; // supervised | semi_auto | autonomous
 
+	// Feasibility check: kết quả kiểm tra tính khả thi/sẵn sàng của agent
+	// (thiếu tool, tích hợp chưa kết nối, cảnh báo cấu hình...). Lưu trực tiếp
+	// trên SenAgent để khi List ra UI hiển thị badge/cảnh báo ngay.
+	SenAgentFeasibility feasibility = 22;
+
 	// report
 	int64 credit_spend_last_7days_fpv = 50;
 	int64 total_credit_spend_fpv = 51;
@@ -9679,6 +9685,76 @@ message SenApprovalRequest {
 	string reviewer = 9;
 	string comment = 10; // feedback cho agent khi reject, đưa vào context run sau
 	WorkflowAction edited_action = 11; // nếu human sửa draft trước khi duyệt, bản này được execute
+}
+
+// SuggestSenAgentSpecRequest — AI hỗ trợ gợi ý cấu hình cho SenAgent:
+// Có thể yêu cầu gợi ý toàn bộ (all) hoặc chỉ 1 trường cụ thể (ví dụ: "tools", "goal", "instruction", "policies", "subscriptions", "action_policies").
+// Kết quả trả về qua Response.sen_agent với các trường được yêu cầu đã có thông tin mới.
+message SuggestSenAgentSpecRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// Yêu cầu, ý định hoặc mô tả bài toán bằng ngôn ngữ tự nhiên từ người dùng
+	string prompt = 3;
+
+	// Cấu hình SenAgent hiện tại (nếu đang chỉnh sửa hoặc đã điền một phần)
+	SenAgent agent = 4;
+
+	// Danh sách các trường cần gợi ý (ví dụ: ["tools"], ["goal"], ["instruction"]...).
+	// Nếu để rỗng hoặc chứa "all", hệ thống sẽ gợi ý toàn bộ cấu hình agent.
+	repeated string suggest_fields = 5;
+
+	// Ngành nghề / lĩnh vực hoạt động của doanh nghiệp (tùy chọn, giúp AI hiểu context hơn)
+	string business_domain = 6;
+}
+
+// CheckSenAgentFeasibilityRequest — kiểm tra tính khả thi và tính hợp lệ của SenAgent trước khi lưu hoặc kích hoạt
+message CheckSenAgentFeasibilityRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// Cấu hình SenAgent cần kiểm tra
+	SenAgent agent = 3;
+}
+
+// SenFeasibilityIssue — một vấn đề/cảnh báo được phát hiện khi kiểm tra cấu hình agent
+message SenFeasibilityIssue {
+	string severity = 3; // "error" (chặn lưu/bật), "warning" (khuyến nghị), "info"
+	string field = 4; // trường liên quan: "tools", "subscriptions", "policies", "goal", "integrations"...
+	string code = 5; // mã lỗi định danh: "missing_observe_tool", "unresolved_action", "mcp_server_offline", "invalid_coalesce"
+	string message = 6; // mô tả dễ hiểu cho người dùng
+	string suggestion = 7; // hướng dẫn cách khắc phục cụ thể
+}
+
+// SenAgentFeasibility — báo cáo tính khả thi tổng thể của SenAgent
+message SenAgentFeasibility {
+	bool is_feasible = 3; // true nếu không có lỗi severity=error
+	repeated SenFeasibilityIssue issues = 4; // danh sách các vấn đề phát hiện được
+	repeated string missing_tools = 5; // các tool được nhắc tới trong goal/instruction nhưng chưa có trong catalog
+	repeated string missing_integrations = 6; // các tích hợp (Zalo, MCP, Webhook...) cần cài đặt thêm
+}
+
+// TestSenAgentRequest — chạy thử nghiệm (dry-run/simulation) một Agent draft với mock signals mà không thay đổi dữ liệu thật
+message TestSenAgentRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// Cấu hình SenAgent muốn test
+	SenAgent agent = 3;
+
+	// ID khách hàng mẫu để nạp profile thử nghiệm (tùy chọn)
+	string user_id = 4;
+
+	// Danh sách tín hiệu (signals/events) giả lập để kích hoạt agent
+	repeated Event signals = 5;
+}
+
+// SenAgentRunControlRequest — điều khiển vòng đời run (cancel, retry)
+message SenAgentRunControlRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string run_id = 3;
+	string reason = 4;
 }
 
 message AIAgentBrand {
