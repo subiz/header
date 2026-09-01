@@ -406,22 +406,36 @@ service SenAgentMgr {
 	rpc ListSenActions(Id) returns (Response);
 	rpc CreateSenAction(SenAction) returns (Response);
 	rpc UpdateSenAction(SenAction) returns (Response);
+	rpc GetSenAction(Id) returns (Response); // Id.id = name
 	rpc DeleteSenAction(Id) returns (Response); // Id.id = name
 	rpc MatchSenActions(Ids) returns (Response);
+
+	rpc SuggestSenAgentSpec(SuggestSenAgentSpecRequest) returns (Response);
+	rpc CheckSenAgentFeasibility(SenAgent) returns (Response);
+	rpc TestSenAgent(TestSenAgentRequest) returns (Response);
 
 	// kết nối MCP server: import tools thành SenAction (source=mcp)
 	rpc ListSenMcpServers(Id) returns (Response);
 	rpc CreateSenMcpServer(SenMcpServer) returns (Response);
 	rpc UpdateSenMcpServer(SenMcpServer) returns (Response);
+	rpc GetSenMcpServer(Id) returns (Response);
 	rpc DeleteSenMcpServer(Id) returns (Response);
 	rpc SyncSenMcpServer(Id) returns (Response); // gọi tools/list rồi cập nhật catalog
 
 	rpc ListPendingSenActions(SenPendingActionListRequest) returns (Response);
+	rpc GetSenSessionAction(Id) returns (Response);
 	rpc ReviewSenAction(SenActionReviewRequest) returns (Response);
 
 	rpc ListSenSessionRunActivities(SenActivityListRequest) returns (Response);
 	rpc ListSenSessionRuns(SenAgentRunListRequest) returns (Response);
+	rpc GetSenSessionRun(SenAgentRun) returns (Response);
 	rpc ListSenAgentSessions(SenAgentSessionListRequest) returns (Response);
+
+	// Run lifecycle control
+	rpc CancelSenAgentRun(SenAgentRunControlRequest) returns (Response);
+	rpc RetrySenAgentRun(SenAgentRunControlRequest) returns (Response);
+
+	rpc EnrollUser(SenAgentSession) returns (Response);
 }
 
 service ConversationMgr {
