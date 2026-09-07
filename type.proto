@@ -389,6 +389,9 @@ enum RealtimeType {
 	sen_agent_created = 522;
 	sen_agent_updated = 523;
 	sen_agent_deleted = 524;
+
+	sla_breached = 530; // sla_event
+	sla_cleared = 531; // sla_event
 }
 
 message TextTransform {

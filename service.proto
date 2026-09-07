@@ -604,6 +604,13 @@ service RecordMgr {
 	rpc DeletePipeline(Id) returns (Empty);
 	rpc MatchPipelines(Ids) returns (Response);
 	rpc ListPipelines(Ids) returns (Response);
+
+	rpc ReadSLAPolicy(header.Id) returns (Response);
+	rpc CreateSLAPolicy(header.SLAPolicy) returns (Response);
+	rpc UpdateSLAPolicy(header.SLAPolicy) returns (Response);
+	rpc DeleteSLAPolicy(Id) returns (Empty);
+	rpc MatchSLAPolicies(Ids) returns (Response);
+	rpc ListSLAPolicies(Ids) returns (Response);
 }
 
 service TicketMgr {

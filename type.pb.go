@@ -301,6 +301,8 @@ const (
 	RealtimeType_sen_agent_created                RealtimeType = 522
 	RealtimeType_sen_agent_updated                RealtimeType = 523
 	RealtimeType_sen_agent_deleted                RealtimeType = 524
+	RealtimeType_sla_breached                     RealtimeType = 530 // sla_event
+	RealtimeType_sla_cleared                      RealtimeType = 531 // sla_event
 )
 
 // Enum value maps for RealtimeType.
@@ -580,6 +582,8 @@ var (
 		522: "sen_agent_created",
 		523: "sen_agent_updated",
 		524: "sen_agent_deleted",
+		530: "sla_breached",
+		531: "sla_cleared",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -856,6 +860,8 @@ var (
 		"sen_agent_created":                  522,
 		"sen_agent_updated":                  523,
 		"sen_agent_deleted":                  524,
+		"sla_breached":                       530,
+		"sla_cleared":                        531,
 	}
 )
 
@@ -1798,7 +1804,7 @@ const file_type_proto_rawDesc = "" +
 	"monthEqVar\x12\x1d\n" +
 	"\n" +
 	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
-	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xe04\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\x855\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -2075,7 +2081,9 @@ const file_type_proto_rawDesc = "" +
 	"\x13record_type_updated\x10\x88\x04\x12\x16\n" +
 	"\x11sen_agent_created\x10\x8a\x04\x12\x16\n" +
 	"\x11sen_agent_updated\x10\x8b\x04\x12\x16\n" +
-	"\x11sen_agent_deleted\x10\x8c\x04B\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\x11sen_agent_deleted\x10\x8c\x04\x12\x11\n" +
+	"\fsla_breached\x10\x92\x04\x12\x10\n" +
+	"\vsla_cleared\x10\x93\x04B\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_type_proto_rawDescOnce sync.Once

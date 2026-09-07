@@ -770,6 +770,7 @@ message Data {
 	RecordType record_type = 151;
 
 	SenAgent sen_agent = 152;
+	SLAEvent sla_event = 153;
 }
 
 message ConversationMeta {
@@ -1342,6 +1343,44 @@ message Conversation {
 	int64 total_user_messages = 92;
 	int64 total_messages = 93;
 	int64 total_human_messages = 94;
+
+	// SLA
+	string sla_policy_id = 101;
+	int64 sla_applied_at = 102;
+
+	int64 first_response_due_at = 103;
+	int64 next_response_due_at = 104;
+	// int64 resolution_due_at = 105;
+
+	int64 sla_breach_count = 106; // read-only
+
+	int64 next_response_sla_breached_at = 107;
+	int64 first_response_sla_breached = 108;
+	int64 response_sla_breach_count = 109;
+	// int64 resolution_sla_breach_count = 110;
+}
+
+message SLAEvent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string record_type = 4; // request | conversation
+	string record_id = 5;
+
+	string sla_policy_id = 6;
+
+	string sla_type = 7; // response | stage | first_response | next_response | resolution
+
+	string pipeline_stage_id = 8; // chỉ dùng cho Request Stage SLA
+
+	int64 started_at = 10;
+	int64 due_at = 11;
+
+	int64 completed_at = 12; // hoàn thành SLA target
+	int64 breached_at = 13;  // 0 nếu không breach
+
+	string status = 14; // active | met | breached | cancelled
 }
 
 message GoogleReview {
@@ -8083,7 +8122,7 @@ message Record {
 	repeated Tag tags = 13;
 	int64 closed = 14;
 	string status = 15; // unassigned, open, hold, closed
-	// repeated string user_ids  = 16; // only save primary user
+	string outcome = 16; // computed từ status won | lost, empty nếu chưa close
 	int64 amount_fpv = 17;
 
 	string assignee = 19; // The id representing the admin assigned to the ticket.
@@ -8091,7 +8130,6 @@ message Record {
 
 	Touchpoint touchpoint = 21; // read-only copy from conversation touchpoint
 
-	int64 response_sec = 25;
 	string duplicate_of = 26;
 
 	// RouteResult assigned_to = 30;
@@ -8116,11 +8154,6 @@ message Record {
 
 	string sla_policy = 75;
 
-	int64 first_response_due = 76; // 0 -> dont use // sec
-	int64 every_response_due = 77; // sec 20'
-	int64 resolution_due = 78; // sec 1 ngay
-	int64 periodic_update_due = 79;
-
 	int64 created = 80;
 	int64 updated = 81;
 	int64 archived = 82;
@@ -8142,6 +8175,19 @@ message Record {
 	Event unread_event = 122;
 	string unread_kind = 123; // important | mention
 	int64 num_comments = 124;
+
+	string sla_policy_id = 125;
+	int64 sla_applied_at = 126;
+	int64 stage_entered_at = 127;
+	int64 first_contact_at = 128;
+	int64 last_contact_at = 129;
+
+	int64 sla_due_at = 130;       // computed deadline SLA gần nhất
+	string sla_due_type = 131;    // computed response | stage
+
+	int64 first_contact_due_at = 135;
+	int64 next_contact_due_at = 136;
+	int64 stage_due_at = 138;
 }
 
 message Ticket {
@@ -8423,12 +8469,11 @@ message SLAPolicy {
 	string id = 3;
 
 	string name = 4;
-	string description = 5;
+	string note = 5;
 
-	int32 number_of = 6; //stt
-	SLATarget normal_priority_target = 7;
-	SLATarget high_priority_target = 8;
-	SLATarget urgent_priority_target = 9;
+	string priority = 27;
+	string record_type = 28; // record | conversation
+	repeated RecordFilterCondition conditions = 30;
 
 	int64 disabled = 12;
 	int64 updated = 13;
@@ -8436,24 +8481,26 @@ message SLAPolicy {
 	int64 created = 15;
 	string created_by = 16;
 
-	ChannelCondition channel_condition = 20;
-	TimmingCondition timming_condition = 21;
-	repeated Condition form_conditions = 22;
-	bool user_has_replied_before = 23; // new
-	repeated Condition user_conditions = 24;
-	bool when_offline = 25; // only run when there is no online agent
-	repeated string ticket_types = 26; // only apply for these ticket type
-	string type_id = 27;
-}
+	string action = 33; // set | clear
+	string start_trigger = 34; // unspecified, created, last_contact, condition_matched
 
-message SLATarget {
-	string sla_policy = 3;
-	string priority = 5;
-	int64 first_response_sec = 6; // 0 -> dont use
-	int64 every_response_sec = 7;
-	int64 resolution_sec = 8;
-	bool escalation = 9;
-	int64 periodic_update_sec = 10;
+	// Time allowed from SLA start until the first customer contact.
+	// 0 = not enforced.
+	int64 first_contact_due_sec = 36;
+
+	// Maximum time allowed between subsequent customer contacts.
+	// 0 = not enforced.
+	int64 contact_interval_sec = 37;
+
+	// Maximum time the request can remain in the matched stage/state.
+	// 0 = not enforced.
+	int64 max_duration_sec = 38;
+	int64 rank = 39;
+
+	int64 last_breached = 40; // ms, computed
+	int64 num_breaches = 41; // computed
+	int64 num_useds = 42; // computed
+	int64 last_used = 43; // ms, computed
 }
 
 message ArticleSEOSetting {
@@ -9362,11 +9409,13 @@ message SenActivity {
 	string account_id = 2;
 	string agent_id = 3;
 	string id = 4; // unique audit-event id
+	int64 agent_version = 31;
 	string user_id = 6; // customer associated with this activity
-	string activity_class = 7; // observation, decision, action
+	string activity_class = 7; // observation, decision, action, debug_llm
 
 	string signal_id = 8; // signal that triggered the agent run
-	string agent_run_id = 9; // agent run that produced the action
+	string run_id = 9; // agent run that produced the action
+
 	string action_id = 10; // logical action id shared by its state-transition events
 	string action_type = 11; // send_message, update_user, linear.create_issue, ...
 	string target_type = 12; // user, ticket, message, linear_issue, ...
@@ -9380,6 +9429,8 @@ message SenActivity {
 
 	int64 occurred_at = 16; // event occurrence time in Unix milliseconds
 	string status = 17; // proposed, pending_approval, approved, executing, succeeded, rejected, failed, skipped, cancelled, timed_out
+	int64 duration_ms = 18; // ms
+
 
 	// Messages actually emitted by a send-message action, after rendering/generation.
 	// Their content must not be duplicated in result.
@@ -9394,6 +9445,12 @@ message SenActivity {
 	int32 attempt = 24; // 0 before execution; otherwise one-based attempt number
 	string trace_id = 25;
 	string span_id = 26;
+
+	// for debugging llm
+	string conversation_id = 28;
+	string llm_input = 29; // full
+	string llm_output = 30;  // full
+	int64 credit_spend_fpv_vnd = 32;
 }
 
 // ActionPolicy quy định approval mode cho một action type.
@@ -9499,23 +9556,98 @@ message SenAgentRun {
 	int32 num_failed_actions = 28;
 }
 
-message SenAgent {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string name = 4;
-	int64 version = 5;
-	string goal = 6;
-	string instruction = 7;
-	repeated string policies = 8;
+message AgentResponsibility {
+
+	string id = 5;
+	string name = 6;
+	string description = 7;
 
 	repeated SenSubscription subscriptions = 9;
 	repeated string allowed_entity_types = 10;
 	repeated string tools = 11;
 	repeated SenActionPolicy action_policies = 12;
 
-	string model = 13;
-	int64 max_tokens = 14;
+
+	/* chat */
+	/* ticket_maintain */
+	AIAgentBrand company = 15; // for brand
+	string model = 23; // gpt-4o-mini, custom_webhook
+	int64 minimum_answer_delay_sec = 24;
+	string token_limit = 28; // short, balanced, long
+	// int64 temperature = 29; // 50% -> 50
+
+	string first_person_pronoun = 30; // personal pronoun: em
+	string second_person_pronoun = 31; // anh/chi
+
+	int64 context_guard = 35;
+	Message context_guard_message = 36; // unknow message @deprecated, use unknown
+	string source_attribution = 14; // unlikely | empty=neutral | likely
+
+
+
+	repeated AIFunction functions = 37;
+
+	// Message unabled_to_answer_message = 38;
+	Message error_message = 40;
+
+	string generated_refuse_message = 46;
+	// string job_title = 69;
+	repeated string channels = 70; // default: all channel
+	InitFlow init_flow = 60;
+
+	string locale = 64; // can be auto
+	repeated string locales = 65;
+
+	repeated AIAgentOverrideRule override_rules = 66; // only root, quy trinh
+	repeated AIAgentOverrideRule follow_up_rules = 69;
+
+	// [convert lead (second brain)]
+	string collect_user_information_on = 76; // none | chat_started | interest_detected
+	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
+	string collect_user_information_prompt = 75;
+	Form collect_user_information = 78;
+
+	Message welcome_message = 79;
+	string welcome_message_prompt = 80;
+	repeated Trigger welcome_message_triggers = 87;
+	Frequently welcome_message_initiative_frequency = 84;
+
+	AIAgentUsageLimit usage_limit = 85;
+
+	// RewriteQuerySetting rewrite_query = 86;
+	AIAgentWebhook custom_webhook = 88;
+	repeated string supervisors = 89;
+	repeated string tags = 90;
+}
+
+message SenAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	// File avatar = 5;
+	int64 version = 5;
+	string goal = 6;
+	// string instruction = 6;
+	string avatar_url = 7;
+	repeated string policies = 8;
+
+	string brand = 9;
+	string brand_description = 10;
+	string brand_category = 13; // @readonly generated from brand and brand description
+
+	// string job_title = 11; // customer_support, sale
+	string tone = 12; // casual, friendly, professional
+
+	AIDataStore data_store = 47;
+
+	repeated SenSubscription subscriptions = 11;
+	repeated string allowed_entity_types = 110;
+	repeated string tools = 111;
+	repeated SenActionPolicy action_policies = 112;
+
+	string model = 113;
+	int64 max_tokens = 114;
 
 	int64 enabled = 15; // 0 -> disabled
 
@@ -9744,8 +9876,10 @@ message SenAgentRunControlRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	string run_id = 4;
-	string reason = 5;
+	string user_id = 4;
+	string run_id = 5;
+
+	string reason = 6;
 }
 
 message AIAgentBrand {

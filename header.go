@@ -2845,4 +2845,3 @@ func IsCommentChannel(channel string) bool {
 	}
 	return false
 }
-

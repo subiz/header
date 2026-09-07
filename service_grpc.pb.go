@@ -15461,6 +15461,12 @@ const (
 	RecordMgr_DeletePipeline_FullMethodName         = "/header.RecordMgr/DeletePipeline"
 	RecordMgr_MatchPipelines_FullMethodName         = "/header.RecordMgr/MatchPipelines"
 	RecordMgr_ListPipelines_FullMethodName          = "/header.RecordMgr/ListPipelines"
+	RecordMgr_ReadSLAPolicy_FullMethodName          = "/header.RecordMgr/ReadSLAPolicy"
+	RecordMgr_CreateSLAPolicy_FullMethodName        = "/header.RecordMgr/CreateSLAPolicy"
+	RecordMgr_UpdateSLAPolicy_FullMethodName        = "/header.RecordMgr/UpdateSLAPolicy"
+	RecordMgr_DeleteSLAPolicy_FullMethodName        = "/header.RecordMgr/DeleteSLAPolicy"
+	RecordMgr_MatchSLAPolicies_FullMethodName       = "/header.RecordMgr/MatchSLAPolicies"
+	RecordMgr_ListSLAPolicies_FullMethodName        = "/header.RecordMgr/ListSLAPolicies"
 )
 
 // RecordMgrClient is the client API for RecordMgr service.
@@ -15499,6 +15505,12 @@ type RecordMgrClient interface {
 	DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ListPipelines(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ReadSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error)
+	UpdateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error)
+	DeleteSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ListSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 }
 
 type recordMgrClient struct {
@@ -15829,6 +15841,66 @@ func (c *recordMgrClient) ListPipelines(ctx context.Context, in *Ids, opts ...gr
 	return out, nil
 }
 
+func (c *recordMgrClient) ReadSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_ReadSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) CreateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_CreateSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) UpdateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_UpdateSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) DeleteSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RecordMgr_DeleteSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) MatchSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_MatchSLAPolicies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *recordMgrClient) ListSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, RecordMgr_ListSLAPolicies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RecordMgrServer is the server API for RecordMgr service.
 // All implementations must embed UnimplementedRecordMgrServer
 // for forward compatibility.
@@ -15865,6 +15937,12 @@ type RecordMgrServer interface {
 	DeletePipeline(context.Context, *Id) (*Empty, error)
 	MatchPipelines(context.Context, *Ids) (*Response, error)
 	ListPipelines(context.Context, *Ids) (*Response, error)
+	ReadSLAPolicy(context.Context, *Id) (*Response, error)
+	CreateSLAPolicy(context.Context, *SLAPolicy) (*Response, error)
+	UpdateSLAPolicy(context.Context, *SLAPolicy) (*Response, error)
+	DeleteSLAPolicy(context.Context, *Id) (*Empty, error)
+	MatchSLAPolicies(context.Context, *Ids) (*Response, error)
+	ListSLAPolicies(context.Context, *Ids) (*Response, error)
 	mustEmbedUnimplementedRecordMgrServer()
 }
 
@@ -15970,6 +16048,24 @@ func (UnimplementedRecordMgrServer) MatchPipelines(context.Context, *Ids) (*Resp
 }
 func (UnimplementedRecordMgrServer) ListPipelines(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListPipelines not implemented")
+}
+func (UnimplementedRecordMgrServer) ReadSLAPolicy(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadSLAPolicy not implemented")
+}
+func (UnimplementedRecordMgrServer) CreateSLAPolicy(context.Context, *SLAPolicy) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSLAPolicy not implemented")
+}
+func (UnimplementedRecordMgrServer) UpdateSLAPolicy(context.Context, *SLAPolicy) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateSLAPolicy not implemented")
+}
+func (UnimplementedRecordMgrServer) DeleteSLAPolicy(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteSLAPolicy not implemented")
+}
+func (UnimplementedRecordMgrServer) MatchSLAPolicies(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchSLAPolicies not implemented")
+}
+func (UnimplementedRecordMgrServer) ListSLAPolicies(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSLAPolicies not implemented")
 }
 func (UnimplementedRecordMgrServer) mustEmbedUnimplementedRecordMgrServer() {}
 func (UnimplementedRecordMgrServer) testEmbeddedByValue()                   {}
@@ -16568,6 +16664,114 @@ func _RecordMgr_ListPipelines_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RecordMgr_ReadSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ReadSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ReadSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ReadSLAPolicy(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_CreateSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SLAPolicy)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).CreateSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_CreateSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).CreateSLAPolicy(ctx, req.(*SLAPolicy))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_UpdateSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SLAPolicy)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).UpdateSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_UpdateSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).UpdateSLAPolicy(ctx, req.(*SLAPolicy))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_DeleteSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).DeleteSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_DeleteSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).DeleteSLAPolicy(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_MatchSLAPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).MatchSLAPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_MatchSLAPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).MatchSLAPolicies(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RecordMgr_ListSLAPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordMgrServer).ListSLAPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RecordMgr_ListSLAPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordMgrServer).ListSLAPolicies(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RecordMgr_ServiceDesc is the grpc.ServiceDesc for RecordMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -16702,6 +16906,30 @@ var RecordMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPipelines",
 			Handler:    _RecordMgr_ListPipelines_Handler,
+		},
+		{
+			MethodName: "ReadSLAPolicy",
+			Handler:    _RecordMgr_ReadSLAPolicy_Handler,
+		},
+		{
+			MethodName: "CreateSLAPolicy",
+			Handler:    _RecordMgr_CreateSLAPolicy_Handler,
+		},
+		{
+			MethodName: "UpdateSLAPolicy",
+			Handler:    _RecordMgr_UpdateSLAPolicy_Handler,
+		},
+		{
+			MethodName: "DeleteSLAPolicy",
+			Handler:    _RecordMgr_DeleteSLAPolicy_Handler,
+		},
+		{
+			MethodName: "MatchSLAPolicies",
+			Handler:    _RecordMgr_MatchSLAPolicies_Handler,
+		},
+		{
+			MethodName: "ListSLAPolicies",
+			Handler:    _RecordMgr_ListSLAPolicies_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
