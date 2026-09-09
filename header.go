@@ -1950,7 +1950,7 @@ func singleBlockToText(block *Block) (string, []*Attachment) {
 		return block.AltText, []*Attachment{{Type: "file", Mimetype: "image/jpeg", Url: block.GetImage().GetUrl(), File: &File{Url: block.GetImage().GetUrl()}}}
 	}
 
-	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
+	if block.Type == "hard_break" || block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
 		return "\n", nil
 	}
 
@@ -2752,6 +2752,9 @@ func renderBlockToText(block *Block, f func(*Block) (string, bool)) renderedBloc
 	}
 
 	switch typ {
+	case "hard_break":
+		out.text = "\n"
+		return out
 	case "", "text", "link", "dynamic-field":
 		out.text += blockTextWithHref(block)
 		return out
