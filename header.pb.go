@@ -27326,6 +27326,7 @@ type TiktokCommentSetting struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Disabled        bool                   `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	AutoLike        bool                   `protobuf:"varint,2,opt,name=auto_like,json=autoLike,proto3" json:"auto_like,omitempty"`
+	VideoId         string                 `protobuf:"bytes,3,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	AutoInbox       string                 `protobuf:"bytes,6,opt,name=auto_inbox,json=autoInbox,proto3" json:"auto_inbox,omitempty"` // fixed, llm
 	AutoInboxPrompt string                 `protobuf:"bytes,7,opt,name=auto_inbox_prompt,json=autoInboxPrompt,proto3" json:"auto_inbox_prompt,omitempty"`
 	InboxMessage    *Message               `protobuf:"bytes,8,opt,name=inbox_message,json=inboxMessage,proto3" json:"inbox_message,omitempty"`
@@ -27378,6 +27379,13 @@ func (x *TiktokCommentSetting) GetAutoLike() bool {
 		return x.AutoLike
 	}
 	return false
+}
+
+func (x *TiktokCommentSetting) GetVideoId() string {
+	if x != nil {
+		return x.VideoId
+	}
+	return ""
 }
 
 func (x *TiktokCommentSetting) GetAutoInbox() string {
@@ -81741,10 +81749,11 @@ const file_header_proto_rawDesc = "" +
 	"\x18sync_conversion_disabled\x18\x15 \x01(\x03R\x16syncConversionDisabled\"l\n" +
 	"\x11FbFanpageSettings\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x124\n" +
-	"\bsettings\x18\x02 \x03(\v2\x18.header.FbFanpageSettingR\bsettings\"\xc6\x02\n" +
+	"\bsettings\x18\x02 \x03(\v2\x18.header.FbFanpageSettingR\bsettings\"\xe1\x02\n" +
 	"\x14TiktokCommentSetting\x12\x1a\n" +
 	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12\x1b\n" +
-	"\tauto_like\x18\x02 \x01(\bR\bautoLike\x12\x1d\n" +
+	"\tauto_like\x18\x02 \x01(\bR\bautoLike\x12\x19\n" +
+	"\bvideo_id\x18\x03 \x01(\tR\avideoId\x12\x1d\n" +
 	"\n" +
 	"auto_inbox\x18\x06 \x01(\tR\tautoInbox\x12*\n" +
 	"\x11auto_inbox_prompt\x18\a \x01(\tR\x0fautoInboxPrompt\x124\n" +

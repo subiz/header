@@ -3873,6 +3873,8 @@ message TiktokCommentSetting {
 	bool disabled = 1;
 	bool auto_like = 2;
 
+	string video_id = 3;
+
 	string auto_inbox = 6; // fixed, llm
 	string auto_inbox_prompt = 7;
 	Message inbox_message = 8;

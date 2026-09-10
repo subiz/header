@@ -4,7 +4,7 @@
       "account": "read",
       "agent_group": "read",
       "call_campaign": "read",
-      "conversation": "create read:own update:own",
+      "conversation": "create read:own update:own export",
       "campaign": "create:own update:own read",
       "form": "create:own update:own read",
       "rule": "read",
