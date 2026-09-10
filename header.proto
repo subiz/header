@@ -1285,10 +1285,10 @@ message Conversation {
 
 	Event matched_event = 45; // for search only
 	string locale = 46;
-	repeated string agent_sent_ids = 47;
+	// repeated string agent_sent_ids = 47;
 	int64 first_replied_duration = 48;
-	string channel = 49;
-	string channel_touchpoint = 50;
+	// string channel = 49;
+	// string channel_touchpoint = 50;
 	// bool is_private = 51;
 
 	// string avatar_url = 52; // for private conversation
@@ -1325,10 +1325,7 @@ message Conversation {
 	string access = 82; // default=public, private
 	MessageReferral referrer = 83;
 
-	// int64 input_llm_tokens = 84;
-	// int64 output_llm_tokens = 85;
 	bool is_testing = 86; // bot testing, do not report or end
-	// int64 human_only = 87; // > 0 no bot should take over or follow up this
 
 	int64 human_notified = 72; // ms timestamp when bot → human handoff happened
 	// int64 human_handoff_at = 88;
@@ -1338,26 +1335,21 @@ message Conversation {
 	string human_notify_message = 74;
 
 	bool from_light_convo = 75;
-	int64 unreplied_at = 90;
-	// int64 human_unreplied_at = 91;
-	int64 total_user_messages = 92;
-	int64 total_messages = 93;
-	int64 total_human_messages = 94;
+	int64 unreplied_at = 90; // response required at, must be smart, do not update when user message is "thanks" (AI)
+
+	int64 total_user_messages = 92; // computed for filtering
+	int64 total_messages = 93;  // computed for filtering
+	int64 total_human_messages = 94;  // computed for filtering
 
 	// SLA
 	string sla_policy_id = 101;
 	int64 sla_applied_at = 102;
-
 	int64 first_response_due_at = 103;
 	int64 next_response_due_at = 104;
-	// int64 resolution_due_at = 105;
-
+	int64 sla_due_at = 105;       // computed deadline SLA gần nhất
 	int64 sla_breach_count = 106; // read-only
-
 	int64 next_response_sla_breached_at = 107;
 	int64 first_response_sla_breached = 108;
-	int64 response_sla_breach_count = 109;
-	// int64 resolution_sla_breach_count = 110;
 }
 
 message SLAEvent {
@@ -1715,7 +1707,7 @@ enum AttachmentType {
 }
 
 message Attachment {
-	string type = 12; // form, form_submission, quick_replies, zalo_call, location, zalo_contact
+	string type = 12; // form, form_submission, quick_replies, zalo_call, location, zalo_contact, zalo_template
 	int64 index = 7;
 	// file
 	string mimetype = 2;
@@ -1773,6 +1765,15 @@ message Attachment {
 	ZaloCall zalo_call = 52;
 	Location location = 54;
 	ZaloContact zalo_contact = 55;
+	ZaloTemplate zalo_template = 56;
+}
+
+message ZaloTemplate {
+	string checksum = 4; //a1d466ec20b9d8e949b7a4159ec11a7f
+	string link_url = 5; // https://broadcast.api.zaloapp.com/static?c=83e62ee6a6b1c8ee91a1&i=890245da77aa9af4c3bb
+	string zinstant_id = 6; // templateId=12056
+	string text = 7; // GIA HẠN GÓI THÀNH CÔNG
+	string image_url = 8; // computed
 }
 
 message ZaloContact {
@@ -1878,6 +1879,7 @@ message Integration {
 	string logo_url = 4; // emoji for phone
 	string name = 5;
 
+	ChannelSetting setting = 7;
 	string alias = 9; // just name
 	string connector_type = 12; // see facebook, call, website
 	int64 integrated = 6; // first integrated
@@ -3782,15 +3784,35 @@ message GoogleLocationSetting {
 	string business_location_id = 3;
 
 	GoogleReviewSetting google_review_setting = 5;
-	// GoogleQuestionSetting google_question_setting = 6;
-	// GoogleMessageSetting google_message_setting = 7;
-
 	int64 updated = 9;
 }
 
 message GoogleReviewSetting {
-	bool enabled = 1;
-	map<string, string> repliesM = 5; //rating => reply
+	bool disabled = 1;
+
+	string auto_reply = 4; // fixed, llm
+	string auto_reply_prompt = 5;
+	repeated Message replies = 6;
+
+	string auto_reply_1 = 11; // fixed, llm
+	string auto_reply_prompt_1 = 12;
+	repeated Message replies_1 = 13;
+
+	string auto_reply_2 = 21; // fixed, llm
+	string auto_reply_prompt_2 = 22;
+	repeated Message replies_2 = 23;
+
+	string auto_reply_3 = 31; // fixed, llm
+	string auto_reply_prompt_3 = 32;
+	repeated Message replies_3 = 33;
+
+	string auto_reply_4 = 41; // fixed, llm
+	string auto_reply_prompt_4 = 42;
+	repeated Message replies_4 = 43;
+
+	string auto_reply_5 = 51; // fixed, llm
+	string auto_reply_prompt_5 = 52;
+	repeated Message replies_5 = 53;
 }
 
 message FbComment {
@@ -3800,6 +3822,30 @@ message FbComment {
 	string template = 5;
 	bool is_template = 6;
 	Block block = 7;
+}
+
+message ChannelSetting {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string channel_id = 3; // page id, comment id
+
+	int64 updated = 5;
+	string channel = 6; // default facebook. Could be instagram
+
+	Rule assignment_rule = 7;
+	Rule comment_assignment_rule = 8;
+
+	FbCommentSetting general_comment_setting = 10;
+	FbCommentSetting specific_post_comment_setting = 11;
+	repeated FbCommentSetting post_comment_settings = 12;
+
+	repeated string send_lead_event_on_lifecycle_stages = 13;
+	int64 sync_conversion_disabled = 14; // source of truth
+
+	GoogleReviewSetting google_review_setting = 15;
+
+	TiktokCommentSetting general_tiktok_video_comment_setting = 16;
+	repeated TiktokCommentSetting tiktok_video_comment_setting = 17;
 }
 
 message FbFanpageSetting {
@@ -3821,6 +3867,19 @@ message FbFanpageSetting {
 message FbFanpageSettings {
 	common.Context ctx = 1;
 	repeated FbFanpageSetting settings = 2;
+}
+
+message TiktokCommentSetting {
+	bool disabled = 1;
+	bool auto_like = 2;
+
+	string auto_inbox = 6; // fixed, llm
+	string auto_inbox_prompt = 7;
+	Message inbox_message = 8;
+
+	string auto_reply = 9; // fixed, llm
+	string auto_reply_prompt = 10;
+	repeated Message replies = 11;
 }
 
 message FbCommentSetting {
@@ -8141,7 +8200,6 @@ message Record {
 	string source = 36; // indicate where does the conversation happended (url)
 
 	Event matched_event = 45; // for search only
-
 	int64 first_replied_duration = 48;
 
 	string marked_as_spam_by = 67;
@@ -8149,9 +8207,7 @@ message Record {
 
 	int64 average_rating = 73;
 
-	// string user = 73;
 	int64 due_at = 74;
-
 	string sla_policy = 75;
 
 	int64 created = 80;
@@ -8188,6 +8244,8 @@ message Record {
 	int64 first_contact_due_at = 135;
 	int64 next_contact_due_at = 136;
 	int64 stage_due_at = 138;
+
+	int64 sla_breach_count = 139; // read-only
 }
 
 message Ticket {
@@ -8252,11 +8310,6 @@ message Ticket {
 	int64 every_response_due = 77; // sec 20'
 	int64 resolution_due = 78; // sec 1 ngay
 	int64 periodic_update_due = 79;
-
-	// int64 first_response_sla_violated = 88;
-	// int64 num_every_response_sla_violated = 89;
-	// int64 resolution_sla_violated = 90;
-	// int64 num_periodic_update_sla_violated = 95;
 
 	// repeated string tags = 79;
 	int64 created = 80;
@@ -8474,6 +8527,7 @@ message SLAPolicy {
 	string priority = 27;
 	string record_type = 28; // record | conversation
 	repeated RecordFilterCondition conditions = 30;
+	account.ConvoFilter convo_conditions = 31;
 
 	int64 disabled = 12;
 	int64 updated = 13;
@@ -8484,11 +8538,11 @@ message SLAPolicy {
 	string action = 33; // set | clear
 	string start_trigger = 34; // unspecified, created, last_contact, condition_matched
 
-	// Time allowed from SLA start until the first customer contact.
+	// Time allowed from SLA start until the first customer contact (or reply)
 	// 0 = not enforced.
 	int64 first_contact_due_sec = 36;
 
-	// Maximum time allowed between subsequent customer contacts.
+	// Maximum time allowed between subsequent customer contacts (reply)
 	// 0 = not enforced.
 	int64 contact_interval_sec = 37;
 
