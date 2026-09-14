@@ -2062,18 +2062,18 @@ message Integration {
 	string whatsapp_quality_rating = 176;   // GREEN | YELLOW | RED
 	string whatsapp_messaging_limit_tier = 177; // TIER_250 | TIER_1K | TIER_10K | TIER_100K | TIER_UNLIMITED
 	string whatsapp_throughput_level = 178; // STANDARD | HIGH
-	string whatsapp_platform_type = 179;    // CLOUD_API | ON_PREMISE | NOT_APPLICABLE
 	string whatsapp_code_verification_status = 180; // VERIFIED | NOT_VERIFIED | EXPIRED
 	bool whatsapp_is_official_business_account = 181; // tick xanh
 	bool whatsapp_registered = 182;         // đã POST /{phone_number_id}/register chưa
-	reserved 183; // đã bỏ whatsapp_coexistence, dùng whatsapp_mode
-	reserved "whatsapp_coexistence";
 	string whatsapp_account_review_status = 184; // APPROVED | PENDING | REJECTED (cấp WABA)
 	string whatsapp_ban_state = 185;        // SCHEDULE_FOR_DISABLE | DISABLE | REINSTATE (cấp WABA)
 	int64 whatsapp_history_synced_at = 186; // mốc đồng bộ xong 6 tháng lịch sử (Coexistence)
 	string whatsapp_currency = 187;         // cấp WABA
 	string whatsapp_timezone_id = 188;      // cấp WABA
 	string whatsapp_mode = 189; // cloud_api | coexistence; rỗng = chưa xác định từ Meta, theo từng số
+
+	string updated_by = 200;
+	int64 updated = 201;
 }
 
 message FacebookBusiness {

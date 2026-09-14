@@ -14363,7 +14363,6 @@ type Integration struct {
 	WhatsappQualityRating             string `protobuf:"bytes,176,opt,name=whatsapp_quality_rating,json=whatsappQualityRating,proto3" json:"whatsapp_quality_rating,omitempty"`                                          // GREEN | YELLOW | RED
 	WhatsappMessagingLimitTier        string `protobuf:"bytes,177,opt,name=whatsapp_messaging_limit_tier,json=whatsappMessagingLimitTier,proto3" json:"whatsapp_messaging_limit_tier,omitempty"`                         // TIER_250 | TIER_1K | TIER_10K | TIER_100K | TIER_UNLIMITED
 	WhatsappThroughputLevel           string `protobuf:"bytes,178,opt,name=whatsapp_throughput_level,json=whatsappThroughputLevel,proto3" json:"whatsapp_throughput_level,omitempty"`                                    // STANDARD | HIGH
-	WhatsappPlatformType              string `protobuf:"bytes,179,opt,name=whatsapp_platform_type,json=whatsappPlatformType,proto3" json:"whatsapp_platform_type,omitempty"`                                             // CLOUD_API | ON_PREMISE | NOT_APPLICABLE
 	WhatsappCodeVerificationStatus    string `protobuf:"bytes,180,opt,name=whatsapp_code_verification_status,json=whatsappCodeVerificationStatus,proto3" json:"whatsapp_code_verification_status,omitempty"`             // VERIFIED | NOT_VERIFIED | EXPIRED
 	WhatsappIsOfficialBusinessAccount bool   `protobuf:"varint,181,opt,name=whatsapp_is_official_business_account,json=whatsappIsOfficialBusinessAccount,proto3" json:"whatsapp_is_official_business_account,omitempty"` // tick xanh
 	WhatsappRegistered                bool   `protobuf:"varint,182,opt,name=whatsapp_registered,json=whatsappRegistered,proto3" json:"whatsapp_registered,omitempty"`                                                    // đã POST /{phone_number_id}/register chưa
@@ -14373,6 +14372,8 @@ type Integration struct {
 	WhatsappCurrency                  string `protobuf:"bytes,187,opt,name=whatsapp_currency,json=whatsappCurrency,proto3" json:"whatsapp_currency,omitempty"`                                                           // cấp WABA
 	WhatsappTimezoneId                string `protobuf:"bytes,188,opt,name=whatsapp_timezone_id,json=whatsappTimezoneId,proto3" json:"whatsapp_timezone_id,omitempty"`                                                   // cấp WABA
 	WhatsappMode                      string `protobuf:"bytes,189,opt,name=whatsapp_mode,json=whatsappMode,proto3" json:"whatsapp_mode,omitempty"`                                                                       // cloud_api | coexistence; rỗng = chưa xác định từ Meta, theo từng số
+	UpdatedBy                         string `protobuf:"bytes,200,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Updated                           int64  `protobuf:"varint,201,opt,name=updated,proto3" json:"updated,omitempty"`
 	unknownFields                     protoimpl.UnknownFields
 	sizeCache                         protoimpl.SizeCache
 }
@@ -15212,13 +15213,6 @@ func (x *Integration) GetWhatsappThroughputLevel() string {
 	return ""
 }
 
-func (x *Integration) GetWhatsappPlatformType() string {
-	if x != nil {
-		return x.WhatsappPlatformType
-	}
-	return ""
-}
-
 func (x *Integration) GetWhatsappCodeVerificationStatus() string {
 	if x != nil {
 		return x.WhatsappCodeVerificationStatus
@@ -15280,6 +15274,20 @@ func (x *Integration) GetWhatsappMode() string {
 		return x.WhatsappMode
 	}
 	return ""
+}
+
+func (x *Integration) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *Integration) GetUpdated() int64 {
+	if x != nil {
+		return x.Updated
+	}
+	return 0
 }
 
 type FacebookBusiness struct {
@@ -80125,7 +80133,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x17\n" +
 	"\apost_id\x18\x05 \x01(\tR\x06postId\x12\x16\n" +
 	"\x06prompt\x18\x06 \x01(\tR\x06prompt\x12)\n" +
-	"\acomment\x18\a \x01(\v2\x0f.header.MessageR\acomment\"\xd0-\n" +
+	"\acomment\x18\a \x01(\v2\x0f.header.MessageR\acomment\"\xb6-\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -80254,8 +80262,7 @@ const file_header_proto_rawDesc = "" +
 	"\x14whatsapp_name_status\x18\xaf\x01 \x01(\tR\x12whatsappNameStatus\x127\n" +
 	"\x17whatsapp_quality_rating\x18\xb0\x01 \x01(\tR\x15whatsappQualityRating\x12B\n" +
 	"\x1dwhatsapp_messaging_limit_tier\x18\xb1\x01 \x01(\tR\x1awhatsappMessagingLimitTier\x12;\n" +
-	"\x19whatsapp_throughput_level\x18\xb2\x01 \x01(\tR\x17whatsappThroughputLevel\x125\n" +
-	"\x16whatsapp_platform_type\x18\xb3\x01 \x01(\tR\x14whatsappPlatformType\x12J\n" +
+	"\x19whatsapp_throughput_level\x18\xb2\x01 \x01(\tR\x17whatsappThroughputLevel\x12J\n" +
 	"!whatsapp_code_verification_status\x18\xb4\x01 \x01(\tR\x1ewhatsappCodeVerificationStatus\x12Q\n" +
 	"%whatsapp_is_official_business_account\x18\xb5\x01 \x01(\bR!whatsappIsOfficialBusinessAccount\x120\n" +
 	"\x13whatsapp_registered\x18\xb6\x01 \x01(\bR\x12whatsappRegistered\x12D\n" +
@@ -80264,14 +80271,17 @@ const file_header_proto_rawDesc = "" +
 	"\x1awhatsapp_history_synced_at\x18\xba\x01 \x01(\x03R\x17whatsappHistorySyncedAt\x12,\n" +
 	"\x11whatsapp_currency\x18\xbb\x01 \x01(\tR\x10whatsappCurrency\x121\n" +
 	"\x14whatsapp_timezone_id\x18\xbc\x01 \x01(\tR\x12whatsappTimezoneId\x12$\n" +
-	"\rwhatsapp_mode\x18\xbd\x01 \x01(\tR\fwhatsappMode\"J\n" +
+	"\rwhatsapp_mode\x18\xbd\x01 \x01(\tR\fwhatsappMode\x12\x1e\n" +
+	"\n" +
+	"updated_by\x18\xc8\x01 \x01(\tR\tupdatedBy\x12\x19\n" +
+	"\aupdated\x18\xc9\x01 \x01(\x03R\aupdated\"J\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +
 	"\n" +
 	"\x06failed\x10\x02\x12\v\n" +
 	"\adeleted\x10\x03\x12\f\n" +
-	"\binactive\x10\x04J\x06\b\xb7\x01\x10\xb8\x01R\x14whatsapp_coexistence\"\xbe\x04\n" +
+	"\binactive\x10\x04\"\xbe\x04\n" +
 	"\x10FacebookBusiness\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
