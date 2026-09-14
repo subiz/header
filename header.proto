@@ -3870,7 +3870,7 @@ message FbFanpageSettings {
 
 message TiktokCommentSetting {
 	// bool disabled = 1;
-	// bool auto_like = 2;
+	bool auto_like = 2;
 
 	string video_id = 3;
 
@@ -7301,6 +7301,7 @@ message Response {
 	repeated SenActivity sen_activities = 307;
 	SenSessionAction sen_session_action = 308;
 	repeated SenSessionAction sen_session_actions = 309;
+	Message message = 310;
 }
 
 message ReportCount {
