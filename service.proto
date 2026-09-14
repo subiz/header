@@ -12,10 +12,7 @@ import "whatsapp.proto";
 
 service GooglekonService {
 	rpc SendEventToGoogle(header.Events) returns (header.Empty);
-
-	rpc ReadGoogleLocationSetting(Id) returns (GoogleLocationSetting);
-	rpc UpdateGoogleLocationSetting(GoogleLocationSetting) returns (GoogleLocationSetting);
-	rpc ListGoogleLocationSettings(Id) returns (GoogleLocationSettings);
+	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
 }
 
 service Find {
@@ -493,7 +490,6 @@ service ConversationMgr {
 	rpc ListIntegrations2(Id) returns (Response);
 	rpc MatchIntegration(header.Ids) returns (Response);
 
-	// rpc Integrate(header.Integration) returns (header.Integration); // @deprecate, use UpsertIntegration instead
 	rpc ActivateIntegration(header.Id) returns (header.Integration); // connector only
 	rpc UpsertIntegration(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
@@ -763,6 +759,7 @@ service TiktokService {
 	rpc ListTiktokVideos(TiktokVideoRequest) returns (Response);
 	rpc MatchTiktokVideos(Ids) returns (Response);
 	rpc ResyncTiktokVideos(Id) returns (Response);
+	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
 }
 
 service WhatsappService {
@@ -806,6 +803,7 @@ service WhatsappService {
 }
 
 service FabikonService {
+	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
 	rpc ReadFbFanpageSetting(Id) returns (header.FbFanpageSetting);
 	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);
 	rpc ListFbFanpageSettings(Id) returns (header.FbFanpageSettings);

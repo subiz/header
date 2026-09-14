@@ -1872,6 +1872,18 @@ message BotPostback {
 	string status = 13; // confirmed || cancelled
 }
 
+
+message TestAIReplyRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string connector_id = 3;
+
+	string type = 4; // inbox | comment
+	string post_id = 5; // fbpost or tiktok video or google business
+	string prompt = 6;
+	Message comment = 7; // user comment
+}
+
 message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -1883,7 +1895,6 @@ message Integration {
 	string alias = 9; // just name
 	string connector_type = 12; // see facebook, call, website
 	int64 integrated = 6; // first integrated
-	// int64 last_integrated = 7;
 
 	string state = 8; // more like status
 	enum State {
@@ -3775,22 +3786,10 @@ message ExchangeRate {
 	int64 exchange_time = 5; // nanosec
 }
 
-message GoogleLocationSettings {
-	repeated GoogleLocationSetting settings = 2;
-}
-
-message GoogleLocationSetting {
-	string account_id = 2;
-	string business_location_id = 3;
-
-	GoogleReviewSetting google_review_setting = 5;
-	int64 updated = 9;
-}
-
 message GoogleReviewSetting {
 	bool disabled = 1;
 
-	string auto_reply = 4; // fixed, llm
+	string auto_reply = 4; // none, fixed, llm
 	string auto_reply_prompt = 5;
 	repeated Message replies = 6;
 
@@ -3870,16 +3869,16 @@ message FbFanpageSettings {
 }
 
 message TiktokCommentSetting {
-	bool disabled = 1;
-	bool auto_like = 2;
+	// bool disabled = 1;
+	// bool auto_like = 2;
 
 	string video_id = 3;
 
-	string auto_inbox = 6; // fixed, llm
+	string auto_inbox = 6; // none, fixed, llm
 	string auto_inbox_prompt = 7;
 	Message inbox_message = 8;
 
-	string auto_reply = 9; // fixed, llm
+	string auto_reply = 9; // none, fixed, llm
 	string auto_reply_prompt = 10;
 	repeated Message replies = 11;
 }

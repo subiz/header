@@ -23,10 +23,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GooglekonService_SendEventToGoogle_FullMethodName           = "/header.GooglekonService/SendEventToGoogle"
-	GooglekonService_ReadGoogleLocationSetting_FullMethodName   = "/header.GooglekonService/ReadGoogleLocationSetting"
-	GooglekonService_UpdateGoogleLocationSetting_FullMethodName = "/header.GooglekonService/UpdateGoogleLocationSetting"
-	GooglekonService_ListGoogleLocationSettings_FullMethodName  = "/header.GooglekonService/ListGoogleLocationSettings"
+	GooglekonService_SendEventToGoogle_FullMethodName = "/header.GooglekonService/SendEventToGoogle"
+	GooglekonService_TestAIReply_FullMethodName       = "/header.GooglekonService/TestAIReply"
 )
 
 // GooglekonServiceClient is the client API for GooglekonService service.
@@ -34,9 +32,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GooglekonServiceClient interface {
 	SendEventToGoogle(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
-	ReadGoogleLocationSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*GoogleLocationSetting, error)
-	UpdateGoogleLocationSetting(ctx context.Context, in *GoogleLocationSetting, opts ...grpc.CallOption) (*GoogleLocationSetting, error)
-	ListGoogleLocationSettings(ctx context.Context, in *Id, opts ...grpc.CallOption) (*GoogleLocationSettings, error)
+	TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type googlekonServiceClient struct {
@@ -57,30 +53,10 @@ func (c *googlekonServiceClient) SendEventToGoogle(ctx context.Context, in *Even
 	return out, nil
 }
 
-func (c *googlekonServiceClient) ReadGoogleLocationSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*GoogleLocationSetting, error) {
+func (c *googlekonServiceClient) TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GoogleLocationSetting)
-	err := c.cc.Invoke(ctx, GooglekonService_ReadGoogleLocationSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *googlekonServiceClient) UpdateGoogleLocationSetting(ctx context.Context, in *GoogleLocationSetting, opts ...grpc.CallOption) (*GoogleLocationSetting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GoogleLocationSetting)
-	err := c.cc.Invoke(ctx, GooglekonService_UpdateGoogleLocationSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *googlekonServiceClient) ListGoogleLocationSettings(ctx context.Context, in *Id, opts ...grpc.CallOption) (*GoogleLocationSettings, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GoogleLocationSettings)
-	err := c.cc.Invoke(ctx, GooglekonService_ListGoogleLocationSettings_FullMethodName, in, out, cOpts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, GooglekonService_TestAIReply_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -92,9 +68,7 @@ func (c *googlekonServiceClient) ListGoogleLocationSettings(ctx context.Context,
 // for forward compatibility.
 type GooglekonServiceServer interface {
 	SendEventToGoogle(context.Context, *Events) (*Empty, error)
-	ReadGoogleLocationSetting(context.Context, *Id) (*GoogleLocationSetting, error)
-	UpdateGoogleLocationSetting(context.Context, *GoogleLocationSetting) (*GoogleLocationSetting, error)
-	ListGoogleLocationSettings(context.Context, *Id) (*GoogleLocationSettings, error)
+	TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error)
 	mustEmbedUnimplementedGooglekonServiceServer()
 }
 
@@ -108,14 +82,8 @@ type UnimplementedGooglekonServiceServer struct{}
 func (UnimplementedGooglekonServiceServer) SendEventToGoogle(context.Context, *Events) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendEventToGoogle not implemented")
 }
-func (UnimplementedGooglekonServiceServer) ReadGoogleLocationSetting(context.Context, *Id) (*GoogleLocationSetting, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReadGoogleLocationSetting not implemented")
-}
-func (UnimplementedGooglekonServiceServer) UpdateGoogleLocationSetting(context.Context, *GoogleLocationSetting) (*GoogleLocationSetting, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateGoogleLocationSetting not implemented")
-}
-func (UnimplementedGooglekonServiceServer) ListGoogleLocationSettings(context.Context, *Id) (*GoogleLocationSettings, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListGoogleLocationSettings not implemented")
+func (UnimplementedGooglekonServiceServer) TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method TestAIReply not implemented")
 }
 func (UnimplementedGooglekonServiceServer) mustEmbedUnimplementedGooglekonServiceServer() {}
 func (UnimplementedGooglekonServiceServer) testEmbeddedByValue()                          {}
@@ -156,56 +124,20 @@ func _GooglekonService_SendEventToGoogle_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GooglekonService_ReadGoogleLocationSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+func _GooglekonService_TestAIReply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TestAIReplyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GooglekonServiceServer).ReadGoogleLocationSetting(ctx, in)
+		return srv.(GooglekonServiceServer).TestAIReply(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GooglekonService_ReadGoogleLocationSetting_FullMethodName,
+		FullMethod: GooglekonService_TestAIReply_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GooglekonServiceServer).ReadGoogleLocationSetting(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GooglekonService_UpdateGoogleLocationSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GoogleLocationSetting)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GooglekonServiceServer).UpdateGoogleLocationSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GooglekonService_UpdateGoogleLocationSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GooglekonServiceServer).UpdateGoogleLocationSetting(ctx, req.(*GoogleLocationSetting))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GooglekonService_ListGoogleLocationSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GooglekonServiceServer).ListGoogleLocationSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GooglekonService_ListGoogleLocationSettings_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GooglekonServiceServer).ListGoogleLocationSettings(ctx, req.(*Id))
+		return srv.(GooglekonServiceServer).TestAIReply(ctx, req.(*TestAIReplyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -222,16 +154,8 @@ var GooglekonService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GooglekonService_SendEventToGoogle_Handler,
 		},
 		{
-			MethodName: "ReadGoogleLocationSetting",
-			Handler:    _GooglekonService_ReadGoogleLocationSetting_Handler,
-		},
-		{
-			MethodName: "UpdateGoogleLocationSetting",
-			Handler:    _GooglekonService_UpdateGoogleLocationSetting_Handler,
-		},
-		{
-			MethodName: "ListGoogleLocationSettings",
-			Handler:    _GooglekonService_ListGoogleLocationSettings_Handler,
+			MethodName: "TestAIReply",
+			Handler:    _GooglekonService_TestAIReply_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -12436,7 +12360,6 @@ type ConversationMgrClient interface {
 	Deintegrate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListIntegrations2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchIntegration(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	// rpc Integrate(header.Integration) returns (header.Integration); // @deprecate, use UpsertIntegration instead
 	ActivateIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
 	UpsertIntegration(ctx context.Context, in *Integration, opts ...grpc.CallOption) (*Integration, error)
 	GetIntegration(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Integration, error)
@@ -13337,7 +13260,6 @@ type ConversationMgrServer interface {
 	Deintegrate(context.Context, *Id) (*Empty, error)
 	ListIntegrations2(context.Context, *Id) (*Response, error)
 	MatchIntegration(context.Context, *Ids) (*Response, error)
-	// rpc Integrate(header.Integration) returns (header.Integration); // @deprecate, use UpsertIntegration instead
 	ActivateIntegration(context.Context, *Id) (*Integration, error)
 	UpsertIntegration(context.Context, *Integration) (*Integration, error)
 	GetIntegration(context.Context, *Id) (*Integration, error)
@@ -21172,6 +21094,7 @@ const (
 	TiktokService_ListTiktokVideos_FullMethodName   = "/header.TiktokService/ListTiktokVideos"
 	TiktokService_MatchTiktokVideos_FullMethodName  = "/header.TiktokService/MatchTiktokVideos"
 	TiktokService_ResyncTiktokVideos_FullMethodName = "/header.TiktokService/ResyncTiktokVideos"
+	TiktokService_TestAIReply_FullMethodName        = "/header.TiktokService/TestAIReply"
 )
 
 // TiktokServiceClient is the client API for TiktokService service.
@@ -21181,6 +21104,7 @@ type TiktokServiceClient interface {
 	ListTiktokVideos(ctx context.Context, in *TiktokVideoRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchTiktokVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type tiktokServiceClient struct {
@@ -21221,6 +21145,16 @@ func (c *tiktokServiceClient) ResyncTiktokVideos(ctx context.Context, in *Id, op
 	return out, nil
 }
 
+func (c *tiktokServiceClient) TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, TiktokService_TestAIReply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TiktokServiceServer is the server API for TiktokService service.
 // All implementations must embed UnimplementedTiktokServiceServer
 // for forward compatibility.
@@ -21228,6 +21162,7 @@ type TiktokServiceServer interface {
 	ListTiktokVideos(context.Context, *TiktokVideoRequest) (*Response, error)
 	MatchTiktokVideos(context.Context, *Ids) (*Response, error)
 	ResyncTiktokVideos(context.Context, *Id) (*Response, error)
+	TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error)
 	mustEmbedUnimplementedTiktokServiceServer()
 }
 
@@ -21246,6 +21181,9 @@ func (UnimplementedTiktokServiceServer) MatchTiktokVideos(context.Context, *Ids)
 }
 func (UnimplementedTiktokServiceServer) ResyncTiktokVideos(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResyncTiktokVideos not implemented")
+}
+func (UnimplementedTiktokServiceServer) TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method TestAIReply not implemented")
 }
 func (UnimplementedTiktokServiceServer) mustEmbedUnimplementedTiktokServiceServer() {}
 func (UnimplementedTiktokServiceServer) testEmbeddedByValue()                       {}
@@ -21322,6 +21260,24 @@ func _TiktokService_ResyncTiktokVideos_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TiktokService_TestAIReply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TestAIReplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TiktokServiceServer).TestAIReply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TiktokService_TestAIReply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TiktokServiceServer).TestAIReply(ctx, req.(*TestAIReplyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TiktokService_ServiceDesc is the grpc.ServiceDesc for TiktokService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -21340,6 +21296,10 @@ var TiktokService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResyncTiktokVideos",
 			Handler:    _TiktokService_ResyncTiktokVideos_Handler,
+		},
+		{
+			MethodName: "TestAIReply",
+			Handler:    _TiktokService_TestAIReply_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -21969,6 +21929,7 @@ var WhatsappService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	FabikonService_TestAIReply_FullMethodName             = "/header.FabikonService/TestAIReply"
 	FabikonService_ReadFbFanpageSetting_FullMethodName    = "/header.FabikonService/ReadFbFanpageSetting"
 	FabikonService_UpdateFbFanpageSetting_FullMethodName  = "/header.FabikonService/UpdateFbFanpageSetting"
 	FabikonService_ListFbFanpageSettings_FullMethodName   = "/header.FabikonService/ListFbFanpageSettings"
@@ -22000,6 +21961,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FabikonServiceClient interface {
+	TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error)
 	ReadFbFanpageSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSetting, error)
 	UpdateFbFanpageSetting(ctx context.Context, in *FbFanpageSetting, opts ...grpc.CallOption) (*FbFanpageSetting, error)
 	ListFbFanpageSettings(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSettings, error)
@@ -22034,6 +21996,16 @@ type fabikonServiceClient struct {
 
 func NewFabikonServiceClient(cc grpc.ClientConnInterface) FabikonServiceClient {
 	return &fabikonServiceClient{cc}
+}
+
+func (c *fabikonServiceClient) TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_TestAIReply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *fabikonServiceClient) ReadFbFanpageSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSetting, error) {
@@ -22290,6 +22262,7 @@ func (c *fabikonServiceClient) SetMessengerCallRouting(ctx context.Context, in *
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
 type FabikonServiceServer interface {
+	TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error)
 	ReadFbFanpageSetting(context.Context, *Id) (*FbFanpageSetting, error)
 	UpdateFbFanpageSetting(context.Context, *FbFanpageSetting) (*FbFanpageSetting, error)
 	ListFbFanpageSettings(context.Context, *Id) (*FbFanpageSettings, error)
@@ -22326,6 +22299,9 @@ type FabikonServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedFabikonServiceServer struct{}
 
+func (UnimplementedFabikonServiceServer) TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method TestAIReply not implemented")
+}
 func (UnimplementedFabikonServiceServer) ReadFbFanpageSetting(context.Context, *Id) (*FbFanpageSetting, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReadFbFanpageSetting not implemented")
 }
@@ -22420,6 +22396,24 @@ func RegisterFabikonServiceServer(s grpc.ServiceRegistrar, srv FabikonServiceSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&FabikonService_ServiceDesc, srv)
+}
+
+func _FabikonService_TestAIReply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TestAIReplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).TestAIReply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_TestAIReply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).TestAIReply(ctx, req.(*TestAIReplyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _FabikonService_ReadFbFanpageSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -22879,6 +22873,10 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.FabikonService",
 	HandlerType: (*FabikonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "TestAIReply",
+			Handler:    _FabikonService_TestAIReply_Handler,
+		},
 		{
 			MethodName: "ReadFbFanpageSetting",
 			Handler:    _FabikonService_ReadFbFanpageSetting_Handler,
