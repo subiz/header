@@ -2066,12 +2066,14 @@ message Integration {
 	string whatsapp_code_verification_status = 180; // VERIFIED | NOT_VERIFIED | EXPIRED
 	bool whatsapp_is_official_business_account = 181; // tick xanh
 	bool whatsapp_registered = 182;         // đã POST /{phone_number_id}/register chưa
-	bool whatsapp_coexistence = 183;        // khách vẫn dùng app WhatsApp Business trên điện thoại
+	reserved 183; // đã bỏ whatsapp_coexistence, dùng whatsapp_mode
+	reserved "whatsapp_coexistence";
 	string whatsapp_account_review_status = 184; // APPROVED | PENDING | REJECTED (cấp WABA)
 	string whatsapp_ban_state = 185;        // SCHEDULE_FOR_DISABLE | DISABLE | REINSTATE (cấp WABA)
 	int64 whatsapp_history_synced_at = 186; // mốc đồng bộ xong 6 tháng lịch sử (Coexistence)
 	string whatsapp_currency = 187;         // cấp WABA
 	string whatsapp_timezone_id = 188;      // cấp WABA
+	string whatsapp_mode = 189; // cloud_api | coexistence; rỗng = chưa xác định từ Meta, theo từng số
 }
 
 message FacebookBusiness {

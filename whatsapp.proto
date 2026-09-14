@@ -100,6 +100,7 @@ message PhoneNumber {
 	int64 last_synced = 36;
 	int64 created = 37;
 	int64 updated = 38;
+	string mode = 39; // cloud_api | coexistence; rỗng = chưa xác định từ Meta
 }
 
 // Setting — cấu hình theo (account_id, phone_number_id). Lưu blob proto.
@@ -234,6 +235,7 @@ message PhoneNumberInfo {
 	bool is_official_business_account = 11;
 	string status = 12; // CONNECTED | PENDING | ...
 	string messaging_limit_tier = 13;
+	optional bool is_on_biz_app = 14; // presence phân biệt Meta bỏ qua field với false
 }
 
 message Throughput {

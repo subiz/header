@@ -291,6 +291,7 @@ type PhoneNumber struct {
 	LastSynced    int64  `protobuf:"varint,36,opt,name=last_synced,json=lastSynced,proto3" json:"last_synced,omitempty"`
 	Created       int64  `protobuf:"varint,37,opt,name=created,proto3" json:"created,omitempty"`
 	Updated       int64  `protobuf:"varint,38,opt,name=updated,proto3" json:"updated,omitempty"`
+	Mode          string `protobuf:"bytes,39,opt,name=mode,proto3" json:"mode,omitempty"` // cloud_api | coexistence; rỗng = chưa xác định từ Meta
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -533,6 +534,13 @@ func (x *PhoneNumber) GetUpdated() int64 {
 		return x.Updated
 	}
 	return 0
+}
+
+func (x *PhoneNumber) GetMode() string {
+	if x != nil {
+		return x.Mode
+	}
+	return ""
 }
 
 // Setting — cấu hình theo (account_id, phone_number_id). Lưu blob proto.
@@ -1506,6 +1514,7 @@ type PhoneNumberInfo struct {
 	IsOfficialBusinessAccount bool                   `protobuf:"varint,11,opt,name=is_official_business_account,json=isOfficialBusinessAccount,proto3" json:"is_official_business_account,omitempty"`
 	Status                    string                 `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // CONNECTED | PENDING | ...
 	MessagingLimitTier        string                 `protobuf:"bytes,13,opt,name=messaging_limit_tier,json=messagingLimitTier,proto3" json:"messaging_limit_tier,omitempty"`
+	IsOnBizApp                *bool                  `protobuf:"varint,14,opt,name=is_on_biz_app,json=isOnBizApp,proto3,oneof" json:"is_on_biz_app,omitempty"` // presence phân biệt Meta bỏ qua field với false
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -1622,6 +1631,13 @@ func (x *PhoneNumberInfo) GetMessagingLimitTier() string {
 		return x.MessagingLimitTier
 	}
 	return ""
+}
+
+func (x *PhoneNumberInfo) GetIsOnBizApp() bool {
+	if x != nil && x.IsOnBizApp != nil {
+		return *x.IsOnBizApp
+	}
+	return false
 }
 
 type Throughput struct {
@@ -8140,7 +8156,7 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\vlast_synced\x18\x1a \x01(\x03R\n" +
 	"lastSynced\x12\x18\n" +
 	"\acreated\x18\x1b \x01(\x03R\acreated\x12\x18\n" +
-	"\aupdated\x18\x1c \x01(\x03R\aupdated\"\xa5\b\n" +
+	"\aupdated\x18\x1c \x01(\x03R\aupdated\"\xb9\b\n" +
 	"\vPhoneNumber\x12&\n" +
 	"\x0fphone_number_id\x18\x02 \x01(\tR\rphoneNumberId\x12\x17\n" +
 	"\awaba_id\x18\x03 \x01(\tR\x06wabaId\x12\x1d\n" +
@@ -8177,7 +8193,8 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\vlast_synced\x18$ \x01(\x03R\n" +
 	"lastSynced\x12\x18\n" +
 	"\acreated\x18% \x01(\x03R\acreated\x12\x18\n" +
-	"\aupdated\x18& \x01(\x03R\aupdated\"\xb6\x02\n" +
+	"\aupdated\x18& \x01(\x03R\aupdated\x12\x12\n" +
+	"\x04mode\x18' \x01(\tR\x04mode\"\xb6\x02\n" +
 	"\aSetting\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -8272,7 +8289,7 @@ const file_whatsapp_proto_rawDesc = "" +
 	"\x17PhoneNumberListResponse\x12-\n" +
 	"\x04data\x18\x02 \x03(\v2\x19.whatsapp.PhoneNumberInfoR\x04data\x12(\n" +
 	"\x06paging\x18\x03 \x01(\v2\x10.whatsapp.PagingR\x06paging\x12%\n" +
-	"\x05error\x18\x04 \x01(\v2\x0f.whatsapp.ErrorR\x05error\"\x8b\x04\n" +
+	"\x05error\x18\x04 \x01(\v2\x0f.whatsapp.ErrorR\x05error\"\xc5\x04\n" +
 	"\x0fPhoneNumberInfo\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x120\n" +
 	"\x14display_phone_number\x18\x03 \x01(\tR\x12displayPhoneNumber\x12#\n" +
@@ -8289,7 +8306,10 @@ const file_whatsapp_proto_rawDesc = "" +
 	"throughput\x12?\n" +
 	"\x1cis_official_business_account\x18\v \x01(\bR\x19isOfficialBusinessAccount\x12\x16\n" +
 	"\x06status\x18\f \x01(\tR\x06status\x120\n" +
-	"\x14messaging_limit_tier\x18\r \x01(\tR\x12messagingLimitTier\"\"\n" +
+	"\x14messaging_limit_tier\x18\r \x01(\tR\x12messagingLimitTier\x12&\n" +
+	"\ris_on_biz_app\x18\x0e \x01(\bH\x00R\n" +
+	"isOnBizApp\x88\x01\x01B\x10\n" +
+	"\x0e_is_on_biz_app\"\"\n" +
 	"\n" +
 	"Throughput\x12\x14\n" +
 	"\x05level\x18\x02 \x01(\tR\x05level\"e\n" +
@@ -9102,6 +9122,7 @@ func file_whatsapp_proto_init() {
 	if File_whatsapp_proto != nil {
 		return
 	}
+	file_whatsapp_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
