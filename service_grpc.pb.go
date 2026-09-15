@@ -21936,6 +21936,9 @@ const (
 	FabikonService_ListFacebookPosts_FullMethodName       = "/header.FabikonService/ListFacebookPosts"
 	FabikonService_MatchFacebookPosts_FullMethodName      = "/header.FabikonService/MatchFacebookPosts"
 	FabikonService_ResyncFacebookPost_FullMethodName      = "/header.FabikonService/ResyncFacebookPost"
+	FabikonService_ListInstagramPosts_FullMethodName      = "/header.FabikonService/ListInstagramPosts"
+	FabikonService_MatchInstgramPosts_FullMethodName      = "/header.FabikonService/MatchInstgramPosts"
+	FabikonService_ResyncInstagramPost_FullMethodName     = "/header.FabikonService/ResyncInstagramPost"
 	FabikonService_RemoveFbUserLabel_FullMethodName       = "/header.FabikonService/RemoveFbUserLabel"
 	FabikonService_AddFbUserLabel_FullMethodName          = "/header.FabikonService/AddFbUserLabel"
 	FabikonService_GenerateRefLink_FullMethodName         = "/header.FabikonService/GenerateRefLink"
@@ -21968,6 +21971,9 @@ type FabikonServiceClient interface {
 	ListFacebookPosts(ctx context.Context, in *FacebookPostRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchFacebookPosts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ResyncFacebookPost(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListInstagramPosts(ctx context.Context, in *FacebookPostRequest, opts ...grpc.CallOption) (*Response, error)
+	MatchInstgramPosts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ResyncInstagramPost(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	RemoveFbUserLabel(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 	AddFbUserLabel(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 	GenerateRefLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
@@ -22062,6 +22068,36 @@ func (c *fabikonServiceClient) ResyncFacebookPost(ctx context.Context, in *Id, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, FabikonService_ResyncFacebookPost_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) ListInstagramPosts(ctx context.Context, in *FacebookPostRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_ListInstagramPosts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) MatchInstgramPosts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_MatchInstgramPosts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) ResyncInstagramPost(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_ResyncInstagramPost_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -22269,6 +22305,9 @@ type FabikonServiceServer interface {
 	ListFacebookPosts(context.Context, *FacebookPostRequest) (*Response, error)
 	MatchFacebookPosts(context.Context, *Ids) (*Response, error)
 	ResyncFacebookPost(context.Context, *Id) (*Response, error)
+	ListInstagramPosts(context.Context, *FacebookPostRequest) (*Response, error)
+	MatchInstgramPosts(context.Context, *Ids) (*Response, error)
+	ResyncInstagramPost(context.Context, *Id) (*Response, error)
 	RemoveFbUserLabel(context.Context, *User) (*Empty, error)
 	AddFbUserLabel(context.Context, *User) (*Empty, error)
 	GenerateRefLink(context.Context, *Id) (*Id, error)
@@ -22319,6 +22358,15 @@ func (UnimplementedFabikonServiceServer) MatchFacebookPosts(context.Context, *Id
 }
 func (UnimplementedFabikonServiceServer) ResyncFacebookPost(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResyncFacebookPost not implemented")
+}
+func (UnimplementedFabikonServiceServer) ListInstagramPosts(context.Context, *FacebookPostRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListInstagramPosts not implemented")
+}
+func (UnimplementedFabikonServiceServer) MatchInstgramPosts(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchInstgramPosts not implemented")
+}
+func (UnimplementedFabikonServiceServer) ResyncInstagramPost(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResyncInstagramPost not implemented")
 }
 func (UnimplementedFabikonServiceServer) RemoveFbUserLabel(context.Context, *User) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveFbUserLabel not implemented")
@@ -22520,6 +22568,60 @@ func _FabikonService_ResyncFacebookPost_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FabikonServiceServer).ResyncFacebookPost(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_ListInstagramPosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookPostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).ListInstagramPosts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_ListInstagramPosts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).ListInstagramPosts(ctx, req.(*FacebookPostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_MatchInstgramPosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).MatchInstgramPosts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_MatchInstgramPosts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).MatchInstgramPosts(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_ResyncInstagramPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).ResyncInstagramPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_ResyncInstagramPost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).ResyncInstagramPost(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -22900,6 +23002,18 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResyncFacebookPost",
 			Handler:    _FabikonService_ResyncFacebookPost_Handler,
+		},
+		{
+			MethodName: "ListInstagramPosts",
+			Handler:    _FabikonService_ListInstagramPosts_Handler,
+		},
+		{
+			MethodName: "MatchInstgramPosts",
+			Handler:    _FabikonService_MatchInstgramPosts_Handler,
+		},
+		{
+			MethodName: "ResyncInstagramPost",
+			Handler:    _FabikonService_ResyncInstagramPost_Handler,
 		},
 		{
 			MethodName: "RemoveFbUserLabel",

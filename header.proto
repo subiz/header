@@ -1001,7 +1001,7 @@ message Rule {
 	bool remove_other_agents = 41;
 
 	string source = 42; // bot, fanpage, call_setting
-	WorkflowAction actions = 44;
+	repeated WorkflowAction actions = 44;
 }
 
 message FacebookCondition {

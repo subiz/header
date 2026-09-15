@@ -880,7 +880,8 @@ message AiResponseSourceRequest {
 message FacebookPostRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string page_id = 3; // "," delimiter
+	string page_id = 3; // facebook page, "," delimiter
+	string instagram_id = 5; // instagram page
 	string query = 4;
 	bool is_hidden = 8;
 	bool is_published = 9;

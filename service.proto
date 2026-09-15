@@ -811,6 +811,10 @@ service FabikonService {
 	rpc MatchFacebookPosts(Ids) returns (Response);
 	rpc ResyncFacebookPost(Id) returns (Response);
 
+	rpc ListInstagramPosts(FacebookPostRequest) returns (Response);
+	rpc MatchInstgramPosts(Ids) returns (Response);
+	rpc ResyncInstagramPost(Id) returns (Response);
+
 	rpc RemoveFbUserLabel(header.User) returns (header.Empty);
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
 	rpc GenerateRefLink(header.Id) returns (header.Id);

@@ -6983,7 +6983,8 @@ type FacebookPostRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	PageId        string                 `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"` // "," delimiter
+	PageId        string                 `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`                // facebook page, "," delimiter
+	InstagramId   string                 `protobuf:"bytes,5,opt,name=instagram_id,json=instagramId,proto3" json:"instagram_id,omitempty"` // instagram page
 	Query         string                 `protobuf:"bytes,4,opt,name=query,proto3" json:"query,omitempty"`
 	IsHidden      bool                   `protobuf:"varint,8,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	IsPublished   bool                   `protobuf:"varint,9,opt,name=is_published,json=isPublished,proto3" json:"is_published,omitempty"`
@@ -7040,6 +7041,13 @@ func (x *FacebookPostRequest) GetAccountId() string {
 func (x *FacebookPostRequest) GetPageId() string {
 	if x != nil {
 		return x.PageId
+	}
+	return ""
+}
+
+func (x *FacebookPostRequest) GetInstagramId() string {
+	if x != nil {
+		return x.InstagramId
 	}
 	return ""
 }
@@ -9730,12 +9738,13 @@ const file_request_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x17\n" +
-	"\acall_id\x18\x03 \x01(\tR\x06callId\"\xf4\x01\n" +
+	"\acall_id\x18\x03 \x01(\tR\x06callId\"\x97\x02\n" +
 	"\x13FacebookPostRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x17\n" +
-	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x14\n" +
+	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12!\n" +
+	"\finstagram_id\x18\x05 \x01(\tR\vinstagramId\x12\x14\n" +
 	"\x05query\x18\x04 \x01(\tR\x05query\x12\x1b\n" +
 	"\tis_hidden\x18\b \x01(\bR\bisHidden\x12!\n" +
 	"\fis_published\x18\t \x01(\bR\visPublished\x12\x14\n" +

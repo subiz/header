@@ -8560,7 +8560,7 @@ type Rule struct {
 	ApplySlaPolicy                 int64                  `protobuf:"varint,40,opt,name=apply_sla_policy,json=applySlaPolicy,proto3" json:"apply_sla_policy,omitempty"`
 	RemoveOtherAgents              bool                   `protobuf:"varint,41,opt,name=remove_other_agents,json=removeOtherAgents,proto3" json:"remove_other_agents,omitempty"`
 	Source                         string                 `protobuf:"bytes,42,opt,name=source,proto3" json:"source,omitempty"` // bot, fanpage, call_setting
-	Actions                        *WorkflowAction        `protobuf:"bytes,44,opt,name=actions,proto3" json:"actions,omitempty"`
+	Actions                        []*WorkflowAction      `protobuf:"bytes,44,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -8868,7 +8868,7 @@ func (x *Rule) GetSource() string {
 	return ""
 }
 
-func (x *Rule) GetActions() *WorkflowAction {
+func (x *Rule) GetActions() []*WorkflowAction {
 	if x != nil {
 		return x.Actions
 	}
@@ -79453,7 +79453,7 @@ const file_header_proto_rawDesc = "" +
 	"\x10apply_sla_policy\x18( \x01(\x03R\x0eapplySlaPolicy\x12.\n" +
 	"\x13remove_other_agents\x18) \x01(\bR\x11removeOtherAgents\x12\x16\n" +
 	"\x06source\x18* \x01(\tR\x06source\x120\n" +
-	"\aactions\x18, \x01(\v2\x16.header.WorkflowActionR\aactions\"\xab\x03\n" +
+	"\aactions\x18, \x03(\v2\x16.header.WorkflowActionR\aactions\"\xab\x03\n" +
 	"\x0eAssignStrategy\x12\x0e\n" +
 	"\n" +
 	"all_agents\x10\x00\x12\x0e\n" +
