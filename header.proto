@@ -1894,7 +1894,7 @@ message Integration {
 	ChannelSetting setting = 7;
 	string alias = 9; // just name
 	string connector_type = 12; // see facebook, call, website
-	int64 integrated = 6; // first integrated
+	int64 integrated = 6; // last integrated
 
 	string state = 8; // more like status
 	enum State {
@@ -3896,21 +3896,25 @@ message FbCommentSetting {
 	}
 	int64 auto_hide = 3;
 
-	bool auto_reply = 4;
+	bool auto_reply_2 = 4; // @deprecated
+	string auto_reply = 24; // none, fixed, llm
+	string auto_reply_prompt = 25;
 	repeated FbComment comments = 5;
 
-	bool auto_inbox = 6;
+	bool auto_inbox_2 = 6;
+	string auto_inbox = 26; // none, fixed, llm
 	Message message = 7;
+	string auto_inbox_prompt = 27;
 
-	bool custom_inbox_for_comments_contain_phone_email_or_address = 14;
-	Message message_for_comments_contain_phone_email_or_address = 15;
+	bool custom_inbox_for_comments_contain_phone_email_or_address = 14; // @deprecated
+	Message message_for_comments_contain_phone_email_or_address = 15; // @deprecated
 
-	bool custom_inbox_for_comments_contain_keyword = 16;
-	Message message_for_comments_contain_keyword = 17;
+	bool custom_inbox_for_comments_contain_keyword = 16; // @deprecated
+	Message message_for_comments_contain_keyword = 17; // @deprecated
 
-	repeated string keywords = 10; // comment
+	repeated string keywords = 10; // @deprecated comment
 	repeated string post_ids = 11; // post
-	repeated string hashtags = 12; // post (contain #)
+	repeated string hashtags = 12; // @deprecated post (contain #)
 
 	repeated FacebookPost posts = 13; // read only
 }
