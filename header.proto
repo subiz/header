@@ -964,14 +964,16 @@ message Rule {
 	TimmingCondition timming_condition = 16;
 	repeated Condition form_conditions = 30;
 
+	int64 use_llm = 31;
+	string llm_condition = 32; // prompt
+	string llm_min_confidence = 21; // "" | low | medium | high | certain
+
 	string returning_visitor = 35; // new, returning, empty
 	bool user_has_replied_before = 18; // new
 	repeated Condition user_conditions = 19;
 	repeated Condition user_start_content_view_conditions = 43;
 	repeated string lead_owners = 20;
 	string call_menu_key = 28;
-
-	// bool when_offline = 21; // only run when there is no online agent
 
 	string has_agent_replied = 26; // "" -> no use, none, all, agents      | dont use
 	repeated string last_replied_agents = 27; // empty =                   | dont use
@@ -985,8 +987,8 @@ message Rule {
 	repeated string supervisors = 24;
 	RingingSetting call = 25;
 
-	int64 create_ticket_on_incoming_email = 31; // true / false
-	string incoming_email_ticket_type = 32; // tech issue
+	// int64 create_ticket_on_incoming_email = 31; // true / false
+	// string incoming_email_ticket_type = 32; // tech issue
 
 	int64 create_ticket_on_missed_call = 33;
 	string missed_call_ticket_type = 34; // tech issue
@@ -999,6 +1001,7 @@ message Rule {
 	bool remove_other_agents = 41;
 
 	string source = 42; // bot, fanpage, call_setting
+	WorkflowAction actions = 44;
 }
 
 message FacebookCondition {
@@ -1872,7 +1875,6 @@ message BotPostback {
 	string status = 13; // confirmed || cancelled
 }
 
-
 message TestAIReplyRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -2444,6 +2446,9 @@ message ActionUpdateConversation {
 	repeated string remove_fields = 6;
 	string tags_query = 7;
 	string untags_query = 8;
+
+	string mark_as_spam = 9; // "" | "notspam" | "spam"
+	string is_dismissed = 10; // "" | "true" | "false"
 }
 
 message ActionJump {
@@ -3886,7 +3891,7 @@ message TiktokCommentSetting {
 }
 
 message FbCommentSetting {
-	bool enabled = 1;
+	// bool enabled = 1;
 	bool auto_like = 2;
 
 	enum HideComment {
