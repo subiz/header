@@ -8524,6 +8524,7 @@ type Rule struct {
 	Ctx                            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	Id                             string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	AccountId                      string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	ObjectType                     string                 `protobuf:"bytes,7,opt,name=object_type,json=objectType,proto3" json:"object_type,omitempty"` // (default) message | comment | review | form | call | ticket
 	Strategy                       string                 `protobuf:"bytes,5,opt,name=strategy,proto3" json:"strategy,omitempty"`
 	AssignTos                      []string               `protobuf:"bytes,6,rep,name=assign_tos,json=assignTos,proto3" json:"assign_tos,omitempty"`
 	Enabled                        bool                   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -8561,6 +8562,7 @@ type Rule struct {
 	RemoveOtherAgents              bool                   `protobuf:"varint,41,opt,name=remove_other_agents,json=removeOtherAgents,proto3" json:"remove_other_agents,omitempty"`
 	Source                         string                 `protobuf:"bytes,42,opt,name=source,proto3" json:"source,omitempty"` // bot, fanpage, call_setting
 	Actions                        []*WorkflowAction      `protobuf:"bytes,44,rep,name=actions,proto3" json:"actions,omitempty"`
+	LastUsed                       int64                  `protobuf:"varint,46,opt,name=last_used,json=lastUsed,proto3" json:"last_used,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -8612,6 +8614,13 @@ func (x *Rule) GetId() string {
 func (x *Rule) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
+	}
+	return ""
+}
+
+func (x *Rule) GetObjectType() string {
+	if x != nil {
+		return x.ObjectType
 	}
 	return ""
 }
@@ -8873,6 +8882,13 @@ func (x *Rule) GetActions() []*WorkflowAction {
 		return x.Actions
 	}
 	return nil
+}
+
+func (x *Rule) GetLastUsed() int64 {
+	if x != nil {
+		return x.LastUsed
+	}
+	return 0
 }
 
 type FacebookCondition struct {
@@ -14390,6 +14406,7 @@ type Integration struct {
 	WhatsappMode                      string `protobuf:"bytes,189,opt,name=whatsapp_mode,json=whatsappMode,proto3" json:"whatsapp_mode,omitempty"`                                                                       // cloud_api | coexistence; rỗng = chưa xác định từ Meta, theo từng số
 	UpdatedBy                         string `protobuf:"bytes,200,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	Updated                           int64  `protobuf:"varint,201,opt,name=updated,proto3" json:"updated,omitempty"`
+	DeletedBy                         string `protobuf:"bytes,202,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
 	unknownFields                     protoimpl.UnknownFields
 	sizeCache                         protoimpl.SizeCache
 }
@@ -15304,6 +15321,13 @@ func (x *Integration) GetUpdated() int64 {
 		return x.Updated
 	}
 	return 0
+}
+
+func (x *Integration) GetDeletedBy() string {
+	if x != nil {
+		return x.DeletedBy
+	}
+	return ""
 }
 
 type FacebookBusiness struct {
@@ -79404,12 +79428,14 @@ const file_header_proto_rawDesc = "" +
 	"\vexec_bot_id\x18\b \x01(\tR\texecBotId\x12$\n" +
 	"\x0eexec_bot_state\x18\t \x01(\tR\fexecBotState\x12\x1b\n" +
 	"\taction_id\x18\x10 \x01(\tR\bactionId\x12!\n" +
-	"\faction_state\x18\x11 \x01(\tR\vactionState\"\x9e\x10\n" +
+	"\faction_state\x18\x11 \x01(\tR\vactionState\"\xdc\x10\n" +
 	"\x04Rule\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1a\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1f\n" +
+	"\vobject_type\x18\a \x01(\tR\n" +
+	"objectType\x12\x1a\n" +
 	"\bstrategy\x18\x05 \x01(\tR\bstrategy\x12\x1d\n" +
 	"\n" +
 	"assign_tos\x18\x06 \x03(\tR\tassignTos\x12\x18\n" +
@@ -79453,7 +79479,8 @@ const file_header_proto_rawDesc = "" +
 	"\x10apply_sla_policy\x18( \x01(\x03R\x0eapplySlaPolicy\x12.\n" +
 	"\x13remove_other_agents\x18) \x01(\bR\x11removeOtherAgents\x12\x16\n" +
 	"\x06source\x18* \x01(\tR\x06source\x120\n" +
-	"\aactions\x18, \x03(\v2\x16.header.WorkflowActionR\aactions\"\xab\x03\n" +
+	"\aactions\x18, \x03(\v2\x16.header.WorkflowActionR\aactions\x12\x1b\n" +
+	"\tlast_used\x18. \x01(\x03R\blastUsed\"\xab\x03\n" +
 	"\x0eAssignStrategy\x12\x0e\n" +
 	"\n" +
 	"all_agents\x10\x00\x12\x0e\n" +
@@ -80192,7 +80219,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x17\n" +
 	"\apost_id\x18\x05 \x01(\tR\x06postId\x12\x16\n" +
 	"\x06prompt\x18\x06 \x01(\tR\x06prompt\x12)\n" +
-	"\acomment\x18\a \x01(\v2\x0f.header.MessageR\acomment\"\xb6-\n" +
+	"\acomment\x18\a \x01(\v2\x0f.header.MessageR\acomment\"\xd6-\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -80333,7 +80360,9 @@ const file_header_proto_rawDesc = "" +
 	"\rwhatsapp_mode\x18\xbd\x01 \x01(\tR\fwhatsappMode\x12\x1e\n" +
 	"\n" +
 	"updated_by\x18\xc8\x01 \x01(\tR\tupdatedBy\x12\x19\n" +
-	"\aupdated\x18\xc9\x01 \x01(\x03R\aupdated\"J\n" +
+	"\aupdated\x18\xc9\x01 \x01(\x03R\aupdated\x12\x1e\n" +
+	"\n" +
+	"deleted_by\x18\xca\x01 \x01(\tR\tdeletedBy\"J\n" +
 	"\x05State\x12\r\n" +
 	"\tactivated\x10\x00\x12\v\n" +
 	"\apending\x10\x01\x12\n" +

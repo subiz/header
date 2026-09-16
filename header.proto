@@ -951,6 +951,8 @@ message Rule {
 		forward_to = 27; // call
 	}
 
+	string object_type = 7; // (default) message | comment | review | form | call | ticket
+
 	string strategy = 5;
 	repeated string assign_tos = 6;
 	bool enabled = 8;
@@ -987,9 +989,6 @@ message Rule {
 	repeated string supervisors = 24;
 	RingingSetting call = 25;
 
-	// int64 create_ticket_on_incoming_email = 31; // true / false
-	// string incoming_email_ticket_type = 32; // tech issue
-
 	int64 create_ticket_on_missed_call = 33;
 	string missed_call_ticket_type = 34; // tech issue
 
@@ -1002,6 +1001,7 @@ message Rule {
 
 	string source = 42; // bot, fanpage, call_setting
 	repeated WorkflowAction actions = 44;
+	int64 last_used = 46;
 }
 
 message FacebookCondition {
@@ -2076,6 +2076,7 @@ message Integration {
 
 	string updated_by = 200;
 	int64 updated = 201;
+	string deleted_by = 202;
 }
 
 message FacebookBusiness {
