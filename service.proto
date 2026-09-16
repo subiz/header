@@ -20,7 +20,7 @@ service YoutubikonService {
 	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
 	rpc ListYoutubeVideos(YoutubeVideoRequest) returns (Response);
 	rpc MatchYoutubeVideos(Ids) returns (Response);
-	rpc ResyncTiktokVideos(Id) returns (Response);
+	rpc ResyncYoutubeVideos(Id) returns (Response);
 }
 
 service Find {
@@ -800,10 +800,6 @@ service WhatsappService {
 	rpc MarkWhatsappRead(whatsapp.NumberRequest) returns (Empty);
 
 	rpc SendEventToWhatsapp(header.Events) returns (Empty);
-
-	rpc ReadWhatsappSetting(Id) returns (whatsapp.Setting);
-	rpc UpdateWhatsappSetting(whatsapp.Setting) returns (whatsapp.Setting);
-
 	// v2 (chưa làm ở v1 — khách tự tạo template trong Meta Business Manager):
 	// rpc CreateWhatsappTemplate(whatsapp.Template) returns (whatsapp.Template);
 	// rpc UpdateWhatsappTemplate(whatsapp.Template) returns (whatsapp.Template);

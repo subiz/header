@@ -27356,24 +27356,28 @@ func (x *FbComment) GetBlock() *Block {
 }
 
 type ChannelSetting struct {
-	state                            protoimpl.MessageState  `protogen:"open.v1"`
-	Ctx                              *common.Context         `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId                        string                  `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	ChannelId                        string                  `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"` // page id, comment id
-	Updated                          int64                   `protobuf:"varint,5,opt,name=updated,proto3" json:"updated,omitempty"`
-	Channel                          string                  `protobuf:"bytes,6,opt,name=channel,proto3" json:"channel,omitempty"` // default facebook. Could be instagram
-	AssignmentRule                   *Rule                   `protobuf:"bytes,7,opt,name=assignment_rule,json=assignmentRule,proto3" json:"assignment_rule,omitempty"`
-	CommentAssignmentRule            *Rule                   `protobuf:"bytes,8,opt,name=comment_assignment_rule,json=commentAssignmentRule,proto3" json:"comment_assignment_rule,omitempty"`
-	GeneralCommentSetting            *FbCommentSetting       `protobuf:"bytes,10,opt,name=general_comment_setting,json=generalCommentSetting,proto3" json:"general_comment_setting,omitempty"`
-	SpecificPostCommentSetting       *FbCommentSetting       `protobuf:"bytes,11,opt,name=specific_post_comment_setting,json=specificPostCommentSetting,proto3" json:"specific_post_comment_setting,omitempty"`
-	PostCommentSettings              []*FbCommentSetting     `protobuf:"bytes,12,rep,name=post_comment_settings,json=postCommentSettings,proto3" json:"post_comment_settings,omitempty"`
-	SendLeadEventOnLifecycleStages   []string                `protobuf:"bytes,13,rep,name=send_lead_event_on_lifecycle_stages,json=sendLeadEventOnLifecycleStages,proto3" json:"send_lead_event_on_lifecycle_stages,omitempty"`
-	SyncConversionDisabled           int64                   `protobuf:"varint,14,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3" json:"sync_conversion_disabled,omitempty"` // source of truth
-	GoogleReviewSetting              *GoogleReviewSetting    `protobuf:"bytes,15,opt,name=google_review_setting,json=googleReviewSetting,proto3" json:"google_review_setting,omitempty"`
-	GeneralTiktokVideoCommentSetting *TiktokCommentSetting   `protobuf:"bytes,16,opt,name=general_tiktok_video_comment_setting,json=generalTiktokVideoCommentSetting,proto3" json:"general_tiktok_video_comment_setting,omitempty"`
-	TiktokVideoCommentSetting        []*TiktokCommentSetting `protobuf:"bytes,17,rep,name=tiktok_video_comment_setting,json=tiktokVideoCommentSetting,proto3" json:"tiktok_video_comment_setting,omitempty"`
-	YoutubeGeneralCommentSetting     *YoutubeCommentSetting  `protobuf:"bytes,20,opt,name=youtube_general_comment_setting,json=youtubeGeneralCommentSetting,proto3" json:"youtube_general_comment_setting,omitempty"`
-	YoutubeVideoCommentSetting       *YoutubeCommentSetting  `protobuf:"bytes,21,opt,name=youtube_video_comment_setting,json=youtubeVideoCommentSetting,proto3" json:"youtube_video_comment_setting,omitempty"`
+	state                            protoimpl.MessageState   `protogen:"open.v1"`
+	Ctx                              *common.Context          `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                        string                   `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	ChannelId                        string                   `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"` // page id, comment id
+	Updated                          int64                    `protobuf:"varint,5,opt,name=updated,proto3" json:"updated,omitempty"`
+	Channel                          string                   `protobuf:"bytes,6,opt,name=channel,proto3" json:"channel,omitempty"` // default facebook. Could be instagram
+	AssignmentRule                   *Rule                    `protobuf:"bytes,7,opt,name=assignment_rule,json=assignmentRule,proto3" json:"assignment_rule,omitempty"`
+	CommentAssignmentRule            *Rule                    `protobuf:"bytes,8,opt,name=comment_assignment_rule,json=commentAssignmentRule,proto3" json:"comment_assignment_rule,omitempty"`
+	GeneralCommentSetting            *FbCommentSetting        `protobuf:"bytes,10,opt,name=general_comment_setting,json=generalCommentSetting,proto3" json:"general_comment_setting,omitempty"`
+	SpecificPostCommentSetting       *FbCommentSetting        `protobuf:"bytes,11,opt,name=specific_post_comment_setting,json=specificPostCommentSetting,proto3" json:"specific_post_comment_setting,omitempty"`
+	PostCommentSettings              []*FbCommentSetting      `protobuf:"bytes,12,rep,name=post_comment_settings,json=postCommentSettings,proto3" json:"post_comment_settings,omitempty"`
+	SendLeadEventOnLifecycleStages   []string                 `protobuf:"bytes,13,rep,name=send_lead_event_on_lifecycle_stages,json=sendLeadEventOnLifecycleStages,proto3" json:"send_lead_event_on_lifecycle_stages,omitempty"`
+	SyncConversionDisabled           int64                    `protobuf:"varint,14,opt,name=sync_conversion_disabled,json=syncConversionDisabled,proto3" json:"sync_conversion_disabled,omitempty"` // source of truth
+	GoogleReviewSetting              *GoogleReviewSetting     `protobuf:"bytes,15,opt,name=google_review_setting,json=googleReviewSetting,proto3" json:"google_review_setting,omitempty"`
+	GeneralTiktokVideoCommentSetting *TiktokCommentSetting    `protobuf:"bytes,16,opt,name=general_tiktok_video_comment_setting,json=generalTiktokVideoCommentSetting,proto3" json:"general_tiktok_video_comment_setting,omitempty"`
+	TiktokVideoCommentSettings       []*TiktokCommentSetting  `protobuf:"bytes,17,rep,name=tiktok_video_comment_settings,json=tiktokVideoCommentSettings,proto3" json:"tiktok_video_comment_settings,omitempty"`
+	YoutubeGeneralCommentSetting     *YoutubeCommentSetting   `protobuf:"bytes,20,opt,name=youtube_general_comment_setting,json=youtubeGeneralCommentSetting,proto3" json:"youtube_general_comment_setting,omitempty"`
+	YoutubeVideoCommentSettings      []*YoutubeCommentSetting `protobuf:"bytes,21,rep,name=youtube_video_comment_settings,json=youtubeVideoCommentSettings,proto3" json:"youtube_video_comment_settings,omitempty"`
+	AutoMarkRead                     bool                     `protobuf:"varint,25,opt,name=auto_mark_read,json=autoMarkRead,proto3" json:"auto_mark_read,omitempty"` // tự đánh dấu đã đọc khi tin vào Subiz
+	SendTypingIndicator              bool                     `protobuf:"varint,26,opt,name=send_typing_indicator,json=sendTypingIndicator,proto3" json:"send_typing_indicator,omitempty"`
+	MirrorSmbEchoes                  bool                     `protobuf:"varint,27,opt,name=mirror_smb_echoes,json=mirrorSmbEchoes,proto3" json:"mirror_smb_echoes,omitempty"` // mirror tin agent gửi từ app điện thoại (Coexistence)
+	SyncHistory                      bool                     `protobuf:"varint,28,opt,name=sync_history,json=syncHistory,proto3" json:"sync_history,omitempty"`               // đồng bộ 6 tháng lịch sử khi onboard
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -27506,9 +27510,9 @@ func (x *ChannelSetting) GetGeneralTiktokVideoCommentSetting() *TiktokCommentSet
 	return nil
 }
 
-func (x *ChannelSetting) GetTiktokVideoCommentSetting() []*TiktokCommentSetting {
+func (x *ChannelSetting) GetTiktokVideoCommentSettings() []*TiktokCommentSetting {
 	if x != nil {
-		return x.TiktokVideoCommentSetting
+		return x.TiktokVideoCommentSettings
 	}
 	return nil
 }
@@ -27520,11 +27524,39 @@ func (x *ChannelSetting) GetYoutubeGeneralCommentSetting() *YoutubeCommentSettin
 	return nil
 }
 
-func (x *ChannelSetting) GetYoutubeVideoCommentSetting() *YoutubeCommentSetting {
+func (x *ChannelSetting) GetYoutubeVideoCommentSettings() []*YoutubeCommentSetting {
 	if x != nil {
-		return x.YoutubeVideoCommentSetting
+		return x.YoutubeVideoCommentSettings
 	}
 	return nil
+}
+
+func (x *ChannelSetting) GetAutoMarkRead() bool {
+	if x != nil {
+		return x.AutoMarkRead
+	}
+	return false
+}
+
+func (x *ChannelSetting) GetSendTypingIndicator() bool {
+	if x != nil {
+		return x.SendTypingIndicator
+	}
+	return false
+}
+
+func (x *ChannelSetting) GetMirrorSmbEchoes() bool {
+	if x != nil {
+		return x.MirrorSmbEchoes
+	}
+	return false
+}
+
+func (x *ChannelSetting) GetSyncHistory() bool {
+	if x != nil {
+		return x.SyncHistory
+	}
+	return false
 }
 
 type TiktokCommentSetting struct {
@@ -82002,7 +82034,8 @@ const file_header_proto_rawDesc = "" +
 	"\btemplate\x18\x05 \x01(\tR\btemplate\x12\x1f\n" +
 	"\vis_template\x18\x06 \x01(\bR\n" +
 	"isTemplate\x12#\n" +
-	"\x05block\x18\a \x01(\v2\r.header.BlockR\x05block\"\x8c\t\n" +
+	"\x05block\x18\a \x01(\v2\r.header.BlockR\x05block\"\xb9\n" +
+	"\n" +
 	"\x0eChannelSetting\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -82020,10 +82053,14 @@ const file_header_proto_rawDesc = "" +
 	"#send_lead_event_on_lifecycle_stages\x18\r \x03(\tR\x1esendLeadEventOnLifecycleStages\x128\n" +
 	"\x18sync_conversion_disabled\x18\x0e \x01(\x03R\x16syncConversionDisabled\x12O\n" +
 	"\x15google_review_setting\x18\x0f \x01(\v2\x1b.header.GoogleReviewSettingR\x13googleReviewSetting\x12l\n" +
-	"$general_tiktok_video_comment_setting\x18\x10 \x01(\v2\x1c.header.TiktokCommentSettingR generalTiktokVideoCommentSetting\x12]\n" +
-	"\x1ctiktok_video_comment_setting\x18\x11 \x03(\v2\x1c.header.TiktokCommentSettingR\x19tiktokVideoCommentSetting\x12d\n" +
-	"\x1fyoutube_general_comment_setting\x18\x14 \x01(\v2\x1d.header.YoutubeCommentSettingR\x1cyoutubeGeneralCommentSetting\x12`\n" +
-	"\x1dyoutube_video_comment_setting\x18\x15 \x01(\v2\x1d.header.YoutubeCommentSettingR\x1ayoutubeVideoCommentSetting\"\xc5\x02\n" +
+	"$general_tiktok_video_comment_setting\x18\x10 \x01(\v2\x1c.header.TiktokCommentSettingR generalTiktokVideoCommentSetting\x12_\n" +
+	"\x1dtiktok_video_comment_settings\x18\x11 \x03(\v2\x1c.header.TiktokCommentSettingR\x1atiktokVideoCommentSettings\x12d\n" +
+	"\x1fyoutube_general_comment_setting\x18\x14 \x01(\v2\x1d.header.YoutubeCommentSettingR\x1cyoutubeGeneralCommentSetting\x12b\n" +
+	"\x1eyoutube_video_comment_settings\x18\x15 \x03(\v2\x1d.header.YoutubeCommentSettingR\x1byoutubeVideoCommentSettings\x12$\n" +
+	"\x0eauto_mark_read\x18\x19 \x01(\bR\fautoMarkRead\x122\n" +
+	"\x15send_typing_indicator\x18\x1a \x01(\bR\x13sendTypingIndicator\x12*\n" +
+	"\x11mirror_smb_echoes\x18\x1b \x01(\bR\x0fmirrorSmbEchoes\x12!\n" +
+	"\fsync_history\x18\x1c \x01(\bR\vsyncHistory\"\xc5\x02\n" +
 	"\x14TiktokCommentSetting\x12\x1b\n" +
 	"\tauto_like\x18\x02 \x01(\bR\bautoLike\x12\x19\n" +
 	"\bvideo_id\x18\x03 \x01(\tR\avideoId\x12\x1d\n" +
@@ -89519,9 +89556,9 @@ var file_header_proto_depIdxs = []int32{
 	236,  // 526: header.ChannelSetting.post_comment_settings:type_name -> header.FbCommentSetting
 	231,  // 527: header.ChannelSetting.google_review_setting:type_name -> header.GoogleReviewSetting
 	235,  // 528: header.ChannelSetting.general_tiktok_video_comment_setting:type_name -> header.TiktokCommentSetting
-	235,  // 529: header.ChannelSetting.tiktok_video_comment_setting:type_name -> header.TiktokCommentSetting
+	235,  // 529: header.ChannelSetting.tiktok_video_comment_settings:type_name -> header.TiktokCommentSetting
 	232,  // 530: header.ChannelSetting.youtube_general_comment_setting:type_name -> header.YoutubeCommentSetting
-	232,  // 531: header.ChannelSetting.youtube_video_comment_setting:type_name -> header.YoutubeCommentSetting
+	232,  // 531: header.ChannelSetting.youtube_video_comment_settings:type_name -> header.YoutubeCommentSetting
 	101,  // 532: header.TiktokCommentSetting.inbox_message:type_name -> header.Message
 	101,  // 533: header.TiktokCommentSetting.replies:type_name -> header.Message
 	233,  // 534: header.FbCommentSetting.comments:type_name -> header.FbComment

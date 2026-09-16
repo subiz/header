@@ -3899,10 +3899,15 @@ message ChannelSetting {
 	GoogleReviewSetting google_review_setting = 15;
 
 	TiktokCommentSetting general_tiktok_video_comment_setting = 16;
-	repeated TiktokCommentSetting tiktok_video_comment_setting = 17;
+	repeated TiktokCommentSetting tiktok_video_comment_settings = 17;
 
 	YoutubeCommentSetting youtube_general_comment_setting = 20;
-	YoutubeCommentSetting youtube_video_comment_setting = 21;
+	repeated YoutubeCommentSetting youtube_video_comment_settings = 21;
+
+	bool auto_mark_read = 25;      // tự đánh dấu đã đọc khi tin vào Subiz
+	bool send_typing_indicator = 26;
+	bool mirror_smb_echoes = 27;   // mirror tin agent gửi từ app điện thoại (Coexistence)
+	bool sync_history = 28;        // đồng bộ 6 tháng lịch sử khi onboard
 }
 
 message TiktokCommentSetting {

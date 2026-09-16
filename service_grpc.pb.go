@@ -163,11 +163,11 @@ var GooglekonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	YoutubikonService_SendEventToYoutube_FullMethodName = "/header.YoutubikonService/SendEventToYoutube"
-	YoutubikonService_TestAIReply_FullMethodName        = "/header.YoutubikonService/TestAIReply"
-	YoutubikonService_ListYoutubeVideos_FullMethodName  = "/header.YoutubikonService/ListYoutubeVideos"
-	YoutubikonService_MatchYoutubeVideos_FullMethodName = "/header.YoutubikonService/MatchYoutubeVideos"
-	YoutubikonService_ResyncTiktokVideos_FullMethodName = "/header.YoutubikonService/ResyncTiktokVideos"
+	YoutubikonService_SendEventToYoutube_FullMethodName  = "/header.YoutubikonService/SendEventToYoutube"
+	YoutubikonService_TestAIReply_FullMethodName         = "/header.YoutubikonService/TestAIReply"
+	YoutubikonService_ListYoutubeVideos_FullMethodName   = "/header.YoutubikonService/ListYoutubeVideos"
+	YoutubikonService_MatchYoutubeVideos_FullMethodName  = "/header.YoutubikonService/MatchYoutubeVideos"
+	YoutubikonService_ResyncYoutubeVideos_FullMethodName = "/header.YoutubikonService/ResyncYoutubeVideos"
 )
 
 // YoutubikonServiceClient is the client API for YoutubikonService service.
@@ -178,7 +178,7 @@ type YoutubikonServiceClient interface {
 	TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error)
 	ListYoutubeVideos(ctx context.Context, in *YoutubeVideoRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchYoutubeVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ResyncYoutubeVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type youtubikonServiceClient struct {
@@ -229,10 +229,10 @@ func (c *youtubikonServiceClient) MatchYoutubeVideos(ctx context.Context, in *Id
 	return out, nil
 }
 
-func (c *youtubikonServiceClient) ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *youtubikonServiceClient) ResyncYoutubeVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, YoutubikonService_ResyncTiktokVideos_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, YoutubikonService_ResyncYoutubeVideos_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -247,7 +247,7 @@ type YoutubikonServiceServer interface {
 	TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error)
 	ListYoutubeVideos(context.Context, *YoutubeVideoRequest) (*Response, error)
 	MatchYoutubeVideos(context.Context, *Ids) (*Response, error)
-	ResyncTiktokVideos(context.Context, *Id) (*Response, error)
+	ResyncYoutubeVideos(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedYoutubikonServiceServer()
 }
 
@@ -270,8 +270,8 @@ func (UnimplementedYoutubikonServiceServer) ListYoutubeVideos(context.Context, *
 func (UnimplementedYoutubikonServiceServer) MatchYoutubeVideos(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method MatchYoutubeVideos not implemented")
 }
-func (UnimplementedYoutubikonServiceServer) ResyncTiktokVideos(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ResyncTiktokVideos not implemented")
+func (UnimplementedYoutubikonServiceServer) ResyncYoutubeVideos(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResyncYoutubeVideos not implemented")
 }
 func (UnimplementedYoutubikonServiceServer) mustEmbedUnimplementedYoutubikonServiceServer() {}
 func (UnimplementedYoutubikonServiceServer) testEmbeddedByValue()                           {}
@@ -366,20 +366,20 @@ func _YoutubikonService_MatchYoutubeVideos_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _YoutubikonService_ResyncTiktokVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _YoutubikonService_ResyncYoutubeVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(YoutubikonServiceServer).ResyncTiktokVideos(ctx, in)
+		return srv.(YoutubikonServiceServer).ResyncYoutubeVideos(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: YoutubikonService_ResyncTiktokVideos_FullMethodName,
+		FullMethod: YoutubikonService_ResyncYoutubeVideos_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(YoutubikonServiceServer).ResyncTiktokVideos(ctx, req.(*Id))
+		return srv.(YoutubikonServiceServer).ResyncYoutubeVideos(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -408,8 +408,8 @@ var YoutubikonService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _YoutubikonService_MatchYoutubeVideos_Handler,
 		},
 		{
-			MethodName: "ResyncTiktokVideos",
-			Handler:    _YoutubikonService_ResyncTiktokVideos_Handler,
+			MethodName: "ResyncYoutubeVideos",
+			Handler:    _YoutubikonService_ResyncYoutubeVideos_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -21573,8 +21573,6 @@ const (
 	WhatsappService_MakeSureWhatsappUser_FullMethodName          = "/header.WhatsappService/MakeSureWhatsappUser"
 	WhatsappService_MarkWhatsappRead_FullMethodName              = "/header.WhatsappService/MarkWhatsappRead"
 	WhatsappService_SendEventToWhatsapp_FullMethodName           = "/header.WhatsappService/SendEventToWhatsapp"
-	WhatsappService_ReadWhatsappSetting_FullMethodName           = "/header.WhatsappService/ReadWhatsappSetting"
-	WhatsappService_UpdateWhatsappSetting_FullMethodName         = "/header.WhatsappService/UpdateWhatsappSetting"
 )
 
 // WhatsappServiceClient is the client API for WhatsappService service.
@@ -21606,8 +21604,6 @@ type WhatsappServiceClient interface {
 	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
 	MarkWhatsappRead(ctx context.Context, in *whatsapp.NumberRequest, opts ...grpc.CallOption) (*Empty, error)
 	SendEventToWhatsapp(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
-	ReadWhatsappSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*whatsapp.Setting, error)
-	UpdateWhatsappSetting(ctx context.Context, in *whatsapp.Setting, opts ...grpc.CallOption) (*whatsapp.Setting, error)
 }
 
 type whatsappServiceClient struct {
@@ -21738,26 +21734,6 @@ func (c *whatsappServiceClient) SendEventToWhatsapp(ctx context.Context, in *Eve
 	return out, nil
 }
 
-func (c *whatsappServiceClient) ReadWhatsappSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*whatsapp.Setting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(whatsapp.Setting)
-	err := c.cc.Invoke(ctx, WhatsappService_ReadWhatsappSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *whatsappServiceClient) UpdateWhatsappSetting(ctx context.Context, in *whatsapp.Setting, opts ...grpc.CallOption) (*whatsapp.Setting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(whatsapp.Setting)
-	err := c.cc.Invoke(ctx, WhatsappService_UpdateWhatsappSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // WhatsappServiceServer is the server API for WhatsappService service.
 // All implementations must embed UnimplementedWhatsappServiceServer
 // for forward compatibility.
@@ -21787,8 +21763,6 @@ type WhatsappServiceServer interface {
 	// Đánh dấu đã đọc (+ typing indicator) cho khách thấy trên WhatsApp.
 	MarkWhatsappRead(context.Context, *whatsapp.NumberRequest) (*Empty, error)
 	SendEventToWhatsapp(context.Context, *Events) (*Empty, error)
-	ReadWhatsappSetting(context.Context, *Id) (*whatsapp.Setting, error)
-	UpdateWhatsappSetting(context.Context, *whatsapp.Setting) (*whatsapp.Setting, error)
 	mustEmbedUnimplementedWhatsappServiceServer()
 }
 
@@ -21834,12 +21808,6 @@ func (UnimplementedWhatsappServiceServer) MarkWhatsappRead(context.Context, *wha
 }
 func (UnimplementedWhatsappServiceServer) SendEventToWhatsapp(context.Context, *Events) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendEventToWhatsapp not implemented")
-}
-func (UnimplementedWhatsappServiceServer) ReadWhatsappSetting(context.Context, *Id) (*whatsapp.Setting, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReadWhatsappSetting not implemented")
-}
-func (UnimplementedWhatsappServiceServer) UpdateWhatsappSetting(context.Context, *whatsapp.Setting) (*whatsapp.Setting, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateWhatsappSetting not implemented")
 }
 func (UnimplementedWhatsappServiceServer) mustEmbedUnimplementedWhatsappServiceServer() {}
 func (UnimplementedWhatsappServiceServer) testEmbeddedByValue()                         {}
@@ -22078,42 +22046,6 @@ func _WhatsappService_SendEventToWhatsapp_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WhatsappService_ReadWhatsappSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WhatsappServiceServer).ReadWhatsappSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WhatsappService_ReadWhatsappSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WhatsappServiceServer).ReadWhatsappSetting(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WhatsappService_UpdateWhatsappSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(whatsapp.Setting)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WhatsappServiceServer).UpdateWhatsappSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WhatsappService_UpdateWhatsappSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WhatsappServiceServer).UpdateWhatsappSetting(ctx, req.(*whatsapp.Setting))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // WhatsappService_ServiceDesc is the grpc.ServiceDesc for WhatsappService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -22168,14 +22100,6 @@ var WhatsappService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEventToWhatsapp",
 			Handler:    _WhatsappService_SendEventToWhatsapp_Handler,
-		},
-		{
-			MethodName: "ReadWhatsappSetting",
-			Handler:    _WhatsappService_ReadWhatsappSetting_Handler,
-		},
-		{
-			MethodName: "UpdateWhatsappSetting",
-			Handler:    _WhatsappService_UpdateWhatsappSetting_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

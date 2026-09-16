@@ -103,20 +103,6 @@ message PhoneNumber {
 	string mode = 39; // cloud_api | coexistence; rỗng = chưa xác định từ Meta
 }
 
-// Setting — cấu hình theo (account_id, phone_number_id). Lưu blob proto.
-message Setting {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string phone_number_id = 3;
-
-	bool auto_mark_read = 5;      // tự đánh dấu đã đọc khi tin vào Subiz
-	bool send_typing_indicator = 6;
-	bool mirror_smb_echoes = 7;   // mirror tin agent gửi từ app điện thoại (Coexistence)
-	bool sync_history = 8;        // đồng bộ 6 tháng lịch sử khi onboard
-
-	int64 updated = 20;
-}
-
 // WaUser — thông tin & mốc cửa sổ 24h của mỗi khách WhatsApp.
 message WaUser {
 	string phone_number_id = 2;
