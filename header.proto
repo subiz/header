@@ -3860,6 +3860,14 @@ message GoogleReviewSetting {
 	repeated Message replies_5 = 53;
 }
 
+message YoutubeCommentSetting {
+	bool disabled = 1;
+
+	string auto_reply = 4; // none, fixed, llm
+	string auto_reply_prompt = 5;
+	repeated Message replies = 6;
+}
+
 message FbComment {
 	string comment = 2; // read only
 	string quill_delta = 3;
@@ -3891,6 +3899,9 @@ message ChannelSetting {
 
 	TiktokCommentSetting general_tiktok_video_comment_setting = 16;
 	repeated TiktokCommentSetting tiktok_video_comment_setting = 17;
+
+	YoutubeCommentSetting youtube_general_comment_setting = 20;
+	YoutubeCommentSetting youtube_video_comment_setting = 21;
 }
 
 message TiktokCommentSetting {
