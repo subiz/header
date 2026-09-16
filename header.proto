@@ -1214,6 +1214,7 @@ message StartRequest {
 
 	FormSubmission form_submission = 46;
 	GoogleReview google_review = 47;
+	YoutubeVideo youtube_video = 48;
 
 	bool is_testing = 50;
 
@@ -1316,6 +1317,7 @@ message Conversation {
 	int64 marked_as_spam = 68;
 	int64 sentiment_score = 69; //
 	GoogleReview google_review = 70;
+	YoutubeVideo youtube_video = 84;
 	TiktokVideo tiktok_video = 100;
 
 	repeated string associated_tickets = 76;
@@ -1886,6 +1888,25 @@ message TestAIReplyRequest {
 	Message comment = 7; // user comment
 }
 
+// Public video context attached to StartRequest.youtube_video.
+message YoutubeVideo {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string id = 3; // YouTube video ID
+	string channel_id = 4; // channel that owns this video
+	string title = 5;
+	string description = 6;
+	string thumbnail_url = 7;
+	string url = 8; // https://www.youtube.com/watch?v=<id>
+	int64 duration_sec = 9;
+
+	int64 view_count = 20;
+	int64 like_count = 21;
+	int64 favorite_count = 22;
+	int64 comment_count = 23;
+}
+
 message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -2052,7 +2073,9 @@ message Integration {
 
 	int64 following_count = 152;
 	int64 likes_count = 153;
-	int64 video_views = 154;
+	int64 video_views = 154; // youtubte.statistics.viewCount
+	int64 videos_count = 155;
+	int64 subscribers_count = 156;
 
 	// whatsapp: MỘT INTEGRATION = MỘT SỐ WhatsApp (phone number).
 	// id = <account_id>.<phone_number_id>.whatsapp
@@ -2077,6 +2100,16 @@ message Integration {
 	string whatsapp_currency = 187;         // cấp WABA
 	string whatsapp_timezone_id = 188;      // cấp WABA
 	string whatsapp_mode = 189; // cloud_api | coexistence; rỗng = chưa xác định từ Meta, theo từng số
+
+	// youtube: one integration per authorized channel.
+	// id = <account_id>.<channel_id>.youtubikon; connector_type = youtube.
+	// Shared fields: name/alias = channel title, username = custom URL/handle,
+	// logo_url = channel thumbnail, about = description, state/error_code/last_synced.
+	// OAuth tokens and client secret stay in the adapter database, never in Integration.
+	string youtube_channel_id = 190; // stable channel ID returned by channels.list(mine=true)
+	string youtube_channel_url = 191; // https://www.youtube.com/channel/<channel_id>
+	string youtube_country = 192;
+	string youtube_uploads_playlist_id = 193;
 
 	string updated_by = 200;
 	int64 updated = 201;
@@ -3517,6 +3550,7 @@ enum ChannelType {
 	zalo_call = 18; // zcc
 	facebook_call = 19;
 	whatsapp_call = 20;
+	youtube_comment = 21;
 }
 
 message WebhookSecret {
@@ -7297,6 +7331,9 @@ message Response {
 	SenSessionAction sen_session_action = 308;
 	repeated SenSessionAction sen_session_actions = 309;
 	Message message = 310;
+
+	YoutubeVideo youtubte_video = 311;
+	repeated YoutubeVideo youtubte_videos = 312;
 }
 
 message ReportCount {

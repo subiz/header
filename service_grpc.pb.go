@@ -163,6 +163,260 @@ var GooglekonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	YoutubikonService_SendEventToYoutube_FullMethodName = "/header.YoutubikonService/SendEventToYoutube"
+	YoutubikonService_TestAIReply_FullMethodName        = "/header.YoutubikonService/TestAIReply"
+	YoutubikonService_ListYoutubeVideos_FullMethodName  = "/header.YoutubikonService/ListYoutubeVideos"
+	YoutubikonService_MatchYoutubeVideos_FullMethodName = "/header.YoutubikonService/MatchYoutubeVideos"
+	YoutubikonService_ResyncTiktokVideos_FullMethodName = "/header.YoutubikonService/ResyncTiktokVideos"
+)
+
+// YoutubikonServiceClient is the client API for YoutubikonService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type YoutubikonServiceClient interface {
+	SendEventToYoutube(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
+	TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error)
+	ListYoutubeVideos(ctx context.Context, in *YoutubeVideoRequest, opts ...grpc.CallOption) (*Response, error)
+	MatchYoutubeVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+}
+
+type youtubikonServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewYoutubikonServiceClient(cc grpc.ClientConnInterface) YoutubikonServiceClient {
+	return &youtubikonServiceClient{cc}
+}
+
+func (c *youtubikonServiceClient) SendEventToYoutube(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, YoutubikonService_SendEventToYoutube_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *youtubikonServiceClient) TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, YoutubikonService_TestAIReply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *youtubikonServiceClient) ListYoutubeVideos(ctx context.Context, in *YoutubeVideoRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, YoutubikonService_ListYoutubeVideos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *youtubikonServiceClient) MatchYoutubeVideos(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, YoutubikonService_MatchYoutubeVideos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *youtubikonServiceClient) ResyncTiktokVideos(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, YoutubikonService_ResyncTiktokVideos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// YoutubikonServiceServer is the server API for YoutubikonService service.
+// All implementations must embed UnimplementedYoutubikonServiceServer
+// for forward compatibility.
+type YoutubikonServiceServer interface {
+	SendEventToYoutube(context.Context, *Events) (*Empty, error)
+	TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error)
+	ListYoutubeVideos(context.Context, *YoutubeVideoRequest) (*Response, error)
+	MatchYoutubeVideos(context.Context, *Ids) (*Response, error)
+	ResyncTiktokVideos(context.Context, *Id) (*Response, error)
+	mustEmbedUnimplementedYoutubikonServiceServer()
+}
+
+// UnimplementedYoutubikonServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedYoutubikonServiceServer struct{}
+
+func (UnimplementedYoutubikonServiceServer) SendEventToYoutube(context.Context, *Events) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendEventToYoutube not implemented")
+}
+func (UnimplementedYoutubikonServiceServer) TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method TestAIReply not implemented")
+}
+func (UnimplementedYoutubikonServiceServer) ListYoutubeVideos(context.Context, *YoutubeVideoRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListYoutubeVideos not implemented")
+}
+func (UnimplementedYoutubikonServiceServer) MatchYoutubeVideos(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchYoutubeVideos not implemented")
+}
+func (UnimplementedYoutubikonServiceServer) ResyncTiktokVideos(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResyncTiktokVideos not implemented")
+}
+func (UnimplementedYoutubikonServiceServer) mustEmbedUnimplementedYoutubikonServiceServer() {}
+func (UnimplementedYoutubikonServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafeYoutubikonServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to YoutubikonServiceServer will
+// result in compilation errors.
+type UnsafeYoutubikonServiceServer interface {
+	mustEmbedUnimplementedYoutubikonServiceServer()
+}
+
+func RegisterYoutubikonServiceServer(s grpc.ServiceRegistrar, srv YoutubikonServiceServer) {
+	// If the following call panics, it indicates UnimplementedYoutubikonServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&YoutubikonService_ServiceDesc, srv)
+}
+
+func _YoutubikonService_SendEventToYoutube_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Events)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(YoutubikonServiceServer).SendEventToYoutube(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: YoutubikonService_SendEventToYoutube_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(YoutubikonServiceServer).SendEventToYoutube(ctx, req.(*Events))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _YoutubikonService_TestAIReply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TestAIReplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(YoutubikonServiceServer).TestAIReply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: YoutubikonService_TestAIReply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(YoutubikonServiceServer).TestAIReply(ctx, req.(*TestAIReplyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _YoutubikonService_ListYoutubeVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(YoutubeVideoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(YoutubikonServiceServer).ListYoutubeVideos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: YoutubikonService_ListYoutubeVideos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(YoutubikonServiceServer).ListYoutubeVideos(ctx, req.(*YoutubeVideoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _YoutubikonService_MatchYoutubeVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(YoutubikonServiceServer).MatchYoutubeVideos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: YoutubikonService_MatchYoutubeVideos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(YoutubikonServiceServer).MatchYoutubeVideos(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _YoutubikonService_ResyncTiktokVideos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(YoutubikonServiceServer).ResyncTiktokVideos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: YoutubikonService_ResyncTiktokVideos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(YoutubikonServiceServer).ResyncTiktokVideos(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// YoutubikonService_ServiceDesc is the grpc.ServiceDesc for YoutubikonService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var YoutubikonService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.YoutubikonService",
+	HandlerType: (*YoutubikonServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SendEventToYoutube",
+			Handler:    _YoutubikonService_SendEventToYoutube_Handler,
+		},
+		{
+			MethodName: "TestAIReply",
+			Handler:    _YoutubikonService_TestAIReply_Handler,
+		},
+		{
+			MethodName: "ListYoutubeVideos",
+			Handler:    _YoutubikonService_ListYoutubeVideos_Handler,
+		},
+		{
+			MethodName: "MatchYoutubeVideos",
+			Handler:    _YoutubikonService_MatchYoutubeVideos_Handler,
+		},
+		{
+			MethodName: "ResyncTiktokVideos",
+			Handler:    _YoutubikonService_ResyncTiktokVideos_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	Find_FindDocs_FullMethodName = "/header.Find/FindDocs"
 	Find_IndexDoc_FullMethodName = "/header.Find/IndexDoc"
 )
