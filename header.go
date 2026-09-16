@@ -2844,7 +2844,9 @@ func IsCommentChannel(channel string) bool {
 	switch channel {
 	case ChannelType_facebook_comment.String(),
 		ChannelType_instagram_comment.String(),
-		ChannelType_tiktok_comment.String():
+		ChannelType_tiktok_comment.String(),
+		ChannelType_youtube.String(),
+		ChannelType_google_review.String():
 		return true
 	}
 	return false

@@ -15,6 +15,14 @@ service GooglekonService {
 	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
 }
 
+service YoutubikonService {
+	rpc SendEventToYoutube(header.Events) returns (header.Empty);
+	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
+	rpc ListYoutubeVideos(YoutubeVideoRequest) returns (Response);
+	rpc MatchYoutubeVideos(Ids) returns (Response);
+	rpc ResyncTiktokVideos(Id) returns (Response);
+}
+
 service Find {
 	rpc FindDocs(header.DocSearchRequest) returns (header.Response);
 	rpc IndexDoc(header.DocIndexRequest) returns (header.Empty);
