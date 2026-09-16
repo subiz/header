@@ -3861,8 +3861,9 @@ message GoogleReviewSetting {
 }
 
 message YoutubeCommentSetting {
-	bool disabled = 1;
+	// bool disabled = 1;
 
+	string video_id = 3;
 	string auto_reply = 4; // none, fixed, llm
 	string auto_reply_prompt = 5;
 	repeated Message replies = 6;

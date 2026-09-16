@@ -27205,7 +27205,7 @@ func (x *GoogleReviewSetting) GetReplies_5() []*Message {
 
 type YoutubeCommentSetting struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Disabled        bool                   `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	VideoId         string                 `protobuf:"bytes,3,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	AutoReply       string                 `protobuf:"bytes,4,opt,name=auto_reply,json=autoReply,proto3" json:"auto_reply,omitempty"` // none, fixed, llm
 	AutoReplyPrompt string                 `protobuf:"bytes,5,opt,name=auto_reply_prompt,json=autoReplyPrompt,proto3" json:"auto_reply_prompt,omitempty"`
 	Replies         []*Message             `protobuf:"bytes,6,rep,name=replies,proto3" json:"replies,omitempty"`
@@ -27243,11 +27243,11 @@ func (*YoutubeCommentSetting) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{198}
 }
 
-func (x *YoutubeCommentSetting) GetDisabled() bool {
+func (x *YoutubeCommentSetting) GetVideoId() string {
 	if x != nil {
-		return x.Disabled
+		return x.VideoId
 	}
-	return false
+	return ""
 }
 
 func (x *YoutubeCommentSetting) GetAutoReply() string {
@@ -81987,9 +81987,9 @@ const file_header_proto_rawDesc = "" +
 	"\fauto_reply_5\x183 \x01(\tR\n" +
 	"autoReply5\x12-\n" +
 	"\x13auto_reply_prompt_5\x184 \x01(\tR\x10autoReplyPrompt5\x12,\n" +
-	"\treplies_5\x185 \x03(\v2\x0f.header.MessageR\breplies5\"\xa9\x01\n" +
-	"\x15YoutubeCommentSetting\x12\x1a\n" +
-	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12\x1d\n" +
+	"\treplies_5\x185 \x03(\v2\x0f.header.MessageR\breplies5\"\xa8\x01\n" +
+	"\x15YoutubeCommentSetting\x12\x19\n" +
+	"\bvideo_id\x18\x03 \x01(\tR\avideoId\x12\x1d\n" +
 	"\n" +
 	"auto_reply\x18\x04 \x01(\tR\tautoReply\x12*\n" +
 	"\x11auto_reply_prompt\x18\x05 \x01(\tR\x0fautoReplyPrompt\x12)\n" +
