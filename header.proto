@@ -1970,6 +1970,7 @@ message Integration {
 	string google_review_address = 73;
 	string google_review_description = 74;
 	string google_review_maps_uri = 75;
+	string google_review_link = 77;
 
 	// string sending_status = 17; // ok, failed
 	// string receiving_status = 18; // ok, failed
@@ -3853,27 +3854,6 @@ message ChannelSetting {
 
 	TiktokCommentSetting general_tiktok_video_comment_setting = 16;
 	repeated TiktokCommentSetting tiktok_video_comment_setting = 17;
-}
-
-message FbFanpageSetting {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string fanpage_id = 3;
-
-	FbCommentSetting general_comment_setting = 5;
-	FbCommentSetting specific_post_comment_setting = 6;
-	repeated FbCommentSetting post_comment_settings = 7;
-
-	int64 updated = 9;
-	string platform = 10; // default facebook. Could be instagram
-
-	repeated string send_lead_event_on_lifecycle_stages = 20;
-	int64 sync_conversion_disabled = 21; // source of truth
-}
-
-message FbFanpageSettings {
-	common.Context ctx = 1;
-	repeated FbFanpageSetting settings = 2;
 }
 
 message TiktokCommentSetting {
@@ -7242,7 +7222,7 @@ message Response {
 	MetaAdAccount meta_ad_account = 226;
 	repeated MetaAdAccount meta_ad_accounts = 227;
 
-	repeated FbFanpageSetting fanpage_settings = 228;
+	// repeated FbFanpageSetting fanpage_settings = 228;
 
 	// repeated NamedEntity named_entities = 229;
 	// NamedEntity named_entity = 230;

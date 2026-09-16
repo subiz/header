@@ -21930,9 +21930,6 @@ var WhatsappService_ServiceDesc = grpc.ServiceDesc{
 
 const (
 	FabikonService_TestAIReply_FullMethodName             = "/header.FabikonService/TestAIReply"
-	FabikonService_ReadFbFanpageSetting_FullMethodName    = "/header.FabikonService/ReadFbFanpageSetting"
-	FabikonService_UpdateFbFanpageSetting_FullMethodName  = "/header.FabikonService/UpdateFbFanpageSetting"
-	FabikonService_ListFbFanpageSettings_FullMethodName   = "/header.FabikonService/ListFbFanpageSettings"
 	FabikonService_ListFacebookPosts_FullMethodName       = "/header.FabikonService/ListFacebookPosts"
 	FabikonService_MatchFacebookPosts_FullMethodName      = "/header.FabikonService/MatchFacebookPosts"
 	FabikonService_ResyncFacebookPost_FullMethodName      = "/header.FabikonService/ResyncFacebookPost"
@@ -21965,9 +21962,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FabikonServiceClient interface {
 	TestAIReply(ctx context.Context, in *TestAIReplyRequest, opts ...grpc.CallOption) (*Response, error)
-	ReadFbFanpageSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSetting, error)
-	UpdateFbFanpageSetting(ctx context.Context, in *FbFanpageSetting, opts ...grpc.CallOption) (*FbFanpageSetting, error)
-	ListFbFanpageSettings(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSettings, error)
 	ListFacebookPosts(ctx context.Context, in *FacebookPostRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchFacebookPosts(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ResyncFacebookPost(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -22008,36 +22002,6 @@ func (c *fabikonServiceClient) TestAIReply(ctx context.Context, in *TestAIReplyR
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, FabikonService_TestAIReply_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fabikonServiceClient) ReadFbFanpageSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSetting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FbFanpageSetting)
-	err := c.cc.Invoke(ctx, FabikonService_ReadFbFanpageSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fabikonServiceClient) UpdateFbFanpageSetting(ctx context.Context, in *FbFanpageSetting, opts ...grpc.CallOption) (*FbFanpageSetting, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FbFanpageSetting)
-	err := c.cc.Invoke(ctx, FabikonService_UpdateFbFanpageSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fabikonServiceClient) ListFbFanpageSettings(ctx context.Context, in *Id, opts ...grpc.CallOption) (*FbFanpageSettings, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FbFanpageSettings)
-	err := c.cc.Invoke(ctx, FabikonService_ListFbFanpageSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -22299,9 +22263,6 @@ func (c *fabikonServiceClient) SetMessengerCallRouting(ctx context.Context, in *
 // for forward compatibility.
 type FabikonServiceServer interface {
 	TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error)
-	ReadFbFanpageSetting(context.Context, *Id) (*FbFanpageSetting, error)
-	UpdateFbFanpageSetting(context.Context, *FbFanpageSetting) (*FbFanpageSetting, error)
-	ListFbFanpageSettings(context.Context, *Id) (*FbFanpageSettings, error)
 	ListFacebookPosts(context.Context, *FacebookPostRequest) (*Response, error)
 	MatchFacebookPosts(context.Context, *Ids) (*Response, error)
 	ResyncFacebookPost(context.Context, *Id) (*Response, error)
@@ -22340,15 +22301,6 @@ type UnimplementedFabikonServiceServer struct{}
 
 func (UnimplementedFabikonServiceServer) TestAIReply(context.Context, *TestAIReplyRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method TestAIReply not implemented")
-}
-func (UnimplementedFabikonServiceServer) ReadFbFanpageSetting(context.Context, *Id) (*FbFanpageSetting, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReadFbFanpageSetting not implemented")
-}
-func (UnimplementedFabikonServiceServer) UpdateFbFanpageSetting(context.Context, *FbFanpageSetting) (*FbFanpageSetting, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateFbFanpageSetting not implemented")
-}
-func (UnimplementedFabikonServiceServer) ListFbFanpageSettings(context.Context, *Id) (*FbFanpageSettings, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListFbFanpageSettings not implemented")
 }
 func (UnimplementedFabikonServiceServer) ListFacebookPosts(context.Context, *FacebookPostRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListFacebookPosts not implemented")
@@ -22460,60 +22412,6 @@ func _FabikonService_TestAIReply_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FabikonServiceServer).TestAIReply(ctx, req.(*TestAIReplyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FabikonService_ReadFbFanpageSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FabikonServiceServer).ReadFbFanpageSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FabikonService_ReadFbFanpageSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FabikonServiceServer).ReadFbFanpageSetting(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FabikonService_UpdateFbFanpageSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FbFanpageSetting)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FabikonServiceServer).UpdateFbFanpageSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FabikonService_UpdateFbFanpageSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FabikonServiceServer).UpdateFbFanpageSetting(ctx, req.(*FbFanpageSetting))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FabikonService_ListFbFanpageSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FabikonServiceServer).ListFbFanpageSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FabikonService_ListFbFanpageSettings_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FabikonServiceServer).ListFbFanpageSettings(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -22980,18 +22878,6 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FabikonService_TestAIReply_Handler,
 		},
 		{
-			MethodName: "ReadFbFanpageSetting",
-			Handler:    _FabikonService_ReadFbFanpageSetting_Handler,
-		},
-		{
-			MethodName: "UpdateFbFanpageSetting",
-			Handler:    _FabikonService_UpdateFbFanpageSetting_Handler,
-		},
-		{
-			MethodName: "ListFbFanpageSettings",
-			Handler:    _FabikonService_ListFbFanpageSettings_Handler,
-		},
-		{
 			MethodName: "ListFacebookPosts",
 			Handler:    _FabikonService_ListFacebookPosts_Handler,
 		},
@@ -23199,7 +23085,6 @@ var ChannelConnector_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ZalokonService_SendEventToZalo_FullMethodName           = "/header.ZalokonService/SendEventToZalo"
 	ZalokonService_RequestZaloUserToMakeCall_FullMethodName = "/header.ZalokonService/RequestZaloUserToMakeCall"
 	ZalokonService_MakeSureZaloUser_FullMethodName          = "/header.ZalokonService/MakeSureZaloUser"
 	ZalokonService_GetZaloUserCallConsent_FullMethodName    = "/header.ZalokonService/GetZaloUserCallConsent"
@@ -23218,7 +23103,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ZalokonServiceClient interface {
-	SendEventToZalo(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
 	RequestZaloUserToMakeCall(ctx context.Context, in *ZaloUserRequest, opts ...grpc.CallOption) (*Empty, error)
 	MakeSureZaloUser(ctx context.Context, in *ZaloUserRequest, opts ...grpc.CallOption) (*Empty, error)
 	GetZaloUserCallConsent(ctx context.Context, in *ZaloUserRequest, opts ...grpc.CallOption) (*Response, error)
@@ -23239,16 +23123,6 @@ type zalokonServiceClient struct {
 
 func NewZalokonServiceClient(cc grpc.ClientConnInterface) ZalokonServiceClient {
 	return &zalokonServiceClient{cc}
-}
-
-func (c *zalokonServiceClient) SendEventToZalo(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, ZalokonService_SendEventToZalo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *zalokonServiceClient) RequestZaloUserToMakeCall(ctx context.Context, in *ZaloUserRequest, opts ...grpc.CallOption) (*Empty, error) {
@@ -23375,7 +23249,6 @@ func (c *zalokonServiceClient) DeleteZNSMedia(ctx context.Context, in *Id, opts 
 // All implementations must embed UnimplementedZalokonServiceServer
 // for forward compatibility.
 type ZalokonServiceServer interface {
-	SendEventToZalo(context.Context, *Events) (*Empty, error)
 	RequestZaloUserToMakeCall(context.Context, *ZaloUserRequest) (*Empty, error)
 	MakeSureZaloUser(context.Context, *ZaloUserRequest) (*Empty, error)
 	GetZaloUserCallConsent(context.Context, *ZaloUserRequest) (*Response, error)
@@ -23398,9 +23271,6 @@ type ZalokonServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedZalokonServiceServer struct{}
 
-func (UnimplementedZalokonServiceServer) SendEventToZalo(context.Context, *Events) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method SendEventToZalo not implemented")
-}
 func (UnimplementedZalokonServiceServer) RequestZaloUserToMakeCall(context.Context, *ZaloUserRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RequestZaloUserToMakeCall not implemented")
 }
@@ -23456,24 +23326,6 @@ func RegisterZalokonServiceServer(s grpc.ServiceRegistrar, srv ZalokonServiceSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ZalokonService_ServiceDesc, srv)
-}
-
-func _ZalokonService_SendEventToZalo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Events)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ZalokonServiceServer).SendEventToZalo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ZalokonService_SendEventToZalo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ZalokonServiceServer).SendEventToZalo(ctx, req.(*Events))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ZalokonService_RequestZaloUserToMakeCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -23700,10 +23552,6 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ZalokonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendEventToZalo",
-			Handler:    _ZalokonService_SendEventToZalo_Handler,
-		},
-		{
 			MethodName: "RequestZaloUserToMakeCall",
 			Handler:    _ZalokonService_RequestZaloUserToMakeCall_Handler,
 		},
@@ -23757,7 +23605,6 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ZalopersonService_SendEventToZaloPersonal_FullMethodName = "/header.ZalopersonService/SendEventToZaloPersonal"
 	ZalopersonService_UndoFriendRequest_FullMethodName       = "/header.ZalopersonService/UndoFriendRequest"
 	ZalopersonService_SendFriendRequest_FullMethodName       = "/header.ZalopersonService/SendFriendRequest"
 	ZalopersonService_ListFriendRequests_FullMethodName      = "/header.ZalopersonService/ListFriendRequests"
@@ -23782,7 +23629,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ZalopersonServiceClient interface {
-	SendEventToZaloPersonal(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error)
 	UndoFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	SendFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	ListFriendRequests(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -23809,16 +23655,6 @@ type zalopersonServiceClient struct {
 
 func NewZalopersonServiceClient(cc grpc.ClientConnInterface) ZalopersonServiceClient {
 	return &zalopersonServiceClient{cc}
-}
-
-func (c *zalopersonServiceClient) SendEventToZaloPersonal(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, ZalopersonService_SendEventToZaloPersonal_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *zalopersonServiceClient) UndoFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
@@ -24005,7 +23841,6 @@ func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLogi
 // All implementations must embed UnimplementedZalopersonServiceServer
 // for forward compatibility.
 type ZalopersonServiceServer interface {
-	SendEventToZaloPersonal(context.Context, *Events) (*Empty, error)
 	UndoFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	ListFriendRequests(context.Context, *Id) (*Response, error)
@@ -24034,9 +23869,6 @@ type ZalopersonServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedZalopersonServiceServer struct{}
 
-func (UnimplementedZalopersonServiceServer) SendEventToZaloPersonal(context.Context, *Events) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method SendEventToZaloPersonal not implemented")
-}
 func (UnimplementedZalopersonServiceServer) UndoFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method UndoFriendRequest not implemented")
 }
@@ -24110,24 +23942,6 @@ func RegisterZalopersonServiceServer(s grpc.ServiceRegistrar, srv ZalopersonServ
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ZalopersonService_ServiceDesc, srv)
-}
-
-func _ZalopersonService_SendEventToZaloPersonal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Events)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ZalopersonServiceServer).SendEventToZaloPersonal(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ZalopersonService_SendEventToZaloPersonal_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ZalopersonServiceServer).SendEventToZaloPersonal(ctx, req.(*Events))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ZalopersonService_UndoFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -24461,10 +24275,6 @@ var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.ZalopersonService",
 	HandlerType: (*ZalopersonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SendEventToZaloPersonal",
-			Handler:    _ZalopersonService_SendEventToZaloPersonal_Handler,
-		},
 		{
 			MethodName: "UndoFriendRequest",
 			Handler:    _ZalopersonService_UndoFriendRequest_Handler,

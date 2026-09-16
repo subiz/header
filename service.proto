@@ -804,9 +804,6 @@ service WhatsappService {
 
 service FabikonService {
 	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
-	rpc ReadFbFanpageSetting(Id) returns (header.FbFanpageSetting);
-	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);
-	rpc ListFbFanpageSettings(Id) returns (header.FbFanpageSettings);
 	rpc ListFacebookPosts(FacebookPostRequest) returns (Response);
 	rpc MatchFacebookPosts(Ids) returns (Response);
 	rpc ResyncFacebookPost(Id) returns (Response);
@@ -844,12 +841,9 @@ service FabikonService {
 
 service ChannelConnector {
 	rpc GetIntegration(Id) returns (Integration);
-	// rpc UpdateIntegration(Integration) returns (Integration);
 }
 
 service ZalokonService {
-	rpc SendEventToZalo(header.Events) returns (Empty); // zalo
-
 	rpc RequestZaloUserToMakeCall(header.ZaloUserRequest) returns (header.Empty);
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
@@ -867,7 +861,6 @@ service ZalokonService {
 }
 
 service ZalopersonService {
-	rpc SendEventToZaloPersonal(header.Events) returns (Empty); // zalo
 	rpc UndoFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc SendFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc ListFriendRequests(Id) returns (header.Response); // zalo_personal_accounts
