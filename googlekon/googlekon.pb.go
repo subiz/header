@@ -1979,130 +1979,6 @@ func (x *Brand) GetAccountId() string {
 	return ""
 }
 
-type BrandLocation struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	Name                      string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	PlaceId                   string                 `protobuf:"bytes,2,opt,name=placeId,proto3" json:"placeId,omitempty"`
-	LocationId                string                 `protobuf:"bytes,3,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
-	Agent                     string                 `protobuf:"bytes,4,opt,name=agent,proto3" json:"agent,omitempty"`
-	LocationEntryPointConfigs string                 `protobuf:"bytes,5,opt,name=locationEntryPointConfigs,proto3" json:"locationEntryPointConfigs,omitempty"`
-	DefaultLocale             string                 `protobuf:"bytes,8,opt,name=defaultLocale,proto3" json:"defaultLocale,omitempty"`
-	ListingId                 string                 `protobuf:"bytes,9,opt,name=listingId,proto3" json:"listingId,omitempty"`
-	BusinessLocationId        string                 `protobuf:"bytes,11,opt,name=business_location_id,json=businessLocationId,proto3" json:"business_location_id,omitempty"`
-	BrandId                   string                 `protobuf:"bytes,12,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
-	AgentId                   string                 `protobuf:"bytes,13,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	State                     string                 `protobuf:"bytes,14,opt,name=state,proto3" json:"state,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
-}
-
-func (x *BrandLocation) Reset() {
-	*x = BrandLocation{}
-	mi := &file_googlekon_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BrandLocation) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BrandLocation) ProtoMessage() {}
-
-func (x *BrandLocation) ProtoReflect() protoreflect.Message {
-	mi := &file_googlekon_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BrandLocation.ProtoReflect.Descriptor instead.
-func (*BrandLocation) Descriptor() ([]byte, []int) {
-	return file_googlekon_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *BrandLocation) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetPlaceId() string {
-	if x != nil {
-		return x.PlaceId
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetLocationId() string {
-	if x != nil {
-		return x.LocationId
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetAgent() string {
-	if x != nil {
-		return x.Agent
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetLocationEntryPointConfigs() string {
-	if x != nil {
-		return x.LocationEntryPointConfigs
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetDefaultLocale() string {
-	if x != nil {
-		return x.DefaultLocale
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetListingId() string {
-	if x != nil {
-		return x.ListingId
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetBusinessLocationId() string {
-	if x != nil {
-		return x.BusinessLocationId
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetBrandId() string {
-	if x != nil {
-		return x.BrandId
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetAgentId() string {
-	if x != nil {
-		return x.AgentId
-	}
-	return ""
-}
-
-func (x *BrandLocation) GetState() string {
-	if x != nil {
-		return x.State
-	}
-	return ""
-}
-
 var File_googlekon_proto protoreflect.FileDescriptor
 
 const file_googlekon_proto_rawDesc = "" +
@@ -2308,20 +2184,7 @@ const file_googlekon_proto_rawDesc = "" +
 	"\vdisplayName\x18\x02 \x01(\tR\vdisplayName\x12\x19\n" +
 	"\bbrand_id\x18\x03 \x01(\tR\abrandId\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x04 \x01(\tR\taccountId\"\xf4\x02\n" +
-	"\rBrandLocation\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\aplaceId\x18\x02 \x01(\tR\aplaceId\x12\x1f\n" +
-	"\vlocation_id\x18\x03 \x01(\tR\n" +
-	"locationId\x12\x14\n" +
-	"\x05agent\x18\x04 \x01(\tR\x05agent\x12<\n" +
-	"\x19locationEntryPointConfigs\x18\x05 \x01(\tR\x19locationEntryPointConfigs\x12$\n" +
-	"\rdefaultLocale\x18\b \x01(\tR\rdefaultLocale\x12\x1c\n" +
-	"\tlistingId\x18\t \x01(\tR\tlistingId\x120\n" +
-	"\x14business_location_id\x18\v \x01(\tR\x12businessLocationId\x12\x19\n" +
-	"\bbrand_id\x18\f \x01(\tR\abrandId\x12\x19\n" +
-	"\bagent_id\x18\r \x01(\tR\aagentId\x12\x14\n" +
-	"\x05state\x18\x0e \x01(\tR\x05stateB#Z!github.com/subiz/header/googlekonb\x06proto3"
+	"account_id\x18\x04 \x01(\tR\taccountIdB#Z!github.com/subiz/header/googlekonb\x06proto3"
 
 var (
 	file_googlekon_proto_rawDescOnce sync.Once
@@ -2336,7 +2199,7 @@ func file_googlekon_proto_rawDescGZIP() []byte {
 }
 
 var file_googlekon_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_googlekon_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_googlekon_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_googlekon_proto_goTypes = []any{
 	(Review_Rating)(0),              // 0: googlekon.Review.Rating
 	(Author_AuthorType)(0),          // 1: googlekon.Author.AuthorType
@@ -2364,8 +2227,7 @@ var file_googlekon_proto_goTypes = []any{
 	(*AgentInteractQuestion)(nil),   // 23: googlekon.AgentInteractQuestion
 	(*AgentInteractReview)(nil),     // 24: googlekon.AgentInteractReview
 	(*Brand)(nil),                   // 25: googlekon.Brand
-	(*BrandLocation)(nil),           // 26: googlekon.BrandLocation
-	nil,                             // 27: googlekon.Question.AnswerIdsMEntry
+	nil,                             // 26: googlekon.Question.AnswerIdsMEntry
 }
 var file_googlekon_proto_depIdxs = []int32{
 	3,  // 0: googlekon.BusinessProfileAccounts.accounts:type_name -> googlekon.BusinessProfileAccount
@@ -2379,7 +2241,7 @@ var file_googlekon_proto_depIdxs = []int32{
 	11, // 8: googlekon.Reviews.reviews:type_name -> googlekon.Review
 	11, // 9: googlekon.ListReviews.reviews:type_name -> googlekon.Review
 	19, // 10: googlekon.Question.author:type_name -> googlekon.Author
-	27, // 11: googlekon.Question.answer_idsM:type_name -> googlekon.Question.AnswerIdsMEntry
+	26, // 11: googlekon.Question.answer_idsM:type_name -> googlekon.Question.AnswerIdsMEntry
 	19, // 12: googlekon.Answer.author:type_name -> googlekon.Author
 	18, // 13: googlekon.ListQuestions.questions:type_name -> googlekon.Question
 	20, // 14: googlekon.ListAnswers.answers:type_name -> googlekon.Answer
@@ -2401,7 +2263,7 @@ func file_googlekon_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_googlekon_proto_rawDesc), len(file_googlekon_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   26,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -213,17 +213,3 @@ message Brand {
 	string brand_id = 3;
 	string account_id = 4;
 }
-
-message BrandLocation {
-	string name = 1;
-	string placeId = 2;
-	string location_id = 3;
-	string agent = 4;
-	string locationEntryPointConfigs = 5;
-	string defaultLocale = 8;
-	string listingId = 9;
-	string business_location_id = 11;
-	string brand_id = 12;
-	string agent_id = 13;
-	string state = 14;
-}

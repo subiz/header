@@ -14321,7 +14321,10 @@ type Integration struct {
 	GoogleReviewAddress          string  `protobuf:"bytes,73,opt,name=google_review_address,json=googleReviewAddress,proto3" json:"google_review_address,omitempty"`
 	GoogleReviewDescription      string  `protobuf:"bytes,74,opt,name=google_review_description,json=googleReviewDescription,proto3" json:"google_review_description,omitempty"`
 	GoogleReviewMapsUri          string  `protobuf:"bytes,75,opt,name=google_review_maps_uri,json=googleReviewMapsUri,proto3" json:"google_review_maps_uri,omitempty"`
-	GoogleReviewLink             string  `protobuf:"bytes,77,opt,name=google_review_link,json=googleReviewLink,proto3" json:"google_review_link,omitempty"`
+	GoogleReviewNewReviewUri     string  `protobuf:"bytes,77,opt,name=google_review_new_review_uri,json=googleReviewNewReviewUri,proto3" json:"google_review_new_review_uri,omitempty"`
+	GoogleReviewAccountEmail     string  `protobuf:"bytes,78,opt,name=google_review_account_email,json=googleReviewAccountEmail,proto3" json:"google_review_account_email,omitempty"`
+	GoogleReviewMapUri           string  `protobuf:"bytes,79,opt,name=google_review_map_uri,json=googleReviewMapUri,proto3" json:"google_review_map_uri,omitempty"`
+	GoogleReviewPlaceId          string  `protobuf:"bytes,83,opt,name=google_review_place_id,json=googleReviewPlaceId,proto3" json:"google_review_place_id,omitempty"`
 	// string sending_status = 17; // ok, failed
 	// string receiving_status = 18; // ok, failed
 	LastHookReceived        int64    `protobuf:"varint,80,opt,name=last_hook_received,json=lastHookReceived,proto3" json:"last_hook_received,omitempty"`
@@ -14820,9 +14823,30 @@ func (x *Integration) GetGoogleReviewMapsUri() string {
 	return ""
 }
 
-func (x *Integration) GetGoogleReviewLink() string {
+func (x *Integration) GetGoogleReviewNewReviewUri() string {
 	if x != nil {
-		return x.GoogleReviewLink
+		return x.GoogleReviewNewReviewUri
+	}
+	return ""
+}
+
+func (x *Integration) GetGoogleReviewAccountEmail() string {
+	if x != nil {
+		return x.GoogleReviewAccountEmail
+	}
+	return ""
+}
+
+func (x *Integration) GetGoogleReviewMapUri() string {
+	if x != nil {
+		return x.GoogleReviewMapUri
+	}
+	return ""
+}
+
+func (x *Integration) GetGoogleReviewPlaceId() string {
+	if x != nil {
+		return x.GoogleReviewPlaceId
 	}
 	return ""
 }
@@ -80051,7 +80075,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x17\n" +
 	"\apost_id\x18\x05 \x01(\tR\x06postId\x12\x16\n" +
 	"\x06prompt\x18\x06 \x01(\tR\x06prompt\x12)\n" +
-	"\acomment\x18\a \x01(\v2\x0f.header.MessageR\acomment\"\x84.\n" +
+	"\acomment\x18\a \x01(\v2\x0f.header.MessageR\acomment\"\xbd/\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -80111,8 +80135,11 @@ const file_header_proto_rawDesc = "" +
 	"\x1bgoogle_review_primary_phone\x18H \x01(\tR\x18googleReviewPrimaryPhone\x122\n" +
 	"\x15google_review_address\x18I \x01(\tR\x13googleReviewAddress\x12:\n" +
 	"\x19google_review_description\x18J \x01(\tR\x17googleReviewDescription\x123\n" +
-	"\x16google_review_maps_uri\x18K \x01(\tR\x13googleReviewMapsUri\x12,\n" +
-	"\x12google_review_link\x18M \x01(\tR\x10googleReviewLink\x12,\n" +
+	"\x16google_review_maps_uri\x18K \x01(\tR\x13googleReviewMapsUri\x12>\n" +
+	"\x1cgoogle_review_new_review_uri\x18M \x01(\tR\x18googleReviewNewReviewUri\x12=\n" +
+	"\x1bgoogle_review_account_email\x18N \x01(\tR\x18googleReviewAccountEmail\x121\n" +
+	"\x15google_review_map_uri\x18O \x01(\tR\x12googleReviewMapUri\x123\n" +
+	"\x16google_review_place_id\x18S \x01(\tR\x13googleReviewPlaceId\x12,\n" +
 	"\x12last_hook_received\x18P \x01(\x03R\x10lastHookReceived\x12*\n" +
 	"\x11last_request_sent\x18Q \x01(\x03R\x0flastRequestSent\x12)\n" +
 	"\x10comment_disabled\x18U \x01(\x03R\x0fcommentDisabled\x12\x1a\n" +
