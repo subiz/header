@@ -1,7 +1,3 @@
-# AGENTS.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## What this repo is
 
 `github.com/subiz/header` is the shared **schema + contract library** for Subiz's microservices. It holds the protobuf definitions (gRPC service interfaces, message types, enums) that every service imports, plus hand-written Go helpers for the domain types those protos describe. Changing a `.proto` here changes the API surface of the whole platform, so treat edits as cross-service contract changes.

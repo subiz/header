@@ -316,7 +316,7 @@ service NoteMgr {
 }
 
 service AttributeMgr {
-	rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions); // deprecated
+	// rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions); // deprecated
 	rpc ListAttributeDefinitions2(Id) returns (header.Response);
 	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
@@ -375,12 +375,6 @@ service WorkflowMgr {
 	rpc ListConvertedLeads(ReportAIAgentRequest) returns (Response);
 
 	rpc GetAIResponseTrace(AIAgentTraceRequest) returns (Response);
-
-	// rpc ListNamedEntities(Id) returns (Response);
-	//rpc CreateNamedEntity(NamedEntity) returns (Response);
-	// rpc UpdateNamedEntity(NamedEntity) returns (Response);
-	// rpc GetNamedEntity(Id) returns (Response);
-	// rpc MatchNamedEntities(Ids) returns (Response);
 
 	rpc RunAIAgentTest(AIAgentTestResult) returns (Response);
 	rpc ListAIAgentTestResults(AIAgentTestResult) returns (Response);
@@ -1226,11 +1220,6 @@ service KB {
 
 	rpc CheckKbHandle(Id) returns (Response);
 	rpc UpdateArticleTree(ArticleNode) returns (Response);
-}
-
-service AndroidNotificationMgr {
-	rpc PushAndroidNotifications(AndroidNotificationRequest) returns (Response);
-	rpc PingAndroidDevice(AndroidNotificationRequest) returns (Response);
 }
 
 // internal
