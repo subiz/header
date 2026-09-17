@@ -966,10 +966,6 @@ message Rule {
 	TimmingCondition timming_condition = 16;
 	repeated Condition form_conditions = 30;
 
-	int64 use_llm = 31;
-	string llm_condition = 32; // prompt
-	string llm_min_confidence = 21; // "" | low | medium | high | certain
-
 	string returning_visitor = 35; // new, returning, empty
 	bool user_has_replied_before = 18; // new
 	repeated Condition user_conditions = 19;
@@ -989,6 +985,10 @@ message Rule {
 	repeated string supervisors = 24;
 	RingingSetting call = 25;
 
+	// AND with each other and the non-AI conditions above.
+	// When non-empty, replaces use_llm, llm_condition and llm_min_confidence.
+	repeated RuleAICondition ai_conditions = 31;
+
 	int64 create_ticket_on_missed_call = 33;
 	string missed_call_ticket_type = 34; // tech issue
 
@@ -1000,8 +1000,10 @@ message Rule {
 	bool remove_other_agents = 41;
 
 	string source = 42; // bot, fanpage, call_setting
+	// Follow-up actions executed after mandatory assignment.
 	repeated WorkflowAction actions = 44;
 	int64 last_used = 46;
+
 }
 
 message FacebookCondition {
@@ -3926,7 +3928,7 @@ message TiktokCommentSetting {
 }
 
 message FbCommentSetting {
-	// bool enabled = 1;
+	bool enabled = 1;
 	bool auto_like = 2;
 
 	enum HideComment {
@@ -3957,6 +3959,7 @@ message FbCommentSetting {
 	repeated string hashtags = 12; // @deprecated post (contain #)
 
 	repeated FacebookPost posts = 13; // read only
+	string post_id = 18;
 }
 
 message FacebookPosts {
@@ -11296,4 +11299,28 @@ message RecordFilterCondition {
 
 	Touchpoint touchpoint = 35;
 	string pipeline_stage = 38;
+}
+
+message RuleAICondition {
+	string signal = 1; // spam, abusive, purchase_intent, custom
+	string operator = 2; // eq, neq
+	string value = 3; // expected value, depending on signal
+	string min_confidence = 4; // low, medium, high, certain; distinct from value
+	string prompt = 5; // only used when signal is custom
+}
+
+message FbFanpageSetting {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string fanpage_id = 3;
+
+	FbCommentSetting general_comment_setting = 5;
+	FbCommentSetting specific_post_comment_setting = 6;
+	repeated FbCommentSetting post_comment_settings = 7;
+
+	int64 updated = 9;
+	string platform = 10; // default facebook. Could be instagram
+
+	repeated string send_lead_event_on_lifecycle_stages = 20;
+	int64 sync_conversion_disabled = 21; // source of truth
 }
