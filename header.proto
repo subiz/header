@@ -917,7 +917,8 @@ message Rule {
 	string account_id = 3;
 	// int32 priority = 4;
 	enum AssignStrategy {
-		all_agents = 0;
+		all_agents = 0; // => random
+		none = 1; // do not assign to any agent and ignore the conversation
 		agentgroup = 2;
 		agents = 3; // == ordered
 		most_recent = 4;
@@ -949,7 +950,7 @@ message Rule {
 	string object_type = 7; // (default) message | comment | review | form | call | ticket
 
 	string strategy = 5;
-	repeated string assign_tos = 6;
+	repeated string assign_tos = 6; // agent_id, all, or group_id
 	bool enabled = 8;
 	int64 created = 9;
 	int64 modified = 12;
@@ -977,7 +978,7 @@ message Rule {
 
 	int64 v = 22; // version
 
-	repeated string supervisors = 24;
+	repeated string supporters = 24;
 	RingingSetting call = 25;
 
 	// AND with each other and the non-AI conditions above.
@@ -996,9 +997,9 @@ message Rule {
 
 	string source = 42; // bot, fanpage, call_setting
 	// Follow-up actions executed after mandatory assignment.
-	repeated WorkflowAction actions = 44;
+	// repeated WorkflowAction actions = 44;
 	int64 last_used = 46;
-
+	repeated string tags = 45;
 }
 
 message FacebookCondition {
@@ -1353,6 +1354,9 @@ message Conversation {
 	int64 sla_breach_count = 106; // read-only
 	int64 next_response_sla_breached_at = 107;
 	int64 first_response_sla_breached = 108;
+
+	string assignee = 109;
+	string assigned_team_id = 110;
 }
 
 message SLAEvent {
@@ -11236,7 +11240,7 @@ message RecordFilterCondition {
 	int64 created_from_ms = 12; //
 	int64 created_to_ms = 13; //
 	bool is_muted = 14;
-	bool is_spam = 15;
+	bool is_spam = 15; // is_spam
 	bool from_ads = 16;
 	repeated string fb_post_ids = 17;
 	repeated string user_ids = 18;
@@ -11260,20 +11264,4 @@ message RuleAICondition {
 	string value = 3; // expected value, depending on signal
 	string min_confidence = 4; // low, medium, high, certain; distinct from value
 	string prompt = 5; // only used when signal is custom
-}
-
-message FbFanpageSetting {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string fanpage_id = 3;
-
-	FbCommentSetting general_comment_setting = 5;
-	FbCommentSetting specific_post_comment_setting = 6;
-	repeated FbCommentSetting post_comment_settings = 7;
-
-	int64 updated = 9;
-	string platform = 10; // default facebook. Could be instagram
-
-	repeated string send_lead_event_on_lifecycle_stages = 20;
-	int64 sync_conversion_disabled = 21; // source of truth
 }
