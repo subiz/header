@@ -784,16 +784,16 @@ func (AttributeDefinition_AttributeType) EnumDescriptor() ([]byte, []int) {
 type Rule_AssignStrategy int32
 
 const (
-	Rule_all_agents              Rule_AssignStrategy = 0 // => random
+	Rule_all_agents              Rule_AssignStrategy = 0 // @deprecated
 	Rule_none                    Rule_AssignStrategy = 1 // do not assign to any agent and ignore the conversation
-	Rule_agentgroup              Rule_AssignStrategy = 2
+	Rule_agentgroup              Rule_AssignStrategy = 2 // @deprecated
 	Rule_agents                  Rule_AssignStrategy = 3 // == ordered
 	Rule_most_recent             Rule_AssignStrategy = 4
-	Rule_roundrobin_all_agents   Rule_AssignStrategy = 5
+	Rule_roundrobin_all_agents   Rule_AssignStrategy = 5 // @deprecated
 	Rule_roundrobin_agents       Rule_AssignStrategy = 6
 	Rule_first_reply             Rule_AssignStrategy = 7 // list of agent
-	Rule_first_reply_of_all      Rule_AssignStrategy = 8 // all agent
-	Rule_first_reply_of_group    Rule_AssignStrategy = 9 // group
+	Rule_first_reply_of_all      Rule_AssignStrategy = 8 // all agent // @deprecated
+	Rule_first_reply_of_group    Rule_AssignStrategy = 9 // group // @deprecated
 	Rule_least_workload          Rule_AssignStrategy = 11
 	Rule_least_workload_agents   Rule_AssignStrategy = 12
 	Rule_least_workload_of_group Rule_AssignStrategy = 13
@@ -8519,6 +8519,8 @@ type Rule struct {
 	// repeated WorkflowAction actions = 44;
 	LastUsed      int64    `protobuf:"varint,46,opt,name=last_used,json=lastUsed,proto3" json:"last_used,omitempty"`
 	Tags          []string `protobuf:"bytes,45,rep,name=tags,proto3" json:"tags,omitempty"`
+	UpdatedBy     string   `protobuf:"bytes,47,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedBy     string   `protobuf:"bytes,48,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8831,6 +8833,20 @@ func (x *Rule) GetTags() []string {
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *Rule) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *Rule) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
 }
 
 type FacebookCondition struct {
@@ -9546,7 +9562,7 @@ type RouteResult struct {
 	// string bot_id = 8; // strategy == bot
 	Debug         string `protobuf:"bytes,9,opt,name=debug,proto3" json:"debug,omitempty"`
 	Status        string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"` // routing, waiting_for_agent, assigned
-	AssignedTo    string `protobuf:"bytes,11,opt,name=assigned_to,json=assignedTo,proto3" json:"assigned_to,omitempty"`
+	Assignee      string `protobuf:"bytes,11,opt,name=assignee,proto3" json:"assignee,omitempty"`
 	DurationSec   int64  `protobuf:"varint,12,opt,name=duration_sec,json=durationSec,proto3" json:"duration_sec,omitempty"` // routing time
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9631,9 +9647,9 @@ func (x *RouteResult) GetStatus() string {
 	return ""
 }
 
-func (x *RouteResult) GetAssignedTo() string {
+func (x *RouteResult) GetAssignee() string {
 	if x != nil {
-		return x.AssignedTo
+		return x.Assignee
 	}
 	return ""
 }
@@ -79327,7 +79343,7 @@ const file_header_proto_rawDesc = "" +
 	"\vexec_bot_id\x18\b \x01(\tR\texecBotId\x12$\n" +
 	"\x0eexec_bot_state\x18\t \x01(\tR\fexecBotState\x12\x1b\n" +
 	"\taction_id\x18\x10 \x01(\tR\bactionId\x12!\n" +
-	"\faction_state\x18\x11 \x01(\tR\vactionState\"\x98\x10\n" +
+	"\faction_state\x18\x11 \x01(\tR\vactionState\"\xd6\x10\n" +
 	"\x04Rule\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -79379,7 +79395,11 @@ const file_header_proto_rawDesc = "" +
 	"\x13remove_other_agents\x18) \x01(\bR\x11removeOtherAgents\x12\x16\n" +
 	"\x06source\x18* \x01(\tR\x06source\x12\x1b\n" +
 	"\tlast_used\x18. \x01(\x03R\blastUsed\x12\x12\n" +
-	"\x04tags\x18- \x03(\tR\x04tags\"\xb5\x03\n" +
+	"\x04tags\x18- \x03(\tR\x04tags\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18/ \x01(\tR\tupdatedBy\x12\x1d\n" +
+	"\n" +
+	"created_by\x180 \x01(\tR\tcreatedBy\"\xb5\x03\n" +
 	"\x0eAssignStrategy\x12\x0e\n" +
 	"\n" +
 	"all_agents\x10\x00\x12\b\n" +
@@ -79486,7 +79506,7 @@ const file_header_proto_rawDesc = "" +
 	"\tcity_name\x18\x03 \x01(\tR\bcityName\x12!\n" +
 	"\fcountry_code\x18\x04 \x01(\tR\vcountryCode\x12\x1a\n" +
 	"\bprovince\x18\x05 \x01(\tR\bprovince\x12\x1c\n" +
-	"\tdistricts\x18\x06 \x03(\tR\tdistricts\"\x88\x02\n" +
+	"\tdistricts\x18\x06 \x03(\tR\tdistricts\"\x83\x02\n" +
 	"\vRouteResult\x12\x17\n" +
 	"\arule_id\x18\x01 \x01(\tR\x06ruleId\x12\x1a\n" +
 	"\bstrategy\x18\x03 \x01(\tR\bstrategy\x12\x1b\n" +
@@ -79495,9 +79515,8 @@ const file_header_proto_rawDesc = "" +
 	"\bassigned\x18\a \x01(\x03R\bassigned\x12\x14\n" +
 	"\x05debug\x18\t \x01(\tR\x05debug\x12\x16\n" +
 	"\x06status\x18\n" +
-	" \x01(\tR\x06status\x12\x1f\n" +
-	"\vassigned_to\x18\v \x01(\tR\n" +
-	"assignedTo\x12!\n" +
+	" \x01(\tR\x06status\x12\x1a\n" +
+	"\bassignee\x18\v \x01(\tR\bassignee\x12!\n" +
 	"\fduration_sec\x18\f \x01(\x03R\vdurationSec\"\xda\b\n" +
 	"\x12ConversationMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +

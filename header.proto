@@ -917,17 +917,17 @@ message Rule {
 	string account_id = 3;
 	// int32 priority = 4;
 	enum AssignStrategy {
-		all_agents = 0; // => random
+		all_agents = 0; // @deprecated
 		none = 1; // do not assign to any agent and ignore the conversation
-		agentgroup = 2;
+		agentgroup = 2; // @deprecated
 		agents = 3; // == ordered
 		most_recent = 4;
-		roundrobin_all_agents = 5;
+		roundrobin_all_agents = 5; // @deprecated
 		roundrobin_agents = 6;
 
 		first_reply = 7; // list of agent
-		first_reply_of_all = 8; // all agent
-		first_reply_of_group = 9; // group
+		first_reply_of_all = 8; // all agent // @deprecated
+		first_reply_of_group = 9; // group // @deprecated
 
 		least_workload = 11;
 		least_workload_agents = 12;
@@ -1000,6 +1000,8 @@ message Rule {
 	// repeated WorkflowAction actions = 44;
 	int64 last_used = 46;
 	repeated string tags = 45;
+	string updated_by = 47;
+	string created_by = 48;
 }
 
 message FacebookCondition {
@@ -1117,7 +1119,7 @@ message RouteResult {
 	string debug = 9;
 
 	string status = 10; // routing, waiting_for_agent, assigned
-	string assigned_to = 11;
+	string assignee = 11;
 
 	int64 duration_sec = 12; // routing time
 }
