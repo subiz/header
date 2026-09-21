@@ -5061,11 +5061,12 @@ type ListConversationEventsRequest struct {
 	ConversationId string                 `protobuf:"bytes,3,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
 	StartId        string                 `protobuf:"bytes,4,opt,name=start_id,json=startId,proto3" json:"start_id,omitempty"`
 	TicketId       string                 `protobuf:"bytes,5,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	Limit          int32                  `protobuf:"varint,6,opt,name=limit,proto3" json:"limit,omitempty"`
+	Limit          int32                  `protobuf:"varint,6,opt,name=limit,proto3" json:"limit,omitempty"`                                // @depreacted
 	MessageType    string                 `protobuf:"bytes,15,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"` // 'empty', file, image, link, pinned
 	IsPrivate      bool                   `protobuf:"varint,7,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
 	ByTypeOnly     bool                   `protobuf:"varint,8,opt,name=by_type_only,json=byTypeOnly,proto3" json:"by_type_only,omitempty"`
 	MaxChars       int64                  `protobuf:"varint,9,opt,name=max_chars,json=maxChars,proto3" json:"max_chars,omitempty"`
+	Direction      string                 `protobuf:"bytes,10,opt,name=direction,proto3" json:"direction,omitempty"` // '' = before, after, around
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -5168,6 +5169,13 @@ func (x *ListConversationEventsRequest) GetMaxChars() int64 {
 		return x.MaxChars
 	}
 	return 0
+}
+
+func (x *ListConversationEventsRequest) GetDirection() string {
+	if x != nil {
+		return x.Direction
+	}
+	return ""
 }
 
 type ListWorkflowSessionRequest struct {
@@ -9619,7 +9627,7 @@ const file_request_proto_rawDesc = "" +
 	"\x0eticket_id_only\x18\x14 \x01(\bR\fticketIdOnly\x12$\n" +
 	"\x0emin_actived_ms\x18\x15 \x01(\x03R\fminActivedMs\x12$\n" +
 	"\x0emax_actived_ms\x18\x16 \x01(\x03R\fmaxActivedMs\x12.\n" +
-	"\x13user_event_included\x18\x17 \x01(\bR\x11userEventIncluded\"\xd9\x02\n" +
+	"\x13user_event_included\x18\x17 \x01(\bR\x11userEventIncluded\"\xf7\x02\n" +
 	"\x1dListConversationEventsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -9633,7 +9641,9 @@ const file_request_proto_rawDesc = "" +
 	"is_private\x18\a \x01(\bR\tisPrivate\x12 \n" +
 	"\fby_type_only\x18\b \x01(\bR\n" +
 	"byTypeOnly\x12\x1b\n" +
-	"\tmax_chars\x18\t \x01(\x03R\bmaxChars\"\x98\x02\n" +
+	"\tmax_chars\x18\t \x01(\x03R\bmaxChars\x12\x1c\n" +
+	"\tdirection\x18\n" +
+	" \x01(\tR\tdirection\"\x98\x02\n" +
 	"\x1aListWorkflowSessionRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

@@ -6040,26 +6040,6 @@ message TTSVoiceSelection {
 	string background_music = 7; // calm, fresh, soothing, optimistic, happy, inspire
 }
 
-message BusinessHour {
-	string weekday = 4; // empty
-	// or
-	int64 start_time = 5;
-	int64 end_time = 6;
-	string name = 7;
-}
-
-message BusinessHours {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // global, xyz
-
-	string timezone = 4;
-	repeated BusinessHour week_days = 5;
-	repeated BusinessHour extra_hours = 6;
-
-	repeated BusinessHour holidays = 7;
-}
-
 message RecentCallRecords {
 	common.Context ctx = 1;
 	string account_id = 2;

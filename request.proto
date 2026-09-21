@@ -648,7 +648,7 @@ message ListConversationEventsRequest {
 	string conversation_id = 3;
 	string start_id = 4;
 	string ticket_id = 5;
-	int32 limit = 6;
+	int32 limit = 6; // @depreacted
 
 	string message_type = 15; // 'empty', file, image, link, pinned
 	bool is_private = 7;
@@ -656,6 +656,7 @@ message ListConversationEventsRequest {
 	bool by_type_only = 8;
 
 	int64 max_chars = 9;
+	string direction = 10; // '' = before, after, around
 }
 
 message ListWorkflowSessionRequest {
