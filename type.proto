@@ -16,7 +16,7 @@ enum RealtimeType {
 	agent_updated = 16;
 
 	// agent_permission_updated = 17;
-	my_user_upserted = 19;
+	// my_user_upserted = 19;
 	user_info_updated = 20;
 	agent_presence_updated = 21;
 

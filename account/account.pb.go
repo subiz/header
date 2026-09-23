@@ -378,7 +378,7 @@ func (x *Log_Action) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use Log_Action.Descriptor instead.
 func (Log_Action) EnumDescriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{42, 0}
+	return file_account_proto_rawDescGZIP(), []int{44, 0}
 }
 
 type DashboardAgent struct {
@@ -4585,6 +4585,146 @@ func (x *FanpagesInvoiceItem) GetFullCycle() bool {
 	return false
 }
 
+type TiktoksInvoiceItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional string plan = 3;
+	// optional int32 day_left = 4;
+	PackSize      *int64 `protobuf:"varint,8,opt,name=pack_size,json=packSize" json:"pack_size,omitempty"` // typical 500
+	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TiktoksInvoiceItem) Reset() {
+	*x = TiktoksInvoiceItem{}
+	mi := &file_account_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TiktoksInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TiktoksInvoiceItem) ProtoMessage() {}
+
+func (x *TiktoksInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TiktoksInvoiceItem.ProtoReflect.Descriptor instead.
+func (*TiktoksInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *TiktoksInvoiceItem) GetPackSize() int64 {
+	if x != nil && x.PackSize != nil {
+		return *x.PackSize
+	}
+	return 0
+}
+
+func (x *TiktoksInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *TiktoksInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *TiktoksInvoiceItem) GetFullCycle() bool {
+	if x != nil && x.FullCycle != nil {
+		return *x.FullCycle
+	}
+	return false
+}
+
+type WhatsappsInvoiceItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional string plan = 3;
+	// optional int32 day_left = 4;
+	PackSize      *int64 `protobuf:"varint,8,opt,name=pack_size,json=packSize" json:"pack_size,omitempty"` // typical 500
+	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WhatsappsInvoiceItem) Reset() {
+	*x = WhatsappsInvoiceItem{}
+	mi := &file_account_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WhatsappsInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WhatsappsInvoiceItem) ProtoMessage() {}
+
+func (x *WhatsappsInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WhatsappsInvoiceItem.ProtoReflect.Descriptor instead.
+func (*WhatsappsInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *WhatsappsInvoiceItem) GetPackSize() int64 {
+	if x != nil && x.PackSize != nil {
+		return *x.PackSize
+	}
+	return 0
+}
+
+func (x *WhatsappsInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *WhatsappsInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *WhatsappsInvoiceItem) GetFullCycle() bool {
+	if x != nil && x.FullCycle != nil {
+		return *x.FullCycle
+	}
+	return false
+}
+
 type ZaloPersonalsInvoiceItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// optional int32 day_left = 4;
@@ -4598,7 +4738,7 @@ type ZaloPersonalsInvoiceItem struct {
 
 func (x *ZaloPersonalsInvoiceItem) Reset() {
 	*x = ZaloPersonalsInvoiceItem{}
-	mi := &file_account_proto_msgTypes[33]
+	mi := &file_account_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4610,7 +4750,7 @@ func (x *ZaloPersonalsInvoiceItem) String() string {
 func (*ZaloPersonalsInvoiceItem) ProtoMessage() {}
 
 func (x *ZaloPersonalsInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[33]
+	mi := &file_account_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4623,7 +4763,7 @@ func (x *ZaloPersonalsInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZaloPersonalsInvoiceItem.ProtoReflect.Descriptor instead.
 func (*ZaloPersonalsInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{33}
+	return file_account_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ZaloPersonalsInvoiceItem) GetPackSize() int32 {
@@ -4667,7 +4807,7 @@ type AgentInvoiceItem struct {
 
 func (x *AgentInvoiceItem) Reset() {
 	*x = AgentInvoiceItem{}
-	mi := &file_account_proto_msgTypes[34]
+	mi := &file_account_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4679,7 +4819,7 @@ func (x *AgentInvoiceItem) String() string {
 func (*AgentInvoiceItem) ProtoMessage() {}
 
 func (x *AgentInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[34]
+	mi := &file_account_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4692,7 +4832,7 @@ func (x *AgentInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentInvoiceItem.ProtoReflect.Descriptor instead.
 func (*AgentInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{34}
+	return file_account_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *AgentInvoiceItem) GetPlan() string {
@@ -4743,7 +4883,7 @@ type RenewInvoiceItem struct {
 
 func (x *RenewInvoiceItem) Reset() {
 	*x = RenewInvoiceItem{}
-	mi := &file_account_proto_msgTypes[35]
+	mi := &file_account_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4755,7 +4895,7 @@ func (x *RenewInvoiceItem) String() string {
 func (*RenewInvoiceItem) ProtoMessage() {}
 
 func (x *RenewInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[35]
+	mi := &file_account_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4768,7 +4908,7 @@ func (x *RenewInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenewInvoiceItem.ProtoReflect.Descriptor instead.
 func (*RenewInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{35}
+	return file_account_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *RenewInvoiceItem) GetPlan() string {
@@ -4823,7 +4963,7 @@ type ReservedInvoiceItem struct {
 
 func (x *ReservedInvoiceItem) Reset() {
 	*x = ReservedInvoiceItem{}
-	mi := &file_account_proto_msgTypes[36]
+	mi := &file_account_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4835,7 +4975,7 @@ func (x *ReservedInvoiceItem) String() string {
 func (*ReservedInvoiceItem) ProtoMessage() {}
 
 func (x *ReservedInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[36]
+	mi := &file_account_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4848,7 +4988,7 @@ func (x *ReservedInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReservedInvoiceItem.ProtoReflect.Descriptor instead.
 func (*ReservedInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{36}
+	return file_account_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ReservedInvoiceItem) GetOldPlan() string {
@@ -4919,7 +5059,7 @@ type PlanInvoiceItem struct {
 
 func (x *PlanInvoiceItem) Reset() {
 	*x = PlanInvoiceItem{}
-	mi := &file_account_proto_msgTypes[37]
+	mi := &file_account_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4931,7 +5071,7 @@ func (x *PlanInvoiceItem) String() string {
 func (*PlanInvoiceItem) ProtoMessage() {}
 
 func (x *PlanInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[37]
+	mi := &file_account_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4944,7 +5084,7 @@ func (x *PlanInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlanInvoiceItem.ProtoReflect.Descriptor instead.
 func (*PlanInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{37}
+	return file_account_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *PlanInvoiceItem) GetAgentCount() uint32 {
@@ -5033,7 +5173,7 @@ type MarketingInvoiceItem struct {
 
 func (x *MarketingInvoiceItem) Reset() {
 	*x = MarketingInvoiceItem{}
-	mi := &file_account_proto_msgTypes[38]
+	mi := &file_account_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5045,7 +5185,7 @@ func (x *MarketingInvoiceItem) String() string {
 func (*MarketingInvoiceItem) ProtoMessage() {}
 
 func (x *MarketingInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[38]
+	mi := &file_account_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5058,7 +5198,7 @@ func (x *MarketingInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarketingInvoiceItem.ProtoReflect.Descriptor instead.
 func (*MarketingInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{38}
+	return file_account_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *MarketingInvoiceItem) GetExpired() int64 {
@@ -5077,7 +5217,7 @@ type NoVATInvoiceItem struct {
 
 func (x *NoVATInvoiceItem) Reset() {
 	*x = NoVATInvoiceItem{}
-	mi := &file_account_proto_msgTypes[39]
+	mi := &file_account_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5089,7 +5229,7 @@ func (x *NoVATInvoiceItem) String() string {
 func (*NoVATInvoiceItem) ProtoMessage() {}
 
 func (x *NoVATInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[39]
+	mi := &file_account_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5102,7 +5242,7 @@ func (x *NoVATInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoVATInvoiceItem.ProtoReflect.Descriptor instead.
 func (*NoVATInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{39}
+	return file_account_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *NoVATInvoiceItem) GetExpired() int64 {
@@ -5134,7 +5274,7 @@ type InvoiceItem struct {
 
 func (x *InvoiceItem) Reset() {
 	*x = InvoiceItem{}
-	mi := &file_account_proto_msgTypes[40]
+	mi := &file_account_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5146,7 +5286,7 @@ func (x *InvoiceItem) String() string {
 func (*InvoiceItem) ProtoMessage() {}
 
 func (x *InvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[40]
+	mi := &file_account_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5159,7 +5299,7 @@ func (x *InvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceItem.ProtoReflect.Descriptor instead.
 func (*InvoiceItem) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{40}
+	return file_account_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *InvoiceItem) GetHeadline() string {
@@ -5264,7 +5404,7 @@ type Logs struct {
 
 func (x *Logs) Reset() {
 	*x = Logs{}
-	mi := &file_account_proto_msgTypes[41]
+	mi := &file_account_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5276,7 +5416,7 @@ func (x *Logs) String() string {
 func (*Logs) ProtoMessage() {}
 
 func (x *Logs) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[41]
+	mi := &file_account_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5289,7 +5429,7 @@ func (x *Logs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Logs.ProtoReflect.Descriptor instead.
 func (*Logs) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{41}
+	return file_account_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *Logs) GetCtx() *common.Context {
@@ -5330,7 +5470,7 @@ type Log struct {
 
 func (x *Log) Reset() {
 	*x = Log{}
-	mi := &file_account_proto_msgTypes[42]
+	mi := &file_account_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5342,7 +5482,7 @@ func (x *Log) String() string {
 func (*Log) ProtoMessage() {}
 
 func (x *Log) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[42]
+	mi := &file_account_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5355,7 +5495,7 @@ func (x *Log) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Log.ProtoReflect.Descriptor instead.
 func (*Log) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{42}
+	return file_account_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *Log) GetCtx() *common.Context {
@@ -5431,7 +5571,7 @@ type String struct {
 
 func (x *String) Reset() {
 	*x = String{}
-	mi := &file_account_proto_msgTypes[43]
+	mi := &file_account_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5443,7 +5583,7 @@ func (x *String) String() string {
 func (*String) ProtoMessage() {}
 
 func (x *String) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[43]
+	mi := &file_account_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5456,7 +5596,7 @@ func (x *String) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use String.ProtoReflect.Descriptor instead.
 func (*String) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{43}
+	return file_account_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *String) GetCtx() *common.Context {
@@ -5499,7 +5639,7 @@ type PayRequest struct {
 
 func (x *PayRequest) Reset() {
 	*x = PayRequest{}
-	mi := &file_account_proto_msgTypes[44]
+	mi := &file_account_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5511,7 +5651,7 @@ func (x *PayRequest) String() string {
 func (*PayRequest) ProtoMessage() {}
 
 func (x *PayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[44]
+	mi := &file_account_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5524,7 +5664,7 @@ func (x *PayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PayRequest.ProtoReflect.Descriptor instead.
 func (*PayRequest) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{44}
+	return file_account_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *PayRequest) GetCtx() *common.Context {
@@ -5654,7 +5794,7 @@ type InvoiceCreatedEmail struct {
 
 func (x *InvoiceCreatedEmail) Reset() {
 	*x = InvoiceCreatedEmail{}
-	mi := &file_account_proto_msgTypes[45]
+	mi := &file_account_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5666,7 +5806,7 @@ func (x *InvoiceCreatedEmail) String() string {
 func (*InvoiceCreatedEmail) ProtoMessage() {}
 
 func (x *InvoiceCreatedEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[45]
+	mi := &file_account_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5679,7 +5819,7 @@ func (x *InvoiceCreatedEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceCreatedEmail.ProtoReflect.Descriptor instead.
 func (*InvoiceCreatedEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{45}
+	return file_account_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *InvoiceCreatedEmail) GetCtx() *common.Context {
@@ -5744,7 +5884,7 @@ type UpdateSubscriptionRequest struct {
 
 func (x *UpdateSubscriptionRequest) Reset() {
 	*x = UpdateSubscriptionRequest{}
-	mi := &file_account_proto_msgTypes[46]
+	mi := &file_account_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5756,7 +5896,7 @@ func (x *UpdateSubscriptionRequest) String() string {
 func (*UpdateSubscriptionRequest) ProtoMessage() {}
 
 func (x *UpdateSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[46]
+	mi := &file_account_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5769,7 +5909,7 @@ func (x *UpdateSubscriptionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{46}
+	return file_account_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *UpdateSubscriptionRequest) GetCtx() *common.Context {
@@ -5818,7 +5958,7 @@ type BusinessHours_WorkingDay struct {
 
 func (x *BusinessHours_WorkingDay) Reset() {
 	*x = BusinessHours_WorkingDay{}
-	mi := &file_account_proto_msgTypes[50]
+	mi := &file_account_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5830,7 +5970,7 @@ func (x *BusinessHours_WorkingDay) String() string {
 func (*BusinessHours_WorkingDay) ProtoMessage() {}
 
 func (x *BusinessHours_WorkingDay) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[50]
+	mi := &file_account_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5882,7 +6022,7 @@ type BusinessHours_Holiday struct {
 
 func (x *BusinessHours_Holiday) Reset() {
 	*x = BusinessHours_Holiday{}
-	mi := &file_account_proto_msgTypes[51]
+	mi := &file_account_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5894,7 +6034,7 @@ func (x *BusinessHours_Holiday) String() string {
 func (*BusinessHours_Holiday) ProtoMessage() {}
 
 func (x *BusinessHours_Holiday) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[51]
+	mi := &file_account_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5971,13 +6111,15 @@ type InvoiceItem_Data struct {
 	ZaloPersonals         *ZaloPersonalsInvoiceItem `protobuf:"bytes,10,opt,name=zalo_personals,json=zaloPersonals" json:"zalo_personals,omitempty"`
 	ReservedFanpages      *ReservedInvoiceItem      `protobuf:"bytes,11,opt,name=reserved_fanpages,json=reservedFanpages" json:"reserved_fanpages,omitempty"`
 	ReservedZaloPersonals *ReservedInvoiceItem      `protobuf:"bytes,12,opt,name=reserved_zalo_personals,json=reservedZaloPersonals" json:"reserved_zalo_personals,omitempty"`
+	Tiktoks               *TiktoksInvoiceItem       `protobuf:"bytes,13,opt,name=tiktoks" json:"tiktoks,omitempty"`
+	Whatsapps             *WhatsappsInvoiceItem     `protobuf:"bytes,14,opt,name=whatsapps" json:"whatsapps,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *InvoiceItem_Data) Reset() {
 	*x = InvoiceItem_Data{}
-	mi := &file_account_proto_msgTypes[52]
+	mi := &file_account_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5989,7 +6131,7 @@ func (x *InvoiceItem_Data) String() string {
 func (*InvoiceItem_Data) ProtoMessage() {}
 
 func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[52]
+	mi := &file_account_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6002,7 +6144,7 @@ func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceItem_Data.ProtoReflect.Descriptor instead.
 func (*InvoiceItem_Data) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{40, 0}
+	return file_account_proto_rawDescGZIP(), []int{42, 0}
 }
 
 func (x *InvoiceItem_Data) GetRenew() *RenewInvoiceItem {
@@ -6071,6 +6213,20 @@ func (x *InvoiceItem_Data) GetReservedFanpages() *ReservedInvoiceItem {
 func (x *InvoiceItem_Data) GetReservedZaloPersonals() *ReservedInvoiceItem {
 	if x != nil {
 		return x.ReservedZaloPersonals
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetTiktoks() *TiktoksInvoiceItem {
+	if x != nil {
+		return x.Tiktoks
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetWhatsapps() *WhatsappsInvoiceItem {
+	if x != nil {
+		return x.Whatsapps
 	}
 	return nil
 }
@@ -6603,6 +6759,20 @@ const file_account_proto_rawDesc = "" +
 	"\x05ended\x18\n" +
 	" \x01(\x03R\x05ended\x12\x1d\n" +
 	"\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x80\x01\n" +
+	"\x12TiktoksInvoiceItem\x12\x1b\n" +
+	"\tpack_size\x18\b \x01(\x03R\bpackSize\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\x12\x1d\n" +
+	"\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x82\x01\n" +
+	"\x14WhatsappsInvoiceItem\x12\x1b\n" +
+	"\tpack_size\x18\b \x01(\x03R\bpackSize\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\x12\x1d\n" +
+	"\n" +
 	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x86\x01\n" +
 	"\x18ZaloPersonalsInvoiceItem\x12\x1b\n" +
 	"\tpack_size\x18\b \x01(\x05R\bpackSize\x12\x18\n" +
@@ -6653,7 +6823,7 @@ const file_account_proto_rawDesc = "" +
 	"\x14MarketingInvoiceItem\x12\x18\n" +
 	"\aexpired\x18\x04 \x01(\x03R\aexpired\",\n" +
 	"\x10NoVATInvoiceItem\x12\x18\n" +
-	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xca\b\n" +
+	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xbe\t\n" +
 	"\vInvoiceItem\x12\x1a\n" +
 	"\bheadline\x18\x04 \x01(\tR\bheadline\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
@@ -6669,7 +6839,7 @@ const file_account_proto_rawDesc = "" +
 	"\x10fpv_discount_vnd\x18\r \x01(\x03R\x0efpvDiscountVnd\x12\"\n" +
 	"\rfpv_price_usd\x18\x0f \x01(\x03R\vfpvPriceUsd\x12-\n" +
 	"\x13fpv_total_price_usd\x18\x10 \x01(\x03R\x10fpvTotalPriceUsd\x12(\n" +
-	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xec\x04\n" +
+	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xe0\x05\n" +
 	"\x04Data\x12/\n" +
 	"\x05renew\x18\x02 \x01(\v2\x19.account.RenewInvoiceItemR\x05renew\x12/\n" +
 	"\x05agent\x18\x03 \x01(\v2\x19.account.AgentInvoiceItemR\x05agent\x12,\n" +
@@ -6681,7 +6851,9 @@ const file_account_proto_rawDesc = "" +
 	"\x0ezalo_personals\x18\n" +
 	" \x01(\v2!.account.ZaloPersonalsInvoiceItemR\rzaloPersonals\x12I\n" +
 	"\x11reserved_fanpages\x18\v \x01(\v2\x1c.account.ReservedInvoiceItemR\x10reservedFanpages\x12T\n" +
-	"\x17reserved_zalo_personals\x18\f \x01(\v2\x1c.account.ReservedInvoiceItemR\x15reservedZaloPersonals\"l\n" +
+	"\x17reserved_zalo_personals\x18\f \x01(\v2\x1c.account.ReservedInvoiceItemR\x15reservedZaloPersonals\x125\n" +
+	"\atiktoks\x18\r \x01(\v2\x1b.account.TiktoksInvoiceItemR\atiktoks\x12;\n" +
+	"\twhatsapps\x18\x0e \x01(\v2\x1d.account.WhatsappsInvoiceItemR\twhatsapps\"l\n" +
 	"\x04Logs\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
 	"\x04logs\x18\x05 \x03(\v2\f.account.LogR\x04logs\x12\x1f\n" +
@@ -6781,7 +6953,7 @@ func file_account_proto_rawDescGZIP() []byte {
 }
 
 var file_account_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 53)
+var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
 var file_account_proto_goTypes = []any{
 	(Agent_Gender)(0),                 // 0: account.Agent.Gender
 	(Agent_AgentState)(0),             // 1: account.Agent.AgentState
@@ -6821,115 +6993,119 @@ var file_account_proto_goTypes = []any{
 	(*ListInvoiceRequest)(nil),        // 35: account.ListInvoiceRequest
 	(*Invoice)(nil),                   // 36: account.Invoice
 	(*FanpagesInvoiceItem)(nil),       // 37: account.FanpagesInvoiceItem
-	(*ZaloPersonalsInvoiceItem)(nil),  // 38: account.ZaloPersonalsInvoiceItem
-	(*AgentInvoiceItem)(nil),          // 39: account.AgentInvoiceItem
-	(*RenewInvoiceItem)(nil),          // 40: account.RenewInvoiceItem
-	(*ReservedInvoiceItem)(nil),       // 41: account.ReservedInvoiceItem
-	(*PlanInvoiceItem)(nil),           // 42: account.PlanInvoiceItem
-	(*MarketingInvoiceItem)(nil),      // 43: account.MarketingInvoiceItem
-	(*NoVATInvoiceItem)(nil),          // 44: account.NoVATInvoiceItem
-	(*InvoiceItem)(nil),               // 45: account.InvoiceItem
-	(*Logs)(nil),                      // 46: account.Logs
-	(*Log)(nil),                       // 47: account.Log
-	(*String)(nil),                    // 48: account.String
-	(*PayRequest)(nil),                // 49: account.PayRequest
-	(*InvoiceCreatedEmail)(nil),       // 50: account.InvoiceCreatedEmail
-	(*UpdateSubscriptionRequest)(nil), // 51: account.UpdateSubscriptionRequest
-	nil,                               // 52: account.DashboardAgent.SegmentOrderByEntry
-	nil,                               // 53: account.DashboardAgent.UserViewDisplayFieldEntry
-	nil,                               // 54: account.DashboardAgent.SegmentUserViewsOrderEntry
-	(*BusinessHours_WorkingDay)(nil),  // 55: account.BusinessHours.WorkingDay
-	(*BusinessHours_Holiday)(nil),     // 56: account.BusinessHours.Holiday
-	(*InvoiceItem_Data)(nil),          // 57: account.InvoiceItem.Data
-	(*common.Context)(nil),            // 58: common.Context
-	(*common.Limit)(nil),              // 59: common.Limit
+	(*TiktoksInvoiceItem)(nil),        // 38: account.TiktoksInvoiceItem
+	(*WhatsappsInvoiceItem)(nil),      // 39: account.WhatsappsInvoiceItem
+	(*ZaloPersonalsInvoiceItem)(nil),  // 40: account.ZaloPersonalsInvoiceItem
+	(*AgentInvoiceItem)(nil),          // 41: account.AgentInvoiceItem
+	(*RenewInvoiceItem)(nil),          // 42: account.RenewInvoiceItem
+	(*ReservedInvoiceItem)(nil),       // 43: account.ReservedInvoiceItem
+	(*PlanInvoiceItem)(nil),           // 44: account.PlanInvoiceItem
+	(*MarketingInvoiceItem)(nil),      // 45: account.MarketingInvoiceItem
+	(*NoVATInvoiceItem)(nil),          // 46: account.NoVATInvoiceItem
+	(*InvoiceItem)(nil),               // 47: account.InvoiceItem
+	(*Logs)(nil),                      // 48: account.Logs
+	(*Log)(nil),                       // 49: account.Log
+	(*String)(nil),                    // 50: account.String
+	(*PayRequest)(nil),                // 51: account.PayRequest
+	(*InvoiceCreatedEmail)(nil),       // 52: account.InvoiceCreatedEmail
+	(*UpdateSubscriptionRequest)(nil), // 53: account.UpdateSubscriptionRequest
+	nil,                               // 54: account.DashboardAgent.SegmentOrderByEntry
+	nil,                               // 55: account.DashboardAgent.UserViewDisplayFieldEntry
+	nil,                               // 56: account.DashboardAgent.SegmentUserViewsOrderEntry
+	(*BusinessHours_WorkingDay)(nil),  // 57: account.BusinessHours.WorkingDay
+	(*BusinessHours_Holiday)(nil),     // 58: account.BusinessHours.Holiday
+	(*InvoiceItem_Data)(nil),          // 59: account.InvoiceItem.Data
+	(*common.Context)(nil),            // 60: common.Context
+	(*common.Limit)(nil),              // 61: common.Limit
 }
 var file_account_proto_depIdxs = []int32{
-	52, // 0: account.DashboardAgent.segment_order_by:type_name -> account.DashboardAgent.SegmentOrderByEntry
-	53, // 1: account.DashboardAgent.user_view_display_field:type_name -> account.DashboardAgent.UserViewDisplayFieldEntry
-	54, // 2: account.DashboardAgent.segment_user_views_order:type_name -> account.DashboardAgent.SegmentUserViewsOrderEntry
+	54, // 0: account.DashboardAgent.segment_order_by:type_name -> account.DashboardAgent.SegmentOrderByEntry
+	55, // 1: account.DashboardAgent.user_view_display_field:type_name -> account.DashboardAgent.UserViewDisplayFieldEntry
+	56, // 2: account.DashboardAgent.segment_user_views_order:type_name -> account.DashboardAgent.SegmentUserViewsOrderEntry
 	7,  // 3: account.DashboardAgent.convo_filters:type_name -> account.ConvoFilter
-	58, // 4: account.ConvoFilters.ctx:type_name -> common.Context
+	60, // 4: account.ConvoFilters.ctx:type_name -> common.Context
 	7,  // 5: account.ConvoFilters.filters:type_name -> account.ConvoFilter
-	58, // 6: account.ConvoFilter.ctx:type_name -> common.Context
+	60, // 6: account.ConvoFilter.ctx:type_name -> common.Context
 	8,  // 7: account.ConvoFilter.conditions:type_name -> account.ConvoFilterCondition
-	58, // 8: account.Agent.ctx:type_name -> common.Context
+	60, // 8: account.Agent.ctx:type_name -> common.Context
 	10, // 9: account.Agent.account:type_name -> account.Account
 	19, // 10: account.Agent.last_seen:type_name -> account.Presence
 	5,  // 11: account.Agent.dashboard_setting:type_name -> account.DashboardAgent
-	58, // 12: account.Account.ctx:type_name -> common.Context
+	60, // 12: account.Account.ctx:type_name -> common.Context
 	15, // 13: account.Account.business_hours:type_name -> account.BusinessHours
 	12, // 14: account.Account.lead_setting:type_name -> account.LeadSetting
 	11, // 15: account.Account.invoice_info:type_name -> account.InvoiceInfo
-	58, // 16: account.InvoiceInfo.ctx:type_name -> common.Context
-	58, // 17: account.InvoiceEmail.ctx:type_name -> common.Context
-	58, // 18: account.TrialEndingEmail.ctx:type_name -> common.Context
-	58, // 19: account.BusinessHours.ctx:type_name -> common.Context
-	55, // 20: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
-	56, // 21: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
-	58, // 22: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
-	58, // 23: account.SearchSubRequest.ctx:type_name -> common.Context
-	58, // 24: account.Presences.ctx:type_name -> common.Context
+	60, // 16: account.InvoiceInfo.ctx:type_name -> common.Context
+	60, // 17: account.InvoiceEmail.ctx:type_name -> common.Context
+	60, // 18: account.TrialEndingEmail.ctx:type_name -> common.Context
+	60, // 19: account.BusinessHours.ctx:type_name -> common.Context
+	57, // 20: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
+	58, // 21: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
+	60, // 22: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
+	60, // 23: account.SearchSubRequest.ctx:type_name -> common.Context
+	60, // 24: account.Presences.ctx:type_name -> common.Context
 	19, // 25: account.Presences.presences:type_name -> account.Presence
-	58, // 26: account.Presence.ctx:type_name -> common.Context
-	58, // 27: account.ReferrerPayoutBill.ctx:type_name -> common.Context
-	58, // 28: account.ReferrerPayoutBills.ctx:type_name -> common.Context
+	60, // 26: account.Presence.ctx:type_name -> common.Context
+	60, // 27: account.ReferrerPayoutBill.ctx:type_name -> common.Context
+	60, // 28: account.ReferrerPayoutBills.ctx:type_name -> common.Context
 	20, // 29: account.ReferrerPayoutBills.referrer_payout_bills:type_name -> account.ReferrerPayoutBill
-	58, // 30: account.ReferredCustomer.ctx:type_name -> common.Context
-	58, // 31: account.ReferredCustomers.ctx:type_name -> common.Context
+	60, // 30: account.ReferredCustomer.ctx:type_name -> common.Context
+	60, // 31: account.ReferredCustomers.ctx:type_name -> common.Context
 	22, // 32: account.ReferredCustomers.referred_customers:type_name -> account.ReferredCustomer
-	58, // 33: account.ReferredBill.ctx:type_name -> common.Context
-	58, // 34: account.ReferredBills.ctx:type_name -> common.Context
+	60, // 33: account.ReferredBill.ctx:type_name -> common.Context
+	60, // 34: account.ReferredBills.ctx:type_name -> common.Context
 	24, // 35: account.ReferredBills.bills:type_name -> account.ReferredBill
-	58, // 36: account.ReferrerAgent.ctx:type_name -> common.Context
+	60, // 36: account.ReferrerAgent.ctx:type_name -> common.Context
 	9,  // 37: account.ReferrerAgent.agent:type_name -> account.Agent
-	58, // 38: account.ReferrerAgents.ctx:type_name -> common.Context
+	60, // 38: account.ReferrerAgents.ctx:type_name -> common.Context
 	26, // 39: account.ReferrerAgents.referrer_agents:type_name -> account.ReferrerAgent
-	58, // 40: account.Comments.ctx:type_name -> common.Context
+	60, // 40: account.Comments.ctx:type_name -> common.Context
 	29, // 41: account.Comments.comments:type_name -> account.Comment
-	58, // 42: account.Comment.ctx:type_name -> common.Context
-	58, // 43: account.PurchaseRequest.ctx:type_name -> common.Context
-	59, // 44: account.PurchaseRequest.limit:type_name -> common.Limit
-	58, // 45: account.Subscription.ctx:type_name -> common.Context
-	59, // 46: account.Subscription.limit:type_name -> common.Limit
-	59, // 47: account.Subscription.purchased:type_name -> common.Limit
-	58, // 48: account.Bill.ctx:type_name -> common.Context
-	58, // 49: account.Bills.ctx:type_name -> common.Context
+	60, // 42: account.Comment.ctx:type_name -> common.Context
+	60, // 43: account.PurchaseRequest.ctx:type_name -> common.Context
+	61, // 44: account.PurchaseRequest.limit:type_name -> common.Limit
+	60, // 45: account.Subscription.ctx:type_name -> common.Context
+	61, // 46: account.Subscription.limit:type_name -> common.Limit
+	61, // 47: account.Subscription.purchased:type_name -> common.Limit
+	60, // 48: account.Bill.ctx:type_name -> common.Context
+	60, // 49: account.Bills.ctx:type_name -> common.Context
 	32, // 50: account.Bills.bills:type_name -> account.Bill
-	58, // 51: account.Invoices.ctx:type_name -> common.Context
+	60, // 51: account.Invoices.ctx:type_name -> common.Context
 	36, // 52: account.Invoices.invoices:type_name -> account.Invoice
-	58, // 53: account.ListInvoiceRequest.ctx:type_name -> common.Context
-	58, // 54: account.Invoice.ctx:type_name -> common.Context
-	45, // 55: account.Invoice.items:type_name -> account.InvoiceItem
+	60, // 53: account.ListInvoiceRequest.ctx:type_name -> common.Context
+	60, // 54: account.Invoice.ctx:type_name -> common.Context
+	47, // 55: account.Invoice.items:type_name -> account.InvoiceItem
 	31, // 56: account.Invoice.current_sub:type_name -> account.Subscription
 	31, // 57: account.Invoice.sub:type_name -> account.Subscription
 	11, // 58: account.Invoice.invoice_info:type_name -> account.InvoiceInfo
-	57, // 59: account.InvoiceItem.data:type_name -> account.InvoiceItem.Data
-	58, // 60: account.Logs.ctx:type_name -> common.Context
-	47, // 61: account.Logs.logs:type_name -> account.Log
-	58, // 62: account.Log.ctx:type_name -> common.Context
-	58, // 63: account.String.ctx:type_name -> common.Context
-	58, // 64: account.PayRequest.ctx:type_name -> common.Context
+	59, // 59: account.InvoiceItem.data:type_name -> account.InvoiceItem.Data
+	60, // 60: account.Logs.ctx:type_name -> common.Context
+	49, // 61: account.Logs.logs:type_name -> account.Log
+	60, // 62: account.Log.ctx:type_name -> common.Context
+	60, // 63: account.String.ctx:type_name -> common.Context
+	60, // 64: account.PayRequest.ctx:type_name -> common.Context
 	31, // 65: account.PayRequest.subscription:type_name -> account.Subscription
 	36, // 66: account.PayRequest.invoice:type_name -> account.Invoice
-	58, // 67: account.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	58, // 68: account.UpdateSubscriptionRequest.ctx:type_name -> common.Context
+	60, // 67: account.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	60, // 68: account.UpdateSubscriptionRequest.ctx:type_name -> common.Context
 	31, // 69: account.UpdateSubscriptionRequest.subscription:type_name -> account.Subscription
-	40, // 70: account.InvoiceItem.Data.renew:type_name -> account.RenewInvoiceItem
-	39, // 71: account.InvoiceItem.Data.agent:type_name -> account.AgentInvoiceItem
-	42, // 72: account.InvoiceItem.Data.plan:type_name -> account.PlanInvoiceItem
-	43, // 73: account.InvoiceItem.Data.marketing:type_name -> account.MarketingInvoiceItem
-	41, // 74: account.InvoiceItem.Data.reserved_plan:type_name -> account.ReservedInvoiceItem
-	44, // 75: account.InvoiceItem.Data.novat:type_name -> account.NoVATInvoiceItem
+	42, // 70: account.InvoiceItem.Data.renew:type_name -> account.RenewInvoiceItem
+	41, // 71: account.InvoiceItem.Data.agent:type_name -> account.AgentInvoiceItem
+	44, // 72: account.InvoiceItem.Data.plan:type_name -> account.PlanInvoiceItem
+	45, // 73: account.InvoiceItem.Data.marketing:type_name -> account.MarketingInvoiceItem
+	43, // 74: account.InvoiceItem.Data.reserved_plan:type_name -> account.ReservedInvoiceItem
+	46, // 75: account.InvoiceItem.Data.novat:type_name -> account.NoVATInvoiceItem
 	37, // 76: account.InvoiceItem.Data.fanpages:type_name -> account.FanpagesInvoiceItem
-	38, // 77: account.InvoiceItem.Data.zalo_personals:type_name -> account.ZaloPersonalsInvoiceItem
-	41, // 78: account.InvoiceItem.Data.reserved_fanpages:type_name -> account.ReservedInvoiceItem
-	41, // 79: account.InvoiceItem.Data.reserved_zalo_personals:type_name -> account.ReservedInvoiceItem
-	80, // [80:80] is the sub-list for method output_type
-	80, // [80:80] is the sub-list for method input_type
-	80, // [80:80] is the sub-list for extension type_name
-	80, // [80:80] is the sub-list for extension extendee
-	0,  // [0:80] is the sub-list for field type_name
+	40, // 77: account.InvoiceItem.Data.zalo_personals:type_name -> account.ZaloPersonalsInvoiceItem
+	43, // 78: account.InvoiceItem.Data.reserved_fanpages:type_name -> account.ReservedInvoiceItem
+	43, // 79: account.InvoiceItem.Data.reserved_zalo_personals:type_name -> account.ReservedInvoiceItem
+	38, // 80: account.InvoiceItem.Data.tiktoks:type_name -> account.TiktoksInvoiceItem
+	39, // 81: account.InvoiceItem.Data.whatsapps:type_name -> account.WhatsappsInvoiceItem
+	82, // [82:82] is the sub-list for method output_type
+	82, // [82:82] is the sub-list for method input_type
+	82, // [82:82] is the sub-list for extension type_name
+	82, // [82:82] is the sub-list for extension extendee
+	0,  // [0:82] is the sub-list for field type_name
 }
 
 func init() { file_account_proto_init() }
@@ -6943,7 +7119,7 @@ func file_account_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_account_proto_rawDesc), len(file_account_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   53,
+			NumMessages:   55,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

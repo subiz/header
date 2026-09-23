@@ -632,6 +632,24 @@ message FanpagesInvoiceItem {
 	optional bool full_cycle = 11;
 }
 
+message TiktoksInvoiceItem {
+	// optional string plan = 3;
+	// optional int32 day_left = 4;
+	optional int64 pack_size = 8; // typical 500
+	optional int64 started = 9;
+	optional int64 ended = 10;
+	optional bool full_cycle = 11;
+}
+
+message WhatsappsInvoiceItem {
+	// optional string plan = 3;
+	// optional int32 day_left = 4;
+	optional int64 pack_size = 8; // typical 500
+	optional int64 started = 9;
+	optional int64 ended = 10;
+	optional bool full_cycle = 11;
+}
+
 message ZaloPersonalsInvoiceItem {
 	// optional int32 day_left = 4;
 	optional int32 pack_size = 8; // typical 5
@@ -708,6 +726,8 @@ message InvoiceItem {
 		optional ZaloPersonalsInvoiceItem zalo_personals = 10;
 		optional ReservedInvoiceItem reserved_fanpages = 11;
 		optional ReservedInvoiceItem reserved_zalo_personals = 12;
+		optional TiktoksInvoiceItem tiktoks = 13;
+		optional WhatsappsInvoiceItem whatsapps = 14;
 	}
 	optional string type = 18;
 	optional Data data = 9;
