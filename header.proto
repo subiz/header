@@ -7,7 +7,6 @@ option go_package = "github.com/subiz/header";
 import "google/protobuf/struct.proto";
 import "common.proto";
 import "account.proto";
-import "payment.proto";
 import "type.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
 
@@ -718,7 +717,7 @@ message Data {
 	OutboundCallUpdateEvent outbound_call_update = 108;
 	BannedUser banned_user = 109;
 	// Credit credit = 110;
-	payment.Bill subiz_bill = 111;
+	account.Bill subiz_bill = 111;
 
 	Noti desktop_notification = 113;
 
@@ -7649,7 +7648,7 @@ message AccSub {
 	common.Context ctx = 1;
 	string id = 2;
 	account.Account account = 3;
-	payment.Subscription subscription = 4;
+	account.Subscription subscription = 4;
 	// repeated account.Agent agents = 5;
 	string stringify = 6;
 	int64 num_open_invoices = 7;
@@ -9106,8 +9105,8 @@ message PromotionCheckResult {
 
 message PromotionCodeUsage {
 	common.Context ctx = 1;
-	repeated payment.Invoice invoices = 4;
-	repeated payment.Bill bills = 5;
+	repeated account.Invoice invoices = 4;
+	repeated account.Bill bills = 5;
 }
 
 message SubizPaymentMethod {

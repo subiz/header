@@ -3,7 +3,6 @@ syntax = "proto3";
 package header;
 
 option go_package = "github.com/subiz/header";
-import "payment.proto";
 import "account.proto";
 import "header.proto";
 import "request.proto";
@@ -179,14 +178,14 @@ service AccountMgr {
 	rpc LockLogin(header.Id) returns (header.Id); // accid
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
-	rpc ListBills(header.Id) returns (payment.Bills);
+	rpc ListBills(header.Id) returns (account.Bills);
 
 	// promotion code
 	rpc ListPromotionPrograms(header.Id) returns (header.Response); // allow search by code
 	rpc ListPromotionCodesOfProgram(header.Id) returns (header.Response); // allow search programid.keyword
 	rpc ListPromotionCodesOfAgent(header.Id) returns (header.Response);
 	rpc UpsertPromotionCode(header.PromotionCode) returns (header.Response);
-	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);
+	rpc CheckPromotionCode(account.Invoice) returns (header.Response);
 	rpc GetPromotionCode(header.Id) returns (header.Response);
 	rpc DeletePromotionCode(header.Id) returns (header.Response);
 	rpc RedeemPromotionCode(header.RedeemRequest) returns (header.Response);
@@ -717,32 +716,32 @@ service PaymentMgr {
 	rpc ListPlans(Id) returns (Response);
 	rpc SearchSub(account.SearchSubRequest) returns (AccSubs);
 	rpc GetSub(header.Id) returns (AccSub);
-	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription); // @depreacted
+	rpc UpdateSubscription(account.Subscription) returns (account.Subscription); // @depreacted
 
-	rpc UpdateSub(payment.UpdateSubscriptionRequest) returns (payment.Invoice);
+	rpc UpdateSub(account.UpdateSubscriptionRequest) returns (account.Invoice);
 	rpc GetSubscriptionUsage(Id) returns (Response); // subscription.purchased
-	rpc GetInvoice(payment.Invoice) returns (payment.Invoice);
+	rpc GetInvoice(account.Invoice) returns (account.Invoice);
 
-	rpc GetSubscription(Id) returns (payment.Subscription);
-	rpc Pay(payment.PayRequest) returns (payment.Bill);
-	rpc CreateInvoice(payment.Invoice) returns (payment.Invoice);
-	rpc UpdateInvoice(payment.Invoice) returns (payment.Invoice);
+	rpc GetSubscription(Id) returns (account.Subscription);
+	rpc Pay(account.PayRequest) returns (account.Bill);
+	rpc CreateInvoice(account.Invoice) returns (account.Invoice);
+	rpc UpdateInvoice(account.Invoice) returns (account.Invoice);
 	rpc DeleteInvoice(Id) returns (Empty);
 
-	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
+	rpc FilterInvoices(account.ListInvoiceRequest) returns (account.Invoices);
 
 	// call when receive bank transfer
-	rpc DoPaidSubscription(payment.PayRequest) returns (payment.Invoice); // upgrade and generate invoice
+	rpc DoPaidSubscription(account.PayRequest) returns (account.Invoice); // upgrade and generate invoice
 
-	rpc ListComments(Id) returns (payment.Comments);
-	rpc AddComment(payment.Comment) returns (payment.Comment);
-	rpc ExportInvoice(Id) returns (payment.String);
-	rpc ConvertInvoiceToHtml(payment.Invoice) returns (payment.String);
+	rpc ListComments(Id) returns (account.Comments);
+	rpc AddComment(account.Comment) returns (account.Comment);
+	rpc ExportInvoice(Id) returns (account.String);
+	rpc ConvertInvoiceToHtml(account.Invoice) returns (account.String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
-	rpc TransferMoney(payment.PayRequest) returns (payment.Bill); // only subiz
+	rpc TransferMoney(account.PayRequest) returns (account.Bill); // only subiz
 
 	rpc RecomputeCredit(Id) returns (Empty); // internal
-	rpc ListPaymentLogs(Id) returns (payment.Logs);
+	rpc ListPaymentLogs(Id) returns (account.Logs);
 }
 
 // pubsub services

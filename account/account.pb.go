@@ -202,6 +202,185 @@ func (Account_State) EnumDescriptor() ([]byte, []int) {
 	return file_account_proto_rawDescGZIP(), []int{5, 0}
 }
 
+type Invoice_State int32
+
+const (
+	Invoice_draft Invoice_State = 0 // not ready
+	// official, awaiting confirmation by party A or B, can still change, will move to open:
+	// 1. automatically 7 days after created
+	// 2. payment received
+	// 3. agent change the state
+	Invoice_pending Invoice_State = 1
+	Invoice_open    Invoice_State = 2 // confirmed, stable, cannot change
+	Invoice_paid    Invoice_State = 3 // payment fully received, closed
+	Invoice_void    Invoice_State = 4 // cancelled/deleted
+)
+
+// Enum value maps for Invoice_State.
+var (
+	Invoice_State_name = map[int32]string{
+		0: "draft",
+		1: "pending",
+		2: "open",
+		3: "paid",
+		4: "void",
+	}
+	Invoice_State_value = map[string]int32{
+		"draft":   0,
+		"pending": 1,
+		"open":    2,
+		"paid":    3,
+		"void":    4,
+	}
+)
+
+func (x Invoice_State) Enum() *Invoice_State {
+	p := new(Invoice_State)
+	*p = x
+	return p
+}
+
+func (x Invoice_State) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Invoice_State) Descriptor() protoreflect.EnumDescriptor {
+	return file_account_proto_enumTypes[3].Descriptor()
+}
+
+func (Invoice_State) Type() protoreflect.EnumType {
+	return &file_account_proto_enumTypes[3]
+}
+
+func (x Invoice_State) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *Invoice_State) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = Invoice_State(num)
+	return nil
+}
+
+// Deprecated: Use Invoice_State.Descriptor instead.
+func (Invoice_State) EnumDescriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{31, 0}
+}
+
+type Log_Action int32
+
+const (
+	Log_create_invoice         Log_Action = 0
+	Log_change_invoice_status  Log_Action = 1
+	Log_create_discount        Log_Action = 2
+	Log_delete_discount        Log_Action = 3
+	Log_redeem_discount        Log_Action = 4
+	Log_add_credit             Log_Action = 5
+	Log_redeem_credit          Log_Action = 6
+	Log_delete_account         Log_Action = 7
+	Log_change_plan            Log_Action = 8
+	Log_renew_subscription     Log_Action = 10
+	Log_click_subscribe_button Log_Action = 11
+	Log_pay_for_referrer       Log_Action = 12
+	Log_add_money_for_referrer Log_Action = 13
+	Log_pay_invoice            Log_Action = 14
+	Log_charge_stripe          Log_Action = 15
+	Log_create_bill            Log_Action = 16
+	Log_use_credit             Log_Action = 17
+	Log_edit_subscription      Log_Action = 18
+	Log_edit_invoice           Log_Action = 19
+	Log_downgrade              Log_Action = 20
+)
+
+// Enum value maps for Log_Action.
+var (
+	Log_Action_name = map[int32]string{
+		0:  "create_invoice",
+		1:  "change_invoice_status",
+		2:  "create_discount",
+		3:  "delete_discount",
+		4:  "redeem_discount",
+		5:  "add_credit",
+		6:  "redeem_credit",
+		7:  "delete_account",
+		8:  "change_plan",
+		10: "renew_subscription",
+		11: "click_subscribe_button",
+		12: "pay_for_referrer",
+		13: "add_money_for_referrer",
+		14: "pay_invoice",
+		15: "charge_stripe",
+		16: "create_bill",
+		17: "use_credit",
+		18: "edit_subscription",
+		19: "edit_invoice",
+		20: "downgrade",
+	}
+	Log_Action_value = map[string]int32{
+		"create_invoice":         0,
+		"change_invoice_status":  1,
+		"create_discount":        2,
+		"delete_discount":        3,
+		"redeem_discount":        4,
+		"add_credit":             5,
+		"redeem_credit":          6,
+		"delete_account":         7,
+		"change_plan":            8,
+		"renew_subscription":     10,
+		"click_subscribe_button": 11,
+		"pay_for_referrer":       12,
+		"add_money_for_referrer": 13,
+		"pay_invoice":            14,
+		"charge_stripe":          15,
+		"create_bill":            16,
+		"use_credit":             17,
+		"edit_subscription":      18,
+		"edit_invoice":           19,
+		"downgrade":              20,
+	}
+)
+
+func (x Log_Action) Enum() *Log_Action {
+	p := new(Log_Action)
+	*p = x
+	return p
+}
+
+func (x Log_Action) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Log_Action) Descriptor() protoreflect.EnumDescriptor {
+	return file_account_proto_enumTypes[4].Descriptor()
+}
+
+func (Log_Action) Type() protoreflect.EnumType {
+	return &file_account_proto_enumTypes[4]
+}
+
+func (x Log_Action) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *Log_Action) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = Log_Action(num)
+	return nil
+}
+
+// Deprecated: Use Log_Action.Descriptor instead.
+func (Log_Action) EnumDescriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{42, 0}
+}
+
 type DashboardAgent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// optional int64 bot_build_showed = 12;
@@ -3087,6 +3266,2547 @@ func (x *ReferrerAgents) GetReferrerAgents() []*ReferrerAgent {
 	return nil
 }
 
+type Comments struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Comments      []*Comment             `protobuf:"bytes,3,rep,name=comments" json:"comments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Comments) Reset() {
+	*x = Comments{}
+	mi := &file_account_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Comments) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Comments) ProtoMessage() {}
+
+func (x *Comments) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Comments.ProtoReflect.Descriptor instead.
+func (*Comments) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *Comments) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Comments) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Comments) GetComments() []*Comment {
+	if x != nil {
+		return x.Comments
+	}
+	return nil
+}
+
+type Comment struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Ctx             *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId       *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Id              *string                `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	TopicId         *string                `protobuf:"bytes,4,opt,name=topic_id,json=topicId" json:"topic_id,omitempty"`
+	TopicType       *string                `protobuf:"bytes,5,opt,name=topic_type,json=topicType" json:"topic_type,omitempty"`
+	AuthorAccountId *string                `protobuf:"bytes,8,opt,name=author_account_id,json=authorAccountId" json:"author_account_id,omitempty"`
+	AuthorId        *string                `protobuf:"bytes,9,opt,name=author_id,json=authorId" json:"author_id,omitempty"`
+	AuthorEmail     *string                `protobuf:"bytes,10,opt,name=author_email,json=authorEmail" json:"author_email,omitempty"`
+	Content         *string                `protobuf:"bytes,11,opt,name=content" json:"content,omitempty"`
+	Created         *int64                 `protobuf:"varint,12,opt,name=created" json:"created,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *Comment) Reset() {
+	*x = Comment{}
+	mi := &file_account_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Comment) ProtoMessage() {}
+
+func (x *Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Comment.ProtoReflect.Descriptor instead.
+func (*Comment) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *Comment) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Comment) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Comment) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *Comment) GetTopicId() string {
+	if x != nil && x.TopicId != nil {
+		return *x.TopicId
+	}
+	return ""
+}
+
+func (x *Comment) GetTopicType() string {
+	if x != nil && x.TopicType != nil {
+		return *x.TopicType
+	}
+	return ""
+}
+
+func (x *Comment) GetAuthorAccountId() string {
+	if x != nil && x.AuthorAccountId != nil {
+		return *x.AuthorAccountId
+	}
+	return ""
+}
+
+func (x *Comment) GetAuthorId() string {
+	if x != nil && x.AuthorId != nil {
+		return *x.AuthorId
+	}
+	return ""
+}
+
+func (x *Comment) GetAuthorEmail() string {
+	if x != nil && x.AuthorEmail != nil {
+		return *x.AuthorEmail
+	}
+	return ""
+}
+
+func (x *Comment) GetContent() string {
+	if x != nil && x.Content != nil {
+		return *x.Content
+	}
+	return ""
+}
+
+func (x *Comment) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+type PurchaseRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId         *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Created           *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	PromotionCode     *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"` // optional string name = 7;
+	Started           *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`
+	AutoRenew         *bool                  `protobuf:"varint,9,opt,name=auto_renew,json=autoRenew" json:"auto_renew,omitempty"`
+	BillingCycleMonth *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
+	// optional uint32 next_billing_cycle_month = 16;
+	Plan          *string       `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`
+	PaymentMethod *string       `protobuf:"bytes,32,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"`
+	Limit         *common.Limit `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`
+	AutoCharge    *bool         `protobuf:"varint,44,opt,name=auto_charge,json=autoCharge" json:"auto_charge,omitempty"`
+	Ended         *int64        `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"` // optional int64 churned = 47;
+	// optional int64 fpv_credit_vnd = 48;
+	FpvCustomPrice *int64 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"` // usd
+	NumAgents      *int64 `protobuf:"varint,51,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *PurchaseRequest) Reset() {
+	*x = PurchaseRequest{}
+	mi := &file_account_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PurchaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PurchaseRequest) ProtoMessage() {}
+
+func (x *PurchaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PurchaseRequest.ProtoReflect.Descriptor instead.
+func (*PurchaseRequest) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *PurchaseRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *PurchaseRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *PurchaseRequest) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *PurchaseRequest) GetPromotionCode() string {
+	if x != nil && x.PromotionCode != nil {
+		return *x.PromotionCode
+	}
+	return ""
+}
+
+func (x *PurchaseRequest) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *PurchaseRequest) GetAutoRenew() bool {
+	if x != nil && x.AutoRenew != nil {
+		return *x.AutoRenew
+	}
+	return false
+}
+
+func (x *PurchaseRequest) GetBillingCycleMonth() uint32 {
+	if x != nil && x.BillingCycleMonth != nil {
+		return *x.BillingCycleMonth
+	}
+	return 0
+}
+
+func (x *PurchaseRequest) GetPlan() string {
+	if x != nil && x.Plan != nil {
+		return *x.Plan
+	}
+	return ""
+}
+
+func (x *PurchaseRequest) GetPaymentMethod() string {
+	if x != nil && x.PaymentMethod != nil {
+		return *x.PaymentMethod
+	}
+	return ""
+}
+
+func (x *PurchaseRequest) GetLimit() *common.Limit {
+	if x != nil {
+		return x.Limit
+	}
+	return nil
+}
+
+func (x *PurchaseRequest) GetAutoCharge() bool {
+	if x != nil && x.AutoCharge != nil {
+		return *x.AutoCharge
+	}
+	return false
+}
+
+func (x *PurchaseRequest) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *PurchaseRequest) GetFpvCustomPrice() int64 {
+	if x != nil && x.FpvCustomPrice != nil {
+		return *x.FpvCustomPrice
+	}
+	return 0
+}
+
+func (x *PurchaseRequest) GetNumAgents() int64 {
+	if x != nil && x.NumAgents != nil {
+		return *x.NumAgents
+	}
+	return 0
+}
+
+type Subscription struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId         *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Created           *int64                 `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	PromotionCode     *string                `protobuf:"bytes,4,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`                 // last recurring promotion code
+	Started           *int64                 `protobuf:"varint,5,opt,name=started" json:"started,omitempty"`                                                 // ms
+	BillingCycleMonth *uint32                `protobuf:"varint,15,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"` // only use when renew
+	Plan              *string                `protobuf:"bytes,17,opt,name=plan" json:"plan,omitempty"`                                                       // trial, standard, standard_unlmited, advanced, custom, advanced_unlimited
+	// optional float credit = 27; // @deprecated
+	Limit     *common.Limit `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`         // combined from plan.limit and purchased_limit
+	Purchased *common.Limit `protobuf:"bytes,43,opt,name=purchased" json:"purchased,omitempty"` //
+	Ended     *int64        `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
+	Churned   *int64        `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
+	// optional int64 fpv_credit_vnd = 48; // @deprecated, translate from credit, do not store in db
+	FpvCustomPrice *int64 `protobuf:"varint,49,opt,name=fpv_custom_price,json=fpvCustomPrice" json:"fpv_custom_price,omitempty"` // usd, custom price, only edited by subiz
+	NumAgents      *int64 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`                  // @deprecated
+	// optional int64 use_ticket = 51;
+	// optional int64 next_num_agents = 52; // @deprecated
+	// optional int64 unlimited_ai_spending = 54;
+	FpvCreditUsd           *int64  `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"`                                 // soft = total bill - total invoice
+	FpvNovatBalanceUsd     *int64  `protobuf:"varint,58,opt,name=fpv_novat_balance_usd,json=fpvNovatBalanceUsd" json:"fpv_novat_balance_usd,omitempty"`             // soft = total invoice(type=novat) - total novat spend
+	FpvMarketingBalanceVnd *int64  `protobuf:"varint,59,opt,name=fpv_marketing_balance_vnd,json=fpvMarketingBalanceVnd" json:"fpv_marketing_balance_vnd,omitempty"` // soft = total invoice(type=marketing) - total marketing spend
+	Note                   *string `protobuf:"bytes,56,opt,name=note" json:"note,omitempty"`
+	FpvPricePerDayUsd      *int64  `protobuf:"varint,57,opt,name=fpv_price_per_day_usd,json=fpvPricePerDayUsd" json:"fpv_price_per_day_usd,omitempty"` // read only after upgrade
+	AutoRenewDisabled      *int64  `protobuf:"varint,62,opt,name=auto_renew_disabled,json=autoRenewDisabled" json:"auto_renew_disabled,omitempty"`
+	FpvNovatBudgetUsd      *int64  `protobuf:"varint,65,opt,name=fpv_novat_budget_usd,json=fpvNovatBudgetUsd" json:"fpv_novat_budget_usd,omitempty"`             // 15
+	NovatLastPayment       *int64  `protobuf:"varint,66,opt,name=novat_last_payment,json=novatLastPayment" json:"novat_last_payment,omitempty"`                  //
+	NovatLastDeclined      *int64  `protobuf:"varint,67,opt,name=novat_last_declined,json=novatLastDeclined" json:"novat_last_declined,omitempty"`               //
+	FpvMarketingBudgetVnd  *int64  `protobuf:"varint,68,opt,name=fpv_marketing_budget_vnd,json=fpvMarketingBudgetVnd" json:"fpv_marketing_budget_vnd,omitempty"` //
+	MarketingLastPayment   *int64  `protobuf:"varint,69,opt,name=marketing_last_payment,json=marketingLastPayment" json:"marketing_last_payment,omitempty"`      //
+	MarketingLastDeclined  *int64  `protobuf:"varint,70,opt,name=marketing_last_declined,json=marketingLastDeclined" json:"marketing_last_declined,omitempty"`   //
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Subscription) Reset() {
+	*x = Subscription{}
+	mi := &file_account_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Subscription) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Subscription) ProtoMessage() {}
+
+func (x *Subscription) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Subscription.ProtoReflect.Descriptor instead.
+func (*Subscription) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *Subscription) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Subscription) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Subscription) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *Subscription) GetPromotionCode() string {
+	if x != nil && x.PromotionCode != nil {
+		return *x.PromotionCode
+	}
+	return ""
+}
+
+func (x *Subscription) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *Subscription) GetBillingCycleMonth() uint32 {
+	if x != nil && x.BillingCycleMonth != nil {
+		return *x.BillingCycleMonth
+	}
+	return 0
+}
+
+func (x *Subscription) GetPlan() string {
+	if x != nil && x.Plan != nil {
+		return *x.Plan
+	}
+	return ""
+}
+
+func (x *Subscription) GetLimit() *common.Limit {
+	if x != nil {
+		return x.Limit
+	}
+	return nil
+}
+
+func (x *Subscription) GetPurchased() *common.Limit {
+	if x != nil {
+		return x.Purchased
+	}
+	return nil
+}
+
+func (x *Subscription) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *Subscription) GetChurned() int64 {
+	if x != nil && x.Churned != nil {
+		return *x.Churned
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvCustomPrice() int64 {
+	if x != nil && x.FpvCustomPrice != nil {
+		return *x.FpvCustomPrice
+	}
+	return 0
+}
+
+func (x *Subscription) GetNumAgents() int64 {
+	if x != nil && x.NumAgents != nil {
+		return *x.NumAgents
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvCreditUsd() int64 {
+	if x != nil && x.FpvCreditUsd != nil {
+		return *x.FpvCreditUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvNovatBalanceUsd() int64 {
+	if x != nil && x.FpvNovatBalanceUsd != nil {
+		return *x.FpvNovatBalanceUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvMarketingBalanceVnd() int64 {
+	if x != nil && x.FpvMarketingBalanceVnd != nil {
+		return *x.FpvMarketingBalanceVnd
+	}
+	return 0
+}
+
+func (x *Subscription) GetNote() string {
+	if x != nil && x.Note != nil {
+		return *x.Note
+	}
+	return ""
+}
+
+func (x *Subscription) GetFpvPricePerDayUsd() int64 {
+	if x != nil && x.FpvPricePerDayUsd != nil {
+		return *x.FpvPricePerDayUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetAutoRenewDisabled() int64 {
+	if x != nil && x.AutoRenewDisabled != nil {
+		return *x.AutoRenewDisabled
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvNovatBudgetUsd() int64 {
+	if x != nil && x.FpvNovatBudgetUsd != nil {
+		return *x.FpvNovatBudgetUsd
+	}
+	return 0
+}
+
+func (x *Subscription) GetNovatLastPayment() int64 {
+	if x != nil && x.NovatLastPayment != nil {
+		return *x.NovatLastPayment
+	}
+	return 0
+}
+
+func (x *Subscription) GetNovatLastDeclined() int64 {
+	if x != nil && x.NovatLastDeclined != nil {
+		return *x.NovatLastDeclined
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvMarketingBudgetVnd() int64 {
+	if x != nil && x.FpvMarketingBudgetVnd != nil {
+		return *x.FpvMarketingBudgetVnd
+	}
+	return 0
+}
+
+func (x *Subscription) GetMarketingLastPayment() int64 {
+	if x != nil && x.MarketingLastPayment != nil {
+		return *x.MarketingLastPayment
+	}
+	return 0
+}
+
+func (x *Subscription) GetMarketingLastDeclined() int64 {
+	if x != nil && x.MarketingLastDeclined != nil {
+		return *x.MarketingLastDeclined
+	}
+	return 0
+}
+
+type Bill struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Id        *string                `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	AccountId *string                `protobuf:"bytes,4,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	// optional float amount = 5;
+	InvoiceIds []string `protobuf:"bytes,6,rep,name=invoice_ids,json=invoiceIds" json:"invoice_ids,omitempty"`
+	Created    *int64   `protobuf:"varint,7,opt,name=created" json:"created,omitempty"`
+	// optional Contact customer_info = 8;
+	PaymentMethod *string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"` // auto
+	// optional int32 year = 11;
+	Description *string `protobuf:"bytes,12,opt,name=description" json:"description,omitempty"`
+	// optional string credit_id = 15;
+	// optional string status = 16;
+	Currency                 *string `protobuf:"bytes,17,opt,name=currency" json:"currency,omitempty"` // VND, USD
+	OriginalBankTransferNote *string `protobuf:"bytes,18,opt,name=original_bank_transfer_note,json=originalBankTransferNote" json:"original_bank_transfer_note,omitempty"`
+	BankTransferNote         *string `protobuf:"bytes,19,opt,name=bank_transfer_note,json=bankTransferNote" json:"bank_transfer_note,omitempty"`
+	FpvAmountVnd             *int64  `protobuf:"varint,20,opt,name=fpv_amount_vnd,json=fpvAmountVnd" json:"fpv_amount_vnd,omitempty"`
+	RequestId                *string `protobuf:"bytes,21,opt,name=request_id,json=requestId" json:"request_id,omitempty"` // random id from client
+	BankAccountId            *string `protobuf:"bytes,22,opt,name=bank_account_id,json=bankAccountId" json:"bank_account_id,omitempty"`
+	ByAgentId                *string `protobuf:"bytes,23,opt,name=by_agent_id,json=byAgentId" json:"by_agent_id,omitempty"`
+	FpvAmountUsd             *int64  `protobuf:"varint,24,opt,name=fpv_amount_usd,json=fpvAmountUsd" json:"fpv_amount_usd,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *Bill) Reset() {
+	*x = Bill{}
+	mi := &file_account_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Bill) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Bill) ProtoMessage() {}
+
+func (x *Bill) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Bill.ProtoReflect.Descriptor instead.
+func (*Bill) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *Bill) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Bill) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *Bill) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Bill) GetInvoiceIds() []string {
+	if x != nil {
+		return x.InvoiceIds
+	}
+	return nil
+}
+
+func (x *Bill) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *Bill) GetPaymentMethod() string {
+	if x != nil && x.PaymentMethod != nil {
+		return *x.PaymentMethod
+	}
+	return ""
+}
+
+func (x *Bill) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *Bill) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *Bill) GetOriginalBankTransferNote() string {
+	if x != nil && x.OriginalBankTransferNote != nil {
+		return *x.OriginalBankTransferNote
+	}
+	return ""
+}
+
+func (x *Bill) GetBankTransferNote() string {
+	if x != nil && x.BankTransferNote != nil {
+		return *x.BankTransferNote
+	}
+	return ""
+}
+
+func (x *Bill) GetFpvAmountVnd() int64 {
+	if x != nil && x.FpvAmountVnd != nil {
+		return *x.FpvAmountVnd
+	}
+	return 0
+}
+
+func (x *Bill) GetRequestId() string {
+	if x != nil && x.RequestId != nil {
+		return *x.RequestId
+	}
+	return ""
+}
+
+func (x *Bill) GetBankAccountId() string {
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
+	}
+	return ""
+}
+
+func (x *Bill) GetByAgentId() string {
+	if x != nil && x.ByAgentId != nil {
+		return *x.ByAgentId
+	}
+	return ""
+}
+
+func (x *Bill) GetFpvAmountUsd() int64 {
+	if x != nil && x.FpvAmountUsd != nil {
+		return *x.FpvAmountUsd
+	}
+	return 0
+}
+
+type Bills struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Bills         []*Bill                `protobuf:"bytes,3,rep,name=bills" json:"bills,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Bills) Reset() {
+	*x = Bills{}
+	mi := &file_account_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Bills) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Bills) ProtoMessage() {}
+
+func (x *Bills) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Bills.ProtoReflect.Descriptor instead.
+func (*Bills) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *Bills) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Bills) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Bills) GetBills() []*Bill {
+	if x != nil {
+		return x.Bills
+	}
+	return nil
+}
+
+type Invoices struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Invoices      []*Invoice             `protobuf:"bytes,2,rep,name=invoices" json:"invoices,omitempty"`
+	AccountId     *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Anchor        *string                `protobuf:"bytes,4,opt,name=anchor" json:"anchor,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Invoices) Reset() {
+	*x = Invoices{}
+	mi := &file_account_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Invoices) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Invoices) ProtoMessage() {}
+
+func (x *Invoices) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Invoices.ProtoReflect.Descriptor instead.
+func (*Invoices) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *Invoices) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Invoices) GetInvoices() []*Invoice {
+	if x != nil {
+		return x.Invoices
+	}
+	return nil
+}
+
+func (x *Invoices) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Invoices) GetAnchor() string {
+	if x != nil && x.Anchor != nil {
+		return *x.Anchor
+	}
+	return ""
+}
+
+type ListInvoiceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	CreditId      *string                `protobuf:"bytes,6,opt,name=credit_id,json=creditId" json:"credit_id,omitempty"`
+	ComputeDraft  *bool                  `protobuf:"varint,7,opt,name=compute_draft,json=computeDraft" json:"compute_draft,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListInvoiceRequest) Reset() {
+	*x = ListInvoiceRequest{}
+	mi := &file_account_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListInvoiceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListInvoiceRequest) ProtoMessage() {}
+
+func (x *ListInvoiceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListInvoiceRequest.ProtoReflect.Descriptor instead.
+func (*ListInvoiceRequest) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ListInvoiceRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ListInvoiceRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *ListInvoiceRequest) GetCreditId() string {
+	if x != nil && x.CreditId != nil {
+		return *x.CreditId
+	}
+	return ""
+}
+
+func (x *ListInvoiceRequest) GetComputeDraft() bool {
+	if x != nil && x.ComputeDraft != nil {
+		return *x.ComputeDraft
+	}
+	return false
+}
+
+type Invoice struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Id        *string                `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	// optional float amount_due = 4;
+	PromotionCode *string `protobuf:"bytes,5,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
+	// optional string description = 6;
+	// optional BillingInfo billing_info = 8;
+	DueDate    *int64         `protobuf:"varint,9,opt,name=due_date,json=dueDate" json:"due_date,omitempty"`
+	State      *string        `protobuf:"bytes,10,opt,name=state" json:"state,omitempty"`
+	Created    *int64         `protobuf:"varint,11,opt,name=created" json:"created,omitempty"`
+	Items      []*InvoiceItem `protobuf:"bytes,12,rep,name=items" json:"items,omitempty"`
+	Subtotal   *float32       `protobuf:"fixed32,14,opt,name=subtotal" json:"subtotal,omitempty"`
+	TaxPercent *float32       `protobuf:"fixed32,15,opt,name=tax_percent,json=taxPercent" json:"tax_percent,omitempty"`
+	Tax        *float32       `protobuf:"fixed32,16,opt,name=tax" json:"tax,omitempty"`
+	Total      *float32       `protobuf:"fixed32,17,opt,name=total" json:"total,omitempty"`
+	Updated    *int64         `protobuf:"varint,18,opt,name=updated" json:"updated,omitempty"`
+	// optional int32 year = 19; // optional
+	// repeated Note notes = 22;
+	Bills       []string      `protobuf:"bytes,23,rep,name=bills" json:"bills,omitempty"`
+	PaymentMade *float32      `protobuf:"fixed32,24,opt,name=payment_made,json=paymentMade" json:"payment_made,omitempty"`
+	CurrentSub  *Subscription `protobuf:"bytes,25,opt,name=current_sub,json=currentSub" json:"current_sub,omitempty"` // optional
+	// optional string credit_id = 27; // @deprecated
+	Currency          *string `protobuf:"bytes,28,opt,name=currency" json:"currency,omitempty"`                                                 // VND
+	FpvTotalVnd       *int64  `protobuf:"varint,29,opt,name=fpv_total_vnd,json=fpvTotalVnd" json:"fpv_total_vnd,omitempty"`                     // read only
+	FpvPaymentMadeVnd *int64  `protobuf:"varint,30,opt,name=fpv_payment_made_vnd,json=fpvPaymentMadeVnd" json:"fpv_payment_made_vnd,omitempty"` // read only
+	IsGenQr           *bool   `protobuf:"varint,31,opt,name=is_gen_qr,json=isGenQr" json:"is_gen_qr,omitempty"`                                 // not save in db
+	CreatedBy         *string `protobuf:"bytes,32,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`                              // system
+	FpvDiscountVnd    *int64  `protobuf:"varint,34,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`            // read only
+	FpvSubtotalVnd    *int64  `protobuf:"varint,35,opt,name=fpv_subtotal_vnd,json=fpvSubtotalVnd" json:"fpv_subtotal_vnd,omitempty"`            // read only
+	// optional int64 fpv_promotion_vnd = 36; // read only
+	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
+	// optional int64 fpv_referrer_commission_vnd = 36; // hidden
+	ReferrerAgentId   *string       `protobuf:"bytes,37,opt,name=referrer_agent_id,json=referrerAgentId" json:"referrer_agent_id,omitempty"` // read only
+	FpvSubtotalUsd    *int64        `protobuf:"varint,38,opt,name=fpv_subtotal_usd,json=fpvSubtotalUsd" json:"fpv_subtotal_usd,omitempty"`
+	FpvTaxPercent     *int64        `protobuf:"varint,39,opt,name=fpv_tax_percent,json=fpvTaxPercent" json:"fpv_tax_percent,omitempty"`
+	FpvTaxUsd         *int64        `protobuf:"varint,40,opt,name=fpv_tax_usd,json=fpvTaxUsd" json:"fpv_tax_usd,omitempty"`
+	FpvTotalUsd       *int64        `protobuf:"varint,41,opt,name=fpv_total_usd,json=fpvTotalUsd" json:"fpv_total_usd,omitempty"`
+	FpvPaymentMadeUsd *int64        `protobuf:"varint,42,opt,name=fpv_payment_made_usd,json=fpvPaymentMadeUsd" json:"fpv_payment_made_usd,omitempty"`
+	FpvDiscountUsd    *int64        `protobuf:"varint,43,opt,name=fpv_discount_usd,json=fpvDiscountUsd" json:"fpv_discount_usd,omitempty"` // read only
+	PaymentNum        *string       `protobuf:"bytes,45,opt,name=payment_num,json=paymentNum" json:"payment_num,omitempty"`
+	AutoGenerated     *bool         `protobuf:"varint,46,opt,name=auto_generated,json=autoGenerated" json:"auto_generated,omitempty"`
+	Sub               *Subscription `protobuf:"bytes,50,opt,name=sub" json:"sub,omitempty"`
+	FpvRefcomVnd      *int64        `protobuf:"varint,53,opt,name=fpv_refcom_vnd,json=fpvRefcomVnd" json:"fpv_refcom_vnd,omitempty"` // read only
+	InvoiceInfo       *InvoiceInfo  `protobuf:"bytes,54,opt,name=invoice_info,json=invoiceInfo" json:"invoice_info,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *Invoice) Reset() {
+	*x = Invoice{}
+	mi := &file_account_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Invoice) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Invoice) ProtoMessage() {}
+
+func (x *Invoice) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Invoice.ProtoReflect.Descriptor instead.
+func (*Invoice) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *Invoice) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Invoice) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Invoice) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *Invoice) GetPromotionCode() string {
+	if x != nil && x.PromotionCode != nil {
+		return *x.PromotionCode
+	}
+	return ""
+}
+
+func (x *Invoice) GetDueDate() int64 {
+	if x != nil && x.DueDate != nil {
+		return *x.DueDate
+	}
+	return 0
+}
+
+func (x *Invoice) GetState() string {
+	if x != nil && x.State != nil {
+		return *x.State
+	}
+	return ""
+}
+
+func (x *Invoice) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *Invoice) GetItems() []*InvoiceItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *Invoice) GetSubtotal() float32 {
+	if x != nil && x.Subtotal != nil {
+		return *x.Subtotal
+	}
+	return 0
+}
+
+func (x *Invoice) GetTaxPercent() float32 {
+	if x != nil && x.TaxPercent != nil {
+		return *x.TaxPercent
+	}
+	return 0
+}
+
+func (x *Invoice) GetTax() float32 {
+	if x != nil && x.Tax != nil {
+		return *x.Tax
+	}
+	return 0
+}
+
+func (x *Invoice) GetTotal() float32 {
+	if x != nil && x.Total != nil {
+		return *x.Total
+	}
+	return 0
+}
+
+func (x *Invoice) GetUpdated() int64 {
+	if x != nil && x.Updated != nil {
+		return *x.Updated
+	}
+	return 0
+}
+
+func (x *Invoice) GetBills() []string {
+	if x != nil {
+		return x.Bills
+	}
+	return nil
+}
+
+func (x *Invoice) GetPaymentMade() float32 {
+	if x != nil && x.PaymentMade != nil {
+		return *x.PaymentMade
+	}
+	return 0
+}
+
+func (x *Invoice) GetCurrentSub() *Subscription {
+	if x != nil {
+		return x.CurrentSub
+	}
+	return nil
+}
+
+func (x *Invoice) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *Invoice) GetFpvTotalVnd() int64 {
+	if x != nil && x.FpvTotalVnd != nil {
+		return *x.FpvTotalVnd
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvPaymentMadeVnd() int64 {
+	if x != nil && x.FpvPaymentMadeVnd != nil {
+		return *x.FpvPaymentMadeVnd
+	}
+	return 0
+}
+
+func (x *Invoice) GetIsGenQr() bool {
+	if x != nil && x.IsGenQr != nil {
+		return *x.IsGenQr
+	}
+	return false
+}
+
+func (x *Invoice) GetCreatedBy() string {
+	if x != nil && x.CreatedBy != nil {
+		return *x.CreatedBy
+	}
+	return ""
+}
+
+func (x *Invoice) GetFpvDiscountVnd() int64 {
+	if x != nil && x.FpvDiscountVnd != nil {
+		return *x.FpvDiscountVnd
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvSubtotalVnd() int64 {
+	if x != nil && x.FpvSubtotalVnd != nil {
+		return *x.FpvSubtotalVnd
+	}
+	return 0
+}
+
+func (x *Invoice) GetReferrerAgentId() string {
+	if x != nil && x.ReferrerAgentId != nil {
+		return *x.ReferrerAgentId
+	}
+	return ""
+}
+
+func (x *Invoice) GetFpvSubtotalUsd() int64 {
+	if x != nil && x.FpvSubtotalUsd != nil {
+		return *x.FpvSubtotalUsd
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvTaxPercent() int64 {
+	if x != nil && x.FpvTaxPercent != nil {
+		return *x.FpvTaxPercent
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvTaxUsd() int64 {
+	if x != nil && x.FpvTaxUsd != nil {
+		return *x.FpvTaxUsd
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvTotalUsd() int64 {
+	if x != nil && x.FpvTotalUsd != nil {
+		return *x.FpvTotalUsd
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvPaymentMadeUsd() int64 {
+	if x != nil && x.FpvPaymentMadeUsd != nil {
+		return *x.FpvPaymentMadeUsd
+	}
+	return 0
+}
+
+func (x *Invoice) GetFpvDiscountUsd() int64 {
+	if x != nil && x.FpvDiscountUsd != nil {
+		return *x.FpvDiscountUsd
+	}
+	return 0
+}
+
+func (x *Invoice) GetPaymentNum() string {
+	if x != nil && x.PaymentNum != nil {
+		return *x.PaymentNum
+	}
+	return ""
+}
+
+func (x *Invoice) GetAutoGenerated() bool {
+	if x != nil && x.AutoGenerated != nil {
+		return *x.AutoGenerated
+	}
+	return false
+}
+
+func (x *Invoice) GetSub() *Subscription {
+	if x != nil {
+		return x.Sub
+	}
+	return nil
+}
+
+func (x *Invoice) GetFpvRefcomVnd() int64 {
+	if x != nil && x.FpvRefcomVnd != nil {
+		return *x.FpvRefcomVnd
+	}
+	return 0
+}
+
+func (x *Invoice) GetInvoiceInfo() *InvoiceInfo {
+	if x != nil {
+		return x.InvoiceInfo
+	}
+	return nil
+}
+
+type FanpagesInvoiceItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional string plan = 3;
+	// optional int32 day_left = 4;
+	PackSize      *int64 `protobuf:"varint,8,opt,name=pack_size,json=packSize" json:"pack_size,omitempty"` // typical 500
+	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FanpagesInvoiceItem) Reset() {
+	*x = FanpagesInvoiceItem{}
+	mi := &file_account_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FanpagesInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FanpagesInvoiceItem) ProtoMessage() {}
+
+func (x *FanpagesInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FanpagesInvoiceItem.ProtoReflect.Descriptor instead.
+func (*FanpagesInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *FanpagesInvoiceItem) GetPackSize() int64 {
+	if x != nil && x.PackSize != nil {
+		return *x.PackSize
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *FanpagesInvoiceItem) GetFullCycle() bool {
+	if x != nil && x.FullCycle != nil {
+		return *x.FullCycle
+	}
+	return false
+}
+
+type ZaloPersonalsInvoiceItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional int32 day_left = 4;
+	PackSize      *int32 `protobuf:"varint,8,opt,name=pack_size,json=packSize" json:"pack_size,omitempty"` // typical 5
+	Started       *int64 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	FullCycle     *bool  `protobuf:"varint,11,opt,name=full_cycle,json=fullCycle" json:"full_cycle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ZaloPersonalsInvoiceItem) Reset() {
+	*x = ZaloPersonalsInvoiceItem{}
+	mi := &file_account_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ZaloPersonalsInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZaloPersonalsInvoiceItem) ProtoMessage() {}
+
+func (x *ZaloPersonalsInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ZaloPersonalsInvoiceItem.ProtoReflect.Descriptor instead.
+func (*ZaloPersonalsInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetPackSize() int32 {
+	if x != nil && x.PackSize != nil {
+		return *x.PackSize
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *ZaloPersonalsInvoiceItem) GetFullCycle() bool {
+	if x != nil && x.FullCycle != nil {
+		return *x.FullCycle
+	}
+	return false
+}
+
+type AgentInvoiceItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Plan          *string                `protobuf:"bytes,3,opt,name=plan" json:"plan,omitempty"`
+	DayLeft       *int32                 `protobuf:"varint,4,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
+	AgentCount    *int32                 `protobuf:"varint,8,opt,name=agent_count,json=agentCount" json:"agent_count,omitempty"`
+	Started       *int64                 `protobuf:"varint,9,opt,name=started" json:"started,omitempty"`
+	Ended         *int64                 `protobuf:"varint,10,opt,name=ended" json:"ended,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentInvoiceItem) Reset() {
+	*x = AgentInvoiceItem{}
+	mi := &file_account_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentInvoiceItem) ProtoMessage() {}
+
+func (x *AgentInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentInvoiceItem.ProtoReflect.Descriptor instead.
+func (*AgentInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *AgentInvoiceItem) GetPlan() string {
+	if x != nil && x.Plan != nil {
+		return *x.Plan
+	}
+	return ""
+}
+
+func (x *AgentInvoiceItem) GetDayLeft() int32 {
+	if x != nil && x.DayLeft != nil {
+		return *x.DayLeft
+	}
+	return 0
+}
+
+func (x *AgentInvoiceItem) GetAgentCount() int32 {
+	if x != nil && x.AgentCount != nil {
+		return *x.AgentCount
+	}
+	return 0
+}
+
+func (x *AgentInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *AgentInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+type RenewInvoiceItem struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Plan              *string                `protobuf:"bytes,3,opt,name=plan" json:"plan,omitempty"`
+	BillingCycleMonth *uint32                `protobuf:"varint,4,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
+	AgentCount        *uint32                `protobuf:"varint,5,opt,name=agent_count,json=agentCount" json:"agent_count,omitempty"`
+	FromTime          *int64                 `protobuf:"varint,6,opt,name=from_time,json=fromTime" json:"from_time,omitempty"`
+	FpvSavePercentage *int64                 `protobuf:"varint,7,opt,name=fpv_save_percentage,json=fpvSavePercentage" json:"fpv_save_percentage,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *RenewInvoiceItem) Reset() {
+	*x = RenewInvoiceItem{}
+	mi := &file_account_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RenewInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenewInvoiceItem) ProtoMessage() {}
+
+func (x *RenewInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenewInvoiceItem.ProtoReflect.Descriptor instead.
+func (*RenewInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *RenewInvoiceItem) GetPlan() string {
+	if x != nil && x.Plan != nil {
+		return *x.Plan
+	}
+	return ""
+}
+
+func (x *RenewInvoiceItem) GetBillingCycleMonth() uint32 {
+	if x != nil && x.BillingCycleMonth != nil {
+		return *x.BillingCycleMonth
+	}
+	return 0
+}
+
+func (x *RenewInvoiceItem) GetAgentCount() uint32 {
+	if x != nil && x.AgentCount != nil {
+		return *x.AgentCount
+	}
+	return 0
+}
+
+func (x *RenewInvoiceItem) GetFromTime() int64 {
+	if x != nil && x.FromTime != nil {
+		return *x.FromTime
+	}
+	return 0
+}
+
+func (x *RenewInvoiceItem) GetFpvSavePercentage() int64 {
+	if x != nil && x.FpvSavePercentage != nil {
+		return *x.FpvSavePercentage
+	}
+	return 0
+}
+
+type ReservedInvoiceItem struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	OldPlan              *string                `protobuf:"bytes,3,opt,name=old_plan,json=oldPlan" json:"old_plan,omitempty"`
+	OldAgentCount        *int64                 `protobuf:"varint,4,opt,name=old_agent_count,json=oldAgentCount" json:"old_agent_count,omitempty"`
+	OldBillingCycleMonth *int64                 `protobuf:"varint,5,opt,name=old_billing_cycle_month,json=oldBillingCycleMonth" json:"old_billing_cycle_month,omitempty"`
+	// optional bool old_is_unlimited_agent = 5;
+	// optional int64 old_fpv_save_percentage = 6;
+	DayLeft       *int32 `protobuf:"varint,7,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
+	OldStarted    *int64 `protobuf:"varint,8,opt,name=old_started,json=oldStarted" json:"old_started,omitempty"` // now (not sub.started)
+	OldEnded      *int64 `protobuf:"varint,9,opt,name=old_ended,json=oldEnded" json:"old_ended,omitempty"`
+	OldCount      *int64 `protobuf:"varint,10,opt,name=old_count,json=oldCount" json:"old_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReservedInvoiceItem) Reset() {
+	*x = ReservedInvoiceItem{}
+	mi := &file_account_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReservedInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReservedInvoiceItem) ProtoMessage() {}
+
+func (x *ReservedInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReservedInvoiceItem.ProtoReflect.Descriptor instead.
+func (*ReservedInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *ReservedInvoiceItem) GetOldPlan() string {
+	if x != nil && x.OldPlan != nil {
+		return *x.OldPlan
+	}
+	return ""
+}
+
+func (x *ReservedInvoiceItem) GetOldAgentCount() int64 {
+	if x != nil && x.OldAgentCount != nil {
+		return *x.OldAgentCount
+	}
+	return 0
+}
+
+func (x *ReservedInvoiceItem) GetOldBillingCycleMonth() int64 {
+	if x != nil && x.OldBillingCycleMonth != nil {
+		return *x.OldBillingCycleMonth
+	}
+	return 0
+}
+
+func (x *ReservedInvoiceItem) GetDayLeft() int32 {
+	if x != nil && x.DayLeft != nil {
+		return *x.DayLeft
+	}
+	return 0
+}
+
+func (x *ReservedInvoiceItem) GetOldStarted() int64 {
+	if x != nil && x.OldStarted != nil {
+		return *x.OldStarted
+	}
+	return 0
+}
+
+func (x *ReservedInvoiceItem) GetOldEnded() int64 {
+	if x != nil && x.OldEnded != nil {
+		return *x.OldEnded
+	}
+	return 0
+}
+
+func (x *ReservedInvoiceItem) GetOldCount() int64 {
+	if x != nil && x.OldCount != nil {
+		return *x.OldCount
+	}
+	return 0
+}
+
+type PlanInvoiceItem struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	AgentCount        *uint32                `protobuf:"varint,2,opt,name=agent_count,json=agentCount" json:"agent_count,omitempty"`
+	BillingCycleMonth *uint32                `protobuf:"varint,5,opt,name=billing_cycle_month,json=billingCycleMonth" json:"billing_cycle_month,omitempty"`
+	OldPlan           *string                `protobuf:"bytes,6,opt,name=old_plan,json=oldPlan" json:"old_plan,omitempty"`
+	NewPlan           *string                `protobuf:"bytes,3,opt,name=new_plan,json=newPlan" json:"new_plan,omitempty"`
+	SavePercentage    *float32               `protobuf:"fixed32,9,opt,name=save_percentage,json=savePercentage" json:"save_percentage,omitempty"` // remove
+	Started           *int64                 `protobuf:"varint,8,opt,name=started" json:"started,omitempty"`
+	DayLeft           *int32                 `protobuf:"varint,4,opt,name=day_left,json=dayLeft" json:"day_left,omitempty"`
+	OldAgentCount     *uint32                `protobuf:"varint,10,opt,name=old_agent_count,json=oldAgentCount" json:"old_agent_count,omitempty"`
+	IsUnlimitedAgent  *bool                  `protobuf:"varint,11,opt,name=is_unlimited_agent,json=isUnlimitedAgent" json:"is_unlimited_agent,omitempty"`
+	FpvSavePercentage *int64                 `protobuf:"varint,12,opt,name=fpv_save_percentage,json=fpvSavePercentage" json:"fpv_save_percentage,omitempty"`
+	Ended             *int64                 `protobuf:"varint,13,opt,name=ended" json:"ended,omitempty"` // most trusted
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *PlanInvoiceItem) Reset() {
+	*x = PlanInvoiceItem{}
+	mi := &file_account_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlanInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlanInvoiceItem) ProtoMessage() {}
+
+func (x *PlanInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlanInvoiceItem.ProtoReflect.Descriptor instead.
+func (*PlanInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *PlanInvoiceItem) GetAgentCount() uint32 {
+	if x != nil && x.AgentCount != nil {
+		return *x.AgentCount
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetBillingCycleMonth() uint32 {
+	if x != nil && x.BillingCycleMonth != nil {
+		return *x.BillingCycleMonth
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetOldPlan() string {
+	if x != nil && x.OldPlan != nil {
+		return *x.OldPlan
+	}
+	return ""
+}
+
+func (x *PlanInvoiceItem) GetNewPlan() string {
+	if x != nil && x.NewPlan != nil {
+		return *x.NewPlan
+	}
+	return ""
+}
+
+func (x *PlanInvoiceItem) GetSavePercentage() float32 {
+	if x != nil && x.SavePercentage != nil {
+		return *x.SavePercentage
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetStarted() int64 {
+	if x != nil && x.Started != nil {
+		return *x.Started
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetDayLeft() int32 {
+	if x != nil && x.DayLeft != nil {
+		return *x.DayLeft
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetOldAgentCount() uint32 {
+	if x != nil && x.OldAgentCount != nil {
+		return *x.OldAgentCount
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetIsUnlimitedAgent() bool {
+	if x != nil && x.IsUnlimitedAgent != nil {
+		return *x.IsUnlimitedAgent
+	}
+	return false
+}
+
+func (x *PlanInvoiceItem) GetFpvSavePercentage() int64 {
+	if x != nil && x.FpvSavePercentage != nil {
+		return *x.FpvSavePercentage
+	}
+	return 0
+}
+
+func (x *PlanInvoiceItem) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+type MarketingInvoiceItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Expired       *int64                 `protobuf:"varint,4,opt,name=expired" json:"expired,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MarketingInvoiceItem) Reset() {
+	*x = MarketingInvoiceItem{}
+	mi := &file_account_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MarketingInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MarketingInvoiceItem) ProtoMessage() {}
+
+func (x *MarketingInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MarketingInvoiceItem.ProtoReflect.Descriptor instead.
+func (*MarketingInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *MarketingInvoiceItem) GetExpired() int64 {
+	if x != nil && x.Expired != nil {
+		return *x.Expired
+	}
+	return 0
+}
+
+type NoVATInvoiceItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Expired       *int64                 `protobuf:"varint,4,opt,name=expired" json:"expired,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NoVATInvoiceItem) Reset() {
+	*x = NoVATInvoiceItem{}
+	mi := &file_account_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NoVATInvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NoVATInvoiceItem) ProtoMessage() {}
+
+func (x *NoVATInvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NoVATInvoiceItem.ProtoReflect.Descriptor instead.
+func (*NoVATInvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *NoVATInvoiceItem) GetExpired() int64 {
+	if x != nil && x.Expired != nil {
+		return *x.Expired
+	}
+	return 0
+}
+
+type InvoiceItem struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Headline    *string                `protobuf:"bytes,4,opt,name=headline" json:"headline,omitempty"`
+	Description *string                `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
+	// optional string invoice_id = 6; // remove
+	Quantity         *int32            `protobuf:"varint,7,opt,name=quantity" json:"quantity,omitempty"`
+	Price            *float32          `protobuf:"fixed32,8,opt,name=price" json:"price,omitempty"` // per unit
+	Type             *string           `protobuf:"bytes,18,opt,name=type" json:"type,omitempty"`
+	Data             *InvoiceItem_Data `protobuf:"bytes,9,opt,name=data" json:"data,omitempty"`
+	TotalPrice       *float32          `protobuf:"fixed32,10,opt,name=total_price,json=totalPrice" json:"total_price,omitempty"` // = (* quantity price)
+	FpvPriceVnd      *int64            `protobuf:"varint,11,opt,name=fpv_price_vnd,json=fpvPriceVnd" json:"fpv_price_vnd,omitempty"`
+	FpvTotalPriceVnd *int64            `protobuf:"varint,12,opt,name=fpv_total_price_vnd,json=fpvTotalPriceVnd" json:"fpv_total_price_vnd,omitempty"`
+	FpvDiscountVnd   *int64            `protobuf:"varint,13,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`
+	FpvPriceUsd      *int64            `protobuf:"varint,15,opt,name=fpv_price_usd,json=fpvPriceUsd" json:"fpv_price_usd,omitempty"`
+	FpvTotalPriceUsd *int64            `protobuf:"varint,16,opt,name=fpv_total_price_usd,json=fpvTotalPriceUsd" json:"fpv_total_price_usd,omitempty"`
+	FpvDiscountUsd   *int64            `protobuf:"varint,17,opt,name=fpv_discount_usd,json=fpvDiscountUsd" json:"fpv_discount_usd,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *InvoiceItem) Reset() {
+	*x = InvoiceItem{}
+	mi := &file_account_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvoiceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvoiceItem) ProtoMessage() {}
+
+func (x *InvoiceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvoiceItem.ProtoReflect.Descriptor instead.
+func (*InvoiceItem) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *InvoiceItem) GetHeadline() string {
+	if x != nil && x.Headline != nil {
+		return *x.Headline
+	}
+	return ""
+}
+
+func (x *InvoiceItem) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *InvoiceItem) GetQuantity() int32 {
+	if x != nil && x.Quantity != nil {
+		return *x.Quantity
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetPrice() float32 {
+	if x != nil && x.Price != nil {
+		return *x.Price
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *InvoiceItem) GetData() *InvoiceItem_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *InvoiceItem) GetTotalPrice() float32 {
+	if x != nil && x.TotalPrice != nil {
+		return *x.TotalPrice
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetFpvPriceVnd() int64 {
+	if x != nil && x.FpvPriceVnd != nil {
+		return *x.FpvPriceVnd
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetFpvTotalPriceVnd() int64 {
+	if x != nil && x.FpvTotalPriceVnd != nil {
+		return *x.FpvTotalPriceVnd
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetFpvDiscountVnd() int64 {
+	if x != nil && x.FpvDiscountVnd != nil {
+		return *x.FpvDiscountVnd
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetFpvPriceUsd() int64 {
+	if x != nil && x.FpvPriceUsd != nil {
+		return *x.FpvPriceUsd
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetFpvTotalPriceUsd() int64 {
+	if x != nil && x.FpvTotalPriceUsd != nil {
+		return *x.FpvTotalPriceUsd
+	}
+	return 0
+}
+
+func (x *InvoiceItem) GetFpvDiscountUsd() int64 {
+	if x != nil && x.FpvDiscountUsd != nil {
+		return *x.FpvDiscountUsd
+	}
+	return 0
+}
+
+type Logs struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Logs          []*Log                 `protobuf:"bytes,5,rep,name=logs" json:"logs,omitempty"`
+	NextAnchor    *string                `protobuf:"bytes,6,opt,name=next_anchor,json=nextAnchor" json:"next_anchor,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Logs) Reset() {
+	*x = Logs{}
+	mi := &file_account_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Logs) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Logs) ProtoMessage() {}
+
+func (x *Logs) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Logs.ProtoReflect.Descriptor instead.
+func (*Logs) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *Logs) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Logs) GetLogs() []*Log {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+func (x *Logs) GetNextAnchor() string {
+	if x != nil && x.NextAnchor != nil {
+		return *x.NextAnchor
+	}
+	return ""
+}
+
+type Log struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	User          *string                `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
+	Id            *string                `protobuf:"bytes,8,opt,name=id" json:"id,omitempty"`
+	Action        *string                `protobuf:"bytes,3,opt,name=action" json:"action,omitempty"`
+	Created       *int64                 `protobuf:"varint,4,opt,name=created" json:"created,omitempty"`
+	Description   *string                `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
+	AccountId     *string                `protobuf:"bytes,6,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Stack         *string                `protobuf:"bytes,9,opt,name=stack" json:"stack,omitempty"`
+	RefCtx        *string                `protobuf:"bytes,10,opt,name=ref_ctx,json=refCtx" json:"ref_ctx,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Log) Reset() {
+	*x = Log{}
+	mi := &file_account_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Log) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Log) ProtoMessage() {}
+
+func (x *Log) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Log.ProtoReflect.Descriptor instead.
+func (*Log) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *Log) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Log) GetUser() string {
+	if x != nil && x.User != nil {
+		return *x.User
+	}
+	return ""
+}
+
+func (x *Log) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *Log) GetAction() string {
+	if x != nil && x.Action != nil {
+		return *x.Action
+	}
+	return ""
+}
+
+func (x *Log) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *Log) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *Log) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Log) GetStack() string {
+	if x != nil && x.Stack != nil {
+		return *x.Stack
+	}
+	return ""
+}
+
+func (x *Log) GetRefCtx() string {
+	if x != nil && x.RefCtx != nil {
+		return *x.RefCtx
+	}
+	return ""
+}
+
+type String struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Str           *string                `protobuf:"bytes,2,opt,name=str" json:"str,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *String) Reset() {
+	*x = String{}
+	mi := &file_account_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *String) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*String) ProtoMessage() {}
+
+func (x *String) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use String.ProtoReflect.Descriptor instead.
+func (*String) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *String) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *String) GetStr() string {
+	if x != nil && x.Str != nil {
+		return *x.Str
+	}
+	return ""
+}
+
+type PayRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Ctx   *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	// optional string credit_id = 3;
+	AccountId   *string  `protobuf:"bytes,8,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	InvoiceIds  []string `protobuf:"bytes,6,rep,name=invoice_ids,json=invoiceIds" json:"invoice_ids,omitempty"`
+	Description *string  `protobuf:"bytes,7,opt,name=description" json:"description,omitempty"`
+	// optional Contact CustomerInfo = 9;
+	Amount        *float32      `protobuf:"fixed32,10,opt,name=amount" json:"amount,omitempty"` // deprecated
+	FpvAmount     *int64        `protobuf:"varint,11,opt,name=fpv_amount,json=fpvAmount" json:"fpv_amount,omitempty"`
+	RequestId     *string       `protobuf:"bytes,12,opt,name=request_id,json=requestId" json:"request_id,omitempty"`
+	Created       *int64        `protobuf:"varint,13,opt,name=created" json:"created,omitempty"`
+	Currency      *string       `protobuf:"bytes,14,opt,name=currency" json:"currency,omitempty"` // VND or USD
+	BankAccountId *string       `protobuf:"bytes,15,opt,name=bank_account_id,json=bankAccountId" json:"bank_account_id,omitempty"`
+	ByAgentId     *string       `protobuf:"bytes,16,opt,name=by_agent_id,json=byAgentId" json:"by_agent_id,omitempty"`
+	Method        *string       `protobuf:"bytes,17,opt,name=method" json:"method,omitempty"`
+	PaymentMethod *string       `protobuf:"bytes,18,opt,name=payment_method,json=paymentMethod" json:"payment_method,omitempty"`
+	PromotionCode *string       `protobuf:"bytes,21,opt,name=promotion_code,json=promotionCode" json:"promotion_code,omitempty"`
+	Subscription  *Subscription `protobuf:"bytes,22,opt,name=subscription" json:"subscription,omitempty"` // for purchasing new
+	Invoice       *Invoice      `protobuf:"bytes,23,opt,name=invoice" json:"invoice,omitempty"`           // for marketing and novat only
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayRequest) Reset() {
+	*x = PayRequest{}
+	mi := &file_account_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayRequest) ProtoMessage() {}
+
+func (x *PayRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayRequest.ProtoReflect.Descriptor instead.
+func (*PayRequest) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *PayRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *PayRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *PayRequest) GetInvoiceIds() []string {
+	if x != nil {
+		return x.InvoiceIds
+	}
+	return nil
+}
+
+func (x *PayRequest) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *PayRequest) GetAmount() float32 {
+	if x != nil && x.Amount != nil {
+		return *x.Amount
+	}
+	return 0
+}
+
+func (x *PayRequest) GetFpvAmount() int64 {
+	if x != nil && x.FpvAmount != nil {
+		return *x.FpvAmount
+	}
+	return 0
+}
+
+func (x *PayRequest) GetRequestId() string {
+	if x != nil && x.RequestId != nil {
+		return *x.RequestId
+	}
+	return ""
+}
+
+func (x *PayRequest) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *PayRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *PayRequest) GetBankAccountId() string {
+	if x != nil && x.BankAccountId != nil {
+		return *x.BankAccountId
+	}
+	return ""
+}
+
+func (x *PayRequest) GetByAgentId() string {
+	if x != nil && x.ByAgentId != nil {
+		return *x.ByAgentId
+	}
+	return ""
+}
+
+func (x *PayRequest) GetMethod() string {
+	if x != nil && x.Method != nil {
+		return *x.Method
+	}
+	return ""
+}
+
+func (x *PayRequest) GetPaymentMethod() string {
+	if x != nil && x.PaymentMethod != nil {
+		return *x.PaymentMethod
+	}
+	return ""
+}
+
+func (x *PayRequest) GetPromotionCode() string {
+	if x != nil && x.PromotionCode != nil {
+		return *x.PromotionCode
+	}
+	return ""
+}
+
+func (x *PayRequest) GetSubscription() *Subscription {
+	if x != nil {
+		return x.Subscription
+	}
+	return nil
+}
+
+func (x *PayRequest) GetInvoice() *Invoice {
+	if x != nil {
+		return x.Invoice
+	}
+	return nil
+}
+
+type InvoiceCreatedEmail struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Ctx            *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId      *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	InvoiceId      *string                `protobuf:"bytes,5,opt,name=invoice_id,json=invoiceId" json:"invoice_id,omitempty"`
+	Created        *int64                 `protobuf:"varint,6,opt,name=created" json:"created,omitempty"`
+	InvoiceCreated *string                `protobuf:"bytes,8,opt,name=invoice_created,json=invoiceCreated" json:"invoice_created,omitempty"`
+	InvoiceLink    *string                `protobuf:"bytes,9,opt,name=invoice_link,json=invoiceLink" json:"invoice_link,omitempty"`
+	InvoiceDuedate *int64                 `protobuf:"varint,10,opt,name=invoice_duedate,json=invoiceDuedate" json:"invoice_duedate,omitempty"` // ms
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *InvoiceCreatedEmail) Reset() {
+	*x = InvoiceCreatedEmail{}
+	mi := &file_account_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvoiceCreatedEmail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvoiceCreatedEmail) ProtoMessage() {}
+
+func (x *InvoiceCreatedEmail) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvoiceCreatedEmail.ProtoReflect.Descriptor instead.
+func (*InvoiceCreatedEmail) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *InvoiceCreatedEmail) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *InvoiceCreatedEmail) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *InvoiceCreatedEmail) GetInvoiceId() string {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return ""
+}
+
+func (x *InvoiceCreatedEmail) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *InvoiceCreatedEmail) GetInvoiceCreated() string {
+	if x != nil && x.InvoiceCreated != nil {
+		return *x.InvoiceCreated
+	}
+	return ""
+}
+
+func (x *InvoiceCreatedEmail) GetInvoiceLink() string {
+	if x != nil && x.InvoiceLink != nil {
+		return *x.InvoiceLink
+	}
+	return ""
+}
+
+func (x *InvoiceCreatedEmail) GetInvoiceDuedate() int64 {
+	if x != nil && x.InvoiceDuedate != nil {
+		return *x.InvoiceDuedate
+	}
+	return 0
+}
+
+type UpdateSubscriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId     *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Subscription  *Subscription          `protobuf:"bytes,4,opt,name=subscription" json:"subscription,omitempty"`
+	InvoiceMode   *string                `protobuf:"bytes,5,opt,name=invoice_mode,json=invoiceMode" json:"invoice_mode,omitempty"` // none (only subiz can do this), open (create invoice), pending (just create draft invoice without update, update after paid)
+	Now           *int64                 `protobuf:"varint,6,opt,name=now" json:"now,omitempty"`                                   // for testing only
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateSubscriptionRequest) Reset() {
+	*x = UpdateSubscriptionRequest{}
+	mi := &file_account_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateSubscriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateSubscriptionRequest) ProtoMessage() {}
+
+func (x *UpdateSubscriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateSubscriptionRequest.ProtoReflect.Descriptor instead.
+func (*UpdateSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *UpdateSubscriptionRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *UpdateSubscriptionRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *UpdateSubscriptionRequest) GetSubscription() *Subscription {
+	if x != nil {
+		return x.Subscription
+	}
+	return nil
+}
+
+func (x *UpdateSubscriptionRequest) GetInvoiceMode() string {
+	if x != nil && x.InvoiceMode != nil {
+		return *x.InvoiceMode
+	}
+	return ""
+}
+
+func (x *UpdateSubscriptionRequest) GetNow() int64 {
+	if x != nil && x.Now != nil {
+		return *x.Now
+	}
+	return 0
+}
+
 type BusinessHours_WorkingDay struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Weekday       *string                `protobuf:"bytes,1,opt,name=weekday" json:"weekday,omitempty"`
@@ -3098,7 +5818,7 @@ type BusinessHours_WorkingDay struct {
 
 func (x *BusinessHours_WorkingDay) Reset() {
 	*x = BusinessHours_WorkingDay{}
-	mi := &file_account_proto_msgTypes[26]
+	mi := &file_account_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3110,7 +5830,7 @@ func (x *BusinessHours_WorkingDay) String() string {
 func (*BusinessHours_WorkingDay) ProtoMessage() {}
 
 func (x *BusinessHours_WorkingDay) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[26]
+	mi := &file_account_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3162,7 +5882,7 @@ type BusinessHours_Holiday struct {
 
 func (x *BusinessHours_Holiday) Reset() {
 	*x = BusinessHours_Holiday{}
-	mi := &file_account_proto_msgTypes[27]
+	mi := &file_account_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3174,7 +5894,7 @@ func (x *BusinessHours_Holiday) String() string {
 func (*BusinessHours_Holiday) ProtoMessage() {}
 
 func (x *BusinessHours_Holiday) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[27]
+	mi := &file_account_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3237,6 +5957,122 @@ func (x *BusinessHours_Holiday) GetEndTime() string {
 		return *x.EndTime
 	}
 	return ""
+}
+
+type InvoiceItem_Data struct {
+	state                 protoimpl.MessageState    `protogen:"open.v1"`
+	Renew                 *RenewInvoiceItem         `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
+	Agent                 *AgentInvoiceItem         `protobuf:"bytes,3,opt,name=agent" json:"agent,omitempty"`
+	Plan                  *PlanInvoiceItem          `protobuf:"bytes,5,opt,name=plan" json:"plan,omitempty"`
+	Marketing             *MarketingInvoiceItem     `protobuf:"bytes,6,opt,name=marketing" json:"marketing,omitempty"`
+	ReservedPlan          *ReservedInvoiceItem      `protobuf:"bytes,7,opt,name=reserved_plan,json=reservedPlan" json:"reserved_plan,omitempty"`
+	Novat                 *NoVATInvoiceItem         `protobuf:"bytes,8,opt,name=novat" json:"novat,omitempty"`
+	Fanpages              *FanpagesInvoiceItem      `protobuf:"bytes,9,opt,name=fanpages" json:"fanpages,omitempty"`
+	ZaloPersonals         *ZaloPersonalsInvoiceItem `protobuf:"bytes,10,opt,name=zalo_personals,json=zaloPersonals" json:"zalo_personals,omitempty"`
+	ReservedFanpages      *ReservedInvoiceItem      `protobuf:"bytes,11,opt,name=reserved_fanpages,json=reservedFanpages" json:"reserved_fanpages,omitempty"`
+	ReservedZaloPersonals *ReservedInvoiceItem      `protobuf:"bytes,12,opt,name=reserved_zalo_personals,json=reservedZaloPersonals" json:"reserved_zalo_personals,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *InvoiceItem_Data) Reset() {
+	*x = InvoiceItem_Data{}
+	mi := &file_account_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvoiceItem_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvoiceItem_Data) ProtoMessage() {}
+
+func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvoiceItem_Data.ProtoReflect.Descriptor instead.
+func (*InvoiceItem_Data) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{40, 0}
+}
+
+func (x *InvoiceItem_Data) GetRenew() *RenewInvoiceItem {
+	if x != nil {
+		return x.Renew
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetAgent() *AgentInvoiceItem {
+	if x != nil {
+		return x.Agent
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetPlan() *PlanInvoiceItem {
+	if x != nil {
+		return x.Plan
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetMarketing() *MarketingInvoiceItem {
+	if x != nil {
+		return x.Marketing
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetReservedPlan() *ReservedInvoiceItem {
+	if x != nil {
+		return x.ReservedPlan
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetNovat() *NoVATInvoiceItem {
+	if x != nil {
+		return x.Novat
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetFanpages() *FanpagesInvoiceItem {
+	if x != nil {
+		return x.Fanpages
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetZaloPersonals() *ZaloPersonalsInvoiceItem {
+	if x != nil {
+		return x.ZaloPersonals
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetReservedFanpages() *ReservedInvoiceItem {
+	if x != nil {
+		return x.ReservedFanpages
+	}
+	return nil
+}
+
+func (x *InvoiceItem_Data) GetReservedZaloPersonals() *ReservedInvoiceItem {
+	if x != nil {
+		return x.ReservedZaloPersonals
+	}
+	return nil
 }
 
 var File_account_proto protoreflect.FileDescriptor
@@ -3608,7 +6444,329 @@ const file_account_proto_rawDesc = "" +
 	"\x0efpv_commission\x18\x13 \x01(\x03R\rfpvCommission\"t\n" +
 	"\x0eReferrerAgents\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12?\n" +
-	"\x0freferrer_agents\x18\x04 \x03(\v2\x16.account.ReferrerAgentR\x0ereferrerAgentsB!Z\x1fgithub.com/subiz/header/account"
+	"\x0freferrer_agents\x18\x04 \x03(\v2\x16.account.ReferrerAgentR\x0ereferrerAgents\"z\n" +
+	"\bComments\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12,\n" +
+	"\bcomments\x18\x03 \x03(\v2\x10.account.CommentR\bcomments\"\xb5\x02\n" +
+	"\aComment\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x19\n" +
+	"\btopic_id\x18\x04 \x01(\tR\atopicId\x12\x1d\n" +
+	"\n" +
+	"topic_type\x18\x05 \x01(\tR\ttopicType\x12*\n" +
+	"\x11author_account_id\x18\b \x01(\tR\x0fauthorAccountId\x12\x1b\n" +
+	"\tauthor_id\x18\t \x01(\tR\bauthorId\x12!\n" +
+	"\fauthor_email\x18\n" +
+	" \x01(\tR\vauthorEmail\x12\x18\n" +
+	"\acontent\x18\v \x01(\tR\acontent\x12\x18\n" +
+	"\acreated\x18\f \x01(\x03R\acreated\"\xdd\x03\n" +
+	"\x0fPurchaseRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x18\n" +
+	"\acreated\x18\v \x01(\x03R\acreated\x12%\n" +
+	"\x0epromotion_code\x18\x04 \x01(\tR\rpromotionCode\x12\x18\n" +
+	"\astarted\x18\x05 \x01(\x03R\astarted\x12\x1d\n" +
+	"\n" +
+	"auto_renew\x18\t \x01(\bR\tautoRenew\x12.\n" +
+	"\x13billing_cycle_month\x18\x0f \x01(\rR\x11billingCycleMonth\x12\x12\n" +
+	"\x04plan\x18\x11 \x01(\tR\x04plan\x12%\n" +
+	"\x0epayment_method\x18  \x01(\tR\rpaymentMethod\x12#\n" +
+	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12\x1f\n" +
+	"\vauto_charge\x18, \x01(\bR\n" +
+	"autoCharge\x12\x14\n" +
+	"\x05ended\x18- \x01(\x03R\x05ended\x12(\n" +
+	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
+	"\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\xfa\a\n" +
+	"\fSubscription\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x18\n" +
+	"\acreated\x18\v \x01(\x03R\acreated\x12%\n" +
+	"\x0epromotion_code\x18\x04 \x01(\tR\rpromotionCode\x12\x18\n" +
+	"\astarted\x18\x05 \x01(\x03R\astarted\x12.\n" +
+	"\x13billing_cycle_month\x18\x0f \x01(\rR\x11billingCycleMonth\x12\x12\n" +
+	"\x04plan\x18\x11 \x01(\tR\x04plan\x12#\n" +
+	"\x05limit\x18* \x01(\v2\r.common.LimitR\x05limit\x12+\n" +
+	"\tpurchased\x18+ \x01(\v2\r.common.LimitR\tpurchased\x12\x14\n" +
+	"\x05ended\x18- \x01(\x03R\x05ended\x12\x18\n" +
+	"\achurned\x18/ \x01(\x03R\achurned\x12(\n" +
+	"\x10fpv_custom_price\x181 \x01(\x03R\x0efpvCustomPrice\x12\x1d\n" +
+	"\n" +
+	"num_agents\x182 \x01(\x03R\tnumAgents\x12$\n" +
+	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\x121\n" +
+	"\x15fpv_novat_balance_usd\x18: \x01(\x03R\x12fpvNovatBalanceUsd\x129\n" +
+	"\x19fpv_marketing_balance_vnd\x18; \x01(\x03R\x16fpvMarketingBalanceVnd\x12\x12\n" +
+	"\x04note\x188 \x01(\tR\x04note\x120\n" +
+	"\x15fpv_price_per_day_usd\x189 \x01(\x03R\x11fpvPricePerDayUsd\x12.\n" +
+	"\x13auto_renew_disabled\x18> \x01(\x03R\x11autoRenewDisabled\x12/\n" +
+	"\x14fpv_novat_budget_usd\x18A \x01(\x03R\x11fpvNovatBudgetUsd\x12,\n" +
+	"\x12novat_last_payment\x18B \x01(\x03R\x10novatLastPayment\x12.\n" +
+	"\x13novat_last_declined\x18C \x01(\x03R\x11novatLastDeclined\x127\n" +
+	"\x18fpv_marketing_budget_vnd\x18D \x01(\x03R\x15fpvMarketingBudgetVnd\x124\n" +
+	"\x16marketing_last_payment\x18E \x01(\x03R\x14marketingLastPayment\x126\n" +
+	"\x17marketing_last_declined\x18F \x01(\x03R\x15marketingLastDeclined\"\x98\x04\n" +
+	"\x04Bill\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x04 \x01(\tR\taccountId\x12\x1f\n" +
+	"\vinvoice_ids\x18\x06 \x03(\tR\n" +
+	"invoiceIds\x12\x18\n" +
+	"\acreated\x18\a \x01(\x03R\acreated\x12%\n" +
+	"\x0epayment_method\x18\n" +
+	" \x01(\tR\rpaymentMethod\x12 \n" +
+	"\vdescription\x18\f \x01(\tR\vdescription\x12\x1a\n" +
+	"\bcurrency\x18\x11 \x01(\tR\bcurrency\x12=\n" +
+	"\x1boriginal_bank_transfer_note\x18\x12 \x01(\tR\x18originalBankTransferNote\x12,\n" +
+	"\x12bank_transfer_note\x18\x13 \x01(\tR\x10bankTransferNote\x12$\n" +
+	"\x0efpv_amount_vnd\x18\x14 \x01(\x03R\ffpvAmountVnd\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x15 \x01(\tR\trequestId\x12&\n" +
+	"\x0fbank_account_id\x18\x16 \x01(\tR\rbankAccountId\x12\x1e\n" +
+	"\vby_agent_id\x18\x17 \x01(\tR\tbyAgentId\x12$\n" +
+	"\x0efpv_amount_usd\x18\x18 \x01(\x03R\ffpvAmountUsd\"n\n" +
+	"\x05Bills\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12#\n" +
+	"\x05bills\x18\x03 \x03(\v2\r.account.BillR\x05bills\"\x92\x01\n" +
+	"\bInvoices\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12,\n" +
+	"\binvoices\x18\x02 \x03(\v2\x10.account.InvoiceR\binvoices\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x16\n" +
+	"\x06anchor\x18\x04 \x01(\tR\x06anchor\"\x98\x01\n" +
+	"\x12ListInvoiceRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1b\n" +
+	"\tcredit_id\x18\x06 \x01(\tR\bcreditId\x12#\n" +
+	"\rcompute_draft\x18\a \x01(\bR\fcomputeDraft\"\x95\n" +
+	"\n" +
+	"\aInvoice\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id\x12%\n" +
+	"\x0epromotion_code\x18\x05 \x01(\tR\rpromotionCode\x12\x19\n" +
+	"\bdue_date\x18\t \x01(\x03R\adueDate\x12\x14\n" +
+	"\x05state\x18\n" +
+	" \x01(\tR\x05state\x12\x18\n" +
+	"\acreated\x18\v \x01(\x03R\acreated\x12*\n" +
+	"\x05items\x18\f \x03(\v2\x14.account.InvoiceItemR\x05items\x12\x1a\n" +
+	"\bsubtotal\x18\x0e \x01(\x02R\bsubtotal\x12\x1f\n" +
+	"\vtax_percent\x18\x0f \x01(\x02R\n" +
+	"taxPercent\x12\x10\n" +
+	"\x03tax\x18\x10 \x01(\x02R\x03tax\x12\x14\n" +
+	"\x05total\x18\x11 \x01(\x02R\x05total\x12\x18\n" +
+	"\aupdated\x18\x12 \x01(\x03R\aupdated\x12\x14\n" +
+	"\x05bills\x18\x17 \x03(\tR\x05bills\x12!\n" +
+	"\fpayment_made\x18\x18 \x01(\x02R\vpaymentMade\x126\n" +
+	"\vcurrent_sub\x18\x19 \x01(\v2\x15.account.SubscriptionR\n" +
+	"currentSub\x12\x1a\n" +
+	"\bcurrency\x18\x1c \x01(\tR\bcurrency\x12\"\n" +
+	"\rfpv_total_vnd\x18\x1d \x01(\x03R\vfpvTotalVnd\x12/\n" +
+	"\x14fpv_payment_made_vnd\x18\x1e \x01(\x03R\x11fpvPaymentMadeVnd\x12\x1a\n" +
+	"\tis_gen_qr\x18\x1f \x01(\bR\aisGenQr\x12\x1d\n" +
+	"\n" +
+	"created_by\x18  \x01(\tR\tcreatedBy\x12(\n" +
+	"\x10fpv_discount_vnd\x18\" \x01(\x03R\x0efpvDiscountVnd\x12(\n" +
+	"\x10fpv_subtotal_vnd\x18# \x01(\x03R\x0efpvSubtotalVnd\x12*\n" +
+	"\x11referrer_agent_id\x18% \x01(\tR\x0freferrerAgentId\x12(\n" +
+	"\x10fpv_subtotal_usd\x18& \x01(\x03R\x0efpvSubtotalUsd\x12&\n" +
+	"\x0ffpv_tax_percent\x18' \x01(\x03R\rfpvTaxPercent\x12\x1e\n" +
+	"\vfpv_tax_usd\x18( \x01(\x03R\tfpvTaxUsd\x12\"\n" +
+	"\rfpv_total_usd\x18) \x01(\x03R\vfpvTotalUsd\x12/\n" +
+	"\x14fpv_payment_made_usd\x18* \x01(\x03R\x11fpvPaymentMadeUsd\x12(\n" +
+	"\x10fpv_discount_usd\x18+ \x01(\x03R\x0efpvDiscountUsd\x12\x1f\n" +
+	"\vpayment_num\x18- \x01(\tR\n" +
+	"paymentNum\x12%\n" +
+	"\x0eauto_generated\x18. \x01(\bR\rautoGenerated\x12'\n" +
+	"\x03sub\x182 \x01(\v2\x15.account.SubscriptionR\x03sub\x12$\n" +
+	"\x0efpv_refcom_vnd\x185 \x01(\x03R\ffpvRefcomVnd\x127\n" +
+	"\finvoice_info\x186 \x01(\v2\x14.account.InvoiceInfoR\vinvoiceInfo\"=\n" +
+	"\x05State\x12\t\n" +
+	"\x05draft\x10\x00\x12\v\n" +
+	"\apending\x10\x01\x12\b\n" +
+	"\x04open\x10\x02\x12\b\n" +
+	"\x04paid\x10\x03\x12\b\n" +
+	"\x04void\x10\x04\"\x81\x01\n" +
+	"\x13FanpagesInvoiceItem\x12\x1b\n" +
+	"\tpack_size\x18\b \x01(\x03R\bpackSize\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\x12\x1d\n" +
+	"\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x86\x01\n" +
+	"\x18ZaloPersonalsInvoiceItem\x12\x1b\n" +
+	"\tpack_size\x18\b \x01(\x05R\bpackSize\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\x12\x1d\n" +
+	"\n" +
+	"full_cycle\x18\v \x01(\bR\tfullCycle\"\x92\x01\n" +
+	"\x10AgentInvoiceItem\x12\x12\n" +
+	"\x04plan\x18\x03 \x01(\tR\x04plan\x12\x19\n" +
+	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12\x1f\n" +
+	"\vagent_count\x18\b \x01(\x05R\n" +
+	"agentCount\x12\x18\n" +
+	"\astarted\x18\t \x01(\x03R\astarted\x12\x14\n" +
+	"\x05ended\x18\n" +
+	" \x01(\x03R\x05ended\"\xc4\x01\n" +
+	"\x10RenewInvoiceItem\x12\x12\n" +
+	"\x04plan\x18\x03 \x01(\tR\x04plan\x12.\n" +
+	"\x13billing_cycle_month\x18\x04 \x01(\rR\x11billingCycleMonth\x12\x1f\n" +
+	"\vagent_count\x18\x05 \x01(\rR\n" +
+	"agentCount\x12\x1b\n" +
+	"\tfrom_time\x18\x06 \x01(\x03R\bfromTime\x12.\n" +
+	"\x13fpv_save_percentage\x18\a \x01(\x03R\x11fpvSavePercentage\"\x85\x02\n" +
+	"\x13ReservedInvoiceItem\x12\x19\n" +
+	"\bold_plan\x18\x03 \x01(\tR\aoldPlan\x12&\n" +
+	"\x0fold_agent_count\x18\x04 \x01(\x03R\roldAgentCount\x125\n" +
+	"\x17old_billing_cycle_month\x18\x05 \x01(\x03R\x14oldBillingCycleMonth\x12\x19\n" +
+	"\bday_left\x18\a \x01(\x05R\adayLeft\x12\x1f\n" +
+	"\vold_started\x18\b \x01(\x03R\n" +
+	"oldStarted\x12\x1b\n" +
+	"\told_ended\x18\t \x01(\x03R\boldEnded\x12\x1b\n" +
+	"\told_count\x18\n" +
+	" \x01(\x03R\boldCount\"\x92\x03\n" +
+	"\x0fPlanInvoiceItem\x12\x1f\n" +
+	"\vagent_count\x18\x02 \x01(\rR\n" +
+	"agentCount\x12.\n" +
+	"\x13billing_cycle_month\x18\x05 \x01(\rR\x11billingCycleMonth\x12\x19\n" +
+	"\bold_plan\x18\x06 \x01(\tR\aoldPlan\x12\x19\n" +
+	"\bnew_plan\x18\x03 \x01(\tR\anewPlan\x12'\n" +
+	"\x0fsave_percentage\x18\t \x01(\x02R\x0esavePercentage\x12\x18\n" +
+	"\astarted\x18\b \x01(\x03R\astarted\x12\x19\n" +
+	"\bday_left\x18\x04 \x01(\x05R\adayLeft\x12&\n" +
+	"\x0fold_agent_count\x18\n" +
+	" \x01(\rR\roldAgentCount\x12,\n" +
+	"\x12is_unlimited_agent\x18\v \x01(\bR\x10isUnlimitedAgent\x12.\n" +
+	"\x13fpv_save_percentage\x18\f \x01(\x03R\x11fpvSavePercentage\x12\x14\n" +
+	"\x05ended\x18\r \x01(\x03R\x05ended\"0\n" +
+	"\x14MarketingInvoiceItem\x12\x18\n" +
+	"\aexpired\x18\x04 \x01(\x03R\aexpired\",\n" +
+	"\x10NoVATInvoiceItem\x12\x18\n" +
+	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xca\b\n" +
+	"\vInvoiceItem\x12\x1a\n" +
+	"\bheadline\x18\x04 \x01(\tR\bheadline\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bquantity\x18\a \x01(\x05R\bquantity\x12\x14\n" +
+	"\x05price\x18\b \x01(\x02R\x05price\x12\x12\n" +
+	"\x04type\x18\x12 \x01(\tR\x04type\x12-\n" +
+	"\x04data\x18\t \x01(\v2\x19.account.InvoiceItem.DataR\x04data\x12\x1f\n" +
+	"\vtotal_price\x18\n" +
+	" \x01(\x02R\n" +
+	"totalPrice\x12\"\n" +
+	"\rfpv_price_vnd\x18\v \x01(\x03R\vfpvPriceVnd\x12-\n" +
+	"\x13fpv_total_price_vnd\x18\f \x01(\x03R\x10fpvTotalPriceVnd\x12(\n" +
+	"\x10fpv_discount_vnd\x18\r \x01(\x03R\x0efpvDiscountVnd\x12\"\n" +
+	"\rfpv_price_usd\x18\x0f \x01(\x03R\vfpvPriceUsd\x12-\n" +
+	"\x13fpv_total_price_usd\x18\x10 \x01(\x03R\x10fpvTotalPriceUsd\x12(\n" +
+	"\x10fpv_discount_usd\x18\x11 \x01(\x03R\x0efpvDiscountUsd\x1a\xec\x04\n" +
+	"\x04Data\x12/\n" +
+	"\x05renew\x18\x02 \x01(\v2\x19.account.RenewInvoiceItemR\x05renew\x12/\n" +
+	"\x05agent\x18\x03 \x01(\v2\x19.account.AgentInvoiceItemR\x05agent\x12,\n" +
+	"\x04plan\x18\x05 \x01(\v2\x18.account.PlanInvoiceItemR\x04plan\x12;\n" +
+	"\tmarketing\x18\x06 \x01(\v2\x1d.account.MarketingInvoiceItemR\tmarketing\x12A\n" +
+	"\rreserved_plan\x18\a \x01(\v2\x1c.account.ReservedInvoiceItemR\freservedPlan\x12/\n" +
+	"\x05novat\x18\b \x01(\v2\x19.account.NoVATInvoiceItemR\x05novat\x128\n" +
+	"\bfanpages\x18\t \x01(\v2\x1c.account.FanpagesInvoiceItemR\bfanpages\x12H\n" +
+	"\x0ezalo_personals\x18\n" +
+	" \x01(\v2!.account.ZaloPersonalsInvoiceItemR\rzaloPersonals\x12I\n" +
+	"\x11reserved_fanpages\x18\v \x01(\v2\x1c.account.ReservedInvoiceItemR\x10reservedFanpages\x12T\n" +
+	"\x17reserved_zalo_personals\x18\f \x01(\v2\x1c.account.ReservedInvoiceItemR\x15reservedZaloPersonals\"l\n" +
+	"\x04Logs\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12 \n" +
+	"\x04logs\x18\x05 \x03(\v2\f.account.LogR\x04logs\x12\x1f\n" +
+	"\vnext_anchor\x18\x06 \x01(\tR\n" +
+	"nextAnchor\"\x92\x05\n" +
+	"\x03Log\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x12\n" +
+	"\x04user\x18\x02 \x01(\tR\x04user\x12\x0e\n" +
+	"\x02id\x18\b \x01(\tR\x02id\x12\x16\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\x12\x18\n" +
+	"\acreated\x18\x04 \x01(\x03R\acreated\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x06 \x01(\tR\taccountId\x12\x14\n" +
+	"\x05stack\x18\t \x01(\tR\x05stack\x12\x17\n" +
+	"\aref_ctx\x18\n" +
+	" \x01(\tR\x06refCtx\"\xa1\x03\n" +
+	"\x06Action\x12\x12\n" +
+	"\x0ecreate_invoice\x10\x00\x12\x19\n" +
+	"\x15change_invoice_status\x10\x01\x12\x13\n" +
+	"\x0fcreate_discount\x10\x02\x12\x13\n" +
+	"\x0fdelete_discount\x10\x03\x12\x13\n" +
+	"\x0fredeem_discount\x10\x04\x12\x0e\n" +
+	"\n" +
+	"add_credit\x10\x05\x12\x11\n" +
+	"\rredeem_credit\x10\x06\x12\x12\n" +
+	"\x0edelete_account\x10\a\x12\x0f\n" +
+	"\vchange_plan\x10\b\x12\x16\n" +
+	"\x12renew_subscription\x10\n" +
+	"\x12\x1a\n" +
+	"\x16click_subscribe_button\x10\v\x12\x14\n" +
+	"\x10pay_for_referrer\x10\f\x12\x1a\n" +
+	"\x16add_money_for_referrer\x10\r\x12\x0f\n" +
+	"\vpay_invoice\x10\x0e\x12\x11\n" +
+	"\rcharge_stripe\x10\x0f\x12\x0f\n" +
+	"\vcreate_bill\x10\x10\x12\x0e\n" +
+	"\n" +
+	"use_credit\x10\x11\x12\x15\n" +
+	"\x11edit_subscription\x10\x12\x12\x10\n" +
+	"\fedit_invoice\x10\x13\x12\r\n" +
+	"\tdowngrade\x10\x14\"=\n" +
+	"\x06String\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x10\n" +
+	"\x03str\x18\x02 \x01(\tR\x03str\"\xb2\x04\n" +
+	"\n" +
+	"PayRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\b \x01(\tR\taccountId\x12\x1f\n" +
+	"\vinvoice_ids\x18\x06 \x03(\tR\n" +
+	"invoiceIds\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x16\n" +
+	"\x06amount\x18\n" +
+	" \x01(\x02R\x06amount\x12\x1d\n" +
+	"\n" +
+	"fpv_amount\x18\v \x01(\x03R\tfpvAmount\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\f \x01(\tR\trequestId\x12\x18\n" +
+	"\acreated\x18\r \x01(\x03R\acreated\x12\x1a\n" +
+	"\bcurrency\x18\x0e \x01(\tR\bcurrency\x12&\n" +
+	"\x0fbank_account_id\x18\x0f \x01(\tR\rbankAccountId\x12\x1e\n" +
+	"\vby_agent_id\x18\x10 \x01(\tR\tbyAgentId\x12\x16\n" +
+	"\x06method\x18\x11 \x01(\tR\x06method\x12%\n" +
+	"\x0epayment_method\x18\x12 \x01(\tR\rpaymentMethod\x12%\n" +
+	"\x0epromotion_code\x18\x15 \x01(\tR\rpromotionCode\x129\n" +
+	"\fsubscription\x18\x16 \x01(\v2\x15.account.SubscriptionR\fsubscription\x12*\n" +
+	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoice\"\x85\x02\n" +
+	"\x13InvoiceCreatedEmail\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1d\n" +
+	"\n" +
+	"invoice_id\x18\x05 \x01(\tR\tinvoiceId\x12\x18\n" +
+	"\acreated\x18\x06 \x01(\x03R\acreated\x12'\n" +
+	"\x0finvoice_created\x18\b \x01(\tR\x0einvoiceCreated\x12!\n" +
+	"\finvoice_link\x18\t \x01(\tR\vinvoiceLink\x12'\n" +
+	"\x0finvoice_duedate\x18\n" +
+	" \x01(\x03R\x0einvoiceDuedate\"\xcd\x01\n" +
+	"\x19UpdateSubscriptionRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x129\n" +
+	"\fsubscription\x18\x04 \x01(\v2\x15.account.SubscriptionR\fsubscription\x12!\n" +
+	"\finvoice_mode\x18\x05 \x01(\tR\vinvoiceMode\x12\x10\n" +
+	"\x03now\x18\x06 \x01(\x03R\x03nowB!Z\x1fgithub.com/subiz/header/account"
 
 var (
 	file_account_proto_rawDescOnce sync.Once
@@ -3622,88 +6780,156 @@ func file_account_proto_rawDescGZIP() []byte {
 	return file_account_proto_rawDescData
 }
 
-var file_account_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_account_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 53)
 var file_account_proto_goTypes = []any{
 	(Agent_Gender)(0),                 // 0: account.Agent.Gender
 	(Agent_AgentState)(0),             // 1: account.Agent.AgentState
 	(Account_State)(0),                // 2: account.Account.State
-	(*DashboardAgent)(nil),            // 3: account.DashboardAgent
-	(*ConvoFilters)(nil),              // 4: account.ConvoFilters
-	(*ConvoFilter)(nil),               // 5: account.ConvoFilter
-	(*ConvoFilterCondition)(nil),      // 6: account.ConvoFilterCondition
-	(*Agent)(nil),                     // 7: account.Agent
-	(*Account)(nil),                   // 8: account.Account
-	(*InvoiceInfo)(nil),               // 9: account.InvoiceInfo
-	(*LeadSetting)(nil),               // 10: account.LeadSetting
-	(*InvoiceEmail)(nil),              // 11: account.InvoiceEmail
-	(*TrialEndingEmail)(nil),          // 12: account.TrialEndingEmail
-	(*BusinessHours)(nil),             // 13: account.BusinessHours
-	(*SyncPublicHolidaysRequest)(nil), // 14: account.SyncPublicHolidaysRequest
-	(*SearchSubRequest)(nil),          // 15: account.SearchSubRequest
-	(*Presences)(nil),                 // 16: account.Presences
-	(*Presence)(nil),                  // 17: account.Presence
-	(*ReferrerPayoutBill)(nil),        // 18: account.ReferrerPayoutBill
-	(*ReferrerPayoutBills)(nil),       // 19: account.ReferrerPayoutBills
-	(*ReferredCustomer)(nil),          // 20: account.ReferredCustomer
-	(*ReferredCustomers)(nil),         // 21: account.ReferredCustomers
-	(*ReferredBill)(nil),              // 22: account.ReferredBill
-	(*ReferredBills)(nil),             // 23: account.ReferredBills
-	(*ReferrerAgent)(nil),             // 24: account.ReferrerAgent
-	(*ReferrerAgents)(nil),            // 25: account.ReferrerAgents
-	nil,                               // 26: account.DashboardAgent.SegmentOrderByEntry
-	nil,                               // 27: account.DashboardAgent.UserViewDisplayFieldEntry
-	nil,                               // 28: account.DashboardAgent.SegmentUserViewsOrderEntry
-	(*BusinessHours_WorkingDay)(nil),  // 29: account.BusinessHours.WorkingDay
-	(*BusinessHours_Holiday)(nil),     // 30: account.BusinessHours.Holiday
-	(*common.Context)(nil),            // 31: common.Context
+	(Invoice_State)(0),                // 3: account.Invoice.State
+	(Log_Action)(0),                   // 4: account.Log.Action
+	(*DashboardAgent)(nil),            // 5: account.DashboardAgent
+	(*ConvoFilters)(nil),              // 6: account.ConvoFilters
+	(*ConvoFilter)(nil),               // 7: account.ConvoFilter
+	(*ConvoFilterCondition)(nil),      // 8: account.ConvoFilterCondition
+	(*Agent)(nil),                     // 9: account.Agent
+	(*Account)(nil),                   // 10: account.Account
+	(*InvoiceInfo)(nil),               // 11: account.InvoiceInfo
+	(*LeadSetting)(nil),               // 12: account.LeadSetting
+	(*InvoiceEmail)(nil),              // 13: account.InvoiceEmail
+	(*TrialEndingEmail)(nil),          // 14: account.TrialEndingEmail
+	(*BusinessHours)(nil),             // 15: account.BusinessHours
+	(*SyncPublicHolidaysRequest)(nil), // 16: account.SyncPublicHolidaysRequest
+	(*SearchSubRequest)(nil),          // 17: account.SearchSubRequest
+	(*Presences)(nil),                 // 18: account.Presences
+	(*Presence)(nil),                  // 19: account.Presence
+	(*ReferrerPayoutBill)(nil),        // 20: account.ReferrerPayoutBill
+	(*ReferrerPayoutBills)(nil),       // 21: account.ReferrerPayoutBills
+	(*ReferredCustomer)(nil),          // 22: account.ReferredCustomer
+	(*ReferredCustomers)(nil),         // 23: account.ReferredCustomers
+	(*ReferredBill)(nil),              // 24: account.ReferredBill
+	(*ReferredBills)(nil),             // 25: account.ReferredBills
+	(*ReferrerAgent)(nil),             // 26: account.ReferrerAgent
+	(*ReferrerAgents)(nil),            // 27: account.ReferrerAgents
+	(*Comments)(nil),                  // 28: account.Comments
+	(*Comment)(nil),                   // 29: account.Comment
+	(*PurchaseRequest)(nil),           // 30: account.PurchaseRequest
+	(*Subscription)(nil),              // 31: account.Subscription
+	(*Bill)(nil),                      // 32: account.Bill
+	(*Bills)(nil),                     // 33: account.Bills
+	(*Invoices)(nil),                  // 34: account.Invoices
+	(*ListInvoiceRequest)(nil),        // 35: account.ListInvoiceRequest
+	(*Invoice)(nil),                   // 36: account.Invoice
+	(*FanpagesInvoiceItem)(nil),       // 37: account.FanpagesInvoiceItem
+	(*ZaloPersonalsInvoiceItem)(nil),  // 38: account.ZaloPersonalsInvoiceItem
+	(*AgentInvoiceItem)(nil),          // 39: account.AgentInvoiceItem
+	(*RenewInvoiceItem)(nil),          // 40: account.RenewInvoiceItem
+	(*ReservedInvoiceItem)(nil),       // 41: account.ReservedInvoiceItem
+	(*PlanInvoiceItem)(nil),           // 42: account.PlanInvoiceItem
+	(*MarketingInvoiceItem)(nil),      // 43: account.MarketingInvoiceItem
+	(*NoVATInvoiceItem)(nil),          // 44: account.NoVATInvoiceItem
+	(*InvoiceItem)(nil),               // 45: account.InvoiceItem
+	(*Logs)(nil),                      // 46: account.Logs
+	(*Log)(nil),                       // 47: account.Log
+	(*String)(nil),                    // 48: account.String
+	(*PayRequest)(nil),                // 49: account.PayRequest
+	(*InvoiceCreatedEmail)(nil),       // 50: account.InvoiceCreatedEmail
+	(*UpdateSubscriptionRequest)(nil), // 51: account.UpdateSubscriptionRequest
+	nil,                               // 52: account.DashboardAgent.SegmentOrderByEntry
+	nil,                               // 53: account.DashboardAgent.UserViewDisplayFieldEntry
+	nil,                               // 54: account.DashboardAgent.SegmentUserViewsOrderEntry
+	(*BusinessHours_WorkingDay)(nil),  // 55: account.BusinessHours.WorkingDay
+	(*BusinessHours_Holiday)(nil),     // 56: account.BusinessHours.Holiday
+	(*InvoiceItem_Data)(nil),          // 57: account.InvoiceItem.Data
+	(*common.Context)(nil),            // 58: common.Context
+	(*common.Limit)(nil),              // 59: common.Limit
 }
 var file_account_proto_depIdxs = []int32{
-	26, // 0: account.DashboardAgent.segment_order_by:type_name -> account.DashboardAgent.SegmentOrderByEntry
-	27, // 1: account.DashboardAgent.user_view_display_field:type_name -> account.DashboardAgent.UserViewDisplayFieldEntry
-	28, // 2: account.DashboardAgent.segment_user_views_order:type_name -> account.DashboardAgent.SegmentUserViewsOrderEntry
-	5,  // 3: account.DashboardAgent.convo_filters:type_name -> account.ConvoFilter
-	31, // 4: account.ConvoFilters.ctx:type_name -> common.Context
-	5,  // 5: account.ConvoFilters.filters:type_name -> account.ConvoFilter
-	31, // 6: account.ConvoFilter.ctx:type_name -> common.Context
-	6,  // 7: account.ConvoFilter.conditions:type_name -> account.ConvoFilterCondition
-	31, // 8: account.Agent.ctx:type_name -> common.Context
-	8,  // 9: account.Agent.account:type_name -> account.Account
-	17, // 10: account.Agent.last_seen:type_name -> account.Presence
-	3,  // 11: account.Agent.dashboard_setting:type_name -> account.DashboardAgent
-	31, // 12: account.Account.ctx:type_name -> common.Context
-	13, // 13: account.Account.business_hours:type_name -> account.BusinessHours
-	10, // 14: account.Account.lead_setting:type_name -> account.LeadSetting
-	9,  // 15: account.Account.invoice_info:type_name -> account.InvoiceInfo
-	31, // 16: account.InvoiceInfo.ctx:type_name -> common.Context
-	31, // 17: account.InvoiceEmail.ctx:type_name -> common.Context
-	31, // 18: account.TrialEndingEmail.ctx:type_name -> common.Context
-	31, // 19: account.BusinessHours.ctx:type_name -> common.Context
-	29, // 20: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
-	30, // 21: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
-	31, // 22: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
-	31, // 23: account.SearchSubRequest.ctx:type_name -> common.Context
-	31, // 24: account.Presences.ctx:type_name -> common.Context
-	17, // 25: account.Presences.presences:type_name -> account.Presence
-	31, // 26: account.Presence.ctx:type_name -> common.Context
-	31, // 27: account.ReferrerPayoutBill.ctx:type_name -> common.Context
-	31, // 28: account.ReferrerPayoutBills.ctx:type_name -> common.Context
-	18, // 29: account.ReferrerPayoutBills.referrer_payout_bills:type_name -> account.ReferrerPayoutBill
-	31, // 30: account.ReferredCustomer.ctx:type_name -> common.Context
-	31, // 31: account.ReferredCustomers.ctx:type_name -> common.Context
-	20, // 32: account.ReferredCustomers.referred_customers:type_name -> account.ReferredCustomer
-	31, // 33: account.ReferredBill.ctx:type_name -> common.Context
-	31, // 34: account.ReferredBills.ctx:type_name -> common.Context
-	22, // 35: account.ReferredBills.bills:type_name -> account.ReferredBill
-	31, // 36: account.ReferrerAgent.ctx:type_name -> common.Context
-	7,  // 37: account.ReferrerAgent.agent:type_name -> account.Agent
-	31, // 38: account.ReferrerAgents.ctx:type_name -> common.Context
-	24, // 39: account.ReferrerAgents.referrer_agents:type_name -> account.ReferrerAgent
-	40, // [40:40] is the sub-list for method output_type
-	40, // [40:40] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	52, // 0: account.DashboardAgent.segment_order_by:type_name -> account.DashboardAgent.SegmentOrderByEntry
+	53, // 1: account.DashboardAgent.user_view_display_field:type_name -> account.DashboardAgent.UserViewDisplayFieldEntry
+	54, // 2: account.DashboardAgent.segment_user_views_order:type_name -> account.DashboardAgent.SegmentUserViewsOrderEntry
+	7,  // 3: account.DashboardAgent.convo_filters:type_name -> account.ConvoFilter
+	58, // 4: account.ConvoFilters.ctx:type_name -> common.Context
+	7,  // 5: account.ConvoFilters.filters:type_name -> account.ConvoFilter
+	58, // 6: account.ConvoFilter.ctx:type_name -> common.Context
+	8,  // 7: account.ConvoFilter.conditions:type_name -> account.ConvoFilterCondition
+	58, // 8: account.Agent.ctx:type_name -> common.Context
+	10, // 9: account.Agent.account:type_name -> account.Account
+	19, // 10: account.Agent.last_seen:type_name -> account.Presence
+	5,  // 11: account.Agent.dashboard_setting:type_name -> account.DashboardAgent
+	58, // 12: account.Account.ctx:type_name -> common.Context
+	15, // 13: account.Account.business_hours:type_name -> account.BusinessHours
+	12, // 14: account.Account.lead_setting:type_name -> account.LeadSetting
+	11, // 15: account.Account.invoice_info:type_name -> account.InvoiceInfo
+	58, // 16: account.InvoiceInfo.ctx:type_name -> common.Context
+	58, // 17: account.InvoiceEmail.ctx:type_name -> common.Context
+	58, // 18: account.TrialEndingEmail.ctx:type_name -> common.Context
+	58, // 19: account.BusinessHours.ctx:type_name -> common.Context
+	55, // 20: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
+	56, // 21: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
+	58, // 22: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
+	58, // 23: account.SearchSubRequest.ctx:type_name -> common.Context
+	58, // 24: account.Presences.ctx:type_name -> common.Context
+	19, // 25: account.Presences.presences:type_name -> account.Presence
+	58, // 26: account.Presence.ctx:type_name -> common.Context
+	58, // 27: account.ReferrerPayoutBill.ctx:type_name -> common.Context
+	58, // 28: account.ReferrerPayoutBills.ctx:type_name -> common.Context
+	20, // 29: account.ReferrerPayoutBills.referrer_payout_bills:type_name -> account.ReferrerPayoutBill
+	58, // 30: account.ReferredCustomer.ctx:type_name -> common.Context
+	58, // 31: account.ReferredCustomers.ctx:type_name -> common.Context
+	22, // 32: account.ReferredCustomers.referred_customers:type_name -> account.ReferredCustomer
+	58, // 33: account.ReferredBill.ctx:type_name -> common.Context
+	58, // 34: account.ReferredBills.ctx:type_name -> common.Context
+	24, // 35: account.ReferredBills.bills:type_name -> account.ReferredBill
+	58, // 36: account.ReferrerAgent.ctx:type_name -> common.Context
+	9,  // 37: account.ReferrerAgent.agent:type_name -> account.Agent
+	58, // 38: account.ReferrerAgents.ctx:type_name -> common.Context
+	26, // 39: account.ReferrerAgents.referrer_agents:type_name -> account.ReferrerAgent
+	58, // 40: account.Comments.ctx:type_name -> common.Context
+	29, // 41: account.Comments.comments:type_name -> account.Comment
+	58, // 42: account.Comment.ctx:type_name -> common.Context
+	58, // 43: account.PurchaseRequest.ctx:type_name -> common.Context
+	59, // 44: account.PurchaseRequest.limit:type_name -> common.Limit
+	58, // 45: account.Subscription.ctx:type_name -> common.Context
+	59, // 46: account.Subscription.limit:type_name -> common.Limit
+	59, // 47: account.Subscription.purchased:type_name -> common.Limit
+	58, // 48: account.Bill.ctx:type_name -> common.Context
+	58, // 49: account.Bills.ctx:type_name -> common.Context
+	32, // 50: account.Bills.bills:type_name -> account.Bill
+	58, // 51: account.Invoices.ctx:type_name -> common.Context
+	36, // 52: account.Invoices.invoices:type_name -> account.Invoice
+	58, // 53: account.ListInvoiceRequest.ctx:type_name -> common.Context
+	58, // 54: account.Invoice.ctx:type_name -> common.Context
+	45, // 55: account.Invoice.items:type_name -> account.InvoiceItem
+	31, // 56: account.Invoice.current_sub:type_name -> account.Subscription
+	31, // 57: account.Invoice.sub:type_name -> account.Subscription
+	11, // 58: account.Invoice.invoice_info:type_name -> account.InvoiceInfo
+	57, // 59: account.InvoiceItem.data:type_name -> account.InvoiceItem.Data
+	58, // 60: account.Logs.ctx:type_name -> common.Context
+	47, // 61: account.Logs.logs:type_name -> account.Log
+	58, // 62: account.Log.ctx:type_name -> common.Context
+	58, // 63: account.String.ctx:type_name -> common.Context
+	58, // 64: account.PayRequest.ctx:type_name -> common.Context
+	31, // 65: account.PayRequest.subscription:type_name -> account.Subscription
+	36, // 66: account.PayRequest.invoice:type_name -> account.Invoice
+	58, // 67: account.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	58, // 68: account.UpdateSubscriptionRequest.ctx:type_name -> common.Context
+	31, // 69: account.UpdateSubscriptionRequest.subscription:type_name -> account.Subscription
+	40, // 70: account.InvoiceItem.Data.renew:type_name -> account.RenewInvoiceItem
+	39, // 71: account.InvoiceItem.Data.agent:type_name -> account.AgentInvoiceItem
+	42, // 72: account.InvoiceItem.Data.plan:type_name -> account.PlanInvoiceItem
+	43, // 73: account.InvoiceItem.Data.marketing:type_name -> account.MarketingInvoiceItem
+	41, // 74: account.InvoiceItem.Data.reserved_plan:type_name -> account.ReservedInvoiceItem
+	44, // 75: account.InvoiceItem.Data.novat:type_name -> account.NoVATInvoiceItem
+	37, // 76: account.InvoiceItem.Data.fanpages:type_name -> account.FanpagesInvoiceItem
+	38, // 77: account.InvoiceItem.Data.zalo_personals:type_name -> account.ZaloPersonalsInvoiceItem
+	41, // 78: account.InvoiceItem.Data.reserved_fanpages:type_name -> account.ReservedInvoiceItem
+	41, // 79: account.InvoiceItem.Data.reserved_zalo_personals:type_name -> account.ReservedInvoiceItem
+	80, // [80:80] is the sub-list for method output_type
+	80, // [80:80] is the sub-list for method input_type
+	80, // [80:80] is the sub-list for extension type_name
+	80, // [80:80] is the sub-list for extension extendee
+	0,  // [0:80] is the sub-list for field type_name
 }
 
 func init() { file_account_proto_init() }
@@ -3716,8 +6942,8 @@ func file_account_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_account_proto_rawDesc), len(file_account_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   28,
+			NumEnums:      5,
+			NumMessages:   53,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -9,7 +9,6 @@ package header
 import (
 	account "github.com/subiz/header/account"
 	common "github.com/subiz/header/common"
-	payment "github.com/subiz/header/payment"
 	whatsapp "github.com/subiz/header/whatsapp"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -28,7 +27,7 @@ var File_service_proto protoreflect.FileDescriptor
 
 const file_service_proto_rawDesc = "" +
 	"\n" +
-	"\rservice.proto\x12\x06header\x1a\rpayment.proto\x1a\raccount.proto\x1a\fheader.proto\x1a\rrequest.proto\x1a\fcommon.proto\x1a\x0ewhatsapp.proto2\x83\x01\n" +
+	"\rservice.proto\x12\x06header\x1a\raccount.proto\x1a\fheader.proto\x1a\rrequest.proto\x1a\fcommon.proto\x1a\x0ewhatsapp.proto2\x83\x01\n" +
 	"\x10GooglekonService\x122\n" +
 	"\x11SendEventToGoogle\x12\x0e.header.Events\x1a\r.header.Empty\x12;\n" +
 	"\vTestAIReply\x12\x1a.header.TestAIReplyRequest\x1a\x10.header.Response2\xb3\x02\n" +
@@ -228,7 +227,7 @@ const file_service_proto_rawDesc = "" +
 	".header.Id\x1a\n" +
 	".header.Id\x12'\n" +
 	"\tListBills\x12\n" +
-	".header.Id\x1a\x0e.payment.Bills\x125\n" +
+	".header.Id\x1a\x0e.account.Bills\x125\n" +
 	"\x15ListPromotionPrograms\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12;\n" +
 	"\x1bListPromotionCodesOfProgram\x12\n" +
@@ -236,7 +235,7 @@ const file_service_proto_rawDesc = "" +
 	"\x19ListPromotionCodesOfAgent\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12>\n" +
 	"\x13UpsertPromotionCode\x12\x15.header.PromotionCode\x1a\x10.header.Response\x128\n" +
-	"\x12CheckPromotionCode\x12\x10.payment.Invoice\x1a\x10.header.Response\x120\n" +
+	"\x12CheckPromotionCode\x12\x10.account.Invoice\x1a\x10.header.Response\x120\n" +
 	"\x10GetPromotionCode\x12\n" +
 	".header.Id\x1a\x10.header.Response\x123\n" +
 	"\x13DeletePromotionCode\x12\n" +
@@ -788,34 +787,34 @@ const file_service_proto_rawDesc = "" +
 	"\tSearchSub\x12\x19.account.SearchSubRequest\x1a\x0f.header.AccSubs\x12$\n" +
 	"\x06GetSub\x12\n" +
 	".header.Id\x1a\x0e.header.AccSub\x12B\n" +
-	"\x12UpdateSubscription\x12\x15.payment.Subscription\x1a\x15.payment.Subscription\x12A\n" +
-	"\tUpdateSub\x12\".payment.UpdateSubscriptionRequest\x1a\x10.payment.Invoice\x124\n" +
+	"\x12UpdateSubscription\x12\x15.account.Subscription\x1a\x15.account.Subscription\x12A\n" +
+	"\tUpdateSub\x12\".account.UpdateSubscriptionRequest\x1a\x10.account.Invoice\x124\n" +
 	"\x14GetSubscriptionUsage\x12\n" +
 	".header.Id\x1a\x10.header.Response\x120\n" +
 	"\n" +
-	"GetInvoice\x12\x10.payment.Invoice\x1a\x10.payment.Invoice\x124\n" +
+	"GetInvoice\x12\x10.account.Invoice\x1a\x10.account.Invoice\x124\n" +
 	"\x0fGetSubscription\x12\n" +
-	".header.Id\x1a\x15.payment.Subscription\x12)\n" +
-	"\x03Pay\x12\x13.payment.PayRequest\x1a\r.payment.Bill\x123\n" +
-	"\rCreateInvoice\x12\x10.payment.Invoice\x1a\x10.payment.Invoice\x123\n" +
-	"\rUpdateInvoice\x12\x10.payment.Invoice\x1a\x10.payment.Invoice\x12*\n" +
+	".header.Id\x1a\x15.account.Subscription\x12)\n" +
+	"\x03Pay\x12\x13.account.PayRequest\x1a\r.account.Bill\x123\n" +
+	"\rCreateInvoice\x12\x10.account.Invoice\x1a\x10.account.Invoice\x123\n" +
+	"\rUpdateInvoice\x12\x10.account.Invoice\x1a\x10.account.Invoice\x12*\n" +
 	"\rDeleteInvoice\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12@\n" +
-	"\x0eFilterInvoices\x12\x1b.payment.ListInvoiceRequest\x1a\x11.payment.Invoices\x12;\n" +
-	"\x12DoPaidSubscription\x12\x13.payment.PayRequest\x1a\x10.payment.Invoice\x12-\n" +
+	"\x0eFilterInvoices\x12\x1b.account.ListInvoiceRequest\x1a\x11.account.Invoices\x12;\n" +
+	"\x12DoPaidSubscription\x12\x13.account.PayRequest\x1a\x10.account.Invoice\x12-\n" +
 	"\fListComments\x12\n" +
-	".header.Id\x1a\x11.payment.Comments\x120\n" +
+	".header.Id\x1a\x11.account.Comments\x120\n" +
 	"\n" +
-	"AddComment\x12\x10.payment.Comment\x1a\x10.payment.Comment\x12,\n" +
+	"AddComment\x12\x10.account.Comment\x1a\x10.account.Comment\x12,\n" +
 	"\rExportInvoice\x12\n" +
-	".header.Id\x1a\x0f.payment.String\x129\n" +
-	"\x14ConvertInvoiceToHtml\x12\x10.payment.Invoice\x1a\x0f.payment.String\x12=\n" +
+	".header.Id\x1a\x0f.account.String\x129\n" +
+	"\x14ConvertInvoiceToHtml\x12\x10.account.Invoice\x1a\x0f.account.String\x12=\n" +
 	"\x0fGetExchangeRate\x12\x14.header.ExchangeRate\x1a\x14.header.ExchangeRate\x123\n" +
-	"\rTransferMoney\x12\x13.payment.PayRequest\x1a\r.payment.Bill\x12,\n" +
+	"\rTransferMoney\x12\x13.account.PayRequest\x1a\r.account.Bill\x12,\n" +
 	"\x0fRecomputeCredit\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12,\n" +
 	"\x0fListPaymentLogs\x12\n" +
-	".header.Id\x1a\r.payment.Logs2\xe4\x01\n" +
+	".header.Id\x1a\r.account.Logs2\xe4\x01\n" +
 	"\x06Pubsub\x12(\n" +
 	"\x04Fire\x12\x11.header.PsMessage\x1a\r.header.Empty\x12-\n" +
 	"\fIsSubscribed\x12\x11.header.PsMessage\x1a\n" +
@@ -1344,7 +1343,7 @@ var file_service_proto_goTypes = []any{
 	(*ListAgentOnlineRequest)(nil),            // 38: header.ListAgentOnlineRequest
 	(*AvailibilityReportRequest)(nil),         // 39: header.AvailibilityReportRequest
 	(*PromotionCode)(nil),                     // 40: header.PromotionCode
-	(*payment.Invoice)(nil),                   // 41: payment.Invoice
+	(*account.Invoice)(nil),                   // 41: account.Invoice
 	(*RedeemRequest)(nil),                     // 42: header.RedeemRequest
 	(*StripeWebhookEvent)(nil),                // 43: header.StripeWebhookEvent
 	(*BankAccount)(nil),                       // 44: header.BankAccount
@@ -1452,11 +1451,11 @@ var file_service_proto_goTypes = []any{
 	(*ConversationModalPickRequest)(nil),      // 146: header.ConversationModalPickRequest
 	(*Tag)(nil),                               // 147: header.Tag
 	(*account.SearchSubRequest)(nil),          // 148: account.SearchSubRequest
-	(*payment.Subscription)(nil),              // 149: payment.Subscription
-	(*payment.UpdateSubscriptionRequest)(nil), // 150: payment.UpdateSubscriptionRequest
-	(*payment.PayRequest)(nil),                // 151: payment.PayRequest
-	(*payment.ListInvoiceRequest)(nil),        // 152: payment.ListInvoiceRequest
-	(*payment.Comment)(nil),                   // 153: payment.Comment
+	(*account.Subscription)(nil),              // 149: account.Subscription
+	(*account.UpdateSubscriptionRequest)(nil), // 150: account.UpdateSubscriptionRequest
+	(*account.PayRequest)(nil),                // 151: account.PayRequest
+	(*account.ListInvoiceRequest)(nil),        // 152: account.ListInvoiceRequest
+	(*account.Comment)(nil),                   // 153: account.Comment
 	(*ExchangeRate)(nil),                      // 154: header.ExchangeRate
 	(*PsMessage)(nil),                         // 155: header.PsMessage
 	(*RealtimeSubscription)(nil),              // 156: header.RealtimeSubscription
@@ -1588,7 +1587,7 @@ var file_service_proto_goTypes = []any{
 	(*IntegratedShippings)(nil),               // 282: header.IntegratedShippings
 	(*account.Presences)(nil),                 // 283: account.Presences
 	(*ReportResponse)(nil),                    // 284: header.ReportResponse
-	(*payment.Bills)(nil),                     // 285: payment.Bills
+	(*account.Bills)(nil),                     // 285: account.Bills
 	(*PromotionCodeUsage)(nil),                // 286: header.PromotionCodeUsage
 	(*TryUpdateUserResult)(nil),               // 287: header.TryUpdateUserResult
 	(*UserViews)(nil),                         // 288: header.UserViews
@@ -1611,11 +1610,11 @@ var file_service_proto_goTypes = []any{
 	(*ConversationModalPicked)(nil),           // 305: header.ConversationModalPicked
 	(*AccSubs)(nil),                           // 306: header.AccSubs
 	(*AccSub)(nil),                            // 307: header.AccSub
-	(*payment.Bill)(nil),                      // 308: payment.Bill
-	(*payment.Invoices)(nil),                  // 309: payment.Invoices
-	(*payment.Comments)(nil),                  // 310: payment.Comments
-	(*payment.String)(nil),                    // 311: payment.String
-	(*payment.Logs)(nil),                      // 312: payment.Logs
+	(*account.Bill)(nil),                      // 308: account.Bill
+	(*account.Invoices)(nil),                  // 309: account.Invoices
+	(*account.Comments)(nil),                  // 310: account.Comments
+	(*account.String)(nil),                    // 311: account.String
+	(*account.Logs)(nil),                      // 312: account.Logs
 	(*PollResult)(nil),                        // 313: header.PollResult
 	(*whatsapp.Templates)(nil),                // 314: whatsapp.Templates
 	(*whatsapp.Window)(nil),                   // 315: whatsapp.Window
@@ -1787,7 +1786,7 @@ var file_service_proto_depIdxs = []int32{
 	4,   // 121: header.AccountMgr.ListPromotionCodesOfProgram:input_type -> header.Id
 	4,   // 122: header.AccountMgr.ListPromotionCodesOfAgent:input_type -> header.Id
 	40,  // 123: header.AccountMgr.UpsertPromotionCode:input_type -> header.PromotionCode
-	41,  // 124: header.AccountMgr.CheckPromotionCode:input_type -> payment.Invoice
+	41,  // 124: header.AccountMgr.CheckPromotionCode:input_type -> account.Invoice
 	4,   // 125: header.AccountMgr.GetPromotionCode:input_type -> header.Id
 	4,   // 126: header.AccountMgr.DeletePromotionCode:input_type -> header.Id
 	42,  // 127: header.AccountMgr.RedeemPromotionCode:input_type -> header.RedeemRequest
@@ -2161,23 +2160,23 @@ var file_service_proto_depIdxs = []int32{
 	4,   // 495: header.PaymentMgr.ListPlans:input_type -> header.Id
 	148, // 496: header.PaymentMgr.SearchSub:input_type -> account.SearchSubRequest
 	4,   // 497: header.PaymentMgr.GetSub:input_type -> header.Id
-	149, // 498: header.PaymentMgr.UpdateSubscription:input_type -> payment.Subscription
-	150, // 499: header.PaymentMgr.UpdateSub:input_type -> payment.UpdateSubscriptionRequest
+	149, // 498: header.PaymentMgr.UpdateSubscription:input_type -> account.Subscription
+	150, // 499: header.PaymentMgr.UpdateSub:input_type -> account.UpdateSubscriptionRequest
 	4,   // 500: header.PaymentMgr.GetSubscriptionUsage:input_type -> header.Id
-	41,  // 501: header.PaymentMgr.GetInvoice:input_type -> payment.Invoice
+	41,  // 501: header.PaymentMgr.GetInvoice:input_type -> account.Invoice
 	4,   // 502: header.PaymentMgr.GetSubscription:input_type -> header.Id
-	151, // 503: header.PaymentMgr.Pay:input_type -> payment.PayRequest
-	41,  // 504: header.PaymentMgr.CreateInvoice:input_type -> payment.Invoice
-	41,  // 505: header.PaymentMgr.UpdateInvoice:input_type -> payment.Invoice
+	151, // 503: header.PaymentMgr.Pay:input_type -> account.PayRequest
+	41,  // 504: header.PaymentMgr.CreateInvoice:input_type -> account.Invoice
+	41,  // 505: header.PaymentMgr.UpdateInvoice:input_type -> account.Invoice
 	4,   // 506: header.PaymentMgr.DeleteInvoice:input_type -> header.Id
-	152, // 507: header.PaymentMgr.FilterInvoices:input_type -> payment.ListInvoiceRequest
-	151, // 508: header.PaymentMgr.DoPaidSubscription:input_type -> payment.PayRequest
+	152, // 507: header.PaymentMgr.FilterInvoices:input_type -> account.ListInvoiceRequest
+	151, // 508: header.PaymentMgr.DoPaidSubscription:input_type -> account.PayRequest
 	4,   // 509: header.PaymentMgr.ListComments:input_type -> header.Id
-	153, // 510: header.PaymentMgr.AddComment:input_type -> payment.Comment
+	153, // 510: header.PaymentMgr.AddComment:input_type -> account.Comment
 	4,   // 511: header.PaymentMgr.ExportInvoice:input_type -> header.Id
-	41,  // 512: header.PaymentMgr.ConvertInvoiceToHtml:input_type -> payment.Invoice
+	41,  // 512: header.PaymentMgr.ConvertInvoiceToHtml:input_type -> account.Invoice
 	154, // 513: header.PaymentMgr.GetExchangeRate:input_type -> header.ExchangeRate
-	151, // 514: header.PaymentMgr.TransferMoney:input_type -> payment.PayRequest
+	151, // 514: header.PaymentMgr.TransferMoney:input_type -> account.PayRequest
 	4,   // 515: header.PaymentMgr.RecomputeCredit:input_type -> header.Id
 	4,   // 516: header.PaymentMgr.ListPaymentLogs:input_type -> header.Id
 	155, // 517: header.Pubsub.Fire:input_type -> header.PsMessage
@@ -2636,7 +2635,7 @@ var file_service_proto_depIdxs = []int32{
 	4,   // 970: header.AccountMgr.NewID:output_type -> header.Id
 	4,   // 971: header.AccountMgr.LockLogin:output_type -> header.Id
 	4,   // 972: header.AccountMgr.UnlockLogin:output_type -> header.Id
-	285, // 973: header.AccountMgr.ListBills:output_type -> payment.Bills
+	285, // 973: header.AccountMgr.ListBills:output_type -> account.Bills
 	264, // 974: header.AccountMgr.ListPromotionPrograms:output_type -> header.Response
 	264, // 975: header.AccountMgr.ListPromotionCodesOfProgram:output_type -> header.Response
 	264, // 976: header.AccountMgr.ListPromotionCodesOfAgent:output_type -> header.Response
@@ -3015,25 +3014,25 @@ var file_service_proto_depIdxs = []int32{
 	264, // 1349: header.PaymentMgr.ListPlans:output_type -> header.Response
 	306, // 1350: header.PaymentMgr.SearchSub:output_type -> header.AccSubs
 	307, // 1351: header.PaymentMgr.GetSub:output_type -> header.AccSub
-	149, // 1352: header.PaymentMgr.UpdateSubscription:output_type -> payment.Subscription
-	41,  // 1353: header.PaymentMgr.UpdateSub:output_type -> payment.Invoice
+	149, // 1352: header.PaymentMgr.UpdateSubscription:output_type -> account.Subscription
+	41,  // 1353: header.PaymentMgr.UpdateSub:output_type -> account.Invoice
 	264, // 1354: header.PaymentMgr.GetSubscriptionUsage:output_type -> header.Response
-	41,  // 1355: header.PaymentMgr.GetInvoice:output_type -> payment.Invoice
-	149, // 1356: header.PaymentMgr.GetSubscription:output_type -> payment.Subscription
-	308, // 1357: header.PaymentMgr.Pay:output_type -> payment.Bill
-	41,  // 1358: header.PaymentMgr.CreateInvoice:output_type -> payment.Invoice
-	41,  // 1359: header.PaymentMgr.UpdateInvoice:output_type -> payment.Invoice
+	41,  // 1355: header.PaymentMgr.GetInvoice:output_type -> account.Invoice
+	149, // 1356: header.PaymentMgr.GetSubscription:output_type -> account.Subscription
+	308, // 1357: header.PaymentMgr.Pay:output_type -> account.Bill
+	41,  // 1358: header.PaymentMgr.CreateInvoice:output_type -> account.Invoice
+	41,  // 1359: header.PaymentMgr.UpdateInvoice:output_type -> account.Invoice
 	47,  // 1360: header.PaymentMgr.DeleteInvoice:output_type -> header.Empty
-	309, // 1361: header.PaymentMgr.FilterInvoices:output_type -> payment.Invoices
-	41,  // 1362: header.PaymentMgr.DoPaidSubscription:output_type -> payment.Invoice
-	310, // 1363: header.PaymentMgr.ListComments:output_type -> payment.Comments
-	153, // 1364: header.PaymentMgr.AddComment:output_type -> payment.Comment
-	311, // 1365: header.PaymentMgr.ExportInvoice:output_type -> payment.String
-	311, // 1366: header.PaymentMgr.ConvertInvoiceToHtml:output_type -> payment.String
+	309, // 1361: header.PaymentMgr.FilterInvoices:output_type -> account.Invoices
+	41,  // 1362: header.PaymentMgr.DoPaidSubscription:output_type -> account.Invoice
+	310, // 1363: header.PaymentMgr.ListComments:output_type -> account.Comments
+	153, // 1364: header.PaymentMgr.AddComment:output_type -> account.Comment
+	311, // 1365: header.PaymentMgr.ExportInvoice:output_type -> account.String
+	311, // 1366: header.PaymentMgr.ConvertInvoiceToHtml:output_type -> account.String
 	154, // 1367: header.PaymentMgr.GetExchangeRate:output_type -> header.ExchangeRate
-	308, // 1368: header.PaymentMgr.TransferMoney:output_type -> payment.Bill
+	308, // 1368: header.PaymentMgr.TransferMoney:output_type -> account.Bill
 	47,  // 1369: header.PaymentMgr.RecomputeCredit:output_type -> header.Empty
-	312, // 1370: header.PaymentMgr.ListPaymentLogs:output_type -> payment.Logs
+	312, // 1370: header.PaymentMgr.ListPaymentLogs:output_type -> account.Logs
 	47,  // 1371: header.Pubsub.Fire:output_type -> header.Empty
 	4,   // 1372: header.Pubsub.IsSubscribed:output_type -> header.Id
 	313, // 1373: header.Pubsub.Poll:output_type -> header.PollResult

@@ -9,7 +9,6 @@ package header
 import (
 	account "github.com/subiz/header/account"
 	common "github.com/subiz/header/common"
-	payment "github.com/subiz/header/payment"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -6730,7 +6729,7 @@ type Data struct {
 	OutboundCallUpdate   *OutboundCallUpdateEvent `protobuf:"bytes,108,opt,name=outbound_call_update,json=outboundCallUpdate,proto3" json:"outbound_call_update,omitempty"`
 	BannedUser           *BannedUser              `protobuf:"bytes,109,opt,name=banned_user,json=bannedUser,proto3" json:"banned_user,omitempty"`
 	// Credit credit = 110;
-	SubizBill           *payment.Bill       `protobuf:"bytes,111,opt,name=subiz_bill,json=subizBill,proto3" json:"subiz_bill,omitempty"`
+	SubizBill           *account.Bill       `protobuf:"bytes,111,opt,name=subiz_bill,json=subizBill,proto3" json:"subiz_bill,omitempty"`
 	DesktopNotification *Noti               `protobuf:"bytes,113,opt,name=desktop_notification,json=desktopNotification,proto3" json:"desktop_notification,omitempty"`
 	Ticket              *Ticket             `protobuf:"bytes,114,opt,name=ticket,proto3" json:"ticket,omitempty"`
 	TicketType          *TicketType         `protobuf:"bytes,115,opt,name=ticket_type,json=ticketType,proto3" json:"ticket_type,omitempty"`
@@ -7252,7 +7251,7 @@ func (x *Data) GetBannedUser() *BannedUser {
 	return nil
 }
 
-func (x *Data) GetSubizBill() *payment.Bill {
+func (x *Data) GetSubizBill() *account.Bill {
 	if x != nil {
 		return x.SubizBill
 	}
@@ -53542,7 +53541,7 @@ type AccSub struct {
 	Ctx          *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	Id           string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	Account      *account.Account       `protobuf:"bytes,3,opt,name=account,proto3" json:"account,omitempty"`
-	Subscription *payment.Subscription  `protobuf:"bytes,4,opt,name=subscription,proto3" json:"subscription,omitempty"`
+	Subscription *account.Subscription  `protobuf:"bytes,4,opt,name=subscription,proto3" json:"subscription,omitempty"`
 	// repeated account.Agent agents = 5;
 	Stringify       string `protobuf:"bytes,6,opt,name=stringify,proto3" json:"stringify,omitempty"`
 	NumOpenInvoices int64  `protobuf:"varint,7,opt,name=num_open_invoices,json=numOpenInvoices,proto3" json:"num_open_invoices,omitempty"` // repeated Credit credits = 8;
@@ -53601,7 +53600,7 @@ func (x *AccSub) GetAccount() *account.Account {
 	return nil
 }
 
-func (x *AccSub) GetSubscription() *payment.Subscription {
+func (x *AccSub) GetSubscription() *account.Subscription {
 	if x != nil {
 		return x.Subscription
 	}
@@ -63348,8 +63347,8 @@ func (x *PromotionCheckResult) GetPriceType() string {
 type PromotionCodeUsage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Invoices      []*payment.Invoice     `protobuf:"bytes,4,rep,name=invoices,proto3" json:"invoices,omitempty"`
-	Bills         []*payment.Bill        `protobuf:"bytes,5,rep,name=bills,proto3" json:"bills,omitempty"`
+	Invoices      []*account.Invoice     `protobuf:"bytes,4,rep,name=invoices,proto3" json:"invoices,omitempty"`
+	Bills         []*account.Bill        `protobuf:"bytes,5,rep,name=bills,proto3" json:"bills,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -63391,14 +63390,14 @@ func (x *PromotionCodeUsage) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *PromotionCodeUsage) GetInvoices() []*payment.Invoice {
+func (x *PromotionCodeUsage) GetInvoices() []*account.Invoice {
 	if x != nil {
 		return x.Invoices
 	}
 	return nil
 }
 
-func (x *PromotionCodeUsage) GetBills() []*payment.Bill {
+func (x *PromotionCodeUsage) GetBills() []*account.Bill {
 	if x != nil {
 		return x.Bills
 	}
@@ -78521,7 +78520,7 @@ var File_header_proto protoreflect.FileDescriptor
 
 const file_header_proto_rawDesc = "" +
 	"\n" +
-	"\fheader.proto\x12\x06header\x1a\x1cgoogle/protobuf/struct.proto\x1a\fcommon.proto\x1a\raccount.proto\x1a\rpayment.proto\x1a\n" +
+	"\fheader.proto\x12\x06header\x1a\x1cgoogle/protobuf/struct.proto\x1a\fcommon.proto\x1a\raccount.proto\x1a\n" +
 	"type.proto\x1a\x16locale.generated.proto\"*\n" +
 	"\x05Empty\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\"\x93\x02\n" +
@@ -79126,7 +79125,7 @@ const file_header_proto_rawDesc = "" +
 	"\vbanned_user\x18m \x01(\v2\x12.header.BannedUserR\n" +
 	"bannedUser\x12,\n" +
 	"\n" +
-	"subiz_bill\x18o \x01(\v2\r.payment.BillR\tsubizBill\x12?\n" +
+	"subiz_bill\x18o \x01(\v2\r.account.BillR\tsubizBill\x12?\n" +
 	"\x14desktop_notification\x18q \x01(\v2\f.header.NotiR\x13desktopNotification\x12&\n" +
 	"\x06ticket\x18r \x01(\v2\x0e.header.TicketR\x06ticket\x123\n" +
 	"\vticket_type\x18s \x01(\v2\x12.header.TicketTypeR\n" +
@@ -84803,7 +84802,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12*\n" +
 	"\aaccount\x18\x03 \x01(\v2\x10.account.AccountR\aaccount\x129\n" +
-	"\fsubscription\x18\x04 \x01(\v2\x15.payment.SubscriptionR\fsubscription\x12\x1c\n" +
+	"\fsubscription\x18\x04 \x01(\v2\x15.account.SubscriptionR\fsubscription\x12\x1c\n" +
 	"\tstringify\x18\x06 \x01(\tR\tstringify\x12*\n" +
 	"\x11num_open_invoices\x18\a \x01(\x03R\x0fnumOpenInvoices\"\xb6\x02\n" +
 	"\aAccSubs\x12!\n" +
@@ -86075,8 +86074,8 @@ const file_header_proto_rawDesc = "" +
 	"price_type\x18\r \x01(\tR\tpriceType\"\x8a\x01\n" +
 	"\x12PromotionCodeUsage\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12,\n" +
-	"\binvoices\x18\x04 \x03(\v2\x10.payment.InvoiceR\binvoices\x12#\n" +
-	"\x05bills\x18\x05 \x03(\v2\r.payment.BillR\x05bills\"\x8a\a\n" +
+	"\binvoices\x18\x04 \x03(\v2\x10.account.InvoiceR\binvoices\x12#\n" +
+	"\x05bills\x18\x05 \x03(\v2\r.account.BillR\x05bills\"\x8a\a\n" +
 	"\x12SubizPaymentMethod\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -88626,16 +88625,16 @@ var file_header_proto_goTypes = []any{
 	(*account.Agent)(nil),          // 702: account.Agent
 	(*account.Presence)(nil),       // 703: account.Presence
 	(*account.Account)(nil),        // 704: account.Account
-	(*payment.Bill)(nil),           // 705: payment.Bill
+	(*account.Bill)(nil),           // 705: account.Bill
 	(*account.ConvoFilter)(nil),    // 706: account.ConvoFilter
 	(*common.SessionCampaign)(nil), // 707: common.SessionCampaign
 	(*EventConditionFilter)(nil),   // 708: header.EventConditionFilter
-	(*payment.Subscription)(nil),   // 709: payment.Subscription
+	(*account.Subscription)(nil),   // 709: account.Subscription
 	(*BooleanCondition)(nil),       // 710: header.BooleanCondition
 	(*NumberCondition)(nil),        // 711: header.NumberCondition
 	(*DatetimeCondition)(nil),      // 712: header.DatetimeCondition
 	(*TextCondition)(nil),          // 713: header.TextCondition
-	(*payment.Invoice)(nil),        // 714: payment.Invoice
+	(*account.Invoice)(nil),        // 714: account.Invoice
 	(*structpb.Value)(nil),         // 715: google.protobuf.Value
 	(*common.Limit)(nil),           // 716: common.Limit
 }
@@ -88771,7 +88770,7 @@ var file_header_proto_depIdxs = []int32{
 	380,  // 128: header.Data.outbound_call_entry:type_name -> header.OutboundCallEntry
 	451,  // 129: header.Data.outbound_call_update:type_name -> header.OutboundCallUpdateEvent
 	226,  // 130: header.Data.banned_user:type_name -> header.BannedUser
-	705,  // 131: header.Data.subiz_bill:type_name -> payment.Bill
+	705,  // 131: header.Data.subiz_bill:type_name -> account.Bill
 	39,   // 132: header.Data.desktop_notification:type_name -> header.Noti
 	480,  // 133: header.Data.ticket:type_name -> header.Ticket
 	472,  // 134: header.Data.ticket_type:type_name -> header.TicketType
@@ -89703,7 +89702,7 @@ var file_header_proto_depIdxs = []int32{
 	447,  // 1060: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
 	697,  // 1061: header.AccSub.ctx:type_name -> common.Context
 	704,  // 1062: header.AccSub.account:type_name -> account.Account
-	709,  // 1063: header.AccSub.subscription:type_name -> payment.Subscription
+	709,  // 1063: header.AccSub.subscription:type_name -> account.Subscription
 	697,  // 1064: header.AccSubs.ctx:type_name -> common.Context
 	449,  // 1065: header.AccSubs.accsub:type_name -> header.AccSub
 	697,  // 1066: header.OutboundCallUpdateEvent.ctx:type_name -> common.Context
@@ -89897,8 +89896,8 @@ var file_header_proto_depIdxs = []int32{
 	697,  // 1254: header.PromotionCode.ctx:type_name -> common.Context
 	697,  // 1255: header.SubizPromotionProgram.ctx:type_name -> common.Context
 	697,  // 1256: header.PromotionCodeUsage.ctx:type_name -> common.Context
-	714,  // 1257: header.PromotionCodeUsage.invoices:type_name -> payment.Invoice
-	705,  // 1258: header.PromotionCodeUsage.bills:type_name -> payment.Bill
+	714,  // 1257: header.PromotionCodeUsage.invoices:type_name -> account.Invoice
+	705,  // 1258: header.PromotionCodeUsage.bills:type_name -> account.Bill
 	697,  // 1259: header.SubizPaymentMethod.ctx:type_name -> common.Context
 	697,  // 1260: header.BankAccount.ctx:type_name -> common.Context
 	697,  // 1261: header.SuggestLeadFieldRequest.ctx:type_name -> common.Context
