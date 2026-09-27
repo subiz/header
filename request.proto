@@ -1127,3 +1127,26 @@ message CollectionDocumentsRequest {
 	string collection = 3;
 	repeated string document_ids = 4;
 }
+
+message PayRequest {
+	common.Context ctx = 1;
+	// optional string credit_id = 3;
+	string account_id = 8;
+	repeated string invoice_ids = 6;
+	string description = 7;
+	// optional Contact CustomerInfo = 9;
+	float amount = 10; // deprecated
+	int64 fpv_amount = 11;
+	string request_id = 12;
+	int64 created = 13;
+	string currency = 14; // VND or USD
+	string bank_account_id = 15;
+	string by_agent_id = 16;
+	string method = 17;
+
+	string payment_method = 18;
+	string promotion_code = 21;
+
+	account.Subscription subscription = 22; // for purchasing new
+	account.Invoice invoice = 23; // for marketing and novat only
+}

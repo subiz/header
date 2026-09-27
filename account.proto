@@ -427,32 +427,6 @@ message Comment {
 	optional int64 created = 12;
 }
 
-message PurchaseRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional int64 created = 11;
-
-	optional string promotion_code = 4;
-	// optional string name = 7;
-
-	optional int64 started = 5;
-	optional bool auto_renew = 9;
-
-	optional uint32 billing_cycle_month = 15;
-	// optional uint32 next_billing_cycle_month = 16;
-	optional string plan = 17;
-
-	optional string payment_method = 32;
-	optional common.Limit limit = 42;
-	optional bool auto_charge = 44;
-	optional int64 ended = 45;
-	// optional int64 churned = 47;
-
-	// optional int64 fpv_credit_vnd = 48;
-	optional int64 fpv_custom_price = 49; // usd
-	optional int64 num_agents = 51;
-}
-
 message Subscription {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -785,29 +759,6 @@ message Log {
 message String {
 	optional common.Context ctx = 1;
 	optional string str = 2;
-}
-
-message PayRequest {
-	optional common.Context ctx = 1;
-	// optional string credit_id = 3;
-	optional string account_id = 8;
-	repeated string invoice_ids = 6;
-	optional string description = 7;
-	// optional Contact CustomerInfo = 9;
-	optional float amount = 10; // deprecated
-	optional int64 fpv_amount = 11;
-	optional string request_id = 12;
-	optional int64 created = 13;
-	optional string currency = 14; // VND or USD
-	optional string bank_account_id = 15;
-	optional string by_agent_id = 16;
-	optional string method = 17;
-
-	optional string payment_method = 18;
-	optional string promotion_code = 21;
-
-	optional Subscription subscription = 22; // for purchasing new
-	optional Invoice invoice = 23; // for marketing and novat only
 }
 
 message InvoiceCreatedEmail {

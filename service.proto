@@ -723,7 +723,7 @@ service PaymentMgr {
 	rpc GetInvoice(account.Invoice) returns (account.Invoice);
 
 	rpc GetSubscription(Id) returns (account.Subscription);
-	rpc Pay(account.PayRequest) returns (account.Bill);
+	rpc Pay(PayRequest) returns (account.Bill);
 	rpc CreateInvoice(account.Invoice) returns (account.Invoice);
 	rpc UpdateInvoice(account.Invoice) returns (account.Invoice);
 	rpc DeleteInvoice(Id) returns (Empty);
@@ -731,14 +731,14 @@ service PaymentMgr {
 	rpc FilterInvoices(account.ListInvoiceRequest) returns (account.Invoices);
 
 	// call when receive bank transfer
-	rpc DoPaidSubscription(account.PayRequest) returns (account.Invoice); // upgrade and generate invoice
+	rpc DoPaidSubscription(PayRequest) returns (account.Invoice); // upgrade and generate invoice
 
 	rpc ListComments(Id) returns (account.Comments);
 	rpc AddComment(account.Comment) returns (account.Comment);
 	rpc ExportInvoice(Id) returns (account.String);
 	rpc ConvertInvoiceToHtml(account.Invoice) returns (account.String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
-	rpc TransferMoney(account.PayRequest) returns (account.Bill); // only subiz
+	rpc TransferMoney(PayRequest) returns (account.Bill); // only subiz
 
 	rpc RecomputeCredit(Id) returns (Empty); // internal
 	rpc ListPaymentLogs(Id) returns (account.Logs);

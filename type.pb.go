@@ -32,7 +32,7 @@ const (
 	RealtimeType_agent_deleted       RealtimeType = 15
 	RealtimeType_agent_updated       RealtimeType = 16
 	// agent_permission_updated = 17;
-	RealtimeType_my_user_upserted             RealtimeType = 19
+	// my_user_upserted = 19;
 	RealtimeType_user_info_updated            RealtimeType = 20
 	RealtimeType_agent_presence_updated       RealtimeType = 21
 	RealtimeType_user_created                 RealtimeType = 22
@@ -315,7 +315,6 @@ var (
 		14:  "invitation_accepted",
 		15:  "agent_deleted",
 		16:  "agent_updated",
-		19:  "my_user_upserted",
 		20:  "user_info_updated",
 		21:  "agent_presence_updated",
 		22:  "user_created",
@@ -593,7 +592,6 @@ var (
 		"invitation_accepted":                14,
 		"agent_deleted":                      15,
 		"agent_updated":                      16,
-		"my_user_upserted":                   19,
 		"user_info_updated":                  20,
 		"agent_presence_updated":             21,
 		"user_created":                       22,
@@ -1804,7 +1802,7 @@ const file_type_proto_rawDesc = "" +
 	"monthEqVar\x12\x1d\n" +
 	"\n" +
 	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
-	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\x855\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xef4\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1812,8 +1810,7 @@ const file_type_proto_rawDesc = "" +
 	"\x13agent_group_updated\x10\r\x12\x17\n" +
 	"\x13invitation_accepted\x10\x0e\x12\x11\n" +
 	"\ragent_deleted\x10\x0f\x12\x11\n" +
-	"\ragent_updated\x10\x10\x12\x14\n" +
-	"\x10my_user_upserted\x10\x13\x12\x15\n" +
+	"\ragent_updated\x10\x10\x12\x15\n" +
 	"\x11user_info_updated\x10\x14\x12\x1a\n" +
 	"\x16agent_presence_updated\x10\x15\x12\x10\n" +
 	"\fuser_created\x10\x16\x12\x10\n" +

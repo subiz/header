@@ -779,7 +779,7 @@ const file_service_proto_rawDesc = "" +
 	".header.Id\x1a\x10.header.Response\x12!\n" +
 	"\x06GetTag\x12\n" +
 	".header.Id\x1a\v.header.Tag\x12)\n" +
-	"\bMatchTag\x12\v.header.Ids\x1a\x10.header.Response2\x95\t\n" +
+	"\bMatchTag\x12\v.header.Ids\x1a\x10.header.Response2\x92\t\n" +
 	"\n" +
 	"PaymentMgr\x12)\n" +
 	"\tListPlans\x12\n" +
@@ -794,14 +794,14 @@ const file_service_proto_rawDesc = "" +
 	"\n" +
 	"GetInvoice\x12\x10.account.Invoice\x1a\x10.account.Invoice\x124\n" +
 	"\x0fGetSubscription\x12\n" +
-	".header.Id\x1a\x15.account.Subscription\x12)\n" +
-	"\x03Pay\x12\x13.account.PayRequest\x1a\r.account.Bill\x123\n" +
+	".header.Id\x1a\x15.account.Subscription\x12(\n" +
+	"\x03Pay\x12\x12.header.PayRequest\x1a\r.account.Bill\x123\n" +
 	"\rCreateInvoice\x12\x10.account.Invoice\x1a\x10.account.Invoice\x123\n" +
 	"\rUpdateInvoice\x12\x10.account.Invoice\x1a\x10.account.Invoice\x12*\n" +
 	"\rDeleteInvoice\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12@\n" +
-	"\x0eFilterInvoices\x12\x1b.account.ListInvoiceRequest\x1a\x11.account.Invoices\x12;\n" +
-	"\x12DoPaidSubscription\x12\x13.account.PayRequest\x1a\x10.account.Invoice\x12-\n" +
+	"\x0eFilterInvoices\x12\x1b.account.ListInvoiceRequest\x1a\x11.account.Invoices\x12:\n" +
+	"\x12DoPaidSubscription\x12\x12.header.PayRequest\x1a\x10.account.Invoice\x12-\n" +
 	"\fListComments\x12\n" +
 	".header.Id\x1a\x11.account.Comments\x120\n" +
 	"\n" +
@@ -809,8 +809,8 @@ const file_service_proto_rawDesc = "" +
 	"\rExportInvoice\x12\n" +
 	".header.Id\x1a\x0f.account.String\x129\n" +
 	"\x14ConvertInvoiceToHtml\x12\x10.account.Invoice\x1a\x0f.account.String\x12=\n" +
-	"\x0fGetExchangeRate\x12\x14.header.ExchangeRate\x1a\x14.header.ExchangeRate\x123\n" +
-	"\rTransferMoney\x12\x13.account.PayRequest\x1a\r.account.Bill\x12,\n" +
+	"\x0fGetExchangeRate\x12\x14.header.ExchangeRate\x1a\x14.header.ExchangeRate\x122\n" +
+	"\rTransferMoney\x12\x12.header.PayRequest\x1a\r.account.Bill\x12,\n" +
 	"\x0fRecomputeCredit\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12,\n" +
 	"\x0fListPaymentLogs\x12\n" +
@@ -1453,7 +1453,7 @@ var file_service_proto_goTypes = []any{
 	(*account.SearchSubRequest)(nil),          // 148: account.SearchSubRequest
 	(*account.Subscription)(nil),              // 149: account.Subscription
 	(*account.UpdateSubscriptionRequest)(nil), // 150: account.UpdateSubscriptionRequest
-	(*account.PayRequest)(nil),                // 151: account.PayRequest
+	(*PayRequest)(nil),                        // 151: header.PayRequest
 	(*account.ListInvoiceRequest)(nil),        // 152: account.ListInvoiceRequest
 	(*account.Comment)(nil),                   // 153: account.Comment
 	(*ExchangeRate)(nil),                      // 154: header.ExchangeRate
@@ -2165,18 +2165,18 @@ var file_service_proto_depIdxs = []int32{
 	4,   // 500: header.PaymentMgr.GetSubscriptionUsage:input_type -> header.Id
 	41,  // 501: header.PaymentMgr.GetInvoice:input_type -> account.Invoice
 	4,   // 502: header.PaymentMgr.GetSubscription:input_type -> header.Id
-	151, // 503: header.PaymentMgr.Pay:input_type -> account.PayRequest
+	151, // 503: header.PaymentMgr.Pay:input_type -> header.PayRequest
 	41,  // 504: header.PaymentMgr.CreateInvoice:input_type -> account.Invoice
 	41,  // 505: header.PaymentMgr.UpdateInvoice:input_type -> account.Invoice
 	4,   // 506: header.PaymentMgr.DeleteInvoice:input_type -> header.Id
 	152, // 507: header.PaymentMgr.FilterInvoices:input_type -> account.ListInvoiceRequest
-	151, // 508: header.PaymentMgr.DoPaidSubscription:input_type -> account.PayRequest
+	151, // 508: header.PaymentMgr.DoPaidSubscription:input_type -> header.PayRequest
 	4,   // 509: header.PaymentMgr.ListComments:input_type -> header.Id
 	153, // 510: header.PaymentMgr.AddComment:input_type -> account.Comment
 	4,   // 511: header.PaymentMgr.ExportInvoice:input_type -> header.Id
 	41,  // 512: header.PaymentMgr.ConvertInvoiceToHtml:input_type -> account.Invoice
 	154, // 513: header.PaymentMgr.GetExchangeRate:input_type -> header.ExchangeRate
-	151, // 514: header.PaymentMgr.TransferMoney:input_type -> account.PayRequest
+	151, // 514: header.PaymentMgr.TransferMoney:input_type -> header.PayRequest
 	4,   // 515: header.PaymentMgr.RecomputeCredit:input_type -> header.Id
 	4,   // 516: header.PaymentMgr.ListPaymentLogs:input_type -> header.Id
 	155, // 517: header.Pubsub.Fire:input_type -> header.PsMessage
