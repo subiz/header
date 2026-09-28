@@ -595,6 +595,8 @@ message Invoice {
 
 	optional int64 fpv_refcom_vnd = 53; // read only
 	optional InvoiceInfo invoice_info = 54;
+
+	optional bool is_quotation = 55;
 }
 
 message FanpagesInvoiceItem {
