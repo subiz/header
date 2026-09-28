@@ -10026,22 +10026,6 @@ message AIAgent {
 	AIAgentWebhook custom_webhook = 88;
 	repeated string supervisors = 89;
 	repeated string tags = 90;
-
-	repeated AIRole roles = 91;
-}
-
-message AIRole {
-	string name = 4;
-	string instruct = 5;
-
-	string template = 6; // collect_information, assign_agent, custom
-	// templateing
-	string collect_user_information_on = 76; // none | chat_started | interest_detected
-	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
-	string collect_user_information_prompt = 75;
-	Form collect_user_information = 78;
-
-	string assign_agent_on = 49; // interest_detected
 }
 
 message AIAgentWebhook {
@@ -10277,6 +10261,9 @@ message AIFunction {
 	UnlockKnowledge unlock_knowledge = 40;
 	string parameter_enforcement = 41; // "enforce" (slower but more correct parameter)
 	string additional_description = 42; // used on when parameter_enforcement=enforce
+
+	string computed_cases_hash = 45; // md5(rule)
+	repeated AIAgentOverrideRule computed_cases = 46;
 }
 
 message UnlockKnowledge {
