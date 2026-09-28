@@ -9370,9 +9370,12 @@ message AIAgentOverrideRule {
 
 	Frequently frequently = 17; // once or always
 
-	// AIAgent ai_agent = 23;
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
+
+	string computed_hash = 45; // md5(rule)
+	AIIntent computed_intent = 43;
+	bool use_in_rag = 47;
 }
 
 message SenAgentSessionListRequest {
@@ -9958,6 +9961,7 @@ message AIAgent {
 	string updated_by = 20;
 
 	string state = 22; // active, inactive
+	string sub_state = 21; // ready | training | optimizing | inactive
 
 	string model = 23; // gpt-4o-mini, custom_webhook
 	int64 minimum_answer_delay_sec = 24;
@@ -10026,22 +10030,6 @@ message AIAgent {
 	AIAgentWebhook custom_webhook = 88;
 	repeated string supervisors = 89;
 	repeated string tags = 90;
-
-	repeated AIRole roles = 91;
-}
-
-message AIRole {
-	string name = 4;
-	string instruct = 5;
-
-	string template = 6; // collect_information, assign_agent, custom
-	// templateing
-	string collect_user_information_on = 76; // none | chat_started | interest_detected
-	repeated string interested_topics = 77; // "product", "pricing", "features", "availability"
-	string collect_user_information_prompt = 75;
-	Form collect_user_information = 78;
-
-	string assign_agent_on = 49; // interest_detected
 }
 
 message AIAgentWebhook {
