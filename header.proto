@@ -9373,9 +9373,9 @@ message AIAgentOverrideRule {
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
 
-	string computed_hash = 45; // md5(rule)
-	AIIntent computed_intent = 43;
-	bool use_in_rag = 47;
+	// string computed_hash = 45; // md5(rule)
+	// AIIntent computed_intent = 43;
+	// bool use_in_rag = 47;
 }
 
 message SenAgentSessionListRequest {
@@ -11230,6 +11230,6 @@ message RuleAICondition {
 	string signal = 1; // spam, abusive, purchase_intent, custom
 	string operator = 2; // eq, neq
 	string value = 3; // expected value, depending on signal
-	string min_confidence = 4; // low, medium, high, certain; distinct from value
+	string min_confidence = 4; // low, medium, high (default), certain; distinct from value
 	string prompt = 5; // only used when signal is custom
 }

@@ -15,7 +15,6 @@ import (
 
 	pb "github.com/subiz/header/account"
 	cpb "github.com/subiz/header/common"
-	ppb "github.com/subiz/header/payment"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
@@ -236,7 +235,7 @@ func TestPartition(t *testing.T) {
 }
 
 func TestPack(t *testing.T) {
-	ev := &ppb.Invoice{}
+	ev := &pb.Invoice{}
 	json.Unmarshal([]byte(`{"account_id":"acsbkyfhmwxsmmamrfnj","id":"icsclchaeaopzwlobggxc","due_date":0,"state":"paid","created":1726627068975,"items":[{"quantity":1,"price":182.87546,"data":{"plan":{"agent_count":100,"billing_cycle_month":12,"old_plan":"standard","new_plan":"standard_unlimited_agent","save_percentage":1,"started":1726627068975,"day_left":79,"old_agent_count":1,"fpv_save_percentage":1000000,"ended":1758163068000}},"total_price":182.87546,"fpv_price_vnd":3994000031744,"fpv_total_price_vnd":3994000031744,"fpv_discount_vnd":0,"fpv_price_usd":182875456,"fpv_total_price_usd":182875456,"fpv_discount_usd":0},{"quantity":1,"price":-29.665369,"data":{"reserved_plan":{"old_plan":"standard","old_agent_count":1,"old_billing_cycle_month":3,"old_started":1726627068975,"old_ended":1733468818000}},"total_price":-29.665369,"fpv_price_vnd":-647891648512,"fpv_total_price_vnd":-647891648512,"fpv_price_usd":-29665370,"fpv_total_price_usd":-29665370}],"subtotal":153.21008,"total":153.21008,"updated":1726632356893,"payment_made":153.21008,"current_sub":{"account_id":"acsbkyfhmwxsmmamrfnj","created":1722934647779,"promotion_code":"","started":1725606418165,"billing_cycle_month":3,"next_billing_cycle_month":3,"plan":"standard","next_plan":"standard","credit":0.000019073486,"limit":{},"ended":1733468818000,"churned":0,"fpv_credit_vnd":416564,"fpv_unlimited_agent_price":182875452,"fpv_next_unlimited_agent_price":182875452,"num_agents":1,"use_ticket":0,"next_num_agents":1},"currency":"USD","fpv_total_vnd":3346108147200,"fpv_payment_made_vnd":3346108147200,"fpv_subtotal_vnd":3346108252160,"fpv_subtotal_usd":153210080,"fpv_total_usd":153210080,"fpv_payment_made_usd":153210080}
 `), ev)
 	b, _ := proto.Marshal(ev)
