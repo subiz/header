@@ -72306,20 +72306,21 @@ func (x *TicketTypeSubscription) GetTopics() []string {
 }
 
 type NotiSetting struct {
-	state            protoimpl.MessageState    `protogen:"open.v1"`
-	Ctx              *common.Context           `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId        string                    `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	AgentId          string                    `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	Updated          int64                     `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
-	Web              *NotiSubscription         `protobuf:"bytes,9,opt,name=web,proto3" json:"web,omitempty"` // desktop
-	Mobile           *NotiSubscription         `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email            *NotiSubscription         `protobuf:"bytes,11,opt,name=email,proto3" json:"email,omitempty"`
-	Instant          *NotiSubscription         `protobuf:"bytes,15,opt,name=instant,proto3" json:"instant,omitempty"` // web
-	TicketTypes      []*TicketTypeSubscription `protobuf:"bytes,16,rep,name=ticket_types,json=ticketTypes,proto3" json:"ticket_types,omitempty"`
-	DoNotDisturb     *DoNotDisturb             `protobuf:"bytes,12,opt,name=do_not_disturb,json=doNotDisturb,proto3" json:"do_not_disturb,omitempty"`
-	InstantMuteUntil int64                     `protobuf:"varint,14,opt,name=instant_mute_until,json=instantMuteUntil,proto3" json:"instant_mute_until,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state               protoimpl.MessageState    `protogen:"open.v1"`
+	Ctx                 *common.Context           `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId           string                    `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AgentId             string                    `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Updated             int64                     `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
+	Web                 *NotiSubscription         `protobuf:"bytes,9,opt,name=web,proto3" json:"web,omitempty"`        // desktop
+	Mobile              *NotiSubscription         `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile,omitempty"` // @deprecated
+	Email               *NotiSubscription         `protobuf:"bytes,11,opt,name=email,proto3" json:"email,omitempty"`
+	Instant             *NotiSubscription         `protobuf:"bytes,15,opt,name=instant,proto3" json:"instant,omitempty"` // web
+	TicketTypes         []*TicketTypeSubscription `protobuf:"bytes,16,rep,name=ticket_types,json=ticketTypes,proto3" json:"ticket_types,omitempty"`
+	NotificationDevices []string                  `protobuf:"bytes,17,rep,name=notification_devices,json=notificationDevices,proto3" json:"notification_devices,omitempty"` // nil ==> all , emptyarray =  ["none"] , ["web"], ["mobile"], ["web", "mobile"]
+	DoNotDisturb        *DoNotDisturb             `protobuf:"bytes,12,opt,name=do_not_disturb,json=doNotDisturb,proto3" json:"do_not_disturb,omitempty"`
+	InstantMuteUntil    int64                     `protobuf:"varint,14,opt,name=instant_mute_until,json=instantMuteUntil,proto3" json:"instant_mute_until,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *NotiSetting) Reset() {
@@ -72411,6 +72412,13 @@ func (x *NotiSetting) GetInstant() *NotiSubscription {
 func (x *NotiSetting) GetTicketTypes() []*TicketTypeSubscription {
 	if x != nil {
 		return x.TicketTypes
+	}
+	return nil
+}
+
+func (x *NotiSetting) GetNotificationDevices() []string {
+	if x != nil {
+		return x.NotificationDevices
 	}
 	return nil
 }
@@ -87006,7 +87014,7 @@ const file_header_proto_rawDesc = "" +
 	"\x16TicketTypeSubscription\x12\x1f\n" +
 	"\vticket_type\x18\x04 \x01(\tR\n" +
 	"ticketType\x12\x16\n" +
-	"\x06topics\x18\x05 \x03(\tR\x06topics\"\xf3\x03\n" +
+	"\x06topics\x18\x05 \x03(\tR\x06topics\"\xa6\x04\n" +
 	"\vNotiSetting\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -87018,7 +87026,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\v2\x18.header.NotiSubscriptionR\x06mobile\x12.\n" +
 	"\x05email\x18\v \x01(\v2\x18.header.NotiSubscriptionR\x05email\x122\n" +
 	"\ainstant\x18\x0f \x01(\v2\x18.header.NotiSubscriptionR\ainstant\x12A\n" +
-	"\fticket_types\x18\x10 \x03(\v2\x1e.header.TicketTypeSubscriptionR\vticketTypes\x12:\n" +
+	"\fticket_types\x18\x10 \x03(\v2\x1e.header.TicketTypeSubscriptionR\vticketTypes\x121\n" +
+	"\x14notification_devices\x18\x11 \x03(\tR\x13notificationDevices\x12:\n" +
 	"\x0edo_not_disturb\x18\f \x01(\v2\x14.header.DoNotDisturbR\fdoNotDisturb\x12,\n" +
 	"\x12instant_mute_until\x18\x0e \x01(\x03R\x10instantMuteUntil\"\x81\x01\n" +
 	"\fDoNotDisturb\x12\x1d\n" +

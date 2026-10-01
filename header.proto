@@ -10510,11 +10510,13 @@ message NotiSetting {
 	int64 updated = 8;
 
 	NotiSubscription web = 9; // desktop
-	NotiSubscription mobile = 10;
+	NotiSubscription mobile = 10; // @deprecated
 	NotiSubscription email = 11;
 	NotiSubscription instant = 15; // web
 
 	repeated TicketTypeSubscription ticket_types = 16;
+
+	repeated string notification_devices = 17; // nil ==> all , emptyarray =  ["none"] , ["web"], ["mobile"], ["web", "mobile"]
 
 	DoNotDisturb do_not_disturb = 12;
 	int64 instant_mute_until = 14;
