@@ -972,6 +972,7 @@ message Rule {
 	repeated string last_replied_agents = 27; // empty =                   | dont use
 
 	bool prefer_most_recent_agent = 29;
+	bool prefer_lead_owner = 32;
 
 	repeated string fallback_agents = 23;
 
@@ -7335,6 +7336,9 @@ message Response {
 
 	YoutubeVideo youtubte_video = 311;
 	repeated YoutubeVideo youtubte_videos = 312;
+
+	repeated SLAPolicy conversation_sla_policies = 313;
+	SLAPolicy conversation_sla_policy = 314;
 }
 
 message ReportCount {
@@ -9984,7 +9988,7 @@ message AIAgent {
 	int64 modified = 41;
 	int64 version = 42;
 
-	string generated_refuse_message = 46;
+	// string generated_refuse_message = 46;
 	int64 active_version = 45; // only root
 
 	AIDataStore data_store = 47;

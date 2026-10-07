@@ -220,9 +220,12 @@ const (
 	RealtimeType_ticket_view_updated              RealtimeType = 285
 	RealtimeType_ticket_view_deleted              RealtimeType = 286
 	RealtimeType_live_users_updated               RealtimeType = 255
-	RealtimeType_sla_policy_created               RealtimeType = 287
-	RealtimeType_sla_policy_updated               RealtimeType = 288
-	RealtimeType_sla_policy_deleted               RealtimeType = 289
+	RealtimeType_record_sla_policy_created        RealtimeType = 271
+	RealtimeType_record_sla_policy_updated        RealtimeType = 272
+	RealtimeType_record_sla_policy_deleted        RealtimeType = 273
+	RealtimeType_conversation_sla_policy_created  RealtimeType = 287
+	RealtimeType_conversation_sla_policy_updated  RealtimeType = 288
+	RealtimeType_conversation_sla_policy_deleted  RealtimeType = 289
 	RealtimeType_knowledge_base_updated           RealtimeType = 290
 	RealtimeType_knowledge_base_deleted           RealtimeType = 291
 	RealtimeType_article_updated                  RealtimeType = 292
@@ -500,9 +503,12 @@ var (
 		285: "ticket_view_updated",
 		286: "ticket_view_deleted",
 		255: "live_users_updated",
-		287: "sla_policy_created",
-		288: "sla_policy_updated",
-		289: "sla_policy_deleted",
+		271: "record_sla_policy_created",
+		272: "record_sla_policy_updated",
+		273: "record_sla_policy_deleted",
+		287: "conversation_sla_policy_created",
+		288: "conversation_sla_policy_updated",
+		289: "conversation_sla_policy_deleted",
 		290: "knowledge_base_updated",
 		291: "knowledge_base_deleted",
 		292: "article_updated",
@@ -777,9 +783,12 @@ var (
 		"ticket_view_updated":                285,
 		"ticket_view_deleted":                286,
 		"live_users_updated":                 255,
-		"sla_policy_created":                 287,
-		"sla_policy_updated":                 288,
-		"sla_policy_deleted":                 289,
+		"record_sla_policy_created":          271,
+		"record_sla_policy_updated":          272,
+		"record_sla_policy_deleted":          273,
+		"conversation_sla_policy_created":    287,
+		"conversation_sla_policy_updated":    288,
+		"conversation_sla_policy_deleted":    289,
 		"knowledge_base_updated":             290,
 		"knowledge_base_deleted":             291,
 		"article_updated":                    292,
@@ -1802,7 +1811,7 @@ const file_type_proto_rawDesc = "" +
 	"monthEqVar\x12\x1d\n" +
 	"\n" +
 	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
-	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xef4\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xf65\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1997,10 +2006,13 @@ const file_type_proto_rawDesc = "" +
 	"\x13ticket_view_created\x10\x9c\x02\x12\x18\n" +
 	"\x13ticket_view_updated\x10\x9d\x02\x12\x18\n" +
 	"\x13ticket_view_deleted\x10\x9e\x02\x12\x17\n" +
-	"\x12live_users_updated\x10\xff\x01\x12\x17\n" +
-	"\x12sla_policy_created\x10\x9f\x02\x12\x17\n" +
-	"\x12sla_policy_updated\x10\xa0\x02\x12\x17\n" +
-	"\x12sla_policy_deleted\x10\xa1\x02\x12\x1b\n" +
+	"\x12live_users_updated\x10\xff\x01\x12\x1e\n" +
+	"\x19record_sla_policy_created\x10\x8f\x02\x12\x1e\n" +
+	"\x19record_sla_policy_updated\x10\x90\x02\x12\x1e\n" +
+	"\x19record_sla_policy_deleted\x10\x91\x02\x12$\n" +
+	"\x1fconversation_sla_policy_created\x10\x9f\x02\x12$\n" +
+	"\x1fconversation_sla_policy_updated\x10\xa0\x02\x12$\n" +
+	"\x1fconversation_sla_policy_deleted\x10\xa1\x02\x12\x1b\n" +
 	"\x16knowledge_base_updated\x10\xa2\x02\x12\x1b\n" +
 	"\x16knowledge_base_deleted\x10\xa3\x02\x12\x14\n" +
 	"\x0farticle_updated\x10\xa4\x02\x12\x14\n" +

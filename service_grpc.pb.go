@@ -12532,6 +12532,12 @@ const (
 	ConversationMgr_VerifyWebsiteByDNS_FullMethodName       = "/header.ConversationMgr/VerifyWebsiteByDNS"
 	ConversationMgr_ForceVerifyWebsite_FullMethodName       = "/header.ConversationMgr/ForceVerifyWebsite"
 	ConversationMgr_ListUserTags_FullMethodName             = "/header.ConversationMgr/ListUserTags"
+	ConversationMgr_ReadSLAPolicy_FullMethodName            = "/header.ConversationMgr/ReadSLAPolicy"
+	ConversationMgr_CreateSLAPolicy_FullMethodName          = "/header.ConversationMgr/CreateSLAPolicy"
+	ConversationMgr_UpdateSLAPolicy_FullMethodName          = "/header.ConversationMgr/UpdateSLAPolicy"
+	ConversationMgr_DeleteSLAPolicy_FullMethodName          = "/header.ConversationMgr/DeleteSLAPolicy"
+	ConversationMgr_MatchSLAPolicies_FullMethodName         = "/header.ConversationMgr/MatchSLAPolicies"
+	ConversationMgr_ListSLAPolicies_FullMethodName          = "/header.ConversationMgr/ListSLAPolicies"
 )
 
 // ConversationMgrClient is the client API for ConversationMgr service.
@@ -12624,6 +12630,12 @@ type ConversationMgrClient interface {
 	VerifyWebsiteByDNS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ForceVerifyWebsite(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListUserTags(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ReadSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error)
+	UpdateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error)
+	DeleteSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	MatchSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	ListSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conversationMgrClient struct {
@@ -13434,6 +13446,66 @@ func (c *conversationMgrClient) ListUserTags(ctx context.Context, in *Id, opts .
 	return out, nil
 }
 
+func (c *conversationMgrClient) ReadSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_ReadSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) CreateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_CreateSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) UpdateSLAPolicy(ctx context.Context, in *SLAPolicy, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_UpdateSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) DeleteSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ConversationMgr_DeleteSLAPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) MatchSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_MatchSLAPolicies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ListSLAPolicies(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_ListSLAPolicies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationMgrServer is the server API for ConversationMgr service.
 // All implementations must embed UnimplementedConversationMgrServer
 // for forward compatibility.
@@ -13524,6 +13596,12 @@ type ConversationMgrServer interface {
 	VerifyWebsiteByDNS(context.Context, *Id) (*Response, error)
 	ForceVerifyWebsite(context.Context, *Id) (*Response, error)
 	ListUserTags(context.Context, *Id) (*Response, error)
+	ReadSLAPolicy(context.Context, *Id) (*Response, error)
+	CreateSLAPolicy(context.Context, *SLAPolicy) (*Response, error)
+	UpdateSLAPolicy(context.Context, *SLAPolicy) (*Response, error)
+	DeleteSLAPolicy(context.Context, *Id) (*Empty, error)
+	MatchSLAPolicies(context.Context, *Ids) (*Response, error)
+	ListSLAPolicies(context.Context, *Ids) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -13773,6 +13851,24 @@ func (UnimplementedConversationMgrServer) ForceVerifyWebsite(context.Context, *I
 }
 func (UnimplementedConversationMgrServer) ListUserTags(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserTags not implemented")
+}
+func (UnimplementedConversationMgrServer) ReadSLAPolicy(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadSLAPolicy not implemented")
+}
+func (UnimplementedConversationMgrServer) CreateSLAPolicy(context.Context, *SLAPolicy) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSLAPolicy not implemented")
+}
+func (UnimplementedConversationMgrServer) UpdateSLAPolicy(context.Context, *SLAPolicy) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateSLAPolicy not implemented")
+}
+func (UnimplementedConversationMgrServer) DeleteSLAPolicy(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteSLAPolicy not implemented")
+}
+func (UnimplementedConversationMgrServer) MatchSLAPolicies(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchSLAPolicies not implemented")
+}
+func (UnimplementedConversationMgrServer) ListSLAPolicies(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSLAPolicies not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
 func (UnimplementedConversationMgrServer) testEmbeddedByValue()                         {}
@@ -15235,6 +15331,114 @@ func _ConversationMgr_ListUserTags_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_ReadSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ReadSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ReadSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ReadSLAPolicy(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_CreateSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SLAPolicy)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).CreateSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_CreateSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).CreateSLAPolicy(ctx, req.(*SLAPolicy))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_UpdateSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SLAPolicy)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).UpdateSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_UpdateSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).UpdateSLAPolicy(ctx, req.(*SLAPolicy))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_DeleteSLAPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).DeleteSLAPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_DeleteSLAPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).DeleteSLAPolicy(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_MatchSLAPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).MatchSLAPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_MatchSLAPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).MatchSLAPolicies(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ListSLAPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ListSLAPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ListSLAPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ListSLAPolicies(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConversationMgr_ServiceDesc is the grpc.ServiceDesc for ConversationMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -15561,6 +15765,30 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserTags",
 			Handler:    _ConversationMgr_ListUserTags_Handler,
+		},
+		{
+			MethodName: "ReadSLAPolicy",
+			Handler:    _ConversationMgr_ReadSLAPolicy_Handler,
+		},
+		{
+			MethodName: "CreateSLAPolicy",
+			Handler:    _ConversationMgr_CreateSLAPolicy_Handler,
+		},
+		{
+			MethodName: "UpdateSLAPolicy",
+			Handler:    _ConversationMgr_UpdateSLAPolicy_Handler,
+		},
+		{
+			MethodName: "DeleteSLAPolicy",
+			Handler:    _ConversationMgr_DeleteSLAPolicy_Handler,
+		},
+		{
+			MethodName: "MatchSLAPolicies",
+			Handler:    _ConversationMgr_MatchSLAPolicies_Handler,
+		},
+		{
+			MethodName: "ListSLAPolicies",
+			Handler:    _ConversationMgr_ListSLAPolicies_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
