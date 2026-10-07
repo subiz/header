@@ -8498,6 +8498,7 @@ type Rule struct {
 	HasAgentReplied                string                 `protobuf:"bytes,26,opt,name=has_agent_replied,json=hasAgentReplied,proto3" json:"has_agent_replied,omitempty"`       // "" -> no use, none, all, agents      | dont use
 	LastRepliedAgents              []string               `protobuf:"bytes,27,rep,name=last_replied_agents,json=lastRepliedAgents,proto3" json:"last_replied_agents,omitempty"` // empty =                   | dont use
 	PreferMostRecentAgent          bool                   `protobuf:"varint,29,opt,name=prefer_most_recent_agent,json=preferMostRecentAgent,proto3" json:"prefer_most_recent_agent,omitempty"`
+	PreferLeadOwner                bool                   `protobuf:"varint,32,opt,name=prefer_lead_owner,json=preferLeadOwner,proto3" json:"prefer_lead_owner,omitempty"`
 	FallbackAgents                 []string               `protobuf:"bytes,23,rep,name=fallback_agents,json=fallbackAgents,proto3" json:"fallback_agents,omitempty"`
 	V                              int64                  `protobuf:"varint,22,opt,name=v,proto3" json:"v,omitempty"` // version
 	Supporters                     []string               `protobuf:"bytes,24,rep,name=supporters,proto3" json:"supporters,omitempty"`
@@ -8718,6 +8719,13 @@ func (x *Rule) GetLastRepliedAgents() []string {
 func (x *Rule) GetPreferMostRecentAgent() bool {
 	if x != nil {
 		return x.PreferMostRecentAgent
+	}
+	return false
+}
+
+func (x *Rule) GetPreferLeadOwner() bool {
+	if x != nil {
+		return x.PreferLeadOwner
 	}
 	return false
 }
@@ -68851,18 +68859,18 @@ type AIAgent struct {
 	Model                 string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"`                       // gpt-4o-mini, custom_webhook
 	MinimumAnswerDelaySec int64                  `protobuf:"varint,24,opt,name=minimum_answer_delay_sec,json=minimumAnswerDelaySec,proto3" json:"minimum_answer_delay_sec,omitempty"`
 	// repeated AIAgent sub_agents = 25;
-	FormIds                []string      `protobuf:"bytes,27,rep,name=form_ids,json=formIds,proto3" json:"form_ids,omitempty"`                                       // readonly
-	TokenLimit             string        `protobuf:"bytes,28,opt,name=token_limit,json=tokenLimit,proto3" json:"token_limit,omitempty"`                              // short, balanced, long
-	FirstPersonPronoun     string        `protobuf:"bytes,30,opt,name=first_person_pronoun,json=firstPersonPronoun,proto3" json:"first_person_pronoun,omitempty"`    // personal pronoun: em
-	SecondPersonPronoun    string        `protobuf:"bytes,31,opt,name=second_person_pronoun,json=secondPersonPronoun,proto3" json:"second_person_pronoun,omitempty"` // anh/chi
-	ContextGuard           int64         `protobuf:"varint,35,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`                       // Message context_guard_message = 36; // unknow message @deprecated, use unknown
-	Functions              []*AIFunction `protobuf:"bytes,37,rep,name=functions,proto3" json:"functions,omitempty"`
-	ErrorMessage           *Message      `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	Modified               int64         `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
-	Version                int64         `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
-	GeneratedRefuseMessage string        `protobuf:"bytes,46,opt,name=generated_refuse_message,json=generatedRefuseMessage,proto3" json:"generated_refuse_message,omitempty"`
-	ActiveVersion          int64         `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"` // only root
-	DataStore              *AIDataStore  `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
+	FormIds             []string      `protobuf:"bytes,27,rep,name=form_ids,json=formIds,proto3" json:"form_ids,omitempty"`                                       // readonly
+	TokenLimit          string        `protobuf:"bytes,28,opt,name=token_limit,json=tokenLimit,proto3" json:"token_limit,omitempty"`                              // short, balanced, long
+	FirstPersonPronoun  string        `protobuf:"bytes,30,opt,name=first_person_pronoun,json=firstPersonPronoun,proto3" json:"first_person_pronoun,omitempty"`    // personal pronoun: em
+	SecondPersonPronoun string        `protobuf:"bytes,31,opt,name=second_person_pronoun,json=secondPersonPronoun,proto3" json:"second_person_pronoun,omitempty"` // anh/chi
+	ContextGuard        int64         `protobuf:"varint,35,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`                       // Message context_guard_message = 36; // unknow message @deprecated, use unknown
+	Functions           []*AIFunction `protobuf:"bytes,37,rep,name=functions,proto3" json:"functions,omitempty"`
+	ErrorMessage        *Message      `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	Modified            int64         `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
+	Version             int64         `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
+	// string generated_refuse_message = 46;
+	ActiveVersion int64        `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"` // only root
+	DataStore     *AIDataStore `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
 	// report
 	CreditSpendLast_7DaysFpv int64                  `protobuf:"varint,50,opt,name=credit_spend_last_7days_fpv,json=creditSpendLast7daysFpv,proto3" json:"credit_spend_last_7days_fpv,omitempty"`
 	TotalCreditSpendFpv      int64                  `protobuf:"varint,51,opt,name=total_credit_spend_fpv,json=totalCreditSpendFpv,proto3" json:"total_credit_spend_fpv,omitempty"`
@@ -69146,13 +69154,6 @@ func (x *AIAgent) GetVersion() int64 {
 		return x.Version
 	}
 	return 0
-}
-
-func (x *AIAgent) GetGeneratedRefuseMessage() string {
-	if x != nil {
-		return x.GeneratedRefuseMessage
-	}
-	return ""
 }
 
 func (x *AIAgent) GetActiveVersion() int64 {
@@ -79170,7 +79171,7 @@ const file_header_proto_rawDesc = "" +
 	"\vexec_bot_id\x18\b \x01(\tR\texecBotId\x12$\n" +
 	"\x0eexec_bot_state\x18\t \x01(\tR\fexecBotState\x12\x1b\n" +
 	"\taction_id\x18\x10 \x01(\tR\bactionId\x12!\n" +
-	"\faction_state\x18\x11 \x01(\tR\vactionState\"\xd6\x10\n" +
+	"\faction_state\x18\x11 \x01(\tR\vactionState\"\x82\x11\n" +
 	"\x04Rule\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +
@@ -79200,7 +79201,8 @@ const file_header_proto_rawDesc = "" +
 	"\rcall_menu_key\x18\x1c \x01(\tR\vcallMenuKey\x12*\n" +
 	"\x11has_agent_replied\x18\x1a \x01(\tR\x0fhasAgentReplied\x12.\n" +
 	"\x13last_replied_agents\x18\x1b \x03(\tR\x11lastRepliedAgents\x127\n" +
-	"\x18prefer_most_recent_agent\x18\x1d \x01(\bR\x15preferMostRecentAgent\x12'\n" +
+	"\x18prefer_most_recent_agent\x18\x1d \x01(\bR\x15preferMostRecentAgent\x12*\n" +
+	"\x11prefer_lead_owner\x18  \x01(\bR\x0fpreferLeadOwner\x12'\n" +
 	"\x0ffallback_agents\x18\x17 \x03(\tR\x0efallbackAgents\x12\f\n" +
 	"\x01v\x18\x16 \x01(\x03R\x01v\x12\x1e\n" +
 	"\n" +
@@ -86595,7 +86597,7 @@ const file_header_proto_rawDesc = "" +
 	"\afanpage\x18\x0f \x01(\tR\afanpage\x12\x12\n" +
 	"\x04zalo\x18\x10 \x01(\tR\x04zalo\x12\x18\n" +
 	"\ahotline\x18\x11 \x01(\tR\ahotline\x12\x18\n" +
-	"\aaddress\x18\x13 \x01(\tR\aaddress\"\xba\x14\n" +
+	"\aaddress\x18\x13 \x01(\tR\aaddress\"\x80\x14\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -86636,8 +86638,7 @@ const file_header_proto_rawDesc = "" +
 	"\tfunctions\x18% \x03(\v2\x12.header.AIFunctionR\tfunctions\x124\n" +
 	"\rerror_message\x18( \x01(\v2\x0f.header.MessageR\ferrorMessage\x12\x1a\n" +
 	"\bmodified\x18) \x01(\x03R\bmodified\x12\x18\n" +
-	"\aversion\x18* \x01(\x03R\aversion\x128\n" +
-	"\x18generated_refuse_message\x18. \x01(\tR\x16generatedRefuseMessage\x12%\n" +
+	"\aversion\x18* \x01(\x03R\aversion\x12%\n" +
 	"\x0eactive_version\x18- \x01(\x03R\ractiveVersion\x122\n" +
 	"\n" +
 	"data_store\x18/ \x01(\v2\x13.header.AIDataStoreR\tdataStore\x12<\n" +

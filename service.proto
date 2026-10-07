@@ -557,6 +557,13 @@ service ConversationMgr {
 	rpc ForceVerifyWebsite(header.Id) returns (Response);
 
 	rpc ListUserTags(header.Id) returns (Response);
+
+	rpc ReadSLAPolicy(header.Id) returns (Response);
+	rpc CreateSLAPolicy(header.SLAPolicy) returns (Response);
+	rpc UpdateSLAPolicy(header.SLAPolicy) returns (Response);
+	rpc DeleteSLAPolicy(Id) returns (Empty);
+	rpc MatchSLAPolicies(Ids) returns (Response);
+	rpc ListSLAPolicies(Ids) returns (Response);
 }
 
 service RecordMgr {
