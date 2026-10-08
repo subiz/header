@@ -765,6 +765,8 @@ message Data {
 
 	SenAgent sen_agent = 152;
 	SLAEvent sla_event = 153;
+
+	SLAPolicy conversation_sla_policy = 154;
 }
 
 message ConversationMeta {
@@ -8587,6 +8589,7 @@ message SLAPolicy {
 
 	// Maximum time the request can remain in the matched stage/state.
 	// 0 = not enforced.
+	// do not use for record_type=conversation
 	int64 max_duration_sec = 38;
 	int64 rank = 39;
 
@@ -11021,29 +11024,6 @@ message EventAggregate {
 	string op = 5;
 	string value = 6; // json.stringified
 }
-
-/*
-message CompletionInput {
-	string prompt_cache_key = 3;
-	string prompt_cache_retention = 4;
-	string verbosity = 5;
-	repeated string stop = 6;
-	string model = 7;
-	bool no_log = 8;
-	string instruct = 9;
-	repeated LLMChatHistoryEntry messages = 10;
-	int64 max_completion_tokens = 11;
-	LLMResponseJSONSchemaFormat response_format = 12;
-	string ToolChoice           string                        `json:"tool_choice,omitempty"`
-	// Reasoning            *CompletionReasoning          `json:"reasoning,omitempty"`
-	string reasoning_effort = 14;
-	float temperature          float32                       `json:"temperature,omitempty"`
-	float top_p                 float32                       `json:"top_p,omitempty"`
-	tools                []OpenAITool                  `json:"tools,omitempty"`
-	string service_tier
-	bool stop_after_tool_called
-}
-*/
 
 message FacebookCall {
 	//{
