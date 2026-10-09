@@ -394,10 +394,10 @@ enum RealtimeType {
 	sen_agent_updated = 523;
 	sen_agent_deleted = 524;
 
-	sla_breached = 530; // sla_event
-	sla_cleared = 531; // sla_event
-
-
+	sla_breached = 530;  // SLA đã quá thời hạn cho phép
+	sla_cleared = 531;   // SLA từng bị breach và điều kiện vi phạm đã được xử lý
+	sla_cancelled = 532; // SLA ngừng áp dụng trước khi hoàn tất
+	sla_started = 533;   // SLA bắt đầu được áp dụng và tính thời gian
 }
 
 message TextTransform {

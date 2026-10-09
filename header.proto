@@ -1356,11 +1356,42 @@ message Conversation {
 	int64 next_response_due_at = 104;
 	int64 sla_due_at = 105;       // computed deadline SLA gần nhất
 	int64 sla_breach_count = 106; // read-only
-	int64 next_response_sla_breached_at = 107;
+	int64 next_response_sla_breached = 107;
 	int64 first_response_sla_breached = 108;
 
 	string assignee = 109;
 	string assigned_team_id = 110;
+
+	ConversationAnalysis analysis = 111;
+}
+
+message ConversationAnalysis {
+	repeated CustomerNeed needs = 10;
+
+	int64 updated = 12; // millisecond
+	string analyzed_until_event_id = 13;
+}
+
+message CustomerNeed {
+	string id = 5;
+
+	// Khách muốn gì?
+	string description = 6;
+	string intent = 7; // ask_price, check_stock, buy, complaint...
+
+	// Đã xử lý chưa?
+	string status = 8; // open, in_progress, waiting_customer, resolved, unresolved
+	string resolution = 9; // Kết quả xử lý hoặc lý do chưa xử lý được
+	// string resolved_by = 6;
+	// int64 resolved_at = 7;
+
+	// Cần làm gì tiếp?
+	// NextAction next_action = 8;
+
+	// AI analysis metadata
+	// repeated string evidence_event_ids = 9;
+	// float confidence = 10;
+	// int64 updated_at = 11;
 }
 
 message SLAEvent {

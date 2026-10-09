@@ -564,6 +564,8 @@ service ConversationMgr {
 	rpc DeleteSLAPolicy(Id) returns (Empty);
 	rpc MatchSLAPolicies(Ids) returns (Response);
 	rpc ListSLAPolicies(Ids) returns (Response);
+	rpc ClearSLA(Id) returns (Response);
+	rpc ApplySLA(Id) returns (Response);
 }
 
 service RecordMgr {
