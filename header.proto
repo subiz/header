@@ -1373,14 +1373,14 @@ message ConversationAnalysis {
 }
 
 message CustomerNeed {
-	string id = 5;
+	// string id = 5;
 
 	// Khách muốn gì?
 	string description = 6;
 	string intent = 7; // ask_price, check_stock, buy, complaint...
 
 	// Đã xử lý chưa?
-	string status = 8; // open, in_progress, waiting_customer, resolved, unresolved
+	string status = 8; // open, resolved
 	string resolution = 9; // Kết quả xử lý hoặc lý do chưa xử lý được
 	// string resolved_by = 6;
 	// int64 resolved_at = 7;
@@ -6825,12 +6825,13 @@ message WorkflowAction {
 
 	string scope = 7; // computed
 	bool is_async = 8; // just go, dont care about revalid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope, terminate_bot, update_user_segments
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope, terminate_bot, update_user_segments, invite_agent
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
 	ActionAskQuestion ask_question = 18;
-	AssignRequest assign = 19;
+	AssignRequest assign = 19; // add agents and change convo.assignee
+	AssignRequest invite_agent = 20; // only add agents
 
 	ActionUpdateConversation update_conversation = 21;
 	ActionUpdateUser update_user = 31;
