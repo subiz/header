@@ -14,6 +14,15 @@ service GooglekonService {
 	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message
 }
 
+service CdnMgr {
+	rpc CreateUpload(CreateUploadRequest) returns (CreateUploadResponse);
+	rpc FinishUpload(Id) returns (Response);
+	rpc GetFile(Id) returns (Response);
+
+	// 	response.files
+	rpc BatchCreateReadURLs(BatchCreateReadURLsRequest) returns (Response);
+}
+
 service YoutubikonService {
 	rpc SendEventToYoutube(header.Events) returns (header.Empty);
 	rpc TestAIReply(TestAIReplyRequest) returns (Response); // .message

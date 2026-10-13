@@ -162,6 +162,224 @@ var GooglekonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	CdnMgr_CreateUpload_FullMethodName        = "/header.CdnMgr/CreateUpload"
+	CdnMgr_FinishUpload_FullMethodName        = "/header.CdnMgr/FinishUpload"
+	CdnMgr_GetFile_FullMethodName             = "/header.CdnMgr/GetFile"
+	CdnMgr_BatchCreateReadURLs_FullMethodName = "/header.CdnMgr/BatchCreateReadURLs"
+)
+
+// CdnMgrClient is the client API for CdnMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CdnMgrClient interface {
+	CreateUpload(ctx context.Context, in *CreateUploadRequest, opts ...grpc.CallOption) (*CreateUploadResponse, error)
+	FinishUpload(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GetFile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// response.files
+	BatchCreateReadURLs(ctx context.Context, in *BatchCreateReadURLsRequest, opts ...grpc.CallOption) (*Response, error)
+}
+
+type cdnMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCdnMgrClient(cc grpc.ClientConnInterface) CdnMgrClient {
+	return &cdnMgrClient{cc}
+}
+
+func (c *cdnMgrClient) CreateUpload(ctx context.Context, in *CreateUploadRequest, opts ...grpc.CallOption) (*CreateUploadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUploadResponse)
+	err := c.cc.Invoke(ctx, CdnMgr_CreateUpload_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cdnMgrClient) FinishUpload(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CdnMgr_FinishUpload_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cdnMgrClient) GetFile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CdnMgr_GetFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cdnMgrClient) BatchCreateReadURLs(ctx context.Context, in *BatchCreateReadURLsRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CdnMgr_BatchCreateReadURLs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CdnMgrServer is the server API for CdnMgr service.
+// All implementations must embed UnimplementedCdnMgrServer
+// for forward compatibility.
+type CdnMgrServer interface {
+	CreateUpload(context.Context, *CreateUploadRequest) (*CreateUploadResponse, error)
+	FinishUpload(context.Context, *Id) (*Response, error)
+	GetFile(context.Context, *Id) (*Response, error)
+	// response.files
+	BatchCreateReadURLs(context.Context, *BatchCreateReadURLsRequest) (*Response, error)
+	mustEmbedUnimplementedCdnMgrServer()
+}
+
+// UnimplementedCdnMgrServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedCdnMgrServer struct{}
+
+func (UnimplementedCdnMgrServer) CreateUpload(context.Context, *CreateUploadRequest) (*CreateUploadResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateUpload not implemented")
+}
+func (UnimplementedCdnMgrServer) FinishUpload(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method FinishUpload not implemented")
+}
+func (UnimplementedCdnMgrServer) GetFile(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFile not implemented")
+}
+func (UnimplementedCdnMgrServer) BatchCreateReadURLs(context.Context, *BatchCreateReadURLsRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchCreateReadURLs not implemented")
+}
+func (UnimplementedCdnMgrServer) mustEmbedUnimplementedCdnMgrServer() {}
+func (UnimplementedCdnMgrServer) testEmbeddedByValue()                {}
+
+// UnsafeCdnMgrServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CdnMgrServer will
+// result in compilation errors.
+type UnsafeCdnMgrServer interface {
+	mustEmbedUnimplementedCdnMgrServer()
+}
+
+func RegisterCdnMgrServer(s grpc.ServiceRegistrar, srv CdnMgrServer) {
+	// If the following call panics, it indicates UnimplementedCdnMgrServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&CdnMgr_ServiceDesc, srv)
+}
+
+func _CdnMgr_CreateUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUploadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CdnMgrServer).CreateUpload(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CdnMgr_CreateUpload_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CdnMgrServer).CreateUpload(ctx, req.(*CreateUploadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CdnMgr_FinishUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CdnMgrServer).FinishUpload(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CdnMgr_FinishUpload_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CdnMgrServer).FinishUpload(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CdnMgr_GetFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CdnMgrServer).GetFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CdnMgr_GetFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CdnMgrServer).GetFile(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CdnMgr_BatchCreateReadURLs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchCreateReadURLsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CdnMgrServer).BatchCreateReadURLs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CdnMgr_BatchCreateReadURLs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CdnMgrServer).BatchCreateReadURLs(ctx, req.(*BatchCreateReadURLsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CdnMgr_ServiceDesc is the grpc.ServiceDesc for CdnMgr service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CdnMgr_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.CdnMgr",
+	HandlerType: (*CdnMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateUpload",
+			Handler:    _CdnMgr_CreateUpload_Handler,
+		},
+		{
+			MethodName: "FinishUpload",
+			Handler:    _CdnMgr_FinishUpload_Handler,
+		},
+		{
+			MethodName: "GetFile",
+			Handler:    _CdnMgr_GetFile_Handler,
+		},
+		{
+			MethodName: "BatchCreateReadURLs",
+			Handler:    _CdnMgr_BatchCreateReadURLs_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	YoutubikonService_SendEventToYoutube_FullMethodName  = "/header.YoutubikonService/SendEventToYoutube"
 	YoutubikonService_TestAIReply_FullMethodName         = "/header.YoutubikonService/TestAIReply"
 	YoutubikonService_ListYoutubeVideos_FullMethodName   = "/header.YoutubikonService/ListYoutubeVideos"

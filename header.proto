@@ -11254,3 +11254,16 @@ message RuleAICondition {
 	string min_confidence = 4; // low, medium, high (default), certain; distinct from value
 	string prompt = 5; // only used when signal is custom
 }
+
+message CreateUploadResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string upload_id = 4;
+	string fid = 5;
+
+	string upload_url = 6;
+	map<string, string> required_headers = 7;
+	int64 upload_expires_at = 8;
+	Error error = 10;
+}

@@ -1150,3 +1150,67 @@ message PayRequest {
 	account.Subscription subscription = 22; // for purchasing new
 	account.Invoice invoice = 23; // for marketing and novat only
 }
+
+message CreateUploadRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string scope = 3;
+	string sha256 = 4; // SHA-256 nội dung, 64 ký tự hex thường.
+	string name = 5;
+	string content_type = 6;
+	int64 size = 7; // Byte, tối đa 25 MB.
+	int64 ttl_seconds = 8; // 0: không tự hết hạn; âm: không hợp lệ.
+
+	string content_disposition = 10;
+	string description = 11;
+	string category = 12;
+
+	// Retry cùng key và cùng input trả lại cùng phiên upload.
+	string idempotency_key = 13;
+}
+
+message CreateReadURLItem {
+	// Duy nhất trong batch, dùng đối chiếu kết quả.
+	string request_id = 5;
+	string fid = 6;
+
+	// Pixel. 0 nghĩa là không giới hạn chiều tương ứng.
+	// Nếu yêu cầu resize, ít nhất một chiều phải lớn hơn 0.
+	uint32 image_max_width = 7;
+	uint32 image_max_height = 8;
+
+	// Ngữ cảnh nguồn, bắt buộc với attachment hội thoại.
+	string conversation_id = 20;
+	string message_id = 21;
+}
+
+message BatchCreateReadURLsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated CreateReadURLItem items = 3;
+
+	// 0: dùng mặc định 1800 giây.
+	// CDN áp trần cấu hình và giới hạn theo TTL file.
+	int64 expires_in_seconds = 5;
+}
+
+message ReadFileRequest {
+	// Context nội bộ API → CDN.
+	// Người dùng đọc bằng signed URL không cần credential đăng nhập.
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// Path và query nguyên bản từ URL client yêu cầu.
+	// Ví dụ:
+	// /file/ac01/attachment_<hash>?expires=...&signature=...
+	// CDN tự parse và xác minh chữ ký, account, fid, resize.
+	string request_target = 5;
+
+	string method = 6; // none | get | head
+
+	// Header đọc có hỗ trợ, API chuyển tiếp nếu client gửi.
+	string range = 4;
+	string if_none_match = 7;
+	string if_modified_since = 8;
+	string if_range = 9;
+}

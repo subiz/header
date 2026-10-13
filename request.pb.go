@@ -9221,6 +9221,404 @@ func (x *PayRequest) GetInvoice() *account.Invoice {
 	return nil
 }
 
+type CreateUploadRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId          string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Scope              string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
+	Sha256             string                 `protobuf:"bytes,4,opt,name=sha256,proto3" json:"sha256,omitempty"` // SHA-256 nội dung, 64 ký tự hex thường.
+	Name               string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	ContentType        string                 `protobuf:"bytes,6,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	Size               int64                  `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`                               // Byte, tối đa 25 MB.
+	TtlSeconds         int64                  `protobuf:"varint,8,opt,name=ttl_seconds,json=ttlSeconds,proto3" json:"ttl_seconds,omitempty"` // 0: không tự hết hạn; âm: không hợp lệ.
+	ContentDisposition string                 `protobuf:"bytes,10,opt,name=content_disposition,json=contentDisposition,proto3" json:"content_disposition,omitempty"`
+	Description        string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
+	Category           string                 `protobuf:"bytes,12,opt,name=category,proto3" json:"category,omitempty"`
+	// Retry cùng key và cùng input trả lại cùng phiên upload.
+	IdempotencyKey string `protobuf:"bytes,13,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateUploadRequest) Reset() {
+	*x = CreateUploadRequest{}
+	mi := &file_request_proto_msgTypes[84]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUploadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUploadRequest) ProtoMessage() {}
+
+func (x *CreateUploadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[84]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUploadRequest.ProtoReflect.Descriptor instead.
+func (*CreateUploadRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{84}
+}
+
+func (x *CreateUploadRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *CreateUploadRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetSha256() string {
+	if x != nil {
+		return x.Sha256
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *CreateUploadRequest) GetTtlSeconds() int64 {
+	if x != nil {
+		return x.TtlSeconds
+	}
+	return 0
+}
+
+func (x *CreateUploadRequest) GetContentDisposition() string {
+	if x != nil {
+		return x.ContentDisposition
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *CreateUploadRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
+type CreateReadURLItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Duy nhất trong batch, dùng đối chiếu kết quả.
+	RequestId string `protobuf:"bytes,5,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Fid       string `protobuf:"bytes,6,opt,name=fid,proto3" json:"fid,omitempty"`
+	// Pixel. 0 nghĩa là không giới hạn chiều tương ứng.
+	// Nếu yêu cầu resize, ít nhất một chiều phải lớn hơn 0.
+	ImageMaxWidth  uint32 `protobuf:"varint,7,opt,name=image_max_width,json=imageMaxWidth,proto3" json:"image_max_width,omitempty"`
+	ImageMaxHeight uint32 `protobuf:"varint,8,opt,name=image_max_height,json=imageMaxHeight,proto3" json:"image_max_height,omitempty"`
+	// Ngữ cảnh nguồn, bắt buộc với attachment hội thoại.
+	ConversationId string `protobuf:"bytes,20,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	MessageId      string `protobuf:"bytes,21,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateReadURLItem) Reset() {
+	*x = CreateReadURLItem{}
+	mi := &file_request_proto_msgTypes[85]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateReadURLItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateReadURLItem) ProtoMessage() {}
+
+func (x *CreateReadURLItem) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[85]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateReadURLItem.ProtoReflect.Descriptor instead.
+func (*CreateReadURLItem) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{85}
+}
+
+func (x *CreateReadURLItem) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+func (x *CreateReadURLItem) GetFid() string {
+	if x != nil {
+		return x.Fid
+	}
+	return ""
+}
+
+func (x *CreateReadURLItem) GetImageMaxWidth() uint32 {
+	if x != nil {
+		return x.ImageMaxWidth
+	}
+	return 0
+}
+
+func (x *CreateReadURLItem) GetImageMaxHeight() uint32 {
+	if x != nil {
+		return x.ImageMaxHeight
+	}
+	return 0
+}
+
+func (x *CreateReadURLItem) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *CreateReadURLItem) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
+type BatchCreateReadURLsRequest struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Items     []*CreateReadURLItem   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	// 0: dùng mặc định 1800 giây.
+	// CDN áp trần cấu hình và giới hạn theo TTL file.
+	ExpiresInSeconds int64 `protobuf:"varint,5,opt,name=expires_in_seconds,json=expiresInSeconds,proto3" json:"expires_in_seconds,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *BatchCreateReadURLsRequest) Reset() {
+	*x = BatchCreateReadURLsRequest{}
+	mi := &file_request_proto_msgTypes[86]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateReadURLsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateReadURLsRequest) ProtoMessage() {}
+
+func (x *BatchCreateReadURLsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[86]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateReadURLsRequest.ProtoReflect.Descriptor instead.
+func (*BatchCreateReadURLsRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{86}
+}
+
+func (x *BatchCreateReadURLsRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *BatchCreateReadURLsRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *BatchCreateReadURLsRequest) GetItems() []*CreateReadURLItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *BatchCreateReadURLsRequest) GetExpiresInSeconds() int64 {
+	if x != nil {
+		return x.ExpiresInSeconds
+	}
+	return 0
+}
+
+type ReadFileRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Context nội bộ API → CDN.
+	// Người dùng đọc bằng signed URL không cần credential đăng nhập.
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// Path và query nguyên bản từ URL client yêu cầu.
+	// Ví dụ:
+	// /file/ac01/attachment_<hash>?expires=...&signature=...
+	// CDN tự parse và xác minh chữ ký, account, fid, resize.
+	RequestTarget string `protobuf:"bytes,5,opt,name=request_target,json=requestTarget,proto3" json:"request_target,omitempty"`
+	Method        string `protobuf:"bytes,6,opt,name=method,proto3" json:"method,omitempty"` // none | get | head
+	// Header đọc có hỗ trợ, API chuyển tiếp nếu client gửi.
+	Range           string `protobuf:"bytes,4,opt,name=range,proto3" json:"range,omitempty"`
+	IfNoneMatch     string `protobuf:"bytes,7,opt,name=if_none_match,json=ifNoneMatch,proto3" json:"if_none_match,omitempty"`
+	IfModifiedSince string `protobuf:"bytes,8,opt,name=if_modified_since,json=ifModifiedSince,proto3" json:"if_modified_since,omitempty"`
+	IfRange         string `protobuf:"bytes,9,opt,name=if_range,json=ifRange,proto3" json:"if_range,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ReadFileRequest) Reset() {
+	*x = ReadFileRequest{}
+	mi := &file_request_proto_msgTypes[87]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReadFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadFileRequest) ProtoMessage() {}
+
+func (x *ReadFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[87]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadFileRequest.ProtoReflect.Descriptor instead.
+func (*ReadFileRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{87}
+}
+
+func (x *ReadFileRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ReadFileRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ReadFileRequest) GetRequestTarget() string {
+	if x != nil {
+		return x.RequestTarget
+	}
+	return ""
+}
+
+func (x *ReadFileRequest) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *ReadFileRequest) GetRange() string {
+	if x != nil {
+		return x.Range
+	}
+	return ""
+}
+
+func (x *ReadFileRequest) GetIfNoneMatch() string {
+	if x != nil {
+		return x.IfNoneMatch
+	}
+	return ""
+}
+
+func (x *ReadFileRequest) GetIfModifiedSince() string {
+	if x != nil {
+		return x.IfModifiedSince
+	}
+	return ""
+}
+
+func (x *ReadFileRequest) GetIfRange() string {
+	if x != nil {
+		return x.IfRange
+	}
+	return ""
+}
+
 var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
@@ -10263,7 +10661,48 @@ const file_request_proto_rawDesc = "" +
 	"\x0epayment_method\x18\x12 \x01(\tR\rpaymentMethod\x12%\n" +
 	"\x0epromotion_code\x18\x15 \x01(\tR\rpromotionCode\x129\n" +
 	"\fsubscription\x18\x16 \x01(\v2\x15.account.SubscriptionR\fsubscription\x12*\n" +
-	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoiceB\x19Z\x17github.com/subiz/headerb\x06proto3"
+	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoice\"\x89\x03\n" +
+	"\x13CreateUploadRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x14\n" +
+	"\x05scope\x18\x03 \x01(\tR\x05scope\x12\x16\n" +
+	"\x06sha256\x18\x04 \x01(\tR\x06sha256\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12!\n" +
+	"\fcontent_type\x18\x06 \x01(\tR\vcontentType\x12\x12\n" +
+	"\x04size\x18\a \x01(\x03R\x04size\x12\x1f\n" +
+	"\vttl_seconds\x18\b \x01(\x03R\n" +
+	"ttlSeconds\x12/\n" +
+	"\x13content_disposition\x18\n" +
+	" \x01(\tR\x12contentDisposition\x12 \n" +
+	"\vdescription\x18\v \x01(\tR\vdescription\x12\x1a\n" +
+	"\bcategory\x18\f \x01(\tR\bcategory\x12'\n" +
+	"\x0fidempotency_key\x18\r \x01(\tR\x0eidempotencyKey\"\xde\x01\n" +
+	"\x11CreateReadURLItem\x12\x1d\n" +
+	"\n" +
+	"request_id\x18\x05 \x01(\tR\trequestId\x12\x10\n" +
+	"\x03fid\x18\x06 \x01(\tR\x03fid\x12&\n" +
+	"\x0fimage_max_width\x18\a \x01(\rR\rimageMaxWidth\x12(\n" +
+	"\x10image_max_height\x18\b \x01(\rR\x0eimageMaxHeight\x12'\n" +
+	"\x0fconversation_id\x18\x14 \x01(\tR\x0econversationId\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x15 \x01(\tR\tmessageId\"\xbd\x01\n" +
+	"\x1aBatchCreateReadURLsRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12/\n" +
+	"\x05items\x18\x03 \x03(\v2\x19.header.CreateReadURLItemR\x05items\x12,\n" +
+	"\x12expires_in_seconds\x18\x05 \x01(\x03R\x10expiresInSeconds\"\x93\x02\n" +
+	"\x0fReadFileRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12%\n" +
+	"\x0erequest_target\x18\x05 \x01(\tR\rrequestTarget\x12\x16\n" +
+	"\x06method\x18\x06 \x01(\tR\x06method\x12\x14\n" +
+	"\x05range\x18\x04 \x01(\tR\x05range\x12\"\n" +
+	"\rif_none_match\x18\a \x01(\tR\vifNoneMatch\x12*\n" +
+	"\x11if_modified_since\x18\b \x01(\tR\x0fifModifiedSince\x12\x19\n" +
+	"\bif_range\x18\t \x01(\tR\aifRangeB\x19Z\x17github.com/subiz/headerb\x06proto3"
 
 var (
 	file_request_proto_rawDescOnce sync.Once
@@ -10278,7 +10717,7 @@ func file_request_proto_rawDescGZIP() []byte {
 }
 
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 84)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 88)
 var file_request_proto_goTypes = []any{
 	(ReportCampaignRequest_Range)(0),      // 0: header.ReportCampaignRequest.Range
 	(ReportWebPluginRequest_Range)(0),     // 1: header.ReportWebPluginRequest.Range
@@ -10367,103 +10806,111 @@ var file_request_proto_goTypes = []any{
 	(*AutoPayRequest)(nil),                // 84: header.AutoPayRequest
 	(*CollectionDocumentsRequest)(nil),    // 85: header.CollectionDocumentsRequest
 	(*PayRequest)(nil),                    // 86: header.PayRequest
-	(*common.Context)(nil),                // 87: common.Context
-	(*account.BusinessHours)(nil),         // 88: account.BusinessHours
-	(*account.Subscription)(nil),          // 89: account.Subscription
-	(*account.Invoice)(nil),               // 90: account.Invoice
+	(*CreateUploadRequest)(nil),           // 87: header.CreateUploadRequest
+	(*CreateReadURLItem)(nil),             // 88: header.CreateReadURLItem
+	(*BatchCreateReadURLsRequest)(nil),    // 89: header.BatchCreateReadURLsRequest
+	(*ReadFileRequest)(nil),               // 90: header.ReadFileRequest
+	(*common.Context)(nil),                // 91: common.Context
+	(*account.BusinessHours)(nil),         // 92: account.BusinessHours
+	(*account.Subscription)(nil),          // 93: account.Subscription
+	(*account.Invoice)(nil),               // 94: account.Invoice
 }
 var file_request_proto_depIdxs = []int32{
-	87, // 0: header.TagRequest.ctx:type_name -> common.Context
-	87, // 1: header.UserReportRequest.ctx:type_name -> common.Context
-	88, // 2: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
-	88, // 3: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	88, // 4: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
-	88, // 5: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	88, // 6: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
-	88, // 7: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	87, // 8: header.ListUserEventsRequest.ctx:type_name -> common.Context
-	87, // 9: header.ListEventTypeRequest.ctx:type_name -> common.Context
-	87, // 10: header.PresencesRequest.ctx:type_name -> common.Context
-	87, // 11: header.ListNotiRequest.ctx:type_name -> common.Context
-	87, // 12: header.UserRequest.ctx:type_name -> common.Context
-	87, // 13: header.ListNotesRequest.ctx:type_name -> common.Context
-	87, // 14: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
-	87, // 15: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
-	87, // 16: header.BotsRequest.ctx:type_name -> common.Context
-	87, // 17: header.ListAIAgentMessageRequest.ctx:type_name -> common.Context
-	87, // 18: header.ReportConvoMessageRequest.ctx:type_name -> common.Context
-	87, // 19: header.ReportAIAgentRequest.ctx:type_name -> common.Context
-	87, // 20: header.ConversionRequest.ctx:type_name -> common.Context
-	87, // 21: header.ReportCampaignRequest.ctx:type_name -> common.Context
-	87, // 22: header.ReportWebPluginRequest.ctx:type_name -> common.Context
-	87, // 23: header.WebPluginConversionRequest.ctx:type_name -> common.Context
-	87, // 24: header.SearchLocationsRequest.ctx:type_name -> common.Context
-	87, // 25: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
-	87, // 26: header.DeliveryRequest.ctx:type_name -> common.Context
-	87, // 27: header.SearchRequest.ctx:type_name -> common.Context
-	87, // 28: header.AvailibilityReportRequest.ctx:type_name -> common.Context
-	87, // 29: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
-	88, // 30: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
-	88, // 31: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	87, // 32: header.OrdersRequest.ctx:type_name -> common.Context
-	87, // 33: header.CountOrdersRequest.ctx:type_name -> common.Context
+	91, // 0: header.TagRequest.ctx:type_name -> common.Context
+	91, // 1: header.UserReportRequest.ctx:type_name -> common.Context
+	92, // 2: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
+	92, // 3: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	92, // 4: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
+	92, // 5: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	92, // 6: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
+	92, // 7: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	91, // 8: header.ListUserEventsRequest.ctx:type_name -> common.Context
+	91, // 9: header.ListEventTypeRequest.ctx:type_name -> common.Context
+	91, // 10: header.PresencesRequest.ctx:type_name -> common.Context
+	91, // 11: header.ListNotiRequest.ctx:type_name -> common.Context
+	91, // 12: header.UserRequest.ctx:type_name -> common.Context
+	91, // 13: header.ListNotesRequest.ctx:type_name -> common.Context
+	91, // 14: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
+	91, // 15: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
+	91, // 16: header.BotsRequest.ctx:type_name -> common.Context
+	91, // 17: header.ListAIAgentMessageRequest.ctx:type_name -> common.Context
+	91, // 18: header.ReportConvoMessageRequest.ctx:type_name -> common.Context
+	91, // 19: header.ReportAIAgentRequest.ctx:type_name -> common.Context
+	91, // 20: header.ConversionRequest.ctx:type_name -> common.Context
+	91, // 21: header.ReportCampaignRequest.ctx:type_name -> common.Context
+	91, // 22: header.ReportWebPluginRequest.ctx:type_name -> common.Context
+	91, // 23: header.WebPluginConversionRequest.ctx:type_name -> common.Context
+	91, // 24: header.SearchLocationsRequest.ctx:type_name -> common.Context
+	91, // 25: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
+	91, // 26: header.DeliveryRequest.ctx:type_name -> common.Context
+	91, // 27: header.SearchRequest.ctx:type_name -> common.Context
+	91, // 28: header.AvailibilityReportRequest.ctx:type_name -> common.Context
+	91, // 29: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
+	92, // 30: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
+	92, // 31: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	91, // 32: header.OrdersRequest.ctx:type_name -> common.Context
+	91, // 33: header.CountOrdersRequest.ctx:type_name -> common.Context
 	35, // 34: header.CountOrdersRequest.queries:type_name -> header.OrdersRequest
-	87, // 35: header.WorkflowReportRequest.ctx:type_name -> common.Context
-	87, // 36: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
-	87, // 37: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
-	87, // 38: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
-	87, // 39: header.TasksRequest.ctx:type_name -> common.Context
-	87, // 40: header.DocIndexRequest.ctx:type_name -> common.Context
-	87, // 41: header.DocSearchRequest.ctx:type_name -> common.Context
-	87, // 42: header.CreateAgentRequest.ctx:type_name -> common.Context
-	87, // 43: header.ListConversationsRequest.ctx:type_name -> common.Context
-	87, // 44: header.ListConversationEventsRequest.ctx:type_name -> common.Context
-	87, // 45: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
-	87, // 46: header.ListArticleRequest.ctx:type_name -> common.Context
-	87, // 47: header.SearchArticleRequest.ctx:type_name -> common.Context
-	87, // 48: header.RedeemRequest.ctx:type_name -> common.Context
-	87, // 49: header.ListVersions.ctx:type_name -> common.Context
-	87, // 50: header.ReportCountRequest.ctx:type_name -> common.Context
-	87, // 51: header.CounterReportRequest.ctx:type_name -> common.Context
-	87, // 52: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
-	87, // 53: header.CreateAccountRequest.ctx:type_name -> common.Context
-	87, // 54: header.NewPassword.ctx:type_name -> common.Context
-	87, // 55: header.CrawlUrlRequest.ctx:type_name -> common.Context
-	87, // 56: header.ListAIDataEntryRequest.ctx:type_name -> common.Context
-	87, // 57: header.CampaignSendLogRequest.ctx:type_name -> common.Context
-	87, // 58: header.AiQnaSuggestionRequest.ctx:type_name -> common.Context
-	87, // 59: header.AiResponseSourceRequest.ctx:type_name -> common.Context
-	87, // 60: header.FacebookPostRequest.ctx:type_name -> common.Context
-	87, // 61: header.TiktokVideoRequest.ctx:type_name -> common.Context
-	87, // 62: header.YoutubeVideoRequest.ctx:type_name -> common.Context
-	87, // 63: header.ListRuleRequest.ctx:type_name -> common.Context
-	87, // 64: header.ListZNSTemplateRequest.ctx:type_name -> common.Context
-	87, // 65: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
-	87, // 66: header.CreditSpendReportRequest.ctx:type_name -> common.Context
-	87, // 67: header.CreditSpendLogRequest.ctx:type_name -> common.Context
-	87, // 68: header.LLMSpansRequest2.ctx:type_name -> common.Context
-	87, // 69: header.AIAgentTraceRequest.ctx:type_name -> common.Context
-	87, // 70: header.LLMTracesRequest.ctx:type_name -> common.Context
-	87, // 71: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context
-	87, // 72: header.ListAgentOnlineRequest.ctx:type_name -> common.Context
-	87, // 73: header.GenerateFormTokenRequest.ctx:type_name -> common.Context
-	87, // 74: header.ConvertProductRequest.ctx:type_name -> common.Context
-	87, // 75: header.FilterProductRequest.ctx:type_name -> common.Context
-	87, // 76: header.SegmentUsersRequest.ctx:type_name -> common.Context
-	87, // 77: header.UserSegmentSyncStatusCheck.ctx:type_name -> common.Context
-	87, // 78: header.ListPageSettingRequest.ctx:type_name -> common.Context
-	87, // 79: header.AIAgentDataEntryRequest.ctx:type_name -> common.Context
-	87, // 80: header.WidgetSettingRequest.ctx:type_name -> common.Context
-	87, // 81: header.AutoPayRequest.ctx:type_name -> common.Context
-	87, // 82: header.CollectionDocumentsRequest.ctx:type_name -> common.Context
-	87, // 83: header.PayRequest.ctx:type_name -> common.Context
-	89, // 84: header.PayRequest.subscription:type_name -> account.Subscription
-	90, // 85: header.PayRequest.invoice:type_name -> account.Invoice
-	86, // [86:86] is the sub-list for method output_type
-	86, // [86:86] is the sub-list for method input_type
-	86, // [86:86] is the sub-list for extension type_name
-	86, // [86:86] is the sub-list for extension extendee
-	0,  // [0:86] is the sub-list for field type_name
+	91, // 35: header.WorkflowReportRequest.ctx:type_name -> common.Context
+	91, // 36: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
+	91, // 37: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
+	91, // 38: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
+	91, // 39: header.TasksRequest.ctx:type_name -> common.Context
+	91, // 40: header.DocIndexRequest.ctx:type_name -> common.Context
+	91, // 41: header.DocSearchRequest.ctx:type_name -> common.Context
+	91, // 42: header.CreateAgentRequest.ctx:type_name -> common.Context
+	91, // 43: header.ListConversationsRequest.ctx:type_name -> common.Context
+	91, // 44: header.ListConversationEventsRequest.ctx:type_name -> common.Context
+	91, // 45: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
+	91, // 46: header.ListArticleRequest.ctx:type_name -> common.Context
+	91, // 47: header.SearchArticleRequest.ctx:type_name -> common.Context
+	91, // 48: header.RedeemRequest.ctx:type_name -> common.Context
+	91, // 49: header.ListVersions.ctx:type_name -> common.Context
+	91, // 50: header.ReportCountRequest.ctx:type_name -> common.Context
+	91, // 51: header.CounterReportRequest.ctx:type_name -> common.Context
+	91, // 52: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
+	91, // 53: header.CreateAccountRequest.ctx:type_name -> common.Context
+	91, // 54: header.NewPassword.ctx:type_name -> common.Context
+	91, // 55: header.CrawlUrlRequest.ctx:type_name -> common.Context
+	91, // 56: header.ListAIDataEntryRequest.ctx:type_name -> common.Context
+	91, // 57: header.CampaignSendLogRequest.ctx:type_name -> common.Context
+	91, // 58: header.AiQnaSuggestionRequest.ctx:type_name -> common.Context
+	91, // 59: header.AiResponseSourceRequest.ctx:type_name -> common.Context
+	91, // 60: header.FacebookPostRequest.ctx:type_name -> common.Context
+	91, // 61: header.TiktokVideoRequest.ctx:type_name -> common.Context
+	91, // 62: header.YoutubeVideoRequest.ctx:type_name -> common.Context
+	91, // 63: header.ListRuleRequest.ctx:type_name -> common.Context
+	91, // 64: header.ListZNSTemplateRequest.ctx:type_name -> common.Context
+	91, // 65: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
+	91, // 66: header.CreditSpendReportRequest.ctx:type_name -> common.Context
+	91, // 67: header.CreditSpendLogRequest.ctx:type_name -> common.Context
+	91, // 68: header.LLMSpansRequest2.ctx:type_name -> common.Context
+	91, // 69: header.AIAgentTraceRequest.ctx:type_name -> common.Context
+	91, // 70: header.LLMTracesRequest.ctx:type_name -> common.Context
+	91, // 71: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context
+	91, // 72: header.ListAgentOnlineRequest.ctx:type_name -> common.Context
+	91, // 73: header.GenerateFormTokenRequest.ctx:type_name -> common.Context
+	91, // 74: header.ConvertProductRequest.ctx:type_name -> common.Context
+	91, // 75: header.FilterProductRequest.ctx:type_name -> common.Context
+	91, // 76: header.SegmentUsersRequest.ctx:type_name -> common.Context
+	91, // 77: header.UserSegmentSyncStatusCheck.ctx:type_name -> common.Context
+	91, // 78: header.ListPageSettingRequest.ctx:type_name -> common.Context
+	91, // 79: header.AIAgentDataEntryRequest.ctx:type_name -> common.Context
+	91, // 80: header.WidgetSettingRequest.ctx:type_name -> common.Context
+	91, // 81: header.AutoPayRequest.ctx:type_name -> common.Context
+	91, // 82: header.CollectionDocumentsRequest.ctx:type_name -> common.Context
+	91, // 83: header.PayRequest.ctx:type_name -> common.Context
+	93, // 84: header.PayRequest.subscription:type_name -> account.Subscription
+	94, // 85: header.PayRequest.invoice:type_name -> account.Invoice
+	91, // 86: header.CreateUploadRequest.ctx:type_name -> common.Context
+	91, // 87: header.BatchCreateReadURLsRequest.ctx:type_name -> common.Context
+	88, // 88: header.BatchCreateReadURLsRequest.items:type_name -> header.CreateReadURLItem
+	91, // 89: header.ReadFileRequest.ctx:type_name -> common.Context
+	90, // [90:90] is the sub-list for method output_type
+	90, // [90:90] is the sub-list for method input_type
+	90, // [90:90] is the sub-list for extension type_name
+	90, // [90:90] is the sub-list for extension extendee
+	0,  // [0:90] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -10477,7 +10924,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   84,
+			NumMessages:   88,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
