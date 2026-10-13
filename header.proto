@@ -1171,6 +1171,9 @@ message ConversationMember {
 
 	string last_unread_event_id = 42;
 	int64 last_unread_at = 43;
+	int64 sla_breached = 44; //
+	int64 sla_started = 45;
+	int64 sla_breach_count = 46;
 }
 
 message StartRequest {

@@ -9709,6 +9709,9 @@ type ConversationMember struct {
 	BotVersion        int64  `protobuf:"varint,41,opt,name=bot_version,json=botVersion,proto3" json:"bot_version,omitempty"`
 	LastUnreadEventId string `protobuf:"bytes,42,opt,name=last_unread_event_id,json=lastUnreadEventId,proto3" json:"last_unread_event_id,omitempty"`
 	LastUnreadAt      int64  `protobuf:"varint,43,opt,name=last_unread_at,json=lastUnreadAt,proto3" json:"last_unread_at,omitempty"`
+	SlaBreached       int64  `protobuf:"varint,44,opt,name=sla_breached,json=slaBreached,proto3" json:"sla_breached,omitempty"` //
+	SlaStarted        int64  `protobuf:"varint,45,opt,name=sla_started,json=slaStarted,proto3" json:"sla_started,omitempty"`
+	SlaBreachCount    int64  `protobuf:"varint,46,opt,name=sla_breach_count,json=slaBreachCount,proto3" json:"sla_breach_count,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -9949,6 +9952,27 @@ func (x *ConversationMember) GetLastUnreadEventId() string {
 func (x *ConversationMember) GetLastUnreadAt() int64 {
 	if x != nil {
 		return x.LastUnreadAt
+	}
+	return 0
+}
+
+func (x *ConversationMember) GetSlaBreached() int64 {
+	if x != nil {
+		return x.SlaBreached
+	}
+	return 0
+}
+
+func (x *ConversationMember) GetSlaStarted() int64 {
+	if x != nil {
+		return x.SlaStarted
+	}
+	return 0
+}
+
+func (x *ConversationMember) GetSlaBreachCount() int64 {
+	if x != nil {
+		return x.SlaBreachCount
 	}
 	return 0
 }
@@ -79518,7 +79542,7 @@ const file_header_proto_rawDesc = "" +
 	"\x06status\x18\n" +
 	" \x01(\tR\x06status\x12\x1a\n" +
 	"\bassignee\x18\v \x01(\tR\bassignee\x12!\n" +
-	"\fduration_sec\x18\f \x01(\x03R\vdurationSec\"\xda\b\n" +
+	"\fduration_sec\x18\f \x01(\x03R\vdurationSec\"\xc8\t\n" +
 	"\x12ConversationMember\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -79556,7 +79580,11 @@ const file_header_proto_rawDesc = "" +
 	"\vbot_version\x18) \x01(\x03R\n" +
 	"botVersion\x12/\n" +
 	"\x14last_unread_event_id\x18* \x01(\tR\x11lastUnreadEventId\x12$\n" +
-	"\x0elast_unread_at\x18+ \x01(\x03R\flastUnreadAt\";\n" +
+	"\x0elast_unread_at\x18+ \x01(\x03R\flastUnreadAt\x12!\n" +
+	"\fsla_breached\x18, \x01(\x03R\vslaBreached\x12\x1f\n" +
+	"\vsla_started\x18- \x01(\x03R\n" +
+	"slaStarted\x12(\n" +
+	"\x10sla_breach_count\x18. \x01(\x03R\x0eslaBreachCount\";\n" +
 	"\x05State\x12\n" +
 	"\n" +
 	"\x06active\x10\x00\x12\b\n" +
