@@ -9221,7 +9221,7 @@ func (x *PayRequest) GetInvoice() *account.Invoice {
 	return nil
 }
 
-type CreateUploadRequest struct {
+type UploadRequest struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Ctx                *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId          string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -9236,24 +9236,36 @@ type CreateUploadRequest struct {
 	Category           string                 `protobuf:"bytes,12,opt,name=category,proto3" json:"category,omitempty"`
 	// Retry cùng key và cùng input trả lại cùng phiên upload.
 	IdempotencyKey string `protobuf:"bytes,13,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Upload validation in pixels; 0 means unlimited, negative values are invalid.
+	MaxWidth  int64 `protobuf:"varint,14,opt,name=max_width,json=maxWidth,proto3" json:"max_width,omitempty"`
+	MaxHeight int64 `protobuf:"varint,15,opt,name=max_height,json=maxHeight,proto3" json:"max_height,omitempty"`
+	// upload (import) from url
+	Force            int64  `protobuf:"varint,23,opt,name=force,proto3" json:"force,omitempty"`
+	ImportUrl        string `protobuf:"bytes,24,opt,name=import_url,json=importUrl,proto3" json:"import_url,omitempty"`
+	ImportMaxSize    int64  `protobuf:"varint,25,opt,name=import_max_size,json=importMaxSize,proto3" json:"import_max_size,omitempty"`
+	ImportTypePrefix string `protobuf:"bytes,26,opt,name=import_type_prefix,json=importTypePrefix,proto3" json:"import_type_prefix,omitempty"`
+	ImportTimeout    int64  `protobuf:"varint,27,opt,name=import_timeout,json=importTimeout,proto3" json:"import_timeout,omitempty"`        // ms
+	ImportUserAgent  string `protobuf:"bytes,28,opt,name=import_user_agent,json=importUserAgent,proto3" json:"import_user_agent,omitempty"` // control client user-agent while download
+	ImportTypeHint   string `protobuf:"bytes,29,opt,name=import_type_hint,json=importTypeHint,proto3" json:"import_type_hint,omitempty"`    // must from trusted source
+	ImportExtension  string `protobuf:"bytes,30,opt,name=import_extension,json=importExtension,proto3" json:"import_extension,omitempty"`   // xlsx, jped
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
-func (x *CreateUploadRequest) Reset() {
-	*x = CreateUploadRequest{}
+func (x *UploadRequest) Reset() {
+	*x = UploadRequest{}
 	mi := &file_request_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateUploadRequest) String() string {
+func (x *UploadRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateUploadRequest) ProtoMessage() {}
+func (*UploadRequest) ProtoMessage() {}
 
-func (x *CreateUploadRequest) ProtoReflect() protoreflect.Message {
+func (x *UploadRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9265,91 +9277,161 @@ func (x *CreateUploadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateUploadRequest.ProtoReflect.Descriptor instead.
-func (*CreateUploadRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadRequest.ProtoReflect.Descriptor instead.
+func (*UploadRequest) Descriptor() ([]byte, []int) {
 	return file_request_proto_rawDescGZIP(), []int{84}
 }
 
-func (x *CreateUploadRequest) GetCtx() *common.Context {
+func (x *UploadRequest) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *CreateUploadRequest) GetAccountId() string {
+func (x *UploadRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetScope() string {
+func (x *UploadRequest) GetScope() string {
 	if x != nil {
 		return x.Scope
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetSha256() string {
+func (x *UploadRequest) GetSha256() string {
 	if x != nil {
 		return x.Sha256
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetName() string {
+func (x *UploadRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetContentType() string {
+func (x *UploadRequest) GetContentType() string {
 	if x != nil {
 		return x.ContentType
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetSize() int64 {
+func (x *UploadRequest) GetSize() int64 {
 	if x != nil {
 		return x.Size
 	}
 	return 0
 }
 
-func (x *CreateUploadRequest) GetTtlSeconds() int64 {
+func (x *UploadRequest) GetTtlSeconds() int64 {
 	if x != nil {
 		return x.TtlSeconds
 	}
 	return 0
 }
 
-func (x *CreateUploadRequest) GetContentDisposition() string {
+func (x *UploadRequest) GetContentDisposition() string {
 	if x != nil {
 		return x.ContentDisposition
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetDescription() string {
+func (x *UploadRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetCategory() string {
+func (x *UploadRequest) GetCategory() string {
 	if x != nil {
 		return x.Category
 	}
 	return ""
 }
 
-func (x *CreateUploadRequest) GetIdempotencyKey() string {
+func (x *UploadRequest) GetIdempotencyKey() string {
 	if x != nil {
 		return x.IdempotencyKey
+	}
+	return ""
+}
+
+func (x *UploadRequest) GetMaxWidth() int64 {
+	if x != nil {
+		return x.MaxWidth
+	}
+	return 0
+}
+
+func (x *UploadRequest) GetMaxHeight() int64 {
+	if x != nil {
+		return x.MaxHeight
+	}
+	return 0
+}
+
+func (x *UploadRequest) GetForce() int64 {
+	if x != nil {
+		return x.Force
+	}
+	return 0
+}
+
+func (x *UploadRequest) GetImportUrl() string {
+	if x != nil {
+		return x.ImportUrl
+	}
+	return ""
+}
+
+func (x *UploadRequest) GetImportMaxSize() int64 {
+	if x != nil {
+		return x.ImportMaxSize
+	}
+	return 0
+}
+
+func (x *UploadRequest) GetImportTypePrefix() string {
+	if x != nil {
+		return x.ImportTypePrefix
+	}
+	return ""
+}
+
+func (x *UploadRequest) GetImportTimeout() int64 {
+	if x != nil {
+		return x.ImportTimeout
+	}
+	return 0
+}
+
+func (x *UploadRequest) GetImportUserAgent() string {
+	if x != nil {
+		return x.ImportUserAgent
+	}
+	return ""
+}
+
+func (x *UploadRequest) GetImportTypeHint() string {
+	if x != nil {
+		return x.ImportTypeHint
+	}
+	return ""
+}
+
+func (x *UploadRequest) GetImportExtension() string {
+	if x != nil {
+		return x.ImportExtension
 	}
 	return ""
 }
@@ -9363,9 +9445,6 @@ type CreateReadURLItem struct {
 	// Nếu yêu cầu resize, ít nhất một chiều phải lớn hơn 0.
 	ImageMaxWidth  uint32 `protobuf:"varint,7,opt,name=image_max_width,json=imageMaxWidth,proto3" json:"image_max_width,omitempty"`
 	ImageMaxHeight uint32 `protobuf:"varint,8,opt,name=image_max_height,json=imageMaxHeight,proto3" json:"image_max_height,omitempty"`
-	// Ngữ cảnh nguồn, bắt buộc với attachment hội thoại.
-	ConversationId string `protobuf:"bytes,20,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
-	MessageId      string `protobuf:"bytes,21,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -9426,20 +9505,6 @@ func (x *CreateReadURLItem) GetImageMaxHeight() uint32 {
 		return x.ImageMaxHeight
 	}
 	return 0
-}
-
-func (x *CreateReadURLItem) GetConversationId() string {
-	if x != nil {
-		return x.ConversationId
-	}
-	return ""
-}
-
-func (x *CreateReadURLItem) GetMessageId() string {
-	if x != nil {
-		return x.MessageId
-	}
-	return ""
 }
 
 type BatchCreateReadURLsRequest struct {
@@ -10661,8 +10726,8 @@ const file_request_proto_rawDesc = "" +
 	"\x0epayment_method\x18\x12 \x01(\tR\rpaymentMethod\x12%\n" +
 	"\x0epromotion_code\x18\x15 \x01(\tR\rpromotionCode\x129\n" +
 	"\fsubscription\x18\x16 \x01(\v2\x15.account.SubscriptionR\fsubscription\x12*\n" +
-	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoice\"\x89\x03\n" +
-	"\x13CreateUploadRequest\x12!\n" +
+	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoice\"\xf2\x05\n" +
+	"\rUploadRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x14\n" +
@@ -10677,16 +10742,25 @@ const file_request_proto_rawDesc = "" +
 	" \x01(\tR\x12contentDisposition\x12 \n" +
 	"\vdescription\x18\v \x01(\tR\vdescription\x12\x1a\n" +
 	"\bcategory\x18\f \x01(\tR\bcategory\x12'\n" +
-	"\x0fidempotency_key\x18\r \x01(\tR\x0eidempotencyKey\"\xde\x01\n" +
+	"\x0fidempotency_key\x18\r \x01(\tR\x0eidempotencyKey\x12\x1b\n" +
+	"\tmax_width\x18\x0e \x01(\x03R\bmaxWidth\x12\x1d\n" +
+	"\n" +
+	"max_height\x18\x0f \x01(\x03R\tmaxHeight\x12\x14\n" +
+	"\x05force\x18\x17 \x01(\x03R\x05force\x12\x1d\n" +
+	"\n" +
+	"import_url\x18\x18 \x01(\tR\timportUrl\x12&\n" +
+	"\x0fimport_max_size\x18\x19 \x01(\x03R\rimportMaxSize\x12,\n" +
+	"\x12import_type_prefix\x18\x1a \x01(\tR\x10importTypePrefix\x12%\n" +
+	"\x0eimport_timeout\x18\x1b \x01(\x03R\rimportTimeout\x12*\n" +
+	"\x11import_user_agent\x18\x1c \x01(\tR\x0fimportUserAgent\x12(\n" +
+	"\x10import_type_hint\x18\x1d \x01(\tR\x0eimportTypeHint\x12)\n" +
+	"\x10import_extension\x18\x1e \x01(\tR\x0fimportExtension\"\x96\x01\n" +
 	"\x11CreateReadURLItem\x12\x1d\n" +
 	"\n" +
 	"request_id\x18\x05 \x01(\tR\trequestId\x12\x10\n" +
 	"\x03fid\x18\x06 \x01(\tR\x03fid\x12&\n" +
 	"\x0fimage_max_width\x18\a \x01(\rR\rimageMaxWidth\x12(\n" +
-	"\x10image_max_height\x18\b \x01(\rR\x0eimageMaxHeight\x12'\n" +
-	"\x0fconversation_id\x18\x14 \x01(\tR\x0econversationId\x12\x1d\n" +
-	"\n" +
-	"message_id\x18\x15 \x01(\tR\tmessageId\"\xbd\x01\n" +
+	"\x10image_max_height\x18\b \x01(\rR\x0eimageMaxHeight\"\xbd\x01\n" +
 	"\x1aBatchCreateReadURLsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -10806,7 +10880,7 @@ var file_request_proto_goTypes = []any{
 	(*AutoPayRequest)(nil),                // 84: header.AutoPayRequest
 	(*CollectionDocumentsRequest)(nil),    // 85: header.CollectionDocumentsRequest
 	(*PayRequest)(nil),                    // 86: header.PayRequest
-	(*CreateUploadRequest)(nil),           // 87: header.CreateUploadRequest
+	(*UploadRequest)(nil),                 // 87: header.UploadRequest
 	(*CreateReadURLItem)(nil),             // 88: header.CreateReadURLItem
 	(*BatchCreateReadURLsRequest)(nil),    // 89: header.BatchCreateReadURLsRequest
 	(*ReadFileRequest)(nil),               // 90: header.ReadFileRequest
@@ -10902,7 +10976,7 @@ var file_request_proto_depIdxs = []int32{
 	91, // 83: header.PayRequest.ctx:type_name -> common.Context
 	93, // 84: header.PayRequest.subscription:type_name -> account.Subscription
 	94, // 85: header.PayRequest.invoice:type_name -> account.Invoice
-	91, // 86: header.CreateUploadRequest.ctx:type_name -> common.Context
+	91, // 86: header.UploadRequest.ctx:type_name -> common.Context
 	91, // 87: header.BatchCreateReadURLsRequest.ctx:type_name -> common.Context
 	88, // 88: header.BatchCreateReadURLsRequest.items:type_name -> header.CreateReadURLItem
 	91, // 89: header.ReadFileRequest.ctx:type_name -> common.Context

@@ -1151,7 +1151,7 @@ message PayRequest {
 	account.Invoice invoice = 23; // for marketing and novat only
 }
 
-message CreateUploadRequest {
+message UploadRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string scope = 3;
@@ -1167,6 +1167,20 @@ message CreateUploadRequest {
 
 	// Retry cùng key và cùng input trả lại cùng phiên upload.
 	string idempotency_key = 13;
+
+	// Upload validation in pixels; 0 means unlimited, negative values are invalid.
+	int64 max_width = 14;
+	int64 max_height = 15;
+
+	// upload (import) from url
+	int64 force = 23;
+	string import_url = 24;
+	int64 import_max_size = 25;
+	string import_type_prefix = 26;
+	int64 import_timeout = 27; // ms
+	string import_user_agent = 28; // control client user-agent while download
+	string import_type_hint = 29; // must from trusted source
+	string import_extension = 30; // xlsx, jped
 }
 
 message CreateReadURLItem {
@@ -1178,10 +1192,6 @@ message CreateReadURLItem {
 	// Nếu yêu cầu resize, ít nhất một chiều phải lớn hơn 0.
 	uint32 image_max_width = 7;
 	uint32 image_max_height = 8;
-
-	// Ngữ cảnh nguồn, bắt buộc với attachment hội thoại.
-	string conversation_id = 20;
-	string message_id = 21;
 }
 
 message BatchCreateReadURLsRequest {
