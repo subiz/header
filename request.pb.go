@@ -9363,9 +9363,6 @@ type CreateReadURLItem struct {
 	// Nếu yêu cầu resize, ít nhất một chiều phải lớn hơn 0.
 	ImageMaxWidth  uint32 `protobuf:"varint,7,opt,name=image_max_width,json=imageMaxWidth,proto3" json:"image_max_width,omitempty"`
 	ImageMaxHeight uint32 `protobuf:"varint,8,opt,name=image_max_height,json=imageMaxHeight,proto3" json:"image_max_height,omitempty"`
-	// Ngữ cảnh nguồn, bắt buộc với attachment hội thoại.
-	ConversationId string `protobuf:"bytes,20,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
-	MessageId      string `protobuf:"bytes,21,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -9426,20 +9423,6 @@ func (x *CreateReadURLItem) GetImageMaxHeight() uint32 {
 		return x.ImageMaxHeight
 	}
 	return 0
-}
-
-func (x *CreateReadURLItem) GetConversationId() string {
-	if x != nil {
-		return x.ConversationId
-	}
-	return ""
-}
-
-func (x *CreateReadURLItem) GetMessageId() string {
-	if x != nil {
-		return x.MessageId
-	}
-	return ""
 }
 
 type BatchCreateReadURLsRequest struct {
@@ -10677,16 +10660,13 @@ const file_request_proto_rawDesc = "" +
 	" \x01(\tR\x12contentDisposition\x12 \n" +
 	"\vdescription\x18\v \x01(\tR\vdescription\x12\x1a\n" +
 	"\bcategory\x18\f \x01(\tR\bcategory\x12'\n" +
-	"\x0fidempotency_key\x18\r \x01(\tR\x0eidempotencyKey\"\xde\x01\n" +
+	"\x0fidempotency_key\x18\r \x01(\tR\x0eidempotencyKey\"\x96\x01\n" +
 	"\x11CreateReadURLItem\x12\x1d\n" +
 	"\n" +
 	"request_id\x18\x05 \x01(\tR\trequestId\x12\x10\n" +
 	"\x03fid\x18\x06 \x01(\tR\x03fid\x12&\n" +
 	"\x0fimage_max_width\x18\a \x01(\rR\rimageMaxWidth\x12(\n" +
-	"\x10image_max_height\x18\b \x01(\rR\x0eimageMaxHeight\x12'\n" +
-	"\x0fconversation_id\x18\x14 \x01(\tR\x0econversationId\x12\x1d\n" +
-	"\n" +
-	"message_id\x18\x15 \x01(\tR\tmessageId\"\xbd\x01\n" +
+	"\x10image_max_height\x18\b \x01(\rR\x0eimageMaxHeight\"\xbd\x01\n" +
 	"\x1aBatchCreateReadURLsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
