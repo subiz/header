@@ -15,12 +15,12 @@ service GooglekonService {
 }
 
 service CdnMgr {
-	rpc CreateUpload(CreateUploadRequest) returns (CreateUploadResponse);
+	rpc CreateUpload(CreateUploadRequest) returns (Response); // response.upload
 	rpc FinishUpload(Id) returns (Response);
+	rpc ImportFile(FileUrlDownloadRequest) returns (Response); // URL/data URI or existing CDN fid; response.file
 	rpc GetFile(Id) returns (Response);
 
-	// 	response.files
-	rpc BatchCreateReadURLs(BatchCreateReadURLsRequest) returns (Response);
+	rpc BatchCreateReadURLs(BatchCreateReadURLsRequest) returns (Response); // response.files
 }
 
 service YoutubikonService {

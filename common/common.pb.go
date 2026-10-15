@@ -1041,6 +1041,7 @@ type Limit struct {
 	MaxAutomations      int64                  `protobuf:"varint,35,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
 	UseAutomation       int64                  `protobuf:"varint,36,opt,name=use_automation,json=useAutomation,proto3" json:"use_automation,omitempty"`
 	UseChatbotAi        int64                  `protobuf:"varint,38,opt,name=use_chatbot_ai,json=useChatbotAi,proto3" json:"use_chatbot_ai,omitempty"`
+	UseSla              bool                   `protobuf:"varint,39,opt,name=use_sla,json=useSla,proto3" json:"use_sla,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1243,6 +1244,13 @@ func (x *Limit) GetUseChatbotAi() int64 {
 	return 0
 }
 
+func (x *Limit) GetUseSla() bool {
+	if x != nil {
+		return x.UseSla
+	}
+	return false
+}
+
 var File_common_proto protoreflect.FileDescriptor
 
 const file_common_proto_rawDesc = "" +
@@ -1358,7 +1366,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\x94\a\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xad\a\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1389,7 +1397,8 @@ const file_common_proto_rawDesc = "" +
 	"\fmax_segments\x18\" \x01(\x03R\vmaxSegments\x12'\n" +
 	"\x0fmax_automations\x18# \x01(\x03R\x0emaxAutomations\x12%\n" +
 	"\x0euse_automation\x18$ \x01(\x03R\ruseAutomation\x12$\n" +
-	"\x0euse_chatbot_ai\x18& \x01(\x03R\fuseChatbotAi*d\n" +
+	"\x0euse_chatbot_ai\x18& \x01(\x03R\fuseChatbotAi\x12\x17\n" +
+	"\ause_sla\x18' \x01(\bR\x06useSla*d\n" +
 	"\x04Type\x12\v\n" +
 	"\aunknown\x10\x00\x12\b\n" +
 	"\x04user\x10\x01\x12\t\n" +

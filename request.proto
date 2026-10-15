@@ -1167,6 +1167,10 @@ message CreateUploadRequest {
 
 	// Retry cùng key và cùng input trả lại cùng phiên upload.
 	string idempotency_key = 13;
+
+	// Upload validation in pixels; 0 means unlimited, negative values are invalid.
+	int64 max_width = 14;
+	int64 max_height = 15;
 }
 
 message CreateReadURLItem {
@@ -1178,10 +1182,6 @@ message CreateReadURLItem {
 	// Nếu yêu cầu resize, ít nhất một chiều phải lớn hơn 0.
 	uint32 image_max_width = 7;
 	uint32 image_max_height = 8;
-
-	// Ngữ cảnh nguồn, bắt buộc với attachment hội thoại.
-	string conversation_id = 20;
-	string message_id = 21;
 }
 
 message BatchCreateReadURLsRequest {

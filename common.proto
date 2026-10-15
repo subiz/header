@@ -187,4 +187,6 @@ message Limit {
 
 	int64 use_automation = 36;
 	int64 use_chatbot_ai = 38;
+
+	bool use_sla = 39;
 }

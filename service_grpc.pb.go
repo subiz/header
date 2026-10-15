@@ -164,6 +164,7 @@ var GooglekonService_ServiceDesc = grpc.ServiceDesc{
 const (
 	CdnMgr_CreateUpload_FullMethodName        = "/header.CdnMgr/CreateUpload"
 	CdnMgr_FinishUpload_FullMethodName        = "/header.CdnMgr/FinishUpload"
+	CdnMgr_ImportFile_FullMethodName          = "/header.CdnMgr/ImportFile"
 	CdnMgr_GetFile_FullMethodName             = "/header.CdnMgr/GetFile"
 	CdnMgr_BatchCreateReadURLs_FullMethodName = "/header.CdnMgr/BatchCreateReadURLs"
 )
@@ -172,10 +173,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CdnMgrClient interface {
-	CreateUpload(ctx context.Context, in *CreateUploadRequest, opts ...grpc.CallOption) (*CreateUploadResponse, error)
+	CreateUpload(ctx context.Context, in *CreateUploadRequest, opts ...grpc.CallOption) (*Response, error)
 	FinishUpload(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ImportFile(ctx context.Context, in *FileUrlDownloadRequest, opts ...grpc.CallOption) (*Response, error)
 	GetFile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	// response.files
 	BatchCreateReadURLs(ctx context.Context, in *BatchCreateReadURLsRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
@@ -187,9 +188,9 @@ func NewCdnMgrClient(cc grpc.ClientConnInterface) CdnMgrClient {
 	return &cdnMgrClient{cc}
 }
 
-func (c *cdnMgrClient) CreateUpload(ctx context.Context, in *CreateUploadRequest, opts ...grpc.CallOption) (*CreateUploadResponse, error) {
+func (c *cdnMgrClient) CreateUpload(ctx context.Context, in *CreateUploadRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateUploadResponse)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, CdnMgr_CreateUpload_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -201,6 +202,16 @@ func (c *cdnMgrClient) FinishUpload(ctx context.Context, in *Id, opts ...grpc.Ca
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, CdnMgr_FinishUpload_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cdnMgrClient) ImportFile(ctx context.Context, in *FileUrlDownloadRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CdnMgr_ImportFile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -231,10 +242,10 @@ func (c *cdnMgrClient) BatchCreateReadURLs(ctx context.Context, in *BatchCreateR
 // All implementations must embed UnimplementedCdnMgrServer
 // for forward compatibility.
 type CdnMgrServer interface {
-	CreateUpload(context.Context, *CreateUploadRequest) (*CreateUploadResponse, error)
+	CreateUpload(context.Context, *CreateUploadRequest) (*Response, error)
 	FinishUpload(context.Context, *Id) (*Response, error)
+	ImportFile(context.Context, *FileUrlDownloadRequest) (*Response, error)
 	GetFile(context.Context, *Id) (*Response, error)
-	// response.files
 	BatchCreateReadURLs(context.Context, *BatchCreateReadURLsRequest) (*Response, error)
 	mustEmbedUnimplementedCdnMgrServer()
 }
@@ -246,11 +257,14 @@ type CdnMgrServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCdnMgrServer struct{}
 
-func (UnimplementedCdnMgrServer) CreateUpload(context.Context, *CreateUploadRequest) (*CreateUploadResponse, error) {
+func (UnimplementedCdnMgrServer) CreateUpload(context.Context, *CreateUploadRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateUpload not implemented")
 }
 func (UnimplementedCdnMgrServer) FinishUpload(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method FinishUpload not implemented")
+}
+func (UnimplementedCdnMgrServer) ImportFile(context.Context, *FileUrlDownloadRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ImportFile not implemented")
 }
 func (UnimplementedCdnMgrServer) GetFile(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetFile not implemented")
@@ -315,6 +329,24 @@ func _CdnMgr_FinishUpload_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CdnMgr_ImportFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FileUrlDownloadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CdnMgrServer).ImportFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CdnMgr_ImportFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CdnMgrServer).ImportFile(ctx, req.(*FileUrlDownloadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CdnMgr_GetFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -365,6 +397,10 @@ var CdnMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FinishUpload",
 			Handler:    _CdnMgr_FinishUpload_Handler,
+		},
+		{
+			MethodName: "ImportFile",
+			Handler:    _CdnMgr_ImportFile_Handler,
 		},
 		{
 			MethodName: "GetFile",
