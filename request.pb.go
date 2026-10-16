@@ -9248,6 +9248,7 @@ type UploadRequest struct {
 	ImportUserAgent  string `protobuf:"bytes,28,opt,name=import_user_agent,json=importUserAgent,proto3" json:"import_user_agent,omitempty"` // control client user-agent while download
 	ImportTypeHint   string `protobuf:"bytes,29,opt,name=import_type_hint,json=importTypeHint,proto3" json:"import_type_hint,omitempty"`    // must from trusted source
 	ImportExtension  string `protobuf:"bytes,30,opt,name=import_extension,json=importExtension,proto3" json:"import_extension,omitempty"`   // xlsx, jped
+	Gentext          bool   `protobuf:"varint,31,opt,name=gentext,proto3" json:"gentext,omitempty"`                                         // Extract document text before returning; retry reuses completed work.
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -9434,6 +9435,13 @@ func (x *UploadRequest) GetImportExtension() string {
 		return x.ImportExtension
 	}
 	return ""
+}
+
+func (x *UploadRequest) GetGentext() bool {
+	if x != nil {
+		return x.Gentext
+	}
+	return false
 }
 
 type CreateReadURLItem struct {
@@ -10726,7 +10734,7 @@ const file_request_proto_rawDesc = "" +
 	"\x0epayment_method\x18\x12 \x01(\tR\rpaymentMethod\x12%\n" +
 	"\x0epromotion_code\x18\x15 \x01(\tR\rpromotionCode\x129\n" +
 	"\fsubscription\x18\x16 \x01(\v2\x15.account.SubscriptionR\fsubscription\x12*\n" +
-	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoice\"\xf2\x05\n" +
+	"\ainvoice\x18\x17 \x01(\v2\x10.account.InvoiceR\ainvoice\"\x8c\x06\n" +
 	"\rUploadRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -10754,7 +10762,8 @@ const file_request_proto_rawDesc = "" +
 	"\x0eimport_timeout\x18\x1b \x01(\x03R\rimportTimeout\x12*\n" +
 	"\x11import_user_agent\x18\x1c \x01(\tR\x0fimportUserAgent\x12(\n" +
 	"\x10import_type_hint\x18\x1d \x01(\tR\x0eimportTypeHint\x12)\n" +
-	"\x10import_extension\x18\x1e \x01(\tR\x0fimportExtension\"\x96\x01\n" +
+	"\x10import_extension\x18\x1e \x01(\tR\x0fimportExtension\x12\x18\n" +
+	"\agentext\x18\x1f \x01(\bR\agentext\"\x96\x01\n" +
 	"\x11CreateReadURLItem\x12\x1d\n" +
 	"\n" +
 	"request_id\x18\x05 \x01(\tR\trequestId\x12\x10\n" +

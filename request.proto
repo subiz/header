@@ -1181,6 +1181,7 @@ message UploadRequest {
 	string import_user_agent = 28; // control client user-agent while download
 	string import_type_hint = 29; // must from trusted source
 	string import_extension = 30; // xlsx, jped
+	bool gentext = 31; // Extract document text before returning; retry reuses completed work.
 }
 
 message CreateReadURLItem {

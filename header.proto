@@ -3769,7 +3769,7 @@ message File {
 	string category = 27;
 	string gcs_url = 29; // example: acrtvsvgrvecksycsble/802b2cd6014f0546c36e3fa198ef27dadbc8b174573a267eca6d352dd8982067
 
-	string status = 30; // uploading
+	string status = 30; // uploading | processing | ready | failed; empty means not requested.
 	string error_code = 31;
 
 	string image_1024 = 32; // @deprecated
@@ -3785,6 +3785,8 @@ message File {
 	string r2_url = 41;
 
 	By upload_by = 42;
+	string text_file_id = 43; // Self for UTF-8 text; otherwise a source-bound derivative.
+	string source_file_id = 44; // Internal derivatives must be read through this source.
 }
 
 message BotTerminated {

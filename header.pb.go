@@ -26288,7 +26288,7 @@ type File struct {
 	// call_recorded
 	Category      string `protobuf:"bytes,27,opt,name=category,proto3" json:"category,omitempty"`
 	GcsUrl        string `protobuf:"bytes,29,opt,name=gcs_url,json=gcsUrl,proto3" json:"gcs_url,omitempty"` // example: acrtvsvgrvecksycsble/802b2cd6014f0546c36e3fa198ef27dadbc8b174573a267eca6d352dd8982067
-	Status        string `protobuf:"bytes,30,opt,name=status,proto3" json:"status,omitempty"`               // uploading
+	Status        string `protobuf:"bytes,30,opt,name=status,proto3" json:"status,omitempty"`               // uploading | processing | ready | failed; empty means not requested.
 	ErrorCode     string `protobuf:"bytes,31,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
 	Image_1024    string `protobuf:"bytes,32,opt,name=image_1024,json=image1024,proto3" json:"image_1024,omitempty"` // @deprecated
 	Image_512     string `protobuf:"bytes,33,opt,name=image_512,json=image512,proto3" json:"image_512,omitempty"`    // @deprecated
@@ -26299,6 +26299,8 @@ type File struct {
 	R2Path        string `protobuf:"bytes,40,opt,name=r2_path,json=r2Path,proto3" json:"r2_path,omitempty"`
 	R2Url         string `protobuf:"bytes,41,opt,name=r2_url,json=r2Url,proto3" json:"r2_url,omitempty"`
 	UploadBy      *By    `protobuf:"bytes,42,opt,name=upload_by,json=uploadBy,proto3" json:"upload_by,omitempty"`
+	TextFileId    string `protobuf:"bytes,43,opt,name=text_file_id,json=textFileId,proto3" json:"text_file_id,omitempty"`       // Self for UTF-8 text; otherwise a source-bound derivative.
+	SourceFileId  string `protobuf:"bytes,44,opt,name=source_file_id,json=sourceFileId,proto3" json:"source_file_id,omitempty"` // Internal derivatives must be read through this source.
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -26576,6 +26578,20 @@ func (x *File) GetUploadBy() *By {
 		return x.UploadBy
 	}
 	return nil
+}
+
+func (x *File) GetTextFileId() string {
+	if x != nil {
+		return x.TextFileId
+	}
+	return ""
+}
+
+func (x *File) GetSourceFileId() string {
+	if x != nil {
+		return x.SourceFileId
+	}
+	return ""
 }
 
 type BotTerminated struct {
@@ -81736,7 +81752,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x0e\n" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xff\a\n" +
+	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xc7\b\n" +
 	"\x04File\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -81780,7 +81796,10 @@ const file_header_proto_rawDesc = "" +
 	"\ar2_path\x18( \x01(\tR\x06r2Path\x12\x15\n" +
 	"\x06r2_url\x18) \x01(\tR\x05r2Url\x12'\n" +
 	"\tupload_by\x18* \x01(\v2\n" +
-	".header.ByR\buploadBy\"\xf9\x02\n" +
+	".header.ByR\buploadBy\x12 \n" +
+	"\ftext_file_id\x18+ \x01(\tR\n" +
+	"textFileId\x12$\n" +
+	"\x0esource_file_id\x18, \x01(\tR\fsourceFileId\"\xf9\x02\n" +
 	"\rBotTerminated\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
