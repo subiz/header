@@ -2851,3 +2851,54 @@ func IsCommentChannel(channel string) bool {
 	}
 	return false
 }
+
+// https://docs.google.com/document/
+// https://drive.google.com/file/d/
+// https://docs.google.com/document/d/
+func IsGooglePublicURL(raw string) bool {
+	u, err := url.Parse(strings.TrimSpace(raw))
+	if err != nil || u.Host == "" {
+		return false
+	}
+
+	host := strings.ToLower(u.Host)
+	host = strings.TrimPrefix(host, "www.")
+
+	path := strings.Trim(u.Path, "/")
+
+	switch host {
+	case "drive.google.com":
+		return strings.HasPrefix(path, "file/d/") ||
+			strings.HasPrefix(path, "drive/folders/") ||
+			strings.HasPrefix(path, "drive/u/") && strings.Contains(path, "/folders/") ||
+			path == "open" ||
+			path == "uc" ||
+			path == "thumbnail"
+
+	case "docs.google.com":
+		return strings.HasPrefix(path, "document/d/") ||
+			strings.HasPrefix(path, "spreadsheets/d/") ||
+			strings.HasPrefix(path, "presentation/d/") ||
+			strings.HasPrefix(path, "forms/d/") ||
+			strings.HasPrefix(path, "drawings/d/")
+
+	case "sites.google.com":
+		return true
+
+	case "calendar.google.com":
+		return strings.HasPrefix(path, "calendar/embed") ||
+			strings.HasPrefix(path, "calendar/ical/")
+
+	case "google.com":
+		return strings.HasPrefix(path, "maps") ||
+			strings.HasPrefix(path, "calendar")
+
+	case "maps.google.com", "maps.app.goo.gl":
+		return true
+
+	case "goo.gl":
+		return strings.HasPrefix(path, "maps/")
+	}
+
+	return false
+}
