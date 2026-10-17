@@ -79,7 +79,7 @@
         "attachments": [
           {
             "type": "file",
-            "mimetype": "image/jpeg",
+            "mimetype": "image/png",
             "url": "https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png",
             "file": {
               "url": "https://vcdn.subiz-cdn.com/file/fisngqthasgopsfzknqh_acsnacgjwhgvoxzijjhi/Can_ho_2_ngu.png"
@@ -299,7 +299,7 @@
         "attachments": [
           {
             "type": "file",
-            "mimetype": "image/jpeg",
+            "mimetype": "image/png",
             "url": "https://vcdn.subiz-cdn.com/file/fisngquaqykaectslhdg_acsnacgjwhgvoxzijjhi/4_ly_do_de_an_cu.png",
             "file": {
               "url": "https://vcdn.subiz-cdn.com/file/fisngquaqykaectslhdg_acsnacgjwhgvoxzijjhi/4_ly_do_de_an_cu.png"
@@ -307,7 +307,7 @@
           },
           {
             "type": "file",
-            "mimetype": "image/jpeg",
+            "mimetype": "image/png",
             "url": "https://vcdn.subiz-cdn.com/file/fisngquebkeualcfzupy_acsnacgjwhgvoxzijjhi/tien_ich_noi_khu.png",
             "file": {
               "url": "https://vcdn.subiz-cdn.com/file/fisngquebkeualcfzupy_acsnacgjwhgvoxzijjhi/tien_ich_noi_khu.png"
@@ -598,6 +598,694 @@
     "output": [
       {
         "text": ":custom:"
+      }
+    ]
+  },
+  {
+    "name": "nil",
+    "input": null,
+    "output": []
+  },
+  {
+    "name": "empty item",
+    "input": {
+      "type": "list_item"
+    },
+    "output": []
+  },
+  {
+    "name": "explicit empty content",
+    "input": {
+      "type": "list_item",
+      "content": []
+    },
+    "output": []
+  },
+  {
+    "name": "nested empty item",
+    "input": {
+      "type": "bullet_list",
+      "content": [
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "list_item"
+            }
+          ]
+        }
+      ]
+    },
+    "output": []
+  },
+  {
+    "name": "bullet siblings",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "bullet_list",
+          "content": [
+            {
+              "type": "list_item"
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Hello"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* Hello"
+      }
+    ]
+  },
+  {
+    "name": "ordered position",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "ordered_list",
+          "content": [
+            {
+              "type": "list_item"
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Hello"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "2. Hello"
+      }
+    ]
+  },
+  {
+    "name": "nil child",
+    "input": {
+      "type": "list_item",
+      "content": [
+        null
+      ]
+    },
+    "output": []
+  },
+  {
+    "name": "image sibling",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "list_item"
+        },
+        {
+          "type": "image",
+          "image": {
+            "url": "https://example.com/image.jpg"
+          }
+        }
+      ]
+    },
+    "output": [
+      {
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "url": "https://example.com/image.jpg",
+            "file": {
+              "url": "https://example.com/image.jpg"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "paragraph",
+    "input": {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Hello"
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "Hello"
+      }
+    ]
+  },
+  {
+    "name": "root bullets",
+    "input": {
+      "type": "bullet_list",
+      "content": [
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "one"
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "two"
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* one\n* two"
+      }
+    ]
+  },
+  {
+    "name": "root bullets wrapped",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "bullet_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "one"
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "two"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* one\n* two"
+      }
+    ]
+  },
+  {
+    "name": "root numbering",
+    "input": {
+      "type": "ordered_list",
+      "content": [
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "one"
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "two"
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "1. one\n2. two"
+      }
+    ]
+  },
+  {
+    "name": "root numbering wrapped",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "ordered_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "one"
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "two"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "1. one\n2. two"
+      }
+    ]
+  },
+  {
+    "name": "nested mixed lists",
+    "input": {
+      "type": "bullet_list",
+      "content": [
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "parent"
+            },
+            {
+              "type": "ordered_list",
+              "content": [
+                {
+                  "type": "list_item",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "child"
+                    },
+                    {
+                      "type": "bullet_list",
+                      "content": [
+                        {
+                          "type": "list_item",
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "grandchild"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "list_item",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "child two"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "sibling"
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* parent\n  1. child\n    * grandchild\n  2. child two\n* sibling"
+      }
+    ]
+  },
+  {
+    "name": "nested mixed lists wrapped",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "bullet_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "parent"
+                },
+                {
+                  "type": "ordered_list",
+                  "content": [
+                    {
+                      "type": "list_item",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "child"
+                        },
+                        {
+                          "type": "bullet_list",
+                          "content": [
+                            {
+                              "type": "list_item",
+                              "content": [
+                                {
+                                  "type": "text",
+                                  "text": "grandchild"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list_item",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "child two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "sibling"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* parent\n  1. child\n    * grandchild\n  2. child two\n* sibling"
+      }
+    ]
+  },
+  {
+    "name": "paragraph after nested list",
+    "input": {
+      "type": "bullet_list",
+      "content": [
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "text",
+              "text": "parent"
+            },
+            {
+              "type": "bullet_list",
+              "content": [
+                {
+                  "type": "list_item",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "child"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "after"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* parent\n  * child\nafter"
+      }
+    ]
+  },
+  {
+    "name": "paragraph after nested list wrapped",
+    "input": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "bullet_list",
+          "content": [
+            {
+              "type": "list_item",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "parent"
+                },
+                {
+                  "type": "bullet_list",
+                  "content": [
+                    {
+                      "type": "list_item",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "child"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "after"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output": [
+      {
+        "text": "* parent\n  * child\nafter"
+      }
+    ]
+  },
+  {
+    "name": "metadata wins",
+    "input": {
+      "type": "image",
+      "alt_text": "caption",
+      "image": {
+        "id": "file-id",
+        "url": "https://example.com/photo.jpg",
+        "type": "image/webp",
+        "name": "photo.webp",
+        "size": 123,
+        "width": 640,
+        "height": 480,
+        "thumbnail_url": "https://example.com/thumb.webp"
+      }
+    },
+    "output": [
+      {
+        "text": "caption",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/webp",
+            "file": {
+              "id": "file-id",
+              "url": "https://example.com/photo.jpg",
+              "type": "image/webp",
+              "name": "photo.webp",
+              "size": 123,
+              "width": 640,
+              "height": 480,
+              "thumbnail_url": "https://example.com/thumb.webp"
+            },
+            "url": "https://example.com/photo.jpg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "png URL",
+    "input": {
+      "type": "image",
+      "alt_text": "caption",
+      "image": {
+        "url": "https://example.com/photo.PNG?token=example#preview"
+      }
+    },
+    "output": [
+      {
+        "text": "caption",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/png",
+            "file": {
+              "url": "https://example.com/photo.PNG?token=example#preview"
+            },
+            "url": "https://example.com/photo.PNG?token=example#preview"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "gif URL",
+    "input": {
+      "type": "image",
+      "alt_text": "caption",
+      "image": {
+        "url": "https://example.com/photo.gif"
+      }
+    },
+    "output": [
+      {
+        "text": "caption",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/gif",
+            "file": {
+              "url": "https://example.com/photo.gif"
+            },
+            "url": "https://example.com/photo.gif"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "jpeg URL",
+    "input": {
+      "type": "image",
+      "alt_text": "caption",
+      "image": {
+        "url": "https://example.com/photo.jpg"
+      }
+    },
+    "output": [
+      {
+        "text": "caption",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "file": {
+              "url": "https://example.com/photo.jpg"
+            },
+            "url": "https://example.com/photo.jpg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "extensionless fallback",
+    "input": {
+      "type": "image",
+      "alt_text": "caption",
+      "image": {
+        "url": "https://example.com/opaque"
+      }
+    },
+    "output": [
+      {
+        "text": "caption",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "file": {
+              "url": "https://example.com/opaque"
+            },
+            "url": "https://example.com/opaque"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "nil image",
+    "input": {
+      "type": "image",
+      "alt_text": "caption"
+    },
+    "output": [
+      {
+        "text": "caption",
+        "attachments": [
+          {
+            "type": "file",
+            "mimetype": "image/jpeg",
+            "file": {}
+          }
+        ]
       }
     ]
   }

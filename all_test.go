@@ -263,7 +263,11 @@ func TestBlockToPlainTextMessages(t *testing.T) {
 			if tc.Name != "5" {
 				//  return
 			}
+			before := proto.Clone(tc.Input)
 			out := BlockToTextMessages(tc.Input)
+			if !proto.Equal(before, tc.Input) {
+				t.Fatal("input block was modified")
+			}
 			outb, _ := json.Marshal(out)
 			expb, _ := json.Marshal(tc.Output)
 			if string(outb) != string(expb) {

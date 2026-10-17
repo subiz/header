@@ -7,8 +7,10 @@ import (
 	"html"
 	"maps"
 	"math"
+	"mime"
 	"net/mail"
 	"net/url"
+	"path"
 	"reflect"
 	"regexp"
 	"slices"
@@ -1896,16 +1898,15 @@ func BlockToTextMessages(block *Block) []*Message {
 }
 
 func flattenBlock(block *Block) []*Block {
+	if block.GetType() == "bullet_list" || block.GetType() == "ordered_list" {
+		return []*Block{block}
+	}
 	out := []*Block{}
 	if len(block.GetContent()) > 0 {
 		if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
 			out = append(out, &Block{Type: "text", Text: "\n"})
 		}
 		for _, sub := range block.Content {
-			if sub.GetType() == "bullet_list" || sub.GetType() == "ordered_list" {
-				out = append(out, sub)
-				continue
-			}
 			out = append(out, flattenBlock(sub)...)
 		}
 	} else {
@@ -1915,6 +1916,10 @@ func flattenBlock(block *Block) []*Block {
 }
 
 func singleBlockToText(block *Block) (string, []*Attachment) {
+	return singleBlockToTextAtDepth(block, 0)
+}
+
+func singleBlockToTextAtDepth(block *Block, depth int) (string, []*Attachment) {
 	if block == nil {
 		return "", nil
 	}
@@ -1922,11 +1927,11 @@ func singleBlockToText(block *Block) (string, []*Attachment) {
 	if block.Type == "bullet_list" || block.Type == "ordered_list" {
 		outatts := []*Attachment{}
 		for i, item := range block.GetContent() {
-			prefix := "\n* "
+			prefix := "\n" + strings.Repeat("  ", depth) + "* "
 			if block.Type == "ordered_list" {
-				prefix = "\n" + strconv.Itoa(i+1) + ". "
+				prefix = "\n" + strings.Repeat("  ", depth) + strconv.Itoa(i+1) + ". "
 			}
-			item, atts := singleBlockToText(item)
+			item, atts := singleBlockToTextAtDepth(item, depth+1)
 			outatts = append(outatts, atts...)
 			item = strings.TrimSpace(item)
 			if item != "" {
@@ -1937,18 +1942,36 @@ func singleBlockToText(block *Block) (string, []*Attachment) {
 	}
 
 	if block.Type == "list_item" {
+		// flattenBlock returns a leaf unchanged; an empty item would recurse on itself.
+		if len(block.Content) == 0 {
+			return "", nil
+		}
 		flatten := flattenBlock(block)
 		var outtext strings.Builder
 		var outatts []*Attachment
 		for _, block := range flatten {
-			text, atts := singleBlockToText(block)
+			text, atts := singleBlockToTextAtDepth(block, depth)
 			outtext.WriteString(text)
 			outatts = append(outatts, atts...)
 		}
 		return outtext.String(), outatts
 	}
 	if block.Type == "image" {
-		return block.AltText, []*Attachment{{Type: "file", Mimetype: "image/jpeg", Url: block.GetImage().GetUrl(), File: &File{Url: block.GetImage().GetUrl()}}}
+		file := &File{}
+		if block.Image != nil {
+			file = proto.Clone(block.Image).(*File)
+		}
+		mimetype := file.GetType()
+		if mimetype == "" {
+			if u, err := url.Parse(file.GetUrl()); err == nil {
+				mimetype = mime.TypeByExtension(strings.ToLower(path.Ext(u.Path)))
+			}
+		}
+		if mimetype == "" {
+			// Preserve the historical fallback for image URLs without metadata or extensions.
+			mimetype = "image/jpeg"
+		}
+		return block.AltText, []*Attachment{{Type: "file", Mimetype: mimetype, Url: file.GetUrl(), File: file}}
 	}
 
 	if block.Type == "hard_break" || block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
