@@ -1811,6 +1811,8 @@ message Attachment {
 	Location location = 54;
 	ZaloContact zalo_contact = 55;
 	ZaloTemplate zalo_template = 56;
+
+	string v = 57; // empty = legacy, "cdn" = new CDN.
 }
 
 message ZaloTemplate {
@@ -11263,6 +11265,7 @@ message RuleAICondition {
 }
 
 message CreateUploadResponse {
+	string account_id = 2;
 	string upload_id = 4;
 	string fid = 5;
 

@@ -13119,6 +13119,7 @@ type Attachment struct {
 	Location        *Location       `protobuf:"bytes,54,opt,name=location,proto3" json:"location,omitempty"`
 	ZaloContact     *ZaloContact    `protobuf:"bytes,55,opt,name=zalo_contact,json=zaloContact,proto3" json:"zalo_contact,omitempty"`
 	ZaloTemplate    *ZaloTemplate   `protobuf:"bytes,56,opt,name=zalo_template,json=zaloTemplate,proto3" json:"zalo_template,omitempty"`
+	V               string          `protobuf:"bytes,57,opt,name=v,proto3" json:"v,omitempty"` // empty = legacy, "cdn" = new CDN.
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -13417,6 +13418,13 @@ func (x *Attachment) GetZaloTemplate() *ZaloTemplate {
 		return x.ZaloTemplate
 	}
 	return nil
+}
+
+func (x *Attachment) GetV() string {
+	if x != nil {
+		return x.V
+	}
+	return ""
 }
 
 type ZaloTemplate struct {
@@ -77959,6 +77967,7 @@ func (x *RuleAICondition) GetPrompt() string {
 
 type CreateUploadResponse struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
+	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	UploadId        string                 `protobuf:"bytes,4,opt,name=upload_id,json=uploadId,proto3" json:"upload_id,omitempty"`
 	Fid             string                 `protobuf:"bytes,5,opt,name=fid,proto3" json:"fid,omitempty"`
 	UploadUrl       string                 `protobuf:"bytes,6,opt,name=upload_url,json=uploadUrl,proto3" json:"upload_url,omitempty"`
@@ -77997,6 +78006,13 @@ func (x *CreateUploadResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateUploadResponse.ProtoReflect.Descriptor instead.
 func (*CreateUploadResponse) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{608}
+}
+
+func (x *CreateUploadResponse) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *CreateUploadResponse) GetUploadId() string {
@@ -80148,7 +80164,7 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\a \x01(\tR\x02id\x121\n" +
 	"\n" +
 	"i18n_title\x18\b \x01(\v2\x12.header.I18nStringR\ti18nTitle\x127\n" +
-	"\ri18n_subtitle\x18\t \x01(\v2\x12.header.I18nStringR\fi18nSubtitle\"\xd4\n" +
+	"\ri18n_subtitle\x18\t \x01(\v2\x12.header.I18nStringR\fi18nSubtitle\"\xe2\n" +
 	"\n" +
 	"\n" +
 	"Attachment\x12\x12\n" +
@@ -80193,7 +80209,8 @@ const file_header_proto_rawDesc = "" +
 	"\tzalo_call\x184 \x01(\v2\x10.header.ZaloCallR\bzaloCall\x12,\n" +
 	"\blocation\x186 \x01(\v2\x10.header.LocationR\blocation\x126\n" +
 	"\fzalo_contact\x187 \x01(\v2\x13.header.ZaloContactR\vzaloContact\x129\n" +
-	"\rzalo_template\x188 \x01(\v2\x14.header.ZaloTemplateR\fzaloTemplate\"\x97\x01\n" +
+	"\rzalo_template\x188 \x01(\v2\x14.header.ZaloTemplateR\fzaloTemplate\x12\f\n" +
+	"\x01v\x189 \x01(\tR\x01v\"\x97\x01\n" +
 	"\fZaloTemplate\x12\x1a\n" +
 	"\bchecksum\x18\x04 \x01(\tR\bchecksum\x12\x19\n" +
 	"\blink_url\x18\x05 \x01(\tR\alinkUrl\x12\x1f\n" +
@@ -87975,8 +87992,10 @@ const file_header_proto_rawDesc = "" +
 	"\boperator\x18\x02 \x01(\tR\boperator\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\tR\x05value\x12%\n" +
 	"\x0emin_confidence\x18\x04 \x01(\tR\rminConfidence\x12\x16\n" +
-	"\x06prompt\x18\x05 \x01(\tR\x06prompt\"\xd7\x02\n" +
-	"\x14CreateUploadResponse\x12\x1b\n" +
+	"\x06prompt\x18\x05 \x01(\tR\x06prompt\"\xf6\x02\n" +
+	"\x14CreateUploadResponse\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1b\n" +
 	"\tupload_id\x18\x04 \x01(\tR\buploadId\x12\x10\n" +
 	"\x03fid\x18\x05 \x01(\tR\x03fid\x12\x1d\n" +
 	"\n" +
