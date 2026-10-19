@@ -13119,7 +13119,6 @@ type Attachment struct {
 	Location        *Location       `protobuf:"bytes,54,opt,name=location,proto3" json:"location,omitempty"`
 	ZaloContact     *ZaloContact    `protobuf:"bytes,55,opt,name=zalo_contact,json=zaloContact,proto3" json:"zalo_contact,omitempty"`
 	ZaloTemplate    *ZaloTemplate   `protobuf:"bytes,56,opt,name=zalo_template,json=zaloTemplate,proto3" json:"zalo_template,omitempty"`
-	V               string          `protobuf:"bytes,57,opt,name=v,proto3" json:"v,omitempty"` // empty = legacy, "cdn" = new CDN.
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -13418,13 +13417,6 @@ func (x *Attachment) GetZaloTemplate() *ZaloTemplate {
 		return x.ZaloTemplate
 	}
 	return nil
-}
-
-func (x *Attachment) GetV() string {
-	if x != nil {
-		return x.V
-	}
-	return ""
 }
 
 type ZaloTemplate struct {
@@ -80173,7 +80165,7 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\a \x01(\tR\x02id\x121\n" +
 	"\n" +
 	"i18n_title\x18\b \x01(\v2\x12.header.I18nStringR\ti18nTitle\x127\n" +
-	"\ri18n_subtitle\x18\t \x01(\v2\x12.header.I18nStringR\fi18nSubtitle\"\xe2\n" +
+	"\ri18n_subtitle\x18\t \x01(\v2\x12.header.I18nStringR\fi18nSubtitle\"\xd4\n" +
 	"\n" +
 	"\n" +
 	"Attachment\x12\x12\n" +
@@ -80218,8 +80210,7 @@ const file_header_proto_rawDesc = "" +
 	"\tzalo_call\x184 \x01(\v2\x10.header.ZaloCallR\bzaloCall\x12,\n" +
 	"\blocation\x186 \x01(\v2\x10.header.LocationR\blocation\x126\n" +
 	"\fzalo_contact\x187 \x01(\v2\x13.header.ZaloContactR\vzaloContact\x129\n" +
-	"\rzalo_template\x188 \x01(\v2\x14.header.ZaloTemplateR\fzaloTemplate\x12\f\n" +
-	"\x01v\x189 \x01(\tR\x01v\"\x97\x01\n" +
+	"\rzalo_template\x188 \x01(\v2\x14.header.ZaloTemplateR\fzaloTemplate\"\x97\x01\n" +
 	"\fZaloTemplate\x12\x1a\n" +
 	"\bchecksum\x18\x04 \x01(\tR\bchecksum\x12\x19\n" +
 	"\blink_url\x18\x05 \x01(\tR\alinkUrl\x12\x1f\n" +

@@ -1812,7 +1812,7 @@ message Attachment {
 	ZaloContact zalo_contact = 55;
 	ZaloTemplate zalo_template = 56;
 
-	string v = 57; // empty = legacy, "cdn" = new CDN.
+	// string v = 57; // empty = legacy, "cdn" = new CDN.
 }
 
 message ZaloTemplate {

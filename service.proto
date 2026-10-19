@@ -18,8 +18,6 @@ service CdnMgr {
 	rpc CreateUpload(UploadRequest) returns (Response); // response.upload
 	rpc FinishUpload(Id) returns (Response);
 	rpc GetFile(Id) returns (Response);
-
-	rpc BatchCreateReadURLs(BatchCreateReadURLsRequest) returns (Response); // response.files
 }
 
 service YoutubikonService {
@@ -323,7 +321,6 @@ service NoteMgr {
 }
 
 service AttributeMgr {
-	// rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions); // deprecated
 	rpc ListAttributeDefinitions2(Id) returns (header.Response);
 	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
