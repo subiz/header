@@ -18,6 +18,7 @@ service CdnMgr {
 	rpc CreateUpload(UploadRequest) returns (Response); // response.upload
 	rpc FinishUpload(Id) returns (Response);
 	rpc GetFile(Id) returns (Response);
+	rpc ResizeImage(ResizeImageRequest) returns (Response); // response.file is the derivative.
 }
 
 service YoutubikonService {

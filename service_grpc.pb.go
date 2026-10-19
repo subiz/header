@@ -165,6 +165,7 @@ const (
 	CdnMgr_CreateUpload_FullMethodName = "/header.CdnMgr/CreateUpload"
 	CdnMgr_FinishUpload_FullMethodName = "/header.CdnMgr/FinishUpload"
 	CdnMgr_GetFile_FullMethodName      = "/header.CdnMgr/GetFile"
+	CdnMgr_ResizeImage_FullMethodName  = "/header.CdnMgr/ResizeImage"
 )
 
 // CdnMgrClient is the client API for CdnMgr service.
@@ -174,6 +175,7 @@ type CdnMgrClient interface {
 	CreateUpload(ctx context.Context, in *UploadRequest, opts ...grpc.CallOption) (*Response, error)
 	FinishUpload(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	GetFile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ResizeImage(ctx context.Context, in *ResizeImageRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type cdnMgrClient struct {
@@ -214,6 +216,16 @@ func (c *cdnMgrClient) GetFile(ctx context.Context, in *Id, opts ...grpc.CallOpt
 	return out, nil
 }
 
+func (c *cdnMgrClient) ResizeImage(ctx context.Context, in *ResizeImageRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CdnMgr_ResizeImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CdnMgrServer is the server API for CdnMgr service.
 // All implementations must embed UnimplementedCdnMgrServer
 // for forward compatibility.
@@ -221,6 +233,7 @@ type CdnMgrServer interface {
 	CreateUpload(context.Context, *UploadRequest) (*Response, error)
 	FinishUpload(context.Context, *Id) (*Response, error)
 	GetFile(context.Context, *Id) (*Response, error)
+	ResizeImage(context.Context, *ResizeImageRequest) (*Response, error)
 	mustEmbedUnimplementedCdnMgrServer()
 }
 
@@ -239,6 +252,9 @@ func (UnimplementedCdnMgrServer) FinishUpload(context.Context, *Id) (*Response, 
 }
 func (UnimplementedCdnMgrServer) GetFile(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetFile not implemented")
+}
+func (UnimplementedCdnMgrServer) ResizeImage(context.Context, *ResizeImageRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResizeImage not implemented")
 }
 func (UnimplementedCdnMgrServer) mustEmbedUnimplementedCdnMgrServer() {}
 func (UnimplementedCdnMgrServer) testEmbeddedByValue()                {}
@@ -315,6 +331,24 @@ func _CdnMgr_GetFile_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CdnMgr_ResizeImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CdnMgrServer).ResizeImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CdnMgr_ResizeImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CdnMgrServer).ResizeImage(ctx, req.(*ResizeImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CdnMgr_ServiceDesc is the grpc.ServiceDesc for CdnMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -333,6 +367,10 @@ var CdnMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFile",
 			Handler:    _CdnMgr_GetFile_Handler,
+		},
+		{
+			MethodName: "ResizeImage",
+			Handler:    _CdnMgr_ResizeImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
