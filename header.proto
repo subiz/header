@@ -8609,6 +8609,7 @@ message SLAPolicy {
 	string name = 4;
 	string note = 5;
 
+	account.BusinessHours business_hours = 7;
 	string priority = 27;
 	string record_type = 28; // record | conversation
 	repeated RecordFilterCondition conditions = 30;
