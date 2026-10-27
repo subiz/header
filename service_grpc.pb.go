@@ -2344,6 +2344,12 @@ const (
 	AccountMgr_GetSetupFeatureStatus_FullMethodName           = "/header.AccountMgr/GetSetupFeatureStatus"
 	AccountMgr_UpdateSetupFeatureStatus_FullMethodName        = "/header.AccountMgr/UpdateSetupFeatureStatus"
 	AccountMgr_ListActiveAccountIds_FullMethodName            = "/header.AccountMgr/ListActiveAccountIds"
+	AccountMgr_GetOAuthClient_FullMethodName                  = "/header.AccountMgr/GetOAuthClient"
+	AccountMgr_ListOAuthClients_FullMethodName                = "/header.AccountMgr/ListOAuthClients"
+	AccountMgr_StartOAuthAuthorization_FullMethodName         = "/header.AccountMgr/StartOAuthAuthorization"
+	AccountMgr_GetOAuthAuthorization_FullMethodName           = "/header.AccountMgr/GetOAuthAuthorization"
+	AccountMgr_ApproveOAuthAuthorization_FullMethodName       = "/header.AccountMgr/ApproveOAuthAuthorization"
+	AccountMgr_ExchangeOAuthToken_FullMethodName              = "/header.AccountMgr/ExchangeOAuthToken"
 )
 
 // AccountMgrClient is the client API for AccountMgr service.
@@ -2453,6 +2459,13 @@ type AccountMgrClient interface {
 	GetSetupFeatureStatus(ctx context.Context, in *Id, opts ...grpc.CallOption) (*SetupFeatureStatus, error)
 	UpdateSetupFeatureStatus(ctx context.Context, in *SetupFeatureStatus, opts ...grpc.CallOption) (*SetupFeatureStatus, error)
 	ListActiveAccountIds(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// Oauth
+	GetOAuthClient(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListOAuthClients(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	StartOAuthAuthorization(ctx context.Context, in *StartOAuthAuthorizationRequest, opts ...grpc.CallOption) (*Response, error)
+	GetOAuthAuthorization(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ApproveOAuthAuthorization(ctx context.Context, in *ApproveOAuthAuthorizationRequest, opts ...grpc.CallOption) (*ApproveOAuthAuthorizationResponse, error)
+	ExchangeOAuthToken(ctx context.Context, in *ExchangeOAuthTokenRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type accountMgrClient struct {
@@ -3463,6 +3476,66 @@ func (c *accountMgrClient) ListActiveAccountIds(ctx context.Context, in *Id, opt
 	return out, nil
 }
 
+func (c *accountMgrClient) GetOAuthClient(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, AccountMgr_GetOAuthClient_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListOAuthClients(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, AccountMgr_ListOAuthClients_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) StartOAuthAuthorization(ctx context.Context, in *StartOAuthAuthorizationRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, AccountMgr_StartOAuthAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetOAuthAuthorization(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, AccountMgr_GetOAuthAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ApproveOAuthAuthorization(ctx context.Context, in *ApproveOAuthAuthorizationRequest, opts ...grpc.CallOption) (*ApproveOAuthAuthorizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApproveOAuthAuthorizationResponse)
+	err := c.cc.Invoke(ctx, AccountMgr_ApproveOAuthAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ExchangeOAuthToken(ctx context.Context, in *ExchangeOAuthTokenRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, AccountMgr_ExchangeOAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountMgrServer is the server API for AccountMgr service.
 // All implementations must embed UnimplementedAccountMgrServer
 // for forward compatibility.
@@ -3570,6 +3643,13 @@ type AccountMgrServer interface {
 	GetSetupFeatureStatus(context.Context, *Id) (*SetupFeatureStatus, error)
 	UpdateSetupFeatureStatus(context.Context, *SetupFeatureStatus) (*SetupFeatureStatus, error)
 	ListActiveAccountIds(context.Context, *Id) (*Response, error)
+	// Oauth
+	GetOAuthClient(context.Context, *Id) (*Response, error)
+	ListOAuthClients(context.Context, *Id) (*Response, error)
+	StartOAuthAuthorization(context.Context, *StartOAuthAuthorizationRequest) (*Response, error)
+	GetOAuthAuthorization(context.Context, *Id) (*Response, error)
+	ApproveOAuthAuthorization(context.Context, *ApproveOAuthAuthorizationRequest) (*ApproveOAuthAuthorizationResponse, error)
+	ExchangeOAuthToken(context.Context, *ExchangeOAuthTokenRequest) (*Response, error)
 	mustEmbedUnimplementedAccountMgrServer()
 }
 
@@ -3879,6 +3959,24 @@ func (UnimplementedAccountMgrServer) UpdateSetupFeatureStatus(context.Context, *
 }
 func (UnimplementedAccountMgrServer) ListActiveAccountIds(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListActiveAccountIds not implemented")
+}
+func (UnimplementedAccountMgrServer) GetOAuthClient(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOAuthClient not implemented")
+}
+func (UnimplementedAccountMgrServer) ListOAuthClients(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOAuthClients not implemented")
+}
+func (UnimplementedAccountMgrServer) StartOAuthAuthorization(context.Context, *StartOAuthAuthorizationRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartOAuthAuthorization not implemented")
+}
+func (UnimplementedAccountMgrServer) GetOAuthAuthorization(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOAuthAuthorization not implemented")
+}
+func (UnimplementedAccountMgrServer) ApproveOAuthAuthorization(context.Context, *ApproveOAuthAuthorizationRequest) (*ApproveOAuthAuthorizationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ApproveOAuthAuthorization not implemented")
+}
+func (UnimplementedAccountMgrServer) ExchangeOAuthToken(context.Context, *ExchangeOAuthTokenRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExchangeOAuthToken not implemented")
 }
 func (UnimplementedAccountMgrServer) mustEmbedUnimplementedAccountMgrServer() {}
 func (UnimplementedAccountMgrServer) testEmbeddedByValue()                    {}
@@ -5701,6 +5799,114 @@ func _AccountMgr_ListActiveAccountIds_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountMgr_GetOAuthClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetOAuthClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_GetOAuthClient_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetOAuthClient(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListOAuthClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListOAuthClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_ListOAuthClients_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListOAuthClients(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_StartOAuthAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartOAuthAuthorizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).StartOAuthAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_StartOAuthAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).StartOAuthAuthorization(ctx, req.(*StartOAuthAuthorizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetOAuthAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetOAuthAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_GetOAuthAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetOAuthAuthorization(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ApproveOAuthAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApproveOAuthAuthorizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ApproveOAuthAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_ApproveOAuthAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ApproveOAuthAuthorization(ctx, req.(*ApproveOAuthAuthorizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ExchangeOAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExchangeOAuthTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ExchangeOAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_ExchangeOAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ExchangeOAuthToken(ctx, req.(*ExchangeOAuthTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountMgr_ServiceDesc is the grpc.ServiceDesc for AccountMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6107,6 +6313,30 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListActiveAccountIds",
 			Handler:    _AccountMgr_ListActiveAccountIds_Handler,
+		},
+		{
+			MethodName: "GetOAuthClient",
+			Handler:    _AccountMgr_GetOAuthClient_Handler,
+		},
+		{
+			MethodName: "ListOAuthClients",
+			Handler:    _AccountMgr_ListOAuthClients_Handler,
+		},
+		{
+			MethodName: "StartOAuthAuthorization",
+			Handler:    _AccountMgr_StartOAuthAuthorization_Handler,
+		},
+		{
+			MethodName: "GetOAuthAuthorization",
+			Handler:    _AccountMgr_GetOAuthAuthorization_Handler,
+		},
+		{
+			MethodName: "ApproveOAuthAuthorization",
+			Handler:    _AccountMgr_ApproveOAuthAuthorization_Handler,
+		},
+		{
+			MethodName: "ExchangeOAuthToken",
+			Handler:    _AccountMgr_ExchangeOAuthToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -213,6 +213,14 @@ service AccountMgr {
 	rpc GetSetupFeatureStatus(header.Id) returns (SetupFeatureStatus);
 	rpc UpdateSetupFeatureStatus(SetupFeatureStatus) returns (SetupFeatureStatus);
 	rpc ListActiveAccountIds(header.Id) returns (Response);
+
+	// Oauth
+	rpc GetOAuthClient(Id) returns (Response); // oauth_client
+  rpc ListOAuthClients(Id) returns (Response); // oauth_clients
+  rpc StartOAuthAuthorization(StartOAuthAuthorizationRequest) returns (Response);
+  rpc GetOAuthAuthorization(Id) returns (Response);
+  rpc ApproveOAuthAuthorization(ApproveOAuthAuthorizationRequest) returns (ApproveOAuthAuthorizationResponse);
+  rpc ExchangeOAuthToken(ExchangeOAuthTokenRequest) returns (Response); // LoginSession
 }
 
 service Crash {
