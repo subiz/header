@@ -400,8 +400,9 @@ message Users {
 message AttributeDefinitionListItem {
 	// value
 	string value = 4; // cannot be changed
-	I18nString i18n_label = 7;
+	I18nString i18n_label = 7; // @deprecated
 	string label = 8;
+	string color = 9; // css color
 }
 
 message AttributeDefinition {
@@ -1569,7 +1570,7 @@ message Message {
 
 	string zns_phone = 40; // zns-only
 	string zns_template_id = 41; // zns-only
-	// string zns_tracking_id = 42; // zns-only
+	string zns_tracking_id = 42; // zns-only
 	map<string, string> zns_template_data = 43; // zns-only
 
 	map<string, string> zns_template_default_data = 44; // zns-only
@@ -3748,7 +3749,6 @@ message File {
 	string content_disposition = 12; // inline (for printing) || attachment (download)
 	int64 last_access_at = 13;
 
-
 	// for audio file only
 	repeated float audio_waveform = 15;
 
@@ -3774,8 +3774,8 @@ message File {
 	string status = 30; // uploading | processing | ready | failed; empty means not requested.
 	string error_code = 31;
 
-	string image_1024 = 32; // @deprecated
-	string image_512 = 33; // @deprecated
+	// string image_1024 = 32; // @deprecated
+	// string image_512 = 33; // @deprecated
 
 	string text_url = 35;
 	int64 num_characters = 36;
@@ -3837,18 +3837,41 @@ message LoginSessions {
 	repeated LoginSession sessions = 2;
 }
 
-// agent session
+// Registered application, shared by many agents/tenants. Not a user or a token.
+// Credentials (secret hashes/private keys) remain private in account storage.
+message OAuthClient {
+	common.Context ctx = 1;
+	string id = 2; // OAuth client_id; can be a registered ID or a validated CIMD URL
+	string name = 3; // registry-controlled display name, not a model/user assertion
+	string description = 4;
+	string homepage_uri = 5;
+	string logo_uri = 6;
+	repeated string redirect_uris = 7; // exact registered/validated HTTPS callbacks
+	repeated string scopes = 8; // allowed scopes; does not grant these to anyone
+	repeated string resources = 9; // canonical allowed resource identifiers
+	string token_endpoint_auth_method = 10; // none, client_secret_basic, client_secret_post
+	string registration_method = 11; // provided or cimd; advertise only implemented modes
+	string state = 12; // active, disabled
+	int64 created = 13;
+	int64 modified = 14;
+}
+
+// Agent login/API-key session or OAuth authorization (type=oauth).
+// For OAuth, this IS the authorization record, not a view of another grant model.
+// At most one effective OAuth session per agent; approving a new one revokes the
+// previous OAuth session and all its tokens. Web login sessions are unaffected.
 message LoginSession {
 	common.Context ctx = 1;
 
 	string account_id = 2;
 	string agent_id = 3;
 	string client_id = 4; // application id
-	string id = 5; // crc32 code of refresh_token
+	string id = 5; // legacy: crc32 of refresh_token; oauth: opaque stable session ID
 
 	string kind = 6; // should be agent, connector, bot or profile
 
-	// should be the same as access_token, since we dont want to use refresh token
+	// Legacy sessions may reuse access_token here. For type=oauth, both fields
+	// remain empty in management/check responses; token issuance uses OAuthTokenResponse.
 	string refresh_token = 7;
 	string access_token = 8;
 
@@ -3860,17 +3883,37 @@ message LoginSession {
 
 	Location location = 17;
 
-	// use on realtime event only
-	string state = 18; // ended, created, updated
+	// Legacy realtime: ended, created, updated. OAuth lifecycle: active, revoked, expired.
+	string state = 18;
 
-	string type = 19; // session, apikey, admin(inspect), profile
+	string type = 19; // session, apikey, admin(inspect), profile, oauth
 	// string client_version = 20;
 
-	int64 ttls = 21; // seconds, apikey only
+	// Seconds; legacy API-key semantics unchanged. In a successful OAuth
+	// CheckLoginSession response, remaining access-token lifetime rounded DOWN.
+	// API caches at most min(300, ttls) seconds measured from RPC request start;
+	// ttl <= 0 cannot authenticate. This is not the OAuth session's lifetime.
+	int64 ttls = 21;
 	string note = 23;
 
 	bool inspect = 24;
 	string created_by = 25;
+
+	// OAuth-only metadata. Existing identity, client_id, scopes, created and
+	// last_used fields describe this session; tenant/client/resource are immutable.
+	// OAuth scopes must still be intersected with current Subiz permissions.
+	// ID is already in id=5; do not create a second grant identifier.
+	string token_id = 27; // verified access-token ID in CheckLoginSession response
+	// Request: expected resource from trusted service config, required for OAuth.
+	// Response/record: canonical resource bound to this OAuth session.
+	string resource = 28;
+
+	int64 last_refreshed = 30; // Unix ms; last successful refresh rotation
+	int64 revoked = 31; // Unix ms; revoking the session invalidates all its tokens
+	string revoked_by = 32; // agent ID; system actions identified by revoke_reason
+	string revoke_reason = 33; // user_revoked, replaced, refresh_reuse, etc.
+	int64 tokens_issued = 34; // lifetime count of access + refresh tokens, not LLM tokens
+	int32 active_refresh_tokens = 36;
 }
 
 message ExchangeRate {
@@ -7385,6 +7428,11 @@ message Response {
 	repeated SLAPolicy conversation_sla_policies = 313;
 	SLAPolicy conversation_sla_policy = 314;
 	CreateUploadResponse upload = 315;
+
+	OAuthClient oauth_client = 316;
+	repeated OAuthClient oauth_clients = 317;
+
+	OAuthAuthorization oauth_authorization = 318;
 }
 
 message ReportCount {
@@ -7476,16 +7524,6 @@ message WorkflowThread {
 	// string catch_action_id = 17; // set on start-scope
 	int64 is_on_exception = 18; // clear on start-scope
 	string start_action_id = 19; // used when action id is empty
-}
-
-message WorkflowStack {
-	repeated WorkflowStackItem calls = 4; // [wfid.actionid]
-}
-
-message WorkflowStackItem {
-	string workflow_id = 4;
-	string action_id = 5;
-	int64 at = 6;
 }
 
 message WorkflowSession {
@@ -9409,7 +9447,7 @@ message AIAgentGuardrail {
 }
 
 message AIAgentOverrideRule {
-	string id = 3;
+	string id = 3; // human_handoff, knowledge_not_found
 	string name = 4;
 
 	// repeated AIFunction functions = 9; // use when action = function
@@ -9424,10 +9462,6 @@ message AIAgentOverrideRule {
 
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
-
-	// string computed_hash = 45; // md5(rule)
-	// AIIntent computed_intent = 43;
-	// bool use_in_rag = 47;
 }
 
 message SenAgentSessionListRequest {
@@ -11276,4 +11310,88 @@ message CreateUploadResponse {
 	map<string, string> required_headers = 7;
 	int64 upload_expires_at = 8;
 	Error error = 10;
+}
+
+// An OAuth authorization is a LoginSession with type=oauth, kind=agent.
+// LoginSession.id is the stable authorization/session ID; there is no separate grant.
+// At most one effective OAuth session per agent. New consent revokes the previous
+// OAuth session and every token belonging to it; refresh keeps the same session.
+
+// Safe token inventory metadata. Neither the raw token nor its hash is returned.
+// Storage models containing secret hashes/code bindings are private to account.
+message OAuthToken {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // independent opaque token ID, not the bearer value or its suffix
+	string session_id = 4; // LoginSession.id (type=oauth)
+	string kind = 5; // access_token, refresh_token
+	string family_id = 6; // refresh lineage for replay handling and revoke
+	int64 created = 7;
+	int64 expires_at = 8;
+	int64 last_used = 9;
+	int64 revoked = 10;
+	string state = 11; // active, expired, revoked, rotated
+	Error error = 12;
+}
+
+// OAuth transport messages. Raw secrets occur in exchange/revocation requests
+// and token response; verification uses LoginSession.access_token.
+// Never put these payloads in logs/traces/audits.
+message StartOAuthAuthorizationRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string client_id = 3;
+	string redirect_uri = 4;
+	string response_type = 5; // code only
+	string scope = 6; // standard OAuth space-delimited scope string
+	string resource = 7;
+	string state = 8;
+	string code_challenge = 9;
+	string code_challenge_method = 10; // S256 required, public AND confidential clients
+}
+
+// Validated, server-stored request before the agent grants permission.
+// Does not contain code_verifier, login token, authorization code or client secret.
+message OAuthAuthorization {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	OAuthClient client = 4;
+	repeated string scopes = 5;
+	string resource = 6;
+	int64 expires_at = 7;
+}
+
+message ApproveOAuthAuthorizationRequest {
+	common.Context ctx = 1;
+	string account_id = 2; // user-selected tenant; account verifies active membership
+	string authorization_id = 3;
+	bool approve = 4; // false rejects; must never mint a grant/token
+}
+
+message ApproveOAuthAuthorizationResponse {
+	common.Context ctx = 1;
+	// Constructed ONLY from validated stored request. Includes code or error,
+	// state and iss. Never log this URL; it may contain an authorization code.
+	string redirect_uri = 4;
+	string session_id = 5; // empty on rejection
+}
+
+message OAuthClientAuthentication {
+	string client_id = 3;
+	string method = 5; // supplied by API based on actual HTTP method of authentication
+	string client_secret = 6; // confidential only; sensitive, never logged/persisted raw
+}
+
+message ExchangeOAuthTokenRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	OAuthClientAuthentication client = 3;
+	string grant_type = 4; // authorization_code, refresh_token
+	string code = 5;
+	string code_verifier = 6;
+	string redirect_uri = 7;
+	string resource = 8;
+	string refresh_token = 9;
+	string scope = 10; // refresh cannot expand original scopes
 }

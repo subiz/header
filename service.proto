@@ -1260,3 +1260,21 @@ service VectorDB {
 	rpc RemoveDocument(Id) returns (Empty);
 	rpc Search(DocSearchRequest) returns(DocSearchResponse);
 }
+
+
+// Implemented by service account, registered on its existing gRPC listener.
+// OAuth lifecycle lives here; access-token verification uses
+// AccountMgr.CheckLoginSession and returns LoginSession with type=oauth.
+// API translates public HTTP requests/responses; no business tools in this service.
+service OAuthMgr {
+  rpc GetOAuthClient(Id) returns (Response);
+  rpc ListOAuthClients(Id) returns (Response);
+
+  // OAuth endpoints called by API. Start is pre-login, but validates client,
+  // exact redirect, scope, resource and PKCE before storing anything.
+  rpc StartOAuthAuthorization(StartOAuthAuthorizationRequest) returns (Response);
+  rpc GetOAuthAuthorization(Id) returns (Response);
+  // Verified login agent + explicit consent + membership; no self-declared actor.
+  rpc ApproveOAuthAuthorization(ApproveOAuthAuthorizationRequest) returns (ApproveOAuthAuthorizationResponse);
+  rpc ExchangeOAuthToken(ExchangeOAuthTokenRequest) returns (OAuthToken);
+}

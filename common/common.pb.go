@@ -587,139 +587,6 @@ func (x *Device) GetUtm() *SessionCampaign {
 	return nil
 }
 
-type PackedDevice struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	IPv4   uint32                 `protobuf:"varint,3,opt,name=IPv4,proto3" json:"IPv4,omitempty"`
-	IPv6Lo uint64                 `protobuf:"varint,4,opt,name=IPv6_lo,json=IPv6Lo,proto3" json:"IPv6_lo,omitempty"`
-	IPv6Hi uint64                 `protobuf:"varint,5,opt,name=IPv6_hi,json=IPv6Hi,proto3" json:"IPv6_hi,omitempty"`
-	// int64 user_agent = 6; // hash
-	// int64 screen_resolution = 7;
-	// int64 timezone = 8; // hash
-	// int64 language = 9;
-	Referrer int64 `protobuf:"varint,10,opt,name=referrer,proto3" json:"referrer,omitempty"` // hash, referer of api.subiz.com.vn (the current page that user is viewing)
-	Type     int32 `protobuf:"varint,11,opt,name=type,proto3" json:"type,omitempty"`         // 0 - 1 - 2 -3
-	// referrer of referrer
-	// for example: user go to google.com then click a link to company.com, a request
-	// will be sent to api.subiz.com.vn
-	// referer will be 'company.com' and source_referer will be 'google.com'
-	SourceReferrer int64 `protobuf:"varint,12,opt,name=source_referrer,json=sourceReferrer,proto3" json:"source_referrer,omitempty"`
-	// repeated string ga_tracking_ids = 12;
-	PageUrl       int64                  `protobuf:"varint,13,opt,name=page_url,json=pageUrl,proto3" json:"page_url,omitempty"`
-	PageTitle     int64                  `protobuf:"varint,14,opt,name=page_title,json=pageTitle,proto3" json:"page_title,omitempty"`
-	AdsNetwork    int64                  `protobuf:"varint,15,opt,name=ads_network,json=adsNetwork,proto3" json:"ads_network,omitempty"` // google_adwords
-	Source        int32                  `protobuf:"varint,16,opt,name=source,proto3" json:"source,omitempty"`
-	Utm           *PackedSessionCampaign `protobuf:"bytes,17,opt,name=utm,proto3" json:"utm,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PackedDevice) Reset() {
-	*x = PackedDevice{}
-	mi := &file_common_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PackedDevice) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PackedDevice) ProtoMessage() {}
-
-func (x *PackedDevice) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PackedDevice.ProtoReflect.Descriptor instead.
-func (*PackedDevice) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *PackedDevice) GetIPv4() uint32 {
-	if x != nil {
-		return x.IPv4
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetIPv6Lo() uint64 {
-	if x != nil {
-		return x.IPv6Lo
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetIPv6Hi() uint64 {
-	if x != nil {
-		return x.IPv6Hi
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetReferrer() int64 {
-	if x != nil {
-		return x.Referrer
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetType() int32 {
-	if x != nil {
-		return x.Type
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetSourceReferrer() int64 {
-	if x != nil {
-		return x.SourceReferrer
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetPageUrl() int64 {
-	if x != nil {
-		return x.PageUrl
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetPageTitle() int64 {
-	if x != nil {
-		return x.PageTitle
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetAdsNetwork() int64 {
-	if x != nil {
-		return x.AdsNetwork
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetSource() int32 {
-	if x != nil {
-		return x.Source
-	}
-	return 0
-}
-
-func (x *PackedDevice) GetUtm() *PackedSessionCampaign {
-	if x != nil {
-		return x.Utm
-	}
-	return nil
-}
-
 type Credential struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// string account_id = 1; // @deprecated
@@ -742,7 +609,7 @@ type Credential struct {
 
 func (x *Credential) Reset() {
 	*x = Credential{}
-	mi := &file_common_proto_msgTypes[4]
+	mi := &file_common_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -754,7 +621,7 @@ func (x *Credential) String() string {
 func (*Credential) ProtoMessage() {}
 
 func (x *Credential) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[4]
+	mi := &file_common_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -767,7 +634,7 @@ func (x *Credential) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Credential.ProtoReflect.Descriptor instead.
 func (*Credential) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{4}
+	return file_common_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Credential) GetIssuer() string {
@@ -861,7 +728,7 @@ type SessionCampaign struct {
 
 func (x *SessionCampaign) Reset() {
 	*x = SessionCampaign{}
-	mi := &file_common_proto_msgTypes[5]
+	mi := &file_common_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -873,7 +740,7 @@ func (x *SessionCampaign) String() string {
 func (*SessionCampaign) ProtoMessage() {}
 
 func (x *SessionCampaign) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[5]
+	mi := &file_common_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -886,7 +753,7 @@ func (x *SessionCampaign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SessionCampaign.ProtoReflect.Descriptor instead.
 func (*SessionCampaign) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{5}
+	return file_common_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SessionCampaign) GetName() string {
@@ -931,90 +798,6 @@ func (x *SessionCampaign) GetId() string {
 	return ""
 }
 
-type PackedSessionCampaign struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          int64                  `protobuf:"varint,2,opt,name=name,proto3" json:"name,omitempty"`
-	Source        int64                  `protobuf:"varint,3,opt,name=source,proto3" json:"source,omitempty"`
-	Medium        int64                  `protobuf:"varint,4,opt,name=medium,proto3" json:"medium,omitempty"`
-	Term          int64                  `protobuf:"varint,5,opt,name=term,proto3" json:"term,omitempty"`
-	Content       int64                  `protobuf:"varint,6,opt,name=content,proto3" json:"content,omitempty"`
-	Id            int64                  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PackedSessionCampaign) Reset() {
-	*x = PackedSessionCampaign{}
-	mi := &file_common_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PackedSessionCampaign) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PackedSessionCampaign) ProtoMessage() {}
-
-func (x *PackedSessionCampaign) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PackedSessionCampaign.ProtoReflect.Descriptor instead.
-func (*PackedSessionCampaign) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *PackedSessionCampaign) GetName() int64 {
-	if x != nil {
-		return x.Name
-	}
-	return 0
-}
-
-func (x *PackedSessionCampaign) GetSource() int64 {
-	if x != nil {
-		return x.Source
-	}
-	return 0
-}
-
-func (x *PackedSessionCampaign) GetMedium() int64 {
-	if x != nil {
-		return x.Medium
-	}
-	return 0
-}
-
-func (x *PackedSessionCampaign) GetTerm() int64 {
-	if x != nil {
-		return x.Term
-	}
-	return 0
-}
-
-func (x *PackedSessionCampaign) GetContent() int64 {
-	if x != nil {
-		return x.Content
-	}
-	return 0
-}
-
-func (x *PackedSessionCampaign) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
 type Limit struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Ctx                 *Context               `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -1048,7 +831,7 @@ type Limit struct {
 
 func (x *Limit) Reset() {
 	*x = Limit{}
-	mi := &file_common_proto_msgTypes[7]
+	mi := &file_common_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1060,7 +843,7 @@ func (x *Limit) String() string {
 func (*Limit) ProtoMessage() {}
 
 func (x *Limit) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[7]
+	mi := &file_common_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1073,7 +856,7 @@ func (x *Limit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Limit.ProtoReflect.Descriptor instead.
 func (*Limit) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{7}
+	return file_common_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Limit) GetCtx() *Context {
@@ -1319,22 +1102,7 @@ const file_common_proto_rawDesc = "" +
 	"\aorganic\x10\x02\x12\n" +
 	"\n" +
 	"\x06social\x10\x03\x12\x0f\n" +
-	"\vadvertising\x10\x04\"\xd1\x02\n" +
-	"\fPackedDevice\x12\x12\n" +
-	"\x04IPv4\x18\x03 \x01(\rR\x04IPv4\x12\x17\n" +
-	"\aIPv6_lo\x18\x04 \x01(\x04R\x06IPv6Lo\x12\x17\n" +
-	"\aIPv6_hi\x18\x05 \x01(\x04R\x06IPv6Hi\x12\x1a\n" +
-	"\breferrer\x18\n" +
-	" \x01(\x03R\breferrer\x12\x12\n" +
-	"\x04type\x18\v \x01(\x05R\x04type\x12'\n" +
-	"\x0fsource_referrer\x18\f \x01(\x03R\x0esourceReferrer\x12\x19\n" +
-	"\bpage_url\x18\r \x01(\x03R\apageUrl\x12\x1d\n" +
-	"\n" +
-	"page_title\x18\x0e \x01(\x03R\tpageTitle\x12\x1f\n" +
-	"\vads_network\x18\x0f \x01(\x03R\n" +
-	"adsNetwork\x12\x16\n" +
-	"\x06source\x18\x10 \x01(\x05R\x06source\x12/\n" +
-	"\x03utm\x18\x11 \x01(\v2\x1d.common.PackedSessionCampaignR\x03utm\"\xef\x02\n" +
+	"\vadvertising\x10\x04\"\xef\x02\n" +
 	"\n" +
 	"Credential\x12\x16\n" +
 	"\x06issuer\x18\x03 \x01(\tR\x06issuer\x12 \n" +
@@ -1359,14 +1127,7 @@ const file_common_proto_rawDesc = "" +
 	"\x06medium\x18\x04 \x01(\tR\x06medium\x12\x12\n" +
 	"\x04term\x18\x05 \x01(\tR\x04term\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\tR\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\tR\x02id\"\x99\x01\n" +
-	"\x15PackedSessionCampaign\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\x03R\x04name\x12\x16\n" +
-	"\x06source\x18\x03 \x01(\x03R\x06source\x12\x16\n" +
-	"\x06medium\x18\x04 \x01(\x03R\x06medium\x12\x12\n" +
-	"\x04term\x18\x05 \x01(\x03R\x04term\x12\x18\n" +
-	"\acontent\x18\x06 \x01(\x03R\acontent\x12\x0e\n" +
-	"\x02id\x18\a \x01(\x03R\x02id\"\xad\a\n" +
+	"\x02id\x18\a \x01(\tR\x02id\"\xad\a\n" +
 	"\x05Limit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -1422,32 +1183,29 @@ func file_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_common_proto_goTypes = []any{
-	(Type)(0),                     // 0: common.Type
-	(Device_DeviceType)(0),        // 1: common.Device.DeviceType
-	(Device_SourceType)(0),        // 2: common.Device.SourceType
-	(*Context)(nil),               // 3: common.Context
-	(*Uint128)(nil),               // 4: common.Uint128
-	(*Device)(nil),                // 5: common.Device
-	(*PackedDevice)(nil),          // 6: common.PackedDevice
-	(*Credential)(nil),            // 7: common.Credential
-	(*SessionCampaign)(nil),       // 8: common.SessionCampaign
-	(*PackedSessionCampaign)(nil), // 9: common.PackedSessionCampaign
-	(*Limit)(nil),                 // 10: common.Limit
+	(Type)(0),               // 0: common.Type
+	(Device_DeviceType)(0),  // 1: common.Device.DeviceType
+	(Device_SourceType)(0),  // 2: common.Device.SourceType
+	(*Context)(nil),         // 3: common.Context
+	(*Uint128)(nil),         // 4: common.Uint128
+	(*Device)(nil),          // 5: common.Device
+	(*Credential)(nil),      // 6: common.Credential
+	(*SessionCampaign)(nil), // 7: common.SessionCampaign
+	(*Limit)(nil),           // 8: common.Limit
 }
 var file_common_proto_depIdxs = []int32{
-	7, // 0: common.Context.credential:type_name -> common.Credential
+	6, // 0: common.Context.credential:type_name -> common.Credential
 	5, // 1: common.Context.by_device:type_name -> common.Device
-	8, // 2: common.Device.utm:type_name -> common.SessionCampaign
-	9, // 3: common.PackedDevice.utm:type_name -> common.PackedSessionCampaign
-	0, // 4: common.Credential.type:type_name -> common.Type
-	3, // 5: common.Limit.ctx:type_name -> common.Context
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	7, // 2: common.Device.utm:type_name -> common.SessionCampaign
+	0, // 3: common.Credential.type:type_name -> common.Type
+	3, // 4: common.Limit.ctx:type_name -> common.Context
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_common_proto_init() }
@@ -1461,7 +1219,7 @@ func file_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   8,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

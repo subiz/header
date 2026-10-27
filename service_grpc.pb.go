@@ -35960,3 +35960,311 @@ var VectorDB_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
 }
+
+const (
+	OAuthMgr_GetOAuthClient_FullMethodName            = "/header.OAuthMgr/GetOAuthClient"
+	OAuthMgr_ListOAuthClients_FullMethodName          = "/header.OAuthMgr/ListOAuthClients"
+	OAuthMgr_StartOAuthAuthorization_FullMethodName   = "/header.OAuthMgr/StartOAuthAuthorization"
+	OAuthMgr_GetOAuthAuthorization_FullMethodName     = "/header.OAuthMgr/GetOAuthAuthorization"
+	OAuthMgr_ApproveOAuthAuthorization_FullMethodName = "/header.OAuthMgr/ApproveOAuthAuthorization"
+	OAuthMgr_ExchangeOAuthToken_FullMethodName        = "/header.OAuthMgr/ExchangeOAuthToken"
+)
+
+// OAuthMgrClient is the client API for OAuthMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Implemented by service account, registered on its existing gRPC listener.
+// OAuth lifecycle lives here; access-token verification uses
+// AccountMgr.CheckLoginSession and returns LoginSession with type=oauth.
+// API translates public HTTP requests/responses; no business tools in this service.
+type OAuthMgrClient interface {
+	GetOAuthClient(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListOAuthClients(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// OAuth endpoints called by API. Start is pre-login, but validates client,
+	// exact redirect, scope, resource and PKCE before storing anything.
+	StartOAuthAuthorization(ctx context.Context, in *StartOAuthAuthorizationRequest, opts ...grpc.CallOption) (*Response, error)
+	GetOAuthAuthorization(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// Verified login agent + explicit consent + membership; no self-declared actor.
+	ApproveOAuthAuthorization(ctx context.Context, in *ApproveOAuthAuthorizationRequest, opts ...grpc.CallOption) (*ApproveOAuthAuthorizationResponse, error)
+	ExchangeOAuthToken(ctx context.Context, in *ExchangeOAuthTokenRequest, opts ...grpc.CallOption) (*OAuthToken, error)
+}
+
+type oAuthMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOAuthMgrClient(cc grpc.ClientConnInterface) OAuthMgrClient {
+	return &oAuthMgrClient{cc}
+}
+
+func (c *oAuthMgrClient) GetOAuthClient(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, OAuthMgr_GetOAuthClient_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAuthMgrClient) ListOAuthClients(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, OAuthMgr_ListOAuthClients_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAuthMgrClient) StartOAuthAuthorization(ctx context.Context, in *StartOAuthAuthorizationRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, OAuthMgr_StartOAuthAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAuthMgrClient) GetOAuthAuthorization(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, OAuthMgr_GetOAuthAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAuthMgrClient) ApproveOAuthAuthorization(ctx context.Context, in *ApproveOAuthAuthorizationRequest, opts ...grpc.CallOption) (*ApproveOAuthAuthorizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApproveOAuthAuthorizationResponse)
+	err := c.cc.Invoke(ctx, OAuthMgr_ApproveOAuthAuthorization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAuthMgrClient) ExchangeOAuthToken(ctx context.Context, in *ExchangeOAuthTokenRequest, opts ...grpc.CallOption) (*OAuthToken, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OAuthToken)
+	err := c.cc.Invoke(ctx, OAuthMgr_ExchangeOAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OAuthMgrServer is the server API for OAuthMgr service.
+// All implementations must embed UnimplementedOAuthMgrServer
+// for forward compatibility.
+//
+// Implemented by service account, registered on its existing gRPC listener.
+// OAuth lifecycle lives here; access-token verification uses
+// AccountMgr.CheckLoginSession and returns LoginSession with type=oauth.
+// API translates public HTTP requests/responses; no business tools in this service.
+type OAuthMgrServer interface {
+	GetOAuthClient(context.Context, *Id) (*Response, error)
+	ListOAuthClients(context.Context, *Id) (*Response, error)
+	// OAuth endpoints called by API. Start is pre-login, but validates client,
+	// exact redirect, scope, resource and PKCE before storing anything.
+	StartOAuthAuthorization(context.Context, *StartOAuthAuthorizationRequest) (*Response, error)
+	GetOAuthAuthorization(context.Context, *Id) (*Response, error)
+	// Verified login agent + explicit consent + membership; no self-declared actor.
+	ApproveOAuthAuthorization(context.Context, *ApproveOAuthAuthorizationRequest) (*ApproveOAuthAuthorizationResponse, error)
+	ExchangeOAuthToken(context.Context, *ExchangeOAuthTokenRequest) (*OAuthToken, error)
+	mustEmbedUnimplementedOAuthMgrServer()
+}
+
+// UnimplementedOAuthMgrServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedOAuthMgrServer struct{}
+
+func (UnimplementedOAuthMgrServer) GetOAuthClient(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOAuthClient not implemented")
+}
+func (UnimplementedOAuthMgrServer) ListOAuthClients(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOAuthClients not implemented")
+}
+func (UnimplementedOAuthMgrServer) StartOAuthAuthorization(context.Context, *StartOAuthAuthorizationRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartOAuthAuthorization not implemented")
+}
+func (UnimplementedOAuthMgrServer) GetOAuthAuthorization(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOAuthAuthorization not implemented")
+}
+func (UnimplementedOAuthMgrServer) ApproveOAuthAuthorization(context.Context, *ApproveOAuthAuthorizationRequest) (*ApproveOAuthAuthorizationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ApproveOAuthAuthorization not implemented")
+}
+func (UnimplementedOAuthMgrServer) ExchangeOAuthToken(context.Context, *ExchangeOAuthTokenRequest) (*OAuthToken, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExchangeOAuthToken not implemented")
+}
+func (UnimplementedOAuthMgrServer) mustEmbedUnimplementedOAuthMgrServer() {}
+func (UnimplementedOAuthMgrServer) testEmbeddedByValue()                  {}
+
+// UnsafeOAuthMgrServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OAuthMgrServer will
+// result in compilation errors.
+type UnsafeOAuthMgrServer interface {
+	mustEmbedUnimplementedOAuthMgrServer()
+}
+
+func RegisterOAuthMgrServer(s grpc.ServiceRegistrar, srv OAuthMgrServer) {
+	// If the following call panics, it indicates UnimplementedOAuthMgrServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&OAuthMgr_ServiceDesc, srv)
+}
+
+func _OAuthMgr_GetOAuthClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthMgrServer).GetOAuthClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthMgr_GetOAuthClient_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthMgrServer).GetOAuthClient(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthMgr_ListOAuthClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthMgrServer).ListOAuthClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthMgr_ListOAuthClients_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthMgrServer).ListOAuthClients(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthMgr_StartOAuthAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartOAuthAuthorizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthMgrServer).StartOAuthAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthMgr_StartOAuthAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthMgrServer).StartOAuthAuthorization(ctx, req.(*StartOAuthAuthorizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthMgr_GetOAuthAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthMgrServer).GetOAuthAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthMgr_GetOAuthAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthMgrServer).GetOAuthAuthorization(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthMgr_ApproveOAuthAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApproveOAuthAuthorizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthMgrServer).ApproveOAuthAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthMgr_ApproveOAuthAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthMgrServer).ApproveOAuthAuthorization(ctx, req.(*ApproveOAuthAuthorizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthMgr_ExchangeOAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExchangeOAuthTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthMgrServer).ExchangeOAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthMgr_ExchangeOAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthMgrServer).ExchangeOAuthToken(ctx, req.(*ExchangeOAuthTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// OAuthMgr_ServiceDesc is the grpc.ServiceDesc for OAuthMgr service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OAuthMgr_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.OAuthMgr",
+	HandlerType: (*OAuthMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetOAuthClient",
+			Handler:    _OAuthMgr_GetOAuthClient_Handler,
+		},
+		{
+			MethodName: "ListOAuthClients",
+			Handler:    _OAuthMgr_ListOAuthClients_Handler,
+		},
+		{
+			MethodName: "StartOAuthAuthorization",
+			Handler:    _OAuthMgr_StartOAuthAuthorization_Handler,
+		},
+		{
+			MethodName: "GetOAuthAuthorization",
+			Handler:    _OAuthMgr_GetOAuthAuthorization_Handler,
+		},
+		{
+			MethodName: "ApproveOAuthAuthorization",
+			Handler:    _OAuthMgr_ApproveOAuthAuthorization_Handler,
+		},
+		{
+			MethodName: "ExchangeOAuthToken",
+			Handler:    _OAuthMgr_ExchangeOAuthToken_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
