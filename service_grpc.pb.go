@@ -2281,7 +2281,6 @@ const (
 	AccountMgr_TransferOwner_FullMethodName                   = "/header.AccountMgr/TransferOwner"
 	AccountMgr_CheckLoginSession_FullMethodName               = "/header.AccountMgr/CheckLoginSession"
 	AccountMgr_ListLoginSessions_FullMethodName               = "/header.AccountMgr/ListLoginSessions"
-	AccountMgr_ListApiKeys_FullMethodName                     = "/header.AccountMgr/ListApiKeys"
 	AccountMgr_LogoutSession_FullMethodName                   = "/header.AccountMgr/LogoutSession"
 	AccountMgr_CreateApiKey_FullMethodName                    = "/header.AccountMgr/CreateApiKey"
 	AccountMgr_GetLanguage_FullMethodName                     = "/header.AccountMgr/GetLanguage"
@@ -2392,9 +2391,9 @@ type AccountMgrClient interface {
 	SyncPublicHolidays(ctx context.Context, in *account.SyncPublicHolidaysRequest, opts ...grpc.CallOption) (*account.BusinessHours, error)
 	TransferOwner(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Agent, error)
 	CheckLoginSession(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*LoginSession, error)
-	ListLoginSessions(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSessions, error)
-	ListApiKeys(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSessions, error)
-	LogoutSession(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	ListLoginSessions(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*Response, error)
+	// rpc ListApiKeys(Id) returns (LoginSessions);
+	LogoutSession(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*Empty, error)
 	CreateApiKey(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*LoginSession, error)
 	GetLanguage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Lang, error)
 	UpdateLanguage(ctx context.Context, in *LangMessage, opts ...grpc.CallOption) (*LangMessage, error)
@@ -2836,9 +2835,9 @@ func (c *accountMgrClient) CheckLoginSession(ctx context.Context, in *LoginSessi
 	return out, nil
 }
 
-func (c *accountMgrClient) ListLoginSessions(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSessions, error) {
+func (c *accountMgrClient) ListLoginSessions(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginSessions)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, AccountMgr_ListLoginSessions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -2846,17 +2845,7 @@ func (c *accountMgrClient) ListLoginSessions(ctx context.Context, in *Id, opts .
 	return out, nil
 }
 
-func (c *accountMgrClient) ListApiKeys(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LoginSessions, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginSessions)
-	err := c.cc.Invoke(ctx, AccountMgr_ListApiKeys_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountMgrClient) LogoutSession(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *accountMgrClient) LogoutSession(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, AccountMgr_LogoutSession_FullMethodName, in, out, cOpts...)
@@ -3576,9 +3565,9 @@ type AccountMgrServer interface {
 	SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error)
 	TransferOwner(context.Context, *Id) (*account.Agent, error)
 	CheckLoginSession(context.Context, *LoginSession) (*LoginSession, error)
-	ListLoginSessions(context.Context, *Id) (*LoginSessions, error)
-	ListApiKeys(context.Context, *Id) (*LoginSessions, error)
-	LogoutSession(context.Context, *Id) (*Empty, error)
+	ListLoginSessions(context.Context, *LoginSession) (*Response, error)
+	// rpc ListApiKeys(Id) returns (LoginSessions);
+	LogoutSession(context.Context, *LoginSession) (*Empty, error)
 	CreateApiKey(context.Context, *LoginSession) (*LoginSession, error)
 	GetLanguage(context.Context, *Id) (*Lang, error)
 	UpdateLanguage(context.Context, *LangMessage) (*LangMessage, error)
@@ -3768,13 +3757,10 @@ func (UnimplementedAccountMgrServer) TransferOwner(context.Context, *Id) (*accou
 func (UnimplementedAccountMgrServer) CheckLoginSession(context.Context, *LoginSession) (*LoginSession, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckLoginSession not implemented")
 }
-func (UnimplementedAccountMgrServer) ListLoginSessions(context.Context, *Id) (*LoginSessions, error) {
+func (UnimplementedAccountMgrServer) ListLoginSessions(context.Context, *LoginSession) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListLoginSessions not implemented")
 }
-func (UnimplementedAccountMgrServer) ListApiKeys(context.Context, *Id) (*LoginSessions, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListApiKeys not implemented")
-}
-func (UnimplementedAccountMgrServer) LogoutSession(context.Context, *Id) (*Empty, error) {
+func (UnimplementedAccountMgrServer) LogoutSession(context.Context, *LoginSession) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method LogoutSession not implemented")
 }
 func (UnimplementedAccountMgrServer) CreateApiKey(context.Context, *LoginSession) (*LoginSession, error) {
@@ -4648,7 +4634,7 @@ func _AccountMgr_CheckLoginSession_Handler(srv interface{}, ctx context.Context,
 }
 
 func _AccountMgr_ListLoginSessions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(LoginSession)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -4660,31 +4646,13 @@ func _AccountMgr_ListLoginSessions_Handler(srv interface{}, ctx context.Context,
 		FullMethod: AccountMgr_ListLoginSessions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).ListLoginSessions(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountMgr_ListApiKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountMgrServer).ListApiKeys(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountMgr_ListApiKeys_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).ListApiKeys(ctx, req.(*Id))
+		return srv.(AccountMgrServer).ListLoginSessions(ctx, req.(*LoginSession))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AccountMgr_LogoutSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(LoginSession)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -4696,7 +4664,7 @@ func _AccountMgr_LogoutSession_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: AccountMgr_LogoutSession_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).LogoutSession(ctx, req.(*Id))
+		return srv.(AccountMgrServer).LogoutSession(ctx, req.(*LoginSession))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6061,10 +6029,6 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListLoginSessions",
 			Handler:    _AccountMgr_ListLoginSessions_Handler,
-		},
-		{
-			MethodName: "ListApiKeys",
-			Handler:    _AccountMgr_ListApiKeys_Handler,
 		},
 		{
 			MethodName: "LogoutSession",

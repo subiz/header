@@ -3832,11 +3832,6 @@ message BannedUser {
 	string by = 6;
 }
 
-message LoginSessions {
-	common.Context ctx = 1;
-	repeated LoginSession sessions = 2;
-}
-
 // Registered application, shared by many agents/tenants. Not a user or a token.
 // Credentials (secret hashes/private keys) remain private in account storage.
 message OAuthClient {
@@ -7238,6 +7233,7 @@ message Response {
 
 	AgentProfile agent_profile = 136;
 	LoginSession login_session = 137;
+	repeated LoginSession login_sessions = 121;
 	PromotionCode promotion_code = 138;
 	repeated PromotionCode promotion_codes = 139;
 	PromotionCheckResult promotion_check_result = 140;
