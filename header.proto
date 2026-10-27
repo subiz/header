@@ -400,8 +400,9 @@ message Users {
 message AttributeDefinitionListItem {
 	// value
 	string value = 4; // cannot be changed
-	I18nString i18n_label = 7;
+	I18nString i18n_label = 7; // @deprecated
 	string label = 8;
+	string color = 9; // css color
 }
 
 message AttributeDefinition {
@@ -1569,7 +1570,7 @@ message Message {
 
 	string zns_phone = 40; // zns-only
 	string zns_template_id = 41; // zns-only
-	// string zns_tracking_id = 42; // zns-only
+	string zns_tracking_id = 42; // zns-only
 	map<string, string> zns_template_data = 43; // zns-only
 
 	map<string, string> zns_template_default_data = 44; // zns-only
@@ -3748,7 +3749,6 @@ message File {
 	string content_disposition = 12; // inline (for printing) || attachment (download)
 	int64 last_access_at = 13;
 
-
 	// for audio file only
 	repeated float audio_waveform = 15;
 
@@ -3774,8 +3774,8 @@ message File {
 	string status = 30; // uploading | processing | ready | failed; empty means not requested.
 	string error_code = 31;
 
-	string image_1024 = 32; // @deprecated
-	string image_512 = 33; // @deprecated
+	// string image_1024 = 32; // @deprecated
+	// string image_512 = 33; // @deprecated
 
 	string text_url = 35;
 	int64 num_characters = 36;
@@ -7478,16 +7478,6 @@ message WorkflowThread {
 	string start_action_id = 19; // used when action id is empty
 }
 
-message WorkflowStack {
-	repeated WorkflowStackItem calls = 4; // [wfid.actionid]
-}
-
-message WorkflowStackItem {
-	string workflow_id = 4;
-	string action_id = 5;
-	int64 at = 6;
-}
-
 message WorkflowSession {
 	common.Context ctx = 1;
 
@@ -9409,7 +9399,7 @@ message AIAgentGuardrail {
 }
 
 message AIAgentOverrideRule {
-	string id = 3;
+	string id = 3; // human_handoff, knowledge_not_found
 	string name = 4;
 
 	// repeated AIFunction functions = 9; // use when action = function
@@ -9424,10 +9414,6 @@ message AIAgentOverrideRule {
 
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
-
-	// string computed_hash = 45; // md5(rule)
-	// AIIntent computed_intent = 43;
-	// bool use_in_rag = 47;
 }
 
 message SenAgentSessionListRequest {

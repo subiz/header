@@ -1,0 +1,238 @@
+syntax = "proto3";
+
+package header;
+option go_package = "github.com/subiz/header";
+
+import "common.proto";
+import "header.proto";
+
+// OAuth application authorization and agent-owned grant/token management.
+// All timestamps are Unix milliseconds, matching LoginSession.
+// ctx is supplied by trusted API middleware, NEVER copied from HTTP/MCP input.
+
+// Registered application, shared by many agents/tenants. Not a user or a token.
+// Credentials (secret hashes/private keys) remain private in account storage.
+message OAuthClient {
+  common.Context ctx = 1;
+  string id = 2; // OAuth client_id; can be a registered ID or a validated CIMD URL
+  string name = 3; // registry-controlled display name, not a model/user assertion
+  string description = 4;
+  string homepage_uri = 5;
+  string logo_uri = 6;
+  repeated string redirect_uris = 7; // exact registered/validated HTTPS callbacks
+  repeated string scopes = 8; // allowed scopes; does not grant these to anyone
+  repeated string resources = 9; // canonical allowed resource identifiers
+  string token_endpoint_auth_method = 10; // none, client_secret_basic, client_secret_post
+  string registration_method = 11; // provided or cimd; advertise only implemented modes
+  string state = 12; // active, disabled
+  int64 created = 13;
+  int64 modified = 14;
+}
+
+// One explicit consent/connection: agent -> client, within one tenant/resource.
+// Multiple connections to the same app are allowed and individually revocable.
+// A new token/refresh does NOT create another OAuthGrant.
+message OAuthGrant {
+  common.Context ctx = 1;
+  string id = 2; // opaque connection/grant ID; NOT a credential
+  string agent_id = 3; // verified consenting agent, set by account
+  string account_id = 4; // tenant selected at consent, immutable after grant
+  string client_id = 5;
+  repeated string scopes = 6; // actually granted; intersect with live domain ACL
+  string resource = 7;
+  string state = 8; // active, revoked, expired (expired when no usable token remains)
+  int64 created = 9;
+  int64 last_used = 10; // latest successful resource access; does not extend token expiry
+  int64 last_refreshed = 11;
+  int64 revoked = 12;
+  string revoked_by = 13; // agent ID for self-revoke; system actions use reason
+  string revoke_reason = 14; // user_revoked, refresh_reuse, client_disabled, etc.
+  int64 tokens_issued = 15; // lifetime number of access + refresh tokens issued
+  int32 active_access_tokens = 16; // unexpired, unrevoked and grant/client still active
+  int32 active_refresh_tokens = 17;
+  OAuthClient client = 18; // current public registry metadata for UI; never credentials
+}
+
+// Safe token inventory metadata. Neither the raw token nor its hash is returned.
+// Storage models containing secret hashes/code bindings are private to account.
+message OAuthToken {
+  common.Context ctx = 1;
+  string id = 2; // independent opaque token ID, not the bearer value or its suffix
+  string grant_id = 3;
+  string kind = 4; // access_token, refresh_token
+  string family_id = 5; // refresh lineage for replay handling and revoke
+  int64 created = 6;
+  int64 expires_at = 7;
+  int64 last_used = 8;
+  int64 revoked = 9;
+  string state = 10; // active, expired, revoked, rotated
+}
+
+message GetOAuthClientRequest {
+  common.Context ctx = 1;
+  string client_id = 2;
+}
+message ListOAuthGrantsRequest {
+  common.Context ctx = 1;
+  // Caller is always ctx credential issuer. No agent_id/owner override.
+  string account_id = 2; // optional filter, cannot expand beyond caller's own grants
+  string client_id = 3; // optional filter
+  int32 limit = 4; // default 20, max 100
+  string cursor = 5; // bound to owner and filters
+  bool include_inactive = 6; // include revoked/expired grants
+}
+message OAuthGrants {
+  common.Context ctx = 1;
+  repeated OAuthGrant grants = 2;
+  string next_cursor = 3;
+}
+message OAuthGrantRequest {
+  common.Context ctx = 1;
+  string grant_id = 2;
+}
+message ListOAuthTokensRequest {
+  common.Context ctx = 1;
+  string grant_id = 2;
+  int32 limit = 3; // default 20, max 100
+  string cursor = 4;
+  bool include_inactive = 5;
+}
+message OAuthTokens {
+  common.Context ctx = 1;
+  repeated OAuthToken tokens = 2;
+  string next_cursor = 3;
+}
+message RevokeOAuthTokenRequest {
+  common.Context ctx = 1;
+  string grant_id = 2;
+  string token_id = 3;
+}
+
+// OAuth transport messages. Raw secrets occur ONLY in exchange/revocation/check
+// requests and token response. Never put these payloads in logs/traces/audits.
+message StartOAuthAuthorizationRequest {
+  common.Context ctx = 1;
+  string client_id = 2;
+  string redirect_uri = 3;
+  string response_type = 4; // code only
+  string scope = 5; // standard OAuth space-delimited scope string
+  string resource = 6;
+  string state = 7;
+  string code_challenge = 8;
+  string code_challenge_method = 9; // S256 required, public AND confidential clients
+}
+// Validated, server-stored request before the agent grants permission.
+// Does not contain code_verifier, login token, authorization code or client secret.
+message OAuthAuthorization {
+  common.Context ctx = 1;
+  string id = 2;
+  OAuthClient client = 3;
+  repeated string scopes = 4;
+  string resource = 5;
+  int64 expires_at = 6;
+}
+message GetOAuthAuthorizationRequest {
+  common.Context ctx = 1;
+  string authorization_id = 2;
+}
+message ApproveOAuthAuthorizationRequest {
+  common.Context ctx = 1;
+  string authorization_id = 2;
+  string account_id = 3; // user-selected tenant; account verifies active membership
+  bool approve = 4; // false rejects; must never mint a grant/token
+}
+message ApproveOAuthAuthorizationResponse {
+  common.Context ctx = 1;
+  // Constructed ONLY from validated stored request. Includes code or error,
+  // state and iss. Never log this URL; it may contain an authorization code.
+  string redirect_uri = 2;
+  string grant_id = 3; // empty on rejection
+}
+message OAuthClientAuthentication {
+  string client_id = 1;
+  string method = 2; // supplied by API based on actual HTTP method of authentication
+  string client_secret = 3; // confidential only; sensitive, never logged/persisted raw
+}
+message ExchangeOAuthTokenRequest {
+  common.Context ctx = 1;
+  OAuthClientAuthentication client = 2;
+  string grant_type = 3; // authorization_code, refresh_token
+  string code = 4;
+  string code_verifier = 5;
+  string redirect_uri = 6;
+  string resource = 7;
+  string refresh_token = 8;
+  string scope = 9; // refresh cannot expand original scopes
+}
+message OAuthTokenResponse {
+  // No ctx/internal IDs on this response: maps to the OAuth HTTP token response.
+  string access_token = 1;
+  string token_type = 2; // Bearer
+  int64 expires_in = 3; // 36000 seconds, fixed 10-hour access token lifetime
+  string refresh_token = 4;
+  string scope = 5;
+}
+message RevokeOAuthTokenByValueRequest {
+  common.Context ctx = 1;
+  OAuthClientAuthentication client = 2;
+  string token = 3; // RFC 7009; distinct from the agent-facing revoke-by-ID API
+  string token_type_hint = 4;
+}
+message CheckOAuthAccessTokenRequest {
+  common.Context ctx = 1;
+  string access_token = 2;
+  string resource = 3; // expected resource from server config, not tool arguments
+}
+message OAuthPrincipal {
+  common.Context ctx = 1;
+  string agent_id = 2;
+  string account_id = 3;
+  string client_id = 4;
+  string grant_id = 5;
+  string token_id = 6;
+  repeated string scopes = 7;
+  int64 expires_at = 8;
+}
+
+// Implemented by service account, registered on its existing gRPC listener.
+// Dedicated service keeps new OAuth lifecycle separate from legacy LoginSession.
+// API translates public HTTP requests/responses; no business tools in this service.
+service OAuthMgr {
+  // Read configured public app metadata; disabled/unknown clients cannot authorize.
+  rpc GetOAuthClient(GetOAuthClientRequest) returns (OAuthClient);
+
+  // Agent management: requires a verified Subiz LOGIN session, not an MCP token.
+  // Always enforce OAuthGrant.agent_id == authenticated agent on every call.
+  rpc ListOAuthGrants(ListOAuthGrantsRequest) returns (OAuthGrants);
+  rpc GetOAuthGrant(OAuthGrantRequest) returns (OAuthGrant);
+  rpc ListOAuthTokens(ListOAuthTokensRequest) returns (OAuthTokens);
+  // Revoke grant AND all token families; repeat requests are idempotent.
+  rpc RevokeOAuthGrant(OAuthGrantRequest) returns (OAuthGrant);
+  // Access token: revoke that token only. Refresh token: revoke its family,
+  // including descendant access/refresh tokens. Disconnect app via RevokeOAuthGrant.
+  rpc RevokeOAuthToken(RevokeOAuthTokenRequest) returns (OAuthToken);
+
+  // OAuth endpoints called by API. Start is pre-login, but validates client,
+  // exact redirect, scope, resource and PKCE before storing anything.
+  rpc StartOAuthAuthorization(StartOAuthAuthorizationRequest) returns (OAuthAuthorization);
+  rpc GetOAuthAuthorization(GetOAuthAuthorizationRequest) returns (OAuthAuthorization);
+  // Verified login agent + explicit consent + membership; no self-declared actor.
+  rpc ApproveOAuthAuthorization(ApproveOAuthAuthorizationRequest) returns (ApproveOAuthAuthorizationResponse);
+  rpc ExchangeOAuthToken(ExchangeOAuthTokenRequest) returns (OAuthTokenResponse);
+  rpc RevokeOAuthTokenByValue(RevokeOAuthTokenByValueRequest) returns (Empty);
+  // INTERNAL: API middleware only; not an anonymous public introspection endpoint.
+  // Checks revocation/client/account/agent on every call, no positive auth cache.
+  rpc CheckOAuthAccessToken(CheckOAuthAccessTokenRequest) returns (OAuthPrincipal);
+}
+
+// Lifecycle rules:
+// - Authorization request 10 minutes; code 2 minutes, single-use with atomic consume.
+// - Access expires 10 hours after issuance; using it never extends its lifetime.
+// - Refresh rotates on each successful use. New refresh expires 14 days from then.
+// - Old refresh hash/replay lineage is retained server-side, not exposed here.
+// - Old access tokens remain valid until their own expiry unless explicitly revoked,
+//   their family/grant is revoked, or client/agent/account is disabled.
+// - Reused refresh revokes its family; rotation/revoke must serialize across replicas.
+// - No absolute 90-day connection expiry, and no account-level MCP call quota.
+// - Counts are token counts, NOT number of chat messages or LLM tokens.
+// - OAuthClient creation/secret provisioning initially operator-controlled (no agent CRUD).
