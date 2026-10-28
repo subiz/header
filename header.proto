@@ -10316,6 +10316,9 @@ message AIFunction {
 	UpdateUserInformation update_information = 16; // deprecated
 	CollectUserInformation collect_user_information = 20;
 	AssignRequest assign_agent = 18; // name=system_assign, human handoff or invite_human
+	ListUserRecordsFunction list_user_records = 150; // system
+	CreateUserRecordFunction create_user_record = 151; // system
+	UpdateUserRecordFunction update_user_record = 152; // system
 
 	Form system_schedule_appointment = 19;
 
@@ -10379,6 +10382,18 @@ message CreateTicketFunction {
 	string description = 4; // prompt
 	string type_id = 5;
 	string due_at = 6;
+}
+
+message UpdateUserRecordFunction {
+	string type_id = 5;
+}
+
+message CreateUserRecordFunction {
+	string type_id = 5;
+}
+
+message ListUserRecordsFunction {
+	string type_id = 5; // optional
 }
 
 message AIIntent {
