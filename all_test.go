@@ -1,6 +1,7 @@
 package header
 
 import (
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 
@@ -17,6 +19,8 @@ import (
 	cpb "github.com/subiz/header/common"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/structpb"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func TestStagginTarget(t *testing.T) {
@@ -1370,5 +1374,121 @@ func TestEvent(t *testing.T) {
 
 	if config.Fields["retries"].GetNumberValue() != 5 {
 		t.Errorf("expected retries 5, got %v", config.Fields["retries"].GetNumberValue())
+	}
+}
+
+func TestShallowCloneProtoAgent(t *testing.T) {
+	source := &pb.Agent{Id: proto.String("ag"), PasswordChanged: proto.Int64(0), Scopes: []string{"agent"}, LastSeen: &pb.Presence{Pinged: proto.Int64(42)}}
+	source.ProtoReflect().SetUnknown([]byte{0xf8, 0x07, 0x01})
+	originalWire, err := proto.Marshal(source)
+	if err != nil {
+		t.Fatal(err)
+	}
+	copy := ShallowClone(source)
+	if copy == source || !proto.Equal(copy, source) {
+		t.Fatal("not an equal, independent top-level message")
+	}
+	if copy.LastSeen != source.LastSeen || &copy.Scopes[0] != &source.Scopes[0] {
+		t.Fatal("nested message or list deep-cloned")
+	}
+	if copy.PasswordChanged == nil {
+		t.Fatal("lost optional zero field")
+	}
+	copy.LastSeen = &pb.Presence{Pinged: proto.Int64(43)}
+	copy.Id = proto.String("other")
+	copy.Scopes = []string{"other"}
+	afterWire, err := proto.Marshal(source)
+	if err != nil || !bytes.Equal(originalWire, afterWire) {
+		t.Fatal("replacing top-level fields changed original")
+	}
+	wire, err := proto.Marshal(copy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	decoded := &pb.Agent{}
+	if err := proto.Unmarshal(wire, decoded); err != nil || !proto.Equal(copy, decoded) {
+		t.Fatal("copy cannot round-trip after replacement")
+	}
+}
+
+func TestShallowCloneProtoMapsOneofsAndBytes(t *testing.T) {
+	source := &structpb.Struct{Fields: map[string]*structpb.Value{"x": structpb.NewStringValue("old")}}
+	copy := ShallowClone(source)
+	if copy == source || copy.Fields["x"] != source.Fields["x"] {
+		t.Fatal("map message not shared")
+	}
+	copy.Fields = map[string]*structpb.Value{"x": structpb.NewStringValue("new")}
+	if source.Fields["x"].GetStringValue() != "old" {
+		t.Fatal("map replacement modified original")
+	}
+	// A selected oneof with a default value must remain selected.
+	value := structpb.NewStringValue("")
+	valueCopy := ShallowClone(value)
+	if valueCopy.Kind == nil || !proto.Equal(value, valueCopy) {
+		t.Fatal("lost oneof presence")
+	}
+	valueCopy.Kind = &structpb.Value_BoolValue{BoolValue: true}
+	if _, ok := value.Kind.(*structpb.Value_StringValue); !ok {
+		t.Fatal("oneof replacement changed original")
+	}
+	data := wrapperspb.Bytes([]byte("bytes"))
+	dataCopy := ShallowClone(data)
+	if &data.Value[0] != &dataCopy.Value[0] {
+		t.Fatal("bytes were deep-cloned")
+	}
+	dataCopy.Value = []byte("other")
+	if string(data.Value) != "bytes" {
+		t.Fatal("bytes replacement changed original")
+	}
+}
+
+func TestShallowCloneProtoNil(t *testing.T) {
+	var message proto.Message
+	if ShallowClone(message) != nil {
+		t.Fatal("nil interface changed")
+	}
+	var agent *pb.Agent
+	if ShallowClone(agent) != nil {
+		t.Fatal("typed nil changed")
+	}
+}
+
+func TestShallowCloneProtoConcurrentReads(t *testing.T) {
+	source := &pb.Agent{Id: proto.String("ag"), Scopes: []string{"agent"}, LastSeen: &pb.Presence{Pinged: proto.Int64(42)}}
+	var wg sync.WaitGroup
+	for i := 0; i < 8; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 100; j++ {
+				copy := ShallowClone(source)
+				copy.LastSeen = &pb.Presence{Pinged: proto.Int64(int64(j))}
+				if _, err := proto.Marshal(copy); err != nil {
+					t.Error(err)
+				}
+				if _, err := proto.Marshal(source); err != nil {
+					t.Error(err)
+				}
+			}
+		}()
+	}
+	wg.Wait()
+	if source.LastSeen.GetPinged() != 42 {
+		t.Fatal("source mutated")
+	}
+}
+
+type wrappedProtoMessage struct{ proto.Message }
+
+func TestShallowCloneProtoReflectionFallback(t *testing.T) {
+	original := &pb.Agent{Id: proto.String("ag")}
+	var source proto.Message = wrappedProtoMessage{original}
+	copy := ShallowClone(source)
+	if copy == original || !proto.Equal(copy, original) {
+		t.Fatal("reflection fallback lost data")
+	}
+	copy.ProtoReflect().Clear(copy.ProtoReflect().Descriptor().Fields().ByName("id"))
+	if original.GetId() != "ag" {
+		t.Fatal("fallback changed source")
 	}
 }

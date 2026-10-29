@@ -17,11 +17,13 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"unicode"
 
 	cpb "github.com/subiz/header/common"
 	"github.com/subiz/log"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 var EmojiReplacer *strings.Replacer
@@ -2863,6 +2865,17 @@ func IsOTTChannel(channel string) bool {
 	return false
 }
 
+func IsCallChannel(channel string) bool {
+	switch channel {
+	case ChannelType_call.String(),
+		ChannelType_zalo_call.String(),
+		ChannelType_facebook_call.String(),
+		ChannelType_whatsapp_call.String():
+		return true
+	}
+	return false
+}
+
 func IsCommentChannel(channel string) bool {
 	switch channel {
 	case ChannelType_facebook_comment.String(),
@@ -2924,4 +2937,74 @@ func IsGooglePublicURL(raw string) bool {
 	}
 
 	return false
+}
+
+// Cache only type metadata, never messages or request data.
+var shallowProtoFields sync.Map // reflect.Type -> []int; nil means reflection fallback
+
+func protoDataFields(typ reflect.Type) []int {
+	if cached, ok := shallowProtoFields.Load(typ); ok {
+		return cached.([]int)
+	}
+	var fields []int
+	if typ.Kind() == reflect.Struct {
+		supported := true
+		for i := 0; i < typ.NumField(); i++ {
+			field := typ.Field(i)
+			if field.IsExported() && (field.Tag.Get("protobuf") != "" || field.Tag.Get("protobuf_oneof") != "") {
+				fields = append(fields, i)
+			} else if field.Name != "state" && field.Name != "sizeCache" && field.Name != "unknownFields" {
+				// Opaque/dynamic messages, extensions and unfamiliar layouts use the
+				// protobuf API so no logical fields can be silently discarded.
+				supported = false
+			}
+		}
+		if !supported {
+			fields = nil
+		}
+	}
+	cached, _ := shallowProtoFields.LoadOrStore(typ, fields)
+	return cached.([]int)
+}
+
+// ShallowClone creates a new top-level protobuf message without recursively
+// cloning its fields. Nested messages, lists, maps, bytes and unknown fields are
+// shared and MUST remain immutable. Replace a top-level field freely; proto.Clone
+// a shared child (or the entire message) before modifying anything inside it.
+// No protobuf internal locks or size caches are copied.
+func ShallowClone[M proto.Message](src M) M {
+	if any(src) == nil {
+		return src
+	}
+	value := reflect.ValueOf(src)
+	if value.Kind() == reflect.Pointer && value.IsNil() {
+		return src
+	}
+	if value.Kind() == reflect.Pointer {
+		if fields := protoDataFields(value.Type().Elem()); len(fields) > 0 {
+			target := reflect.New(value.Type().Elem())
+			sourceFields, targetFields := value.Elem(), target.Elem()
+			for _, index := range fields {
+				targetFields.Field(index).Set(sourceFields.Field(index))
+			}
+			result := target.Interface().(M)
+			if unknown := src.ProtoReflect().GetUnknown(); len(unknown) > 0 {
+				result.ProtoReflect().SetUnknown(unknown)
+			}
+			return result
+		}
+	}
+	// Supports arbitrary proto.Message implementations, including dynamicpb and
+	// opaque generated messages, without relying on their Go struct layout.
+	source := src.ProtoReflect()
+	if !source.IsValid() {
+		return src
+	}
+	target := source.New()
+	source.Range(func(field protoreflect.FieldDescriptor, value protoreflect.Value) bool {
+		target.Set(field, value)
+		return true
+	})
+	target.SetUnknown(source.GetUnknown())
+	return target.Interface().(M)
 }
