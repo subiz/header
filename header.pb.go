@@ -42336,6 +42336,9 @@ type CallDriverRequest struct {
 	SipProvider                string       `protobuf:"bytes,19,opt,name=sip_provider,json=sipProvider,proto3" json:"sip_provider,omitempty"`
 	PhoneDevice                *PhoneDevice `protobuf:"bytes,18,opt,name=phone_device,json=phoneDevice,proto3" json:"phone_device,omitempty"` // register-device || unregister-device
 	CallerDisplayName          string       `protobuf:"bytes,20,opt,name=caller_display_name,json=callerDisplayName,proto3" json:"caller_display_name,omitempty"`
+	CallerAvatarUrl            string       `protobuf:"bytes,40,opt,name=caller_avatar_url,json=callerAvatarUrl,proto3" json:"caller_avatar_url,omitempty"`
+	CallerId                   string       `protobuf:"bytes,41,opt,name=caller_id,json=callerId,proto3" json:"caller_id,omitempty"`
+	CallerType                 string       `protobuf:"bytes,42,opt,name=caller_type,json=callerType,proto3" json:"caller_type,omitempty"`
 	IsInternalCall             bool         `protobuf:"varint,21,opt,name=is_internal_call,json=isInternalCall,proto3" json:"is_internal_call,omitempty"`
 	ToSipProvider              string       `protobuf:"bytes,25,opt,name=to_sip_provider,json=toSipProvider,proto3" json:"to_sip_provider,omitempty"`
 	DirectExtensionDurationSec int64        `protobuf:"varint,22,opt,name=direct_extension_duration_sec,json=directExtensionDurationSec,proto3" json:"direct_extension_duration_sec,omitempty"`
@@ -42507,6 +42510,27 @@ func (x *CallDriverRequest) GetPhoneDevice() *PhoneDevice {
 func (x *CallDriverRequest) GetCallerDisplayName() string {
 	if x != nil {
 		return x.CallerDisplayName
+	}
+	return ""
+}
+
+func (x *CallDriverRequest) GetCallerAvatarUrl() string {
+	if x != nil {
+		return x.CallerAvatarUrl
+	}
+	return ""
+}
+
+func (x *CallDriverRequest) GetCallerId() string {
+	if x != nil {
+		return x.CallerId
+	}
+	return ""
+}
+
+func (x *CallDriverRequest) GetCallerType() string {
+	if x != nil {
+		return x.CallerType
 	}
 	return ""
 }
@@ -84472,8 +84496,7 @@ const file_header_proto_rawDesc = "" +
 	"\x17is_user_follow_business\x18\x0e \x01(\bR\x14isUserFollowBusiness\x125\n" +
 	"\x17is_business_follow_user\x18\x0f \x01(\bR\x14isBusinessFollowUser\x12\x1f\n" +
 	"\vprofile_pic\x18\x10 \x01(\tR\n" +
-	"profilePic\"\x98\n" +
-	"\n" +
+	"profilePic\"\x82\v\n" +
 	"\x11CallDriverRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -84498,7 +84521,11 @@ const file_header_proto_rawDesc = "" +
 	"fromNumber\x12!\n" +
 	"\fsip_provider\x18\x13 \x01(\tR\vsipProvider\x126\n" +
 	"\fphone_device\x18\x12 \x01(\v2\x13.header.PhoneDeviceR\vphoneDevice\x12.\n" +
-	"\x13caller_display_name\x18\x14 \x01(\tR\x11callerDisplayName\x12(\n" +
+	"\x13caller_display_name\x18\x14 \x01(\tR\x11callerDisplayName\x12*\n" +
+	"\x11caller_avatar_url\x18( \x01(\tR\x0fcallerAvatarUrl\x12\x1b\n" +
+	"\tcaller_id\x18) \x01(\tR\bcallerId\x12\x1f\n" +
+	"\vcaller_type\x18* \x01(\tR\n" +
+	"callerType\x12(\n" +
 	"\x10is_internal_call\x18\x15 \x01(\bR\x0eisInternalCall\x12&\n" +
 	"\x0fto_sip_provider\x18\x19 \x01(\tR\rtoSipProvider\x12A\n" +
 	"\x1ddirect_extension_duration_sec\x18\x16 \x01(\x03R\x1adirectExtensionDurationSec\x12\x1b\n" +
