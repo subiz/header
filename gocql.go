@@ -26,13 +26,6 @@ var attempCount = promauto.NewCounterVec(prometheus.CounterOpts{
 	"statement", "type",
 })
 
-var opsBandwidth = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "gocql_bandwidth",
-	Help: "Gocql bandwidth",
-}, []string{
-	"host",
-})
-
 var attempErrorCount = promauto.NewCounterVec(prometheus.CounterOpts{
 	Name: "gocql_error_count_3",
 	Help: "The total number of query attempts that failed",
@@ -57,17 +50,10 @@ func (qo *queryObserver) ObserveQuery(ctx context.Context, q gocql.ObservedQuery
 	}
 }
 
-type frameObserver struct{}
-
-func (qo *frameObserver) ObserveFrameHeader(ctx context.Context, h gocql.ObservedFrameHeader) {
-	opsBandwidth.WithLabelValues(_hostname).Add(float64(h.Length))
-}
-
 func ConnectDB(seeds []string, keyspace string) *gocql.Session {
 	var session *gocql.Session
 	cluster := gocql.NewCluster(seeds...)
 	cluster.QueryObserver = &queryObserver{}
-	cluster.FrameHeaderObserver = &frameObserver{}
 	cluster.Timeout = 30 * time.Second
 	cluster.ConnectTimeout = 30 * time.Second
 	cluster.Keyspace = keyspace

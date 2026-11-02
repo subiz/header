@@ -2392,7 +2392,6 @@ type AccountMgrClient interface {
 	TransferOwner(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Agent, error)
 	CheckLoginSession(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*LoginSession, error)
 	ListLoginSessions(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*Response, error)
-	// rpc ListApiKeys(Id) returns (LoginSessions);
 	LogoutSession(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*Empty, error)
 	CreateApiKey(ctx context.Context, in *LoginSession, opts ...grpc.CallOption) (*LoginSession, error)
 	GetLanguage(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Lang, error)
@@ -3566,7 +3565,6 @@ type AccountMgrServer interface {
 	TransferOwner(context.Context, *Id) (*account.Agent, error)
 	CheckLoginSession(context.Context, *LoginSession) (*LoginSession, error)
 	ListLoginSessions(context.Context, *LoginSession) (*Response, error)
-	// rpc ListApiKeys(Id) returns (LoginSessions);
 	LogoutSession(context.Context, *LoginSession) (*Empty, error)
 	CreateApiKey(context.Context, *LoginSession) (*LoginSession, error)
 	GetLanguage(context.Context, *Id) (*Lang, error)
