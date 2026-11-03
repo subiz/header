@@ -5437,6 +5437,9 @@ message ProductStoreResult {
 	string query = 6; // search only: resolved search query
 	bool truncated = 7; // search only: more products matched than the requested limit
 	repeated Product products = 8;
+
+	int64 fpv_total_cost_vnd = 10;
+	int64 fpv_total_cost_usd = 11;
 }
 
 message KV {
@@ -6063,9 +6066,9 @@ message CallDriverRequest {
 
 	// make outgoing call
 	string call_device = 15;
-	string to_number = 16;
-	string from_number = 17;
-	string sip_provider = 19;
+	string to_number = 16; // facebook: PSID người nhận
+	string from_number = 17; // facebook: page id
+	string sip_provider = 19; // viettel, vcc, zcc, facebook (Messenger Calling qua Fabikon, không trunk SIP)
 
 	PhoneDevice phone_device = 18; // register-device || unregister-device
 
@@ -7453,6 +7456,8 @@ message Response {
 	repeated OAuthClient oauth_clients = 317;
 
 	OAuthAuthorization oauth_authorization = 318;
+
+	FacebookLabel facebook_label = 320;
 }
 
 message ReportCount {
@@ -11235,6 +11240,15 @@ message FacebookCallRequest {
 	string sdp = 5;
 
 	string call_id = 6;
+}
+
+message FacebookLabel {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string id = 3; // meta custom label id
+	string page_id = 4;
+	string name = 5;
 }
 
 message SetMessengerCallRoutingRequest {
