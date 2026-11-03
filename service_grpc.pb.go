@@ -28793,6 +28793,7 @@ const (
 	Proder_CancelProductFeedRun_FullMethodName       = "/header.Proder/CancelProductFeedRun"
 	Proder_SuggestProductFeedMapping_FullMethodName  = "/header.Proder/SuggestProductFeedMapping"
 	Proder_ListProductCategories_FullMethodName      = "/header.Proder/ListProductCategories"
+	Proder_SearchProducts_FullMethodName             = "/header.Proder/SearchProducts"
 	Proder_ReadOrder_FullMethodName                  = "/header.Proder/ReadOrder"
 	Proder_CreateOrder_FullMethodName                = "/header.Proder/CreateOrder"
 	Proder_UpdateOrder_FullMethodName                = "/header.Proder/UpdateOrder"
@@ -28883,6 +28884,7 @@ type ProderClient interface {
 	CancelProductFeedRun(ctx context.Context, in *ProductFeedRun, opts ...grpc.CallOption) (*Response, error)
 	SuggestProductFeedMapping(ctx context.Context, in *ProductFeed, opts ...grpc.CallOption) (*Response, error)
 	ListProductCategories(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*ProductCategories, error)
+	SearchProducts(ctx context.Context, in *ProductSearchRequest, opts ...grpc.CallOption) (*ProductStoreResult, error)
 	ReadOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	CreateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
 	UpdateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
@@ -29365,6 +29367,16 @@ func (c *proderClient) ListProductCategories(ctx context.Context, in *Ids, opts 
 	return out, nil
 }
 
+func (c *proderClient) SearchProducts(ctx context.Context, in *ProductSearchRequest, opts ...grpc.CallOption) (*ProductStoreResult, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProductStoreResult)
+	err := c.cc.Invoke(ctx, Proder_SearchProducts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *proderClient) ReadOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Order)
@@ -29822,6 +29834,7 @@ type ProderServer interface {
 	CancelProductFeedRun(context.Context, *ProductFeedRun) (*Response, error)
 	SuggestProductFeedMapping(context.Context, *ProductFeed) (*Response, error)
 	ListProductCategories(context.Context, *Ids) (*ProductCategories, error)
+	SearchProducts(context.Context, *ProductSearchRequest) (*ProductStoreResult, error)
 	ReadOrder(context.Context, *Id) (*Order, error)
 	CreateOrder(context.Context, *Order) (*Order, error)
 	UpdateOrder(context.Context, *Order) (*Order, error)
@@ -30002,6 +30015,9 @@ func (UnimplementedProderServer) SuggestProductFeedMapping(context.Context, *Pro
 }
 func (UnimplementedProderServer) ListProductCategories(context.Context, *Ids) (*ProductCategories, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListProductCategories not implemented")
+}
+func (UnimplementedProderServer) SearchProducts(context.Context, *ProductSearchRequest) (*ProductStoreResult, error) {
+	return nil, status.Error(codes.Unimplemented, "method SearchProducts not implemented")
 }
 func (UnimplementedProderServer) ReadOrder(context.Context, *Id) (*Order, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReadOrder not implemented")
@@ -30917,6 +30933,24 @@ func _Proder_ListProductCategories_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).ListProductCategories(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_SearchProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).SearchProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_SearchProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).SearchProducts(ctx, req.(*ProductSearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -31837,6 +31871,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListProductCategories",
 			Handler:    _Proder_ListProductCategories_Handler,
+		},
+		{
+			MethodName: "SearchProducts",
+			Handler:    _Proder_SearchProducts_Handler,
 		},
 		{
 			MethodName: "ReadOrder",

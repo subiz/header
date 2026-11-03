@@ -1074,6 +1074,9 @@ service Proder {
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);
 
+	rpc SearchProducts(header.ProductSearchRequest) returns (header.ProductStoreResult);
+	// rpc LearnProductTerms(header.Id) returns (header.Empty); // account_id
+
 	rpc ReadOrder(header.Id) returns (header.Order);
 	rpc CreateOrder(header.Order) returns (header.Order);
 	rpc UpdateOrder(header.Order) returns (header.Order);

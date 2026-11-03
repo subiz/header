@@ -5419,6 +5419,26 @@ message ProductsRequest {
 	bool id_only = 30;
 }
 
+// Product store: answers product questions from a chat history using the
+// account's proder catalog
+message ProductSearchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated LLMChatHistoryEntry history = 3; // must end with a user message; roles: user | assistant
+}
+
+message ProductStoreResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated string product_ids = 3;
+	repeated string facts = 4; // evidence from catalog records and product documents
+	string clarification = 5; // non-empty when the product reference is ambiguous
+	string query = 6; // search only: resolved search query
+	bool truncated = 7; // search only: more products matched than the requested limit
+	repeated Product products = 8;
+}
+
 message KV {
 	string key = 2;
 	string value = 3;
