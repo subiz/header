@@ -5433,10 +5433,14 @@ message ProductStoreResult {
 	string account_id = 2;
 	repeated string product_ids = 3;
 	repeated string facts = 4; // evidence from catalog records and product documents
-	string clarification = 5; // non-empty when the product reference is ambiguous
+	string clarification = 5; // lookup only: non-empty when the product document applies to several scopes (departure, package, customer group) and the request does not pick one
 	string query = 6; // search only: resolved search query
 	bool truncated = 7; // search only: more products matched than the requested limit
 	repeated Product products = 8;
+	string operation = 9; // lookup | search
+	bool is_not_found = 12; // lookup only: no product matches the request
+	bool is_ambiguous = 13; // lookup only: the user must say which product they mean; product_ids are the candidates (empty when history names none), facts is empty
+	bool is_unresolved_reference = 14; // lookup only
 
 	int64 fpv_total_cost_vnd = 10;
 	int64 fpv_total_cost_usd = 11;

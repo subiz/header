@@ -37807,19 +37807,23 @@ func (x *ProductSearchRequest) GetHistory() []*LLMChatHistoryEntry {
 }
 
 type ProductStoreResult struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Ctx             *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId       string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	ProductIds      []string               `protobuf:"bytes,3,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
-	Facts           []string               `protobuf:"bytes,4,rep,name=facts,proto3" json:"facts,omitempty"`                 // evidence from catalog records and product documents
-	Clarification   string                 `protobuf:"bytes,5,opt,name=clarification,proto3" json:"clarification,omitempty"` // non-empty when the product reference is ambiguous
-	Query           string                 `protobuf:"bytes,6,opt,name=query,proto3" json:"query,omitempty"`                 // search only: resolved search query
-	Truncated       bool                   `protobuf:"varint,7,opt,name=truncated,proto3" json:"truncated,omitempty"`        // search only: more products matched than the requested limit
-	Products        []*Product             `protobuf:"bytes,8,rep,name=products,proto3" json:"products,omitempty"`
-	FpvTotalCostVnd int64                  `protobuf:"varint,10,opt,name=fpv_total_cost_vnd,json=fpvTotalCostVnd,proto3" json:"fpv_total_cost_vnd,omitempty"`
-	FpvTotalCostUsd int64                  `protobuf:"varint,11,opt,name=fpv_total_cost_usd,json=fpvTotalCostUsd,proto3" json:"fpv_total_cost_usd,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId             string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	ProductIds            []string               `protobuf:"bytes,3,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
+	Facts                 []string               `protobuf:"bytes,4,rep,name=facts,proto3" json:"facts,omitempty"`                 // evidence from catalog records and product documents
+	Clarification         string                 `protobuf:"bytes,5,opt,name=clarification,proto3" json:"clarification,omitempty"` // lookup only: non-empty when the product document applies to several scopes (departure, package, customer group) and the request does not pick one
+	Query                 string                 `protobuf:"bytes,6,opt,name=query,proto3" json:"query,omitempty"`                 // search only: resolved search query
+	Truncated             bool                   `protobuf:"varint,7,opt,name=truncated,proto3" json:"truncated,omitempty"`        // search only: more products matched than the requested limit
+	Products              []*Product             `protobuf:"bytes,8,rep,name=products,proto3" json:"products,omitempty"`
+	Operation             string                 `protobuf:"bytes,9,opt,name=operation,proto3" json:"operation,omitempty"`                                                          // lookup | search
+	IsNotFound            bool                   `protobuf:"varint,12,opt,name=is_not_found,json=isNotFound,proto3" json:"is_not_found,omitempty"`                                  // lookup only: no product matches the request
+	IsAmbiguous           bool                   `protobuf:"varint,13,opt,name=is_ambiguous,json=isAmbiguous,proto3" json:"is_ambiguous,omitempty"`                                 // lookup only: the user must say which product they mean; product_ids are the candidates (empty when history names none), facts is empty
+	IsUnresolvedReference bool                   `protobuf:"varint,14,opt,name=is_unresolved_reference,json=isUnresolvedReference,proto3" json:"is_unresolved_reference,omitempty"` // lookup only
+	FpvTotalCostVnd       int64                  `protobuf:"varint,10,opt,name=fpv_total_cost_vnd,json=fpvTotalCostVnd,proto3" json:"fpv_total_cost_vnd,omitempty"`
+	FpvTotalCostUsd       int64                  `protobuf:"varint,11,opt,name=fpv_total_cost_usd,json=fpvTotalCostUsd,proto3" json:"fpv_total_cost_usd,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ProductStoreResult) Reset() {
@@ -37906,6 +37910,34 @@ func (x *ProductStoreResult) GetProducts() []*Product {
 		return x.Products
 	}
 	return nil
+}
+
+func (x *ProductStoreResult) GetOperation() string {
+	if x != nil {
+		return x.Operation
+	}
+	return ""
+}
+
+func (x *ProductStoreResult) GetIsNotFound() bool {
+	if x != nil {
+		return x.IsNotFound
+	}
+	return false
+}
+
+func (x *ProductStoreResult) GetIsAmbiguous() bool {
+	if x != nil {
+		return x.IsAmbiguous
+	}
+	return false
+}
+
+func (x *ProductStoreResult) GetIsUnresolvedReference() bool {
+	if x != nil {
+		return x.IsUnresolvedReference
+	}
+	return false
 }
 
 func (x *ProductStoreResult) GetFpvTotalCostVnd() int64 {
@@ -84284,7 +84316,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x125\n" +
-	"\ahistory\x18\x03 \x03(\v2\x1b.header.LLMChatHistoryEntryR\ahistory\"\xee\x02\n" +
+	"\ahistory\x18\x03 \x03(\v2\x1b.header.LLMChatHistoryEntryR\ahistory\"\x89\x04\n" +
 	"\x12ProductStoreResult\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -84295,7 +84327,12 @@ const file_header_proto_rawDesc = "" +
 	"\rclarification\x18\x05 \x01(\tR\rclarification\x12\x14\n" +
 	"\x05query\x18\x06 \x01(\tR\x05query\x12\x1c\n" +
 	"\ttruncated\x18\a \x01(\bR\ttruncated\x12+\n" +
-	"\bproducts\x18\b \x03(\v2\x0f.header.ProductR\bproducts\x12+\n" +
+	"\bproducts\x18\b \x03(\v2\x0f.header.ProductR\bproducts\x12\x1c\n" +
+	"\toperation\x18\t \x01(\tR\toperation\x12 \n" +
+	"\fis_not_found\x18\f \x01(\bR\n" +
+	"isNotFound\x12!\n" +
+	"\fis_ambiguous\x18\r \x01(\bR\visAmbiguous\x126\n" +
+	"\x17is_unresolved_reference\x18\x0e \x01(\bR\x15isUnresolvedReference\x12+\n" +
 	"\x12fpv_total_cost_vnd\x18\n" +
 	" \x01(\x03R\x0ffpvTotalCostVnd\x12+\n" +
 	"\x12fpv_total_cost_usd\x18\v \x01(\x03R\x0ffpvTotalCostUsd\"\xe4\x02\n" +
