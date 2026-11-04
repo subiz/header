@@ -22790,6 +22790,7 @@ const (
 	FabikonService_RemoveFbUserLabel_FullMethodName       = "/header.FabikonService/RemoveFbUserLabel"
 	FabikonService_AddFbUserLabel_FullMethodName          = "/header.FabikonService/AddFbUserLabel"
 	FabikonService_EnsureFbPageLabel_FullMethodName       = "/header.FabikonService/EnsureFbPageLabel"
+	FabikonService_DeleteFbPageLabel_FullMethodName       = "/header.FabikonService/DeleteFbPageLabel"
 	FabikonService_GenerateRefLink_FullMethodName         = "/header.FabikonService/GenerateRefLink"
 	FabikonService_SyncAdsFlow_FullMethodName             = "/header.FabikonService/SyncAdsFlow"
 	FabikonService_GetAdsAudience_FullMethodName          = "/header.FabikonService/GetAdsAudience"
@@ -22823,6 +22824,7 @@ type FabikonServiceClient interface {
 	RemoveFbUserLabel(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 	AddFbUserLabel(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 	EnsureFbPageLabel(ctx context.Context, in *FacebookLabel, opts ...grpc.CallOption) (*Response, error)
+	DeleteFbPageLabel(ctx context.Context, in *FacebookLabel, opts ...grpc.CallOption) (*Empty, error)
 	GenerateRefLink(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	SyncAdsFlow(ctx context.Context, in *FacebookAdsFlow, opts ...grpc.CallOption) (*Id, error)
 	GetAdsAudience(ctx context.Context, in *MetaCustomAudience, opts ...grpc.CallOption) (*MetaCustomAudience, error)
@@ -22945,6 +22947,16 @@ func (c *fabikonServiceClient) EnsureFbPageLabel(ctx context.Context, in *Facebo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, FabikonService_EnsureFbPageLabel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fabikonServiceClient) DeleteFbPageLabel(ctx context.Context, in *FacebookLabel, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, FabikonService_DeleteFbPageLabel_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -23135,6 +23147,7 @@ type FabikonServiceServer interface {
 	RemoveFbUserLabel(context.Context, *User) (*Empty, error)
 	AddFbUserLabel(context.Context, *User) (*Empty, error)
 	EnsureFbPageLabel(context.Context, *FacebookLabel) (*Response, error)
+	DeleteFbPageLabel(context.Context, *FacebookLabel) (*Empty, error)
 	GenerateRefLink(context.Context, *Id) (*Id, error)
 	SyncAdsFlow(context.Context, *FacebookAdsFlow) (*Id, error)
 	GetAdsAudience(context.Context, *MetaCustomAudience) (*MetaCustomAudience, error)
@@ -23192,6 +23205,9 @@ func (UnimplementedFabikonServiceServer) AddFbUserLabel(context.Context, *User) 
 }
 func (UnimplementedFabikonServiceServer) EnsureFbPageLabel(context.Context, *FacebookLabel) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method EnsureFbPageLabel not implemented")
+}
+func (UnimplementedFabikonServiceServer) DeleteFbPageLabel(context.Context, *FacebookLabel) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteFbPageLabel not implemented")
 }
 func (UnimplementedFabikonServiceServer) GenerateRefLink(context.Context, *Id) (*Id, error) {
 	return nil, status.Error(codes.Unimplemented, "method GenerateRefLink not implemented")
@@ -23441,6 +23457,24 @@ func _FabikonService_EnsureFbPageLabel_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FabikonServiceServer).EnsureFbPageLabel(ctx, req.(*FacebookLabel))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FabikonService_DeleteFbPageLabel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FacebookLabel)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).DeleteFbPageLabel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_DeleteFbPageLabel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).DeleteFbPageLabel(ctx, req.(*FacebookLabel))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -23797,6 +23831,10 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EnsureFbPageLabel",
 			Handler:    _FabikonService_EnsureFbPageLabel_Handler,
+		},
+		{
+			MethodName: "DeleteFbPageLabel",
+			Handler:    _FabikonService_DeleteFbPageLabel_Handler,
 		},
 		{
 			MethodName: "GenerateRefLink",

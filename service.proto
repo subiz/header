@@ -832,6 +832,7 @@ service FabikonService {
 	rpc RemoveFbUserLabel(header.User) returns (header.Empty);
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
 	rpc EnsureFbPageLabel(FacebookLabel) returns (Response); // create the page label only when the page does not have one with the same name
+	rpc DeleteFbPageLabel(FacebookLabel) returns (header.Empty); // delete the page label (id, page_id), also removes it from every user
 	rpc GenerateRefLink(header.Id) returns (header.Id);
 
 	rpc SyncAdsFlow(header.FacebookAdsFlow) returns (header.Id);
