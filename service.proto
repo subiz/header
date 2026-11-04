@@ -856,6 +856,7 @@ service FabikonService {
 	rpc RequestCallPermission(FacebookCallRequest) returns (header.Response);
 	rpc CheckCallPermission(FacebookCallRequest) returns (header.Response);
 	rpc SetMessengerCallRouting(SetMessengerCallRoutingRequest) returns (header.Response); // integration
+	rpc LookupConversationId(LookupMetaConversationIdRequest) returns (header.Response); // response.conversation.id
 }
 
 service ChannelConnector {

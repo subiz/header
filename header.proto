@@ -7456,7 +7456,6 @@ message Response {
 	repeated OAuthClient oauth_clients = 317;
 
 	OAuthAuthorization oauth_authorization = 318;
-
 	FacebookLabel facebook_label = 320;
 }
 
@@ -11427,4 +11426,11 @@ message ExchangeOAuthTokenRequest {
 	string resource = 8;
 	string refresh_token = 9;
 	string scope = 10; // refresh cannot expand original scopes
+}
+
+message LookupMetaConversationIdRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string page_id = 3;
+	string psid = 4;
 }

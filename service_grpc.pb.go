@@ -22808,6 +22808,7 @@ const (
 	FabikonService_RequestCallPermission_FullMethodName   = "/header.FabikonService/RequestCallPermission"
 	FabikonService_CheckCallPermission_FullMethodName     = "/header.FabikonService/CheckCallPermission"
 	FabikonService_SetMessengerCallRouting_FullMethodName = "/header.FabikonService/SetMessengerCallRouting"
+	FabikonService_LookupConversationId_FullMethodName    = "/header.FabikonService/LookupConversationId"
 )
 
 // FabikonServiceClient is the client API for FabikonService service.
@@ -22843,6 +22844,7 @@ type FabikonServiceClient interface {
 	RequestCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
 	CheckCallPermission(ctx context.Context, in *FacebookCallRequest, opts ...grpc.CallOption) (*Response, error)
 	SetMessengerCallRouting(ctx context.Context, in *SetMessengerCallRoutingRequest, opts ...grpc.CallOption) (*Response, error)
+	LookupConversationId(ctx context.Context, in *LookupMetaConversationIdRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type fabikonServiceClient struct {
@@ -23133,6 +23135,16 @@ func (c *fabikonServiceClient) SetMessengerCallRouting(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *fabikonServiceClient) LookupConversationId(ctx context.Context, in *LookupMetaConversationIdRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FabikonService_LookupConversationId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FabikonServiceServer is the server API for FabikonService service.
 // All implementations must embed UnimplementedFabikonServiceServer
 // for forward compatibility.
@@ -23166,6 +23178,7 @@ type FabikonServiceServer interface {
 	RequestCallPermission(context.Context, *FacebookCallRequest) (*Response, error)
 	CheckCallPermission(context.Context, *FacebookCallRequest) (*Response, error)
 	SetMessengerCallRouting(context.Context, *SetMessengerCallRoutingRequest) (*Response, error)
+	LookupConversationId(context.Context, *LookupMetaConversationIdRequest) (*Response, error)
 	mustEmbedUnimplementedFabikonServiceServer()
 }
 
@@ -23259,6 +23272,9 @@ func (UnimplementedFabikonServiceServer) CheckCallPermission(context.Context, *F
 }
 func (UnimplementedFabikonServiceServer) SetMessengerCallRouting(context.Context, *SetMessengerCallRoutingRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetMessengerCallRouting not implemented")
+}
+func (UnimplementedFabikonServiceServer) LookupConversationId(context.Context, *LookupMetaConversationIdRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method LookupConversationId not implemented")
 }
 func (UnimplementedFabikonServiceServer) mustEmbedUnimplementedFabikonServiceServer() {}
 func (UnimplementedFabikonServiceServer) testEmbeddedByValue()                        {}
@@ -23785,6 +23801,24 @@ func _FabikonService_SetMessengerCallRouting_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FabikonService_LookupConversationId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LookupMetaConversationIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FabikonServiceServer).LookupConversationId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FabikonService_LookupConversationId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FabikonServiceServer).LookupConversationId(ctx, req.(*LookupMetaConversationIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FabikonService_ServiceDesc is the grpc.ServiceDesc for FabikonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -23903,6 +23937,10 @@ var FabikonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetMessengerCallRouting",
 			Handler:    _FabikonService_SetMessengerCallRouting_Handler,
+		},
+		{
+			MethodName: "LookupConversationId",
+			Handler:    _FabikonService_LookupConversationId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
