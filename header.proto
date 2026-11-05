@@ -1281,7 +1281,7 @@ message Conversation {
 	string subject = 32;
 
 	repeated KV fields = 33;
-	repeated Rating ratings = 35;
+	repeated Rating ratings = 35; // @deprecated, use .rating
 
 	string source = 36; // indicate where does the conversation happended (url)
 	// my field
@@ -1367,6 +1367,7 @@ message Conversation {
 	string assigned_team_id = 110;
 
 	ConversationAnalysis analysis = 111;
+	Rating rating = 112;
 }
 
 message ConversationAnalysis {
@@ -1518,6 +1519,7 @@ message Rating {
 
 	Block question = 42;
 	int64 allow_comment = 43;
+	repeated string reasons = 44; // selected reason values, e.g. fast_response, resolved
 }
 
 message Conversations {
@@ -3195,6 +3197,10 @@ message Form {
 
 	string ticket_type_id = 46;
 	string ticket_due_at = 47;
+
+	string conversation_feedback_rating_field = 50; // string
+	string conversation_feedback_comment__field = 51; // string
+	string conversation_feedback_reasons_field = 52; // checkbox, multiple values
 }
 
 message OldForm {
@@ -8950,6 +8956,7 @@ message Block {
 	message InputOption {
 		string label = 2;
 		string value = 3;
+		string icon = 4; // icon name or emoji, e.g. face_sad, face_happy, 😀
 	}
 	repeated InputOption input_options = 31;
 
@@ -8957,6 +8964,15 @@ message Block {
 	string validation_regex = 33;
 	bool is_hidden = 34;
 	string value = 35;
+
+	string description = 36; // help text shown under the question label
+	bool allow_other_option = 37; // show "Other..." option with a free text input (single-choice, multiple-choice, checkbox)
+
+	// linear scale (input_type = linear_scale)
+	int64 scale_min = 38; // 0 or 1
+	int64 scale_max = 39; // 2 -> 10
+	string scale_min_label = 40; // Không hài lòng
+	string scale_max_label = 41; // Rất hài lòng
 
 	string class = 98;
 	Style style = 99; // inline style
