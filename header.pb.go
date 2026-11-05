@@ -22185,6 +22185,7 @@ type Form struct {
 	ConversationFeedbackRatingField   string         `protobuf:"bytes,50,opt,name=conversation_feedback_rating_field,json=conversationFeedbackRatingField,proto3" json:"conversation_feedback_rating_field,omitempty"`      // string
 	ConversationFeedbackComment_Field string         `protobuf:"bytes,51,opt,name=conversation_feedback_comment__field,json=conversationFeedbackCommentField,proto3" json:"conversation_feedback_comment__field,omitempty"` // string
 	ConversationFeedbackReasonsField  string         `protobuf:"bytes,52,opt,name=conversation_feedback_reasons_field,json=conversationFeedbackReasonsField,proto3" json:"conversation_feedback_reasons_field,omitempty"`   // checkbox, multiple values
+	Access                            string         `protobuf:"bytes,53,opt,name=access,proto3" json:"access,omitempty"`                                                                                                   // ""=="private", "public" anyone with the public link (form id) can view and submit
 	unknownFields                     protoimpl.UnknownFields
 	sizeCache                         protoimpl.SizeCache
 }
@@ -22495,6 +22496,13 @@ func (x *Form) GetConversationFeedbackComment_Field() string {
 func (x *Form) GetConversationFeedbackReasonsField() string {
 	if x != nil {
 		return x.ConversationFeedbackReasonsField
+	}
+	return ""
+}
+
+func (x *Form) GetAccess() string {
+	if x != nil {
+		return x.Access
 	}
 	return ""
 }
@@ -82525,7 +82533,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_message_id\x18\r \x01(\tR\rformMessageId\x122\n" +
 	"\x15form_attachment_index\x18\x0e \x01(\x03R\x13formAttachmentIndex\x12\x1d\n" +
 	"\n" +
-	"auth_token\x18\x0f \x01(\tR\tauthToken\"\xb1\r\n" +
+	"auth_token\x18\x0f \x01(\tR\tauthToken\"\xc9\r\n" +
 	"\x04Form\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -82579,7 +82587,8 @@ const file_header_proto_rawDesc = "" +
 	"\rticket_due_at\x18/ \x01(\tR\vticketDueAt\x12K\n" +
 	"\"conversation_feedback_rating_field\x182 \x01(\tR\x1fconversationFeedbackRatingField\x12N\n" +
 	"$conversation_feedback_comment__field\x183 \x01(\tR conversationFeedbackCommentField\x12M\n" +
-	"#conversation_feedback_reasons_field\x184 \x01(\tR conversationFeedbackReasonsField\"9\n" +
+	"#conversation_feedback_reasons_field\x184 \x01(\tR conversationFeedbackReasonsField\x12\x16\n" +
+	"\x06access\x185 \x01(\tR\x06access\"9\n" +
 	"\x04When\x12\x16\n" +
 	"\x12all_agents_offline\x10\x00\x12\x19\n" +
 	"\x15out_of_bussiness_hour\x10\x01\"\xbb\x06\n" +
