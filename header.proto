@@ -5438,6 +5438,11 @@ message ProductSearchRequest {
 	string account_id = 2;
 
 	repeated LLMChatHistoryEntry history = 3; // must end with a user message; roles: user | assistant
+
+	string pos_id = 4;
+	string user_id = 5;
+	string conversation_id = 6;
+	string bot_id = 7;
 }
 
 message ProductStoreResult {
@@ -5456,6 +5461,8 @@ message ProductStoreResult {
 
 	int64 fpv_total_cost_vnd = 10;
 	int64 fpv_total_cost_usd = 11;
+
+	repeated Discount discounts = 16;
 }
 
 message KV {
@@ -8075,17 +8082,24 @@ message OpenAIMessageContent {
 	string text = 4;
 	string type = 5;
 	OpenAIMessageContentImageUrl image_url = 6;
+	OpenAIMessageContentPromptCacheBreakpoint prompt_cache_breakpoint = 7;
+}
+
+message OpenAIMessageContentPromptCacheBreakpoint {
+	string mode = 4; // explicit
+	string ttl = 5; // 30m
 }
 
 message LLMChatHistoryEntry {
 	int64 created = 2; // ms
-	string role = 3; // user | agent
+	string role = 3; // user | agent | developer
 	string content = 4;
 
 	repeated OpenAIMessageContent contents = 11;
 	string name = 12;
 	LLMToolCall tool = 5;
 	string id = 6;
+	bool cache_breakpoint = 21; //
 	string tool_call_id = 13;
 	repeated LLMToolCall tool_calls = 14;
 
