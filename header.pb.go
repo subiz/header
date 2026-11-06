@@ -22151,43 +22151,46 @@ type Form struct {
 	ServiceId   string `protobuf:"bytes,5,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
 	ServiceType string `protobuf:"bytes,6,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`
 	// for widget
-	GroupRequired                     bool           `protobuf:"varint,12,opt,name=group_required,json=groupRequired,proto3" json:"group_required,omitempty"`
-	Groups                            []*WidgetGroup `protobuf:"bytes,13,rep,name=groups,proto3" json:"groups,omitempty"`
-	GroupLabel                        string         `protobuf:"bytes,14,opt,name=group_label,json=groupLabel,proto3" json:"group_label,omitempty"`
-	Title                             string         `protobuf:"bytes,15,opt,name=title,proto3" json:"title,omitempty"`
-	Enabled                           bool           `protobuf:"varint,16,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	EndConversationAfterSubmit        bool           `protobuf:"varint,17,opt,name=end_conversation_after_submit,json=endConversationAfterSubmit,proto3" json:"end_conversation_after_submit,omitempty"`
-	EnableWhen                        string         `protobuf:"bytes,18,opt,name=enable_when,json=enableWhen,proto3" json:"enable_when,omitempty"`
-	QuestionRequired                  bool           `protobuf:"varint,20,opt,name=question_required,json=questionRequired,proto3" json:"question_required,omitempty"`
-	QuestionLabel                     string         `protobuf:"bytes,21,opt,name=question_label,json=questionLabel,proto3" json:"question_label,omitempty"`
-	I18NGroupLabel                    *I18NString    `protobuf:"bytes,22,opt,name=i18n_group_label,json=i18nGroupLabel,proto3" json:"i18n_group_label,omitempty"`
-	I18NTitle                         *I18NString    `protobuf:"bytes,23,opt,name=i18n_title,json=i18nTitle,proto3" json:"i18n_title,omitempty"`
-	I18NQuestionLabel                 *I18NString    `protobuf:"bytes,24,opt,name=i18n_question_label,json=i18nQuestionLabel,proto3" json:"i18n_question_label,omitempty"`
-	Created                           int64          `protobuf:"varint,30,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy                         string         `protobuf:"bytes,31,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated                           int64          `protobuf:"varint,32,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy                         string         `protobuf:"bytes,33,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Type                              string         `protobuf:"bytes,26,opt,name=type,proto3" json:"type,omitempty"` // campaign, form, popup
-	Components                        []*Block       `protobuf:"bytes,27,rep,name=components,proto3" json:"components,omitempty"`
-	Logo                              *File          `protobuf:"bytes,35,opt,name=logo,proto3" json:"logo,omitempty"`
-	BrandUrl                          string         `protobuf:"bytes,36,opt,name=brand_url,json=brandUrl,proto3" json:"brand_url,omitempty"`
-	SuccessUrl                        string         `protobuf:"bytes,37,opt,name=success_url,json=successUrl,proto3" json:"success_url,omitempty"`
-	SuccessTitle                      string         `protobuf:"bytes,38,opt,name=success_title,json=successTitle,proto3" json:"success_title,omitempty"`
-	SuccessSubtext                    string         `protobuf:"bytes,39,opt,name=success_subtext,json=successSubtext,proto3" json:"success_subtext,omitempty"`
-	PrimaryColor                      string         `protobuf:"bytes,40,opt,name=primary_color,json=primaryColor,proto3" json:"primary_color,omitempty"`
-	BackgroundColor                   string         `protobuf:"bytes,41,opt,name=background_color,json=backgroundColor,proto3" json:"background_color,omitempty"`
-	CoverImage                        *File          `protobuf:"bytes,42,opt,name=cover_image,json=coverImage,proto3" json:"cover_image,omitempty"`
-	HeaderStyle                       *Style         `protobuf:"bytes,43,opt,name=header_style,json=headerStyle,proto3" json:"header_style,omitempty"`
-	TextStyle                         *Style         `protobuf:"bytes,44,opt,name=text_style,json=textStyle,proto3" json:"text_style,omitempty"`
-	InputStyle                        *Style         `protobuf:"bytes,45,opt,name=input_style,json=inputStyle,proto3" json:"input_style,omitempty"`
-	TicketTypeId                      string         `protobuf:"bytes,46,opt,name=ticket_type_id,json=ticketTypeId,proto3" json:"ticket_type_id,omitempty"`
-	TicketDueAt                       string         `protobuf:"bytes,47,opt,name=ticket_due_at,json=ticketDueAt,proto3" json:"ticket_due_at,omitempty"`
-	ConversationFeedbackRatingField   string         `protobuf:"bytes,50,opt,name=conversation_feedback_rating_field,json=conversationFeedbackRatingField,proto3" json:"conversation_feedback_rating_field,omitempty"`      // string
-	ConversationFeedbackComment_Field string         `protobuf:"bytes,51,opt,name=conversation_feedback_comment__field,json=conversationFeedbackCommentField,proto3" json:"conversation_feedback_comment__field,omitempty"` // string
-	ConversationFeedbackReasonsField  string         `protobuf:"bytes,52,opt,name=conversation_feedback_reasons_field,json=conversationFeedbackReasonsField,proto3" json:"conversation_feedback_reasons_field,omitempty"`   // checkbox, multiple values
-	Access                            string         `protobuf:"bytes,53,opt,name=access,proto3" json:"access,omitempty"`                                                                                                   // ""=="private", "public" anyone with the public link (form id) can view and submit
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+	GroupRequired                    bool           `protobuf:"varint,12,opt,name=group_required,json=groupRequired,proto3" json:"group_required,omitempty"`
+	Groups                           []*WidgetGroup `protobuf:"bytes,13,rep,name=groups,proto3" json:"groups,omitempty"`
+	GroupLabel                       string         `protobuf:"bytes,14,opt,name=group_label,json=groupLabel,proto3" json:"group_label,omitempty"`
+	Title                            string         `protobuf:"bytes,15,opt,name=title,proto3" json:"title,omitempty"`
+	Enabled                          bool           `protobuf:"varint,16,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	EndConversationAfterSubmit       bool           `protobuf:"varint,17,opt,name=end_conversation_after_submit,json=endConversationAfterSubmit,proto3" json:"end_conversation_after_submit,omitempty"`
+	EnableWhen                       string         `protobuf:"bytes,18,opt,name=enable_when,json=enableWhen,proto3" json:"enable_when,omitempty"`
+	QuestionRequired                 bool           `protobuf:"varint,20,opt,name=question_required,json=questionRequired,proto3" json:"question_required,omitempty"`
+	QuestionLabel                    string         `protobuf:"bytes,21,opt,name=question_label,json=questionLabel,proto3" json:"question_label,omitempty"`
+	I18NGroupLabel                   *I18NString    `protobuf:"bytes,22,opt,name=i18n_group_label,json=i18nGroupLabel,proto3" json:"i18n_group_label,omitempty"`
+	I18NTitle                        *I18NString    `protobuf:"bytes,23,opt,name=i18n_title,json=i18nTitle,proto3" json:"i18n_title,omitempty"`
+	I18NQuestionLabel                *I18NString    `protobuf:"bytes,24,opt,name=i18n_question_label,json=i18nQuestionLabel,proto3" json:"i18n_question_label,omitempty"`
+	Created                          int64          `protobuf:"varint,30,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy                        string         `protobuf:"bytes,31,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated                          int64          `protobuf:"varint,32,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy                        string         `protobuf:"bytes,33,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Type                             string         `protobuf:"bytes,26,opt,name=type,proto3" json:"type,omitempty"` // campaign, form, popup
+	Components                       []*Block       `protobuf:"bytes,27,rep,name=components,proto3" json:"components,omitempty"`
+	Logo                             *File          `protobuf:"bytes,35,opt,name=logo,proto3" json:"logo,omitempty"`
+	BrandUrl                         string         `protobuf:"bytes,36,opt,name=brand_url,json=brandUrl,proto3" json:"brand_url,omitempty"`
+	SuccessUrl                       string         `protobuf:"bytes,37,opt,name=success_url,json=successUrl,proto3" json:"success_url,omitempty"`
+	SuccessTitle                     string         `protobuf:"bytes,38,opt,name=success_title,json=successTitle,proto3" json:"success_title,omitempty"`
+	SuccessSubtext                   string         `protobuf:"bytes,39,opt,name=success_subtext,json=successSubtext,proto3" json:"success_subtext,omitempty"`
+	PrimaryColor                     string         `protobuf:"bytes,40,opt,name=primary_color,json=primaryColor,proto3" json:"primary_color,omitempty"`
+	BackgroundColor                  string         `protobuf:"bytes,41,opt,name=background_color,json=backgroundColor,proto3" json:"background_color,omitempty"`
+	CoverImage                       *File          `protobuf:"bytes,42,opt,name=cover_image,json=coverImage,proto3" json:"cover_image,omitempty"`
+	HeaderStyle                      *Style         `protobuf:"bytes,43,opt,name=header_style,json=headerStyle,proto3" json:"header_style,omitempty"`
+	TextStyle                        *Style         `protobuf:"bytes,44,opt,name=text_style,json=textStyle,proto3" json:"text_style,omitempty"`
+	InputStyle                       *Style         `protobuf:"bytes,45,opt,name=input_style,json=inputStyle,proto3" json:"input_style,omitempty"`
+	TicketTypeId                     string         `protobuf:"bytes,46,opt,name=ticket_type_id,json=ticketTypeId,proto3" json:"ticket_type_id,omitempty"`
+	TicketDueAt                      string         `protobuf:"bytes,47,opt,name=ticket_due_at,json=ticketDueAt,proto3" json:"ticket_due_at,omitempty"`
+	ConversationFeedbackRatingField  string         `protobuf:"bytes,50,opt,name=conversation_feedback_rating_field,json=conversationFeedbackRatingField,proto3" json:"conversation_feedback_rating_field,omitempty"`    // string
+	ConversationFeedbackCommentField string         `protobuf:"bytes,51,opt,name=conversation_feedback_comment_field,json=conversationFeedbackCommentField,proto3" json:"conversation_feedback_comment_field,omitempty"` // string
+	ConversationFeedbackReasonsField string         `protobuf:"bytes,52,opt,name=conversation_feedback_reasons_field,json=conversationFeedbackReasonsField,proto3" json:"conversation_feedback_reasons_field,omitempty"` // checkbox, multiple values
+	Access                           string         `protobuf:"bytes,53,opt,name=access,proto3" json:"access,omitempty"`                                                                                                 // ""=="private", "public" anyone with the public link (form id) can view and submit
+	// some statistic
+	TotalSubmissions int64 `protobuf:"varint,54,opt,name=total_submissions,json=totalSubmissions,proto3" json:"total_submissions,omitempty"`
+	LastSubmissions  int64 `protobuf:"varint,55,opt,name=last_submissions,json=lastSubmissions,proto3" json:"last_submissions,omitempty"` // ms
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Form) Reset() {
@@ -22486,9 +22489,9 @@ func (x *Form) GetConversationFeedbackRatingField() string {
 	return ""
 }
 
-func (x *Form) GetConversationFeedbackComment_Field() string {
+func (x *Form) GetConversationFeedbackCommentField() string {
 	if x != nil {
-		return x.ConversationFeedbackComment_Field
+		return x.ConversationFeedbackCommentField
 	}
 	return ""
 }
@@ -22505,6 +22508,20 @@ func (x *Form) GetAccess() string {
 		return x.Access
 	}
 	return ""
+}
+
+func (x *Form) GetTotalSubmissions() int64 {
+	if x != nil {
+		return x.TotalSubmissions
+	}
+	return 0
+}
+
+func (x *Form) GetLastSubmissions() int64 {
+	if x != nil {
+		return x.LastSubmissions
+	}
+	return 0
 }
 
 type OldForm struct {
@@ -82533,7 +82550,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_message_id\x18\r \x01(\tR\rformMessageId\x122\n" +
 	"\x15form_attachment_index\x18\x0e \x01(\x03R\x13formAttachmentIndex\x12\x1d\n" +
 	"\n" +
-	"auth_token\x18\x0f \x01(\tR\tauthToken\"\xc9\r\n" +
+	"auth_token\x18\x0f \x01(\tR\tauthToken\"\xa0\x0e\n" +
 	"\x04Form\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -82585,10 +82602,12 @@ const file_header_proto_rawDesc = "" +
 	"inputStyle\x12$\n" +
 	"\x0eticket_type_id\x18. \x01(\tR\fticketTypeId\x12\"\n" +
 	"\rticket_due_at\x18/ \x01(\tR\vticketDueAt\x12K\n" +
-	"\"conversation_feedback_rating_field\x182 \x01(\tR\x1fconversationFeedbackRatingField\x12N\n" +
-	"$conversation_feedback_comment__field\x183 \x01(\tR conversationFeedbackCommentField\x12M\n" +
+	"\"conversation_feedback_rating_field\x182 \x01(\tR\x1fconversationFeedbackRatingField\x12M\n" +
+	"#conversation_feedback_comment_field\x183 \x01(\tR conversationFeedbackCommentField\x12M\n" +
 	"#conversation_feedback_reasons_field\x184 \x01(\tR conversationFeedbackReasonsField\x12\x16\n" +
-	"\x06access\x185 \x01(\tR\x06access\"9\n" +
+	"\x06access\x185 \x01(\tR\x06access\x12+\n" +
+	"\x11total_submissions\x186 \x01(\x03R\x10totalSubmissions\x12)\n" +
+	"\x10last_submissions\x187 \x01(\x03R\x0flastSubmissions\"9\n" +
 	"\x04When\x12\x16\n" +
 	"\x12all_agents_offline\x10\x00\x12\x19\n" +
 	"\x15out_of_bussiness_hour\x10\x01\"\xbb\x06\n" +
