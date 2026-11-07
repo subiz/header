@@ -5439,6 +5439,7 @@ message ProductSearchRequest {
 
 	repeated LLMChatHistoryEntry history = 3; // must end with a user message; roles: user | assistant
 
+
 	string pos_id = 4;
 	string user_id = 5;
 	string conversation_id = 6;
@@ -5446,6 +5447,7 @@ message ProductSearchRequest {
 	string trace_id = 9;
 	string workflow_session_id = 10;
 	string message_id = 11; // tracking
+	string is_ai_message = 12;
 }
 
 message ProductStoreResult {

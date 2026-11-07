@@ -37823,6 +37823,7 @@ type ProductSearchRequest struct {
 	TraceId           string                 `protobuf:"bytes,9,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	WorkflowSessionId string                 `protobuf:"bytes,10,opt,name=workflow_session_id,json=workflowSessionId,proto3" json:"workflow_session_id,omitempty"`
 	MessageId         string                 `protobuf:"bytes,11,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"` // tracking
+	IsAiMessage       string                 `protobuf:"bytes,12,opt,name=is_ai_message,json=isAiMessage,proto3" json:"is_ai_message,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -37923,6 +37924,13 @@ func (x *ProductSearchRequest) GetWorkflowSessionId() string {
 func (x *ProductSearchRequest) GetMessageId() string {
 	if x != nil {
 		return x.MessageId
+	}
+	return ""
+}
+
+func (x *ProductSearchRequest) GetIsAiMessage() string {
+	if x != nil {
+		return x.IsAiMessage
 	}
 	return ""
 }
@@ -84582,7 +84590,7 @@ const file_header_proto_rawDesc = "" +
 	"\afeed_id\x18\x1b \x01(\tR\x06feedId\x12\x1e\n" +
 	"\vfeed_log_id\x18\x1c \x01(\tR\tfeedLogId\x12\x19\n" +
 	"\bprop_key\x18\x1d \x01(\tR\apropKey\x12\x17\n" +
-	"\aid_only\x18\x1e \x01(\bR\x06idOnly\"\xe9\x02\n" +
+	"\aid_only\x18\x1e \x01(\bR\x06idOnly\"\x8d\x03\n" +
 	"\x14ProductSearchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -84596,7 +84604,8 @@ const file_header_proto_rawDesc = "" +
 	"\x13workflow_session_id\x18\n" +
 	" \x01(\tR\x11workflowSessionId\x12\x1d\n" +
 	"\n" +
-	"message_id\x18\v \x01(\tR\tmessageId\"\xf0\x04\n" +
+	"message_id\x18\v \x01(\tR\tmessageId\x12\"\n" +
+	"\ris_ai_message\x18\f \x01(\tR\visAiMessage\"\xf0\x04\n" +
 	"\x12ProductStoreResult\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
