@@ -11532,3 +11532,28 @@ message LookupMetaConversationIdRequest {
 	string page_id = 3;
 	string psid = 4;
 }
+
+// Internal call control. The API must authenticate the call server and forward
+// its credential in ctx. The service verifies account/ZPA ownership, the live
+// WebSocket generation and the integration's call opt-out before signaling.
+message ZaloPersonalCallSignalRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string zpa_id = 3;
+	// Empty only for the initial ready operation. Subsequent commands must
+	// use the generation returned by ready (or the incoming call event).
+	string session_id = 4;
+	// ready, requestcall, request, ringring, answer, answerack, cancel, endcall.
+	string operation = 5;
+	// A JSON object containing provider-specific parameters. JSON stays text
+	// to preserve integer IDs exactly; credentials/imei are supplied by service.
+	// Contains private relay data: never publish or log this payload.
+	string params_json = 6;
+}
+
+message ZaloPersonalCallSignalResponse {
+	string session_id = 4;
+	// Decrypted provider data as JSON ({} for ready). It can contain relay
+	// credentials and must only be returned to the authenticated call server.
+	string data_json = 5;
+}

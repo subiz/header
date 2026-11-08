@@ -24570,6 +24570,7 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	ZalopersonService_SignalCall_FullMethodName              = "/header.ZalopersonService/SignalCall"
 	ZalopersonService_UndoFriendRequest_FullMethodName       = "/header.ZalopersonService/UndoFriendRequest"
 	ZalopersonService_SendFriendRequest_FullMethodName       = "/header.ZalopersonService/SendFriendRequest"
 	ZalopersonService_ListFriendRequests_FullMethodName      = "/header.ZalopersonService/ListFriendRequests"
@@ -24594,6 +24595,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ZalopersonServiceClient interface {
+	// Call server -> public API -> this service. Credentials and the Zalo
+	// WebSocket remain in zaloperson; media and device routing remain in call.
+	SignalCall(ctx context.Context, in *ZaloPersonalCallSignalRequest, opts ...grpc.CallOption) (*ZaloPersonalCallSignalResponse, error)
 	UndoFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	SendFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error)
 	ListFriendRequests(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -24620,6 +24624,16 @@ type zalopersonServiceClient struct {
 
 func NewZalopersonServiceClient(cc grpc.ClientConnInterface) ZalopersonServiceClient {
 	return &zalopersonServiceClient{cc}
+}
+
+func (c *zalopersonServiceClient) SignalCall(ctx context.Context, in *ZaloPersonalCallSignalRequest, opts ...grpc.CallOption) (*ZaloPersonalCallSignalResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ZaloPersonalCallSignalResponse)
+	err := c.cc.Invoke(ctx, ZalopersonService_SignalCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *zalopersonServiceClient) UndoFriendRequest(ctx context.Context, in *ZaloFriendRequest, opts ...grpc.CallOption) (*Response, error) {
@@ -24806,6 +24820,9 @@ func (c *zalopersonServiceClient) TryZaloLogin(ctx context.Context, in *ZaloLogi
 // All implementations must embed UnimplementedZalopersonServiceServer
 // for forward compatibility.
 type ZalopersonServiceServer interface {
+	// Call server -> public API -> this service. Credentials and the Zalo
+	// WebSocket remain in zaloperson; media and device routing remain in call.
+	SignalCall(context.Context, *ZaloPersonalCallSignalRequest) (*ZaloPersonalCallSignalResponse, error)
 	UndoFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	SendFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error)
 	ListFriendRequests(context.Context, *Id) (*Response, error)
@@ -24834,6 +24851,9 @@ type ZalopersonServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedZalopersonServiceServer struct{}
 
+func (UnimplementedZalopersonServiceServer) SignalCall(context.Context, *ZaloPersonalCallSignalRequest) (*ZaloPersonalCallSignalResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SignalCall not implemented")
+}
 func (UnimplementedZalopersonServiceServer) UndoFriendRequest(context.Context, *ZaloFriendRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method UndoFriendRequest not implemented")
 }
@@ -24907,6 +24927,24 @@ func RegisterZalopersonServiceServer(s grpc.ServiceRegistrar, srv ZalopersonServ
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ZalopersonService_ServiceDesc, srv)
+}
+
+func _ZalopersonService_SignalCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ZaloPersonalCallSignalRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ZalopersonServiceServer).SignalCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ZalopersonService_SignalCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ZalopersonServiceServer).SignalCall(ctx, req.(*ZaloPersonalCallSignalRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ZalopersonService_UndoFriendRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -25240,6 +25278,10 @@ var ZalopersonService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.ZalopersonService",
 	HandlerType: (*ZalopersonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SignalCall",
+			Handler:    _ZalopersonService_SignalCall_Handler,
+		},
 		{
 			MethodName: "UndoFriendRequest",
 			Handler:    _ZalopersonService_UndoFriendRequest_Handler,

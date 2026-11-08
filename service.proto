@@ -881,6 +881,9 @@ service ZalokonService {
 }
 
 service ZalopersonService {
+	// Call server -> public API -> this service. Credentials and the Zalo
+	// WebSocket remain in zaloperson; media and device routing remain in call.
+	rpc SignalCall(ZaloPersonalCallSignalRequest) returns (ZaloPersonalCallSignalResponse);
 	rpc UndoFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc SendFriendRequest(header.ZaloFriendRequest) returns (Response);
 	rpc ListFriendRequests(Id) returns (header.Response); // zalo_personal_accounts
