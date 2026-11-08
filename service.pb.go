@@ -1235,7 +1235,7 @@ const file_service_proto_rawDesc = "" +
 	"\x0eTrySpendCredit\x12\x18.header.CreditSpendEntry\x1a\x1e.header.TrySpendCreditResponse\x12X\n" +
 	"\x11ReportCreditSpend\x12 .header.CreditSpendReportRequest\x1a!.header.CreditSpendReportResponse\x12O\n" +
 	"\x12ListCreditSpendLog\x12\x1d.header.CreditSpendLogRequest\x1a\x1a.header.CreditSpendEntries\x12I\n" +
-	"\x13GetTotalCreditSpend\x12 .header.CreditSpendReportRequest\x1a\x10.header.Response2\xae\x05\n" +
+	"\x13GetTotalCreditSpend\x12 .header.CreditSpendReportRequest\x1a\x10.header.Response2\xa4\x05\n" +
 	"\aFormMgr\x12)\n" +
 	"\tListForms\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12,\n" +
@@ -1248,9 +1248,9 @@ const file_service_proto_rawDesc = "" +
 	"\tMatchForm\x12\v.header.Ids\x1a\x10.header.Response\x12'\n" +
 	"\n" +
 	"DeleteForm\x12\n" +
-	".header.Id\x1a\r.header.Empty\x12C\n" +
+	".header.Id\x1a\r.header.Empty\x129\n" +
 	"\n" +
-	"ReportForm\x12\x19.header.FormReportRequest\x1a\x1a.header.FormReportResponse\x12U\n" +
+	"ReportForm\x12\x19.header.FormReportRequest\x1a\x10.header.Response\x12U\n" +
 	"\x18SuggestFormAnswerChoices\x12'.header.SuggestFormAnswerChoicesRequest\x1a\x10.header.Response\x12J\n" +
 	"\x13ListFormSubmissions\x12!.header.ListFormSubmissionRequest\x1a\x10.header.Response\x12<\n" +
 	"\n" +
@@ -1693,12 +1693,11 @@ var file_service_proto_goTypes = []any{
 	(*TrySpendCreditResponse)(nil),            // 359: header.TrySpendCreditResponse
 	(*CreditSpendReportResponse)(nil),         // 360: header.CreditSpendReportResponse
 	(*CreditSpendEntries)(nil),                // 361: header.CreditSpendEntries
-	(*FormReportResponse)(nil),                // 362: header.FormReportResponse
-	(*ArticleSearchResponse)(nil),             // 363: header.ArticleSearchResponse
-	(*ArticleTopics)(nil),                     // 364: header.ArticleTopics
-	(*CounterReportResponse)(nil),             // 365: header.CounterReportResponse
-	(*CounterDataPoints)(nil),                 // 366: header.CounterDataPoints
-	(*CrawlResponse)(nil),                     // 367: header.CrawlResponse
+	(*ArticleSearchResponse)(nil),             // 362: header.ArticleSearchResponse
+	(*ArticleTopics)(nil),                     // 363: header.ArticleTopics
+	(*CounterReportResponse)(nil),             // 364: header.CounterReportResponse
+	(*CounterDataPoints)(nil),                 // 365: header.CounterDataPoints
+	(*CrawlResponse)(nil),                     // 366: header.CrawlResponse
 }
 var file_service_proto_depIdxs = []int32{
 	0,   // 0: header.GooglekonService.SendEventToGoogle:input_type -> header.Events
@@ -3401,7 +3400,7 @@ var file_service_proto_depIdxs = []int32{
 	273, // 1697: header.FormMgr.UpdateForm:output_type -> header.Response
 	273, // 1698: header.FormMgr.MatchForm:output_type -> header.Response
 	52,  // 1699: header.FormMgr.DeleteForm:output_type -> header.Empty
-	362, // 1700: header.FormMgr.ReportForm:output_type -> header.FormReportResponse
+	273, // 1700: header.FormMgr.ReportForm:output_type -> header.Response
 	273, // 1701: header.FormMgr.SuggestFormAnswerChoices:output_type -> header.Response
 	273, // 1702: header.FormMgr.ListFormSubmissions:output_type -> header.Response
 	256, // 1703: header.FormMgr.SubmitForm:output_type -> header.FormSubmission
@@ -3421,7 +3420,7 @@ var file_service_proto_depIdxs = []int32{
 	273, // 1717: header.KB.GetArticle:output_type -> header.Response
 	273, // 1718: header.KB.ListArticles:output_type -> header.Response
 	273, // 1719: header.KB.ListArticleVersions:output_type -> header.Response
-	363, // 1720: header.KB.SearchArticles:output_type -> header.ArticleSearchResponse
+	362, // 1720: header.KB.SearchArticles:output_type -> header.ArticleSearchResponse
 	52,  // 1721: header.KB.AddTopicToArticle:output_type -> header.Empty
 	52,  // 1722: header.KB.RemoveTopicFromArticle:output_type -> header.Empty
 	273, // 1723: header.KB.RateArticle:output_type -> header.Response
@@ -3431,7 +3430,7 @@ var file_service_proto_depIdxs = []int32{
 	266, // 1727: header.KB.CreateArticleTopic:output_type -> header.ArticleTopic
 	266, // 1728: header.KB.UpdateArticleTopic:output_type -> header.ArticleTopic
 	52,  // 1729: header.KB.DeleteArticleTopic:output_type -> header.Empty
-	364, // 1730: header.KB.ListArticleTopics:output_type -> header.ArticleTopics
+	363, // 1730: header.KB.ListArticleTopics:output_type -> header.ArticleTopics
 	266, // 1731: header.KB.GetArticleTopic:output_type -> header.ArticleTopic
 	273, // 1732: header.KB.CreateArticleCategory:output_type -> header.Response
 	273, // 1733: header.KB.UpdateArticleCategory:output_type -> header.Response
@@ -3440,10 +3439,10 @@ var file_service_proto_depIdxs = []int32{
 	273, // 1736: header.KB.ListArticleCategories:output_type -> header.Response
 	273, // 1737: header.KB.CheckKbHandle:output_type -> header.Response
 	273, // 1738: header.KB.UpdateArticleTree:output_type -> header.Response
-	365, // 1739: header.Counter.Report:output_type -> header.CounterReportResponse
-	366, // 1740: header.Counter.ListLogs:output_type -> header.CounterDataPoints
-	367, // 1741: header.Crawler.Crawl:output_type -> header.CrawlResponse
-	367, // 1742: header.Crawler.ScreenShoot:output_type -> header.CrawlResponse
+	364, // 1739: header.Counter.Report:output_type -> header.CounterReportResponse
+	365, // 1740: header.Counter.ListLogs:output_type -> header.CounterDataPoints
+	366, // 1741: header.Crawler.Crawl:output_type -> header.CrawlResponse
+	366, // 1742: header.Crawler.ScreenShoot:output_type -> header.CrawlResponse
 	52,  // 1743: header.VectorDB.CleanDocumentChunks:output_type -> header.Empty
 	273, // 1744: header.VectorDB.ListDocumentsByTag:output_type -> header.Response
 	273, // 1745: header.VectorDB.ListDocumentChunks:output_type -> header.Response

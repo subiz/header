@@ -2871,6 +2871,7 @@ func IsCallChannel(channel string) bool {
 		ChannelType_zalo_call.String(),
 		ChannelType_facebook_call.String(),
 		ChannelType_whatsapp_call.String():
+		ChannelType_zalo_personal_call.String():
 		return true
 	}
 	return false
