@@ -33770,7 +33770,7 @@ type FormMgrClient interface {
 	UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
 	MatchForm(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*FormReportResponse, error)
+	ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*Response, error)
 	SuggestFormAnswerChoices(ctx context.Context, in *SuggestFormAnswerChoicesRequest, opts ...grpc.CallOption) (*Response, error)
 	ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error)
 	SubmitForm(ctx context.Context, in *FormSubmission, opts ...grpc.CallOption) (*FormSubmission, error)
@@ -33846,9 +33846,9 @@ func (c *formMgrClient) DeleteForm(ctx context.Context, in *Id, opts ...grpc.Cal
 	return out, nil
 }
 
-func (c *formMgrClient) ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*FormReportResponse, error) {
+func (c *formMgrClient) ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FormReportResponse)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_ReportForm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -33916,7 +33916,7 @@ type FormMgrServer interface {
 	UpdateForm(context.Context, *Form) (*Response, error)
 	MatchForm(context.Context, *Ids) (*Response, error)
 	DeleteForm(context.Context, *Id) (*Empty, error)
-	ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error)
+	ReportForm(context.Context, *FormReportRequest) (*Response, error)
 	SuggestFormAnswerChoices(context.Context, *SuggestFormAnswerChoicesRequest) (*Response, error)
 	ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error)
 	SubmitForm(context.Context, *FormSubmission) (*FormSubmission, error)
@@ -33950,7 +33950,7 @@ func (UnimplementedFormMgrServer) MatchForm(context.Context, *Ids) (*Response, e
 func (UnimplementedFormMgrServer) DeleteForm(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteForm not implemented")
 }
-func (UnimplementedFormMgrServer) ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error) {
+func (UnimplementedFormMgrServer) ReportForm(context.Context, *FormReportRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReportForm not implemented")
 }
 func (UnimplementedFormMgrServer) SuggestFormAnswerChoices(context.Context, *SuggestFormAnswerChoicesRequest) (*Response, error) {

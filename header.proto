@@ -3609,6 +3609,7 @@ enum ChannelType {
 	facebook_call = 19;
 	whatsapp_call = 20;
 	youtube_comment = 21;
+	zalo_personal_call = 22;
 }
 
 message WebhookSecret {
@@ -6773,8 +6774,6 @@ message BusinessEmailAddresses {
 	repeated BusinessEmailAddress business_email_addresses = 3;
 }
 
-// Report one question, or total submissions when key is empty.
-// Labels, input types and scale bounds come from Form.components.
 message FormReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6788,17 +6787,6 @@ message FormReportRequest {
 	repeated WorkflowCondition conditions = 9;
 }
 
-message FormReportResponse {
-	common.Context ctx = 1;
-	int64 total_submissions = 2; // matching submissions in the requested range
-	int64 answered = 3; // valid, nonempty answers to key; skipped = total - answered
-	repeated FormReportValueCount values = 4; // whole-range distribution for key
-	repeated FormReportBucket buckets = 5;
-	// Without key: answered = 0 and values are empty (including bucket values).
-	// Percentage = count / answered * 100; no percentage when answered = 0.
-	// Numeric averages can be calculated from values, weighted by count.
-}
-
 message FormReportBucket {
 	// Sorted calendar buckets in request timezone; clipped to [from, to).
 	// Include empty time buckets with total_submissions = 0.
@@ -6806,10 +6794,9 @@ message FormReportBucket {
 	int64 to = 2; // Unix ms, exclusive
 	int64 total_submissions = 3;
 	repeated FormReportValueCount values = 4; // counts for key in this bucket
-	// Match series by value, not array position; absent values mean zero.
 }
 
-// Shared by report distributions, time buckets and answer suggestions.
+// Shared by report distributions and time buckets.
 message FormReportValueCount {
 	string value = 1; // JSON scalar, e.g. 4 or "resolved"; never a display label
 	int64 count = 2; // unique submissions containing this value; positive only
@@ -6818,19 +6805,11 @@ message FormReportValueCount {
 	// Return values sorted lexicographically by their serialized value.
 }
 
-// Observed choices for one question. Resolve its type from the stored form.
-// Allow radio/select/dropdown/single-choice, checkbox/multiple-choice,
-// rating and linear_scale; reject other types, including free text.
-// Custom text entered through "Other" is not an answer choice.
 message SuggestFormAnswerChoicesRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string form_id = 3;
 	string key = 4; // required input key
-	int64 from = 5; // submitted_at, Unix ms, inclusive; 0 = unbounded
-	int64 to = 6; // Unix ms, exclusive; 0 = unbounded
-	// Same AND filtering as ReportForm. Caller omits the condition being edited.
-	repeated WorkflowCondition conditions = 7;
 }
 
 message ListFormSubmissionRequest {
@@ -7553,8 +7532,10 @@ message Response {
 	OAuthAuthorization oauth_authorization = 318;
 	FacebookLabel facebook_label = 320;
 
-	// SuggestFormAnswerChoices: distinct observed values and submission counts.
-	repeated FormReportValueCount form_values = 321;
+	repeated string form_answer_choices = 322;
+	int64 form_answered = 323; // valid, nonempty answers to key; skipped = total - answered
+	repeated FormReportValueCount form_report_values = 324; // whole-range distribution for key
+	repeated FormReportBucket form_report_buckets = 325;
 }
 
 message ReportCount {
