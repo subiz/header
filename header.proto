@@ -1053,6 +1053,8 @@ message RingingSetting {
 	Rule menu_fallback = 19;
 
 	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
+
+	bool enable_recording = 21;
 }
 
 message TimmingCondition {
@@ -5439,7 +5441,6 @@ message ProductSearchRequest {
 
 	repeated LLMChatHistoryEntry history = 3; // must end with a user message; roles: user | assistant
 
-
 	string pos_id = 4;
 	string user_id = 5;
 	string conversation_id = 6;
@@ -6769,8 +6770,55 @@ message BusinessEmailAddresses {
 	repeated BusinessEmailAddress business_email_addresses = 3;
 }
 
-message FormReportRequest {}
-message FormReportResponse {}
+message FormReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string form_id = 3;
+	int64 from = 4; // submitted_at, Unix ms, inclusive
+	int64 to = 5; // Unix ms, exclusive
+	string timezone = 6; // IANA timezone; default UTC
+	string interval = 7; // day (default), week (Monday start), month
+	// AND; key = form input key. Use WorkflowCondition's typed values/all/one.
+	// Filter submissions first, then aggregate all supported questions.
+	repeated WorkflowCondition conditions = 8;
+}
+
+message FormReportResponse {
+	common.Context ctx = 1;
+	reserved 2 to 7, 13;
+	int64 total_submissions = 8; // matching submissions, not lifetime counter
+	repeated FormReportBucket buckets = 9;
+	repeated FormReportField fields = 10; // excludes free text and layout blocks
+	int64 total_days = 11; // calendar days intersecting the range, in request timezone
+	int64 active_days = 12; // days with matching submissions
+}
+
+message FormReportBucket {
+	// Calendar buckets in request timezone, sorted and zero-filled; clipped to range.
+	int64 from = 1; // Unix ms, inclusive
+	int64 to = 2; // Unix ms, exclusive
+	int64 total_submissions = 3;
+}
+
+message FormReportField {
+	string key = 1;
+	string label = 2;
+	string type = 3;
+	int64 answered = 4; // submissions with a valid, nonempty answer
+	int64 skipped = 5; // total_submissions - answered
+	repeated FormReportValueCount distribution = 6;
+	double average = 7; // numeric fields; original scale; meaningful if answered > 0
+	double scale_min = 8; // configured bounds for bounded numeric fields
+	double scale_max = 9;
+}
+
+message FormReportValueCount {
+	string value = 1; // JSON scalar; individual option for checkbox answers
+	string label = 2;
+	// Unique submissions per value; percentage = count / field.answered * 100.
+	// Checkbox percentages may sum above 100%.
+	int64 count = 3;
+}
 
 message ListFormSubmissionRequest {
 	common.Context ctx = 1;
@@ -6780,6 +6828,10 @@ message ListFormSubmissionRequest {
 	string anchor = 5;
 	// string category = 6; // comma separated
 	string keyword = 8; // for searching
+	int64 from = 9; // submitted_at, Unix ms, inclusive; 0 = unbounded
+	int64 to = 10; // Unix ms, exclusive; 0 = unbounded
+	// Same condition semantics as FormReportRequest. Reset anchor when filters change.
+	repeated WorkflowCondition conditions = 11;
 }
 
 message OutboundCallReportRequest {
