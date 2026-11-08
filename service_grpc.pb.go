@@ -33746,17 +33746,18 @@ var CreditMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FormMgr_ListForms_FullMethodName              = "/header.FormMgr/ListForms"
-	FormMgr_CreateForm_FullMethodName             = "/header.FormMgr/CreateForm"
-	FormMgr_GetForm_FullMethodName                = "/header.FormMgr/GetForm"
-	FormMgr_UpdateForm_FullMethodName             = "/header.FormMgr/UpdateForm"
-	FormMgr_MatchForm_FullMethodName              = "/header.FormMgr/MatchForm"
-	FormMgr_DeleteForm_FullMethodName             = "/header.FormMgr/DeleteForm"
-	FormMgr_ReportForm_FullMethodName             = "/header.FormMgr/ReportForm"
-	FormMgr_ListFormSubmissions_FullMethodName    = "/header.FormMgr/ListFormSubmissions"
-	FormMgr_SubmitForm_FullMethodName             = "/header.FormMgr/SubmitForm"
-	FormMgr_CheckFormFromAuthToken_FullMethodName = "/header.FormMgr/CheckFormFromAuthToken"
-	FormMgr_GenerateFormLink_FullMethodName       = "/header.FormMgr/GenerateFormLink"
+	FormMgr_ListForms_FullMethodName                = "/header.FormMgr/ListForms"
+	FormMgr_CreateForm_FullMethodName               = "/header.FormMgr/CreateForm"
+	FormMgr_GetForm_FullMethodName                  = "/header.FormMgr/GetForm"
+	FormMgr_UpdateForm_FullMethodName               = "/header.FormMgr/UpdateForm"
+	FormMgr_MatchForm_FullMethodName                = "/header.FormMgr/MatchForm"
+	FormMgr_DeleteForm_FullMethodName               = "/header.FormMgr/DeleteForm"
+	FormMgr_ReportForm_FullMethodName               = "/header.FormMgr/ReportForm"
+	FormMgr_SuggestFormAnswerChoices_FullMethodName = "/header.FormMgr/SuggestFormAnswerChoices"
+	FormMgr_ListFormSubmissions_FullMethodName      = "/header.FormMgr/ListFormSubmissions"
+	FormMgr_SubmitForm_FullMethodName               = "/header.FormMgr/SubmitForm"
+	FormMgr_CheckFormFromAuthToken_FullMethodName   = "/header.FormMgr/CheckFormFromAuthToken"
+	FormMgr_GenerateFormLink_FullMethodName         = "/header.FormMgr/GenerateFormLink"
 )
 
 // FormMgrClient is the client API for FormMgr service.
@@ -33770,6 +33771,7 @@ type FormMgrClient interface {
 	MatchForm(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*FormReportResponse, error)
+	SuggestFormAnswerChoices(ctx context.Context, in *SuggestFormAnswerChoicesRequest, opts ...grpc.CallOption) (*Response, error)
 	ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error)
 	SubmitForm(ctx context.Context, in *FormSubmission, opts ...grpc.CallOption) (*FormSubmission, error)
 	CheckFormFromAuthToken(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -33854,6 +33856,16 @@ func (c *formMgrClient) ReportForm(ctx context.Context, in *FormReportRequest, o
 	return out, nil
 }
 
+func (c *formMgrClient) SuggestFormAnswerChoices(ctx context.Context, in *SuggestFormAnswerChoicesRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FormMgr_SuggestFormAnswerChoices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *formMgrClient) ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -33905,6 +33917,7 @@ type FormMgrServer interface {
 	MatchForm(context.Context, *Ids) (*Response, error)
 	DeleteForm(context.Context, *Id) (*Empty, error)
 	ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error)
+	SuggestFormAnswerChoices(context.Context, *SuggestFormAnswerChoicesRequest) (*Response, error)
 	ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error)
 	SubmitForm(context.Context, *FormSubmission) (*FormSubmission, error)
 	CheckFormFromAuthToken(context.Context, *Id) (*Response, error)
@@ -33939,6 +33952,9 @@ func (UnimplementedFormMgrServer) DeleteForm(context.Context, *Id) (*Empty, erro
 }
 func (UnimplementedFormMgrServer) ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReportForm not implemented")
+}
+func (UnimplementedFormMgrServer) SuggestFormAnswerChoices(context.Context, *SuggestFormAnswerChoicesRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuggestFormAnswerChoices not implemented")
 }
 func (UnimplementedFormMgrServer) ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListFormSubmissions not implemented")
@@ -34099,6 +34115,24 @@ func _FormMgr_ReportForm_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FormMgr_SuggestFormAnswerChoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuggestFormAnswerChoicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormMgrServer).SuggestFormAnswerChoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FormMgr_SuggestFormAnswerChoices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormMgrServer).SuggestFormAnswerChoices(ctx, req.(*SuggestFormAnswerChoicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FormMgr_ListFormSubmissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFormSubmissionRequest)
 	if err := dec(in); err != nil {
@@ -34205,6 +34239,10 @@ var FormMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportForm",
 			Handler:    _FormMgr_ReportForm_Handler,
+		},
+		{
+			MethodName: "SuggestFormAnswerChoices",
+			Handler:    _FormMgr_SuggestFormAnswerChoices_Handler,
 		},
 		{
 			MethodName: "ListFormSubmissions",

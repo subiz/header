@@ -3208,7 +3208,8 @@ message Form {
 
 	// some statistic
 	int64 total_submissions = 54;
-	int64 last_submissions = 55; // ms
+	int64 last_submitted = 55; // ms
+	int64 total_impressions = 56;
 }
 
 message OldForm {
@@ -5449,6 +5450,8 @@ message ProductSearchRequest {
 	string workflow_session_id = 10;
 	string message_id = 11; // tracking
 	string is_ai_message = 12;
+	string brand_name = 13;
+	string brand_category = 14;
 }
 
 message ProductStoreResult {
@@ -6770,54 +6773,64 @@ message BusinessEmailAddresses {
 	repeated BusinessEmailAddress business_email_addresses = 3;
 }
 
+// Report one question, or total submissions when key is empty.
+// Labels, input types and scale bounds come from Form.components.
 message FormReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string form_id = 3;
-	int64 from = 4; // submitted_at, Unix ms, inclusive
-	int64 to = 5; // Unix ms, exclusive
-	string timezone = 6; // IANA timezone; default UTC
-	string interval = 7; // day (default), week (Monday start), month
-	// AND; key = form input key. Use WorkflowCondition's typed values/all/one.
-	// Filter submissions first, then aggregate all supported questions.
-	repeated WorkflowCondition conditions = 8;
+	string key = 4; // optional input key; reject unknown keys and free-text inputs
+	int64 from = 5; // submitted_at, Unix ms, inclusive
+	int64 to = 6; // Unix ms, exclusive; required, greater than from
+	string timezone = 7; // IANA timezone; default UTC
+	string interval = 8; // day (default), week (Monday start), month
+	// AND; filter submissions before counting. key may differ from condition keys.
+	repeated WorkflowCondition conditions = 9;
 }
 
 message FormReportResponse {
 	common.Context ctx = 1;
-	reserved 2 to 7, 13;
-	int64 total_submissions = 8; // matching submissions, not lifetime counter
-	repeated FormReportBucket buckets = 9;
-	repeated FormReportField fields = 10; // excludes free text and layout blocks
-	int64 total_days = 11; // calendar days intersecting the range, in request timezone
-	int64 active_days = 12; // days with matching submissions
+	int64 total_submissions = 2; // matching submissions in the requested range
+	int64 answered = 3; // valid, nonempty answers to key; skipped = total - answered
+	repeated FormReportValueCount values = 4; // whole-range distribution for key
+	repeated FormReportBucket buckets = 5;
+	// Without key: answered = 0 and values are empty (including bucket values).
+	// Percentage = count / answered * 100; no percentage when answered = 0.
+	// Numeric averages can be calculated from values, weighted by count.
 }
 
 message FormReportBucket {
-	// Calendar buckets in request timezone, sorted and zero-filled; clipped to range.
+	// Sorted calendar buckets in request timezone; clipped to [from, to).
+	// Include empty time buckets with total_submissions = 0.
 	int64 from = 1; // Unix ms, inclusive
 	int64 to = 2; // Unix ms, exclusive
 	int64 total_submissions = 3;
+	repeated FormReportValueCount values = 4; // counts for key in this bucket
+	// Match series by value, not array position; absent values mean zero.
 }
 
-message FormReportField {
-	string key = 1;
-	string label = 2;
-	string type = 3;
-	int64 answered = 4; // submissions with a valid, nonempty answer
-	int64 skipped = 5; // total_submissions - answered
-	repeated FormReportValueCount distribution = 6;
-	double average = 7; // numeric fields; original scale; meaningful if answered > 0
-	double scale_min = 8; // configured bounds for bounded numeric fields
-	double scale_max = 9;
-}
-
+// Shared by report distributions, time buckets and answer suggestions.
 message FormReportValueCount {
-	string value = 1; // JSON scalar; individual option for checkbox answers
-	string label = 2;
-	// Unique submissions per value; percentage = count / field.answered * 100.
-	// Checkbox percentages may sum above 100%.
-	int64 count = 3;
+	string value = 1; // JSON scalar, e.g. 4 or "resolved"; never a display label
+	int64 count = 2; // unique submissions containing this value; positive only
+	// Checkbox: flatten answers and deduplicate per submission. Counts may sum
+	// above answered/total_submissions because a submission can select many options.
+	// Return values sorted lexicographically by their serialized value.
+}
+
+// Observed choices for one question. Resolve its type from the stored form.
+// Allow radio/select/dropdown/single-choice, checkbox/multiple-choice,
+// rating and linear_scale; reject other types, including free text.
+// Custom text entered through "Other" is not an answer choice.
+message SuggestFormAnswerChoicesRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string form_id = 3;
+	string key = 4; // required input key
+	int64 from = 5; // submitted_at, Unix ms, inclusive; 0 = unbounded
+	int64 to = 6; // Unix ms, exclusive; 0 = unbounded
+	// Same AND filtering as ReportForm. Caller omits the condition being edited.
+	repeated WorkflowCondition conditions = 7;
 }
 
 message ListFormSubmissionRequest {
@@ -7539,6 +7552,9 @@ message Response {
 
 	OAuthAuthorization oauth_authorization = 318;
 	FacebookLabel facebook_label = 320;
+
+	// SuggestFormAnswerChoices: distinct observed values and submission counts.
+	repeated FormReportValueCount form_values = 321;
 }
 
 message ReportCount {
