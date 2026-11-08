@@ -1054,7 +1054,7 @@ message RingingSetting {
 
 	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
 
-	bool enable_recording = 21;
+	int64 recording_disabled = 21;
 }
 
 message TimmingCondition {
@@ -2157,6 +2157,8 @@ message Integration {
 	string youtube_channel_url = 191; // https://www.youtube.com/channel/<channel_id>
 	string youtube_country = 192;
 	string youtube_uploads_playlist_id = 193;
+
+	int64 zalo_personal_call_disabled = 194;
 
 	string updated_by = 200;
 	int64 updated = 201;

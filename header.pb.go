@@ -9084,7 +9084,7 @@ type RingingSetting struct {
 	MenuOptions               []*Rule        `protobuf:"bytes,18,rep,name=menu_options,json=menuOptions,proto3" json:"menu_options,omitempty"`
 	MenuFallback              *Rule          `protobuf:"bytes,19,opt,name=menu_fallback,json=menuFallback,proto3" json:"menu_fallback,omitempty"`
 	AgentRingTimeoutSec       int64          `protobuf:"varint,20,opt,name=agent_ring_timeout_sec,json=agentRingTimeoutSec,proto3" json:"agent_ring_timeout_sec,omitempty"` // -1 forever, 0 auto, ... n sec
-	EnableRecording           bool           `protobuf:"varint,21,opt,name=enable_recording,json=enableRecording,proto3" json:"enable_recording,omitempty"`
+	RecordingDisabled         int64          `protobuf:"varint,21,opt,name=recording_disabled,json=recordingDisabled,proto3" json:"recording_disabled,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -9217,11 +9217,11 @@ func (x *RingingSetting) GetAgentRingTimeoutSec() int64 {
 	return 0
 }
 
-func (x *RingingSetting) GetEnableRecording() bool {
+func (x *RingingSetting) GetRecordingDisabled() int64 {
 	if x != nil {
-		return x.EnableRecording
+		return x.RecordingDisabled
 	}
-	return false
+	return 0
 }
 
 type TimmingCondition struct {
@@ -14768,6 +14768,7 @@ type Integration struct {
 	YoutubeChannelUrl        string `protobuf:"bytes,191,opt,name=youtube_channel_url,json=youtubeChannelUrl,proto3" json:"youtube_channel_url,omitempty"` // https://www.youtube.com/channel/<channel_id>
 	YoutubeCountry           string `protobuf:"bytes,192,opt,name=youtube_country,json=youtubeCountry,proto3" json:"youtube_country,omitempty"`
 	YoutubeUploadsPlaylistId string `protobuf:"bytes,193,opt,name=youtube_uploads_playlist_id,json=youtubeUploadsPlaylistId,proto3" json:"youtube_uploads_playlist_id,omitempty"`
+	ZaloPersonalCallDisabled int64  `protobuf:"varint,194,opt,name=zalo_personal_call_disabled,json=zaloPersonalCallDisabled,proto3" json:"zalo_personal_call_disabled,omitempty"`
 	UpdatedBy                string `protobuf:"bytes,200,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	Updated                  int64  `protobuf:"varint,201,opt,name=updated,proto3" json:"updated,omitempty"`
 	DeletedBy                string `protobuf:"bytes,202,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
@@ -15741,6 +15742,13 @@ func (x *Integration) GetYoutubeUploadsPlaylistId() string {
 		return x.YoutubeUploadsPlaylistId
 	}
 	return ""
+}
+
+func (x *Integration) GetZaloPersonalCallDisabled() int64 {
+	if x != nil {
+		return x.ZaloPersonalCallDisabled
+	}
+	return 0
 }
 
 func (x *Integration) GetUpdatedBy() string {
@@ -81367,7 +81375,7 @@ const file_header_proto_rawDesc = "" +
 	"\aads_ids\x18\x06 \x03(\tR\x06adsIds\x12\x1b\n" +
 	"\tvideo_ids\x18\a \x03(\tR\bvideoIds\x12\x1e\n" +
 	"\vnot_ads_ids\x18\b \x03(\tR\tnotAdsIds\x12\"\n" +
-	"\rnot_video_ids\x18\t \x03(\tR\vnotVideoIds\"\xd8\x06\n" +
+	"\rnot_video_ids\x18\t \x03(\tR\vnotVideoIds\"\xdc\x06\n" +
 	"\x0eRingingSetting\x12@\n" +
 	"\x10greeting_message\x18\x04 \x01(\v2\x15.header.GreetingAudioR\x0fgreetingMessage\x12<\n" +
 	"\x0emissed_message\x18\x05 \x01(\v2\x15.header.GreetingAudioR\rmissedMessage\x12\x1d\n" +
@@ -81384,8 +81392,8 @@ const file_header_proto_rawDesc = "" +
 	"\x16invalid_option_message\x18\x11 \x01(\v2\x15.header.GreetingAudioR\x14invalidOptionMessage\x12/\n" +
 	"\fmenu_options\x18\x12 \x03(\v2\f.header.RuleR\vmenuOptions\x121\n" +
 	"\rmenu_fallback\x18\x13 \x01(\v2\f.header.RuleR\fmenuFallback\x123\n" +
-	"\x16agent_ring_timeout_sec\x18\x14 \x01(\x03R\x13agentRingTimeoutSec\x12)\n" +
-	"\x10enable_recording\x18\x15 \x01(\bR\x0fenableRecording\"\xbd\x01\n" +
+	"\x16agent_ring_timeout_sec\x18\x14 \x01(\x03R\x13agentRingTimeoutSec\x12-\n" +
+	"\x12recording_disabled\x18\x15 \x01(\x03R\x11recordingDisabled\"\xbd\x01\n" +
 	"\x10TimmingCondition\x12#\n" +
 	"\rbusiness_hour\x18\x03 \x01(\tR\fbusinessHour\x12 \n" +
 	"\fdays_of_week\x18\x02 \x03(\tR\n" +
@@ -82099,7 +82107,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"like_count\x18\x15 \x01(\x03R\tlikeCount\x12%\n" +
 	"\x0efavorite_count\x18\x16 \x01(\x03R\rfavoriteCount\x12#\n" +
-	"\rcomment_count\x18\x17 \x01(\x03R\fcommentCount\"\xd91\n" +
+	"\rcomment_count\x18\x17 \x01(\x03R\fcommentCount\"\x992\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -82247,7 +82255,8 @@ const file_header_proto_rawDesc = "" +
 	"\x12youtube_channel_id\x18\xbe\x01 \x01(\tR\x10youtubeChannelId\x12/\n" +
 	"\x13youtube_channel_url\x18\xbf\x01 \x01(\tR\x11youtubeChannelUrl\x12(\n" +
 	"\x0fyoutube_country\x18\xc0\x01 \x01(\tR\x0eyoutubeCountry\x12>\n" +
-	"\x1byoutube_uploads_playlist_id\x18\xc1\x01 \x01(\tR\x18youtubeUploadsPlaylistId\x12\x1e\n" +
+	"\x1byoutube_uploads_playlist_id\x18\xc1\x01 \x01(\tR\x18youtubeUploadsPlaylistId\x12>\n" +
+	"\x1bzalo_personal_call_disabled\x18\xc2\x01 \x01(\x03R\x18zaloPersonalCallDisabled\x12\x1e\n" +
 	"\n" +
 	"updated_by\x18\xc8\x01 \x01(\tR\tupdatedBy\x12\x19\n" +
 	"\aupdated\x18\xc9\x01 \x01(\x03R\aupdated\x12\x1e\n" +
