@@ -2158,7 +2158,8 @@ message Integration {
 	string youtube_country = 192;
 	string youtube_uploads_playlist_id = 193;
 
-	int64 zalo_personal_call_disabled = 194;
+	int64 zalo_personal_call_enabled = 194;
+	int64 zalo_personal_call_recording_enabled = 195;
 
 	string updated_by = 200;
 	int64 updated = 201;

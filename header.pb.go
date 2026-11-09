@@ -14764,16 +14764,17 @@ type Integration struct {
 	// Shared fields: name/alias = channel title, username = custom URL/handle,
 	// logo_url = channel thumbnail, about = description, state/error_code/last_synced.
 	// OAuth tokens and client secret stay in the adapter database, never in Integration.
-	YoutubeChannelId         string `protobuf:"bytes,190,opt,name=youtube_channel_id,json=youtubeChannelId,proto3" json:"youtube_channel_id,omitempty"`    // stable channel ID returned by channels.list(mine=true)
-	YoutubeChannelUrl        string `protobuf:"bytes,191,opt,name=youtube_channel_url,json=youtubeChannelUrl,proto3" json:"youtube_channel_url,omitempty"` // https://www.youtube.com/channel/<channel_id>
-	YoutubeCountry           string `protobuf:"bytes,192,opt,name=youtube_country,json=youtubeCountry,proto3" json:"youtube_country,omitempty"`
-	YoutubeUploadsPlaylistId string `protobuf:"bytes,193,opt,name=youtube_uploads_playlist_id,json=youtubeUploadsPlaylistId,proto3" json:"youtube_uploads_playlist_id,omitempty"`
-	ZaloPersonalCallDisabled int64  `protobuf:"varint,194,opt,name=zalo_personal_call_disabled,json=zaloPersonalCallDisabled,proto3" json:"zalo_personal_call_disabled,omitempty"`
-	UpdatedBy                string `protobuf:"bytes,200,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Updated                  int64  `protobuf:"varint,201,opt,name=updated,proto3" json:"updated,omitempty"`
-	DeletedBy                string `protobuf:"bytes,202,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	YoutubeChannelId                 string `protobuf:"bytes,190,opt,name=youtube_channel_id,json=youtubeChannelId,proto3" json:"youtube_channel_id,omitempty"`    // stable channel ID returned by channels.list(mine=true)
+	YoutubeChannelUrl                string `protobuf:"bytes,191,opt,name=youtube_channel_url,json=youtubeChannelUrl,proto3" json:"youtube_channel_url,omitempty"` // https://www.youtube.com/channel/<channel_id>
+	YoutubeCountry                   string `protobuf:"bytes,192,opt,name=youtube_country,json=youtubeCountry,proto3" json:"youtube_country,omitempty"`
+	YoutubeUploadsPlaylistId         string `protobuf:"bytes,193,opt,name=youtube_uploads_playlist_id,json=youtubeUploadsPlaylistId,proto3" json:"youtube_uploads_playlist_id,omitempty"`
+	ZaloPersonalCallEnabled          int64  `protobuf:"varint,194,opt,name=zalo_personal_call_enabled,json=zaloPersonalCallEnabled,proto3" json:"zalo_personal_call_enabled,omitempty"`
+	ZaloPersonalCallRecordingEnabled int64  `protobuf:"varint,195,opt,name=zalo_personal_call_recording_enabled,json=zaloPersonalCallRecordingEnabled,proto3" json:"zalo_personal_call_recording_enabled,omitempty"`
+	UpdatedBy                        string `protobuf:"bytes,200,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Updated                          int64  `protobuf:"varint,201,opt,name=updated,proto3" json:"updated,omitempty"`
+	DeletedBy                        string `protobuf:"bytes,202,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *Integration) Reset() {
@@ -15744,9 +15745,16 @@ func (x *Integration) GetYoutubeUploadsPlaylistId() string {
 	return ""
 }
 
-func (x *Integration) GetZaloPersonalCallDisabled() int64 {
+func (x *Integration) GetZaloPersonalCallEnabled() int64 {
 	if x != nil {
-		return x.ZaloPersonalCallDisabled
+		return x.ZaloPersonalCallEnabled
+	}
+	return 0
+}
+
+func (x *Integration) GetZaloPersonalCallRecordingEnabled() int64 {
+	if x != nil {
+		return x.ZaloPersonalCallRecordingEnabled
 	}
 	return 0
 }
@@ -82254,7 +82262,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"like_count\x18\x15 \x01(\x03R\tlikeCount\x12%\n" +
 	"\x0efavorite_count\x18\x16 \x01(\x03R\rfavoriteCount\x12#\n" +
-	"\rcomment_count\x18\x17 \x01(\x03R\fcommentCount\"\x992\n" +
+	"\rcomment_count\x18\x17 \x01(\x03R\fcommentCount\"\xe82\n" +
 	"\vIntegration\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -82402,8 +82410,9 @@ const file_header_proto_rawDesc = "" +
 	"\x12youtube_channel_id\x18\xbe\x01 \x01(\tR\x10youtubeChannelId\x12/\n" +
 	"\x13youtube_channel_url\x18\xbf\x01 \x01(\tR\x11youtubeChannelUrl\x12(\n" +
 	"\x0fyoutube_country\x18\xc0\x01 \x01(\tR\x0eyoutubeCountry\x12>\n" +
-	"\x1byoutube_uploads_playlist_id\x18\xc1\x01 \x01(\tR\x18youtubeUploadsPlaylistId\x12>\n" +
-	"\x1bzalo_personal_call_disabled\x18\xc2\x01 \x01(\x03R\x18zaloPersonalCallDisabled\x12\x1e\n" +
+	"\x1byoutube_uploads_playlist_id\x18\xc1\x01 \x01(\tR\x18youtubeUploadsPlaylistId\x12<\n" +
+	"\x1azalo_personal_call_enabled\x18\xc2\x01 \x01(\x03R\x17zaloPersonalCallEnabled\x12O\n" +
+	"$zalo_personal_call_recording_enabled\x18\xc3\x01 \x01(\x03R zaloPersonalCallRecordingEnabled\x12\x1e\n" +
 	"\n" +
 	"updated_by\x18\xc8\x01 \x01(\tR\tupdatedBy\x12\x19\n" +
 	"\aupdated\x18\xc9\x01 \x01(\x03R\aupdated\x12\x1e\n" +
