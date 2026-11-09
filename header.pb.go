@@ -22028,6 +22028,7 @@ type FormSubmission struct {
 	FormMessageId        string         `protobuf:"bytes,13,opt,name=form_message_id,json=formMessageId,proto3" json:"form_message_id,omitempty"`
 	FormAttachmentIndex  int64          `protobuf:"varint,14,opt,name=form_attachment_index,json=formAttachmentIndex,proto3" json:"form_attachment_index,omitempty"`
 	AuthToken            string         `protobuf:"bytes,15,opt,name=auth_token,json=authToken,proto3" json:"auth_token,omitempty"`
+	UserName             string         `protobuf:"bytes,16,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"` // server-owned customer name snapshot when the submission is first saved
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -22163,6 +22164,13 @@ func (x *FormSubmission) GetFormAttachmentIndex() int64 {
 func (x *FormSubmission) GetAuthToken() string {
 	if x != nil {
 		return x.AuthToken
+	}
+	return ""
+}
+
+func (x *FormSubmission) GetUserName() string {
+	if x != nil {
+		return x.UserName
 	}
 	return ""
 }
@@ -47637,7 +47645,7 @@ type ListFormSubmissionRequest struct {
 	Limit     int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 	Anchor    string                 `protobuf:"bytes,5,opt,name=anchor,proto3" json:"anchor,omitempty"`
 	// string category = 6; // comma separated
-	Keyword string `protobuf:"bytes,8,opt,name=keyword,proto3" json:"keyword,omitempty"` // for searching
+	Keyword string `protobuf:"bytes,8,opt,name=keyword,proto3" json:"keyword,omitempty"` // substring search in user_name and submitted answer text; case/accent insensitive
 	From    int64  `protobuf:"varint,9,opt,name=from,proto3" json:"from,omitempty"`      // submitted_at, Unix ms, inclusive; 0 = unbounded
 	To      int64  `protobuf:"varint,10,opt,name=to,proto3" json:"to,omitempty"`         // Unix ms, exclusive; 0 = unbounded
 	// Same condition semantics as FormReportRequest. Reset anchor when filters change.
@@ -83166,7 +83174,7 @@ const file_header_proto_rawDesc = "" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x121\n" +
 	"\n" +
 	"i18n_label\x18\x04 \x01(\v2\x12.header.I18nStringR\ti18nLabel\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\tR\x05value\"\xad\x04\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\"\xca\x04\n" +
 	"\x0eFormSubmission\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -83185,7 +83193,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0fform_message_id\x18\r \x01(\tR\rformMessageId\x122\n" +
 	"\x15form_attachment_index\x18\x0e \x01(\x03R\x13formAttachmentIndex\x12\x1d\n" +
 	"\n" +
-	"auth_token\x18\x0f \x01(\tR\tauthToken\"\xc9\x0e\n" +
+	"auth_token\x18\x0f \x01(\tR\tauthToken\x12\x1b\n" +
+	"\tuser_name\x18\x10 \x01(\tR\buserName\"\xc9\x0e\n" +
 	"\x04Form\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

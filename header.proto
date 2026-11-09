@@ -3145,6 +3145,7 @@ message FormSubmission {
 	int64 form_attachment_index = 14;
 
 	string auth_token = 15;
+	string user_name = 16; // server-owned customer name snapshot when the submission is first saved
 }
 
 message Form {
@@ -6822,7 +6823,7 @@ message ListFormSubmissionRequest {
 	int32 limit = 4;
 	string anchor = 5;
 	// string category = 6; // comma separated
-	string keyword = 8; // for searching
+	string keyword = 8; // substring search in user_name and submitted answer text; case/accent insensitive
 	int64 from = 9; // submitted_at, Unix ms, inclusive; 0 = unbounded
 	int64 to = 10; // Unix ms, exclusive; 0 = unbounded
 	// Same condition semantics as FormReportRequest. Reset anchor when filters change.
