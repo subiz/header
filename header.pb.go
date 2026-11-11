@@ -45411,7 +45411,7 @@ type Campaign struct {
 	StateUpdatedBy          string             `protobuf:"bytes,52,opt,name=state_updated_by,json=stateUpdatedBy,proto3" json:"state_updated_by,omitempty"`
 	FromPage                string             `protobuf:"bytes,54,opt,name=from_page,json=fromPage,proto3" json:"from_page,omitempty"` // lead
 	Modified                int64              `protobuf:"varint,57,opt,name=modified,proto3" json:"modified,omitempty"`
-	TotalCreditSpendFpv     int64              `protobuf:"varint,58,opt,name=total_credit_spend_fpv,json=totalCreditSpendFpv,proto3" json:"total_credit_spend_fpv,omitempty"`
+	TotalCreditSpendFpv     int64              `protobuf:"varint,58,opt,name=total_credit_spend_fpv,json=totalCreditSpendFpv,proto3" json:"total_credit_spend_fpv,omitempty"` // vnd
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -79996,17 +79996,18 @@ func (x *ZaloPersonalCallSignalResponse) GetDataJson() string {
 }
 
 type CheckZBSCampaignResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Ctx            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId      string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	CampaignId     string                 `protobuf:"bytes,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	ValidUsers     []*User                `protobuf:"bytes,20,rep,name=valid_users,json=validUsers,proto3" json:"valid_users,omitempty"`       // top 100
-	InvalidUsers   []*User                `protobuf:"bytes,21,rep,name=invalid_users,json=invalidUsers,proto3" json:"invalid_users,omitempty"` // top 100
-	InvalidReasons []string               `protobuf:"bytes,22,rep,name=invalid_reasons,json=invalidReasons,proto3" json:"invalid_reasons,omitempty"`
-	TotalValids    int64                  `protobuf:"varint,24,opt,name=total_valids,json=totalValids,proto3" json:"total_valids,omitempty"`
-	TotalInvalids  int64                  `protobuf:"varint,25,opt,name=total_invalids,json=totalInvalids,proto3" json:"total_invalids,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                     *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId               string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	CampaignId              string                 `protobuf:"bytes,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	ValidUsers              []*User                `protobuf:"bytes,20,rep,name=valid_users,json=validUsers,proto3" json:"valid_users,omitempty"`       // top 100
+	InvalidUsers            []*User                `protobuf:"bytes,21,rep,name=invalid_users,json=invalidUsers,proto3" json:"invalid_users,omitempty"` // top 100
+	InvalidReasons          []string               `protobuf:"bytes,22,rep,name=invalid_reasons,json=invalidReasons,proto3" json:"invalid_reasons,omitempty"`
+	TotalValids             int64                  `protobuf:"varint,24,opt,name=total_valids,json=totalValids,proto3" json:"total_valids,omitempty"`
+	TotalInvalids           int64                  `protobuf:"varint,25,opt,name=total_invalids,json=totalInvalids,proto3" json:"total_invalids,omitempty"`
+	EstimatedCreditSpendFpv int64                  `protobuf:"varint,26,opt,name=estimated_credit_spend_fpv,json=estimatedCreditSpendFpv,proto3" json:"estimated_credit_spend_fpv,omitempty"` // vnd
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *CheckZBSCampaignResponse) Reset() {
@@ -80091,6 +80092,13 @@ func (x *CheckZBSCampaignResponse) GetTotalValids() int64 {
 func (x *CheckZBSCampaignResponse) GetTotalInvalids() int64 {
 	if x != nil {
 		return x.TotalInvalids
+	}
+	return 0
+}
+
+func (x *CheckZBSCampaignResponse) GetEstimatedCreditSpendFpv() int64 {
+	if x != nil {
+		return x.EstimatedCreditSpendFpv
 	}
 	return 0
 }
@@ -90263,7 +90271,7 @@ const file_header_proto_rawDesc = "" +
 	"\x1eZaloPersonalCallSignalResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x04 \x01(\tR\tsessionId\x12\x1b\n" +
-	"\tdata_json\x18\x05 \x01(\tR\bdataJson\"\xd2\x02\n" +
+	"\tdata_json\x18\x05 \x01(\tR\bdataJson\"\x8f\x03\n" +
 	"\x18CheckZBSCampaignResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -90275,7 +90283,8 @@ const file_header_proto_rawDesc = "" +
 	"\rinvalid_users\x18\x15 \x03(\v2\f.header.UserR\finvalidUsers\x12'\n" +
 	"\x0finvalid_reasons\x18\x16 \x03(\tR\x0einvalidReasons\x12!\n" +
 	"\ftotal_valids\x18\x18 \x01(\x03R\vtotalValids\x12%\n" +
-	"\x0etotal_invalids\x18\x19 \x01(\x03R\rtotalInvalids*t\n" +
+	"\x0etotal_invalids\x18\x19 \x01(\x03R\rtotalInvalids\x12;\n" +
+	"\x1aestimated_credit_spend_fpv\x18\x1a \x01(\x03R\x17estimatedCreditSpendFpv*t\n" +
 	"\n" +
 	"ConvoState\x12\x0e\n" +
 	"\n" +

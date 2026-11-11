@@ -6523,7 +6523,7 @@ message Campaign {
 
 	int64 modified = 57;
 
-	int64 total_credit_spend_fpv = 58;
+	int64 total_credit_spend_fpv = 58; // vnd
 }
 
 message OutboundCallCampaign {
@@ -11574,4 +11574,5 @@ message CheckZBSCampaignResponse {
 	repeated string invalid_reasons = 22;
 	int64 total_valids = 24;
 	int64 total_invalids = 25;
+	int64 estimated_credit_spend_fpv = 26; // vnd
 }

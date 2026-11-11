@@ -1162,24 +1162,25 @@ service Speex {
 }
 
 service CampaignMgr {
+	rpc AutoMappingZBSCampaign(Campaign) returns (Response) ; // response.campaign
 	rpc CheckZBSCampaign(Campaign) returns (Response) ; // response.zbs_campaign_check
-	rpc ListCampaigns(Ids) returns (header.Response);
-	rpc ReadCampaign(Id) returns (header.Response);
-	rpc CreateCampaign(header.Campaign) returns (header.Response);
-	rpc UpdateCampaign(header.Campaign) returns (header.Response);
-	rpc MatchCampaigns(Ids) returns (header.Response);
+	rpc ListCampaigns(Ids) returns (Response);
+	rpc ReadCampaign(Id) returns (Response);
+	rpc CreateCampaign(Campaign) returns (Response);
+	rpc UpdateCampaign(Campaign) returns (Response);
+	rpc MatchCampaigns(Ids) returns (Response);
 	rpc DeleteCampaign(Id) returns (Empty);
-	rpc OnEvent(header.Event) returns (Empty);
-	rpc ListCampaignSendLog(header.CampaignSendLogRequest) returns (header.CampaignSendLog);
-	rpc ReportBroadcastCampaign(Id) returns (header.BroadcastCampaignMetrics);
+	rpc OnEvent(Event) returns (Empty);
+	rpc ListCampaignSendLog(CampaignSendLogRequest) returns (CampaignSendLog);
+	rpc ReportBroadcastCampaign(Id) returns (BroadcastCampaignMetrics);
 
-	rpc ListOutboundCallEntries(header.ListOutboundCallRequest) returns (header.OutboundCallEntries);
-	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
-	rpc ImportOutboundCall(header.ImportOutboundCallEntryRequest) returns (header.ImportOutboundCallEntryResponse);
-	rpc GetOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
-	rpc RemoveOutboudCall(header.OutboundCallEntry) returns (header.Empty);
-	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReportResponse);
-	rpc ReassignOutboundCall(ListOutboundCallRequest) returns (header.Empty);
+	rpc ListOutboundCallEntries(ListOutboundCallRequest) returns (OutboundCallEntries);
+	rpc UpdateOutboundCall(OutboundCallEntry) returns (OutboundCallEntry);
+	rpc ImportOutboundCall(ImportOutboundCallEntryRequest) returns (ImportOutboundCallEntryResponse);
+	rpc GetOutboundCall(OutboundCallEntry) returns (header.OutboundCallEntry);
+	rpc RemoveOutboudCall(OutboundCallEntry) returns (header.Empty);
+	rpc ReportOutboundCalls(OutboundCallReportRequest) returns(OutboundCallReportResponse);
+	rpc ReassignOutboundCall(ListOutboundCallRequest) returns (Empty);
 
 	rpc SendTestMessage(TestMessageRequest) returns (header.Response);
 }
