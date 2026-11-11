@@ -45403,6 +45403,7 @@ type Campaign struct {
 	Purpose                 string             `protobuf:"bytes,43,opt,name=purpose,proto3" json:"purpose,omitempty"` // CUSTOMER_SUPPORT, TRANSACTION, PROMOTION
 	BroadcastDeliveredCount int64              `protobuf:"varint,44,opt,name=broadcast_delivered_count,json=broadcastDeliveredCount,proto3" json:"broadcast_delivered_count,omitempty"`
 	BroadcastReadCount      int64              `protobuf:"varint,45,opt,name=broadcast_read_count,json=broadcastReadCount,proto3" json:"broadcast_read_count,omitempty"`
+	BroadcastInvalidCount   int64              `protobuf:"varint,59,opt,name=broadcast_invalid_count,json=broadcastInvalidCount,proto3" json:"broadcast_invalid_count,omitempty"` // invalid audient before send
 	BroadcastFailedCount    int64              `protobuf:"varint,53,opt,name=broadcast_failed_count,json=broadcastFailedCount,proto3" json:"broadcast_failed_count,omitempty"`
 	BroadcastAckCount       int64              `protobuf:"varint,55,opt,name=broadcast_ack_count,json=broadcastAckCount,proto3" json:"broadcast_ack_count,omitempty"`
 	BroadcastSentCount      int64              `protobuf:"varint,56,opt,name=broadcast_sent_count,json=broadcastSentCount,proto3" json:"broadcast_sent_count,omitempty"`
@@ -45687,6 +45688,13 @@ func (x *Campaign) GetBroadcastDeliveredCount() int64 {
 func (x *Campaign) GetBroadcastReadCount() int64 {
 	if x != nil {
 		return x.BroadcastReadCount
+	}
+	return 0
+}
+
+func (x *Campaign) GetBroadcastInvalidCount() int64 {
+	if x != nil {
+		return x.BroadcastInvalidCount
 	}
 	return 0
 }
@@ -86105,7 +86113,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"segment_id\x18\x04 \x01(\tR\tsegmentId\x12\x18\n" +
 	"\acreated\x18\x05 \x01(\x03R\acreated\x12\x0e\n" +
-	"\x02by\x18\b \x01(\tR\x02by\"\x99\x0e\n" +
+	"\x02by\x18\b \x01(\tR\x02by\"\xd1\x0e\n" +
 	"\bCampaign\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -86146,7 +86154,8 @@ const file_header_proto_rawDesc = "" +
 	"\x15broadcast_finished_at\x18* \x01(\x03R\x13broadcastFinishedAt\x12\x18\n" +
 	"\apurpose\x18+ \x01(\tR\apurpose\x12:\n" +
 	"\x19broadcast_delivered_count\x18, \x01(\x03R\x17broadcastDeliveredCount\x120\n" +
-	"\x14broadcast_read_count\x18- \x01(\x03R\x12broadcastReadCount\x124\n" +
+	"\x14broadcast_read_count\x18- \x01(\x03R\x12broadcastReadCount\x126\n" +
+	"\x17broadcast_invalid_count\x18; \x01(\x03R\x15broadcastInvalidCount\x124\n" +
 	"\x16broadcast_failed_count\x185 \x01(\x03R\x14broadcastFailedCount\x12.\n" +
 	"\x13broadcast_ack_count\x187 \x01(\x03R\x11broadcastAckCount\x120\n" +
 	"\x14broadcast_sent_count\x188 \x01(\x03R\x12broadcastSentCount\x12\x1b\n" +

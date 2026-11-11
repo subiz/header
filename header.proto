@@ -6513,6 +6513,8 @@ message Campaign {
 
 	int64 broadcast_delivered_count = 44;
 	int64 broadcast_read_count = 45;
+
+	int64 broadcast_invalid_count = 59; // invalid audient before send
 	int64 broadcast_failed_count = 53;
 	int64 broadcast_ack_count = 55;
 	int64 broadcast_sent_count = 56;
