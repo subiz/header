@@ -1162,6 +1162,7 @@ service Speex {
 }
 
 service CampaignMgr {
+	rpc CheckZBSCampaign(Campaign) returns (Response) ; // response.zbs_campaign_check
 	rpc ListCampaigns(Ids) returns (header.Response);
 	rpc ReadCampaign(Id) returns (header.Response);
 	rpc CreateCampaign(header.Campaign) returns (header.Response);

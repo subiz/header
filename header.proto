@@ -1577,7 +1577,10 @@ message Message {
 	string zns_tracking_id = 42; // zns-only
 	map<string, string> zns_template_data = 43; // zns-only
 
+	// "hello", 43, true
 	map<string, string> zns_template_default_data = 44; // zns-only
+
+	// { "order_id": "STATIC=\"hello\", "customer_name": "fullname" }
 	map<string, string> zns_template_data_field = 45; // zns-only
 
 	// facebook: ACCOUNT_UPDATE, CONFIRMED_EVENT_UPDATE, CUSTOMER_FEEDBACK, HUMAN_AGENT, POST_PURCHASE_UPDATE
@@ -7540,6 +7543,8 @@ message Response {
 	int64 form_answered = 323; // valid, nonempty answers to key; skipped = total - answered
 	repeated FormReportValueCount form_report_values = 324; // whole-range distribution for key
 	repeated FormReportBucket form_report_buckets = 325;
+
+	CheckZBSCampaignResponse zbs_campaign_check = 330;
 }
 
 message ReportCount {
@@ -11558,4 +11563,15 @@ message ZaloPersonalCallSignalResponse {
 	// Decrypted provider data as JSON ({} for ready). It can contain relay
 	// credentials and must only be returned to the authenticated call server.
 	string data_json = 5;
+}
+
+message CheckZBSCampaignResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	repeated User valid_users = 20; // top 100
+	repeated User invalid_users = 21; // top 100
+	repeated string invalid_reasons = 22;
+	int64 total_valids = 24;
+	int64 total_invalids = 25;
 }

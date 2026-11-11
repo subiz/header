@@ -32862,6 +32862,7 @@ var Speex_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	CampaignMgr_CheckZBSCampaign_FullMethodName        = "/header.CampaignMgr/CheckZBSCampaign"
 	CampaignMgr_ListCampaigns_FullMethodName           = "/header.CampaignMgr/ListCampaigns"
 	CampaignMgr_ReadCampaign_FullMethodName            = "/header.CampaignMgr/ReadCampaign"
 	CampaignMgr_CreateCampaign_FullMethodName          = "/header.CampaignMgr/CreateCampaign"
@@ -32885,6 +32886,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CampaignMgrClient interface {
+	CheckZBSCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error)
 	ListCampaigns(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ReadCampaign(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error)
@@ -32910,6 +32912,16 @@ type campaignMgrClient struct {
 
 func NewCampaignMgrClient(cc grpc.ClientConnInterface) CampaignMgrClient {
 	return &campaignMgrClient{cc}
+}
+
+func (c *campaignMgrClient) CheckZBSCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CampaignMgr_CheckZBSCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *campaignMgrClient) ListCampaigns(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
@@ -33086,6 +33098,7 @@ func (c *campaignMgrClient) SendTestMessage(ctx context.Context, in *TestMessage
 // All implementations must embed UnimplementedCampaignMgrServer
 // for forward compatibility.
 type CampaignMgrServer interface {
+	CheckZBSCampaign(context.Context, *Campaign) (*Response, error)
 	ListCampaigns(context.Context, *Ids) (*Response, error)
 	ReadCampaign(context.Context, *Id) (*Response, error)
 	CreateCampaign(context.Context, *Campaign) (*Response, error)
@@ -33113,6 +33126,9 @@ type CampaignMgrServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCampaignMgrServer struct{}
 
+func (UnimplementedCampaignMgrServer) CheckZBSCampaign(context.Context, *Campaign) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckZBSCampaign not implemented")
+}
 func (UnimplementedCampaignMgrServer) ListCampaigns(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCampaigns not implemented")
 }
@@ -33183,6 +33199,24 @@ func RegisterCampaignMgrServer(s grpc.ServiceRegistrar, srv CampaignMgrServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&CampaignMgr_ServiceDesc, srv)
+}
+
+func _CampaignMgr_CheckZBSCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Campaign)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CampaignMgrServer).CheckZBSCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CampaignMgr_CheckZBSCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CampaignMgrServer).CheckZBSCampaign(ctx, req.(*Campaign))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _CampaignMgr_ListCampaigns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -33498,6 +33532,10 @@ var CampaignMgr_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "header.CampaignMgr",
 	HandlerType: (*CampaignMgrServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CheckZBSCampaign",
+			Handler:    _CampaignMgr_CheckZBSCampaign_Handler,
+		},
 		{
 			MethodName: "ListCampaigns",
 			Handler:    _CampaignMgr_ListCampaigns_Handler,
