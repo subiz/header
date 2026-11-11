@@ -32863,7 +32863,7 @@ var Speex_ServiceDesc = grpc.ServiceDesc{
 
 const (
 	CampaignMgr_AutoMappingZBSCampaign_FullMethodName  = "/header.CampaignMgr/AutoMappingZBSCampaign"
-	CampaignMgr_CheckZBSCampaign_FullMethodName        = "/header.CampaignMgr/CheckZBSCampaign"
+	CampaignMgr_CheckCampaign_FullMethodName           = "/header.CampaignMgr/CheckCampaign"
 	CampaignMgr_ListCampaigns_FullMethodName           = "/header.CampaignMgr/ListCampaigns"
 	CampaignMgr_ReadCampaign_FullMethodName            = "/header.CampaignMgr/ReadCampaign"
 	CampaignMgr_CreateCampaign_FullMethodName          = "/header.CampaignMgr/CreateCampaign"
@@ -32888,7 +32888,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CampaignMgrClient interface {
 	AutoMappingZBSCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error)
-	CheckZBSCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error)
+	CheckCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error)
 	ListCampaigns(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ReadCampaign(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error)
@@ -32926,10 +32926,10 @@ func (c *campaignMgrClient) AutoMappingZBSCampaign(ctx context.Context, in *Camp
 	return out, nil
 }
 
-func (c *campaignMgrClient) CheckZBSCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error) {
+func (c *campaignMgrClient) CheckCampaign(ctx context.Context, in *Campaign, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, CampaignMgr_CheckZBSCampaign_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, CampaignMgr_CheckCampaign_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -33111,7 +33111,7 @@ func (c *campaignMgrClient) SendTestMessage(ctx context.Context, in *TestMessage
 // for forward compatibility.
 type CampaignMgrServer interface {
 	AutoMappingZBSCampaign(context.Context, *Campaign) (*Response, error)
-	CheckZBSCampaign(context.Context, *Campaign) (*Response, error)
+	CheckCampaign(context.Context, *Campaign) (*Response, error)
 	ListCampaigns(context.Context, *Ids) (*Response, error)
 	ReadCampaign(context.Context, *Id) (*Response, error)
 	CreateCampaign(context.Context, *Campaign) (*Response, error)
@@ -33142,8 +33142,8 @@ type UnimplementedCampaignMgrServer struct{}
 func (UnimplementedCampaignMgrServer) AutoMappingZBSCampaign(context.Context, *Campaign) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method AutoMappingZBSCampaign not implemented")
 }
-func (UnimplementedCampaignMgrServer) CheckZBSCampaign(context.Context, *Campaign) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CheckZBSCampaign not implemented")
+func (UnimplementedCampaignMgrServer) CheckCampaign(context.Context, *Campaign) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckCampaign not implemented")
 }
 func (UnimplementedCampaignMgrServer) ListCampaigns(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCampaigns not implemented")
@@ -33235,20 +33235,20 @@ func _CampaignMgr_AutoMappingZBSCampaign_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CampaignMgr_CheckZBSCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CampaignMgr_CheckCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Campaign)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CampaignMgrServer).CheckZBSCampaign(ctx, in)
+		return srv.(CampaignMgrServer).CheckCampaign(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CampaignMgr_CheckZBSCampaign_FullMethodName,
+		FullMethod: CampaignMgr_CheckCampaign_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CampaignMgrServer).CheckZBSCampaign(ctx, req.(*Campaign))
+		return srv.(CampaignMgrServer).CheckCampaign(ctx, req.(*Campaign))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -33571,8 +33571,8 @@ var CampaignMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CampaignMgr_AutoMappingZBSCampaign_Handler,
 		},
 		{
-			MethodName: "CheckZBSCampaign",
-			Handler:    _CampaignMgr_CheckZBSCampaign_Handler,
+			MethodName: "CheckCampaign",
+			Handler:    _CampaignMgr_CheckCampaign_Handler,
 		},
 		{
 			MethodName: "ListCampaigns",

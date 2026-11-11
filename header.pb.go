@@ -50822,7 +50822,7 @@ type Response struct {
 	FormAnswered            int64                        `protobuf:"varint,323,opt,name=form_answered,json=formAnswered,proto3" json:"form_answered,omitempty"`              // valid, nonempty answers to key; skipped = total - answered
 	FormReportValues        []*FormReportValueCount      `protobuf:"bytes,324,rep,name=form_report_values,json=formReportValues,proto3" json:"form_report_values,omitempty"` // whole-range distribution for key
 	FormReportBuckets       []*FormReportBucket          `protobuf:"bytes,325,rep,name=form_report_buckets,json=formReportBuckets,proto3" json:"form_report_buckets,omitempty"`
-	ZbsCampaignCheck        *CheckZBSCampaignResponse    `protobuf:"bytes,330,opt,name=zbs_campaign_check,json=zbsCampaignCheck,proto3" json:"zbs_campaign_check,omitempty"`
+	CampaignCheck           *CheckCampaignResponse       `protobuf:"bytes,330,opt,name=campaign_check,json=campaignCheck,proto3" json:"campaign_check,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -52208,9 +52208,9 @@ func (x *Response) GetFormReportBuckets() []*FormReportBucket {
 	return nil
 }
 
-func (x *Response) GetZbsCampaignCheck() *CheckZBSCampaignResponse {
+func (x *Response) GetCampaignCheck() *CheckCampaignResponse {
 	if x != nil {
-		return x.ZbsCampaignCheck
+		return x.CampaignCheck
 	}
 	return nil
 }
@@ -79995,7 +79995,7 @@ func (x *ZaloPersonalCallSignalResponse) GetDataJson() string {
 	return ""
 }
 
-type CheckZBSCampaignResponse struct {
+type CheckCampaignResponse struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
 	Ctx                     *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId               string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -80010,20 +80010,20 @@ type CheckZBSCampaignResponse struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *CheckZBSCampaignResponse) Reset() {
-	*x = CheckZBSCampaignResponse{}
+func (x *CheckCampaignResponse) Reset() {
+	*x = CheckCampaignResponse{}
 	mi := &file_header_proto_msgTypes[625]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CheckZBSCampaignResponse) String() string {
+func (x *CheckCampaignResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CheckZBSCampaignResponse) ProtoMessage() {}
+func (*CheckCampaignResponse) ProtoMessage() {}
 
-func (x *CheckZBSCampaignResponse) ProtoReflect() protoreflect.Message {
+func (x *CheckCampaignResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_header_proto_msgTypes[625]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -80035,68 +80035,68 @@ func (x *CheckZBSCampaignResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CheckZBSCampaignResponse.ProtoReflect.Descriptor instead.
-func (*CheckZBSCampaignResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CheckCampaignResponse.ProtoReflect.Descriptor instead.
+func (*CheckCampaignResponse) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{625}
 }
 
-func (x *CheckZBSCampaignResponse) GetCtx() *common.Context {
+func (x *CheckCampaignResponse) GetCtx() *common.Context {
 	if x != nil {
 		return x.Ctx
 	}
 	return nil
 }
 
-func (x *CheckZBSCampaignResponse) GetAccountId() string {
+func (x *CheckCampaignResponse) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *CheckZBSCampaignResponse) GetCampaignId() string {
+func (x *CheckCampaignResponse) GetCampaignId() string {
 	if x != nil {
 		return x.CampaignId
 	}
 	return ""
 }
 
-func (x *CheckZBSCampaignResponse) GetValidUsers() []*User {
+func (x *CheckCampaignResponse) GetValidUsers() []*User {
 	if x != nil {
 		return x.ValidUsers
 	}
 	return nil
 }
 
-func (x *CheckZBSCampaignResponse) GetInvalidUsers() []*User {
+func (x *CheckCampaignResponse) GetInvalidUsers() []*User {
 	if x != nil {
 		return x.InvalidUsers
 	}
 	return nil
 }
 
-func (x *CheckZBSCampaignResponse) GetInvalidReasons() []string {
+func (x *CheckCampaignResponse) GetInvalidReasons() []string {
 	if x != nil {
 		return x.InvalidReasons
 	}
 	return nil
 }
 
-func (x *CheckZBSCampaignResponse) GetTotalValids() int64 {
+func (x *CheckCampaignResponse) GetTotalValids() int64 {
 	if x != nil {
 		return x.TotalValids
 	}
 	return 0
 }
 
-func (x *CheckZBSCampaignResponse) GetTotalInvalids() int64 {
+func (x *CheckCampaignResponse) GetTotalInvalids() int64 {
 	if x != nil {
 		return x.TotalInvalids
 	}
 	return 0
 }
 
-func (x *CheckZBSCampaignResponse) GetEstimatedCreditSpendFpv() int64 {
+func (x *CheckCampaignResponse) GetEstimatedCreditSpendFpv() int64 {
 	if x != nil {
 		return x.EstimatedCreditSpendFpv
 	}
@@ -86732,7 +86732,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xcaU\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xc0U\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -86943,8 +86943,8 @@ const file_header_proto_rawDesc = "" +
 	"\x13form_answer_choices\x18\xc2\x02 \x03(\tR\x11formAnswerChoices\x12$\n" +
 	"\rform_answered\x18\xc3\x02 \x01(\x03R\fformAnswered\x12K\n" +
 	"\x12form_report_values\x18\xc4\x02 \x03(\v2\x1c.header.FormReportValueCountR\x10formReportValues\x12I\n" +
-	"\x13form_report_buckets\x18\xc5\x02 \x03(\v2\x18.header.FormReportBucketR\x11formReportBuckets\x12O\n" +
-	"\x12zbs_campaign_check\x18\xca\x02 \x01(\v2 .header.CheckZBSCampaignResponseR\x10zbsCampaignCheck\"Y\n" +
+	"\x13form_report_buckets\x18\xc5\x02 \x03(\v2\x18.header.FormReportBucketR\x11formReportBuckets\x12E\n" +
+	"\x0ecampaign_check\x18\xca\x02 \x01(\v2\x1d.header.CheckCampaignResponseR\rcampaignCheck\"Y\n" +
 	"\vReportCount\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12\x1e\n" +
 	"\n" +
@@ -90271,8 +90271,8 @@ const file_header_proto_rawDesc = "" +
 	"\x1eZaloPersonalCallSignalResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x04 \x01(\tR\tsessionId\x12\x1b\n" +
-	"\tdata_json\x18\x05 \x01(\tR\bdataJson\"\x8f\x03\n" +
-	"\x18CheckZBSCampaignResponse\x12!\n" +
+	"\tdata_json\x18\x05 \x01(\tR\bdataJson\"\x8c\x03\n" +
+	"\x15CheckCampaignResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1f\n" +
@@ -91103,7 +91103,7 @@ var file_header_proto_goTypes = []any{
 	(*LookupMetaConversationIdRequest)(nil),           // 656: header.LookupMetaConversationIdRequest
 	(*ZaloPersonalCallSignalRequest)(nil),             // 657: header.ZaloPersonalCallSignalRequest
 	(*ZaloPersonalCallSignalResponse)(nil),            // 658: header.ZaloPersonalCallSignalResponse
-	(*CheckZBSCampaignResponse)(nil),                  // 659: header.CheckZBSCampaignResponse
+	(*CheckCampaignResponse)(nil),                     // 659: header.CheckCampaignResponse
 	nil,                                               // 660: header.UserReportEntry.CategoryIdsEntry
 	nil,                                               // 661: header.ConversationLog.DataEntry
 	nil,                                               // 662: header.Message.I18nBlockEntry
@@ -92237,7 +92237,7 @@ var file_header_proto_depIdxs = []int32{
 	643,  // 1051: header.Response.facebook_label:type_name -> header.FacebookLabel
 	394,  // 1052: header.Response.form_report_values:type_name -> header.FormReportValueCount
 	393,  // 1053: header.Response.form_report_buckets:type_name -> header.FormReportBucket
-	659,  // 1054: header.Response.zbs_campaign_check:type_name -> header.CheckZBSCampaignResponse
+	659,  // 1054: header.Response.campaign_check:type_name -> header.CheckCampaignResponse
 	717,  // 1055: header.ProductCollection.ctx:type_name -> common.Context
 	718,  // 1056: header.ZaloCallConsent.message:type_name -> header.I18nString
 	717,  // 1057: header.SendEmailRequest.ctx:type_name -> common.Context
@@ -92704,9 +92704,9 @@ var file_header_proto_depIdxs = []int32{
 	654,  // 1518: header.ExchangeOAuthTokenRequest.client:type_name -> header.OAuthClientAuthentication
 	717,  // 1519: header.LookupMetaConversationIdRequest.ctx:type_name -> common.Context
 	717,  // 1520: header.ZaloPersonalCallSignalRequest.ctx:type_name -> common.Context
-	717,  // 1521: header.CheckZBSCampaignResponse.ctx:type_name -> common.Context
-	46,   // 1522: header.CheckZBSCampaignResponse.valid_users:type_name -> header.User
-	46,   // 1523: header.CheckZBSCampaignResponse.invalid_users:type_name -> header.User
+	717,  // 1521: header.CheckCampaignResponse.ctx:type_name -> common.Context
+	46,   // 1522: header.CheckCampaignResponse.valid_users:type_name -> header.User
+	46,   // 1523: header.CheckCampaignResponse.invalid_users:type_name -> header.User
 	508,  // 1524: header.Message.I18nBlockEntry.value:type_name -> header.Block
 	508,  // 1525: header.TextComponent.I18nBlockEntry.value:type_name -> header.Block
 	508,  // 1526: header.I18nBlock.I18nEntry.value:type_name -> header.Block

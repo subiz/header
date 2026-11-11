@@ -1211,10 +1211,10 @@ const file_service_proto_rawDesc = "" +
 	"\x10ListTaskComments\x12\n" +
 	".header.Id\x1a\x1a.header.TaskHistoryEntries2M\n" +
 	"\x05Speex\x12D\n" +
-	"\fTextToSpeech\x12\x19.header.TTSVoiceSelection\x1a\x19.header.TTSVoiceSelection2\xe8\t\n" +
+	"\fTextToSpeech\x12\x19.header.TTSVoiceSelection\x1a\x19.header.TTSVoiceSelection2\xe5\t\n" +
 	"\vCampaignMgr\x12<\n" +
-	"\x16AutoMappingZBSCampaign\x12\x10.header.Campaign\x1a\x10.header.Response\x126\n" +
-	"\x10CheckZBSCampaign\x12\x10.header.Campaign\x1a\x10.header.Response\x12.\n" +
+	"\x16AutoMappingZBSCampaign\x12\x10.header.Campaign\x1a\x10.header.Response\x123\n" +
+	"\rCheckCampaign\x12\x10.header.Campaign\x1a\x10.header.Response\x12.\n" +
 	"\rListCampaigns\x12\v.header.Ids\x1a\x10.header.Response\x12,\n" +
 	"\fReadCampaign\x12\n" +
 	".header.Id\x1a\x10.header.Response\x124\n" +
@@ -2505,7 +2505,7 @@ var file_service_proto_depIdxs = []int32{
 	3,   // 796: header.TaskMgr.ListTaskComments:input_type -> header.Id
 	242, // 797: header.Speex.TextToSpeech:input_type -> header.TTSVoiceSelection
 	243, // 798: header.CampaignMgr.AutoMappingZBSCampaign:input_type -> header.Campaign
-	243, // 799: header.CampaignMgr.CheckZBSCampaign:input_type -> header.Campaign
+	243, // 799: header.CampaignMgr.CheckCampaign:input_type -> header.Campaign
 	6,   // 800: header.CampaignMgr.ListCampaigns:input_type -> header.Ids
 	3,   // 801: header.CampaignMgr.ReadCampaign:input_type -> header.Id
 	243, // 802: header.CampaignMgr.CreateCampaign:input_type -> header.Campaign
@@ -3384,7 +3384,7 @@ var file_service_proto_depIdxs = []int32{
 	355, // 1675: header.TaskMgr.ListTaskComments:output_type -> header.TaskHistoryEntries
 	242, // 1676: header.Speex.TextToSpeech:output_type -> header.TTSVoiceSelection
 	274, // 1677: header.CampaignMgr.AutoMappingZBSCampaign:output_type -> header.Response
-	274, // 1678: header.CampaignMgr.CheckZBSCampaign:output_type -> header.Response
+	274, // 1678: header.CampaignMgr.CheckCampaign:output_type -> header.Response
 	274, // 1679: header.CampaignMgr.ListCampaigns:output_type -> header.Response
 	274, // 1680: header.CampaignMgr.ReadCampaign:output_type -> header.Response
 	274, // 1681: header.CampaignMgr.CreateCampaign:output_type -> header.Response

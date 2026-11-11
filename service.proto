@@ -1163,7 +1163,7 @@ service Speex {
 
 service CampaignMgr {
 	rpc AutoMappingZBSCampaign(Campaign) returns (Response) ; // response.campaign
-	rpc CheckZBSCampaign(Campaign) returns (Response) ; // response.zbs_campaign_check
+	rpc CheckCampaign(Campaign) returns (Response); // response.campaign_check
 	rpc ListCampaigns(Ids) returns (Response);
 	rpc ReadCampaign(Id) returns (Response);
 	rpc CreateCampaign(Campaign) returns (Response);
