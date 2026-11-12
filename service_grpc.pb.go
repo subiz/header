@@ -24569,6 +24569,66 @@ var ZalokonService_ServiceDesc = grpc.ServiceDesc{
 	Metadata: "service.proto",
 }
 
+// AirbnbServiceClient is the client API for AirbnbService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AirbnbServiceClient interface {
+}
+
+type airbnbServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAirbnbServiceClient(cc grpc.ClientConnInterface) AirbnbServiceClient {
+	return &airbnbServiceClient{cc}
+}
+
+// AirbnbServiceServer is the server API for AirbnbService service.
+// All implementations must embed UnimplementedAirbnbServiceServer
+// for forward compatibility.
+type AirbnbServiceServer interface {
+	mustEmbedUnimplementedAirbnbServiceServer()
+}
+
+// UnimplementedAirbnbServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAirbnbServiceServer struct{}
+
+func (UnimplementedAirbnbServiceServer) mustEmbedUnimplementedAirbnbServiceServer() {}
+func (UnimplementedAirbnbServiceServer) testEmbeddedByValue()                       {}
+
+// UnsafeAirbnbServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AirbnbServiceServer will
+// result in compilation errors.
+type UnsafeAirbnbServiceServer interface {
+	mustEmbedUnimplementedAirbnbServiceServer()
+}
+
+func RegisterAirbnbServiceServer(s grpc.ServiceRegistrar, srv AirbnbServiceServer) {
+	// If the following call panics, it indicates UnimplementedAirbnbServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AirbnbService_ServiceDesc, srv)
+}
+
+// AirbnbService_ServiceDesc is the grpc.ServiceDesc for AirbnbService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AirbnbService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AirbnbService",
+	HandlerType: (*AirbnbServiceServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams:     []grpc.StreamDesc{},
+	Metadata:    "service.proto",
+}
+
 const (
 	ZalopersonService_SignalCall_FullMethodName              = "/header.ZalopersonService/SignalCall"
 	ZalopersonService_UndoFriendRequest_FullMethodName       = "/header.ZalopersonService/UndoFriendRequest"

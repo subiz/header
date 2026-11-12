@@ -880,6 +880,9 @@ service ZalokonService {
 	rpc DeleteZNSMedia(Id) returns (Empty);
 }
 
+service AirbnbService {
+}
+
 service ZalopersonService {
 	// Call server -> public API -> this service. Credentials and the Zalo
 	// WebSocket remain in zaloperson; media and device routing remain in call.

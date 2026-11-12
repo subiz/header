@@ -307,7 +307,7 @@ message Touchpoint {
 	string account_id = 2;
 	string id = 3; // psid, igsid, zalo id, comment id or wa_id (whatsapp)
 
-	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms, zalo, tiktok, whatsapp
+	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms, zalo, tiktok, whatsapp, airbnb
 	repeated KV fields = 8;
 
 	string linked_page_id = 24; // instagram
@@ -2164,9 +2164,58 @@ message Integration {
 	int64 zalo_personal_call_enabled = 194;
 	int64 zalo_personal_call_recording_enabled = 195;
 
+	int64 messenger_call_enabled = 196;
+
+	string airbnb_listing_id = 221; // Numeric ID dùng liên kết Booking.listing_id.
+	string airbnb_stay_global_id = 222; // base64("StayListing:" + listing_id), dùng Calendar.
+	string airbnb_supply_global_id = 223; // base64("StaySupplyListing:" + listing_id).
+	// string airbnb_nickname = 5; // use integration.alias
+	string airbnb_display_status = 226; // LISTED, IN_PROGRESS, ...; trạng thái UI upstream.
+	string airbnb_smart_location = 227; // Vị trí hiển thị, không phải địa chỉ đầy đủ.
+	string airbnb_timezone = 228; // Chỉ gán khi biết timezone của listing.
+	string airbnb_owner_host_id = 229; // Host.host_id với role LISTING_OWNER.
+	string airbnb_primary_host_id = 230; // Chỉ gán khi xác định được primary host thực tế.
+	repeated AirbnbHost airbnb_hosts = 231;
+
+
+	string airbnb_viewer_id = 232; // Numeric Airbnb User ID của session đọc dữ liệu.
+	int64 first_observed_at_ms = 233;
+	int64 last_fetched_at_ms = 234;
+	repeated string sources = 235; // Operation names, ví dụ StayHostingDetailsQuery.
+	// Field paths tương đối từ message chứa sync, dùng tên snake_case của proto.
+	// Field nằm trong danh sách này đã được đọc thành công. Ví dụ "hosts" với
+	// mảng rỗng có nghĩa đã đọc và không có host; không có path nghĩa là chưa biết.
+	// Collection chỉ được đánh dấu khi đã đọc đầy đủ collection đó. Dữ liệu một
+	// phần chỉ dùng bổ sung, không thay thế toàn bộ collection đã có.
+	repeated string fetched_fields = 236;
+	// true nếu lượt fetch cuối có lỗi/thiếu dữ liệu; false không chứng minh đã
+	// quét hết toàn tài khoản. Độ phủ mỗi field vẫn theo fetched_fields.
+	bool is_partial = 238;
+
 	string updated_by = 200;
 	int64 updated = 201;
 	string deleted_by = 202;
+}
+
+message AirbnbHost {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string id = 3; // Numeric Airbnb User ID, không phải contextual user ID.
+	string global_id = 4; // base64("User:" + host_id).
+	string contextual_user_id = 5; // Numeric ContextualUser ID khi API có trả.
+	string name = 6;
+	string first_name = 7;
+	string avatar_url = 8;
+	string profile_url = 9;
+
+	// for host - listing relationship
+	string role = 15;
+	string role_display_name = 16;
+	string display_name = 17; // Tên trong danh sách quản lý, có thể khác Host.name.
+	bool is_primary_guest_contact = 18;
+	// Có thể được chọn làm primary host, không có nghĩa đang là primary host.
+	bool can_be_primary_host = 19;
 }
 
 message FacebookBusiness {
@@ -3606,6 +3655,8 @@ enum ChannelType {
 	instagram = 7;
 	instagram_comment = 8;
 	google_review = 9;
+	airbnb = 10;
+	booking = 11;
 	zns = 12;
 	zalo_personal = 13;
 	account = 14; // subiz internal

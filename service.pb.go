@@ -922,7 +922,8 @@ const file_service_proto_rawDesc = "" +
 	"\x0eMatchZNSMedias\x12\v.header.Ids\x1a\x10.header.Response\x124\n" +
 	"\x0eCreateZNSMedia\x12\x10.header.ZNSMedia\x1a\x10.header.Response\x12+\n" +
 	"\x0eDeleteZNSMedia\x12\n" +
-	".header.Id\x1a\r.header.Empty2\x9b\t\n" +
+	".header.Id\x1a\r.header.Empty2\x0f\n" +
+	"\rAirbnbService2\x9b\t\n" +
 	"\x11ZalopersonService\x12[\n" +
 	"\n" +
 	"SignalCall\x12%.header.ZaloPersonalCallSignalRequest\x1a&.header.ZaloPersonalCallSignalResponse\x12@\n" +
@@ -3486,7 +3487,7 @@ func file_service_proto_init() {
 			NumEnums:      0,
 			NumMessages:   0,
 			NumExtensions: 0,
-			NumServices:   46,
+			NumServices:   47,
 		},
 		GoTypes:           file_service_proto_goTypes,
 		DependencyIndexes: file_service_proto_depIdxs,
