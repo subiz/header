@@ -21700,6 +21700,7 @@ const (
 	Pubsub_IsSubscribed_FullMethodName = "/header.Pubsub/IsSubscribed"
 	Pubsub_Poll_FullMethodName         = "/header.Pubsub/Poll"
 	Pubsub_Subscribe_FullMethodName    = "/header.Pubsub/Subscribe"
+	Pubsub_CleanUp_FullMethodName      = "/header.Pubsub/CleanUp"
 )
 
 // PubsubClient is the client API for Pubsub service.
@@ -21712,6 +21713,7 @@ type PubsubClient interface {
 	IsSubscribed(ctx context.Context, in *PsMessage, opts ...grpc.CallOption) (*Id, error)
 	Poll(ctx context.Context, in *RealtimeSubscription, opts ...grpc.CallOption) (*PollResult, error)
 	Subscribe(ctx context.Context, in *RealtimeSubscription, opts ...grpc.CallOption) (*RealtimeSubscription, error)
+	CleanUp(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type pubsubClient struct {
@@ -21762,6 +21764,16 @@ func (c *pubsubClient) Subscribe(ctx context.Context, in *RealtimeSubscription, 
 	return out, nil
 }
 
+func (c *pubsubClient) CleanUp(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Pubsub_CleanUp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubsubServer is the server API for Pubsub service.
 // All implementations must embed UnimplementedPubsubServer
 // for forward compatibility.
@@ -21772,6 +21784,7 @@ type PubsubServer interface {
 	IsSubscribed(context.Context, *PsMessage) (*Id, error)
 	Poll(context.Context, *RealtimeSubscription) (*PollResult, error)
 	Subscribe(context.Context, *RealtimeSubscription) (*RealtimeSubscription, error)
+	CleanUp(context.Context, *Id) (*Empty, error)
 	mustEmbedUnimplementedPubsubServer()
 }
 
@@ -21793,6 +21806,9 @@ func (UnimplementedPubsubServer) Poll(context.Context, *RealtimeSubscription) (*
 }
 func (UnimplementedPubsubServer) Subscribe(context.Context, *RealtimeSubscription) (*RealtimeSubscription, error) {
 	return nil, status.Error(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (UnimplementedPubsubServer) CleanUp(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CleanUp not implemented")
 }
 func (UnimplementedPubsubServer) mustEmbedUnimplementedPubsubServer() {}
 func (UnimplementedPubsubServer) testEmbeddedByValue()                {}
@@ -21887,6 +21903,24 @@ func _Pubsub_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Pubsub_CleanUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).CleanUp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Pubsub_CleanUp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).CleanUp(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Pubsub_ServiceDesc is the grpc.ServiceDesc for Pubsub service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -21909,6 +21943,10 @@ var Pubsub_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Subscribe",
 			Handler:    _Pubsub_Subscribe_Handler,
+		},
+		{
+			MethodName: "CleanUp",
+			Handler:    _Pubsub_CleanUp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

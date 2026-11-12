@@ -770,6 +770,7 @@ service Pubsub {
 	rpc IsSubscribed(PsMessage) returns (Id);
 	rpc Poll(RealtimeSubscription) returns (PollResult);
 	rpc Subscribe(RealtimeSubscription) returns (RealtimeSubscription);
+	rpc CleanUp(Id) returns (Empty);
 }
 
 service RealtimePublisher {
