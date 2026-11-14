@@ -395,7 +395,6 @@ service WorkflowMgr {
 	rpc UpdateAIAgentTestcase(AIAgentTestcase) returns (Response);
 	rpc DeleteAIAgentTestcase(AIAgentTestcase) returns (Response);
 	rpc ListAIAgentTestcases(Id) returns (Response);
-	rpc ListLLMLogs(Id) returns (Response); // AIAgentTrace
 }
 
 service SenAgentMgr {

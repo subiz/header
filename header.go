@@ -2856,6 +2856,8 @@ func IsOTTChannel(channel string) bool {
 		ChannelType_facebook.String(),
 		ChannelType_viber.String(),
 		ChannelType_zalo.String(),
+		ChannelType_airbnb.String(),
+		ChannelType_booking.String(),
 		ChannelType_instagram.String(),
 		ChannelType_zalo_personal.String(),
 		ChannelType_tiktok.String(),
