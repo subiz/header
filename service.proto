@@ -530,7 +530,7 @@ service ConversationMgr {
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
 
 	rpc BlockNumber(BlockedNumber) returns (BlockedNumber);
-	rpc ListBlockedNumbers(Id) returns (BlockedNumbers);
+	rpc ListBlockedNumbers(Id) returns (Response); // blocked_numbers
 	rpc UnblockNumber(BlockedNumber) returns (Empty);
 
 	// rpc BlockOutgoing(OutgoingBlockRule) returns (OutgoingBlockRule);
@@ -1113,8 +1113,8 @@ service Proder {
 
 	rpc SyncShopeeProducts(header.ShopeeSyncProductRequest) returns (header.ShopeeSyncProductResponse);
 
-	rpc GHTKShippingStatus(header.GHTKOrder) returns (Empty);
-	rpc GHNShippingStatus(header.GHNOrder2) returns (Empty);
+	// rpc GHTKShippingStatus(header.GHTKOrder) returns (Empty);
+	// rpc GHNShippingStatus(header.GHNOrder2) returns (Empty);
 	rpc ShippingFee(header.ShippingInfo) returns (header.ShippingInfo);
 	rpc ShipOrder(header.Id) returns (header.Order);
 	rpc UpdateShippingCode(header.Order) returns (header.Order);

@@ -4438,16 +4438,6 @@ message OrderItem {
 	string sku = 34;
 }
 
-message GHNAddress {
-	int64 ProvinceID = 2;
-	string ProvinceName = 3;
-	int64 DistrictID = 4;
-	string DistrictName = 5;
-	int64 Code = 6;
-	string WardName = 7;
-	string WardCode = 8;
-}
-
 message Address {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -4495,8 +4485,8 @@ message Address {
 	string ward_id = 32;
 	string street_id = 33;
 
-	GHNAddress ghn = 35;
-	Address ghtk = 36;
+	// GHNAddress ghn = 35;
+	// Address ghtk = 36;
 
 	string description = 40;
 	int64 deleted = 41;
@@ -4511,180 +4501,6 @@ message Address {
 	string name = 48; // addrdb
 }
 
-message GHNShippingData {
-	int32 service_type_id = 2;
-	int32 payment_type_id = 3;
-	string required_note = 4;
-	int64 insurance_value = 5;
-	string coupon = 6;
-}
-
-message GHNOrder {
-	string client_order_code = 2;
-	int64 shop_id = 3;
-	string order_code = 4;
-
-	int32 service_type_id = 5;
-	int32 service_id = 6;
-	int32 payment_type_id = 7;
-	string required_note = 8;
-	repeated int32 pick_shift = 38;
-
-	string to_name = 9;
-	string to_phone = 10;
-	string to_address = 11;
-	string to_ward_code = 12;
-	int64 to_district_id = 13;
-
-	int64 pick_station_id = 14;
-	string from_name = 33;
-	string from_phone = 34;
-	string from_address = 35;
-	string from_ward_code = 36;
-	int64 from_district_id = 37;
-
-	repeated GHNOrderItem items = 15;
-	int64 weight = 16;
-	int64 length = 17;
-	int64 width = 18;
-	int64 height = 19;
-	int64 cod_amount = 20;
-	int64 insurance_value = 21;
-	string coupon = 22;
-
-	string return_phone = 23;
-	string return_address = 24;
-	int64 return_district_id = 25;
-	string return_ward_code = 26;
-
-	string content = 27;
-	string note = 28;
-
-	int64 total_fee = 29;
-	int64 total = 32; // fee
-	string expected_delivery_time = 30;
-	string status = 31;
-	GHNOrderFee fee = 39;
-}
-
-message GHNOrderFee {
-	int64 insurance = 2;
-	int64 main_service = 3;
-}
-
-// webhook
-message GHNOrder2 {
-	string account_id = 10; // only subiz
-
-	int64 ShopID = 2;
-	string ClientOrderCode = 3;
-	string OrderCode = 4;
-	int64 TotalFee = 5;
-	string Time = 6;
-	string Status = 7;
-	string ShipperName = 8;
-	string ShipperPhone = 9;
-	GHNOrder2Fee Fee = 11;
-}
-
-message GHNOrder2Fee {
-	int64 Insurance = 2;
-	int64 MainService = 3;
-}
-
-message GHNOrderItem {
-	int64 weight = 2;
-	int32 quantity = 3;
-	string name = 4;
-
-	string code = 5;
-	int64 price = 6;
-	int64 length = 7;
-	int64 width = 8;
-	int64 height = 9;
-}
-
-message GHTKShippingData {
-	int64 deliver_work_shift = 10;
-	int64 pick_work_shift = 11;
-	string label_id = 13;
-	string expired = 14;
-	int64 value = 15; // gia tri dong bao hiem
-	string pick_option = 16;
-	string deliver_option = 17;
-	string pick_session = 18;
-	repeated string tags = 19;
-}
-
-message GHTKOrder {
-	string account_id = 55; // only subiz
-
-	string id = 2;
-	string partner_id = 3; // is id
-	string label = 4;
-	string label_id = 5; // is label
-
-	int32 status_id = 6;
-	int32 status = 7;
-	string status_text = 8;
-	string created = 9;
-	string modified = 10;
-	string expired = 11;
-	string action_time = 12;
-	string reason_code = 13;
-	string reason = 14;
-
-	string weight_option = 59;
-	float total_weight = 60;
-	float weight = 15;
-	int32 area = 16; // goi cuoc tinh fee
-	int64 fee = 17;
-	int64 value = 18; // gia tri dong bao hiem
-	int64 pick_money = 19;
-	int32 is_freeship = 20;
-	int64 insurance = 21;
-	int64 insurance_fee = 22;
-	int64 ship_money = 23;
-
-	int32 return_part_package = 24;
-	string transport = 25;
-	string pick_option = 26;
-	string deliver_option = 27;
-	string pick_session = 28;
-	string estimated_pick_time = 29;
-	string estimated_deliver_time = 30;
-	string deliver_date = 31;
-	int64 deliver_work_shift = 32;
-	int64 pick_work_shift = 33;
-	int32 storage_day = 34;
-
-	string pick_address_id = 61;
-	string pick_name = 35;
-	string pick_tel = 36;
-	string pick_email = 57;
-	string pick_address = 37;
-	string pick_province = 38;
-	string pick_district = 39;
-	string pick_ward = 40;
-	string pick_street = 56;
-	string pick_date = 41;
-
-	string name = 42;
-	string customer_fullname = 43; // is name
-	string tel = 44;
-	string email = 58;
-	string customer_tel = 45; // is tell
-	string address = 46;
-	string province = 47;
-	string district = 48;
-	string ward = 49;
-	string street = 50;
-	string hamlet = 51;
-
-	string note = 52;
-	string message = 53;
-	repeated int32 tags = 54;
-}
 
 message ShippingInfo {
 	string account_id = 2;
@@ -4735,7 +4551,7 @@ message ShippingInfo {
 	// could be -1, 1, 2, -3
 	// see https://docs.giaohangtietkiem.vn/?shell#tr-ng-th-i-n-h-ng35
 	string status_code = 43;
-	ShippingData data = 45;
+	// ShippingData data = 45;
 	string integrated_shipping_id = 46;
 	int32 index_incre = 48; // only server
 
@@ -4750,17 +4566,6 @@ message ShippingInfo {
 	string submitted_by = 55;
 
 	bool pickup_at_shop = 56;
-}
-
-message ShippingData {
-	GHTKShippingData ghtk = 3;
-	GHTKOrder ghtk_order = 5;
-	int64 ghtk_order_created = 7;
-	int64 ghtk_order_updated = 8;
-	GHNShippingData ghn = 4;
-	GHNOrder ghn_order = 6;
-	int64 ghn_order_created = 9;
-	int64 ghn_order_updated = 10;
 }
 
 enum ShippingProvider {
@@ -6205,12 +6010,6 @@ message CallDriverResponse {
 	CallInfo call = 11; // for get-call-status
 }
 
-message BlockedNumbers {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated BlockedNumber blocked_numbers = 3;
-}
-
 // incomming call
 message BlockedNumber {
 	common.Context ctx = 1;
@@ -7601,6 +7400,7 @@ message Response {
 	repeated FormReportBucket form_report_buckets = 325;
 
 	CheckCampaignResponse campaign_check = 330;
+	repeated BlockedNumber blocked_numbers = 331;
 }
 
 message ReportCount {

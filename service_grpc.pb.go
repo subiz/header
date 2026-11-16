@@ -12975,7 +12975,7 @@ type ConversationMgrClient interface {
 	ListCallSettings(ctx context.Context, in *Id, opts ...grpc.CallOption) (*CallSettings, error)
 	UpdateCallSetting(ctx context.Context, in *CallSetting, opts ...grpc.CallOption) (*CallSetting, error)
 	BlockNumber(ctx context.Context, in *BlockedNumber, opts ...grpc.CallOption) (*BlockedNumber, error)
-	ListBlockedNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*BlockedNumbers, error)
+	ListBlockedNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UnblockNumber(ctx context.Context, in *BlockedNumber, opts ...grpc.CallOption) (*Empty, error)
 	ListGreetingAudio(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateGreetingAudio(ctx context.Context, in *GreetingAudio, opts ...grpc.CallOption) (*GreetingAudio, error)
@@ -13598,9 +13598,9 @@ func (c *conversationMgrClient) BlockNumber(ctx context.Context, in *BlockedNumb
 	return out, nil
 }
 
-func (c *conversationMgrClient) ListBlockedNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*BlockedNumbers, error) {
+func (c *conversationMgrClient) ListBlockedNumbers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BlockedNumbers)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_ListBlockedNumbers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -13963,7 +13963,7 @@ type ConversationMgrServer interface {
 	ListCallSettings(context.Context, *Id) (*CallSettings, error)
 	UpdateCallSetting(context.Context, *CallSetting) (*CallSetting, error)
 	BlockNumber(context.Context, *BlockedNumber) (*BlockedNumber, error)
-	ListBlockedNumbers(context.Context, *Id) (*BlockedNumbers, error)
+	ListBlockedNumbers(context.Context, *Id) (*Response, error)
 	UnblockNumber(context.Context, *BlockedNumber) (*Empty, error)
 	ListGreetingAudio(context.Context, *Id) (*Response, error)
 	CreateGreetingAudio(context.Context, *GreetingAudio) (*GreetingAudio, error)
@@ -14180,7 +14180,7 @@ func (UnimplementedConversationMgrServer) UpdateCallSetting(context.Context, *Ca
 func (UnimplementedConversationMgrServer) BlockNumber(context.Context, *BlockedNumber) (*BlockedNumber, error) {
 	return nil, status.Error(codes.Unimplemented, "method BlockNumber not implemented")
 }
-func (UnimplementedConversationMgrServer) ListBlockedNumbers(context.Context, *Id) (*BlockedNumbers, error) {
+func (UnimplementedConversationMgrServer) ListBlockedNumbers(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBlockedNumbers not implemented")
 }
 func (UnimplementedConversationMgrServer) UnblockNumber(context.Context, *BlockedNumber) (*Empty, error) {
@@ -29030,8 +29030,6 @@ const (
 	Proder_AuthorizeShopeeShop_FullMethodName        = "/header.Proder/AuthorizeShopeeShop"
 	Proder_DeauthorizeShopeeShop_FullMethodName      = "/header.Proder/DeauthorizeShopeeShop"
 	Proder_SyncShopeeProducts_FullMethodName         = "/header.Proder/SyncShopeeProducts"
-	Proder_GHTKShippingStatus_FullMethodName         = "/header.Proder/GHTKShippingStatus"
-	Proder_GHNShippingStatus_FullMethodName          = "/header.Proder/GHNShippingStatus"
 	Proder_ShippingFee_FullMethodName                = "/header.Proder/ShippingFee"
 	Proder_ShipOrder_FullMethodName                  = "/header.Proder/ShipOrder"
 	Proder_UpdateShippingCode_FullMethodName         = "/header.Proder/UpdateShippingCode"
@@ -29122,8 +29120,8 @@ type ProderClient interface {
 	AuthorizeShopeeShop(ctx context.Context, in *AuthorizeShopeeRequest, opts ...grpc.CallOption) (*ShopeeShop, error)
 	DeauthorizeShopeeShop(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	SyncShopeeProducts(ctx context.Context, in *ShopeeSyncProductRequest, opts ...grpc.CallOption) (*ShopeeSyncProductResponse, error)
-	GHTKShippingStatus(ctx context.Context, in *GHTKOrder, opts ...grpc.CallOption) (*Empty, error)
-	GHNShippingStatus(ctx context.Context, in *GHNOrder2, opts ...grpc.CallOption) (*Empty, error)
+	// rpc GHTKShippingStatus(header.GHTKOrder) returns (Empty);
+	// rpc GHNShippingStatus(header.GHNOrder2) returns (Empty);
 	ShippingFee(ctx context.Context, in *ShippingInfo, opts ...grpc.CallOption) (*ShippingInfo, error)
 	ShipOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	UpdateShippingCode(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
@@ -29793,26 +29791,6 @@ func (c *proderClient) SyncShopeeProducts(ctx context.Context, in *ShopeeSyncPro
 	return out, nil
 }
 
-func (c *proderClient) GHTKShippingStatus(ctx context.Context, in *GHTKOrder, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, Proder_GHTKShippingStatus_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) GHNShippingStatus(ctx context.Context, in *GHNOrder2, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, Proder_GHNShippingStatus_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *proderClient) ShippingFee(ctx context.Context, in *ShippingInfo, opts ...grpc.CallOption) (*ShippingInfo, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ShippingInfo)
@@ -30072,8 +30050,8 @@ type ProderServer interface {
 	AuthorizeShopeeShop(context.Context, *AuthorizeShopeeRequest) (*ShopeeShop, error)
 	DeauthorizeShopeeShop(context.Context, *Id) (*Empty, error)
 	SyncShopeeProducts(context.Context, *ShopeeSyncProductRequest) (*ShopeeSyncProductResponse, error)
-	GHTKShippingStatus(context.Context, *GHTKOrder) (*Empty, error)
-	GHNShippingStatus(context.Context, *GHNOrder2) (*Empty, error)
+	// rpc GHTKShippingStatus(header.GHTKOrder) returns (Empty);
+	// rpc GHNShippingStatus(header.GHNOrder2) returns (Empty);
 	ShippingFee(context.Context, *ShippingInfo) (*ShippingInfo, error)
 	ShipOrder(context.Context, *Id) (*Order, error)
 	UpdateShippingCode(context.Context, *Order) (*Order, error)
@@ -30294,12 +30272,6 @@ func (UnimplementedProderServer) DeauthorizeShopeeShop(context.Context, *Id) (*E
 }
 func (UnimplementedProderServer) SyncShopeeProducts(context.Context, *ShopeeSyncProductRequest) (*ShopeeSyncProductResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SyncShopeeProducts not implemented")
-}
-func (UnimplementedProderServer) GHTKShippingStatus(context.Context, *GHTKOrder) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method GHTKShippingStatus not implemented")
-}
-func (UnimplementedProderServer) GHNShippingStatus(context.Context, *GHNOrder2) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method GHNShippingStatus not implemented")
 }
 func (UnimplementedProderServer) ShippingFee(context.Context, *ShippingInfo) (*ShippingInfo, error) {
 	return nil, status.Error(codes.Unimplemented, "method ShippingFee not implemented")
@@ -31531,42 +31503,6 @@ func _Proder_SyncShopeeProducts_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_GHTKShippingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GHTKOrder)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).GHTKShippingStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Proder_GHTKShippingStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).GHTKShippingStatus(ctx, req.(*GHTKOrder))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_GHNShippingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GHNOrder2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).GHNShippingStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Proder_GHNShippingStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).GHNShippingStatus(ctx, req.(*GHNOrder2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Proder_ShippingFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ShippingInfo)
 	if err := dec(in); err != nil {
@@ -32171,14 +32107,6 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SyncShopeeProducts",
 			Handler:    _Proder_SyncShopeeProducts_Handler,
-		},
-		{
-			MethodName: "GHTKShippingStatus",
-			Handler:    _Proder_GHTKShippingStatus_Handler,
-		},
-		{
-			MethodName: "GHNShippingStatus",
-			Handler:    _Proder_GHNShippingStatus_Handler,
 		},
 		{
 			MethodName: "ShippingFee",
