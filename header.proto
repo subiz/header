@@ -176,8 +176,6 @@ message PhoneDevice {
 	string status = 14; // unknown, notinuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
 	int64 last_status_updated = 15;
 
-	// string driver = 16; // subiz stringee
-
 	int64 disabled = 17;
 	string transport_protocol = 18; // default=udp, tcp
 	// int64 extension = 18; // auto-increasement 5001, 5002, 5003
@@ -1462,6 +1460,10 @@ message CallInfo {
 	string to_number = 8; // derived from touchpoint
 	string from_number = 9; // derived from touchpoint
 	string caller_name = 32; // display name enriched by call driver / contact
+	string caller_avatar = 37;
+	string caller_type = 38; // agent, user
+	string caller_id = 39; // agent, user
+
 	string direction = 10; // inbound, outbound
 
 	string initial_by_phone_device = 11;
@@ -1490,6 +1492,8 @@ message CallInfo {
 	string call_id = 26; // sip-call-id
 	string diversion_number = 27;
 	string transfer_to = 28;
+
+	bool is_internal = 36;
 
 	// debug
 	string hangup_by = 29; // agent - subiz - isp - user
