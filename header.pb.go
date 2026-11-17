@@ -11643,6 +11643,7 @@ type CallInfo struct {
 	CallId          string `protobuf:"bytes,26,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`             // sip-call-id
 	DiversionNumber string `protobuf:"bytes,27,opt,name=diversion_number,json=diversionNumber,proto3" json:"diversion_number,omitempty"`
 	TransferTo      string `protobuf:"bytes,28,opt,name=transfer_to,json=transferTo,proto3" json:"transfer_to,omitempty"`
+	IsInternal      bool   `protobuf:"varint,36,opt,name=is_internal,json=isInternal,proto3" json:"is_internal,omitempty"`
 	// debug
 	HangupBy        string `protobuf:"bytes,29,opt,name=hangup_by,json=hangupBy,proto3" json:"hangup_by,omitempty"` // agent - subiz - isp - user
 	IspUserAgent    string `protobuf:"bytes,30,opt,name=isp_user_agent,json=ispUserAgent,proto3" json:"isp_user_agent,omitempty"`
@@ -11864,6 +11865,13 @@ func (x *CallInfo) GetTransferTo() string {
 		return x.TransferTo
 	}
 	return ""
+}
+
+func (x *CallInfo) GetIsInternal() bool {
+	if x != nil {
+		return x.IsInternal
+	}
+	return false
 }
 
 func (x *CallInfo) GetHangupBy() string {
@@ -80929,7 +80937,7 @@ const file_header_proto_rawDesc = "" +
 	"\vReviewReply\x12\x18\n" +
 	"\acomment\x18\x01 \x01(\tR\acomment\x12\x18\n" +
 	"\aupdated\x18\x02 \x01(\x03R\aupdated\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\xcc\b\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\"\xed\b\n" +
 	"\bCallInfo\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12'\n" +
@@ -80964,7 +80972,9 @@ const file_header_proto_rawDesc = "" +
 	"\acall_id\x18\x1a \x01(\tR\x06callId\x12)\n" +
 	"\x10diversion_number\x18\x1b \x01(\tR\x0fdiversionNumber\x12\x1f\n" +
 	"\vtransfer_to\x18\x1c \x01(\tR\n" +
-	"transferTo\x12\x1b\n" +
+	"transferTo\x12\x1f\n" +
+	"\vis_internal\x18$ \x01(\bR\n" +
+	"isInternal\x12\x1b\n" +
 	"\thangup_by\x18\x1d \x01(\tR\bhangupBy\x12$\n" +
 	"\x0eisp_user_agent\x18\x1e \x01(\tR\fispUserAgent\x12*\n" +
 	"\x11isp_hangup_reason\x18\x1f \x01(\tR\x0fispHangupReason\x12\x1e\n" +
