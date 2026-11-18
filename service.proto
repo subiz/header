@@ -371,7 +371,8 @@ service WorkflowMgr {
 	rpc EstimateTrainingCost(AIDataEntry) returns (CreditSpendEntry);
 	rpc ListAIDataEntryChunks(Id) returns (Response);
 
-	rpc GetAIDataEntryDocument(Id) returns (Response);
+	rpc GetAIDataEntryDocument(Id) returns (Response); // ai_data_entry.document + document_revision
+	rpc PersistAIDataEntryDocument(PersistAIDataEntryDocumentRequest) returns (Response); // BlockStepBatch
 
 	rpc RetrainAIDataEntry(Id) returns (Response);
 	rpc DeleteAIDataEntry(Id) returns (Empty);

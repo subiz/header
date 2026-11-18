@@ -7405,6 +7405,8 @@ message Response {
 
 	CheckCampaignResponse campaign_check = 330;
 	repeated BlockedNumber blocked_numbers = 331;
+
+	BlockStepBatch block_step_batch = 332;
 }
 
 message ReportCount {
@@ -10454,6 +10456,16 @@ message AIDataChunk {
 	string type = 24; // user_guide, technical_specification, feature_description, troubleshooting, installation_guide
 }
 
+// Persist edits to an existing AIDataEntry of type=document.
+message PersistAIDataEntryDocumentRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// Required. document_id is the AIDataEntry ID within account_id.
+	// Apply atomically only on matching base_revision; reject stale revisions.
+	// Retry/deduplication keys are scoped to account_id as well as the batch keys.
+	BlockStepBatch batch = 4;
+}
+
 message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -10469,6 +10481,7 @@ message AIDataEntry {
 
 	File file = 10;
 	Block document = 11;
+	string document_revision = 71; // Server-issued revision of document; use as batch.base_revision.
 	string source_visibility = 15; // "", default, private, public
 
 	Product product = 18;
@@ -11488,4 +11501,90 @@ enum AirbnbBookingStatus {
 	BOOKING_STATUS_CURRENTLY_HOSTING = 3;
 	BOOKING_STATUS_PAST = 4;
 	BOOKING_STATUS_CANCELED = 5;
+}
+
+// Subiz Block editing contract v1, independent of any editor implementation.
+// A document is one root Block (e.g. type=div). A path [a,b] addresses
+// root.content[a].content[b]; an empty path addresses the root itself.
+// Paths resolve against the result of earlier steps in the same batch.
+// No automatic text-node merging, splitting, or normalization between steps.
+// Clients must send such structural changes explicitly, so paths stay stable.
+// This is a persistence contract, not an OT/CRDT or an apply implementation.
+message BlockStep {
+	repeated uint32 path = 4;
+	string type = 5; // splice_text, splice_content, set_properties
+	// Set only the payload matching type. Reject missing/mismatched payloads
+	// and unknown types at the service boundary.
+	BlockTextSplice splice_text = 6;
+	BlockContentSplice splice_content = 7;
+	BlockProperties set_properties = 8;
+}
+
+// Replace [offset, offset + delete_count) in the target text Block's text.
+// Target must have type=text and no children. Other fields stay unchanged.
+// Offsets count Unicode scalar values (Go runes / JS Array.from(text)), NOT
+// UTF-8 bytes, UTF-16 units, or grapheme clusters. Reject invalid Unicode.
+// The editor adapter must translate its own positions to these offsets.
+// Require offset <= length and delete_count <= length-offset; never clamp.
+// Empty resulting text is allowed; remove its Block explicitly if desired.
+message BlockTextSplice {
+	uint32 offset = 4; // presence preserves valid zero.
+	uint32 delete_count = 5;
+	string text = 6; // Text to insert; empty/absent inserts nothing.
+}
+
+// Replace children [index, index + delete_count) in target.content with blocks.
+// Empty blocks means deletion; delete_count=0 means insertion.
+// All inserted values are native header.Block, never editor-specific JSON.
+// Require index <= child count and delete_count <= child count-index.
+// Only content changes; all other properties of the parent stay unchanged.
+// Used for splitting/joining paragraphs, wrapping, tables and inline objects.
+message BlockContentSplice {
+	uint32 index = 4; // indexes immediate children only.
+	uint32 delete_count = 5;
+	repeated Block blocks = 6;
+}
+
+// Assign selected top-level Block properties from values, preserving all others.
+// fields is required, nonempty, unique, and uses exact proto field names.
+// Reject unknown fields and text/content (use the two splice operations).
+// No dotted paths: style, attrs, image and other composite properties are
+// replaced in full when listed. This avoids ambiguous map/nested merge rules.
+// A listed scalar absent from values is assigned its protobuf default:
+// fields=["bold"], values={} explicitly turns bold off. A listed absent
+// message is cleared; a listed absent repeated/map field becomes empty.
+// values must be present, even when empty. Reject populated properties outside
+// fields. Block IDs are optional metadata, not addresses in this contract.
+message BlockProperties {
+	repeated string fields = 5;
+	Block values = 6;
+}
+
+// Atomic persistence unit. Client converts editor transactions into BlockSteps.
+// A transaction may produce zero, one or multiple steps; there is no 1:1 mapping
+// to ProseMirror steps. Do not persist cursor/selection-only transactions.
+// JSON transport uses protojson with default field names (no UseProtoNames).
+// The explicit json_name options keep envelope/operation keys in snake_case.
+// Block values follow the existing Block protobuf JSON contract.
+message BlockStepBatch {
+	string document_id = 11;
+	uint32 schema_version = 12; // Must equal 1.
+	// Required; opaque document revision issued by server (e.g. "42").
+	// Not a ProseMirror version or a count of steps. Server issues a new revision
+	// per committed batch and atomically compares against base_revision.
+	string base_revision = 13;
+	string client_id = 14; // Required editor session ID.
+	string batch_id = 15; // Required retry key.
+	repeated BlockStep steps = 16; // Required, nonempty, in execution order.
+	// Deduplicate by document_id + client_id + batch_id BEFORE revision check.
+	// Same ID and payload returns original result; different payload is an error.
+	// Resolve/apply each step on a working copy, validate final Block tree, then
+	// commit document + new revision + deduplication result atomically.
+	// Invalid path/range/operation or failed final validation rejects ALL steps.
+	// Intermediate trees may be incomplete; indexes must be valid at each step.
+	// Never apply these paths to another revision. On conflict, keep local edits
+	// and explicitly reconcile against latest snapshot, then create a new batch.
+	// This contract provides no automatic concurrent merge or collab rebase.
+
+	string revision = 17; // Required committed revision; success responses only.
 }

@@ -9570,55 +9570,56 @@ var AttributeMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	WorkflowMgr_ListWorkflows_FullMethodName          = "/header.WorkflowMgr/ListWorkflows"
-	WorkflowMgr_UpdateWorkflow_FullMethodName         = "/header.WorkflowMgr/UpdateWorkflow"
-	WorkflowMgr_CreateWorkflow_FullMethodName         = "/header.WorkflowMgr/CreateWorkflow"
-	WorkflowMgr_DeleteWorkflow_FullMethodName         = "/header.WorkflowMgr/DeleteWorkflow"
-	WorkflowMgr_GetWorkflow_FullMethodName            = "/header.WorkflowMgr/GetWorkflow"
-	WorkflowMgr_ListWorkflowVersions_FullMethodName   = "/header.WorkflowMgr/ListWorkflowVersions"
-	WorkflowMgr_StartWorkflowSession_FullMethodName   = "/header.WorkflowMgr/StartWorkflowSession"
-	WorkflowMgr_MatchWorkflows_FullMethodName         = "/header.WorkflowMgr/MatchWorkflows"
-	WorkflowMgr_PumpWorkflowSession_FullMethodName    = "/header.WorkflowMgr/PumpWorkflowSession"
-	WorkflowMgr_GetWorkflowSession_FullMethodName     = "/header.WorkflowMgr/GetWorkflowSession"
-	WorkflowMgr_UpdateWorkflowSession_FullMethodName  = "/header.WorkflowMgr/UpdateWorkflowSession"
-	WorkflowMgr_ListWorkflowSessions_FullMethodName   = "/header.WorkflowMgr/ListWorkflowSessions"
-	WorkflowMgr_ListWorkflowLogs_FullMethodName       = "/header.WorkflowMgr/ListWorkflowLogs"
-	WorkflowMgr_ReportWorkflow_FullMethodName         = "/header.WorkflowMgr/ReportWorkflow"
-	WorkflowMgr_RunWorkflowAction_FullMethodName      = "/header.WorkflowMgr/RunWorkflowAction"
-	WorkflowMgr_ListAIAgents_FullMethodName           = "/header.WorkflowMgr/ListAIAgents"
-	WorkflowMgr_CreateAIAgent_FullMethodName          = "/header.WorkflowMgr/CreateAIAgent"
-	WorkflowMgr_UpdateAIAgent_FullMethodName          = "/header.WorkflowMgr/UpdateAIAgent"
-	WorkflowMgr_GetAIAgent_FullMethodName             = "/header.WorkflowMgr/GetAIAgent"
-	WorkflowMgr_MatchAIAgent_FullMethodName           = "/header.WorkflowMgr/MatchAIAgent"
-	WorkflowMgr_DeleteAIAgent_FullMethodName          = "/header.WorkflowMgr/DeleteAIAgent"
-	WorkflowMgr_StartAiAgent_FullMethodName           = "/header.WorkflowMgr/StartAiAgent"
-	WorkflowMgr_StopAIAgent_FullMethodName            = "/header.WorkflowMgr/StopAIAgent"
-	WorkflowMgr_DeleteAIAgentDataEntry_FullMethodName = "/header.WorkflowMgr/DeleteAIAgentDataEntry"
-	WorkflowMgr_AddAIAgentDataEntry_FullMethodName    = "/header.WorkflowMgr/AddAIAgentDataEntry"
-	WorkflowMgr_SuggestAIDataEntry_FullMethodName     = "/header.WorkflowMgr/SuggestAIDataEntry"
-	WorkflowMgr_CreateAIDataEntry_FullMethodName      = "/header.WorkflowMgr/CreateAIDataEntry"
-	WorkflowMgr_ListAIDataEntry_FullMethodName        = "/header.WorkflowMgr/ListAIDataEntry"
-	WorkflowMgr_GetAIDataEntry_FullMethodName         = "/header.WorkflowMgr/GetAIDataEntry"
-	WorkflowMgr_UpdateAIDataEntry_FullMethodName      = "/header.WorkflowMgr/UpdateAIDataEntry"
-	WorkflowMgr_EstimateTrainingCost_FullMethodName   = "/header.WorkflowMgr/EstimateTrainingCost"
-	WorkflowMgr_ListAIDataEntryChunks_FullMethodName  = "/header.WorkflowMgr/ListAIDataEntryChunks"
-	WorkflowMgr_GetAIDataEntryDocument_FullMethodName = "/header.WorkflowMgr/GetAIDataEntryDocument"
-	WorkflowMgr_RetrainAIDataEntry_FullMethodName     = "/header.WorkflowMgr/RetrainAIDataEntry"
-	WorkflowMgr_DeleteAIDataEntry_FullMethodName      = "/header.WorkflowMgr/DeleteAIDataEntry"
-	WorkflowMgr_MatchDataEntries_FullMethodName       = "/header.WorkflowMgr/MatchDataEntries"
-	WorkflowMgr_ReportAIAgent_FullMethodName          = "/header.WorkflowMgr/ReportAIAgent"
-	WorkflowMgr_TryWorkflowAction_FullMethodName      = "/header.WorkflowMgr/TryWorkflowAction"
-	WorkflowMgr_ListAIAgentMessages_FullMethodName    = "/header.WorkflowMgr/ListAIAgentMessages"
-	WorkflowMgr_ListConvertedLeads_FullMethodName     = "/header.WorkflowMgr/ListConvertedLeads"
-	WorkflowMgr_GetAIResponseTrace_FullMethodName     = "/header.WorkflowMgr/GetAIResponseTrace"
-	WorkflowMgr_RunAIAgentTest_FullMethodName         = "/header.WorkflowMgr/RunAIAgentTest"
-	WorkflowMgr_ListAIAgentTestResults_FullMethodName = "/header.WorkflowMgr/ListAIAgentTestResults"
-	WorkflowMgr_GetAIAgentTestResult_FullMethodName   = "/header.WorkflowMgr/GetAIAgentTestResult"
-	WorkflowMgr_CancelAIAgentTest_FullMethodName      = "/header.WorkflowMgr/CancelAIAgentTest"
-	WorkflowMgr_CreateAIAgentTestcase_FullMethodName  = "/header.WorkflowMgr/CreateAIAgentTestcase"
-	WorkflowMgr_UpdateAIAgentTestcase_FullMethodName  = "/header.WorkflowMgr/UpdateAIAgentTestcase"
-	WorkflowMgr_DeleteAIAgentTestcase_FullMethodName  = "/header.WorkflowMgr/DeleteAIAgentTestcase"
-	WorkflowMgr_ListAIAgentTestcases_FullMethodName   = "/header.WorkflowMgr/ListAIAgentTestcases"
+	WorkflowMgr_ListWorkflows_FullMethodName              = "/header.WorkflowMgr/ListWorkflows"
+	WorkflowMgr_UpdateWorkflow_FullMethodName             = "/header.WorkflowMgr/UpdateWorkflow"
+	WorkflowMgr_CreateWorkflow_FullMethodName             = "/header.WorkflowMgr/CreateWorkflow"
+	WorkflowMgr_DeleteWorkflow_FullMethodName             = "/header.WorkflowMgr/DeleteWorkflow"
+	WorkflowMgr_GetWorkflow_FullMethodName                = "/header.WorkflowMgr/GetWorkflow"
+	WorkflowMgr_ListWorkflowVersions_FullMethodName       = "/header.WorkflowMgr/ListWorkflowVersions"
+	WorkflowMgr_StartWorkflowSession_FullMethodName       = "/header.WorkflowMgr/StartWorkflowSession"
+	WorkflowMgr_MatchWorkflows_FullMethodName             = "/header.WorkflowMgr/MatchWorkflows"
+	WorkflowMgr_PumpWorkflowSession_FullMethodName        = "/header.WorkflowMgr/PumpWorkflowSession"
+	WorkflowMgr_GetWorkflowSession_FullMethodName         = "/header.WorkflowMgr/GetWorkflowSession"
+	WorkflowMgr_UpdateWorkflowSession_FullMethodName      = "/header.WorkflowMgr/UpdateWorkflowSession"
+	WorkflowMgr_ListWorkflowSessions_FullMethodName       = "/header.WorkflowMgr/ListWorkflowSessions"
+	WorkflowMgr_ListWorkflowLogs_FullMethodName           = "/header.WorkflowMgr/ListWorkflowLogs"
+	WorkflowMgr_ReportWorkflow_FullMethodName             = "/header.WorkflowMgr/ReportWorkflow"
+	WorkflowMgr_RunWorkflowAction_FullMethodName          = "/header.WorkflowMgr/RunWorkflowAction"
+	WorkflowMgr_ListAIAgents_FullMethodName               = "/header.WorkflowMgr/ListAIAgents"
+	WorkflowMgr_CreateAIAgent_FullMethodName              = "/header.WorkflowMgr/CreateAIAgent"
+	WorkflowMgr_UpdateAIAgent_FullMethodName              = "/header.WorkflowMgr/UpdateAIAgent"
+	WorkflowMgr_GetAIAgent_FullMethodName                 = "/header.WorkflowMgr/GetAIAgent"
+	WorkflowMgr_MatchAIAgent_FullMethodName               = "/header.WorkflowMgr/MatchAIAgent"
+	WorkflowMgr_DeleteAIAgent_FullMethodName              = "/header.WorkflowMgr/DeleteAIAgent"
+	WorkflowMgr_StartAiAgent_FullMethodName               = "/header.WorkflowMgr/StartAiAgent"
+	WorkflowMgr_StopAIAgent_FullMethodName                = "/header.WorkflowMgr/StopAIAgent"
+	WorkflowMgr_DeleteAIAgentDataEntry_FullMethodName     = "/header.WorkflowMgr/DeleteAIAgentDataEntry"
+	WorkflowMgr_AddAIAgentDataEntry_FullMethodName        = "/header.WorkflowMgr/AddAIAgentDataEntry"
+	WorkflowMgr_SuggestAIDataEntry_FullMethodName         = "/header.WorkflowMgr/SuggestAIDataEntry"
+	WorkflowMgr_CreateAIDataEntry_FullMethodName          = "/header.WorkflowMgr/CreateAIDataEntry"
+	WorkflowMgr_ListAIDataEntry_FullMethodName            = "/header.WorkflowMgr/ListAIDataEntry"
+	WorkflowMgr_GetAIDataEntry_FullMethodName             = "/header.WorkflowMgr/GetAIDataEntry"
+	WorkflowMgr_UpdateAIDataEntry_FullMethodName          = "/header.WorkflowMgr/UpdateAIDataEntry"
+	WorkflowMgr_EstimateTrainingCost_FullMethodName       = "/header.WorkflowMgr/EstimateTrainingCost"
+	WorkflowMgr_ListAIDataEntryChunks_FullMethodName      = "/header.WorkflowMgr/ListAIDataEntryChunks"
+	WorkflowMgr_GetAIDataEntryDocument_FullMethodName     = "/header.WorkflowMgr/GetAIDataEntryDocument"
+	WorkflowMgr_PersistAIDataEntryDocument_FullMethodName = "/header.WorkflowMgr/PersistAIDataEntryDocument"
+	WorkflowMgr_RetrainAIDataEntry_FullMethodName         = "/header.WorkflowMgr/RetrainAIDataEntry"
+	WorkflowMgr_DeleteAIDataEntry_FullMethodName          = "/header.WorkflowMgr/DeleteAIDataEntry"
+	WorkflowMgr_MatchDataEntries_FullMethodName           = "/header.WorkflowMgr/MatchDataEntries"
+	WorkflowMgr_ReportAIAgent_FullMethodName              = "/header.WorkflowMgr/ReportAIAgent"
+	WorkflowMgr_TryWorkflowAction_FullMethodName          = "/header.WorkflowMgr/TryWorkflowAction"
+	WorkflowMgr_ListAIAgentMessages_FullMethodName        = "/header.WorkflowMgr/ListAIAgentMessages"
+	WorkflowMgr_ListConvertedLeads_FullMethodName         = "/header.WorkflowMgr/ListConvertedLeads"
+	WorkflowMgr_GetAIResponseTrace_FullMethodName         = "/header.WorkflowMgr/GetAIResponseTrace"
+	WorkflowMgr_RunAIAgentTest_FullMethodName             = "/header.WorkflowMgr/RunAIAgentTest"
+	WorkflowMgr_ListAIAgentTestResults_FullMethodName     = "/header.WorkflowMgr/ListAIAgentTestResults"
+	WorkflowMgr_GetAIAgentTestResult_FullMethodName       = "/header.WorkflowMgr/GetAIAgentTestResult"
+	WorkflowMgr_CancelAIAgentTest_FullMethodName          = "/header.WorkflowMgr/CancelAIAgentTest"
+	WorkflowMgr_CreateAIAgentTestcase_FullMethodName      = "/header.WorkflowMgr/CreateAIAgentTestcase"
+	WorkflowMgr_UpdateAIAgentTestcase_FullMethodName      = "/header.WorkflowMgr/UpdateAIAgentTestcase"
+	WorkflowMgr_DeleteAIAgentTestcase_FullMethodName      = "/header.WorkflowMgr/DeleteAIAgentTestcase"
+	WorkflowMgr_ListAIAgentTestcases_FullMethodName       = "/header.WorkflowMgr/ListAIAgentTestcases"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9658,6 +9659,7 @@ type WorkflowMgrClient interface {
 	EstimateTrainingCost(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*CreditSpendEntry, error)
 	ListAIDataEntryChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	GetAIDataEntryDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	PersistAIDataEntryDocument(ctx context.Context, in *PersistAIDataEntryDocumentRequest, opts ...grpc.CallOption) (*Response, error)
 	RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
@@ -10014,6 +10016,16 @@ func (c *workflowMgrClient) GetAIDataEntryDocument(ctx context.Context, in *Id, 
 	return out, nil
 }
 
+func (c *workflowMgrClient) PersistAIDataEntryDocument(ctx context.Context, in *PersistAIDataEntryDocumentRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_PersistAIDataEntryDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *workflowMgrClient) RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -10211,6 +10223,7 @@ type WorkflowMgrServer interface {
 	EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error)
 	ListAIDataEntryChunks(context.Context, *Id) (*Response, error)
 	GetAIDataEntryDocument(context.Context, *Id) (*Response, error)
+	PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error)
 	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
 	DeleteAIDataEntry(context.Context, *Id) (*Empty, error)
 	MatchDataEntries(context.Context, *Ids) (*Response, error)
@@ -10335,6 +10348,9 @@ func (UnimplementedWorkflowMgrServer) ListAIDataEntryChunks(context.Context, *Id
 }
 func (UnimplementedWorkflowMgrServer) GetAIDataEntryDocument(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAIDataEntryDocument not implemented")
+}
+func (UnimplementedWorkflowMgrServer) PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PersistAIDataEntryDocument not implemented")
 }
 func (UnimplementedWorkflowMgrServer) RetrainAIDataEntry(context.Context, *Id) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method RetrainAIDataEntry not implemented")
@@ -10999,6 +11015,24 @@ func _WorkflowMgr_GetAIDataEntryDocument_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_PersistAIDataEntryDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PersistAIDataEntryDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).PersistAIDataEntryDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_PersistAIDataEntryDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).PersistAIDataEntryDocument(ctx, req.(*PersistAIDataEntryDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _WorkflowMgr_RetrainAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -11425,6 +11459,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAIDataEntryDocument",
 			Handler:    _WorkflowMgr_GetAIDataEntryDocument_Handler,
+		},
+		{
+			MethodName: "PersistAIDataEntryDocument",
+			Handler:    _WorkflowMgr_PersistAIDataEntryDocument_Handler,
 		},
 		{
 			MethodName: "RetrainAIDataEntry",
