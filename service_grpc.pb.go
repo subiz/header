@@ -9595,6 +9595,10 @@ const (
 	WorkflowMgr_StopAIAgent_FullMethodName                = "/header.WorkflowMgr/StopAIAgent"
 	WorkflowMgr_DeleteAIAgentDataEntry_FullMethodName     = "/header.WorkflowMgr/DeleteAIAgentDataEntry"
 	WorkflowMgr_AddAIAgentDataEntry_FullMethodName        = "/header.WorkflowMgr/AddAIAgentDataEntry"
+	WorkflowMgr_ListAIDataFolders_FullMethodName          = "/header.WorkflowMgr/ListAIDataFolders"
+	WorkflowMgr_CreateAIDataFolder_FullMethodName         = "/header.WorkflowMgr/CreateAIDataFolder"
+	WorkflowMgr_UpdateAIDataFolder_FullMethodName         = "/header.WorkflowMgr/UpdateAIDataFolder"
+	WorkflowMgr_DeleteAIDataFolder_FullMethodName         = "/header.WorkflowMgr/DeleteAIDataFolder"
 	WorkflowMgr_SuggestAIDataEntry_FullMethodName         = "/header.WorkflowMgr/SuggestAIDataEntry"
 	WorkflowMgr_CreateAIDataEntry_FullMethodName          = "/header.WorkflowMgr/CreateAIDataEntry"
 	WorkflowMgr_ListAIDataEntry_FullMethodName            = "/header.WorkflowMgr/ListAIDataEntry"
@@ -9651,6 +9655,13 @@ type WorkflowMgrClient interface {
 	StopAIAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error)
 	DeleteAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	AddAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
+	// All folders in account_id, returned as a flat list (ai_data_folders).
+	ListAIDataFolders(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error)
+	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
+	UpdateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error)
+	// Reject nonempty folders: no child folders or document entries may remain.
+	DeleteAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error)
 	ListAIDataEntry(ctx context.Context, in *ListAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
@@ -9936,6 +9947,46 @@ func (c *workflowMgrClient) AddAIAgentDataEntry(ctx context.Context, in *AIAgent
 	return out, nil
 }
 
+func (c *workflowMgrClient) ListAIDataFolders(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIDataFolders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) CreateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_CreateAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) UpdateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_UpdateAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) DeleteAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *workflowMgrClient) SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -10215,6 +10266,13 @@ type WorkflowMgrServer interface {
 	StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
 	DeleteAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
 	AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
+	// All folders in account_id, returned as a flat list (ai_data_folders).
+	ListAIDataFolders(context.Context, *Id) (*Response, error)
+	CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
+	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
+	UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
+	// Reject nonempty folders: no child folders or document entries may remain.
+	DeleteAIDataFolder(context.Context, *Id) (*Empty, error)
 	SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error)
 	CreateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
 	ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error)
@@ -10324,6 +10382,18 @@ func (UnimplementedWorkflowMgrServer) DeleteAIAgentDataEntry(context.Context, *A
 }
 func (UnimplementedWorkflowMgrServer) AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddAIAgentDataEntry not implemented")
+}
+func (UnimplementedWorkflowMgrServer) ListAIDataFolders(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIDataFolders not implemented")
+}
+func (UnimplementedWorkflowMgrServer) CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAIDataFolder not implemented")
+}
+func (UnimplementedWorkflowMgrServer) UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAIDataFolder not implemented")
+}
+func (UnimplementedWorkflowMgrServer) DeleteAIDataFolder(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataFolder not implemented")
 }
 func (UnimplementedWorkflowMgrServer) SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SuggestAIDataEntry not implemented")
@@ -10867,6 +10937,78 @@ func _WorkflowMgr_AddAIAgentDataEntry_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).AddAIAgentDataEntry(ctx, req.(*AIAgentDataEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_ListAIDataFolders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).ListAIDataFolders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_ListAIDataFolders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).ListAIDataFolders(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_CreateAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataFolder)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).CreateAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_CreateAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).CreateAIDataFolder(ctx, req.(*AIDataFolder))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_UpdateAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataFolder)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).UpdateAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_UpdateAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).UpdateAIDataFolder(ctx, req.(*AIDataFolder))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_DeleteAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).DeleteAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_DeleteAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).DeleteAIDataFolder(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11427,6 +11569,22 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddAIAgentDataEntry",
 			Handler:    _WorkflowMgr_AddAIAgentDataEntry_Handler,
+		},
+		{
+			MethodName: "ListAIDataFolders",
+			Handler:    _WorkflowMgr_ListAIDataFolders_Handler,
+		},
+		{
+			MethodName: "CreateAIDataFolder",
+			Handler:    _WorkflowMgr_CreateAIDataFolder_Handler,
+		},
+		{
+			MethodName: "UpdateAIDataFolder",
+			Handler:    _WorkflowMgr_UpdateAIDataFolder_Handler,
+		},
+		{
+			MethodName: "DeleteAIDataFolder",
+			Handler:    _WorkflowMgr_DeleteAIDataFolder_Handler,
 		},
 		{
 			MethodName: "SuggestAIDataEntry",

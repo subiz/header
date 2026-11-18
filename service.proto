@@ -363,6 +363,14 @@ service WorkflowMgr {
 	rpc DeleteAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
 	rpc AddAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
 
+	// All folders in account_id, returned as a flat list (ai_data_folders).
+	rpc ListAIDataFolders(Id) returns (Response);
+	rpc CreateAIDataFolder(AIDataFolder) returns (Response); // ai_data_folder
+	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
+	rpc UpdateAIDataFolder(AIDataFolder) returns (Response); // ai_data_folder
+	// Reject nonempty folders: no child folders or document entries may remain.
+	rpc DeleteAIDataFolder(Id) returns (Empty);
+
 	rpc SuggestAIDataEntry(SuggestAIDataEntryRequest) returns (Response);
 	rpc CreateAIDataEntry(AIDataEntry) returns (Response);
 	rpc ListAIDataEntry(ListAIDataEntryRequest) returns (Response);

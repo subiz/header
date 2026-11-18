@@ -7407,6 +7407,8 @@ message Response {
 	repeated BlockedNumber blocked_numbers = 331;
 
 	BlockStepBatch block_step_batch = 332;
+	repeated AIDataFolder ai_data_folders = 333;
+	AIDataFolder ai_data_folder = 334;
 }
 
 message ReportCount {
@@ -10466,6 +10468,24 @@ message PersistAIDataEntryDocumentRequest {
 	BlockStepBatch batch = 4;
 }
 
+// Flat folder list for document entries; clients reconstruct the tree by parent_id.
+message AIDataFolder {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	string description = 5;
+	// Empty means root. Parent must exist in the same account and cannot be
+	// this folder or one of its descendants. Moving only changes parent_id;
+	// child folders and documents keep their existing references.
+	string parent_id = 15;
+
+	int64 created = 16; // Server-managed, milliseconds since epoch.
+	string created_by = 17;
+	int64 updated = 18; // Server-managed, milliseconds since epoch.
+	string updated_by = 19;
+}
+
 message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -10482,6 +10502,10 @@ message AIDataEntry {
 	File file = 10;
 	Block document = 11;
 	string document_revision = 71; // Server-issued revision of document; use as batch.base_revision.
+	// type=document only. Empty means root; otherwise an AIDataFolder in this account.
+	// Update via UpdateAIDataEntry with ctx.fields=["folder_id"], including when
+	// clearing it. Moving a document does not change document_revision or retrain it.
+	string folder_id = 72;
 	string source_visibility = 15; // "", default, private, public
 
 	Product product = 18;
