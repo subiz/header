@@ -9599,6 +9599,8 @@ const (
 	WorkflowMgr_CreateAIDataFolder_FullMethodName         = "/header.WorkflowMgr/CreateAIDataFolder"
 	WorkflowMgr_UpdateAIDataFolder_FullMethodName         = "/header.WorkflowMgr/UpdateAIDataFolder"
 	WorkflowMgr_DeleteAIDataFolder_FullMethodName         = "/header.WorkflowMgr/DeleteAIDataFolder"
+	WorkflowMgr_RestoreAIDataFolder_FullMethodName        = "/header.WorkflowMgr/RestoreAIDataFolder"
+	WorkflowMgr_PurgeAIDataFolder_FullMethodName          = "/header.WorkflowMgr/PurgeAIDataFolder"
 	WorkflowMgr_SuggestAIDataEntry_FullMethodName         = "/header.WorkflowMgr/SuggestAIDataEntry"
 	WorkflowMgr_CreateAIDataEntry_FullMethodName          = "/header.WorkflowMgr/CreateAIDataEntry"
 	WorkflowMgr_ListAIDataEntry_FullMethodName            = "/header.WorkflowMgr/ListAIDataEntry"
@@ -9610,6 +9612,8 @@ const (
 	WorkflowMgr_PersistAIDataEntryDocument_FullMethodName = "/header.WorkflowMgr/PersistAIDataEntryDocument"
 	WorkflowMgr_RetrainAIDataEntry_FullMethodName         = "/header.WorkflowMgr/RetrainAIDataEntry"
 	WorkflowMgr_DeleteAIDataEntry_FullMethodName          = "/header.WorkflowMgr/DeleteAIDataEntry"
+	WorkflowMgr_RestoreAIDataEntry_FullMethodName         = "/header.WorkflowMgr/RestoreAIDataEntry"
+	WorkflowMgr_PurgeAIDataEntry_FullMethodName           = "/header.WorkflowMgr/PurgeAIDataEntry"
 	WorkflowMgr_MatchDataEntries_FullMethodName           = "/header.WorkflowMgr/MatchDataEntries"
 	WorkflowMgr_ReportAIAgent_FullMethodName              = "/header.WorkflowMgr/ReportAIAgent"
 	WorkflowMgr_TryWorkflowAction_FullMethodName          = "/header.WorkflowMgr/TryWorkflowAction"
@@ -9655,13 +9659,15 @@ type WorkflowMgrClient interface {
 	StopAIAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error)
 	DeleteAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	AddAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
-	// All folders in account_id, returned as a flat list (ai_data_folders).
-	ListAIDataFolders(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	// Flat list (ai_data_folders); defaults to active folders, trash=true lists deleted folders.
+	ListAIDataFolders(ctx context.Context, in *ListAIDataFoldersRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error)
 	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
 	UpdateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error)
-	// Reject nonempty folders: no child folders or document entries may remain.
+	// Soft-delete the folder tree with one deletion_id; retain for 30 days.
 	DeleteAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	RestoreAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	PurgeAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error)
 	ListAIDataEntry(ctx context.Context, in *ListAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
@@ -9673,6 +9679,8 @@ type WorkflowMgrClient interface {
 	PersistAIDataEntryDocument(ctx context.Context, in *PersistAIDataEntryDocumentRequest, opts ...grpc.CallOption) (*Response, error)
 	RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	RestoreAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	PurgeAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
 	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -9947,7 +9955,7 @@ func (c *workflowMgrClient) AddAIAgentDataEntry(ctx context.Context, in *AIAgent
 	return out, nil
 }
 
-func (c *workflowMgrClient) ListAIDataFolders(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *workflowMgrClient) ListAIDataFolders(ctx context.Context, in *ListAIDataFoldersRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIDataFolders_FullMethodName, in, out, cOpts...)
@@ -9981,6 +9989,26 @@ func (c *workflowMgrClient) DeleteAIDataFolder(ctx context.Context, in *Id, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) RestoreAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_RestoreAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) PurgeAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_PurgeAIDataFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -10091,6 +10119,26 @@ func (c *workflowMgrClient) DeleteAIDataEntry(ctx context.Context, in *Id, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) RestoreAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_RestoreAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) PurgeAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_PurgeAIDataEntry_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -10266,13 +10314,15 @@ type WorkflowMgrServer interface {
 	StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
 	DeleteAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
 	AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
-	// All folders in account_id, returned as a flat list (ai_data_folders).
-	ListAIDataFolders(context.Context, *Id) (*Response, error)
+	// Flat list (ai_data_folders); defaults to active folders, trash=true lists deleted folders.
+	ListAIDataFolders(context.Context, *ListAIDataFoldersRequest) (*Response, error)
 	CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
 	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
 	UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
-	// Reject nonempty folders: no child folders or document entries may remain.
+	// Soft-delete the folder tree with one deletion_id; retain for 30 days.
 	DeleteAIDataFolder(context.Context, *Id) (*Empty, error)
+	RestoreAIDataFolder(context.Context, *Id) (*Empty, error)
+	PurgeAIDataFolder(context.Context, *Id) (*Empty, error)
 	SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error)
 	CreateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
 	ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error)
@@ -10284,6 +10334,8 @@ type WorkflowMgrServer interface {
 	PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error)
 	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
 	DeleteAIDataEntry(context.Context, *Id) (*Empty, error)
+	RestoreAIDataEntry(context.Context, *Id) (*Empty, error)
+	PurgeAIDataEntry(context.Context, *Id) (*Empty, error)
 	MatchDataEntries(context.Context, *Ids) (*Response, error)
 	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
 	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
@@ -10383,7 +10435,7 @@ func (UnimplementedWorkflowMgrServer) DeleteAIAgentDataEntry(context.Context, *A
 func (UnimplementedWorkflowMgrServer) AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddAIAgentDataEntry not implemented")
 }
-func (UnimplementedWorkflowMgrServer) ListAIDataFolders(context.Context, *Id) (*Response, error) {
+func (UnimplementedWorkflowMgrServer) ListAIDataFolders(context.Context, *ListAIDataFoldersRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAIDataFolders not implemented")
 }
 func (UnimplementedWorkflowMgrServer) CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
@@ -10394,6 +10446,12 @@ func (UnimplementedWorkflowMgrServer) UpdateAIDataFolder(context.Context, *AIDat
 }
 func (UnimplementedWorkflowMgrServer) DeleteAIDataFolder(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataFolder not implemented")
+}
+func (UnimplementedWorkflowMgrServer) RestoreAIDataFolder(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreAIDataFolder not implemented")
+}
+func (UnimplementedWorkflowMgrServer) PurgeAIDataFolder(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method PurgeAIDataFolder not implemented")
 }
 func (UnimplementedWorkflowMgrServer) SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SuggestAIDataEntry not implemented")
@@ -10427,6 +10485,12 @@ func (UnimplementedWorkflowMgrServer) RetrainAIDataEntry(context.Context, *Id) (
 }
 func (UnimplementedWorkflowMgrServer) DeleteAIDataEntry(context.Context, *Id) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataEntry not implemented")
+}
+func (UnimplementedWorkflowMgrServer) RestoreAIDataEntry(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreAIDataEntry not implemented")
+}
+func (UnimplementedWorkflowMgrServer) PurgeAIDataEntry(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method PurgeAIDataEntry not implemented")
 }
 func (UnimplementedWorkflowMgrServer) MatchDataEntries(context.Context, *Ids) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method MatchDataEntries not implemented")
@@ -10942,7 +11006,7 @@ func _WorkflowMgr_AddAIAgentDataEntry_Handler(srv interface{}, ctx context.Conte
 }
 
 func _WorkflowMgr_ListAIDataFolders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(ListAIDataFoldersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -10954,7 +11018,7 @@ func _WorkflowMgr_ListAIDataFolders_Handler(srv interface{}, ctx context.Context
 		FullMethod: WorkflowMgr_ListAIDataFolders_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIDataFolders(ctx, req.(*Id))
+		return srv.(WorkflowMgrServer).ListAIDataFolders(ctx, req.(*ListAIDataFoldersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11009,6 +11073,42 @@ func _WorkflowMgr_DeleteAIDataFolder_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).DeleteAIDataFolder(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_RestoreAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).RestoreAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_RestoreAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).RestoreAIDataFolder(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_PurgeAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).PurgeAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_PurgeAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).PurgeAIDataFolder(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11207,6 +11307,42 @@ func _WorkflowMgr_DeleteAIDataEntry_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).DeleteAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_RestoreAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).RestoreAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_RestoreAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).RestoreAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_PurgeAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).PurgeAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_PurgeAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).PurgeAIDataEntry(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11587,6 +11723,14 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _WorkflowMgr_DeleteAIDataFolder_Handler,
 		},
 		{
+			MethodName: "RestoreAIDataFolder",
+			Handler:    _WorkflowMgr_RestoreAIDataFolder_Handler,
+		},
+		{
+			MethodName: "PurgeAIDataFolder",
+			Handler:    _WorkflowMgr_PurgeAIDataFolder_Handler,
+		},
+		{
 			MethodName: "SuggestAIDataEntry",
 			Handler:    _WorkflowMgr_SuggestAIDataEntry_Handler,
 		},
@@ -11629,6 +11773,14 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAIDataEntry",
 			Handler:    _WorkflowMgr_DeleteAIDataEntry_Handler,
+		},
+		{
+			MethodName: "RestoreAIDataEntry",
+			Handler:    _WorkflowMgr_RestoreAIDataEntry_Handler,
+		},
+		{
+			MethodName: "PurgeAIDataEntry",
+			Handler:    _WorkflowMgr_PurgeAIDataEntry_Handler,
 		},
 		{
 			MethodName: "MatchDataEntries",

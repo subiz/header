@@ -363,13 +363,15 @@ service WorkflowMgr {
 	rpc DeleteAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
 	rpc AddAIAgentDataEntry(AIAgentDataEntryRequest) returns (Response); // empty
 
-	// All folders in account_id, returned as a flat list (ai_data_folders).
-	rpc ListAIDataFolders(Id) returns (Response);
+	// Flat list (ai_data_folders); defaults to active folders, trash=true lists deleted folders.
+	rpc ListAIDataFolders(ListAIDataFoldersRequest) returns (Response);
 	rpc CreateAIDataFolder(AIDataFolder) returns (Response); // ai_data_folder
 	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
 	rpc UpdateAIDataFolder(AIDataFolder) returns (Response); // ai_data_folder
-	// Reject nonempty folders: no child folders or document entries may remain.
+	// Soft-delete the folder tree with one deletion_id; retain for 30 days.
 	rpc DeleteAIDataFolder(Id) returns (Empty);
+	rpc RestoreAIDataFolder(Id) returns (Empty); // Restore descendants from the same deletion operation.
+	rpc PurgeAIDataFolder(Id) returns (Empty); // Permanently delete a trashed folder and its contents.
 
 	rpc SuggestAIDataEntry(SuggestAIDataEntryRequest) returns (Response);
 	rpc CreateAIDataEntry(AIDataEntry) returns (Response);
@@ -383,7 +385,9 @@ service WorkflowMgr {
 	rpc PersistAIDataEntryDocument(PersistAIDataEntryDocumentRequest) returns (Response); // BlockStepBatch
 
 	rpc RetrainAIDataEntry(Id) returns (Response);
-	rpc DeleteAIDataEntry(Id) returns (Empty);
+	rpc DeleteAIDataEntry(Id) returns (Empty); // Move to trash; retain for 30 days.
+	rpc RestoreAIDataEntry(Id) returns (Empty);
+	rpc PurgeAIDataEntry(Id) returns (Empty); // Requires entry already in trash.
 	rpc MatchDataEntries(Ids) returns (Response);
 
 	rpc ReportAIAgent(ReportAIAgentRequest) returns (AIAgentReportResponse);

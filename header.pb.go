@@ -65337,6 +65337,10 @@ type AIAgentOverrideRule struct {
 	Frequently    *Frequently            `protobuf:"bytes,17,opt,name=frequently,proto3" json:"frequently,omitempty"` // once or always
 	RunOnce       bool                   `protobuf:"varint,24,opt,name=run_once,json=runOnce,proto3" json:"run_once,omitempty"`
 	Actions       []*AIFunction          `protobuf:"bytes,27,rep,name=actions,proto3" json:"actions,omitempty"`
+	CreatedBy     string                 `protobuf:"bytes,28,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Created       int64                  `protobuf:"varint,29,opt,name=created,proto3" json:"created,omitempty"`
+	UpdatedBy     string                 `protobuf:"bytes,30,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Updated       int64                  `protobuf:"varint,31,opt,name=updated,proto3" json:"updated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -65425,6 +65429,34 @@ func (x *AIAgentOverrideRule) GetActions() []*AIFunction {
 		return x.Actions
 	}
 	return nil
+}
+
+func (x *AIAgentOverrideRule) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *AIAgentOverrideRule) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *AIAgentOverrideRule) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *AIAgentOverrideRule) GetUpdated() int64 {
+	if x != nil {
+		return x.Updated
+	}
+	return 0
 }
 
 type SenAgentSessionListRequest struct {
@@ -71639,7 +71671,7 @@ func (x *PersistAIDataEntryDocumentRequest) GetBatch() *BlockStepBatch {
 	return nil
 }
 
-// Flat folder list for document entries; clients reconstruct the tree by parent_id.
+// Flat folder list for all AI data entry types; clients reconstruct the tree by parent_id.
 type AIDataFolder struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Ctx         *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -71649,12 +71681,15 @@ type AIDataFolder struct {
 	Description string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	// Empty means root. Parent must exist in the same account and cannot be
 	// this folder or one of its descendants. Moving only changes parent_id;
-	// child folders and documents keep their existing references.
+	// child folders and entries keep their existing references.
 	ParentId      string `protobuf:"bytes,15,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Created       int64  `protobuf:"varint,16,opt,name=created,proto3" json:"created,omitempty"` // Server-managed, milliseconds since epoch.
 	CreatedBy     string `protobuf:"bytes,17,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	Updated       int64  `protobuf:"varint,18,opt,name=updated,proto3" json:"updated,omitempty"` // Server-managed, milliseconds since epoch.
 	UpdatedBy     string `protobuf:"bytes,19,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	DeletedAt     int64  `protobuf:"varint,20,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"` // Server-managed trash timestamp, milliseconds; zero means active.
+	DeletedBy     string `protobuf:"bytes,21,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	DeletionId    string `protobuf:"bytes,22,opt,name=deletion_id,json=deletionId,proto3" json:"deletion_id,omitempty"` // Groups items trashed by one operation.
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71759,6 +71794,27 @@ func (x *AIDataFolder) GetUpdatedBy() string {
 	return ""
 }
 
+func (x *AIDataFolder) GetDeletedAt() int64 {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return 0
+}
+
+func (x *AIDataFolder) GetDeletedBy() string {
+	if x != nil {
+		return x.DeletedBy
+	}
+	return ""
+}
+
+func (x *AIDataFolder) GetDeletionId() string {
+	if x != nil {
+		return x.DeletionId
+	}
+	return ""
+}
+
 type AIDataEntry struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -71773,10 +71829,13 @@ type AIDataEntry struct {
 	File              *File                  `protobuf:"bytes,10,opt,name=file,proto3" json:"file,omitempty"`
 	Document          *Block                 `protobuf:"bytes,11,opt,name=document,proto3" json:"document,omitempty"`
 	DocumentRevision  string                 `protobuf:"bytes,71,opt,name=document_revision,json=documentRevision,proto3" json:"document_revision,omitempty"` // Server-issued revision of document; use as batch.base_revision.
-	// type=document only. Empty means root; otherwise an AIDataFolder in this account.
+	// All entry types. Empty means root; otherwise an active AIDataFolder in this account.
 	// Update via UpdateAIDataEntry with ctx.fields=["folder_id"], including when
-	// clearing it. Moving a document does not change document_revision or retrain it.
+	// clearing it. Moving an entry does not change content or retrain it.
 	FolderId         string    `protobuf:"bytes,72,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	DeletedAt        int64     `protobuf:"varint,73,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"` // Server-managed trash timestamp, milliseconds; zero means active.
+	DeletedBy        string    `protobuf:"bytes,74,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	DeletionId       string    `protobuf:"bytes,75,opt,name=deletion_id,json=deletionId,proto3" json:"deletion_id,omitempty"`                   // Groups items trashed by one operation.
 	SourceVisibility string    `protobuf:"bytes,15,opt,name=source_visibility,json=sourceVisibility,proto3" json:"source_visibility,omitempty"` // "", default, private, public
 	Product          *Product  `protobuf:"bytes,18,opt,name=product,proto3" json:"product,omitempty"`
 	Discount         *Discount `protobuf:"bytes,55,opt,name=discount,proto3" json:"discount,omitempty"`
@@ -71949,6 +72008,27 @@ func (x *AIDataEntry) GetDocumentRevision() string {
 func (x *AIDataEntry) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
+	}
+	return ""
+}
+
+func (x *AIDataEntry) GetDeletedAt() int64 {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return 0
+}
+
+func (x *AIDataEntry) GetDeletedBy() string {
+	if x != nil {
+		return x.DeletedBy
+	}
+	return ""
+}
+
+func (x *AIDataEntry) GetDeletionId() string {
+	if x != nil {
+		return x.DeletionId
 	}
 	return ""
 }
@@ -88171,7 +88251,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12 \n" +
 	"\vinstruction\x18\x06 \x01(\tR\vinstruction\x12\x1c\n" +
 	"\treasoning\x18\a \x01(\bR\treasoning\x12\x16\n" +
-	"\x06action\x18\b \x01(\tR\x06action\"\xb5\x02\n" +
+	"\x06action\x18\b \x01(\tR\x06action\"\xa7\x03\n" +
 	"\x13AIAgentOverrideRule\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12(\n" +
@@ -88182,7 +88262,13 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x18\x11 \x01(\v2\x12.header.FrequentlyR\n" +
 	"frequently\x12\x19\n" +
 	"\brun_once\x18\x18 \x01(\bR\arunOnce\x12,\n" +
-	"\aactions\x18\x1b \x03(\v2\x12.header.AIFunctionR\aactions\"\x91\x01\n" +
+	"\aactions\x18\x1b \x03(\v2\x12.header.AIFunctionR\aactions\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\x1c \x01(\tR\tcreatedBy\x12\x18\n" +
+	"\acreated\x18\x1d \x01(\x03R\acreated\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\x1e \x01(\tR\tupdatedBy\x12\x18\n" +
+	"\aupdated\x18\x1f \x01(\x03R\aupdated\"\x91\x01\n" +
 	"\x1aSenAgentSessionListRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -88896,7 +88982,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12,\n" +
-	"\x05batch\x18\x04 \x01(\v2\x16.header.BlockStepBatchR\x05batch\"\xa5\x02\n" +
+	"\x05batch\x18\x04 \x01(\v2\x16.header.BlockStepBatchR\x05batch\"\x84\x03\n" +
 	"\fAIDataFolder\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -88910,7 +88996,13 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x11 \x01(\tR\tcreatedBy\x12\x18\n" +
 	"\aupdated\x18\x12 \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x13 \x01(\tR\tupdatedBy\"\xb7\x0f\n" +
+	"updated_by\x18\x13 \x01(\tR\tupdatedBy\x12\x1d\n" +
+	"\n" +
+	"deleted_at\x18\x14 \x01(\x03R\tdeletedAt\x12\x1d\n" +
+	"\n" +
+	"deleted_by\x18\x15 \x01(\tR\tdeletedBy\x12\x1f\n" +
+	"\vdeletion_id\x18\x16 \x01(\tR\n" +
+	"deletionId\"\x96\x10\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -88926,7 +89018,13 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\v2\f.header.FileR\x04file\x12)\n" +
 	"\bdocument\x18\v \x01(\v2\r.header.BlockR\bdocument\x12+\n" +
 	"\x11document_revision\x18G \x01(\tR\x10documentRevision\x12\x1b\n" +
-	"\tfolder_id\x18H \x01(\tR\bfolderId\x12+\n" +
+	"\tfolder_id\x18H \x01(\tR\bfolderId\x12\x1d\n" +
+	"\n" +
+	"deleted_at\x18I \x01(\x03R\tdeletedAt\x12\x1d\n" +
+	"\n" +
+	"deleted_by\x18J \x01(\tR\tdeletedBy\x12\x1f\n" +
+	"\vdeletion_id\x18K \x01(\tR\n" +
+	"deletionId\x12+\n" +
 	"\x11source_visibility\x18\x0f \x01(\tR\x10sourceVisibility\x12)\n" +
 	"\aproduct\x18\x12 \x01(\v2\x0f.header.ProductR\aproduct\x12,\n" +
 	"\bdiscount\x187 \x01(\v2\x10.header.DiscountR\bdiscount\x12!\n" +

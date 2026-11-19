@@ -820,6 +820,12 @@ message CrawlUrlRequest {
 	bool product_only = 22;
 }
 
+message ListAIDataFoldersRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	bool trash = 4; // false: active folders only; true: trash only.
+}
+
 message ListAIDataEntryRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -839,6 +845,7 @@ message ListAIDataEntryRequest {
 	string ai_agent_id = 16;
 	string exclude_ai_agent_id = 17;
 	int64 ai_agent_version = 18;
+	bool trash = 19; // false: active entries only; true: trash only.
 }
 
 message CampaignSendLogRequest {

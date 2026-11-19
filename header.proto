@@ -9455,6 +9455,11 @@ message AIAgentOverrideRule {
 
 	bool run_once = 24;
 	repeated AIFunction actions = 27;
+
+	string created_by = 28;
+	int64 created = 29;
+	string updated_by = 30;
+	int64 updated = 31;
 }
 
 message SenAgentSessionListRequest {
@@ -10468,7 +10473,7 @@ message PersistAIDataEntryDocumentRequest {
 	BlockStepBatch batch = 4;
 }
 
-// Flat folder list for document entries; clients reconstruct the tree by parent_id.
+// Flat folder list for all AI data entry types; clients reconstruct the tree by parent_id.
 message AIDataFolder {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -10477,13 +10482,16 @@ message AIDataFolder {
 	string description = 5;
 	// Empty means root. Parent must exist in the same account and cannot be
 	// this folder or one of its descendants. Moving only changes parent_id;
-	// child folders and documents keep their existing references.
+	// child folders and entries keep their existing references.
 	string parent_id = 15;
 
 	int64 created = 16; // Server-managed, milliseconds since epoch.
 	string created_by = 17;
 	int64 updated = 18; // Server-managed, milliseconds since epoch.
 	string updated_by = 19;
+	int64 deleted_at = 20; // Server-managed trash timestamp, milliseconds; zero means active.
+	string deleted_by = 21;
+	string deletion_id = 22; // Groups items trashed by one operation.
 }
 
 message AIDataEntry {
@@ -10502,10 +10510,13 @@ message AIDataEntry {
 	File file = 10;
 	Block document = 11;
 	string document_revision = 71; // Server-issued revision of document; use as batch.base_revision.
-	// type=document only. Empty means root; otherwise an AIDataFolder in this account.
+	// All entry types. Empty means root; otherwise an active AIDataFolder in this account.
 	// Update via UpdateAIDataEntry with ctx.fields=["folder_id"], including when
-	// clearing it. Moving a document does not change document_revision or retrain it.
+	// clearing it. Moving an entry does not change content or retrain it.
 	string folder_id = 72;
+	int64 deleted_at = 73; // Server-managed trash timestamp, milliseconds; zero means active.
+	string deleted_by = 74;
+	string deletion_id = 75; // Groups items trashed by one operation.
 	string source_visibility = 15; // "", default, private, public
 
 	Product product = 18;
