@@ -9570,85 +9570,54 @@ var AttributeMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	WorkflowMgr_ListWorkflows_FullMethodName              = "/header.WorkflowMgr/ListWorkflows"
-	WorkflowMgr_UpdateWorkflow_FullMethodName             = "/header.WorkflowMgr/UpdateWorkflow"
-	WorkflowMgr_CreateWorkflow_FullMethodName             = "/header.WorkflowMgr/CreateWorkflow"
-	WorkflowMgr_DeleteWorkflow_FullMethodName             = "/header.WorkflowMgr/DeleteWorkflow"
-	WorkflowMgr_GetWorkflow_FullMethodName                = "/header.WorkflowMgr/GetWorkflow"
-	WorkflowMgr_ListWorkflowVersions_FullMethodName       = "/header.WorkflowMgr/ListWorkflowVersions"
-	WorkflowMgr_StartWorkflowSession_FullMethodName       = "/header.WorkflowMgr/StartWorkflowSession"
-	WorkflowMgr_MatchWorkflows_FullMethodName             = "/header.WorkflowMgr/MatchWorkflows"
-	WorkflowMgr_PumpWorkflowSession_FullMethodName        = "/header.WorkflowMgr/PumpWorkflowSession"
-	WorkflowMgr_GetWorkflowSession_FullMethodName         = "/header.WorkflowMgr/GetWorkflowSession"
-	WorkflowMgr_UpdateWorkflowSession_FullMethodName      = "/header.WorkflowMgr/UpdateWorkflowSession"
-	WorkflowMgr_ListWorkflowSessions_FullMethodName       = "/header.WorkflowMgr/ListWorkflowSessions"
-	WorkflowMgr_ListWorkflowLogs_FullMethodName           = "/header.WorkflowMgr/ListWorkflowLogs"
-	WorkflowMgr_ReportWorkflow_FullMethodName             = "/header.WorkflowMgr/ReportWorkflow"
-	WorkflowMgr_RunWorkflowAction_FullMethodName          = "/header.WorkflowMgr/RunWorkflowAction"
-	WorkflowMgr_ListAIAgents_FullMethodName               = "/header.WorkflowMgr/ListAIAgents"
-	WorkflowMgr_CreateAIAgent_FullMethodName              = "/header.WorkflowMgr/CreateAIAgent"
-	WorkflowMgr_UpdateAIAgent_FullMethodName              = "/header.WorkflowMgr/UpdateAIAgent"
-	WorkflowMgr_GetAIAgent_FullMethodName                 = "/header.WorkflowMgr/GetAIAgent"
-	WorkflowMgr_MatchAIAgent_FullMethodName               = "/header.WorkflowMgr/MatchAIAgent"
-	WorkflowMgr_DeleteAIAgent_FullMethodName              = "/header.WorkflowMgr/DeleteAIAgent"
-	WorkflowMgr_StartAiAgent_FullMethodName               = "/header.WorkflowMgr/StartAiAgent"
-	WorkflowMgr_StopAIAgent_FullMethodName                = "/header.WorkflowMgr/StopAIAgent"
-	WorkflowMgr_DeleteAIAgentDataEntry_FullMethodName     = "/header.WorkflowMgr/DeleteAIAgentDataEntry"
-	WorkflowMgr_AddAIAgentDataEntry_FullMethodName        = "/header.WorkflowMgr/AddAIAgentDataEntry"
-	WorkflowMgr_ListAIDataFolders_FullMethodName          = "/header.WorkflowMgr/ListAIDataFolders"
-	WorkflowMgr_CreateAIDataFolder_FullMethodName         = "/header.WorkflowMgr/CreateAIDataFolder"
-	WorkflowMgr_UpdateAIDataFolder_FullMethodName         = "/header.WorkflowMgr/UpdateAIDataFolder"
-	WorkflowMgr_DeleteAIDataFolder_FullMethodName         = "/header.WorkflowMgr/DeleteAIDataFolder"
-	WorkflowMgr_RestoreAIDataFolder_FullMethodName        = "/header.WorkflowMgr/RestoreAIDataFolder"
-	WorkflowMgr_PurgeAIDataFolder_FullMethodName          = "/header.WorkflowMgr/PurgeAIDataFolder"
-	WorkflowMgr_SuggestAIDataEntry_FullMethodName         = "/header.WorkflowMgr/SuggestAIDataEntry"
-	WorkflowMgr_CreateAIDataEntry_FullMethodName          = "/header.WorkflowMgr/CreateAIDataEntry"
-	WorkflowMgr_ListAIDataEntry_FullMethodName            = "/header.WorkflowMgr/ListAIDataEntry"
-	WorkflowMgr_GetAIDataEntry_FullMethodName             = "/header.WorkflowMgr/GetAIDataEntry"
-	WorkflowMgr_UpdateAIDataEntry_FullMethodName          = "/header.WorkflowMgr/UpdateAIDataEntry"
-	WorkflowMgr_EstimateTrainingCost_FullMethodName       = "/header.WorkflowMgr/EstimateTrainingCost"
-	WorkflowMgr_ListAIDataEntryChunks_FullMethodName      = "/header.WorkflowMgr/ListAIDataEntryChunks"
-	WorkflowMgr_GetAIDataEntryDocument_FullMethodName     = "/header.WorkflowMgr/GetAIDataEntryDocument"
-	WorkflowMgr_PersistAIDataEntryDocument_FullMethodName = "/header.WorkflowMgr/PersistAIDataEntryDocument"
-	WorkflowMgr_RetrainAIDataEntry_FullMethodName         = "/header.WorkflowMgr/RetrainAIDataEntry"
-	WorkflowMgr_DeleteAIDataEntry_FullMethodName          = "/header.WorkflowMgr/DeleteAIDataEntry"
-	WorkflowMgr_RestoreAIDataEntry_FullMethodName         = "/header.WorkflowMgr/RestoreAIDataEntry"
-	WorkflowMgr_PurgeAIDataEntry_FullMethodName           = "/header.WorkflowMgr/PurgeAIDataEntry"
-	WorkflowMgr_MatchDataEntries_FullMethodName           = "/header.WorkflowMgr/MatchDataEntries"
-	WorkflowMgr_ReportAIAgent_FullMethodName              = "/header.WorkflowMgr/ReportAIAgent"
-	WorkflowMgr_TryWorkflowAction_FullMethodName          = "/header.WorkflowMgr/TryWorkflowAction"
-	WorkflowMgr_ListAIAgentMessages_FullMethodName        = "/header.WorkflowMgr/ListAIAgentMessages"
-	WorkflowMgr_ListConvertedLeads_FullMethodName         = "/header.WorkflowMgr/ListConvertedLeads"
-	WorkflowMgr_GetAIResponseTrace_FullMethodName         = "/header.WorkflowMgr/GetAIResponseTrace"
-	WorkflowMgr_RunAIAgentTest_FullMethodName             = "/header.WorkflowMgr/RunAIAgentTest"
-	WorkflowMgr_ListAIAgentTestResults_FullMethodName     = "/header.WorkflowMgr/ListAIAgentTestResults"
-	WorkflowMgr_GetAIAgentTestResult_FullMethodName       = "/header.WorkflowMgr/GetAIAgentTestResult"
-	WorkflowMgr_CancelAIAgentTest_FullMethodName          = "/header.WorkflowMgr/CancelAIAgentTest"
-	WorkflowMgr_CreateAIAgentTestcase_FullMethodName      = "/header.WorkflowMgr/CreateAIAgentTestcase"
-	WorkflowMgr_UpdateAIAgentTestcase_FullMethodName      = "/header.WorkflowMgr/UpdateAIAgentTestcase"
-	WorkflowMgr_DeleteAIAgentTestcase_FullMethodName      = "/header.WorkflowMgr/DeleteAIAgentTestcase"
-	WorkflowMgr_ListAIAgentTestcases_FullMethodName       = "/header.WorkflowMgr/ListAIAgentTestcases"
+	ChatbotMgr_ListAIAgents_FullMethodName               = "/header.ChatbotMgr/ListAIAgents"
+	ChatbotMgr_CreateAIAgent_FullMethodName              = "/header.ChatbotMgr/CreateAIAgent"
+	ChatbotMgr_UpdateAIAgent_FullMethodName              = "/header.ChatbotMgr/UpdateAIAgent"
+	ChatbotMgr_GetAIAgent_FullMethodName                 = "/header.ChatbotMgr/GetAIAgent"
+	ChatbotMgr_MatchAIAgent_FullMethodName               = "/header.ChatbotMgr/MatchAIAgent"
+	ChatbotMgr_DeleteAIAgent_FullMethodName              = "/header.ChatbotMgr/DeleteAIAgent"
+	ChatbotMgr_StartAiAgent_FullMethodName               = "/header.ChatbotMgr/StartAiAgent"
+	ChatbotMgr_StopAIAgent_FullMethodName                = "/header.ChatbotMgr/StopAIAgent"
+	ChatbotMgr_DeleteAIAgentDataEntry_FullMethodName     = "/header.ChatbotMgr/DeleteAIAgentDataEntry"
+	ChatbotMgr_AddAIAgentDataEntry_FullMethodName        = "/header.ChatbotMgr/AddAIAgentDataEntry"
+	ChatbotMgr_ListAIDataFolders_FullMethodName          = "/header.ChatbotMgr/ListAIDataFolders"
+	ChatbotMgr_CreateAIDataFolder_FullMethodName         = "/header.ChatbotMgr/CreateAIDataFolder"
+	ChatbotMgr_UpdateAIDataFolder_FullMethodName         = "/header.ChatbotMgr/UpdateAIDataFolder"
+	ChatbotMgr_DeleteAIDataFolder_FullMethodName         = "/header.ChatbotMgr/DeleteAIDataFolder"
+	ChatbotMgr_RestoreAIDataFolder_FullMethodName        = "/header.ChatbotMgr/RestoreAIDataFolder"
+	ChatbotMgr_PurgeAIDataFolder_FullMethodName          = "/header.ChatbotMgr/PurgeAIDataFolder"
+	ChatbotMgr_SuggestAIDataEntry_FullMethodName         = "/header.ChatbotMgr/SuggestAIDataEntry"
+	ChatbotMgr_CreateAIDataEntry_FullMethodName          = "/header.ChatbotMgr/CreateAIDataEntry"
+	ChatbotMgr_ListAIDataEntry_FullMethodName            = "/header.ChatbotMgr/ListAIDataEntry"
+	ChatbotMgr_GetAIDataEntry_FullMethodName             = "/header.ChatbotMgr/GetAIDataEntry"
+	ChatbotMgr_UpdateAIDataEntry_FullMethodName          = "/header.ChatbotMgr/UpdateAIDataEntry"
+	ChatbotMgr_EstimateTrainingCost_FullMethodName       = "/header.ChatbotMgr/EstimateTrainingCost"
+	ChatbotMgr_ListAIDataEntryChunks_FullMethodName      = "/header.ChatbotMgr/ListAIDataEntryChunks"
+	ChatbotMgr_GetAIDataEntryDocument_FullMethodName     = "/header.ChatbotMgr/GetAIDataEntryDocument"
+	ChatbotMgr_PersistAIDataEntryDocument_FullMethodName = "/header.ChatbotMgr/PersistAIDataEntryDocument"
+	ChatbotMgr_RetrainAIDataEntry_FullMethodName         = "/header.ChatbotMgr/RetrainAIDataEntry"
+	ChatbotMgr_DeleteAIDataEntry_FullMethodName          = "/header.ChatbotMgr/DeleteAIDataEntry"
+	ChatbotMgr_RestoreAIDataEntry_FullMethodName         = "/header.ChatbotMgr/RestoreAIDataEntry"
+	ChatbotMgr_PurgeAIDataEntry_FullMethodName           = "/header.ChatbotMgr/PurgeAIDataEntry"
+	ChatbotMgr_MatchDataEntries_FullMethodName           = "/header.ChatbotMgr/MatchDataEntries"
+	ChatbotMgr_ReportAIAgent_FullMethodName              = "/header.ChatbotMgr/ReportAIAgent"
+	ChatbotMgr_ListAIAgentMessages_FullMethodName        = "/header.ChatbotMgr/ListAIAgentMessages"
+	ChatbotMgr_ListConvertedLeads_FullMethodName         = "/header.ChatbotMgr/ListConvertedLeads"
+	ChatbotMgr_GetAIResponseTrace_FullMethodName         = "/header.ChatbotMgr/GetAIResponseTrace"
+	ChatbotMgr_RunAIAgentTest_FullMethodName             = "/header.ChatbotMgr/RunAIAgentTest"
+	ChatbotMgr_ListAIAgentTestResults_FullMethodName     = "/header.ChatbotMgr/ListAIAgentTestResults"
+	ChatbotMgr_GetAIAgentTestResult_FullMethodName       = "/header.ChatbotMgr/GetAIAgentTestResult"
+	ChatbotMgr_CancelAIAgentTest_FullMethodName          = "/header.ChatbotMgr/CancelAIAgentTest"
+	ChatbotMgr_CreateAIAgentTestcase_FullMethodName      = "/header.ChatbotMgr/CreateAIAgentTestcase"
+	ChatbotMgr_UpdateAIAgentTestcase_FullMethodName      = "/header.ChatbotMgr/UpdateAIAgentTestcase"
+	ChatbotMgr_DeleteAIAgentTestcase_FullMethodName      = "/header.ChatbotMgr/DeleteAIAgentTestcase"
+	ChatbotMgr_ListAIAgentTestcases_FullMethodName       = "/header.ChatbotMgr/ListAIAgentTestcases"
 )
 
-// WorkflowMgrClient is the client API for WorkflowMgr service.
+// ChatbotMgrClient is the client API for ChatbotMgr service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type WorkflowMgrClient interface {
-	ListWorkflows(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	UpdateWorkflow(ctx context.Context, in *Workflow, opts ...grpc.CallOption) (*Response, error)
-	CreateWorkflow(ctx context.Context, in *Workflow, opts ...grpc.CallOption) (*Response, error)
-	DeleteWorkflow(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	GetWorkflow(ctx context.Context, in *Workflow, opts ...grpc.CallOption) (*Response, error)
-	ListWorkflowVersions(ctx context.Context, in *ListVersions, opts ...grpc.CallOption) (*Response, error)
-	StartWorkflowSession(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
-	MatchWorkflows(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
-	PumpWorkflowSession(ctx context.Context, in *WorkflowPulse, opts ...grpc.CallOption) (*Response, error)
-	GetWorkflowSession(ctx context.Context, in *WorkflowSessionId, opts ...grpc.CallOption) (*Response, error)
-	UpdateWorkflowSession(ctx context.Context, in *UpdateWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
-	ListWorkflowSessions(ctx context.Context, in *ListWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
-	ListWorkflowLogs(ctx context.Context, in *ListWorkflowLogRequest, opts ...grpc.CallOption) (*Response, error)
-	ReportWorkflow(ctx context.Context, in *WorkflowReportRequest, opts ...grpc.CallOption) (*Response, error)
-	RunWorkflowAction(ctx context.Context, in *RunWorkflowActionRequest, opts ...grpc.CallOption) (*Response, error)
+type ChatbotMgrClient interface {
 	ListAIAgents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateAIAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
 	UpdateAIAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
@@ -9683,7 +9652,6 @@ type WorkflowMgrClient interface {
 	PurgeAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
-	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
 	ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error)
 	GetAIResponseTrace(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error)
@@ -9695,6 +9663,1617 @@ type WorkflowMgrClient interface {
 	UpdateAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error)
 	ListAIAgentTestcases(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+}
+
+type chatbotMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewChatbotMgrClient(cc grpc.ClientConnInterface) ChatbotMgrClient {
+	return &chatbotMgrClient{cc}
+}
+
+func (c *chatbotMgrClient) ListAIAgents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIAgents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) CreateAIAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_CreateAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) UpdateAIAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_UpdateAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) GetAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_GetAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) MatchAIAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_MatchAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) DeleteAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_DeleteAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) StartAiAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_StartAiAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) StopAIAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_StopAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) DeleteAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_DeleteAIAgentDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) AddAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_AddAIAgentDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListAIDataFolders(ctx context.Context, in *ListAIDataFoldersRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIDataFolders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) CreateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_CreateAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) UpdateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_UpdateAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) DeleteAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_DeleteAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) RestoreAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_RestoreAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) PurgeAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_PurgeAIDataFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_SuggestAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) CreateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_CreateAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListAIDataEntry(ctx context.Context, in *ListAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) GetAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_GetAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) UpdateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_UpdateAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) EstimateTrainingCost(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*CreditSpendEntry, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreditSpendEntry)
+	err := c.cc.Invoke(ctx, ChatbotMgr_EstimateTrainingCost_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListAIDataEntryChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIDataEntryChunks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) GetAIDataEntryDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_GetAIDataEntryDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) PersistAIDataEntryDocument(ctx context.Context, in *PersistAIDataEntryDocumentRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_PersistAIDataEntryDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_RetrainAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) DeleteAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_DeleteAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) RestoreAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_RestoreAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) PurgeAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatbotMgr_PurgeAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_MatchDataEntries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AIAgentReportResponse)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ReportAIAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIAgentMessages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListConvertedLeads_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) GetAIResponseTrace(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_GetAIResponseTrace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) RunAIAgentTest(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_RunAIAgentTest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListAIAgentTestResults(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIAgentTestResults_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) GetAIAgentTestResult(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_GetAIAgentTestResult_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) CancelAIAgentTest(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_CancelAIAgentTest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) CreateAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_CreateAIAgentTestcase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) UpdateAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_UpdateAIAgentTestcase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) DeleteAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_DeleteAIAgentTestcase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatbotMgrClient) ListAIAgentTestcases(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ChatbotMgr_ListAIAgentTestcases_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ChatbotMgrServer is the server API for ChatbotMgr service.
+// All implementations must embed UnimplementedChatbotMgrServer
+// for forward compatibility.
+type ChatbotMgrServer interface {
+	ListAIAgents(context.Context, *Id) (*Response, error)
+	CreateAIAgent(context.Context, *AIAgent) (*Response, error)
+	UpdateAIAgent(context.Context, *AIAgent) (*Response, error)
+	GetAIAgent(context.Context, *Id) (*Response, error)
+	MatchAIAgent(context.Context, *Ids) (*Response, error)
+	DeleteAIAgent(context.Context, *Id) (*Response, error)
+	StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
+	StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
+	DeleteAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
+	AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
+	// Flat list (ai_data_folders); defaults to active folders, trash=true lists deleted folders.
+	ListAIDataFolders(context.Context, *ListAIDataFoldersRequest) (*Response, error)
+	CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
+	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
+	UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
+	// Soft-delete the folder tree with one deletion_id; retain for 30 days.
+	DeleteAIDataFolder(context.Context, *Id) (*Empty, error)
+	RestoreAIDataFolder(context.Context, *Id) (*Empty, error)
+	PurgeAIDataFolder(context.Context, *Id) (*Empty, error)
+	SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error)
+	CreateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
+	ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error)
+	GetAIDataEntry(context.Context, *Id) (*Response, error)
+	UpdateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
+	EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error)
+	ListAIDataEntryChunks(context.Context, *Id) (*Response, error)
+	GetAIDataEntryDocument(context.Context, *Id) (*Response, error)
+	PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error)
+	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
+	DeleteAIDataEntry(context.Context, *Id) (*Empty, error)
+	RestoreAIDataEntry(context.Context, *Id) (*Empty, error)
+	PurgeAIDataEntry(context.Context, *Id) (*Empty, error)
+	MatchDataEntries(context.Context, *Ids) (*Response, error)
+	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
+	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
+	ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error)
+	GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error)
+	RunAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error)
+	ListAIAgentTestResults(context.Context, *AIAgentTestResult) (*Response, error)
+	GetAIAgentTestResult(context.Context, *AIAgentTestResult) (*Response, error)
+	CancelAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error)
+	CreateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
+	UpdateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
+	DeleteAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
+	ListAIAgentTestcases(context.Context, *Id) (*Response, error)
+	mustEmbedUnimplementedChatbotMgrServer()
+}
+
+// UnimplementedChatbotMgrServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedChatbotMgrServer struct{}
+
+func (UnimplementedChatbotMgrServer) ListAIAgents(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIAgents not implemented")
+}
+func (UnimplementedChatbotMgrServer) CreateAIAgent(context.Context, *AIAgent) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) UpdateAIAgent(context.Context, *AIAgent) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) GetAIAgent(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) MatchAIAgent(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) DeleteAIAgent(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartAiAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) DeleteAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAIAgentDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddAIAgentDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListAIDataFolders(context.Context, *ListAIDataFoldersRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIDataFolders not implemented")
+}
+func (UnimplementedChatbotMgrServer) CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAIDataFolder not implemented")
+}
+func (UnimplementedChatbotMgrServer) UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAIDataFolder not implemented")
+}
+func (UnimplementedChatbotMgrServer) DeleteAIDataFolder(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataFolder not implemented")
+}
+func (UnimplementedChatbotMgrServer) RestoreAIDataFolder(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreAIDataFolder not implemented")
+}
+func (UnimplementedChatbotMgrServer) PurgeAIDataFolder(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method PurgeAIDataFolder not implemented")
+}
+func (UnimplementedChatbotMgrServer) SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuggestAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) CreateAIDataEntry(context.Context, *AIDataEntry) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) GetAIDataEntry(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) UpdateAIDataEntry(context.Context, *AIDataEntry) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error) {
+	return nil, status.Error(codes.Unimplemented, "method EstimateTrainingCost not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListAIDataEntryChunks(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIDataEntryChunks not implemented")
+}
+func (UnimplementedChatbotMgrServer) GetAIDataEntryDocument(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAIDataEntryDocument not implemented")
+}
+func (UnimplementedChatbotMgrServer) PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PersistAIDataEntryDocument not implemented")
+}
+func (UnimplementedChatbotMgrServer) RetrainAIDataEntry(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RetrainAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) DeleteAIDataEntry(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) RestoreAIDataEntry(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) PurgeAIDataEntry(context.Context, *Id) (*Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method PurgeAIDataEntry not implemented")
+}
+func (UnimplementedChatbotMgrServer) MatchDataEntries(context.Context, *Ids) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method MatchDataEntries not implemented")
+}
+func (UnimplementedChatbotMgrServer) ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReportAIAgent not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIAgentMessages not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListConvertedLeads not implemented")
+}
+func (UnimplementedChatbotMgrServer) GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAIResponseTrace not implemented")
+}
+func (UnimplementedChatbotMgrServer) RunAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RunAIAgentTest not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListAIAgentTestResults(context.Context, *AIAgentTestResult) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIAgentTestResults not implemented")
+}
+func (UnimplementedChatbotMgrServer) GetAIAgentTestResult(context.Context, *AIAgentTestResult) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAIAgentTestResult not implemented")
+}
+func (UnimplementedChatbotMgrServer) CancelAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelAIAgentTest not implemented")
+}
+func (UnimplementedChatbotMgrServer) CreateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAIAgentTestcase not implemented")
+}
+func (UnimplementedChatbotMgrServer) UpdateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAIAgentTestcase not implemented")
+}
+func (UnimplementedChatbotMgrServer) DeleteAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAIAgentTestcase not implemented")
+}
+func (UnimplementedChatbotMgrServer) ListAIAgentTestcases(context.Context, *Id) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAIAgentTestcases not implemented")
+}
+func (UnimplementedChatbotMgrServer) mustEmbedUnimplementedChatbotMgrServer() {}
+func (UnimplementedChatbotMgrServer) testEmbeddedByValue()                    {}
+
+// UnsafeChatbotMgrServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ChatbotMgrServer will
+// result in compilation errors.
+type UnsafeChatbotMgrServer interface {
+	mustEmbedUnimplementedChatbotMgrServer()
+}
+
+func RegisterChatbotMgrServer(s grpc.ServiceRegistrar, srv ChatbotMgrServer) {
+	// If the following call panics, it indicates UnimplementedChatbotMgrServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ChatbotMgr_ServiceDesc, srv)
+}
+
+func _ChatbotMgr_ListAIAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIAgents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIAgents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIAgents(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_CreateAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).CreateAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_CreateAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).CreateAIAgent(ctx, req.(*AIAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_UpdateAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).UpdateAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_UpdateAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).UpdateAIAgent(ctx, req.(*AIAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_GetAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).GetAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_GetAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).GetAIAgent(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_MatchAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).MatchAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_MatchAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).MatchAIAgent(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_DeleteAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).DeleteAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_DeleteAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).DeleteAIAgent(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_StartAiAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunAiAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).StartAiAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_StartAiAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).StartAiAgent(ctx, req.(*RunAiAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_StopAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunAiAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).StopAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_StopAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).StopAIAgent(ctx, req.(*RunAiAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_DeleteAIAgentDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentDataEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).DeleteAIAgentDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_DeleteAIAgentDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).DeleteAIAgentDataEntry(ctx, req.(*AIAgentDataEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_AddAIAgentDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentDataEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).AddAIAgentDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_AddAIAgentDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).AddAIAgentDataEntry(ctx, req.(*AIAgentDataEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListAIDataFolders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAIDataFoldersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIDataFolders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIDataFolders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIDataFolders(ctx, req.(*ListAIDataFoldersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_CreateAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataFolder)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).CreateAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_CreateAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).CreateAIDataFolder(ctx, req.(*AIDataFolder))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_UpdateAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataFolder)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).UpdateAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_UpdateAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).UpdateAIDataFolder(ctx, req.(*AIDataFolder))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_DeleteAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).DeleteAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_DeleteAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).DeleteAIDataFolder(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_RestoreAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).RestoreAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_RestoreAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).RestoreAIDataFolder(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_PurgeAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).PurgeAIDataFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_PurgeAIDataFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).PurgeAIDataFolder(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_SuggestAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuggestAIDataEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).SuggestAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_SuggestAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).SuggestAIDataEntry(ctx, req.(*SuggestAIDataEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_CreateAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataEntry)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).CreateAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_CreateAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).CreateAIDataEntry(ctx, req.(*AIDataEntry))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAIDataEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIDataEntry(ctx, req.(*ListAIDataEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_GetAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).GetAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_GetAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).GetAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_UpdateAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataEntry)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).UpdateAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_UpdateAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).UpdateAIDataEntry(ctx, req.(*AIDataEntry))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_EstimateTrainingCost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIDataEntry)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).EstimateTrainingCost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_EstimateTrainingCost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).EstimateTrainingCost(ctx, req.(*AIDataEntry))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListAIDataEntryChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIDataEntryChunks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIDataEntryChunks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIDataEntryChunks(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_GetAIDataEntryDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).GetAIDataEntryDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_GetAIDataEntryDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).GetAIDataEntryDocument(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_PersistAIDataEntryDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PersistAIDataEntryDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).PersistAIDataEntryDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_PersistAIDataEntryDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).PersistAIDataEntryDocument(ctx, req.(*PersistAIDataEntryDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_RetrainAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).RetrainAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_RetrainAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).RetrainAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_DeleteAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).DeleteAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_DeleteAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).DeleteAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_RestoreAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).RestoreAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_RestoreAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).RestoreAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_PurgeAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).PurgeAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_PurgeAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).PurgeAIDataEntry(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_MatchDataEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).MatchDataEntries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_MatchDataEntries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).MatchDataEntries(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ReportAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportAIAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ReportAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ReportAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ReportAIAgent(ctx, req.(*ReportAIAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListAIAgentMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAIAgentMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIAgentMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIAgentMessages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIAgentMessages(ctx, req.(*ListAIAgentMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListConvertedLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportAIAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListConvertedLeads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListConvertedLeads_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListConvertedLeads(ctx, req.(*ReportAIAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_GetAIResponseTrace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTraceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).GetAIResponseTrace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_GetAIResponseTrace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).GetAIResponseTrace(ctx, req.(*AIAgentTraceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_RunAIAgentTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestResult)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).RunAIAgentTest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_RunAIAgentTest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).RunAIAgentTest(ctx, req.(*AIAgentTestResult))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListAIAgentTestResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestResult)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIAgentTestResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIAgentTestResults_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIAgentTestResults(ctx, req.(*AIAgentTestResult))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_GetAIAgentTestResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestResult)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).GetAIAgentTestResult(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_GetAIAgentTestResult_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).GetAIAgentTestResult(ctx, req.(*AIAgentTestResult))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_CancelAIAgentTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestResult)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).CancelAIAgentTest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_CancelAIAgentTest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).CancelAIAgentTest(ctx, req.(*AIAgentTestResult))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_CreateAIAgentTestcase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestcase)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).CreateAIAgentTestcase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_CreateAIAgentTestcase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).CreateAIAgentTestcase(ctx, req.(*AIAgentTestcase))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_UpdateAIAgentTestcase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestcase)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).UpdateAIAgentTestcase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_UpdateAIAgentTestcase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).UpdateAIAgentTestcase(ctx, req.(*AIAgentTestcase))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_DeleteAIAgentTestcase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIAgentTestcase)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).DeleteAIAgentTestcase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_DeleteAIAgentTestcase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).DeleteAIAgentTestcase(ctx, req.(*AIAgentTestcase))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatbotMgr_ListAIAgentTestcases_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatbotMgrServer).ListAIAgentTestcases(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatbotMgr_ListAIAgentTestcases_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatbotMgrServer).ListAIAgentTestcases(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ChatbotMgr_ServiceDesc is the grpc.ServiceDesc for ChatbotMgr service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ChatbotMgr_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ChatbotMgr",
+	HandlerType: (*ChatbotMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListAIAgents",
+			Handler:    _ChatbotMgr_ListAIAgents_Handler,
+		},
+		{
+			MethodName: "CreateAIAgent",
+			Handler:    _ChatbotMgr_CreateAIAgent_Handler,
+		},
+		{
+			MethodName: "UpdateAIAgent",
+			Handler:    _ChatbotMgr_UpdateAIAgent_Handler,
+		},
+		{
+			MethodName: "GetAIAgent",
+			Handler:    _ChatbotMgr_GetAIAgent_Handler,
+		},
+		{
+			MethodName: "MatchAIAgent",
+			Handler:    _ChatbotMgr_MatchAIAgent_Handler,
+		},
+		{
+			MethodName: "DeleteAIAgent",
+			Handler:    _ChatbotMgr_DeleteAIAgent_Handler,
+		},
+		{
+			MethodName: "StartAiAgent",
+			Handler:    _ChatbotMgr_StartAiAgent_Handler,
+		},
+		{
+			MethodName: "StopAIAgent",
+			Handler:    _ChatbotMgr_StopAIAgent_Handler,
+		},
+		{
+			MethodName: "DeleteAIAgentDataEntry",
+			Handler:    _ChatbotMgr_DeleteAIAgentDataEntry_Handler,
+		},
+		{
+			MethodName: "AddAIAgentDataEntry",
+			Handler:    _ChatbotMgr_AddAIAgentDataEntry_Handler,
+		},
+		{
+			MethodName: "ListAIDataFolders",
+			Handler:    _ChatbotMgr_ListAIDataFolders_Handler,
+		},
+		{
+			MethodName: "CreateAIDataFolder",
+			Handler:    _ChatbotMgr_CreateAIDataFolder_Handler,
+		},
+		{
+			MethodName: "UpdateAIDataFolder",
+			Handler:    _ChatbotMgr_UpdateAIDataFolder_Handler,
+		},
+		{
+			MethodName: "DeleteAIDataFolder",
+			Handler:    _ChatbotMgr_DeleteAIDataFolder_Handler,
+		},
+		{
+			MethodName: "RestoreAIDataFolder",
+			Handler:    _ChatbotMgr_RestoreAIDataFolder_Handler,
+		},
+		{
+			MethodName: "PurgeAIDataFolder",
+			Handler:    _ChatbotMgr_PurgeAIDataFolder_Handler,
+		},
+		{
+			MethodName: "SuggestAIDataEntry",
+			Handler:    _ChatbotMgr_SuggestAIDataEntry_Handler,
+		},
+		{
+			MethodName: "CreateAIDataEntry",
+			Handler:    _ChatbotMgr_CreateAIDataEntry_Handler,
+		},
+		{
+			MethodName: "ListAIDataEntry",
+			Handler:    _ChatbotMgr_ListAIDataEntry_Handler,
+		},
+		{
+			MethodName: "GetAIDataEntry",
+			Handler:    _ChatbotMgr_GetAIDataEntry_Handler,
+		},
+		{
+			MethodName: "UpdateAIDataEntry",
+			Handler:    _ChatbotMgr_UpdateAIDataEntry_Handler,
+		},
+		{
+			MethodName: "EstimateTrainingCost",
+			Handler:    _ChatbotMgr_EstimateTrainingCost_Handler,
+		},
+		{
+			MethodName: "ListAIDataEntryChunks",
+			Handler:    _ChatbotMgr_ListAIDataEntryChunks_Handler,
+		},
+		{
+			MethodName: "GetAIDataEntryDocument",
+			Handler:    _ChatbotMgr_GetAIDataEntryDocument_Handler,
+		},
+		{
+			MethodName: "PersistAIDataEntryDocument",
+			Handler:    _ChatbotMgr_PersistAIDataEntryDocument_Handler,
+		},
+		{
+			MethodName: "RetrainAIDataEntry",
+			Handler:    _ChatbotMgr_RetrainAIDataEntry_Handler,
+		},
+		{
+			MethodName: "DeleteAIDataEntry",
+			Handler:    _ChatbotMgr_DeleteAIDataEntry_Handler,
+		},
+		{
+			MethodName: "RestoreAIDataEntry",
+			Handler:    _ChatbotMgr_RestoreAIDataEntry_Handler,
+		},
+		{
+			MethodName: "PurgeAIDataEntry",
+			Handler:    _ChatbotMgr_PurgeAIDataEntry_Handler,
+		},
+		{
+			MethodName: "MatchDataEntries",
+			Handler:    _ChatbotMgr_MatchDataEntries_Handler,
+		},
+		{
+			MethodName: "ReportAIAgent",
+			Handler:    _ChatbotMgr_ReportAIAgent_Handler,
+		},
+		{
+			MethodName: "ListAIAgentMessages",
+			Handler:    _ChatbotMgr_ListAIAgentMessages_Handler,
+		},
+		{
+			MethodName: "ListConvertedLeads",
+			Handler:    _ChatbotMgr_ListConvertedLeads_Handler,
+		},
+		{
+			MethodName: "GetAIResponseTrace",
+			Handler:    _ChatbotMgr_GetAIResponseTrace_Handler,
+		},
+		{
+			MethodName: "RunAIAgentTest",
+			Handler:    _ChatbotMgr_RunAIAgentTest_Handler,
+		},
+		{
+			MethodName: "ListAIAgentTestResults",
+			Handler:    _ChatbotMgr_ListAIAgentTestResults_Handler,
+		},
+		{
+			MethodName: "GetAIAgentTestResult",
+			Handler:    _ChatbotMgr_GetAIAgentTestResult_Handler,
+		},
+		{
+			MethodName: "CancelAIAgentTest",
+			Handler:    _ChatbotMgr_CancelAIAgentTest_Handler,
+		},
+		{
+			MethodName: "CreateAIAgentTestcase",
+			Handler:    _ChatbotMgr_CreateAIAgentTestcase_Handler,
+		},
+		{
+			MethodName: "UpdateAIAgentTestcase",
+			Handler:    _ChatbotMgr_UpdateAIAgentTestcase_Handler,
+		},
+		{
+			MethodName: "DeleteAIAgentTestcase",
+			Handler:    _ChatbotMgr_DeleteAIAgentTestcase_Handler,
+		},
+		{
+			MethodName: "ListAIAgentTestcases",
+			Handler:    _ChatbotMgr_ListAIAgentTestcases_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
+	WorkflowMgr_ListWorkflows_FullMethodName         = "/header.WorkflowMgr/ListWorkflows"
+	WorkflowMgr_UpdateWorkflow_FullMethodName        = "/header.WorkflowMgr/UpdateWorkflow"
+	WorkflowMgr_CreateWorkflow_FullMethodName        = "/header.WorkflowMgr/CreateWorkflow"
+	WorkflowMgr_DeleteWorkflow_FullMethodName        = "/header.WorkflowMgr/DeleteWorkflow"
+	WorkflowMgr_GetWorkflow_FullMethodName           = "/header.WorkflowMgr/GetWorkflow"
+	WorkflowMgr_ListWorkflowVersions_FullMethodName  = "/header.WorkflowMgr/ListWorkflowVersions"
+	WorkflowMgr_StartWorkflowSession_FullMethodName  = "/header.WorkflowMgr/StartWorkflowSession"
+	WorkflowMgr_MatchWorkflows_FullMethodName        = "/header.WorkflowMgr/MatchWorkflows"
+	WorkflowMgr_PumpWorkflowSession_FullMethodName   = "/header.WorkflowMgr/PumpWorkflowSession"
+	WorkflowMgr_GetWorkflowSession_FullMethodName    = "/header.WorkflowMgr/GetWorkflowSession"
+	WorkflowMgr_UpdateWorkflowSession_FullMethodName = "/header.WorkflowMgr/UpdateWorkflowSession"
+	WorkflowMgr_ListWorkflowSessions_FullMethodName  = "/header.WorkflowMgr/ListWorkflowSessions"
+	WorkflowMgr_ListWorkflowLogs_FullMethodName      = "/header.WorkflowMgr/ListWorkflowLogs"
+	WorkflowMgr_ReportWorkflow_FullMethodName        = "/header.WorkflowMgr/ReportWorkflow"
+	WorkflowMgr_RunWorkflowAction_FullMethodName     = "/header.WorkflowMgr/RunWorkflowAction"
+	WorkflowMgr_TryWorkflowAction_FullMethodName     = "/header.WorkflowMgr/TryWorkflowAction"
+)
+
+// WorkflowMgrClient is the client API for WorkflowMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type WorkflowMgrClient interface {
+	ListWorkflows(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	UpdateWorkflow(ctx context.Context, in *Workflow, opts ...grpc.CallOption) (*Response, error)
+	CreateWorkflow(ctx context.Context, in *Workflow, opts ...grpc.CallOption) (*Response, error)
+	DeleteWorkflow(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GetWorkflow(ctx context.Context, in *Workflow, opts ...grpc.CallOption) (*Response, error)
+	ListWorkflowVersions(ctx context.Context, in *ListVersions, opts ...grpc.CallOption) (*Response, error)
+	StartWorkflowSession(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
+	MatchWorkflows(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	PumpWorkflowSession(ctx context.Context, in *WorkflowPulse, opts ...grpc.CallOption) (*Response, error)
+	GetWorkflowSession(ctx context.Context, in *WorkflowSessionId, opts ...grpc.CallOption) (*Response, error)
+	UpdateWorkflowSession(ctx context.Context, in *UpdateWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
+	ListWorkflowSessions(ctx context.Context, in *ListWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
+	ListWorkflowLogs(ctx context.Context, in *ListWorkflowLogRequest, opts ...grpc.CallOption) (*Response, error)
+	ReportWorkflow(ctx context.Context, in *WorkflowReportRequest, opts ...grpc.CallOption) (*Response, error)
+	RunWorkflowAction(ctx context.Context, in *RunWorkflowActionRequest, opts ...grpc.CallOption) (*Response, error)
+	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type workflowMgrClient struct {
@@ -9855,430 +11434,10 @@ func (c *workflowMgrClient) RunWorkflowAction(ctx context.Context, in *RunWorkfl
 	return out, nil
 }
 
-func (c *workflowMgrClient) ListAIAgents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgents_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) CreateAIAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_CreateAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) UpdateAIAgent(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_UpdateAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) GetAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) MatchAIAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_MatchAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) DeleteAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) StartAiAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_StartAiAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) StopAIAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_StopAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) DeleteAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIAgentDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) AddAIAgentDataEntry(ctx context.Context, in *AIAgentDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_AddAIAgentDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIDataFolders(ctx context.Context, in *ListAIDataFoldersRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIDataFolders_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) CreateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_CreateAIDataFolder_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) UpdateAIDataFolder(ctx context.Context, in *AIDataFolder, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_UpdateAIDataFolder_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) DeleteAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIDataFolder_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) RestoreAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_RestoreAIDataFolder_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) PurgeAIDataFolder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_PurgeAIDataFolder_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_SuggestAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) CreateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_CreateAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIDataEntry(ctx context.Context, in *ListAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) GetAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) UpdateAIDataEntry(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_UpdateAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) EstimateTrainingCost(ctx context.Context, in *AIDataEntry, opts ...grpc.CallOption) (*CreditSpendEntry, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreditSpendEntry)
-	err := c.cc.Invoke(ctx, WorkflowMgr_EstimateTrainingCost_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIDataEntryChunks(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIDataEntryChunks_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) GetAIDataEntryDocument(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIDataEntryDocument_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) PersistAIDataEntryDocument(ctx context.Context, in *PersistAIDataEntryDocumentRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_PersistAIDataEntryDocument_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) RetrainAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_RetrainAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) DeleteAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) RestoreAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_RestoreAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) PurgeAIDataEntry(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, WorkflowMgr_PurgeAIDataEntry_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) MatchDataEntries(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_MatchDataEntries_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AIAgentReportResponse)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ReportAIAgent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *workflowMgrClient) TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, WorkflowMgr_TryWorkflowAction_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentMessages_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListConvertedLeads_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) GetAIResponseTrace(ctx context.Context, in *AIAgentTraceRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIResponseTrace_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) RunAIAgentTest(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_RunAIAgentTest_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIAgentTestResults(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentTestResults_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) GetAIAgentTestResult(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_GetAIAgentTestResult_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) CancelAIAgentTest(ctx context.Context, in *AIAgentTestResult, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_CancelAIAgentTest_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) CreateAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_CreateAIAgentTestcase_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) UpdateAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_UpdateAIAgentTestcase_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) DeleteAIAgentTestcase(ctx context.Context, in *AIAgentTestcase, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_DeleteAIAgentTestcase_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowMgrClient) ListAIAgentTestcases(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentTestcases_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -10304,52 +11463,7 @@ type WorkflowMgrServer interface {
 	ListWorkflowLogs(context.Context, *ListWorkflowLogRequest) (*Response, error)
 	ReportWorkflow(context.Context, *WorkflowReportRequest) (*Response, error)
 	RunWorkflowAction(context.Context, *RunWorkflowActionRequest) (*Response, error)
-	ListAIAgents(context.Context, *Id) (*Response, error)
-	CreateAIAgent(context.Context, *AIAgent) (*Response, error)
-	UpdateAIAgent(context.Context, *AIAgent) (*Response, error)
-	GetAIAgent(context.Context, *Id) (*Response, error)
-	MatchAIAgent(context.Context, *Ids) (*Response, error)
-	DeleteAIAgent(context.Context, *Id) (*Response, error)
-	StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
-	StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
-	DeleteAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
-	AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error)
-	// Flat list (ai_data_folders); defaults to active folders, trash=true lists deleted folders.
-	ListAIDataFolders(context.Context, *ListAIDataFoldersRequest) (*Response, error)
-	CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
-	// Update name/parent_id via ctx.fields. Include parent_id when moving to root ("").
-	UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error)
-	// Soft-delete the folder tree with one deletion_id; retain for 30 days.
-	DeleteAIDataFolder(context.Context, *Id) (*Empty, error)
-	RestoreAIDataFolder(context.Context, *Id) (*Empty, error)
-	PurgeAIDataFolder(context.Context, *Id) (*Empty, error)
-	SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error)
-	CreateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
-	ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error)
-	GetAIDataEntry(context.Context, *Id) (*Response, error)
-	UpdateAIDataEntry(context.Context, *AIDataEntry) (*Response, error)
-	EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error)
-	ListAIDataEntryChunks(context.Context, *Id) (*Response, error)
-	GetAIDataEntryDocument(context.Context, *Id) (*Response, error)
-	PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error)
-	RetrainAIDataEntry(context.Context, *Id) (*Response, error)
-	DeleteAIDataEntry(context.Context, *Id) (*Empty, error)
-	RestoreAIDataEntry(context.Context, *Id) (*Empty, error)
-	PurgeAIDataEntry(context.Context, *Id) (*Empty, error)
-	MatchDataEntries(context.Context, *Ids) (*Response, error)
-	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
 	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
-	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
-	ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error)
-	GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error)
-	RunAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error)
-	ListAIAgentTestResults(context.Context, *AIAgentTestResult) (*Response, error)
-	GetAIAgentTestResult(context.Context, *AIAgentTestResult) (*Response, error)
-	CancelAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error)
-	CreateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
-	UpdateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
-	DeleteAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error)
-	ListAIAgentTestcases(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -10405,134 +11519,8 @@ func (UnimplementedWorkflowMgrServer) ReportWorkflow(context.Context, *WorkflowR
 func (UnimplementedWorkflowMgrServer) RunWorkflowAction(context.Context, *RunWorkflowActionRequest) (*Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method RunWorkflowAction not implemented")
 }
-func (UnimplementedWorkflowMgrServer) ListAIAgents(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIAgents not implemented")
-}
-func (UnimplementedWorkflowMgrServer) CreateAIAgent(context.Context, *AIAgent) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateAIAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) UpdateAIAgent(context.Context, *AIAgent) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateAIAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) GetAIAgent(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAIAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) MatchAIAgent(context.Context, *Ids) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method MatchAIAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) DeleteAIAgent(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteAIAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartAiAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method StopAIAgent not implemented")
-}
-func (UnimplementedWorkflowMgrServer) DeleteAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteAIAgentDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) AddAIAgentDataEntry(context.Context, *AIAgentDataEntryRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddAIAgentDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIDataFolders(context.Context, *ListAIDataFoldersRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIDataFolders not implemented")
-}
-func (UnimplementedWorkflowMgrServer) CreateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateAIDataFolder not implemented")
-}
-func (UnimplementedWorkflowMgrServer) UpdateAIDataFolder(context.Context, *AIDataFolder) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateAIDataFolder not implemented")
-}
-func (UnimplementedWorkflowMgrServer) DeleteAIDataFolder(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataFolder not implemented")
-}
-func (UnimplementedWorkflowMgrServer) RestoreAIDataFolder(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method RestoreAIDataFolder not implemented")
-}
-func (UnimplementedWorkflowMgrServer) PurgeAIDataFolder(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method PurgeAIDataFolder not implemented")
-}
-func (UnimplementedWorkflowMgrServer) SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method SuggestAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) CreateAIDataEntry(context.Context, *AIDataEntry) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIDataEntry(context.Context, *ListAIDataEntryRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) GetAIDataEntry(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) UpdateAIDataEntry(context.Context, *AIDataEntry) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) EstimateTrainingCost(context.Context, *AIDataEntry) (*CreditSpendEntry, error) {
-	return nil, status.Error(codes.Unimplemented, "method EstimateTrainingCost not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIDataEntryChunks(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIDataEntryChunks not implemented")
-}
-func (UnimplementedWorkflowMgrServer) GetAIDataEntryDocument(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAIDataEntryDocument not implemented")
-}
-func (UnimplementedWorkflowMgrServer) PersistAIDataEntryDocument(context.Context, *PersistAIDataEntryDocumentRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method PersistAIDataEntryDocument not implemented")
-}
-func (UnimplementedWorkflowMgrServer) RetrainAIDataEntry(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method RetrainAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) DeleteAIDataEntry(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) RestoreAIDataEntry(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method RestoreAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) PurgeAIDataEntry(context.Context, *Id) (*Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method PurgeAIDataEntry not implemented")
-}
-func (UnimplementedWorkflowMgrServer) MatchDataEntries(context.Context, *Ids) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method MatchDataEntries not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReportAIAgent not implemented")
-}
 func (UnimplementedWorkflowMgrServer) TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method TryWorkflowAction not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIAgentMessages not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListConvertedLeads not implemented")
-}
-func (UnimplementedWorkflowMgrServer) GetAIResponseTrace(context.Context, *AIAgentTraceRequest) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAIResponseTrace not implemented")
-}
-func (UnimplementedWorkflowMgrServer) RunAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method RunAIAgentTest not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIAgentTestResults(context.Context, *AIAgentTestResult) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIAgentTestResults not implemented")
-}
-func (UnimplementedWorkflowMgrServer) GetAIAgentTestResult(context.Context, *AIAgentTestResult) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAIAgentTestResult not implemented")
-}
-func (UnimplementedWorkflowMgrServer) CancelAIAgentTest(context.Context, *AIAgentTestResult) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CancelAIAgentTest not implemented")
-}
-func (UnimplementedWorkflowMgrServer) CreateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateAIAgentTestcase not implemented")
-}
-func (UnimplementedWorkflowMgrServer) UpdateAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateAIAgentTestcase not implemented")
-}
-func (UnimplementedWorkflowMgrServer) DeleteAIAgentTestcase(context.Context, *AIAgentTestcase) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteAIAgentTestcase not implemented")
-}
-func (UnimplementedWorkflowMgrServer) ListAIAgentTestcases(context.Context, *Id) (*Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAIAgentTestcases not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -10825,564 +11813,6 @@ func _WorkflowMgr_RunWorkflowAction_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkflowMgr_ListAIAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIAgents(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIAgents_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIAgents(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_CreateAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgent)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).CreateAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_CreateAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).CreateAIAgent(ctx, req.(*AIAgent))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_UpdateAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgent)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).UpdateAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_UpdateAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).UpdateAIAgent(ctx, req.(*AIAgent))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_GetAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).GetAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_GetAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).GetAIAgent(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_MatchAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).MatchAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_MatchAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).MatchAIAgent(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_DeleteAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).DeleteAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_DeleteAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).DeleteAIAgent(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_StartAiAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RunAiAgentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).StartAiAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_StartAiAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).StartAiAgent(ctx, req.(*RunAiAgentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_StopAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RunAiAgentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).StopAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_StopAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).StopAIAgent(ctx, req.(*RunAiAgentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_DeleteAIAgentDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentDataEntryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).DeleteAIAgentDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_DeleteAIAgentDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).DeleteAIAgentDataEntry(ctx, req.(*AIAgentDataEntryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_AddAIAgentDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentDataEntryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).AddAIAgentDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_AddAIAgentDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).AddAIAgentDataEntry(ctx, req.(*AIAgentDataEntryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIDataFolders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAIDataFoldersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIDataFolders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIDataFolders_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIDataFolders(ctx, req.(*ListAIDataFoldersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_CreateAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIDataFolder)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).CreateAIDataFolder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_CreateAIDataFolder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).CreateAIDataFolder(ctx, req.(*AIDataFolder))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_UpdateAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIDataFolder)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).UpdateAIDataFolder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_UpdateAIDataFolder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).UpdateAIDataFolder(ctx, req.(*AIDataFolder))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_DeleteAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).DeleteAIDataFolder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_DeleteAIDataFolder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).DeleteAIDataFolder(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_RestoreAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).RestoreAIDataFolder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_RestoreAIDataFolder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).RestoreAIDataFolder(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_PurgeAIDataFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).PurgeAIDataFolder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_PurgeAIDataFolder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).PurgeAIDataFolder(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_SuggestAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SuggestAIDataEntryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).SuggestAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_SuggestAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).SuggestAIDataEntry(ctx, req.(*SuggestAIDataEntryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_CreateAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIDataEntry)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).CreateAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_CreateAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).CreateAIDataEntry(ctx, req.(*AIDataEntry))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAIDataEntryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIDataEntry(ctx, req.(*ListAIDataEntryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_GetAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).GetAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_GetAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).GetAIDataEntry(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_UpdateAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIDataEntry)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).UpdateAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_UpdateAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).UpdateAIDataEntry(ctx, req.(*AIDataEntry))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_EstimateTrainingCost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIDataEntry)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).EstimateTrainingCost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_EstimateTrainingCost_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).EstimateTrainingCost(ctx, req.(*AIDataEntry))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIDataEntryChunks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIDataEntryChunks(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIDataEntryChunks_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIDataEntryChunks(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_GetAIDataEntryDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).GetAIDataEntryDocument(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_GetAIDataEntryDocument_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).GetAIDataEntryDocument(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_PersistAIDataEntryDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PersistAIDataEntryDocumentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).PersistAIDataEntryDocument(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_PersistAIDataEntryDocument_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).PersistAIDataEntryDocument(ctx, req.(*PersistAIDataEntryDocumentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_RetrainAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).RetrainAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_RetrainAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).RetrainAIDataEntry(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_DeleteAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).DeleteAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_DeleteAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).DeleteAIDataEntry(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_RestoreAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).RestoreAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_RestoreAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).RestoreAIDataEntry(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_PurgeAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).PurgeAIDataEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_PurgeAIDataEntry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).PurgeAIDataEntry(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_MatchDataEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).MatchDataEntries(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_MatchDataEntries_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).MatchDataEntries(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ReportAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReportAIAgentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ReportAIAgent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ReportAIAgent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ReportAIAgent(ctx, req.(*ReportAIAgentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _WorkflowMgr_TryWorkflowAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartWorkflowSessionRequest)
 	if err := dec(in); err != nil {
@@ -11397,204 +11827,6 @@ func _WorkflowMgr_TryWorkflowAction_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).TryWorkflowAction(ctx, req.(*StartWorkflowSessionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIAgentMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAIAgentMessageRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIAgentMessages(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIAgentMessages_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIAgentMessages(ctx, req.(*ListAIAgentMessageRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListConvertedLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReportAIAgentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListConvertedLeads(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListConvertedLeads_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListConvertedLeads(ctx, req.(*ReportAIAgentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_GetAIResponseTrace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTraceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).GetAIResponseTrace(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_GetAIResponseTrace_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).GetAIResponseTrace(ctx, req.(*AIAgentTraceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_RunAIAgentTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestResult)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).RunAIAgentTest(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_RunAIAgentTest_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).RunAIAgentTest(ctx, req.(*AIAgentTestResult))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIAgentTestResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestResult)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIAgentTestResults(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIAgentTestResults_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIAgentTestResults(ctx, req.(*AIAgentTestResult))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_GetAIAgentTestResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestResult)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).GetAIAgentTestResult(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_GetAIAgentTestResult_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).GetAIAgentTestResult(ctx, req.(*AIAgentTestResult))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_CancelAIAgentTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestResult)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).CancelAIAgentTest(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_CancelAIAgentTest_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).CancelAIAgentTest(ctx, req.(*AIAgentTestResult))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_CreateAIAgentTestcase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestcase)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).CreateAIAgentTestcase(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_CreateAIAgentTestcase_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).CreateAIAgentTestcase(ctx, req.(*AIAgentTestcase))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_UpdateAIAgentTestcase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestcase)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).UpdateAIAgentTestcase(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_UpdateAIAgentTestcase_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).UpdateAIAgentTestcase(ctx, req.(*AIAgentTestcase))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_DeleteAIAgentTestcase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AIAgentTestcase)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).DeleteAIAgentTestcase(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_DeleteAIAgentTestcase_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).DeleteAIAgentTestcase(ctx, req.(*AIAgentTestcase))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowMgr_ListAIAgentTestcases_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowMgrServer).ListAIAgentTestcases(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowMgr_ListAIAgentTestcases_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowMgrServer).ListAIAgentTestcases(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -11667,176 +11899,8 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _WorkflowMgr_RunWorkflowAction_Handler,
 		},
 		{
-			MethodName: "ListAIAgents",
-			Handler:    _WorkflowMgr_ListAIAgents_Handler,
-		},
-		{
-			MethodName: "CreateAIAgent",
-			Handler:    _WorkflowMgr_CreateAIAgent_Handler,
-		},
-		{
-			MethodName: "UpdateAIAgent",
-			Handler:    _WorkflowMgr_UpdateAIAgent_Handler,
-		},
-		{
-			MethodName: "GetAIAgent",
-			Handler:    _WorkflowMgr_GetAIAgent_Handler,
-		},
-		{
-			MethodName: "MatchAIAgent",
-			Handler:    _WorkflowMgr_MatchAIAgent_Handler,
-		},
-		{
-			MethodName: "DeleteAIAgent",
-			Handler:    _WorkflowMgr_DeleteAIAgent_Handler,
-		},
-		{
-			MethodName: "StartAiAgent",
-			Handler:    _WorkflowMgr_StartAiAgent_Handler,
-		},
-		{
-			MethodName: "StopAIAgent",
-			Handler:    _WorkflowMgr_StopAIAgent_Handler,
-		},
-		{
-			MethodName: "DeleteAIAgentDataEntry",
-			Handler:    _WorkflowMgr_DeleteAIAgentDataEntry_Handler,
-		},
-		{
-			MethodName: "AddAIAgentDataEntry",
-			Handler:    _WorkflowMgr_AddAIAgentDataEntry_Handler,
-		},
-		{
-			MethodName: "ListAIDataFolders",
-			Handler:    _WorkflowMgr_ListAIDataFolders_Handler,
-		},
-		{
-			MethodName: "CreateAIDataFolder",
-			Handler:    _WorkflowMgr_CreateAIDataFolder_Handler,
-		},
-		{
-			MethodName: "UpdateAIDataFolder",
-			Handler:    _WorkflowMgr_UpdateAIDataFolder_Handler,
-		},
-		{
-			MethodName: "DeleteAIDataFolder",
-			Handler:    _WorkflowMgr_DeleteAIDataFolder_Handler,
-		},
-		{
-			MethodName: "RestoreAIDataFolder",
-			Handler:    _WorkflowMgr_RestoreAIDataFolder_Handler,
-		},
-		{
-			MethodName: "PurgeAIDataFolder",
-			Handler:    _WorkflowMgr_PurgeAIDataFolder_Handler,
-		},
-		{
-			MethodName: "SuggestAIDataEntry",
-			Handler:    _WorkflowMgr_SuggestAIDataEntry_Handler,
-		},
-		{
-			MethodName: "CreateAIDataEntry",
-			Handler:    _WorkflowMgr_CreateAIDataEntry_Handler,
-		},
-		{
-			MethodName: "ListAIDataEntry",
-			Handler:    _WorkflowMgr_ListAIDataEntry_Handler,
-		},
-		{
-			MethodName: "GetAIDataEntry",
-			Handler:    _WorkflowMgr_GetAIDataEntry_Handler,
-		},
-		{
-			MethodName: "UpdateAIDataEntry",
-			Handler:    _WorkflowMgr_UpdateAIDataEntry_Handler,
-		},
-		{
-			MethodName: "EstimateTrainingCost",
-			Handler:    _WorkflowMgr_EstimateTrainingCost_Handler,
-		},
-		{
-			MethodName: "ListAIDataEntryChunks",
-			Handler:    _WorkflowMgr_ListAIDataEntryChunks_Handler,
-		},
-		{
-			MethodName: "GetAIDataEntryDocument",
-			Handler:    _WorkflowMgr_GetAIDataEntryDocument_Handler,
-		},
-		{
-			MethodName: "PersistAIDataEntryDocument",
-			Handler:    _WorkflowMgr_PersistAIDataEntryDocument_Handler,
-		},
-		{
-			MethodName: "RetrainAIDataEntry",
-			Handler:    _WorkflowMgr_RetrainAIDataEntry_Handler,
-		},
-		{
-			MethodName: "DeleteAIDataEntry",
-			Handler:    _WorkflowMgr_DeleteAIDataEntry_Handler,
-		},
-		{
-			MethodName: "RestoreAIDataEntry",
-			Handler:    _WorkflowMgr_RestoreAIDataEntry_Handler,
-		},
-		{
-			MethodName: "PurgeAIDataEntry",
-			Handler:    _WorkflowMgr_PurgeAIDataEntry_Handler,
-		},
-		{
-			MethodName: "MatchDataEntries",
-			Handler:    _WorkflowMgr_MatchDataEntries_Handler,
-		},
-		{
-			MethodName: "ReportAIAgent",
-			Handler:    _WorkflowMgr_ReportAIAgent_Handler,
-		},
-		{
 			MethodName: "TryWorkflowAction",
 			Handler:    _WorkflowMgr_TryWorkflowAction_Handler,
-		},
-		{
-			MethodName: "ListAIAgentMessages",
-			Handler:    _WorkflowMgr_ListAIAgentMessages_Handler,
-		},
-		{
-			MethodName: "ListConvertedLeads",
-			Handler:    _WorkflowMgr_ListConvertedLeads_Handler,
-		},
-		{
-			MethodName: "GetAIResponseTrace",
-			Handler:    _WorkflowMgr_GetAIResponseTrace_Handler,
-		},
-		{
-			MethodName: "RunAIAgentTest",
-			Handler:    _WorkflowMgr_RunAIAgentTest_Handler,
-		},
-		{
-			MethodName: "ListAIAgentTestResults",
-			Handler:    _WorkflowMgr_ListAIAgentTestResults_Handler,
-		},
-		{
-			MethodName: "GetAIAgentTestResult",
-			Handler:    _WorkflowMgr_GetAIAgentTestResult_Handler,
-		},
-		{
-			MethodName: "CancelAIAgentTest",
-			Handler:    _WorkflowMgr_CancelAIAgentTest_Handler,
-		},
-		{
-			MethodName: "CreateAIAgentTestcase",
-			Handler:    _WorkflowMgr_CreateAIAgentTestcase_Handler,
-		},
-		{
-			MethodName: "UpdateAIAgentTestcase",
-			Handler:    _WorkflowMgr_UpdateAIAgentTestcase_Handler,
-		},
-		{
-			MethodName: "DeleteAIAgentTestcase",
-			Handler:    _WorkflowMgr_DeleteAIAgentTestcase_Handler,
-		},
-		{
-			MethodName: "ListAIAgentTestcases",
-			Handler:    _WorkflowMgr_ListAIAgentTestcases_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

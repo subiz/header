@@ -397,25 +397,9 @@ const file_service_proto_rawDesc = "" +
 	"\x19ListAttributeDefinitions2\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12U\n" +
 	"\x19CreateAttributeDefinition\x12\x1b.header.AttributeDefinition\x1a\x1b.header.AttributeDefinition\x12U\n" +
-	"\x19UpdateAttributeDefinition\x12\x1b.header.AttributeDefinition\x1a\x1b.header.AttributeDefinition2\xfe\x1b\n" +
-	"\vWorkflowMgr\x12-\n" +
-	"\rListWorkflows\x12\n" +
-	".header.Id\x1a\x10.header.Response\x124\n" +
-	"\x0eUpdateWorkflow\x12\x10.header.Workflow\x1a\x10.header.Response\x124\n" +
-	"\x0eCreateWorkflow\x12\x10.header.Workflow\x1a\x10.header.Response\x12.\n" +
-	"\x0eDeleteWorkflow\x12\n" +
-	".header.Id\x1a\x10.header.Response\x121\n" +
-	"\vGetWorkflow\x12\x10.header.Workflow\x1a\x10.header.Response\x12>\n" +
-	"\x14ListWorkflowVersions\x12\x14.header.ListVersions\x1a\x10.header.Response\x12M\n" +
-	"\x14StartWorkflowSession\x12#.header.StartWorkflowSessionRequest\x1a\x10.header.Response\x12/\n" +
-	"\x0eMatchWorkflows\x12\v.header.Ids\x1a\x10.header.Response\x12>\n" +
-	"\x13PumpWorkflowSession\x12\x15.header.WorkflowPulse\x1a\x10.header.Response\x12A\n" +
-	"\x12GetWorkflowSession\x12\x19.header.WorkflowSessionId\x1a\x10.header.Response\x12O\n" +
-	"\x15UpdateWorkflowSession\x12$.header.UpdateWorkflowSessionRequest\x1a\x10.header.Response\x12L\n" +
-	"\x14ListWorkflowSessions\x12\".header.ListWorkflowSessionRequest\x1a\x10.header.Response\x12D\n" +
-	"\x10ListWorkflowLogs\x12\x1e.header.ListWorkflowLogRequest\x1a\x10.header.Response\x12A\n" +
-	"\x0eReportWorkflow\x12\x1d.header.WorkflowReportRequest\x1a\x10.header.Response\x12G\n" +
-	"\x11RunWorkflowAction\x12 .header.RunWorkflowActionRequest\x1a\x10.header.Response\x12,\n" +
+	"\x19UpdateAttributeDefinition\x12\x1b.header.AttributeDefinition\x1a\x1b.header.AttributeDefinition2\x82\x14\n" +
+	"\n" +
+	"ChatbotMgr\x12,\n" +
 	"\fListAIAgents\x12\n" +
 	".header.Id\x1a\x10.header.Response\x122\n" +
 	"\rCreateAIAgent\x12\x0f.header.AIAgent\x1a\x10.header.Response\x122\n" +
@@ -460,8 +444,7 @@ const file_service_proto_rawDesc = "" +
 	"\x10PurgeAIDataEntry\x12\n" +
 	".header.Id\x1a\r.header.Empty\x121\n" +
 	"\x10MatchDataEntries\x12\v.header.Ids\x1a\x10.header.Response\x12L\n" +
-	"\rReportAIAgent\x12\x1c.header.ReportAIAgentRequest\x1a\x1d.header.AIAgentReportResponse\x12G\n" +
-	"\x11TryWorkflowAction\x12#.header.StartWorkflowSessionRequest\x1a\r.header.Empty\x12J\n" +
+	"\rReportAIAgent\x12\x1c.header.ReportAIAgentRequest\x1a\x1d.header.AIAgentReportResponse\x12J\n" +
 	"\x13ListAIAgentMessages\x12!.header.ListAIAgentMessageRequest\x1a\x10.header.Response\x12D\n" +
 	"\x12ListConvertedLeads\x12\x1c.header.ReportAIAgentRequest\x1a\x10.header.Response\x12C\n" +
 	"\x12GetAIResponseTrace\x12\x1b.header.AIAgentTraceRequest\x1a\x10.header.Response\x12=\n" +
@@ -473,7 +456,26 @@ const file_service_proto_rawDesc = "" +
 	"\x15UpdateAIAgentTestcase\x12\x17.header.AIAgentTestcase\x1a\x10.header.Response\x12B\n" +
 	"\x15DeleteAIAgentTestcase\x12\x17.header.AIAgentTestcase\x1a\x10.header.Response\x124\n" +
 	"\x14ListAIAgentTestcases\x12\n" +
-	".header.Id\x1a\x10.header.Response2\xb0\x0f\n" +
+	".header.Id\x1a\x10.header.Response2\x88\b\n" +
+	"\vWorkflowMgr\x12-\n" +
+	"\rListWorkflows\x12\n" +
+	".header.Id\x1a\x10.header.Response\x124\n" +
+	"\x0eUpdateWorkflow\x12\x10.header.Workflow\x1a\x10.header.Response\x124\n" +
+	"\x0eCreateWorkflow\x12\x10.header.Workflow\x1a\x10.header.Response\x12.\n" +
+	"\x0eDeleteWorkflow\x12\n" +
+	".header.Id\x1a\x10.header.Response\x121\n" +
+	"\vGetWorkflow\x12\x10.header.Workflow\x1a\x10.header.Response\x12>\n" +
+	"\x14ListWorkflowVersions\x12\x14.header.ListVersions\x1a\x10.header.Response\x12M\n" +
+	"\x14StartWorkflowSession\x12#.header.StartWorkflowSessionRequest\x1a\x10.header.Response\x12/\n" +
+	"\x0eMatchWorkflows\x12\v.header.Ids\x1a\x10.header.Response\x12>\n" +
+	"\x13PumpWorkflowSession\x12\x15.header.WorkflowPulse\x1a\x10.header.Response\x12A\n" +
+	"\x12GetWorkflowSession\x12\x19.header.WorkflowSessionId\x1a\x10.header.Response\x12O\n" +
+	"\x15UpdateWorkflowSession\x12$.header.UpdateWorkflowSessionRequest\x1a\x10.header.Response\x12L\n" +
+	"\x14ListWorkflowSessions\x12\".header.ListWorkflowSessionRequest\x1a\x10.header.Response\x12D\n" +
+	"\x10ListWorkflowLogs\x12\x1e.header.ListWorkflowLogRequest\x1a\x10.header.Response\x12A\n" +
+	"\x0eReportWorkflow\x12\x1d.header.WorkflowReportRequest\x1a\x10.header.Response\x12G\n" +
+	"\x11RunWorkflowAction\x12 .header.RunWorkflowActionRequest\x1a\x10.header.Response\x12G\n" +
+	"\x11TryWorkflowAction\x12#.header.StartWorkflowSessionRequest\x1a\r.header.Empty2\xb0\x0f\n" +
 	"\vSenAgentMgr\x12-\n" +
 	"\rListSenAgents\x12\n" +
 	".header.Id\x1a\x10.header.Response\x124\n" +
@@ -1427,30 +1429,30 @@ var file_service_proto_goTypes = []any{
 	(*Note)(nil),                              // 76: header.Note
 	(*DeleteNoteRequest)(nil),                 // 77: header.DeleteNoteRequest
 	(*AttributeDefinition)(nil),               // 78: header.AttributeDefinition
-	(*Workflow)(nil),                          // 79: header.Workflow
-	(*ListVersions)(nil),                      // 80: header.ListVersions
-	(*StartWorkflowSessionRequest)(nil),       // 81: header.StartWorkflowSessionRequest
-	(*WorkflowPulse)(nil),                     // 82: header.WorkflowPulse
-	(*WorkflowSessionId)(nil),                 // 83: header.WorkflowSessionId
-	(*UpdateWorkflowSessionRequest)(nil),      // 84: header.UpdateWorkflowSessionRequest
-	(*ListWorkflowSessionRequest)(nil),        // 85: header.ListWorkflowSessionRequest
-	(*ListWorkflowLogRequest)(nil),            // 86: header.ListWorkflowLogRequest
-	(*WorkflowReportRequest)(nil),             // 87: header.WorkflowReportRequest
-	(*RunWorkflowActionRequest)(nil),          // 88: header.RunWorkflowActionRequest
-	(*AIAgent)(nil),                           // 89: header.AIAgent
-	(*RunAiAgentRequest)(nil),                 // 90: header.RunAiAgentRequest
-	(*AIAgentDataEntryRequest)(nil),           // 91: header.AIAgentDataEntryRequest
-	(*ListAIDataFoldersRequest)(nil),          // 92: header.ListAIDataFoldersRequest
-	(*AIDataFolder)(nil),                      // 93: header.AIDataFolder
-	(*SuggestAIDataEntryRequest)(nil),         // 94: header.SuggestAIDataEntryRequest
-	(*AIDataEntry)(nil),                       // 95: header.AIDataEntry
-	(*ListAIDataEntryRequest)(nil),            // 96: header.ListAIDataEntryRequest
-	(*PersistAIDataEntryDocumentRequest)(nil), // 97: header.PersistAIDataEntryDocumentRequest
-	(*ReportAIAgentRequest)(nil),              // 98: header.ReportAIAgentRequest
-	(*ListAIAgentMessageRequest)(nil),         // 99: header.ListAIAgentMessageRequest
-	(*AIAgentTraceRequest)(nil),               // 100: header.AIAgentTraceRequest
-	(*AIAgentTestResult)(nil),                 // 101: header.AIAgentTestResult
-	(*AIAgentTestcase)(nil),                   // 102: header.AIAgentTestcase
+	(*AIAgent)(nil),                           // 79: header.AIAgent
+	(*RunAiAgentRequest)(nil),                 // 80: header.RunAiAgentRequest
+	(*AIAgentDataEntryRequest)(nil),           // 81: header.AIAgentDataEntryRequest
+	(*ListAIDataFoldersRequest)(nil),          // 82: header.ListAIDataFoldersRequest
+	(*AIDataFolder)(nil),                      // 83: header.AIDataFolder
+	(*SuggestAIDataEntryRequest)(nil),         // 84: header.SuggestAIDataEntryRequest
+	(*AIDataEntry)(nil),                       // 85: header.AIDataEntry
+	(*ListAIDataEntryRequest)(nil),            // 86: header.ListAIDataEntryRequest
+	(*PersistAIDataEntryDocumentRequest)(nil), // 87: header.PersistAIDataEntryDocumentRequest
+	(*ReportAIAgentRequest)(nil),              // 88: header.ReportAIAgentRequest
+	(*ListAIAgentMessageRequest)(nil),         // 89: header.ListAIAgentMessageRequest
+	(*AIAgentTraceRequest)(nil),               // 90: header.AIAgentTraceRequest
+	(*AIAgentTestResult)(nil),                 // 91: header.AIAgentTestResult
+	(*AIAgentTestcase)(nil),                   // 92: header.AIAgentTestcase
+	(*Workflow)(nil),                          // 93: header.Workflow
+	(*ListVersions)(nil),                      // 94: header.ListVersions
+	(*StartWorkflowSessionRequest)(nil),       // 95: header.StartWorkflowSessionRequest
+	(*WorkflowPulse)(nil),                     // 96: header.WorkflowPulse
+	(*WorkflowSessionId)(nil),                 // 97: header.WorkflowSessionId
+	(*UpdateWorkflowSessionRequest)(nil),      // 98: header.UpdateWorkflowSessionRequest
+	(*ListWorkflowSessionRequest)(nil),        // 99: header.ListWorkflowSessionRequest
+	(*ListWorkflowLogRequest)(nil),            // 100: header.ListWorkflowLogRequest
+	(*WorkflowReportRequest)(nil),             // 101: header.WorkflowReportRequest
+	(*RunWorkflowActionRequest)(nil),          // 102: header.RunWorkflowActionRequest
 	(*SenAgent)(nil),                          // 103: header.SenAgent
 	(*SenAgentSession)(nil),                   // 104: header.SenAgentSession
 	(*SenAction)(nil),                         // 105: header.SenAction
@@ -1948,64 +1950,64 @@ var file_service_proto_depIdxs = []int32{
 	3,   // 226: header.AttributeMgr.ListAttributeDefinitions2:input_type -> header.Id
 	78,  // 227: header.AttributeMgr.CreateAttributeDefinition:input_type -> header.AttributeDefinition
 	78,  // 228: header.AttributeMgr.UpdateAttributeDefinition:input_type -> header.AttributeDefinition
-	3,   // 229: header.WorkflowMgr.ListWorkflows:input_type -> header.Id
-	79,  // 230: header.WorkflowMgr.UpdateWorkflow:input_type -> header.Workflow
-	79,  // 231: header.WorkflowMgr.CreateWorkflow:input_type -> header.Workflow
-	3,   // 232: header.WorkflowMgr.DeleteWorkflow:input_type -> header.Id
-	79,  // 233: header.WorkflowMgr.GetWorkflow:input_type -> header.Workflow
-	80,  // 234: header.WorkflowMgr.ListWorkflowVersions:input_type -> header.ListVersions
-	81,  // 235: header.WorkflowMgr.StartWorkflowSession:input_type -> header.StartWorkflowSessionRequest
-	6,   // 236: header.WorkflowMgr.MatchWorkflows:input_type -> header.Ids
-	82,  // 237: header.WorkflowMgr.PumpWorkflowSession:input_type -> header.WorkflowPulse
-	83,  // 238: header.WorkflowMgr.GetWorkflowSession:input_type -> header.WorkflowSessionId
-	84,  // 239: header.WorkflowMgr.UpdateWorkflowSession:input_type -> header.UpdateWorkflowSessionRequest
-	85,  // 240: header.WorkflowMgr.ListWorkflowSessions:input_type -> header.ListWorkflowSessionRequest
-	86,  // 241: header.WorkflowMgr.ListWorkflowLogs:input_type -> header.ListWorkflowLogRequest
-	87,  // 242: header.WorkflowMgr.ReportWorkflow:input_type -> header.WorkflowReportRequest
-	88,  // 243: header.WorkflowMgr.RunWorkflowAction:input_type -> header.RunWorkflowActionRequest
-	3,   // 244: header.WorkflowMgr.ListAIAgents:input_type -> header.Id
-	89,  // 245: header.WorkflowMgr.CreateAIAgent:input_type -> header.AIAgent
-	89,  // 246: header.WorkflowMgr.UpdateAIAgent:input_type -> header.AIAgent
-	3,   // 247: header.WorkflowMgr.GetAIAgent:input_type -> header.Id
-	6,   // 248: header.WorkflowMgr.MatchAIAgent:input_type -> header.Ids
-	3,   // 249: header.WorkflowMgr.DeleteAIAgent:input_type -> header.Id
-	90,  // 250: header.WorkflowMgr.StartAiAgent:input_type -> header.RunAiAgentRequest
-	90,  // 251: header.WorkflowMgr.StopAIAgent:input_type -> header.RunAiAgentRequest
-	91,  // 252: header.WorkflowMgr.DeleteAIAgentDataEntry:input_type -> header.AIAgentDataEntryRequest
-	91,  // 253: header.WorkflowMgr.AddAIAgentDataEntry:input_type -> header.AIAgentDataEntryRequest
-	92,  // 254: header.WorkflowMgr.ListAIDataFolders:input_type -> header.ListAIDataFoldersRequest
-	93,  // 255: header.WorkflowMgr.CreateAIDataFolder:input_type -> header.AIDataFolder
-	93,  // 256: header.WorkflowMgr.UpdateAIDataFolder:input_type -> header.AIDataFolder
-	3,   // 257: header.WorkflowMgr.DeleteAIDataFolder:input_type -> header.Id
-	3,   // 258: header.WorkflowMgr.RestoreAIDataFolder:input_type -> header.Id
-	3,   // 259: header.WorkflowMgr.PurgeAIDataFolder:input_type -> header.Id
-	94,  // 260: header.WorkflowMgr.SuggestAIDataEntry:input_type -> header.SuggestAIDataEntryRequest
-	95,  // 261: header.WorkflowMgr.CreateAIDataEntry:input_type -> header.AIDataEntry
-	96,  // 262: header.WorkflowMgr.ListAIDataEntry:input_type -> header.ListAIDataEntryRequest
-	3,   // 263: header.WorkflowMgr.GetAIDataEntry:input_type -> header.Id
-	95,  // 264: header.WorkflowMgr.UpdateAIDataEntry:input_type -> header.AIDataEntry
-	95,  // 265: header.WorkflowMgr.EstimateTrainingCost:input_type -> header.AIDataEntry
-	3,   // 266: header.WorkflowMgr.ListAIDataEntryChunks:input_type -> header.Id
-	3,   // 267: header.WorkflowMgr.GetAIDataEntryDocument:input_type -> header.Id
-	97,  // 268: header.WorkflowMgr.PersistAIDataEntryDocument:input_type -> header.PersistAIDataEntryDocumentRequest
-	3,   // 269: header.WorkflowMgr.RetrainAIDataEntry:input_type -> header.Id
-	3,   // 270: header.WorkflowMgr.DeleteAIDataEntry:input_type -> header.Id
-	3,   // 271: header.WorkflowMgr.RestoreAIDataEntry:input_type -> header.Id
-	3,   // 272: header.WorkflowMgr.PurgeAIDataEntry:input_type -> header.Id
-	6,   // 273: header.WorkflowMgr.MatchDataEntries:input_type -> header.Ids
-	98,  // 274: header.WorkflowMgr.ReportAIAgent:input_type -> header.ReportAIAgentRequest
-	81,  // 275: header.WorkflowMgr.TryWorkflowAction:input_type -> header.StartWorkflowSessionRequest
-	99,  // 276: header.WorkflowMgr.ListAIAgentMessages:input_type -> header.ListAIAgentMessageRequest
-	98,  // 277: header.WorkflowMgr.ListConvertedLeads:input_type -> header.ReportAIAgentRequest
-	100, // 278: header.WorkflowMgr.GetAIResponseTrace:input_type -> header.AIAgentTraceRequest
-	101, // 279: header.WorkflowMgr.RunAIAgentTest:input_type -> header.AIAgentTestResult
-	101, // 280: header.WorkflowMgr.ListAIAgentTestResults:input_type -> header.AIAgentTestResult
-	101, // 281: header.WorkflowMgr.GetAIAgentTestResult:input_type -> header.AIAgentTestResult
-	101, // 282: header.WorkflowMgr.CancelAIAgentTest:input_type -> header.AIAgentTestResult
-	102, // 283: header.WorkflowMgr.CreateAIAgentTestcase:input_type -> header.AIAgentTestcase
-	102, // 284: header.WorkflowMgr.UpdateAIAgentTestcase:input_type -> header.AIAgentTestcase
-	102, // 285: header.WorkflowMgr.DeleteAIAgentTestcase:input_type -> header.AIAgentTestcase
-	3,   // 286: header.WorkflowMgr.ListAIAgentTestcases:input_type -> header.Id
+	3,   // 229: header.ChatbotMgr.ListAIAgents:input_type -> header.Id
+	79,  // 230: header.ChatbotMgr.CreateAIAgent:input_type -> header.AIAgent
+	79,  // 231: header.ChatbotMgr.UpdateAIAgent:input_type -> header.AIAgent
+	3,   // 232: header.ChatbotMgr.GetAIAgent:input_type -> header.Id
+	6,   // 233: header.ChatbotMgr.MatchAIAgent:input_type -> header.Ids
+	3,   // 234: header.ChatbotMgr.DeleteAIAgent:input_type -> header.Id
+	80,  // 235: header.ChatbotMgr.StartAiAgent:input_type -> header.RunAiAgentRequest
+	80,  // 236: header.ChatbotMgr.StopAIAgent:input_type -> header.RunAiAgentRequest
+	81,  // 237: header.ChatbotMgr.DeleteAIAgentDataEntry:input_type -> header.AIAgentDataEntryRequest
+	81,  // 238: header.ChatbotMgr.AddAIAgentDataEntry:input_type -> header.AIAgentDataEntryRequest
+	82,  // 239: header.ChatbotMgr.ListAIDataFolders:input_type -> header.ListAIDataFoldersRequest
+	83,  // 240: header.ChatbotMgr.CreateAIDataFolder:input_type -> header.AIDataFolder
+	83,  // 241: header.ChatbotMgr.UpdateAIDataFolder:input_type -> header.AIDataFolder
+	3,   // 242: header.ChatbotMgr.DeleteAIDataFolder:input_type -> header.Id
+	3,   // 243: header.ChatbotMgr.RestoreAIDataFolder:input_type -> header.Id
+	3,   // 244: header.ChatbotMgr.PurgeAIDataFolder:input_type -> header.Id
+	84,  // 245: header.ChatbotMgr.SuggestAIDataEntry:input_type -> header.SuggestAIDataEntryRequest
+	85,  // 246: header.ChatbotMgr.CreateAIDataEntry:input_type -> header.AIDataEntry
+	86,  // 247: header.ChatbotMgr.ListAIDataEntry:input_type -> header.ListAIDataEntryRequest
+	3,   // 248: header.ChatbotMgr.GetAIDataEntry:input_type -> header.Id
+	85,  // 249: header.ChatbotMgr.UpdateAIDataEntry:input_type -> header.AIDataEntry
+	85,  // 250: header.ChatbotMgr.EstimateTrainingCost:input_type -> header.AIDataEntry
+	3,   // 251: header.ChatbotMgr.ListAIDataEntryChunks:input_type -> header.Id
+	3,   // 252: header.ChatbotMgr.GetAIDataEntryDocument:input_type -> header.Id
+	87,  // 253: header.ChatbotMgr.PersistAIDataEntryDocument:input_type -> header.PersistAIDataEntryDocumentRequest
+	3,   // 254: header.ChatbotMgr.RetrainAIDataEntry:input_type -> header.Id
+	3,   // 255: header.ChatbotMgr.DeleteAIDataEntry:input_type -> header.Id
+	3,   // 256: header.ChatbotMgr.RestoreAIDataEntry:input_type -> header.Id
+	3,   // 257: header.ChatbotMgr.PurgeAIDataEntry:input_type -> header.Id
+	6,   // 258: header.ChatbotMgr.MatchDataEntries:input_type -> header.Ids
+	88,  // 259: header.ChatbotMgr.ReportAIAgent:input_type -> header.ReportAIAgentRequest
+	89,  // 260: header.ChatbotMgr.ListAIAgentMessages:input_type -> header.ListAIAgentMessageRequest
+	88,  // 261: header.ChatbotMgr.ListConvertedLeads:input_type -> header.ReportAIAgentRequest
+	90,  // 262: header.ChatbotMgr.GetAIResponseTrace:input_type -> header.AIAgentTraceRequest
+	91,  // 263: header.ChatbotMgr.RunAIAgentTest:input_type -> header.AIAgentTestResult
+	91,  // 264: header.ChatbotMgr.ListAIAgentTestResults:input_type -> header.AIAgentTestResult
+	91,  // 265: header.ChatbotMgr.GetAIAgentTestResult:input_type -> header.AIAgentTestResult
+	91,  // 266: header.ChatbotMgr.CancelAIAgentTest:input_type -> header.AIAgentTestResult
+	92,  // 267: header.ChatbotMgr.CreateAIAgentTestcase:input_type -> header.AIAgentTestcase
+	92,  // 268: header.ChatbotMgr.UpdateAIAgentTestcase:input_type -> header.AIAgentTestcase
+	92,  // 269: header.ChatbotMgr.DeleteAIAgentTestcase:input_type -> header.AIAgentTestcase
+	3,   // 270: header.ChatbotMgr.ListAIAgentTestcases:input_type -> header.Id
+	3,   // 271: header.WorkflowMgr.ListWorkflows:input_type -> header.Id
+	93,  // 272: header.WorkflowMgr.UpdateWorkflow:input_type -> header.Workflow
+	93,  // 273: header.WorkflowMgr.CreateWorkflow:input_type -> header.Workflow
+	3,   // 274: header.WorkflowMgr.DeleteWorkflow:input_type -> header.Id
+	93,  // 275: header.WorkflowMgr.GetWorkflow:input_type -> header.Workflow
+	94,  // 276: header.WorkflowMgr.ListWorkflowVersions:input_type -> header.ListVersions
+	95,  // 277: header.WorkflowMgr.StartWorkflowSession:input_type -> header.StartWorkflowSessionRequest
+	6,   // 278: header.WorkflowMgr.MatchWorkflows:input_type -> header.Ids
+	96,  // 279: header.WorkflowMgr.PumpWorkflowSession:input_type -> header.WorkflowPulse
+	97,  // 280: header.WorkflowMgr.GetWorkflowSession:input_type -> header.WorkflowSessionId
+	98,  // 281: header.WorkflowMgr.UpdateWorkflowSession:input_type -> header.UpdateWorkflowSessionRequest
+	99,  // 282: header.WorkflowMgr.ListWorkflowSessions:input_type -> header.ListWorkflowSessionRequest
+	100, // 283: header.WorkflowMgr.ListWorkflowLogs:input_type -> header.ListWorkflowLogRequest
+	101, // 284: header.WorkflowMgr.ReportWorkflow:input_type -> header.WorkflowReportRequest
+	102, // 285: header.WorkflowMgr.RunWorkflowAction:input_type -> header.RunWorkflowActionRequest
+	95,  // 286: header.WorkflowMgr.TryWorkflowAction:input_type -> header.StartWorkflowSessionRequest
 	3,   // 287: header.SenAgentMgr.ListSenAgents:input_type -> header.Id
 	103, // 288: header.SenAgentMgr.CreateSenAgent:input_type -> header.SenAgent
 	103, // 289: header.SenAgentMgr.UpdateSenAgent:input_type -> header.SenAgent
@@ -2111,7 +2113,7 @@ var file_service_proto_depIdxs = []int32{
 	3,   // 389: header.ConversationMgr.OnWebUserCreated:input_type -> header.Id
 	137, // 390: header.ConversationMgr.OnBotUpdated:input_type -> header.Bot
 	3,   // 391: header.ConversationMgr.OnBotDeleted:input_type -> header.Id
-	89,  // 392: header.ConversationMgr.OnAIAgentUpdated:input_type -> header.AIAgent
+	79,  // 392: header.ConversationMgr.OnAIAgentUpdated:input_type -> header.AIAgent
 	66,  // 393: header.ConversationMgr.NotifyHuman:input_type -> header.Event
 	3,   // 394: header.ConversationMgr.MarkAsHumanHandled:input_type -> header.Id
 	138, // 395: header.ConversationMgr.ReportMessages:input_type -> header.ReportConvoMessageRequest
@@ -2572,7 +2574,7 @@ var file_service_proto_depIdxs = []int32{
 	3,   // 850: header.KB.DeleteArticle:input_type -> header.Id
 	263, // 851: header.KB.GetArticle:input_type -> header.Article
 	264, // 852: header.KB.ListArticles:input_type -> header.ListArticleRequest
-	80,  // 853: header.KB.ListArticleVersions:input_type -> header.ListVersions
+	94,  // 853: header.KB.ListArticleVersions:input_type -> header.ListVersions
 	265, // 854: header.KB.SearchArticles:input_type -> header.SearchArticleRequest
 	266, // 855: header.KB.AddTopicToArticle:input_type -> header.ArticleTopicRequest
 	266, // 856: header.KB.RemoveTopicFromArticle:input_type -> header.ArticleTopicRequest
@@ -2834,64 +2836,64 @@ var file_service_proto_depIdxs = []int32{
 	275, // 1112: header.AttributeMgr.ListAttributeDefinitions2:output_type -> header.Response
 	78,  // 1113: header.AttributeMgr.CreateAttributeDefinition:output_type -> header.AttributeDefinition
 	78,  // 1114: header.AttributeMgr.UpdateAttributeDefinition:output_type -> header.AttributeDefinition
-	275, // 1115: header.WorkflowMgr.ListWorkflows:output_type -> header.Response
-	275, // 1116: header.WorkflowMgr.UpdateWorkflow:output_type -> header.Response
-	275, // 1117: header.WorkflowMgr.CreateWorkflow:output_type -> header.Response
-	275, // 1118: header.WorkflowMgr.DeleteWorkflow:output_type -> header.Response
-	275, // 1119: header.WorkflowMgr.GetWorkflow:output_type -> header.Response
-	275, // 1120: header.WorkflowMgr.ListWorkflowVersions:output_type -> header.Response
-	275, // 1121: header.WorkflowMgr.StartWorkflowSession:output_type -> header.Response
-	275, // 1122: header.WorkflowMgr.MatchWorkflows:output_type -> header.Response
-	275, // 1123: header.WorkflowMgr.PumpWorkflowSession:output_type -> header.Response
-	275, // 1124: header.WorkflowMgr.GetWorkflowSession:output_type -> header.Response
-	275, // 1125: header.WorkflowMgr.UpdateWorkflowSession:output_type -> header.Response
-	275, // 1126: header.WorkflowMgr.ListWorkflowSessions:output_type -> header.Response
-	275, // 1127: header.WorkflowMgr.ListWorkflowLogs:output_type -> header.Response
-	275, // 1128: header.WorkflowMgr.ReportWorkflow:output_type -> header.Response
-	275, // 1129: header.WorkflowMgr.RunWorkflowAction:output_type -> header.Response
-	275, // 1130: header.WorkflowMgr.ListAIAgents:output_type -> header.Response
-	275, // 1131: header.WorkflowMgr.CreateAIAgent:output_type -> header.Response
-	275, // 1132: header.WorkflowMgr.UpdateAIAgent:output_type -> header.Response
-	275, // 1133: header.WorkflowMgr.GetAIAgent:output_type -> header.Response
-	275, // 1134: header.WorkflowMgr.MatchAIAgent:output_type -> header.Response
-	275, // 1135: header.WorkflowMgr.DeleteAIAgent:output_type -> header.Response
-	52,  // 1136: header.WorkflowMgr.StartAiAgent:output_type -> header.Empty
-	52,  // 1137: header.WorkflowMgr.StopAIAgent:output_type -> header.Empty
-	275, // 1138: header.WorkflowMgr.DeleteAIAgentDataEntry:output_type -> header.Response
-	275, // 1139: header.WorkflowMgr.AddAIAgentDataEntry:output_type -> header.Response
-	275, // 1140: header.WorkflowMgr.ListAIDataFolders:output_type -> header.Response
-	275, // 1141: header.WorkflowMgr.CreateAIDataFolder:output_type -> header.Response
-	275, // 1142: header.WorkflowMgr.UpdateAIDataFolder:output_type -> header.Response
-	52,  // 1143: header.WorkflowMgr.DeleteAIDataFolder:output_type -> header.Empty
-	52,  // 1144: header.WorkflowMgr.RestoreAIDataFolder:output_type -> header.Empty
-	52,  // 1145: header.WorkflowMgr.PurgeAIDataFolder:output_type -> header.Empty
-	275, // 1146: header.WorkflowMgr.SuggestAIDataEntry:output_type -> header.Response
-	275, // 1147: header.WorkflowMgr.CreateAIDataEntry:output_type -> header.Response
-	275, // 1148: header.WorkflowMgr.ListAIDataEntry:output_type -> header.Response
-	275, // 1149: header.WorkflowMgr.GetAIDataEntry:output_type -> header.Response
-	275, // 1150: header.WorkflowMgr.UpdateAIDataEntry:output_type -> header.Response
-	251, // 1151: header.WorkflowMgr.EstimateTrainingCost:output_type -> header.CreditSpendEntry
-	275, // 1152: header.WorkflowMgr.ListAIDataEntryChunks:output_type -> header.Response
-	275, // 1153: header.WorkflowMgr.GetAIDataEntryDocument:output_type -> header.Response
-	275, // 1154: header.WorkflowMgr.PersistAIDataEntryDocument:output_type -> header.Response
-	275, // 1155: header.WorkflowMgr.RetrainAIDataEntry:output_type -> header.Response
-	52,  // 1156: header.WorkflowMgr.DeleteAIDataEntry:output_type -> header.Empty
-	52,  // 1157: header.WorkflowMgr.RestoreAIDataEntry:output_type -> header.Empty
-	52,  // 1158: header.WorkflowMgr.PurgeAIDataEntry:output_type -> header.Empty
-	275, // 1159: header.WorkflowMgr.MatchDataEntries:output_type -> header.Response
-	310, // 1160: header.WorkflowMgr.ReportAIAgent:output_type -> header.AIAgentReportResponse
-	52,  // 1161: header.WorkflowMgr.TryWorkflowAction:output_type -> header.Empty
-	275, // 1162: header.WorkflowMgr.ListAIAgentMessages:output_type -> header.Response
-	275, // 1163: header.WorkflowMgr.ListConvertedLeads:output_type -> header.Response
-	275, // 1164: header.WorkflowMgr.GetAIResponseTrace:output_type -> header.Response
-	275, // 1165: header.WorkflowMgr.RunAIAgentTest:output_type -> header.Response
-	275, // 1166: header.WorkflowMgr.ListAIAgentTestResults:output_type -> header.Response
-	275, // 1167: header.WorkflowMgr.GetAIAgentTestResult:output_type -> header.Response
-	275, // 1168: header.WorkflowMgr.CancelAIAgentTest:output_type -> header.Response
-	275, // 1169: header.WorkflowMgr.CreateAIAgentTestcase:output_type -> header.Response
-	275, // 1170: header.WorkflowMgr.UpdateAIAgentTestcase:output_type -> header.Response
-	275, // 1171: header.WorkflowMgr.DeleteAIAgentTestcase:output_type -> header.Response
-	275, // 1172: header.WorkflowMgr.ListAIAgentTestcases:output_type -> header.Response
+	275, // 1115: header.ChatbotMgr.ListAIAgents:output_type -> header.Response
+	275, // 1116: header.ChatbotMgr.CreateAIAgent:output_type -> header.Response
+	275, // 1117: header.ChatbotMgr.UpdateAIAgent:output_type -> header.Response
+	275, // 1118: header.ChatbotMgr.GetAIAgent:output_type -> header.Response
+	275, // 1119: header.ChatbotMgr.MatchAIAgent:output_type -> header.Response
+	275, // 1120: header.ChatbotMgr.DeleteAIAgent:output_type -> header.Response
+	52,  // 1121: header.ChatbotMgr.StartAiAgent:output_type -> header.Empty
+	52,  // 1122: header.ChatbotMgr.StopAIAgent:output_type -> header.Empty
+	275, // 1123: header.ChatbotMgr.DeleteAIAgentDataEntry:output_type -> header.Response
+	275, // 1124: header.ChatbotMgr.AddAIAgentDataEntry:output_type -> header.Response
+	275, // 1125: header.ChatbotMgr.ListAIDataFolders:output_type -> header.Response
+	275, // 1126: header.ChatbotMgr.CreateAIDataFolder:output_type -> header.Response
+	275, // 1127: header.ChatbotMgr.UpdateAIDataFolder:output_type -> header.Response
+	52,  // 1128: header.ChatbotMgr.DeleteAIDataFolder:output_type -> header.Empty
+	52,  // 1129: header.ChatbotMgr.RestoreAIDataFolder:output_type -> header.Empty
+	52,  // 1130: header.ChatbotMgr.PurgeAIDataFolder:output_type -> header.Empty
+	275, // 1131: header.ChatbotMgr.SuggestAIDataEntry:output_type -> header.Response
+	275, // 1132: header.ChatbotMgr.CreateAIDataEntry:output_type -> header.Response
+	275, // 1133: header.ChatbotMgr.ListAIDataEntry:output_type -> header.Response
+	275, // 1134: header.ChatbotMgr.GetAIDataEntry:output_type -> header.Response
+	275, // 1135: header.ChatbotMgr.UpdateAIDataEntry:output_type -> header.Response
+	251, // 1136: header.ChatbotMgr.EstimateTrainingCost:output_type -> header.CreditSpendEntry
+	275, // 1137: header.ChatbotMgr.ListAIDataEntryChunks:output_type -> header.Response
+	275, // 1138: header.ChatbotMgr.GetAIDataEntryDocument:output_type -> header.Response
+	275, // 1139: header.ChatbotMgr.PersistAIDataEntryDocument:output_type -> header.Response
+	275, // 1140: header.ChatbotMgr.RetrainAIDataEntry:output_type -> header.Response
+	52,  // 1141: header.ChatbotMgr.DeleteAIDataEntry:output_type -> header.Empty
+	52,  // 1142: header.ChatbotMgr.RestoreAIDataEntry:output_type -> header.Empty
+	52,  // 1143: header.ChatbotMgr.PurgeAIDataEntry:output_type -> header.Empty
+	275, // 1144: header.ChatbotMgr.MatchDataEntries:output_type -> header.Response
+	310, // 1145: header.ChatbotMgr.ReportAIAgent:output_type -> header.AIAgentReportResponse
+	275, // 1146: header.ChatbotMgr.ListAIAgentMessages:output_type -> header.Response
+	275, // 1147: header.ChatbotMgr.ListConvertedLeads:output_type -> header.Response
+	275, // 1148: header.ChatbotMgr.GetAIResponseTrace:output_type -> header.Response
+	275, // 1149: header.ChatbotMgr.RunAIAgentTest:output_type -> header.Response
+	275, // 1150: header.ChatbotMgr.ListAIAgentTestResults:output_type -> header.Response
+	275, // 1151: header.ChatbotMgr.GetAIAgentTestResult:output_type -> header.Response
+	275, // 1152: header.ChatbotMgr.CancelAIAgentTest:output_type -> header.Response
+	275, // 1153: header.ChatbotMgr.CreateAIAgentTestcase:output_type -> header.Response
+	275, // 1154: header.ChatbotMgr.UpdateAIAgentTestcase:output_type -> header.Response
+	275, // 1155: header.ChatbotMgr.DeleteAIAgentTestcase:output_type -> header.Response
+	275, // 1156: header.ChatbotMgr.ListAIAgentTestcases:output_type -> header.Response
+	275, // 1157: header.WorkflowMgr.ListWorkflows:output_type -> header.Response
+	275, // 1158: header.WorkflowMgr.UpdateWorkflow:output_type -> header.Response
+	275, // 1159: header.WorkflowMgr.CreateWorkflow:output_type -> header.Response
+	275, // 1160: header.WorkflowMgr.DeleteWorkflow:output_type -> header.Response
+	275, // 1161: header.WorkflowMgr.GetWorkflow:output_type -> header.Response
+	275, // 1162: header.WorkflowMgr.ListWorkflowVersions:output_type -> header.Response
+	275, // 1163: header.WorkflowMgr.StartWorkflowSession:output_type -> header.Response
+	275, // 1164: header.WorkflowMgr.MatchWorkflows:output_type -> header.Response
+	275, // 1165: header.WorkflowMgr.PumpWorkflowSession:output_type -> header.Response
+	275, // 1166: header.WorkflowMgr.GetWorkflowSession:output_type -> header.Response
+	275, // 1167: header.WorkflowMgr.UpdateWorkflowSession:output_type -> header.Response
+	275, // 1168: header.WorkflowMgr.ListWorkflowSessions:output_type -> header.Response
+	275, // 1169: header.WorkflowMgr.ListWorkflowLogs:output_type -> header.Response
+	275, // 1170: header.WorkflowMgr.ReportWorkflow:output_type -> header.Response
+	275, // 1171: header.WorkflowMgr.RunWorkflowAction:output_type -> header.Response
+	52,  // 1172: header.WorkflowMgr.TryWorkflowAction:output_type -> header.Empty
 	275, // 1173: header.SenAgentMgr.ListSenAgents:output_type -> header.Response
 	275, // 1174: header.SenAgentMgr.CreateSenAgent:output_type -> header.Response
 	275, // 1175: header.SenAgentMgr.UpdateSenAgent:output_type -> header.Response
@@ -3513,7 +3515,7 @@ func file_service_proto_init() {
 			NumEnums:      0,
 			NumMessages:   0,
 			NumExtensions: 0,
-			NumServices:   47,
+			NumServices:   48,
 		},
 		GoTypes:           file_service_proto_goTypes,
 		DependencyIndexes: file_service_proto_depIdxs,

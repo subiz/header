@@ -332,25 +332,7 @@ service AttributeMgr {
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 }
 
-service WorkflowMgr {
-	rpc ListWorkflows(Id) returns (Response);
-	rpc UpdateWorkflow(Workflow) returns (Response);
-	rpc CreateWorkflow(Workflow) returns (Response);
-	rpc DeleteWorkflow(Id) returns (Response);
-	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
-
-	rpc ListWorkflowVersions(ListVersions) returns (Response); // workflows
-	rpc StartWorkflowSession(StartWorkflowSessionRequest) returns (Response); // workflow_session
-	rpc MatchWorkflows(Ids) returns (Response);
-	rpc PumpWorkflowSession(WorkflowPulse) returns (Response); // save stuck session
-	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
-	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
-	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);
-
-	rpc ListWorkflowLogs(ListWorkflowLogRequest) returns (Response); // workflow_log
-	rpc ReportWorkflow(WorkflowReportRequest) returns (Response); // workflow_counts
-	rpc RunWorkflowAction(RunWorkflowActionRequest) returns (Response);
-
+service ChatbotMgr {
 	rpc ListAIAgents(Id) returns (Response);
 	rpc CreateAIAgent(AIAgent) returns (Response);
 	rpc UpdateAIAgent(AIAgent) returns (Response);
@@ -392,8 +374,6 @@ service WorkflowMgr {
 
 	rpc ReportAIAgent(ReportAIAgentRequest) returns (AIAgentReportResponse);
 
-	rpc TryWorkflowAction(header.StartWorkflowSessionRequest) returns (Empty);
-
 	rpc ListAIAgentMessages(ListAIAgentMessageRequest) returns (Response);
 	rpc ListConvertedLeads(ReportAIAgentRequest) returns (Response);
 
@@ -408,6 +388,28 @@ service WorkflowMgr {
 	rpc UpdateAIAgentTestcase(AIAgentTestcase) returns (Response);
 	rpc DeleteAIAgentTestcase(AIAgentTestcase) returns (Response);
 	rpc ListAIAgentTestcases(Id) returns (Response);
+}
+
+service WorkflowMgr {
+	rpc ListWorkflows(Id) returns (Response);
+	rpc UpdateWorkflow(Workflow) returns (Response);
+	rpc CreateWorkflow(Workflow) returns (Response);
+	rpc DeleteWorkflow(Id) returns (Response);
+	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
+
+	rpc ListWorkflowVersions(ListVersions) returns (Response); // workflows
+	rpc StartWorkflowSession(StartWorkflowSessionRequest) returns (Response); // workflow_session
+	rpc MatchWorkflows(Ids) returns (Response);
+	rpc PumpWorkflowSession(WorkflowPulse) returns (Response); // save stuck session
+	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
+	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
+	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);
+
+	rpc ListWorkflowLogs(ListWorkflowLogRequest) returns (Response); // workflow_log
+	rpc ReportWorkflow(WorkflowReportRequest) returns (Response); // workflow_counts
+	rpc RunWorkflowAction(RunWorkflowActionRequest) returns (Response);
+
+	rpc TryWorkflowAction(header.StartWorkflowSessionRequest) returns (Empty);
 }
 
 service SenAgentMgr {
