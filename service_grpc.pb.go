@@ -33262,25 +33262,27 @@ var Speex_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CampaignMgr_AutoMappingZBSCampaign_FullMethodName  = "/header.CampaignMgr/AutoMappingZBSCampaign"
-	CampaignMgr_CheckCampaign_FullMethodName           = "/header.CampaignMgr/CheckCampaign"
-	CampaignMgr_ListCampaigns_FullMethodName           = "/header.CampaignMgr/ListCampaigns"
-	CampaignMgr_ReadCampaign_FullMethodName            = "/header.CampaignMgr/ReadCampaign"
-	CampaignMgr_CreateCampaign_FullMethodName          = "/header.CampaignMgr/CreateCampaign"
-	CampaignMgr_UpdateCampaign_FullMethodName          = "/header.CampaignMgr/UpdateCampaign"
-	CampaignMgr_MatchCampaigns_FullMethodName          = "/header.CampaignMgr/MatchCampaigns"
-	CampaignMgr_DeleteCampaign_FullMethodName          = "/header.CampaignMgr/DeleteCampaign"
-	CampaignMgr_OnEvent_FullMethodName                 = "/header.CampaignMgr/OnEvent"
-	CampaignMgr_ListCampaignSendLog_FullMethodName     = "/header.CampaignMgr/ListCampaignSendLog"
-	CampaignMgr_ReportBroadcastCampaign_FullMethodName = "/header.CampaignMgr/ReportBroadcastCampaign"
-	CampaignMgr_ListOutboundCallEntries_FullMethodName = "/header.CampaignMgr/ListOutboundCallEntries"
-	CampaignMgr_UpdateOutboundCall_FullMethodName      = "/header.CampaignMgr/UpdateOutboundCall"
-	CampaignMgr_ImportOutboundCall_FullMethodName      = "/header.CampaignMgr/ImportOutboundCall"
-	CampaignMgr_GetOutboundCall_FullMethodName         = "/header.CampaignMgr/GetOutboundCall"
-	CampaignMgr_RemoveOutboudCall_FullMethodName       = "/header.CampaignMgr/RemoveOutboudCall"
-	CampaignMgr_ReportOutboundCalls_FullMethodName     = "/header.CampaignMgr/ReportOutboundCalls"
-	CampaignMgr_ReassignOutboundCall_FullMethodName    = "/header.CampaignMgr/ReassignOutboundCall"
-	CampaignMgr_SendTestMessage_FullMethodName         = "/header.CampaignMgr/SendTestMessage"
+	CampaignMgr_AutoMappingZBSCampaign_FullMethodName      = "/header.CampaignMgr/AutoMappingZBSCampaign"
+	CampaignMgr_CheckCampaign_FullMethodName               = "/header.CampaignMgr/CheckCampaign"
+	CampaignMgr_ListCampaigns_FullMethodName               = "/header.CampaignMgr/ListCampaigns"
+	CampaignMgr_ReadCampaign_FullMethodName                = "/header.CampaignMgr/ReadCampaign"
+	CampaignMgr_CreateCampaign_FullMethodName              = "/header.CampaignMgr/CreateCampaign"
+	CampaignMgr_UpdateCampaign_FullMethodName              = "/header.CampaignMgr/UpdateCampaign"
+	CampaignMgr_MatchCampaigns_FullMethodName              = "/header.CampaignMgr/MatchCampaigns"
+	CampaignMgr_DeleteCampaign_FullMethodName              = "/header.CampaignMgr/DeleteCampaign"
+	CampaignMgr_OnEvent_FullMethodName                     = "/header.CampaignMgr/OnEvent"
+	CampaignMgr_ListCampaignSendLog_FullMethodName         = "/header.CampaignMgr/ListCampaignSendLog"
+	CampaignMgr_ReportBroadcastCampaign_FullMethodName     = "/header.CampaignMgr/ReportBroadcastCampaign"
+	CampaignMgr_PollChromeExtensionCommand_FullMethodName  = "/header.CampaignMgr/PollChromeExtensionCommand"
+	CampaignMgr_ReportChomeExtensionCommand_FullMethodName = "/header.CampaignMgr/ReportChomeExtensionCommand"
+	CampaignMgr_ListOutboundCallEntries_FullMethodName     = "/header.CampaignMgr/ListOutboundCallEntries"
+	CampaignMgr_UpdateOutboundCall_FullMethodName          = "/header.CampaignMgr/UpdateOutboundCall"
+	CampaignMgr_ImportOutboundCall_FullMethodName          = "/header.CampaignMgr/ImportOutboundCall"
+	CampaignMgr_GetOutboundCall_FullMethodName             = "/header.CampaignMgr/GetOutboundCall"
+	CampaignMgr_RemoveOutboudCall_FullMethodName           = "/header.CampaignMgr/RemoveOutboudCall"
+	CampaignMgr_ReportOutboundCalls_FullMethodName         = "/header.CampaignMgr/ReportOutboundCalls"
+	CampaignMgr_ReassignOutboundCall_FullMethodName        = "/header.CampaignMgr/ReassignOutboundCall"
+	CampaignMgr_SendTestMessage_FullMethodName             = "/header.CampaignMgr/SendTestMessage"
 )
 
 // CampaignMgrClient is the client API for CampaignMgr service.
@@ -33298,6 +33300,8 @@ type CampaignMgrClient interface {
 	OnEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error)
 	ListCampaignSendLog(ctx context.Context, in *CampaignSendLogRequest, opts ...grpc.CallOption) (*CampaignSendLog, error)
 	ReportBroadcastCampaign(ctx context.Context, in *Id, opts ...grpc.CallOption) (*BroadcastCampaignMetrics, error)
+	PollChromeExtensionCommand(ctx context.Context, in *PollChromeExtensionCommandRequest, opts ...grpc.CallOption) (*Response, error)
+	ReportChomeExtensionCommand(ctx context.Context, in *ReportChromeExtensionCommandRequest, opts ...grpc.CallOption) (*Response, error)
 	ListOutboundCallEntries(ctx context.Context, in *ListOutboundCallRequest, opts ...grpc.CallOption) (*OutboundCallEntries, error)
 	UpdateOutboundCall(ctx context.Context, in *OutboundCallEntry, opts ...grpc.CallOption) (*OutboundCallEntry, error)
 	ImportOutboundCall(ctx context.Context, in *ImportOutboundCallEntryRequest, opts ...grpc.CallOption) (*ImportOutboundCallEntryResponse, error)
@@ -33426,6 +33430,26 @@ func (c *campaignMgrClient) ReportBroadcastCampaign(ctx context.Context, in *Id,
 	return out, nil
 }
 
+func (c *campaignMgrClient) PollChromeExtensionCommand(ctx context.Context, in *PollChromeExtensionCommandRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CampaignMgr_PollChromeExtensionCommand_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *campaignMgrClient) ReportChomeExtensionCommand(ctx context.Context, in *ReportChromeExtensionCommandRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, CampaignMgr_ReportChomeExtensionCommand_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *campaignMgrClient) ListOutboundCallEntries(ctx context.Context, in *ListOutboundCallRequest, opts ...grpc.CallOption) (*OutboundCallEntries, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(OutboundCallEntries)
@@ -33521,6 +33545,8 @@ type CampaignMgrServer interface {
 	OnEvent(context.Context, *Event) (*Empty, error)
 	ListCampaignSendLog(context.Context, *CampaignSendLogRequest) (*CampaignSendLog, error)
 	ReportBroadcastCampaign(context.Context, *Id) (*BroadcastCampaignMetrics, error)
+	PollChromeExtensionCommand(context.Context, *PollChromeExtensionCommandRequest) (*Response, error)
+	ReportChomeExtensionCommand(context.Context, *ReportChromeExtensionCommandRequest) (*Response, error)
 	ListOutboundCallEntries(context.Context, *ListOutboundCallRequest) (*OutboundCallEntries, error)
 	UpdateOutboundCall(context.Context, *OutboundCallEntry) (*OutboundCallEntry, error)
 	ImportOutboundCall(context.Context, *ImportOutboundCallEntryRequest) (*ImportOutboundCallEntryResponse, error)
@@ -33571,6 +33597,12 @@ func (UnimplementedCampaignMgrServer) ListCampaignSendLog(context.Context, *Camp
 }
 func (UnimplementedCampaignMgrServer) ReportBroadcastCampaign(context.Context, *Id) (*BroadcastCampaignMetrics, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReportBroadcastCampaign not implemented")
+}
+func (UnimplementedCampaignMgrServer) PollChromeExtensionCommand(context.Context, *PollChromeExtensionCommandRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PollChromeExtensionCommand not implemented")
+}
+func (UnimplementedCampaignMgrServer) ReportChomeExtensionCommand(context.Context, *ReportChromeExtensionCommandRequest) (*Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReportChomeExtensionCommand not implemented")
 }
 func (UnimplementedCampaignMgrServer) ListOutboundCallEntries(context.Context, *ListOutboundCallRequest) (*OutboundCallEntries, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOutboundCallEntries not implemented")
@@ -33815,6 +33847,42 @@ func _CampaignMgr_ReportBroadcastCampaign_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CampaignMgr_PollChromeExtensionCommand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollChromeExtensionCommandRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CampaignMgrServer).PollChromeExtensionCommand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CampaignMgr_PollChromeExtensionCommand_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CampaignMgrServer).PollChromeExtensionCommand(ctx, req.(*PollChromeExtensionCommandRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CampaignMgr_ReportChomeExtensionCommand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportChromeExtensionCommandRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CampaignMgrServer).ReportChomeExtensionCommand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CampaignMgr_ReportChomeExtensionCommand_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CampaignMgrServer).ReportChomeExtensionCommand(ctx, req.(*ReportChromeExtensionCommandRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CampaignMgr_ListOutboundCallEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListOutboundCallRequest)
 	if err := dec(in); err != nil {
@@ -34009,6 +34077,14 @@ var CampaignMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportBroadcastCampaign",
 			Handler:    _CampaignMgr_ReportBroadcastCampaign_Handler,
+		},
+		{
+			MethodName: "PollChromeExtensionCommand",
+			Handler:    _CampaignMgr_PollChromeExtensionCommand_Handler,
+		},
+		{
+			MethodName: "ReportChomeExtensionCommand",
+			Handler:    _CampaignMgr_ReportChomeExtensionCommand_Handler,
 		},
 		{
 			MethodName: "ListOutboundCallEntries",

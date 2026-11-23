@@ -1191,6 +1191,8 @@ service CampaignMgr {
 	rpc OnEvent(Event) returns (Empty);
 	rpc ListCampaignSendLog(CampaignSendLogRequest) returns (CampaignSendLog);
 	rpc ReportBroadcastCampaign(Id) returns (BroadcastCampaignMetrics);
+	rpc PollChromeExtensionCommand(PollChromeExtensionCommandRequest) returns (Response);
+	rpc ReportChomeExtensionCommand(ReportChromeExtensionCommandRequest) returns (Response);
 
 	rpc ListOutboundCallEntries(ListOutboundCallRequest) returns (OutboundCallEntries);
 	rpc UpdateOutboundCall(OutboundCallEntry) returns (OutboundCallEntry);

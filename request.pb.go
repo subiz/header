@@ -164,6 +164,64 @@ func (AvailibilityReportRequest_Range) EnumDescriptor() ([]byte, []int) {
 	return file_request_proto_rawDescGZIP(), []int{29, 0}
 }
 
+type ReportChromeExtensionCommandRequest_Outcome int32
+
+const (
+	ReportChromeExtensionCommandRequest_unspecified        ReportChromeExtensionCommandRequest_Outcome = 0
+	ReportChromeExtensionCommandRequest_sent               ReportChromeExtensionCommandRequest_Outcome = 1 // Meta confirmed the send
+	ReportChromeExtensionCommandRequest_worker_unavailable ReportChromeExtensionCommandRequest_Outcome = 2 // before send, return to queue without consuming a retry
+	ReportChromeExtensionCommandRequest_retryable_failure  ReportChromeExtensionCommandRequest_Outcome = 3 // confirmed unsent
+	ReportChromeExtensionCommandRequest_permanent_failure  ReportChromeExtensionCommandRequest_Outcome = 4
+	ReportChromeExtensionCommandRequest_unknown_after_send ReportChromeExtensionCommandRequest_Outcome = 5 // reconcile before another send
+)
+
+// Enum value maps for ReportChromeExtensionCommandRequest_Outcome.
+var (
+	ReportChromeExtensionCommandRequest_Outcome_name = map[int32]string{
+		0: "unspecified",
+		1: "sent",
+		2: "worker_unavailable",
+		3: "retryable_failure",
+		4: "permanent_failure",
+		5: "unknown_after_send",
+	}
+	ReportChromeExtensionCommandRequest_Outcome_value = map[string]int32{
+		"unspecified":        0,
+		"sent":               1,
+		"worker_unavailable": 2,
+		"retryable_failure":  3,
+		"permanent_failure":  4,
+		"unknown_after_send": 5,
+	}
+)
+
+func (x ReportChromeExtensionCommandRequest_Outcome) Enum() *ReportChromeExtensionCommandRequest_Outcome {
+	p := new(ReportChromeExtensionCommandRequest_Outcome)
+	*p = x
+	return p
+}
+
+func (x ReportChromeExtensionCommandRequest_Outcome) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ReportChromeExtensionCommandRequest_Outcome) Descriptor() protoreflect.EnumDescriptor {
+	return file_request_proto_enumTypes[3].Descriptor()
+}
+
+func (ReportChromeExtensionCommandRequest_Outcome) Type() protoreflect.EnumType {
+	return &file_request_proto_enumTypes[3]
+}
+
+func (x ReportChromeExtensionCommandRequest_Outcome) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ReportChromeExtensionCommandRequest_Outcome.Descriptor instead.
+func (ReportChromeExtensionCommandRequest_Outcome) EnumDescriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{59, 0}
+}
+
 type TagRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Ctx            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -6747,6 +6805,192 @@ func (x *ListAIDataEntryRequest) GetTrash() bool {
 	return false
 }
 
+type PollChromeExtensionCommandRequest struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WorkerId  string                 `protobuf:"bytes,3,opt,name=worker_id,json=workerId,proto3" json:"worker_id,omitempty"` // stable per extension installation
+	// A poll is also a heartbeat. Only ready workers may receive a command.
+	MetaState string `protobuf:"bytes,4,opt,name=meta_state,json=metaState,proto3" json:"meta_state,omitempty"` // ready, logged_out, reauth
+	// Pages with a usable inbox in the current Meta session. Empty means none.
+	ReadyPageIds  []string `protobuf:"bytes,5,rep,name=ready_page_ids,json=readyPageIds,proto3" json:"ready_page_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PollChromeExtensionCommandRequest) Reset() {
+	*x = PollChromeExtensionCommandRequest{}
+	mi := &file_request_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PollChromeExtensionCommandRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PollChromeExtensionCommandRequest) ProtoMessage() {}
+
+func (x *PollChromeExtensionCommandRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PollChromeExtensionCommandRequest.ProtoReflect.Descriptor instead.
+func (*PollChromeExtensionCommandRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *PollChromeExtensionCommandRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *PollChromeExtensionCommandRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *PollChromeExtensionCommandRequest) GetWorkerId() string {
+	if x != nil {
+		return x.WorkerId
+	}
+	return ""
+}
+
+func (x *PollChromeExtensionCommandRequest) GetMetaState() string {
+	if x != nil {
+		return x.MetaState
+	}
+	return ""
+}
+
+func (x *PollChromeExtensionCommandRequest) GetReadyPageIds() []string {
+	if x != nil {
+		return x.ReadyPageIds
+	}
+	return nil
+}
+
+type ReportChromeExtensionCommandRequest struct {
+	state         protoimpl.MessageState                      `protogen:"open.v1"`
+	Ctx           *common.Context                             `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId     string                                      `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AgentId       string                                      `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	WorkerId      string                                      `protobuf:"bytes,4,opt,name=worker_id,json=workerId,proto3" json:"worker_id,omitempty"`
+	CommandId     string                                      `protobuf:"bytes,5,opt,name=command_id,json=commandId,proto3" json:"command_id,omitempty"`
+	LeaseId       string                                      `protobuf:"bytes,6,opt,name=lease_id,json=leaseId,proto3" json:"lease_id,omitempty"`
+	Outcome       ReportChromeExtensionCommandRequest_Outcome `protobuf:"varint,7,opt,name=outcome,proto3,enum=header.ReportChromeExtensionCommandRequest_Outcome" json:"outcome,omitempty"`
+	MetaMessageId string                                      `protobuf:"bytes,8,opt,name=meta_message_id,json=metaMessageId,proto3" json:"meta_message_id,omitempty"` // required for sent
+	ErrorCode     string                                      `protobuf:"bytes,9,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportChromeExtensionCommandRequest) Reset() {
+	*x = ReportChromeExtensionCommandRequest{}
+	mi := &file_request_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportChromeExtensionCommandRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportChromeExtensionCommandRequest) ProtoMessage() {}
+
+func (x *ReportChromeExtensionCommandRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportChromeExtensionCommandRequest.ProtoReflect.Descriptor instead.
+func (*ReportChromeExtensionCommandRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
+	}
+	return ""
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetWorkerId() string {
+	if x != nil {
+		return x.WorkerId
+	}
+	return ""
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetCommandId() string {
+	if x != nil {
+		return x.CommandId
+	}
+	return ""
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetLeaseId() string {
+	if x != nil {
+		return x.LeaseId
+	}
+	return ""
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetOutcome() ReportChromeExtensionCommandRequest_Outcome {
+	if x != nil {
+		return x.Outcome
+	}
+	return ReportChromeExtensionCommandRequest_unspecified
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetMetaMessageId() string {
+	if x != nil {
+		return x.MetaMessageId
+	}
+	return ""
+}
+
+func (x *ReportChromeExtensionCommandRequest) GetErrorCode() string {
+	if x != nil {
+		return x.ErrorCode
+	}
+	return ""
+}
+
 type CampaignSendLogRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Ctx            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
@@ -6770,7 +7014,7 @@ type CampaignSendLogRequest struct {
 
 func (x *CampaignSendLogRequest) Reset() {
 	*x = CampaignSendLogRequest{}
-	mi := &file_request_proto_msgTypes[58]
+	mi := &file_request_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6782,7 +7026,7 @@ func (x *CampaignSendLogRequest) String() string {
 func (*CampaignSendLogRequest) ProtoMessage() {}
 
 func (x *CampaignSendLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[58]
+	mi := &file_request_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6795,7 +7039,7 @@ func (x *CampaignSendLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CampaignSendLogRequest.ProtoReflect.Descriptor instead.
 func (*CampaignSendLogRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{58}
+	return file_request_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *CampaignSendLogRequest) GetCtx() *common.Context {
@@ -6918,7 +7162,7 @@ type AiQnaSuggestionRequest struct {
 
 func (x *AiQnaSuggestionRequest) Reset() {
 	*x = AiQnaSuggestionRequest{}
-	mi := &file_request_proto_msgTypes[59]
+	mi := &file_request_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6930,7 +7174,7 @@ func (x *AiQnaSuggestionRequest) String() string {
 func (*AiQnaSuggestionRequest) ProtoMessage() {}
 
 func (x *AiQnaSuggestionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[59]
+	mi := &file_request_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6943,7 +7187,7 @@ func (x *AiQnaSuggestionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AiQnaSuggestionRequest.ProtoReflect.Descriptor instead.
 func (*AiQnaSuggestionRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{59}
+	return file_request_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *AiQnaSuggestionRequest) GetCtx() *common.Context {
@@ -7006,7 +7250,7 @@ type AiResponseSourceRequest struct {
 
 func (x *AiResponseSourceRequest) Reset() {
 	*x = AiResponseSourceRequest{}
-	mi := &file_request_proto_msgTypes[60]
+	mi := &file_request_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7018,7 +7262,7 @@ func (x *AiResponseSourceRequest) String() string {
 func (*AiResponseSourceRequest) ProtoMessage() {}
 
 func (x *AiResponseSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[60]
+	mi := &file_request_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7031,7 +7275,7 @@ func (x *AiResponseSourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AiResponseSourceRequest.ProtoReflect.Descriptor instead.
 func (*AiResponseSourceRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{60}
+	return file_request_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *AiResponseSourceRequest) GetCtx() *common.Context {
@@ -7072,7 +7316,7 @@ type FacebookPostRequest struct {
 
 func (x *FacebookPostRequest) Reset() {
 	*x = FacebookPostRequest{}
-	mi := &file_request_proto_msgTypes[61]
+	mi := &file_request_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7084,7 +7328,7 @@ func (x *FacebookPostRequest) String() string {
 func (*FacebookPostRequest) ProtoMessage() {}
 
 func (x *FacebookPostRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[61]
+	mi := &file_request_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7097,7 +7341,7 @@ func (x *FacebookPostRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FacebookPostRequest.ProtoReflect.Descriptor instead.
 func (*FacebookPostRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{61}
+	return file_request_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *FacebookPostRequest) GetCtx() *common.Context {
@@ -7179,7 +7423,7 @@ type TiktokVideoRequest struct {
 
 func (x *TiktokVideoRequest) Reset() {
 	*x = TiktokVideoRequest{}
-	mi := &file_request_proto_msgTypes[62]
+	mi := &file_request_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7191,7 +7435,7 @@ func (x *TiktokVideoRequest) String() string {
 func (*TiktokVideoRequest) ProtoMessage() {}
 
 func (x *TiktokVideoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[62]
+	mi := &file_request_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7204,7 +7448,7 @@ func (x *TiktokVideoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TiktokVideoRequest.ProtoReflect.Descriptor instead.
 func (*TiktokVideoRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{62}
+	return file_request_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *TiktokVideoRequest) GetCtx() *common.Context {
@@ -7279,7 +7523,7 @@ type YoutubeVideoRequest struct {
 
 func (x *YoutubeVideoRequest) Reset() {
 	*x = YoutubeVideoRequest{}
-	mi := &file_request_proto_msgTypes[63]
+	mi := &file_request_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7291,7 +7535,7 @@ func (x *YoutubeVideoRequest) String() string {
 func (*YoutubeVideoRequest) ProtoMessage() {}
 
 func (x *YoutubeVideoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[63]
+	mi := &file_request_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7304,7 +7548,7 @@ func (x *YoutubeVideoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use YoutubeVideoRequest.ProtoReflect.Descriptor instead.
 func (*YoutubeVideoRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{63}
+	return file_request_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *YoutubeVideoRequest) GetCtx() *common.Context {
@@ -7379,7 +7623,7 @@ type ListRuleRequest struct {
 
 func (x *ListRuleRequest) Reset() {
 	*x = ListRuleRequest{}
-	mi := &file_request_proto_msgTypes[64]
+	mi := &file_request_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7391,7 +7635,7 @@ func (x *ListRuleRequest) String() string {
 func (*ListRuleRequest) ProtoMessage() {}
 
 func (x *ListRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[64]
+	mi := &file_request_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7404,7 +7648,7 @@ func (x *ListRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRuleRequest.ProtoReflect.Descriptor instead.
 func (*ListRuleRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{64}
+	return file_request_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *ListRuleRequest) GetCtx() *common.Context {
@@ -7479,7 +7723,7 @@ type ListZNSTemplateRequest struct {
 
 func (x *ListZNSTemplateRequest) Reset() {
 	*x = ListZNSTemplateRequest{}
-	mi := &file_request_proto_msgTypes[65]
+	mi := &file_request_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7491,7 +7735,7 @@ func (x *ListZNSTemplateRequest) String() string {
 func (*ListZNSTemplateRequest) ProtoMessage() {}
 
 func (x *ListZNSTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[65]
+	mi := &file_request_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7504,7 +7748,7 @@ func (x *ListZNSTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListZNSTemplateRequest.ProtoReflect.Descriptor instead.
 func (*ListZNSTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{65}
+	return file_request_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *ListZNSTemplateRequest) GetCtx() *common.Context {
@@ -7577,7 +7821,7 @@ type ListEmailSignatureRequest struct {
 
 func (x *ListEmailSignatureRequest) Reset() {
 	*x = ListEmailSignatureRequest{}
-	mi := &file_request_proto_msgTypes[66]
+	mi := &file_request_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7589,7 +7833,7 @@ func (x *ListEmailSignatureRequest) String() string {
 func (*ListEmailSignatureRequest) ProtoMessage() {}
 
 func (x *ListEmailSignatureRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[66]
+	mi := &file_request_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7602,7 +7846,7 @@ func (x *ListEmailSignatureRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEmailSignatureRequest.ProtoReflect.Descriptor instead.
 func (*ListEmailSignatureRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{66}
+	return file_request_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *ListEmailSignatureRequest) GetCtx() *common.Context {
@@ -7669,7 +7913,7 @@ type CreditSpendReportRequest struct {
 
 func (x *CreditSpendReportRequest) Reset() {
 	*x = CreditSpendReportRequest{}
-	mi := &file_request_proto_msgTypes[67]
+	mi := &file_request_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7681,7 +7925,7 @@ func (x *CreditSpendReportRequest) String() string {
 func (*CreditSpendReportRequest) ProtoMessage() {}
 
 func (x *CreditSpendReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[67]
+	mi := &file_request_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7694,7 +7938,7 @@ func (x *CreditSpendReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditSpendReportRequest.ProtoReflect.Descriptor instead.
 func (*CreditSpendReportRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{67}
+	return file_request_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *CreditSpendReportRequest) GetCtx() *common.Context {
@@ -7816,7 +8060,7 @@ type CreditSpendLogRequest struct {
 
 func (x *CreditSpendLogRequest) Reset() {
 	*x = CreditSpendLogRequest{}
-	mi := &file_request_proto_msgTypes[68]
+	mi := &file_request_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7828,7 +8072,7 @@ func (x *CreditSpendLogRequest) String() string {
 func (*CreditSpendLogRequest) ProtoMessage() {}
 
 func (x *CreditSpendLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[68]
+	mi := &file_request_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7841,7 +8085,7 @@ func (x *CreditSpendLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditSpendLogRequest.ProtoReflect.Descriptor instead.
 func (*CreditSpendLogRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{68}
+	return file_request_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *CreditSpendLogRequest) GetCtx() *common.Context {
@@ -7949,7 +8193,7 @@ type LLMSpansRequest2 struct {
 
 func (x *LLMSpansRequest2) Reset() {
 	*x = LLMSpansRequest2{}
-	mi := &file_request_proto_msgTypes[69]
+	mi := &file_request_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7961,7 +8205,7 @@ func (x *LLMSpansRequest2) String() string {
 func (*LLMSpansRequest2) ProtoMessage() {}
 
 func (x *LLMSpansRequest2) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[69]
+	mi := &file_request_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7974,7 +8218,7 @@ func (x *LLMSpansRequest2) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMSpansRequest2.ProtoReflect.Descriptor instead.
 func (*LLMSpansRequest2) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{69}
+	return file_request_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *LLMSpansRequest2) GetCtx() *common.Context {
@@ -8031,7 +8275,7 @@ type AIAgentTraceRequest struct {
 
 func (x *AIAgentTraceRequest) Reset() {
 	*x = AIAgentTraceRequest{}
-	mi := &file_request_proto_msgTypes[70]
+	mi := &file_request_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8043,7 +8287,7 @@ func (x *AIAgentTraceRequest) String() string {
 func (*AIAgentTraceRequest) ProtoMessage() {}
 
 func (x *AIAgentTraceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[70]
+	mi := &file_request_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8056,7 +8300,7 @@ func (x *AIAgentTraceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentTraceRequest.ProtoReflect.Descriptor instead.
 func (*AIAgentTraceRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{70}
+	return file_request_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *AIAgentTraceRequest) GetCtx() *common.Context {
@@ -8103,7 +8347,7 @@ type LLMTracesRequest struct {
 
 func (x *LLMTracesRequest) Reset() {
 	*x = LLMTracesRequest{}
-	mi := &file_request_proto_msgTypes[71]
+	mi := &file_request_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8115,7 +8359,7 @@ func (x *LLMTracesRequest) String() string {
 func (*LLMTracesRequest) ProtoMessage() {}
 
 func (x *LLMTracesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[71]
+	mi := &file_request_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8128,7 +8372,7 @@ func (x *LLMTracesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LLMTracesRequest.ProtoReflect.Descriptor instead.
 func (*LLMTracesRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{71}
+	return file_request_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *LLMTracesRequest) GetCtx() *common.Context {
@@ -8200,7 +8444,7 @@ type SuggestAIDataEntryRequest struct {
 
 func (x *SuggestAIDataEntryRequest) Reset() {
 	*x = SuggestAIDataEntryRequest{}
-	mi := &file_request_proto_msgTypes[72]
+	mi := &file_request_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8212,7 +8456,7 @@ func (x *SuggestAIDataEntryRequest) String() string {
 func (*SuggestAIDataEntryRequest) ProtoMessage() {}
 
 func (x *SuggestAIDataEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[72]
+	mi := &file_request_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8225,7 +8469,7 @@ func (x *SuggestAIDataEntryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestAIDataEntryRequest.ProtoReflect.Descriptor instead.
 func (*SuggestAIDataEntryRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{72}
+	return file_request_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *SuggestAIDataEntryRequest) GetCtx() *common.Context {
@@ -8274,7 +8518,7 @@ type ListAgentOnlineRequest struct {
 
 func (x *ListAgentOnlineRequest) Reset() {
 	*x = ListAgentOnlineRequest{}
-	mi := &file_request_proto_msgTypes[73]
+	mi := &file_request_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8286,7 +8530,7 @@ func (x *ListAgentOnlineRequest) String() string {
 func (*ListAgentOnlineRequest) ProtoMessage() {}
 
 func (x *ListAgentOnlineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[73]
+	mi := &file_request_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8299,7 +8543,7 @@ func (x *ListAgentOnlineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAgentOnlineRequest.ProtoReflect.Descriptor instead.
 func (*ListAgentOnlineRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{73}
+	return file_request_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ListAgentOnlineRequest) GetCtx() *common.Context {
@@ -8342,7 +8586,7 @@ type GenerateFormTokenRequest struct {
 
 func (x *GenerateFormTokenRequest) Reset() {
 	*x = GenerateFormTokenRequest{}
-	mi := &file_request_proto_msgTypes[74]
+	mi := &file_request_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8354,7 +8598,7 @@ func (x *GenerateFormTokenRequest) String() string {
 func (*GenerateFormTokenRequest) ProtoMessage() {}
 
 func (x *GenerateFormTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[74]
+	mi := &file_request_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8367,7 +8611,7 @@ func (x *GenerateFormTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateFormTokenRequest.ProtoReflect.Descriptor instead.
 func (*GenerateFormTokenRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{74}
+	return file_request_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *GenerateFormTokenRequest) GetCtx() *common.Context {
@@ -8458,7 +8702,7 @@ type ConvertProductRequest struct {
 
 func (x *ConvertProductRequest) Reset() {
 	*x = ConvertProductRequest{}
-	mi := &file_request_proto_msgTypes[75]
+	mi := &file_request_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8470,7 +8714,7 @@ func (x *ConvertProductRequest) String() string {
 func (*ConvertProductRequest) ProtoMessage() {}
 
 func (x *ConvertProductRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[75]
+	mi := &file_request_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8483,7 +8727,7 @@ func (x *ConvertProductRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConvertProductRequest.ProtoReflect.Descriptor instead.
 func (*ConvertProductRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{75}
+	return file_request_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *ConvertProductRequest) GetCtx() *common.Context {
@@ -8523,7 +8767,7 @@ type FilterProductRequest struct {
 
 func (x *FilterProductRequest) Reset() {
 	*x = FilterProductRequest{}
-	mi := &file_request_proto_msgTypes[76]
+	mi := &file_request_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8535,7 +8779,7 @@ func (x *FilterProductRequest) String() string {
 func (*FilterProductRequest) ProtoMessage() {}
 
 func (x *FilterProductRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[76]
+	mi := &file_request_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8548,7 +8792,7 @@ func (x *FilterProductRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterProductRequest.ProtoReflect.Descriptor instead.
 func (*FilterProductRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{76}
+	return file_request_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *FilterProductRequest) GetCtx() *common.Context {
@@ -8620,7 +8864,7 @@ type SegmentUsersRequest struct {
 
 func (x *SegmentUsersRequest) Reset() {
 	*x = SegmentUsersRequest{}
-	mi := &file_request_proto_msgTypes[77]
+	mi := &file_request_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8632,7 +8876,7 @@ func (x *SegmentUsersRequest) String() string {
 func (*SegmentUsersRequest) ProtoMessage() {}
 
 func (x *SegmentUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[77]
+	mi := &file_request_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8645,7 +8889,7 @@ func (x *SegmentUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SegmentUsersRequest.ProtoReflect.Descriptor instead.
 func (*SegmentUsersRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{77}
+	return file_request_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *SegmentUsersRequest) GetCtx() *common.Context {
@@ -8696,7 +8940,7 @@ type UserSegmentSyncStatusCheck struct {
 
 func (x *UserSegmentSyncStatusCheck) Reset() {
 	*x = UserSegmentSyncStatusCheck{}
-	mi := &file_request_proto_msgTypes[78]
+	mi := &file_request_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8708,7 +8952,7 @@ func (x *UserSegmentSyncStatusCheck) String() string {
 func (*UserSegmentSyncStatusCheck) ProtoMessage() {}
 
 func (x *UserSegmentSyncStatusCheck) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[78]
+	mi := &file_request_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8721,7 +8965,7 @@ func (x *UserSegmentSyncStatusCheck) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserSegmentSyncStatusCheck.ProtoReflect.Descriptor instead.
 func (*UserSegmentSyncStatusCheck) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{78}
+	return file_request_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *UserSegmentSyncStatusCheck) GetCtx() *common.Context {
@@ -8770,7 +9014,7 @@ type ListPageSettingRequest struct {
 
 func (x *ListPageSettingRequest) Reset() {
 	*x = ListPageSettingRequest{}
-	mi := &file_request_proto_msgTypes[79]
+	mi := &file_request_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8782,7 +9026,7 @@ func (x *ListPageSettingRequest) String() string {
 func (*ListPageSettingRequest) ProtoMessage() {}
 
 func (x *ListPageSettingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[79]
+	mi := &file_request_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8795,7 +9039,7 @@ func (x *ListPageSettingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPageSettingRequest.ProtoReflect.Descriptor instead.
 func (*ListPageSettingRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{79}
+	return file_request_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *ListPageSettingRequest) GetCtx() *common.Context {
@@ -8832,7 +9076,7 @@ type AIAgentDataEntryRequest struct {
 
 func (x *AIAgentDataEntryRequest) Reset() {
 	*x = AIAgentDataEntryRequest{}
-	mi := &file_request_proto_msgTypes[80]
+	mi := &file_request_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8844,7 +9088,7 @@ func (x *AIAgentDataEntryRequest) String() string {
 func (*AIAgentDataEntryRequest) ProtoMessage() {}
 
 func (x *AIAgentDataEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[80]
+	mi := &file_request_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8857,7 +9101,7 @@ func (x *AIAgentDataEntryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AIAgentDataEntryRequest.ProtoReflect.Descriptor instead.
 func (*AIAgentDataEntryRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{80}
+	return file_request_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *AIAgentDataEntryRequest) GetCtx() *common.Context {
@@ -8908,7 +9152,7 @@ type WidgetSettingRequest struct {
 
 func (x *WidgetSettingRequest) Reset() {
 	*x = WidgetSettingRequest{}
-	mi := &file_request_proto_msgTypes[81]
+	mi := &file_request_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8920,7 +9164,7 @@ func (x *WidgetSettingRequest) String() string {
 func (*WidgetSettingRequest) ProtoMessage() {}
 
 func (x *WidgetSettingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[81]
+	mi := &file_request_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8933,7 +9177,7 @@ func (x *WidgetSettingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WidgetSettingRequest.ProtoReflect.Descriptor instead.
 func (*WidgetSettingRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{81}
+	return file_request_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *WidgetSettingRequest) GetCtx() *common.Context {
@@ -8985,7 +9229,7 @@ type AutoPayRequest struct {
 
 func (x *AutoPayRequest) Reset() {
 	*x = AutoPayRequest{}
-	mi := &file_request_proto_msgTypes[82]
+	mi := &file_request_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8997,7 +9241,7 @@ func (x *AutoPayRequest) String() string {
 func (*AutoPayRequest) ProtoMessage() {}
 
 func (x *AutoPayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[82]
+	mi := &file_request_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9010,7 +9254,7 @@ func (x *AutoPayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AutoPayRequest.ProtoReflect.Descriptor instead.
 func (*AutoPayRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{82}
+	return file_request_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *AutoPayRequest) GetCtx() *common.Context {
@@ -9067,7 +9311,7 @@ type CollectionDocumentsRequest struct {
 
 func (x *CollectionDocumentsRequest) Reset() {
 	*x = CollectionDocumentsRequest{}
-	mi := &file_request_proto_msgTypes[83]
+	mi := &file_request_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9079,7 +9323,7 @@ func (x *CollectionDocumentsRequest) String() string {
 func (*CollectionDocumentsRequest) ProtoMessage() {}
 
 func (x *CollectionDocumentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[83]
+	mi := &file_request_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9092,7 +9336,7 @@ func (x *CollectionDocumentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectionDocumentsRequest.ProtoReflect.Descriptor instead.
 func (*CollectionDocumentsRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{83}
+	return file_request_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *CollectionDocumentsRequest) GetCtx() *common.Context {
@@ -9149,7 +9393,7 @@ type PayRequest struct {
 
 func (x *PayRequest) Reset() {
 	*x = PayRequest{}
-	mi := &file_request_proto_msgTypes[84]
+	mi := &file_request_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9161,7 +9405,7 @@ func (x *PayRequest) String() string {
 func (*PayRequest) ProtoMessage() {}
 
 func (x *PayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[84]
+	mi := &file_request_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9174,7 +9418,7 @@ func (x *PayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PayRequest.ProtoReflect.Descriptor instead.
 func (*PayRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{84}
+	return file_request_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *PayRequest) GetCtx() *common.Context {
@@ -9323,7 +9567,7 @@ type UploadRequest struct {
 
 func (x *UploadRequest) Reset() {
 	*x = UploadRequest{}
-	mi := &file_request_proto_msgTypes[85]
+	mi := &file_request_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9335,7 +9579,7 @@ func (x *UploadRequest) String() string {
 func (*UploadRequest) ProtoMessage() {}
 
 func (x *UploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[85]
+	mi := &file_request_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9348,7 +9592,7 @@ func (x *UploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadRequest.ProtoReflect.Descriptor instead.
 func (*UploadRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{85}
+	return file_request_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *UploadRequest) GetCtx() *common.Context {
@@ -9529,7 +9773,7 @@ type ResizeImageRequest struct {
 
 func (x *ResizeImageRequest) Reset() {
 	*x = ResizeImageRequest{}
-	mi := &file_request_proto_msgTypes[86]
+	mi := &file_request_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9541,7 +9785,7 @@ func (x *ResizeImageRequest) String() string {
 func (*ResizeImageRequest) ProtoMessage() {}
 
 func (x *ResizeImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[86]
+	mi := &file_request_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9554,7 +9798,7 @@ func (x *ResizeImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResizeImageRequest.ProtoReflect.Descriptor instead.
 func (*ResizeImageRequest) Descriptor() ([]byte, []int) {
-	return file_request_proto_rawDescGZIP(), []int{86}
+	return file_request_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *ResizeImageRequest) GetCtx() *common.Context {
@@ -10364,7 +10608,35 @@ const file_request_proto_rawDesc = "" +
 	"\vai_agent_id\x18\x10 \x01(\tR\taiAgentId\x12-\n" +
 	"\x13exclude_ai_agent_id\x18\x11 \x01(\tR\x10excludeAiAgentId\x12(\n" +
 	"\x10ai_agent_version\x18\x12 \x01(\x03R\x0eaiAgentVersion\x12\x14\n" +
-	"\x05trash\x18\x13 \x01(\bR\x05trash\"\x82\x04\n" +
+	"\x05trash\x18\x13 \x01(\bR\x05trash\"\xc7\x01\n" +
+	"!PollChromeExtensionCommandRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1b\n" +
+	"\tworker_id\x18\x03 \x01(\tR\bworkerId\x12\x1d\n" +
+	"\n" +
+	"meta_state\x18\x04 \x01(\tR\tmetaState\x12$\n" +
+	"\x0eready_page_ids\x18\x05 \x03(\tR\freadyPageIds\"\xf4\x03\n" +
+	"#ReportChromeExtensionCommandRequest\x12!\n" +
+	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\x12\x19\n" +
+	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12\x1b\n" +
+	"\tworker_id\x18\x04 \x01(\tR\bworkerId\x12\x1d\n" +
+	"\n" +
+	"command_id\x18\x05 \x01(\tR\tcommandId\x12\x19\n" +
+	"\blease_id\x18\x06 \x01(\tR\aleaseId\x12M\n" +
+	"\aoutcome\x18\a \x01(\x0e23.header.ReportChromeExtensionCommandRequest.OutcomeR\aoutcome\x12&\n" +
+	"\x0fmeta_message_id\x18\b \x01(\tR\rmetaMessageId\x12\x1d\n" +
+	"\n" +
+	"error_code\x18\t \x01(\tR\terrorCode\"\x82\x01\n" +
+	"\aOutcome\x12\x0f\n" +
+	"\vunspecified\x10\x00\x12\b\n" +
+	"\x04sent\x10\x01\x12\x16\n" +
+	"\x12worker_unavailable\x10\x02\x12\x15\n" +
+	"\x11retryable_failure\x10\x03\x12\x15\n" +
+	"\x11permanent_failure\x10\x04\x12\x16\n" +
+	"\x12unknown_after_send\x10\x05\"\x82\x04\n" +
 	"\x16CampaignSendLogRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -10699,199 +10971,205 @@ func file_request_proto_rawDescGZIP() []byte {
 	return file_request_proto_rawDescData
 }
 
-var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 87)
+var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 89)
 var file_request_proto_goTypes = []any{
-	(ReportCampaignRequest_Range)(0),      // 0: header.ReportCampaignRequest.Range
-	(ReportWebPluginRequest_Range)(0),     // 1: header.ReportWebPluginRequest.Range
-	(AvailibilityReportRequest_Range)(0),  // 2: header.AvailibilityReportRequest.Range
-	(*TagRequest)(nil),                    // 3: header.TagRequest
-	(*UserReportRequest)(nil),             // 4: header.UserReportRequest
-	(*ConversationMetricsRequest)(nil),    // 5: header.ConversationMetricsRequest
-	(*AgentMetricsRequest)(nil),           // 6: header.AgentMetricsRequest
-	(*CallMetricsRequest)(nil),            // 7: header.CallMetricsRequest
-	(*ListUserEventsRequest)(nil),         // 8: header.ListUserEventsRequest
-	(*ListEventTypeRequest)(nil),          // 9: header.ListEventTypeRequest
-	(*PresencesRequest)(nil),              // 10: header.PresencesRequest
-	(*ListNotiRequest)(nil),               // 11: header.ListNotiRequest
-	(*UserRequest)(nil),                   // 12: header.UserRequest
-	(*ListNotesRequest)(nil),              // 13: header.ListNotesRequest
-	(*DeleteNoteRequest)(nil),             // 14: header.DeleteNoteRequest
-	(*UpdateWorkflowSessionRequest)(nil),  // 15: header.UpdateWorkflowSessionRequest
-	(*ListWorkflowLogRequest)(nil),        // 16: header.ListWorkflowLogRequest
-	(*BotsRequest)(nil),                   // 17: header.BotsRequest
-	(*ListAIAgentMessageRequest)(nil),     // 18: header.ListAIAgentMessageRequest
-	(*ReportConvoMessageRequest)(nil),     // 19: header.ReportConvoMessageRequest
-	(*ReportAIAgentRequest)(nil),          // 20: header.ReportAIAgentRequest
-	(*ActionrunMetricsRequest)(nil),       // 21: header.ActionrunMetricsRequest
-	(*BotrunMetricsRequest)(nil),          // 22: header.BotrunMetricsRequest
-	(*ListObjectsRequest)(nil),            // 23: header.ListObjectsRequest
-	(*ConversionRequest)(nil),             // 24: header.ConversionRequest
-	(*ReportCampaignRequest)(nil),         // 25: header.ReportCampaignRequest
-	(*ReportWebPluginRequest)(nil),        // 26: header.ReportWebPluginRequest
-	(*WebPluginConversionRequest)(nil),    // 27: header.WebPluginConversionRequest
-	(*SearchLocationsRequest)(nil),        // 28: header.SearchLocationsRequest
-	(*RecentIndexDeliveryRequest)(nil),    // 29: header.RecentIndexDeliveryRequest
-	(*DeliveryRequest)(nil),               // 30: header.DeliveryRequest
-	(*SearchRequest)(nil),                 // 31: header.SearchRequest
-	(*AvailibilityReportRequest)(nil),     // 32: header.AvailibilityReportRequest
-	(*FileUrlDownloadRequest)(nil),        // 33: header.FileUrlDownloadRequest
-	(*OrderMetricsRequest)(nil),           // 34: header.OrderMetricsRequest
-	(*OrdersRequest)(nil),                 // 35: header.OrdersRequest
-	(*CountOrdersRequest)(nil),            // 36: header.CountOrdersRequest
-	(*WorkflowReportRequest)(nil),         // 37: header.WorkflowReportRequest
-	(*AuthorizeShopeeRequest)(nil),        // 38: header.AuthorizeShopeeRequest
-	(*ShopeeSyncProductRequest)(nil),      // 39: header.ShopeeSyncProductRequest
-	(*AddressAutocompleteRequest)(nil),    // 40: header.AddressAutocompleteRequest
-	(*TasksRequest)(nil),                  // 41: header.TasksRequest
-	(*DocIndexRequest)(nil),               // 42: header.DocIndexRequest
-	(*DocSearchRequest)(nil),              // 43: header.DocSearchRequest
-	(*CreateAgentRequest)(nil),            // 44: header.CreateAgentRequest
-	(*ListConversationsRequest)(nil),      // 45: header.ListConversationsRequest
-	(*ListConversationEventsRequest)(nil), // 46: header.ListConversationEventsRequest
-	(*ListWorkflowSessionRequest)(nil),    // 47: header.ListWorkflowSessionRequest
-	(*BillsRequest)(nil),                  // 48: header.BillsRequest
-	(*ListArticleRequest)(nil),            // 49: header.ListArticleRequest
-	(*SearchArticleRequest)(nil),          // 50: header.SearchArticleRequest
-	(*RedeemRequest)(nil),                 // 51: header.RedeemRequest
-	(*ListVersions)(nil),                  // 52: header.ListVersions
-	(*ReportCountRequest)(nil),            // 53: header.ReportCountRequest
-	(*CounterReportRequest)(nil),          // 54: header.CounterReportRequest
-	(*ListKnowledgeBaseEventRequest)(nil), // 55: header.ListKnowledgeBaseEventRequest
-	(*CreateAccountRequest)(nil),          // 56: header.CreateAccountRequest
-	(*NewPassword)(nil),                   // 57: header.NewPassword
-	(*CrawlUrlRequest)(nil),               // 58: header.CrawlUrlRequest
-	(*ListAIDataFoldersRequest)(nil),      // 59: header.ListAIDataFoldersRequest
-	(*ListAIDataEntryRequest)(nil),        // 60: header.ListAIDataEntryRequest
-	(*CampaignSendLogRequest)(nil),        // 61: header.CampaignSendLogRequest
-	(*AiQnaSuggestionRequest)(nil),        // 62: header.AiQnaSuggestionRequest
-	(*AiResponseSourceRequest)(nil),       // 63: header.AiResponseSourceRequest
-	(*FacebookPostRequest)(nil),           // 64: header.FacebookPostRequest
-	(*TiktokVideoRequest)(nil),            // 65: header.TiktokVideoRequest
-	(*YoutubeVideoRequest)(nil),           // 66: header.YoutubeVideoRequest
-	(*ListRuleRequest)(nil),               // 67: header.ListRuleRequest
-	(*ListZNSTemplateRequest)(nil),        // 68: header.ListZNSTemplateRequest
-	(*ListEmailSignatureRequest)(nil),     // 69: header.ListEmailSignatureRequest
-	(*CreditSpendReportRequest)(nil),      // 70: header.CreditSpendReportRequest
-	(*CreditSpendLogRequest)(nil),         // 71: header.CreditSpendLogRequest
-	(*LLMSpansRequest2)(nil),              // 72: header.LLMSpansRequest2
-	(*AIAgentTraceRequest)(nil),           // 73: header.AIAgentTraceRequest
-	(*LLMTracesRequest)(nil),              // 74: header.LLMTracesRequest
-	(*SuggestAIDataEntryRequest)(nil),     // 75: header.SuggestAIDataEntryRequest
-	(*ListAgentOnlineRequest)(nil),        // 76: header.ListAgentOnlineRequest
-	(*GenerateFormTokenRequest)(nil),      // 77: header.GenerateFormTokenRequest
-	(*ConvertProductRequest)(nil),         // 78: header.ConvertProductRequest
-	(*FilterProductRequest)(nil),          // 79: header.FilterProductRequest
-	(*SegmentUsersRequest)(nil),           // 80: header.SegmentUsersRequest
-	(*UserSegmentSyncStatusCheck)(nil),    // 81: header.UserSegmentSyncStatusCheck
-	(*ListPageSettingRequest)(nil),        // 82: header.ListPageSettingRequest
-	(*AIAgentDataEntryRequest)(nil),       // 83: header.AIAgentDataEntryRequest
-	(*WidgetSettingRequest)(nil),          // 84: header.WidgetSettingRequest
-	(*AutoPayRequest)(nil),                // 85: header.AutoPayRequest
-	(*CollectionDocumentsRequest)(nil),    // 86: header.CollectionDocumentsRequest
-	(*PayRequest)(nil),                    // 87: header.PayRequest
-	(*UploadRequest)(nil),                 // 88: header.UploadRequest
-	(*ResizeImageRequest)(nil),            // 89: header.ResizeImageRequest
-	(*common.Context)(nil),                // 90: common.Context
-	(*account.BusinessHours)(nil),         // 91: account.BusinessHours
-	(*account.Subscription)(nil),          // 92: account.Subscription
-	(*account.Invoice)(nil),               // 93: account.Invoice
+	(ReportCampaignRequest_Range)(0),                 // 0: header.ReportCampaignRequest.Range
+	(ReportWebPluginRequest_Range)(0),                // 1: header.ReportWebPluginRequest.Range
+	(AvailibilityReportRequest_Range)(0),             // 2: header.AvailibilityReportRequest.Range
+	(ReportChromeExtensionCommandRequest_Outcome)(0), // 3: header.ReportChromeExtensionCommandRequest.Outcome
+	(*TagRequest)(nil),                               // 4: header.TagRequest
+	(*UserReportRequest)(nil),                        // 5: header.UserReportRequest
+	(*ConversationMetricsRequest)(nil),               // 6: header.ConversationMetricsRequest
+	(*AgentMetricsRequest)(nil),                      // 7: header.AgentMetricsRequest
+	(*CallMetricsRequest)(nil),                       // 8: header.CallMetricsRequest
+	(*ListUserEventsRequest)(nil),                    // 9: header.ListUserEventsRequest
+	(*ListEventTypeRequest)(nil),                     // 10: header.ListEventTypeRequest
+	(*PresencesRequest)(nil),                         // 11: header.PresencesRequest
+	(*ListNotiRequest)(nil),                          // 12: header.ListNotiRequest
+	(*UserRequest)(nil),                              // 13: header.UserRequest
+	(*ListNotesRequest)(nil),                         // 14: header.ListNotesRequest
+	(*DeleteNoteRequest)(nil),                        // 15: header.DeleteNoteRequest
+	(*UpdateWorkflowSessionRequest)(nil),             // 16: header.UpdateWorkflowSessionRequest
+	(*ListWorkflowLogRequest)(nil),                   // 17: header.ListWorkflowLogRequest
+	(*BotsRequest)(nil),                              // 18: header.BotsRequest
+	(*ListAIAgentMessageRequest)(nil),                // 19: header.ListAIAgentMessageRequest
+	(*ReportConvoMessageRequest)(nil),                // 20: header.ReportConvoMessageRequest
+	(*ReportAIAgentRequest)(nil),                     // 21: header.ReportAIAgentRequest
+	(*ActionrunMetricsRequest)(nil),                  // 22: header.ActionrunMetricsRequest
+	(*BotrunMetricsRequest)(nil),                     // 23: header.BotrunMetricsRequest
+	(*ListObjectsRequest)(nil),                       // 24: header.ListObjectsRequest
+	(*ConversionRequest)(nil),                        // 25: header.ConversionRequest
+	(*ReportCampaignRequest)(nil),                    // 26: header.ReportCampaignRequest
+	(*ReportWebPluginRequest)(nil),                   // 27: header.ReportWebPluginRequest
+	(*WebPluginConversionRequest)(nil),               // 28: header.WebPluginConversionRequest
+	(*SearchLocationsRequest)(nil),                   // 29: header.SearchLocationsRequest
+	(*RecentIndexDeliveryRequest)(nil),               // 30: header.RecentIndexDeliveryRequest
+	(*DeliveryRequest)(nil),                          // 31: header.DeliveryRequest
+	(*SearchRequest)(nil),                            // 32: header.SearchRequest
+	(*AvailibilityReportRequest)(nil),                // 33: header.AvailibilityReportRequest
+	(*FileUrlDownloadRequest)(nil),                   // 34: header.FileUrlDownloadRequest
+	(*OrderMetricsRequest)(nil),                      // 35: header.OrderMetricsRequest
+	(*OrdersRequest)(nil),                            // 36: header.OrdersRequest
+	(*CountOrdersRequest)(nil),                       // 37: header.CountOrdersRequest
+	(*WorkflowReportRequest)(nil),                    // 38: header.WorkflowReportRequest
+	(*AuthorizeShopeeRequest)(nil),                   // 39: header.AuthorizeShopeeRequest
+	(*ShopeeSyncProductRequest)(nil),                 // 40: header.ShopeeSyncProductRequest
+	(*AddressAutocompleteRequest)(nil),               // 41: header.AddressAutocompleteRequest
+	(*TasksRequest)(nil),                             // 42: header.TasksRequest
+	(*DocIndexRequest)(nil),                          // 43: header.DocIndexRequest
+	(*DocSearchRequest)(nil),                         // 44: header.DocSearchRequest
+	(*CreateAgentRequest)(nil),                       // 45: header.CreateAgentRequest
+	(*ListConversationsRequest)(nil),                 // 46: header.ListConversationsRequest
+	(*ListConversationEventsRequest)(nil),            // 47: header.ListConversationEventsRequest
+	(*ListWorkflowSessionRequest)(nil),               // 48: header.ListWorkflowSessionRequest
+	(*BillsRequest)(nil),                             // 49: header.BillsRequest
+	(*ListArticleRequest)(nil),                       // 50: header.ListArticleRequest
+	(*SearchArticleRequest)(nil),                     // 51: header.SearchArticleRequest
+	(*RedeemRequest)(nil),                            // 52: header.RedeemRequest
+	(*ListVersions)(nil),                             // 53: header.ListVersions
+	(*ReportCountRequest)(nil),                       // 54: header.ReportCountRequest
+	(*CounterReportRequest)(nil),                     // 55: header.CounterReportRequest
+	(*ListKnowledgeBaseEventRequest)(nil),            // 56: header.ListKnowledgeBaseEventRequest
+	(*CreateAccountRequest)(nil),                     // 57: header.CreateAccountRequest
+	(*NewPassword)(nil),                              // 58: header.NewPassword
+	(*CrawlUrlRequest)(nil),                          // 59: header.CrawlUrlRequest
+	(*ListAIDataFoldersRequest)(nil),                 // 60: header.ListAIDataFoldersRequest
+	(*ListAIDataEntryRequest)(nil),                   // 61: header.ListAIDataEntryRequest
+	(*PollChromeExtensionCommandRequest)(nil),        // 62: header.PollChromeExtensionCommandRequest
+	(*ReportChromeExtensionCommandRequest)(nil),      // 63: header.ReportChromeExtensionCommandRequest
+	(*CampaignSendLogRequest)(nil),                   // 64: header.CampaignSendLogRequest
+	(*AiQnaSuggestionRequest)(nil),                   // 65: header.AiQnaSuggestionRequest
+	(*AiResponseSourceRequest)(nil),                  // 66: header.AiResponseSourceRequest
+	(*FacebookPostRequest)(nil),                      // 67: header.FacebookPostRequest
+	(*TiktokVideoRequest)(nil),                       // 68: header.TiktokVideoRequest
+	(*YoutubeVideoRequest)(nil),                      // 69: header.YoutubeVideoRequest
+	(*ListRuleRequest)(nil),                          // 70: header.ListRuleRequest
+	(*ListZNSTemplateRequest)(nil),                   // 71: header.ListZNSTemplateRequest
+	(*ListEmailSignatureRequest)(nil),                // 72: header.ListEmailSignatureRequest
+	(*CreditSpendReportRequest)(nil),                 // 73: header.CreditSpendReportRequest
+	(*CreditSpendLogRequest)(nil),                    // 74: header.CreditSpendLogRequest
+	(*LLMSpansRequest2)(nil),                         // 75: header.LLMSpansRequest2
+	(*AIAgentTraceRequest)(nil),                      // 76: header.AIAgentTraceRequest
+	(*LLMTracesRequest)(nil),                         // 77: header.LLMTracesRequest
+	(*SuggestAIDataEntryRequest)(nil),                // 78: header.SuggestAIDataEntryRequest
+	(*ListAgentOnlineRequest)(nil),                   // 79: header.ListAgentOnlineRequest
+	(*GenerateFormTokenRequest)(nil),                 // 80: header.GenerateFormTokenRequest
+	(*ConvertProductRequest)(nil),                    // 81: header.ConvertProductRequest
+	(*FilterProductRequest)(nil),                     // 82: header.FilterProductRequest
+	(*SegmentUsersRequest)(nil),                      // 83: header.SegmentUsersRequest
+	(*UserSegmentSyncStatusCheck)(nil),               // 84: header.UserSegmentSyncStatusCheck
+	(*ListPageSettingRequest)(nil),                   // 85: header.ListPageSettingRequest
+	(*AIAgentDataEntryRequest)(nil),                  // 86: header.AIAgentDataEntryRequest
+	(*WidgetSettingRequest)(nil),                     // 87: header.WidgetSettingRequest
+	(*AutoPayRequest)(nil),                           // 88: header.AutoPayRequest
+	(*CollectionDocumentsRequest)(nil),               // 89: header.CollectionDocumentsRequest
+	(*PayRequest)(nil),                               // 90: header.PayRequest
+	(*UploadRequest)(nil),                            // 91: header.UploadRequest
+	(*ResizeImageRequest)(nil),                       // 92: header.ResizeImageRequest
+	(*common.Context)(nil),                           // 93: common.Context
+	(*account.BusinessHours)(nil),                    // 94: account.BusinessHours
+	(*account.Subscription)(nil),                     // 95: account.Subscription
+	(*account.Invoice)(nil),                          // 96: account.Invoice
 }
 var file_request_proto_depIdxs = []int32{
-	90, // 0: header.TagRequest.ctx:type_name -> common.Context
-	90, // 1: header.UserReportRequest.ctx:type_name -> common.Context
-	91, // 2: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
-	91, // 3: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	91, // 4: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
-	91, // 5: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	91, // 6: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
-	91, // 7: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	90, // 8: header.ListUserEventsRequest.ctx:type_name -> common.Context
-	90, // 9: header.ListEventTypeRequest.ctx:type_name -> common.Context
-	90, // 10: header.PresencesRequest.ctx:type_name -> common.Context
-	90, // 11: header.ListNotiRequest.ctx:type_name -> common.Context
-	90, // 12: header.UserRequest.ctx:type_name -> common.Context
-	90, // 13: header.ListNotesRequest.ctx:type_name -> common.Context
-	90, // 14: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
-	90, // 15: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
-	90, // 16: header.BotsRequest.ctx:type_name -> common.Context
-	90, // 17: header.ListAIAgentMessageRequest.ctx:type_name -> common.Context
-	90, // 18: header.ReportConvoMessageRequest.ctx:type_name -> common.Context
-	90, // 19: header.ReportAIAgentRequest.ctx:type_name -> common.Context
-	90, // 20: header.ConversionRequest.ctx:type_name -> common.Context
-	90, // 21: header.ReportCampaignRequest.ctx:type_name -> common.Context
-	90, // 22: header.ReportWebPluginRequest.ctx:type_name -> common.Context
-	90, // 23: header.WebPluginConversionRequest.ctx:type_name -> common.Context
-	90, // 24: header.SearchLocationsRequest.ctx:type_name -> common.Context
-	90, // 25: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
-	90, // 26: header.DeliveryRequest.ctx:type_name -> common.Context
-	90, // 27: header.SearchRequest.ctx:type_name -> common.Context
-	90, // 28: header.AvailibilityReportRequest.ctx:type_name -> common.Context
-	90, // 29: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
-	91, // 30: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
-	91, // 31: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	90, // 32: header.OrdersRequest.ctx:type_name -> common.Context
-	90, // 33: header.CountOrdersRequest.ctx:type_name -> common.Context
-	35, // 34: header.CountOrdersRequest.queries:type_name -> header.OrdersRequest
-	90, // 35: header.WorkflowReportRequest.ctx:type_name -> common.Context
-	90, // 36: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
-	90, // 37: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
-	90, // 38: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
-	90, // 39: header.TasksRequest.ctx:type_name -> common.Context
-	90, // 40: header.DocIndexRequest.ctx:type_name -> common.Context
-	90, // 41: header.DocSearchRequest.ctx:type_name -> common.Context
-	90, // 42: header.CreateAgentRequest.ctx:type_name -> common.Context
-	90, // 43: header.ListConversationsRequest.ctx:type_name -> common.Context
-	90, // 44: header.ListConversationEventsRequest.ctx:type_name -> common.Context
-	90, // 45: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
-	90, // 46: header.ListArticleRequest.ctx:type_name -> common.Context
-	90, // 47: header.SearchArticleRequest.ctx:type_name -> common.Context
-	90, // 48: header.RedeemRequest.ctx:type_name -> common.Context
-	90, // 49: header.ListVersions.ctx:type_name -> common.Context
-	90, // 50: header.ReportCountRequest.ctx:type_name -> common.Context
-	90, // 51: header.CounterReportRequest.ctx:type_name -> common.Context
-	90, // 52: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
-	90, // 53: header.CreateAccountRequest.ctx:type_name -> common.Context
-	90, // 54: header.NewPassword.ctx:type_name -> common.Context
-	90, // 55: header.CrawlUrlRequest.ctx:type_name -> common.Context
-	90, // 56: header.ListAIDataFoldersRequest.ctx:type_name -> common.Context
-	90, // 57: header.ListAIDataEntryRequest.ctx:type_name -> common.Context
-	90, // 58: header.CampaignSendLogRequest.ctx:type_name -> common.Context
-	90, // 59: header.AiQnaSuggestionRequest.ctx:type_name -> common.Context
-	90, // 60: header.AiResponseSourceRequest.ctx:type_name -> common.Context
-	90, // 61: header.FacebookPostRequest.ctx:type_name -> common.Context
-	90, // 62: header.TiktokVideoRequest.ctx:type_name -> common.Context
-	90, // 63: header.YoutubeVideoRequest.ctx:type_name -> common.Context
-	90, // 64: header.ListRuleRequest.ctx:type_name -> common.Context
-	90, // 65: header.ListZNSTemplateRequest.ctx:type_name -> common.Context
-	90, // 66: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
-	90, // 67: header.CreditSpendReportRequest.ctx:type_name -> common.Context
-	90, // 68: header.CreditSpendLogRequest.ctx:type_name -> common.Context
-	90, // 69: header.LLMSpansRequest2.ctx:type_name -> common.Context
-	90, // 70: header.AIAgentTraceRequest.ctx:type_name -> common.Context
-	90, // 71: header.LLMTracesRequest.ctx:type_name -> common.Context
-	90, // 72: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context
-	90, // 73: header.ListAgentOnlineRequest.ctx:type_name -> common.Context
-	90, // 74: header.GenerateFormTokenRequest.ctx:type_name -> common.Context
-	90, // 75: header.ConvertProductRequest.ctx:type_name -> common.Context
-	90, // 76: header.FilterProductRequest.ctx:type_name -> common.Context
-	90, // 77: header.SegmentUsersRequest.ctx:type_name -> common.Context
-	90, // 78: header.UserSegmentSyncStatusCheck.ctx:type_name -> common.Context
-	90, // 79: header.ListPageSettingRequest.ctx:type_name -> common.Context
-	90, // 80: header.AIAgentDataEntryRequest.ctx:type_name -> common.Context
-	90, // 81: header.WidgetSettingRequest.ctx:type_name -> common.Context
-	90, // 82: header.AutoPayRequest.ctx:type_name -> common.Context
-	90, // 83: header.CollectionDocumentsRequest.ctx:type_name -> common.Context
-	90, // 84: header.PayRequest.ctx:type_name -> common.Context
-	92, // 85: header.PayRequest.subscription:type_name -> account.Subscription
-	93, // 86: header.PayRequest.invoice:type_name -> account.Invoice
-	90, // 87: header.UploadRequest.ctx:type_name -> common.Context
-	90, // 88: header.ResizeImageRequest.ctx:type_name -> common.Context
-	89, // [89:89] is the sub-list for method output_type
-	89, // [89:89] is the sub-list for method input_type
-	89, // [89:89] is the sub-list for extension type_name
-	89, // [89:89] is the sub-list for extension extendee
-	0,  // [0:89] is the sub-list for field type_name
+	93, // 0: header.TagRequest.ctx:type_name -> common.Context
+	93, // 1: header.UserReportRequest.ctx:type_name -> common.Context
+	94, // 2: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
+	94, // 3: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	94, // 4: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
+	94, // 5: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	94, // 6: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
+	94, // 7: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	93, // 8: header.ListUserEventsRequest.ctx:type_name -> common.Context
+	93, // 9: header.ListEventTypeRequest.ctx:type_name -> common.Context
+	93, // 10: header.PresencesRequest.ctx:type_name -> common.Context
+	93, // 11: header.ListNotiRequest.ctx:type_name -> common.Context
+	93, // 12: header.UserRequest.ctx:type_name -> common.Context
+	93, // 13: header.ListNotesRequest.ctx:type_name -> common.Context
+	93, // 14: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
+	93, // 15: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
+	93, // 16: header.BotsRequest.ctx:type_name -> common.Context
+	93, // 17: header.ListAIAgentMessageRequest.ctx:type_name -> common.Context
+	93, // 18: header.ReportConvoMessageRequest.ctx:type_name -> common.Context
+	93, // 19: header.ReportAIAgentRequest.ctx:type_name -> common.Context
+	93, // 20: header.ConversionRequest.ctx:type_name -> common.Context
+	93, // 21: header.ReportCampaignRequest.ctx:type_name -> common.Context
+	93, // 22: header.ReportWebPluginRequest.ctx:type_name -> common.Context
+	93, // 23: header.WebPluginConversionRequest.ctx:type_name -> common.Context
+	93, // 24: header.SearchLocationsRequest.ctx:type_name -> common.Context
+	93, // 25: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
+	93, // 26: header.DeliveryRequest.ctx:type_name -> common.Context
+	93, // 27: header.SearchRequest.ctx:type_name -> common.Context
+	93, // 28: header.AvailibilityReportRequest.ctx:type_name -> common.Context
+	93, // 29: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
+	94, // 30: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
+	94, // 31: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	93, // 32: header.OrdersRequest.ctx:type_name -> common.Context
+	93, // 33: header.CountOrdersRequest.ctx:type_name -> common.Context
+	36, // 34: header.CountOrdersRequest.queries:type_name -> header.OrdersRequest
+	93, // 35: header.WorkflowReportRequest.ctx:type_name -> common.Context
+	93, // 36: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
+	93, // 37: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
+	93, // 38: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
+	93, // 39: header.TasksRequest.ctx:type_name -> common.Context
+	93, // 40: header.DocIndexRequest.ctx:type_name -> common.Context
+	93, // 41: header.DocSearchRequest.ctx:type_name -> common.Context
+	93, // 42: header.CreateAgentRequest.ctx:type_name -> common.Context
+	93, // 43: header.ListConversationsRequest.ctx:type_name -> common.Context
+	93, // 44: header.ListConversationEventsRequest.ctx:type_name -> common.Context
+	93, // 45: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
+	93, // 46: header.ListArticleRequest.ctx:type_name -> common.Context
+	93, // 47: header.SearchArticleRequest.ctx:type_name -> common.Context
+	93, // 48: header.RedeemRequest.ctx:type_name -> common.Context
+	93, // 49: header.ListVersions.ctx:type_name -> common.Context
+	93, // 50: header.ReportCountRequest.ctx:type_name -> common.Context
+	93, // 51: header.CounterReportRequest.ctx:type_name -> common.Context
+	93, // 52: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
+	93, // 53: header.CreateAccountRequest.ctx:type_name -> common.Context
+	93, // 54: header.NewPassword.ctx:type_name -> common.Context
+	93, // 55: header.CrawlUrlRequest.ctx:type_name -> common.Context
+	93, // 56: header.ListAIDataFoldersRequest.ctx:type_name -> common.Context
+	93, // 57: header.ListAIDataEntryRequest.ctx:type_name -> common.Context
+	93, // 58: header.PollChromeExtensionCommandRequest.ctx:type_name -> common.Context
+	93, // 59: header.ReportChromeExtensionCommandRequest.ctx:type_name -> common.Context
+	3,  // 60: header.ReportChromeExtensionCommandRequest.outcome:type_name -> header.ReportChromeExtensionCommandRequest.Outcome
+	93, // 61: header.CampaignSendLogRequest.ctx:type_name -> common.Context
+	93, // 62: header.AiQnaSuggestionRequest.ctx:type_name -> common.Context
+	93, // 63: header.AiResponseSourceRequest.ctx:type_name -> common.Context
+	93, // 64: header.FacebookPostRequest.ctx:type_name -> common.Context
+	93, // 65: header.TiktokVideoRequest.ctx:type_name -> common.Context
+	93, // 66: header.YoutubeVideoRequest.ctx:type_name -> common.Context
+	93, // 67: header.ListRuleRequest.ctx:type_name -> common.Context
+	93, // 68: header.ListZNSTemplateRequest.ctx:type_name -> common.Context
+	93, // 69: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
+	93, // 70: header.CreditSpendReportRequest.ctx:type_name -> common.Context
+	93, // 71: header.CreditSpendLogRequest.ctx:type_name -> common.Context
+	93, // 72: header.LLMSpansRequest2.ctx:type_name -> common.Context
+	93, // 73: header.AIAgentTraceRequest.ctx:type_name -> common.Context
+	93, // 74: header.LLMTracesRequest.ctx:type_name -> common.Context
+	93, // 75: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context
+	93, // 76: header.ListAgentOnlineRequest.ctx:type_name -> common.Context
+	93, // 77: header.GenerateFormTokenRequest.ctx:type_name -> common.Context
+	93, // 78: header.ConvertProductRequest.ctx:type_name -> common.Context
+	93, // 79: header.FilterProductRequest.ctx:type_name -> common.Context
+	93, // 80: header.SegmentUsersRequest.ctx:type_name -> common.Context
+	93, // 81: header.UserSegmentSyncStatusCheck.ctx:type_name -> common.Context
+	93, // 82: header.ListPageSettingRequest.ctx:type_name -> common.Context
+	93, // 83: header.AIAgentDataEntryRequest.ctx:type_name -> common.Context
+	93, // 84: header.WidgetSettingRequest.ctx:type_name -> common.Context
+	93, // 85: header.AutoPayRequest.ctx:type_name -> common.Context
+	93, // 86: header.CollectionDocumentsRequest.ctx:type_name -> common.Context
+	93, // 87: header.PayRequest.ctx:type_name -> common.Context
+	95, // 88: header.PayRequest.subscription:type_name -> account.Subscription
+	96, // 89: header.PayRequest.invoice:type_name -> account.Invoice
+	93, // 90: header.UploadRequest.ctx:type_name -> common.Context
+	93, // 91: header.ResizeImageRequest.ctx:type_name -> common.Context
+	92, // [92:92] is the sub-list for method output_type
+	92, // [92:92] is the sub-list for method input_type
+	92, // [92:92] is the sub-list for extension type_name
+	92, // [92:92] is the sub-list for extension extendee
+	0,  // [0:92] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -10904,8 +11182,8 @@ func file_request_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   87,
+			NumEnums:      4,
+			NumMessages:   89,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

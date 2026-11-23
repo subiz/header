@@ -848,6 +848,37 @@ message ListAIDataEntryRequest {
 	bool trash = 19; // false: active entries only; true: trash only.
 }
 
+message PollChromeExtensionCommandRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string worker_id = 3; // stable per extension installation
+	// A poll is also a heartbeat. Only ready workers may receive a command.
+	string meta_state = 4; // ready, logged_out, reauth
+	// Pages with a usable inbox in the current Meta session. Empty means none.
+	repeated string ready_page_ids = 5;
+}
+
+message ReportChromeExtensionCommandRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+
+	string worker_id = 4;
+	string command_id = 5;
+	string lease_id = 6;
+	enum Outcome {
+		unspecified = 0;
+		sent = 1; // Meta confirmed the send
+		worker_unavailable = 2; // before send, return to queue without consuming a retry
+		retryable_failure = 3; // confirmed unsent
+		permanent_failure = 4;
+		unknown_after_send = 5; // reconcile before another send
+	}
+	Outcome outcome = 7;
+	string meta_message_id = 8; // required for sent
+	string error_code = 9;
+}
+
 message CampaignSendLogRequest {
 	common.Context ctx = 1;
 	string account_id = 2;

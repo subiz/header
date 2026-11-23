@@ -7409,6 +7409,11 @@ message Response {
 	BlockStepBatch block_step_batch = 332;
 	repeated AIDataFolder ai_data_folders = 333;
 	AIDataFolder ai_data_folder = 334;
+
+	// Absent when idle. Only issue work for authorized Pages the worker reports ready.
+	ChromeExtensionCommand chrome_extension_command = 335;
+	int64 next_poll_at = 336; // Unix ms. Idle polls back off from 30 to 45 to 60 seconds.
+
 }
 
 message ReportCount {
@@ -7964,12 +7969,11 @@ message Workflow {
 	int64 total_sessions = 25;
 	int64 num_goal_reached_sessions = 31;
 
-	File avatar = 32;
-	string format = 33; // empty, chatbot
+	// File avatar = 32;
+	// string format = 33; // empty, chatbot
 
 	bool is_system = 34; // auto assign tag, auto end chat
 	// int64 exit_when_not_match_trigger = 35;
-
 	int64 total_credit_spend_fpv = 37;
 }
 
@@ -11622,4 +11626,16 @@ message BlockStepBatch {
 	// This contract provides no automatic concurrent merge or collab rebase.
 
 	string revision = 17; // Required committed revision; success responses only.
+}
+
+message ChromeExtensionCommand {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string command_id = 4; // stable across attempts for one recipient and message
+	string lease_id = 5; // unique to this assignment
+	int64 lease_expires_at = 6; // Unix ms, latest time the worker may start sending
+	string page_id = 7;
+	string fb_conversation_id = 8; // Messenger conversation on the specified Page
+	string text = 9; // rendered for this recipient
 }
