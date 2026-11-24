@@ -29427,6 +29427,8 @@ const (
 	Proder_UpdateOrder_FullMethodName                = "/header.Proder/UpdateOrder"
 	Proder_DeleteOrder_FullMethodName                = "/header.Proder/DeleteOrder"
 	Proder_ListOrders_FullMethodName                 = "/header.Proder/ListOrders"
+	Proder_ListProductBuyerIds_FullMethodName        = "/header.Proder/ListProductBuyerIds"
+	Proder_ListBuyerIdsByOrderValue_FullMethodName   = "/header.Proder/ListBuyerIdsByOrderValue"
 	Proder_CountOrders2_FullMethodName               = "/header.Proder/CountOrders2"
 	Proder_ImportOrders_FullMethodName               = "/header.Proder/ImportOrders"
 	Proder_MakeOrderPayment_FullMethodName           = "/header.Proder/MakeOrderPayment"
@@ -29516,6 +29518,11 @@ type ProderClient interface {
 	UpdateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
 	DeleteOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListOrders(ctx context.Context, in *OrdersRequest, opts ...grpc.CallOption) (*Orders, error)
+	// Lists distinct primary user IDs with a matching purchase across the account's order history. An empty response anchor marks the last page.
+	ListProductBuyerIds(ctx context.Context, in *ListProductBuyerIdsRequest, opts ...grpc.CallOption) (*Ids, error)
+	// Lists distinct primary user IDs with at least one non-draft open or closed order whose total matches order_value.
+	// Searches the account's full order history. An empty response anchor marks the last page.
+	ListBuyerIdsByOrderValue(ctx context.Context, in *ListBuyerIdsByOrderValueRequest, opts ...grpc.CallOption) (*Ids, error)
 	CountOrders2(ctx context.Context, in *CountOrdersRequest, opts ...grpc.CallOption) (*CountOrdersResponse, error)
 	ImportOrders(ctx context.Context, in *Orders, opts ...grpc.CallOption) (*Orders, error)
 	// fire order_updated, order_event_updated
@@ -30053,6 +30060,26 @@ func (c *proderClient) ListOrders(ctx context.Context, in *OrdersRequest, opts .
 	return out, nil
 }
 
+func (c *proderClient) ListProductBuyerIds(ctx context.Context, in *ListProductBuyerIdsRequest, opts ...grpc.CallOption) (*Ids, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ids)
+	err := c.cc.Invoke(ctx, Proder_ListProductBuyerIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proderClient) ListBuyerIdsByOrderValue(ctx context.Context, in *ListBuyerIdsByOrderValueRequest, opts ...grpc.CallOption) (*Ids, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ids)
+	err := c.cc.Invoke(ctx, Proder_ListBuyerIdsByOrderValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *proderClient) CountOrders2(ctx context.Context, in *CountOrdersRequest, opts ...grpc.CallOption) (*CountOrdersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CountOrdersResponse)
@@ -30446,6 +30473,11 @@ type ProderServer interface {
 	UpdateOrder(context.Context, *Order) (*Order, error)
 	DeleteOrder(context.Context, *Id) (*Empty, error)
 	ListOrders(context.Context, *OrdersRequest) (*Orders, error)
+	// Lists distinct primary user IDs with a matching purchase across the account's order history. An empty response anchor marks the last page.
+	ListProductBuyerIds(context.Context, *ListProductBuyerIdsRequest) (*Ids, error)
+	// Lists distinct primary user IDs with at least one non-draft open or closed order whose total matches order_value.
+	// Searches the account's full order history. An empty response anchor marks the last page.
+	ListBuyerIdsByOrderValue(context.Context, *ListBuyerIdsByOrderValueRequest) (*Ids, error)
 	CountOrders2(context.Context, *CountOrdersRequest) (*CountOrdersResponse, error)
 	ImportOrders(context.Context, *Orders) (*Orders, error)
 	// fire order_updated, order_event_updated
@@ -30639,6 +30671,12 @@ func (UnimplementedProderServer) DeleteOrder(context.Context, *Id) (*Empty, erro
 }
 func (UnimplementedProderServer) ListOrders(context.Context, *OrdersRequest) (*Orders, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOrders not implemented")
+}
+func (UnimplementedProderServer) ListProductBuyerIds(context.Context, *ListProductBuyerIdsRequest) (*Ids, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListProductBuyerIds not implemented")
+}
+func (UnimplementedProderServer) ListBuyerIdsByOrderValue(context.Context, *ListBuyerIdsByOrderValueRequest) (*Ids, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListBuyerIdsByOrderValue not implemented")
 }
 func (UnimplementedProderServer) CountOrders2(context.Context, *CountOrdersRequest) (*CountOrdersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CountOrders2 not implemented")
@@ -31645,6 +31683,42 @@ func _Proder_ListOrders_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Proder_ListProductBuyerIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductBuyerIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListProductBuyerIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListProductBuyerIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListProductBuyerIds(ctx, req.(*ListProductBuyerIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Proder_ListBuyerIdsByOrderValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBuyerIdsByOrderValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListBuyerIdsByOrderValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListBuyerIdsByOrderValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListBuyerIdsByOrderValue(ctx, req.(*ListBuyerIdsByOrderValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Proder_CountOrders2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CountOrdersRequest)
 	if err := dec(in); err != nil {
@@ -32459,6 +32533,14 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOrders",
 			Handler:    _Proder_ListOrders_Handler,
+		},
+		{
+			MethodName: "ListProductBuyerIds",
+			Handler:    _Proder_ListProductBuyerIds_Handler,
+		},
+		{
+			MethodName: "ListBuyerIdsByOrderValue",
+			Handler:    _Proder_ListBuyerIdsByOrderValue_Handler,
 		},
 		{
 			MethodName: "CountOrders2",

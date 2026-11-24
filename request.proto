@@ -6,6 +6,7 @@ option go_package = "github.com/subiz/header";
 
 import "common.proto";
 import "account.proto";
+import "type.proto";
 
 message TagRequest {
 	common.Context ctx = 1;
@@ -419,6 +420,21 @@ message OrderMetricsRequest {
 	account.BusinessHours not_business_hours = 24;
 	int64 created_hour_from = 25;
 	int64 created_hour_to = 26;
+}
+
+message ListProductBuyerIdsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated string product_ids = 3; // Match any OrderItem.product.id. An empty list matches no buyers.
+	string anchor = 5; // Pass the previous response anchor to fetch the next page.
+}
+
+message ListBuyerIdsByOrderValueRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// Required. Compare each order total in account currency units (Order.fpv_total / 1000000).
+	NumberCondition order_value = 3;
+	string anchor = 4; // Pass the previous response anchor to fetch the next server-sized page.
 }
 
 message OrdersRequest {

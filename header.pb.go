@@ -54353,6 +54353,8 @@ type WorkflowCondition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Id    string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// event, id, keyword, lead_owner attr:fullname segment user_label, intent
+	// For segmentation, purchased_products matches any product ID in text.eq.
+	// For order_value, number must match the total of at least one qualifying order (see Proder.ListBuyerIdsByOrderValue).
 	Key       string             `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
 	Channel   *ChannelCondition  `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"`
 	IsChanged bool               `protobuf:"varint,6,opt,name=is_changed,json=isChanged,proto3" json:"is_changed,omitempty"`

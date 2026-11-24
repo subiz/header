@@ -7849,6 +7849,8 @@ message WorkflowTimming {
 message WorkflowCondition {
 	string id = 2;
 	// event, id, keyword, lead_owner attr:fullname segment user_label, intent
+	// For segmentation, purchased_products matches any product ID in text.eq.
+	// For order_value, number must match the total of at least one qualifying order (see Proder.ListBuyerIdsByOrderValue).
 	string key = 4;
 
 	ChannelCondition channel = 5;
