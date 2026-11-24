@@ -3513,11 +3513,13 @@ func (x *OrderMetricsRequest) GetCreatedHourTo() int64 {
 }
 
 type ListProductBuyerIdsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	ProductIds    []string               `protobuf:"bytes,3,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"` // Match any OrderItem.product.id. An empty list matches no buyers.
-	Anchor        string                 `protobuf:"bytes,5,opt,name=anchor,proto3" json:"anchor,omitempty"`                           // Pass the previous response anchor to fetch the next page.
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Ctx        *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId  string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	ProductIds []string               `protobuf:"bytes,3,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"` // Match any OrderItem.product.id. An empty list matches no buyers.
+	Anchor     string                 `protobuf:"bytes,5,opt,name=anchor,proto3" json:"anchor,omitempty"`                           // Pass the previous response anchor to fetch the next page.
+	// Limit matches to these Order.user.id values. An empty list searches all buyers visible to the caller.
+	UserIds       []string `protobuf:"bytes,6,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3580,13 +3582,22 @@ func (x *ListProductBuyerIdsRequest) GetAnchor() string {
 	return ""
 }
 
+func (x *ListProductBuyerIdsRequest) GetUserIds() []string {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
 type ListBuyerIdsByOrderValueRequest struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
 	Ctx       *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Required. Compare each order total in account currency units (Order.fpv_total / 1000000).
-	OrderValue    *NumberCondition `protobuf:"bytes,3,opt,name=order_value,json=orderValue,proto3" json:"order_value,omitempty"`
-	Anchor        string           `protobuf:"bytes,4,opt,name=anchor,proto3" json:"anchor,omitempty"` // Pass the previous response anchor to fetch the next server-sized page.
+	OrderValue *NumberCondition `protobuf:"bytes,3,opt,name=order_value,json=orderValue,proto3" json:"order_value,omitempty"`
+	Anchor     string           `protobuf:"bytes,4,opt,name=anchor,proto3" json:"anchor,omitempty"` // Pass the previous response anchor to fetch the next server-sized page.
+	// Limit matches to these Order.user.id values. An empty list searches all buyers visible to the caller.
+	UserIds       []string `protobuf:"bytes,6,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3647,6 +3658,13 @@ func (x *ListBuyerIdsByOrderValueRequest) GetAnchor() string {
 		return x.Anchor
 	}
 	return ""
+}
+
+func (x *ListBuyerIdsByOrderValueRequest) GetUserIds() []string {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
 }
 
 type OrdersRequest struct {
@@ -10360,21 +10378,23 @@ const file_request_proto_rawDesc = "" +
 	"\x0ebusiness_hours\x18\x17 \x01(\v2\x16.account.BusinessHoursR\rbusinessHours\x12D\n" +
 	"\x12not_business_hours\x18\x18 \x01(\v2\x16.account.BusinessHoursR\x10notBusinessHours\x12*\n" +
 	"\x11created_hour_from\x18\x19 \x01(\x03R\x0fcreatedHourFrom\x12&\n" +
-	"\x0fcreated_hour_to\x18\x1a \x01(\x03R\rcreatedHourTo\"\x97\x01\n" +
+	"\x0fcreated_hour_to\x18\x1a \x01(\x03R\rcreatedHourTo\"\xb2\x01\n" +
 	"\x1aListProductBuyerIdsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x1f\n" +
 	"\vproduct_ids\x18\x03 \x03(\tR\n" +
 	"productIds\x12\x16\n" +
-	"\x06anchor\x18\x05 \x01(\tR\x06anchor\"\xb5\x01\n" +
+	"\x06anchor\x18\x05 \x01(\tR\x06anchor\x12\x19\n" +
+	"\buser_ids\x18\x06 \x03(\tR\auserIds\"\xd0\x01\n" +
 	"\x1fListBuyerIdsByOrderValueRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x128\n" +
 	"\vorder_value\x18\x03 \x01(\v2\x17.header.NumberConditionR\n" +
 	"orderValue\x12\x16\n" +
-	"\x06anchor\x18\x04 \x01(\tR\x06anchor\"\xfa\a\n" +
+	"\x06anchor\x18\x04 \x01(\tR\x06anchor\x12\x19\n" +
+	"\buser_ids\x18\x06 \x03(\tR\auserIds\"\xfa\a\n" +
 	"\rOrdersRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

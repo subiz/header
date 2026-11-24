@@ -1107,9 +1107,9 @@ service Proder {
 
 	rpc DeleteOrder(header.Id) returns (header.Empty); // soft delete, mark as deleted
 	rpc ListOrders(header.OrdersRequest) returns (header.Orders);
-	// Lists distinct primary user IDs with a matching purchase across the account's order history. An empty response anchor marks the last page.
+	// Lists distinct Order.user.id values with a matching purchase across the account's order history. An empty response anchor marks the last page.
 	rpc ListProductBuyerIds(header.ListProductBuyerIdsRequest) returns (header.Ids);
-	// Lists distinct primary user IDs with at least one non-draft open or closed order whose total matches order_value.
+	// Lists distinct Order.user.id values from non-draft open or closed orders whose total matches order_value.
 	// Searches the account's full order history. An empty response anchor marks the last page.
 	rpc ListBuyerIdsByOrderValue(header.ListBuyerIdsByOrderValueRequest) returns (header.Ids);
 	rpc CountOrders2(header.CountOrdersRequest) returns (header.CountOrdersResponse);

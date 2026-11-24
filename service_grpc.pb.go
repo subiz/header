@@ -29518,9 +29518,9 @@ type ProderClient interface {
 	UpdateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Order, error)
 	DeleteOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListOrders(ctx context.Context, in *OrdersRequest, opts ...grpc.CallOption) (*Orders, error)
-	// Lists distinct primary user IDs with a matching purchase across the account's order history. An empty response anchor marks the last page.
+	// Lists distinct Order.user.id values with a matching purchase across the account's order history. An empty response anchor marks the last page.
 	ListProductBuyerIds(ctx context.Context, in *ListProductBuyerIdsRequest, opts ...grpc.CallOption) (*Ids, error)
-	// Lists distinct primary user IDs with at least one non-draft open or closed order whose total matches order_value.
+	// Lists distinct Order.user.id values from non-draft open or closed orders whose total matches order_value.
 	// Searches the account's full order history. An empty response anchor marks the last page.
 	ListBuyerIdsByOrderValue(ctx context.Context, in *ListBuyerIdsByOrderValueRequest, opts ...grpc.CallOption) (*Ids, error)
 	CountOrders2(ctx context.Context, in *CountOrdersRequest, opts ...grpc.CallOption) (*CountOrdersResponse, error)
@@ -30473,9 +30473,9 @@ type ProderServer interface {
 	UpdateOrder(context.Context, *Order) (*Order, error)
 	DeleteOrder(context.Context, *Id) (*Empty, error)
 	ListOrders(context.Context, *OrdersRequest) (*Orders, error)
-	// Lists distinct primary user IDs with a matching purchase across the account's order history. An empty response anchor marks the last page.
+	// Lists distinct Order.user.id values with a matching purchase across the account's order history. An empty response anchor marks the last page.
 	ListProductBuyerIds(context.Context, *ListProductBuyerIdsRequest) (*Ids, error)
-	// Lists distinct primary user IDs with at least one non-draft open or closed order whose total matches order_value.
+	// Lists distinct Order.user.id values from non-draft open or closed orders whose total matches order_value.
 	// Searches the account's full order history. An empty response anchor marks the last page.
 	ListBuyerIdsByOrderValue(context.Context, *ListBuyerIdsByOrderValueRequest) (*Ids, error)
 	CountOrders2(context.Context, *CountOrdersRequest) (*CountOrdersResponse, error)
