@@ -917,6 +917,34 @@ message CampaignSendLogRequest {
 	int64 clicked_at_lte = 13;
 	int64 received_at_lte = 14;
 	int64 delivered_at_lte = 15;
+
+	// Filter by the recipient's processed_at, never by campaign creation or
+	// individual retry/callback times. Unix milliseconds; [from_time, to_time).
+	// Zero omits that bound. With a bound, rows with processed_at=0 are excluded.
+	int64 from_time = 16;
+	int64 to_time = 17;
+	// Normalized recipient result: waiting, sending, success, failed, skipped.
+	// Empty means all. Keep status above for legacy clients; reject conflicting
+	// status/result filters rather than silently ignoring either one.
+	string result = 18;
+	string query = 19; // customer name/email/phone search
+	string channel = 20; // optional; canonical channel, e.g. zns, facebook, email
+	string message_id = 21; // optional MarketingMessage.id
+}
+
+message BroadcastCampaignTimeseriesRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	// Unix milliseconds; [from_time, to_time), filtering by processed_at.
+	// Zero bounds use the campaign's available processing-time range.
+	int64 from_time = 4;
+	int64 to_time = 5;
+	// Zero selects automatically. Positive values must be supported bucket
+	// widths (e.g. 5000, 15000, 30000, 60000); negative values are invalid.
+	int64 interval_ms = 6;
+	string channel = 7; // optional canonical channel
+	string message_id = 8; // optional MarketingMessage.id
 }
 
 message AiQnaSuggestionRequest {

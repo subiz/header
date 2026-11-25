@@ -6549,6 +6549,17 @@ message CampaignSendLogEntry {
 	int64 spam_reported_at = 35; // from pong
 
 	int64 attempt_index = 39;
+
+	// Reporting result per recipient, independent of the legacy status field:
+	// waiting, sending, success, failed, skipped. Retryable attempt failures
+	// are not a final failed result. Success includes a successful channel ACK.
+	string result = 41;
+	// Unix milliseconds when the current final success/failed result was
+	// established. Persist this timestamp; ordinary read/delivery callbacks
+	// must not move it. Zero while unresolved or excluded without a send result.
+	// A retry clears it until the new final result is established.
+	int64 processed_at = 42;
+	string channel = 43; // canonical channel for the reported result
 }
 
 message CampaignSendLog {
@@ -6556,8 +6567,10 @@ message CampaignSendLog {
 	string account_id = 2;
 	string campaign_id = 3;
 	repeated CampaignSendLogEntry entries = 4;
-	string anchor = 5;
-	int64 total = 6;
+	string anchor = 5; // legacy next-page anchor
+	int64 total = 6; // total matching all filters, independent of anchor/limit
+	string next_anchor = 7; // opaque cursor; empty when no more results
+	bool has_more = 8;
 }
 
 message BroadcastCampaignMetrics {
@@ -6590,6 +6603,45 @@ message BroadcastCampaignMetrics {
 	string campaign_id = 3;
 	repeated BroadcastCampaignMetric metrics = 4;
 	repeated BroadcastCampaignMetric per_message_metrics = 5;
+	BroadcastCampaignSummary summary = 6;
+}
+
+// Whole-campaign recipient totals. Log time filters do not affect these.
+// Each selected recipient has exactly one result; retries and multi-message
+// batches do not multiply these counts. Exclusions must come from the saved
+// campaign audience, not a fresh evaluation of the current segment.
+message BroadcastCampaignSummary {
+	int64 selected_count = 1; // recipient_count + skipped_count
+	int64 skipped_count = 2;
+	int64 recipient_count = 3; // waiting + sending + success + failed
+	int64 waiting_count = 4;
+	int64 sending_count = 5;
+	int64 success_count = 6;
+	int64 failed_count = 7;
+	int64 seen_count = 8; // engagement; not an additional recipient result
+	int64 total_credit_spend_fpv = 9; // actual cumulative VND; 1 VND = 1,000,000 FPV
+}
+
+// Histogram of current final recipient results, bucketed by processed_at.
+// Count each recipient once, regardless of message count or retry attempts.
+// Waiting/sending/skipped recipients are not included in these buckets.
+message BroadcastCampaignTimeseries {
+	message Bucket {
+		int64 from_time = 1; // inclusive Unix milliseconds
+		int64 to_time = 2; // exclusive Unix milliseconds
+		int64 success_count = 3;
+		int64 failed_count = 4;
+	}
+
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	int64 from_time = 4; // effective inclusive query bound
+	int64 to_time = 5; // effective exclusive query bound
+	int64 interval_ms = 6; // actual bucket width, including when auto-selected
+	// Ascending, contiguous buckets, including zero-count buckets. Align to
+	// Unix-epoch multiples of interval_ms; clip edge buckets to the query bounds.
+	repeated Bucket buckets = 7;
 }
 
 message EmailSenderVerificationResult {
