@@ -838,6 +838,7 @@ message CrawlUrlRequest {
 
 	string render_text = 21; // markdown -> do not return body
 	bool product_only = 22;
+	bool fast = 23; // enable fast mode -> use stale gcs cache
 }
 
 message ListAIDataFoldersRequest {

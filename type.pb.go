@@ -45,6 +45,7 @@ const (
 	RealtimeType_user_attribute_deleted       RealtimeType = 34
 	RealtimeType_notification_setting_updated RealtimeType = 39
 	RealtimeType_conversation_updated         RealtimeType = 40
+	RealtimeType_conversation_updated_2       RealtimeType = 38
 	RealtimeType_message_sent                 RealtimeType = 41 // event.data.message
 	RealtimeType_conversation_state_updated   RealtimeType = 42 // event.data.conversation
 	RealtimeType_message_pong                 RealtimeType = 43 // event.data.message.pongs.0
@@ -332,6 +333,7 @@ var (
 		34:  "user_attribute_deleted",
 		39:  "notification_setting_updated",
 		40:  "conversation_updated",
+		38:  "conversation_updated_2",
 		41:  "message_sent",
 		42:  "conversation_state_updated",
 		43:  "message_pong",
@@ -614,6 +616,7 @@ var (
 		"user_attribute_deleted":             34,
 		"notification_setting_updated":       39,
 		"conversation_updated":               40,
+		"conversation_updated_2":             38,
 		"message_sent":                       41,
 		"conversation_state_updated":         42,
 		"message_pong":                       43,
@@ -1817,7 +1820,7 @@ const file_type_proto_rawDesc = "" +
 	"monthEqVar\x12\x1d\n" +
 	"\n" +
 	"weekday_eq\x18\x1f \x03(\x03R\tweekdayEq\x12$\n" +
-	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\x9c6\n" +
+	"\x0eweekday_eq_var\x18  \x01(\tR\fweekdayEqVar*\xb86\n" +
 	"\fRealtimeType\x12\x05\n" +
 	"\x01a\x10\x00\x12\x13\n" +
 	"\x0faccount_updated\x10\v\x12\x17\n" +
@@ -1838,7 +1841,8 @@ const file_type_proto_rawDesc = "" +
 	"\x16user_attribute_updated\x10!\x12\x1a\n" +
 	"\x16user_attribute_deleted\x10\"\x12 \n" +
 	"\x1cnotification_setting_updated\x10'\x12\x18\n" +
-	"\x14conversation_updated\x10(\x12\x10\n" +
+	"\x14conversation_updated\x10(\x12\x1a\n" +
+	"\x16conversation_updated_2\x10&\x12\x10\n" +
 	"\fmessage_sent\x10)\x12\x1e\n" +
 	"\x1aconversation_state_updated\x10*\x12\x10\n" +
 	"\fmessage_pong\x10+\x12\x17\n" +

@@ -6466,9 +6466,7 @@ const (
 	UserMgr_FillDevice_FullMethodName                       = "/header.UserMgr/FillDevice"
 	UserMgr_ImportLead_FullMethodName                       = "/header.UserMgr/ImportLead"
 	UserMgr_LinkTask_FullMethodName                         = "/header.UserMgr/LinkTask"
-	UserMgr_CountUserProfiles_FullMethodName                = "/header.UserMgr/CountUserProfiles"
 	UserMgr_ListUserIds_FullMethodName                      = "/header.UserMgr/ListUserIds"
-	UserMgr_ListUserIdWithPhones_FullMethodName             = "/header.UserMgr/ListUserIdWithPhones"
 	UserMgr_SearchUsers_FullMethodName                      = "/header.UserMgr/SearchUsers"
 	UserMgr_ReportUser_FullMethodName                       = "/header.UserMgr/ReportUser"
 	UserMgr_FetchLiveUsers_FullMethodName                   = "/header.UserMgr/FetchLiveUsers"
@@ -6545,9 +6543,8 @@ type UserMgrClient interface {
 	FillDevice(ctx context.Context, in *common.Device, opts ...grpc.CallOption) (*common.Device, error)
 	ImportLead(ctx context.Context, in *ImportLeadRequest, opts ...grpc.CallOption) (*ImportLeadResponse, error)
 	LinkTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Empty, error)
-	CountUserProfiles(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*CountTouchpointResponse, error)
+	// rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse); // ok
 	ListUserIds(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*Ids, error)
-	ListUserIdWithPhones(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*Users, error)
 	SearchUsers(ctx context.Context, in *DocSearchRequest, opts ...grpc.CallOption) (*DocSearchResponse, error)
 	ReportUser(ctx context.Context, in *UserReportRequest, opts ...grpc.CallOption) (*UserReportResponse, error)
 	FetchLiveUsers(ctx context.Context, in *LiveUserView, opts ...grpc.CallOption) (*LiveUserView, error)
@@ -7147,30 +7144,10 @@ func (c *userMgrClient) LinkTask(ctx context.Context, in *Task, opts ...grpc.Cal
 	return out, nil
 }
 
-func (c *userMgrClient) CountUserProfiles(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*CountTouchpointResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CountTouchpointResponse)
-	err := c.cc.Invoke(ctx, UserMgr_CountUserProfiles_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *userMgrClient) ListUserIds(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*Ids, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Ids)
 	err := c.cc.Invoke(ctx, UserMgr_ListUserIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) ListUserIdWithPhones(ctx context.Context, in *UsersRequest, opts ...grpc.CallOption) (*Users, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Users)
-	err := c.cc.Invoke(ctx, UserMgr_ListUserIdWithPhones_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7332,9 +7309,8 @@ type UserMgrServer interface {
 	FillDevice(context.Context, *common.Device) (*common.Device, error)
 	ImportLead(context.Context, *ImportLeadRequest) (*ImportLeadResponse, error)
 	LinkTask(context.Context, *Task) (*Empty, error)
-	CountUserProfiles(context.Context, *UsersRequest) (*CountTouchpointResponse, error)
+	// rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse); // ok
 	ListUserIds(context.Context, *UsersRequest) (*Ids, error)
-	ListUserIdWithPhones(context.Context, *UsersRequest) (*Users, error)
 	SearchUsers(context.Context, *DocSearchRequest) (*DocSearchResponse, error)
 	ReportUser(context.Context, *UserReportRequest) (*UserReportResponse, error)
 	FetchLiveUsers(context.Context, *LiveUserView) (*LiveUserView, error)
@@ -7528,14 +7504,8 @@ func (UnimplementedUserMgrServer) ImportLead(context.Context, *ImportLeadRequest
 func (UnimplementedUserMgrServer) LinkTask(context.Context, *Task) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method LinkTask not implemented")
 }
-func (UnimplementedUserMgrServer) CountUserProfiles(context.Context, *UsersRequest) (*CountTouchpointResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CountUserProfiles not implemented")
-}
 func (UnimplementedUserMgrServer) ListUserIds(context.Context, *UsersRequest) (*Ids, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserIds not implemented")
-}
-func (UnimplementedUserMgrServer) ListUserIdWithPhones(context.Context, *UsersRequest) (*Users, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListUserIdWithPhones not implemented")
 }
 func (UnimplementedUserMgrServer) SearchUsers(context.Context, *DocSearchRequest) (*DocSearchResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SearchUsers not implemented")
@@ -8629,24 +8599,6 @@ func _UserMgr_LinkTask_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserMgr_CountUserProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UsersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).CountUserProfiles(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserMgr_CountUserProfiles_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).CountUserProfiles(ctx, req.(*UsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _UserMgr_ListUserIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UsersRequest)
 	if err := dec(in); err != nil {
@@ -8661,24 +8613,6 @@ func _UserMgr_ListUserIds_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserMgrServer).ListUserIds(ctx, req.(*UsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_ListUserIdWithPhones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UsersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).ListUserIdWithPhones(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserMgr_ListUserIdWithPhones_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).ListUserIdWithPhones(ctx, req.(*UsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -9085,16 +9019,8 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserMgr_LinkTask_Handler,
 		},
 		{
-			MethodName: "CountUserProfiles",
-			Handler:    _UserMgr_CountUserProfiles_Handler,
-		},
-		{
 			MethodName: "ListUserIds",
 			Handler:    _UserMgr_ListUserIds_Handler,
-		},
-		{
-			MethodName: "ListUserIdWithPhones",
-			Handler:    _UserMgr_ListUserIdWithPhones_Handler,
 		},
 		{
 			MethodName: "SearchUsers",

@@ -766,6 +766,7 @@ message Data {
 	SLAEvent sla_event = 153;
 
 	SLAPolicy conversation_sla_policy = 154;
+	ObjectUpdate object_update = 155;
 }
 
 message ConversationMeta {
@@ -5101,7 +5102,8 @@ message Product {
 
 	map<string, Block> i18n_description_block = 70; // (shared) long description generated
 
-	string llm_summary = 71;
+	string llm_summary = 71; // @readonly
+
 	repeated File attachments = 80;
 	// string category_id = 81;
 	ProductValidity validity = 82;
@@ -10558,7 +10560,7 @@ message AIDataEntry {
 	string id = 3; // url://https://glkasdfadf
 	// string group_id = 4;
 
-	string type = 5; // qa, file, document, website, product, text (for testing), instruction, discount
+	string type = 5; // qa, file, document, website, text (for testing), instruction, discount
 	Message answer = 6; // solution
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
@@ -11692,4 +11694,18 @@ message ChromeExtensionCommand {
 	string page_id = 7;
 	string fb_conversation_id = 8; // Messenger conversation on the specified Page
 	string text = 9; // rendered for this recipient
+}
+
+// A partial update shared by conversation, ticket, record, user and other objects.
+// Fields not addressed by sets or unsets remain unchanged.
+message ObjectUpdate {
+	string object_type = 1;
+	string object_id = 2;
+	repeated ObjectFieldSet sets = 3;
+	repeated string unsets = 4; // GJSON paths of fields to remove, relative to the object root.
+}
+
+message ObjectFieldSet {
+	string path = 1; // GJSON path relative to the object root.
+	google.protobuf.Value value = 2; // An explicit JSON value, including zero, false and null.
 }

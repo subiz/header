@@ -33,6 +33,7 @@ enum RealtimeType {
 	notification_setting_updated = 39;
 
 	conversation_updated = 40;
+	conversation_updated_2 = 38;
 	message_sent = 41; // event.data.message
 	conversation_state_updated = 42; // event.data.conversation
 
